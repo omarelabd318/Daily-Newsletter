@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daily Newsletter</title>
+<meta name="description" content="A daily briefing: world news, Egypt, markets, sports and more.">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%97%9E%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#0d1117; --surface:#151b23; --line:#232b36; --text:#e7e9ec; --muted:#8c96a3;
+  --accent:#e2b95b; --accent-soft:rgba(226,185,91,.12); --link:#8ab4f8;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.65 var(--sans)}
+a{color:var(--link);text-decoration:none;overflow-wrap:anywhere}
+a:hover{text-decoration:underline}
+.wrap{max-width:740px;margin:0 auto;padding:0 16px 80px}
+header.mast{padding:44px 0 22px;border-bottom:1px solid var(--line);text-align:center}
+.mast h1{margin:0;font:700 clamp(30px,7vw,46px)/1.1 var(--serif);letter-spacing:.01em}
+.mast .date{margin-top:10px;color:var(--muted);font-size:14px;letter-spacing:.14em;text-transform:uppercase}
+nav.bar{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line);font-size:14px}
+nav.bar a,nav.bar button,nav.bar span.off{background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font:inherit;cursor:pointer}
+nav.bar span.off{opacity:.35;cursor:default}
+nav.bar a:hover,nav.bar button:hover{border-color:var(--accent);text-decoration:none}
+#archive{display:none;margin:14px 0 0;border:1px solid var(--line);border-radius:12px;background:var(--surface);max-height:50vh;overflow:auto}
+#archive.open{display:block}
+#archive a{display:block;padding:12px 16px;border-bottom:1px solid var(--line);color:var(--text)}
+#archive a:last-child{border-bottom:0}
+#archive a small{display:block;color:var(--muted);font-size:13px}
+#archive a.current{background:var(--accent-soft)}
+article{padding-top:8px}
+article h1{display:none}
+article h2{margin:44px 0 14px;padding-top:6px;font:700 25px/1.25 var(--serif);color:var(--accent);border-top:1px solid var(--line);padding-top:26px}
+article h2:first-of-type{margin-top:26px}
+article h3{margin:28px 0 8px;font:700 18px/1.35 var(--sans);color:var(--text)}
+article h4{margin:20px 0 6px;font-size:16px;color:var(--muted)}
+article p{margin:0 0 16px}
+article ul,article ol{margin:0 0 18px;padding-left:22px}
+article li{margin:6px 0}
+article strong{color:#fff}
+article blockquote{margin:0 0 18px;padding:2px 16px;border-left:3px solid var(--accent);color:var(--muted)}
+article hr{border:0;border-top:1px solid var(--line);margin:30px 0}
+article code{background:var(--surface);padding:2px 6px;border-radius:5px;font-size:.9em}
+.tablewrap{overflow-x:auto;margin:0 0 20px;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+th{background:var(--surface);color:var(--muted);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.06em}
+tr:last-child td{border-bottom:0}
+.state{padding:70px 10px;text-align:center;color:var(--muted)}
+.state b{display:block;font:700 22px var(--serif);color:var(--text);margin-bottom:8px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-align:center}
+@media (max-width:520px){body{font-size:16px}.mast{padding-top:32px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="mast">
+    <h1>Daily Newsletter</h1>
+    <div class="date" id="dateline"></div>
+  </header>
+  <nav class="bar" id="bar" hidden>
+    <span id="prev"></span>
+    <button id="archiveBtn" type="button" aria-expanded="false" aria-controls="archive">Archive</button>
+    <span id="next"></span>
+  </nav>
+  <div id="archive" role="list"></div>
+  <article id="content"><div class="state"><b>Loading…</b></div></article>
+  <footer>Updated every day.</footer>
+</div>
+<script>
+(function(){
+  var $ = function(id){return document.getElementById(id)};
+  var editions = [];
+
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+
+  // ---- tiny, safe markdown renderer ----
+  function inline(s){
+    s = esc(s);
+    s = s.replace(/`([^`]+)`/g,'<code>$1</code>');
+    s = s.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,'<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+    s = s.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+    s = s.replace(/(^|[^*])\*([^*\s][^*]*)\*/g,'$1<em>$2</em>');
+    return s;
+  }
+  function cells(line){
+    return line.trim().replace(/^\|/,'').replace(/\|$/,'').split('|').map(function(c){return c.trim()});
+  }
+  function render(md){
+    var lines = md.replace(/\r/g,'').split('\n'), out = [], i = 0;
+    while(i < lines.length){
+      var l = lines[i];
+      if(!l.trim()){i++;continue}
+      var m;
+      if((m = l.match(/^(#{1,4})\s+(.*)$/))){out.push('<h'+m[1].length+'>'+inline(m[2])+'</h'+m[1].length+'>');i++;continue}
+      if(/^\s*(---+|\*\*\*+)\s*$/.test(l)){out.push('<hr>');i++;continue}
+      if(/^\s*\|/.test(l) && i+1 < lines.length && /^\s*\|?\s*:?-{2,}/.test(lines[i+1])){
+        var head = cells(l), body = [];
+        i += 2;
+        while(i < lines.length && /^\s*\|/.test(lines[i])){body.push(cells(lines[i]));i++}
+        var t = '<div class="tablewrap"><table><thead><tr>'+head.map(function(c){return '<th>'+inline(c)+'</th>'}).join('')+'</tr></thead><tbody>';
+        body.forEach(function(r){t += '<tr>'+r.map(function(c){return '<td>'+inline(c)+'</td>'}).join('')+'</tr>'});
+        out.push(t+'</tbody></table></div>');continue;
+      }
+      if(/^\s*>/.test(l)){
+        var q = [];
+        while(i < lines.length && /^\s*>/.test(lines[i])){q.push(lines[i].replace(/^\s*>\s?/,''));i++}
+        out.push('<blockquote>'+inline(q.join(' '))+'</blockquote>');continue;
+      }
+      if(/^\s*[-*]\s+/.test(l)){
+        var ul = [];
+        while(i < lines.length && /^\s*[-*]\s+/.test(lines[i])){ul.push('<li>'+inline(lines[i].replace(/^\s*[-*]\s+/,''))+'</li>');i++}
+        out.push('<ul>'+ul.join('')+'</ul>');continue;
+      }
+      if(/^\s*\d+[.)]\s+/.test(l)){
+        var ol = [];
+        while(i < lines.length && /^\s*\d+[.)]\s+/.test(lines[i])){ol.push('<li>'+inline(lines[i].replace(/^\s*\d+[.)]\s+/,''))+'</li>');i++}
+        out.push('<ol>'+ol.join('')+'</ol>');continue;
+      }
+      var p = [];
+      while(i < lines.length && lines[i].trim() && !/^(#{1,4}\s|\s*[-*]\s+|\s*\d+[.)]\s+|\s*>|\s*\||\s*---)/.test(lines[i])){p.push(lines[i].trim());i++}
+      if(!p.length){p.push(l.trim());i++}
+      out.push('<p>'+inline(p.join(' '))+'</p>');
+    }
+    return out.join('\n');
+  }
+
+  function pretty(d){
+    var dt = new Date(d+'T12:00:00');
+    if(isNaN(dt)) return d;
+    return dt.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  }
+  function state(title,msg){$('content').innerHTML='<div class="state"><b>'+esc(title)+'</b>'+esc(msg)+'</div>'}
+
+  function buildArchive(current){
+    $('archive').innerHTML = editions.map(function(e){
+      return '<a role="listitem" href="#'+e.date+'"'+(e.date===current?' class="current"':'')+'>'+esc(pretty(e.date))+(e.summary?'<small>'+esc(e.summary)+'</small>':'')+'</a>';
+    }).join('');
+  }
+  function setNav(idx){
+    // editions are newest first: older = idx+1, newer = idx-1
+    var older = editions[idx+1], newer = editions[idx-1];
+    $('prev').innerHTML = older ? '<a href="#'+older.date+'">&larr; Older</a>' : '<span class="off">&larr; Older</span>';
+    $('next').innerHTML = newer ? '<a href="#'+newer.date+'">Newer &rarr;</a>' : '<span class="off">Newer &rarr;</span>';
+  }
+
+  function show(){
+    var date = (location.hash||'').replace('#','');
+    var idx = editions.findIndex(function(e){return e.date===date});
+    if(idx < 0) idx = 0;
+    var ed = editions[idx];
+    $('archive').classList.remove('open');
+    $('archiveBtn').setAttribute('aria-expanded','false');
+    $('dateline').textContent = pretty(ed.date);
+    document.title = 'Daily Newsletter · ' + ed.date;
+    buildArchive(ed.date); setNav(idx);
+    state('Loading…','');
+    fetch('editions/'+ed.date+'.md',{cache:'no-cache'}).then(function(r){
+      if(!r.ok) throw new Error(r.status);
+      return r.text();
+    }).then(function(md){
+      $('content').innerHTML = render(md);
+      window.scrollTo(0,0);
+    }).catch(function(){state('Could not load this edition','Please try again in a moment.')});
+  }
+
+  $('archiveBtn').addEventListener('click',function(){
+    var open = $('archive').classList.toggle('open');
+    this.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  window.addEventListener('hashchange',function(){ if(editions.length) show(); });
+
+  fetch('editions/index.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(data){
+    editions = (data.editions||[]).slice().sort(function(a,b){return a.date<b.date?1:-1});
+    if(!editions.length){
+      $('dateline').textContent = '';
+      state('The first edition is on its way','New editions are added every morning.');
+      return;
+    }
+    $('bar').hidden = false;
+    show();
+  }).catch(function(){state('Could not load the newsletter','Please try again in a moment.')});
+})();
+</script>
+</body>
+</html>
