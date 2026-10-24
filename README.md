@@ -1,6 +1,6 @@
 # Daily Newsletter
 
-A static, dark-theme site that shows a daily newsletter (world news, Egypt, markets, sports and more). Deployed on Vercel from this repo. No build step.
+A static, dark-theme site that shows a daily newsletter (Egypt, world news, markets, sports and more). Deployed on Vercel from this repo. No build step.
 
 ## How it works
 
