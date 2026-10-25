@@ -28,6 +28,7 @@ a:hover{text-decoration:underline}
 /* top bar */
 .top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:clamp(32px,4vw,48px);font-size:16px}
 .top .grp{display:flex;gap:6px}
+.top a,.top .off,#archiveBtn{white-space:nowrap}
 .top a,.top .off{font:inherit;color:var(--ink);padding:12px 12px;text-decoration:none;transition:color .2s var(--ease)}
 .top a:hover{color:var(--accent);text-decoration:none}
 #archiveBtn{font:600 16px var(--sans);color:var(--accent-ink);background:var(--accent);border:0;cursor:pointer;min-height:48px;padding:0 26px;transition:background .2s var(--ease),transform .2s var(--ease)}
@@ -103,8 +104,12 @@ footer p{margin:clamp(16px,2vw,24px) 0 0;max-width:40ch;color:var(--ink2);font-s
   .s h2{position:static;margin-bottom:24px}
   .edition{gap:20px}
   #archive a{gap:2px}
+  .top{gap:8px}
+  #archiveBtn{padding:0 16px;font-size:15px}
+  .top a,.top .off{padding:12px 6px}
   .s-body p,.s-body ul,.s-body ol{max-width:none}
 }
+@media (max-width:340px){.top{flex-wrap:wrap}}
 </style>
 </head>
 <body>
