@@ -188,6 +188,39 @@ session's close with its date. If a price cannot be confirmed, write `n/a` rathe
 Use three columns: `| Item | Level | Note |`. Keep each Note under about 10 words, so the table stays
 easy to scan. On phones the site shows each row as a small card, so long notes still fit.
 
+## Weekly Recap (Saturdays)
+
+Every Saturday a separate run publishes a weekly recap alongside that day's regular edition. It sums up
+the week from Sunday to Saturday. The daily rules on voice, sources, figure checks, linking visuals,
+placement and standing alone all apply; the daily section list, word budgets, Today at a Glance links and
+Stocks Watch do not.
+
+- **File:** `editions/DATE-recap.md`, where DATE is the Saturday. In `editions/index.json` add
+  `{"date": "DATE", "id": "DATE-recap", "label": "Weekly Recap", "summary": "..."}` and keep every other
+  entry, including that day's regular edition.
+- **Research:** start from that week's editions in `editions/` (Sunday to Saturday, including any second
+  edition of a day), then search for how each big story developed and ended up. Report where things stand
+  now, not what was said on each day. Check every figure as usual.
+- **Length:** about 1,700 to 2,000 words, a 7 to 8 minute read. A guide, not a limit.
+- **First line:** an italic sentence with the week's dates and what it was about, for example
+  `*Week of 25 to 31 October 2026: a rate hold, a weaker pound and Egypt's Saudi deployment vote.*`
+- **Sections,** in this order, each as `##` with exactly these titles:
+  1. **The Week in Brief:** a numbered list of 7 to 10 of the week's biggest stories, Egypt first, each
+     `**Label:** one sentence`. No links.
+  2. **Egypt This Week:** 4 to 6 items on the main Egyptian stories, each with where it stands now.
+  3. **Region and World:** 4 to 6 items, regional first, then the rest of the world.
+  4. **Markets This Week:** a short paragraph on the week, then a table
+     `| Item | Week close | Weekly change |` covering EGX30, USD/EGP, gold 21K per gram in Egypt, Brent,
+     S&P 500, Nasdaq and Bitcoin, then one line each on the week's best and worst EGX30 stocks if known.
+  5. **Sports This Week:** the week's main results and stories as separate items, Egyptian football first,
+     with no sport headings.
+  6. **Culture and Tech:** 3 to 5 short items from tech, AI, entertainment and culture.
+  7. **The Week Ahead:** the key scheduled events for the coming week (central bank meetings, data,
+     holidays and closures, big matches).
+  8. **Sources:** the links used.
+- Every item opens with a bold lead-in, as in the daily edition. Never refer to the daily editions
+  themselves ("as reported on Tuesday"): write about the events and their dates.
+
 ## Check before committing
 
 Run the checker on the new edition from the repo root:

@@ -15,6 +15,12 @@ SECTIONS = [
     "Regional and Gulf", "Markets", "Stocks Watch", "Currency and Commodities Watch", "In Other News",
     "Economic Calendar", "Worth Knowing", "Sources",
 ]
+# The Saturday weekly recap (editions/YYYY-MM-DD-recap.md) has its own sections.
+RECAP_SECTIONS = [
+    "The Week in Brief", "Egypt This Week", "Region and World", "Markets This Week",
+    "Sports This Week", "Culture and Tech", "The Week Ahead", "Sources",
+]
+RECAP_TOTAL = (1500, 2300)
 PARTS = {
     "Markets": ["Egypt Markets", "Global Markets"],
     "Stocks Watch": ["Egypt", "USA"],
@@ -56,6 +62,8 @@ def main(path):
     errors, warnings = [], []
     text = open(path, encoding="utf-8").read()
     lines = text.splitlines()
+    recap = os.path.basename(path).endswith("-recap.md")
+    expected = RECAP_SECTIONS if recap else SECTIONS
 
     first = next((l for l in lines if l.strip()), "")
     if not re.fullmatch(r"\*[^*].*[^*]\*", first.strip()):
@@ -80,16 +88,16 @@ def main(path):
         elif current:
             (sections[current]["parts"][part] if part else sections[current]["body"]).append(line)
 
-    if order != SECTIONS:
-        missing = [s for s in SECTIONS if s not in order]
-        extra = [s for s in order if s not in SECTIONS]
+    if order != expected:
+        missing = [s for s in expected if s not in order]
+        extra = [s for s in order if s not in expected]
         msg = "Section titles or order do not match."
         if missing:
             msg += " Missing: " + ", ".join(missing) + "."
         if extra:
             msg += " Unexpected: " + ", ".join(extra) + "."
         errors.append(msg)
-    for sec, parts in PARTS.items():
+    for sec, parts in ({} if recap else PARTS).items():
         have = list(sections.get(sec, {}).get("parts", {}))
         if have != parts:
             errors.append(f"'{sec}' should have parts {parts} in that order; found {have}.")
@@ -116,13 +124,15 @@ def main(path):
                 counts[p] = words("\n".join(body))
         else:
             counts[name] = words("\n".join(sec["body"]))
-    for name, (lo, hi) in BUDGET.items():
+    for name, (lo, hi) in ({} if recap else BUDGET).items():
         n = counts.get(name)
         if n is not None and (n < lo * 0.7 or n > hi * 1.3):
             warnings.append(f"{name}: {n} words (guide {lo}-{hi}; fine if the stories justify it, never cut a story to fit).")
     total = sum(counts.values())
-    if not TOTAL[0] <= total <= TOTAL[1]:
-        warnings.append(f"Total {total} words without Sources (guide about 3,050-3,150; never cut a worthwhile story to fit).")
+    lo, hi = RECAP_TOTAL if recap else TOTAL
+    if not lo <= total <= hi:
+        guide = "1,700-2,000" if recap else "3,050-3,150"
+        warnings.append(f"Total {total} words without Sources (guide about {guide}; never cut a worthwhile story to fit).")
 
     # Voice: first person, names, authorship.
     current = None
@@ -152,7 +162,7 @@ def main(path):
     # Same story in two sections: compare bold lead-ins outside Today at a Glance and Sources.
     leads = []
     for name, sec in sections.items():
-        if name in ("Today at a Glance", "Sources"):
+        if name in ("Today at a Glance", "The Week in Brief", "Sources"):
             continue
         chunks = [(name, sec["body"])] + [(p, b) for p, b in sec["parts"].items()]
         for where, body in chunks:
@@ -189,7 +199,7 @@ def main(path):
                 errors.append(f"Today at a Glance item has no link to its story: {line.strip()[:80]}")
             elif link.group(1) not in anchors:
                 errors.append(f"Today at a Glance link #{link.group(1)} matches no story lead-in or section.")
-    if not any(re.match(r"^\s*\*\*What to watch today:\*\*", l) for l in glance):
+    if not recap and not any(re.match(r"^\s*\*\*What to watch today:\*\*", l) for l in glance):
         errors.append("Today at a Glance should end with a '**What to watch today:**' line.")
 
     # index.json must parse and list this date.
