@@ -43,6 +43,11 @@ def words(text):
     return len(re.findall(r"\S+", text))
 
 
+def slug(s):
+    """Same rule as slug() in index.html."""
+    return re.sub(r"^-+|-+$", "", re.sub(r"[^a-z0-9]+", "-", s.lower()))
+
+
 def strip_quotes(line):
     return re.sub(r"\"[^\"]*\"|“[^”]*”", "", line)
 
@@ -151,6 +156,27 @@ def main(path):
             shared = a[2] & b[2]
             if len(shared) >= 2 or shared & STORY:
                 warnings.append(f"Possible repeat: '{a[1]}' ({a[0]}) and '{b[1]}' ({b[0]}).")
+
+    # Today at a Glance: every item links to its story, and the list ends with a What to watch line.
+    anchors = {slug(n) for n in sections} | {slug(p) for sec in sections.values() for p in sec["parts"]}
+    for name, sec in sections.items():
+        if name in ("Today at a Glance", "Sources"):
+            continue
+        for body in [sec["body"]] + list(sec["parts"].values()):
+            for line in body:
+                m = re.match(r"^\s*(?:[-*]|\d+\.)?\s*\*\*([^*]+?)\*\*", line)
+                if m:
+                    anchors.add("story-" + slug(m.group(1).rstrip(":")))
+    glance = sections.get("Today at a Glance", {}).get("body", [])
+    for line in glance:
+        if re.match(r"^\s*\d+\.", line):
+            link = re.search(r"\]\(#([a-z0-9-]+)\)", line)
+            if not link:
+                errors.append(f"Today at a Glance item has no link to its story: {line.strip()[:80]}")
+            elif link.group(1) not in anchors:
+                errors.append(f"Today at a Glance link #{link.group(1)} matches no story lead-in or section.")
+    if not any(re.match(r"^\s*\*\*What to watch today:\*\*", l) for l in glance):
+        errors.append("Today at a Glance should end with a '**What to watch today:**' line.")
 
     # index.json must parse and list this date.
     date = os.path.splitext(os.path.basename(path))[0]

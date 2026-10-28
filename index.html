@@ -70,6 +70,9 @@ a:hover{text-decoration:underline}
 .s-body h3:first-child{margin-top:0}
 .s-body h4{margin:28px 0 6px;font-size:18px;color:var(--ink2)}
 .s-body strong{font-weight:700}
+.s-body [id]{scroll-margin-top:24px}
+#today-at-a-glance .s-body a{color:var(--ink);text-decoration:underline;text-decoration-color:rgba(140,150,160,.4);text-underline-offset:4px}
+#today-at-a-glance .s-body a:hover{color:var(--accent)}
 .s-body .sp{height:32px}
 .s-body code{background:var(--panel);padding:2px 6px;font-size:.9em}
 .s-body blockquote{margin:28px 0;padding:26px 30px;background:var(--panel);font:400 24px/1.5 var(--serif);max-width:68ch}
@@ -176,6 +179,7 @@ footer p{margin:clamp(16px,2vw,24px) 0 0;max-width:40ch;color:var(--ink2);font-s
     s = esc(s);
     s = s.replace(/`([^`]+)`/g,'<code>$1</code>');
     s = s.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,'<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+    s = s.replace(/\[([^\]]+)\]\((#[a-z0-9-]+)\)/g,'<a href="$2">$1</a>');
     s = s.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
     s = s.replace(/(^|[^*])\*([^*\s][^*]*)\*/g,'$1<em>$2</em>');
     return s;
@@ -198,7 +202,7 @@ footer p{margin:clamp(16px,2vw,24px) 0 0;max-width:40ch;color:var(--ink2);font-s
           var t = m[2].replace(/[*_`]/g,'');
           cur = {title:t, id:slug(t)||('s'+sections.length), parts:[]};
           sections.push(cur);
-        } else { push('<h'+lv+'>'+inline(m[2])+'</h'+lv+'>'); }
+        } else { push('<h'+lv+' id="'+slug(m[2].replace(/[*_`]/g,''))+'">'+inline(m[2])+'</h'+lv+'>'); }
         i++;continue;
       }
       if(/^\s*(---+|\*\*\*+)\s*$/.test(l)){push('<div class="sp"></div>');i++;continue}
@@ -279,6 +283,15 @@ footer p{margin:clamp(16px,2vw,24px) 0 0;max-width:40ch;color:var(--ink2);font-s
         var src = s.title.toLowerCase()==='sources' ? ' src' : '';
         return '<section class="s'+src+'" id="'+s.id+'"><div class="frame"><div class="s-in"><h2 class="rv">'+esc(s.title)+'</h2><div class="s-body">'+s.html+'</div></div></div></section>';
       }).join('');
+      // each story that opens with a bold lead-in gets an anchor, so Today at a Glance can link to it
+      var used = {};
+      document.querySelectorAll('#content section:not(#today-at-a-glance) .s-body p, #content section:not(#today-at-a-glance) .s-body li').forEach(function(el){
+        var f = el.firstElementChild;
+        if(!f || f.tagName !== 'STRONG' || el.firstChild !== f) return;
+        var id = 'story-' + slug(f.textContent.replace(/:\s*$/,''));
+        if(id === 'story-' || used[id]) return;
+        used[id] = 1; el.id = id;
+      });
       // only each section's heading and opening block animate in; the rest of the text is always visible
       document.querySelectorAll('#content .s-body > *:first-child').forEach(function(el){el.classList.add('rv')});
       document.querySelectorAll('.mast > *').forEach(function(el){el.classList.add('rv')});

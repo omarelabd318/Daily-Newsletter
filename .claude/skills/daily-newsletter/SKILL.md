@@ -41,6 +41,36 @@ reach its number on a quiet day.
 Sports is the deepest part of In Other News, but it no longer outweighs Markets. Global Markets got the
 extra room: use it to explain what drives the moves and what they mean for Egypt and emerging markets.
 
+## Today at a Glance
+
+Each numbered item links to the full story further down. Make the headline a link to the story's
+anchor, which the site builds from the story's bold lead-in: `story-` followed by the lead-in in lower
+case, with every run of characters other than letters and digits turned into a single hyphen and no
+hyphen at either end. For example, a story that opens `**Rate decision on Thursday:**` has the anchor
+`#story-rate-decision-on-thursday`, so its item reads:
+
+`2. **Economy:** [The central bank meets Thursday with rates expected to hold at 19%](#story-rate-decision-on-thursday)`
+
+If a story has no bold lead-in of its own, link to its section or part instead, built the same way from
+the heading, for example `#egypt-news` or `#tech-and-ai`. These
+in-page links are the only links allowed in Today at a Glance.
+
+After the numbered list, end the section with one line on the day's key scheduled events, such as a
+central bank decision, a data release, a major vote or a big match, with times in Cairo where known:
+
+`**What to watch today:** The central bank's rate decision at 2pm; Al Ahly vs Pyramids at 8pm.`
+
+Only list events happening that day. On a day with nothing scheduled, say what to keep an eye on instead.
+
+## Check every figure
+
+Before publishing, check each figure in Stocks Watch and Currency and Commodities Watch, and any key
+number in Egypt Markets (EGX30 close, central bank rates), against a second source: the backup in the
+go-to sources table or another reputable outlet. Where the two agree within normal rounding, use the
+figure. Where they disagree, use the more authoritative or more recent one and mark it `(unconfirmed)`,
+for example `56.10 (unconfirmed)`. Never present a figure as confirmed when only one source had it and it
+looks out of line with recent days. Never guess a figure; write `n/a` instead.
+
 ## Where each story goes
 
 Each story appears in one section only. Today at a Glance is the exception: it is an index of stories
@@ -145,8 +175,9 @@ python3 .claude/skills/daily-newsletter/check_edition.py editions/YYYY-MM-DD.md
 It reports:
 
 - **Errors** (exit code 1): missing or misordered section titles, missing Markets, Stocks Watch or In Other News parts,
-  a top-level `#` title, HTML, a first line that is not an italic intro, or an `editions/index.json` that
-  does not parse or has no entry for the date. Fix all of these before committing.
+  a top-level `#` title, HTML, a first line that is not an italic intro, a Today at a Glance item with no
+  link or a link to an anchor that does not exist, a missing What to watch today line, or an
+  `editions/index.json` that does not parse or has no entry for the date. Fix all of these before committing.
 - **Warnings:** first-person words or names outside quotes, sections far outside their word budget, and
   bold lead-ins that look like the same story in two sections. Read each one and fix the real problems;
   some are false alarms (a quoted "we", "US" as a country). A word-count warning is information only:
