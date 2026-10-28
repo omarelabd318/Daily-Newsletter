@@ -115,12 +115,12 @@ List these every day, in this order:
 | Telecom Egypt (ETEL) | Nvidia (NVDA) |
 | Eastern Company (EAST) | Amazon (AMZN) |
 | Elsewedy Electric (SWDY) | Alphabet (GOOGL) |
-| EFG Holding (HRHO) | Meta (META) |
+| Orascom Construction (ORAS) | Meta (META) |
 | Fawry (FWRY) | Tesla (TSLA) |
 | Abu Qir Fertilizers (ABUK) | JPMorgan Chase (JPM) |
 
 After the fixed rows, add up to three rows for other stocks with a notable move or notable news that
-day, marked in italics, for example `| *Orascom Construction (ORAS), notable mover* | 410.00 | +8.5% |`.
+day, marked in italics, for example `| *Ezz Steel (ESRS), notable mover* | 98.50 | +8.5% |`.
 Leave them out when nothing stands out.
 
 On weekends the EGX is closed Friday and Saturday and US markets Saturday and Sunday. Show the last
