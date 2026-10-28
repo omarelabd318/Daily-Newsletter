@@ -76,7 +76,8 @@ a:hover{text-decoration:underline}
 .tablewrap{overflow-x:auto;margin:6px 0 24px}
 table{border-collapse:separate;border-spacing:0 6px;width:100%}
 th{padding:6px 16px;text-align:left;font-size:16px;font-weight:600;color:var(--ink2);white-space:nowrap}
-td{padding:14px 16px;background:var(--panel);font-size:18px;white-space:nowrap}
+td{padding:14px 16px;background:var(--panel);font-size:18px}
+
 td:first-child{font-weight:600}
 .s.src .s-body{font-size:16px;color:var(--ink2)}
 .s.src .s-body li{margin:6px 0}
@@ -100,6 +101,14 @@ footer p{margin:clamp(16px,2vw,24px) 0 0;max-width:40ch;color:var(--ink2);font-s
 }
 
 @media (max-width:860px){
+  .tablewrap{overflow-x:visible}
+  table,tbody,tr,td{display:block;width:100%}
+  thead{display:none}
+  table{border-spacing:0}
+  tr{background:var(--panel);margin:0 0 8px;padding:12px 16px}
+  td{background:none;padding:2px 0;font-size:17px}
+  td:first-child{font-size:18px;padding-bottom:4px}
+  td:nth-child(3){color:var(--ink2);font-size:16px}
   .s-in,.edition,#archive a{grid-template-columns:minmax(0,1fr)}
   .s h2{position:static;margin-bottom:24px}
   .edition{gap:20px}
