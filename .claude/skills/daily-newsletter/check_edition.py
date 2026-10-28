@@ -192,7 +192,7 @@ def main(path):
     index = os.path.join(os.path.dirname(path), "index.json")
     try:
         data = json.load(open(index, encoding="utf-8"))
-        entry = next((e for e in data["editions"] if e.get("date") == date), None)
+        entry = next((e for e in data["editions"] if (e.get("id") or e.get("date")) == date), None)
         if not entry:
             errors.append(f"editions/index.json has no entry for {date}.")
         elif len(entry.get("summary", "")) >= 140:

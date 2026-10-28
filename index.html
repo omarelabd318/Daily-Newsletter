@@ -244,34 +244,37 @@ footer p{margin:clamp(16px,2vw,24px) 0 0;max-width:40ch;color:var(--ink2);font-s
     if(isNaN(dt)) return d;
     return dt.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
   }
+  // an edition's key is its id when it has one (a second edition on the same day), otherwise its date
+  function key(e){return e.id || e.date}
+  function title(e){return pretty(e.date) + (e.label ? ' · ' + e.label : '')}
   function state(title,msg){
     $('content').innerHTML='<div class="frame"><div class="state"><b>'+esc(title)+'</b><span>'+esc(msg||'')+'</span></div></div>';
   }
   function buildArchive(current){
     $('archive').innerHTML = editions.map(function(e){
-      return '<a role="listitem" href="#'+e.date+'"'+(e.date===current?' class="current"':'')+'><span>'+esc(pretty(e.date))+'</span><small>'+esc(e.summary||'')+'</small></a>';
+      return '<a role="listitem" href="#'+key(e)+'"'+(key(e)===current?' class="current"':'')+'><span>'+esc(title(e))+'</span><small>'+esc(e.summary||'')+'</small></a>';
     }).join('');
   }
   function setNav(idx){
     var older = editions[idx+1], newer = editions[idx-1];
-    $('prev').innerHTML = older ? '<a href="#'+older.date+'">&larr; Older</a>' : '<span class="off">&larr; Older</span>';
-    $('next').innerHTML = newer ? '<a href="#'+newer.date+'">Newer &rarr;</a>' : '<span class="off">Newer &rarr;</span>';
+    $('prev').innerHTML = older ? '<a href="#'+key(older)+'">&larr; Older</a>' : '<span class="off">&larr; Older</span>';
+    $('next').innerHTML = newer ? '<a href="#'+key(newer)+'">Newer &rarr;</a>' : '<span class="off">Newer &rarr;</span>';
   }
 
   function show(){
     var date = (location.hash||'').replace('#','');
-    var idx = editions.findIndex(function(e){return e.date===date});
+    var idx = editions.findIndex(function(e){return key(e)===date});
     if(idx < 0) idx = 0;
     var ed = editions[idx];
     $('archive').classList.remove('open');
     $('archiveBtn').setAttribute('aria-expanded','false');
-    $('dateline').textContent = pretty(ed.date);
+    $('dateline').textContent = title(ed);
     $('summary').textContent = ed.summary || '';
     $('summary').hidden = !ed.summary;
     $('edition').hidden = false;
-    document.title = 'Daily Newsletter · ' + pretty(ed.date);
-    buildArchive(ed.date); setNav(idx);
-    fetch('editions/'+ed.date+'.md',{cache:'no-cache'}).then(function(r){
+    document.title = 'Daily Newsletter · ' + title(ed);
+    buildArchive(key(ed)); setNav(idx);
+    fetch('editions/'+key(ed)+'.md',{cache:'no-cache'}).then(function(r){
       if(!r.ok) throw new Error(r.status);
       return r.text();
     }).then(function(md){
@@ -308,11 +311,11 @@ footer p{margin:clamp(16px,2vw,24px) 0 0;max-width:40ch;color:var(--ink2);font-s
   window.addEventListener('hashchange',function(){
     var h = (location.hash||'').replace('#','');
     if(!editions.length) return;
-    if(/^\d{4}-\d{2}-\d{2}$/.test(h)) show();   // section links are plain in-page anchors
+    if(/^\d{4}-\d{2}-\d{2}(-[a-z0-9]+)?$/.test(h)) show();   // section links are plain in-page anchors
   });
 
   fetch('editions/index.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(data){
-    editions = (data.editions||[]).slice().sort(function(a,b){return a.date<b.date?1:-1});
+    editions = (data.editions||[]).slice().sort(function(a,b){return key(a)<key(b)?1:-1});
     if(!editions.length){
       state('The first edition is on its way','New editions are added every day.');
       return;
