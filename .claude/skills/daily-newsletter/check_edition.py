@@ -114,10 +114,10 @@ def main(path):
     for name, (lo, hi) in BUDGET.items():
         n = counts.get(name)
         if n is not None and (n < lo * 0.7 or n > hi * 1.3):
-            warnings.append(f"{name}: {n} words (budget {lo}-{hi}).")
+            warnings.append(f"{name}: {n} words (guide {lo}-{hi}; fine if the stories justify it, never cut a story to fit).")
     total = sum(counts.values())
     if not TOTAL[0] <= total <= TOTAL[1]:
-        warnings.append(f"Total {total} words without Sources (target about 2,900-3,000).")
+        warnings.append(f"Total {total} words without Sources (guide about 3,050-3,150; never cut a worthwhile story to fit).")
 
     # Voice: first person, names, authorship.
     current = None

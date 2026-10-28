@@ -14,8 +14,10 @@ where each story goes, and the check to run before committing.
 
 ## Word budget
 
-Aim for about 3,050 to 3,150 words, not counting the Sources list. Each range below is a target, not a
-hard cap. Go a little over when the day's news calls for it, and say less when there is less.
+Aim for about 3,050 to 3,150 words, not counting the Sources list. These numbers are a guide to
+balance, never a limit. Never leave out a story that deserves a place because a section or the edition
+is over its word count: include it, and let the section run long. Equally, do not pad a section to
+reach its number on a quiet day.
 
 | Section | Words | Share |
 |---|---|---|
@@ -113,7 +115,7 @@ List these every day, in this order:
 | Commercial International Bank (COMI) | Apple (AAPL) |
 | Talaat Moustafa Group (TMGH) | Microsoft (MSFT) |
 | Telecom Egypt (ETEL) | Nvidia (NVDA) |
-| Eastern Company (EAST) | Amazon (AMZN) |
+| Palm Hills Developments (PHDC) | Amazon (AMZN) |
 | Elsewedy Electric (SWDY) | Alphabet (GOOGL) |
 | Orascom Construction (ORAS) | Meta (META) |
 | Fawry (FWRY) | Tesla (TSLA) |
@@ -146,7 +148,8 @@ It reports:
   does not parse or has no entry for the date. Fix all of these before committing.
 - **Warnings:** first-person words or names outside quotes, sections far outside their word budget, and
   bold lead-ins that look like the same story in two sections. Read each one and fix the real problems;
-  some are false alarms (a quoted "we", "US" as a country).
+  some are false alarms (a quoted "we", "US" as a country). A word-count warning is information only:
+  never cut a worthwhile story to clear it.
 
 If a story is flagged as appearing twice, keep it in the section the rules above give it and remove it
 from the other.
