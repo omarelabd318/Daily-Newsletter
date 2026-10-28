@@ -48,8 +48,9 @@ covered in full further down.
 
 - **Top World Headlines:** stories outside the Middle East and North Africa.
 - **Regional and Gulf:** Middle East and North Africa politics, security and diplomacy, including Iran,
-  the Houthis, Israel, Gaza, Lebanon, Syria, Libya, Sudan and the Strait of Hormuz. Add one line on what
-  each story means for Egypt.
+  the Houthis, Israel, Gaza, Lebanon, Syria, Libya, Sudan and the Strait of Hormuz. Where a story has a
+  clear, real effect on Egypt (for example on the Suez Canal, fuel costs or investment), add one line on
+  it. Do not force an Egypt angle onto stories that have none.
 - **Markets:** all prices and money. That covers oil, gold, Gulf stock markets, bonds, IPOs, earnings,
   deals and Gulf or foreign investment flowing into Egypt. Regional and Gulf may refer to a market move
   in a few words, but the figures and analysis live here.
