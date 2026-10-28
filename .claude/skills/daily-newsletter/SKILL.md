@@ -57,6 +57,31 @@ covered in full further down.
   story behind a move belongs in Markets.
 - **Economic Calendar:** upcoming events only, not news already covered above.
 
+## Go-to sources for figures
+
+Check these pages first for the figures below, then search as usual for anything they do not cover.
+Every page here loaded with real content when tested from the cloud environment on 28 October 2026.
+Sites change, so if a page fails or looks stale, use the backup or search, and say in the edition when
+a figure could not be confirmed. These pages are for figures; news still comes from many outlets.
+
+| Figure | First choice | Backup |
+|---|---|---|
+| EGP against USD, EUR, SAR, AED, KWD, QAR, GBP | https://open.er-api.com/v6/latest/EGP (JSON; rates are EGP per 1 unit when inverted; market mid-rates, not the central bank's official rate) | EnterpriseAM's edition, which usually quotes the central bank's dollar rate |
+| Gold in Egypt (21K, 24K, 18K per gram) | https://egypt.gold-price-today.com/ (Arabic: عيار 21 is 21K) | https://www.goldpricez.com/eg/gram |
+| EGX30 close and daily change | https://english.mubasher.info/markets/EGX/indices/EGX30 (close, change, open, high, low) | https://tradingeconomics.com/egypt/stock-market |
+| Central bank interest rates | https://tradingeconomics.com/egypt/interest-rate | EnterpriseAM's edition |
+| Treasury bill yields | No reliable page found; search for the latest auction results (EnterpriseAM often reports them) | — |
+| Public holidays and bank closures | https://www.officeholidays.com/countries/egypt/2026 (verify any holiday shift against a news report of the official announcement) | Search |
+| Cairo weather, today and next two days | https://wttr.in/Cairo?format=j1 (JSON: daily max and min °C) | Search |
+| Egyptian football | https://www.kingfut.com/ (English) | https://www.kooora.com/ (Arabic) |
+| European football results | https://www.bbc.com/sport/football/scores-fixtures/YYYY-MM-DD (use the date of the matches) | https://www.espn.com/soccer/scoreboard |
+| Tennis | https://www.bbc.com/sport/tennis | https://www.wtatennis.com/scores |
+
+These block automated access from the cloud environment, so do not spend time on them: the Central
+Bank of Egypt site (cbe.org.eg), the Egyptian Exchange site (egx.com.eg), Ahram Online, Egypt Today,
+Reuters, investing.com, timeanddate.com, the ATP Tour site and the Egyptian Meteorological Authority.
+News reports that quote them are fine.
+
 ## Link every visual
 
 The site shows text only, so a reader cannot see a photo, chart, video, map or infographic the
