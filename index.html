@@ -247,6 +247,12 @@ footer p{margin:clamp(16px,2vw,24px) 0 0;max-width:40ch;color:var(--ink2);font-s
   // an edition's key is its id when it has one (a second edition on the same day), otherwise its date
   function key(e){return e.id || e.date}
   function title(e){return pretty(e.date) + (e.label ? ' · ' + e.label : '')}
+  // short form for the browser tab, e.g. "Wed 28 Oct · 2.0"
+  function tabTitle(e){
+    var dt = new Date(e.date+'T12:00:00');
+    var d = isNaN(dt) ? e.date : dt.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'}).replace(',','');
+    return d + (e.label ? ' · ' + e.label.replace(/^Edition\s+/i,'') : '');
+  }
   function state(title,msg){
     $('content').innerHTML='<div class="frame"><div class="state"><b>'+esc(title)+'</b><span>'+esc(msg||'')+'</span></div></div>';
   }
@@ -272,7 +278,7 @@ footer p{margin:clamp(16px,2vw,24px) 0 0;max-width:40ch;color:var(--ink2);font-s
     $('summary').textContent = ed.summary || '';
     $('summary').hidden = !ed.summary;
     $('edition').hidden = false;
-    document.title = 'Daily Newsletter · ' + title(ed);
+    document.title = 'Daily Newsletter · ' + tabTitle(ed);
     buildArchive(key(ed)); setNav(idx);
     fetch('editions/'+key(ed)+'.md',{cache:'no-cache'}).then(function(r){
       if(!r.ok) throw new Error(r.status);
