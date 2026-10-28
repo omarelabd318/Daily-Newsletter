@@ -71,6 +71,23 @@ figure. Where they disagree, use the more authoritative or more recent one and m
 for example `56.10 (unconfirmed)`. Never present a figure as confirmed when only one source had it and it
 looks out of line with recent days. Never guess a figure; write `n/a` instead.
 
+## Continuing stories
+
+Before writing, read the most recent earlier edition in `editions/` (the newest file before today's date;
+after a gap, such as a failed run, that may be two or more days old). Use it only to tell which stories
+are new and which are continuing. Then:
+
+- **Continuing story with a new development:** open with what is new, then give one sentence of
+  background so a reader who missed earlier editions can follow it. Do not retell the whole backstory.
+- **Continuing story with nothing new:** leave it out, or keep it to one line if it still matters today.
+  Use the space for fresh news.
+- **New story:** write it in full, as usual.
+
+Every edition must still make full sense on its own. Never refer to earlier editions or assume the reader
+saw them: no "as reported yesterday", "as covered in Tuesday's edition", "as noted previously" or "the
+story continues". Write "Parliament's authorisation, approved on 26 October, …", not "the authorisation
+covered yesterday …". This applies to every section, including Today at a Glance.
+
 ## Where each story goes
 
 Each story appears in one section only. Today at a Glance is the exception: it is an index of stories

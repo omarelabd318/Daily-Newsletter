@@ -135,6 +135,15 @@ def main(path):
         if hit:
             warnings.append(f"Line {i}: '{hit.group(0)}' may break the voice rules: {line.strip()[:90]}")
 
+    # Editions stand alone: no references to earlier editions.
+    backref = re.compile(r"(as (we )?(reported|covered|noted|mentioned) (yesterday|earlier|previously|on \w+day)|"
+                         r"(yesterday's|previous|last|earlier) (edition|issue|newsletter)|"
+                         r"see (yesterday|the previous)|the story continues)", re.I)
+    for i, line in enumerate(lines, 1):
+        hit = backref.search(line)
+        if hit:
+            warnings.append(f"Line {i}: '{hit.group(0)}' refers to an earlier edition; each edition must stand alone.")
+
     # Same story in two sections: compare bold lead-ins outside Today at a Glance and Sources.
     leads = []
     for name, sec in sections.items():
