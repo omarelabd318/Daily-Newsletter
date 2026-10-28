@@ -305,6 +305,9 @@ footer p{margin:clamp(16px,2vw,24px) 0 0;max-width:40ch;color:var(--ink2);font-s
       return;
     }
     $('top').hidden = false;
+    // a refresh always opens the newest edition; a shared link to a dated edition still opens that one
+    var nav = window.performance && performance.getEntriesByType ? performance.getEntriesByType('navigation')[0] : null;
+    if(nav && nav.type === 'reload' && location.hash) history.replaceState(null, '', location.pathname + location.search);
     show();
   }).catch(function(){state('Could not load the newsletter','Please try again in a moment.')});
 })();
