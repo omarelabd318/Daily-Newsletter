@@ -145,6 +145,13 @@ example `[view the photo essay](https://...)` or `[watch the trailer](https://..
 that shows the visual, not to a site's home page. If no direct link can be found, do not mention the
 visual. Never embed images (`![...](...)`).
 
+## Sports
+
+Do not group Sports items under sport headings such as **Football**, **Tennis** or **Other Sports**, and
+do not use any heading or standalone bold line inside Sports. Each match, result or story is its own item
+with its own bold lead-in, for example `**Liverpool v Chelsea:** ...` or `**Paris Masters:** ...`. Order
+them with Egyptian football first, then other football, then other sports.
+
 ## Stocks Watch tables
 
 `## Stocks Watch` comes right after Markets and before Currency and Commodities Watch. It has two parts,

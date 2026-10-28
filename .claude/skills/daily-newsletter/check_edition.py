@@ -135,6 +135,11 @@ def main(path):
         if hit:
             warnings.append(f"Line {i}: '{hit.group(0)}' may break the voice rules: {line.strip()[:90]}")
 
+    # Sports: no sport-name headings or standalone bold lines.
+    for line in sections.get("In Other News", {}).get("parts", {}).get("Sports", []):
+        if re.fullmatch(r"\s*(\*\*[^*]+\*\*|#{4,}\s+.+)\s*", line):
+            errors.append(f"Sports has a heading line; remove it and keep only items with lead-ins: {line.strip()}")
+
     # Editions stand alone: no references to earlier editions.
     backref = re.compile(r"(as (we )?(reported|covered|noted|mentioned) (yesterday|earlier|previously|on \w+day)|"
                          r"(yesterday's|previous|last|earlier) (edition|issue|newsletter)|"
