@@ -57,6 +57,14 @@ covered in full further down.
   story behind a move belongs in Markets.
 - **Economic Calendar:** upcoming events only, not news already covered above.
 
+## Link every visual
+
+The site shows text only, so a reader cannot see a photo, chart, video, map or infographic the
+edition mentions. Whenever an item refers to one, link straight to it in the same sentence, for
+example `[view the photo essay](https://...)` or `[watch the trailer](https://...)`. Link to the page
+that shows the visual, not to a site's home page. If no direct link can be found, do not mention the
+visual. Never embed images (`![...](...)`).
+
 ## Currency and Commodities Watch table
 
 Use three columns: `| Item | Level | Note |`. Keep each Note under about 10 words, so the table stays
