@@ -12,22 +12,23 @@ import sys
 
 SECTIONS = [
     "Today at a Glance", "Quick Hits", "Weather", "Egypt News", "Top World Headlines",
-    "Regional and Gulf", "Markets", "Currency and Commodities Watch", "In Other News",
+    "Regional and Gulf", "Markets", "Stocks Watch", "Currency and Commodities Watch", "In Other News",
     "Economic Calendar", "Worth Knowing", "Sources",
 ]
 PARTS = {
     "Markets": ["Egypt Markets", "Global Markets"],
+    "Stocks Watch": ["Egypt", "USA"],
     "In Other News": ["Tech and AI", "Sports", "Health and Science", "Entertainment and Culture"],
 }
 BUDGET = {
     "Today at a Glance": (150, 190), "Quick Hits": (70, 100), "Weather": (50, 80),
     "Egypt News": (450, 550), "Top World Headlines": (300, 380), "Regional and Gulf": (180, 230),
-    "Egypt Markets": (280, 340), "Global Markets": (210, 260),
+    "Egypt Markets": (280, 340), "Global Markets": (210, 260), "Stocks Watch": (100, 180),
     "Currency and Commodities Watch": (110, 160), "Tech and AI": (130, 170), "Sports": (150, 200),
     "Health and Science": (70, 100), "Entertainment and Culture": (120, 150),
     "Economic Calendar": (130, 170), "Worth Knowing": (160, 200),
 }
-TOTAL = (2700, 3300)
+TOTAL = (2850, 3450)
 # Words that break the voice rules. "US" is left out on purpose: it is usually the country.
 VOICE = re.compile(r"\b(I|I'm|I've|we|We|we're|We're|our|Our|ours|my|My|me|Omar)\b")
 # A single shared word in two lead-ins usually means the same running story.
@@ -92,6 +93,18 @@ def main(path):
     counts = {}
     for name, sec in sections.items():
         if name == "Sources":
+            continue
+        if name == "Stocks Watch":
+            # Tables only: one budget for the whole section, and no prose in either part.
+            counts[name] = sum(words("\n".join(b)) for b in sec["parts"].values())
+            for p, body in sec["parts"].items():
+                rows = [l for l in body if l.strip().startswith("|")]
+                prose = [l for l in body if l.strip() and not l.strip().startswith("|")
+                         and not re.fullmatch(r"\*[^*].*\*", l.strip()) and l.strip() != "---"]
+                if len(rows) < 10:
+                    errors.append(f"Stocks Watch '{p}' should be a table with the 8 fixed stocks.")
+                if prose:
+                    warnings.append(f"Stocks Watch '{p}' should be a table only; found: {prose[0][:80]}")
             continue
         if sec["parts"]:
             for p, body in sec["parts"].items():

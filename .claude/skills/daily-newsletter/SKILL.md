@@ -14,7 +14,7 @@ where each story goes, and the check to run before committing.
 
 ## Word budget
 
-Aim for about 2,900 to 3,000 words, not counting the Sources list. Each range below is a target, not a
+Aim for about 3,050 to 3,150 words, not counting the Sources list. Each range below is a target, not a
 hard cap. Go a little over when the day's news calls for it, and say less when there is less.
 
 | Section | Words | Share |
@@ -27,6 +27,7 @@ hard cap. Go a little over when the day's news calls for it, and say less when t
 | Regional and Gulf | 180-230 | 7% |
 | Markets: Egypt Markets | 280-340 | 10% |
 | Markets: Global Markets | 210-260 | 8% |
+| Stocks Watch (two tables) | 100-180 | 5% |
 | Currency and Commodities Watch | 110-160 | 5% |
 | In Other News: Tech and AI | 130-170 | 5% |
 | In Other News: Sports | 150-200 | 6% |
@@ -53,6 +54,8 @@ covered in full further down.
 - **Egypt News:** Egyptian government decisions and domestic stories. When Egypt acts on a regional
   matter (for example a parliamentary vote on a deployment), the Egyptian decision goes here and Regional
   and Gulf does not repeat it.
+- **Stocks Watch:** two tables of figures only (see below). Markets keeps its own coverage, including
+  stories about individual companies; Stocks Watch just lists the prices.
 - **Currency and Commodities Watch:** figures and a short note for each row. No story narrative; the
   story behind a move belongs in Markets.
 - **Economic Calendar:** upcoming events only, not news already covered above.
@@ -69,6 +72,8 @@ a figure could not be confirmed. These pages are for figures; news still comes f
 | EGP against USD, EUR, SAR, AED, KWD, QAR, GBP | https://open.er-api.com/v6/latest/EGP (JSON; rates are EGP per 1 unit when inverted; market mid-rates, not the central bank's official rate) | EnterpriseAM's edition, which usually quotes the central bank's dollar rate |
 | Gold in Egypt (21K, 24K, 18K per gram) | https://egypt.gold-price-today.com/ (Arabic: عيار 21 is 21K) | https://www.goldpricez.com/eg/gram |
 | EGX30 close and daily change | https://english.mubasher.info/markets/EGX/indices/EGX30 (close, change, open, high, low) | https://tradingeconomics.com/egypt/stock-market |
+| Egyptian stock prices (Stocks Watch) | https://english.mubasher.info/markets/EGX/stocks/TICKER, for example .../stocks/COMI (price, change, % change, previous close, time of last update) | Search |
+| US stock prices (Stocks Watch) | https://query1.finance.yahoo.com/v8/finance/chart/TICKER?range=5d&interval=1d (JSON: the last two values in indicators.quote[0].close give the latest close and the change; timestamp gives the date). Do not use Yahoo for Egyptian stocks; its EGX data is years out of date | Search |
 | Central bank interest rates | https://tradingeconomics.com/egypt/interest-rate | EnterpriseAM's edition |
 | Treasury bill yields | No page shows current yields. Search Arabic financial news for the latest auction, for example https://amwalalghad.com/?s=عائد+أذون or https://www.alborsaanews.com/?s=أذون (look for متوسط عائد, the average yield, by tenor). Results are not sorted by date: use only an auction from the last 7 days, and give its date | EnterpriseAM's edition, which reports some auctions; otherwise say the yield was not confirmed |
 | Public holidays and bank closures | https://www.officeholidays.com/countries/egypt/2026 (verify any holiday shift against a news report of the official announcement) | Search |
@@ -90,6 +95,37 @@ example `[view the photo essay](https://...)` or `[watch the trailer](https://..
 that shows the visual, not to a site's home page. If no direct link can be found, do not mention the
 visual. Never embed images (`![...](...)`).
 
+## Stocks Watch tables
+
+`## Stocks Watch` comes right after Markets and before Currency and Commodities Watch. It has two parts,
+`### Egypt` first, then `### USA`. Each part is one table and nothing else: no paragraphs and no bullet
+points. Under each heading, put one italic line saying which close the table shows, for example
+`*EGX close, Tuesday 27 October*` or `*US close, Tuesday 27 October*`. If the run happens while the EGX is
+trading, say so and give the time, for example `*EGX intraday, 11:49 Cairo*`.
+
+Columns: `| Stock (ticker) | Close | Change |`, with the price in EGP or USD and the change as a
+percentage with a sign, for example `+1.2%`.
+
+List these every day, in this order:
+
+| Egypt (EGX) | USA |
+|---|---|
+| Commercial International Bank (COMI) | Apple (AAPL) |
+| Talaat Moustafa Group (TMGH) | Microsoft (MSFT) |
+| Telecom Egypt (ETEL) | Nvidia (NVDA) |
+| Eastern Company (EAST) | Amazon (AMZN) |
+| Elsewedy Electric (SWDY) | Alphabet (GOOGL) |
+| EFG Holding (HRHO) | Meta (META) |
+| Fawry (FWRY) | Tesla (TSLA) |
+| Abu Qir Fertilizers (ABUK) | JPMorgan Chase (JPM) |
+
+After the fixed rows, add up to three rows for other stocks with a notable move or notable news that
+day, marked in italics, for example `| *Orascom Construction (ORAS), notable mover* | 410.00 | +8.5% |`.
+Leave them out when nothing stands out.
+
+On weekends the EGX is closed Friday and Saturday and US markets Saturday and Sunday. Show the last
+session's close with its date. If a price cannot be confirmed, write `n/a` rather than guessing.
+
 ## Currency and Commodities Watch table
 
 Use three columns: `| Item | Level | Note |`. Keep each Note under about 10 words, so the table stays
@@ -105,7 +141,7 @@ python3 .claude/skills/daily-newsletter/check_edition.py editions/YYYY-MM-DD.md
 
 It reports:
 
-- **Errors** (exit code 1): missing or misordered section titles, missing Markets or In Other News parts,
+- **Errors** (exit code 1): missing or misordered section titles, missing Markets, Stocks Watch or In Other News parts,
   a top-level `#` title, HTML, a first line that is not an italic intro, or an `editions/index.json` that
   does not parse or has no entry for the date. Fix all of these before committing.
 - **Warnings:** first-person words or names outside quotes, sections far outside their word budget, and
