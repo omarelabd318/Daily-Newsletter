@@ -70,7 +70,7 @@ a figure could not be confirmed. These pages are for figures; news still comes f
 | Gold in Egypt (21K, 24K, 18K per gram) | https://egypt.gold-price-today.com/ (Arabic: عيار 21 is 21K) | https://www.goldpricez.com/eg/gram |
 | EGX30 close and daily change | https://english.mubasher.info/markets/EGX/indices/EGX30 (close, change, open, high, low) | https://tradingeconomics.com/egypt/stock-market |
 | Central bank interest rates | https://tradingeconomics.com/egypt/interest-rate | EnterpriseAM's edition |
-| Treasury bill yields | No reliable page found; search for the latest auction results (EnterpriseAM often reports them) | — |
+| Treasury bill yields | No page shows current yields. Search Arabic financial news for the latest auction, for example https://amwalalghad.com/?s=عائد+أذون or https://www.alborsaanews.com/?s=أذون (look for متوسط عائد, the average yield, by tenor). Results are not sorted by date: use only an auction from the last 7 days, and give its date | EnterpriseAM's edition, which reports some auctions; otherwise say the yield was not confirmed |
 | Public holidays and bank closures | https://www.officeholidays.com/countries/egypt/2026 (verify any holiday shift against a news report of the official announcement) | Search |
 | Cairo weather, today and next two days | https://wttr.in/Cairo?format=j1 (JSON: daily max and min °C) | Search |
 | Egyptian football | https://www.kingfut.com/ (English) | https://www.kooora.com/ (Arabic) |
