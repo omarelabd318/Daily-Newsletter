@@ -5,9 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Daily Newsletter</title>
 <meta name="description" content="A daily briefing on Egypt, World News, Markets, Sports and Culture.">
-<meta name="color-scheme" content="dark">
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2352d6b5'/%3E%3Cpath d='M18 14h14c11 0 18 7 18 18s-7 18-18 18H18z' fill='%230e1216'/%3E%3C/svg%3E">
-<script>document.documentElement.className='js'</script>
+<script>document.documentElement.className='js';try{if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
 <style>
 :root{
   --ground:#0e1216; --raised:#151b21; --ink:#eef2f4; --ink2:#a9b4be; --accent:#52d6b5; --accent-ink:#07201a;
@@ -122,11 +125,53 @@ footer p{margin:clamp(16px,2vw,24px) 0 0;max-width:40ch;color:var(--ink2);font-s
   .s-body p,.s-body ul,.s-body ol{max-width:none}
 }
 @media (max-width:340px){.top{flex-wrap:wrap}}
+
+/* ---- broadsheet look (light by default; data-theme="dark" switches to the dark palette) ---- */
+:root{
+  --ground:#faf8f3; --raised:#f0ebe0; --ink:#16181a; --ink2:#5b6168; --accent:#8a1c1c; --accent-ink:#fff; --rule:#d8d2c4;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif; --sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+:root[data-theme="dark"]{
+  --ground:#0e1216; --raised:#151b21; --ink:#eef2f4; --ink2:#a9b4be; --accent:#52d6b5; --accent-ink:#07201a; --rule:#222a31;
+}
+body{font:20px/1.65 var(--serif)}
+.frame{max-width:780px}
+.s-in,.edition{grid-template-columns:minmax(0,1fr)}
+.s-in{gap:0}
+.s h2{position:static}
+.s-body p,.s-body ul,.s-body ol,.s-body blockquote,.edition .sum,.lead{max-width:none}
+.mast{position:relative;text-align:center;padding:44px 0 28px;border-bottom:3px double var(--ink)}
+.mast h1{font:700 clamp(36px,6.2vw,76px)/1 var(--serif);letter-spacing:-.02em;white-space:nowrap}
+.what{margin:14px auto 0;max-width:none;font:600 12px/1.5 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink2)}
+.top{justify-content:space-between;margin-top:26px;padding:6px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.top a,.top .off{font:600 12px var(--sans);letter-spacing:.12em;text-transform:uppercase}
+#archiveBtn{background:none;color:var(--ink);font:600 12px var(--sans);letter-spacing:.12em;text-transform:uppercase;min-height:36px;padding:0}
+#archiveBtn:hover,#archiveBtn[aria-expanded="true"]{background:none;color:var(--accent)}
+#themeBtn{position:absolute;top:14px;right:0;background:none;border:0;cursor:pointer;color:var(--ink2);font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;padding:8px 0}
+#themeBtn:hover{color:var(--accent)}
+.edition{text-align:center;gap:10px;margin-top:34px}
+.edition .date{font:600 13px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.edition .sum{margin:0 auto;font:400 26px/1.35 var(--serif)}
+.lead{font-style:italic;margin:12px auto 0}
+.toc{justify-content:center;gap:2px 18px;font:500 13px var(--sans);margin-top:28px}
+.s,.s:nth-of-type(even){--panel:var(--raised);background:var(--ground);padding-block:36px}
+.s+.s{border-top:1px solid var(--rule)}
+.s h2{font:700 12px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 22px;padding-bottom:12px;border-bottom:1px solid var(--ink)}
+.s-body h3{font:700 23px/1.3 var(--serif);margin-top:30px}
+td{font-family:var(--sans);font-size:17px} th{font-family:var(--sans)}
+@media (max-width:860px){
+  .top{gap:8px}
+  #archiveBtn{padding:0;font-size:12px}
+  .top a,.top .off{padding:12px 4px}
+  .edition .sum{font-size:22px}
+}
+
 </style>
 </head>
 <body>
 <div class="frame">
   <header class="mast">
+    <button id="themeBtn" type="button" aria-label="Switch to dark mode">Dark</button>
     <h1>Daily Newsletter</h1>
     <p class="what">A daily briefing on Egypt, World News, Markets, Sports and Culture.</p>
     <div class="top" id="top" hidden>
@@ -309,6 +354,20 @@ footer p{margin:clamp(16px,2vw,24px) 0 0;max-width:40ch;color:var(--ink2);font-s
       sweep();
     }).catch(function(){state('Could not load this edition','Please try again in a moment.')});
   }
+
+  // light/dark switch, remembered on this device
+  function syncThemeBtn(){
+    var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    $('themeBtn').textContent = dark ? 'Light' : 'Dark';
+    $('themeBtn').setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+  }
+  $('themeBtn').addEventListener('click',function(){
+    var dark = document.documentElement.getAttribute('data-theme') !== 'dark';
+    if(dark) document.documentElement.setAttribute('data-theme','dark'); else document.documentElement.removeAttribute('data-theme');
+    try{ localStorage.setItem('theme', dark ? 'dark' : 'light'); }catch(e){}
+    syncThemeBtn();
+  });
+  syncThemeBtn();
 
   $('archiveBtn').addEventListener('click',function(){
     var open = $('archive').classList.toggle('open');
