@@ -18,9 +18,9 @@ SECTIONS = [
 # The Saturday weekly recap (editions/YYYY-MM-DD-recap.md) has its own sections.
 RECAP_SECTIONS = [
     "The Week in Brief", "Egypt This Week", "Region and World", "Markets This Week",
-    "Sports This Week", "Culture and Tech", "The Week Ahead", "Sources",
+    "Sports This Week", "Culture and Tech", "How It Played Out", "The Week Ahead", "Sources",
 ]
-RECAP_TOTAL = (1500, 2300)
+RECAP_TOTAL = (1600, 2500)
 PARTS = {
     "Markets": ["Egypt Markets", "Global Markets"],
     "Stocks Watch": ["Egypt", "USA"],
@@ -56,6 +56,53 @@ def slug(s):
 
 def strip_quotes(line):
     return re.sub(r"\"[^\"]*\"|“[^”]*”", "", line)
+
+
+def num(cell):
+    m = re.match(r"\s*([+\-\u2212]?)\s*(\d[\d,]*(?:\.\d+)?)", cell)
+    if not m:
+        return None
+    v = float(m.group(2).replace(",", ""))
+    return -v if m.group(1) in "-\u2212" and m.group(1) else v
+
+
+def check_stocks(parts, days, date):
+    """Compare each Stocks Watch row with the data log: the close should match what was logged for this
+    date, and the change should match the move from the previous logged close. A live (intraday) table is
+    compared with the previous close, which is what the log holds while the market is open."""
+    out = []
+    for part, group in (("Egypt", "egx"), ("USA", "us")):
+        body = parts.get(part, [])
+        live = any("intraday" in l.lower() for l in body if l.strip().startswith("*"))
+        series = [(d["date"], d.get(group) or {}) for d in days if d.get("date", "") <= date]
+        for line in body:
+            cells = [c.strip() for c in line.strip().strip("|").split("|")]
+            m = re.search(r"\(([A-Z.]{2,6})\)", cells[0]) if len(cells) >= 3 else None
+            if not m:
+                continue
+            t, close, change = m.group(1), num(cells[1]), num(cells[2])
+            vals = [(d, g[t]) for d, g in series if t in g]
+            if close is None or not vals or vals[-1][0] != date:
+                continue
+            logged = vals[-1][1]
+            if live:
+                base = logged
+            else:
+                if abs(close / logged - 1) > 0.005:
+                    out.append(f"Stocks Watch {t}: table close {close:,.2f} but the log has {logged:,.2f} for {date}.")
+                    continue
+                # Weekend and holiday editions repeat the last close: step back past repeats.
+                earlier = [v for _, v in vals[:-1] if v != logged]
+                base = earlier[-1] if earlier else None
+            if base is None:
+                continue
+            implied = (close / base - 1) * 100
+            if abs(implied) > 15:
+                out.append(f"Stocks Watch {t}: {implied:+.1f}% from the previous close ({base:,.2f}); check the figure.")
+            if change is not None and change != 0 and abs(implied - change) > 0.3:
+                out.append(f"Stocks Watch {t}: table change {change:+.1f}% but the log implies {implied:+.1f}% "
+                           f"({base:,.2f} to {close:,.2f}); check one of them.")
+    return out
 
 
 def main(path):
@@ -137,7 +184,7 @@ def main(path):
     total = sum(counts.values())
     lo, hi = RECAP_TOTAL if recap else TOTAL
     if not lo <= total <= hi:
-        guide = "1,700-2,000" if recap else "3,050-3,150"
+        guide = "1,850-2,150" if recap else "3,050-3,150"
         warnings.append(f"Total {total} words without Sources (guide about {guide}; never cut a worthwhile story to fit).")
 
     # Voice: first person, names, authorship.
@@ -157,15 +204,30 @@ def main(path):
         errors.append("Quick Hits should include a '**Number of the day:**' item.")
 
     # The day's figures are logged for the site's trend lines (daily editions only).
+    date = os.path.basename(path)[:10]
+    data_dir = os.path.join(os.path.dirname(os.path.abspath(path)), "..", "data")
     if not recap:
-        mpath = os.path.join(os.path.dirname(os.path.abspath(path)), "..", "data", "markets.json")
         try:
-            mdays = json.load(open(mpath)).get("days", [])
-            day = next((d for d in mdays if d.get("date") == os.path.basename(path)[:10]), None)
+            mdays = json.load(open(os.path.join(data_dir, "markets.json"))).get("days", [])
+            day = next((d for d in mdays if d.get("date") == date), None)
             if not day or day.get("seed") or not (day.get("egx") or day.get("us") or day.get("usd_egp")):
                 warnings.append("No figures logged for this date in data/markets.json; run log_figures.py.")
+            else:
+                warnings += check_stocks(sections.get("Stocks Watch", {}).get("parts", {}), mdays, date)
         except (OSError, ValueError):
             warnings.append("data/markets.json is missing or not valid JSON.")
+
+    # EGX closures from data/holidays.json: the Egypt table must say the market is closed.
+    if not recap:
+        try:
+            hols = json.load(open(os.path.join(data_dir, "holidays.json"))).get("days", [])
+            hol = next((h for h in hols if h.get("date") == date and h.get("egx_closed")), None)
+            egypt = sections.get("Stocks Watch", {}).get("parts", {}).get("Egypt", [])
+            if hol and not any("closed" in l.lower() for l in egypt if l.strip().startswith("*")):
+                warnings.append(f"The EGX is closed today ({hol['name']}, {hol.get('status', 'expected')}); "
+                                "say so in the Egypt Stocks Watch line and show the last session's close.")
+        except (OSError, ValueError):
+            warnings.append("data/holidays.json is missing or not valid JSON.")
 
     # Sports: no sport-name headings or standalone bold lines.
     for line in sections.get("In Other News", {}).get("parts", {}).get("Sports", []):

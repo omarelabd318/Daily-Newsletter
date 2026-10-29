@@ -216,7 +216,22 @@ day, marked in italics, for example `| *Ezz Steel (ESRS), notable mover* | 98.50
 Leave them out when nothing stands out.
 
 On weekends the EGX is closed Friday and Saturday and US markets Saturday and Sunday. Show the last
-session's close with its date. If a price cannot be confirmed, write `n/a` rather than guessing.
+session's close with its date. On EGX holidays, listed in `data/holidays.json`, do the same and say why in
+the italic line, for example `*EGX closed today for Sham el-Nessim; last close Sunday 2 May*`, and log
+the figures as usual (the last close again). The checker warns when a listed closure is not mentioned. If a price cannot be confirmed, write `n/a` rather than guessing.
+
+The checker compares every Stocks Watch row with the data log: the close with what was logged for the
+date, and the change with the move from the previous logged close (from the previous close to the live
+price for an intraday table). A warning there means one of the two figures is wrong: recheck both at the
+source and fix the table or re-run log_figures.py before publishing.
+
+## Egyptian holidays
+
+`data/holidays.json` lists the public holidays that close the EGX. Use it in Today at a Glance's What to
+watch line and the Economic Calendar (upcoming closures and long weekends). Dates marked `expected` are
+projections, so always confirm them against current official announcements; when the Cabinet or the EGX
+announces dates, update the file (dates, any day moved to a Thursday or Sunday, and `"status":
+"confirmed"`) and commit it with the edition. When a new year's holidays are announced, add them.
 
 ## Currency and Commodities Watch table
 
@@ -236,7 +251,7 @@ Stocks Watch do not.
 - **Research:** start from that week's editions in `editions/` (Sunday to Saturday, including any second
   edition of a day), then search for how each big story developed and ended up. Report where things stand
   now, not what was said on each day. Check every figure as usual.
-- **Length:** about 1,700 to 2,000 words, a 7 to 8 minute read. A guide, not a limit.
+- **Length:** about 1,850 to 2,150 words, an 8 to 9 minute read. A guide, not a limit.
 - **First line:** an italic sentence with the week's dates and what it was about, for example
   `*Week of 25 to 31 October 2026: a rate hold, a weaker pound and Egypt's Saudi deployment vote.*`
 - **Sections,** in this order, each as `##` with exactly these titles:
@@ -258,11 +273,21 @@ Stocks Watch do not.
      after Month in Numbers if both appear): one line on the year, then the table that
      `python3 .claude/skills/daily-newsletter/market_facts.py DATE --year` prints, then one line each on
      the year's best and worst stocks from that table.
-  7. **The Week Ahead:** the key scheduled events for the coming week (central bank meetings, data,
+  7. **How It Played Out:** go through the What to watch today lines in this week's daily editions and
+     pick the 4 to 6 events that mattered most (a rate decision, a vote, a data release, a big match).
+     For each, one item: what was expected and what actually happened, for example
+     `**Central bank meeting:** Expected to hold; it held rates at 22% and signalled cuts in December.`
+     Skip anything already covered in full above; say "postponed" or "no decision yet" where that is the
+     case. Do not mention the daily editions themselves.
+  8. **The Week Ahead:** the key scheduled events for the coming week (central bank meetings, data,
      holidays and closures, big matches).
-  8. **Sources:** the links used.
+  9. **Sources:** the links used.
 - On the recap page, the site draws year-long trend lines next to the Markets This Week rows by itself;
   nothing to add for that.
+- **Data log check:** before committing, run
+  `python3 .claude/skills/daily-newsletter/check_log.py DATE`. Fix any real problem it finds in
+  `data/markets.json` with log_figures.py (checking the figure at the source first), commit the fix, and
+  list anything left unfixed in the final reply's Publishing note. It does not go in the recap itself.
 - Every item opens with a bold lead-in, as in the daily edition. Never refer to the daily editions
   themselves ("as reported on Tuesday"): write about the events and their dates.
 

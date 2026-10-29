@@ -1,0 +1,83 @@
+{
+ "note": "Egyptian public holidays and EGX closures. status 'expected' means a projected date (Islamic holidays depend on the moon sighting, and the government often moves holidays to a Thursday or Sunday); runs change it to 'confirmed' with the announced dates once the Cabinet or the EGX announces them. egx_closed: the exchange is shut. Fridays and Saturdays are always closed and are not listed. Holidays that fall on a Friday or Saturday (Arafat Day and July 23 in 2027) are left out; if the government gives a weekday off instead, add that day once it is announced.",
+ "days": [
+  {
+   "date": "2027-01-07",
+   "name": "Coptic Christmas",
+   "egx_closed": true,
+   "status": "expected"
+  },
+  {
+   "date": "2027-01-25",
+   "name": "January 25 Revolution and Police Day",
+   "egx_closed": true,
+   "status": "expected"
+  },
+  {
+   "date": "2027-03-10",
+   "name": "Eid al-Fitr",
+   "egx_closed": true,
+   "status": "expected"
+  },
+  {
+   "date": "2027-03-11",
+   "name": "Eid al-Fitr",
+   "egx_closed": true,
+   "status": "expected"
+  },
+  {
+   "date": "2027-04-25",
+   "name": "Sinai Liberation Day",
+   "egx_closed": true,
+   "status": "expected"
+  },
+  {
+   "date": "2027-05-03",
+   "name": "Sham el-Nessim",
+   "egx_closed": true,
+   "status": "expected"
+  },
+  {
+   "date": "2027-05-16",
+   "name": "Eid al-Adha",
+   "egx_closed": true,
+   "status": "expected"
+  },
+  {
+   "date": "2027-05-17",
+   "name": "Eid al-Adha",
+   "egx_closed": true,
+   "status": "expected"
+  },
+  {
+   "date": "2027-05-18",
+   "name": "Eid al-Adha",
+   "egx_closed": true,
+   "status": "expected"
+  },
+  {
+   "date": "2027-06-06",
+   "name": "Islamic New Year",
+   "egx_closed": true,
+   "status": "expected"
+  },
+  {
+   "date": "2027-06-30",
+   "name": "June 30 Revolution",
+   "egx_closed": true,
+   "status": "expected"
+  },
+  {
+   "date": "2027-08-15",
+   "name": "Prophet's Birthday",
+   "egx_closed": true,
+   "status": "expected"
+  },
+  {
+   "date": "2027-10-06",
+   "name": "Armed Forces Day",
+   "egx_closed": true,
+   "status": "expected"
+  }
+ ]
+}
