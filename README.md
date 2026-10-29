@@ -36,6 +36,8 @@ US indices, Bitcoin and the Stocks Watch prices), one entry per edition date. Ru
 `.claude/skills/daily-newsletter/log_figures.py`. The site uses it to draw a small trend line next to
 matching table rows (the last seven logged values), and the weekly recap uses it for weekly and monthly
 changes. Entries marked `seed` were backfilled from market history when the log was started.
+`data/markets.xlsx` is a spreadsheet copy of the same data (headline figures, Egypt stocks, US stocks),
+refreshed by `.claude/skills/daily-newsletter/export_xlsx.py` on every run.
 
 ## Who writes the editions
 

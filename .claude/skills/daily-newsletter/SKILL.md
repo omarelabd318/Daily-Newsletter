@@ -253,6 +253,12 @@ next to table rows and the recap can compute weekly and monthly changes. From th
 python3 .claude/skills/daily-newsletter/log_figures.py DATE usd_egp=56.20 eur_egp=62.57 gold21_egp=6385 brent=113.88 egx30=49723.72 sp500=7743.98 nasdaq=26549.85 btc=81231 egx.COMI=120.30 us.AAPL=347.10
 ```
 
+Then refresh the spreadsheet copy, `data/markets.xlsx`, and commit it too:
+
+```
+python3 .claude/skills/daily-newsletter/export_xlsx.py
+```
+
 Log the same numbers the edition shows (the central bank's selling rate for the dollar when that is what
 the table shows), one value per key, with every Stocks Watch row as `egx.TICKER` or `us.TICKER`. Leave out
 anything marked n/a or unconfirmed. Weekend editions log what they show; the recap does not log. Commit
@@ -267,6 +273,18 @@ a figure, a name, a date or a result, add one item at the end of Quick Hits:
 sentence, plain and factual, and fix that day's entry in `data/markets.json` with `log_figures.py`. Do not
 edit the earlier edition itself, and leave out trivial slips. This is the only place an edition may refer
 to an earlier one.
+
+## Other skills for work on this repo
+
+These are general Claude skills, not part of this repo; use them when the task calls for it:
+
+- **dataviz:** read it before adding or changing any chart on the site, such as the trend lines drawn
+  from `data/markets.json`, so charts stay consistent in light and dark mode.
+- **xlsx:** for anything beyond the automatic `data/markets.xlsx` export, such as a custom analysis
+  workbook or charts in Excel.
+- **code-review:** run it on changes to `index.html` or the scripts before pushing them.
+
+Daily and recap runs do not need any of these.
 
 ## Check before committing
 
