@@ -195,6 +195,10 @@ closing or a LIVE price, the quote time and the source. Then:
 - **Usually one credit per item:** if a point rests on several outlets, credit the main one, or use a
   general credit such as "according to news bulletins", and let the Sources list carry the rest. About
   10 to 20 credits in an edition reads naturally; the checker warns above 25, or at 3 or more in one item.
+- **No limit per source:** take as many stories from one outlet as are relevant and credible, including
+  EnterpriseAM and CairoScene. The instruction that an edition should not read like a rewrite of either
+  is about writing in your own words and checking key facts elsewhere, not a cap on how much comes from
+  them. Each story is still judged on its own merit and placed in the section where it belongs.
 - **Credit every outlet the same way:** keep crediting EnterpriseAM and CairoScene whenever a point comes
   from them and the credit fits; they are trusted, daily sources. The aim is that other outlets are
   named just as readily when a point comes from them, not that these two are named less.
