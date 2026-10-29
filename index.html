@@ -120,9 +120,10 @@ footer p{margin:clamp(16px,2vw,24px) 0 0;max-width:40ch;color:var(--ink2);font-s
   td[data-label]{padding-left:72px}
   td[data-label]::before{content:attr(data-label);display:inline-block;min-width:62px;margin:0 10px 0 -72px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);vertical-align:1px}
   tr{position:relative}
-  tr.has-trend td:first-child{padding-right:84px}
-  tr.trend-long td:first-child{padding-right:140px}
-  tr td.trend{position:absolute;top:12px;right:16px;width:auto;padding:0;text-align:center}
+  /* the trend line sits on the right, centred down the card; every line keeps that strip clear */
+  tr.has-trend td:not(.trend){padding-right:84px}
+  tr.trend-long td:not(.trend){padding-right:140px}
+  tr td.trend{position:absolute;top:50%;transform:translateY(-50%);right:16px;width:auto;padding:0;text-align:center}
   tr td.trend::before{display:block;min-width:0;margin:0 0 3px;font-size:9.5px;letter-spacing:.08em}
   tr td.trend .spark{margin:0 auto}
   tr:not(.has-trend) td.trend{display:none}
