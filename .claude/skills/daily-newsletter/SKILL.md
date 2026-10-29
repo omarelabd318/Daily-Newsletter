@@ -202,6 +202,10 @@ closing or a LIVE price, the quote time and the source. Then:
 - **Variety by adding, not dropping:** go through the whole EnterpriseAM edition (on weekdays) and
   CairoScene, and consider every item. Variety comes from adding strong stories from other outlets
   alongside them, never from leaving out a good EnterpriseAM or CairoScene story to balance the count.
+- **Merit, not origin:** the same bar applies the other way. Include an EnterpriseAM or CairoScene story
+  because it is worth a reader's time, not because of where it came from; skip their minor items as you
+  would anyone's. Each section should draw on a range of outlets, and the edition should never read like
+  a summary of those two.
 - **Credit every outlet the same way:** keep crediting EnterpriseAM and CairoScene whenever a point comes
   from them and the credit fits; they are trusted, daily sources. The aim is that other outlets are
   named just as readily when a point comes from them, not that these two are named less.
