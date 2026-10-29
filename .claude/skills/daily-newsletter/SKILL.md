@@ -71,6 +71,18 @@ figure. Where they disagree, use the more authoritative or more recent one and m
 for example `56.10 (unconfirmed)`. Never present a figure as confirmed when only one source had it and it
 looks out of line with recent days. Never guess a figure; write `n/a` instead.
 
+## Context from the data log
+
+`data/markets.json` holds daily figures back to 2021. After logging the day's figures, run
+`python3 .claude/skills/daily-newsletter/market_facts.py DATE`. For each item it prints the month-to-date
+and year-to-date change, the 52-week range, and lines marked `NOTABLE:` for an item within 3% of its
+52-week high or low, on a run of 4 or more sessions up or down, or at its highest or lowest in at least
+three months. Use the notable facts for one or two context lines in Egypt Markets and Global Markets, for
+example "The EGX30 closed at its highest since March" or "the pound has weakened for five sessions in a
+row", and consider one for the Number of the day. Only use facts that fit the story; skip the rest. Take
+the day's change from the source, not from this report, since a log entry can mix closing and intraday
+values.
+
 ## Number of the day
 
 Quick Hits always includes one item `**Number of the day:** ...`: a single striking figure from the day's
@@ -179,8 +191,12 @@ points. Under each heading, put one italic line saying which close the table sho
 `*EGX close, Tuesday 27 October*` or `*US close, Tuesday 27 October*`. If the run happens while the EGX is
 trading, say so and give the time, for example `*EGX intraday, 11:49 Cairo*`.
 
-Columns: `| Stock (ticker) | Close | Change |`, with the price in EGP or USD and the change as a
-percentage with a sign, for example `+1.2%`.
+Columns: `| Stock (ticker) | Close | Change | YTD |`, with the price in EGP or USD and the change as a
+percentage with a sign, for example `+1.2%`. The site colours signed changes green or red with an arrow,
+and bolds moves of 5% or more, so always write the sign. Take Change from the source. Take YTD (change
+since the last close of the previous year) from the data log: log the day's figures first (see "Log the
+day's figures"), then run `python3 .claude/skills/daily-newsletter/market_facts.py DATE --ytd`. Write
+`n/a` for YTD when it prints n/a, and for notable movers that are not in the log.
 
 List these every day, in this order:
 
@@ -196,7 +212,7 @@ List these every day, in this order:
 | Abu Qir Fertilizers (ABUK) | JPMorgan Chase (JPM) |
 
 After the fixed rows, add up to three rows for other stocks with a notable move or notable news that
-day, marked in italics, for example `| *Ezz Steel (ESRS), notable mover* | 98.50 | +8.5% |`.
+day, marked in italics, for example `| *Ezz Steel (ESRS), notable mover* | 98.50 | +8.5% | n/a |`.
 Leave them out when nothing stands out.
 
 On weekends the EGX is closed Friday and Saturday and US markets Saturday and Sunday. Show the last
@@ -238,9 +254,15 @@ Stocks Watch do not.
      the month, then a table `| Item | Start of month | End of month | Change |` for EGX30, USD/EGP, gold
      21K, Brent, S&P 500 and Bitcoin, taken from the first and last entries of the previous month in
      `data/markets.json` (say "not logged" where a figure is missing).
+  In the last Saturday recap of December, also add **Year in Numbers** right after Markets This Week (and
+     after Month in Numbers if both appear): one line on the year, then the table that
+     `python3 .claude/skills/daily-newsletter/market_facts.py DATE --year` prints, then one line each on
+     the year's best and worst stocks from that table.
   7. **The Week Ahead:** the key scheduled events for the coming week (central bank meetings, data,
      holidays and closures, big matches).
   8. **Sources:** the links used.
+- On the recap page, the site draws year-long trend lines next to the Markets This Week rows by itself;
+  nothing to add for that.
 - Every item opens with a bold lead-in, as in the daily edition. Never refer to the daily editions
   themselves ("as reported on Tuesday"): write about the events and their dates.
 

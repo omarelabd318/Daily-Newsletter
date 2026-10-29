@@ -88,8 +88,10 @@ def main(path):
         elif current:
             (sections[current]["parts"][part] if part else sections[current]["body"]).append(line)
 
-    if recap and "Month in Numbers" in order:
-        expected = expected[:4] + ["Month in Numbers"] + expected[4:]
+    if recap:
+        # Optional sections that go right after Markets This Week.
+        extra_secs = [s for s in ("Month in Numbers", "Year in Numbers") if s in order]
+        expected = expected[:4] + extra_secs + expected[4:]
     if order != expected:
         missing = [s for s in expected if s not in order]
         extra = [s for s in order if s not in expected]
@@ -120,6 +122,8 @@ def main(path):
                     errors.append(f"Stocks Watch '{p}' should be a table with the 8 fixed stocks.")
                 if prose:
                     warnings.append(f"Stocks Watch '{p}' should be a table only; found: {prose[0][:80]}")
+                if rows and "YTD" not in rows[0]:
+                    warnings.append(f"Stocks Watch '{p}' should have a YTD column: | Stock (ticker) | Close | Change | YTD |")
             continue
         if sec["parts"]:
             for p, body in sec["parts"].items():

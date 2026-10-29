@@ -8,7 +8,8 @@ repo; every push to `main` redeploys it. There is no build step.
 
 - `index.html` is the whole site: the page, its styles and a small Markdown renderer. It reads
   `editions/index.json`, shows the newest edition, and offers an archive with search, Older/Newer links,
-  a Dark/Light switch (remembered per device) and a print-friendly layout.
+  a Dark/Light switch (follows the device setting until you pick one, then remembered per device), green
+  and red arrows on price changes, and a print-friendly layout.
 - Each edition is a Markdown file in `editions/`:
   - `YYYY-MM-DD.md` for the daily edition (Cairo date),
   - `YYYY-MM-DD-recap.md` for the Saturday weekly recap,
@@ -34,8 +35,11 @@ returns to the newest.
 `data/markets.json` holds the figures each edition showed (exchange rates, Egyptian gold, EGX30, Brent,
 US indices, Bitcoin and the Stocks Watch prices), one entry per edition date. Runs add to it with
 `.claude/skills/daily-newsletter/log_figures.py`. The site uses it to draw a small trend line next to
-matching table rows (the last seven logged values), and the weekly recap uses it for weekly and monthly
-changes. Entries marked `seed` were backfilled from market history when the log was started.
+matching table rows (the last seven logged values, or about a year on the weekly recap), and the weekly
+recap uses it for weekly, monthly and yearly changes. Entries marked `seed` were backfilled from market
+history back to 2021 when the log was started (Egyptian stocks, EGX30 and gold from investing.com exports,
+the rest from Yahoo Finance). `.claude/skills/daily-newsletter/market_facts.py` reads the log for the
+Stocks Watch YTD column and context lines such as 52-week highs and lows, streaks and "highest since".
 `data/markets.xlsx` is a spreadsheet copy of the same data (headline figures, Egypt stocks, US stocks),
 refreshed by `.claude/skills/daily-newsletter/export_xlsx.py` on every run.
 

@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2352d6b5'/%3E%3Cpath d='M18 14h14c11 0 18 7 18 18s-7 18-18 18H18z' fill='%230e1216'/%3E%3C/svg%3E">
-<script>document.documentElement.className='js';try{if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+<script>document.documentElement.className='js';try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
 <style>
 :root{
   --ground:#0e1216; --raised:#151b21; --ink:#eef2f4; --ink2:#a9b4be; --accent:#52d6b5; --accent-ink:#07201a;
@@ -170,6 +170,10 @@ td{font-family:var(--sans);font-size:17px} th{font-family:var(--sans)}
 
 /* search, explained boxes, print */
 #archive{text-align:left}
+:root{--up:#1d7a3a;--down:#b3261e}
+:root[data-theme="dark"]{--up:#5fd08a;--down:#ff8a80}
+.chg.up{color:var(--up)} .chg.down{color:var(--down)} .chg.big{font-weight:700}
+.chg span{font-size:.8em}
 .spark{display:inline-block;vertical-align:middle;margin-left:8px;overflow:visible}
 .spark path{fill:none;stroke:var(--ink2);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
 .spark circle{fill:var(--accent);stroke:var(--panel);stroke-width:1.5}
@@ -378,7 +382,8 @@ td{font-family:var(--sans);font-size:17px} th{font-family:var(--sans)}
       document.querySelectorAll('#content .s-body > *:first-child').forEach(function(el){el.classList.add('rv')});
       document.querySelectorAll('.mast > *').forEach(function(el){el.classList.add('rv')});
       pending = Array.prototype.slice.call(document.querySelectorAll('.rv'));
-      addSparks(ed.date);
+      addSparks(ed.date, /-recap$/.test(key(ed)));
+      markChanges();
       if(pendingStory && document.getElementById(pendingStory)) jumpTo(pendingStory); else window.scrollTo(0,0);
       pendingStory = null;
       sweep();
@@ -398,6 +403,16 @@ td{font-family:var(--sans);font-size:17px} th{font-family:var(--sans)}
     syncThemeBtn();
   });
   syncThemeBtn();
+
+  // ---- colour signed percentage changes in tables, with an arrow so colour is never the only cue ----
+  function markChanges(){
+    document.querySelectorAll('#content .s-body td:not(:first-child)').forEach(function(td){
+      var m = td.textContent.trim().match(/^([+\-−])\s?(\d[\d,]*(?:\.\d+)?)\s?%/);
+      if(!m || td.querySelector('.chg')) return;
+      var up = m[1] === '+', big = parseFloat(m[2].replace(/,/g,'')) >= 5;
+      td.innerHTML = '<span class="chg ' + (up ? 'up' : 'down') + (big ? ' big' : '') + '"><span aria-hidden="true">' + (up ? '▲' : '▼') + '</span> ' + td.innerHTML + '</span>';
+    });
+  }
 
   // ---- sparklines: recent trend for table rows, from data/markets.json ----
   var market = fetch('data/markets.json',{cache:'no-cache'}).then(function(r){return r.ok ? r.json() : null}).catch(function(){return null});
@@ -419,16 +434,18 @@ td{font-family:var(--sans);font-size:17px} th{font-family:var(--sans)}
     for(var i=0;i<SERIES.length;i++) if(SERIES[i][0].test(label)) return day[SERIES[i][1]] != null ? day[SERIES[i][1]] : null;
     return null;
   }
-  function spark(pts){
-    var w = 56, h = 16, p = 2, min = Math.min.apply(null, pts.map(function(x){return x.v})), max = Math.max.apply(null, pts.map(function(x){return x.v}));
+  function spark(pts, long){
+    var w = long ? 120 : 56, h = long ? 26 : 16, p = 2, min = Math.min.apply(null, pts.map(function(x){return x.v})), max = Math.max.apply(null, pts.map(function(x){return x.v}));
     var span = max - min || 1, step = (w - 2*p) / (pts.length - 1);
     var xy = pts.map(function(x,i){ return [p + i*step, h - p - (x.v - min) / span * (h - 2*p)]; });
     var d = xy.map(function(c,i){ return (i ? 'L' : 'M') + c[0].toFixed(1) + ' ' + c[1].toFixed(1); }).join('');
-    var last = xy[xy.length-1], tip = pts.map(function(x){ return x.d.slice(5) + ': ' + x.v.toLocaleString('en-GB'); }).join('  ·  ');
+    var last = xy[xy.length-1], nf = function(v){ return v.toLocaleString('en-GB'); };
+    var tip = long ? ('About a year: ' + nf(pts[0].v) + ' → ' + nf(pts[pts.length-1].v) + ' (low ' + nf(min) + ', high ' + nf(max) + ')')
+                   : pts.map(function(x){ return x.d.slice(5) + ': ' + nf(x.v); }).join('  ·  ');
     return '<svg class="spark" viewBox="0 0 '+w+' '+h+'" width="'+w+'" height="'+h+'" role="img" aria-label="Trend: '+esc(tip)+'"><title>'+esc(tip)+'</title>'+
       '<path d="'+d+'"/><circle cx="'+last[0].toFixed(1)+'" cy="'+last[1].toFixed(1)+'" r="2.5"/></svg>';
   }
-  function addSparks(upto){
+  function addSparks(upto, long){
     market.then(function(m){
       if(!m || !m.days) return;
       var days = m.days.filter(function(x){ return x.date <= upto; });
@@ -437,8 +454,8 @@ td{font-family:var(--sans);font-size:17px} th{font-family:var(--sans)}
         var cell = tr.querySelector('td'); if(!cell || cell.querySelector('.spark')) return;
         var label = cell.textContent, pts = [];
         days.forEach(function(x){ var v = pick(x, label); if(typeof v === 'number') pts.push({d:x.date, v:v}); });
-        pts = pts.slice(-7);
-        if(pts.length >= 2 && pts[pts.length-1].d === upto) cell.insertAdjacentHTML('beforeend', ' ' + spark(pts));
+        pts = pts.slice(long ? -260 : -7);
+        if(pts.length >= 2 && pts[pts.length-1].d === upto) cell.insertAdjacentHTML('beforeend', ' ' + spark(pts, long));
       });
     });
   }
