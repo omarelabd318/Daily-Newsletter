@@ -141,6 +141,29 @@ covered in full further down.
   story behind a move belongs in Markets.
 - **Economic Calendar:** upcoming events only, not news already covered above.
 
+## Fetch the figures first
+
+Start the figures with one command from the repo root:
+
+```
+python3 .claude/skills/daily-newsletter/fetch_figures.py DATE
+```
+
+It fetches the Egyptian stocks, the EGX30, the US stocks and indices, Brent, gold, Bitcoin and the
+exchange rates (about 30 seconds), and prints a table with each value, its change, whether it is a
+closing or a LIVE price, the quote time and the source. Then:
+
+- **Anything under NOT FOUND:** look it up by hand from the go-to sources below (first choice, then
+  backup, then search). If it still cannot be confirmed, write `n/a` in the edition. Never guess or carry
+  over an old figure as if it were today's.
+- **Check every figure against a second source** as usual; the script only replaces the first lookup.
+- **Egyptian stocks:** the script works out the official close as the previous close plus the day's
+  change, because the "last price" on Mubasher can be an earlier trade. Use its figures, not the last price.
+- **Logging:** after checking, run the `log_figures.py` command it prints at the end, adding any figure
+  found by hand and replacing any figure changed after checking (for example the central bank's dollar
+  rate instead of the market mid-rate, when that is what the edition shows). It already holds closing
+  prices only, including previous closes while the EGX is trading.
+
 ## Go-to sources for figures
 
 Check these pages first for the figures below, then search as usual for anything they do not cover.

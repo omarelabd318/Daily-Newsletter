@@ -414,8 +414,10 @@ td{font-family:var(--sans);font-size:17px} th{font-family:var(--sans)}
     });
   }
 
-  // ---- sparklines: recent trend for table rows, from data/markets.json ----
-  var market = fetch('data/markets.json',{cache:'no-cache'}).then(function(r){return r.ok ? r.json() : null}).catch(function(){return null});
+  // ---- sparklines: recent trend for table rows, from data/markets-recent.json (about the last 400 days);
+  // the full history in data/markets.json is loaded only for an older edition that needs it ----
+  function loadMarket(f){ return fetch('data/'+f,{cache:'no-cache'}).then(function(r){return r.ok ? r.json() : null}).catch(function(){return null}); }
+  var market = loadMarket('markets-recent.json'), marketFull = null;
   var SERIES = [
     [/EGX\s*30/i,'egx30'], [/USD\s*\/\s*EGP|US dollar/i,'usd_egp'], [/EUR\s*\/\s*EGP|\beuro\b/i,'eur_egp'],
     [/SAR\b|Saudi riyal/i,'sar_egp'], [/AED\b|dirham/i,'aed_egp'], [/21\s*K/i,'gold21_egp'], [/brent/i,'brent'],
@@ -447,6 +449,10 @@ td{font-family:var(--sans);font-size:17px} th{font-family:var(--sans)}
   }
   function addSparks(upto, long){
     market.then(function(m){
+      var from = new Date(new Date(upto+'T12:00:00') - (long ? 380 : 14) * 864e5).toISOString().slice(0,10);
+      if(!m || !m.days || !m.days.length || m.days[0].date > from) return marketFull = marketFull || loadMarket('markets.json');
+      return m;
+    }).then(function(m){
       if(!m || !m.days) return;
       var days = m.days.filter(function(x){ return x.date <= upto; });
       if(!tickerSet){ tickerSet = {}; m.days.forEach(function(x){ Object.keys(x.egx||{}).concat(Object.keys(x.us||{})).forEach(function(k){ tickerSet[k] = 1; }); }); }

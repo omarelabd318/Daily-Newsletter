@@ -40,6 +40,9 @@ recap uses it for weekly, monthly and yearly changes. Entries marked `seed` were
 history back to 2021 when the log was started (Egyptian stocks, EGX30 and gold from investing.com exports,
 the rest from Yahoo Finance). `.claude/skills/daily-newsletter/market_facts.py` reads the log for the
 Stocks Watch YTD column and context lines such as 52-week highs and lows, streaks and "highest since".
+The site loads `data/markets-recent.json` (the last 400 days, rewritten by log_figures.py) and only falls
+back to the full log for older editions. `.claude/skills/daily-newsletter/fetch_figures.py` fetches the
+day's prices in one go at the start of each run.
 `data/holidays.json` lists the Egyptian public holidays that close the EGX (projected dates are marked
 `expected` until announced). The edition checker compares Stocks Watch figures with the log, and the
 Saturday recap runs `.claude/skills/daily-newsletter/check_log.py` to catch gaps and odd values.

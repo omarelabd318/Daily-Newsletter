@@ -10,6 +10,7 @@ Keys (numbers only; leave out anything not confirmed):
   us.TICKER   for the USA Stocks Watch rows, e.g. us.AAPL=347.10
 
 Running it again for the same DATE updates that entry (keys you pass replace old values; others stay).
+It also rewrites data/markets-recent.json, the last 400 days that the site loads.
 """
 import datetime
 import json
@@ -21,6 +22,16 @@ import sys
 KEYS = {"usd_egp", "eur_egp", "sar_egp", "aed_egp", "gold21_egp", "gold_usd", "brent",
         "egx30", "sp500", "nasdaq", "btc"}
 PATH = os.path.join(os.path.dirname(__file__), "..", "..", "..", "data", "markets.json")
+
+
+def write_recent(data, path):
+    """The site loads only the last 400 days, kept in data/markets-recent.json beside the full log."""
+    cut = (datetime.date.fromisoformat(data["days"][-1]["date"]) - datetime.timedelta(days=400)).isoformat()
+    recent = {"note": "The last 400 days of markets.json, for the site. Written by log_figures.py; do not edit.",
+              "days": [d for d in data["days"] if d["date"] >= cut]}
+    with open(os.path.join(os.path.dirname(path), "markets-recent.json"), "w") as f:
+        json.dump(recent, f, separators=(",", ":"))
+        f.write("\n")
 
 
 def main(args):
@@ -57,6 +68,7 @@ def main(args):
     with open(path, "w") as f:
         json.dump(data, f, indent=1)
         f.write("\n")
+    write_recent(data, path)
     print(f"Logged {len(pairs)} figure(s) for {date} in data/markets.json")
 
 
