@@ -41,6 +41,24 @@ reach its number on a quiet day.
 Sports is the deepest part of In Other News, but it no longer outweighs Markets. Global Markets got the
 extra room: use it to explain what drives the moves and what they mean for Egypt and emerging markets.
 
+### Minimum stories per section
+
+A busy section, often Markets, must not crowd out the rest. Aim for at least this many separate stories:
+
+| Section | At least |
+|---|---|
+| Egypt News | 4 |
+| Top World Headlines | 6 |
+| In Other News: Tech and AI | 3 |
+| In Other News: Sports | 5 |
+| In Other News: Entertainment and Culture | 3 |
+
+Reach these with stories genuinely worth a reader's time, never filler: when a section is short, search
+wider (more outlets, other regions, other leagues and sports, other parts of tech or culture) for real
+news from the last day or two, rather than stretching minor items or splitting one story into several.
+If, after a real search, a section truly has fewer worthwhile stories, keep it shorter and say so in the
+final reply's Publishing note. The checker warns when a section is below its minimum.
+
 ## Today at a Glance
 
 Each numbered item links to the full story further down. Make the headline a link to the story's

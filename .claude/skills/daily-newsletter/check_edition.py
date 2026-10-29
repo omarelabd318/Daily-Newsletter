@@ -40,6 +40,8 @@ BUDGET = {
     "Economic Calendar": (130, 170), "Worth Knowing": (160, 200),
 }
 TOTAL = (2850, 3450)
+MIN_ITEMS = {"Egypt News": 4, "Top World Headlines": 6, "Tech and AI": 3, "Sports": 5,
+             "Entertainment and Culture": 3}
 # Words that break the voice rules. "US" is left out on purpose: it is usually the country.
 VOICE = re.compile(r"\b(I|I'm|I've|we|We|we're|We're|our|Our|ours|my|My|me|Omar)\b")
 # A single shared word in two lead-ins usually means the same running story.
@@ -188,6 +190,16 @@ def main(path):
                 counts[p] = words("\n".join(body))
         else:
             counts[name] = words("\n".join(sec["body"]))
+    # Minimum stories per section (bold lead-ins), so one busy section cannot crowd out the rest.
+    for name, least in ({} if recap else MIN_ITEMS).items():
+        body = next((sec["parts"][name] for sec in sections.values() if name in sec["parts"]),
+                    sections.get(name, {}).get("body"))
+        if body is None:
+            continue
+        n = sum(1 for l in body if re.match(r"^\s*(?:[-*]\s+|\d+\.\s+)?\*\*[^*]+\*\*", l))
+        if n < least:
+            warnings.append(f"{name}: {n} stories (aim for at least {least}). Search wider for real news; "
+                            "never pad. If there truly are fewer, say so in the Publishing note.")
     for name, (lo, hi) in ({} if recap else BUDGET).items():
         n = counts.get(name)
         if n is not None and (n < lo * 0.7 or n > hi * 1.3):
