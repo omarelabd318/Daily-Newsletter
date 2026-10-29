@@ -118,9 +118,11 @@ footer p{margin:clamp(16px,2vw,24px) 0 0;max-width:40ch;color:var(--ink2);font-s
   td[data-label]{padding-left:72px}
   td[data-label]::before{content:attr(data-label);display:inline-block;min-width:62px;margin:0 10px 0 -72px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);vertical-align:1px}
   tr{position:relative}
-  tr.has-trend td:first-child{padding-right:76px}
+  tr.has-trend td:first-child{padding-right:84px}
   tr.trend-long td:first-child{padding-right:140px}
-  tr td.trend{position:absolute;top:16px;right:16px;width:auto;padding:0}
+  tr td.trend{position:absolute;top:12px;right:16px;width:auto;padding:0;text-align:right}
+  tr td.trend::before{display:block;min-width:0;margin:0 0 3px;font-size:9.5px;letter-spacing:.08em}
+  tr td.trend .spark{margin-left:auto}
   tr:not(.has-trend) td.trend{display:none}
   .s-in,.edition,#archive a{grid-template-columns:minmax(0,1fr)}
   .s h2{position:static;margin-bottom:24px}
@@ -493,7 +495,7 @@ td.trend{vertical-align:middle}
         if(th) th.insertAdjacentHTML('afterend', '<th class="trend">' + (long ? 'Past year' : 'Last 7 days') + '</th>');
         [].forEach.call(table.querySelectorAll('tbody tr'), function(tr, i){
           var cell = tr.querySelector('td'); if(!cell) return;
-          cell.insertAdjacentHTML('afterend', '<td class="trend">' + lines[i] + '</td>');
+          cell.insertAdjacentHTML('afterend', '<td class="trend" data-label="' + (long ? 'Past year' : 'Last 7 days') + '">' + lines[i] + '</td>');
           if(lines[i]) tr.classList.add('has-trend'); if(lines[i] && long) tr.classList.add('trend-long');
         });
       });
