@@ -202,6 +202,16 @@ closing or a LIVE price, the quote time and the source. Then:
 - **Variety by adding, not dropping:** go through the whole EnterpriseAM edition (on weekdays) and
   CairoScene, and consider every item. Variety comes from adding strong stories from other outlets
   alongside them, never from leaving out a good EnterpriseAM or CairoScene story to balance the count.
+- **How research runs:** EnterpriseAM (on weekdays) and CairoScene are read in full on every run, as a
+  core part of research, alongside many searches across many other outlets: Egyptian, regional and
+  international. Neither comes first and neither is a fallback. Pick the day's stories from everything
+  together, on merit, so the wider research shapes the edition as much as those two do.
+- **Link each story's own page** in Sources, one link per story, for EnterpriseAM and CairoScene as for
+  everyone else (for example `https://enterpriseam.com/egypt/2026/10/25/...`), not the homepage or the
+  edition page. `enterpriseam.com/egypt/am-edition/` always shows the latest edition, so it points to the
+  wrong day later. Link the edition page only for an item that has no page of its own.
+- **Dependence check:** the checker warns when EnterpriseAM and CairoScene make up more than a third of
+  the links in Sources. The answer is wider research for more strong stories, never cutting a good one.
 - **Merit, not origin:** the same bar applies the other way. Include an EnterpriseAM or CairoScene story
   because it is worth a reader's time, not because of where it came from; skip their minor items as you
   would anyone's. Each section should draw on a range of outlets, and the edition should never read like

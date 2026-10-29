@@ -273,6 +273,17 @@ def main(path):
         hit = vague.search(line)
         if hit:
             warnings.append(f"Line {i}: '{hit.group(0)}': fine if several outlets back this point; otherwise name the outlet.")
+    # Dependence: EnterpriseAM and CairoScene are core sources, but the edition should not rest on them.
+    src = text.split("## Sources", 1)[1] if "## Sources" in text else ""
+    links = re.findall(r"\]\((https?://[^)\s]+)\)", src)
+    two = [u for u in links if re.search(r"enterpriseam\.com|cairoscene\.com", u)]
+    if not recap and links and len(two) / len(links) > 1 / 3:
+        warnings.append(f"EnterpriseAM and CairoScene are {len(two)} of {len(links)} source links; research wider "
+                        "for more strong stories from other outlets (never cut a good one).")
+    for u in two:
+        if re.fullmatch(r"https?://(www\.)?(cairoscene\.com/?|enterpriseam\.com/egypt/am-edition/?)", u):
+            warnings.append(f"Sources: {u} is a homepage or edition page; link each story's own page where it has one.")
+            break
     # Credits in the text: about one per item reads naturally.
     credit = re.compile(r"\b((?i:according to|reported|citing)|told [A-Z]|per (?=[A-Z]))")
     body_lines = lines[:next((i for i, l in enumerate(lines) if l.startswith("## Sources")), len(lines))]
