@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Daily Newsletter</title>
 <meta name="description" content="A daily briefing on Egypt, World News, Markets, Sports and Culture.">
-<meta name="color-scheme" content="light dark">
+<meta name="color-scheme" content="light">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
@@ -131,7 +131,8 @@ footer p{margin:clamp(16px,2vw,24px) 0 0;max-width:40ch;color:var(--ink2);font-s
   --ground:#faf8f3; --raised:#f0ebe0; --ink:#16181a; --ink2:#5b6168; --accent:#8a1c1c; --accent-ink:#fff; --rule:#d8d2c4;
   --serif:"Newsreader",Georgia,"Times New Roman",serif; --sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
 }
-:root[data-theme="dark"]{
+:root{color-scheme:light}
+:root[data-theme="dark"]{color-scheme:dark;
   --ground:#0e1216; --raised:#151b21; --ink:#eef2f4; --ink2:#a9b4be; --accent:#52d6b5; --accent-ink:#07201a; --rule:#222a31;
 }
 body{font:20px/1.65 var(--serif)}
@@ -334,6 +335,7 @@ td{font-family:var(--sans);font-size:17px} th{font-family:var(--sans)}
   function show(){
     var date = (location.hash||'').replace('#','');
     var idx = editions.findIndex(function(e){return key(e)===date});
+    if(idx < 0) idx = editions.findIndex(function(e){return e.date===date});
     if(idx < 0) idx = 0;
     var ed = editions[idx];
     $('archive').classList.remove('open');
@@ -398,9 +400,16 @@ td{font-family:var(--sans);font-size:17px} th{font-family:var(--sans)}
     [/SAR\b|Saudi riyal/i,'sar_egp'], [/AED\b|dirham/i,'aed_egp'], [/21\s*K/i,'gold21_egp'], [/brent/i,'brent'],
     [/gold.*(global|ounce|oz|spot)|(global|spot).*gold/i,'gold_usd'], [/S&P\s*500/i,'sp500'], [/nasdaq/i,'nasdaq'], [/bitcoin|\bBTC\b/i,'btc']
   ];
+  var tickerSet = null;
+  function isTicker(tk){ return tickerSet && tickerSet[tk]; }
   function pick(day, label){
     var t = label.match(/\(([A-Z.]{2,6})\)/);
-    if(t){ var tk = t[1]; return (day.egx && day.egx[tk] != null) ? day.egx[tk] : (day.us && day.us[tk] != null ? day.us[tk] : null); }
+    if(t){
+      var tk = t[1];
+      if(day.egx && day.egx[tk] != null) return day.egx[tk];
+      if(day.us && day.us[tk] != null) return day.us[tk];
+      if(isTicker(tk)) return null;   // a stock that simply was not logged that day
+    }
     for(var i=0;i<SERIES.length;i++) if(SERIES[i][0].test(label)) return day[SERIES[i][1]] != null ? day[SERIES[i][1]] : null;
     return null;
   }
@@ -417,12 +426,13 @@ td{font-family:var(--sans);font-size:17px} th{font-family:var(--sans)}
     market.then(function(m){
       if(!m || !m.days) return;
       var days = m.days.filter(function(x){ return x.date <= upto; });
+      if(!tickerSet){ tickerSet = {}; m.days.forEach(function(x){ Object.keys(x.egx||{}).concat(Object.keys(x.us||{})).forEach(function(k){ tickerSet[k] = 1; }); }); }
       document.querySelectorAll('#content .s-body tbody tr').forEach(function(tr){
         var cell = tr.querySelector('td'); if(!cell || cell.querySelector('.spark')) return;
         var label = cell.textContent, pts = [];
         days.forEach(function(x){ var v = pick(x, label); if(typeof v === 'number') pts.push({d:x.date, v:v}); });
         pts = pts.slice(-7);
-        if(pts.length >= 2) cell.insertAdjacentHTML('beforeend', ' ' + spark(pts));
+        if(pts.length >= 2 && pts[pts.length-1].d === upto) cell.insertAdjacentHTML('beforeend', ' ' + spark(pts));
       });
     });
   }
@@ -445,17 +455,19 @@ td{font-family:var(--sans);font-size:17px} th{font-family:var(--sans)}
           if(h){ sec = h[1].replace(/[*_`]/g,''); return; }
           var m = l.match(/^\s*(?:[-*]|\d+[.)])?\s*\*\*([^*]+?):?\*\*:?\s*(.*)$/);
           if(m && sec !== 'Today at a Glance' && sec !== 'Sources' && sec !== 'The Week in Brief')
-            items.push({e:e, sec:sec, lead:m[1].replace(/:$/,''), text:m[2].replace(/\[([^\]]+)\]\([^)]*\)/g,'$1').replace(/[*_`]/g,'')});
+            items.push({e:e, sec:sec, lead:m[1].replace(/:$/,'').replace(/\[([^\]]+)\]\([^)]*\)/g,'$1').replace(/[`_]/g,''), text:m[2].replace(/\[([^\]]+)\]\([^)]*\)/g,'$1').replace(/[*_`]/g,'')});
         });
         return items;
       }).catch(function(){return []});
     })).then(function(all){return [].concat.apply([], all)});
     return corpus;
   }
+  var searchSeq = 0;
   function search(q){
-    var words = q.toLowerCase().split(/\s+/).filter(Boolean);
+    var words = q.toLowerCase().split(/\s+/).filter(Boolean), seq = ++searchSeq;
     if(!words.length || q.trim().length < 2){ $('results').hidden = true; $('archList').hidden = false; return; }
     loadCorpus().then(function(items){
+      if(seq !== searchSeq) return;
       var hits = items.filter(function(it){
         var hay = (it.lead+' '+it.text).toLowerCase();
         return words.every(function(w){return hay.indexOf(w) >= 0});

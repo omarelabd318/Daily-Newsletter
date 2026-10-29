@@ -11,7 +11,9 @@ Keys (numbers only; leave out anything not confirmed):
 
 Running it again for the same DATE updates that entry (keys you pass replace old values; others stay).
 """
+import datetime
 import json
+import math
 import os
 import re
 import sys
@@ -24,6 +26,10 @@ PATH = os.path.join(os.path.dirname(__file__), "..", "..", "..", "data", "market
 def main(args):
     if len(args) < 2 or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", args[0]):
         sys.exit(__doc__)
+    try:
+        datetime.date.fromisoformat(args[0])
+    except ValueError:
+        sys.exit(f"Not a real date: {args[0]}")
     date, pairs = args[0], args[1:]
     path = os.path.normpath(PATH)
     data = json.load(open(path)) if os.path.exists(path) else {"days": []}
@@ -38,7 +44,9 @@ def main(args):
             num = float(v.replace(",", ""))
         except ValueError:
             sys.exit(f"Not a number: {p}")
-        m = re.fullmatch(r"(egx|us)\.([A-Z.]{1,6})", k)
+        if not math.isfinite(num):
+            sys.exit(f"Not a finite number: {p}")
+        m = re.fullmatch(r"(egx|us)\.([A-Z.]{2,6})", k)
         if m:
             entry.setdefault(m.group(1), {})[m.group(2)] = num
         elif k in KEYS:
