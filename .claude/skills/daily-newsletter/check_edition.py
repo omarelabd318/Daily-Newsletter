@@ -170,6 +170,10 @@ def main(path):
                 rows = [l for l in body if l.strip().startswith("|")]
                 prose = [l for l in body if l.strip() and not l.strip().startswith("|")
                          and not re.fullmatch(r"\*[^*].*\*", l.strip()) and l.strip() != "---"]
+                for r in rows:
+                    cells = [c.strip() for c in r.strip().strip("|").split("|")]
+                    if "notable mover" in cells[0].lower() and len(cells) > 1 and cells[1].lower().startswith("n/a"):
+                        warnings.append(f"Stocks Watch '{p}': mover row has no close; add it with fetch_figures.py: {cells[0]}")
                 fixed = FIXED.get(p, [])
                 missing = [t for t in fixed if not any(f"({t})" in r for r in rows)]
                 if missing:
@@ -257,10 +261,6 @@ def main(path):
         hit = vague.search(line)
         if hit:
             warnings.append(f"Line {i}: '{hit.group(0)}': name the outlet, unless this point rests on several outlets.")
-    named = {o: len(re.findall(o, text.split("## Sources")[0])) for o in ("EnterpriseAM", "CairoScene")}
-    if sum(named.values()) > 4:
-        warnings.append(f"EnterpriseAM and CairoScene are named {sum(named.values())} times in the text; "
-                        "credit them only where the point is theirs, like any other outlet.")
 
     # Same story in two sections: compare bold lead-ins outside Today at a Glance and Sources.
     leads = []

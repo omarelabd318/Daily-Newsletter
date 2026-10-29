@@ -2,7 +2,10 @@
 """Fetch the day's market figures in one go, for Stocks Watch, Currency and Commodities Watch and the log.
 
 Usage:
-  python3 .claude/skills/daily-newsletter/fetch_figures.py DATE
+  python3 .claude/skills/daily-newsletter/fetch_figures.py DATE [egx.TICKER ...] [us.TICKER ...]
+
+Add notable movers after DATE, for example `egx.MCQE us.ORCL`: they are fetched and shown with their
+close and change (and YTD for US stocks) but not put in the log command.
 
 DATE is the edition date (Cairo). For every figure it prints the value, the change, whether it is a
 closing or a live price, the time of the quote and the source. Anything it cannot get is listed as
@@ -103,14 +106,36 @@ def yahoo(sym):
     raise RuntimeError("Yahoo: " + "; ".join(errors))
 
 
+def yahoo_ytd(sym):
+    """Year-to-date change from Yahoo: the latest close against the last close of the previous year."""
+    if YAHOO_DOWN:
+        return None
+    start = int(datetime.datetime(datetime.date.today().year - 1, 12, 15).timestamp())
+    try:
+        res = json.loads(get(f"https://query1.finance.yahoo.com/v8/finance/chart/{urllib.parse.quote(sym)}"
+                             f"?period1={start}&period2={int(time.time())}&interval=1d"))["chart"]["result"][0]
+    except Exception:
+        return None
+    year = datetime.date.today().year
+    pts = [(datetime.datetime.fromtimestamp(t, CAIRO).year, c)
+           for t, c in zip(res["timestamp"], res["indicators"]["quote"][0]["close"]) if c]
+    base = [c for y, c in pts if y < year]
+    return (pts[-1][1] / base[-1] - 1) * 100 if base and pts else None
+
+
 def nasdaq(sym, cls="stocks"):
     d = json.loads(get(f"https://api.nasdaq.com/api/quote/{sym}/info?assetclass={cls}"))["data"]
     if not d:
         raise RuntimeError(f"Nasdaq has no quote for {sym}")
-    p = d["primaryData"]
+    p, sec = d["primaryData"], d.get("secondaryData") or {}
+    # Before the open and after hours, primaryData is extended-hours trading and secondaryData holds
+    # the official close ("Closed at ..."): use the close.
+    if "closed" in (sec.get("lastTradeTimestamp") or "").lower():
+        p, live = sec, False
+    else:
+        live = d.get("marketStatus", "").lower() not in ("closed", "after hours", "after-hours", "pre market", "pre-market")
     value, change = number(p["lastSalePrice"]), number(p["netChange"])
-    return {"value": value, "prev": value - change, "pct": number(p["percentageChange"]),
-            "live": d.get("marketStatus", "").lower() not in ("closed", "after hours", "pre market"),
+    return {"value": value, "prev": value - change, "pct": number(p["percentageChange"]), "live": live,
             "when": p.get("lastTradeTimestamp", ""), "src": "Nasdaq"}
 
 
@@ -151,6 +176,13 @@ def main(args):
         if log_key and val is not None:
             log.append(f"{log_key}={round(val, 4)}")
 
+    extras = []
+    for a in args[1:]:
+        m = re.fullmatch(r"(egx|us)\.([A-Z.]{2,6})", a)
+        if not m:
+            sys.exit(f"Not a ticker: {a} (use egx.TICKER or us.TICKER)")
+        extras.append((m.group(1), m.group(2)))
+
     for t in EGX:
         add(t, f"EGX {t}", lambda t=t: dict(mubasher(f"stocks/{t}"), src="Mubasher"), f"egx.{t}", egx_live)
     add("egx30", "EGX30", lambda: dict(mubasher("indices/EGX30"), src="Mubasher"), "egx30", egx_live)
@@ -162,6 +194,15 @@ def main(args):
     add("gold_usd", "Gold ($/oz)", lambda: yahoo("GC=F"), "gold_usd")
     add("btc", "Bitcoin ($)", lambda: first(lambda: yahoo("BTC-USD"), coingecko), "btc")
     add("dxy", "US dollar index (DXY)", lambda: yahoo("DX-Y.NYB"), "dxy")
+
+    for group, t in extras:
+        if group == "egx":
+            add(t, f"Mover EGX {t} (YTD n/a)", lambda t=t: dict(mubasher(f"stocks/{t}"), src="Mubasher"), None, egx_live)
+        else:
+            sym = t.replace(".", "-")
+            ytd = yahoo_ytd(sym)
+            label = f"Mover US {t} (YTD {'n/a' if ytd is None else f'{ytd:+.1f}%'})"
+            add(t, label, lambda t=t, sym=sym: first(lambda: yahoo(sym), lambda: nasdaq(t)))
 
     gold_page = []
 

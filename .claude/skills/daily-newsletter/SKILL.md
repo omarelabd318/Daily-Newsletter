@@ -174,8 +174,9 @@ closing or a LIVE price, the quote time and the source. Then:
 - **Attribute only where it adds something:** an exclusive, a disputed or unconfirmed claim, a forecast or
   an estimate, or a figure that differs between sources. Well-established facts need no credit in the text;
   the Sources list covers them.
-- **No favourites:** EnterpriseAM and CairoScene are fetched every day, but credit them like any other
-  outlet, only where the point is theirs. An edition should not name them more than other outlets.
+- **Credit every outlet the same way:** keep crediting EnterpriseAM and CairoScene whenever a point comes
+  from them and the credit fits; they are trusted, daily sources. The aim is that other outlets are
+  named just as readily when a point comes from them, not that these two are named less.
 
 ## Go-to sources for figures
 
@@ -253,8 +254,11 @@ List these every day, in this order:
 | Alexandria Containers (ALCN) | Walmart (WMT) |
 
 After the fixed rows, add up to three rows for other stocks with a notable move or notable news that
-day, marked in italics, for example `| *Misr Cement Qena (MCQE), notable mover* | 98.50 | +8.5% | n/a |`.
-Leave them out when nothing stands out.
+day, marked in italics, for example `| *Misr Cement Qena (MCQE), notable mover* | 167.85 | +8.5% | n/a |`.
+Leave them out when nothing stands out. Every mover row shows its close, like the fixed rows: get it by
+adding the tickers to the fetch command, for example
+`python3 .claude/skills/daily-newsletter/fetch_figures.py DATE egx.MCQE us.ORCL`, which also gives YTD for
+US stocks (write `n/a` for YTD when it has none). Movers are not logged.
 
 On weekends the EGX is closed Friday and Saturday and US markets Saturday and Sunday. Show the last
 session's close with its date. On EGX holidays, listed in `data/holidays.json`, do the same and say why in
