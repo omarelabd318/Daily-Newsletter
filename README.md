@@ -29,6 +29,14 @@ The site sorts by `id` (or `date`), newest first, and opens the newest one. A li
 `https://daily-newsletter-eg.vercel.app/#2026-10-29` opens a specific edition; refreshing the page always
 returns to the newest.
 
+## Market data
+
+`data/markets.json` holds the figures each edition showed (exchange rates, Egyptian gold, EGX30, Brent,
+US indices, Bitcoin and the Stocks Watch prices), one entry per edition date. Runs add to it with
+`.claude/skills/daily-newsletter/log_figures.py`. The site uses it to draw a small trend line next to
+matching table rows (the last seven logged values), and the weekly recap uses it for weekly and monthly
+changes. Entries marked `seed` were backfilled from market history when the log was started.
+
 ## Who writes the editions
 
 Scheduled Claude Code cloud tasks (managed at claude.ai, not in this repo):

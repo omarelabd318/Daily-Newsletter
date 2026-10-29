@@ -169,6 +169,9 @@ td{font-family:var(--sans);font-size:17px} th{font-family:var(--sans)}
 
 /* search, explained boxes, print */
 #archive{text-align:left}
+.spark{display:inline-block;vertical-align:middle;margin-left:8px;overflow:visible}
+.spark path{fill:none;stroke:var(--ink2);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.spark circle{fill:var(--accent);stroke:var(--panel);stroke-width:1.5}
 #q{width:100%;margin:8px 0 4px;padding:10px 12px;font:500 15px var(--sans);color:var(--ink);background:var(--ground);border:1px solid var(--rule);border-radius:0}
 #q:focus{outline:2px solid var(--accent);outline-offset:0}
 #results a small.where{display:block;margin-top:2px;font:600 11px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
@@ -367,6 +370,7 @@ td{font-family:var(--sans);font-size:17px} th{font-family:var(--sans)}
       document.querySelectorAll('#content .s-body > *:first-child').forEach(function(el){el.classList.add('rv')});
       document.querySelectorAll('.mast > *').forEach(function(el){el.classList.add('rv')});
       pending = Array.prototype.slice.call(document.querySelectorAll('.rv'));
+      addSparks(ed.date);
       if(pendingStory && document.getElementById(pendingStory)) jumpTo(pendingStory); else window.scrollTo(0,0);
       pendingStory = null;
       sweep();
@@ -386,6 +390,42 @@ td{font-family:var(--sans);font-size:17px} th{font-family:var(--sans)}
     syncThemeBtn();
   });
   syncThemeBtn();
+
+  // ---- sparklines: recent trend for table rows, from data/markets.json ----
+  var market = fetch('data/markets.json',{cache:'no-cache'}).then(function(r){return r.ok ? r.json() : null}).catch(function(){return null});
+  var SERIES = [
+    [/EGX\s*30/i,'egx30'], [/USD\s*\/\s*EGP|US dollar/i,'usd_egp'], [/EUR\s*\/\s*EGP|\beuro\b/i,'eur_egp'],
+    [/SAR\b|Saudi riyal/i,'sar_egp'], [/AED\b|dirham/i,'aed_egp'], [/21\s*K/i,'gold21_egp'], [/brent/i,'brent'],
+    [/gold.*(global|ounce|oz|spot)|(global|spot).*gold/i,'gold_usd'], [/S&P\s*500/i,'sp500'], [/nasdaq/i,'nasdaq'], [/bitcoin|\bBTC\b/i,'btc']
+  ];
+  function pick(day, label){
+    var t = label.match(/\(([A-Z.]{2,6})\)/);
+    if(t){ var tk = t[1]; return (day.egx && day.egx[tk] != null) ? day.egx[tk] : (day.us && day.us[tk] != null ? day.us[tk] : null); }
+    for(var i=0;i<SERIES.length;i++) if(SERIES[i][0].test(label)) return day[SERIES[i][1]] != null ? day[SERIES[i][1]] : null;
+    return null;
+  }
+  function spark(pts){
+    var w = 56, h = 16, p = 2, min = Math.min.apply(null, pts.map(function(x){return x.v})), max = Math.max.apply(null, pts.map(function(x){return x.v}));
+    var span = max - min || 1, step = (w - 2*p) / (pts.length - 1);
+    var xy = pts.map(function(x,i){ return [p + i*step, h - p - (x.v - min) / span * (h - 2*p)]; });
+    var d = xy.map(function(c,i){ return (i ? 'L' : 'M') + c[0].toFixed(1) + ' ' + c[1].toFixed(1); }).join('');
+    var last = xy[xy.length-1], tip = pts.map(function(x){ return x.d.slice(5) + ': ' + x.v.toLocaleString('en-GB'); }).join('  ·  ');
+    return '<svg class="spark" viewBox="0 0 '+w+' '+h+'" width="'+w+'" height="'+h+'" role="img" aria-label="Trend: '+esc(tip)+'"><title>'+esc(tip)+'</title>'+
+      '<path d="'+d+'"/><circle cx="'+last[0].toFixed(1)+'" cy="'+last[1].toFixed(1)+'" r="2.5"/></svg>';
+  }
+  function addSparks(upto){
+    market.then(function(m){
+      if(!m || !m.days) return;
+      var days = m.days.filter(function(x){ return x.date <= upto; });
+      document.querySelectorAll('#content .s-body tbody tr').forEach(function(tr){
+        var cell = tr.querySelector('td'); if(!cell || cell.querySelector('.spark')) return;
+        var label = cell.textContent, pts = [];
+        days.forEach(function(x){ var v = pick(x, label); if(typeof v === 'number') pts.push({d:x.date, v:v}); });
+        pts = pts.slice(-7);
+        if(pts.length >= 2) cell.insertAdjacentHTML('beforeend', ' ' + spark(pts));
+      });
+    });
+  }
 
   // ---- search across every edition (loaded on first use) ----
   var pendingStory = null, corpus = null, current = null;

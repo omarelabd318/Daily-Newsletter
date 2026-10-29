@@ -234,11 +234,39 @@ Stocks Watch do not.
   5. **Sports This Week:** the week's main results and stories as separate items, Egyptian football first,
      with no sport headings.
   6. **Culture and Tech:** 3 to 5 short items from tech, AI, entertainment and culture.
+  On the first Saturday of a month, add **Month in Numbers** right after Markets This Week: one line on
+     the month, then a table `| Item | Start of month | End of month | Change |` for EGX30, USD/EGP, gold
+     21K, Brent, S&P 500 and Bitcoin, taken from the first and last entries of the previous month in
+     `data/markets.json` (say "not logged" where a figure is missing).
   7. **The Week Ahead:** the key scheduled events for the coming week (central bank meetings, data,
      holidays and closures, big matches).
   8. **Sources:** the links used.
 - Every item opens with a bold lead-in, as in the daily edition. Never refer to the daily editions
   themselves ("as reported on Tuesday"): write about the events and their dates.
+
+## Log the day's figures
+
+After the figures are checked, record them in `data/markets.json` so the site can draw small trend lines
+next to table rows and the recap can compute weekly and monthly changes. From the repo root:
+
+```
+python3 .claude/skills/daily-newsletter/log_figures.py DATE usd_egp=56.20 eur_egp=62.57 gold21_egp=6385 brent=113.88 egx30=49723.72 sp500=7743.98 nasdaq=26549.85 btc=81231 egx.COMI=120.30 us.AAPL=347.10
+```
+
+Log the same numbers the edition shows (the central bank's selling rate for the dollar when that is what
+the table shows), one value per key, with every Stocks Watch row as `egx.TICKER` or `us.TICKER`. Leave out
+anything marked n/a or unconfirmed. Weekend editions log what they show; the recap does not log. Commit
+`data/markets.json` together with the edition.
+
+## Corrections
+
+Before writing, compare the previous edition's key figures and facts against what is now known (the
+checked sources and `data/markets.json`). If something published was wrong in a way that matters, such as
+a figure, a name, a date or a result, add one item at the end of Quick Hits:
+`**Correction:** Tuesday's edition gave the EGX30 close as 51,050; it closed at 50,105.` Keep it to one
+sentence, plain and factual, and fix that day's entry in `data/markets.json` with `log_figures.py`. Do not
+edit the earlier edition itself, and leave out trivial slips. This is the only place an edition may refer
+to an earlier one.
 
 ## Check before committing
 

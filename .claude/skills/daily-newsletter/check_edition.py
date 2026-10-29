@@ -88,6 +88,8 @@ def main(path):
         elif current:
             (sections[current]["parts"][part] if part else sections[current]["body"]).append(line)
 
+    if recap and "Month in Numbers" in order:
+        expected = expected[:4] + ["Month in Numbers"] + expected[4:]
     if order != expected:
         missing = [s for s in expected if s not in order]
         extra = [s for s in order if s not in expected]
@@ -149,6 +151,17 @@ def main(path):
     if not recap and not any(re.match(r"^\s*(?:[-*]\s+)?\*\*Number of the day:\*\*", l)
                              for l in sections.get("Quick Hits", {}).get("body", [])):
         errors.append("Quick Hits should include a '**Number of the day:**' item.")
+
+    # The day's figures are logged for the site's trend lines (daily editions only).
+    if not recap:
+        mpath = os.path.join(os.path.dirname(os.path.abspath(path)), "..", "data", "markets.json")
+        try:
+            mdays = json.load(open(mpath)).get("days", [])
+            day = next((d for d in mdays if d.get("date") == os.path.basename(path)[:10]), None)
+            if not day or day.get("seed") or not (day.get("egx") or day.get("us") or day.get("usd_egp")):
+                warnings.append("No figures logged for this date in data/markets.json; run log_figures.py.")
+        except (OSError, ValueError):
+            warnings.append("data/markets.json is missing or not valid JSON.")
 
     # Sports: no sport-name headings or standalone bold lines.
     for line in sections.get("In Other News", {}).get("parts", {}).get("Sports", []):
