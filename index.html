@@ -114,7 +114,12 @@ footer p{margin:clamp(16px,2vw,24px) 0 0;max-width:40ch;color:var(--ink2);font-s
   tr{background:var(--panel);margin:0 0 8px;padding:12px 16px}
   td{background:none;padding:2px 0;font-size:17px}
   td:first-child{font-size:18px;padding-bottom:4px}
-  td:nth-child(3){color:var(--ink2);font-size:16px}
+  td.c3{color:var(--ink2);font-size:16px}
+  tr{position:relative}
+  tr.has-trend td:first-child{padding-right:76px}
+  tr.trend-long td:first-child{padding-right:140px}
+  tr td.trend{position:absolute;top:16px;right:16px;width:auto;padding:0}
+  tr:not(.has-trend) td.trend{display:none}
   .s-in,.edition,#archive a{grid-template-columns:minmax(0,1fr)}
   .s h2{position:static;margin-bottom:24px}
   .edition{gap:20px}
@@ -174,7 +179,12 @@ td{font-family:var(--sans);font-size:17px} th{font-family:var(--sans)}
 :root[data-theme="dark"]{--up:#5fd08a;--down:#ff8a80}
 .chg.up{color:var(--up)} .chg.down{color:var(--down)} .chg.big{font-weight:700}
 .chg span{font-size:.8em}
-.spark{display:inline-block;vertical-align:middle;margin-left:8px;overflow:visible}
+.spark{display:block;overflow:visible}
+th.trend,td.trend{width:1%;white-space:nowrap}
+td.trend{padding-left:4px;padding-right:4px;vertical-align:middle}
+.unc{color:var(--accent);font-weight:700;margin-left:2px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.tnote{margin:2px 0 0;font-size:14px;color:var(--ink2)}
 .spark path{fill:none;stroke:var(--ink2);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
 .spark circle{fill:var(--accent);stroke:var(--panel);stroke-width:1.5}
 #q{width:100%;margin:8px 0 4px;padding:10px 12px;font:500 15px var(--sans);color:var(--ink);background:var(--ground);border:1px solid var(--rule);border-radius:0}
@@ -285,8 +295,12 @@ td{font-family:var(--sans);font-size:17px} th{font-family:var(--sans)}
         i += 2;
         while(i < lines.length && /^\s*\|/.test(lines[i])){body.push(cells(lines[i]));i++}
         var t2 = '<div class="tablewrap"><table><thead><tr>'+head.map(function(c){return '<th>'+inline(c)+'</th>'}).join('')+'</tr></thead><tbody>';
-        body.forEach(function(r){t2 += '<tr>'+r.map(function(c){return '<td>'+inline(c)+'</td>'}).join('')+'</tr>'});
-        push(t2+'</tbody></table></div>');continue;
+        var unc = false;
+        body.forEach(function(r){t2 += '<tr>'+r.map(function(c,ci){
+          var h = inline(c).replace(/\s*\(unconfirmed\)/gi, function(){ unc = true; return '<sup class="unc" title="Unconfirmed">†<span class="vh"> unconfirmed</span></sup>'; });
+          return '<td'+(ci===2?' class="c3"':'')+'>'+h+'</td>';
+        }).join('')+'</tr>'});
+        push(t2+'</tbody></table>'+(unc?'<p class="tnote">† Unconfirmed: the sources disagreed, or only one source had the figure.</p>':'')+'</div>');continue;
       }
       if(/^\s*>/.test(l)){
         var q = [];
@@ -419,8 +433,10 @@ td{font-family:var(--sans);font-size:17px} th{font-family:var(--sans)}
   function loadMarket(f){ return fetch('data/'+f,{cache:'no-cache'}).then(function(r){return r.ok ? r.json() : null}).catch(function(){return null}); }
   var market = loadMarket('markets-recent.json'), marketFull = null;
   var SERIES = [
-    [/EGX\s*30/i,'egx30'], [/USD\s*\/\s*EGP|US dollar/i,'usd_egp'], [/EUR\s*\/\s*EGP|\beuro\b/i,'eur_egp'],
-    [/SAR\b|Saudi riyal/i,'sar_egp'], [/AED\b|dirham/i,'aed_egp'], [/21\s*K/i,'gold21_egp'], [/brent/i,'brent'],
+    [/dollar index|\bDXY\b/i,'dxy'], [/EGX\s*30/i,'egx30'], [/USD\s*\/\s*EGP|US dollar/i,'usd_egp'], [/EUR\s*\/\s*EGP|\beuro\b/i,'eur_egp'],
+    [/SAR\b|Saudi riyal/i,'sar_egp'], [/AED\b|dirham/i,'aed_egp'], [/KWD\b|Kuwaiti dinar/i,'kwd_egp'], [/QAR\b|Qatari riyal/i,'qar_egp'],
+    [/GBP\b|sterling|British pound/i,'gbp_egp'], [/21\s*K/i,'gold21_egp'], [/24\s*K/i,'gold24_egp'], [/18\s*K/i,'gold18_egp'],
+    [/gold pound|gold coin/i,'goldpound_egp'], [/brent/i,'brent'],
     [/gold.*(global|ounce|oz|spot)|(global|spot).*gold/i,'gold_usd'], [/S&P\s*500/i,'sp500'], [/nasdaq/i,'nasdaq'], [/bitcoin|\bBTC\b/i,'btc']
   ];
   var tickerSet = null;
@@ -456,12 +472,23 @@ td{font-family:var(--sans);font-size:17px} th{font-family:var(--sans)}
       if(!m || !m.days) return;
       var days = m.days.filter(function(x){ return x.date <= upto; });
       if(!tickerSet){ tickerSet = {}; m.days.forEach(function(x){ Object.keys(x.egx||{}).concat(Object.keys(x.us||{})).forEach(function(k){ tickerSet[k] = 1; }); }); }
-      document.querySelectorAll('#content .s-body tbody tr').forEach(function(tr){
-        var cell = tr.querySelector('td'); if(!cell || cell.querySelector('.spark')) return;
-        var label = cell.textContent, pts = [];
-        days.forEach(function(x){ var v = pick(x, label); if(typeof v === 'number') pts.push({d:x.date, v:v}); });
-        pts = pts.slice(long ? -260 : -7);
-        if(pts.length >= 2 && pts[pts.length-1].d === upto) cell.insertAdjacentHTML('beforeend', ' ' + spark(pts, long));
+      document.querySelectorAll('#content .s-body table').forEach(function(table){
+        if(table.querySelector('.trend')) return;
+        var lines = [].map.call(table.querySelectorAll('tbody tr'), function(tr){
+          var cell = tr.querySelector('td'), pts = [];
+          if(!cell) return '';
+          days.forEach(function(x){ var v = pick(x, cell.textContent); if(typeof v === 'number') pts.push({d:x.date, v:v}); });
+          pts = pts.slice(long ? -260 : -7);
+          return pts.length >= 2 && pts[pts.length-1].d === upto ? spark(pts, long) : '';
+        });
+        if(!lines.some(Boolean)) return;   // only tables with at least one trend line get the column
+        var th = table.querySelector('thead th');
+        if(th) th.insertAdjacentHTML('afterend', '<th class="trend">' + (long ? 'Past year' : 'Last 7 days') + '</th>');
+        [].forEach.call(table.querySelectorAll('tbody tr'), function(tr, i){
+          var cell = tr.querySelector('td'); if(!cell) return;
+          cell.insertAdjacentHTML('afterend', '<td class="trend">' + lines[i] + '</td>');
+          if(lines[i]) tr.classList.add('has-trend'); if(lines[i] && long) tr.classList.add('trend-long');
+        });
       });
     });
   }

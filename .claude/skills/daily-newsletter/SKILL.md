@@ -173,6 +173,7 @@ a figure could not be confirmed. These pages are for figures; news still comes f
 
 | Figure | First choice | Backup |
 |---|---|---|
+| US dollar index (DXY) | https://query1.finance.yahoo.com/v8/finance/chart/DX-Y.NYB?range=5d&interval=1d (fetch_figures.py gets it) | Search "dollar index" news for the day's level |
 | EGP against USD, EUR, SAR, AED, KWD, QAR, GBP | https://open.er-api.com/v6/latest/EGP (JSON; rates are EGP per 1 unit when inverted; market mid-rates, not the central bank's official rate) | EnterpriseAM's edition, which usually quotes the central bank's dollar rate |
 | Gold in Egypt (21K, 24K, 18K per gram) | https://egypt.gold-price-today.com/ (Arabic: عيار 21 is 21K) | https://www.goldpricez.com/eg/gram |
 | EGX30 close and daily change | https://english.mubasher.info/markets/EGX/indices/EGX30 (close, change, open, high, low) | https://tradingeconomics.com/egypt/stock-market |
@@ -261,6 +262,19 @@ announces dates, update the file (dates, any day moved to a Thursday or Sunday, 
 Use three columns: `| Item | Level | Note |`. Keep each Note under about 10 words, so the table stays
 easy to scan. On phones the site shows each row as a small card, so long notes still fit.
 
+Right after the USD/EGP row, add `| US dollar index (DXY) | 102.19 | ... |`: the dollar against six major
+currencies, with the day's change in the Note, so readers can tell whether a move in the pound is the
+dollar strengthening everywhere or something specific to Egypt. Say which in the Note when it is clear,
+for example `+0.4%; dollar firmer worldwide` or `-0.3%; pound's fall is local`.
+
+The site draws a trend line beside every row whose figure is in the data log: USD, EUR, SAR, AED, KWD,
+QAR and GBP against the pound, the dollar index, 21K, 24K and 18K gold, the gold pound, global gold and
+Brent. Log all of these every day so the lines stay up to date. Rates, certificates and T-bills change
+too rarely for a line and get none.
+
+Mark a figure the sources disagree on with `(unconfirmed)` right after it, in any table. The site shows
+it as a small † with a note under the table, so it takes no extra space.
+
 ## Weekly Recap (Saturdays)
 
 Every Saturday a separate run publishes a weekly recap alongside that day's regular edition. It sums up
@@ -320,7 +334,7 @@ After the figures are checked, record them in `data/markets.json` so the site ca
 next to table rows and the recap can compute weekly and monthly changes. From the repo root:
 
 ```
-python3 .claude/skills/daily-newsletter/log_figures.py DATE usd_egp=56.20 eur_egp=62.57 gold21_egp=6385 brent=113.88 egx30=49723.72 sp500=7743.98 nasdaq=26549.85 btc=81231 egx.COMI=120.30 us.AAPL=347.10
+python3 .claude/skills/daily-newsletter/log_figures.py DATE usd_egp=56.20 eur_egp=62.57 sar_egp=14.99 aed_egp=15.30 kwd_egp=181.19 qar_egp=15.41 gbp_egp=74.69 dxy=102.19 gold21_egp=6385 gold24_egp=7295 gold18_egp=5475 goldpound_egp=51080 gold_usd=4076 brent=113.88 egx30=49723.72 sp500=7743.98 nasdaq=26549.85 btc=81231 egx.COMI=120.30 us.AAPL=347.10
 ```
 
 Then refresh the spreadsheet copy, `data/markets.xlsx`, and commit it too:

@@ -17,7 +17,10 @@ import os
 import sys
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
-NAMES = {"usd_egp": "USD/EGP", "eur_egp": "EUR/EGP", "gold21_egp": "Gold 21K", "gold_usd": "Gold ($/oz)",
+NAMES = {"usd_egp": "USD/EGP", "eur_egp": "EUR/EGP", "sar_egp": "SAR/EGP", "aed_egp": "AED/EGP",
+         "kwd_egp": "KWD/EGP", "qar_egp": "QAR/EGP", "gbp_egp": "GBP/EGP", "dxy": "US dollar index",
+         "gold21_egp": "Gold 21K", "gold24_egp": "Gold 24K", "gold18_egp": "Gold 18K",
+         "goldpound_egp": "Gold pound", "gold_usd": "Gold ($/oz)",
          "brent": "Brent", "egx30": "EGX30", "sp500": "S&P 500", "nasdaq": "Nasdaq", "btc": "Bitcoin"}
 
 

@@ -31,7 +31,6 @@ CAIRO = ZoneInfo("Africa/Cairo")
 UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36"
 EGX = ["COMI", "TMGH", "ETEL", "PHDC", "SWDY", "ORAS", "FWRY", "ABUK"]
 US = ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA", "JPM"]
-YAHOO = {"sp500": "^GSPC", "nasdaq": "^IXIC", "brent": "BZ=F", "gold_usd": "GC=F", "btc": "BTC-USD"}
 
 
 def get(url, tries=2):
@@ -162,16 +161,26 @@ def main(args):
     add("brent", "Brent ($/bbl)", lambda: yahoo("BZ=F"), "brent")
     add("gold_usd", "Gold ($/oz)", lambda: yahoo("GC=F"), "gold_usd")
     add("btc", "Bitcoin ($)", lambda: first(lambda: yahoo("BTC-USD"), coingecko), "btc")
+    add("dxy", "US dollar index (DXY)", lambda: yahoo("DX-Y.NYB"), "dxy")
 
-    def gold21():
-        page = get("https://egypt.gold-price-today.com/")
-        for block in re.findall(r'<script type="application/ld\+json">(.*?)</script>', page, re.S):
-            for g in json.loads(html.unescape(block)).get("@graph", []):
-                if g.get("@type") == "FinancialQuote" and "21" in g.get("name", ""):
-                    return {"value": number(g["price"]), "prev": None, "pct": None, "live": False,
-                            "when": g.get("dateModified", ""), "src": "gold-price-today"}
-        raise RuntimeError("no 21K quote on the page")
-    add("gold21", "Gold 21K (EGP/g)", gold21, "gold21_egp")
+    gold_page = []
+
+    def gold(col):
+        """The page's daily table: newest row first, columns 24K, 21K, 18K, gold pound."""
+        if not gold_page:
+            gold_page.append(get("https://egypt.gold-price-today.com/"))
+        page = gold_page[0]
+        i = page.find('<th class="col-popular">')
+        text = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "|", page[i:i + 6000])) if i >= 0 else ""
+        row = re.search(r"\|([^|\d]+)\| ?(\d{1,2} [^|\d]+?) ?\|[ |]*([\d,]+)\|[ |]*([\d,]+)\|[ |]*([\d,]+)\|[ |]*([\d,]+)\|", text)
+        if not row:
+            raise RuntimeError("daily price table not found on the page")
+        return {"value": number(row.group(3 + col)), "prev": None, "pct": None, "live": False,
+                "when": f"{row.group(1).strip()} {row.group(2).strip()}", "src": "gold-price-today"}
+    add("gold24", "Gold 24K (EGP/g)", lambda: gold(0), "gold24_egp")
+    add("gold21", "Gold 21K (EGP/g)", lambda: gold(1), "gold21_egp")
+    add("gold18", "Gold 18K (EGP/g)", lambda: gold(2), "gold18_egp")
+    add("goldpound", "Gold pound (EGP)", lambda: gold(3), "goldpound_egp")
 
     def fx():
         j = json.loads(get("https://open.er-api.com/v6/latest/USD"))
@@ -181,7 +190,8 @@ def main(args):
     try:
         j = fx()
         egp = j["rates"]["EGP"]
-        for code, key in (("USD", "usd_egp"), ("EUR", "eur_egp"), ("SAR", "sar_egp"), ("AED", "aed_egp")):
+        for code, key in (("USD", "usd_egp"), ("EUR", "eur_egp"), ("SAR", "sar_egp"), ("AED", "aed_egp"),
+                          ("KWD", "kwd_egp"), ("QAR", "qar_egp"), ("GBP", "gbp_egp")):
             v = round(egp / j["rates"][code], 4)
             rows.append((f"{code}/EGP (mid)", {"value": v, "pct": None, "when": j["time_last_update_utc"],
                                               "src": "open.er-api"}, False))
