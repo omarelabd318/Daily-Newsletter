@@ -115,7 +115,8 @@ footer p{margin:clamp(16px,2vw,24px) 0 0;max-width:40ch;color:var(--ink2);font-s
   td{background:none;padding:2px 0;font-size:17px}
   td:first-child{font-size:18px;padding-bottom:4px}
   td.c3{color:var(--ink2);font-size:16px}
-  tr td.num{text-align:left}
+  tr td.num,tr td.num.na{text-align:left}
+  tr td:empty{display:none}
   td[data-label]{padding-left:72px}
   td[data-label]::before{content:attr(data-label);display:inline-block;min-width:62px;margin:0 10px 0 -72px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);vertical-align:1px}
   tr{position:relative}
@@ -188,6 +189,7 @@ td{font-family:var(--sans);font-size:17px} th{font-family:var(--sans)}
 th.trend,td.trend{width:1%;white-space:nowrap;text-align:center}
 th.num{text-align:center}
 td.num{text-align:right;font-variant-numeric:tabular-nums}
+td.num.na{text-align:center}
 td.trend{vertical-align:middle}
 .unc{color:var(--accent);font-weight:700;margin-left:2px}
 .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -307,7 +309,9 @@ td.trend{vertical-align:middle}
           var h = inline(c).replace(/\s*\(unconfirmed\)/gi, function(){ return '<sup class="unc" title="Unconfirmed">*<span class="vh"> unconfirmed</span></sup>'; });
           // the column name, shown as a small label on phones where the header row is hidden
           var lab = ci && head[ci] ? ' data-label="'+esc(head[ci].replace(/[*_`]/g,'').trim())+'"' : '';
-          var cls = [ci===2?'c3':'', num[ci]?'num':''].join(' ').trim();
+          // placeholders are centred: there is no number to line up
+          var na = num[ci] && /^(n\/a|—|–|-)$/i.test(c.trim());
+          var cls = [ci===2?'c3':'', num[ci]?'num':'', na?'na':''].join(' ').trim();
           return '<td'+(cls?' class="'+cls+'"':'')+lab+'>'+h+'</td>';
         }).join('')+'</tr>'});
         push(t2+'</tbody></table></div>');continue;

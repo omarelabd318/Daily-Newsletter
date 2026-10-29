@@ -30,7 +30,7 @@ reach its number on a quiet day.
 | Markets: Egypt Markets | 280-340 | 10% |
 | Markets: Global Markets | 210-260 | 8% |
 | Stocks Watch (two tables) | 140-240 | 6% |
-| Currency and Commodities Watch | 110-160 | 5% |
+| Currency and Commodities Watch | 180-260 | 7% |
 | In Other News: Tech and AI | 130-170 | 5% |
 | In Other News: Sports | 150-200 | 6% |
 | In Other News: Health and Science | 70-100 | 3% |
@@ -329,10 +329,19 @@ announces dates, update the file (dates, any day moved to a Thursday or Sunday, 
 
 ## Currency and Commodities Watch table
 
-Use three columns: `| Item | Level | Note |`. Keep each Note under about 10 words, so the table stays
-easy to scan. On phones the site shows each row as a small card, so long notes still fit.
+Use four columns: `| Item | Level | Note | YTD |`.
 
-Right after the USD/EGP row, add `| US dollar index (DXY) | 102.19 | ... |`: the dollar against six major
+- **Italic line first:** under the heading, one italic line saying which rates the table shows, for example
+  `*USD/EGP is the central bank's rate; other currencies are market mid-rates.*` Then do not repeat
+  "Market mid-rate" in the Notes.
+- **Notes:** about 6 words, so rows stay on one line. Use them for the day's change or one short point
+  ("highest since March", "fourth rise running"), or leave a Note empty when there is nothing to add.
+- **YTD:** the change since the last close of the previous year, from
+  `python3 .claude/skills/daily-newsletter/market_facts.py DATE --ytd` after logging, with a sign
+  (`+17.8%`). Write `n/a` when the figure is not in the log that day, and `—` for central bank rates,
+  certificates and T-bills, which have no YTD.
+
+Right after the USD/EGP row, add `| US dollar index (DXY) | 102.19 | ... | +4.0% |`: the dollar against six major
 currencies, with the day's change in the Note, so readers can tell whether a move in the pound is the
 dollar strengthening everywhere or something specific to Egypt. Say which in the Note when it is clear,
 for example `+0.4%; dollar firmer worldwide` or `-0.3%; pound's fall is local`.

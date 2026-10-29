@@ -35,7 +35,7 @@ BUDGET = {
     "Today at a Glance": (150, 190), "Quick Hits": (70, 100), "Weather": (50, 80),
     "Egypt News": (450, 550), "Top World Headlines": (300, 380), "Regional and Gulf": (180, 230),
     "Egypt Markets": (280, 340), "Global Markets": (210, 260), "Stocks Watch": (140, 240),
-    "Currency and Commodities Watch": (110, 160), "Tech and AI": (130, 170), "Sports": (150, 200),
+    "Currency and Commodities Watch": (180, 260), "Tech and AI": (130, 170), "Sports": (150, 200),
     "Health and Science": (70, 100), "Entertainment and Culture": (120, 150),
     "Economic Calendar": (130, 170), "Worth Knowing": (160, 200),
 }
@@ -190,6 +190,22 @@ def main(path):
                 counts[p] = words("\n".join(body))
         else:
             counts[name] = words("\n".join(sec["body"]))
+    # Currency and Commodities Watch: a YTD column, short notes, no repeated "Market mid-rate".
+    if not recap:
+        crows = [l for l in sections.get("Currency and Commodities Watch", {}).get("body", []) if l.strip().startswith("|")]
+        if crows:
+            head = [c.strip() for c in crows[0].strip().strip("|").split("|")]
+            if "YTD" not in head:
+                warnings.append("Currency and Commodities Watch should have four columns: | Item | Level | Note | YTD |")
+            elif "Note" in head:
+                ni = head.index("Note")
+                for r in crows[2:]:
+                    cells = [c.strip() for c in r.strip().strip("|").split("|")]
+                    if len(cells) > ni and len(cells[ni].split()) > 9:
+                        warnings.append(f"Currency note over about 6 words: {cells[0]}: {cells[ni]}")
+            if sum("mid-rate" in r.lower() for r in crows[2:]) > 1:
+                warnings.append("'Market mid-rate' is repeated in the currency table; say it once in the italic line above it.")
+
     # Minimum stories per section (bold lead-ins), so one busy section cannot crowd out the rest.
     for name, least in ({} if recap else MIN_ITEMS).items():
         body = next((sec["parts"][name] for sec in sections.values() if name in sec["parts"]),
