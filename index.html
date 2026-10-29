@@ -177,7 +177,7 @@ td{font-family:var(--sans);font-size:17px} th{font-family:var(--sans)}
 #archive{text-align:left}
 :root{--up:#1d7a3a;--down:#b3261e}
 :root[data-theme="dark"]{--up:#5fd08a;--down:#ff8a80}
-.chg.up{color:var(--up)} .chg.down{color:var(--down)} .chg.big{font-weight:700}
+.chg{white-space:nowrap} .chg.up{color:var(--up)} .chg.down{color:var(--down)} .chg.big{font-weight:700}
 .chg span{font-size:.8em}
 .spark{display:block;overflow:visible}
 th.trend,td.trend{width:1%;white-space:nowrap}
@@ -421,7 +421,9 @@ td.trend{vertical-align:middle}
     document.querySelectorAll('#content .s-body td:not(:first-child)').forEach(function(td){
       var m = td.textContent.trim().match(/^([+\-−])\s?(\d[\d,]*(?:\.\d+)?)\s?%/);
       if(!m || td.querySelector('.chg')) return;
-      var up = m[1] === '+', big = parseFloat(m[2].replace(/,/g,'')) >= 5;
+      // bold marks a big daily move, so year-to-date columns are left plain
+      var th = td.closest('table').querySelectorAll('thead th')[td.cellIndex], ytd = th && /YTD|year/i.test(th.textContent);
+      var up = m[1] === '+', big = !ytd && parseFloat(m[2].replace(/,/g,'')) >= 5;
       td.innerHTML = '<span class="chg ' + (up ? 'up' : 'down') + (big ? ' big' : '') + '"><span aria-hidden="true">' + (up ? '▲' : '▼') + '</span> ' + td.innerHTML + '</span>';
     });
   }
