@@ -21,6 +21,11 @@ RECAP_SECTIONS = [
     "Sports This Week", "Culture and Tech", "How It Played Out", "The Week Ahead", "Sources",
 ]
 RECAP_TOTAL = (1600, 2500)
+# The fixed Stocks Watch rows, in order (see the skill).
+FIXED = {
+    "Egypt": ["COMI", "TMGH", "ETEL", "PHDC", "SWDY", "ORAS", "FWRY", "ABUK", "HRHO", "CLHO", "JUFO", "ALCN"],
+    "USA": ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA", "JPM", "XOM", "AVGO", "BRK.B", "WMT"],
+}
 PARTS = {
     "Markets": ["Egypt Markets", "Global Markets"],
     "Stocks Watch": ["Egypt", "USA"],
@@ -29,7 +34,7 @@ PARTS = {
 BUDGET = {
     "Today at a Glance": (150, 190), "Quick Hits": (70, 100), "Weather": (50, 80),
     "Egypt News": (450, 550), "Top World Headlines": (300, 380), "Regional and Gulf": (180, 230),
-    "Egypt Markets": (280, 340), "Global Markets": (210, 260), "Stocks Watch": (100, 180),
+    "Egypt Markets": (280, 340), "Global Markets": (210, 260), "Stocks Watch": (140, 240),
     "Currency and Commodities Watch": (110, 160), "Tech and AI": (130, 170), "Sports": (150, 200),
     "Health and Science": (70, 100), "Entertainment and Culture": (120, 150),
     "Economic Calendar": (130, 170), "Worth Knowing": (160, 200),
@@ -165,8 +170,10 @@ def main(path):
                 rows = [l for l in body if l.strip().startswith("|")]
                 prose = [l for l in body if l.strip() and not l.strip().startswith("|")
                          and not re.fullmatch(r"\*[^*].*\*", l.strip()) and l.strip() != "---"]
-                if len(rows) < 10:
-                    errors.append(f"Stocks Watch '{p}' should be a table with the 8 fixed stocks.")
+                fixed = FIXED.get(p, [])
+                missing = [t for t in fixed if not any(f"({t})" in r for r in rows)]
+                if missing:
+                    errors.append(f"Stocks Watch '{p}' is missing fixed stocks: {', '.join(missing)}.")
                 if prose:
                     warnings.append(f"Stocks Watch '{p}' should be a table only; found: {prose[0][:80]}")
                 if rows and "YTD" not in rows[0]:

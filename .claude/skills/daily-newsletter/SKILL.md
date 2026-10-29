@@ -29,7 +29,7 @@ reach its number on a quiet day.
 | Regional and Gulf | 180-230 | 7% |
 | Markets: Egypt Markets | 280-340 | 10% |
 | Markets: Global Markets | 210-260 | 8% |
-| Stocks Watch (two tables) | 100-180 | 5% |
+| Stocks Watch (two tables) | 140-240 | 6% |
 | Currency and Commodities Watch | 110-160 | 5% |
 | In Other News: Tech and AI | 130-170 | 5% |
 | In Other News: Sports | 150-200 | 6% |
@@ -234,9 +234,13 @@ List these every day, in this order:
 | Orascom Construction (ORAS) | Meta (META) |
 | Fawry (FWRY) | Tesla (TSLA) |
 | Abu Qir Fertilizers (ABUK) | JPMorgan Chase (JPM) |
+| EFG Holding (HRHO) | Exxon Mobil (XOM) |
+| Cleopatra Hospital (CLHO) | Broadcom (AVGO) |
+| Juhayna Food Industries (JUFO) | Berkshire Hathaway (BRK.B) |
+| Alexandria Containers (ALCN) | Walmart (WMT) |
 
 After the fixed rows, add up to three rows for other stocks with a notable move or notable news that
-day, marked in italics, for example `| *Ezz Steel (ESRS), notable mover* | 98.50 | +8.5% | n/a |`.
+day, marked in italics, for example `| *Misr Cement Qena (MCQE), notable mover* | 98.50 | +8.5% | n/a |`.
 Leave them out when nothing stands out.
 
 On weekends the EGX is closed Friday and Saturday and US markets Saturday and Sunday. Show the last
