@@ -181,10 +181,9 @@ td{font-family:var(--sans);font-size:17px} th{font-family:var(--sans)}
 .chg span{font-size:.8em}
 .spark{display:block;overflow:visible}
 th.trend,td.trend{width:1%;white-space:nowrap}
-td.trend{padding-left:4px;padding-right:4px;vertical-align:middle}
+td.trend{vertical-align:middle}
 .unc{color:var(--accent);font-weight:700;margin-left:2px}
 .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.tnote{margin:2px 0 0;font-size:14px;color:var(--ink2)}
 .spark path{fill:none;stroke:var(--ink2);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
 .spark circle{fill:var(--accent);stroke:var(--panel);stroke-width:1.5}
 #q{width:100%;margin:8px 0 4px;padding:10px 12px;font:500 15px var(--sans);color:var(--ink);background:var(--ground);border:1px solid var(--rule);border-radius:0}
@@ -295,12 +294,11 @@ td.trend{padding-left:4px;padding-right:4px;vertical-align:middle}
         i += 2;
         while(i < lines.length && /^\s*\|/.test(lines[i])){body.push(cells(lines[i]));i++}
         var t2 = '<div class="tablewrap"><table><thead><tr>'+head.map(function(c){return '<th>'+inline(c)+'</th>'}).join('')+'</tr></thead><tbody>';
-        var unc = false;
         body.forEach(function(r){t2 += '<tr>'+r.map(function(c,ci){
-          var h = inline(c).replace(/\s*\(unconfirmed\)/gi, function(){ unc = true; return '<sup class="unc" title="Unconfirmed">†<span class="vh"> unconfirmed</span></sup>'; });
+          var h = inline(c).replace(/\s*\(unconfirmed\)/gi, function(){ return '<sup class="unc" title="Unconfirmed">†<span class="vh"> unconfirmed</span></sup>'; });
           return '<td'+(ci===2?' class="c3"':'')+'>'+h+'</td>';
         }).join('')+'</tr>'});
-        push(t2+'</tbody></table>'+(unc?'<p class="tnote">† Unconfirmed: the sources disagreed, or only one source had the figure.</p>':'')+'</div>');continue;
+        push(t2+'</tbody></table></div>');continue;
       }
       if(/^\s*>/.test(l)){
         var q = [];
