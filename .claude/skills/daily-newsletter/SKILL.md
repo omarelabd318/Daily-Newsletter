@@ -202,6 +202,11 @@ closing or a LIVE price, the quote time and the source. Then:
 - **Variety by adding, not dropping:** go through the whole EnterpriseAM edition (on weekdays) and
   CairoScene, and consider every item. Variety comes from adding strong stories from other outlets
   alongside them, never from leaving out a good EnterpriseAM or CairoScene story to balance the count.
+- **Read EnterpriseAM with its script, not a web fetch:** on weekdays run
+  `python3 .claude/skills/daily-newsletter/read_enterprise.py`. It prints the whole AM edition: every story
+  in full with its own link, the smaller items inside each story (under their own subheadings), Today at a
+  glance and the calendar. A web fetch only returns a summary, which can drop items and has no story
+  links. Use a web fetch of https://enterpriseam.com/egypt/am-edition/ only if the script fails.
 - **How research runs:** EnterpriseAM (on weekdays) and CairoScene are read in full on every run, as a
   core part of research, alongside many searches across many other outlets: Egyptian, regional and
   international. Neither comes first and neither is a fallback. Pick the day's stories from everything
