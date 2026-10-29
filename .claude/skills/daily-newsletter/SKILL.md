@@ -283,7 +283,11 @@ python3 .claude/skills/daily-newsletter/export_xlsx.py
 
 Log the same numbers the edition shows (the central bank's selling rate for the dollar when that is what
 the table shows), one value per key, with every Stocks Watch row as `egx.TICKER` or `us.TICKER`. Leave out
-anything marked n/a or unconfirmed. Weekend editions log what they show; the recap does not log. Commit
+anything marked n/a or unconfirmed. Log closing prices only, never live prices: if the
+EGX is still trading when the run happens, log each Egyptian stock's previous close (Mubasher shows it on
+the stock's page) and the EGX30's previous close instead of the intraday figures the table shows. The log
+files a close under the next edition's date, so a live price logged today would be overwritten by nothing
+and would skew every change worked out from the log. Weekend editions log what they show; the recap does not log. Commit
 `data/markets.json` together with the edition.
 
 ## Corrections
