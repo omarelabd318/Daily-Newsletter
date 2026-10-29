@@ -1,5 +1,5 @@
 {
- "note": "Daily figures shown in each edition, keyed by edition date. Entries marked seed were backfilled: US, oil, global gold, bitcoin and dollar history from market data; EGX30 and Egyptian stock closes from investing.com history; Egyptian 21K gold converted from investing.com XAU/EGP (per ounce of fine gold / 31.1035 x 0.875). A close on day D is filed under the edition of D+1.",
+ "note": "Daily figures shown in each edition, keyed by edition date. Entries marked seed were backfilled: US, oil, global gold, bitcoin and dollar history from market data; EGX30 and Egyptian stock closes from investing.com history; Egyptian 21K gold from goldpricez for 14-28 October and otherwise converted from investing.com XAU/EGP (per ounce of fine gold / 31.1035 x 0.875). A close on day D is filed under the edition of D+1.",
  "days": [
   {
    "date": "2026-06-02",
@@ -1761,7 +1761,7 @@
    "usd_egp": 53.04,
    "eur_egp": 59.38,
    "egx30": 51492.83,
-   "gold21_egp": 6129.0
+   "gold21_egp": 6130.04
   },
   {
    "date": "2026-10-16",
@@ -1794,7 +1794,7 @@
    "usd_egp": 53.4,
    "eur_egp": 59.88,
    "egx30": 52273.34,
-   "gold21_egp": 6270.0
+   "gold21_egp": 6269.6
   },
   {
    "date": "2026-10-17",
@@ -1815,14 +1815,15 @@
    "brent": 109.86,
    "btc": 81500.8,
    "gold_usd": 4181.1,
-   "gold21_egp": 6263.0
+   "gold21_egp": 6270.26
   },
   {
    "date": "2026-10-18",
    "seed": true,
    "egx": {},
    "us": {},
-   "btc": 81382.15
+   "btc": 81382.15,
+   "gold21_egp": 6270.26
   },
   {
    "date": "2026-10-19",
@@ -1841,7 +1842,8 @@
    "btc": 82017.6,
    "usd_egp": 53.59,
    "eur_egp": 60.15,
-   "egx30": 50896.19
+   "egx30": 50896.19,
+   "gold21_egp": 6281.98
   },
   {
    "date": "2026-10-20",
@@ -1874,7 +1876,7 @@
    "usd_egp": 53.88,
    "eur_egp": 60.43,
    "egx30": 51098.83,
-   "gold21_egp": 6280.0
+   "gold21_egp": 6283.2
   },
   {
    "date": "2026-10-21",
@@ -1907,7 +1909,7 @@
    "usd_egp": 54.47,
    "eur_egp": 61.15,
    "egx30": 52089.01,
-   "gold21_egp": 6324.0
+   "gold21_egp": 6328.62
   },
   {
    "date": "2026-10-22",
@@ -1940,7 +1942,7 @@
    "usd_egp": 54.35,
    "eur_egp": 61.06,
    "egx30": 52854.95,
-   "gold21_egp": 6335.0
+   "gold21_egp": 6335.61
   },
   {
    "date": "2026-10-23",
@@ -1973,7 +1975,7 @@
    "usd_egp": 55.27,
    "eur_egp": 62.02,
    "egx30": 51052.26,
-   "gold21_egp": 6261.0
+   "gold21_egp": 6261.48
   },
   {
    "date": "2026-10-24",
@@ -1994,14 +1996,15 @@
    "brent": 116.72,
    "btc": 81074.19,
    "gold_usd": 4007.9,
-   "gold21_egp": 6216.0
+   "gold21_egp": 6217.01
   },
   {
    "date": "2026-10-25",
    "seed": true,
    "egx": {},
    "us": {},
-   "btc": 80790.84
+   "btc": 80790.84,
+   "gold21_egp": 6217.01
   },
   {
    "date": "2026-10-26",
@@ -2018,7 +2021,8 @@
    },
    "us": {},
    "btc": 80024.01,
-   "egx30": 49234.35
+   "egx30": 49234.35,
+   "gold21_egp": 6275.47
   },
   {
    "date": "2026-10-27",
@@ -2051,7 +2055,7 @@
    "usd_egp": 54.99,
    "eur_egp": 61.69,
    "egx30": 48416.94,
-   "gold21_egp": 6359.0
+   "gold21_egp": 6358.34
   },
   {
    "date": "2026-10-28",
@@ -2104,7 +2108,7 @@
    "usd_egp": 55.99,
    "eur_egp": 62.32,
    "egx30": 49281.24,
-   "gold21_egp": 6393.0
+   "gold21_egp": 6410.65
   }
  ]
 }
