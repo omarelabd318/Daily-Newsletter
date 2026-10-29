@@ -115,6 +115,8 @@ footer p{margin:clamp(16px,2vw,24px) 0 0;max-width:40ch;color:var(--ink2);font-s
   td{background:none;padding:2px 0;font-size:17px}
   td:first-child{font-size:18px;padding-bottom:4px}
   td.c3{color:var(--ink2);font-size:16px}
+  td[data-label]{padding-left:72px}
+  td[data-label]::before{content:attr(data-label);display:inline-block;min-width:62px;margin:0 10px 0 -72px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);vertical-align:1px}
   tr{position:relative}
   tr.has-trend td:first-child{padding-right:76px}
   tr.trend-long td:first-child{padding-right:140px}
@@ -296,7 +298,9 @@ td.trend{vertical-align:middle}
         var t2 = '<div class="tablewrap"><table><thead><tr>'+head.map(function(c){return '<th>'+inline(c)+'</th>'}).join('')+'</tr></thead><tbody>';
         body.forEach(function(r){t2 += '<tr>'+r.map(function(c,ci){
           var h = inline(c).replace(/\s*\(unconfirmed\)/gi, function(){ return '<sup class="unc" title="Unconfirmed">*<span class="vh"> unconfirmed</span></sup>'; });
-          return '<td'+(ci===2?' class="c3"':'')+'>'+h+'</td>';
+          // the column name, shown as a small label on phones where the header row is hidden
+          var lab = ci && head[ci] ? ' data-label="'+esc(head[ci].replace(/[*_`]/g,'').trim())+'"' : '';
+          return '<td'+(ci===2?' class="c3"':'')+lab+'>'+h+'</td>';
         }).join('')+'</tr>'});
         push(t2+'</tbody></table></div>');continue;
       }
@@ -424,7 +428,10 @@ td.trend{vertical-align:middle}
       // bold marks a big daily move, so year-to-date columns are left plain
       var th = td.closest('table').querySelectorAll('thead th')[td.cellIndex], ytd = th && /YTD|year/i.test(th.textContent);
       var up = m[1] === '+', big = !ytd && parseFloat(m[2].replace(/,/g,'')) >= 5;
-      td.innerHTML = '<span class="chg ' + (up ? 'up' : 'down') + (big ? ' big' : '') + '"><span aria-hidden="true">' + (up ? '▲' : '▼') + '</span> ' + td.innerHTML + '</span>';
+      // colour just the leading change; any words after it (as in a Note) stay plain
+      var lead = td.innerHTML.match(/^\s*[+\-−]\s?\d[\d,]*(?:\.\d+)?\s?%/);
+      if(!lead) return;
+      td.innerHTML = '<span class="chg ' + (up ? 'up' : 'down') + (big ? ' big' : '') + '"><span aria-hidden="true">' + (up ? '▲' : '▼') + '</span> ' + lead[0].trim() + '</span>' + td.innerHTML.slice(lead[0].length);
     });
   }
 
