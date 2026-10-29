@@ -145,6 +145,11 @@ def main(path):
         if hit:
             warnings.append(f"Line {i}: '{hit.group(0)}' may break the voice rules: {line.strip()[:90]}")
 
+    # Quick Hits carries a Number of the day (daily editions only).
+    if not recap and not any(re.match(r"^\s*(?:[-*]\s+)?\*\*Number of the day:\*\*", l)
+                             for l in sections.get("Quick Hits", {}).get("body", [])):
+        errors.append("Quick Hits should include a '**Number of the day:**' item.")
+
     # Sports: no sport-name headings or standalone bold lines.
     for line in sections.get("In Other News", {}).get("parts", {}).get("Sports", []):
         if re.fullmatch(r"\s*(\*\*[^*]+\*\*|#{4,}\s+.+)\s*", line):

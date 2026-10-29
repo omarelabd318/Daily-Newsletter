@@ -71,6 +71,25 @@ figure. Where they disagree, use the more authoritative or more recent one and m
 for example `56.10 (unconfirmed)`. Never present a figure as confirmed when only one source had it and it
 looks out of line with recent days. Never guess a figure; write `n/a` instead.
 
+## Number of the day
+
+Quick Hits always includes one item `**Number of the day:** ...`: a single striking figure from the day's
+news, with one line on why it matters. Pick a number covered elsewhere in the edition or one that adds
+something new, and check it like any other figure.
+
+## Explained boxes
+
+When a story relies on a term many readers may not know (for example carry trade, T-bill auction,
+sourcing commission, oversubscription, core inflation), add a short explainer straight after that story,
+as its own quote line:
+
+`> **Explained: carry trade.** Borrowing in a low-interest currency to invest in a higher-yielding one,
+such as Egyptian treasury bills, profiting from the gap as long as the exchange rate holds.`
+
+One or two sentences, plain language, no figures that need checking. Use at most three per edition, only
+where they genuinely help, and never explain the same term in Worth Knowing on the same day. The site
+shows these as small boxes.
+
 ## Continuing stories
 
 Before writing, read the most recent earlier edition in `editions/` (the newest file before today's date;

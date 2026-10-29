@@ -166,6 +166,27 @@ td{font-family:var(--sans);font-size:17px} th{font-family:var(--sans)}
   .edition .sum{font-size:22px}
 }
 
+
+/* search, explained boxes, print */
+#archive{text-align:left}
+#q{width:100%;margin:8px 0 4px;padding:10px 12px;font:500 15px var(--sans);color:var(--ink);background:var(--ground);border:1px solid var(--rule);border-radius:0}
+#q:focus{outline:2px solid var(--accent);outline-offset:0}
+#results a small.where{display:block;margin-top:2px;font:600 11px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+#results .none{font:500 15px var(--sans);color:var(--ink2);padding:12px 0;margin:0}
+.s-body blockquote.explain{margin:10px 0 24px;padding:12px 16px;border-left:3px solid var(--accent);font:400 16px/1.6 var(--sans);color:var(--ink2)}
+.s-body .hit{outline:2px solid var(--accent);outline-offset:6px;transition:outline-color 1s}
+@media print{
+  :root,:root[data-theme="dark"]{--ground:#fff;--raised:#f2f2f2;--panel:#f2f2f2;--ink:#000;--ink2:#444;--accent:#8a1c1c;--rule:#ccc}
+  body{background:#fff;color:#000;font-size:11pt}
+  #themeBtn,.top,#archive,.toc,footer,noscript{display:none!important}
+  .rv{opacity:1!important;transform:none!important}
+  .mast{padding:0 0 12pt}
+  .s,.s:nth-of-type(even){padding-block:12pt;background:#fff}
+  .s h2,.s-body h3{break-after:avoid}
+  .s-body p,.s-body li,tr{break-inside:avoid}
+  a{color:inherit;text-decoration:none}
+  td{background:#f2f2f2!important}
+}
 </style>
 </head>
 <body>
@@ -178,7 +199,7 @@ td{font-family:var(--sans);font-size:17px} th{font-family:var(--sans)}
       <button id="archiveBtn" type="button" aria-expanded="false" aria-controls="archive">Browse the archive</button>
       <div class="grp"><span id="prev"></span><span id="next"></span></div>
     </div>
-    <div id="archive" role="list"></div>
+    <div id="archive"><input id="q" type="search" placeholder="Search all editions" aria-label="Search all editions" autocomplete="off"><div id="archList" role="list"></div><div id="results" role="list" hidden></div></div>
     <div class="edition" id="edition" hidden>
       <div class="date" id="dateline"></div>
       <div><p class="sum" id="summary"></p><div id="leadwrap"></div></div>
@@ -262,7 +283,8 @@ td{font-family:var(--sans);font-size:17px} th{font-family:var(--sans)}
       if(/^\s*>/.test(l)){
         var q = [];
         while(i < lines.length && /^\s*>/.test(lines[i])){q.push(lines[i].replace(/^\s*>\s?/,''));i++}
-        push('<blockquote>'+inline(q.join(' '))+'</blockquote>');continue;
+        var qh = inline(q.join(' '));
+        push('<blockquote'+(/^<strong>Explained/.test(qh)?' class="explain"':'')+'>'+qh+'</blockquote>');continue;
       }
       if(/^\s*[-*]\s+/.test(l)){
         var ul = [];
@@ -296,7 +318,7 @@ td{font-family:var(--sans);font-size:17px} th{font-family:var(--sans)}
     $('content').innerHTML='<div class="frame"><div class="state"><b>'+esc(title)+'</b><span>'+esc(msg||'')+'</span></div></div>';
   }
   function buildArchive(current){
-    $('archive').innerHTML = editions.map(function(e){
+    $('archList').innerHTML = editions.map(function(e){
       return '<a role="listitem" href="#'+key(e)+'"'+(key(e)===current?' class="current"':'')+'><span>'+esc(title(e))+'</span><small>'+esc(e.summary||'')+'</small></a>';
     }).join('');
   }
@@ -318,6 +340,7 @@ td{font-family:var(--sans);font-size:17px} th{font-family:var(--sans)}
     $('summary').hidden = !ed.summary;
     $('edition').hidden = false;
     document.title = 'Daily Newsletter';
+    current = key(ed);
     buildArchive(key(ed)); setNav(idx);
     fetch('editions/'+key(ed)+'.md',{cache:'no-cache'}).then(function(r){
       if(!r.ok) throw new Error(r.status);
@@ -344,7 +367,8 @@ td{font-family:var(--sans);font-size:17px} th{font-family:var(--sans)}
       document.querySelectorAll('#content .s-body > *:first-child').forEach(function(el){el.classList.add('rv')});
       document.querySelectorAll('.mast > *').forEach(function(el){el.classList.add('rv')});
       pending = Array.prototype.slice.call(document.querySelectorAll('.rv'));
-      window.scrollTo(0,0);
+      if(pendingStory && document.getElementById(pendingStory)) jumpTo(pendingStory); else window.scrollTo(0,0);
+      pendingStory = null;
       sweep();
     }).catch(function(){state('Could not load this edition','Please try again in a moment.')});
   }
@@ -362,6 +386,56 @@ td{font-family:var(--sans);font-size:17px} th{font-family:var(--sans)}
     syncThemeBtn();
   });
   syncThemeBtn();
+
+  // ---- search across every edition (loaded on first use) ----
+  var pendingStory = null, corpus = null, current = null;
+  function jumpTo(id){
+    var el = document.getElementById(id);
+    if(!el) return;
+    el.scrollIntoView({block:'start'});
+    el.classList.add('hit'); setTimeout(function(){el.classList.remove('hit')}, 2000);
+  }
+  function loadCorpus(){
+    if(corpus) return corpus;
+    corpus = Promise.all(editions.map(function(e){
+      return fetch('editions/'+key(e)+'.md',{cache:'no-cache'}).then(function(r){return r.ok ? r.text() : ''}).then(function(md){
+        var items = [], sec = '';
+        md.split('\n').forEach(function(l){
+          var h = l.match(/^##\s+(.*)$/);
+          if(h){ sec = h[1].replace(/[*_`]/g,''); return; }
+          var m = l.match(/^\s*(?:[-*]|\d+[.)])?\s*\*\*([^*]+?):?\*\*:?\s*(.*)$/);
+          if(m && sec !== 'Today at a Glance' && sec !== 'Sources' && sec !== 'The Week in Brief')
+            items.push({e:e, sec:sec, lead:m[1].replace(/:$/,''), text:m[2].replace(/\[([^\]]+)\]\([^)]*\)/g,'$1').replace(/[*_`]/g,'')});
+        });
+        return items;
+      }).catch(function(){return []});
+    })).then(function(all){return [].concat.apply([], all)});
+    return corpus;
+  }
+  function search(q){
+    var words = q.toLowerCase().split(/\s+/).filter(Boolean);
+    if(!words.length || q.trim().length < 2){ $('results').hidden = true; $('archList').hidden = false; return; }
+    loadCorpus().then(function(items){
+      var hits = items.filter(function(it){
+        var hay = (it.lead+' '+it.text).toLowerCase();
+        return words.every(function(w){return hay.indexOf(w) >= 0});
+      }).slice(0, 40);
+      $('results').innerHTML = hits.length ? hits.map(function(it){
+        var t = it.text.length > 160 ? it.text.slice(0,157)+'…' : it.text;
+        return '<a role="listitem" href="#'+key(it.e)+'" data-story="story-'+slug(it.lead)+'"><span>'+esc(it.lead)+'<small class="where">'+esc(title(it.e)+' · '+it.sec)+'</small></span><small>'+esc(t)+'</small></a>';
+      }).join('') : '<p class="none">No stories match.</p>';
+      $('results').hidden = false; $('archList').hidden = true;
+    });
+  }
+  var qTimer;
+  $('q').addEventListener('input',function(){ var v = this.value; clearTimeout(qTimer); qTimer = setTimeout(function(){search(v)}, 200); });
+  $('results').addEventListener('click',function(ev){
+    var a = ev.target.closest('a[data-story]');
+    if(!a) return;
+    var k = a.getAttribute('href').slice(1);
+    if(k === current){ ev.preventDefault(); $('archive').classList.remove('open'); $('archiveBtn').setAttribute('aria-expanded','false'); jumpTo(a.getAttribute('data-story')); }
+    else pendingStory = a.getAttribute('data-story');
+  });
 
   $('archiveBtn').addEventListener('click',function(){
     var open = $('archive').classList.toggle('open');
