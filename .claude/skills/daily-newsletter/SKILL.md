@@ -199,6 +199,9 @@ closing or a LIVE price, the quote time and the source. Then:
   EnterpriseAM and CairoScene. The instruction that an edition should not read like a rewrite of either
   is about writing in your own words and checking key facts elsewhere, not a cap on how much comes from
   them. Each story is still judged on its own merit and placed in the section where it belongs.
+- **Variety by adding, not dropping:** go through the whole EnterpriseAM edition (on weekdays) and
+  CairoScene, and consider every item. Variety comes from adding strong stories from other outlets
+  alongside them, never from leaving out a good EnterpriseAM or CairoScene story to balance the count.
 - **Credit every outlet the same way:** keep crediting EnterpriseAM and CairoScene whenever a point comes
   from them and the credit fits; they are trusted, daily sources. The aim is that other outlets are
   named just as readily when a point comes from them, not that these two are named less.
