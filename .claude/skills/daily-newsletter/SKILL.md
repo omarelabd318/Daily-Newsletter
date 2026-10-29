@@ -273,7 +273,7 @@ Brent. Log all of these every day so the lines stay up to date. Rates, certifica
 too rarely for a line and get none.
 
 Mark a figure the sources disagree on with `(unconfirmed)` right after it, in any table. The site shows
-it as a small † that says "Unconfirmed" on hover, so it takes no extra space.
+it as a small * that says "Unconfirmed" on hover, so it takes no extra space.
 
 ## Weekly Recap (Saturdays)
 

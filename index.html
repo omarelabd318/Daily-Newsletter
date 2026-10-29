@@ -295,7 +295,7 @@ td.trend{vertical-align:middle}
         while(i < lines.length && /^\s*\|/.test(lines[i])){body.push(cells(lines[i]));i++}
         var t2 = '<div class="tablewrap"><table><thead><tr>'+head.map(function(c){return '<th>'+inline(c)+'</th>'}).join('')+'</tr></thead><tbody>';
         body.forEach(function(r){t2 += '<tr>'+r.map(function(c,ci){
-          var h = inline(c).replace(/\s*\(unconfirmed\)/gi, function(){ return '<sup class="unc" title="Unconfirmed">†<span class="vh"> unconfirmed</span></sup>'; });
+          var h = inline(c).replace(/\s*\(unconfirmed\)/gi, function(){ return '<sup class="unc" title="Unconfirmed">*<span class="vh"> unconfirmed</span></sup>'; });
           return '<td'+(ci===2?' class="c3"':'')+'>'+h+'</td>';
         }).join('')+'</tr>'});
         push(t2+'</tbody></table></div>');continue;
