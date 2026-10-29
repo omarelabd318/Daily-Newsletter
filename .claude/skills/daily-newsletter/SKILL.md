@@ -168,12 +168,15 @@ closing or a LIVE price, the quote time and the source. Then:
 
 - **Name the outlet** whenever a claim is attributed: "according to Reuters", "Ahram Online reported",
   "per Bloomberg". A search result that summarises a story is not the source; credit the outlet behind it.
-- **General credits** such as "according to news reports" or "market reports suggest" are fine only when the
-  point rests on more than one outlet and naming one would mislead. Never use them to stand in for a
-  single source.
+- **General credits** such as "according to news bulletins" or "market reports suggest" are fine when the
+  point rests on more than one outlet. Never use them to stand in for a single source. The checker flags
+  them only as a reminder to make sure several outlets back the point.
 - **Attribute only where it adds something:** an exclusive, a disputed or unconfirmed claim, a forecast or
   an estimate, or a figure that differs between sources. Well-established facts need no credit in the text;
   the Sources list covers them.
+- **Usually one credit per item:** if a point rests on several outlets, credit the main one, or use a
+  general credit such as "according to news bulletins", and let the Sources list carry the rest. About
+  10 to 20 credits in an edition reads naturally; the checker warns above 25, or at 3 or more in one item.
 - **Credit every outlet the same way:** keep crediting EnterpriseAM and CairoScene whenever a point comes
   from them and the credit fits; they are trusted, daily sources. The aim is that other outlets are
   named just as readily when a point comes from them, not that these two are named less.

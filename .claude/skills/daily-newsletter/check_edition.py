@@ -260,7 +260,18 @@ def main(path):
     for i, line in enumerate(lines, 1):
         hit = vague.search(line)
         if hit:
-            warnings.append(f"Line {i}: '{hit.group(0)}': name the outlet, unless this point rests on several outlets.")
+            warnings.append(f"Line {i}: '{hit.group(0)}': fine if several outlets back this point; otherwise name the outlet.")
+    # Credits in the text: about one per item reads naturally.
+    credit = re.compile(r"\b((?i:according to|reported|citing)|told [A-Z]|per (?=[A-Z]))")
+    body_lines = lines[:next((i for i, l in enumerate(lines) if l.startswith("## Sources")), len(lines))]
+    total_credits = 0
+    for i, line in enumerate(body_lines, 1):
+        n = len(credit.findall(line))
+        total_credits += n
+        if n >= 3:
+            warnings.append(f"Line {i}: {n} source credits in one item; keep the main one and let Sources carry the rest.")
+    if total_credits > 25:
+        warnings.append(f"{total_credits} source credits in the text; about 10 to 20 reads naturally. Credit only where it adds something.")
 
     # Same story in two sections: compare bold lead-ins outside Today at a Glance and Sources.
     leads = []
