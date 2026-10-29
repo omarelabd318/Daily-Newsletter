@@ -164,6 +164,19 @@ closing or a LIVE price, the quote time and the source. Then:
   rate instead of the market mid-rate, when that is what the edition shows). It already holds closing
   prices only, including previous closes while the EGX is trading.
 
+## Attribution in the text
+
+- **Name the outlet** whenever a claim is attributed: "according to Reuters", "Ahram Online reported",
+  "per Bloomberg". A search result that summarises a story is not the source; credit the outlet behind it.
+- **General credits** such as "according to news reports" or "market reports suggest" are fine only when the
+  point rests on more than one outlet and naming one would mislead. Never use them to stand in for a
+  single source.
+- **Attribute only where it adds something:** an exclusive, a disputed or unconfirmed claim, a forecast or
+  an estimate, or a figure that differs between sources. Well-established facts need no credit in the text;
+  the Sources list covers them.
+- **No favourites:** EnterpriseAM and CairoScene are fetched every day, but credit them like any other
+  outlet, only where the point is theirs. An edition should not name them more than other outlets.
+
 ## Go-to sources for figures
 
 Check these pages first for the figures below, then search as usual for anything they do not cover.

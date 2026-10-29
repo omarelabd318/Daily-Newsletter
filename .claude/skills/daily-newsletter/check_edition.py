@@ -250,6 +250,18 @@ def main(path):
         if hit:
             warnings.append(f"Line {i}: '{hit.group(0)}' refers to an earlier edition; each edition must stand alone.")
 
+    # Attribution: general credits are fine only when a point rests on several outlets.
+    vague = re.compile(r"\b(according to|per|says|said|reported by|citing) (the )?(news|market|media|press|"
+                       r"industry) (roundups?|reports?|bulletins?|coverage|sources)\b", re.I)
+    for i, line in enumerate(lines, 1):
+        hit = vague.search(line)
+        if hit:
+            warnings.append(f"Line {i}: '{hit.group(0)}': name the outlet, unless this point rests on several outlets.")
+    named = {o: len(re.findall(o, text.split("## Sources")[0])) for o in ("EnterpriseAM", "CairoScene")}
+    if sum(named.values()) > 4:
+        warnings.append(f"EnterpriseAM and CairoScene are named {sum(named.values())} times in the text; "
+                        "credit them only where the point is theirs, like any other outlet.")
+
     # Same story in two sections: compare bold lead-ins outside Today at a Glance and Sources.
     leads = []
     for name, sec in sections.items():
