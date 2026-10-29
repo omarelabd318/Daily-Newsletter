@@ -209,7 +209,9 @@ closing or a LIVE price, the quote time and the source. Then:
 - **Link each story's own page** in Sources, one link per story, for EnterpriseAM and CairoScene as for
   everyone else (for example `https://enterpriseam.com/egypt/2026/10/25/...`), not the homepage or the
   edition page. `enterpriseam.com/egypt/am-edition/` always shows the latest edition, so it points to the
-  wrong day later. Link the edition page only for an item that has no page of its own.
+  wrong day later. For items that appear only in the edition or on the homepage, use one line for that
+  page and say how many items it was used for, for example
+  `[EnterpriseAM Egypt, AM edition, 29 October 2026 (used for 3 items)](https://enterpriseam.com/egypt/am-edition/)`.
 - **Dependence check:** the checker warns when EnterpriseAM and CairoScene make up more than a third of
   the links in Sources. The answer is wider research for more strong stories, never cutting a good one.
 - **Merit, not origin:** the same bar applies the other way. Include an EnterpriseAM or CairoScene story
