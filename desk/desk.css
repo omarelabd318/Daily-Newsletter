@@ -9,7 +9,7 @@
   --text:#16181a; --muted:#5b6168; --faint:#6b6b6b;
   --primary:#16181a; --primary-ink:#ffffff;
   --brand:#8a1c1c;
-  --chart-1:#1d5fbf; --chart-muted:#8b9097; --grid:#ebe7de; --axis-ink:#5b6168; --ink:#16181a; --chart-span:.06;
+  --chart-1:#1d5fbf; --gold:#a8730a; --chart-muted:#8b9097; --grid:#ebe7de; --axis-ink:#5b6168; --ink:#16181a; --chart-span:.06;
   --positive:#1d7a3a; --negative:#b3261e; --negative-ink:#b3261e; --sell:#8e1b15;
   --pill-pos-bg:#dcfae5; --pill-pos-ink:#04250e; --pill-neg-bg:#ffedea; --pill-neg-ink:#831c1e;
   --pill-warn-bg:#fffbeb; --pill-warn-ink:#92400e; --pill-warn-line:#fde68a;
@@ -25,7 +25,7 @@
   --text:#eef2f4; --muted:#b0b8c0; --faint:#949ca4;
   --primary:#eef2f4; --primary-ink:#0e1216;
   --brand:#e0605a;
-  --chart-1:#6ea0ff; --chart-muted:#7d8791; --grid:#232b33; --axis-ink:#b0b8c0; --ink:#eef2f4; --chart-span:.12;
+  --chart-1:#6ea0ff; --gold:#d9a93c; --chart-muted:#7d8791; --grid:#232b33; --axis-ink:#b0b8c0; --ink:#eef2f4; --chart-span:.12;
   --positive:#5fd08a; --negative:#e8605a; --negative-ink:#e8605a; --sell:#b83f39;
   --pill-pos-bg:#16291d; --pill-pos-ink:#5fd08a; --pill-neg-bg:#2c1a1c; --pill-neg-ink:#ff8a80;
   --pill-warn-bg:#2a2414; --pill-warn-ink:#f2c56b; --pill-warn-line:#4a3e1c;
@@ -216,7 +216,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
 .midchart{height:200px}
 .smallchart{height:120px;margin:6px -4px 0}
 .kv{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0 12px}
-.kv span{height:30px;line-height:30px;border-top:1px solid var(--rule)}
+.kv span{min-height:30px;padding:5px 0;line-height:20px;border-top:1px solid var(--rule)}
 .kv span:nth-child(-n+2){border-top:0}
 .kv .k{color:var(--muted)} .kv .v{text-align:right}
 .hero{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin:2px 0 4px}
@@ -330,3 +330,11 @@ td.name a{text-decoration:none}
 .snews .when{font-size:12px;color:var(--muted);margin-right:4px}
 @media (max-width:1180px){.sgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:860px){.sgrid{grid-template-columns:minmax(0,1fr)}}
+/* reserves by what they are held in: one stacked bar per month */
+.rsv-legend{display:flex;flex-wrap:wrap;gap:6px 18px;margin:4px 0 12px;font-size:13px;color:var(--muted)}
+.rsv-legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.rsv-legend b{color:var(--text);font-weight:600}
+.rsv-row{display:grid;grid-template-columns:72px minmax(0,1fr) 46px;gap:10px;align-items:center;height:30px}
+.rsv-row .m{color:var(--muted);font-size:13px} .rsv-row .t{text-align:right}
+.rsv-bar{display:flex;height:16px;border-radius:3px;overflow:hidden;background:var(--raised)}
+.rsv-bar span{height:100%} .rsv-fx{background:var(--chart-1)} .rsv-gold{background:var(--gold)} .rsv-sdr{background:var(--chart-muted)}

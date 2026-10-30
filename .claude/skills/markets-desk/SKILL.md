@@ -39,7 +39,10 @@ closes are the last session's; the news, stock research and analysis are still u
    that stock's row in `desk/movers.json`. One short line; leave it out when no reason is found, and write
    "No company news found." only for moves of 5% or more. Never guess a reason.
 6. Add the session's flows to `desk/flows.json` when the EGX traded, and the date to `desk/index.json`
-   with a one-line summary.
+   with a one-line summary. When the central bank has published a new month of reserves (about the 7th;
+   `fetch_figures.py` shows a new `reserves_usd`), add that month to `desk/reserves.json`: total, foreign
+   currencies, gold and `sdr` (the rest: total minus the other two), from the bank's release or a news report
+   of it that gives all three (Daily News Egypt, Arab Finance, Egypt Today), with `source` and `url`.
 7. Run `python3 .claude/skills/markets-desk/check_desk.py`, fix every ERROR, then commit and push as for
    the edition (message `Desk DATE`).
 
@@ -85,9 +88,11 @@ The menu order is Dashboard, EGX, EGP, Wall Street, Global, Egyptian stocks, US 
   latest session's trading, dates coming up, views and news. News and views are added newest first and
   never deleted. Valuation figures older than about a quarter are flagged on the page, not hidden.
 - `desk/flows.json`: net equity flows by investor group, one entry per session, for the flow history.
+- `desk/reserves.json`: net international reserves by what they are held in, one entry per month, oldest
+  first; the EGP page draws the last 12 as stacked bars.
 - Stock pages read each stock's volume (`vol`) from the data log and compare the last session with the
   average of the 30 before it; the EGP page reads the central bank's dollar rate, policy rates, the one-year T-bill
-  yield, inflation and reserves from the log. The day's file only adds what the log does not hold.
+  yield and inflation from the log. The day's file only adds what the log does not hold.
 - The charts, the Stocks tables and every change and YTD figure are drawn by the page from
   `data/markets-recent.json`, so log the day's figures before publishing a desk.
 

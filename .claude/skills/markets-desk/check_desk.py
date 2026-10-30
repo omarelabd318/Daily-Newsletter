@@ -158,6 +158,18 @@ def main(args):
         if dates_ != sorted(dates_, reverse=True):
             warnings.append(f"stocks.json {t}: news is not newest first.")
     load("desk/flows.json")
+    RS = load("desk/reserves.json") or {}
+    months = [r.get("month", "") for r in RS.get("months", [])]
+    if months != sorted(months):
+        errors.append("desk/reserves.json: months must be oldest first.")
+    for r in RS.get("months", []):
+        need(r, ["month", "total", "fx", "gold", "sdr", "source", "url"], f"reserves.json {r.get('month')}")
+        parts = sum(r.get(k) or 0 for k in ("fx", "gold", "sdr"))
+        if r.get("total") and abs(parts - r["total"]) > 0.05:
+            errors.append(f"reserves.json {r.get('month')}: the parts add to {parts:.3f}, not the total {r['total']}.")
+    logged = [v for v in (d.get("reserves_usd") for d in log.get("days", [])) if v]
+    if logged and months and abs(logged[-1] - RS["months"][-1]["total"]) > 0.05:
+        warnings.append(f"desk/reserves.json ends at {months[-1]} ({RS['months'][-1]['total']}bn) but the log has {logged[-1]}bn: add the new month.")
     VL = load("desk/views.json") or {}
     ids = set()
     for v in VL.get("views", []):

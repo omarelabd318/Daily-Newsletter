@@ -1,0 +1,9 @@
+{
+ "note": "Egypt's net international reserves by what they are held in, $bn, as the central bank announces each month (about the 7th). sdr is special drawing rights and the other small items: the total minus foreign currencies and gold. Add each new month from the central bank's release or a news report of it.",
+ "months": [
+  {"month": "2026-06", "total": 55.072, "fx": 37.85, "gold": 16.784, "sdr": 0.438, "source": "Daily News Egypt; Egypt Today", "url": "https://www.dailynewsegypt.com/2026/07/18/egypts-net-international-reserves-rise-3-6bn-in-h1-2026-to-record-55-1bn/"},
+  {"month": "2026-07", "total": 56.294, "fx": 38.711, "gold": 17.139, "sdr": 0.444, "source": "Daily News Egypt", "url": "https://www.dailynewsegypt.com/2026/09/07/egypts-net-international-reserves-rise-to-57-214bn-in-august/"},
+  {"month": "2026-08", "total": 57.214, "fx": 37.553, "gold": 19.058, "sdr": 0.603, "source": "Daily News Egypt", "url": "https://www.dailynewsegypt.com/2026/09/07/egypts-net-international-reserves-rise-to-57-214bn-in-august/"},
+  {"month": "2026-09", "total": 57.348, "fx": 39.292, "gold": 17.456, "sdr": 0.6, "source": "Economy Middle East; Arab Finance", "url": "https://economymiddleeast.com/news/egypts-foreign-reserves-climb-to-record-57-35-billion-as-currency-holdings-jump-1-74-billion/"}
+ ]
+}

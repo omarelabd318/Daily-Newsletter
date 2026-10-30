@@ -50,6 +50,14 @@
       <p class="chart-cap" id="icap"></p>
     </section>
 
+    <section class="card c12" id="c-rsv" hidden>
+      <div class="card-h"><h2>Foreign reserves</h2><span class="meta">Net international reserves, $bn</span></div>
+      <div class="hero"><span class="lvl num" id="rlvl"></span><span class="d num" id="rchg"></span><span class="meta" id="rmonth"></span></div>
+      <div class="rsv-legend" id="rleg"></div>
+      <div id="rbars"></div>
+      <p class="chart-cap" id="rcap"></p>
+    </section>
+
     <section class="card c12">
       <div class="card-h"><h2>News</h2><span class="meta">Checked against the day's research</span></div>
       <div id="news"></div>
@@ -93,11 +101,8 @@
   const pair = (a, b, d = 2, u = '') => lv(a) == null ? dash : `${M.num(lv(a), d)}${u} / ${M.num(lv(b), d)}${u}`;
   const tb = [['tbill_364', 'One-year T-bill yield']].filter(([k]) => lv(k) != null).map(([k, n]) => [n, M.num(lv(k), 2) + '%']);
   // inflation and the real one-year yield (T-bill yield minus headline inflation), the return foreign investors weigh
-  if (lv('infl_headline') != null) tb.push(['Inflation (headline, annual)', M.num(lv('infl_headline'), 1) + '%']);
+  if (lv('infl_headline') != null) tb.push(['Inflation (annual)', M.num(lv('infl_headline'), 1) + '%']);
   if (lv('infl_headline') != null && lv('tbill_364') != null) tb.push(['Real one-year yield', M.num(lv('tbill_364') - lv('infl_headline'), 1) + ' pts']);
-  // net international reserves: the latest month and the change from the month before
-  const rs = lg('reserves_usd'), rv = M.last(rs), rp = [...rs].reverse().find(([, v]) => v !== rv);
-  if (rv != null) tb.push(['Net international reserves', `$${M.num(rv, 2)}bn` + (rp ? ` <span class="${M.cls(rv - rp[1])}">(${rv >= rp[1] ? '+' : '−'}${M.num(Math.abs(rv - rp[1]), 2)}bn)</span>` : '')]);
   const known = /central bank, buy|deposit rate|lending rate|t-bill/i;
   M.$('stats').innerHTML = M.kv([['Market mid-rate', M.num(M.last(fx))], ['Central bank, buy / sell', pair('cbe_usd_buy', 'cbe_usd_sell')],
     ['Deposit / lending rate', pair('cbe_deposit', 'cbe_lending', 2, '%')], ...tb,
@@ -117,6 +122,22 @@
       : `The dollar is <span class="num">${M.pct(da)}</span> against the pound and <span class="num">${M.pct(db)}</span> against major currencies over the month.`;
   }
   M.$('drivers').innerHTML = M.drivers(P.drivers || []);
+  // foreign reserves by what they are held in, one bar per month (desk/reserves.json, from the central bank's monthly figures)
+  const R = ((await M.get('/desk/reserves.json')) || {}).months || [];
+  if (R.length) {
+    const mon = (m) => new Date(m + '-15T12:00:00').toLocaleDateString('en-GB', { month: 'short', year: 'numeric' }).replace('Sept', 'Sep');
+    const L = R.at(-1), Pm = R.at(-2), top = Math.max(...R.map((r) => r.total)), bn = (v) => '$' + M.num(v, 2) + 'bn';
+    const PARTS = [['fx', 'Foreign currencies', 'rsv-fx'], ['gold', 'Gold', 'rsv-gold'], ['sdr', 'IMF drawing rights and other', 'rsv-sdr']];
+    M.$('c-rsv').hidden = false; M.$('rlvl').textContent = bn(L.total);
+    M.$('rmonth').textContent = 'End of ' + new Date(L.month + '-15T12:00:00').toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+    if (Pm) { const c = L.total - Pm.total; M.$('rchg').innerHTML = `<span class="${M.cls(c)}">${c >= 0 ? '+' : '−'}${M.num(Math.abs(c), 2)}bn</span> on the month`; }
+    M.$('rleg').innerHTML = PARTS.map(([k, n, c]) => `<span><i class="${c}"></i>${n} <b class="num">${bn(L[k])}</b> · ${M.num(L[k] / L.total * 100, 1)}%</span>`).join('');
+    M.$('rbars').innerHTML = R.slice(-12).reverse().map((r) => `<div class="rsv-row"><span class="m">${mon(r.month)}</span><div class="rsv-bar" style="width:${(r.total / top * 100).toFixed(1)}%">`
+      + PARTS.map(([k, n, c]) => `<span class="${c}" style="width:${(r[k] / r.total * 100).toFixed(2)}%" title="${n}: ${bn(r[k])}"></span>`).join('') + `</div><span class="t num">${M.num(r.total, 2)}</span></div>`).join('');
+    const g = Pm ? L.gold - Pm.gold : 0;
+    M.$('rcap').innerHTML = (Pm && Math.abs(g) >= 0.5 ? `Gold ${g > 0 ? 'gained' : 'lost'} <span class="num">${bn(Math.abs(g))}</span> in value this month as its price moved: the central bank values its gold at market prices, so ${g > 0 ? 'a rise does not mean any was bought' : 'a fall does not mean any was sold'}. ` : 'Gold is valued at market prices each month, so its share moves with the gold price. ')
+      + `Source: <a href="${M.esc(L.url)}" target="_blank" rel="noopener">${M.esc(L.source)}</a>, reporting the central bank's figures.`;
+  }
   // inflation, or the real one-year yield: the T-bill yield in force minus the inflation in force on each day
   let iReal = false, iPer = M.PERIODS[4];
   const real = () => {
