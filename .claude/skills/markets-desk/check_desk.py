@@ -158,6 +158,28 @@ def main(args):
         if dates_ != sorted(dates_, reverse=True):
             warnings.append(f"stocks.json {t}: news is not newest first.")
     load("desk/flows.json")
+    VL = load("desk/views.json") or {}
+    ids = set()
+    for v in VL.get("views", []):
+        where = f"views.json {v.get('id')}"
+        need(v, ["id", "opened", "market", "kind", "title", "detail", "wrong", "confidence", "status"], where)
+        level(v.get("confidence"), where)
+        if v.get("id") in ids:
+            errors.append(f"{where}: the id is used twice.")
+        ids.add(v.get("id"))
+        if v.get("status") not in ("open", "on track", "right", "wrong", "closed"):
+            errors.append(f"{where}: status must be open, on track, right, wrong or closed.")
+        if v.get("status") in ("right", "wrong", "closed") and not (v.get("result") or {}).get("text"):
+            errors.append(f"{where}: a judged view needs a result (date and text).")
+        if v.get("due") and v["due"] < D["date"] and v.get("status") in ("open", "on track"):
+            warnings.append(f"{where}: its date ({v['due']}) has passed; judge it right or wrong.")
+        for t in v.get("tickers", []):
+            if t not in ALL:
+                errors.append(f"{where}: unknown ticker {t}.")
+        for x in v.get("updates", []):
+            need(x, ["date", "text", "source", "effect"], f"{where} update")
+            if x.get("effect") not in ("supports", "against", "neutral"):
+                errors.append(f"{where} update: effect must be supports, against or neutral.")
 
     for s in list(texts(D)) + list(texts(S)):
         if re.search(r"\byour (stocks?|names|egyptian|us)\b", s, re.I):

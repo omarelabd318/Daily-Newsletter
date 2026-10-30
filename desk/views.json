@@ -1,0 +1,499 @@
+{
+ "note": "Every view and projection the Markets Desk has made, newest first, with the news that bears on each, until it is right, wrong or closed. Never delete an entry: a wrong call stays on the record, marked wrong.",
+ "views": [
+  {
+   "id": "2026-10-30-hike-pound",
+   "opened": "2026-10-30",
+   "market": "egp",
+   "kind": "view",
+   "title": "The hike supports the pound and the banks",
+   "confidence": "medium",
+   "detail": "A 100-basis-point rise pays foreign holders of Egyptian debt to stay, which should cap the dollar and widen banks' margins.",
+   "wrong": "The dollar closes above EGP 57 before the next T-bill auction.",
+   "due": null,
+   "track": {
+    "key": "usd_egp",
+    "label": "USD/EGP",
+    "start": 56.04,
+    "good": "down"
+   },
+   "tickers": [
+    "COMI",
+    "HRHO"
+   ],
+   "status": "open",
+   "updates": [
+    {
+     "date": "2026-10-29",
+     "text": "The central bank raised its key rates by 100 basis points, to 20.00% for deposits and 21.00% for lending.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/10/30/cbe-raises-key-rates-by-100-bps/",
+     "effect": "supports"
+    },
+    {
+     "date": "2026-10-29",
+     "text": "The central bank's dollar rate eased to 55.98 to buy and 56.12 to sell at Thursday's close, from 56.06 and 56.20 on Wednesday.",
+     "source": "Al-Masry Al-Youm",
+     "url": "https://www.almasryalyoum.com/news/details/4396829",
+     "effect": "supports"
+    }
+   ]
+  },
+  {
+   "id": "2026-10-30-developers",
+   "opened": "2026-10-30",
+   "market": "egx",
+   "kind": "view",
+   "title": "Developers lag while rates stay high",
+   "confidence": "medium",
+   "detail": "Dearer financing hits instalment buyers and developers' own borrowing; Talaat Moustafa and Palm Hills should trail the EGX30.",
+   "wrong": "Talaat Moustafa and Palm Hills beat the EGX30 over four weeks.",
+   "due": "2026-11-27",
+   "track": {
+    "key": "egx.TMGH",
+    "label": "Talaat Moustafa",
+    "start": 80.4,
+    "vs": "egx30",
+    "vsStart": 49596.14,
+    "good": "lag"
+   },
+   "tickers": [
+    "TMGH",
+    "PHDC"
+   ],
+   "status": "open",
+   "updates": [
+    {
+     "date": "2026-10-28",
+     "text": "Talaat Moustafa signed an EGP 11 trillion development deal with the state for four projects.",
+     "source": "CairoScene",
+     "url": "https://cairoscene.com/News/Talaat-Moustafa-Group-Signs-EGP-11-Trillion-Development-Deal",
+     "effect": "against"
+    },
+    {
+     "date": "2026-10-27",
+     "text": "Al Ahly Pharos put Palm Hills' fair value at EGP 21.40, well above its price.",
+     "source": "Economy Plus",
+     "url": "https://economyplusme.com/ar/news/33801",
+     "effect": "against"
+    }
+   ]
+  },
+  {
+   "id": "2026-10-30-oil-pound",
+   "opened": "2026-10-30",
+   "market": "global",
+   "kind": "view",
+   "title": "Oil above $110 weighs on the pound",
+   "confidence": "medium",
+   "detail": "Egypt imports much of its fuel, so a dearer barrel adds to the dollars it needs.",
+   "wrong": "Brent falls below $100.",
+   "due": null,
+   "track": {
+    "key": "brent",
+    "label": "Brent",
+    "start": 114.88,
+    "good": "up"
+   },
+   "tickers": [],
+   "status": "open",
+   "updates": [
+    {
+     "date": "2026-10-30",
+     "text": "December Brent rose toward $116 after the Revolutionary Guards said four tankers struck mines in the Strait of Hormuz.",
+     "source": "FinanceFeeds",
+     "url": "https://financefeeds.com/brent-crude-oil-price-116-friday-hormuz-mine-strikes-december-expiry-fourth-monthly-gain-bull-120-bear-108/",
+     "effect": "supports"
+    }
+   ]
+  },
+  {
+   "id": "2026-10-30-rotation",
+   "opened": "2026-10-30",
+   "market": "us",
+   "kind": "view",
+   "title": "Money rotates from AI spenders to steady earners",
+   "confidence": "medium",
+   "detail": "After Alphabet's fall, investors favour predictable earnings (Walmart, JPMorgan) over heavy AI spenders.",
+   "wrong": "Alphabet and Amazon beat Walmart and JPMorgan over four weeks.",
+   "due": "2026-11-27",
+   "track": {
+    "key": "us.WMT",
+    "label": "Walmart",
+    "start": 121.25,
+    "vs": "us.GOOGL",
+    "vsStart": 283.82,
+    "vsLabel": "Alphabet",
+    "good": "lead"
+   },
+   "tickers": [
+    "WMT",
+    "JPM",
+    "GOOGL",
+    "AMZN"
+   ],
+   "status": "open",
+   "updates": [
+    {
+     "date": "2026-10-29",
+     "text": "Amazon and Intel fell after the bell on earnings misses, deepening the AI-spending sell-off.",
+     "source": "InvestingLive",
+     "url": "https://investinglive.com/stocks/nasdaq-leads-stocks-lower-intel-and-amazon-tumble-after-hours/",
+     "effect": "supports"
+    }
+   ]
+  },
+  {
+   "id": "2026-10-30-amzn",
+   "opened": "2026-10-30",
+   "market": "us",
+   "kind": "view",
+   "title": "Amazon trades lower after its miss",
+   "confidence": "medium",
+   "detail": "Earnings of $1.89 a share against $1.97 expected, and revenue just short.",
+   "wrong": "It closes back above $245 within two weeks.",
+   "due": "2026-11-13",
+   "track": {
+    "key": "us.AMZN",
+    "label": "Amazon",
+    "start": 243.79,
+    "good": "down"
+   },
+   "tickers": [
+    "AMZN"
+   ],
+   "status": "open",
+   "updates": [
+    {
+     "date": "2026-10-29",
+     "text": "Amazon fell about 6% in extended trading after missing on earnings and revenue.",
+     "source": "InvestingLive",
+     "url": "https://investinglive.com/stocks/nasdaq-leads-stocks-lower-intel-and-amazon-tumble-after-hours/",
+     "effect": "supports"
+    }
+   ]
+  },
+  {
+   "id": "2026-10-30-cib-margins",
+   "opened": "2026-10-30",
+   "market": "egx",
+   "kind": "view",
+   "title": "Higher rates protect CIB's margins",
+   "confidence": "medium",
+   "detail": "High rates protect lending margins and T-bill income; CIB should hold up better than the market.",
+   "wrong": "CIB falls more than the EGX30 over the next two weeks.",
+   "due": "2026-11-13",
+   "track": {
+    "key": "egx.COMI",
+    "label": "CIB",
+    "start": 120.47,
+    "vs": "egx30",
+    "vsStart": 49596.14,
+    "good": "lead"
+   },
+   "tickers": [
+    "COMI"
+   ],
+   "status": "open",
+   "updates": [
+    {
+     "date": "2026-10-29",
+     "text": "The central bank raised its key rates by 100 basis points, to 20.00% for deposits and 21.00% for lending.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/10/30/cbe-raises-key-rates-by-100-bps/",
+     "effect": "supports"
+    }
+   ]
+  },
+  {
+   "id": "2026-10-30-comi-bull",
+   "opened": "2026-10-30",
+   "market": "egx",
+   "kind": "projection",
+   "title": "CIB: bullish, EGP 128–132 by end of December",
+   "confidence": "medium",
+   "detail": "A return to its 50-day average (130.7). The hike widens margins, the stock is 16% below its 52-week high, and it trades near 5.5 times its last reported earnings.",
+   "wrong": "It closes below EGP 114, 5% under Thursday’s close, or the EGX30 falls while it does.",
+   "due": "2026-12-31",
+   "track": {
+    "key": "egx.COMI",
+    "label": "CIB",
+    "start": 120.47,
+    "target": [
+     128,
+     132
+    ],
+    "side": "bull"
+   },
+   "tickers": [
+    "COMI"
+   ],
+   "status": "open",
+   "updates": [
+    {
+     "date": "2026-10-29",
+     "text": "The central bank raised its key rates by 100 basis points, to 20.00% for deposits and 21.00% for lending.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/10/30/cbe-raises-key-rates-by-100-bps/",
+     "effect": "supports"
+    }
+   ]
+  },
+  {
+   "id": "2026-10-30-oras-bull",
+   "opened": "2026-10-30",
+   "market": "egx",
+   "kind": "projection",
+   "title": "Orascom Construction: bullish, EGP 860–900 by end of January",
+   "confidence": "low",
+   "detail": "Dollar revenue from Gulf and US projects gains from the weaker pound. Up 91% this year, so a pause is as likely as a new high.",
+   "wrong": "It closes below EGP 780, 5% under Thursday, or the pound recovers sharply.",
+   "due": "2027-01-31",
+   "track": {
+    "key": "egx.ORAS",
+    "label": "Orascom Construction",
+    "start": 822.0,
+    "target": [
+     860,
+     900
+    ],
+    "side": "bull"
+   },
+   "tickers": [
+    "ORAS"
+   ],
+   "status": "open",
+   "updates": []
+  },
+  {
+   "id": "2026-10-30-tmgh-bear",
+   "opened": "2026-10-30",
+   "market": "egx",
+   "kind": "projection",
+   "title": "Talaat Moustafa: bearish, EGP 72–76 by end of December",
+   "confidence": "low",
+   "detail": "Down 7.6% in a month and 12% under its 50-day average (91.3); the hike lands on its buyers and its debt. Its EGP 11 trillion state deal is a long-term offset, so confidence is low.",
+   "wrong": "It closes back above EGP 88, near its 50-day average, or a big sales launch beats expectations.",
+   "due": "2026-12-31",
+   "track": {
+    "key": "egx.TMGH",
+    "label": "Talaat Moustafa",
+    "start": 80.4,
+    "target": [
+     72,
+     76
+    ],
+    "side": "bear"
+   },
+   "tickers": [
+    "TMGH"
+   ],
+   "status": "open",
+   "updates": [
+    {
+     "date": "2026-10-28",
+     "text": "Talaat Moustafa signed an EGP 11 trillion development deal with the state.",
+     "source": "CairoScene",
+     "url": "https://cairoscene.com/News/Talaat-Moustafa-Group-Signs-EGP-11-Trillion-Development-Deal",
+     "effect": "against"
+    }
+   ]
+  },
+  {
+   "id": "2026-10-30-phdc-bear",
+   "opened": "2026-10-30",
+   "market": "egx",
+   "kind": "projection",
+   "title": "Palm Hills: bearish, EGP 10.2–10.8 by end of December",
+   "confidence": "low",
+   "detail": "Down 10.6% in a month and 16% under its 50-day average (13.5), under the same rate pressure as Talaat Moustafa. Al Ahly Pharos values it at EGP 21.40 on existing assets alone, which argues against a deep fall.",
+   "wrong": "It closes above EGP 12.50.",
+   "due": "2026-12-31",
+   "track": {
+    "key": "egx.PHDC",
+    "label": "Palm Hills",
+    "start": 11.4,
+    "target": [
+     10.2,
+     10.8
+    ],
+    "side": "bear"
+   },
+   "tickers": [
+    "PHDC"
+   ],
+   "status": "open",
+   "updates": [
+    {
+     "date": "2026-10-27",
+     "text": "Al Ahly Pharos put Palm Hills' fair value at EGP 21.40.",
+     "source": "Economy Plus",
+     "url": "https://economyplusme.com/ar/news/33801",
+     "effect": "against"
+    }
+   ]
+  },
+  {
+   "id": "2026-10-30-abuk-bear",
+   "opened": "2026-10-30",
+   "market": "egx",
+   "kind": "projection",
+   "title": "Abu Qir Fertilizers: bearish, EGP 80–85 by end of November",
+   "confidence": "low",
+   "detail": "Profit-taking after a 73% run this year: it fell 3.5% on Thursday even as nine-month profit roughly doubled to about EGP 13bn, a sign the good news was priced in. The weaker pound helps its exports, so the downside should be limited.",
+   "wrong": "It makes a new high above EGP 95.75.",
+   "due": "2026-11-30",
+   "track": {
+    "key": "egx.ABUK",
+    "label": "Abu Qir Fertilizers",
+    "start": 88.03,
+    "target": [
+     80,
+     85
+    ],
+    "side": "bear"
+   },
+   "tickers": [
+    "ABUK"
+   ],
+   "status": "open",
+   "updates": [
+    {
+     "date": "2026-10-29",
+     "text": "Nine-month profit roughly doubled to about EGP 13bn, yet the stock fell 3.5%: the results look priced in.",
+     "source": "Al-Mostaqbal Al-Youm",
+     "url": "https://www.elmostqpalelyuom.com/38926",
+     "effect": "neutral"
+    }
+   ]
+  },
+  {
+   "id": "2026-10-30-xom-bull",
+   "opened": "2026-10-30",
+   "market": "us",
+   "kind": "projection",
+   "title": "Exxon Mobil: bullish, $185–195 by end of December",
+   "confidence": "medium",
+   "detail": "At its 52-week high and up 52% this year; Friday's results showed profit doubling to $15.4bn. More upside needs Brent to hold above $110.",
+   "wrong": "Brent falls below $100, for example on a Gulf de-escalation.",
+   "due": "2026-12-31",
+   "track": {
+    "key": "us.XOM",
+    "label": "Exxon Mobil",
+    "start": 183.29,
+    "target": [
+     185,
+     195
+    ],
+    "side": "bull"
+   },
+   "tickers": [
+    "XOM"
+   ],
+   "status": "open",
+   "updates": [
+    {
+     "date": "2026-10-30",
+     "text": "Third-quarter profit doubled to $15.4bn on higher oil prices and record output.",
+     "source": "Free Malaysia Today (AFP)",
+     "url": "https://www.freemalaysiatoday.com/category/business/2026/10/30/exxonmobil-profits-double-to-us-15-4bil-on-oil-price-surge/",
+     "effect": "supports"
+    }
+   ]
+  },
+  {
+   "id": "2026-10-30-wmt-bull",
+   "opened": "2026-10-30",
+   "market": "us",
+   "kind": "projection",
+   "title": "Walmart: bullish, $124–128 by end of December",
+   "confidence": "low",
+   "detail": "Well above its 50-day average (109.8) after the rotation; its 52-week high of 134.20 is the ceiling to watch.",
+   "wrong": "It closes below $115 as money returns to tech.",
+   "due": "2026-12-31",
+   "track": {
+    "key": "us.WMT",
+    "label": "Walmart",
+    "start": 121.25,
+    "target": [
+     124,
+     128
+    ],
+    "side": "bull"
+   },
+   "tickers": [
+    "WMT"
+   ],
+   "status": "open",
+   "updates": []
+  },
+  {
+   "id": "2026-10-30-amzn-bear",
+   "opened": "2026-10-30",
+   "market": "us",
+   "kind": "projection",
+   "title": "Amazon: bearish, $225–235 by end of November",
+   "confidence": "medium",
+   "detail": "Missed on earnings ($1.89 against $1.97) and revenue, and fell about 6% after hours, which would take it near 229.",
+   "wrong": "It closes back above $245 within two weeks of the results.",
+   "due": "2026-11-30",
+   "track": {
+    "key": "us.AMZN",
+    "label": "Amazon",
+    "start": 243.79,
+    "target": [
+     225,
+     235
+    ],
+    "side": "bear"
+   },
+   "tickers": [
+    "AMZN"
+   ],
+   "status": "open",
+   "updates": [
+    {
+     "date": "2026-10-29",
+     "text": "Amazon fell about 6% after hours on its earnings miss.",
+     "source": "InvestingLive",
+     "url": "https://investinglive.com/stocks/nasdaq-leads-stocks-lower-intel-and-amazon-tumble-after-hours/",
+     "effect": "supports"
+    }
+   ]
+  },
+  {
+   "id": "2026-10-30-googl-bear",
+   "opened": "2026-10-30",
+   "market": "us",
+   "kind": "projection",
+   "title": "Alphabet: bearish, $265–280 by end of November",
+   "confidence": "low",
+   "detail": "Already down 17.5% in a month and near its 52-week low (273.50), so much of the bad news is in the price; the risk is further downgrades.",
+   "wrong": "It closes above $300 by mid-November.",
+   "due": "2026-11-30",
+   "track": {
+    "key": "us.GOOGL",
+    "label": "Alphabet",
+    "start": 283.82,
+    "target": [
+     265,
+     280
+    ],
+    "side": "bear"
+   },
+   "tickers": [
+    "GOOGL"
+   ],
+   "status": "open",
+   "updates": [
+    {
+     "date": "2026-10-30",
+     "text": "UBS cut its price target to $332 from $380 and kept a neutral rating.",
+     "source": "Yahoo Finance",
+     "url": "https://ca.finance.yahoo.com/news/alphabet-faces-ubs-target-cut-103000032.html",
+     "effect": "neutral"
+    }
+   ]
+  }
+ ]
+}

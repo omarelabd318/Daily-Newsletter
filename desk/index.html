@@ -252,6 +252,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
       <a href="/desk/global/"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke-width="1.5"><circle cx="8" cy="8" r="5.5"/><path d="M2.5 8h11"/></svg>Global</a>
       <div class="navgroup">Stocks</div>
       <a href="/desk/stock/"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke-width="1.5"><path d="M3 3h10v10H3zM3 6.5h10M6.5 6.5V13"/></svg>Stocks</a>
+      <a href="/desk/views/"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke-width="1.5"><path d="M3 3.5h10M3 8h10M3 12.5h6M12 11l1.5 1.5L16 10"/></svg>Views</a>
       <div class="navgroup">Newsletter</div>
       <a href="/"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke-width="1.5"><path d="M3 2.5h10v11H3zM5.5 5.5h5M5.5 8h5M5.5 10.5h3"/></svg>Today's newsletter</a>
       <div class="navgroup">Library</div>
@@ -268,7 +269,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
       <div class="brand"><span class="mark" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18"><path d="M2 13l4-4 3 2.5L16 4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Markets Desk</b></span></div>
       <a class="btn" href="/">Newsletter</a>
     </header>
-    <nav class="pagenav" aria-label="Pages"><a href="/desk/" aria-current="page">Dashboard</a><a href="/desk/egx/">EGX</a><a href="/desk/egp/">EGP</a><a href="/desk/us/">Wall Street</a><a href="/desk/global/">Global</a><a href="/desk/stock/">Stocks</a></nav>
+    <nav class="pagenav" aria-label="Pages"><a href="/desk/" aria-current="page">Dashboard</a><a href="/desk/egx/">EGX</a><a href="/desk/egp/">EGP</a><a href="/desk/us/">Wall Street</a><a href="/desk/global/">Global</a><a href="/desk/stock/">Stocks</a><a href="/desk/views/">Views</a></nav>
 
     <main class="canvas">
       <div class="titlerow">
@@ -350,7 +351,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
           </section>
 
           <section class="card" id="c-views" aria-labelledby="h-views">
-            <div class="card-h"><h2 id="h-views">Open views</h2><span class="meta" id="views-h">Checked each morning</span></div>
+            <div class="card-h"><h2 id="h-views">Open views</h2><a class="meta" href="/desk/views/">All views and projections →</a></div>
             <div id="views"></div>
           </section>
         </div>
@@ -524,7 +525,6 @@ td.trend svg{display:inline-block;vertical-align:middle}
     $('helped').innerHTML = callRows(X.board.helped); $('hurt').innerHTML = callRows(X.board.hurt);
     $('week').innerHTML = X.week.map((w) => `<div class="wk"><span class="day">${esc(w.day)}</span><b>${esc(w.event)}</b><span class="imp${w.impact === 'high' ? ' high' : ''}">${esc(w.impact[0].toUpperCase() + w.impact.slice(1))}</span><span class="why">${esc(w.why)}</span></div>`).join('');
     $('views').innerHTML = X.views.map((v) => `<div class="view"><b>${esc(v.call)}</b><span class="pill ${PILL[v.status] || 'open'}">${esc(v.status[0].toUpperCase() + v.status.slice(1))}</span><span class="why">${esc(v.note)}</span></div>`).join('');
-    $('views-h').textContent = D.sample ? 'Sample rows · checked each morning' : 'Checked each morning';
 
     // the section's index, in the one chart hue
     let idx = series((e) => e[S.chart], S.market);

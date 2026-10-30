@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Views · Markets Desk</title>
+<meta name="description" content="Every view and projection the desk has made, with the news that bears on each, until it is right or wrong.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,600&display=swap">
+<script>try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+<link rel="stylesheet" href="/desk/desk.css">
+</head>
+<body>
+<main class="canvas">
+  <div class="titlerow"><div>
+    <div class="crumbs"><a href="/desk/">Desk</a> / Views</div>
+    <h1>Views</h1>
+    <p class="finding">Every view and projection the desk has made, with the news that bears on it, kept until it proves right or wrong. Wrong calls stay on the record.</p>
+  </div></div>
+
+  <div class="pages">
+    <section class="card c12">
+      <div class="score" id="score"></div>
+    </section>
+    <section class="c12 vfilters">
+      <div class="ctabs" id="fstatus" aria-label="Status"></div>
+      <div class="ctabs" id="fmarket" aria-label="Market"></div>
+      <div class="ctabs" id="fkind" aria-label="Kind"></div>
+    </section>
+    <div class="c12 vgrid" id="views"></div>
+  </div>
+</main>
+<script src="/desk/charts.js"></script>
+<script src="/desk/desk.js"></script>
+<script>
+(async () => {
+  const M = Desk, D = await M.init('/desk/views/'); if (!D) return;
+  const L = await M.get('/desk/views.json'), all = ((L && L.views) || []).slice().sort((a, b) => (a.opened < b.opened ? 1 : a.opened > b.opened ? -1 : 0));
+  const MK = { egx: 'Egypt', egp: 'Egypt', global: 'Global', us: 'Wall Street' };
+  const PILL = { 'open': 'open', 'on track': 'ok', 'right': 'ok', 'wrong': 'bad', 'closed': 'open' };
+  const EFF = { supports: ['ok', 'Supports'], against: ['bad', 'Against'], neutral: ['open', 'Neutral'] };
+  const fmtDate = (iso) => { const d = M.day(iso); return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: d.getFullYear() !== M.day(M.ASOF).getFullYear() ? 'numeric' : undefined }).replace('Sept', 'Sep'); };
+  // the tracked figure from the data log: the stock or rate the view rests on, now against when it was opened
+  const seriesFor = (key) => { const [g, t] = key.split('.'); return t ? M.series((e) => (e[g] || {})[t], g) : M.series((e) => e[key], key === 'egx30' ? 'egx' : key === 'usd_egp' ? 'fx' : 'us'); };
+  function progress(v) {
+    const T = v.track; if (!T) return '';
+    const s = seriesFor(T.key), now = M.last(s); if (now == null) return '';
+    const cur = /^egx\./.test(T.key) ? 'EGP ' : /^us\./.test(T.key) || T.key === 'brent' ? '$' : '';
+    const ch = (now / T.start - 1) * 100;
+    if (T.target) {
+      const [lo, hi] = T.target, inside = now >= lo && now <= hi, gap = now < lo ? (lo / now - 1) * 100 : now > hi ? (hi / now - 1) * 100 : 0;
+      return `<div class="vprog"><span>Opened at <b class="num">${cur}${M.num(T.start)}</b></span><span>Now <b class="num">${cur}${M.num(now)}</b> <span class="num ${M.cls(ch)}">${M.pct(ch)}</span></span><span>Target <b class="num">${cur}${lo}–${hi}</b> ${inside ? '<span class="pill ok">In range</span>' : `<span class="num">${M.pct(gap)} away</span>`}</span></div>`;
+    }
+    let rel = '';
+    if (T.vs) { const vs = seriesFor(T.vs), vn = M.last(vs), vch = vn ? (vn / T.vsStart - 1) * 100 : null; rel = `<span>${M.esc(T.vsLabel || (T.vs === 'egx30' ? 'EGX30' : T.vs))} <span class="num ${M.cls(vch)}">${M.pct(vch)}</span></span>`; }
+    return `<div class="vprog"><span>${M.esc(T.label)}: opened at <b class="num">${cur}${M.num(T.start)}</b></span><span>Now <b class="num">${cur}${M.num(now)}</b> <span class="num ${M.cls(ch)}">${M.pct(ch)}</span></span>${rel}</div>`;
+  }
+  function card(v) {
+    const chips = (v.tickers || []).filter((t) => M.NAMES[t]).map((t) => `<a class="chip" href="/desk/stock/?t=${encodeURIComponent(t)}">${t}</a>`).join('');
+    const ups = (v.updates || []).slice().sort((a, b) => (a.date < b.date ? 1 : -1)).map((x) => { const e = EFF[x.effect] || EFF.neutral;
+      return `<li><span class="when">${fmtDate(x.date)}</span><span class="pill ${e[0]}">${e[1]}</span><p>${M.esc(x.text)} ${x.url ? `<a class="src" href="${M.esc(x.url)}" target="_blank" rel="noopener">${M.esc(x.source || 'Source')}&nbsp;→</a>` : ''}</p></li>`; }).join('');
+    return `<article class="card vcard">
+      <div class="vhead"><span class="pill ${PILL[v.status] || 'open'}">${M.esc(v.status[0].toUpperCase() + v.status.slice(1))}</span>${M.conf(v.confidence)}<span class="meta">${MK[v.market] || ''} · ${v.kind === 'projection' ? 'Projection' : 'View'}</span></div>
+      <h2>${M.esc(v.title)}</h2>
+      <p class="meta">Opened ${fmtDate(v.opened)}${v.due ? ` · judged by ${fmtDate(v.due)}` : ' · open until proved wrong'}</p>
+      <p class="vdetail">${M.esc(v.detail)}</p>
+      ${progress(v)}
+      <p class="vwrong"><b>Wrong if</b> ${M.esc(v.wrong)}</p>
+      ${v.result ? `<p class="vresult"><b>${M.esc(v.status === 'right' ? 'Right' : v.status === 'wrong' ? 'Wrong' : 'Closed')}, ${fmtDate(v.result.date)}:</b> ${M.esc(v.result.text)}</p>` : ''}
+      ${chips ? `<div class="nf" style="margin-top:10px">${chips}</div>` : ''}
+      <h3>News that bears on it</h3>
+      ${ups ? `<ul class="vnews">${ups}</ul>` : '<p class="sub">No news on it yet.</p>'}
+    </article>`;
+  }
+  // the record: open calls, and the hit rate of those already judged
+  const n = (st) => all.filter((v) => v.status === st).length, right = n('right'), wrong = n('wrong');
+  M.$('score').innerHTML = [['Open', all.filter((v) => ['open', 'on track'].includes(v.status)).length], ['Right', right], ['Wrong', wrong], ['Hit rate', right + wrong ? Math.round(right / (right + wrong) * 100) + '%' : '—']]
+    .map(([k, x]) => `<div><span class="meta">${k}</span><b class="num">${x}</b></div>`).join('') + `<p class="sub">${right + wrong ? '' : 'No view has reached its date yet; the record fills in as they do. '}Views are checked against the data log each morning, and news that supports or cuts against them is added as it comes.</p>`;
+  let fs = 0, fm = 0, fk = 0;
+  const draw = () => {
+    const list = all.filter((v) => (fs === 0 || (fs === 1 ? ['open', 'on track'].includes(v.status) : !['open', 'on track'].includes(v.status)))
+      && (fm === 0 || (fm === 1 ? ['egx', 'egp'].includes(v.market) : fm === 2 ? v.market === 'us' : v.market === 'global'))
+      && (fk === 0 || (fk === 1 ? v.kind === 'view' : v.kind === 'projection')));
+    M.$('views').innerHTML = list.map(card).join('') || '<p class="sub">Nothing here yet.</p>';
+  };
+  M.toggle(M.$('fstatus'), ['All', 'Open', 'Judged'], (i) => { fs = i; draw(); });
+  M.toggle(M.$('fmarket'), ['All markets', 'Egypt', 'Wall Street', 'Global'], (i) => { fm = i; draw(); });
+  M.toggle(M.$('fkind'), ['Views and projections', 'Views', 'Projections'], (i) => { fk = i; draw(); });
+  draw();
+})();
+</script>
+</body>
+</html>

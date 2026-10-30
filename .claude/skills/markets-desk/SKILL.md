@@ -21,7 +21,7 @@ closes are the last session's; the news, stock research and analysis are still u
 2. Run `python3 .claude/skills/markets-desk/stock_news.py` (`3` on Sundays) and do the stock research
    below; update `desk/stocks.json`.
 3. Write each section: finding, one to three stories (`calls`), who it helps and hurts, the Stocks note,
-   the week ahead and open views (check each open view against the data log: on track, right, wrong).
+   the week ahead and open views, then update `desk/views.json` (see Views: the record): new entries, news, and judgements.
 4. Write `pages`: EGX (finding, session, news, outlook), EGP (finding, rates, drivers, news, view), US
    (finding, rates, afterBell, news, outlook), Global (finding, notes, news). Carry each projection
    forward until its date, and score it when the date passes.
@@ -162,7 +162,7 @@ over the next one to three months.
 - **Confidence:** high when several independent reasons and the figures agree; medium for a clear driver
   with cross-currents; low for momentum or a single reason. Say low when it is low.
 - **Scoring:** every projection is kept until its date passes and then marked right or wrong against the
-  data log, on the stock's page and in Open views, like any other view. Only list stocks with a real case;
+  data log, on the stock's page and on the Views page, like any other view. Only list stocks with a real case;
   an empty side is better than a filler pick.
 
 ## News
@@ -195,11 +195,28 @@ No news is a valid result: never pad a stock with filler. Its page then shows it
 The events that can move Egyptian markets and the reader's stocks, each rated high, medium or low impact,
 with one line on why it matters (catalyst-calendar skill). Dates are checked like any other fact.
 
-## Open views
+## Views: the record
 
-Every view is tracked until it is right, wrong or closed, and checked each morning against the data log.
-Wrong views stay on the record, marked wrong; the record is never cleaned (thesis-tracker skill).
+`desk/views.json` holds every view and projection the desk has made, shown on the Views page
+(`/desk/views/`) and on each stock's page. Each entry: `id` (date and a short slug), `opened`, `market`
+(egx, egp, us or global), `kind` (view or projection), `title`, `detail`, `wrong`, `confidence`, `due`
+(the date it is judged by, or null), `track` (the figure it rests on: `key` such as `egx.COMI`, `usd_egp`
+or `brent`, its `start` value, and for projections the `target` range and `side`), `tickers`, `status`
+and `updates`.
 
+Every day:
+
+1. **Add** each new view and projection the day's desk makes (the open views and the Bullish and bearish
+   stocks), with its start figure from the data log. A projection carried over from an earlier day is the
+   same entry, not a new one.
+2. **Add news** that bears on an open entry to its `updates`: date, one line, source, url, and `effect`
+   (supports, against or neutral). Take it from the day's research and the stock research; only news
+   checked at the outlet. The same story can go on several entries.
+3. **Judge** an entry when its date passes, or earlier when its "wrong if" happens: set `status` to right
+   or wrong and add `result` (date and one line with the figures). `on track` marks an open entry whose
+   figures are going its way. Never delete or rewrite a judged entry: wrong calls stay on the record.
+
+The dashboard's Open views card shows the day's views and links to the full record.
 ## Figures
 
 The same sources and checks as the newsletter: `fetch_figures.py` first, a second source for every figure,

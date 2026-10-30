@@ -121,10 +121,10 @@
   M.$('next').innerHTML = (p.next || []).map((n) => `<div class="wk" style="grid-template-columns:minmax(0,1fr) auto"><b>${M.esc(n.event)}</b><span class="imp${n.impact === 'high' ? ' high' : ''}">${M.esc(n.impact[0].toUpperCase() + n.impact.slice(1))}</span><span class="why" style="grid-column:1/-1"><span class="num">${M.esc(n.when)}</span> · ${M.esc(n.why)}</span></div>`).join('') || '<p class="sub">No dates found yet.</p>';
   const PILL = { 'open': 'open', 'on track': 'ok', 'right': 'ok', 'wrong': 'bad', 'closed': 'open' };
   // the desk's projections for this stock from today's bullish and bearish lists come first
-  const O = (D.pages[egx ? 'egx' : 'us'] || {}).outlook, proj = [];
-  if (O) for (const side of ['bull', 'bear']) for (const x of O[side].stocks) if (x.t === t) proj.push({ side, x });
-  M.$('views').innerHTML = proj.map(({ side, x }) => `<div class="view"><b>${side === 'bull' ? 'Bullish' : 'Bearish'}: ${cur}${M.num(x.range[0], x.dp ?? 2)}–${M.num(x.range[1], x.dp ?? 2)} by ${M.esc(x.by)}</b>${M.conf(x.confidence)}<span class="why">${M.esc(x.why)} Wrong if ${M.esc(x.wrong)}</span></div>`).join('')
-    + (p.views || []).map((v) => `<div class="view"><b>${M.esc(v.call)}</b><span class="pill ${PILL[v.status] || 'open'}">${M.esc(v.status[0].toUpperCase() + v.status.slice(1))}</span><span class="why">${M.esc(v.note)}</span></div>`).join('')
+  // the desk's views and projections on this stock, from the record on the Views page (desk/views.json)
+  const VL = await M.get('/desk/views.json'), mine = ((VL && VL.views) || []).filter((v) => (v.tickers || []).includes(t));
+  M.$('views').innerHTML = mine.map((v) => `<div class="view"><b>${M.esc(v.title)}</b><span><span class="pill ${PILL[v.status] || 'open'}">${M.esc(v.status[0].toUpperCase() + v.status.slice(1))}</span> ${M.conf(v.confidence)}</span><span class="why">${M.esc(v.detail)} Wrong if: ${M.esc(v.wrong)}${(v.updates || []).length ? ` · ${v.updates.length} news item${v.updates.length > 1 ? 's' : ''}` : ''}</span></div>`).join('')
+    + (mine.length ? '<p class="sub" style="margin-top:10px"><a href="/desk/views/">All views and the news on each →</a></p>' : '')
     || '<p class="sub">No open view on this stock.</p>';
   // news: today's market news that names this stock, then its own news from desk/stocks.json, newest first
   const tagged = [];

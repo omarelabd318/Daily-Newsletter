@@ -1,5 +1,5 @@
 {
- "note": "One entry per stock for its page on the desk: sector, valuation (with its source and date), the latest session's trading, dates coming up, the desk's views and news. The daily run updates it; news and views are kept, newest first, and never deleted.",
+ "note": "One entry per stock for its page on the desk: sector, valuation (with its source and date), the latest session's trading, dates coming up and news. The daily run updates it; news is kept, newest first, and never deleted.",
  "stocks": {
   "COMI": {
    "sector": "Banks",
@@ -59,14 +59,6 @@
      "when": "Not confirmed",
      "why": "Thursday's 100 bps hike widens lending margins; another move would matter as much.",
      "impact": "medium"
-    }
-   ],
-   "views": [
-    {
-     "date": "2026-10-30",
-     "call": "Higher rates protect CIB's margins",
-     "status": "open",
-     "note": "High rates protect lending margins and T-bill income. CIB rose 0.5% on Thursday and is 17% up this year. Wrong if: CIB falls more than the EGX30 over the next two weeks."
     }
    ],
    "news": [
