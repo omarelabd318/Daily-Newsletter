@@ -22,7 +22,10 @@
   <div class="pages" style="margin-top:var(--gap)">
     <section class="card c12">
       <div class="card-h"><h2>Gold in Egypt</h2><div class="seg" id="gseg"></div></div>
-      <table><thead><tr><th>Gold</th><th class="trend" id="gtrend-h">Last 7 days</th><th class="num">EGP</th><th class="num" id="gchg-h">Change (1D)</th><th class="num">YTD</th></tr></thead><tbody id="gbody"></tbody></table>
+      <div class="ctabs" id="gtabs" style="margin-bottom:10px"></div>
+      <div class="hero"><span class="lvl num" id="glvl"></span><span class="d num" id="gd"></span><span class="meta" id="gunit"></span></div>
+      <div class="gold-grid"><div class="midchart" id="gch" style="height:240px"></div><div id="gkv"></div></div>
+      <p class="chart-cap" id="gcap"></p>
       <p class="stock-note">Egyptian gold follows the world price in dollars times the pound's rate, so a weaker pound lifts it even when gold falls abroad.</p>
     </section>
 
@@ -58,13 +61,21 @@
     const [lo, hi] = M.range52(s), signed = (c) => `<span class="${M.cls(c)}">${M.pct(c)}</span>`;
     M.$('kv' + i).innerHTML = M.kv([['Month', signed(M.change(s, 30))], ['This year', signed(M.ytd(s))], ['52-week range', `${M.num(lo, dp)} – ${M.num(hi, dp)}`]]);
   });
-  const G = [['gold24_egp', '24K', 'per gram'], ['gold21_egp', '21K', 'per gram, the most bought'], ['gold18_egp', '18K', 'per gram'], ['goldpound_egp', 'Gold pound', '8 grams of 21K']];
-  const drawG = (p) => {
-    M.$('gchg-h').textContent = `Change (${p[0]})`; M.$('gtrend-h').textContent = p[1] <= 7 ? 'Last 7 days' : p[2];
-    M.$('gbody').innerHTML = G.map(([k, n, sub]) => { const s = M.series((e) => e[k], 'all'), c = M.change(s, p[1]), y = M.ytd(s);
-      return `<tr><td class="name"><b>${n}</b><span>${sub}</span></td><td class="trend">${M.spark(s, p[1])}</td><td class="num">${M.num(M.last(s), 0)}</td><td class="num"><span class="${M.cls(c)}">${M.pct(c)}</span></td><td class="num"><span class="${M.cls(y)}">${M.pct(y)}</span></td></tr>`; }).join('');
+  // Gold in Egypt: one chart, switched between 24K, 21K, 18K and the gold pound (21K first: the most bought)
+  const G = [['gold21_egp', '21K', 'EGP per gram, the most bought'], ['gold24_egp', '24K', 'EGP per gram'], ['gold18_egp', '18K', 'EGP per gram'], ['goldpound_egp', 'Gold pound', 'EGP, 8 grams of 21K']];
+  let gi = 0, gp = M.PERIODS[2];
+  const drawG = () => {
+    const [k, n, unit] = G[gi], s = M.series((e) => e[k], 'all'), signed = (c) => `<span class="${M.cls(c)}">${M.pct(c)}</span>`;
+    const dc = M.change(s, 0);
+    M.$('glvl').textContent = M.num(M.last(s), 0); M.$('gd').innerHTML = `<span class="${M.cls(dc)}">${M.pct(dc, 2)}</span>`; M.$('gunit').textContent = unit;
+    M.chart(M.$('gch'), s, gp[1], `Gold ${n}`, Charts.fmt.int, { xAt: true });
+    const c = M.change(s, gp[1]); M.$('gcap').innerHTML = `${gp[2]}: <span class="num ${M.cls(c)}">${M.pct(c, 2)}</span>`;
+    const [lo, hi] = M.range52(s);
+    M.$('gkv').innerHTML = M.kv([['Day', signed(dc)], ['Week', signed(M.change(s, 7))], ['Month', signed(M.change(s, 30))], ['This year', signed(M.ytd(s))]]) + M.rangeBar(lo, hi, M.last(s), (x) => M.num(x, 0));
   };
-  M.segment(M.$('gseg'), '1D', drawG); drawG(M.PERIODS[0]);
+  M.$('gtabs').innerHTML = G.map((g, j) => `<button type="button" aria-pressed="${!j}">${g[1]}</button>`).join('');
+  M.$('gtabs').querySelectorAll('button').forEach((b, j) => b.addEventListener('click', () => { M.$('gtabs').querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); gi = j; drawG(); }));
+  M.segment(M.$('gseg'), '1M', (p) => { gp = p; drawG(); }, M.PERIODS.slice(1)); drawG();
   M.news(M.$('news'), P.news);
 })();
 </script>
