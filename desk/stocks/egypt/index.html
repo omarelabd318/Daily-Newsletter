@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Egyptian stocks · Markets Desk</title>
+<meta name="description" content="All 12 Egyptian stocks on the desk with their price, trend and latest news.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,600&display=swap">
+<script>try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+<link rel="stylesheet" href="/desk/desk.css">
+</head>
+<body>
+<main class="canvas">
+  <div class="titlerow"><div>
+    <div class="crumbs"><a href="/desk/">Desk</a> / Egyptian stocks</div>
+    <h1 id="title">Egyptian stocks</h1>
+    <p class="finding" id="finding"></p>
+  </div></div>
+  <div class="vfilters" style="margin-bottom:var(--gap)">
+    <div class="seg" id="seg"></div>
+    <div class="ctabs" id="sort" aria-label="Order"></div>
+    <div class="ctabs" id="cur" aria-label="Currency" hidden></div>
+  </div>
+  <div class="sgrid" id="grid"></div>
+</main>
+<script src="/desk/charts.js"></script>
+<script src="/desk/desk.js"></script>
+<script>
+(async () => {
+  const MKT = 'egx', egx = MKT === 'egx';
+  const M = Desk, D = await M.init(egx ? '/desk/stocks/egypt/' : '/desk/stocks/us/'); if (!D) return;
+  M.$('title').textContent = 'Egyptian stocks · ' + M.dateLine(M.ASOF);
+  const ST = await M.get('/desk/stocks.json'), VL = await M.get('/desk/views.json');
+  const views = (VL && VL.views) || [], prof = (ST && ST.stocks) || {};
+  // today's market news tagged with a stock counts as its latest news too
+  const tagged = {};
+  for (const k of ['egx', 'egp', 'us', 'global']) for (const n of ((D.pages[k] || {}).news || [])) for (const t of (n.tickers || [])) (tagged[t] = tagged[t] || []).push({ date: M.ASOF, text: n.headline, source: n.source, url: n.url });
+  // a story in both lists keeps its own date from the stock's news
+  const latest = (t) => { const own = (prof[t] || {}).news || [], urls = new Set(own.map((n) => n.url));
+    return [...own, ...(tagged[t] || []).filter((n) => !urls.has(n.url))].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0))[0]; };
+  const tickers = M.GROUP[MKT];
+  M.$('finding').textContent = `All 12 ${egx ? 'Egyptian' : 'US'} stocks on the desk. Tap one for its page: price chart, performance, valuation, trading, news and the desk's views.`;
+  // a wider trend line for the cards
+  function line(vals) {
+    if (vals.length < 2) return '';
+    const w = 220, h = 44, lo = Math.min(...vals), hi = Math.max(...vals), sp = hi - lo || 1, st = (w - 4) / (vals.length - 1);
+    const xy = vals.map((v, i) => [2 + i * st, h - 3 - (v - lo) / sp * (h - 6)]);
+    return `<svg class="cline" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true"><path d="${xy.map((c, i) => (i ? 'L' : 'M') + c[0].toFixed(1) + ' ' + c[1].toFixed(1)).join('')}"/><circle cx="${xy.at(-1)[0].toFixed(1)}" cy="${xy.at(-1)[1].toFixed(1)}" r="2.6"/></svg>`;
+  }
+  let per = M.PERIODS[2], inUSD = false, order = 0;
+  const draw = async () => {
+    if (per[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; }
+    const rows = tickers.map((t) => {
+      const raw = M.stock(t), s = inUSD ? M.usd(raw) : raw, c = M.change(s, per[1]), y = M.ytd(s);
+      const intra = !per[1] && M.INTRA && M.INTRA[MKT] && M.INTRA[MKT].series[t];
+      const pts = intra ? intra.map((x) => x[1]) : (per[1] <= 7 ? s.slice(-7) : s.filter(([d]) => d >= M.cut(M.ASOF, Math.max(per[1], 7)))).map((x) => x[1]);
+      const [lo, hi] = M.range52(raw), now = M.last(raw);
+      const open = views.filter((v) => (v.tickers || []).includes(t) && ['open', 'on track'].includes(v.status)).length;
+      return { t, s, c, y, pts, lo, hi, now, open, news: latest(t) };
+    });
+    if (order) rows.sort((a, b) => (order === 1 ? (b.c ?? -1e9) - (a.c ?? -1e9) : (a.c ?? 1e9) - (b.c ?? 1e9)));
+    const cur = inUSD || !egx ? '$' : 'EGP ';
+    M.$('grid').innerHTML = rows.map((r) => `<a class="card scard" href="/desk/stock/?t=${encodeURIComponent(r.t)}">
+      <div class="sh"><span><b>${M.esc(M.NAMES[r.t])}</b><span class="t">${M.esc(r.t)}${(prof[r.t] || {}).sector ? ' · ' + M.esc(prof[r.t].sector) : ''}</span></span>${r.open ? `<span class="pill open">${r.open} open view${r.open > 1 ? 's' : ''}</span>` : ''}</div>
+      <div class="sp"><span class="lvl num">${cur}${M.num(M.last(r.s))}</span>${M.heroChg(r.s, per)}</div>
+      ${line(r.pts)}
+      <div class="sk"><span>This year <span class="num ${M.cls(r.y)}">${M.pct(r.y)}</span></span><span class="num">52w ${M.num(r.lo, r.lo < 10 ? 2 : 0)}–${M.num(r.hi, r.hi < 10 ? 2 : 0)}</span></div>
+      <div class="range" style="margin:8px 0 0"><i style="left:calc(${((r.now - r.lo) / (r.hi - r.lo || 1) * 100).toFixed(1)}% - 1px)"></i></div>
+      <p class="snews">${r.news ? `<span class="when">${M.day(r.news.date).getDate()} ${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][M.day(r.news.date).getMonth()]}</span> ${M.esc(r.news.text.length > 120 ? r.news.text.slice(0, 117) + '…' : r.news.text)}` : '<span class="when">No recent news</span>'}</p>
+    </a>`).join('');
+  };
+  M.segment(M.$('seg'), '1M', (p) => { per = p; draw(); }, M.PERIODS.concat(M.LONG));
+  M.toggle(M.$('sort'), ['List order', 'Best', 'Worst'], (i) => { order = i; draw(); });
+  if (egx) { M.$('cur').hidden = false; M.toggle(M.$('cur'), ['EGP', 'USD'], (i) => { inUSD = i === 1; draw(); }); }
+  draw();
+})();
+</script>
+</body>
+</html>

@@ -54,10 +54,12 @@ closes are the last session's; the news, stock research and analysis are still u
   results after the bell, the 12 stocks, then Bullish and bearish.
 - **Global** `/desk/global/`: Brent, gold, the dollar index and Bitcoin, each with one line on why it
   matters for Egypt, and gold prices in Egypt.
-- **Stocks** `/desk/stock/?t=TICKER`: one page per stock: chart against its index, performance,
+- **Egyptian stocks** `/desk/stocks/egypt/` and **US stocks** `/desk/stocks/us/`: all 12 of each as cards (price, change over
+  the chosen period, trend line, YTD, 52-week range, latest news, open views); each opens its stock's page.
+- **Stock page** `/desk/stock/?t=TICKER`: one page per stock: chart against its index, performance,
   valuation, trading, dates coming up, the desk's projections and views on it, and its news.
 
-The menu order is Dashboard, EGX, EGP, Wall Street, Global, Stocks. Shared code is `desk/desk.js` and `desk/desk.css`
+The menu order is Dashboard, EGX, EGP, Wall Street, Global, Egyptian stocks, US stocks, Views. Shared code is `desk/desk.js` and `desk/desk.css`
 (the dashboard keeps its own copy of the styles: change both together).
 
 ## Files

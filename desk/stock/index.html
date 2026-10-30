@@ -62,7 +62,8 @@
 <script src="/desk/desk.js"></script>
 <script>
 (async () => {
-  const M = Desk, D = await M.init('/desk/stock/'); if (!D) return;
+  const t0 = new URLSearchParams(location.search).get('t') || 'COMI';
+  const M = Desk, D = await M.init(Desk.GROUP.us.includes(t0) ? '/desk/stocks/us/' : '/desk/stocks/egypt/'); if (!D) return;
   let t = new URLSearchParams(location.search).get('t') || 'COMI';
   if (!M.NAMES[t]) t = 'COMI';
   const egx = M.GROUP.egx.includes(t), cur = egx ? 'EGP ' : '$';
@@ -71,7 +72,7 @@
   const dash = '<span class="dash">—</span>', signed = (c) => `<span class="${M.cls(c)}">${M.pct(c)}</span>`;
   M.$('pick').innerHTML = ['egx', 'us'].map((g) => `<optgroup label="${g === 'egx' ? 'Egypt' : 'USA'}">${M.GROUP[g].map((x) => `<option value="${x}"${x === t ? ' selected' : ''}>${M.esc(M.NAMES[x])} (${x})</option>`).join('')}</optgroup>`).join('');
   M.$('pick').addEventListener('change', (e) => { location.search = '?t=' + encodeURIComponent(e.target.value); });
-  M.$('crumb').textContent = M.NAMES[t]; M.$('mkt').textContent = egx ? 'EGX' : 'Wall Street'; M.$('mkt').href = egx ? '/desk/egx/' : '/desk/us/';
+  M.$('crumb').textContent = M.NAMES[t]; M.$('mkt').textContent = egx ? 'Egyptian stocks' : 'US stocks'; M.$('mkt').href = egx ? '/desk/stocks/egypt/' : '/desk/stocks/us/';
   M.$('name').innerHTML = `${M.esc(M.NAMES[t])} <span class="meta" style="font-size:15px;font-weight:400">${M.esc(t)}${p.sector ? ' · ' + M.esc(p.sector) : ''}</span>`;
   document.title = M.NAMES[t] + ' · Markets Desk';
   const fresh = s.length && s.at(-1)[0] === M.ASOF, dc = fresh ? M.change(s, 0) : null, y = M.ytd(s);
@@ -129,7 +130,7 @@
   // news: today's market news that names this stock, then its own news from desk/stocks.json, newest first
   const tagged = [];
   for (const k of ['egx', 'egp', 'us', 'global']) for (const n of ((D.pages[k] || {}).news || [])) if ((n.tickers || []).includes(t)) tagged.push({ date: M.ASOF, text: n.headline + '. ' + n.text, source: n.source, url: n.url });
-  const seen = new Set(), items = [...tagged, ...(p.news || [])].filter((n) => { const k = n.url || n.text.slice(0, 60); if (seen.has(k)) return false; seen.add(k); return true; })
+  const seen = new Set(), items = [...(p.news || []), ...tagged].filter((n) => { const k = n.url || n.text.slice(0, 60); if (seen.has(k)) return false; seen.add(k); return true; })
     .sort((x, y) => (y.date > x.date ? 1 : y.date < x.date ? -1 : 0));
   const link = (n) => n.url ? `<a class="src" href="${M.esc(n.url)}" target="_blank" rel="noopener">${M.esc(n.source || 'Source')} →</a>` : n.edition ? `<a class="src" href="/#${n.edition}">Newsletter, ${M.short(n.edition)} →</a>` : '';
   M.$('news').innerHTML = items.map((n) => `<div class="news"><span class="when">${M.day(n.date).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }).replace('Sept', 'Sep')}</span><p>${M.esc(n.text)}</p>${link(n)}</div>`).join('') || '<p class="sub">No company news found in the last month.</p>';
