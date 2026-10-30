@@ -63,8 +63,8 @@
     const [lo, hi] = M.range52(s), signed = (c) => `<span class="${M.cls(c)}">${M.pct(c)}</span>`;
     M.$('kv' + i).innerHTML = M.kv([['Month', signed(M.change(s, 30))], ['This year', signed(M.ytd(s))], ['52-week range', `${M.num(lo, dp)} – ${M.num(hi, dp)}`]]);
   });
-  // Gold in Egypt: one chart, switched between 24K, 21K, 18K and the gold pound (21K first: the most bought)
-  const G = [['gold21_egp', '21K', 'EGP per gram, the most bought'], ['gold24_egp', '24K', 'EGP per gram'], ['gold18_egp', '18K', 'EGP per gram'], ['goldpound_egp', 'Gold pound', 'EGP, 8 grams of 21K']];
+  // Gold in Egypt: one chart, switched between 24K, 21K, 18K and the gold pound
+  const G = [['gold24_egp', '24K', 'EGP per gram'], ['gold21_egp', '21K', 'EGP per gram, the most bought'], ['gold18_egp', '18K', 'EGP per gram'], ['goldpound_egp', 'Gold pound', 'EGP, 8 grams of 21K']];
   let gi = 0, gp = M.PERIODS[2];
   const drawG = () => {
     const [k, n, unit] = G[gi], s = M.series((e) => e[k], 'all'), signed = (c) => `<span class="${M.cls(c)}">${M.pct(c)}</span>`;
