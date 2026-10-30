@@ -278,6 +278,9 @@ points. Under each heading, put one italic line saying which close the table sho
 `*EGX close, Tuesday 27 October*` or `*US close, Tuesday 27 October*`. If the run happens while the EGX is
 trading, say so and give the time, for example `*EGX intraday, 11:49 Cairo*`.
 
+The site adds a 1D / 1W / 1M / 6M / 1Y switch above each table: 1D shows the Change you write, the
+other periods are worked out from the data log, and the trend line redraws over the same period.
+
 Columns: `| Stock (ticker) | Close | Change | YTD |`, with the price in EGP or USD and the change as a
 percentage with a sign, for example `+1.2%`. The site colours signed changes green or red with an arrow,
 and bolds moves of 5% or more, so always write the sign. Take Change from the source. Take YTD (change
@@ -334,8 +337,10 @@ Use four columns: `| Item | Level | Note | YTD |`.
 - **Italic line first:** under the heading, one italic line saying which rates the table shows, for example
   `*USD/EGP is the central bank's rate; other currencies are market mid-rates.*` Then do not repeat
   "Market mid-rate" in the Notes.
-- **Notes:** about 6 words, so rows stay on one line. Use them for the day's change or one short point
-  ("highest since March", "fourth rise running"), or leave a Note empty when there is nothing to add.
+- **Notes:** about 6 words, so rows stay on one line. Use them for one short point ("highest since
+  March", "fourth rise running", "central bank rate"), or leave a Note empty when there is nothing to add.
+  Do not repeat the day's change: the site adds a Change column to this table by itself, worked out from
+  the data log, with a 1D / 1W / 1M / 6M / 1Y switch. That is one more reason to log every figure daily.
 - **YTD:** the change since the last close of the previous year, from
   `python3 .claude/skills/daily-newsletter/market_facts.py DATE --ytd` after logging, with a sign
   (`+17.8%`). Write `n/a` when the figure is not in the log that day, and `—` for central bank rates,
