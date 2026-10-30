@@ -483,7 +483,7 @@ td.trend{vertical-align:middle}
     var xy = pts.map(function(x,i){ return [p + i*step, h - p - (x.v - min) / span * (h - 2*p)]; });
     var d = xy.map(function(c,i){ return (i ? 'L' : 'M') + c[0].toFixed(1) + ' ' + c[1].toFixed(1); }).join('');
     var last = xy[xy.length-1], nf = function(v){ return v.toLocaleString('en-GB'); };
-    var tip = (long || title) ? ((title || 'About a year') + ': ' + nf(pts[0].v) + ' → ' + nf(pts[pts.length-1].v) + ' (low ' + nf(min) + ', high ' + nf(max) + ')')
+    var tip = (long || title) ? ((title || 'Last 12 months') + ': ' + nf(pts[0].v) + ' → ' + nf(pts[pts.length-1].v) + ' (low ' + nf(min) + ', high ' + nf(max) + ')')
                    : pts.map(function(x){ return x.d.slice(5) + ': ' + nf(x.v); }).join('  ·  ');
     return '<svg class="spark" viewBox="0 0 '+w+' '+h+'" width="'+w+'" height="'+h+'" role="img" aria-label="Trend: '+esc(tip)+'"><title>'+esc(tip)+'</title>'+
       '<path d="'+d+'"/><circle cx="'+last[0].toFixed(1)+'" cy="'+last[1].toFixed(1)+'" r="2.5"/></svg>';
@@ -510,10 +510,10 @@ td.trend{vertical-align:middle}
         });
         if(!lines.some(Boolean)) return;   // only tables with at least one trend line get the column
         var th = table.querySelector('thead th');
-        if(th) th.insertAdjacentHTML('afterend', '<th class="trend">' + (long ? 'Past year' : 'Last 7 days') + '</th>');
+        if(th) th.insertAdjacentHTML('afterend', '<th class="trend">' + (long ? 'Last 12 months' : 'Last 7 days') + '</th>');
         [].forEach.call(table.querySelectorAll('tbody tr'), function(tr, i){
           var cell = tr.querySelector('td'); if(!cell) return;
-          cell.insertAdjacentHTML('afterend', '<td class="trend" data-label="' + (long ? 'Past year' : 'Last 7 days') + '">' + lines[i] + '</td>');
+          cell.insertAdjacentHTML('afterend', '<td class="trend" data-label="' + (long ? 'Last 12 months' : 'Last 7 days') + '">' + lines[i] + '</td>');
           if(lines[i]) tr.classList.add('has-trend'); if(lines[i] && long) tr.classList.add('trend-long');
         });
         var sec = table.closest('.s'), name = sec && sec.querySelector('h2') ? sec.querySelector('h2').textContent.trim() : '';
@@ -525,7 +525,7 @@ td.trend{vertical-align:middle}
   // ---- change over 1D / 1W / 1M / 6M / 1Y: a switch above Stocks Watch and the currency table ----
   // The 1D figures in Stocks Watch are the run's own; every other figure is worked out from the data log,
   // and the trend line redraws over the same period.
-  var PERIODS = [['1D',0,'Last 7 days'],['1W',7,'Last 7 days'],['1M',30,'Past month'],['6M',182,'Past 6 months'],['1Y',365,'Past year']];
+  var PERIODS = [['1D',0,'Last 7 days'],['1W',7,'Last 7 days'],['1M',30,'Last 30 days'],['6M',182,'Last 6 months'],['1Y',365,'Last 12 months']];
   function cutoff(upto, back){ return new Date(new Date(upto+'T12:00:00') - back * 864e5).toISOString().slice(0,10); }
   function chgHtml(v, bold){
     if(v == null) return 'n/a';
