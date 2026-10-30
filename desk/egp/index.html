@@ -44,6 +44,11 @@
     </section>
 
     <section class="card c12">
+      <div class="card-h"><h2>News</h2><span class="meta">Checked against the day's research</span></div>
+      <div id="news"></div>
+    </section>
+
+    <section class="card c12">
       <div class="card-h"><h2>Other currencies against the pound</h2><div class="seg" id="cseg"></div></div>
       <table><thead><tr><th>Currency</th><th class="trend" id="trend-h">Last 7 days</th><th class="num">Level</th><th class="num" id="chg-h">Change (1D)</th><th class="num">YTD</th></tr></thead><tbody id="body"></tbody></table>
       <p class="stock-note">The Gulf currencies are pegged to the dollar, so they move with USD/EGP; the euro and sterling also carry the dollar's own moves.</p>
@@ -96,6 +101,7 @@
   M.segment(M.$('cseg'), '1D', drawT); drawT(M.PERIODS[0]);
   const V = P.view;
   if (V) { M.$('c-view').hidden = false; M.$('v-head').textContent = V.headline; M.$('v-body').textContent = V.body; M.$('v-moves').textContent = V.moves; M.$('v-wrong').textContent = V.wrong; M.$('v-conf').textContent = 'Confidence: ' + V.confidence; }
+  M.news(M.$('news'), P.news);
 })();
 </script>
 </body>

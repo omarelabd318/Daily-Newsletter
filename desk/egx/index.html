@@ -47,6 +47,11 @@
     </section>
 
     <section class="card c12">
+      <div class="card-h"><h2>News</h2><span class="meta">Checked against the day's research</span></div>
+      <div id="news"></div>
+    </section>
+
+    <section class="card c12">
       <div class="card-h"><h2>Your Egyptian stocks</h2><div class="seg" id="sseg"></div></div>
       <table><thead><tr><th>Stock</th><th class="trend" id="trend-h">Last 7 days</th><th class="num">Close</th><th class="num" id="chg-h">Change (1D)</th><th class="num">YTD</th></tr></thead><tbody id="body"></tbody></table>
       <p class="stock-note">Tap a stock for its own page.</p>
@@ -96,6 +101,7 @@
   const drawT = (p) => { M.$('chg-h').textContent = `Change (${p[0]})`; M.$('trend-h').textContent = p[1] <= 7 ? 'Last 7 days' : p[2]; M.stockTable(M.$('body'), M.GROUP.egx, p[1]); };
   M.segment(M.$('sseg'), '1D', drawT); drawT(M.PERIODS[0]);
   M.outlook(M.$('outlook'), P.outlook, 'EGP');
+  M.news(M.$('news'), P.news);
 })();
 </script>
 </body>

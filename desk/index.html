@@ -78,7 +78,7 @@ h1{margin:0;font-size:24px;line-height:30px;font-weight:600;letter-spacing:-.01e
 .finding .when{color:var(--muted)}
 .actions{display:flex;align-items:center;gap:16px;flex:none}
 .stamp{font-size:12px;line-height:16px;color:var(--muted);text-align:right}
-.btn{display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:var(--radius-control);border:1px solid var(--control);background:var(--surface);text-decoration:none;font-weight:500;cursor:pointer}
+.btn{display:inline-flex;align-items:center;white-space:nowrap;height:36px;padding:0 14px;border-radius:var(--radius-control);border:1px solid var(--control);background:var(--surface);text-decoration:none;font-weight:500;cursor:pointer}
 .btn:hover{background:var(--raised)}
 .btn-primary{background:var(--primary);color:var(--primary-ink);border-color:var(--primary)}
 .btn-primary:hover{background:var(--primary);opacity:.88}
@@ -133,6 +133,13 @@ h2{margin:0;font-size:16px;line-height:22px;font-weight:600}
 .read dl{display:grid;grid-template-columns:118px minmax(0,1fr);gap:8px 12px;margin:14px 0 0;padding-top:14px;border-top:1px solid var(--rule)}
 .read dt{color:var(--muted);font-size:13px}
 .read dd{margin:0;font-size:13px;line-height:19px}
+.story-nav{display:inline-flex;align-items:center;gap:10px}
+.arrows{display:inline-flex;gap:4px}
+.arrows button{width:28px;height:28px;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--muted);font-size:18px;line-height:1;cursor:pointer}
+.arrows button:hover{background:var(--raised);color:var(--text)}
+.dots{display:flex;justify-content:center;gap:8px;margin-top:16px}
+.dots button{width:8px;height:8px;padding:0;border-radius:50%;border:0;background:var(--control);cursor:pointer}
+.dots button[aria-selected="true"]{background:var(--text);width:20px;border-radius:4px}
 .conf{display:inline-flex;align-items:center;height:20px;padding:0 7px;border-radius:var(--radius-chip);background:var(--raised);font-size:12px;font-weight:500;white-space:nowrap}
 .notice{margin-top:14px;padding:9px 12px;border-radius:6px;background:var(--pill-warn-bg);border:1px solid var(--pill-warn-line);color:var(--pill-warn-ink);font-size:12px;line-height:17px}
 .seg{display:inline-flex;gap:2px;padding:2px;border-radius:7px;background:var(--raised)}
@@ -298,8 +305,8 @@ td.trend svg{display:inline-block;vertical-align:middle}
         <div class="main">
           <section class="card span2" id="c-read" aria-labelledby="h-read">
             <div class="read">
-              <div>
-                <div class="card-h" style="margin-bottom:6px"><span class="meta">Top call</span><span class="conf" id="top-conf"></span></div>
+              <div class="story" id="story" aria-roledescription="carousel" aria-label="The day's stories">
+                <div class="card-h" style="margin-bottom:6px"><span class="meta" id="story-n">Top call</span><span class="story-nav"><span class="conf" id="top-conf"></span><span class="arrows" id="story-arrows" hidden><button type="button" id="story-prev" aria-label="Previous story">&#8249;</button><button type="button" id="story-next" aria-label="Next story">&#8250;</button></span></span></div>
                 <h2 class="call" id="h-read"></h2>
                 <p id="top-body"></p>
                 <dl>
@@ -308,6 +315,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
                   <dt>Wrong if</dt><dd id="top-wrong"></dd>
                 </dl>
                 <div class="notice" id="top-notice" hidden></div>
+                <div class="dots" id="story-dots" role="tablist" aria-label="Stories" hidden></div>
               </div>
               <div>
                 <div class="card-h"><span class="meta" id="chart-name">EGX30</span><div class="seg" role="group" aria-label="Chart period" id="egx-seg"></div></div>
@@ -433,11 +441,24 @@ td.trend svg{display:inline-block;vertical-align:middle}
       `<div class="lrow${r.lead ? ' lead' : ''}"><span class="k">${esc(r.label)}</span><span class="v num${r.value == null ? ' dash' : ''}">${r.value == null ? '—' : esc(r.value)}</span><span class="d num ${cls(r.change)}">${r.change == null ? '—' : pct(r.change, 2)}</span></div>`).join('')).join('');
     $('close-note').textContent = X.close.note || '';
 
-    const T = X.top;
-    $('h-read').textContent = T.headline; $('top-body').textContent = T.body;
-    $('top-view').textContent = T.view; $('top-moves').textContent = T.moves; $('top-wrong').textContent = T.wrong;
-    $('top-conf').textContent = 'Confidence: ' + T.confidence;
-    $('top-notice').hidden = !T.notice; $('top-notice').textContent = T.notice || '';
+    // the day's stories: the top call first, then up to two more, one at a time; arrows, dots, keys or a swipe move between them
+    const calls = (X.calls || [X.top]).filter(Boolean).slice(0, 3);
+    let at = 0;
+    const show = (i) => {
+      at = (i + calls.length) % calls.length;
+      const T = calls[at];
+      $('story-n').textContent = calls.length > 1 ? (at ? `Story ${at + 1} of ${calls.length}` : `Top call · 1 of ${calls.length}`) : 'Top call';
+      $('h-read').textContent = T.headline; $('top-body').textContent = T.body;
+      $('top-view').textContent = T.view; $('top-moves').textContent = T.moves; $('top-wrong').textContent = T.wrong;
+      $('top-conf').textContent = 'Confidence: ' + T.confidence;
+      $('top-notice').hidden = !T.notice; $('top-notice').textContent = T.notice || '';
+      $('story-dots').querySelectorAll('button').forEach((b, j) => b.setAttribute('aria-selected', j === at));
+    };
+    $('story-arrows').hidden = $('story-dots').hidden = calls.length < 2;
+    $('story-dots').innerHTML = calls.map((c, j) => `<button type="button" role="tab" aria-label="${esc(c.headline)}"></button>`).join('');
+    $('story-dots').querySelectorAll('button').forEach((b, j) => { b.onclick = () => show(j); });
+    $('story-prev').onclick = () => show(at - 1); $('story-next').onclick = () => show(at + 1);
+    show(0);
 
     $('board-h').textContent = X.board.horizon || '';
     $('helped').innerHTML = callRows(X.board.helped); $('hurt').innerHTML = callRows(X.board.hurt);
@@ -516,6 +537,11 @@ td.trend svg{display:inline-block;vertical-align:middle}
   }
   const pick = () => (location.hash === '#global' ? 'global' : 'egypt');
   window.addEventListener('hashchange', () => { render(pick()); window.scrollTo(0, 0); });
+  // swipe and arrow keys for the stories, set once
+  const story = $('story'); let x0 = null;
+  story.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+  story.addEventListener('touchend', (e) => { if (x0 == null) return; const dx = e.changedTouches[0].clientX - x0; x0 = null; if (Math.abs(dx) > 50) $(dx < 0 ? 'story-next' : 'story-prev').click(); });
+  story.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight') $('story-next').click(); if (e.key === 'ArrowLeft') $('story-prev').click(); });
   render(pick());
 })();
 

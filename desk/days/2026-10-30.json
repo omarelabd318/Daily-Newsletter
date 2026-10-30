@@ -4,7 +4,7 @@
  "fetched": "Fri 30 Oct, 05:22 Cairo",
  "sample": true,
  "egypt": {
-  "finding": "The pound's fall is mostly local: the dollar is up 8% against it in a month, 0.8% against majors. The EGX30 rose 0.6% to 49,596 as Banque du Caire's offering was executed.",
+  "finding": "The central bank raised rates by 100 basis points after Thursday's close to defend the pound, which is down 8% against the dollar in a month, mostly for local reasons. The EGX30 rose 0.6% to 49,596 as Banque du Caire's offering was executed.",
   "next": "Next session: Sunday.",
   "close": {
    "title": "Thursday's close",
@@ -57,15 +57,6 @@
     }
    ],
    "note": "A dash is a figure not yet confirmed by two sources this morning."
-  },
-  "top": {
-   "headline": "The pound's slide is local; the EGX waits on the central bank",
-   "body": "The dollar is up 8% against the pound in a month but only 0.8% against major currencies, so about 90% of the move comes from Egypt, not the dollar. The EGX30 rose 0.6% to 49,596 on Thursday, but the session's flows were swamped by the execution of Banque du Caire's offering, so they say little about who is backing the market ahead of the central bank's decision.",
-   "view": "Neutral on the EGX30 into Sunday. A weakening pound and a pending rate decision argue for waiting; Sunday's first session after the decision is the real signal.",
-   "moves": "Dollar earners (Orascom, Elsewedy) gain from a weaker pound; developers (Talaat Moustafa, Palm Hills) suffer if rates rise to defend it.",
-   "wrong": "Sunday's turnover tops its 90-day average with foreigners net buyers outside the offering, or the pound steadies.",
-   "confidence": "medium",
-   "notice": "Reports of a 100 bp rate hike after Thursday's close come from one source and could not be confirmed. The view above does not rely on them."
   },
   "board": {
    "horizon": "EGX sectors · next 1–4 weeks",
@@ -174,7 +165,33 @@
    "read": "Dominated by the execution of Banque du Caire's EGP 36.4 bn offering: foreign institutions bought, Egyptian institutions sold. Read normal days' flows, not this one, for who is backing the market.",
    "confirmed": false,
    "source": "Cairo Mubasher and Youm7 via one secondary report; not yet matched to the EGX's own figures."
-  }
+  },
+  "calls": [
+   {
+    "headline": "The central bank hikes to defend the pound",
+    "body": "The Monetary Policy Committee raised all key rates by 100 basis points after Thursday's close, taking the overnight deposit rate to 20.00% and lending to 21.00%, the first rise since March 2024. Most analysts had expected a hold. The dollar is up 8% against the pound in a month but only 0.8% against major currencies, so about 90% of the move is local: the hike is aimed at bringing back the foreign money that sold Egyptian debt.",
+    "view": "Supportive for the pound and the banks, negative for developers. Sunday is the first session to price the hike.",
+    "moves": "CIB and EFG Holding gain on wider margins; Talaat Moustafa and Palm Hills lose on dearer financing for buyers.",
+    "wrong": "The dollar closes above EGP 57 before the next T-bill auction, or the auction's average yield falls.",
+    "confidence": "medium"
+   },
+   {
+    "headline": "Banque du Caire's offering pulls in money, but distorts the flows",
+    "body": "The state lender's retail tranche closed about 27 times covered, with orders for about 9.29 billion shares against 343.1 million offered. Thursday's execution put foreign institutions EGP 29.2bn net buyers and Egyptian institutions EGP 34.3bn net sellers, figures driven by the offering rather than the market. Enppi is next, planned for the second half of January.",
+    "view": "Strong demand for state offerings is a good sign for the programme and for brokers' fees, but Thursday's flows say nothing about who is backing the EGX30.",
+    "moves": "EFG Holding gains from a busier offering pipeline; CIB and other listed banks face a new rival for investors' money.",
+    "wrong": "Banque du Caire trades below its offer price in its first week, or Enppi's listing slips past January.",
+    "confidence": "low"
+   },
+   {
+    "headline": "Oil at $115 widens Egypt's import bill",
+    "body": "Brent settled at $114.88 a barrel, within 3% of its 52-week high and up about 89% this year, and December Brent was near $116 on Friday after the Revolutionary Guards said four tankers struck mines in the Strait of Hormuz. Egypt buys much of its fuel abroad, so every dollar on the barrel adds to the dollars it needs.",
+    "view": "A drag on the pound as long as Brent holds above $110; it adds to the case for the rate hike rather than against it.",
+    "moves": "Abu Qir Fertilizers and other exporters with dollar sales are cushioned; consumer companies with imported inputs, such as Juhayna, face higher costs.",
+    "wrong": "Brent falls below $100, for example on a de-escalation in the Gulf.",
+    "confidence": "medium"
+   }
+  ]
  },
  "global": {
   "finding": "Alphabet's 12.6% fall on its results pulled the Nasdaq 1.4% lower; Walmart and JPMorgan rose as money moved to steadier names.",
@@ -230,15 +247,6 @@
     }
    ],
    "note": "A dash is a figure not yet confirmed by two sources this morning."
-  },
-  "top": {
-   "headline": "Alphabet's AI-search miss hits big tech",
-   "body": "Alphabet fell 12.6% after revenue missed and free cash flow turned negative, as AI Mode slowed search advertising. Amazon lost 4.3% and the Nasdaq 1.4%, while Walmart (+2.1%), JPMorgan (+1.3%) and Exxon (+0.7%) rose: money moved from AI spenders to steadier earnings.",
-   "view": "Cautious on ad-funded and AI-heavy tech into Amazon's and Apple's results; the market is now asking for AI spending to pay back, not just to grow.",
-   "moves": "Alphabet, Amazon and Broadcom most exposed; Walmart, JPMorgan and Berkshire as places money hides.",
-   "wrong": "Alphabet recovers half its fall within a week, or the Nasdaq makes a new high before November's US inflation figure.",
-   "confidence": "medium",
-   "notice": "Results dates for Apple and Amazon conflict between reports; check them before relying on the week ahead."
   },
   "board": {
    "horizon": "US sectors · next 1–4 weeks",
@@ -308,6 +316,33 @@
     "call": "Alphabet's AI spend is priced in",
     "status": "wrong",
     "note": "Called on 27 Oct. Alphabet fell 12.6% on its results, so the view was wrong; it stays on the record."
+   }
+  ],
+  "calls": [
+   {
+    "headline": "Alphabet's AI-search miss hits big tech",
+    "body": "Alphabet fell 12.6% after revenue missed and free cash flow turned negative, as AI Mode slowed search advertising. Amazon lost 4.3% and the Nasdaq 1.4%, while Walmart (+2.1%), JPMorgan (+1.3%) and Exxon (+0.7%) rose: money moved from AI spenders to steadier earnings.",
+    "view": "Cautious on ad-funded and AI-heavy tech into Amazon's and Apple's results; the market is now asking for AI spending to pay back, not just to grow.",
+    "moves": "Alphabet, Amazon and Broadcom most exposed; Walmart, JPMorgan and Berkshire as places money hides.",
+    "wrong": "Alphabet recovers half its fall within a week, or the Nasdaq makes a new high before November's US inflation figure.",
+    "confidence": "medium",
+    "notice": "Results dates for Apple and Amazon conflict between reports; check them before relying on the week ahead."
+   },
+   {
+    "headline": "Amazon and Intel misses deepen the AI-spending sell-off",
+    "body": "After the bell, Amazon reported earnings of $1.89 a share against $1.97 expected and revenue of $201.9bn against $202.2bn, and fell about 6%. Intel beat on adjusted earnings but missed on revenue at $16.5bn, and dropped 17% to 20% in extended trading.",
+    "view": "Expect the Nasdaq to stay under pressure into Monday; the market is punishing any AI spender that does not show the spending paying back.",
+    "moves": "Amazon, Nvidia and Broadcom are most exposed; Walmart and JPMorgan benefit from the rotation.",
+    "wrong": "The Nasdaq recovers Thursday's loss within the week.",
+    "confidence": "medium"
+   },
+   {
+    "headline": "Strong growth and sticky inflation keep a December Fed hike in play",
+    "body": "US growth accelerated to 3.4% in the third quarter, above the 3.2% expected, and annual PCE inflation came in at 3.6%, with the core measure at 3.1%. The 10-year Treasury yield stayed near 5%.",
+    "view": "Higher-for-longer rates favour banks and weigh on the most expensive growth stocks; they also keep pressure on emerging-market currencies, the pound included.",
+    "moves": "JPMorgan and Berkshire Hathaway gain; Tesla and Nvidia, the highest-valued, are most exposed.",
+    "wrong": "The 10-year yield falls below 4.75% before the Fed's December meeting.",
+    "confidence": "low"
    }
   ]
  },
@@ -417,7 +452,32 @@
       }
      ]
     }
-   }
+   },
+   "news": [
+    {
+     "headline": "Banque du Caire's retail tranche 27 times covered",
+     "text": "Orders reached about 9.29 billion shares against 343.1 million offered, so applicants get about 3.7% of what they asked for. The Cabinet has approved the sale of a 30% to 45% stake.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/weekend/",
+     "tickers": [
+      "HRHO"
+     ]
+    },
+    {
+     "headline": "Enppi to list in the second half of January",
+     "text": "The state plans to sell 10% to 20% of the engineering contractor, priced in dollars, as part of a push to raise dollar inflows before the IMF programme ends.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/weekend/",
+     "tickers": []
+    },
+    {
+     "headline": "MNT-Halan's EGP 4bn injection into its Egyptian unit is fully paid",
+     "text": "163.27 million shares were bought at EGP 24.50, lifting the unit's issued capital to EGP 176.3m.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/weekend/",
+     "tickers": []
+    }
+   ]
   },
   "egp": {
    "finding": "The dollar is at EGP 56.04, near its 52-week high, after foreign investors sold local debt; Thursday's 100-basis-point hike is the central bank's answer.",
@@ -471,7 +531,28 @@
     "body": "A 100-basis-point rise lifts T-bill yields back above inflation and pays foreign holders to stay. Most of the month's move was local, as the Pound or dollar chart shows.",
     "moves": "CIB and EFG Holding gain on wider margins and inflows; Talaat Moustafa and Palm Hills lose on dearer mortgages.",
     "wrong": "The dollar closes above EGP 57 before the next auction, or the auction's average yield falls rather than rises."
-   }
+   },
+   "news": [
+    {
+     "headline": "Central bank raises key rates by 100 basis points",
+     "text": "The overnight deposit rate rises to 20.00% and the lending rate to 21.00%, with the main operation and discount rates at 20.50%: the first increase since March 2024. Most analysts had expected a hold.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/10/30/cbe-raises-key-rates-by-100-bps/",
+     "tickers": [
+      "COMI",
+      "HRHO",
+      "TMGH",
+      "PHDC"
+     ]
+    },
+    {
+     "headline": "IMF mission starts the final review",
+     "text": "The mission is in Cairo for the eighth and last review of Egypt's $8bn Extended Fund Facility; a passed review releases the final tranche.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/weekend/",
+     "tickers": []
+    }
+   ]
   },
   "us": {
    "finding": "Alphabet's 12.6% fall pulled the Nasdaq down 1.4%; the S&P 500 lost 0.3% and the Dow 0.3%, while Walmart and JPMorgan rose as money moved to steadier earnings.",
@@ -591,7 +672,34 @@
       }
      ]
     }
-   }
+   },
+   "news": [
+    {
+     "headline": "Alphabet suffers its worst day, losing about $500bn",
+     "text": "Alphabet fell 12.6% to $283.82 after revenue missed estimates and an executive said Google's AI Mode produced fewer ads. Adjusted earnings were $2.67 a share against an expected $3.02.",
+     "source": "NBC News",
+     "url": "https://www.nbcnews.com/business/markets/alphabet-google-stock-ai-advertising-rcna606322",
+     "tickers": [
+      "GOOGL"
+     ]
+    },
+    {
+     "headline": "Amazon and Intel fall after the bell",
+     "text": "Amazon missed on earnings and revenue and fell about 6% in extended trading; Intel beat on earnings but missed on revenue and fell sharply.",
+     "source": "InvestingLive",
+     "url": "https://investinglive.com/stocks/nasdaq-leads-stocks-lower-intel-and-amazon-tumble-after-hours/",
+     "tickers": [
+      "AMZN"
+     ]
+    },
+    {
+     "headline": "US growth hits 3.4% as PCE inflation stays at 3.6%",
+     "text": "Third-quarter growth beat the 3.2% expected and core PCE rose 3.1%, supporting bets on another Fed hike in December.",
+     "source": "Kitco",
+     "url": "https://www.kitco.com/news/article/2026-10-29/spot-gold-4025oz-us-gdp-growth-rises-34-q3-core-pce-rises-25",
+     "tickers": []
+    }
+   ]
   },
   "global": {
    "finding": "Brent held near $115 on Gulf shipping risk, gold slipped toward $4,000 as US yields stayed near 5%, and Bitcoin fell.",
@@ -600,7 +708,25 @@
     "gold_usd": "Sets the base for Egyptian gold prices; Egyptians buy gold as a hedge against the pound, so local demand stays strong even as the world price falls.",
     "dxy": "A stronger dollar pressures emerging-market currencies and pulls money out of their debt, Egypt's included.",
     "btc": "A gauge of risk appetite; when it falls with tech stocks, investors are cutting risk, which rarely helps frontier markets."
-   }
+   },
+   "news": [
+    {
+     "headline": "Brent near $116 after Hormuz mine claims",
+     "text": "December Brent rose toward $116 on Friday after the Revolutionary Guards said four tankers struck mines in the Strait of Hormuz; Brent settled at $114.88 on Thursday.",
+     "source": "FinanceFeeds",
+     "url": "https://financefeeds.com/brent-crude-oil-price-116-friday-hormuz-mine-strikes-december-expiry-fourth-monthly-gain-bull-120-bear-108/",
+     "tickers": [
+      "XOM"
+     ]
+    },
+    {
+     "headline": "Gold falls on strong US growth and inflation",
+     "text": "Spot gold fell about 1% to roughly $4,025 an ounce as the GDP and inflation figures supported bets on Fed tightening.",
+     "source": "Kitco",
+     "url": "https://www.kitco.com/news/article/2026-10-29/gold-silver-fall-strong-us-gdp-inflation-support-fed-tightening-bets-kitco",
+     "tickers": []
+    }
+   ]
   }
  }
 }

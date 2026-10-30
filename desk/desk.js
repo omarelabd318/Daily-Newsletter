@@ -94,6 +94,13 @@ window.Desk = (function () {
       <p class="ol-key"><b>Confidence.</b> High: several independent reasons and the figures agree. Medium: a clear driver, with cross-currents. Low: momentum, or one reason only. Projections are the desk's view, not advice; each is scored here, right or wrong, when its date passes.</p>`;
   }
 
+  // the day's news for a page: headline, a line or two, the outlet's link, and chips for the stocks it touches
+  function news(el, items) {
+    el.innerHTML = (items || []).map((n) => `<div class="news"><b class="nh">${esc(n.headline)}</b><p>${esc(n.text)}</p>
+      <div class="nf">${n.url ? `<a class="src" href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.source)} →</a>` : `<span class="src">${esc(n.source || '')}</span>`}${(n.tickers || []).filter((t) => NAMES[t]).map((t) => `<a class="chip" href="/desk/stock/?t=${encodeURIComponent(t)}">${esc(t)}</a>`).join('')}</div></div>`).join('')
+      || '<p class="sub">No market news today.</p>';
+  }
+
   async function init(page) {
     const icon = (d) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke-width="1.5"><path d="${d}"/></svg>`;
     const links = PAGES.map(([h, n, d]) => `<a href="${h}"${h === page ? ' aria-current="page"' : ''}>${icon(d)}${n}</a>`);
@@ -136,5 +143,5 @@ window.Desk = (function () {
       location.reload();
     });
   }
-  return { get ASOF() { return ASOF; }, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, init };
+  return { get ASOF() { return ASOF; }, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, init };
 })();

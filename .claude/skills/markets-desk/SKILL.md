@@ -31,8 +31,9 @@ The menu order is Dashboard, EGX, EGP, US, Global, Stocks. Shared code is `desk/
 - `desk/days/DATE.json`: one day's desk in two sections, `egypt` and `global` (shown as "USA"),
   each with its own finding, close figures, top call, board, note under Stocks, week ahead and open views.
   `desk/days/2026-10-30.json` is the reference for its shape. `"sample": true` marks sample content.
-- `desk/days/DATE.json` also holds `pages`: `egx` (finding, session, outlook), `egp` (finding, rates,
-  drivers, view), `us` (finding, rates, afterBell, outlook) and `global` (finding, notes).
+- `desk/days/DATE.json` also holds `pages`: `egx` (finding, session, news, outlook), `egp` (finding, rates,
+  drivers, news, view), `us` (finding, rates, afterBell, news, outlook) and `global` (finding, notes, news).
+- Each section's `calls` holds the dashboard's stories, one to three, the top call first.
 - `desk/index.json`: `{"desks": [{"date": "DATE", "summary": "..."}]}`; every page opens the newest.
 - `desk/stocks.json`: one entry per stock for its page: sector, valuation (source, date, basis), the
   latest session's trading, dates coming up, views and news. News and views are added newest first and
@@ -71,6 +72,13 @@ reader's US stocks.
   call (Alphabet's fall was). When it does not reach Egypt, the Egypt section leaves it out.
 - **Prefer the story that ties the day together**: the pound, the EGX30's move and who was buying, the
   central bank, rather than the loudest headline.
+
+## Two or three stories
+
+The dashboard shows up to three stories in each section, one at a time, with arrows, dots and a swipe
+between them. The first is the top call (above); add a second and third only when another story moves
+markets or the reader's stocks in its own right, each written like the top call (below). One strong
+story is better than three thin ones.
 
 ## How a call is written
 
@@ -116,6 +124,31 @@ over the next one to three months.
 - **Scoring:** every projection is kept until its date passes and then marked right or wrong against the
   data log, on the stock's page and in Open views, like any other view. Only list stocks with a real case;
   an empty side is better than a filler pick.
+
+## News
+
+The EGX, EGP, US and Global pages each have a News card: the day's stories for that market, two to six,
+each with a headline, one or two sentences in figures, the outlet and a link to the story's own page.
+Tag every story with the tickers it names or clearly affects (`"tickers": ["COMI"]`); a tagged story also
+shows on those stocks' pages. Take them from the newsletter's research and from the stock research below.
+
+## Stock research, every day
+
+Each of the 24 stocks gets its own search every morning, on top of the newsletter's research:
+
+1. Run `python3 .claude/skills/markets-desk/stock_news.py` (add `3` on Sundays to cover the weekend). It
+   lists each stock's headlines from the last two days, in English and, for the Egyptian stocks, Arabic.
+2. Open every lead that is about the company, its stock or something that clearly affects it: results,
+   disclosures to the exchange, deals and contracts, financing, dividends and capital changes, analysts'
+   ratings and fair values, management changes, regulation, and prices of what it sells or buys. Skip
+   market wraps, sponsorships, sports clubs that share a name, and fund-holding filings.
+3. Check the facts at the outlet, and against a second outlet for anything that moves the stock.
+4. Add each item to that stock in `desk/stocks.json` (`news`, newest first: date, text, source, url) and,
+   when it matters to the market, to the page's News card with its ticker.
+5. Let it change the analysis: news can move a stock onto or off the Bullish and bearish lists, change a
+   projection or its confidence, or add a date to Coming up (results dates, general assemblies).
+
+No news is a valid result: never pad a stock with filler. Its page then shows its figures and older news.
 
 ## The week ahead
 

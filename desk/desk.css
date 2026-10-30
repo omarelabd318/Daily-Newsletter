@@ -66,7 +66,7 @@ h1{margin:0;font-size:24px;line-height:30px;font-weight:600;letter-spacing:-.01e
 .finding .when{color:var(--muted)}
 .actions{display:flex;align-items:center;gap:16px;flex:none}
 .stamp{font-size:12px;line-height:16px;color:var(--muted);text-align:right}
-.btn{display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:var(--radius-control);border:1px solid var(--control);background:var(--surface);text-decoration:none;font-weight:500;cursor:pointer}
+.btn{display:inline-flex;align-items:center;white-space:nowrap;height:36px;padding:0 14px;border-radius:var(--radius-control);border:1px solid var(--control);background:var(--surface);text-decoration:none;font-weight:500;cursor:pointer}
 .btn:hover{background:var(--raised)}
 .btn-primary{background:var(--primary);color:var(--primary-ink);border-color:var(--primary)}
 .btn-primary:hover{background:var(--primary);opacity:.88}
@@ -275,3 +275,7 @@ td.name a{text-decoration:none}
 .conf.high{background:var(--text);color:var(--surface)}
 .ol-key{margin:16px 0 0;padding-top:12px;border-top:1px solid var(--rule);font-size:12px;line-height:17px;color:var(--muted)}
 @media (max-width:860px){ .outlook{grid-template-columns:minmax(0,1fr);gap:20px} }
+.news .nh{display:block;font-weight:500;font-size:14px;line-height:20px}
+.news .nf{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:6px}
+.chip{display:inline-flex;align-items:center;height:20px;padding:0 7px;border-radius:var(--radius-chip);background:var(--raised);font-size:12px;font-weight:500;text-decoration:none;color:var(--text)}
+.chip:hover{background:var(--active)}

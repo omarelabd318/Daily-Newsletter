@@ -25,6 +25,11 @@
       <table><thead><tr><th>Gold</th><th class="trend" id="gtrend-h">Last 7 days</th><th class="num">EGP</th><th class="num" id="gchg-h">Change (1D)</th><th class="num">YTD</th></tr></thead><tbody id="gbody"></tbody></table>
       <p class="stock-note">Egyptian gold follows the world price in dollars times the pound's rate, so a weaker pound lifts it even when gold falls abroad.</p>
     </section>
+
+    <section class="card c12">
+      <div class="card-h"><h2>News</h2><span class="meta">Checked against the day's research</span></div>
+      <div id="news"></div>
+    </section>
   </div>
 </main>
 <script src="/desk/charts.js"></script>
@@ -54,6 +59,7 @@
       return `<tr><td class="name"><b>${n}</b><span>${sub}</span></td><td class="trend">${M.spark(s, p[1])}</td><td class="num">${M.num(M.last(s), 0)}</td><td class="num"><span class="${M.cls(c)}">${M.pct(c)}</span></td><td class="num"><span class="${M.cls(y)}">${M.pct(y)}</span></td></tr>`; }).join('');
   };
   M.segment(M.$('gseg'), '1D', drawG); drawG(M.PERIODS[0]);
+  M.news(M.$('news'), P.news);
 })();
 </script>
 </body>
