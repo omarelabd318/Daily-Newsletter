@@ -17,7 +17,7 @@ HEADLINE = [("usd_egp", "USD/EGP"), ("eur_egp", "EUR/EGP"), ("sar_egp", "SAR/EGP
             ("cbe_usd_buy", "USD/EGP central bank buy"), ("cbe_usd_sell", "USD/EGP central bank sell"),
             ("cbe_deposit", "Deposit rate (%)"), ("cbe_lending", "Lending rate (%)"), ("tbill_91", "91-day T-bill (%)"),
             ("tbill_182", "182-day T-bill (%)"), ("tbill_273", "273-day T-bill (%)"), ("tbill_364", "364-day T-bill (%)"),
-            ("egx_turnover", "EGX turnover (EGP bn)")]
+            ("egx_turnover", "EGX turnover (EGP bn)"), ("infl_headline", "Inflation, headline (%)"), ("infl_core", "Inflation, core (%)")]
 
 
 def main():

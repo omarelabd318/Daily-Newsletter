@@ -167,6 +167,33 @@ def cbe_tbills():
     return out
 
 
+def cbe_page(path):
+    page = get(f"https://www.cbe.org.eg/en/{path}")
+    return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", re.sub(r"<(script|style)[^>]*>.*?</\1>", " ", page, flags=re.S))))
+
+
+def cbe_official():
+    """The central bank's official exchange rates (buy, sell), policy rates and latest inflation."""
+    out = {}
+    text = cbe_page("economic-research/statistics/cbe-exchange-rates")
+    d = re.search(r"Rates for Date: (\d\d/\d\d/\d{4})", text)
+    out["fx_date"] = d.group(1) if d else ""
+    for name, code in (("US Dollar", "USD"), ("Euro", "EUR"), ("Pound Sterling", "GBP"), ("Saudi Riyal", "SAR"),
+                       ("Kuwaiti Dinar", "KWD"), ("UAE Dirham", "AED"), ("Qatari Riyal", "QAR")):
+        m = re.search(re.escape(name) + r" ([\d.]+) ([\d.]+)", text)
+        if m:
+            out[code] = (float(m.group(1)), float(m.group(2)))
+    text = cbe_page("economic-research/statistics/overnight-deposit-and-lending-rate")
+    m = re.search(r"Effective from: (\d\d \w+ \d{4}) Overnight Deposit Rate Overnight Lending Rate ([\d.]+)% ([\d.]+)%", text)
+    if m:
+        out["policy"] = (m.group(1), float(m.group(2)), float(m.group(3)))
+    text = cbe_page("economic-research/statistics/inflation-rates")
+    m = re.search(r"Inflation for Last Month: (\w+ \d{4}).*?Headline \(m/m\) Core \(m/m\) Headline \(y/y\) Core \(y/y\).*? ([\d.]+)% ([\d.]+)% ([\d.]+)% ([\d.]+)%", text)
+    if m:
+        out["inflation"] = (m.group(1), float(m.group(4)), float(m.group(5)))   # month, headline y/y, core y/y
+    return out
+
+
 def coingecko():
     j = json.loads(get("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd"
                        "&include_24hr_change=true"))["bitcoin"]
@@ -297,6 +324,26 @@ def main(args):
             log.append(f"{key}={v}")
     except Exception as e:
         missing.append(f"Exchange rates: {e}")
+
+    # the central bank's official rates and inflation
+    try:
+        cb = cbe_official()
+        for code in ("USD", "EUR", "GBP", "SAR", "KWD", "AED", "QAR"):
+            if code in cb:
+                b, s_ = cb[code]
+                rows.append((f"{code}/EGP central bank, buy / sell", {"value": s_, "pct": None, "when": f"{cb['fx_date']} (buy {b})", "src": "Central Bank of Egypt"}, False))
+        if "USD" in cb:
+            log += [f"cbe_usd_buy={cb['USD'][0]}", f"cbe_usd_sell={cb['USD'][1]}"]
+        if "policy" in cb:
+            eff, dep, lend = cb["policy"]
+            rows.append(("Overnight deposit / lending rate (%)", {"value": dep, "pct": None, "when": f"lending {lend}, effective {eff}", "src": "Central Bank of Egypt"}, False))
+            log += [f"cbe_deposit={dep}", f"cbe_lending={lend}"]
+        if "inflation" in cb:
+            month, head, core = cb["inflation"]
+            rows.append((f"Inflation, {month} (headline y/y %)", {"value": head, "pct": None, "when": f"core {core}%", "src": "Central Bank of Egypt"}, False))
+            log += [f"infl_headline={head}", f"infl_core={core}"]
+    except Exception as e:
+        missing.append(f"Central bank rates and inflation (cbe.org.eg): {e}")
 
     # T-bills: the central bank's latest auction; log a tenor only when this edition is the first after its auction
     try:

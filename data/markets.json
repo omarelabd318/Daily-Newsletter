@@ -110665,8 +110665,8 @@
    "qar_egp": 15.4,
    "gbp_egp": 74.81,
    "dow": 52342.56,
-   "cbe_usd_buy": 55.98,
-   "cbe_usd_sell": 56.12,
+   "cbe_usd_buy": 55.9866,
+   "cbe_usd_sell": 56.1234,
    "cbe_deposit": 20.0,
    "cbe_lending": 21.0,
    "egx_turnover": 43.9,
@@ -110704,7 +110704,9 @@
     "COST": 1608507
    },
    "tbill_364": 26.076,
-   "tbill_182": 25.457
+   "tbill_182": 25.457,
+   "infl_headline": 13.9,
+   "infl_core": 14.1
   }
  ]
 }
