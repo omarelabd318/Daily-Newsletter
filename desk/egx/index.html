@@ -73,7 +73,7 @@
   M.$('title').textContent = 'EGX · ' + M.dateLine(M.ASOF); document.title = 'EGX · Markets Desk';
   M.$('finding').textContent = P.finding;
   M.$('sess-date').textContent = M.short(M.ASOF);
-  let idx = M.series((e) => e.egx30, 'egx'), per = M.PERIODS[2], inUSD = false;
+  let idx = M.series((e) => e.egx30, 'egx'), per = M.startPeriod('egx', 'EGX30'), inUSD = false;
   const dc = M.change(idx, 0);
   // the chart in pounds or in dollars (divided by each day's dollar rate); 3Y and 5Y load the full log
   const draw = async () => {
@@ -85,7 +85,7 @@
     M.$('cap').innerHTML = `${per[2]}${unit}: <span class="num ${M.cls(c)}">${M.pct(c, 2)}</span> · this year <span class="num ${M.cls(M.ytd(s))}">${M.pct(M.ytd(s))}</span>`;
   };
   M.toggle(M.$('cur'), ['EGP', 'USD'], (i) => { inUSD = i === 1; draw(); });
-  M.segment(M.$('seg'), '1M', (p) => { per = p; draw(); }, M.PERIODS.concat(M.LONG)); draw();
+  M.segment(M.$('seg'), per[0], (p) => { per = p; draw(); }, M.PERIODS.concat(M.LONG)); draw();
   const signed = (c) => `<span class="${M.cls(c)}">${M.pct(c)}</span>`, dash = '<span class="dash">—</span>', S = P.session || {};
   M.$('stats').innerHTML = M.kv([['Close', M.num(M.last(idx))], ['Day', `<span class="${M.cls(dc)}">${M.pct(dc, 2)}</span>`], ['Week', signed(M.change(idx, 7))], ['Month', signed(M.change(idx, 30))], ['This year', signed(M.ytd(idx))],
     ['Turnover', S.turnover ? M.esc(S.turnover) : dash], ['Against 90-day average', S.vs90 ? M.esc(S.vs90) : dash], ['Advancers / decliners', S.breadth ? M.esc(S.breadth) : dash]]);

@@ -420,6 +420,8 @@ td.trend svg{display:inline-block;vertical-align:middle}
 
   // the data log: each entry holds the closes its edition showed, so a close belongs to the day before the entry
   const INTRA = await get('/desk/intraday.json'), MOVERS = await get('/desk/movers.json');
+  // a session saved after the desk's closes (a re-run later in the day) would not match its figures: leave it out
+  if (INTRA) for (const m of ['egx', 'us']) if (INTRA[m] && INTRA[m].session > ASOF) delete INTRA[m];
   const log = await get('/data/markets-recent.json');
   let days = (log && log.days) || [];
   function series(pick, market) {
@@ -595,7 +597,9 @@ td.trend svg{display:inline-block;vertical-align:middle}
       const y = ytd(idx);
       $('egx-cap').innerHTML = `${esc(cur.n)}, ${p[2].toLowerCase()} · this year <span class="num ${cls(y)}">${pct(y)}</span>`;
     }
-    segment($('egx-seg'), '1M', drawIdx, PERIODS.concat(LONG)); drawIdx(PERIODS[2]);
+    // opens on 1D when the last session through the day is saved, otherwise on 1M
+    const start = INTRA && INTRA[S.market] && INTRA[S.market].series[cur.intra] ? PERIODS[0] : PERIODS[2];
+    segment($('egx-seg'), start[0], drawIdx, PERIODS.concat(LONG)); drawIdx(start);
 
     // the whole market's biggest movers of the last session, three each way, with the reason where one was found
     const MV = MOVERS && MOVERS[S.market];

@@ -69,7 +69,7 @@
   M.$('title').textContent = 'Wall Street · ' + M.dateLine(M.ASOF); document.title = 'Wall Street · Markets Desk';
   M.$('finding').textContent = P.finding;
   const IDX = [['sp500', 'S&P 500'], ['nasdaq', 'Nasdaq'], ['dow', 'Dow Jones']].map(([k, n]) => ({ k, n, s: M.series((e) => e[k], 'us') }));
-  let cur = IDX[0], per = M.PERIODS[2];
+  let cur = IDX[0], per = M.startPeriod('us', cur.k === 'nasdaq' ? 'COMP' : cur.k);
   const draw = () => {
     M.$('lvl').textContent = M.num(M.last(cur.s)); M.$('dchg').innerHTML = M.heroChg(cur.s, per);
     if (!per[1]) { const c1 = M.dayChart(M.$('chart'), 'us', cur.k === 'nasdaq' ? 'COMP' : cur.k, cur.n, Charts.fmt.int), dc1 = M.change(cur.s, 0); M.$('cap').innerHTML = c1 ? `${c1} · on the day <span class="num ${M.cls(dc1)}">${M.pct(dc1, 2)}</span>` : ''; return; }
@@ -78,7 +78,7 @@
   };
   M.$('itabs').innerHTML = IDX.map((x, i) => `<button type="button" aria-pressed="${!i}">${M.esc(x.n)}</button>`).join('');
   M.$('itabs').querySelectorAll('button').forEach((b, i) => b.addEventListener('click', () => { M.$('itabs').querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); cur = IDX[i]; draw(); }));
-  M.segment(M.$('seg'), '1M', (p) => { per = p; draw(); }); draw();
+  M.segment(M.$('seg'), per[0], (p) => { per = p; draw(); }); draw();
   M.$('idx').innerHTML = IDX.map((x, i) => { const c = M.change(x.s, 0); return `<div class="lrow${i ? '' : ' lead'}"><span class="k">${M.esc(x.n)}</span><span class="v num">${M.num(M.last(x.s))}</span><span class="d num ${M.cls(c)}">${M.pct(c, 2)}</span></div>`; }).join('');
   M.$('rates').innerHTML = (P.rates || []).map((r) => `<div class="lrow"><span class="k">${M.esc(r.label)}</span><span class="v num${r.value == null ? ' dash' : ''}">${r.value == null ? '—' : M.esc(r.value)}</span><span class="d"></span></div>`).join('');
   // the whole market's movers of the last session, or the desk's 12 stocks over any period

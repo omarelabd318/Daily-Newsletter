@@ -93,7 +93,7 @@ try {
   M.$('lvl').textContent = M.num(M.last(s)); M.$('dchg').innerHTML = `<span class="${M.cls(dc)}">${M.pct(dc, 2)}</span>`; M.$('cur').textContent = egx ? 'EGP' : 'USD';
   M.$('pdate').textContent = 'to ' + M.short(M.ASOF);
   // the chart in the stock's currency or, for Egyptian stocks, in dollars; 3Y and 5Y load the full log
-  let sx = s, per = M.PERIODS[2], inUSD = false;
+  let sx = s, per = M.startPeriod(egx ? 'egx' : 'us', t), inUSD = false;
   const draw = async () => {
     if (!per[1]) { M.$('dchg').innerHTML = M.heroChg(inUSD ? M.usd(sx) : sx, per); const c1 = M.dayChart(M.$('chart'), egx ? 'egx' : 'us', t, t, Charts.fmt.dec(2)); M.$('cap').innerHTML = c1 ? `${c1}${egx ? ' (in pounds)' : ''} · on the day <span class="num ${M.cls(dc)}">${M.pct(dc, 2)}</span>` : ''; return; }
     if (per[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; sx = M.stock(t); idxAll = M.series((e) => e[egx ? 'egx30' : 'sp500'], egx ? 'egx' : 'us'); return draw(); }
@@ -103,7 +103,7 @@ try {
     M.$('cap').innerHTML = `${per[2]}${unit}: <span class="num ${M.cls(c)}">${M.pct(c, 2)}</span> · ${idxN} <span class="num ${M.cls(ci)}">${M.pct(ci, 2)}</span>`;
   };
   if (egx) { M.$('curtog').hidden = false; M.toggle(M.$('curtog'), ['EGP', 'USD'], (i) => { inUSD = i === 1; draw(); }); }
-  M.segment(M.$('seg'), '1M', (q) => { per = q; draw(); }, M.PERIODS.concat(M.LONG)); draw();
+  M.segment(M.$('seg'), per[0], (q) => { per = q; draw(); }, M.PERIODS.concat(M.LONG)); draw();
   // the stock's move next to its index's over the same period, and the gap between them in percentage points
   const vs = (back) => { const a = back == null ? y : M.change(s, back), b = back == null ? M.ytd(idxS) : M.change(idxS, back); return a == null || b == null ? null : a - b; };
   const pts = (v) => v == null ? '<span class="dash">—</span>' : `<span class="${M.cls(v)}">${v > 0 ? '+' : v < 0 ? '−' : ''}${Math.abs(v).toFixed(1)} pts</span>`;

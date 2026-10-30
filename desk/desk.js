@@ -99,6 +99,8 @@ window.Desk = (function () {
   }
   // the last session's prices through the day (desk/intraday.json): market 'egx' or 'us', key a ticker,
   // 'EGX30' or 'COMP'. Returns a caption, or null when there is no one-day data for it.
+  // stock and index charts open on 1D when the last session through the day is saved, otherwise on 1M
+  const startPeriod = (market, key) => (INTRA && INTRA[market] && INTRA[market].series && INTRA[market].series[key] ? PERIODS[0] : PERIODS[2]);
   function dayChart(el, market, key, name, fmt) {
     const M_ = INTRA && INTRA[market], I = M_ && M_.series && M_.series[key]; el.innerHTML = '';
     if (!I) { el.innerHTML = `<p class="sub" style="padding:24px 0">No one-day data for ${esc(name)}: ${/^(sp500|dow|brent|gold_usd|dxy)$/.test(key) ? 'its only free source refused the last run; it fills in on days it answers.' : 'not saved for the last session.'}</p>`; return null; }
@@ -234,6 +236,8 @@ window.Desk = (function () {
     if (!DESK) { main.innerHTML = '<p class="finding">No desk has been published yet.</p>'; return null; }
     ASOF = DESK.asOf;
     INTRA = await get('/desk/intraday.json');
+    // a session saved after the desk's closes (a re-run later in the day) would not match its figures: leave it out
+    if (INTRA) for (const m of ['egx', 'us']) if (INTRA[m] && INTRA[m].session > ASOF) delete INTRA[m];
     MOVERS = await get('/desk/movers.json');
     const log = await get('/data/markets-recent.json');
     days = (log && log.days) || [];
@@ -256,5 +260,5 @@ window.Desk = (function () {
       location.reload();
     });
   }
-  return { get ASOF() { return ASOF; }, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, get INTRA() { return INTRA; }, init };
+  return { get ASOF() { return ASOF; }, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, startPeriod, get INTRA() { return INTRA; }, init };
 })();
