@@ -112,7 +112,7 @@
   let tper = M.PERIODS[0], tUSD = false;
   const drawT = async () => {
     if (tper[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; }
-    M.$('chg-h').textContent = `Change (${tper[0]})`; M.$('trend-h').textContent = tper[1] <= 7 ? 'Last 7 days' : tper[2];
+    M.$('chg-h').textContent = `Change (${tper[0]})`; M.$('trend-h').textContent = M.trendHead(tper[1], 'egx', tper[2]);
     M.$('close-h').textContent = tUSD ? 'Close ($)' : 'Close';
     M.stockTable(M.$('body'), M.GROUP.egx, tper[1], tUSD);
   };

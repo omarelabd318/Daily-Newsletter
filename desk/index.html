@@ -422,8 +422,9 @@ td.trend svg{display:inline-block;vertical-align:middle}
   const STOCK = {}; for (const g in GROUP) for (const t of GROUP[g]) STOCK[t] = series((e) => (e[g] || {})[t], g);
   const callRows = (rows) => rows.map((c) => `<div class="call-row"><b>${esc(c.name)}</b><span class="conf">${esc(c.confidence[0].toUpperCase() + c.confidence.slice(1))}</span><span class="why">${esc(c.why)}</span></div>`).join('');
   const PILL = { 'open': 'open', 'on track': 'ok', 'right': 'ok', 'wrong': 'bad', 'closed': 'open' };
-  function spark(s, back) {
-    const pts = (back <= 7 ? s.slice(-7) : s.filter(([d]) => d >= cut(ASOF, back))).map((x) => x[1]);
+  // a trend line: the period's closes, or on 1D the last session through the day when it is saved (intra)
+  function spark(s, back, intra = null) {
+    const pts = !back && intra && intra.length > 1 ? intra.map((x) => x[1]) : (back <= 7 ? s.slice(-7) : s.filter(([d]) => d >= cut(ASOF, back))).map((x) => x[1]);
     if (pts.length < 2) return '';
     const w = 72, h = 18, min = Math.min(...pts), max = Math.max(...pts), sp = max - min || 1, st = (w - 4) / (pts.length - 1);
     const xy = pts.map((v, i) => [2 + i * st, h - 2 - (v - min) / sp * (h - 4)]);
@@ -593,12 +594,13 @@ td.trend svg{display:inline-block;vertical-align:middle}
     function drawStocks() {
       const back = period[1];
       $('chg-h').textContent = `Change (${period[0]})`;
-      $('trend-h').textContent = back <= 7 ? 'Last 7 days' : period[2];
+      const I1 = INTRA && INTRA[S.group];
+      $('trend-h').textContent = back > 7 ? period[2] : !back && I1 && I1.session ? `${WD[day(I1.session).getDay()]} ${day(I1.session).getDate()} ${MON[day(I1.session).getMonth()]} session` : 'Last 7 days';
       $('stk-note').innerHTML = X.stocksNote || '';
       $('stk-body').innerHTML = GROUP[S.group].map((t) => {
         const s = STOCK[t], fresh = s.length && s[s.length - 1][0] === ASOF;
         const last = fresh ? s[s.length - 1][1] : null, c = fresh ? change(s, back) : null, y = fresh ? ytd(s) : null;
-        return `<tr style="cursor:pointer" onclick="location='/desk/stock/?t=${encodeURIComponent(t)}'"><td class="name"><b>${NAMES[t]}</b><span>${t}</span></td><td class="trend">${fresh ? spark(s, back) : ''}</td><td class="num${last == null ? ' dash' : ''}">${last == null ? '—' : last.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td><td class="num"><span class="${cls(c)}">${pct(c)}</span></td><td class="num"><span class="${cls(y)}">${pct(y)}</span></td></tr>`;
+        return `<tr style="cursor:pointer" onclick="location='/desk/stock/?t=${encodeURIComponent(t)}'"><td class="name"><b>${NAMES[t]}</b><span>${t}</span></td><td class="trend">${fresh ? spark(s, back, INTRA && INTRA[S.group] && INTRA[S.group].series[t]) : ''}</td><td class="num${last == null ? ' dash' : ''}">${last == null ? '—' : last.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td><td class="num"><span class="${cls(c)}">${pct(c)}</span></td><td class="num"><span class="${cls(y)}">${pct(y)}</span></td></tr>`;
       }).join('');
     }
     segment($('stk-seg'), '1D', (p) => { period = p; drawStocks(); });
