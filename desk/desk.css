@@ -91,7 +91,7 @@ h2{margin:0;font-size:16px;line-height:22px;font-weight:600}
 .lrow.lead .k{color:var(--text);font-weight:500}
 .lrow.lead .v{font-size:18px;font-weight:600}
 .dash{color:var(--faint)}
-.up{color:var(--positive)} .down{color:var(--negative)}
+.up{color:var(--positive)} .down{color:var(--negative)} .inv.up{color:var(--negative)} .inv.down{color:var(--positive)}
 .chg::before{content:"";display:inline-block;width:0;height:0;margin-right:5px;vertical-align:1px;border-left:4px solid transparent;border-right:4px solid transparent}
 .chg.up::before{border-bottom:6px solid currentColor}
 .chg.down::before{border-top:6px solid currentColor}

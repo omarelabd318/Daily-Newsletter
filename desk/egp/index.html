@@ -45,7 +45,7 @@
 
     <section class="card c12">
       <div class="card-h"><div class="hgroup"><h2 id="ih">Inflation</h2><div class="ctabs" id="itab" aria-label="Measure"></div></div><div class="seg" id="iseg"></div></div>
-      <div class="hero"><span class="lvl num" id="ilvl"></span><span class="meta" id="imeta"></span></div>
+      <div class="hero"><span class="lvl num" id="ilvl"></span><span class="d num" id="ichg"></span><span class="meta" id="imeta"></span></div>
       <div class="midchart" id="ichart"></div>
       <p class="chart-cap" id="icap"></p>
     </section>
@@ -147,9 +147,14 @@
     const s = iReal ? real() : lg('infl_headline'), v = M.last(s), u = iReal ? ' pts' : '%', y = M.valueAt(s, M.cut(M.ASOF, iPer[1]));
     M.$('ih').textContent = iReal ? 'Real one-year yield' : 'Inflation';
     M.$('ilvl').textContent = v == null ? '—' : M.num(v, 1) + u;
+    // the change in points: inflation from the month before (falling shows green), the real yield over the last month
+    const pts = (c) => `${c > 0 ? '+' : c < 0 ? '−' : ''}${M.num(Math.abs(c), 1)} pts`;
+    const before = iReal ? M.valueAt(s, M.cut(M.ASOF, 30)) : ([...s].reverse().find(([, x]) => x !== v) || [])[1];
+    const c = v != null && before != null ? +(v - before).toFixed(2) : null;
+    M.$('ichg').innerHTML = c == null ? '' : `<span class="${M.cls(c)}${iReal ? '' : ' inv'}">${pts(c)}</span> ${iReal ? 'in a month' : 'on the month'}`;
     M.$('imeta').textContent = iReal ? 'One-year T-bill yield minus headline inflation' : 'Headline, annual, urban';
     M.chart(M.$('ichart'), s, iPer[1], iReal ? 'Real yield' : 'Inflation', Charts.fmt.dec(1), { mark: false });
-    M.$('icap').innerHTML = (y != null && v != null ? `${iPer[2]}: from <span class="num">${M.num(y, 1)}${u}</span> to <span class="num">${M.num(v, 1)}${u}</span> · ` : '')
+    M.$('icap').innerHTML = (y != null && v != null ? `${iPer[2]}: from <span class="num">${M.num(y, 1)}${u}</span> to <span class="num">${M.num(v, 1)}${u}</span> (<span class="num">${pts(v - y)}</span>) · ` : '')
       + (iReal ? 'above zero, T-bills pay more than prices rise' : 'published monthly by the central bank, about the 10th');
   };
   M.toggle(M.$('itab'), ['Inflation', 'Real yield'], (i) => { iReal = i === 1; drawI(); });
