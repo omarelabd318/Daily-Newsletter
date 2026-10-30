@@ -463,6 +463,14 @@ Also log, every day, with the same command:
 
 The weekly log check does not expect the rates and T-bill yields every day.
 
+**Bonus shares and splits:** every run, after logging, run
+`python3 .claude/skills/daily-newsletter/corporate_actions.py --check`. When an Egyptian stock in the log
+has passed its ex-date (the first session without the right to the free shares), confirm the ratio in the
+company's disclosure (Mubasher or Arab Finance, cross-checked against the reference price the script
+estimates), then run `corporate_actions.py --apply TICKER EXDATE BONUS` once (BONUS is free shares per
+share: 0.25 for one for every four) and refresh the spreadsheet. Without it, the charts show a fall that
+never happened to holders and the changes and YTD figures come out too low. Cash dividends are not adjusted.
+
 Then refresh the spreadsheet copy, `data/markets.xlsx`, and commit it too:
 
 ```
