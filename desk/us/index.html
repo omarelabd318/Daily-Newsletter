@@ -72,12 +72,13 @@
   let cur = IDX[0], per = M.PERIODS[2];
   const draw = () => {
     M.$('lvl').textContent = M.num(M.last(cur.s)); const dc = M.change(cur.s, 0); M.$('dchg').innerHTML = `<span class="${M.cls(dc)}">${M.pct(dc, 2)}</span>`;
+    if (!per[1]) { const c1 = M.dayChart(M.$('chart'), 'us', cur.k === 'nasdaq' ? 'COMP' : cur.k, cur.n, Charts.fmt.int), dc1 = M.change(cur.s, 0); M.$('cap').innerHTML = c1 ? `${c1} · on the day <span class="num ${M.cls(dc1)}">${M.pct(dc1, 2)}</span>` : ''; return; }
     M.chart(M.$('chart'), cur.s, per[1], cur.n, Charts.fmt.int);
     const c = M.change(cur.s, per[1]); M.$('cap').innerHTML = `${M.esc(cur.n)}, ${per[2].toLowerCase()}: <span class="num ${M.cls(c)}">${M.pct(c, 2)}</span> · this year <span class="num ${M.cls(M.ytd(cur.s))}">${M.pct(M.ytd(cur.s))}</span>`;
   };
   M.$('itabs').innerHTML = IDX.map((x, i) => `<button type="button" aria-pressed="${!i}">${M.esc(x.n)}</button>`).join('');
   M.$('itabs').querySelectorAll('button').forEach((b, i) => b.addEventListener('click', () => { M.$('itabs').querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); cur = IDX[i]; draw(); }));
-  M.segment(M.$('seg'), '1M', (p) => { per = p; draw(); }, M.PERIODS.slice(1)); draw();
+  M.segment(M.$('seg'), '1M', (p) => { per = p; draw(); }); draw();
   M.$('idx').innerHTML = IDX.map((x, i) => { const c = M.change(x.s, 0); return `<div class="lrow${i ? '' : ' lead'}"><span class="k">${M.esc(x.n)}</span><span class="v num">${M.num(M.last(x.s))}</span><span class="d num ${M.cls(c)}">${M.pct(c, 2)}</span></div>`; }).join('');
   M.$('rates').innerHTML = (P.rates || []).map((r) => `<div class="lrow"><span class="k">${M.esc(r.label)}</span><span class="v num${r.value == null ? ' dash' : ''}">${r.value == null ? '—' : M.esc(r.value)}</span><span class="d"></span></div>`).join('');
   let mback = 0; const dm = () => M.movers(M.$('movers'), M.GROUP.us, mback);

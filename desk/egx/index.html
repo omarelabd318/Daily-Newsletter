@@ -76,8 +76,10 @@
   const idx = M.series((e) => e.egx30, 'egx'), dc = M.change(idx, 0);
   M.$('lvl').textContent = M.num(M.last(idx));
   M.$('dchg').innerHTML = `<span class="${M.cls(dc)}">${M.pct(dc, 2)}</span>`;
-  const draw = (p) => { M.chart(M.$('chart'), idx, p[1], 'EGX30', Charts.fmt.int); const c = M.change(idx, p[1]); M.$('cap').innerHTML = `${p[2]}: <span class="num ${M.cls(c)}">${M.pct(c, 2)}</span> · this year <span class="num ${M.cls(M.ytd(idx))}">${M.pct(M.ytd(idx))}</span>`; };
-  M.segment(M.$('seg'), '1M', draw, M.PERIODS.slice(1)); draw(M.PERIODS[2]);
+  const draw = (p) => {
+    if (!p[1]) { const c1 = M.dayChart(M.$('chart'), 'egx', 'EGX30', 'EGX30', Charts.fmt.int); M.$('cap').innerHTML = c1 ? `${c1} · on the day <span class="num ${M.cls(dc)}">${M.pct(dc, 2)}</span>` : ''; return; }
+    M.chart(M.$('chart'), idx, p[1], 'EGX30', Charts.fmt.int); const c = M.change(idx, p[1]); M.$('cap').innerHTML = `${p[2]}: <span class="num ${M.cls(c)}">${M.pct(c, 2)}</span> · this year <span class="num ${M.cls(M.ytd(idx))}">${M.pct(M.ytd(idx))}</span>`; };
+  M.segment(M.$('seg'), '1M', draw); draw(M.PERIODS[2]);
   const signed = (c) => `<span class="${M.cls(c)}">${M.pct(c)}</span>`, dash = '<span class="dash">—</span>', S = P.session || {};
   M.$('stats').innerHTML = M.kv([['Close', M.num(M.last(idx))], ['Day', `<span class="${M.cls(dc)}">${M.pct(dc, 2)}</span>`], ['Week', signed(M.change(idx, 7))], ['Month', signed(M.change(idx, 30))], ['This year', signed(M.ytd(idx))],
     ['Turnover', S.turnover ? M.esc(S.turnover) : dash], ['Against 90-day average', S.vs90 ? M.esc(S.vs90) : dash], ['Advancers / decliners', S.breadth ? M.esc(S.breadth) : dash]]);

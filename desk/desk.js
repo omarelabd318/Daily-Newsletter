@@ -7,7 +7,7 @@ window.Desk = (function () {
   const cls = (v) => v == null ? 'dash' : v > 0 ? 'chg up' : v < 0 ? 'chg down' : 'chg flat';
   const num = (v, d = 2) => v == null ? '—' : v.toLocaleString('en-GB', { minimumFractionDigits: d, maximumFractionDigits: d });
   const get = (u) => fetch(u, { cache: 'no-cache' }).then((r) => r.ok ? r.json() : null).catch(() => null);
-  let ASOF = null, DESK = null;
+  let ASOF = null, DESK = null, INTRA = null;
   const day = (iso) => new Date(iso + 'T12:00:00');
   const cut = (iso, back) => new Date(day(iso) - back * 864e5).toISOString().slice(0, 10);
   const short = (iso) => day(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
@@ -75,6 +75,16 @@ window.Desk = (function () {
     const first = best.a + 1, same = d(first).getMonth() === d(best.b).getMonth();
     return [{ from: best.a, to: best.b, label: `${same ? dd(first) : mon(first)}–${mon(best.b)} ${p(best.m)}`, short: p(best.m) }];
   }
+  // the last session's prices through the day (desk/intraday.json): market 'egx' or 'us', key a ticker,
+  // 'EGX30' or 'COMP'. Returns a caption, or null when there is no one-day data for it.
+  function dayChart(el, market, key, name, fmt) {
+    const M_ = INTRA && INTRA[market], I = M_ && M_.series && M_.series[key]; el.innerHTML = '';
+    if (!I) { el.innerHTML = `<p class="sub" style="padding:24px 0">No one-day data for ${esc(name)}: ${market === 'us' && /^(sp500|dow)$/.test(key) ? 'no free source has its prices through the day.' : 'not saved for the last session.'}</p>`; return null; }
+    const vals = I.map((x) => x[1]), lo = Math.min(...vals), hi = Math.max(...vals), pad = (hi - lo) * 0.15 || lo * 0.002;
+    Charts.line(el, { labels: I.map((x) => x[0]), series: [{ name, values: vals }], format: fmt, endLabel: true, height: el.clientHeight, min: lo - pad, xAt: [0, Math.floor((I.length - 1) / 2), I.length - 1] });
+    const ch = (vals.at(-1) / vals[0] - 1) * 100;
+    return `${day(M_.session).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short' })}, ${I[0][0]}–${I.at(-1)[0]} ${market === 'egx' ? 'Cairo' : 'New York'} time: <span class="num ${cls(ch)}">${pct(ch, 2)}</span> from the first trade`;
+  }
   // a line chart of one series over a period (at least a month), with the biggest day marked when it stands out
   function chart(el, s, back, name, fmt, opts = {}) {
     const pts = s.filter(([d]) => d >= cut(ASOF, Math.max(back, 7))); el.innerHTML = '';
@@ -140,6 +150,7 @@ window.Desk = (function () {
     DESK = latest ? await get('/desk/days/' + latest + '.json') : null;
     if (!DESK) { main.innerHTML = '<p class="finding">No desk has been published yet.</p>'; return null; }
     ASOF = DESK.asOf;
+    INTRA = await get('/desk/intraday.json');
     const log = await get('/data/markets-recent.json');
     days = (log && log.days) || [];
     if (DESK.sample) document.querySelectorAll('[data-sample]').forEach((e) => { e.hidden = false; });
@@ -161,5 +172,5 @@ window.Desk = (function () {
       location.reload();
     });
   }
-  return { get ASOF() { return ASOF; }, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, init };
+  return { get ASOF() { return ASOF; }, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, init };
 })();

@@ -385,6 +385,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
   $('stamp').innerHTML = 'Closes to ' + esc(day(ASOF).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }).replace(',', '')) + '<br>Fetched ' + esc(D.fetched || '');
 
   // the data log: each entry holds the closes its edition showed, so a close belongs to the day before the entry
+  const INTRA = await get('/desk/intraday.json');
   const log = await get('/data/markets-recent.json');
   const days = (log && log.days) || [];
   function series(pick, market) {
@@ -408,10 +409,10 @@ td.trend svg{display:inline-block;vertical-align:middle}
   };
   const ytd = (s) => { const b = valueAt(s, (ASOF.slice(0, 4) - 1) + '-12-31'); return b && s.length ? (s[s.length - 1][1] / b - 1) * 100 : null; };
   const PERIODS = [['1D', 0, 'Last 7 days'], ['1W', 7, 'Last 7 days'], ['1M', 30, 'Last 30 days'], ['6M', 182, 'Last 6 months'], ['1Y', 365, 'Last 12 months']];
-  const segment = (el, start, onPick) => {
-    el.innerHTML = PERIODS.map((p) => `<button type="button" aria-pressed="${p[0] === start}">${p[0]}</button>`).join('');
+  const segment = (el, start, onPick, list = PERIODS) => {
+    el.innerHTML = list.map((p) => `<button type="button" aria-pressed="${p[0] === start}">${p[0]}</button>`).join('');
     el.querySelectorAll('button').forEach((b, i) => b.addEventListener('click', () => {
-      el.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); onPick(PERIODS[i]);
+      el.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); onPick(list[i]);
     }));
   };
   const NAMES = { COMI: 'Commercial International Bank', TMGH: 'Talaat Moustafa', ETEL: 'Telecom Egypt', PHDC: 'Palm Hills', SWDY: 'Elsewedy Electric', ORAS: 'Orascom Construction', FWRY: 'Fawry', ABUK: 'Abu Qir Fertilizers', HRHO: 'EFG Holding', CLHO: 'Cleopatra Hospital', JUFO: 'Juhayna', ALCN: 'Alexandria Containers',
@@ -491,6 +492,16 @@ td.trend svg{display:inline-block;vertical-align:middle}
     $('chart-name').textContent = S.chartName;
     $('chart-more').textContent = key === 'egypt' ? 'EGX page →' : 'US page →'; $('chart-more').href = key === 'egypt' ? '/desk/egx/' : '/desk/us/';
     function drawIdx(p) {
+      if (!p[1]) {   // the last session through the day, from desk/intraday.json
+        const el = $('egx-chart'), mk = S.market, key = S.chart === 'egx30' ? 'EGX30' : 'COMP', I = INTRA && INTRA[mk] && INTRA[mk].series[key]; el.innerHTML = '';
+        if (!I) { el.innerHTML = '<p class="chart-cap">The last session through the day is not saved yet; the morning run saves it once the session has closed.</p>'; $('egx-cap').textContent = ''; return; }
+        const v = I.map((x) => x[1]), lo = Math.min(...v), hi = Math.max(...v);
+        Charts.line(el, { labels: I.map((x) => x[0]), series: [{ name: S.chartName, values: v }], format: Charts.fmt.int, endLabel: true, height: el.clientHeight, min: lo - (hi - lo) * 0.15, xAt: [0, Math.floor((I.length - 1) / 2), I.length - 1] });
+        const ch = (v.at(-1) / v[0] - 1) * 100;
+        const dd = change(idx, 0);
+        $('egx-cap').innerHTML = `${day(INTRA[mk].session).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short' })}, ${I[0][0]}–${I.at(-1)[0]} ${mk === 'egx' ? 'Cairo' : 'New York'} time: <span class="num ${cls(ch)}">${pct(ch, 2)}</span> from the first trade · on the day <span class="num ${cls(dd)}">${pct(dd, 2)}</span>`;
+        return;
+      }
       const back = Math.max(p[1], 7), pts = idx.filter(([d]) => d >= cut(ASOF, back)), el = $('egx-chart'); el.innerHTML = '';
       if (pts.length < 2) { el.textContent = 'Not enough closes logged yet.'; $('egx-cap').textContent = ''; return; }
       const ann = bigMove(pts);
