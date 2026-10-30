@@ -6,7 +6,7 @@ description: House rules for the Markets Desk, the daily markets analysis page p
 # Markets Desk
 
 Status: written every day by the newsletter's scheduled runs, after the edition is published (see Daily run).
-The 30 October desk is a sample kept for reference.
+The first desk is 30 October 2026.
 These are the rules agreed so far; add to them as the desk is finished.
 
 ## Daily run

@@ -2,7 +2,6 @@
  "date": "2026-10-30",
  "asOf": "2026-10-29",
  "fetched": "Fri 30 Oct, 05:22 Cairo",
- "sample": true,
  "egypt": {
   "finding": "The central bank raised rates by 100 basis points after Thursday's close to defend the pound, which is down 8% against the dollar in a month, mostly for local reasons. The EGX30 rose 0.6% to 49,596 as Banque du Caire's offering was executed.",
   "next": "Next session: Sunday.",
@@ -35,12 +34,12 @@
      "rows": [
       {
        "label": "Brent, $ per barrel",
-       "value": null,
+       "value": "114.88",
        "change": null
       },
       {
        "label": "Gold, $ per ounce",
-       "value": null,
+       "value": "4,025",
        "change": null
       },
       {
@@ -50,13 +49,13 @@
       },
       {
        "label": "Bitcoin, $",
-       "value": "77,242",
-       "change": -3.19
+       "value": "77,554",
+       "change": -4.74
       }
      ]
     }
    ],
-   "note": "A dash is a figure not yet confirmed by two sources this morning."
+   "note": "A dash is a figure not confirmed by two sources this morning: Brent's and gold's day changes differ between sources, and the dollar index was not confirmed."
   },
   "board": {
    "horizon": "EGX sectors · next 1–4 weeks",
@@ -99,38 +98,38 @@
   "week": [
    {
     "day": "Sun 1 Nov",
-    "event": "EGX reopens after the central bank",
+    "event": "EGX reopens after the rate hike",
     "impact": "high",
-    "why": "The first chance to price the rate decision; watch banks and developers in the first hour."
+    "why": "The first session to price Thursday's 100 bps hike; watch banks and developers in the first hour."
    },
    {
     "day": "Mon 2 Nov",
     "event": "Banque du Caire starts trading",
     "impact": "high",
-    "why": "Retail book 27 times covered at EGP 5.30; a strong debut pulls money towards banks."
+    "why": "Retail tranche 27 times covered at EGP 5.30; retail buyers can sell back at the offer price for 30 days, which cushions the debut."
    },
    {
-    "day": "Tue 10 Nov",
+    "day": "Mid-Nov, date to confirm",
     "event": "Egypt October inflation",
     "impact": "high",
-    "why": "The number the central bank answers to; a rise above September keeps rates high."
+    "why": "The figure the central bank answers to; a rise keeps the case for high rates."
    }
   ],
   "views": [
    {
-    "call": "EGX30 neutral into the decision",
+    "call": "The hike supports the pound and the banks",
     "status": "open",
-    "note": "From 28 Oct at 49,281. Since then +0.6%. Wrong if Sunday's turnover tops its average with foreigners buying."
+    "note": "From 30 Oct: USD/EGP 56.04, CIB EGP 120.47, EGX30 49,596. Wrong if the dollar closes above EGP 57 before the next T-bill auction."
    },
    {
     "call": "Developers lag while rates stay high",
-    "status": "on track",
-    "note": "From 26 Oct. Talaat Moustafa −1.5% since; the EGX30 +2.4%."
+    "status": "open",
+    "note": "From 30 Oct: Talaat Moustafa EGP 80.40, Palm Hills EGP 11.40, against the EGX30 at 49,596; judged over four weeks."
    },
    {
-    "call": "Dollar earners outperform as the pound slides",
+    "call": "Oil above $110 weighs on the pound",
     "status": "open",
-    "note": "From 29 Oct. Orascom +0.9% and Elsewedy −0.7% on the day; judged over four weeks."
+    "note": "From 30 Oct: Brent $114.88. Wrong if Brent falls below $100."
    }
   ],
   "flows": {
@@ -225,12 +224,12 @@
      "rows": [
       {
        "label": "Brent, $ per barrel",
-       "value": null,
+       "value": "114.88",
        "change": null
       },
       {
        "label": "Gold, $ per ounce",
-       "value": null,
+       "value": "4,025",
        "change": null
       },
       {
@@ -240,13 +239,13 @@
       },
       {
        "label": "Bitcoin, $",
-       "value": "77,242",
-       "change": -3.19
+       "value": "77,554",
+       "change": -4.74
       }
      ]
     }
    ],
-   "note": "A dash is a figure not yet confirmed by two sources this morning."
+   "note": "A dash is a figure not confirmed by two sources this morning: Brent's and gold's day changes differ between sources, and the dollar index was not confirmed."
   },
   "board": {
    "horizon": "US sectors · next 1–4 weeks",
@@ -288,34 +287,34 @@
   "stocksNote": "<b>Worst on Thursday:</b> Alphabet −12.6%. <b>Best:</b> Walmart +2.1%.",
   "week": [
    {
-    "day": "Fri 6 Nov",
-    "event": "US jobs report",
-    "impact": "high",
-    "why": "Sets the tone for rate bets and the dollar index, which feeds straight into the pound."
-   },
-   {
-    "day": "Thu 12 Nov",
-    "event": "US October inflation",
-    "impact": "high",
-    "why": "A hot reading pushes rate cuts further out and lifts the dollar."
-   },
-   {
-    "day": "Nov, date to confirm",
-    "event": "Apple and Amazon results",
+    "day": "Tue 3 Nov",
+    "event": "US midterm elections",
     "impact": "medium",
-    "why": "The next test of whether AI spending pays back; reports disagree on the dates."
+    "why": "Control of Congress shapes spending and tariff policy; markets can swing on the result."
+   },
+   {
+    "day": "Early Nov, date to confirm",
+    "event": "Apple results",
+    "impact": "medium",
+    "why": "After Alphabet's and Amazon's misses, the next test of big tech's earnings."
+   },
+   {
+    "day": "Wed 9 Dec",
+    "event": "Fed meeting",
+    "impact": "high",
+    "why": "Strong growth and 3.6% PCE inflation keep a hike in play; a hike lifts the dollar, which presses on the pound."
    }
   ],
   "views": [
    {
     "call": "Money rotates from AI spenders to steady earners",
     "status": "open",
-    "note": "From 29 Oct. Walmart +2.1% and JPMorgan +1.3% against Alphabet −12.6% on the day; judged over four weeks."
+    "note": "From 30 Oct: Walmart $121.25, JPMorgan $343.58, Alphabet $283.82; judged over four weeks."
    },
    {
-    "call": "Alphabet's AI spend is priced in",
-    "status": "wrong",
-    "note": "Called on 27 Oct. Alphabet fell 12.6% on its results, so the view was wrong; it stays on the record."
+    "call": "Amazon trades lower after its miss",
+    "status": "open",
+    "note": "From 30 Oct: closed at $243.79 before results, about 6% lower after hours. Wrong if it closes back above $245 within two weeks."
    }
   ],
   "calls": [
