@@ -114,8 +114,9 @@
     const dates = f30.map((x) => x[0]), b1 = f30[0][1], b2 = M.valueAt(dx, dates[0]);
     const a = f30.map((x) => +(x[1] / b1 * 100).toFixed(2)), b = dates.map((d) => +(M.valueAt(dx, d) / b2 * 100).toFixed(2));
     const res = Charts.line(M.$('pvd'), { ...M.axis(dates, 30, M.$('pvd').clientWidth), series: [{ name: 'Dollar in pounds', values: a }, { name: 'Dollar index', values: b, muted: true }], format: Charts.fmt.dec(1), height: M.$('pvd').clientHeight, min: Math.floor(Math.min(...a, ...b) - 1) });
-    if (res && res.legend) M.$('pvd-legend').appendChild(res.legend);
     const da = a.at(-1) - 100, db = b.at(-1) - 100;
+    // each line's change over the 30 days, beside its name in the legend
+    if (res && res.legend) { [da, db].forEach((c, i) => { const li = res.legend.children[i]; if (li) li.insertAdjacentHTML('beforeend', `<span class="num ${M.cls(c)}">${M.pct(c)}</span>`); }); M.$('pvd-legend').appendChild(res.legend); }
     M.$('pvd-read').innerHTML = da > 0.5
       ? `The dollar is <span class="num">${M.pct(da)}</span> against the pound and <span class="num">${M.pct(db)}</span> against major currencies, so about <b>${Math.max(0, Math.min(100, Math.round((1 - Math.max(0, db) / da) * 100)))}%</b> of the pound's fall is local.`
       : `The dollar is <span class="num">${M.pct(da)}</span> against the pound and <span class="num">${M.pct(db)}</span> against major currencies over the month.`;
