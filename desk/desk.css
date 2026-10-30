@@ -148,7 +148,7 @@ td{height:44px;border-top:1px solid var(--rule)}
 th.num,td.num{text-align:right}
 td.name b{font-weight:500}
 td.name span{color:var(--muted);font-size:12px;margin-left:6px}
-td.trend{width:96px;text-align:center}
+td.trend,th.trend{width:96px;text-align:center}
 td.trend svg{display:inline-block;vertical-align:middle}
 .spark path{fill:none;stroke:var(--chart-muted);stroke-width:1.5}
 .spark circle{fill:var(--chart-1)}
