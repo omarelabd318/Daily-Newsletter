@@ -30,9 +30,8 @@ window.Desk = (function () {
   function toggle(el, names, onPick) {
     el.innerHTML = names.map((n, i) => `<button type="button" aria-pressed="${!i}">${esc(n)}</button>`).join('');
     el.querySelectorAll('button').forEach((b, i) => b.addEventListener('click', () => {
-      el.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); remember(el, names[i]); onPick(i);
+      el.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); onPick(i);
     }));
-    restore(el, recall(el));
   }
   // a pound series in dollars: each value divided by that day's dollar rate (strips out the pound's moves)
   function usd(s) {
@@ -63,18 +62,13 @@ window.Desk = (function () {
   const range52 = (s) => { const p = s.filter(([d]) => d >= cut(ASOF, 365)).map((x) => x[1]); return [Math.min(...p), Math.max(...p)]; };
   const stock = (t) => series((e) => (e[GROUP.egx.includes(t) ? 'egx' : 'us'] || {})[t], GROUP.egx.includes(t) ? 'egx' : 'us');
 
-  // switches remember the viewer's last choice on this device (per page and switch); after the page draws
-  // its default, a remembered choice different from it is applied with a click
-  const memKey = (el) => 'desk:' + location.pathname + ':' + el.id;
-  const recall = (el) => { try { return localStorage.getItem(memKey(el)); } catch (e) { return null; } };
-  const remember = (el, v) => { try { localStorage.setItem(memKey(el), v); } catch (e) {} };
-  const restore = (el, v) => { if (v == null) return; const b = [...el.querySelectorAll('button')].find((x) => x.textContent === v && x.getAttribute('aria-pressed') !== 'true'); if (b) setTimeout(() => b.click(), 0); };
+  // every visit opens on the defaults; clear the choices an earlier version of the desk remembered
+  try { Object.keys(localStorage).filter((k) => k.startsWith('desk:')).forEach((k) => localStorage.removeItem(k)); } catch (e) {}
   function segment(el, start, onPick, list = PERIODS) {
     el.innerHTML = list.map((p) => `<button type="button" aria-pressed="${p[0] === start}">${p[0]}</button>`).join('');
     el.querySelectorAll('button').forEach((b, i) => b.addEventListener('click', () => {
-      el.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); remember(el, list[i][0]); onPick(list[i]);
+      el.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); onPick(list[i]);
     }));
-    restore(el, recall(el));
   }
   // a trend line: the period's closes, or on 1D the last session through the day when it is saved (intra)
   function spark(s, back, intra = null) {
