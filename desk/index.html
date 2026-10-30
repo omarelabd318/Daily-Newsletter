@@ -67,6 +67,7 @@ button{font:inherit;color:inherit}
 .side-foot button{display:flex;align-items:center;gap:8px;height:32px;margin:0 -10px 8px;padding:0 10px;width:calc(100% + 20px);border:0;background:none;border-radius:6px;cursor:pointer;color:var(--muted)}
 .side-foot button:hover{background:var(--raised);color:var(--text)}
 .topbar{display:none}
+.secswitch{display:none}
 
 /* canvas */
 .canvas{padding:32px;min-width:0}
@@ -191,6 +192,9 @@ td.trend svg{display:inline-block;vertical-align:middle}
   .topbar{display:flex;align-items:center;justify-content:space-between;height:48px;padding:0 16px;border-bottom:1px solid var(--border);background:var(--ground);position:sticky;top:0;z-index:2}
   .topbar .brand{padding:0}
   .topbar .btn{height:36px}
+  .secswitch{display:inline-flex;gap:2px;margin-top:14px;padding:2px;border-radius:7px;background:var(--raised)}
+  .secswitch a{display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:5px;border:1px solid transparent;text-decoration:none;color:var(--muted);font-weight:500}
+  .secswitch a[aria-current="page"]{background:var(--surface);color:var(--text);border-color:var(--border)}
   .canvas{padding:16px}
   .titlerow{flex-direction:column;gap:12px}
   .actions{width:100%;justify-content:space-between}
@@ -215,8 +219,10 @@ td.trend svg{display:inline-block;vertical-align:middle}
       <span><b>Markets Desk</b><span>Daily Newsletter · EGP</span></span>
     </div>
     <nav class="nav" aria-label="Main">
-      <div class="navgroup">Today</div>
-      <a href="./" aria-current="page"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke-width="1.5"><path d="M2 13h12M4 10l3-3 2 2 4-5"/></svg>Desk</a>
+      <div class="navgroup">Today's desk</div>
+      <a href="#egypt" data-sec="egypt"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke-width="1.5"><path d="M2 13h12M4 10l3-3 2 2 4-5"/></svg>Egypt</a>
+      <a href="#global" data-sec="global"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke-width="1.5"><circle cx="8" cy="8" r="5.5"/><path d="M2.5 8h11M8 2.5c1.8 1.6 1.8 9.4 0 11M8 2.5c-1.8 1.6-1.8 9.4 0 11"/></svg>USA &amp; others</a>
+      <div class="navgroup">Newsletter</div>
       <a href="../"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke-width="1.5"><path d="M3 2.5h10v11H3zM5.5 5.5h5M5.5 8h5M5.5 10.5h3"/></svg>Today's newsletter</a>
       <div class="navgroup">Library</div>
       <a href="../data/markets.xlsx"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke-width="1.5"><path d="M3 3h10v10H3zM3 6.5h10M3 10h10M6.5 3v10"/></svg>Data log (Excel)</a>
@@ -238,6 +244,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
         <div>
           <h1 id="title">Markets Desk</h1>
           <p class="finding" id="finding"></p>
+          <div class="secswitch" role="group" aria-label="Section"><a href="#egypt" data-sec="egypt">Egypt</a><a href="#global" data-sec="global">USA &amp; others</a></div>
         </div>
         <div class="actions">
           <div class="stamp num" id="stamp"></div>
@@ -253,7 +260,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
             <p class="ledger-note" id="close-note"></p>
           </section>
           <section class="card" id="c-pvd" aria-labelledby="h-pvd">
-            <div class="card-h"><h2 id="h-pvd">Pound or dollar?</h2><span class="meta">Last 30 days</span></div>
+            <div class="card-h"><h2 id="h-pvd">Pound or dollar?</h2><span class="meta" id="side-meta">Last 30 days</span></div>
             <div class="legend" id="pvd-legend"></div>
             <div class="pvd-plot" id="pvd"></div>
             <p class="pvd-read" id="pvd-read"></p>
@@ -275,7 +282,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
                 <div class="notice" id="top-notice" hidden></div>
               </div>
               <div>
-                <div class="card-h"><span class="meta">EGX30</span><div class="seg" role="group" aria-label="EGX30 period" id="egx-seg"></div></div>
+                <div class="card-h"><span class="meta" id="chart-name">EGX30</span><div class="seg" role="group" aria-label="Chart period" id="egx-seg"></div></div>
                 <div class="chartbox" id="egx-chart"></div>
                 <p class="chart-cap" id="egx-cap"></p>
               </div>
@@ -291,8 +298,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
           </section>
 
           <section class="card span2" id="c-stocks" aria-labelledby="h-stocks">
-            <div class="card-h"><h2 id="h-stocks">Your stocks</h2><div class="seg" role="group" aria-label="Change period" id="stk-seg"></div></div>
-            <div class="tabs" role="tablist"><button role="tab" aria-selected="true" data-g="egx">Egypt 12</button><button role="tab" aria-selected="false" data-g="us">USA 12</button></div>
+            <div class="card-h"><h2 id="h-stocks">Stocks</h2><div class="seg" role="group" aria-label="Change period" id="stk-seg"></div></div>
             <table>
               <thead><tr><th>Stock</th><th class="trend" id="trend-h">Last 7 days</th><th class="num">Close</th><th class="num" id="chg-h">Change (1D)</th><th class="num">YTD</th></tr></thead>
               <tbody id="stk-body"></tbody>
@@ -335,33 +341,12 @@ td.trend svg{display:inline-block;vertical-align:middle}
   const cut = (iso, back) => new Date(day(iso) - back * 864e5).toISOString().slice(0, 10);
   const short = (iso) => day(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
 
-  // header
-  $('title').textContent = 'Desk · ' + day(D.date).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
-  document.title = 'Markets Desk · ' + day(D.date).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }).replace(',', '');
-  $('finding').innerHTML = esc(D.finding) + (D.next ? ' <span class="when">' + esc(D.next) + '</span>' : '');
+  const SECTIONS = {
+    egypt: { name: 'Egypt', chart: 'egx30', chartName: 'EGX30', market: 'egx', group: 'egx' },
+    global: { name: 'USA & others', chart: 'nasdaq', chartName: 'Nasdaq', market: 'us', group: 'us' },
+  };
+  const longDate = day(D.date).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
   $('stamp').innerHTML = 'Closes to ' + esc(day(ASOF).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }).replace(',', '')) + '<br>Fetched ' + esc(D.fetched || '');
-
-  // close ledger
-  $('h-close').textContent = D.close.title || 'Close';
-  $('close-rows').innerHTML = D.close.groups.map((g) => '<h3>' + esc(g.name) + '</h3>' + g.rows.map((r) =>
-    `<div class="lrow${r.lead ? ' lead' : ''}"><span class="k">${esc(r.label)}</span><span class="v num${r.value == null ? ' dash' : ''}">${r.value == null ? '—' : esc(r.value)}</span><span class="d num ${cls(r.change)}">${r.change == null ? '—' : pct(r.change, 2)}</span></div>`).join('')).join('');
-  $('close-note').textContent = D.close.note || '';
-
-  // top call
-  const T = D.top;
-  $('h-read').textContent = T.headline; $('top-body').textContent = T.body;
-  $('top-view').textContent = T.view; $('top-moves').textContent = T.moves; $('top-wrong').textContent = T.wrong;
-  $('top-conf').textContent = 'Confidence: ' + T.confidence;
-  if (T.notice) { $('top-notice').textContent = T.notice; $('top-notice').hidden = false; }
-
-  // board, week, views
-  const callRows = (rows) => rows.map((c) => `<div class="call-row"><b>${esc(c.name)}</b><span class="conf">${esc(c.confidence[0].toUpperCase() + c.confidence.slice(1))}</span><span class="why">${esc(c.why)}</span></div>`).join('');
-  $('board-h').textContent = D.board.horizon || '';
-  $('helped').innerHTML = callRows(D.board.helped); $('hurt').innerHTML = callRows(D.board.hurt);
-  $('week').innerHTML = D.week.map((w) => `<div class="wk"><span class="day">${esc(w.day)}</span><b>${esc(w.event)}</b><span class="imp${w.impact === 'high' ? ' high' : ''}">${esc(w.impact[0].toUpperCase() + w.impact.slice(1))}</span><span class="why">${esc(w.why)}</span></div>`).join('');
-  const PILL = { 'open': 'open', 'on track': 'ok', 'right': 'ok', 'wrong': 'bad', 'closed': 'open' };
-  $('views').innerHTML = D.views.map((v) => `<div class="view"><b>${esc(v.call)}</b><span class="pill ${PILL[v.status] || 'open'}">${esc(v.status[0].toUpperCase() + v.status.slice(1))}</span><span class="why">${esc(v.note)}</span></div>`).join('');
-  if (D.sample) $('views-h').textContent = 'Sample rows · checked each morning';
 
   // the data log: each entry holds the closes its edition showed, so a close belongs to the day before the entry
   const log = await get('../data/markets-recent.json');
@@ -393,43 +378,12 @@ td.trend svg{display:inline-block;vertical-align:middle}
       el.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); onPick(PERIODS[i]);
     }));
   };
-
-  // EGX30, the main data element
-  const egx = series((e) => e.egx30, 'egx');
-  function drawEgx(p) {
-    const back = Math.max(p[1], 30), pts = egx.filter(([d]) => d >= cut(ASOF, back)), el = $('egx-chart'); el.innerHTML = '';
-    if (pts.length < 2) { el.textContent = 'Not enough EGX30 closes logged yet.'; return; }
-    const big = pts.reduce((m, x, i) => i && Math.abs(x[1] / pts[i - 1][1] - 1) > Math.abs(m.v) ? { i, v: x[1] / pts[i - 1][1] - 1 } : m, { i: -1, v: 0 });
-    const ann = big.i > 0 && Math.abs(big.v) > 0.025 ? [{ at: big.i, label: `${short(pts[big.i][0])} ${pct(big.v * 100)}`, short: pct(big.v * 100) }] : [];
-    const lo = Math.min(...pts.map((x) => x[1]));
-    Charts.line(el, { labels: pts.map((x) => short(x[0])), series: [{ name: 'EGX30', values: pts.map((x) => x[1]) }], format: Charts.fmt.int, annotations: ann, endLabel: true, height: el.clientHeight, min: Math.floor(lo * 0.97 / 1000) * 1000 });
-    const c = change(egx, p[1]), y = ytd(egx);
-    $('egx-cap').innerHTML = `${p[0] === '1D' ? 'On the day' : p[2]}: <span class="num ${cls(c)}">${pct(c, 2)}</span> · this year <span class="num ${cls(y)}">${pct(y)}</span>`;
-  }
-  segment($('egx-seg'), '1M', drawEgx); drawEgx(PERIODS[2]);
-
-  // Pound or dollar: USD/EGP against the dollar index, both from 100 thirty days back
-  (function () {
-    const fx = series((e) => e.usd_egp, 'fx').filter(([d]) => d >= cut(ASOF, 30));
-    const dx = series((e) => e.dxy, 'us');
-    if (fx.length < 2 || !dx.length) { $('pvd-read').textContent = 'Not enough logged rates yet.'; return; }
-    const dates = fx.map((x) => x[0]), b1 = fx[0][1], b2 = valueAt(dx, dates[0]);
-    const a = fx.map((x) => +(x[1] / b1 * 100).toFixed(2)), b = dates.map((d) => +(valueAt(dx, d) / b2 * 100).toFixed(2));
-    const pv = $('pvd');
-    const res = Charts.line(pv, { labels: dates.map(short), series: [{ name: 'Dollar in pounds', values: a }, { name: 'Dollar index', values: b, muted: true }], format: Charts.fmt.dec(1), height: pv.clientHeight, min: Math.floor(Math.min(...a, ...b) - 1) });
-    if (res && res.legend) $('pvd-legend').appendChild(res.legend);
-    const da = a[a.length - 1] - 100, db = b[b.length - 1] - 100;
-    $('pvd-read').innerHTML = da > 0.5
-      ? `The dollar is <span class="num">${pct(da)}</span> against the pound and <span class="num">${pct(db)}</span> against major currencies, so about <b>${Math.max(0, Math.min(100, Math.round((1 - Math.max(0, db) / da) * 100)))}%</b> of the pound's fall is local.`
-      : `The dollar is <span class="num">${pct(da)}</span> against the pound and <span class="num">${pct(db)}</span> against major currencies over the month.`;
-  })();
-
-  // Your stocks
   const NAMES = { COMI: 'Commercial International Bank', TMGH: 'Talaat Moustafa', ETEL: 'Telecom Egypt', PHDC: 'Palm Hills', SWDY: 'Elsewedy Electric', ORAS: 'Orascom Construction', FWRY: 'Fawry', ABUK: 'Abu Qir Fertilizers', HRHO: 'EFG Holding', CLHO: 'Cleopatra Hospital', JUFO: 'Juhayna', ALCN: 'Alexandria Containers',
     AAPL: 'Apple', MSFT: 'Microsoft', NVDA: 'Nvidia', AMZN: 'Amazon', GOOGL: 'Alphabet', META: 'Meta', TSLA: 'Tesla', JPM: 'JPMorgan Chase', XOM: 'Exxon Mobil', AVGO: 'Broadcom', 'BRK.B': 'Berkshire Hathaway', WMT: 'Walmart' };
   const GROUP = { egx: ['COMI', 'TMGH', 'ETEL', 'PHDC', 'SWDY', 'ORAS', 'FWRY', 'ABUK', 'HRHO', 'CLHO', 'JUFO', 'ALCN'], us: ['AAPL', 'MSFT', 'NVDA', 'AMZN', 'GOOGL', 'META', 'TSLA', 'JPM', 'XOM', 'AVGO', 'BRK.B', 'WMT'] };
   const STOCK = {}; for (const g in GROUP) for (const t of GROUP[g]) STOCK[t] = series((e) => (e[g] || {})[t], g);
-  let group = 'egx', period = PERIODS[0];
+  const callRows = (rows) => rows.map((c) => `<div class="call-row"><b>${esc(c.name)}</b><span class="conf">${esc(c.confidence[0].toUpperCase() + c.confidence.slice(1))}</span><span class="why">${esc(c.why)}</span></div>`).join('');
+  const PILL = { 'open': 'open', 'on track': 'ok', 'right': 'ok', 'wrong': 'bad', 'closed': 'open' };
   function spark(s, back) {
     const pts = (back <= 7 ? s.slice(-7) : s.filter(([d]) => d >= cut(ASOF, back))).map((x) => x[1]);
     if (pts.length < 2) return '';
@@ -437,22 +391,95 @@ td.trend svg{display:inline-block;vertical-align:middle}
     const xy = pts.map((v, i) => [2 + i * st, h - 2 - (v - min) / sp * (h - 4)]);
     return `<svg class="spark" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true"><path d="${xy.map((c, i) => (i ? 'L' : 'M') + c[0].toFixed(1) + ' ' + c[1].toFixed(1)).join('')}"/><circle cx="${xy.at(-1)[0].toFixed(1)}" cy="${xy.at(-1)[1].toFixed(1)}" r="2.2"/></svg>`;
   }
-  function drawStocks() {
-    const back = period[1];
-    $('chg-h').textContent = `Change (${period[0]})`;
-    $('trend-h').textContent = back <= 7 ? 'Last 7 days' : period[2];
-    $('stk-note').innerHTML = (D.notes && D.notes[group]) || '';
-    $('stk-body').innerHTML = GROUP[group].map((t) => {
-      const s = STOCK[t], fresh = s.length && s[s.length - 1][0] === ASOF;
-      const last = fresh ? s[s.length - 1][1] : null, c = fresh ? change(s, back) : null, y = fresh ? ytd(s) : null;
-      return `<tr><td class="name"><b>${NAMES[t]}</b><span>${t}</span></td><td class="trend">${fresh ? spark(s, back) : ''}</td><td class="num${last == null ? ' dash' : ''}">${last == null ? '—' : last.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td><td class="num"><span class="${cls(c)}">${pct(c)}</span></td><td class="num"><span class="${cls(y)}">${pct(y)}</span></td></tr>`;
-    }).join('');
+
+  function render(key) {
+    const S = SECTIONS[key], X = D[key];
+    document.querySelectorAll('[data-sec]').forEach((a) => { if (a.dataset.sec === key) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+    $('title').textContent = S.name + ' · ' + longDate;
+    document.title = 'Markets Desk · ' + S.name + ' · ' + day(D.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+    $('finding').innerHTML = esc(X.finding) + (X.next ? ' <span class="when">' + esc(X.next) + '</span>' : '');
+
+    $('h-close').textContent = X.close.title || 'Close';
+    $('close-rows').innerHTML = X.close.groups.map((g) => '<h3>' + esc(g.name) + '</h3>' + g.rows.map((r) =>
+      `<div class="lrow${r.lead ? ' lead' : ''}"><span class="k">${esc(r.label)}</span><span class="v num${r.value == null ? ' dash' : ''}">${r.value == null ? '—' : esc(r.value)}</span><span class="d num ${cls(r.change)}">${r.change == null ? '—' : pct(r.change, 2)}</span></div>`).join('')).join('');
+    $('close-note').textContent = X.close.note || '';
+
+    const T = X.top;
+    $('h-read').textContent = T.headline; $('top-body').textContent = T.body;
+    $('top-view').textContent = T.view; $('top-moves').textContent = T.moves; $('top-wrong').textContent = T.wrong;
+    $('top-conf').textContent = 'Confidence: ' + T.confidence;
+    $('top-notice').hidden = !T.notice; $('top-notice').textContent = T.notice || '';
+
+    $('board-h').textContent = X.board.horizon || '';
+    $('helped').innerHTML = callRows(X.board.helped); $('hurt').innerHTML = callRows(X.board.hurt);
+    $('week').innerHTML = X.week.map((w) => `<div class="wk"><span class="day">${esc(w.day)}</span><b>${esc(w.event)}</b><span class="imp${w.impact === 'high' ? ' high' : ''}">${esc(w.impact[0].toUpperCase() + w.impact.slice(1))}</span><span class="why">${esc(w.why)}</span></div>`).join('');
+    $('views').innerHTML = X.views.map((v) => `<div class="view"><b>${esc(v.call)}</b><span class="pill ${PILL[v.status] || 'open'}">${esc(v.status[0].toUpperCase() + v.status.slice(1))}</span><span class="why">${esc(v.note)}</span></div>`).join('');
+    $('views-h').textContent = D.sample ? 'Sample rows · checked each morning' : 'Checked each morning';
+
+    // the section's index, in the one chart hue
+    const idx = series((e) => e[S.chart], S.market);
+    $('chart-name').textContent = S.chartName;
+    function drawIdx(p) {
+      const back = Math.max(p[1], 30), pts = idx.filter(([d]) => d >= cut(ASOF, back)), el = $('egx-chart'); el.innerHTML = '';
+      if (pts.length < 2) { el.textContent = 'Not enough closes logged yet.'; $('egx-cap').textContent = ''; return; }
+      const big = pts.reduce((m, x, i) => i && Math.abs(x[1] / pts[i - 1][1] - 1) > Math.abs(m.v) ? { i, v: x[1] / pts[i - 1][1] - 1 } : m, { i: -1, v: 0 });
+      const ann = big.i > 0 && Math.abs(big.v) > 0.025 ? [{ at: big.i, label: `${short(pts[big.i][0])} ${pct(big.v * 100)}`, short: pct(big.v * 100) }] : [];
+      const lo = Math.min(...pts.map((x) => x[1]));
+      Charts.line(el, { labels: pts.map((x) => short(x[0])), series: [{ name: S.chartName, values: pts.map((x) => x[1]) }], format: Charts.fmt.int, annotations: ann, endLabel: true, height: el.clientHeight, min: Math.floor(lo * 0.97 / 1000) * 1000 });
+      const c = change(idx, p[1]), y = ytd(idx);
+      $('egx-cap').innerHTML = `${p[0] === '1D' ? 'On the day' : p[2]}: <span class="num ${cls(c)}">${pct(c, 2)}</span> · this year <span class="num ${cls(y)}">${pct(y)}</span>`;
+    }
+    segment($('egx-seg'), '1M', drawIdx); drawIdx(PERIODS[2]);
+
+    // side card: Egypt asks whether the pound's move is local; USA & others shows oil, the price that reaches Egypt most
+    $('pvd-legend').innerHTML = ''; $('pvd').innerHTML = '';
+    if (key === 'egypt') {
+      $('h-pvd').textContent = 'Pound or dollar?'; $('side-meta').textContent = 'Last 30 days';
+      const fx = series((e) => e.usd_egp, 'fx').filter(([d]) => d >= cut(ASOF, 30));
+      const dx = series((e) => e.dxy, 'us');
+      if (fx.length < 2 || !dx.length) { $('pvd-read').textContent = 'Not enough logged rates yet.'; }
+      else {
+        const dates = fx.map((x) => x[0]), b1 = fx[0][1], b2 = valueAt(dx, dates[0]);
+        const a = fx.map((x) => +(x[1] / b1 * 100).toFixed(2)), b = dates.map((d) => +(valueAt(dx, d) / b2 * 100).toFixed(2));
+        const pv = $('pvd');
+        const res = Charts.line(pv, { labels: dates.map(short), series: [{ name: 'Dollar in pounds', values: a }, { name: 'Dollar index', values: b, muted: true }], format: Charts.fmt.dec(1), height: pv.clientHeight, min: Math.floor(Math.min(...a, ...b) - 1), xAt: [0, Math.floor((dates.length - 1) / 2), dates.length - 1] });
+        if (res && res.legend) $('pvd-legend').appendChild(res.legend);
+        const da = a[a.length - 1] - 100, db = b[b.length - 1] - 100;
+        $('pvd-read').innerHTML = da > 0.5
+          ? `The dollar is <span class="num">${pct(da)}</span> against the pound and <span class="num">${pct(db)}</span> against major currencies, so about <b>${Math.max(0, Math.min(100, Math.round((1 - Math.max(0, db) / da) * 100)))}%</b> of the pound's fall is local.`
+          : `The dollar is <span class="num">${pct(da)}</span> against the pound and <span class="num">${pct(db)}</span> against major currencies over the month.`;
+      }
+    } else {
+      const br = series((e) => e.brent, 'us').filter(([d]) => d >= cut(ASOF, 30));
+      $('h-pvd').textContent = 'Oil'; $('side-meta').textContent = 'Brent, last 30 days';
+      if (br.length < 2) { $('pvd-read').textContent = 'Not enough logged prices yet.'; }
+      else {
+        const pv = $('pvd'), vals = br.map((x) => x[1]);
+        Charts.line(pv, { labels: br.map((x) => short(x[0])), series: [{ name: 'Brent', values: vals, muted: true }], format: Charts.fmt.dec(2), height: pv.clientHeight, min: Math.floor(Math.min(...vals) - 2), endLabel: true, xAt: [0, Math.floor((br.length - 1) / 2), br.length - 1] });
+        const ch = (vals[vals.length - 1] / vals[0] - 1) * 100, lastDay = short(br[br.length - 1][0]);
+        $('pvd-read').innerHTML = `Brent is <span class="num">${pct(ch)}</span> over the month, last logged at <span class="num">$${vals[vals.length - 1].toFixed(2)}</span> (${lastDay}). Oil feeds Egypt's import bill and fuel prices.`;
+      }
+    }
+
+    // stocks for this section
+    let period = PERIODS[0];
+    function drawStocks() {
+      const back = period[1];
+      $('chg-h').textContent = `Change (${period[0]})`;
+      $('trend-h').textContent = back <= 7 ? 'Last 7 days' : period[2];
+      $('stk-note').innerHTML = X.stocksNote || '';
+      $('stk-body').innerHTML = GROUP[S.group].map((t) => {
+        const s = STOCK[t], fresh = s.length && s[s.length - 1][0] === ASOF;
+        const last = fresh ? s[s.length - 1][1] : null, c = fresh ? change(s, back) : null, y = fresh ? ytd(s) : null;
+        return `<tr><td class="name"><b>${NAMES[t]}</b><span>${t}</span></td><td class="trend">${fresh ? spark(s, back) : ''}</td><td class="num${last == null ? ' dash' : ''}">${last == null ? '—' : last.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td><td class="num"><span class="${cls(c)}">${pct(c)}</span></td><td class="num"><span class="${cls(y)}">${pct(y)}</span></td></tr>`;
+      }).join('');
+    }
+    segment($('stk-seg'), '1D', (p) => { period = p; drawStocks(); });
+    drawStocks();
   }
-  segment($('stk-seg'), '1D', (p) => { period = p; drawStocks(); });
-  document.querySelectorAll('.tabs button').forEach((b) => b.addEventListener('click', () => {
-    document.querySelectorAll('.tabs button').forEach((x) => x.setAttribute('aria-selected', x === b)); group = b.dataset.g; drawStocks();
-  }));
-  drawStocks();
+  const pick = () => (location.hash === '#global' ? 'global' : 'egypt');
+  window.addEventListener('hashchange', () => { render(pick()); window.scrollTo(0, 0); });
+  render(pick());
 })();
 
 // theme, shared with the newsletter through localStorage

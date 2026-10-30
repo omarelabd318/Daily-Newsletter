@@ -3,161 +3,249 @@
  "asOf": "2026-10-29",
  "fetched": "Fri 30 Oct, 05:22 Cairo",
  "sample": true,
- "finding": "The pound's fall is mostly local: the dollar is up 8% against it in a month, 0.8% against majors. The EGX30 rose 0.6% to 49,596 on local buying.",
- "next": "Next session: Sunday.",
- "close": {
-  "title": "Thursday's close",
-  "groups": [
+ "egypt": {
+  "finding": "The pound's fall is mostly local: the dollar is up 8% against it in a month, 0.8% against majors. The EGX30 rose 0.6% to 49,596 on local buying.",
+  "next": "Next session: Sunday.",
+  "close": {
+   "title": "Thursday's close",
+   "groups": [
+    {
+     "name": "Egypt",
+     "rows": [
+      {
+       "label": "EGX30",
+       "value": "49,596.14",
+       "change": 0.64,
+       "lead": true
+      },
+      {
+       "label": "USD/EGP (mid)",
+       "value": "56.04",
+       "change": 0.09
+      },
+      {
+       "label": "Gold 21K, per gram",
+       "value": "6,345",
+       "change": -0.94
+      }
+     ]
+    }
+   ],
+   "note": "A dash is a figure not yet confirmed by two sources this morning."
+  },
+  "top": {
+   "headline": "The pound's slide is local, and locals are buying the dip",
+   "body": "The dollar is up 8% against the pound in a month but only 0.8% against major currencies, so about 90% of the move comes from Egypt, not the dollar. On the EGX, local investors bought while foreigners sold, lifting the EGX30 0.6% to 49,596 on turnover well below its usual level, ahead of the central bank's decision.",
+   "view": "Neutral on the EGX30 into Sunday. Local buying on thin turnover is a fragile base while foreigners sell and the pound weakens.",
+   "moves": "Dollar earners (Orascom, Elsewedy) gain from a weaker pound; developers (Talaat Moustafa, Palm Hills) suffer if rates rise to defend it.",
+   "wrong": "Foreigners turn net buyers on Sunday with turnover above its 90-day average, or the pound steadies.",
+   "confidence": "medium",
+   "notice": "Reports of a 100 bp rate hike after Thursday's close come from one source and could not be confirmed. The view above does not rely on them."
+  },
+  "board": {
+   "horizon": "EGX sectors · next 1–4 weeks",
+   "helped": [
+    {
+     "name": "Banks: CIB, EFG Holding",
+     "why": "High rates protect lending margins and T-bill income. CIB rose 0.5% on Thursday and is 17% up this year.",
+     "confidence": "medium"
+    },
+    {
+     "name": "Dollar earners: Orascom, Elsewedy",
+     "why": "A weaker pound lifts the pound value of dollar revenue; the dollar is up 8% against the pound in a month.",
+     "confidence": "medium"
+    },
+    {
+     "name": "Ports: Alexandria Containers",
+     "why": "Up 1.5% on Thursday and 29% this year; momentum, not news, so the call is weak.",
+     "confidence": "low"
+    }
+   ],
+   "hurt": [
+    {
+     "name": "Developers: Talaat Moustafa, Palm Hills",
+     "why": "Higher rates raise buyers' financing costs; Talaat Moustafa is down 8% in a month and flat this year.",
+     "confidence": "medium"
+    },
+    {
+     "name": "Telecom Egypt",
+     "why": "Down 1.7% on Thursday and 11% in a month after an 83% run this year; profit-taking, no company news found.",
+     "confidence": "low"
+    },
+    {
+     "name": "Fertilisers: Abu Qir",
+     "why": "Down 3.5%, the worst of your Egyptian names on Thursday; no company news found, likely profit-taking after a 73% run this year.",
+     "confidence": "low"
+    }
+   ]
+  },
+  "stocksNote": "<b>Worst on Thursday:</b> Abu Qir −3.5%, no company news found. <b>Best:</b> Alexandria Containers +1.5%.",
+  "week": [
    {
-    "name": "Egypt",
-    "rows": [
-     {
-      "label": "EGX30",
-      "value": "49,596.14",
-      "change": 0.64,
-      "lead": true
-     },
-     {
-      "label": "USD/EGP (mid)",
-      "value": "56.04",
-      "change": 0.09
-     },
-     {
-      "label": "Gold 21K, per gram",
-      "value": "6,345",
-      "change": -0.94
-     }
-    ]
+    "day": "Sun 1 Nov",
+    "event": "EGX reopens after the central bank",
+    "impact": "high",
+    "why": "The first chance to price the rate decision; watch banks and developers in the first hour."
    },
    {
-    "name": "Global",
-    "rows": [
-     {
-      "label": "Nasdaq",
-      "value": "26,184.73",
-      "change": -1.38
-     },
-     {
-      "label": "S&P 500",
-      "value": null,
-      "change": null
-     },
-     {
-      "label": "Brent, $ per barrel",
-      "value": null,
-      "change": null
-     },
-     {
-      "label": "Dollar index",
-      "value": null,
-      "change": null
-     },
-     {
-      "label": "Bitcoin, $",
-      "value": "77,242",
-      "change": -3.19
-     }
-    ]
+    "day": "Mon 2 Nov",
+    "event": "Banque du Caire starts trading",
+    "impact": "high",
+    "why": "Retail book 27 times covered at EGP 5.30; a strong debut pulls money towards banks."
+   },
+   {
+    "day": "Tue 10 Nov",
+    "event": "Egypt October inflation",
+    "impact": "high",
+    "why": "The number the central bank answers to; a rise above September keeps rates high."
    }
   ],
-  "note": "A dash is a figure not yet confirmed by two sources this morning."
- },
- "top": {
-  "headline": "The pound's slide is local, and locals are buying the dip",
-  "body": "The dollar is up 8% against the pound in a month but only 0.8% against major currencies, so about 90% of the move comes from Egypt, not the dollar. On the EGX, local investors bought while foreigners sold, lifting the EGX30 0.6% to 49,596 on turnover well below its usual level, ahead of the central bank's decision.",
-  "view": "Neutral on the EGX30 into Sunday. Local buying on thin turnover is a fragile base while foreigners sell and the pound weakens.",
-  "moves": "Dollar earners (Orascom, Elsewedy) gain from a weaker pound; developers (Talaat Moustafa, Palm Hills) suffer if rates rise to defend it.",
-  "wrong": "Foreigners turn net buyers on Sunday with turnover above its 90-day average, or the pound steadies.",
-  "confidence": "medium",
-  "notice": "Reports of a 100 bp rate hike after Thursday's close come from one source and could not be confirmed. The view above does not rely on them."
- },
- "board": {
-  "horizon": "EGX sectors · next 1–4 weeks",
-  "helped": [
+  "views": [
    {
-    "name": "Banks: CIB, EFG Holding",
-    "why": "High rates protect lending margins and T-bill income. CIB rose 0.5% on Thursday and is 17% up this year.",
-    "confidence": "medium"
+    "call": "EGX30 neutral into the decision",
+    "status": "open",
+    "note": "From 28 Oct at 49,281. Since then +0.6%. Wrong if Sunday's turnover tops its average."
    },
    {
-    "name": "Dollar earners: Orascom, Elsewedy",
-    "why": "A weaker pound lifts the pound value of dollar revenue; the dollar is up 8% against the pound in a month.",
-    "confidence": "medium"
+    "call": "Developers lag while rates stay high",
+    "status": "on track",
+    "note": "From 26 Oct. Talaat Moustafa −1.5% since; the EGX30 +2.4%."
    },
    {
-    "name": "Ports: Alexandria Containers",
-    "why": "Up 1.5% on Thursday and 29% this year; momentum, not news, so the call is weak.",
-    "confidence": "low"
-   }
-  ],
-  "hurt": [
-   {
-    "name": "Developers: Talaat Moustafa, Palm Hills",
-    "why": "Higher rates raise buyers' financing costs; Talaat Moustafa is down 8% in a month and flat this year.",
-    "confidence": "medium"
-   },
-   {
-    "name": "Telecom Egypt",
-    "why": "Down 1.7% on Thursday and 11% in a month after an 83% run this year; profit-taking, no company news found.",
-    "confidence": "low"
-   },
-   {
-    "name": "Fertilisers: Abu Qir",
-    "why": "Down 3.5%, the worst of your Egyptian names on Thursday; no company news found, likely profit-taking after a 73% run this year.",
-    "confidence": "low"
+    "call": "Dollar earners outperform as the pound slides",
+    "status": "open",
+    "note": "From 29 Oct. Orascom +0.9% and Elsewedy −0.7% on the day; judged over four weeks."
    }
   ]
  },
- "notes": {
-  "egx": "<b>Worst on Thursday:</b> Abu Qir −3.5%, no company news found. <b>Best:</b> Alexandria Containers +1.5%.",
-  "us": "<b>Alphabet −12.6%</b> after revenue missed and free cash flow turned negative as AI Mode slowed search advertising; Amazon −4.3%, the Nasdaq −1.4%. No direct read-through to the EGX."
- },
- "week": [
-  {
-   "day": "Sun 1 Nov",
-   "event": "EGX reopens after the central bank",
-   "impact": "high",
-   "why": "The first chance to price the rate decision; watch banks and developers in the first hour."
+ "global": {
+  "finding": "Alphabet's 12.6% fall on its results pulled the Nasdaq 1.4% lower; Walmart and JPMorgan rose as money moved to steadier names.",
+  "next": "US markets reopen Monday.",
+  "close": {
+   "title": "Thursday's close",
+   "groups": [
+    {
+     "name": "USA",
+     "rows": [
+      {
+       "label": "Nasdaq",
+       "value": "26,184.73",
+       "change": -1.38,
+       "lead": true
+      },
+      {
+       "label": "S&P 500",
+       "value": null,
+       "change": null
+      }
+     ]
+    },
+    {
+     "name": "Others",
+     "rows": [
+      {
+       "label": "Brent, $ per barrel",
+       "value": null,
+       "change": null
+      },
+      {
+       "label": "Gold, $ per ounce",
+       "value": null,
+       "change": null
+      },
+      {
+       "label": "Dollar index",
+       "value": null,
+       "change": null
+      },
+      {
+       "label": "Bitcoin, $",
+       "value": "77,242",
+       "change": -3.19
+      }
+     ]
+    }
+   ],
+   "note": "A dash is a figure not yet confirmed by two sources this morning."
   },
-  {
-   "day": "Mon 2 Nov",
-   "event": "Banque du Caire starts trading",
-   "impact": "high",
-   "why": "Retail book 27 times covered at EGP 5.30; a strong debut pulls money towards banks."
+  "top": {
+   "headline": "Alphabet's AI-search miss hits big tech",
+   "body": "Alphabet fell 12.6% after revenue missed and free cash flow turned negative, as AI Mode slowed search advertising. Amazon lost 4.3% and the Nasdaq 1.4%, while Walmart (+2.1%), JPMorgan (+1.3%) and Exxon (+0.7%) rose: money moved from AI spenders to steadier earnings.",
+   "view": "Cautious on ad-funded and AI-heavy tech into Amazon's and Apple's results; the market is now asking for AI spending to pay back, not just to grow.",
+   "moves": "Alphabet, Amazon and Broadcom most exposed; Walmart, JPMorgan and Berkshire as places money hides.",
+   "wrong": "Alphabet recovers half its fall within a week, or the Nasdaq makes a new high before November's US inflation figure.",
+   "confidence": "medium",
+   "notice": "Results dates for Apple and Amazon conflict between reports; check them before relying on the week ahead."
   },
-  {
-   "day": "Fri 6 Nov",
-   "event": "US jobs report",
-   "impact": "medium",
-   "why": "Sets the tone for rate bets and the dollar index."
+  "board": {
+   "horizon": "US sectors · next 1–4 weeks",
+   "helped": [
+    {
+     "name": "Retail and staples: Walmart",
+     "why": "Up 2.1% on Thursday as money left tech; steady earnings are in demand while AI payback is questioned.",
+     "confidence": "medium"
+    },
+    {
+     "name": "Banks: JPMorgan",
+     "why": "Up 1.3%; higher-for-longer rates keep lending margins wide.",
+     "confidence": "medium"
+    },
+    {
+     "name": "Energy: Exxon Mobil",
+     "why": "Up 0.7% and 51% this year with Brent above $110; the oil price, not the day's news, drives it.",
+     "confidence": "low"
+    }
+   ],
+   "hurt": [
+    {
+     "name": "Search and ads: Alphabet",
+     "why": "Down 12.6%: AI Mode is eating into search advertising faster than expected, and free cash flow turned negative.",
+     "confidence": "high"
+    },
+    {
+     "name": "Cloud spenders: Amazon",
+     "why": "Down 4.3% in sympathy ahead of its own results; the same AI-spending question hangs over it.",
+     "confidence": "medium"
+    },
+    {
+     "name": "AI chips: Broadcom, Nvidia",
+     "why": "Down 1.9% and 0.8%; if the spenders slow, the chip makers' orders follow.",
+     "confidence": "low"
+    }
+   ]
   },
-  {
-   "day": "Tue 10 Nov",
-   "event": "Egypt October inflation",
-   "impact": "high",
-   "why": "The number the central bank answers to; a rise above September keeps rates high."
-  }
- ],
- "views": [
-  {
-   "call": "EGX30 neutral into the decision",
-   "status": "open",
-   "note": "From 28 Oct at 49,281. Since then +0.6%. Wrong if Sunday's turnover tops its average."
-  },
-  {
-   "call": "Developers lag while rates stay high",
-   "status": "on track",
-   "note": "From 26 Oct. Talaat Moustafa −1.5% since; the EGX30 +2.4%."
-  },
-  {
-   "call": "Dollar earners outperform as the pound slides",
-   "status": "open",
-   "note": "From 29 Oct. Orascom +0.9% and Elsewedy −0.7% on the day; judged over four weeks."
-  },
-  {
-   "call": "Alphabet's AI spend is priced in",
-   "status": "wrong",
-   "note": "From 27 Oct. Fell 12.6% on the results; closed and kept on the record."
-  }
- ]
+  "stocksNote": "<b>Worst on Thursday:</b> Alphabet −12.6%. <b>Best:</b> Walmart +2.1%.",
+  "week": [
+   {
+    "day": "Fri 6 Nov",
+    "event": "US jobs report",
+    "impact": "high",
+    "why": "Sets the tone for rate bets and the dollar index, which feeds straight into the pound."
+   },
+   {
+    "day": "Thu 12 Nov",
+    "event": "US October inflation",
+    "impact": "high",
+    "why": "A hot reading pushes rate cuts further out and lifts the dollar."
+   },
+   {
+    "day": "Nov, date to confirm",
+    "event": "Apple and Amazon results",
+    "impact": "medium",
+    "why": "The next test of whether AI spending pays back; reports disagree on the dates."
+   }
+  ],
+  "views": [
+   {
+    "call": "Money rotates from AI spenders to steady earners",
+    "status": "open",
+    "note": "From 29 Oct. Walmart +2.1% and JPMorgan +1.3% against Alphabet −12.6% on the day; judged over four weeks."
+   },
+   {
+    "call": "Alphabet's AI spend is priced in",
+    "status": "wrong",
+    "note": "From 27 Oct. Fell 12.6% on the results; closed and kept on the record."
+   }
+  ]
+ }
 }
