@@ -53,8 +53,8 @@
     </section>
 
     <section class="card c12">
-      <div class="card-h"><h2>Egyptian stocks</h2><div class="seg" id="sseg"></div></div>
-      <table><thead><tr><th>Stock</th><th class="trend" id="trend-h">Last 7 days</th><th class="num">Close</th><th class="num" id="chg-h">Change (1D)</th><th class="num">YTD</th></tr></thead><tbody id="body"></tbody></table>
+      <div class="card-h"><div class="hgroup"><h2>Egyptian stocks</h2><div class="ctabs" id="scur" aria-label="Currency"></div></div><div class="seg" id="sseg"></div></div>
+      <table><thead><tr><th>Stock</th><th class="trend" id="trend-h">Last 7 days</th><th class="num" id="close-h">Close</th><th class="num" id="chg-h">Change (1D)</th><th class="num">YTD</th></tr></thead><tbody id="body"></tbody></table>
       <p class="stock-note">Tap a stock for its own page.</p>
     </section>
 
@@ -108,8 +108,16 @@
   if (fd.length >= 3) Charts.diverging(M.$('fhist'), { labels: fd.map((d) => M.short(d.date)), values: foreign, above: 'Bought', below: 'Sold', format: Charts.fmt.dec(2), height: 120 });
   else { M.$('fhist').style.height = 'auto'; M.$('fhist').innerHTML = `<p class="sub">${fd.length ? `Logged since ${M.short(fd[0].date)}: ` + fd.map((d, i) => `${M.short(d.date)} <span class="num ${M.cls(foreign[i])}">${foreign[i] > 0 ? '+' : ''}${foreign[i].toFixed(2)}</span>`).join(', ') + '. The chart appears after three sessions.' : 'No sessions logged yet.'}</p>`; }
 
-  const drawT = (p) => { M.$('chg-h').textContent = `Change (${p[0]})`; M.$('trend-h').textContent = p[1] <= 7 ? 'Last 7 days' : p[2]; M.stockTable(M.$('body'), M.GROUP.egx, p[1]); };
-  M.segment(M.$('sseg'), '1D', drawT); drawT(M.PERIODS[0]);
+  // the table in pounds or dollars, over 1D to 5Y (3Y and 5Y load the full log)
+  let tper = M.PERIODS[0], tUSD = false;
+  const drawT = async () => {
+    if (tper[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; }
+    M.$('chg-h').textContent = `Change (${tper[0]})`; M.$('trend-h').textContent = tper[1] <= 7 ? 'Last 7 days' : tper[2];
+    M.$('close-h').textContent = tUSD ? 'Close ($)' : 'Close';
+    M.stockTable(M.$('body'), M.GROUP.egx, tper[1], tUSD);
+  };
+  M.toggle(M.$('scur'), ['EGP', 'USD'], (i) => { tUSD = i === 1; drawT(); });
+  M.segment(M.$('sseg'), '1D', (p) => { tper = p; drawT(); }, M.PERIODS.concat(M.LONG)); drawT();
   M.outlook(M.$('outlook'), P.outlook, 'EGP');
   M.news(M.$('news'), P.news);
 })();

@@ -84,8 +84,11 @@
   let mback = 0; const dm = () => M.movers(M.$('movers'), M.GROUP.us, mback);
   M.segment(M.$('mseg'), '1D', (p) => { mback = p[1]; dm(); }); dm();
   if (P.afterBell && P.afterBell.length) { M.$('c-bell').hidden = false; M.$('bell-date').textContent = M.short(M.ASOF); M.$('bell').innerHTML = M.drivers(P.afterBell); }
-  const drawT = (p) => { M.$('chg-h').textContent = `Change (${p[0]})`; M.$('trend-h').textContent = p[1] <= 7 ? 'Last 7 days' : p[2]; M.stockTable(M.$('body'), M.GROUP.us, p[1]); };
-  M.segment(M.$('sseg'), '1D', drawT); drawT(M.PERIODS[0]);
+  const drawT = async (p) => {
+    if (p[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; }   // 3Y and 5Y load the full log
+    M.$('chg-h').textContent = `Change (${p[0]})`; M.$('trend-h').textContent = p[1] <= 7 ? 'Last 7 days' : p[2]; M.stockTable(M.$('body'), M.GROUP.us, p[1]);
+  };
+  M.segment(M.$('sseg'), '1D', drawT, M.PERIODS.concat(M.LONG)); drawT(M.PERIODS[0]);
   M.outlook(M.$('outlook'), P.outlook, '$');
   M.news(M.$('news'), P.news);
 })();
