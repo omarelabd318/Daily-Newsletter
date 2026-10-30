@@ -194,7 +194,9 @@ closing or a LIVE price, the quote time and the source. Then:
   the Sources list covers them.
 - **Usually one credit per item:** if a point rests on several outlets, credit the main one, or use a
   general credit such as "according to news bulletins", and let the Sources list carry the rest. About
-  10 to 20 credits in an edition reads naturally; the checker warns above 25, or at 3 or more in one item.
+  10 to 20 credits in an edition reads naturally. The checker blocks publishing above 25 credits, when
+  more than half the stories in a section carry a credit, or when one outlet is credited in more than half
+  of a section's stories; it warns at 3 or more credits in one item.
 - **No limit per source:** take as many stories from one outlet as are relevant and credible, including
   EnterpriseAM and CairoScene. The instruction that an edition should not read like a rewrite of either
   is about writing in your own words and checking key facts elsewhere, not a cap on how much comes from
@@ -226,6 +228,31 @@ closing or a LIVE price, the quote time and the source. Then:
 - **Credit every outlet the same way:** keep crediting EnterpriseAM and CairoScene whenever a point comes
   from them and the credit fits; they are trusted, daily sources. The aim is that other outlets are
   named just as readily when a point comes from them, not that these two are named less.
+
+## Egyptian news outlets: read every day
+
+On **every** run, weekdays and weekends alike, read the front pages of at least three of these outlets,
+alongside EnterpriseAM and CairoScene, before choosing the Egypt News stories. All of them load from the
+cloud (tested 30 October 2026):
+
+- **English:** Egypt Independent (egyptindependent.com), Daily News Egypt (dailynewsegypt.com),
+  Egyptian Streets (egyptianstreets.com), Zawya (zawya.com, Egypt pages), Arab Finance (arabfinance.com),
+  Middle East Observer (meobserver.org), Amwal Al Ghad English (en.amwalalghad.com).
+- **Arabic:** Youm7 (youm7.com), Masrawy (masrawy.com), Al-Shorouk (shorouknews.com).
+- **Regional, for Egypt stories with a wider angle:** The National, Al-Monitor, Asharq Al-Awsat,
+  Middle East Eye.
+- **Blocked from the cloud:** Ahram Online, Mada Masr and Egypt Today do not load (SIS times out). Use
+  them only through a search result that names the story, and credit the outlet, not the search.
+
+Rules:
+
+- **Egypt News draws on at least three outlets.** No one outlet supplies more than half its stories.
+- **Cross-check:** check each Egypt News story against a second outlet where one carries it; a story only
+  one outlet carries is either flagged as such or left out if it is a claim rather than an event.
+- **Rotate:** vary which three or more you read most closely from day to day, but always scan the rest
+  for anything big. Saturdays and Fridays, when EnterpriseAM has no edition, lean on these outlets more,
+  never on CairoScene alone.
+- If an outlet stops loading, say so in the run notes and use another from the list.
 
 ## Go-to sources for figures
 

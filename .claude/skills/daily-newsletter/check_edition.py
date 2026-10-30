@@ -318,7 +318,41 @@ def main(path):
         if n >= 3:
             warnings.append(f"Line {i}: {n} source credits in one item; keep the main one and let Sources carry the rest.")
     if total_credits > 25:
-        warnings.append(f"{total_credits} source credits in the text; about 10 to 20 reads naturally. Credit only where it adds something.")
+        errors.append(f"{total_credits} source credits in the text (limit 25; about 10 to 20 reads naturally). "
+                      "Keep credits only where they add something: an exclusive, a disputed claim, a forecast, differing figures.")
+
+    # Per section: credits on most stories, or one outlet behind most of them, means the section leans on
+    # attribution or on one source. Both block publishing.
+    outlet_re = re.compile(r"(?:according to|citing|per) ((?:[A-Z][\w'&.-]*)(?: (?:[A-Z][\w'&.-]*|of|al|el))*)"
+                           r"|((?:[A-Z][\w'&.-]*)(?: [A-Z][\w'&.-]*)*) reported")
+    generic = {"News", "The", "Egyptian", "Officials", "State", "Local", "Reports", "Market", "Figures"}
+    lead_re = re.compile(r"^\s*(?:[-*]\s+|\d+\.\s+)?\*\*[^*]+\*\*")
+    for name in ("Egypt News", "Top World Headlines", "Regional and Gulf", "Egypt Markets", "Global Markets",
+                 "Tech and AI", "Sports", "Health and Science", "Entertainment and Culture"):
+        body = next((sec["parts"][name] for sec in sections.values() if name in sec["parts"]),
+                    sections.get(name, {}).get("body"))
+        if not body:
+            continue
+        items = [l for l in body if lead_re.match(l)]
+        if len(items) < 3:
+            continue
+        credited = [l for l in items if credit.search(l)]
+        if len(credited) * 2 > len(items):
+            errors.append(f"{name}: {len(credited)} of {len(items)} stories carry a source credit; credit only where it adds "
+                          "something and let Sources carry plain facts.")
+        counts = {}
+        for l in items:
+            seen = set()
+            for m in outlet_re.finditer(l):
+                o = (m.group(1) or m.group(2) or "").strip().rstrip(".,;:")
+                if o and o.split()[0] not in generic:
+                    seen.add(o)
+            for o in seen:
+                counts[o] = counts.get(o, 0) + 1
+        for o, n in counts.items():
+            if n * 2 > len(items):
+                errors.append(f"{name}: {o} is credited in {n} of {len(items)} stories; draw the section from at least three "
+                              "outlets and check each story against a second one.")
 
     # Same story in two sections: compare bold lead-ins outside Today at a Glance and Sources.
     leads = []
