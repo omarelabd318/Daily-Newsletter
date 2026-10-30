@@ -29,6 +29,31 @@
        "change": -0.94
       }
      ]
+    },
+    {
+     "name": "Global",
+     "rows": [
+      {
+       "label": "Brent, $ per barrel",
+       "value": null,
+       "change": null
+      },
+      {
+       "label": "Gold, $ per ounce",
+       "value": null,
+       "change": null
+      },
+      {
+       "label": "Dollar index",
+       "value": null,
+       "change": null
+      },
+      {
+       "label": "Bitcoin, $",
+       "value": "77,242",
+       "change": -3.19
+      }
+     ]
     }
    ],
    "note": "A dash is a figure not yet confirmed by two sources this morning."
@@ -244,7 +269,7 @@
    {
     "call": "Alphabet's AI spend is priced in",
     "status": "wrong",
-    "note": "From 27 Oct. Fell 12.6% on the results; closed and kept on the record."
+    "note": "Called on 27 Oct. Alphabet fell 12.6% on its results, so the view was wrong; it stays on the record."
    }
   ]
  }
