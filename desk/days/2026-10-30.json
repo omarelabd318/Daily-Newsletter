@@ -134,7 +134,7 @@
   ],
   "flows": {
    "title": "Who bought and who sold",
-   "sub": "Net EGX equity flows, Thu 29 Oct, EGP bn",
+   "sub": "Net EGX equity flows, Thu 29 Oct, EGP bn · Youm7, Masr Times, Newsroom",
    "rows": [
     {
      "who": "Egyptian institutions",
@@ -162,8 +162,8 @@
     }
    ],
    "read": "Dominated by the execution of Banque du Caire's EGP 36.4 bn offering: foreign institutions bought, Egyptian institutions sold. Read normal days' flows, not this one, for who is backing the market.",
-   "confirmed": false,
-   "source": "Cairo Mubasher and Youm7 via one secondary report; not yet matched to the EGX's own figures."
+   "confirmed": true,
+   "source": "Youm7, Masr Times and Newsroom, which agree to the decimal; Alam Al-Mal's differing figures are ruled out because its buy and sell values exceed the session's EGP 43.9bn turnover."
   },
   "calls": [
    {

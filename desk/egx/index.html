@@ -39,6 +39,7 @@
     </section>
     <section class="card c6" id="c-flows" hidden>
       <div class="card-h"><h2>Who bought and who sold</h2><span class="meta">Net, EGP bn</span></div>
+      <p class="sub" id="flows-sub" style="margin:-6px 0 10px"></p>
       <div id="flows"></div>
       <p class="pvd-read" id="flows-read"></p>
       <div class="notice" id="flows-note" hidden></div>
@@ -89,6 +90,7 @@
     M.$('c-flows').hidden = false;
     const max = Math.max(...F.rows.map((r) => Math.abs(r.net))) || 1;
     M.$('flows').innerHTML = F.rows.map((r) => `<div class="flow"><div class="flow-top"><span>${M.esc(r.who)}</span><span class="num">${r.net > 0 ? '+' : r.net < 0 ? '−' : ''}${Math.abs(r.net).toFixed(2)}</span></div><div class="flow-bar"><i class="${r.net >= 0 ? 'buy' : 'sell'}" style="width:${(Math.abs(r.net) / max * 50).toFixed(1)}%"></i></div></div>`).join('') + '<div class="flow-axis"><span>Net sold</span><span>Net bought</span></div>';
+    M.$('flows-sub').textContent = F.sub || '';
     M.$('flows-read').textContent = F.read || '';
     M.$('flows-note').hidden = !!F.confirmed; M.$('flows-note').textContent = F.confirmed ? '' : 'Not yet confirmed: ' + (F.source || 'one source only');
   }

@@ -3,7 +3,7 @@
  "days": [
   {
    "date": "2026-10-29",
-   "confirmed": false,
+   "confirmed": true,
    "rows": {
     "Egyptian institutions": -34.33,
     "Egyptian individuals": 2.89,
@@ -11,7 +11,13 @@
     "Arab individuals": 0.15,
     "Foreign institutions": 29.19,
     "Foreign individuals": 0.01
-   }
+   },
+   "sources": [
+    "Youm7",
+    "Masr Times",
+    "Newsroom"
+   ],
+   "turnover": 43.9
   }
  ]
 }
