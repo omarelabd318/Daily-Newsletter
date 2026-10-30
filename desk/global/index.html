@@ -70,7 +70,8 @@
   // Gold in Egypt: one chart, switched between 24K, 21K, 18K and the gold pound
   const G = [['gold24_egp', '24K', 'EGP per gram'], ['gold21_egp', '21K', 'EGP per gram, the most bought'], ['gold18_egp', '18K', 'EGP per gram'], ['goldpound_egp', 'Gold pound', 'EGP, 8 grams of 21K']];
   let gi = 0, gp = M.PERIODS[2];
-  const drawG = () => {
+  const drawG = async () => {
+    if (gp[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; }
     const [k, n, unit] = G[gi], s = M.series((e) => e[k], 'all'), signed = (c) => `<span class="${M.cls(c)}">${M.pct(c)}</span>`;
     const dc = M.change(s, 0);
     M.$('glvl').textContent = M.num(M.last(s), 0); M.$('gd').innerHTML = `<span class="${M.cls(dc)}">${M.pct(dc, 2)}</span>`; M.$('gunit').textContent = unit;
@@ -81,7 +82,7 @@
   };
   M.$('gtabs').innerHTML = G.map((g, j) => `<button type="button" aria-pressed="${!j}">${g[1]}</button>`).join('');
   M.$('gtabs').querySelectorAll('button').forEach((b, j) => b.addEventListener('click', () => { M.$('gtabs').querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); gi = j; drawG(); }));
-  M.segment(M.$('gseg'), '1M', (p) => { gp = p; drawG(); }, M.PERIODS.slice(1)); drawG();
+  M.segment(M.$('gseg'), '1M', (p) => { gp = p; drawG(); }, M.PERIODS.slice(1).concat(M.LONG)); drawG();
   M.news(M.$('news'), P.news);
 })();
 </script>

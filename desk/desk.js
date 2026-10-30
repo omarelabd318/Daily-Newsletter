@@ -18,7 +18,26 @@ window.Desk = (function () {
   const PAGES = [['/desk/', 'Dashboard', 'M2 13h12M4 10l3-3 2 2 4-5'], ['/desk/egx/', 'EGX', 'M2 13h12M3 10h2v3H3zM7 7h2v6H7zM11 4h2v9h-2z'], ['/desk/egp/', 'EGP', 'M8 2v12M11 4.5H6.5a2 2 0 000 4h3a2 2 0 010 4H5'],
     ['/desk/us/', 'US', 'M2 4h12v8H2zM2 7h12'], ['/desk/global/', 'Global', 'M8 2.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2.5 8h11M8 2.5c1.8 1.6 1.8 9.4 0 11M8 2.5c-1.8 1.6-1.8 9.4 0 11'], ['/desk/stock/', 'Stocks', 'M3 3h10v10H3zM3 6.5h10M6.5 6.5V13']];
 
-  let days = [];
+  let days = [], FULL = false;
+  // 3Y and 5Y: the long periods, offered on the EGP, EGX30, Gold in Egypt and stock charts; they load the full log
+  const LONG = [['3Y', 1095, 'Last 3 years'], ['5Y', 1826, 'Last 5 years']];
+  async function full() {
+    if (FULL) return;
+    const f = await get('/data/markets.json');
+    if (f && f.days) { days = f.days; FULL = true; }
+  }
+  // a small switch of named options (for example EGP and USD); calls onPick with the chosen index
+  function toggle(el, names, onPick) {
+    el.innerHTML = names.map((n, i) => `<button type="button" aria-pressed="${!i}">${esc(n)}</button>`).join('');
+    el.querySelectorAll('button').forEach((b, i) => b.addEventListener('click', () => {
+      el.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); onPick(i);
+    }));
+  }
+  // a pound series in dollars: each value divided by that day's dollar rate (strips out the pound's moves)
+  function usd(s) {
+    const fx = series((e) => e.usd_egp, 'fx');
+    return s.map(([d, v]) => { const r = valueAt(fx, d); return r ? [d, v / r] : null; }).filter(Boolean);
+  }
   function series(pick, market) {
     const out = [];
     for (const e of days) {
@@ -106,10 +125,11 @@ window.Desk = (function () {
       }
     }
     else {
-      const step = back <= 200 ? 1 : 2, mo = (d) => d.getFullYear() * 12 + d.getMonth(), last = mo(ds[n - 1]);
-      ds.forEach((d, i) => { if ((i === 0 && d.getDate() > 7) || (i > 0 && mo(ds[i - 1]) === mo(d))) return; if ((last - mo(d)) % step === 0) at.push(i); });
+      // monthly to a year; every six months (January and July) for three years; each January for five
+      const step = back <= 200 ? 1 : back <= 400 ? 2 : back <= 1100 ? 6 : 12, mo = (d) => d.getFullYear() * 12 + d.getMonth(), last = mo(ds[n - 1]);
+      ds.forEach((d, i) => { if ((i === 0 && d.getDate() > 7) || (i > 0 && mo(ds[i - 1]) === mo(d))) return; if (step >= 6 ? d.getMonth() % step === 0 : (last - mo(d)) % step === 0) at.push(i); });
       const spans = ds[0].getFullYear() !== ds[n - 1].getFullYear();
-      at.forEach((i, j) => { const d = ds[i], prev = j ? ds[at[j - 1]] : null; text[i] = MON[d.getMonth()] + ((prev ? prev.getFullYear() !== d.getFullYear() : spans) ? ' ' + d.getFullYear() : ''); });
+      at.forEach((i, j) => { const d = ds[i], prev = j ? ds[at[j - 1]] : null; text[i] = step === 12 ? String(d.getFullYear()) : MON[d.getMonth()] + ((prev ? prev.getFullYear() !== d.getFullYear() : spans) ? ' ' + d.getFullYear() : ''); });
     }
     if (width < 520 && at.length > 4) at = at.filter((_, j) => (at.length - 1 - j) % 2 === 0);
     return { labels, xAt: at, xText: text };
@@ -207,5 +227,5 @@ window.Desk = (function () {
       location.reload();
     });
   }
-  return { get ASOF() { return ASOF; }, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, get INTRA() { return INTRA; }, init };
+  return { get ASOF() { return ASOF; }, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, get INTRA() { return INTRA; }, init };
 })();

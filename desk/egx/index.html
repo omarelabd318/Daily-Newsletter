@@ -21,7 +21,7 @@
 
   <div class="pages">
     <section class="card c8">
-      <div class="card-h"><h2>EGX30</h2><div class="seg" id="seg"></div></div>
+      <div class="card-h"><div class="hgroup"><h2>EGX30</h2><div class="ctabs" id="cur" aria-label="Currency"></div></div><div class="seg" id="seg"></div></div>
       <div class="hero"><span class="lvl num" id="lvl"></span><span class="d num" id="dchg"></span></div>
       <div class="bigchart" id="chart"></div>
       <p class="chart-cap" id="cap"></p>
@@ -73,13 +73,19 @@
   M.$('title').textContent = 'EGX · ' + M.dateLine(M.ASOF); document.title = 'EGX · Markets Desk';
   M.$('finding').textContent = P.finding;
   M.$('sess-date').textContent = M.short(M.ASOF);
-  const idx = M.series((e) => e.egx30, 'egx'), dc = M.change(idx, 0);
-  M.$('lvl').textContent = M.num(M.last(idx));
-  M.$('dchg').innerHTML = `<span class="${M.cls(dc)}">${M.pct(dc, 2)}</span>`;
-  const draw = (p) => {
-    if (!p[1]) { const c1 = M.dayChart(M.$('chart'), 'egx', 'EGX30', 'EGX30', Charts.fmt.int); M.$('cap').innerHTML = c1 ? `${c1} · on the day <span class="num ${M.cls(dc)}">${M.pct(dc, 2)}</span>` : ''; return; }
-    M.chart(M.$('chart'), idx, p[1], 'EGX30', Charts.fmt.int); const c = M.change(idx, p[1]); M.$('cap').innerHTML = `${p[2]}: <span class="num ${M.cls(c)}">${M.pct(c, 2)}</span> · this year <span class="num ${M.cls(M.ytd(idx))}">${M.pct(M.ytd(idx))}</span>`; };
-  M.segment(M.$('seg'), '1M', draw); draw(M.PERIODS[2]);
+  let idx = M.series((e) => e.egx30, 'egx'), per = M.PERIODS[2], inUSD = false;
+  const dc = M.change(idx, 0);
+  // the chart in pounds or in dollars (divided by each day's dollar rate); 3Y and 5Y load the full log
+  const draw = async () => {
+    const s = inUSD ? M.usd(idx) : idx, d1 = M.change(s, 0), unit = inUSD ? ' in dollars' : '';
+    M.$('lvl').textContent = M.num(M.last(s), inUSD ? 1 : 2); M.$('dchg').innerHTML = `<span class="${M.cls(d1)}">${M.pct(d1, 2)}</span>`;
+    if (!per[1]) { const c1 = M.dayChart(M.$('chart'), 'egx', 'EGX30', 'EGX30', Charts.fmt.int); M.$('cap').innerHTML = c1 ? `${c1} (in pounds) · on the day <span class="num ${M.cls(dc)}">${M.pct(dc, 2)}</span>` : ''; return; }
+    if (per[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; idx = M.series((e) => e.egx30, 'egx'); return draw(); }
+    M.chart(M.$('chart'), s, per[1], 'EGX30' + unit, Charts.fmt.int); const c = M.change(s, per[1]);
+    M.$('cap').innerHTML = `${per[2]}${unit}: <span class="num ${M.cls(c)}">${M.pct(c, 2)}</span> · this year <span class="num ${M.cls(M.ytd(s))}">${M.pct(M.ytd(s))}</span>`;
+  };
+  M.toggle(M.$('cur'), ['EGP', 'USD'], (i) => { inUSD = i === 1; draw(); });
+  M.segment(M.$('seg'), '1M', (p) => { per = p; draw(); }, M.PERIODS.concat(M.LONG)); draw();
   const signed = (c) => `<span class="${M.cls(c)}">${M.pct(c)}</span>`, dash = '<span class="dash">—</span>', S = P.session || {};
   M.$('stats').innerHTML = M.kv([['Close', M.num(M.last(idx))], ['Day', `<span class="${M.cls(dc)}">${M.pct(dc, 2)}</span>`], ['Week', signed(M.change(idx, 7))], ['Month', signed(M.change(idx, 30))], ['This year', signed(M.ytd(idx))],
     ['Turnover', S.turnover ? M.esc(S.turnover) : dash], ['Against 90-day average', S.vs90 ? M.esc(S.vs90) : dash], ['Advancers / decliners', S.breadth ? M.esc(S.breadth) : dash]]);

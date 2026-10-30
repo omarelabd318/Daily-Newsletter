@@ -74,8 +74,11 @@
   M.$('finding').textContent = P.finding; M.$('rdate').textContent = M.short(M.ASOF);
   const fx = M.series((e) => e.usd_egp, 'fx'), dc = M.change(fx, 0);
   M.$('lvl').textContent = M.num(M.last(fx)); M.$('dchg').innerHTML = `<span class="${M.cls(dc)}">${M.pct(dc, 2)}</span>`;
-  const draw = (p) => { M.chart(M.$('chart'), fx, p[1], 'USD/EGP', Charts.fmt.dec(2), { markAt: 0.02 }); const c = M.change(fx, p[1]); M.$('cap').innerHTML = `${p[2]}: <span class="num ${M.cls(c)}">${M.pct(c, 2)}</span> · this year <span class="num ${M.cls(M.ytd(fx))}">${M.pct(M.ytd(fx))}</span>`; };
-  M.segment(M.$('seg'), '1M', draw, M.PERIODS.slice(1)); draw(M.PERIODS[2]);
+  let fxAll = fx;
+  const draw = async (p) => {
+    if (p[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; fxAll = M.series((e) => e.usd_egp, 'fx'); }
+    M.chart(M.$('chart'), fxAll, p[1], 'USD/EGP', Charts.fmt.dec(2), { markAt: 0.02 }); const c = M.change(fxAll, p[1]); M.$('cap').innerHTML = `${p[2]}: <span class="num ${M.cls(c)}">${M.pct(c, 2)}</span> · this year <span class="num ${M.cls(M.ytd(fx))}">${M.pct(M.ytd(fx))}</span>`; };
+  M.segment(M.$('seg'), '1M', draw, M.PERIODS.slice(1).concat(M.LONG)); draw(M.PERIODS[2]);
   const dx = M.series((e) => e.dxy, 'us'), dash = '<span class="dash">—</span>';
   // the central bank's rate and policy rates come from the data log; the day's file adds what the log lacks
   const lg = (k) => M.series((e) => e[k], 'fx'), lv = (k) => M.last(lg(k));

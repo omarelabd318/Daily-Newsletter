@@ -387,7 +387,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
   // the data log: each entry holds the closes its edition showed, so a close belongs to the day before the entry
   const INTRA = await get('/desk/intraday.json');
   const log = await get('/data/markets-recent.json');
-  const days = (log && log.days) || [];
+  let days = (log && log.days) || [];
   function series(pick, market) {
     const out = [];
     for (const e of days) {
@@ -408,6 +408,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
     return base ? (last / base - 1) * 100 : null;
   };
   const ytd = (s) => { const b = valueAt(s, (ASOF.slice(0, 4) - 1) + '-12-31'); return b && s.length ? (s[s.length - 1][1] / b - 1) * 100 : null; };
+  const LONG = [['3Y', 1095, 'Last 3 years'], ['5Y', 1826, 'Last 5 years']]; let fullLoaded = false;
   const PERIODS = [['1D', 0, 'Last 7 days'], ['1W', 7, 'Last 7 days'], ['1M', 30, 'Last 30 days'], ['6M', 182, 'Last 6 months'], ['1Y', 365, 'Last 12 months']];
   const segment = (el, start, onPick, list = PERIODS) => {
     el.innerHTML = list.map((p) => `<button type="button" aria-pressed="${p[0] === start}">${p[0]}</button>`).join('');
@@ -466,10 +467,11 @@ td.trend svg{display:inline-block;vertical-align:middle}
       }
     }
     else {
-      const step = back <= 200 ? 1 : 2, mo = (d) => d.getFullYear() * 12 + d.getMonth(), last = mo(ds[n - 1]);
-      ds.forEach((d, i) => { if ((i === 0 && d.getDate() > 7) || (i > 0 && mo(ds[i - 1]) === mo(d))) return; if ((last - mo(d)) % step === 0) at.push(i); });
+      // monthly to a year; every six months (January and July) for three years; each January for five
+      const step = back <= 200 ? 1 : back <= 400 ? 2 : back <= 1100 ? 6 : 12, mo = (d) => d.getFullYear() * 12 + d.getMonth(), last = mo(ds[n - 1]);
+      ds.forEach((d, i) => { if ((i === 0 && d.getDate() > 7) || (i > 0 && mo(ds[i - 1]) === mo(d))) return; if (step >= 6 ? d.getMonth() % step === 0 : (last - mo(d)) % step === 0) at.push(i); });
       const spans = ds[0].getFullYear() !== ds[n - 1].getFullYear();
-      at.forEach((i, j) => { const d = ds[i], prev = j ? ds[at[j - 1]] : null; text[i] = MON[d.getMonth()] + ((prev ? prev.getFullYear() !== d.getFullYear() : spans) ? ' ' + d.getFullYear() : ''); });
+      at.forEach((i, j) => { const d = ds[i], prev = j ? ds[at[j - 1]] : null; text[i] = step === 12 ? String(d.getFullYear()) : MON[d.getMonth()] + ((prev ? prev.getFullYear() !== d.getFullYear() : spans) ? ' ' + d.getFullYear() : ''); });
     }
     if (width < 520 && at.length > 4) at = at.filter((_, j) => (at.length - 1 - j) % 2 === 0);
     return { labels, xAt: at, xText: text };
@@ -520,10 +522,14 @@ td.trend svg{display:inline-block;vertical-align:middle}
     $('views-h').textContent = D.sample ? 'Sample rows · checked each morning' : 'Checked each morning';
 
     // the section's index, in the one chart hue
-    const idx = series((e) => e[S.chart], S.market);
+    let idx = series((e) => e[S.chart], S.market);
     $('chart-name').textContent = S.chartName;
     $('chart-more').textContent = key === 'egypt' ? 'EGX page →' : 'US page →'; $('chart-more').href = key === 'egypt' ? '/desk/egx/' : '/desk/us/';
-    function drawIdx(p) {
+    async function drawIdx(p) {
+      if (p[1] > 400 && !fullLoaded) {   // 3Y and 5Y need the full log, loaded once
+        const f = await get('/data/markets.json'); fullLoaded = true;
+        if (f && f.days) { days = f.days; idx = series((e) => e[S.chart], S.market); }
+      }
       if (!p[1]) {   // the last session through the day, from desk/intraday.json
         const el = $('egx-chart'), mk = S.market, key = S.chart === 'egx30' ? 'EGX30' : 'COMP', I = INTRA && INTRA[mk] && INTRA[mk].series[key]; el.innerHTML = '';
         if (!I) { el.innerHTML = '<p class="chart-cap">The last session through the day is not saved yet; the morning run saves it once the session has closed.</p>'; $('egx-cap').textContent = ''; return; }
@@ -542,7 +548,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
       const c = change(idx, p[1]), y = ytd(idx);
       $('egx-cap').innerHTML = `${p[0] === '1D' ? 'On the day' : p[2]}: <span class="num ${cls(c)}">${pct(c, 2)}</span> · this year <span class="num ${cls(y)}">${pct(y)}</span>`;
     }
-    segment($('egx-seg'), '1M', drawIdx); drawIdx(PERIODS[2]);
+    segment($('egx-seg'), '1M', drawIdx, key === 'egypt' ? PERIODS.concat(LONG) : PERIODS); drawIdx(PERIODS[2]);
 
     // side card: Egypt asks whether the pound's move is local; USA shows oil, the price that reaches Egypt most
     $('pvd-legend').innerHTML = ''; $('pvd').innerHTML = '';
