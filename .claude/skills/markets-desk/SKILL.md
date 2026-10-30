@@ -39,7 +39,7 @@ The menu order is Dashboard, EGX, EGP, US, Global, Stocks. Shared code is `desk/
   latest session's trading, dates coming up, views and news. News and views are added newest first and
   never deleted. Valuation figures older than about a quarter are flagged on the page, not hidden.
 - `desk/flows.json`: net equity flows by investor group, one entry per session, for the flow history.
-- The charts, Your stocks and every change and YTD figure are drawn by the page from
+- The charts, the Stocks tables and every change and YTD figure are drawn by the page from
   `data/markets-recent.json`, so log the day's figures before publishing a desk.
 
 ## What it is
@@ -165,6 +165,11 @@ Wrong views stay on the record, marked wrong; the record is never cleaned (thesi
 The same sources and checks as the newsletter: `fetch_figures.py` first, a second source for every figure,
 closing prices only, and a grey dash for any figure not confirmed that morning. Trend lines, changes over
 periods and YTD come from `data/markets.json`.
+
+## Wording
+
+Label the stock tables "Egyptian stocks" and "US stocks", and the dashboard's "Stocks": never "your stocks",
+in labels or in the text.
 
 ## Design
 
