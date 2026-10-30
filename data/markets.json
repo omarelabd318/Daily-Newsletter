@@ -78367,7 +78367,21 @@
    },
    "egx30": 49596.14,
    "nasdaq": 26184.73,
-   "gold21_egp": 6345.0
+   "gold21_egp": 6345.0,
+   "sp500": 7720.54,
+   "brent": 114.88,
+   "gold_usd": 4025.0,
+   "btc": 77554.0,
+   "gold24_egp": 7250.0,
+   "gold18_egp": 5440.0,
+   "goldpound_egp": 50760.0,
+   "usd_egp": 56.04,
+   "eur_egp": 62.55,
+   "sar_egp": 14.94,
+   "aed_egp": 15.26,
+   "kwd_egp": 180.43,
+   "qar_egp": 15.4,
+   "gbp_egp": 74.81
   }
  ]
 }
