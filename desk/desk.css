@@ -10,7 +10,7 @@
   --primary:#16181a; --primary-ink:#ffffff;
   --brand:#8a1c1c;
   --chart-1:#1d5fbf; --chart-muted:#8b9097; --grid:#ebe7de; --axis-ink:#5b6168; --ink:#16181a; --chart-span:.06;
-  --positive:#1d7a3a; --negative:#b3261e; --negative-ink:#b3261e;
+  --positive:#1d7a3a; --negative:#b3261e; --negative-ink:#b3261e; --sell:#8e1b15;
   --pill-pos-bg:#dcfae5; --pill-pos-ink:#04250e; --pill-neg-bg:#ffedea; --pill-neg-ink:#831c1e;
   --pill-warn-bg:#fffbeb; --pill-warn-ink:#92400e; --pill-warn-line:#fde68a;
   --radius-card:8px; --radius-control:6px; --radius-chip:4px;
@@ -26,7 +26,7 @@
   --primary:#eef2f4; --primary-ink:#0e1216;
   --brand:#e0605a;
   --chart-1:#6ea0ff; --chart-muted:#7d8791; --grid:#232b33; --axis-ink:#b0b8c0; --ink:#eef2f4; --chart-span:.12;
-  --positive:#5fd08a; --negative:#e8605a; --negative-ink:#e8605a;
+  --positive:#5fd08a; --negative:#e8605a; --negative-ink:#e8605a; --sell:#b83f39;
   --pill-pos-bg:#16291d; --pill-pos-ink:#5fd08a; --pill-neg-bg:#2c1a1c; --pill-neg-ink:#ff8a80;
   --pill-warn-bg:#2a2414; --pill-warn-ink:#f2c56b; --pill-warn-line:#4a3e1c;
   color-scheme:dark;
@@ -109,7 +109,7 @@ h2{margin:0;font-size:16px;line-height:22px;font-weight:600}
 .flow-bar::before{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;width:1px;background:var(--control)}
 .flow-bar i{position:absolute;top:0;height:8px;border-radius:2px}
 .flow-bar i.buy{left:50%;background:var(--chart-1)}
-.flow-bar i.sell{right:50%;background:var(--negative)}
+.flow-bar i.sell{right:50%;background:var(--sell)}
 .flow-axis{display:flex;justify-content:space-between;margin-top:6px;font-size:12px;color:var(--muted)}
 .legend{display:flex;gap:14px;font-size:12px;color:var(--muted)}
 .legend i{display:inline-block;width:10px;height:2px;margin-right:6px;vertical-align:3px}
