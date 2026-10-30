@@ -79,10 +79,14 @@ window.Desk = (function () {
   // 'EGX30' or 'COMP'. Returns a caption, or null when there is no one-day data for it.
   function dayChart(el, market, key, name, fmt) {
     const M_ = INTRA && INTRA[market], I = M_ && M_.series && M_.series[key]; el.innerHTML = '';
-    if (!I) { el.innerHTML = `<p class="sub" style="padding:24px 0">No one-day data for ${esc(name)}: ${market === 'us' && /^(sp500|dow)$/.test(key) ? 'no free source has its prices through the day.' : 'not saved for the last session.'}</p>`; return null; }
+    if (!I) { el.innerHTML = `<p class="sub" style="padding:24px 0">No one-day data for ${esc(name)}: ${/^(sp500|dow|brent|gold_usd|dxy)$/.test(key) ? 'its only free source refused the last run; it fills in on days it answers.' : 'not saved for the last session.'}</p>`; return null; }
     const vals = I.map((x) => x[1]), lo = Math.min(...vals), hi = Math.max(...vals), pad = (hi - lo) * 0.15 || lo * 0.002;
     Charts.line(el, { labels: I.map((x) => x[0]), series: [{ name, values: vals }], format: fmt, endLabel: true, height: el.clientHeight, min: lo - pad, xAt: [0, Math.floor((I.length - 1) / 2), I.length - 1] });
     const ch = (vals.at(-1) / vals[0] - 1) * 100;
+    if (M_.window) {   // round-the-clock markets: the last 24 hours, Cairo time
+      const to = new Date(M_.to.replace(' ', 'T'));
+      return `Last 24 hours to ${to.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' })} ${M_.to.slice(11)} Cairo time: <span class="num ${cls(ch)}">${pct(ch, 2)}</span>`;
+    }
     return `${day(M_.session).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short' })}, ${I[0][0]}–${I.at(-1)[0]} ${market === 'egx' ? 'Cairo' : 'New York'} time: <span class="num ${cls(ch)}">${pct(ch, 2)}</span> from the first trade`;
   }
   // a line chart of one series over a period (at least a month), with the biggest day marked when it stands out
@@ -172,5 +176,5 @@ window.Desk = (function () {
       location.reload();
     });
   }
-  return { get ASOF() { return ASOF; }, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, init };
+  return { get ASOF() { return ASOF; }, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, get INTRA() { return INTRA; }, init };
 })();

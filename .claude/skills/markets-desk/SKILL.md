@@ -26,8 +26,10 @@ closes are the last session's; the news, stock research and analysis are still u
    (finding, rates, afterBell, news, outlook), Global (finding, notes, news). Carry each projection
    forward until its date, and score it when the date passes.
 5. Run `python3 .claude/skills/markets-desk/fetch_intraday.py` to save the last finished session's prices
-   through the day (`desk/intraday.json`, for the 1D charts: the EGX30, the Nasdaq and all 24 stocks).
-   It keeps the saved session if a market is still trading, and takes under a minute.
+   through the day (`desk/intraday.json`, for the 1D charts: the EGX30, the Nasdaq and all 24 stocks, and
+   the last 24 hours of Bitcoin; the S&P 500, Dow, Brent, gold and the dollar index only when Yahoo answers).
+   It keeps the saved session if a market is still trading, and takes under a minute. The dollar in pounds
+   has no 1D chart: the official rate barely moves within a day.
 6. Add the session's flows to `desk/flows.json` when the EGX traded, and the date to `desk/index.json`
    with a one-line summary.
 7. Run `python3 .claude/skills/markets-desk/check_desk.py`, fix every ERROR, then commit and push as for
