@@ -323,8 +323,9 @@ def main(path):
 
     # Per section: credits on most stories, or one outlet behind most of them, means the section leans on
     # attribution or on one source. Both block publishing.
-    outlet_re = re.compile(r"(?:according to|citing|per) ((?:[A-Z][\w'&.-]*)(?: (?:[A-Z][\w'&.-]*|of|al|el))*)"
-                           r"|((?:[A-Z][\w'&.-]*)(?: [A-Z][\w'&.-]*)*) reported")
+    word = r"[A-Z][\w'&-]*(?:\.\w+)*"
+    outlet_re = re.compile(rf"(?:according to|citing|per) ({word}(?: (?:{word}|of|al|el))*)"
+                           rf"|({word}(?: {word})*) reported")
     generic = {"News", "The", "Egyptian", "Officials", "State", "Local", "Reports", "Market", "Figures"}
     lead_re = re.compile(r"^\s*(?:[-*]\s+|\d+\.\s+)?\*\*[^*]+\*\*")
     for name in ("Egypt News", "Top World Headlines", "Regional and Gulf", "Egypt Markets", "Global Markets",
