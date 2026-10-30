@@ -87,7 +87,7 @@ The menu order is Dashboard, EGX, EGP, Wall Street, Global, Egyptian stocks, US 
 - `desk/flows.json`: net equity flows by investor group, one entry per session, for the flow history.
 - Stock pages read each stock's volume (`vol`) from the data log and compare the last session with the
   average of the 30 before it; the EGP page reads the central bank's dollar rate, policy rates and the one-year T-bill
-  yields from the log. The day's file only adds what the log does not hold.
+  yield from the log. The day's file only adds what the log does not hold.
 - The charts, the Stocks tables and every change and YTD figure are drawn by the page from
   `data/markets-recent.json`, so log the day's figures before publishing a desk.
 
