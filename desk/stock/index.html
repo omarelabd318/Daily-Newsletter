@@ -81,10 +81,13 @@
   M.$('pdate').textContent = 'to ' + M.short(M.ASOF);
   const draw = (q) => { M.chart(M.$('chart'), s, q[1], t, Charts.fmt.dec(2)); const c = M.change(s, q[1]), ci = M.change(idxS, q[1]); M.$('cap').innerHTML = `${q[2]}: <span class="num ${M.cls(c)}">${M.pct(c, 2)}</span> · ${idxN} <span class="num ${M.cls(ci)}">${M.pct(ci, 2)}</span>`; };
   M.segment(M.$('seg'), '6M', draw, M.PERIODS.slice(1)); draw(M.PERIODS[3]);
-  M.$('perf').innerHTML = M.kv([['Week', signed(M.change(s, 7))], ['Month', signed(M.change(s, 30))], ['6 months', signed(M.change(s, 182))], ['Year', signed(M.change(s, 365))], ['This year', signed(y)]]);
+  // the stock's move next to its index's over the same period, and the gap between them in percentage points
+  const vs = (back) => { const a = back == null ? y : M.change(s, back), b = back == null ? M.ytd(idxS) : M.change(idxS, back); return a == null || b == null ? null : a - b; };
+  const pts = (v) => v == null ? '<span class="dash">—</span>' : `<span class="${M.cls(v)}">${v > 0 ? '+' : v < 0 ? '−' : ''}${Math.abs(v).toFixed(1)} pts</span>`;
+  M.$('perf').innerHTML = M.kv([['Week', signed(M.change(s, 7))], ['Month', signed(M.change(s, 30))], ['6 months', signed(M.change(s, 182))], ['Year', signed(M.change(s, 365))], ['This year', signed(y)]])
+    + `<h3 class="perf-h">Against the ${idxN}</h3>` + M.kv([['Month', pts(vs(30))], ['6 months', pts(vs(182))], ['This year', pts(vs(null))]]);
   const [lo, hi] = M.range52(s); M.$('range').innerHTML = M.rangeBar(lo, hi, M.last(s));
-  const rel = y != null && M.ytd(idxS) != null ? y - M.ytd(idxS) : null;
-  M.$('vsidx').innerHTML = `This year it is <span class="num ${M.cls(rel)}">${M.pct(rel)}</span> against the ${idxN} (${M.pct(M.ytd(idxS))}). ${M.num((1 - M.last(s) / hi) * 100, 1)}% below its 52-week high.`;
+  M.$('vsidx').innerHTML = `The ${idxN} is <span class="num ${M.cls(M.ytd(idxS))}">${M.pct(M.ytd(idxS))}</span> this year; points above zero mean the stock beat it. ${M.num((1 - M.last(s) / hi) * 100, 1)}% below its 52-week high.`;
 
   const V = p.valuation, rows = (r) => r.map((x) => [x.label, x.value == null ? dash : M.esc(x.value)]);
   M.$('val').innerHTML = M.kv(V ? rows(V.rows) : [['Market value', dash], ['P/E', dash], ['P/B', dash]]);
@@ -109,7 +112,7 @@
   // news: today's market news that names this stock, then its own news from desk/stocks.json, newest first
   const tagged = [];
   for (const k of ['egx', 'egp', 'us', 'global']) for (const n of ((D.pages[k] || {}).news || [])) if ((n.tickers || []).includes(t)) tagged.push({ date: M.ASOF, text: n.headline + '. ' + n.text, source: n.source, url: n.url });
-  const seen = new Set(), items = [...tagged, ...(p.news || [])].filter((n) => { const k = n.text.slice(0, 60); if (seen.has(k)) return false; seen.add(k); return true; })
+  const seen = new Set(), items = [...tagged, ...(p.news || [])].filter((n) => { const k = n.url || n.text.slice(0, 60); if (seen.has(k)) return false; seen.add(k); return true; })
     .sort((x, y) => (y.date > x.date ? 1 : y.date < x.date ? -1 : 0));
   const link = (n) => n.url ? `<a class="src" href="${M.esc(n.url)}" target="_blank" rel="noopener">${M.esc(n.source || 'Source')} →</a>` : n.edition ? `<a class="src" href="/#${n.edition}">Newsletter, ${M.short(n.edition)} →</a>` : '';
   M.$('news').innerHTML = items.map((n) => `<div class="news"><span class="when">${M.day(n.date).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' })}</span><p>${M.esc(n.text)}</p>${link(n)}</div>`).join('') || '<p class="sub">No company news found in the last month.</p>';

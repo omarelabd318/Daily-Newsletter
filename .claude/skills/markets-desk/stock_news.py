@@ -6,14 +6,17 @@ Usage:
 
 DAYS defaults to 2 (use 3 on Sundays, to cover the weekend). With no tickers it covers all 24.
 For each stock it prints headlines from Google News (English, plus Arabic for the Egyptian stocks), newest
-first, each with its date, outlet and link. Headlines are leads, not facts: open the story at the outlet
+first, each with its date, outlet and the story's own link at the outlet (Google's redirect is resolved;
+if that fails the Google link is shown). Headlines are leads, not facts: open the story at the outlet
 before using it, check it against a second outlet where it matters, and keep only news about the company,
 its stock, or something that clearly affects it (results, disclosures, deals, ratings, management,
 regulation, prices of what it sells). Market wraps that only list the stock's move are skipped.
 """
 import datetime
+import concurrent.futures
 import email.utils
 import html
+import json
 import re
 import sys
 import urllib.parse
@@ -87,6 +90,28 @@ def google(query, days, arabic=False):
     return out
 
 
+def resolve(link):
+    """Google News links redirect through a script; ask Google for the outlet's own URL instead."""
+    aid = re.search(r"/articles/([^?]+)", link)
+    if not aid:
+        return link
+    aid = aid.group(1)
+    try:
+        req = urllib.request.Request(f"https://news.google.com/rss/articles/{aid}", headers={"User-Agent": UA})
+        page = urllib.request.urlopen(req, timeout=20).read().decode("utf-8", "replace")
+        sg = re.search(r'data-n-a-sg="([^"]+)"', page).group(1)
+        ts = re.search(r'data-n-a-ts="([^"]+)"', page).group(1)
+        inner = json.dumps(["garturlreq", [["X", "X", ["X", "X"], None, None, 1, 1, "US:en", None, 1, None, None, None, None,
+                                            None, 0, 1], "X", "X", 1, [1, 1, 1], 1, 1, None, 0, 0, None, 0], aid, int(ts), sg])
+        body = "f.req=" + urllib.parse.quote(json.dumps([[["Fbv4je", inner, None, "generic"]]]))
+        req = urllib.request.Request("https://news.google.com/_/DotsSplashUi/data/batchexecute", data=body.encode(),
+                                     headers={"User-Agent": UA, "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"})
+        out = urllib.request.urlopen(req, timeout=20).read().decode("utf-8", "replace")
+        return json.loads(json.loads(out.split("\n\n", 1)[1])[0][2])[1]
+    except Exception:
+        return link
+
+
 def main(args):
     days = int(args.pop(0)) if args and args[0].isdigit() else 2
     tickers = [a.upper() for a in args] or list(STOCKS)
@@ -111,10 +136,14 @@ def main(args):
                 continue
             seen.add(key)
             keep.append(r)
+        keep = keep[:8]
+        with concurrent.futures.ThreadPoolExecutor(8) as pool:
+            urls = list(pool.map(resolve, [r[3] for r in keep]))
+        keep = [(w, o, ti, u) for (w, o, ti, _), u in zip(keep, urls)]
         print(f"## {t}  ({len(keep)} leads)")
         for e in errors:
             print(f"- {e}")
-        for when, outlet, title, link in keep[:8]:
+        for when, outlet, title, link in keep:
             print(f"- {when:%a %d %b} | {outlet} | {title}\n  {link}")
         if not keep and not errors:
             print("- nothing found")

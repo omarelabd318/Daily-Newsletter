@@ -279,3 +279,4 @@ td.name a{text-decoration:none}
 .news .nf{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:6px}
 .chip{display:inline-flex;align-items:center;height:20px;padding:0 7px;border-radius:var(--radius-chip);background:var(--raised);font-size:12px;font-weight:500;text-decoration:none;color:var(--text)}
 .chip:hover{background:var(--active)}
+.perf-h{margin:16px 0 2px;font-size:13px;font-weight:600}

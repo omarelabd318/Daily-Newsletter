@@ -74,14 +74,147 @@
     {
      "date": "2026-10-29",
      "text": "CIB rose 0.5% to EGP 120.47 on the day the central bank raised rates by 100 basis points.",
-     "edition": "2026-10-30"
+     "edition": "2026-10-30",
+     "source": "Daily Newsletter"
     },
     {
      "date": "2026-10-28",
      "text": "Commercial International Bank closed at its lowest since 31 March as the EGX30 fell 1.6%.",
-     "edition": "2026-10-29"
+     "edition": "2026-10-29",
+     "source": "Daily Newsletter"
     }
    ]
+  },
+  "TMGH": {
+   "sector": "Real estate",
+   "news": [
+    {
+     "date": "2026-10-28",
+     "text": "Signed an agreement with the state to develop four mixed-use projects in East Cairo, Alexandria and the North Coast, with targeted investment of about EGP 11 trillion over more than 37 million square metres. President El-Sisi also asked the government to work with the group on 200,000 homes for rent.",
+     "source": "CairoScene",
+     "url": "https://cairoscene.com/News/Talaat-Moustafa-Group-Signs-EGP-11-Trillion-Development-Deal"
+    }
+   ]
+  },
+  "ABUK": {
+   "sector": "Fertilisers",
+   "news": [
+    {
+     "date": "2026-10-29",
+     "text": "Unaudited nine-month profit rose to about EGP 12.97bn, roughly double a year earlier, helped by steadier gas supplies.",
+     "source": "Al-Mostaqbal Al-Youm",
+     "url": "https://www.elmostqpalelyuom.com/38926"
+    },
+    {
+     "date": "2026-10-29",
+     "text": "The board awarded the second phase of its solar plants, about 3 MW for EGP 76.2m over 12 months, to the Arab Organization for Industrialization, and approved a McKinsey-drafted strategy to start in fiscal 2027.",
+     "source": "Al-Masry Al-Youm",
+     "url": "https://www.almasryalyoum.com/news/details/4396028"
+    }
+   ]
+  },
+  "PHDC": {
+   "sector": "Real estate",
+   "news": [
+    {
+     "date": "2026-10-27",
+     "text": "Al Ahly Pharos put Palm Hills' fair value at EGP 21.40 a share, about 74% above its price at the time (EGP 12.28), based on existing assets alone.",
+     "source": "Economy Plus",
+     "url": "https://economyplusme.com/ar/news/33801"
+    }
+   ]
+  },
+  "XOM": {
+   "sector": "Energy",
+   "news": [
+    {
+     "date": "2026-10-30",
+     "text": "Third-quarter profit roughly doubled to $15.4bn from $7.5bn a year earlier, on revenue up about 33% to $113.2bn, beating estimates on higher oil prices and record output.",
+     "source": "Free Malaysia Today (AFP)",
+     "url": "https://www.freemalaysiatoday.com/category/business/2026/10/30/exxonmobil-profits-double-to-us-15-4bil-on-oil-price-surge/"
+    }
+   ]
+  },
+  "MSFT": {
+   "sector": "Software",
+   "news": [
+    {
+     "date": "2026-10-30",
+     "text": "Lined up a $25bn bond sale to fund AI spending, its first bond sale since 2017.",
+     "source": "24/7 Wall St.",
+     "url": "https://247wallst.com/investing/2026/10/30/microsoft-is-borrowing-25-billion-for-ai-its-first-bond-sale-since-2017/"
+    }
+   ]
+  },
+  "GOOGL": {
+   "sector": "Internet",
+   "news": [
+    {
+     "date": "2026-10-30",
+     "text": "UBS cut its price target to $332 from $380 and kept a neutral rating after search and YouTube revenue missed forecasts.",
+     "source": "Yahoo Finance",
+     "url": "https://ca.finance.yahoo.com/news/alphabet-faces-ubs-target-cut-103000032.html"
+    }
+   ]
+  },
+  "AVGO": {
+   "sector": "Semiconductors",
+   "news": [
+    {
+     "date": "2026-10-30",
+     "text": "A $63bn financing deal tied to Anthropic gives Broadcom a funded customer for its AI chip forecast, according to 24/7 Wall St.; reported by one outlet so far.",
+     "source": "24/7 Wall St.",
+     "url": "https://247wallst.com/investing/2026/10/30/broadcoms-63b-anthropic-deal-could-be-the-one-that-finally-gets-it-into-gear/"
+    }
+   ]
+  },
+  "ETEL": {
+   "sector": "Telecoms"
+  },
+  "SWDY": {
+   "sector": "Cables and electrical"
+  },
+  "ORAS": {
+   "sector": "Construction"
+  },
+  "FWRY": {
+   "sector": "Payments"
+  },
+  "HRHO": {
+   "sector": "Investment banking"
+  },
+  "CLHO": {
+   "sector": "Healthcare"
+  },
+  "JUFO": {
+   "sector": "Food"
+  },
+  "ALCN": {
+   "sector": "Ports"
+  },
+  "AAPL": {
+   "sector": "Hardware"
+  },
+  "NVDA": {
+   "sector": "Semiconductors"
+  },
+  "AMZN": {
+   "sector": "Retail and cloud"
+  },
+  "META": {
+   "sector": "Internet"
+  },
+  "TSLA": {
+   "sector": "Cars"
+  },
+  "JPM": {
+   "sector": "Banks"
+  },
+  "BRK.B": {
+   "sector": "Conglomerate"
+  },
+  "WMT": {
+   "sector": "Retail"
   }
  }
 }

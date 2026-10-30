@@ -5,9 +5,30 @@ description: House rules for the Markets Desk, the daily markets analysis page p
 
 # Markets Desk
 
-Status: the dashboard (`/desk/`) and its pages are built for review, filled with a sample desk; the daily run
-does not write them yet.
+Status: written every day by the newsletter's scheduled runs, after the edition is published (see Daily run).
+The 30 October desk is a sample kept for reference.
 These are the rules agreed so far; add to them as the desk is finished.
+
+## Daily run
+
+Run after the newsletter edition is pushed, from the same research, so a desk problem never holds up the
+edition. On days with no session (Friday and Saturday for the EGX, Saturday and Sunday for the US) the
+closes are the last session's; the news, stock research and analysis are still updated.
+
+1. Copy the newest `desk/days/*.json` as a template to `desk/days/DATE.json` (DATE is the edition date) and
+   rewrite every part for today: set `date`, `asOf` (the latest close, the day before DATE on a trading
+   day), `fetched`, and remove `"sample": true`. The close card figures come from today's logged figures.
+2. Run `python3 .claude/skills/markets-desk/stock_news.py` (`3` on Sundays) and do the stock research
+   below; update `desk/stocks.json`.
+3. Write each section: finding, one to three stories (`calls`), who it helps and hurts, the Stocks note,
+   the week ahead and open views (check each open view against the data log: on track, right, wrong).
+4. Write `pages`: EGX (finding, session, news, outlook), EGP (finding, rates, drivers, news, view), US
+   (finding, rates, afterBell, news, outlook), Global (finding, notes, news). Carry each projection
+   forward until its date, and score it when the date passes.
+5. Add the session's flows to `desk/flows.json` when the EGX traded, and the date to `desk/index.json`
+   with a one-line summary.
+6. Run `python3 .claude/skills/markets-desk/check_desk.py`, fix every ERROR, then commit and push as for
+   the edition (message `Desk DATE`).
 
 ## Pages
 
@@ -173,8 +194,8 @@ in labels or in the text.
 
 ## Design
 
-Laid out as the mock-up: the achromatic-ledger style from the design-taste-frontend skill, on the
-newsletter's colours and fonts with its dark mode. A pinned close column on the left; the top call and its
-index chart (EGX30 or Nasdaq) as the largest block; a side card (Egypt: pound or dollar; USA: oil);
-then winners and losers, Stocks with the 1D–1Y switch, the week ahead and open views. On a phone the top
-call comes first.
+The achromatic-ledger style from the design-taste-frontend skill, on the newsletter's colours and fonts
+with its dark mode. Dashboard: a close column on the left with a side card (Egypt: the dollar in pounds;
+USA: oil) and, for Egypt, who bought and who sold; on the right the stories first, then the index chart
+(EGX30 or Nasdaq) as its own card, then who it helps and hurts, Stocks with the 1D–1Y switch, the week
+ahead and open views. On a phone the stories come first.

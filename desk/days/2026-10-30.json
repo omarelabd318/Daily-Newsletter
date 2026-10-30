@@ -85,17 +85,17 @@
     },
     {
      "name": "Telecom Egypt",
-     "why": "Down 1.7% on Thursday and 11% in a month after an 83% run this year; profit-taking, no company news found.",
+     "why": "Down 1.7% on Thursday and 11% in a month after an 83% run this year; profit-taking, with no news beyond setting a date for its third-quarter results.",
      "confidence": "low"
     },
     {
      "name": "Fertilisers: Abu Qir",
-     "why": "Down 3.5%, the worst of the 12 Egyptian stocks on Thursday; no company news found, likely profit-taking after a 73% run this year.",
+     "why": "Down 3.5%, the worst of the 12 Egyptian stocks on Thursday, even as it reported nine-month profit roughly doubling to about EGP 13bn: profit-taking after a 73% run this year, with the results largely expected.",
      "confidence": "low"
     }
    ]
   },
-  "stocksNote": "<b>Worst on Thursday:</b> Abu Qir −3.5%, no company news found. <b>Best:</b> Alexandria Containers +1.5%.",
+  "stocksNote": "<b>Worst on Thursday:</b> Abu Qir −3.5%, despite nine-month profit roughly doubling. <b>Best:</b> Alexandria Containers +1.5%.",
   "week": [
    {
     "day": "Sun 1 Nov",
@@ -404,8 +404,8 @@
      "sectors": [
       {
        "name": "Real estate developers",
-       "confidence": "high",
-       "why": "Dearer financing hits instalment buyers and developers’ own borrowing at once. Talaat Moustafa and Palm Hills are 12% and 16% below their 50-day averages and still falling, with both at their lowest since April."
+       "confidence": "medium",
+       "why": "Dearer financing hits instalment buyers and developers’ own borrowing at once. Talaat Moustafa and Palm Hills are 12% and 16% below their 50-day averages and still falling, with both at their lowest since April. Talaat Moustafa's EGP 11 trillion state deal and Al Ahly Pharos' Palm Hills valuation are the counterweights, so confidence is medium."
       },
       {
        "name": "Food and consumer",
@@ -422,8 +422,8 @@
        ],
        "dp": 0,
        "by": "end of December",
-       "confidence": "medium",
-       "why": "Down 7.6% in a month and 12% under its 50-day average (91.3); the hike lands on its buyers and its debt. No sign yet of buyers stepping in.",
+       "confidence": "low",
+       "why": "Down 7.6% in a month and 12% under its 50-day average (91.3); the hike lands on its buyers and its debt. Its EGP 11 trillion state deal is a long-term offset, so confidence is low.",
        "wrong": "it closes back above EGP 88, near its 50-day average, or a big sales launch beats expectations."
       },
       {
@@ -434,8 +434,8 @@
        ],
        "dp": 1,
        "by": "end of December",
-       "confidence": "medium",
-       "why": "The same pressure as Talaat Moustafa with a smaller balance sheet: down 10.6% in a month and 16% under its 50-day average (13.5).",
+       "confidence": "low",
+       "why": "Down 10.6% in a month and 16% under its 50-day average (13.5), under the same rate pressure as Talaat Moustafa. Al Ahly Pharos values it at EGP 21.40 on existing assets alone, which argues against a deep fall.",
        "wrong": "it closes above EGP 12.50."
       },
       {
@@ -447,13 +447,40 @@
        "dp": 0,
        "by": "end of November",
        "confidence": "low",
-       "why": "Profit-taking after a 73% run this year; it fell 3.5% on Thursday with no company news. The weaker pound helps its exports, so the downside should be limited.",
+       "why": "Profit-taking after a 73% run this year: it fell 3.5% on Thursday even as nine-month profit roughly doubled to about EGP 13bn, a sign the good news was priced in. The weaker pound helps its exports, so the downside should be limited.",
        "wrong": "it makes a new high above EGP 95.75."
       }
      ]
     }
    },
    "news": [
+    {
+     "headline": "Talaat Moustafa signs EGP 11 trillion development deal with the state",
+     "text": "Four mixed-use projects in East Cairo, Alexandria and the North Coast over more than 37 million square metres; the president asked for 200,000 rental homes on top.",
+     "source": "CairoScene",
+     "url": "https://cairoscene.com/News/Talaat-Moustafa-Group-Signs-EGP-11-Trillion-Development-Deal",
+     "tickers": [
+      "TMGH"
+     ]
+    },
+    {
+     "headline": "Abu Qir Fertilizers' nine-month profit roughly doubles to EGP 13bn",
+     "text": "Unaudited results to September show profit of about EGP 12.97bn, helped by steadier gas supplies; the board also approved a McKinsey strategy from fiscal 2027.",
+     "source": "Al-Mostaqbal Al-Youm",
+     "url": "https://www.elmostqpalelyuom.com/38926",
+     "tickers": [
+      "ABUK"
+     ]
+    },
+    {
+     "headline": "Al Ahly Pharos values Palm Hills at EGP 21.40",
+     "text": "The fair value, based on existing assets alone, is about 74% above the price when it was published.",
+     "source": "Economy Plus",
+     "url": "https://economyplusme.com/ar/news/33801",
+     "tickers": [
+      "PHDC"
+     ]
+    },
     {
      "headline": "Banque du Caire's retail tranche 27 times covered",
      "text": "Orders reached about 9.29 billion shares against 343.1 million offered, so applicants get about 3.7% of what they asked for. The Cabinet has approved the sale of a 30% to 45% stake.",
@@ -546,6 +573,13 @@
      ]
     },
     {
+     "headline": "EFG Hermes: about $7bn of foreign money left Egyptian debt in three weeks",
+     "text": "EFG Hermes research estimates net portfolio outflows of about $7bn over the past three weeks, as the pound fell about 7% against the dollar amid regional tension and higher oil prices.",
+     "source": "Economy Plus",
+     "url": "https://economyplusme.com/ar/news/33823",
+     "tickers": []
+    },
+    {
      "headline": "IMF mission starts the final review",
      "text": "The mission is in Cairo for the eighth and last review of Egypt's $8bn Extended Fund Facility; a passed review releases the final tranche.",
      "source": "EnterpriseAM",
@@ -615,7 +649,7 @@
        "dp": 0,
        "by": "end of December",
        "confidence": "medium",
-       "why": "At its 52-week high (184.54) and up 52% this year, carried by oil. More upside needs Brent to hold above $110.",
+       "why": "At its 52-week high and up 52% this year; Friday's results showed profit doubling to $15.4bn. More upside needs Brent to hold above $110.",
        "wrong": "Brent falls below $100, for example on a Gulf de-escalation."
       },
       {
@@ -698,6 +732,24 @@
      "source": "Kitco",
      "url": "https://www.kitco.com/news/article/2026-10-29/spot-gold-4025oz-us-gdp-growth-rises-34-q3-core-pce-rises-25",
      "tickers": []
+    },
+    {
+     "headline": "ExxonMobil's profit doubles to $15.4bn",
+     "text": "Third-quarter revenue rose about 33% to $113.2bn on higher oil prices and record output, beating estimates.",
+     "source": "Free Malaysia Today (AFP)",
+     "url": "https://www.freemalaysiatoday.com/category/business/2026/10/30/exxonmobil-profits-double-to-us-15-4bil-on-oil-price-surge/",
+     "tickers": [
+      "XOM"
+     ]
+    },
+    {
+     "headline": "Microsoft lines up $25bn bond sale for AI",
+     "text": "Its first bond sale since 2017, a sign of what AI spending now costs even the most cash-rich companies.",
+     "source": "24/7 Wall St.",
+     "url": "https://247wallst.com/investing/2026/10/30/microsoft-is-borrowing-25-billion-for-ai-its-first-bond-sale-since-2017/",
+     "tickers": [
+      "MSFT"
+     ]
     }
    ]
   },

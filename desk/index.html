@@ -128,7 +128,8 @@ h2{margin:0;font-size:16px;line-height:22px;font-weight:600}
 
 /* the read */
 .read{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:24px}
-.read h2.call{font-size:20px;line-height:26px;letter-spacing:-.01em;margin-bottom:8px}
+.story.read{display:block;max-width:880px}
+.read h2.call,#c-read h2.call{font-size:20px;line-height:26px;letter-spacing:-.01em;margin-bottom:8px}
 .read p{margin:0 0 10px;font-size:14px;line-height:21px}
 .read dl{display:grid;grid-template-columns:118px minmax(0,1fr);gap:8px 12px;margin:14px 0 0;padding-top:14px;border-top:1px solid var(--rule)}
 .read dt{color:var(--muted);font-size:13px}
@@ -200,7 +201,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
   .grid,.leftcol,.main{display:contents}
   .canvas{display:flex;flex-direction:column}
   .canvas > .grid{display:flex;flex-direction:column;gap:var(--gap)}
-  #c-read{order:1} #c-close{order:2} #c-board{order:3} #c-flows{order:4} #c-stocks{order:5} #c-pvd{order:6} #c-week{order:7} #c-views{order:8}
+  #c-read{order:1} #c-close{order:2} #c-chart{order:3} #c-board{order:3} #c-flows{order:4} #c-stocks{order:5} #c-pvd{order:6} #c-week{order:7} #c-views{order:8}
 }
 /* phone */
 @media (max-width:860px){
@@ -304,8 +305,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
 
         <div class="main">
           <section class="card span2" id="c-read" aria-labelledby="h-read">
-            <div class="read">
-              <div class="story" id="story" aria-roledescription="carousel" aria-label="The day's stories">
+              <div class="story read" id="story" aria-roledescription="carousel" aria-label="The day's stories">
                 <div class="card-h" style="margin-bottom:6px"><span class="meta" id="story-n">Top call</span><span class="story-nav"><span class="conf" id="top-conf"></span><span class="arrows" id="story-arrows" hidden><button type="button" id="story-prev" aria-label="Previous story">&#8249;</button><button type="button" id="story-next" aria-label="Next story">&#8250;</button></span></span></div>
                 <h2 class="call" id="h-read"></h2>
                 <p id="top-body"></p>
@@ -317,12 +317,12 @@ td.trend svg{display:inline-block;vertical-align:middle}
                 <div class="notice" id="top-notice" hidden></div>
                 <div class="dots" id="story-dots" role="tablist" aria-label="Stories" hidden></div>
               </div>
-              <div>
-                <div class="card-h"><span class="meta" id="chart-name">EGX30</span><div class="seg" role="group" aria-label="Chart period" id="egx-seg"></div></div>
-                <div class="chartbox" id="egx-chart"></div>
-                <p class="chart-cap" id="egx-cap"></p>
-              </div>
-            </div>
+          </section>
+
+          <section class="card span2" id="c-chart" aria-labelledby="chart-name">
+            <div class="card-h"><h2 id="chart-name">EGX30</h2><span class="story-nav"><a class="meta" id="chart-more" href="/desk/egx/">EGX page →</a><span class="seg" role="group" aria-label="Chart period" id="egx-seg"></span></span></div>
+            <div class="chartbox" id="egx-chart"></div>
+            <p class="chart-cap" id="egx-cap"></p>
           </section>
 
           <section class="card span2" id="c-board" aria-labelledby="h-board">
@@ -469,6 +469,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
     // the section's index, in the one chart hue
     const idx = series((e) => e[S.chart], S.market);
     $('chart-name').textContent = S.chartName;
+    $('chart-more').textContent = key === 'egypt' ? 'EGX page →' : 'US page →'; $('chart-more').href = key === 'egypt' ? '/desk/egx/' : '/desk/us/';
     function drawIdx(p) {
       const back = Math.max(p[1], 30), pts = idx.filter(([d]) => d >= cut(ASOF, back)), el = $('egx-chart'); el.innerHTML = '';
       if (pts.length < 2) { el.textContent = 'Not enough closes logged yet.'; $('egx-cap').textContent = ''; return; }
