@@ -10,7 +10,7 @@ These are the rules agreed so far; add to them as the desk is finished.
 
 ## Files
 
-- `desk/days/DATE.json`: one day's desk in two sections, `egypt` and `global` (shown as "USA & others"),
+- `desk/days/DATE.json`: one day's desk in two sections, `egypt` and `global` (shown as "USA"),
   each with its own finding, close figures, top call, board, note under Stocks, week ahead and open views.
   `desk/days/2026-10-30.json` is the reference for its shape. `"sample": true` marks sample content.
 - `desk/index.json`: `{"desks": [{"date": "DATE", "summary": "..."}]}`; the page opens the newest.
@@ -27,7 +27,7 @@ and the same research as the newsletter.
 ## Two sections
 
 The desk has two sections, switched from the sidebar (`#egypt`, `#global`): **Egypt** (the EGX, the pound,
-Egyptian gold and rates, the 12 Egyptian stocks) and **USA & others** (US markets and the 12 US stocks, plus
+Egyptian gold and rates, the 12 Egyptian stocks) and **USA** (US markets and the 12 US stocks, plus
 oil, gold, the dollar index and crypto). Each has its own top call, winners and losers, stocks, week ahead
 and open views. A story goes in the section whose markets it moves; a global story that clearly reaches
 Egypt goes in both, told from each side.
@@ -35,14 +35,14 @@ Egypt goes in both, told from each side.
 ## The top call: Egypt first
 
 In the Egypt section, the top call is the one story that matters most for **Egyptian markets and the
-reader's Egyptian stocks**. In USA & others, it is the story that matters most for US markets and the
+reader's Egyptian stocks**. In USA, it is the story that matters most for US markets and the
 reader's US stocks.
 
 - **A global story leads only when it clearly reaches Egypt**, through a channel the call names: oil
   prices, US interest rates and the dollar, money flowing in or out of emerging markets, Gulf investment,
   or Suez and Red Sea traffic. A big move abroad with no such link is not the top call, however large it
   is (for example, Alphabet falling 12.6% on its results: the EGX30 rose the same day).
-- **Global stories still have a place**: in the USA & others section, where such a story can be the top
+- **Global stories still have a place**: in the USA section, where such a story can be the top
   call (Alphabet's fall was). When it does not reach Egypt, the Egypt section leaves it out.
 - **Prefer the story that ties the day together**: the pound, the EGX30's move and who was buying, the
   central bank, rather than the loudest headline.
@@ -86,6 +86,6 @@ periods and YTD come from `data/markets.json`.
 
 Laid out as the mock-up: the achromatic-ledger style from the design-taste-frontend skill, on the
 newsletter's colours and fonts with its dark mode. A pinned close column on the left; the top call and its
-index chart (EGX30 or Nasdaq) as the largest block; a side card (Egypt: pound or dollar; USA & others: oil);
+index chart (EGX30 or Nasdaq) as the largest block; a side card (Egypt: pound or dollar; USA: oil);
 then winners and losers, Stocks with the 1D–1Y switch, the week ahead and open views. On a phone the top
 call comes first.

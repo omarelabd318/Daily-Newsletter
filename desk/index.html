@@ -221,7 +221,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
     <nav class="nav" aria-label="Main">
       <div class="navgroup">Today's desk</div>
       <a href="#egypt" data-sec="egypt"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke-width="1.5"><path d="M2 13h12M4 10l3-3 2 2 4-5"/></svg>Egypt</a>
-      <a href="#global" data-sec="global"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke-width="1.5"><circle cx="8" cy="8" r="5.5"/><path d="M2.5 8h11M8 2.5c1.8 1.6 1.8 9.4 0 11M8 2.5c-1.8 1.6-1.8 9.4 0 11"/></svg>USA &amp; others</a>
+      <a href="#global" data-sec="global"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke-width="1.5"><circle cx="8" cy="8" r="5.5"/><path d="M2.5 8h11M8 2.5c1.8 1.6 1.8 9.4 0 11M8 2.5c-1.8 1.6-1.8 9.4 0 11"/></svg>USA</a>
       <div class="navgroup">Newsletter</div>
       <a href="/"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke-width="1.5"><path d="M3 2.5h10v11H3zM5.5 5.5h5M5.5 8h5M5.5 10.5h3"/></svg>Today's newsletter</a>
       <div class="navgroup">Library</div>
@@ -244,7 +244,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
         <div>
           <h1 id="title">Markets Desk</h1>
           <p class="finding" id="finding"></p>
-          <div class="secswitch" role="group" aria-label="Section"><a href="#egypt" data-sec="egypt">Egypt</a><a href="#global" data-sec="global">USA &amp; others</a></div>
+          <div class="secswitch" role="group" aria-label="Section"><a href="#egypt" data-sec="egypt">Egypt</a><a href="#global" data-sec="global">USA</a></div>
         </div>
         <div class="actions">
           <div class="stamp num" id="stamp"></div>
@@ -343,7 +343,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
 
   const SECTIONS = {
     egypt: { name: 'Egypt', chart: 'egx30', chartName: 'EGX30', market: 'egx', group: 'egx' },
-    global: { name: 'USA & others', chart: 'nasdaq', chartName: 'Nasdaq', market: 'us', group: 'us' },
+    global: { name: 'USA', chart: 'nasdaq', chartName: 'Nasdaq', market: 'us', group: 'us' },
   };
   const longDate = day(D.date).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
   $('stamp').innerHTML = 'Closes to ' + esc(day(ASOF).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }).replace(',', '')) + '<br>Fetched ' + esc(D.fetched || '');
@@ -431,7 +431,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
     }
     segment($('egx-seg'), '1M', drawIdx); drawIdx(PERIODS[2]);
 
-    // side card: Egypt asks whether the pound's move is local; USA & others shows oil, the price that reaches Egypt most
+    // side card: Egypt asks whether the pound's move is local; USA shows oil, the price that reaches Egypt most
     $('pvd-legend').innerHTML = ''; $('pvd').innerHTML = '';
     if (key === 'egypt') {
       $('h-pvd').textContent = 'Pound or dollar?'; $('side-meta').textContent = 'Last 30 days';
