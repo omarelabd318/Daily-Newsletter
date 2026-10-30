@@ -58,6 +58,16 @@
     </section>
   </div>
 </main>
+<script>
+// a refresh on a stock's page goes back to its list (Egyptian or US stocks); opening a stock still shows it
+try {
+  const nav = performance.getEntriesByType('navigation')[0];
+  if (nav && nav.type === 'reload') {
+    const t = new URLSearchParams(location.search).get('t') || '';
+    location.replace(['AAPL', 'MSFT', 'NVDA', 'AMZN', 'GOOGL', 'META', 'TSLA', 'JPM', 'XOM', 'AVGO', 'BRK.B', 'WMT', 'V', 'ORCL', 'COST'].includes(t) ? '/desk/stocks/us/' : '/desk/stocks/egypt/');
+  }
+} catch (e) {}
+</script>
 <script src="/desk/charts.js"></script>
 <script src="/desk/desk.js"></script>
 <script>
