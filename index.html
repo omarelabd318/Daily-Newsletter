@@ -462,7 +462,7 @@ td.trend{vertical-align:middle}
     [/SAR\b|Saudi riyal/i,'sar_egp'], [/AED\b|dirham/i,'aed_egp'], [/KWD\b|Kuwaiti dinar/i,'kwd_egp'], [/QAR\b|Qatari riyal/i,'qar_egp'],
     [/GBP\b|sterling|British pound/i,'gbp_egp'], [/21\s*K/i,'gold21_egp'], [/24\s*K/i,'gold24_egp'], [/18\s*K/i,'gold18_egp'],
     [/gold pound|gold coin/i,'goldpound_egp'], [/brent/i,'brent'],
-    [/gold.*(global|ounce|oz|spot)|(global|spot).*gold/i,'gold_usd'], [/S&P\s*500/i,'sp500'], [/nasdaq/i,'nasdaq'], [/bitcoin|\bBTC\b/i,'btc']
+    [/gold.*(global|ounce|oz|spot)|(global|spot).*gold/i,'gold_usd'], [/S&P\s*500/i,'sp500'], [/nasdaq/i,'nasdaq'], [/\bDow\b/i,'dow'], [/bitcoin|\bBTC\b/i,'btc']
   ];
   var tickerSet = null;
   function isTicker(tk){ return tickerSet && tickerSet[tk]; }

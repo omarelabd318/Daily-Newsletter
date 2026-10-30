@@ -149,7 +149,9 @@ covered in full further down.
   it. Do not force an Egypt angle onto stories that have none.
 - **Markets:** all prices and money. That covers oil, gold, Gulf stock markets, bonds, IPOs, earnings,
   deals and Gulf or foreign investment flowing into Egypt. Regional and Gulf may refer to a market move
-  in a few words, but the figures and analysis live here.
+  in a few words, but the figures and analysis live here. Global Markets gives the day's close and change
+  for all three US indices every day, in this order: S&P 500, Nasdaq, Dow Jones, for example "The S&P 500
+  lost 0.30% to 7,720.54, the Nasdaq 1.38% to 26,184.73 and the Dow 0.25% to 52,342.56".
 - **Egypt News:** Egyptian government decisions and domestic stories. When Egypt acts on a regional
   matter (for example a parliamentary vote on a deployment), the Egyptian decision goes here and Regional
   and Gulf does not repeat it.
@@ -409,13 +411,13 @@ Stocks Watch do not.
   3. **Region and World:** 4 to 6 items, regional first, then the rest of the world.
   4. **Markets This Week:** a short paragraph on the week, then a table
      `| Item | Week close | Weekly change |` covering EGX30, USD/EGP, gold 21K per gram in Egypt, Brent,
-     S&P 500, Nasdaq and Bitcoin, then one line each on the week's best and worst EGX30 stocks if known.
+     S&P 500, Nasdaq, Dow Jones and Bitcoin, then one line each on the week's best and worst EGX30 stocks if known.
   5. **Sports This Week:** the week's main results and stories as separate items, Egyptian football first,
      with no sport headings.
   6. **Culture and Tech:** 3 to 5 short items from tech, AI, entertainment and culture.
   On the first Saturday of a month, add **Month in Numbers** right after Markets This Week: one line on
      the month, then a table `| Item | Start of month | End of month | Change |` for EGX30, USD/EGP, gold
-     21K, Brent, S&P 500 and Bitcoin, taken from the first and last entries of the previous month in
+     21K, Brent, S&P 500, Dow Jones and Bitcoin, taken from the first and last entries of the previous month in
      `data/markets.json` (say "not logged" where a figure is missing).
   In the last Saturday recap of December, also add **Year in Numbers** right after Markets This Week (and
      after Month in Numbers if both appear): one line on the year, then the table that
@@ -445,7 +447,7 @@ After the figures are checked, record them in `data/markets.json` so the site ca
 next to table rows and the recap can compute weekly and monthly changes. From the repo root:
 
 ```
-python3 .claude/skills/daily-newsletter/log_figures.py DATE usd_egp=56.20 eur_egp=62.57 sar_egp=14.99 aed_egp=15.30 kwd_egp=181.19 qar_egp=15.41 gbp_egp=74.69 dxy=102.19 gold21_egp=6385 gold24_egp=7295 gold18_egp=5475 goldpound_egp=51080 gold_usd=4076 brent=113.88 egx30=49723.72 sp500=7743.98 nasdaq=26549.85 btc=81231 egx.COMI=120.30 us.AAPL=347.10
+python3 .claude/skills/daily-newsletter/log_figures.py DATE usd_egp=56.20 eur_egp=62.57 sar_egp=14.99 aed_egp=15.30 kwd_egp=181.19 qar_egp=15.41 gbp_egp=74.69 dxy=102.19 gold21_egp=6385 gold24_egp=7295 gold18_egp=5475 goldpound_egp=51080 gold_usd=4076 brent=113.88 egx30=49723.72 sp500=7743.98 nasdaq=26549.85 dow=52475.10 btc=81231 egx.COMI=120.30 us.AAPL=347.10
 ```
 
 Then refresh the spreadsheet copy, `data/markets.xlsx`, and commit it too:

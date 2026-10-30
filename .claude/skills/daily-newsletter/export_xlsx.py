@@ -13,7 +13,7 @@ HEADLINE = [("usd_egp", "USD/EGP"), ("eur_egp", "EUR/EGP"), ("sar_egp", "SAR/EGP
             ("kwd_egp", "KWD/EGP"), ("qar_egp", "QAR/EGP"), ("gbp_egp", "GBP/EGP"), ("dxy", "US dollar index"),
             ("gold21_egp", "Gold 21K (EGP/g)"), ("gold24_egp", "Gold 24K (EGP/g)"), ("gold18_egp", "Gold 18K (EGP/g)"),
             ("goldpound_egp", "Gold pound (EGP)"), ("gold_usd", "Gold ($/oz)"), ("brent", "Brent ($/bbl)"),
-            ("egx30", "EGX30"), ("sp500", "S&P 500"), ("nasdaq", "Nasdaq"), ("btc", "Bitcoin ($)")]
+            ("egx30", "EGX30"), ("sp500", "S&P 500"), ("nasdaq", "Nasdaq"), ("dow", "Dow Jones"), ("btc", "Bitcoin ($)")]
 
 
 def main():

@@ -15,7 +15,7 @@ NOT FOUND with the reason. It ends with a ready-to-run log_figures.py command ho
 Sources: Mubasher for the EGX (the official close is the previous close plus the day's change; the
 "last price" on the page can be an earlier trade), egypt.gold-price-today.com for 21K gold, open.er-api.com
 for exchange rates (market mid-rates, not the central bank's rate), Yahoo Finance for US stocks, indices,
-Brent, gold and Bitcoin, with Nasdaq's quote feed and CoinGecko as backups.
+Brent, gold and Bitcoin, with Nasdaq's quote feed, FRED (for the Dow) and CoinGecko as backups.
 """
 import datetime
 import html
@@ -36,11 +36,11 @@ EGX = ["COMI", "TMGH", "ETEL", "PHDC", "SWDY", "ORAS", "FWRY", "ABUK", "HRHO", "
 US = ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA", "JPM", "XOM", "AVGO", "BRK.B", "WMT"]
 
 
-def get(url, tries=2):
+def get(url, tries=2, ua=UA):
     last = None
     for i in range(tries):
         try:
-            req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "*/*"})
+            req = urllib.request.Request(url, headers={"User-Agent": ua, "Accept": "*/*"})
             with urllib.request.urlopen(req, timeout=15) as r:
                 return r.read().decode("utf-8", "replace")
         except urllib.error.HTTPError as e:
@@ -156,6 +156,18 @@ def first(*fns):
     raise RuntimeError(" | ".join(errors))
 
 
+def fred(series):
+    """St. Louis Fed's daily series: the latest close, a day behind at most; prev is the close before it.
+    FRED refuses browser user agents, so this one sends its own."""
+    start = datetime.date.today() - datetime.timedelta(days=14)
+    url = f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={series}&cosd={start}"
+    rows = [l.split(",") for l in get(url, ua="daily-newsletter/1.0").splitlines()[1:]]
+    rows = [(d, float(v)) for d, v in rows if v not in ("", ".")]
+    (pd, prev), (d, value) = rows[-2], rows[-1]
+    return {"value": value, "prev": prev, "pct": (value / prev - 1) * 100, "live": False,
+            "when": f"close {d}", "src": "FRED"}
+
+
 def main(args):
     if not args or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", args[0]):
         sys.exit(__doc__)
@@ -190,6 +202,7 @@ def main(args):
         add(t, f"US {t}", lambda t=t: first(lambda: yahoo(t.replace(".", "-")), lambda: nasdaq(t)), f"us.{t}")
     add("sp500", "S&P 500", lambda: yahoo("^GSPC"), "sp500")
     add("nasdaq", "Nasdaq", lambda: first(lambda: yahoo("^IXIC"), lambda: nasdaq("COMP", "index")), "nasdaq")
+    add("dow", "Dow Jones", lambda: first(lambda: yahoo("^DJI"), lambda: fred("DJIA")), "dow")
     add("brent", "Brent ($/bbl)", lambda: yahoo("BZ=F"), "brent")
     add("gold_usd", "Gold ($/oz)", lambda: yahoo("GC=F"), "gold_usd")
     add("btc", "Bitcoin ($)", lambda: first(lambda: yahoo("BTC-USD"), coingecko), "btc")

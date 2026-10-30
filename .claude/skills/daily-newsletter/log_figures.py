@@ -6,7 +6,7 @@ Usage:
 
 Keys (numbers only; leave out anything not confirmed):
   usd_egp eur_egp sar_egp aed_egp kwd_egp qar_egp gbp_egp dxy
-  gold21_egp gold24_egp gold18_egp goldpound_egp gold_usd brent egx30 sp500 nasdaq btc
+  gold21_egp gold24_egp gold18_egp goldpound_egp gold_usd brent egx30 sp500 nasdaq dow btc
   egx.TICKER  for the Egypt Stocks Watch rows, e.g. egx.COMI=120.30
   us.TICKER   for the USA Stocks Watch rows, e.g. us.AAPL=347.10
 
@@ -22,7 +22,7 @@ import sys
 
 KEYS = {"usd_egp", "eur_egp", "sar_egp", "aed_egp", "kwd_egp", "qar_egp", "gbp_egp", "dxy",
         "gold21_egp", "gold24_egp", "gold18_egp", "goldpound_egp", "gold_usd", "brent",
-        "egx30", "sp500", "nasdaq", "btc"}
+        "egx30", "sp500", "nasdaq", "dow", "btc"}
 PATH = os.path.join(os.path.dirname(__file__), "..", "..", "..", "data", "markets.json")
 
 

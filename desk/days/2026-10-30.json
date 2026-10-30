@@ -186,15 +186,20 @@
      "name": "USA",
      "rows": [
       {
-       "label": "Nasdaq",
-       "value": "26,184.73",
-       "change": -1.38,
+       "label": "S&P 500",
+       "value": "7,720.54",
+       "change": -0.3,
        "lead": true
       },
       {
-       "label": "S&P 500",
-       "value": null,
-       "change": null
+       "label": "Nasdaq",
+       "value": "26,184.73",
+       "change": -1.38
+      },
+      {
+       "label": "Dow Jones",
+       "value": "52,342.56",
+       "change": -0.25
       }
      ]
     },

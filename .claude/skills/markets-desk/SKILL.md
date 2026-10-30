@@ -27,7 +27,8 @@ and the same research as the newsletter.
 ## Two sections
 
 The desk has two sections, switched from the sidebar (`#egypt`, `#global`): **Egypt** (the EGX, the pound,
-Egyptian gold and rates, the 12 Egyptian stocks) and **USA** (US markets and the 12 US stocks). Both close
+Egyptian gold and rates, the 12 Egyptian stocks) and **USA** (US markets and the 12 US stocks; its close
+card lists the S&P 500 first, then the Nasdaq and the Dow Jones). Both close
 cards also carry a Global group: oil, gold in dollars, the dollar index and Bitcoin. Each has its own top call, winners and losers, stocks, week ahead
 and open views. A story goes in the section whose markets it moves; a global story that clearly reaches
 Egypt goes in both, told from each side.
