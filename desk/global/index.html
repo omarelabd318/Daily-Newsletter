@@ -18,8 +18,7 @@
     <h1 id="title">Global</h1>
     <p class="finding" id="finding"></p>
   </div><div class="actions"><span class="samp" data-sample hidden>Sample desk</span></div></div>
-  <div class="pages" id="cards"></div>
-  <div class="pages" style="margin-top:var(--gap)">
+  <div class="pages" style="margin-bottom:var(--gap)">
     <section class="card c12">
       <div class="card-h"><h2>Gold in Egypt</h2><div class="seg" id="gseg"></div></div>
       <div class="ctabs" id="gtabs" style="margin-bottom:10px"></div>
@@ -28,6 +27,9 @@
       <p class="chart-cap" id="gcap"></p>
       <p class="stock-note">Egyptian gold follows the world price in dollars times the pound's rate, so a weaker pound lifts it even when gold falls abroad.</p>
     </section>
+  </div>
+  <div class="pages" id="cards"></div>
+  <div class="pages" style="margin-top:var(--gap)">
 
     <section class="card c12">
       <div class="card-h"><h2>News</h2><span class="meta">Checked against the day's research</span></div>
@@ -43,7 +45,7 @@
   const P = D.pages.global, notes = P.notes || {};
   M.$('title').textContent = 'Global · ' + M.dateLine(M.ASOF); document.title = 'Global · Markets Desk';
   M.$('finding').textContent = P.finding;
-  const C = [['brent', 'Brent crude', '$ per barrel', 2], ['gold_usd', 'Gold', '$ per ounce', 0], ['dxy', 'Dollar index', 'DXY, against six major currencies', 2], ['btc', 'Bitcoin', '$', 0]];
+  const C = [['gold_usd', 'Gold', '$ per ounce', 0], ['brent', 'Brent crude', '$ per barrel', 2], ['dxy', 'Dollar index', 'DXY, against six major currencies', 2], ['btc', 'Bitcoin', '$', 0]];
   M.$('cards').innerHTML = C.map(([k, n, u], i) => `<section class="card c6"><div class="card-h"><h2>${n}</h2><div class="seg" id="seg${i}"></div></div><div class="hero"><span class="lvl num" id="lvl${i}"></span><span class="d num" id="d${i}"></span><span class="meta">${u}</span></div><div class="midchart" id="ch${i}"></div><p class="chart-cap" id="cap${i}"></p><div id="kv${i}" style="margin-top:12px"></div><p class="pvd-read">${M.esc(notes[k] || '')}</p></section>`).join('');
   C.forEach(([k, n, u, dp], i) => {
     const s = M.series((e) => e[k], k === 'btc' ? 'all' : 'us');
