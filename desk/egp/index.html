@@ -53,7 +53,6 @@
     <section class="card c12" id="c-rsv" hidden>
       <div class="card-h"><h2>Foreign reserves</h2><span class="meta">Net international reserves, $bn</span></div>
       <div class="hero"><span class="lvl num" id="rlvl"></span><span class="d num" id="rchg"></span><span class="meta" id="rmonth"></span></div>
-      <div class="rsv-bar" id="rbar"></div>
       <div id="rparts"></div>
       <p class="chart-cap" id="rcap"></p>
     </section>
@@ -126,12 +125,13 @@
   const R = ((await M.get('/desk/reserves.json')) || {}).months || [];
   if (R.length) {
     const L = R.at(-1), Pm = R.at(-2), bn = (v) => '$' + M.num(v, 2) + 'bn';
-    const PARTS = [['fx', 'Foreign currencies', 'rsv-fx'], ['gold', 'Gold', 'rsv-gold'], ['sdr', 'IMF drawing rights', 'rsv-sdr']];
+    const PARTS = [['fx', 'Foreign currencies'], ['gold', 'Gold'], ['sdr', 'IMF drawing rights']];
     M.$('c-rsv').hidden = false; M.$('rlvl').textContent = bn(L.total);
     M.$('rmonth').textContent = 'End of ' + new Date(L.month + '-15T12:00:00').toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
     if (Pm) { const c = (L.total / Pm.total - 1) * 100; M.$('rchg').innerHTML = `<span class="${M.cls(c)}">${M.pct(c, 2)}</span> on the month`; }
-    M.$('rbar').innerHTML = PARTS.map(([k, n, c]) => `<span class="${c}" style="width:${(L[k] / L.total * 100).toFixed(2)}%" title="${n}: ${bn(L[k])}"></span>`).join('');
-    M.$('rparts').innerHTML = PARTS.map(([k, n, c]) => `<div class="rsv-part"><span class="n"><i class="${c}"></i>${n}</span><span class="num">${bn(L[k])}</span><span class="num s">${M.num(L[k] / L.total * 100, 1)}%</span></div>`).join('');
+    // one bar per part, its length its share of the total
+    M.$('rparts').innerHTML = PARTS.map(([k, n]) => `<div class="rsv-part"><span class="n">${n}</span><span class="num">${bn(L[k])}</span><span class="num s">${M.num(L[k] / L.total * 100, 1)}%</span>`
+      + `<div class="rsv-track"><span style="width:${Math.max(0.5, L[k] / L.total * 100).toFixed(2)}%"></span></div></div>`).join('');
     const g = Pm ? L.gold - Pm.gold : 0;
     M.$('rcap').innerHTML = (Pm && Math.abs(g) >= 0.5 ? `Gold ${g > 0 ? 'gained' : 'lost'} <span class="num">${bn(Math.abs(g))}</span> in value this month as its price moved: the central bank values its gold at market prices, so ${g > 0 ? 'a rise does not mean any was bought' : 'a fall does not mean any was sold'}. ` : 'Gold is valued at market prices each month, so its share moves with the gold price. ')
       + `Source: <a href="${M.esc(L.url)}" target="_blank" rel="noopener">${M.esc(L.source)}</a>, reporting the central bank's figures.`;
