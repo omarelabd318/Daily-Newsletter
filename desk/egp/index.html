@@ -85,6 +85,9 @@
   const lg = (k) => M.series((e) => e[k], 'fx'), lv = (k) => M.last(lg(k));
   const pair = (a, b, d = 2, u = '') => lv(a) == null ? dash : `${M.num(lv(a), d)}${u} / ${M.num(lv(b), d)}${u}`;
   const tb = [['tbill_364', 'One-year T-bill yield']].filter(([k]) => lv(k) != null).map(([k, n]) => [n, M.num(lv(k), 2) + '%']);
+  // inflation and the real one-year yield (T-bill yield minus headline inflation), the return foreign investors weigh
+  if (lv('infl_headline') != null) tb.push(['Inflation (headline, annual)', M.num(lv('infl_headline'), 1) + '%']);
+  if (lv('infl_headline') != null && lv('tbill_364') != null) tb.push(['Real one-year yield', M.num(lv('tbill_364') - lv('infl_headline'), 1) + ' pts']);
   const known = /central bank, buy|deposit rate|lending rate|t-bill/i;
   M.$('stats').innerHTML = M.kv([['Market mid-rate', M.num(M.last(fx))], ['Central bank, buy / sell', pair('cbe_usd_buy', 'cbe_usd_sell')],
     ['Deposit / lending rate', pair('cbe_deposit', 'cbe_lending', 2, '%')], ...tb,
