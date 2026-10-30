@@ -37,6 +37,11 @@ STOCKS = {
     "CLHO": ('"Cleopatra Hospital"', '"مستشفى كليوباترا"'),
     "JUFO": ('"Juhayna"', '"جهينة"'),
     "ALCN": ('"Alexandria Container"', '"الإسكندرية لتداول الحاويات"'),
+    "MFPC": ('"MOPCO" OR "Misr Fertilizers"', '"موبكو" OR "مصر لإنتاج الأسمدة"'),
+    "EAST": ('"Eastern Company" Egypt', '"الشرقية للدخان" OR "إيسترن كومباني"'),
+    "EFIH": ('"e-finance" Egypt', '"إي فاينانس"'),
+    "EMFD": ('"Emaar Misr"', '"إعمار مصر"'),
+    "BQDC": ('"Banque du Caire"', '"بنك القاهرة"'),
     "AAPL": ('Apple stock OR "Apple Inc"', None),
     "MSFT": ('Microsoft stock', None),
     "NVDA": ('Nvidia stock', None),
@@ -49,6 +54,9 @@ STOCKS = {
     "AVGO": ('Broadcom stock', None),
     "BRK.B": ('"Berkshire Hathaway"', None),
     "WMT": ('Walmart stock', None),
+    "V": ('Visa stock OR "Visa Inc"', None),
+    "ORCL": ('Oracle stock', None),
+    "COST": ('Costco stock', None),
 }
 # A headline must name the company (one of these words) to count.
 MUST = {
@@ -58,9 +66,11 @@ MUST = {
     "FWRY": ["Fawry", "فوري"], "ABUK": ["Abu Qir Fertil", "أبوقير للأسمدة", "أبو قير للأسمدة"],
     "HRHO": ["EFG", "هيرميس", "إي إف جي"], "CLHO": ["Cleopatra", "كليوباترا"],
     "JUFO": ["Juhayna", "جهينة"], "ALCN": ["Alexandria Container", "الحاويات"],
+    "MFPC": ["MOPCO", "Mopco", "موبكو", "مصر لإنتاج الأسمدة"], "EAST": ["Eastern Company", "الشرقية للدخان", "إيسترن"],
+    "EFIH": ["e-finance", "E-Finance", "إي فاينانس"], "EMFD": ["Emaar Misr", "إعمار مصر"], "BQDC": ["Banque du Caire", "بنك القاهرة"],
     "AAPL": ["Apple"], "MSFT": ["Microsoft"], "NVDA": ["Nvidia"], "AMZN": ["Amazon"], "GOOGL": ["Alphabet", "Google"],
     "META": ["Meta"], "TSLA": ["Tesla"], "JPM": ["JPMorgan", "JP Morgan", "Dimon"], "XOM": ["Exxon"],
-    "AVGO": ["Broadcom"], "BRK.B": ["Berkshire", "Buffett"], "WMT": ["Walmart"],
+    "AVGO": ["Broadcom"], "BRK.B": ["Berkshire", "Buffett"], "WMT": ["Walmart"], "V": ["Visa"], "ORCL": ["Oracle"], "COST": ["Costco"],
 }
 # Sports clubs share some company names, and daily price lists mention banks: skip both.
 NOISE = re.compile(r"(league|coach|match|fixtures|vs\.? |\bfc\b|football|olympic|دوري|مباراة|تشكيل|المدرب|لاعب|كورة|"

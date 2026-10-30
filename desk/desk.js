@@ -12,9 +12,9 @@ window.Desk = (function () {
   const cut = (iso, back) => new Date(day(iso) - back * 864e5).toISOString().slice(0, 10);
   const short = (iso) => day(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }).replace('Sept', 'Sep');
   const PERIODS = [['1D', 0, 'Last 7 days'], ['1W', 7, 'Last 7 days'], ['1M', 30, 'Last 30 days'], ['6M', 182, 'Last 6 months'], ['1Y', 365, 'Last 12 months']];
-  const NAMES = { COMI: 'Commercial International Bank', TMGH: 'Talaat Moustafa', ETEL: 'Telecom Egypt', PHDC: 'Palm Hills', SWDY: 'Elsewedy Electric', ORAS: 'Orascom Construction', FWRY: 'Fawry', ABUK: 'Abu Qir Fertilizers', HRHO: 'EFG Holding', CLHO: 'Cleopatra Hospital', JUFO: 'Juhayna', ALCN: 'Alexandria Containers',
-    AAPL: 'Apple', MSFT: 'Microsoft', NVDA: 'Nvidia', AMZN: 'Amazon', GOOGL: 'Alphabet', META: 'Meta', TSLA: 'Tesla', JPM: 'JPMorgan Chase', XOM: 'Exxon Mobil', AVGO: 'Broadcom', 'BRK.B': 'Berkshire Hathaway', WMT: 'Walmart' };
-  const GROUP = { egx: ['COMI', 'TMGH', 'ETEL', 'PHDC', 'SWDY', 'ORAS', 'FWRY', 'ABUK', 'HRHO', 'CLHO', 'JUFO', 'ALCN'], us: ['AAPL', 'MSFT', 'NVDA', 'AMZN', 'GOOGL', 'META', 'TSLA', 'JPM', 'XOM', 'AVGO', 'BRK.B', 'WMT'] };
+  const NAMES = { COMI: 'Commercial International Bank', TMGH: 'Talaat Moustafa', ETEL: 'Telecom Egypt', PHDC: 'Palm Hills', SWDY: 'Elsewedy Electric', ORAS: 'Orascom Construction', FWRY: 'Fawry', ABUK: 'Abu Qir Fertilizers', HRHO: 'EFG Holding', CLHO: 'Cleopatra Hospital', JUFO: 'Juhayna', ALCN: 'Alexandria Containers', MFPC: 'MOPCO', EAST: 'Eastern Company', EFIH: 'e-finance', EMFD: 'Emaar Misr', BQDC: 'Banque du Caire',
+    AAPL: 'Apple', MSFT: 'Microsoft', NVDA: 'Nvidia', AMZN: 'Amazon', GOOGL: 'Alphabet', META: 'Meta', TSLA: 'Tesla', JPM: 'JPMorgan Chase', XOM: 'Exxon Mobil', AVGO: 'Broadcom', 'BRK.B': 'Berkshire Hathaway', WMT: 'Walmart', V: 'Visa', ORCL: 'Oracle', COST: 'Costco' };
+  const GROUP = { egx: ['COMI', 'TMGH', 'ETEL', 'PHDC', 'SWDY', 'ORAS', 'FWRY', 'ABUK', 'HRHO', 'CLHO', 'JUFO', 'ALCN', 'MFPC', 'EAST', 'EFIH', 'EMFD', 'BQDC'], us: ['AAPL', 'MSFT', 'NVDA', 'AMZN', 'GOOGL', 'META', 'TSLA', 'JPM', 'XOM', 'AVGO', 'BRK.B', 'WMT', 'V', 'ORCL', 'COST'] };
   const PAGES = [['/desk/', 'Dashboard', 'M2 13h12M4 10l3-3 2 2 4-5'], ['/desk/egx/', 'EGX', 'M2 13h12M3 10h2v3H3zM7 7h2v6H7zM11 4h2v9h-2z'], ['/desk/egp/', 'EGP', 'M8 2v12M11 4.5H6.5a2 2 0 000 4h3a2 2 0 010 4H5'],
     ['/desk/us/', 'Wall Street', 'M2 4h12v8H2zM2 7h12'], ['/desk/global/', 'Global', 'M8 2.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2.5 8h11M8 2.5c1.8 1.6 1.8 9.4 0 11M8 2.5c-1.8 1.6-1.8 9.4 0 11'], ['/desk/stocks/egypt/', 'Egyptian stocks', 'M3 3h10v10H3zM3 6.5h10M6.5 6.5V13'], ['/desk/stocks/us/', 'US stocks', 'M3 3h10v10H3zM3 6.5h10M6.5 6.5V13'], ['/desk/views/', 'Views', 'M3 3.5h10M3 8h10M3 12.5h6M12 11l1.5 1.5L16 10']];
 
@@ -59,7 +59,7 @@ window.Desk = (function () {
     return base ? (last(s) / base - 1) * 100 : null;
   };
   const ytd = (s) => { const b = valueAt(s, (ASOF.slice(0, 4) - 1) + '-12-31'); return b && s.length ? (last(s) / b - 1) * 100 : null; };
-  const range52 = (s) => { const p = s.filter(([d]) => d >= cut(ASOF, 365)).map((x) => x[1]); return [Math.min(...p), Math.max(...p)]; };
+  const range52 = (s) => { const p = s.filter(([d]) => d >= cut(ASOF, 365)).map((x) => x[1]); return p.length ? [Math.min(...p), Math.max(...p)] : [null, null]; };
   const stock = (t) => series((e) => (e[GROUP.egx.includes(t) ? 'egx' : 'us'] || {})[t], GROUP.egx.includes(t) ? 'egx' : 'us');
 
   // every visit opens on the defaults; clear the choices an earlier version of the desk remembered
@@ -188,7 +188,7 @@ window.Desk = (function () {
     }).join('');
   }
   const kv = (rows) => '<div class="kv">' + rows.map(([k, v]) => `<span class="k">${esc(k)}</span><span class="v num">${v}</span>`).join('') + '</div>';
-  const rangeBar = (lo, hi, v, f = (x) => num(x)) => `<div class="range"><i style="left:calc(${((v - lo) / (hi - lo || 1) * 100).toFixed(1)}% - 1px)"></i></div><div class="range-l"><span>52-week low ${f(lo)}</span><span>high ${f(hi)}</span></div>`;
+  const rangeBar = (lo, hi, v, f = (x) => num(x)) => lo == null ? '' : `<div class="range"><i style="left:calc(${((v - lo) / (hi - lo || 1) * 100).toFixed(1)}% - 1px)"></i></div><div class="range-l"><span>52-week low ${f(lo)}</span><span>high ${f(hi)}</span></div>`;
 
   // bullish and bearish: sectors with a reason, stocks with a projected range, each with a confidence level
   function outlook(el, O, cur) {

@@ -34,6 +34,9 @@ CAIRO = ZoneInfo("Africa/Cairo")
 UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36"
 EGX = ["COMI", "TMGH", "ETEL", "PHDC", "SWDY", "ORAS", "FWRY", "ABUK", "HRHO", "CLHO", "JUFO", "ALCN"]
 US = ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA", "JPM", "XOM", "AVGO", "BRK.B", "WMT"]
+# The Markets Desk follows these too; they are logged every day but are not Stocks Watch rows.
+DESK_EGX = ["MFPC", "EAST", "EFIH", "EMFD", "BQDC"]
+DESK_US = ["V", "ORCL", "COST"]
 
 
 def get(url, tries=2, ua=UA):
@@ -211,9 +214,18 @@ def main(args):
 
     for t in EGX:
         add(t, f"EGX {t}", lambda t=t: dict(mubasher(f"stocks/{t}"), src="Mubasher"), f"egx.{t}", egx_live)
+    for t in DESK_EGX:
+        add(t, f"Desk only: EGX {t}", lambda t=t: dict(mubasher(f"stocks/{t}"), src="Mubasher"), f"egx.{t}", egx_live)
     add("egx30", "EGX30", lambda: dict(mubasher("indices/EGX30"), src="Mubasher"), "egx30", egx_live)
     for t in US:
         add(t, f"US {t}", lambda t=t: first(lambda: yahoo(t.replace(".", "-")), lambda: nasdaq(t)), f"us.{t}")
+        try:
+            v, d = nasdaq_volume(t)
+            log.append(f"vol.{t}={int(v)}")
+        except Exception as e:
+            missing.append(f"US {t} volume: {e}")
+    for t in DESK_US:
+        add(t, f"Desk only: US {t}", lambda t=t: first(lambda: yahoo(t.replace(".", "-")), lambda: nasdaq(t)), f"us.{t}")
         try:
             v, d = nasdaq_volume(t)
             log.append(f"vol.{t}={int(v)}")

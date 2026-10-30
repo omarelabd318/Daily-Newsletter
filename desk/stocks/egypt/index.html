@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Egyptian stocks · Markets Desk</title>
-<meta name="description" content="All 12 Egyptian stocks on the desk with their price, trend and latest news.">
+<meta name="description" content="All Egyptian stocks on the desk with their price, trend and latest news.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,600&display=swap">
@@ -41,7 +41,7 @@
   const latest = (t) => { const own = (prof[t] || {}).news || [], urls = new Set(own.map((n) => n.url));
     return [...own, ...(tagged[t] || []).filter((n) => !urls.has(n.url))].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0))[0]; };
   const tickers = M.GROUP[MKT];
-  M.$('finding').textContent = `All 12 ${egx ? 'Egyptian' : 'US'} stocks on the desk. Tap one for its page: price chart, performance, valuation, trading, news and the desk's views.`;
+  M.$('finding').textContent = `All ${tickers.length} ${egx ? 'Egyptian' : 'US'} stocks on the desk. Tap one for its page: price chart, performance, valuation, trading, news and the desk's views.`;
   // a wider trend line for the cards
   function line(vals) {
     if (vals.length < 2) return '';
@@ -67,7 +67,13 @@
     if (order === 1) rows.sort((a, b) => ((prof[b.t] || {}).cap || {}).value - ((prof[a.t] || {}).cap || {}).value || 0);
     if (order > 1) rows.sort((a, b) => (order === 2 ? (b.c ?? -1e9) - (a.c ?? -1e9) : (a.c ?? 1e9) - (b.c ?? 1e9)));
     const cur = inUSD || !egx ? '$' : 'EGP ';
-    M.$('grid').innerHTML = rows.map((r) => `<a class="card scard" href="/desk/stock/?t=${encodeURIComponent(r.t)}">
+    // a listed stock with no session yet shows when it starts trading instead of figures
+    const soon = (t) => { const n = ((prof[t] || {}).next || [])[0]; return n ? `${n.event}: ${n.when}` : 'No prices logged yet'; };
+    M.$('grid').innerHTML = rows.map((r) => r.now == null ? `<a class="card scard" href="/desk/stock/?t=${encodeURIComponent(r.t)}">
+      <div class="sh"><span><b>${M.esc(M.NAMES[r.t])}</b><span class="t">${M.esc(r.t)}${(prof[r.t] || {}).sector ? ' · ' + M.esc(prof[r.t].sector) : ''}</span></span><span class="pill open">Not trading yet</span></div>
+      <div class="sp"><span class="meta">${M.esc(soon(r.t))}</span></div>
+      <p class="snews">${r.news ? `<span class="when">${M.day(r.news.date).getDate()} ${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][M.day(r.news.date).getMonth()]}</span> ${M.esc(r.news.text.length > 120 ? r.news.text.slice(0, 117) + '…' : r.news.text)}` : ''}</p>
+    </a>` : `<a class="card scard" href="/desk/stock/?t=${encodeURIComponent(r.t)}">
       <div class="sh"><span><b>${M.esc(M.NAMES[r.t])}</b><span class="t">${M.esc(r.t)}${(prof[r.t] || {}).sector ? ' · ' + M.esc(prof[r.t].sector) : ''}${capText(r.t)}</span></span>${r.open ? `<span class="pill open">${r.open} open view${r.open > 1 ? 's' : ''}</span>` : ''}</div>
       <div class="sp"><span class="lvl num">${cur}${M.num(M.last(r.s))}</span>${M.heroChg(r.s, per)}</div>
       ${line(r.pts)}

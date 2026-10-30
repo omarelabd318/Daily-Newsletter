@@ -69,9 +69,11 @@ def egx():
     return out, f"EGX: {session}, {out['count']} stocks"
 
 
-DESK = {"egx": ["COMI", "TMGH", "ETEL", "PHDC", "SWDY", "ORAS", "FWRY", "ABUK", "HRHO", "CLHO", "JUFO", "ALCN"],
-        "us": ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA", "JPM", "XOM", "AVGO", "BRK.B", "WMT"]}
+DESK = {"egx": ["COMI", "TMGH", "ETEL", "PHDC", "SWDY", "ORAS", "FWRY", "ABUK", "HRHO", "CLHO", "JUFO", "ALCN", "MFPC", "EAST", "EFIH", "EMFD", "BQDC"],
+        "us": ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA", "JPM", "XOM", "AVGO", "BRK.B", "WMT", "V", "ORCL", "COST"]}
 SCREENER = []
+# listed but not yet trading: Mubasher's market value for them predates the offering
+NOT_TRADING = {"BQDC"} if datetime.date.today() < datetime.date(2026, 11, 2) else set()
 
 
 def screener():
@@ -95,7 +97,7 @@ def caps():
     found = {}
     with concurrent.futures.ThreadPoolExecutor(6) as pool:
         for t, v in zip(DESK["egx"], pool.map(lambda t: _safe(mubasher_cap, t), DESK["egx"])):
-            if v:
+            if v and t not in NOT_TRADING:
                 found[t] = {"value": round(v / 1e9, 1), "currency": "EGP", "date": today, "source": "Mubasher"}
     try:
         rows = {r["symbol"]: r for r in screener()}
@@ -110,7 +112,7 @@ def caps():
     with open(path, "w") as f:
         json.dump(data, f, indent=1, ensure_ascii=False)
         f.write("\n")
-    return f"Market values: {len(found)} of 24 updated"
+    return f"Market values: {len(found)} of {len(DESK['egx']) + len(DESK['us'])} updated"
 
 
 def _safe(fn, *a):

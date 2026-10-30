@@ -350,6 +350,88 @@
     "date": "2026-10-30",
     "source": "Nasdaq"
    }
+  },
+  "MFPC": {
+   "sector": "Fertilisers",
+   "cap": {
+    "value": 128.6,
+    "currency": "EGP",
+    "date": "2026-10-30",
+    "source": "Mubasher"
+   }
+  },
+  "EAST": {
+   "sector": "Tobacco",
+   "cap": {
+    "value": 97.3,
+    "currency": "EGP",
+    "date": "2026-10-30",
+    "source": "Mubasher"
+   }
+  },
+  "EFIH": {
+   "sector": "Payments",
+   "cap": {
+    "value": 79.0,
+    "currency": "EGP",
+    "date": "2026-10-30",
+    "source": "Mubasher"
+   }
+  },
+  "EMFD": {
+   "sector": "Real estate",
+   "cap": {
+    "value": 64.3,
+    "currency": "EGP",
+    "date": "2026-10-30",
+    "source": "Mubasher"
+   }
+  },
+  "BQDC": {
+   "sector": "Banks",
+   "next": [
+    {
+     "event": "First day of trading",
+     "when": "Mon 2 Nov",
+     "why": "Banque du Caire lists at the EGP 5.30 offer price; retail buyers can sell back at that price for 30 days.",
+     "impact": "high"
+    }
+   ],
+   "news": [
+    {
+     "date": "2026-10-29",
+     "text": "Banque du Caire's EGP 36.4bn offering of 45% of the bank was executed at EGP 5.30 a share; the retail tranche was about 27 times covered. Trading starts on Monday 2 November.",
+     "source": "Youm7",
+     "url": "https://www.youm7.com/story/2026/10/29/%D8%A7%D9%84%D8%A8%D9%88%D8%B1%D8%B5%D8%A9-%D8%AA%D9%88%D8%AF%D8%B9-%D8%A3%D9%83%D8%AA%D9%88%D8%A8%D8%B1-%D8%A8%D9%85%D9%83%D8%A7%D8%B3%D8%A8-33%D9%85%D9%84%D9%8A%D8%A7%D8%B1-%D8%AC%D9%86%D9%8A%D9%87-%D9%82%D9%8A%D9%85-%D8%AA%D8%AF%D8%A7%D9%88%D9%84-%D8%AA%D8%A7%D8%B1%D9%8A%D8%AE%D9%8A%D8%A9-%D8%AA%D9%82%D8%AA%D8%B1%D8%A8/7598612"
+    }
+   ]
+  },
+  "V": {
+   "sector": "Payments",
+   "cap": {
+    "value": 733.5,
+    "currency": "USD",
+    "date": "2026-10-30",
+    "source": "Nasdaq"
+   }
+  },
+  "ORCL": {
+   "sector": "Software and cloud",
+   "cap": {
+    "value": 422.0,
+    "currency": "USD",
+    "date": "2026-10-30",
+    "source": "Nasdaq"
+   }
+  },
+  "COST": {
+   "sector": "Retail",
+   "cap": {
+    "value": 441.4,
+    "currency": "USD",
+    "date": "2026-10-30",
+    "source": "Nasdaq"
+   }
   }
  }
 }

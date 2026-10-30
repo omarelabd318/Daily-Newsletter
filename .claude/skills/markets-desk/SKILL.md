@@ -1,6 +1,6 @@
 ---
 name: markets-desk
-description: House rules for the Markets Desk, the daily markets analysis page planned next to the Daily Newsletter (what moved and why, which EGX sectors it helps or hurts, the reader's 24 stocks, the week ahead, open views). Use whenever writing, designing or reviewing the desk.
+description: House rules for the Markets Desk, the daily markets analysis page planned next to the Daily Newsletter (what moved and why, which EGX sectors it helps or hurts, the desk's 32 stocks, the week ahead, open views). Use whenever writing, designing or reviewing the desk.
 ---
 
 # Markets Desk
@@ -26,14 +26,14 @@ closes are the last session's; the news, stock research and analysis are still u
    (finding, rates, afterBell, news, outlook), Global (finding, notes, news). Carry each projection
    forward until its date, and score it when the date passes.
 5. Run `python3 .claude/skills/markets-desk/fetch_intraday.py` to save the last finished session's prices
-   through the day (`desk/intraday.json`, for the 1D charts: the EGX30, the Nasdaq and all 24 stocks, and
+   through the day (`desk/intraday.json`, for the 1D charts: the EGX30, the Nasdaq and the desk's stocks, and
    the last 24 hours of Bitcoin; the S&P 500, Dow, Brent, gold and the dollar index only when Yahoo answers).
    It keeps the saved session if a market is still trading, and takes under a minute. The dollar in pounds
    has no 1D chart: the official rate barely moves within a day.
    Then run `python3 .claude/skills/markets-desk/fetch_movers.py` for the whole market's biggest gainers and
    losers of the last session (`desk/movers.json`): all EGX stocks that traded at least EGP 1m, and US
    companies worth $10bn or more. The EGX and Wall Street pages show them under "Whole market"; mention a
-   standout mover from outside the 12 in the stories or News when there is a reason behind it.
+   standout mover from outside the desk's stocks in the stories or News when there is a reason behind it.
    Run it with `--leads` to list news for the top five each way, find why each moved (a disclosure,
    results, a deal, a rating, a sector move), check it at the outlet, and add `why`, `source` and `url` to
    that stock's row in `desk/movers.json`. One short line; leave it out when no reason is found, and write
@@ -43,15 +43,23 @@ closes are the last session's; the news, stock research and analysis are still u
 7. Run `python3 .claude/skills/markets-desk/check_desk.py`, fix every ERROR, then commit and push as for
    the edition (message `Desk DATE`).
 
+## The desk's stocks
+
+17 Egyptian: the newsletter's 12 Stocks Watch names (CIB, Talaat Moustafa, Telecom Egypt, Palm Hills,
+Elsewedy, Orascom Construction, Fawry, Abu Qir, EFG Holding, Cleopatra, Juhayna, Alexandria Containers)
+plus MOPCO, Eastern Company, e-finance, Emaar Misr and Banque du Caire (trading from 2 November 2026).
+15 US: the 12 Stocks Watch names plus Visa, Oracle and Costco. The extra eight are desk-only: they are
+logged daily (fetch_figures.py lists them as "Desk only") but are not rows in the newsletter's tables.
+
 ## Pages
 
 - **Dashboard** `/desk/` (`desk/index.html`): the day on one screen, in two sections, Egypt and USA (below).
-- **EGX** `/desk/egx/`: EGX30 chart and the session, biggest movers (the whole market, or the 12 stocks), who
-  bought and who sold with the foreign-flow history, the 12 stocks, then Bullish and bearish.
+- **EGX** `/desk/egx/`: EGX30 chart and the session, biggest movers (the whole market, or the desk's stocks), who
+  bought and who sold with the foreign-flow history, the desk's Egyptian stocks, then Bullish and bearish.
 - **EGP** `/desk/egp/`: the dollar in pounds, the central bank's and banks' rates, Pound or dollar?, what
   is moving the pound, the other currencies and the desk's view on the pound.
-- **Wall Street** `/desk/us/`: S&P 500, Nasdaq and Dow, rates and data, biggest movers (US companies worth $10bn or more, or the 12 stocks),
-  results after the bell, the 12 stocks, then Bullish and bearish.
+- **Wall Street** `/desk/us/`: S&P 500, Nasdaq and Dow, rates and data, biggest movers (US companies worth $10bn or more, or the desk's stocks),
+  results after the bell, the desk's US stocks, then Bullish and bearish.
 - **Global** `/desk/global/`: Brent, gold, the dollar index and Bitcoin, each with one line on why it
   matters for Egypt, and gold prices in Egypt.
 - **Egyptian stocks** `/desk/stocks/egypt/` and **US stocks** `/desk/stocks/us/`: all 12 of each as cards (price, change over
@@ -93,7 +101,7 @@ and the same research as the newsletter.
 ## Two sections
 
 The desk has two sections, switched from the sidebar (`#egypt`, `#global`): **Egypt** (the EGX, the pound,
-Egyptian gold and rates, the 12 Egyptian stocks) and **USA** (US markets and the 12 US stocks; its close
+Egyptian gold and rates, the desk's Egyptian stocks) and **USA** (US markets and the desk's US stocks; its close
 card lists the S&P 500 first, then the Nasdaq and the Dow Jones). Both close
 cards also carry a Global group: oil, gold in dollars, the dollar index and Bitcoin. Each has its own top call, winners and losers, stocks, week ahead
 and open views. A story goes in the section whose markets it moves; a global story that clearly reaches
@@ -178,7 +186,7 @@ shows on those stocks' pages. Take them from the newsletter's research and from 
 
 ## Stock research, every day
 
-Each of the 24 stocks gets its own search every morning, on top of the newsletter's research:
+Each of the desk's stocks gets its own search every morning, on top of the newsletter's research:
 
 1. Run `python3 .claude/skills/markets-desk/stock_news.py` (add `3` on Sundays to cover the weekend). It
    lists each stock's headlines from the last two days, in English and, for the Egyptian stocks, Arabic.

@@ -77,7 +77,9 @@
   document.title = M.NAMES[t] + ' · Markets Desk';
   const fresh = s.length && s.at(-1)[0] === M.ASOF, dc = fresh ? M.change(s, 0) : null, y = M.ytd(s);
   const when = M.day(M.ASOF).toLocaleDateString('en-GB', { weekday: 'long' });
-  M.$('sub').innerHTML = fresh ? `Closed at ${cur}${M.num(M.last(s))} on ${when}, <span class="${M.cls(dc)}">${M.pct(dc)}</span> on the day and <span class="${M.cls(y)}">${M.pct(y)}</span> this year.` : `No close logged for ${when}.`;
+  const nxt = (p.next || [])[0];
+  if (!s.length) { M.$('sub').textContent = `Not trading yet${nxt ? ` · ${nxt.event}: ${nxt.when}. ${nxt.why}` : '.'}`; }
+  else M.$('sub').innerHTML = fresh ? `Closed at ${cur}${M.num(M.last(s))} on ${when}, <span class="${M.cls(dc)}">${M.pct(dc)}</span> on the day and <span class="${M.cls(y)}">${M.pct(y)}</span> this year.` : `No close logged for ${when}.`;
   M.$('lvl').textContent = M.num(M.last(s)); M.$('dchg').innerHTML = `<span class="${M.cls(dc)}">${M.pct(dc, 2)}</span>`; M.$('cur').textContent = egx ? 'EGP' : 'USD';
   M.$('pdate').textContent = 'to ' + M.short(M.ASOF);
   // the chart in the stock's currency or, for Egyptian stocks, in dollars; 3Y and 5Y load the full log
@@ -98,7 +100,7 @@
   M.$('perf').innerHTML = M.kv([['Week', signed(M.change(s, 7))], ['Month', signed(M.change(s, 30))], ['6 months', signed(M.change(s, 182))], ['Year', signed(M.change(s, 365))], ['This year', signed(y)]])
     + `<h3 class="perf-h">Against the ${idxN}</h3>` + M.kv([['Month', pts(vs(30))], ['6 months', pts(vs(182))], ['This year', pts(vs(null))]]);
   const [lo, hi] = M.range52(s); M.$('range').innerHTML = M.rangeBar(lo, hi, M.last(s));
-  M.$('vsidx').innerHTML = `The ${idxN} is <span class="num ${M.cls(M.ytd(idxS))}">${M.pct(M.ytd(idxS))}</span> this year; points above zero mean the stock beat it. ${M.num((1 - M.last(s) / hi) * 100, 1)}% below its 52-week high.`;
+  if (s.length) M.$('vsidx').innerHTML = `The ${idxN} is <span class="num ${M.cls(M.ytd(idxS))}">${M.pct(M.ytd(idxS))}</span> this year; points above zero mean the stock beat it. ${M.num((1 - M.last(s) / hi) * 100, 1)}% below its 52-week high.`;
 
   const V = p.valuation, rows = (r) => r.map((x) => [x.label, x.value == null ? dash : M.esc(x.value)]);
   M.$('val').innerHTML = M.kv(V ? rows(V.rows) : [['Market value', dash], ['P/E', dash], ['P/B', dash]]);
