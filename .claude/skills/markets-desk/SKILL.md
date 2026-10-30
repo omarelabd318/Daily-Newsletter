@@ -66,6 +66,16 @@ Never present an unconfirmed claim as fact. A claim from a single source goes in
 Two short lists, helped and hurt: EGX sectors or stocks, each with its driver, one line of reasoning
 grounded in real figures, and a confidence level. Use the sector-overview skill for what drives a sector.
 
+## Who bought and who sold
+
+In the Egypt section, a card with the EGX's net equity flows for the latest session by investor group
+(Egyptian, Arab and foreign; institutions and individuals), in EGP bn, from the EGX's daily report as
+carried by Mubasher, EnterpriseAM, Youm7 or Arab Finance. Check the six figures against a second report
+and that they net to about zero; until they match, set `"confirmed": false` with the source named. Say in
+one line what drove them, and flag a day distorted by an offering or block trade (as 29 October was by
+Banque du Caire's), so the reader does not read it as a vote on the market. Never write who bought or
+sold elsewhere on the desk without these figures behind it.
+
 ## The week ahead
 
 The events that can move Egyptian markets and the reader's stocks, each rated high, medium or low impact,

@@ -84,7 +84,7 @@ h1{margin:0;font-size:24px;line-height:30px;font-weight:600;letter-spacing:-.01e
 .btn:active{transform:translateY(1px)}
 
 .grid{display:grid;grid-template-columns:300px minmax(0,1fr);gap:var(--gap);align-items:start}
-.leftcol{position:sticky;top:32px;display:grid;gap:var(--gap)}
+.leftcol{display:grid;gap:var(--gap)}
 .main{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap);align-items:start}
 .span2{grid-column:1/-1}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-card);padding:var(--pad)}
@@ -113,6 +113,15 @@ h2{margin:0;font-size:16px;line-height:22px;font-weight:600}
 /* pound vs dollar */
 .pvd-plot{height:160px;margin:8px -4px 0}
 .pvd-read{margin:10px 0 0;font-size:13px;line-height:19px}
+.flow{padding:6px 0}
+.flow-top{display:flex;justify-content:space-between;gap:8px;font-size:13px;line-height:18px}
+.flow-top .num{font-weight:500}
+.flow-bar{position:relative;height:8px;margin-top:5px}
+.flow-bar::before{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;width:1px;background:var(--control)}
+.flow-bar i{position:absolute;top:0;height:8px;border-radius:2px}
+.flow-bar i.buy{left:50%;background:var(--chart-1)}
+.flow-bar i.sell{right:50%;background:var(--chart-muted)}
+.flow-axis{display:flex;justify-content:space-between;margin-top:6px;font-size:12px;color:var(--muted)}
 .legend{display:flex;gap:14px;font-size:12px;color:var(--muted)}
 .legend i{display:inline-block;width:10px;height:2px;margin-right:6px;vertical-align:3px}
 
@@ -183,7 +192,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
   .grid,.leftcol,.main{display:contents}
   .canvas{display:flex;flex-direction:column}
   .canvas > .grid{display:flex;flex-direction:column;gap:var(--gap)}
-  #c-read{order:1} #c-close{order:2} #c-board{order:3} #c-stocks{order:4} #c-pvd{order:5} #c-week{order:6} #c-views{order:7}
+  #c-read{order:1} #c-close{order:2} #c-board{order:3} #c-flows{order:4} #c-stocks{order:5} #c-pvd{order:6} #c-week{order:7} #c-views{order:8}
 }
 /* phone */
 @media (max-width:860px){
@@ -264,6 +273,13 @@ td.trend svg{display:inline-block;vertical-align:middle}
             <div class="legend" id="pvd-legend"></div>
             <div class="pvd-plot" id="pvd"></div>
             <p class="pvd-read" id="pvd-read"></p>
+          </section>
+          <section class="card" id="c-flows" aria-labelledby="h-flows" hidden>
+            <div class="card-h"><h2 id="h-flows">Who bought and who sold</h2></div>
+            <p class="meta" id="flows-sub" style="margin:-6px 0 10px"></p>
+            <div id="flows"></div>
+            <p class="pvd-read" id="flows-read"></p>
+            <div class="notice" id="flows-note" hidden></div>
           </section>
         </div>
 
@@ -459,6 +475,20 @@ td.trend svg{display:inline-block;vertical-align:middle}
         const ch = (vals[vals.length - 1] / vals[0] - 1) * 100, lastDay = short(br[br.length - 1][0]);
         $('pvd-read').innerHTML = `Brent is <span class="num">${pct(ch)}</span> over the month, last logged at <span class="num">$${vals[vals.length - 1].toFixed(2)}</span> (${lastDay}). Oil feeds Egypt's import bill and fuel prices.`;
       }
+    }
+
+    // who bought and who sold (Egypt only): net flows by investor group, bought to the right of the centre line
+    const F = X.flows;
+    $('c-flows').hidden = !F;
+    if (F) {
+      const max = Math.max(...F.rows.map((r) => Math.abs(r.net))) || 1;
+      $('h-flows').textContent = F.title || 'Who bought and who sold';
+      $('flows-sub').textContent = F.sub || '';
+      $('flows').innerHTML = F.rows.map((r) => `<div class="flow"><div class="flow-top"><span>${esc(r.who)}</span><span class="num">${r.net > 0 ? '+' : r.net < 0 ? MINUS : ''}${Math.abs(r.net).toFixed(2)}</span></div><div class="flow-bar"><i class="${r.net >= 0 ? 'buy' : 'sell'}" style="width:${(Math.abs(r.net) / max * 50).toFixed(1)}%"></i></div></div>`).join('')
+        + '<div class="flow-axis"><span>Net sold</span><span>Net bought</span></div>';
+      $('flows-read').textContent = F.read || '';
+      $('flows-note').hidden = !!F.confirmed;
+      $('flows-note').textContent = F.confirmed ? '' : 'Not yet confirmed: ' + (F.source || 'one source only') ;
     }
 
     // stocks for this section

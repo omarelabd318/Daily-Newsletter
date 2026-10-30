@@ -4,7 +4,7 @@
  "fetched": "Fri 30 Oct, 05:22 Cairo",
  "sample": true,
  "egypt": {
-  "finding": "The pound's fall is mostly local: the dollar is up 8% against it in a month, 0.8% against majors. The EGX30 rose 0.6% to 49,596 on local buying.",
+  "finding": "The pound's fall is mostly local: the dollar is up 8% against it in a month, 0.8% against majors. The EGX30 rose 0.6% to 49,596 as Banque du Caire's offering was executed.",
   "next": "Next session: Sunday.",
   "close": {
    "title": "Thursday's close",
@@ -59,11 +59,11 @@
    "note": "A dash is a figure not yet confirmed by two sources this morning."
   },
   "top": {
-   "headline": "The pound's slide is local, and locals are buying the dip",
-   "body": "The dollar is up 8% against the pound in a month but only 0.8% against major currencies, so about 90% of the move comes from Egypt, not the dollar. On the EGX, local investors bought while foreigners sold, lifting the EGX30 0.6% to 49,596 on turnover well below its usual level, ahead of the central bank's decision.",
-   "view": "Neutral on the EGX30 into Sunday. Local buying on thin turnover is a fragile base while foreigners sell and the pound weakens.",
+   "headline": "The pound's slide is local; the EGX waits on the central bank",
+   "body": "The dollar is up 8% against the pound in a month but only 0.8% against major currencies, so about 90% of the move comes from Egypt, not the dollar. The EGX30 rose 0.6% to 49,596 on Thursday, but the session's flows were swamped by the execution of Banque du Caire's offering, so they say little about who is backing the market ahead of the central bank's decision.",
+   "view": "Neutral on the EGX30 into Sunday. A weakening pound and a pending rate decision argue for waiting; Sunday's first session after the decision is the real signal.",
    "moves": "Dollar earners (Orascom, Elsewedy) gain from a weaker pound; developers (Talaat Moustafa, Palm Hills) suffer if rates rise to defend it.",
-   "wrong": "Foreigners turn net buyers on Sunday with turnover above its 90-day average, or the pound steadies.",
+   "wrong": "Sunday's turnover tops its 90-day average with foreigners net buyers outside the offering, or the pound steadies.",
    "confidence": "medium",
    "notice": "Reports of a 100 bp rate hike after Thursday's close come from one source and could not be confirmed. The view above does not rely on them."
   },
@@ -129,7 +129,7 @@
    {
     "call": "EGX30 neutral into the decision",
     "status": "open",
-    "note": "From 28 Oct at 49,281. Since then +0.6%. Wrong if Sunday's turnover tops its average."
+    "note": "From 28 Oct at 49,281. Since then +0.6%. Wrong if Sunday's turnover tops its average with foreigners buying."
    },
    {
     "call": "Developers lag while rates stay high",
@@ -141,7 +141,40 @@
     "status": "open",
     "note": "From 29 Oct. Orascom +0.9% and Elsewedy −0.7% on the day; judged over four weeks."
    }
-  ]
+  ],
+  "flows": {
+   "title": "Who bought and who sold",
+   "sub": "Net EGX equity flows, Thu 29 Oct, EGP bn",
+   "rows": [
+    {
+     "who": "Egyptian institutions",
+     "net": -34.33
+    },
+    {
+     "who": "Egyptian individuals",
+     "net": 2.89
+    },
+    {
+     "who": "Arab institutions",
+     "net": 2.1
+    },
+    {
+     "who": "Arab individuals",
+     "net": 0.15
+    },
+    {
+     "who": "Foreign institutions",
+     "net": 29.19
+    },
+    {
+     "who": "Foreign individuals",
+     "net": 0.01
+    }
+   ],
+   "read": "Dominated by the execution of Banque du Caire's EGP 36.4 bn offering: foreign institutions bought, Egyptian institutions sold. Read normal days' flows, not this one, for who is backing the market.",
+   "confirmed": false,
+   "source": "Cairo Mubasher and Youm7 via one secondary report; not yet matched to the EGX's own figures."
+  }
  },
  "global": {
   "finding": "Alphabet's 12.6% fall on its results pulled the Nasdaq 1.4% lower; Walmart and JPMorgan rose as money moved to steadier names.",
