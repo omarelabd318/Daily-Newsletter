@@ -194,6 +194,15 @@ def cbe_official():
     return out
 
 
+def reserves():
+    """Egypt's net international reserves, latest month and the one before, $bn (the central bank publishes about
+    the 7th; its own reserves page has not been updated since 2023, so this reads Trading Economics' release table)."""
+    page = get("https://tradingeconomics.com/egypt/foreign-exchange-reserves")
+    text = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", re.sub(r"<(script|style)[^>]*>.*?</\1>", " ", page, flags=re.S))))
+    m = re.search(r"Foreign Exchange Reserves ([\d.]+) ([\d.]+) USD Million (\w{3} \d{4})", text)   # last, previous, month
+    return m.group(3), round(float(m.group(1)) / 1000, 2), round(float(m.group(2)) / 1000, 2)
+
+
 def coingecko():
     j = json.loads(get("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd"
                        "&include_24hr_change=true"))["bitcoin"]
@@ -344,6 +353,13 @@ def main(args):
             log += [f"infl_headline={head}", f"infl_core={core}"]
     except Exception as e:
         missing.append(f"Central bank rates and inflation (cbe.org.eg): {e}")
+
+    try:
+        month, last, prev = reserves()
+        rows.append((f"Net international reserves, {month} ($bn)", {"value": last, "pct": (last / prev - 1) * 100, "when": f"previous month {prev}", "src": "Trading Economics (central bank figures)"}, False))
+        log.append(f"reserves_usd={last}")
+    except Exception as e:
+        missing.append(f"Net international reserves (tradingeconomics.com/egypt/foreign-exchange-reserves): {e}")
 
     # T-bills: the central bank's latest auction; log a tenor only when this edition is the first after its auction
     try:

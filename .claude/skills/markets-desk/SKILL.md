@@ -56,8 +56,8 @@ logged daily (fetch_figures.py lists them as "Desk only") but are not rows in th
 - **Dashboard** `/desk/` (`desk/index.html`): the day on one screen, in two sections, Egypt and USA (below).
 - **EGX** `/desk/egx/`: EGX30 chart and the session, biggest movers (the whole market, or the desk's stocks), who
   bought and who sold with the foreign-flow history, the desk's Egyptian stocks, then Bullish and bearish.
-- **EGP** `/desk/egp/`: the dollar in pounds, the central bank's and banks' rates, Pound or dollar?, what
-  is moving the pound, the other currencies and the desk's view on the pound.
+- **EGP** `/desk/egp/`: the dollar in pounds, the central bank's and banks' rates (with net international
+  reserves), Pound or dollar?, what is moving the pound, inflation with a switch to the real one-year yield, the other currencies and the desk's view on the pound.
 - **Wall Street** `/desk/us/`: S&P 500, Nasdaq and Dow, rates and data, biggest movers (US companies worth $10bn or more, or the desk's stocks),
   results after the bell, the desk's US stocks, then Bullish and bearish.
 - **Global** `/desk/global/`: Brent, gold, the dollar index and Bitcoin, each with one line on why it
@@ -86,8 +86,8 @@ The menu order is Dashboard, EGX, EGP, Wall Street, Global, Egyptian stocks, US 
   never deleted. Valuation figures older than about a quarter are flagged on the page, not hidden.
 - `desk/flows.json`: net equity flows by investor group, one entry per session, for the flow history.
 - Stock pages read each stock's volume (`vol`) from the data log and compare the last session with the
-  average of the 30 before it; the EGP page reads the central bank's dollar rate, policy rates and the one-year T-bill
-  yield from the log. The day's file only adds what the log does not hold.
+  average of the 30 before it; the EGP page reads the central bank's dollar rate, policy rates, the one-year T-bill
+  yield, inflation and reserves from the log. The day's file only adds what the log does not hold.
 - The charts, the Stocks tables and every change and YTD figure are drawn by the page from
   `data/markets-recent.json`, so log the day's figures before publishing a desk.
 

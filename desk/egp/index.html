@@ -44,6 +44,13 @@
     </section>
 
     <section class="card c12">
+      <div class="card-h"><div class="hgroup"><h2 id="ih">Inflation</h2><div class="ctabs" id="itab" aria-label="Measure"></div></div><div class="seg" id="iseg"></div></div>
+      <div class="hero"><span class="lvl num" id="ilvl"></span><span class="meta" id="imeta"></span></div>
+      <div class="midchart" id="ichart"></div>
+      <p class="chart-cap" id="icap"></p>
+    </section>
+
+    <section class="card c12">
       <div class="card-h"><h2>News</h2><span class="meta">Checked against the day's research</span></div>
       <div id="news"></div>
     </section>
@@ -88,6 +95,9 @@
   // inflation and the real one-year yield (T-bill yield minus headline inflation), the return foreign investors weigh
   if (lv('infl_headline') != null) tb.push(['Inflation (headline, annual)', M.num(lv('infl_headline'), 1) + '%']);
   if (lv('infl_headline') != null && lv('tbill_364') != null) tb.push(['Real one-year yield', M.num(lv('tbill_364') - lv('infl_headline'), 1) + ' pts']);
+  // net international reserves: the latest month and the change from the month before
+  const rs = lg('reserves_usd'), rv = M.last(rs), rp = [...rs].reverse().find(([, v]) => v !== rv);
+  if (rv != null) tb.push(['Net international reserves', `$${M.num(rv, 2)}bn` + (rp ? ` <span class="${M.cls(rv - rp[1])}">(${rv >= rp[1] ? '+' : '−'}${M.num(Math.abs(rv - rp[1]), 2)}bn)</span>` : '')]);
   const known = /central bank, buy|deposit rate|lending rate|t-bill/i;
   M.$('stats').innerHTML = M.kv([['Market mid-rate', M.num(M.last(fx))], ['Central bank, buy / sell', pair('cbe_usd_buy', 'cbe_usd_sell')],
     ['Deposit / lending rate', pair('cbe_deposit', 'cbe_lending', 2, '%')], ...tb,
@@ -107,6 +117,24 @@
       : `The dollar is <span class="num">${M.pct(da)}</span> against the pound and <span class="num">${M.pct(db)}</span> against major currencies over the month.`;
   }
   M.$('drivers').innerHTML = M.drivers(P.drivers || []);
+  // inflation, or the real one-year yield: the T-bill yield in force minus the inflation in force on each day
+  let iReal = false, iPer = M.PERIODS[4];
+  const real = () => {
+    const tb = lg('tbill_364'), inf = lg('infl_headline'), ds = [...new Set(tb.concat(inf).map((x) => x[0]))].sort();
+    return ds.map((d) => { const a = M.valueAt(tb, d), b = M.valueAt(inf, d); return a != null && b != null ? [d, +(a - b).toFixed(2)] : null; }).filter(Boolean);
+  };
+  const drawI = async () => {
+    if (iPer[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; }
+    const s = iReal ? real() : lg('infl_headline'), v = M.last(s), u = iReal ? ' pts' : '%', y = M.valueAt(s, M.cut(M.ASOF, iPer[1]));
+    M.$('ih').textContent = iReal ? 'Real one-year yield' : 'Inflation';
+    M.$('ilvl').textContent = v == null ? '—' : M.num(v, 1) + u;
+    M.$('imeta').textContent = iReal ? 'One-year T-bill yield minus headline inflation' : 'Headline, annual, urban';
+    M.chart(M.$('ichart'), s, iPer[1], iReal ? 'Real yield' : 'Inflation', Charts.fmt.dec(1), { mark: false });
+    M.$('icap').innerHTML = (y != null && v != null ? `${iPer[2]}: from <span class="num">${M.num(y, 1)}${u}</span> to <span class="num">${M.num(v, 1)}${u}</span> · ` : '')
+      + (iReal ? 'above zero, T-bills pay more than prices rise' : 'published monthly by the central bank, about the 10th');
+  };
+  M.toggle(M.$('itab'), ['Inflation', 'Real yield'], (i) => { iReal = i === 1; drawI(); });
+  M.segment(M.$('iseg'), '1Y', (p) => { iPer = p; drawI(); }, [M.PERIODS[4]].concat(M.LONG)); drawI();
   const CUR = [['eur_egp', 'Euro', 'EUR'], ['sar_egp', 'Saudi riyal', 'SAR'], ['aed_egp', 'UAE dirham', 'AED'], ['kwd_egp', 'Kuwaiti dinar', 'KWD'], ['qar_egp', 'Qatari riyal', 'QAR'], ['gbp_egp', 'Sterling', 'GBP']];
   const drawT = (p) => {
     M.$('chg-h').textContent = `Change (${p[0]})`; M.$('trend-h').textContent = p[1] <= 7 ? 'Last 7 days' : p[2];

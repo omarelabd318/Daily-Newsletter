@@ -12,6 +12,7 @@ Keys (numbers only; leave out anything not confirmed):
   tbill_91 tbill_182 tbill_273 tbill_364   average T-bill yields from the latest auction, % (on auction days)
   egx_turnover                 the EGX session's turnover in stocks, EGP bn
   infl_headline infl_core      the latest annual inflation, headline and core, % (as the central bank publishes it)
+  reserves_usd                 Egypt's net international reserves for the latest month, $bn
   egx.TICKER  for the Egypt Stocks Watch rows, e.g. egx.COMI=120.30
   us.TICKER   for the USA Stocks Watch rows, e.g. us.AAPL=347.10
   vol.TICKER  shares traded in the session, e.g. vol.COMI=4357823
@@ -29,7 +30,7 @@ import sys
 KEYS = {"usd_egp", "eur_egp", "sar_egp", "aed_egp", "kwd_egp", "qar_egp", "gbp_egp", "dxy",
         "gold21_egp", "gold24_egp", "gold18_egp", "goldpound_egp", "gold_usd", "brent",
         "egx30", "sp500", "nasdaq", "dow", "btc", "cbe_usd_buy", "cbe_usd_sell", "cbe_deposit", "cbe_lending",
-        "tbill_91", "tbill_182", "tbill_273", "tbill_364", "egx_turnover", "infl_headline", "infl_core"}
+        "tbill_91", "tbill_182", "tbill_273", "tbill_364", "egx_turnover", "infl_headline", "infl_core", "reserves_usd"}
 PATH = os.path.join(os.path.dirname(__file__), "..", "..", "..", "data", "markets.json")
 
 

@@ -46,7 +46,7 @@ def main(args):
         cur = flat(d)
         if d["date"] > start and prev and not d.get("seed"):
             # rates that are only set on some days (auctions, decisions) are not expected every day
-            missing = sorted(k for k in set(prev) - set(cur) if not k.startswith(("tbill_", "cbe_", "egx_turnover", "infl_")))
+            missing = sorted(k for k in set(prev) - set(cur) if not k.startswith(("tbill_", "cbe_", "egx_turnover", "infl_", "reserves_")))
             if missing:
                 problems.append(f"{d['date']}: missing {', '.join(missing)} (logged the day before).")
         for k, v in cur.items():
