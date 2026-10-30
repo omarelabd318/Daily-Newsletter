@@ -77,6 +77,7 @@
   let fxAll = fx;
   const draw = async (p) => {
     if (p[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; fxAll = M.series((e) => e.usd_egp, 'fx'); }
+    M.$('dchg').innerHTML = M.heroChg(fxAll, p);
     M.chart(M.$('chart'), fxAll, p[1], 'USD/EGP', Charts.fmt.dec(2), { markAt: 0.02 }); const c = M.change(fxAll, p[1]); M.$('cap').innerHTML = `${p[2]}: <span class="num ${M.cls(c)}">${M.pct(c, 2)}</span> · this year <span class="num ${M.cls(M.ytd(fx))}">${M.pct(M.ytd(fx))}</span>`; };
   M.segment(M.$('seg'), '1M', draw, M.PERIODS.slice(1).concat(M.LONG)); draw(M.PERIODS[2]);
   const dx = M.series((e) => e.dxy, 'us'), dash = '<span class="dash">—</span>';

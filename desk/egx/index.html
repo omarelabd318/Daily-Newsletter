@@ -78,7 +78,7 @@
   // the chart in pounds or in dollars (divided by each day's dollar rate); 3Y and 5Y load the full log
   const draw = async () => {
     const s = inUSD ? M.usd(idx) : idx, d1 = M.change(s, 0), unit = inUSD ? ' in dollars' : '';
-    M.$('lvl').textContent = M.num(M.last(s), inUSD ? 1 : 2); M.$('dchg').innerHTML = `<span class="${M.cls(d1)}">${M.pct(d1, 2)}</span>`;
+    M.$('lvl').textContent = M.num(M.last(s), inUSD ? 1 : 2); M.$('dchg').innerHTML = M.heroChg(s, per);
     if (!per[1]) { const c1 = M.dayChart(M.$('chart'), 'egx', 'EGX30', 'EGX30', Charts.fmt.int); M.$('cap').innerHTML = c1 ? `${c1} (in pounds) · on the day <span class="num ${M.cls(dc)}">${M.pct(dc, 2)}</span>` : ''; return; }
     if (per[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; idx = M.series((e) => e.egx30, 'egx'); return draw(); }
     M.chart(M.$('chart'), s, per[1], 'EGX30' + unit, Charts.fmt.int); const c = M.change(s, per[1]);

@@ -181,6 +181,12 @@ window.Desk = (function () {
     const d = day(X.session);
     return `${X.basis}, ${WD[d.getDay()]} ${d.getDate()} ${MON[d.getMonth()]}.`;
   }
+  // the change beside a chart's big number follows the chosen period, labelled ('in a month'); 1D is the day
+  const SPAN = { 0: 'on the day', 7: 'in a week', 30: 'in a month', 182: 'in 6 months', 365: 'in a year', 1095: 'in 3 years', 1826: 'in 5 years' };
+  function heroChg(s, p) {
+    const back = p ? p[1] : 0, c = change(s, back);
+    return `<span class="${cls(c)}">${pct(c, 2)}</span> <span class="span-l">${SPAN[back] || ''}</span>`;
+  }
   function stockTable(body, tickers, back, inUSD = false) {
     body.innerHTML = tickers.map((t) => {
       const s = inUSD ? usd(stock(t)) : stock(t), c = change(s, back), y = ytd(s);
@@ -256,5 +262,5 @@ window.Desk = (function () {
       location.reload();
     });
   }
-  return { get ASOF() { return ASOF; }, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, get INTRA() { return INTRA; }, init };
+  return { get ASOF() { return ASOF; }, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, get INTRA() { return INTRA; }, init };
 })();

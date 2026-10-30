@@ -82,10 +82,10 @@
   // the chart in the stock's currency or, for Egyptian stocks, in dollars; 3Y and 5Y load the full log
   let sx = s, per = M.PERIODS[2], inUSD = false;
   const draw = async () => {
-    if (!per[1]) { const c1 = M.dayChart(M.$('chart'), egx ? 'egx' : 'us', t, t, Charts.fmt.dec(2)); M.$('cap').innerHTML = c1 ? `${c1}${egx ? ' (in pounds)' : ''} · on the day <span class="num ${M.cls(dc)}">${M.pct(dc, 2)}</span>` : ''; return; }
+    if (!per[1]) { M.$('dchg').innerHTML = M.heroChg(inUSD ? M.usd(sx) : sx, per); const c1 = M.dayChart(M.$('chart'), egx ? 'egx' : 'us', t, t, Charts.fmt.dec(2)); M.$('cap').innerHTML = c1 ? `${c1}${egx ? ' (in pounds)' : ''} · on the day <span class="num ${M.cls(dc)}">${M.pct(dc, 2)}</span>` : ''; return; }
     if (per[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; sx = M.stock(t); idxAll = M.series((e) => e[egx ? 'egx30' : 'sp500'], egx ? 'egx' : 'us'); return draw(); }
     const v = inUSD ? M.usd(sx) : sx, vi = inUSD ? M.usd(idxAll) : idxAll, unit = inUSD ? ' in dollars' : '';
-    const d1 = M.change(v, 0); M.$('lvl').textContent = M.num(M.last(v)); M.$('dchg').innerHTML = `<span class="${M.cls(d1)}">${M.pct(d1, 2)}</span>`; M.$('cur').textContent = egx && !inUSD ? 'EGP' : 'USD';
+    M.$('lvl').textContent = M.num(M.last(v)); M.$('dchg').innerHTML = M.heroChg(v, per); M.$('cur').textContent = egx && !inUSD ? 'EGP' : 'USD';
     M.chart(M.$('chart'), v, per[1], t + unit, Charts.fmt.dec(2)); const c = M.change(v, per[1]), ci = M.change(vi, per[1]);
     M.$('cap').innerHTML = `${per[2]}${unit}: <span class="num ${M.cls(c)}">${M.pct(c, 2)}</span> · ${idxN} <span class="num ${M.cls(ci)}">${M.pct(ci, 2)}</span>`;
   };

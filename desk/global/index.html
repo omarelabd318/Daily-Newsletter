@@ -60,9 +60,10 @@
     const has1D = !!(M.INTRA && M.INTRA.global && M.INTRA.global.series[k]);
     let sAll = s;
     const draw = async (p) => {
+      M.$('d' + i).innerHTML = M.heroChg(p[1] > 400 ? sAll : s, p);
       if (!p[1]) { const c1 = M.dayChart(M.$('ch' + i), 'global', k, n, dp ? Charts.fmt.dec(dp) : Charts.fmt.int); M.$('cap' + i).innerHTML = c1 || ''; return; }
       if (p[1] > 400) { if (!M.full.done) { await M.full(); M.full.done = true; } sAll = M.series((e) => e[k], k === 'btc' ? 'all' : 'us'); }
-      M.$('cap' + i).innerHTML = '';
+      M.$('cap' + i).innerHTML = ''; M.$('d' + i).innerHTML = M.heroChg(sAll, p);
       M.chart(M.$('ch' + i), sAll, p[1], n, dp ? Charts.fmt.dec(dp) : Charts.fmt.int);
       if (p[1] > 400) { const c = M.change(sAll, p[1]); M.$('cap' + i).innerHTML = `${p[2]}: <span class="num ${M.cls(c)}">${M.pct(c, 1)}</span>`; }
     };
@@ -77,7 +78,7 @@
     if (gp[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; }
     const [k, n, unit] = G[gi], s = M.series((e) => e[k], 'all'), signed = (c) => `<span class="${M.cls(c)}">${M.pct(c)}</span>`;
     const dc = M.change(s, 0);
-    M.$('glvl').textContent = M.num(M.last(s), 0); M.$('gd').innerHTML = `<span class="${M.cls(dc)}">${M.pct(dc, 2)}</span>`; M.$('gunit').textContent = unit;
+    M.$('glvl').textContent = M.num(M.last(s), 0); M.$('gd').innerHTML = M.heroChg(s, gp); M.$('gunit').textContent = unit;
     M.chart(M.$('gch'), s, gp[1], `Gold ${n}`, Charts.fmt.int, { xAt: true });
     const c = M.change(s, gp[1]); M.$('gcap').innerHTML = `${gp[2]}: <span class="num ${M.cls(c)}">${M.pct(c, 2)}</span>`;
     const [lo, hi] = M.range52(s);
