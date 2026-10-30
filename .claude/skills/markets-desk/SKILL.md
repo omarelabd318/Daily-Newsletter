@@ -89,7 +89,7 @@ The menu order is Dashboard, EGX, EGP, Wall Street, Global, Egyptian stocks, US 
   never deleted. Valuation figures older than about a quarter are flagged on the page, not hidden.
 - `desk/flows.json`: net equity flows by investor group, one entry per session, for the flow history.
 - `desk/reserves.json`: net international reserves by what they are held in, one entry per month, oldest
-  first; the EGP page draws the last 12 as stacked bars.
+  first; the EGP page shows the latest month, split by what the reserves are held in.
 - Stock pages read each stock's volume (`vol`) from the data log and compare the last session with the
   average of the 30 before it; the EGP page reads the central bank's dollar rate, policy rates, the one-year T-bill
   yield and inflation from the log. The day's file only adds what the log does not hold.
