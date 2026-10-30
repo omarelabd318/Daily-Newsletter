@@ -56,7 +56,9 @@ logged daily (fetch_figures.py lists them as "Desk only") but are not rows in th
 
 ## Pages
 
-- **Dashboard** `/desk/` (`desk/index.html`): the day on one screen, in two sections, Egypt and USA (below).
+- **Dashboard** `/desk/` (`desk/index.html`): the day on one screen, in two sections, Egypt and USA (below): the stories,
+  the index chart (EGX30; or S&P 500, Nasdaq and Dow, in that order), the whole market's three biggest gainers and
+  losers with reasons, the dollar in pounds with inflation, the real yield and reserves, flows, stocks, the week and views.
 - **EGX** `/desk/egx/`: EGX30 chart and the session, biggest movers (the whole market, or the desk's stocks), who
   bought and who sold with the foreign-flow history, the desk's Egyptian stocks, then Bullish and bearish.
 - **EGP** `/desk/egp/`: the dollar in pounds, the central bank's and banks' rates (with net international
