@@ -412,11 +412,18 @@ td.trend svg{display:inline-block;vertical-align:middle}
   const ytd = (s) => { const b = valueAt(s, (ASOF.slice(0, 4) - 1) + '-12-31'); return b && s.length ? (s[s.length - 1][1] / b - 1) * 100 : null; };
   const LONG = [['3Y', 1095, 'Last 3 years'], ['5Y', 1826, 'Last 5 years']]; let fullLoaded = false;
   const PERIODS = [['1D', 0, 'Last 7 days'], ['1W', 7, 'Last 7 days'], ['1M', 30, 'Last 30 days'], ['6M', 182, 'Last 6 months'], ['1Y', 365, 'Last 12 months']];
+  // switches remember the viewer's last choice on this device (per page and switch); after the page draws
+  // its default, a remembered choice different from it is applied with a click
+  const memKey = (el) => 'desk:' + location.pathname + ':' + location.hash + ':' + el.id;
+  const recall = (el) => { try { return localStorage.getItem(memKey(el)); } catch (e) { return null; } };
+  const remember = (el, v) => { try { localStorage.setItem(memKey(el), v); } catch (e) {} };
+  const restore = (el, v) => { if (v == null) return; const b = [...el.querySelectorAll('button')].find((x) => x.textContent === v && x.getAttribute('aria-pressed') !== 'true'); if (b) setTimeout(() => b.click(), 0); };
   const segment = (el, start, onPick, list = PERIODS) => {
     el.innerHTML = list.map((p) => `<button type="button" aria-pressed="${p[0] === start}">${p[0]}</button>`).join('');
     el.querySelectorAll('button').forEach((b, i) => b.addEventListener('click', () => {
-      el.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); onPick(list[i]);
+      el.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); remember(el, list[i][0]); onPick(list[i]);
     }));
+    restore(el, recall(el));
   };
   const NAMES = { COMI: 'Commercial International Bank', TMGH: 'Talaat Moustafa', ETEL: 'Telecom Egypt', PHDC: 'Palm Hills', SWDY: 'Elsewedy Electric', ORAS: 'Orascom Construction', FWRY: 'Fawry', ABUK: 'Abu Qir Fertilizers', HRHO: 'EFG Holding', CLHO: 'Cleopatra Hospital', JUFO: 'Juhayna', ALCN: 'Alexandria Containers',
     AAPL: 'Apple', MSFT: 'Microsoft', NVDA: 'Nvidia', AMZN: 'Amazon', GOOGL: 'Alphabet', META: 'Meta', TSLA: 'Tesla', JPM: 'JPMorgan Chase', XOM: 'Exxon Mobil', AVGO: 'Broadcom', 'BRK.B': 'Berkshire Hathaway', WMT: 'Walmart' };
