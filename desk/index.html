@@ -223,9 +223,9 @@ td.trend svg{display:inline-block;vertical-align:middle}
       <a href="#egypt" data-sec="egypt"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke-width="1.5"><path d="M2 13h12M4 10l3-3 2 2 4-5"/></svg>Egypt</a>
       <a href="#global" data-sec="global"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke-width="1.5"><circle cx="8" cy="8" r="5.5"/><path d="M2.5 8h11M8 2.5c1.8 1.6 1.8 9.4 0 11M8 2.5c-1.8 1.6-1.8 9.4 0 11"/></svg>USA &amp; others</a>
       <div class="navgroup">Newsletter</div>
-      <a href="../"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke-width="1.5"><path d="M3 2.5h10v11H3zM5.5 5.5h5M5.5 8h5M5.5 10.5h3"/></svg>Today's newsletter</a>
+      <a href="/"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke-width="1.5"><path d="M3 2.5h10v11H3zM5.5 5.5h5M5.5 8h5M5.5 10.5h3"/></svg>Today's newsletter</a>
       <div class="navgroup">Library</div>
-      <a href="../data/markets.xlsx"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke-width="1.5"><path d="M3 3h10v10H3zM3 6.5h10M3 10h10M6.5 3v10"/></svg>Data log (Excel)</a>
+      <a href="/data/markets.xlsx"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke-width="1.5"><path d="M3 3h10v10H3zM3 6.5h10M3 10h10M6.5 3v10"/></svg>Data log (Excel)</a>
     </nav>
     <div class="side-foot">
       <button type="button" class="theme"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2a6 6 0 100 12A4.5 4.5 0 018 2z"/></svg><span>Dark mode</span></button>
@@ -236,7 +236,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
   <div>
     <header class="topbar">
       <div class="brand"><span class="mark" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18"><path d="M2 13l4-4 3 2.5L16 4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Markets Desk</b></span></div>
-      <a class="btn" href="../">Newsletter</a>
+      <a class="btn" href="/">Newsletter</a>
     </header>
 
     <main class="canvas">
@@ -248,7 +248,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
         </div>
         <div class="actions">
           <div class="stamp num" id="stamp"></div>
-          <a class="btn btn-primary" href="../">Read today's edition</a>
+          <a class="btn btn-primary" href="/">Read today's edition</a>
         </div>
       </div>
 
@@ -321,7 +321,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
   </div>
 </div>
 
-<script src="charts.js"></script>
+<script src="/desk/charts.js"></script>
 <script>
 (async function(){
   const $ = (id) => document.getElementById(id);
@@ -332,9 +332,9 @@ td.trend svg{display:inline-block;vertical-align:middle}
   const get = (u) => fetch(u, { cache: 'no-cache' }).then((r) => r.ok ? r.json() : null).catch(() => null);
 
   // today's desk: the newest entry in desk/index.json
-  const idx = await get('index.json');
+  const idx = await get('/desk/index.json');
   const latest = idx && idx.desks && idx.desks.length ? idx.desks.slice().sort((a, b) => b.date < a.date ? -1 : 1)[0].date : null;
-  const D = latest ? await get('days/' + latest + '.json') : null;
+  const D = latest ? await get('/desk/days/' + latest + '.json') : null;
   if (!D) { $('finding').textContent = 'No desk has been published yet.'; return; }
   const ASOF = D.asOf;
   const day = (iso) => new Date(iso + 'T12:00:00');
@@ -349,7 +349,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
   $('stamp').innerHTML = 'Closes to ' + esc(day(ASOF).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }).replace(',', '')) + '<br>Fetched ' + esc(D.fetched || '');
 
   // the data log: each entry holds the closes its edition showed, so a close belongs to the day before the entry
-  const log = await get('../data/markets-recent.json');
+  const log = await get('/data/markets-recent.json');
   const days = (log && log.days) || [];
   function series(pick, market) {
     const out = [];
