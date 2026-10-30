@@ -193,6 +193,26 @@ td.trend svg{display:inline-block;vertical-align:middle}
 .pill.open{background:var(--raised);color:var(--muted)}
 
 /* tablet */
+/* the index chart's big number and its tabs, the whole market's movers, the pound's figures */
+.hgroup{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.ctabs{display:inline-flex;gap:2px;padding:2px;border-radius:7px;background:var(--raised)}
+.ctabs button{height:26px;padding:0 10px;border:1px solid transparent;border-radius:5px;background:none;color:var(--muted);font-size:12px;font-weight:500;cursor:pointer}
+.ctabs button[aria-pressed="true"]{background:var(--surface);color:var(--text);border-color:var(--border)}
+.hero{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:2px 0 4px}
+.hero .lvl{font-size:28px;line-height:34px;font-weight:600;letter-spacing:-.01em}
+.hero .d{font-size:15px}
+.span-l{font-size:12px;font-weight:400;color:var(--muted);margin-left:2px}
+.inv.up{color:var(--negative)} .inv.down{color:var(--positive)}
+.figs{margin-top:10px;border-top:1px solid var(--rule)}
+.movers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.movers h3{display:flex;align-items:center;gap:8px;margin:0 0 4px;font-size:13px;font-weight:600}
+.mv{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:12px;align-items:center;height:40px;border-top:1px solid var(--rule)}
+.mv:first-of-type{border-top:0}
+.mv a,.mv .nm{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-decoration:none}
+.mv a:hover b{text-decoration:underline}
+.mv b{font-weight:500} .mv span.t{color:var(--muted);font-size:12px;margin-left:6px}
+.mvwhy{margin:-6px 0 8px;font-size:12px;line-height:17px;color:var(--muted)}
+.mvwhy a{color:var(--muted)}
 @media (max-width:1180px){
   .grid{grid-template-columns:minmax(0,1fr)}
   .leftcol{position:static;grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -201,7 +221,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
   .grid,.leftcol,.main{display:contents}
   .canvas{display:flex;flex-direction:column}
   .canvas > .grid{display:flex;flex-direction:column;gap:var(--gap)}
-  #c-read{order:1} #c-close{order:2} #c-chart{order:3} #c-board{order:3} #c-flows{order:4} #c-stocks{order:5} #c-pvd{order:6} #c-week{order:7} #c-views{order:8}
+  #c-read{order:1} #c-close{order:2} #c-chart{order:3} #c-movers{order:3} #c-board{order:3} #c-flows{order:4} #c-stocks{order:5} #c-pvd{order:6} #c-week{order:7} #c-views{order:8}
 }
 /* phone */
 @media (max-width:860px){
@@ -226,6 +246,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
   .leftcol{grid-template-columns:minmax(0,1fr)}
   .main{grid-template-columns:minmax(0,1fr)}
   .board{grid-template-columns:minmax(0,1fr)}
+  .movers{grid-template-columns:minmax(0,1fr);gap:18px}
   td.trend,th.trend{display:none}
   .card{padding:16px}
   .read dl{grid-template-columns:minmax(0,1fr)}
@@ -298,6 +319,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
             <div class="legend" id="pvd-legend"></div>
             <div class="pvd-plot" id="pvd"></div>
             <p class="pvd-read" id="pvd-read"></p>
+            <div class="figs" id="pvd-figs" hidden></div>
           </section>
           <section class="card" id="c-flows" aria-labelledby="h-flows" hidden>
             <div class="card-h"><h2 id="h-flows">Who bought and who sold</h2></div>
@@ -325,9 +347,16 @@ td.trend svg{display:inline-block;vertical-align:middle}
           </section>
 
           <section class="card span2" id="c-chart" aria-labelledby="chart-name">
-            <div class="card-h"><h2 id="chart-name">EGX30</h2><span class="story-nav"><a class="meta" id="chart-more" href="/desk/egx/">EGX page →</a><span class="seg" role="group" aria-label="Chart period" id="egx-seg"></span></span></div>
+            <div class="card-h"><div class="hgroup"><h2 id="chart-name">EGX30</h2><div class="ctabs" id="itabs" aria-label="Index" hidden></div></div><span class="story-nav"><a class="meta" id="chart-more" href="/desk/egx/">EGX page →</a><span class="seg" role="group" aria-label="Chart period" id="egx-seg"></span></span></div>
+            <div class="hero"><span class="lvl num" id="ilvl"></span><span class="d num" id="ichg"></span></div>
             <div class="chartbox" id="egx-chart"></div>
             <p class="chart-cap" id="egx-cap"></p>
+          </section>
+
+          <section class="card span2" id="c-movers" aria-labelledby="h-movers">
+            <div class="card-h"><h2 id="h-movers">Biggest movers, whole market</h2><a class="meta" id="movers-more" href="/desk/egx/">EGX page →</a></div>
+            <div id="movers"></div>
+            <p class="chart-cap" id="movers-note"></p>
           </section>
 
           <section class="card span2" id="c-board" aria-labelledby="h-board">
@@ -390,7 +419,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
   $('stamp').innerHTML = 'Closes to ' + esc(day(ASOF).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }).replace('Sept', 'Sep').replace(',', '')) + '<br>Fetched ' + esc(D.fetched || '');
 
   // the data log: each entry holds the closes its edition showed, so a close belongs to the day before the entry
-  const INTRA = await get('/desk/intraday.json');
+  const INTRA = await get('/desk/intraday.json'), MOVERS = await get('/desk/movers.json');
   const log = await get('/data/markets-recent.json');
   let days = (log && log.days) || [];
   function series(pick, market) {
@@ -491,7 +520,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
     return { labels: times, xAt: at, xText: times.map((t) => t.slice(0, 2) + ':00') };
   }
 
-  function render(key) {
+  async function render(key) {
     const S = SECTIONS[key], X = D[key];
     document.querySelectorAll('[data-sec]').forEach((a) => { if (a.dataset.sec === key) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
     $('title').textContent = S.name + ' · ' + longDate;
@@ -528,34 +557,58 @@ td.trend svg{display:inline-block;vertical-align:middle}
     $('week').innerHTML = X.week.map((w) => `<div class="wk"><span class="day">${esc(w.day)}</span><b>${esc(w.event)}</b><span class="imp${w.impact === 'high' ? ' high' : ''}">${esc(w.impact[0].toUpperCase() + w.impact.slice(1))}</span><span class="why">${esc(w.why)}</span></div>`).join('');
     $('views').innerHTML = X.views.map((v) => `<div class="view"><b>${esc(v.call)}</b><span class="pill ${PILL[v.status] || 'open'}">${esc(v.status[0].toUpperCase() + v.status.slice(1))}</span><span class="why">${esc(v.note)}</span></div>`).join('');
 
-    // the section's index, in the one chart hue
-    let idx = series((e) => e[S.chart], S.market);
-    $('chart-name').textContent = S.chartName;
+    // the section's index, in the one chart hue: the EGX30, or the S&P 500, Nasdaq and Dow in the Wall Street page's order
+    const IDX = key === 'egypt' ? [{ k: 'egx30', n: 'EGX30', intra: 'EGX30' }]
+      : [{ k: 'sp500', n: 'S&P 500', intra: 'sp500' }, { k: 'nasdaq', n: 'Nasdaq', intra: 'COMP' }, { k: 'dow', n: 'Dow Jones', intra: 'dow' }];
+    let cur = IDX[0], per = PERIODS[2], idx = series((e) => e[cur.k], S.market);
     $('chart-more').textContent = key === 'egypt' ? 'EGX page →' : 'Wall Street page →'; $('chart-more').href = key === 'egypt' ? '/desk/egx/' : '/desk/us/';
+    $('itabs').hidden = IDX.length < 2;
+    $('itabs').innerHTML = IDX.length < 2 ? '' : IDX.map((x, i) => `<button type="button" aria-pressed="${!i}">${esc(x.n)}</button>`).join('');
+    $('itabs').querySelectorAll('button').forEach((b, i) => b.addEventListener('click', () => {
+      $('itabs').querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); cur = IDX[i]; idx = series((e) => e[cur.k], S.market); drawIdx(per);
+    }));
+    // the change beside the big number follows the chosen period; 1D is the day
+    const SPAN = { 0: 'on the day', 7: 'in a week', 30: 'in a month', 182: 'in 6 months', 365: 'in a year', 1095: 'in 3 years', 1826: 'in 5 years' };
     async function drawIdx(p) {
+      per = p; $('egx-chart').style.height = '';
       if (p[1] > 400 && !fullLoaded) {   // 3Y and 5Y need the full log, loaded once
         const f = await get('/data/markets.json'); fullLoaded = true;
-        if (f && f.days) { days = f.days; idx = series((e) => e[S.chart], S.market); }
+        if (f && f.days) { days = f.days; idx = series((e) => e[cur.k], S.market); }
       }
+      $('chart-name').textContent = IDX.length < 2 ? cur.n : 'Wall Street';
+      const lv = idx.length ? idx[idx.length - 1][1] : null, hc = change(idx, p[1]);
+      $('ilvl').textContent = lv == null ? '—' : lv.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      $('ichg').innerHTML = `<span class="${cls(hc)}">${pct(hc, 2)}</span> <span class="span-l">${SPAN[p[1]] || ''}</span>`;
       if (!p[1]) {   // the last session through the day, from desk/intraday.json
-        const el = $('egx-chart'), mk = S.market, key = S.chart === 'egx30' ? 'EGX30' : 'COMP', I = INTRA && INTRA[mk] && INTRA[mk].series[key]; el.innerHTML = '';
-        if (!I) { el.innerHTML = '<p class="chart-cap">The last session through the day is not saved yet; the morning run saves it once the session has closed.</p>'; $('egx-cap').textContent = ''; return; }
+        const el = $('egx-chart'), mk = S.market, I = INTRA && INTRA[mk] && INTRA[mk].series[cur.intra]; el.innerHTML = '';
+        if (!I) { el.style.height = 'auto'; el.innerHTML = '<p class="chart-cap">The last session through the day is not saved yet; the morning run saves it once the session has closed.</p>'; $('egx-cap').textContent = ''; return; }
         const v = I.map((x) => x[1]), lo = Math.min(...v), hi = Math.max(...v);
-        Charts.line(el, { ...dayAxis(I.map((x) => x[0]), el.clientWidth), series: [{ name: S.chartName, values: v }], format: Charts.fmt.int, endLabel: true, height: el.clientHeight, min: lo - (hi - lo) * 0.15 });
+        Charts.line(el, { ...dayAxis(I.map((x) => x[0]), el.clientWidth), series: [{ name: cur.n, values: v }], format: Charts.fmt.int, endLabel: true, height: el.clientHeight, min: lo - (hi - lo) * 0.15 });
         const ch = (v.at(-1) / v[0] - 1) * 100;
-        const dd = change(idx, 0);
-        $('egx-cap').innerHTML = `${day(INTRA[mk].session).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short' }).replace('Sept', 'Sep')}, ${I[0][0]}–${I.at(-1)[0]} ${mk === 'egx' ? 'Cairo' : 'New York'} time: <span class="num ${cls(ch)}">${pct(ch, 2)}</span> from the first trade · on the day <span class="num ${cls(dd)}">${pct(dd, 2)}</span>`;
+        $('egx-cap').innerHTML = `${day(INTRA[mk].session).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short' }).replace('Sept', 'Sep')}, ${I[0][0]}–${I.at(-1)[0]} ${mk === 'egx' ? 'Cairo' : 'New York'} time: <span class="num ${cls(ch)}">${pct(ch, 2)}</span> from the first trade`;
         return;
       }
       const back = Math.max(p[1], 7), pts = idx.filter(([d]) => d >= cut(ASOF, back)), el = $('egx-chart'); el.innerHTML = '';
       if (pts.length < 2) { el.textContent = 'Not enough closes logged yet.'; $('egx-cap').textContent = ''; return; }
-      const ann = bigMove(pts);
-      const lo = Math.min(...pts.map((x) => x[1]));
-      Charts.line(el, { ...axis(pts.map((x) => x[0]), back, el.clientWidth), series: [{ name: S.chartName, values: pts.map((x) => x[1]) }], format: Charts.fmt.int, annotations: ann, endLabel: true, height: el.clientHeight, min: Math.floor(lo * 0.97 / 1000) * 1000 });
-      const c = change(idx, p[1]), y = ytd(idx);
-      $('egx-cap').innerHTML = `${p[0] === '1D' ? 'On the day' : p[2]}: <span class="num ${cls(c)}">${pct(c, 2)}</span> · this year <span class="num ${cls(y)}">${pct(y)}</span>`;
+      const ann = bigMove(pts), vals = pts.map((x) => x[1]), lo = Math.min(...vals), hi = Math.max(...vals);
+      Charts.line(el, { ...axis(pts.map((x) => x[0]), back, el.clientWidth), series: [{ name: cur.n, values: vals }], format: Charts.fmt.int, annotations: ann, endLabel: true, height: el.clientHeight, min: lo - (hi - lo) * 0.15 });
+      const y = ytd(idx);
+      $('egx-cap').innerHTML = `${esc(cur.n)}, ${p[2].toLowerCase()} · this year <span class="num ${cls(y)}">${pct(y)}</span>`;
     }
-    segment($('egx-seg'), '1M', drawIdx, key === 'egypt' ? PERIODS.concat(LONG) : PERIODS); drawIdx(PERIODS[2]);
+    segment($('egx-seg'), '1M', drawIdx, PERIODS.concat(LONG)); drawIdx(PERIODS[2]);
+
+    // the whole market's biggest movers of the last session, three each way, with the reason where one was found
+    const MV = MOVERS && MOVERS[S.market];
+    $('movers-more').textContent = key === 'egypt' ? 'EGX page →' : 'Wall Street page →'; $('movers-more').href = key === 'egypt' ? '/desk/egx/' : '/desk/us/';
+    if (!MV) { $('movers').innerHTML = '<p class="chart-cap">Not saved yet; the morning run saves the last session\'s movers once it has closed.</p>'; $('movers-note').textContent = ''; }
+    else {
+      const f2 = (v) => v.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      const row = (r) => { const own = NAMES[r.t], nm = `<b>${esc(own || r.name)}</b><span class="t">${esc(r.t)}</span>`;
+        return `<div class="mv">${own ? `<a href="/desk/stock/?t=${encodeURIComponent(r.t)}">${nm}</a>` : `<span class="nm">${nm}</span>`}<span class="num">${f2(r.price)}</span><span class="num ${cls(r.pct)}">${pct(r.pct)}</span></div>`
+          + (r.why ? `<p class="mvwhy">${esc(r.why)}${r.url ? ` <a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.source || 'Source')} →</a>` : ''}</p>` : ''); };
+      $('movers').innerHTML = `<div class="movers"><div><h3><span class="chg up" aria-hidden="true"></span>Biggest gainers</h3>${MV.gainers.slice(0, 3).map(row).join('')}</div><div><h3><span class="chg down" aria-hidden="true"></span>Biggest losers</h3>${MV.losers.slice(0, 3).map(row).join('') || '<p class="chart-cap">No stock fell.</p>'}</div></div>`;
+      const sd = day(MV.session); $('movers-note').textContent = `${MV.basis}, ${WD[sd.getDay()]} ${sd.getDate()} ${MON[sd.getMonth()]}.`;
+    }
 
     // side card: Egypt asks whether the pound's move is local; USA shows oil, the price that reaches Egypt most
     $('pvd-legend').innerHTML = ''; $('pvd').innerHTML = '';
@@ -566,10 +619,24 @@ td.trend svg{display:inline-block;vertical-align:middle}
       else {
         const pv = $('pvd'), vals = fx.map((x) => x[1]), lo = Math.min(...vals), hi = Math.max(...vals);
         Charts.line(pv, { ...axis(fx.map((x) => x[0]), 30, pv.clientWidth), series: [{ name: 'USD/EGP', values: vals }], format: Charts.fmt.dec(2), height: pv.clientHeight, min: lo - (hi - lo) * 0.15, endLabel: true });
-        const ch = (vals[vals.length - 1] / vals[0] - 1) * 100;
-        $('pvd-read').innerHTML = `The dollar buys <span class="num">EGP ${vals[vals.length - 1].toFixed(2)}</span>, <span class="num">${pct(ch)}</span> over the month and near its 52-week high. The pound's weakness against major currencies, and whether it is local, is on the EGP page.`;
+        const ch = (vals[vals.length - 1] / vals[0] - 1) * 100, now = vals[vals.length - 1];
+        const yr = series((e) => e.usd_egp, 'fx').filter(([d]) => d >= cut(ASOF, 365)).map((x) => x[1]), lo52 = Math.min(...yr), hi52 = Math.max(...yr);
+        const where = now >= hi52 - (hi52 - lo52) * 0.05 ? 'near its 52-week high' : now <= lo52 + (hi52 - lo52) * 0.05 ? 'near its 52-week low'
+          : `between its 52-week low of <span class="num">${lo52.toFixed(2)}</span> and high of <span class="num">${hi52.toFixed(2)}</span>`;
+        $('pvd-read').innerHTML = `The dollar buys <span class="num">EGP ${now.toFixed(2)}</span>, <span class="num ${cls(ch)}">${pct(ch)}</span> over the month and ${where}. Whether the pound's move is local is on the EGP page.`;
       }
+      // the pound's figures: inflation (a fall shows green), the real one-year yield and reserves
+      const lg = (k) => series((e) => e[k], 'fx'), lastOf = (s) => (s.length ? s[s.length - 1][1] : null);
+      const pts = (c) => `${c > 0 ? '+' : c < 0 ? MINUS : ''}${Math.abs(c).toFixed(1)} pts`, rows = [];
+      const inf = lg('infl_headline'), iv = lastOf(inf), ip = ([...inf].reverse().find(([, x]) => x !== iv) || [])[1], tb = lastOf(lg('tbill_364'));
+      if (iv != null) rows.push(['Inflation (annual)', iv.toFixed(1) + '%', ip != null ? `<span class="chg ${iv > ip ? 'up' : iv < ip ? 'down' : 'flat'} inv">${pts(iv - ip)}</span>` : '']);
+      if (iv != null && tb != null) rows.push(['Real one-year yield', (tb - iv).toFixed(1) + ' pts', '']);
+      const R = ((await get('/desk/reserves.json')) || {}).months || [], RL = R[R.length - 1], RP = R[R.length - 2];
+      if (RL) { const rc = RP ? (RL.total / RP.total - 1) * 100 : null; rows.push(['Foreign reserves', '$' + RL.total.toFixed(2) + 'bn', rc == null ? '' : `<span class="${cls(rc)}">${pct(rc, 2)}</span>`]); }
+      $('pvd-figs').hidden = !rows.length;
+      $('pvd-figs').innerHTML = rows.map(([k, v, d]) => `<div class="lrow"><span class="k">${esc(k)}</span><span class="v num">${v}</span><span class="d num">${d}</span></div>`).join('');
     } else {
+      $('pvd-figs').hidden = true;
       const br = series((e) => e.brent, 'us').filter(([d]) => d >= cut(ASOF, 30));
       $('h-pvd').textContent = 'Oil'; $('side-meta').textContent = 'Global page →'; $('side-meta').href = '/desk/global/';
       if (br.length < 2) { $('pvd-read').textContent = 'Not enough logged prices yet.'; }
