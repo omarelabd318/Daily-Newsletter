@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Global · Markets Desk</title>
+<meta name="description" content="Brent, gold, the dollar index and Bitcoin, each with why it matters for Egypt, and gold prices in Egypt.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,600&display=swap">
+<script>try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+<link rel="stylesheet" href="/desk/desk.css">
+</head>
+<body>
+<main class="canvas">
+  <div class="titlerow"><div>
+    <div class="crumbs"><a href="/desk/">Desk</a> / Global</div>
+    <h1 id="title">Global</h1>
+    <p class="finding" id="finding"></p>
+  </div><div class="actions"><span class="samp" data-sample hidden>Sample desk</span></div></div>
+  <div class="pages" id="cards"></div>
+  <div class="pages" style="margin-top:var(--gap)">
+    <section class="card c12">
+      <div class="card-h"><h2>Gold in Egypt</h2><div class="seg" id="gseg"></div></div>
+      <table><thead><tr><th>Gold</th><th class="trend" id="gtrend-h">Last 7 days</th><th class="num">EGP</th><th class="num" id="gchg-h">Change (1D)</th><th class="num">YTD</th></tr></thead><tbody id="gbody"></tbody></table>
+      <p class="stock-note">Egyptian gold follows the world price in dollars times the pound's rate, so a weaker pound lifts it even when gold falls abroad.</p>
+    </section>
+  </div>
+</main>
+<script src="/desk/charts.js"></script>
+<script src="/desk/desk.js"></script>
+<script>
+(async () => {
+  const M = Desk, D = await M.init('/desk/global/'); if (!D) return;
+  const P = D.pages.global, notes = P.notes || {};
+  M.$('title').textContent = 'Global · ' + M.dateLine(M.ASOF); document.title = 'Global · Markets Desk';
+  M.$('finding').textContent = P.finding;
+  const C = [['brent', 'Brent crude', '$ per barrel', 2], ['gold_usd', 'Gold', '$ per ounce', 0], ['dxy', 'Dollar index', 'DXY, against six major currencies', 2], ['btc', 'Bitcoin', '$', 0]];
+  M.$('cards').innerHTML = C.map(([k, n, u], i) => `<section class="card c6"><div class="card-h"><h2>${n}</h2><div class="seg" id="seg${i}"></div></div><div class="hero"><span class="lvl num" id="lvl${i}"></span><span class="d num" id="d${i}"></span><span class="meta">${u}</span></div><div class="midchart" id="ch${i}"></div><div id="kv${i}" style="margin-top:12px"></div><p class="pvd-read">${M.esc(notes[k] || '')}</p></section>`).join('');
+  C.forEach(([k, n, u, dp], i) => {
+    const s = M.series((e) => e[k], k === 'btc' ? 'all' : 'us');
+    if (!s.length) { M.$('ch' + i).textContent = 'Not logged yet.'; return; }
+    M.$('lvl' + i).textContent = M.num(M.last(s), dp);
+    const dc = M.change(s, 0); M.$('d' + i).innerHTML = `<span class="${M.cls(dc)}">${M.pct(dc, 2)}</span>`;
+    const draw = (p) => M.chart(M.$('ch' + i), s, p[1], n, dp ? Charts.fmt.dec(dp) : Charts.fmt.int, { xAt: true });
+    M.segment(M.$('seg' + i), '1M', draw, M.PERIODS.slice(1)); draw(M.PERIODS[2]);
+    const [lo, hi] = M.range52(s), signed = (c) => `<span class="${M.cls(c)}">${M.pct(c)}</span>`;
+    M.$('kv' + i).innerHTML = M.kv([['Month', signed(M.change(s, 30))], ['This year', signed(M.ytd(s))], ['52-week range', `${M.num(lo, dp)} – ${M.num(hi, dp)}`]]);
+  });
+  const G = [['gold24_egp', '24K', 'per gram'], ['gold21_egp', '21K', 'per gram, the most bought'], ['gold18_egp', '18K', 'per gram'], ['goldpound_egp', 'Gold pound', '8 grams of 21K']];
+  const drawG = (p) => {
+    M.$('gchg-h').textContent = `Change (${p[0]})`; M.$('gtrend-h').textContent = p[1] <= 7 ? 'Last 7 days' : p[2];
+    M.$('gbody').innerHTML = G.map(([k, n, sub]) => { const s = M.series((e) => e[k], 'all'), c = M.change(s, p[1]), y = M.ytd(s);
+      return `<tr><td class="name"><b>${n}</b><span>${sub}</span></td><td class="trend">${M.spark(s, p[1])}</td><td class="num">${M.num(M.last(s), 0)}</td><td class="num"><span class="${M.cls(c)}">${M.pct(c)}</span></td><td class="num"><span class="${M.cls(y)}">${M.pct(y)}</span></td></tr>`; }).join('');
+  };
+  M.segment(M.$('gseg'), '1D', drawG); drawG(M.PERIODS[0]);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+ "note": "Net equity flows on the EGX by investor group, EGP bn, one entry per session (the session's date, not the edition's). From the EGX's daily report as carried by Mubasher, EnterpriseAM, Youm7 or Arab Finance; confirmed is false until a second report matches.",
+ "days": [
+  {
+   "date": "2026-10-29",
+   "confirmed": false,
+   "rows": {
+    "Egyptian institutions": -34.33,
+    "Egyptian individuals": 2.89,
+    "Arab institutions": 2.1,
+    "Arab individuals": 0.15,
+    "Foreign institutions": 29.19,
+    "Foreign individuals": 0.01
+   }
+  }
+ ]
+}

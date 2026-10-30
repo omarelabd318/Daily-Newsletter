@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stocks · Markets Desk</title>
+<meta name="description" content="One page per stock: price chart against its index, performance, valuation, trading, dates coming up, the desk's views and news.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,600&display=swap">
+<script>try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+<link rel="stylesheet" href="/desk/desk.css">
+</head>
+<body>
+<main class="canvas">
+  <div class="titlerow"><div>
+    <div class="crumbs"><a href="/desk/">Desk</a> / <a href="/desk/egx/" id="mkt">EGX</a> / <span id="crumb"></span></div>
+    <h1 id="name"></h1>
+    <p class="finding" id="sub"></p>
+  </div><div class="actions"><select class="picker" id="pick" aria-label="Choose a stock"></select><span class="samp" data-sample hidden>Sample desk</span></div></div>
+
+  <div class="pages">
+    <section class="card c8">
+      <div class="card-h"><h2>Price</h2><div class="seg" id="seg"></div></div>
+      <div class="hero"><span class="lvl num" id="lvl"></span><span class="d num" id="dchg"></span><span class="meta" id="cur"></span></div>
+      <div class="bigchart" id="chart"></div>
+      <p class="chart-cap" id="cap"></p>
+    </section>
+    <section class="card c4">
+      <div class="card-h"><h2>Performance</h2><span class="meta" id="pdate"></span></div>
+      <div id="perf"></div>
+      <div id="range"></div>
+      <p class="sub" id="vsidx" style="margin-top:12px"></p>
+    </section>
+
+    <section class="card c4">
+      <div class="card-h"><h2>Valuation</h2><span class="meta" id="valmeta"></span></div>
+      <div id="val"></div>
+      <div class="notice" id="valnote" hidden></div>
+    </section>
+    <section class="card c4">
+      <div class="card-h"><h2>Trading</h2><span class="meta" id="tdate"></span></div>
+      <div id="trade"></div>
+      <p class="sub" id="tnote" style="margin-top:12px"></p>
+    </section>
+    <section class="card c4">
+      <div class="card-h"><h2>Coming up</h2></div>
+      <div id="next"></div>
+    </section>
+
+    <section class="card c6">
+      <div class="card-h"><h2>The desk on this stock</h2></div>
+      <div id="views"></div>
+    </section>
+    <section class="card c6">
+      <div class="card-h"><h2>In the news</h2><span class="meta">From the newsletter and desk</span></div>
+      <div id="news"></div>
+    </section>
+  </div>
+</main>
+<script src="/desk/charts.js"></script>
+<script src="/desk/desk.js"></script>
+<script>
+(async () => {
+  const M = Desk, D = await M.init('/desk/stock/'); if (!D) return;
+  let t = new URLSearchParams(location.search).get('t') || 'COMI';
+  if (!M.NAMES[t]) t = 'COMI';
+  const egx = M.GROUP.egx.includes(t), cur = egx ? 'EGP ' : '$';
+  const ST = await M.get('/desk/stocks.json'), p = (ST && ST.stocks && ST.stocks[t]) || {};
+  const s = M.stock(t), idxS = M.series((e) => e[egx ? 'egx30' : 'sp500'], egx ? 'egx' : 'us'), idxN = egx ? 'EGX30' : 'S&P 500';
+  const dash = '<span class="dash">—</span>', signed = (c) => `<span class="${M.cls(c)}">${M.pct(c)}</span>`;
+  M.$('pick').innerHTML = ['egx', 'us'].map((g) => `<optgroup label="${g === 'egx' ? 'Egypt' : 'USA'}">${M.GROUP[g].map((x) => `<option value="${x}"${x === t ? ' selected' : ''}>${M.esc(M.NAMES[x])} (${x})</option>`).join('')}</optgroup>`).join('');
+  M.$('pick').addEventListener('change', (e) => { location.search = '?t=' + encodeURIComponent(e.target.value); });
+  M.$('crumb').textContent = M.NAMES[t]; M.$('mkt').textContent = egx ? 'EGX' : 'US'; M.$('mkt').href = egx ? '/desk/egx/' : '/desk/us/';
+  M.$('name').innerHTML = `${M.esc(M.NAMES[t])} <span class="meta" style="font-size:15px;font-weight:400">${M.esc(t)}${p.sector ? ' · ' + M.esc(p.sector) : ''}</span>`;
+  document.title = M.NAMES[t] + ' · Markets Desk';
+  const fresh = s.length && s.at(-1)[0] === M.ASOF, dc = fresh ? M.change(s, 0) : null, y = M.ytd(s);
+  const when = M.day(M.ASOF).toLocaleDateString('en-GB', { weekday: 'long' });
+  M.$('sub').innerHTML = fresh ? `Closed at ${cur}${M.num(M.last(s))} on ${when}, <span class="${M.cls(dc)}">${M.pct(dc)}</span> on the day and <span class="${M.cls(y)}">${M.pct(y)}</span> this year.` : `No close logged for ${when}.`;
+  M.$('lvl').textContent = M.num(M.last(s)); M.$('dchg').innerHTML = `<span class="${M.cls(dc)}">${M.pct(dc, 2)}</span>`; M.$('cur').textContent = egx ? 'EGP' : 'USD';
+  M.$('pdate').textContent = 'to ' + M.short(M.ASOF);
+  const draw = (q) => { M.chart(M.$('chart'), s, q[1], t, Charts.fmt.dec(2)); const c = M.change(s, q[1]), ci = M.change(idxS, q[1]); M.$('cap').innerHTML = `${q[2]}: <span class="num ${M.cls(c)}">${M.pct(c, 2)}</span> · ${idxN} <span class="num ${M.cls(ci)}">${M.pct(ci, 2)}</span>`; };
+  M.segment(M.$('seg'), '6M', draw, M.PERIODS.slice(1)); draw(M.PERIODS[3]);
+  M.$('perf').innerHTML = M.kv([['Week', signed(M.change(s, 7))], ['Month', signed(M.change(s, 30))], ['6 months', signed(M.change(s, 182))], ['Year', signed(M.change(s, 365))], ['This year', signed(y)]]);
+  const [lo, hi] = M.range52(s); M.$('range').innerHTML = M.rangeBar(lo, hi, M.last(s));
+  const rel = y != null && M.ytd(idxS) != null ? y - M.ytd(idxS) : null;
+  M.$('vsidx').innerHTML = `This year it is <span class="num ${M.cls(rel)}">${M.pct(rel)}</span> against the ${idxN} (${M.pct(M.ytd(idxS))}). ${M.num((1 - M.last(s) / hi) * 100, 1)}% below its 52-week high.`;
+
+  const V = p.valuation, rows = (r) => r.map((x) => [x.label, x.value == null ? dash : M.esc(x.value)]);
+  M.$('val').innerHTML = M.kv(V ? rows(V.rows) : [['Market value', dash], ['P/E', dash], ['P/B', dash]]);
+  M.$('valmeta').textContent = V ? `${V.source}, ${M.short(V.asOf)}` : 'Not fetched yet';
+  // figures more than about a quarter old are flagged rather than trusted
+  if (V && (M.day(M.ASOF) - M.day(V.asOf)) / 864e5 > 100) {
+    M.$('valnote').hidden = false;
+    M.$('valnote').textContent = `${V.source} last updated these on ${M.day(V.asOf).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}${V.basis ? ', on ' + V.basis : ''}: too old to rely on.`;
+  }
+  const T = p.trading;
+  M.$('trade').innerHTML = M.kv(T ? rows(T.rows) : [['Volume', dash], ['Against 30-day average', dash]]);
+  M.$('tdate').textContent = T ? M.short(T.date) : '';
+  M.$('tnote').innerHTML = egx ? 'Volume against its usual level shows when big money is moving. Buying and selling by investor group is only published for the whole market: see the <a href="/desk/egx/">EGX page</a>.' : 'Volume against its usual level shows when big money is moving.';
+  M.$('next').innerHTML = (p.next || []).map((n) => `<div class="wk" style="grid-template-columns:minmax(0,1fr) auto"><b>${M.esc(n.event)}</b><span class="imp${n.impact === 'high' ? ' high' : ''}">${M.esc(n.impact[0].toUpperCase() + n.impact.slice(1))}</span><span class="why" style="grid-column:1/-1"><span class="num">${M.esc(n.when)}</span> · ${M.esc(n.why)}</span></div>`).join('') || '<p class="sub">No dates found yet.</p>';
+  const PILL = { 'open': 'open', 'on track': 'ok', 'right': 'ok', 'wrong': 'bad', 'closed': 'open' };
+  // the desk's projections for this stock from today's bullish and bearish lists come first
+  const O = (D.pages[egx ? 'egx' : 'us'] || {}).outlook, proj = [];
+  if (O) for (const side of ['bull', 'bear']) for (const x of O[side].stocks) if (x.t === t) proj.push({ side, x });
+  M.$('views').innerHTML = proj.map(({ side, x }) => `<div class="view"><b>${side === 'bull' ? 'Bullish' : 'Bearish'}: ${cur}${M.num(x.range[0], x.dp ?? 2)}–${M.num(x.range[1], x.dp ?? 2)} by ${M.esc(x.by)}</b>${M.conf(x.confidence)}<span class="why">${M.esc(x.why)} Wrong if ${M.esc(x.wrong)}</span></div>`).join('')
+    + (p.views || []).map((v) => `<div class="view"><b>${M.esc(v.call)}</b><span class="pill ${PILL[v.status] || 'open'}">${M.esc(v.status[0].toUpperCase() + v.status.slice(1))}</span><span class="why">${M.esc(v.note)}</span></div>`).join('')
+    || '<p class="sub">No open view on this stock.</p>';
+  M.$('news').innerHTML = (p.news || []).map((n) => `<div class="news"><span class="when">${M.day(n.date).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' })}</span><p>${M.esc(n.text)}</p>${n.edition ? `<a class="src" href="/#${n.edition}">Newsletter, ${M.short(n.edition)} →</a>` : ''}</div>`).join('') || '<p class="sub">Nothing in the newsletter about it yet.</p>';
+})();
+</script>
+</body>
+</html>

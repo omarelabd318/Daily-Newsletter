@@ -1,0 +1,87 @@
+{
+ "note": "One entry per stock for its page on the desk: sector, valuation (with its source and date), the latest session's trading, dates coming up, the desk's views and news. The daily run updates it; news and views are kept, newest first, and never deleted.",
+ "stocks": {
+  "COMI": {
+   "sector": "Banks",
+   "valuation": {
+    "source": "Mubasher",
+    "asOf": "2026-06-27",
+    "basis": "second-quarter 2025 results",
+    "rows": [
+     {
+      "label": "Market value",
+      "value": "EGP 369.9bn"
+     },
+     {
+      "label": "P/E",
+      "value": "4.97"
+     },
+     {
+      "label": "P/B",
+      "value": "1.77"
+     },
+     {
+      "label": "Earnings per share",
+      "value": "EGP 21.77"
+     },
+     {
+      "label": "Book value per share",
+      "value": "EGP 57.67"
+     }
+    ]
+   },
+   "trading": {
+    "date": "2026-10-29",
+    "rows": [
+     {
+      "label": "Volume",
+      "value": "4.36m shares"
+     },
+     {
+      "label": "Turnover",
+      "value": "EGP 523.8m"
+     },
+     {
+      "label": "Against 30-day average",
+      "value": null
+     }
+    ]
+   },
+   "next": [
+    {
+     "event": "Q3 results",
+     "when": "Mid-November",
+     "why": "Date not yet announced.",
+     "impact": "high"
+    },
+    {
+     "event": "Central bank, next rate meeting",
+     "when": "Not confirmed",
+     "why": "Thursday's 100 bps hike widens lending margins; another move would matter as much.",
+     "impact": "medium"
+    }
+   ],
+   "views": [
+    {
+     "date": "2026-10-30",
+     "call": "Higher rates protect CIB's margins",
+     "status": "open",
+     "note": "High rates protect lending margins and T-bill income. CIB rose 0.5% on Thursday and is 17% up this year. Wrong if: CIB falls more than the EGX30 over the next two weeks.",
+     "sample": true
+    }
+   ],
+   "news": [
+    {
+     "date": "2026-10-29",
+     "text": "CIB rose 0.5% to EGP 120.47 on the day the central bank raised rates by 100 basis points.",
+     "edition": "2026-10-30"
+    },
+    {
+     "date": "2026-10-28",
+     "text": "Commercial International Bank closed at its lowest since 31 March as the EGX30 fell 1.6%.",
+     "edition": "2026-10-29"
+    }
+   ]
+  }
+ }
+}

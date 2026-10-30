@@ -5,15 +5,39 @@ description: House rules for the Markets Desk, the daily markets analysis page p
 
 # Markets Desk
 
-Status: the page is built at `/desk/` (`desk/index.html`) for review; it is not yet written by the daily run.
+Status: the dashboard (`/desk/`) and its pages are built for review, filled with a sample desk; the daily run
+does not write them yet.
 These are the rules agreed so far; add to them as the desk is finished.
+
+## Pages
+
+- **Dashboard** `/desk/` (`desk/index.html`): the day on one screen, in two sections, Egypt and USA (below).
+- **EGX** `/desk/egx/`: EGX30 chart and the session, biggest movers among the 12 Egyptian stocks, who
+  bought and who sold with the foreign-flow history, the 12 stocks, then Bullish and bearish.
+- **EGP** `/desk/egp/`: the dollar in pounds, the central bank's and banks' rates, Pound or dollar?, what
+  is moving the pound, the other currencies and the desk's view on the pound.
+- **US** `/desk/us/`: S&P 500, Nasdaq and Dow, rates and data, biggest movers among the 12 US stocks,
+  results after the bell, the 12 stocks, then Bullish and bearish.
+- **Global** `/desk/global/`: Brent, gold, the dollar index and Bitcoin, each with one line on why it
+  matters for Egypt, and gold prices in Egypt.
+- **Stocks** `/desk/stock/?t=TICKER`: one page per stock: chart against its index, performance,
+  valuation, trading, dates coming up, the desk's projections and views on it, and its news.
+
+The menu order is Dashboard, EGX, EGP, US, Global, Stocks. Shared code is `desk/desk.js` and `desk/desk.css`
+(the dashboard keeps its own copy of the styles: change both together).
 
 ## Files
 
 - `desk/days/DATE.json`: one day's desk in two sections, `egypt` and `global` (shown as "USA"),
   each with its own finding, close figures, top call, board, note under Stocks, week ahead and open views.
   `desk/days/2026-10-30.json` is the reference for its shape. `"sample": true` marks sample content.
-- `desk/index.json`: `{"desks": [{"date": "DATE", "summary": "..."}]}`; the page opens the newest.
+- `desk/days/DATE.json` also holds `pages`: `egx` (finding, session, outlook), `egp` (finding, rates,
+  drivers, view), `us` (finding, rates, afterBell, outlook) and `global` (finding, notes).
+- `desk/index.json`: `{"desks": [{"date": "DATE", "summary": "..."}]}`; every page opens the newest.
+- `desk/stocks.json`: one entry per stock for its page: sector, valuation (source, date, basis), the
+  latest session's trading, dates coming up, views and news. News and views are added newest first and
+  never deleted. Valuation figures older than about a quarter are flagged on the page, not hidden.
+- `desk/flows.json`: net equity flows by investor group, one entry per session, for the flow history.
 - The charts, Your stocks and every change and YTD figure are drawn by the page from
   `data/markets-recent.json`, so log the day's figures before publishing a desk.
 
@@ -76,6 +100,22 @@ and that they net to about zero; until they match, set `"confirmed": false` with
 one line what drove them, and flag a day distorted by an offering or block trade (as 29 October was by
 Banque du Caire's), so the reader does not read it as a vote on the market. Never write who bought or
 sold elsewhere on the desk without these figures behind it.
+
+## Bullish and bearish
+
+On the EGX and US pages, after the stocks table: the sectors and stocks the desk expects to rise or fall
+over the next one to three months.
+
+- **Sectors:** a name, a confidence level and one or two sentences on the driver, with real figures.
+- **Stocks:** a projected price range and a date (for example `EGP 128–132 by end of December`), the
+  reasoning, what would prove it wrong, and a confidence level. Ground the range in figures from the data
+  log (the 50-day average, the 52-week high or low, a recent level) and in checked news; never a round
+  guess. The page works out the percentages from the latest close.
+- **Confidence:** high when several independent reasons and the figures agree; medium for a clear driver
+  with cross-currents; low for momentum or a single reason. Say low when it is low.
+- **Scoring:** every projection is kept until its date passes and then marked right or wrong against the
+  data log, on the stock's page and in Open views, like any other view. Only list stocks with a real case;
+  an empty side is better than a filler pick.
 
 ## The week ahead
 
