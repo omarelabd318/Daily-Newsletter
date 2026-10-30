@@ -30,6 +30,10 @@ closes are the last session's; the news, stock research and analysis are still u
    the last 24 hours of Bitcoin; the S&P 500, Dow, Brent, gold and the dollar index only when Yahoo answers).
    It keeps the saved session if a market is still trading, and takes under a minute. The dollar in pounds
    has no 1D chart: the official rate barely moves within a day.
+   Then run `python3 .claude/skills/markets-desk/fetch_movers.py` for the whole market's biggest gainers and
+   losers of the last session (`desk/movers.json`): all EGX stocks that traded at least EGP 1m, and US
+   companies worth $10bn or more. The EGX and Wall Street pages show them under "Whole market"; mention a
+   standout mover from outside the 12 in the stories or News when there is a reason behind it.
 6. Add the session's flows to `desk/flows.json` when the EGX traded, and the date to `desk/index.json`
    with a one-line summary.
 7. Run `python3 .claude/skills/markets-desk/check_desk.py`, fix every ERROR, then commit and push as for
@@ -38,11 +42,11 @@ closes are the last session's; the news, stock research and analysis are still u
 ## Pages
 
 - **Dashboard** `/desk/` (`desk/index.html`): the day on one screen, in two sections, Egypt and USA (below).
-- **EGX** `/desk/egx/`: EGX30 chart and the session, biggest movers among the 12 Egyptian stocks, who
+- **EGX** `/desk/egx/`: EGX30 chart and the session, biggest movers (the whole market, or the 12 stocks), who
   bought and who sold with the foreign-flow history, the 12 stocks, then Bullish and bearish.
 - **EGP** `/desk/egp/`: the dollar in pounds, the central bank's and banks' rates, Pound or dollar?, what
   is moving the pound, the other currencies and the desk's view on the pound.
-- **Wall Street** `/desk/us/`: S&P 500, Nasdaq and Dow, rates and data, biggest movers among the 12 US stocks,
+- **Wall Street** `/desk/us/`: S&P 500, Nasdaq and Dow, rates and data, biggest movers (US companies worth $10bn or more, or the 12 stocks),
   results after the bell, the 12 stocks, then Bullish and bearish.
 - **Global** `/desk/global/`: Brent, gold, the dollar index and Bitcoin, each with one line on why it
   matters for Egypt, and gold prices in Egypt.

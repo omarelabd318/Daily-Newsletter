@@ -284,3 +284,4 @@ td.name a{text-decoration:none}
 .perf-h{margin:16px 0 2px;font-size:13px;font-weight:600}
 .gold-grid{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:24px;align-items:start}
 @media (max-width:860px){.gold-grid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:860px){.card-h{flex-wrap:wrap;row-gap:8px}}

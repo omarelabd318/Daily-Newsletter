@@ -33,9 +33,9 @@
     </section>
 
     <section class="card c6">
-      <div class="card-h"><h2>Biggest movers</h2><div class="seg" id="mseg"></div></div>
+      <div class="card-h"><div class="hgroup"><h2>Biggest movers</h2><div class="ctabs" id="mscope" aria-label="Which stocks"></div></div><div class="seg" id="mseg" hidden></div></div>
       <div id="movers"></div>
-      <p class="sub" style="margin-top:10px">Among the 12 Egyptian stocks. Tap one for its page.</p>
+      <p class="sub" id="mnote" style="margin-top:10px"></p>
     </section>
     <section class="card c6" id="c-flows" hidden>
       <div class="card-h"><h2>Who bought and who sold</h2><span class="meta">Net, EGP bn</span></div>
@@ -90,7 +90,14 @@
   M.$('stats').innerHTML = M.kv([['Close', M.num(M.last(idx))], ['Day', `<span class="${M.cls(dc)}">${M.pct(dc, 2)}</span>`], ['Week', signed(M.change(idx, 7))], ['Month', signed(M.change(idx, 30))], ['This year', signed(M.ytd(idx))],
     ['Turnover', S.turnover ? M.esc(S.turnover) : dash], ['Against 90-day average', S.vs90 ? M.esc(S.vs90) : dash], ['Advancers / decliners', S.breadth ? M.esc(S.breadth) : dash]]);
   const [lo, hi] = M.range52(idx); M.$('range').innerHTML = M.rangeBar(lo, hi, M.last(idx), (x) => M.num(x, 0));
-  let mback = 0; const dm = () => M.movers(M.$('movers'), M.GROUP.egx, mback);
+  // the whole market's movers of the last session, or the desk's 12 stocks over any period
+  let mback = 0, mall = true;
+  const dm = () => {
+    M.$('mseg').hidden = mall;
+    if (mall) { M.$('mnote').textContent = M.marketMovers(M.$('movers'), 'egx'); return; }
+    M.movers(M.$('movers'), M.GROUP.egx, mback); M.$('mnote').textContent = 'Among the 12 Egyptian stocks on the desk. Tap one for its page.';
+  };
+  M.toggle(M.$('mscope'), ['Whole market', 'The 12'], (i) => { mall = i === 0; dm(); });
   M.segment(M.$('mseg'), '1D', (p) => { mback = p[1]; dm(); }); dm();
 
   const F = X.flows;

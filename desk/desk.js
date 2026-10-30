@@ -7,7 +7,7 @@ window.Desk = (function () {
   const cls = (v) => v == null ? 'dash' : v > 0 ? 'chg up' : v < 0 ? 'chg down' : 'chg flat';
   const num = (v, d = 2) => v == null ? '—' : v.toLocaleString('en-GB', { minimumFractionDigits: d, maximumFractionDigits: d });
   const get = (u) => fetch(u, { cache: 'no-cache' }).then((r) => r.ok ? r.json() : null).catch(() => null);
-  let ASOF = null, DESK = null, INTRA = null;
+  let ASOF = null, DESK = null, INTRA = null, MOVERS = null;
   const day = (iso) => new Date(iso + 'T12:00:00');
   const cut = (iso, back) => new Date(day(iso) - back * 864e5).toISOString().slice(0, 10);
   const short = (iso) => day(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }).replace('Sept', 'Sep');
@@ -161,6 +161,17 @@ window.Desk = (function () {
     const I = INTRA && INTRA[market];
     return !back && I && I.session ? `${WD[day(I.session).getDay()]} ${day(I.session).getDate()} ${MON[day(I.session).getMonth()]} session` : 'Last 7 days';
   }
+  // the whole market's biggest gainers and losers of the last session (desk/movers.json); a stock on the
+  // desk links to its page
+  function marketMovers(el, market, n = 5) {
+    const X = MOVERS && MOVERS[market];
+    if (!X) { el.innerHTML = '<p class="sub">Not saved yet; the morning run saves the last session\'s movers once it has closed.</p>'; return ''; }
+    const row = (r) => { const own = NAMES[r.t], nm = `<b>${esc(own || r.name)}</b><span class="t">${esc(r.t)}</span>`;
+      return `<div class="mv">${own ? `<a href="/desk/stock/?t=${encodeURIComponent(r.t)}">${nm}</a>` : `<span style="min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${nm}</span>`}<span class="num">${num(r.price)}</span><span class="num ${cls(r.pct)}">${pct(r.pct)}</span></div>`; };
+    el.innerHTML = `<div class="movers"><div><h3><span class="chg up" aria-hidden="true"></span>Biggest gainers</h3>${X.gainers.slice(0, n).map(row).join('')}</div><div><h3><span class="chg down" aria-hidden="true"></span>Biggest losers</h3>${X.losers.slice(0, n).map(row).join('') || '<p class="sub">No stock fell.</p>'}</div></div>`;
+    const d = day(X.session);
+    return `${X.basis}, ${WD[d.getDay()]} ${d.getDate()} ${MON[d.getMonth()]}.`;
+  }
   function stockTable(body, tickers, back, inUSD = false) {
     body.innerHTML = tickers.map((t) => {
       const s = inUSD ? usd(stock(t)) : stock(t), c = change(s, back), y = ytd(s);
@@ -214,6 +225,7 @@ window.Desk = (function () {
     if (!DESK) { main.innerHTML = '<p class="finding">No desk has been published yet.</p>'; return null; }
     ASOF = DESK.asOf;
     INTRA = await get('/desk/intraday.json');
+    MOVERS = await get('/desk/movers.json');
     const log = await get('/data/markets-recent.json');
     days = (log && log.days) || [];
     if (DESK.sample) document.querySelectorAll('[data-sample]').forEach((e) => { e.hidden = false; });
@@ -235,5 +247,5 @@ window.Desk = (function () {
       location.reload();
     });
   }
-  return { get ASOF() { return ASOF; }, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, get INTRA() { return INTRA; }, init };
+  return { get ASOF() { return ASOF; }, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, get INTRA() { return INTRA; }, init };
 })();
