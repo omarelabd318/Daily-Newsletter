@@ -130,9 +130,9 @@
     M.$('c-rsv').hidden = false; M.$('rlvl').textContent = bn(L.total);
     M.$('rmonth').textContent = 'End of ' + new Date(L.month + '-15T12:00:00').toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
     if (Pm) { const c = (L.total / Pm.total - 1) * 100; M.$('rchg').innerHTML = `<span class="${M.cls(c)}">${M.pct(c, 2)}</span> on the month`; }
-    // one bar per part, its length its share of the total
-    M.$('rparts').innerHTML = PARTS.map(([k, n]) => `<div class="rsv-part"><span class="n">${n}</span><span class="num">${bn(L[k])}</span><span class="num s">${M.num(L[k] / L.total * 100, 1)}%</span>`
-      + `<div class="rsv-track"><span style="width:${Math.max(0.5, L[k] / L.total * 100).toFixed(2)}%"></span></div></div>`).join('');
+    // one bar per part, its length its share of the total; beside the amount, its change on the month
+    M.$('rparts').innerHTML = PARTS.map(([k, n]) => `<div class="rsv-part"><div class="h"><span class="n">${n}</span><span class="num">${bn(L[k])}${Pm && Pm[k] ? ` <span class="${M.cls(L[k] / Pm[k] - 1)}">${M.pct((L[k] / Pm[k] - 1) * 100)}</span>` : ''}</span></div>`
+      + `<div class="rsv-track"><span style="width:${Math.max(0.5, L[k] / L.total * 100).toFixed(2)}%"></span></div><span class="num s">${M.num(L[k] / L.total * 100, 1)}%</span></div>`).join('');
     const g = Pm ? L.gold - Pm.gold : 0;
     M.$('rcap').innerHTML = (Pm && Math.abs(g) >= 0.5 ? `Gold ${g > 0 ? 'gained' : 'lost'} <span class="num">${bn(Math.abs(g))}</span> in value this month as its price moved: the central bank values its gold at market prices, so ${g > 0 ? 'a rise does not mean any was bought' : 'a fall does not mean any was sold'}. ` : 'Gold is valued at market prices each month, so its share moves with the gold price. ')
       + `Source: <a href="${M.esc(L.url)}" target="_blank" rel="noopener">${M.esc(L.source)}</a>, reporting the central bank's figures.`;
