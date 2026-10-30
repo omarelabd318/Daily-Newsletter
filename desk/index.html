@@ -587,7 +587,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
         const v = I.map((x) => x[1]), lo = Math.min(...v), hi = Math.max(...v);
         Charts.line(el, { ...dayAxis(I.map((x) => x[0]), el.clientWidth), series: [{ name: cur.n, values: v }], format: Charts.fmt.int, endLabel: true, height: el.clientHeight, min: lo - (hi - lo) * 0.15 });
         const ch = (v.at(-1) / v[0] - 1) * 100;
-        $('egx-cap').innerHTML = `${day(INTRA[mk].session).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short' }).replace('Sept', 'Sep')}, ${I[0][0]}–${I.at(-1)[0]} ${mk === 'egx' ? 'Cairo' : 'New York'} time: <span class="num ${cls(ch)}">${pct(ch, 2)}</span> from the first trade`;
+        $('egx-cap').innerHTML = `${day(INTRA[mk].session).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short' }).replace('Sept', 'Sep')}, ${I[0][0]}–${I.at(-1)[0]} ${mk === 'egx' ? 'Cairo' : 'New York'} time: <span class="num ${cls(ch)}">${pct(ch, 2)}</span> from the first trade${INTRA[mk].proxy && INTRA[mk].proxy[cur.intra] ? ` · traced by the ${esc(INTRA[mk].proxy[cur.intra])} fund, which tracks it` : ''}`;
         return;
       }
       const back = Math.max(p[1], 7), pts = idx.filter(([d]) => d >= cut(ASOF, back)), el = $('egx-chart'); el.innerHTML = '';

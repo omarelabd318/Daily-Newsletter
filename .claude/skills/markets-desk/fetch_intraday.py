@@ -7,7 +7,9 @@ Usage:
 Writes desk/intraday.json: the EGX30 and the 12 Egyptian stocks from Mubasher (Cairo time), and the
 Nasdaq Composite and the 12 US stocks from Nasdaq (New York time, regular session only), and the last
 24 hours of Bitcoin (CoinGecko). Yahoo adds the S&P 500, the Dow, Brent, gold and the dollar index on the
-days it answers (it often refuses cloud requests); those charts are simply left out on other days. A market whose fetch fails, or whose feed still shows an unfinished
+days it answers (it often refuses cloud requests). When it refuses, the S&P 500 and the Dow are drawn from
+the funds that track them on Nasdaq (SPY, DIA), scaled so the line ends at the index's logged close; the
+file names the fund under "proxy". Brent, gold and the dollar index are simply left out on other days. A market whose fetch fails, or whose feed still shows an unfinished
 session, keeps the session already saved. Prints one line per market; it takes about a minute.
 """
 import datetime
@@ -54,10 +56,10 @@ def mubasher(key):
     return day.isoformat(), every5([(t.strftime("%H:%M"), v) for t, v in pts if t.date() == day])
 
 
-def nasdaq(key):
+def nasdaq(key, cls=None):
     if key in ("sp500", "dow"):
         return us_index(key)
-    cls = "index" if key == "COMP" else "stocks"
+    cls = cls or ("index" if key == "COMP" else "stocks")
     d = json.loads(get(f"https://api.nasdaq.com/api/quote/{urllib.parse.quote(key)}/chart?assetclass={cls}"))["data"]
     pts = []
     for p in d["chart"]:
@@ -80,8 +82,33 @@ def yahoo_points(key):
             for t, c in zip(r["timestamp"], r["indicators"]["quote"][0]["close"]) if c]
 
 
+FUNDS = {"sp500": "SPY", "dow": "DIA"}
+PROXY = {}
+
+
+def logged_close(key, day):
+    """The index's close for a session, from the data log (an entry holds the close of the session before its date)."""
+    for e in json.load(open(os.path.join(ROOT, "data", "markets-recent.json")))["days"]:
+        if e["date"] > day and isinstance(e.get(key), (int, float)):
+            return e[key]
+    return None
+
+
 def us_index(key):
-    """The S&P 500 or the Dow from Yahoo: the last regular session, New York time."""
+    """The S&P 500 or the Dow: the last regular session, New York time, from Yahoo or else from its fund."""
+    try:
+        return yahoo_index(key)
+    except Exception:
+        day, pts = nasdaq(FUNDS[key], "etf")
+        close = logged_close(key, day)
+        if not close:
+            raise ValueError(f"no logged {key} close for {day}")
+        k = close / pts[-1][1]
+        PROXY[key] = FUNDS[key]
+        return day, [[hm, round(v * k, 2)] for hm, v in pts]
+
+
+def yahoo_index(key):
     pts = [(t.astimezone(NY), v) for t, v in yahoo_points(key)]
     pts = [(t, v) for t, v in pts if "09:30" <= t.strftime("%H:%M") <= "16:00"]
     day = max(t.date() for t, _ in pts)
@@ -150,13 +177,15 @@ def main():
     for name, keys, fn, done in (("egx", ["EGX30"] + EGX, mubasher, egx_done), ("us", ["COMP", "sp500", "dow"] + US, nasdaq, us_done)):
         data, line = market(name.upper(), keys, fn, done)
         if data and data["session"] >= (saved.get(name) or {}).get("session", ""):
+            if name == "us" and PROXY:
+                data["proxy"] = {k: f for k, f in PROXY.items() if k in data["series"]}
             out[name] = data
         print(line)
     data, line = global_market()
     if data:
         out["global"] = data
     print(line)
-    out["note"] = "Last finished session, every 5 minutes: EGX in Cairo time (Mubasher), US in New York time (Nasdaq; S&P 500 and Dow from Yahoo when it answers); global: the last 24 hours in Cairo time (Bitcoin from CoinGecko; Brent, gold and the dollar index from Yahoo when it answers). Written by fetch_intraday.py."
+    out["note"] = "Last finished session, every 5 minutes: EGX in Cairo time (Mubasher), US in New York time (Nasdaq; S&P 500 and Dow from Yahoo when it answers, otherwise from the funds named under proxy, scaled to the index's close); global: the last 24 hours in Cairo time (Bitcoin from CoinGecko; Brent, gold and the dollar index from Yahoo when it answers). Written by fetch_intraday.py."
     with open(OUT, "w") as f:
         json.dump(out, f, separators=(",", ":"))
         f.write("\n")
