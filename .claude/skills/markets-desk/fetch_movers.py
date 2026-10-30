@@ -13,8 +13,13 @@ Writes desk/movers.json: the ten biggest rises and falls among all EGX stocks (M
 among US companies worth $10bn or more (Nasdaq's screener of every listed stock). Thinly traded stocks are
 left out so a few trades cannot top the list: on the EGX, those that traded under EGP 1m in the session.
 A market still trading keeps the session already saved. Prints one line per market.
+
+It also refreshes each desk stock's market value in desk/stocks.json ("cap"), which the stock lists sort
+by: Egyptian stocks from Mubasher's stock pages, US stocks from the same Nasdaq screener.
 """
+import concurrent.futures
 import datetime
+import html
 import json
 import os
 import re
@@ -64,6 +69,57 @@ def egx():
     return out, f"EGX: {session}, {out['count']} stocks"
 
 
+DESK = {"egx": ["COMI", "TMGH", "ETEL", "PHDC", "SWDY", "ORAS", "FWRY", "ABUK", "HRHO", "CLHO", "JUFO", "ALCN"],
+        "us": ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA", "JPM", "XOM", "AVGO", "BRK.B", "WMT"]}
+SCREENER = []
+
+
+def screener():
+    if not SCREENER:
+        SCREENER.extend(json.loads(get("https://api.nasdaq.com/api/screener/stocks?tableonly=true&limit=10000&download=true"))["data"]["rows"])
+    return SCREENER
+
+
+def mubasher_cap(t):
+    page = get(f"https://english.mubasher.info/markets/EGX/stocks/{t}")
+    text = re.sub(r"\s*\|[\s|]*", "|", html.unescape(re.sub(r"<[^>]+>", "|", re.sub(r"<(script|style)[^>]*>.*?</\1>", "", page, flags=re.S))))
+    m = re.search(r"Market Cap\|([\d,.]+)", text)
+    return num(m.group(1)) if m else None
+
+
+def caps():
+    """Market value of each desk stock, in billions of its currency, into desk/stocks.json."""
+    path = os.path.join(ROOT, "desk", "stocks.json")
+    data = json.load(open(path))
+    today = datetime.date.today().isoformat()
+    found = {}
+    with concurrent.futures.ThreadPoolExecutor(6) as pool:
+        for t, v in zip(DESK["egx"], pool.map(lambda t: _safe(mubasher_cap, t), DESK["egx"])):
+            if v:
+                found[t] = {"value": round(v / 1e9, 1), "currency": "EGP", "date": today, "source": "Mubasher"}
+    try:
+        rows = {r["symbol"]: r for r in screener()}
+        for t in DESK["us"]:
+            v = num((rows.get(t.replace(".", "/")) or {}).get("marketCap"))
+            if v:
+                found[t] = {"value": round(v / 1e9, 1), "currency": "USD", "date": today, "source": "Nasdaq"}
+    except Exception:
+        pass
+    for t, c in found.items():
+        data["stocks"].setdefault(t, {})["cap"] = c
+    with open(path, "w") as f:
+        json.dump(data, f, indent=1, ensure_ascii=False)
+        f.write("\n")
+    return f"Market values: {len(found)} of 24 updated"
+
+
+def _safe(fn, *a):
+    try:
+        return fn(*a)
+    except Exception:
+        return None
+
+
 def us():
     now = datetime.datetime.now(NY)
     if now.weekday() < 5 and "09:30" <= now.strftime("%H:%M") < "16:15":
@@ -73,7 +129,7 @@ def us():
     while d.weekday() >= 5:
         d -= datetime.timedelta(days=1)
     rows = []
-    for r in json.loads(get("https://api.nasdaq.com/api/screener/stocks?tableonly=true&limit=10000&download=true"))["data"]["rows"]:
+    for r in screener():
         cap, pct, price = num(r.get("marketCap")), num(r.get("pctchange")), num(r.get("lastsale"))
         if not cap or cap < MIN_CAP_USD or pct is None or price is None or "^" in r["symbol"] or "/" in r["symbol"]:
             continue
@@ -127,6 +183,7 @@ def main():
                                 r[k] = notes[r["t"]][k]
             saved[name] = data
         print(line)
+    print(caps())
     saved["note"] = "Biggest gainers and losers of the last finished session across the whole market. Written by fetch_movers.py."
     with open(OUT, "w") as f:
         json.dump(saved, f, separators=(",", ":"), ensure_ascii=False)

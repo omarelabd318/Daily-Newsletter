@@ -74,7 +74,13 @@
      "edition": "2026-10-29",
      "source": "Daily Newsletter"
     }
-   ]
+   ],
+   "cap": {
+    "value": 369.9,
+    "currency": "EGP",
+    "date": "2026-10-30",
+    "source": "Mubasher"
+   }
   },
   "TMGH": {
    "sector": "Real estate",
@@ -85,7 +91,13 @@
      "source": "CairoScene",
      "url": "https://cairoscene.com/News/Talaat-Moustafa-Group-Signs-EGP-11-Trillion-Development-Deal"
     }
-   ]
+   ],
+   "cap": {
+    "value": 165.7,
+    "currency": "EGP",
+    "date": "2026-10-30",
+    "source": "Mubasher"
+   }
   },
   "ABUK": {
    "sector": "Fertilisers",
@@ -102,7 +114,13 @@
      "source": "Al-Masry Al-Youm",
      "url": "https://www.almasryalyoum.com/news/details/4396028"
     }
-   ]
+   ],
+   "cap": {
+    "value": 111.1,
+    "currency": "EGP",
+    "date": "2026-10-30",
+    "source": "Mubasher"
+   }
   },
   "PHDC": {
    "sector": "Real estate",
@@ -113,7 +131,13 @@
      "source": "Economy Plus",
      "url": "https://economyplusme.com/ar/news/33801"
     }
-   ]
+   ],
+   "cap": {
+    "value": 32.6,
+    "currency": "EGP",
+    "date": "2026-10-30",
+    "source": "Mubasher"
+   }
   },
   "XOM": {
    "sector": "Energy",
@@ -124,7 +148,13 @@
      "source": "Free Malaysia Today (AFP)",
      "url": "https://www.freemalaysiatoday.com/category/business/2026/10/30/exxonmobil-profits-double-to-us-15-4bil-on-oil-price-surge/"
     }
-   ]
+   ],
+   "cap": {
+    "value": 753.7,
+    "currency": "USD",
+    "date": "2026-10-30",
+    "source": "Nasdaq"
+   }
   },
   "MSFT": {
    "sector": "Software",
@@ -135,7 +165,13 @@
      "source": "24/7 Wall St.",
      "url": "https://247wallst.com/investing/2026/10/30/microsoft-is-borrowing-25-billion-for-ai-its-first-bond-sale-since-2017/"
     }
-   ]
+   ],
+   "cap": {
+    "value": 3936.9,
+    "currency": "USD",
+    "date": "2026-10-30",
+    "source": "Nasdaq"
+   }
   },
   "GOOGL": {
    "sector": "Internet",
@@ -146,7 +182,13 @@
      "source": "Yahoo Finance",
      "url": "https://ca.finance.yahoo.com/news/alphabet-faces-ubs-target-cut-103000032.html"
     }
-   ]
+   ],
+   "cap": {
+    "value": 3489.3,
+    "currency": "USD",
+    "date": "2026-10-30",
+    "source": "Nasdaq"
+   }
   },
   "AVGO": {
    "sector": "Semiconductors",
@@ -157,55 +199,157 @@
      "source": "24/7 Wall St.",
      "url": "https://247wallst.com/investing/2026/10/30/broadcoms-63b-anthropic-deal-could-be-the-one-that-finally-gets-it-into-gear/"
     }
-   ]
+   ],
+   "cap": {
+    "value": 1646.9,
+    "currency": "USD",
+    "date": "2026-10-30",
+    "source": "Nasdaq"
+   }
   },
   "ETEL": {
-   "sector": "Telecoms"
+   "sector": "Telecoms",
+   "cap": {
+    "value": 205.0,
+    "currency": "EGP",
+    "date": "2026-10-30",
+    "source": "Mubasher"
+   }
   },
   "SWDY": {
-   "sector": "Cables and electrical"
+   "sector": "Cables and electrical",
+   "cap": {
+    "value": 240.3,
+    "currency": "EGP",
+    "date": "2026-10-30",
+    "source": "Mubasher"
+   }
   },
   "ORAS": {
-   "sector": "Construction"
+   "sector": "Construction",
+   "cap": {
+    "value": 90.6,
+    "currency": "EGP",
+    "date": "2026-10-30",
+    "source": "Mubasher"
+   }
   },
   "FWRY": {
-   "sector": "Payments"
+   "sector": "Payments",
+   "cap": {
+    "value": 58.1,
+    "currency": "EGP",
+    "date": "2026-10-30",
+    "source": "Mubasher"
+   }
   },
   "HRHO": {
-   "sector": "Investment banking"
+   "sector": "Investment banking",
+   "cap": {
+    "value": 34.4,
+    "currency": "EGP",
+    "date": "2026-10-30",
+    "source": "Mubasher"
+   }
   },
   "CLHO": {
-   "sector": "Healthcare"
+   "sector": "Healthcare",
+   "cap": {
+    "value": 19.6,
+    "currency": "EGP",
+    "date": "2026-10-30",
+    "source": "Mubasher"
+   }
   },
   "JUFO": {
-   "sector": "Food"
+   "sector": "Food",
+   "cap": {
+    "value": 21.9,
+    "currency": "EGP",
+    "date": "2026-10-30",
+    "source": "Mubasher"
+   }
   },
   "ALCN": {
-   "sector": "Ports"
+   "sector": "Ports",
+   "cap": {
+    "value": 94.1,
+    "currency": "EGP",
+    "date": "2026-10-30",
+    "source": "Mubasher"
+   }
   },
   "AAPL": {
-   "sector": "Hardware"
+   "sector": "Hardware",
+   "cap": {
+    "value": 5092.1,
+    "currency": "USD",
+    "date": "2026-10-30",
+    "source": "Nasdaq"
+   }
   },
   "NVDA": {
-   "sector": "Semiconductors"
+   "sector": "Semiconductors",
+   "cap": {
+    "value": 5149.2,
+    "currency": "USD",
+    "date": "2026-10-30",
+    "source": "Nasdaq"
+   }
   },
   "AMZN": {
-   "sector": "Retail and cloud"
+   "sector": "Retail and cloud",
+   "cap": {
+    "value": 2629.6,
+    "currency": "USD",
+    "date": "2026-10-30",
+    "source": "Nasdaq"
+   }
   },
   "META": {
-   "sector": "Internet"
+   "sector": "Internet",
+   "cap": {
+    "value": 1596.4,
+    "currency": "USD",
+    "date": "2026-10-30",
+    "source": "Nasdaq"
+   }
   },
   "TSLA": {
-   "sector": "Cars"
+   "sector": "Cars",
+   "cap": {
+    "value": 1594.1,
+    "currency": "USD",
+    "date": "2026-10-30",
+    "source": "Nasdaq"
+   }
   },
   "JPM": {
-   "sector": "Banks"
+   "sector": "Banks",
+   "cap": {
+    "value": 913.3,
+    "currency": "USD",
+    "date": "2026-10-30",
+    "source": "Nasdaq"
+   }
   },
   "BRK.B": {
-   "sector": "Conglomerate"
+   "sector": "Conglomerate",
+   "cap": {
+    "value": 1195.7,
+    "currency": "USD",
+    "date": "2026-10-30",
+    "source": "Nasdaq"
+   }
   },
   "WMT": {
-   "sector": "Retail"
+   "sector": "Retail",
+   "cap": {
+    "value": 962.0,
+    "currency": "USD",
+    "date": "2026-10-30",
+    "source": "Nasdaq"
+   }
   }
  }
 }

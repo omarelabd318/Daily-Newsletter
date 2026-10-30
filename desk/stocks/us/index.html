@@ -49,6 +49,9 @@
     const xy = vals.map((v, i) => [2 + i * st, h - 3 - (v - lo) / sp * (h - 6)]);
     return `<svg class="cline" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true"><path d="${xy.map((c, i) => (i ? 'L' : 'M') + c[0].toFixed(1) + ' ' + c[1].toFixed(1)).join('')}"/><circle cx="${xy.at(-1)[0].toFixed(1)}" cy="${xy.at(-1)[1].toFixed(1)}" r="2.6"/></svg>`;
   }
+  // market value, e.g. 'EGP 370bn' or '$5.1tn'
+  const capText = (t) => { const c = (prof[t] || {}).cap; if (!c) return ''; const v = c.value, cur = c.currency === 'USD' ? '$' : 'EGP ';
+    return ' · ' + (v >= 1000 ? `${cur}${(v / 1000).toFixed(1)}tn` : `${cur}${v >= 100 ? Math.round(v) : v.toFixed(1)}bn`); };
   let per = M.PERIODS[2], inUSD = false, order = 0;
   const draw = async () => {
     if (per[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; }
@@ -60,10 +63,12 @@
       const open = views.filter((v) => (v.tickers || []).includes(t) && ['open', 'on track'].includes(v.status)).length;
       return { t, s, c, y, pts, lo, hi, now, open, news: latest(t) };
     });
-    if (order) rows.sort((a, b) => (order === 1 ? (b.c ?? -1e9) - (a.c ?? -1e9) : (a.c ?? 1e9) - (b.c ?? 1e9)));
+    // order: as listed, by market value (largest first), or by the period's change
+    if (order === 1) rows.sort((a, b) => ((prof[b.t] || {}).cap || {}).value - ((prof[a.t] || {}).cap || {}).value || 0);
+    if (order > 1) rows.sort((a, b) => (order === 2 ? (b.c ?? -1e9) - (a.c ?? -1e9) : (a.c ?? 1e9) - (b.c ?? 1e9)));
     const cur = inUSD || !egx ? '$' : 'EGP ';
     M.$('grid').innerHTML = rows.map((r) => `<a class="card scard" href="/desk/stock/?t=${encodeURIComponent(r.t)}">
-      <div class="sh"><span><b>${M.esc(M.NAMES[r.t])}</b><span class="t">${M.esc(r.t)}${(prof[r.t] || {}).sector ? ' · ' + M.esc(prof[r.t].sector) : ''}</span></span>${r.open ? `<span class="pill open">${r.open} open view${r.open > 1 ? 's' : ''}</span>` : ''}</div>
+      <div class="sh"><span><b>${M.esc(M.NAMES[r.t])}</b><span class="t">${M.esc(r.t)}${(prof[r.t] || {}).sector ? ' · ' + M.esc(prof[r.t].sector) : ''}${capText(r.t)}</span></span>${r.open ? `<span class="pill open">${r.open} open view${r.open > 1 ? 's' : ''}</span>` : ''}</div>
       <div class="sp"><span class="lvl num">${cur}${M.num(M.last(r.s))}</span>${M.heroChg(r.s, per)}</div>
       ${line(r.pts)}
       <div class="sk"><span>This year <span class="num ${M.cls(r.y)}">${M.pct(r.y)}</span></span><span class="num">52w ${M.num(r.lo, r.lo < 10 ? 2 : 0)}–${M.num(r.hi, r.hi < 10 ? 2 : 0)}</span></div>
@@ -72,7 +77,7 @@
     </a>`).join('');
   };
   M.segment(M.$('seg'), '1M', (p) => { per = p; draw(); }, M.PERIODS.concat(M.LONG));
-  M.toggle(M.$('sort'), ['List order', 'Best', 'Worst'], (i) => { order = i; draw(); });
+  M.toggle(M.$('sort'), ['List order', 'Largest', 'Best', 'Worst'], (i) => { order = i; draw(); });
   if (egx) { M.$('cur').hidden = false; M.toggle(M.$('cur'), ['EGP', 'USD'], (i) => { inUSD = i === 1; draw(); }); }
   draw();
 })();

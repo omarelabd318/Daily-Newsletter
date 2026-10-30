@@ -55,7 +55,9 @@ closes are the last session's; the news, stock research and analysis are still u
 - **Global** `/desk/global/`: Brent, gold, the dollar index and Bitcoin, each with one line on why it
   matters for Egypt, and gold prices in Egypt.
 - **Egyptian stocks** `/desk/stocks/egypt/` and **US stocks** `/desk/stocks/us/`: all 12 of each as cards (price, change over
-  the chosen period, trend line, YTD, 52-week range, latest news, open views); each opens its stock's page.
+  the chosen period, trend line, YTD, 52-week range, market value, latest news, open views), sortable by
+  list order, market value (largest first), or best and worst; each opens its stock's page. fetch_movers.py
+  refreshes the market values (`cap` in desk/stocks.json) each morning.
 - **Stock page** `/desk/stock/?t=TICKER`: one page per stock: chart against its index, performance,
   valuation, trading, dates coming up, the desk's projections and views on it, and its news.
 
