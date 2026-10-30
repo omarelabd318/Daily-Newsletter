@@ -109,7 +109,7 @@ h2{margin:0;font-size:16px;line-height:22px;font-weight:600}
 .flow-bar::before{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;width:1px;background:var(--control)}
 .flow-bar i{position:absolute;top:0;height:8px;border-radius:2px}
 .flow-bar i.buy{left:50%;background:var(--chart-1)}
-.flow-bar i.sell{right:50%;background:var(--chart-muted)}
+.flow-bar i.sell{right:50%;background:var(--negative)}
 .flow-axis{display:flex;justify-content:space-between;margin-top:6px;font-size:12px;color:var(--muted)}
 .legend{display:flex;gap:14px;font-size:12px;color:var(--muted)}
 .legend i{display:inline-block;width:10px;height:2px;margin-right:6px;vertical-align:3px}
