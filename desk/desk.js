@@ -10,7 +10,7 @@ window.Desk = (function () {
   let ASOF = null, DESK = null, INTRA = null;
   const day = (iso) => new Date(iso + 'T12:00:00');
   const cut = (iso, back) => new Date(day(iso) - back * 864e5).toISOString().slice(0, 10);
-  const short = (iso) => day(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+  const short = (iso) => day(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }).replace('Sept', 'Sep');
   const PERIODS = [['1D', 0, 'Last 7 days'], ['1W', 7, 'Last 7 days'], ['1M', 30, 'Last 30 days'], ['6M', 182, 'Last 6 months'], ['1Y', 365, 'Last 12 months']];
   const NAMES = { COMI: 'Commercial International Bank', TMGH: 'Talaat Moustafa', ETEL: 'Telecom Egypt', PHDC: 'Palm Hills', SWDY: 'Elsewedy Electric', ORAS: 'Orascom Construction', FWRY: 'Fawry', ABUK: 'Abu Qir Fertilizers', HRHO: 'EFG Holding', CLHO: 'Cleopatra Hospital', JUFO: 'Juhayna', ALCN: 'Alexandria Containers',
     AAPL: 'Apple', MSFT: 'Microsoft', NVDA: 'Nvidia', AMZN: 'Amazon', GOOGL: 'Alphabet', META: 'Meta', TSLA: 'Tesla', JPM: 'JPMorgan Chase', XOM: 'Exxon Mobil', AVGO: 'Broadcom', 'BRK.B': 'Berkshire Hathaway', WMT: 'Walmart' };
@@ -70,7 +70,7 @@ window.Desk = (function () {
     if (!best || Math.abs(best.m) <= at) return [];
     const p = (v) => (v > 0 ? '+' : '−') + Math.abs(v * 100).toFixed(1) + '%';
     const d = (i) => new Date(pts[i][0] + 'T12:00:00'), dd = (i) => d(i).toLocaleDateString('en-GB', { day: 'numeric' });
-    const mon = (i) => d(i).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+    const mon = (i) => d(i).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }).replace('Sept', 'Sep');
     if (best.b - best.a === 1) return [{ at: best.b, label: `${mon(best.b)} ${p(best.m)}`, short: p(best.m) }];
     const first = best.a + 1, same = d(first).getMonth() === d(best.b).getMonth();
     return [{ from: best.a, to: best.b, label: `${same ? dd(first) : mon(first)}–${mon(best.b)} ${p(best.m)}`, short: p(best.m) }];
@@ -81,13 +81,44 @@ window.Desk = (function () {
     const M_ = INTRA && INTRA[market], I = M_ && M_.series && M_.series[key]; el.innerHTML = '';
     if (!I) { el.innerHTML = `<p class="sub" style="padding:24px 0">No one-day data for ${esc(name)}: ${/^(sp500|dow|brent|gold_usd|dxy)$/.test(key) ? 'its only free source refused the last run; it fills in on days it answers.' : 'not saved for the last session.'}</p>`; return null; }
     const vals = I.map((x) => x[1]), lo = Math.min(...vals), hi = Math.max(...vals), pad = (hi - lo) * 0.15 || lo * 0.002;
-    Charts.line(el, { labels: I.map((x) => x[0]), series: [{ name, values: vals }], format: fmt, endLabel: true, height: el.clientHeight, min: lo - pad, xAt: [0, Math.floor((I.length - 1) / 2), I.length - 1] });
+    Charts.line(el, { ...dayAxis(I.map((x) => x[0]), el.clientWidth, !!M_.window), series: [{ name, values: vals }], format: fmt, endLabel: true, height: el.clientHeight, min: lo - pad });
     const ch = (vals.at(-1) / vals[0] - 1) * 100;
     if (M_.window) {   // round-the-clock markets: the last 24 hours, Cairo time
       const to = new Date(M_.to.replace(' ', 'T'));
-      return `Last 24 hours to ${to.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' })} ${M_.to.slice(11)} Cairo time: <span class="num ${cls(ch)}">${pct(ch, 2)}</span>`;
+      return `Last 24 hours to ${to.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }).replace('Sept', 'Sep')} ${M_.to.slice(11)} Cairo time: <span class="num ${cls(ch)}">${pct(ch, 2)}</span>`;
     }
-    return `${day(M_.session).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short' })}, ${I[0][0]}–${I.at(-1)[0]} ${market === 'egx' ? 'Cairo' : 'New York'} time: <span class="num ${cls(ch)}">${pct(ch, 2)}</span> from the first trade`;
+    return `${day(M_.session).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short' }).replace('Sept', 'Sep')}, ${I[0][0]}–${I.at(-1)[0]} ${market === 'egx' ? 'Cairo' : 'New York'} time: <span class="num ${cls(ch)}">${pct(ch, 2)}</span> from the first trade`;
+  }
+  // x-axis labels on round, evenly spaced points: each day for a week, one weekday for a month, each month
+  // for six months, every other month for a year, the hour through a session, every six hours for 24 hours.
+  // Months are three letters (Sep, not Sept); the year shows where it changes. Narrow charts label every other one.
+  const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], WD = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  function axis(dates, back, width) {
+    const ds = dates.map((iso) => new Date(iso + 'T12:00:00')), n = ds.length;
+    const labels = ds.map((d) => `${d.getDate()} ${MON[d.getMonth()]}`);
+    let at = [], text = labels.slice();
+    if (back <= 7) { at = [...Array(n).keys()]; text = ds.map((d) => `${WD[d.getDay()]} ${d.getDate()}`); }
+    else if (back <= 31) {   // weekly, counting back from the latest point; a week with no session that day takes its last one before
+      for (let k = 0; ; k++) {
+        const target = ds[n - 1] - k * 7 * 864e5; if (target < ds[0] - 3 * 864e5) break;
+        let i = -1; ds.forEach((d, j) => { if (d <= target && d > target - 7 * 864e5) i = j; });
+        if (i >= 0 && !at.includes(i)) at.unshift(i);
+      }
+    }
+    else {
+      const step = back <= 200 ? 1 : 2, mo = (d) => d.getFullYear() * 12 + d.getMonth(), last = mo(ds[n - 1]);
+      ds.forEach((d, i) => { if ((i === 0 && d.getDate() > 7) || (i > 0 && mo(ds[i - 1]) === mo(d))) return; if ((last - mo(d)) % step === 0) at.push(i); });
+      const spans = ds[0].getFullYear() !== ds[n - 1].getFullYear();
+      at.forEach((i, j) => { const d = ds[i], prev = j ? ds[at[j - 1]] : null; text[i] = MON[d.getMonth()] + ((prev ? prev.getFullYear() !== d.getFullYear() : spans) ? ' ' + d.getFullYear() : ''); });
+    }
+    if (width < 520 && at.length > 4) at = at.filter((_, j) => (at.length - 1 - j) % 2 === 0);
+    return { labels, xAt: at, xText: text };
+  }
+  // the same for prices through the day ('10:05'): on the hour, or every six hours across 24 hours
+  function dayAxis(times, width, round = false) {
+    const every = round ? 6 : width < 520 ? 2 : 1, seen = new Set(), at = [];
+    times.forEach((t, i) => { const [h, m] = t.split(':').map(Number); if (m < 5 && h % every === 0 && !seen.has(h)) { seen.add(h); at.push(i); } });
+    return { labels: times, xAt: at, xText: times.map((t) => t.slice(0, 2) + ':00') };
   }
   // a line chart of one series over a period (at least a month), with the biggest day marked when it stands out
   function chart(el, s, back, name, fmt, opts = {}) {
@@ -95,7 +126,7 @@ window.Desk = (function () {
     if (pts.length < 2) { el.textContent = 'Not enough closes logged yet.'; return; }
     const vals = pts.map((x) => x[1]), lo = Math.min(...vals), hi = Math.max(...vals), pad = (hi - lo) * 0.15 || lo * 0.01;
     const ann = opts.mark !== false ? bigMove(pts, opts.markAt || 0.025) : [];
-    Charts.line(el, { labels: pts.map((x) => short(x[0])), series: [{ name, values: vals, muted: !!opts.muted }], format: fmt, annotations: ann, endLabel: true, height: el.clientHeight, min: lo - pad, xAt: opts.xAt ? [0, Math.floor((pts.length - 1) / 2), pts.length - 1] : null });
+    Charts.line(el, { ...axis(pts.map((x) => x[0]), Math.max(back, 7), el.clientWidth), series: [{ name, values: vals, muted: !!opts.muted }], format: fmt, annotations: ann, endLabel: true, height: el.clientHeight, min: lo - pad });
   }
   function movers(el, tickers, back, n = 3) {
     const rows = tickers.map((t) => ({ t, c: change(stock(t), back), v: last(stock(t)) })).filter((r) => r.c != null).sort((a, b) => b.c - a.c);
@@ -176,5 +207,5 @@ window.Desk = (function () {
       location.reload();
     });
   }
-  return { get ASOF() { return ASOF; }, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, get INTRA() { return INTRA; }, init };
+  return { get ASOF() { return ASOF; }, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, get INTRA() { return INTRA; }, init };
 })();

@@ -92,7 +92,7 @@
   if (f30.length > 1 && dx.length) {
     const dates = f30.map((x) => x[0]), b1 = f30[0][1], b2 = M.valueAt(dx, dates[0]);
     const a = f30.map((x) => +(x[1] / b1 * 100).toFixed(2)), b = dates.map((d) => +(M.valueAt(dx, d) / b2 * 100).toFixed(2));
-    const res = Charts.line(M.$('pvd'), { labels: dates.map(M.short), series: [{ name: 'Dollar in pounds', values: a }, { name: 'Dollar index', values: b, muted: true }], format: Charts.fmt.dec(1), height: M.$('pvd').clientHeight, min: Math.floor(Math.min(...a, ...b) - 1), xAt: [0, Math.floor((dates.length - 1) / 2), dates.length - 1] });
+    const res = Charts.line(M.$('pvd'), { ...M.axis(dates, 30, M.$('pvd').clientWidth), series: [{ name: 'Dollar in pounds', values: a }, { name: 'Dollar index', values: b, muted: true }], format: Charts.fmt.dec(1), height: M.$('pvd').clientHeight, min: Math.floor(Math.min(...a, ...b) - 1) });
     if (res && res.legend) M.$('pvd-legend').appendChild(res.legend);
     const da = a.at(-1) - 100, db = b.at(-1) - 100;
     M.$('pvd-read').innerHTML = da > 0.5

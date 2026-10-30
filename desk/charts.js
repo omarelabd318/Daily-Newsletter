@@ -23,7 +23,8 @@
 // line takes step: true for a balance that only changes on given days; today: index (the forecast after it is dashed)
 // with todayLabel: 'Now 20:34' (set clear of the line); endLabel: true (the last value at the line's end); max: caps a
 // flat series with one spike (the peak is labelled); yTicks: fixed ticks for a bounded quantity (0–100%); tickFormat:
-// axis labels apart from the tooltip format; xAt: the indices to label. Without xAt the x labels keep one step.
+// axis labels apart from the tooltip format; xAt: the indices to label, with xText: their own text (labels stay the
+// tooltip text), for example months under daily points. Without xAt the x labels keep one step.
 // diverging, timeline, matrix and timeStrip return { svg, legend }, and line returns { legend } for two series or more:
 // the legend is drawn from the same style objects as the marks, so a swatch is always the mark scaled down. Put it in
 // the card's header, or pass legend: element (or a selector) to have it filled.
@@ -110,7 +111,7 @@
     if (!t) { t = document.createElement('div'); t.className = 'chart-tip'; t.style.cssText = 'position:absolute;pointer-events:none;padding:6px 8px;font:inherit;font-size:12px;line-height:1.35;border-radius:6px;white-space:nowrap;opacity:0;transition:opacity 120ms ease;background:var(--surface,#fff);color:var(--ink,#111);border:1px solid var(--grid,#e5e7eb)'; if (getComputedStyle(el).position === 'static') el.style.position = 'relative'; el.appendChild(t); }
     return t;
   }
-  function axes(g, el, { w, h, padL, padB, yt, y, labels, x, band = false, at = null, tick, avoid = null }) {
+  function axes(g, el, { w, h, padL, padB, yt, y, labels, x, band = false, at = null, tick, avoid = null, xText = null }) {
     const grid = css(el, '--grid', '#e8e8e8'), ink = css(el, '--axis-ink', '#6b6b6b'), s = g.ownerSVGElement;
     for (const v of yt) {
       const yy = y(v);
@@ -119,7 +120,7 @@
     }
     const n = labels.length;
     for (const i of xPicks(labels, w - padL, at)) {
-      const lab = String(labels[i]), tw = measure(s, lab, 12), xx = x(i);
+      const lab = String(xText ? xText[i] : labels[i]), tw = measure(s, lab, 12), xx = x(i);
       // the first and last labels are pulled inside the plot; none runs past either edge
       let left = band ? xx - tw / 2 : i === 0 ? xx : i === n - 1 ? xx - tw : xx - tw / 2;
       left = Math.max(band ? 0 : padL, Math.min(w - tw, left));
@@ -245,7 +246,7 @@
   function settle(draw) { if (document.fonts) { document.fonts.ready.then(draw); document.fonts.addEventListener?.('loadingdone', draw, { once: true }); } }
   const heightOf = (h) => (typeof h === 'function' ? h() : h);
 
-  function line(el, { labels, series, format = fmt.int, tickFormat = null, height = 220, fill = false, min, max, step = false, annotations, reference, today = null, todayLabel = 'Today', endLabel = false, yTicks = null, xAt = null, legend = null }) {
+  function line(el, { labels, series, format = fmt.int, tickFormat = null, height = 220, fill = false, min, max, step = false, annotations, reference, today = null, todayLabel = 'Today', endLabel = false, yTicks = null, xAt = null, xText = null, legend = null }) {
     el._fmt = format;
     const colourOf = (sr, k) => sr.colour || (k === 0 ? css(el, '--chart-1', '#2f6fdf') : css(el, `--chart-${k + 1}`, css(el, '--chart-muted', '#a3a3a3')));
     const draw = () => {
@@ -272,7 +273,7 @@
         if (!todayBox) { N = prepNotes(s, annotations, x, w, [...peaks, { x: cut, leader: cut, drawn: true, label: todayLabel }]); ({ padT, y } = scale(N)); }
       }
       const g = svg('g', {}, s);
-      axes(g, el, { w, h, padL, padB, yt, y, labels, x, at: xAt, tick });
+      axes(g, el, { w, h, padL, padB, yt, y, labels, x, at: xAt, tick, xText });
       notesUnder(g, el, N, { padT, h, padB });
       series.forEach((sr, k) => {
         const col = colourOf(sr, k);

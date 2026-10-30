@@ -122,7 +122,7 @@
   const seen = new Set(), items = [...tagged, ...(p.news || [])].filter((n) => { const k = n.url || n.text.slice(0, 60); if (seen.has(k)) return false; seen.add(k); return true; })
     .sort((x, y) => (y.date > x.date ? 1 : y.date < x.date ? -1 : 0));
   const link = (n) => n.url ? `<a class="src" href="${M.esc(n.url)}" target="_blank" rel="noopener">${M.esc(n.source || 'Source')} →</a>` : n.edition ? `<a class="src" href="/#${n.edition}">Newsletter, ${M.short(n.edition)} →</a>` : '';
-  M.$('news').innerHTML = items.map((n) => `<div class="news"><span class="when">${M.day(n.date).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' })}</span><p>${M.esc(n.text)}</p>${link(n)}</div>`).join('') || '<p class="sub">No company news found in the last month.</p>';
+  M.$('news').innerHTML = items.map((n) => `<div class="news"><span class="when">${M.day(n.date).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }).replace('Sept', 'Sep')}</span><p>${M.esc(n.text)}</p>${link(n)}</div>`).join('') || '<p class="sub">No company news found in the last month.</p>';
 })();
 </script>
 </body>
