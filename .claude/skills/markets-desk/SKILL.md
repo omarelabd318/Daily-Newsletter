@@ -5,8 +5,17 @@ description: House rules for the Markets Desk, the daily markets analysis page p
 
 # Markets Desk
 
-Status: planned. A design mock-up exists; the page, its data file and its place in the daily run are not built
-yet. These are the rules agreed so far; add to them as the desk is built.
+Status: the page is built at `/desk/` (`desk/index.html`) for review; it is not yet written by the daily run.
+These are the rules agreed so far; add to them as the desk is finished.
+
+## Files
+
+- `desk/days/DATE.json`: one day's desk (the finding, the close figures, the top call, the board, the notes
+  under Your stocks, the week ahead and the open views). `desk/days/2026-10-30.json` is the reference for
+  its shape. `"sample": true` marks sample content.
+- `desk/index.json`: `{"desks": [{"date": "DATE", "summary": "..."}]}`; the page opens the newest.
+- The charts, Your stocks and every change and YTD figure are drawn by the page from
+  `data/markets-recent.json`, so log the day's figures before publishing a desk.
 
 ## What it is
 
