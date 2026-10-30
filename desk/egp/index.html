@@ -84,7 +84,7 @@
   // the central bank's rate and policy rates come from the data log; the day's file adds what the log lacks
   const lg = (k) => M.series((e) => e[k], 'fx'), lv = (k) => M.last(lg(k));
   const pair = (a, b, d = 2, u = '') => lv(a) == null ? dash : `${M.num(lv(a), d)}${u} / ${M.num(lv(b), d)}${u}`;
-  const tb = [['tbill_91', '91-day'], ['tbill_182', '182-day'], ['tbill_364', '364-day']].filter(([k]) => lv(k) != null).map(([k, n]) => [`${n} T-bill`, M.num(lv(k), 2) + '%']);
+  const tb = [['tbill_91', '91-day'], ['tbill_182', '182-day'], ['tbill_273', '273-day'], ['tbill_364', '364-day']].filter(([k]) => lv(k) != null).map(([k, n]) => [`${n} T-bill`, M.num(lv(k), 2) + '%']);
   const known = /central bank, buy|deposit rate|lending rate|t-bill/i;
   M.$('stats').innerHTML = M.kv([['Market mid-rate', M.num(M.last(fx))], ['Central bank, buy / sell', pair('cbe_usd_buy', 'cbe_usd_sell')],
     ['Deposit / lending rate', pair('cbe_deposit', 'cbe_lending', 2, '%')], ...tb,

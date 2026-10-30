@@ -153,6 +153,20 @@ def nasdaq_volume(sym):
     return number(rows[0]["volume"]), rows[0]["date"]
 
 
+def cbe_tbills():
+    """The central bank's latest T-bill auction results: [(tenor, auction date, weighted average accepted yield)]."""
+    page = get("https://www.cbe.org.eg/en/auctions/egp-t-bills")
+    text = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", re.sub(r"<(script|style)[^>]*>.*?</\1>", " ", page, flags=re.S))))
+    res = text[text.find("Results"):]
+    tenors = re.search(r"Tenor \(days\) ((?:\d+ )+)", res).group(1).split()
+    dates = re.search(r"Auction Date ((?:\d\d/\d\d/\d{4} ?)+)", res).group(1).split()
+    yields = re.findall(r"Weighted Avg\. Yield \(%\) ((?:[\d.]+ ?)+)", res)[-1].split()   # the second one is accepted bids
+    out = []
+    for t, d, y in zip(tenors, dates, yields):
+        out.append((int(t), datetime.datetime.strptime(d, "%d/%m/%Y").date().isoformat(), float(y)))
+    return out
+
+
 def coingecko():
     j = json.loads(get("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd"
                        "&include_24hr_change=true"))["bitcoin"]
@@ -283,6 +297,19 @@ def main(args):
             log.append(f"{key}={v}")
     except Exception as e:
         missing.append(f"Exchange rates: {e}")
+
+    # T-bills: the central bank's latest auction; log a tenor only when this edition is the first after its auction
+    try:
+        log_path = os.path.join(os.path.dirname(__file__), "..", "..", "..", "data", "markets.json")
+        logged = {d["date"]: d for d in json.load(open(log_path))["days"]}
+        for ten, adate, y in cbe_tbills():
+            rows.append((f"T-bill {ten} days (auction {adate})", {"value": y, "pct": None, "when": adate, "src": "Central Bank of Egypt"}, False))
+            if ten in (91, 182, 273, 364) and adate < date:
+                later = [d for d in logged if adate < d < date and f"tbill_{ten}" in logged[d]]
+                if not later:
+                    log.append(f"tbill_{ten}={y}")
+    except Exception as e:
+        missing.append(f"T-bill auction results (cbe.org.eg): {e}")
 
     print(f"Fetched {now:%a %d %b %H:%M} Cairo for edition {date}. EGX {'OPEN (live prices)' if egx_live else 'closed'}.\n")
     print("| Figure | Value | Change | Type | Quote time | Source |\n|---|---|---|---|---|---|")

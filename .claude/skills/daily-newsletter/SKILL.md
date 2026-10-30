@@ -272,15 +272,14 @@ a figure could not be confirmed. These pages are for figures; news still comes f
 | Egyptian stock prices (Stocks Watch) | https://english.mubasher.info/markets/EGX/stocks/TICKER, for example .../stocks/COMI (price, change, % change, previous close, time of last update) | Search |
 | US stock prices (Stocks Watch) | https://query1.finance.yahoo.com/v8/finance/chart/TICKER?range=5d&interval=1d (JSON: the last two values in indicators.quote[0].close give the latest close and the change; timestamp gives the date). Do not use Yahoo for Egyptian stocks; its EGX data is years out of date | Search |
 | Central bank interest rates | https://tradingeconomics.com/egypt/interest-rate | EnterpriseAM's edition |
-| Treasury bill yields | No page shows current yields. Search Arabic financial news for the latest auction, for example https://amwalalghad.com/?s=عائد+أذون or https://www.alborsaanews.com/?s=أذون (look for متوسط عائد, the average yield, by tenor). Results are not sorted by date: use only an auction from the last 7 days, and give its date | EnterpriseAM's edition, which reports some auctions; otherwise say the yield was not confirmed |
+| Treasury bill yields | The central bank's auction page, https://www.cbe.org.eg/en/auctions/egp-t-bills (latest results: weighted average accepted yield by tenor, with the auction date). fetch_figures.py reads it and logs each tenor once, on the first edition after its auction. 91- and 273-day bills are auctioned on Sundays, 182- and 364-day bills on Thursdays | News reports of the auction (Amwal Al Ghad, Al-Borsa, EnterpriseAM) |
 | Public holidays and bank closures | https://www.officeholidays.com/countries/egypt/2026 (verify any holiday shift against a news report of the official announcement) | Search |
 | Cairo weather, today and next two days | https://wttr.in/Cairo?format=j1 (JSON: daily max and min °C) | Search |
 | Egyptian football | https://www.kingfut.com/ (English) | https://www.kooora.com/ (Arabic) |
 | European football results | https://www.bbc.com/sport/football/scores-fixtures/YYYY-MM-DD (use the date of the matches) | https://www.espn.com/soccer/scoreboard |
 | Tennis | https://www.bbc.com/sport/tennis | https://www.wtatennis.com/scores |
 
-These block automated access from the cloud environment, so do not spend time on them: the Central
-Bank of Egypt site (cbe.org.eg), the Egyptian Exchange site (egx.com.eg), Ahram Online, Egypt Today,
+These block automated access from the cloud environment, so do not spend time on them: the Egyptian Exchange site (egx.com.eg), Ahram Online, Egypt Today,
 Reuters, investing.com, timeanddate.com, the ATP Tour site and the Egyptian Meteorological Authority.
 News reports that quote them are fine.
 
