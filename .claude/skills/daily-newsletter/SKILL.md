@@ -457,8 +457,10 @@ Also log, every day, with the same command:
   outlets (Egyptian news sites publish it daily, for example Al-Masry Al-Youm and Akhbar El-Youm).
 - **Policy rates:** `cbe_deposit` and `cbe_lending`, every day, so the log shows when they change.
 - **EGX turnover:** `egx_turnover`, the session's value traded in stocks in EGP bn.
-- **T-bill yields:** `tbill_91`, `tbill_182`, `tbill_273`, `tbill_364` (average yields, %) only on the day
-  after an auction, from the auction's results; never repeat an old auction's yields.
+- **T-bill yields:** fetch_figures.py logs all four tenors (`tbill_91` … `tbill_364`) from the central bank's
+  results on the first edition after each auction; never repeat an old auction's yields. The edition and the
+  desk show only the one-year (364-day) yield, the benchmark for foreign investors' carry trade, with its
+  auction date (Thursdays): for example `| Treasury bills | 26.08% (1-year, 29 Oct auction) | ... |`.
 
 The weekly log check does not expect the rates and T-bill yields every day.
 

@@ -507,12 +507,7 @@
   },
   "egp": {
    "finding": "The dollar is at EGP 56.04, near its 52-week high, after foreign investors sold local debt; Thursday's 100-basis-point hike is the central bank's answer.",
-   "rates": [
-    {
-     "label": "91-day T-bill",
-     "value": null
-    }
-   ],
+   "rates": [],
    "drivers": [
     {
      "name": "Rates raised 100 bps",
