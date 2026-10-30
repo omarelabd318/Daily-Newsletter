@@ -285,3 +285,5 @@ td.name a{text-decoration:none}
 .gold-grid{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:24px;align-items:start}
 @media (max-width:860px){.gold-grid{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:860px){.card-h{flex-wrap:wrap;row-gap:8px}}
+.mvwhy{margin:-6px 0 8px;font-size:12px;line-height:17px;color:var(--muted)}
+.mvwhy a{color:var(--muted)}

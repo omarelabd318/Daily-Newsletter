@@ -175,7 +175,8 @@ window.Desk = (function () {
     const X = MOVERS && MOVERS[market];
     if (!X) { el.innerHTML = '<p class="sub">Not saved yet; the morning run saves the last session\'s movers once it has closed.</p>'; return ''; }
     const row = (r) => { const own = NAMES[r.t], nm = `<b>${esc(own || r.name)}</b><span class="t">${esc(r.t)}</span>`;
-      return `<div class="mv">${own ? `<a href="/desk/stock/?t=${encodeURIComponent(r.t)}">${nm}</a>` : `<span style="min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${nm}</span>`}<span class="num">${num(r.price)}</span><span class="num ${cls(r.pct)}">${pct(r.pct)}</span></div>`; };
+      return `<div class="mv">${own ? `<a href="/desk/stock/?t=${encodeURIComponent(r.t)}">${nm}</a>` : `<span style="min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${nm}</span>`}<span class="num">${num(r.price)}</span><span class="num ${cls(r.pct)}">${pct(r.pct)}</span></div>`
+        + (r.why ? `<p class="mvwhy">${esc(r.why)}${r.url ? ` <a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.source || 'Source')} →</a>` : ''}</p>` : ''); };
     el.innerHTML = `<div class="movers"><div><h3><span class="chg up" aria-hidden="true"></span>Biggest gainers</h3>${X.gainers.slice(0, n).map(row).join('')}</div><div><h3><span class="chg down" aria-hidden="true"></span>Biggest losers</h3>${X.losers.slice(0, n).map(row).join('') || '<p class="sub">No stock fell.</p>'}</div></div>`;
     const d = day(X.session);
     return `${X.basis}, ${WD[d.getDay()]} ${d.getDate()} ${MON[d.getMonth()]}.`;

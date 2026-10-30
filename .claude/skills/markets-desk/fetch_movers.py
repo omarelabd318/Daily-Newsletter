@@ -2,7 +2,12 @@
 """Save the last finished session's biggest gainers and losers across the whole market, for the desk.
 
 Usage:
-  python3 .claude/skills/markets-desk/fetch_movers.py
+  python3 .claude/skills/markets-desk/fetch_movers.py           save the movers
+  python3 .claude/skills/markets-desk/fetch_movers.py --leads   then list news leads for the top five each way
+
+For the reasons: open the leads, check the cause at the outlet, and write it into desk/movers.json as
+"why" (one short line), "source" and "url" on that stock's row. Leave "why" out when no reason is found;
+"no news found" is a fact worth stating only when the move is large (5% or more).
 
 Writes desk/movers.json: the ten biggest rises and falls among all EGX stocks (Mubasher's price list) and
 among US companies worth $10bn or more (Nasdaq's screener of every listed stock). Thinly traded stocks are
@@ -40,6 +45,10 @@ def rank(rows):
 
 def egx():
     d = json.loads(get("https://english.mubasher.info/api/1/stocks/prices?country=eg"))
+    try:   # Arabic names, for searching Egyptian news about smaller companies
+        ar = {p["code"]: p["name"] for p in json.loads(get("https://www.mubasher.info/api/1/stocks/prices?country=eg"))["prices"]}
+    except Exception:
+        ar = {}
     session = d["lastUpdate"][:10]
     now = datetime.datetime.now(CAIRO)
     if session == now.date().isoformat() and now.strftime("%H:%M") < "14:45":
@@ -49,7 +58,7 @@ def egx():
         pct, price, turnover = num(p.get("changePercentage")), num(p.get("value")), num(p.get("turnover"))
         if pct is None or price is None or (turnover or 0) < MIN_TURNOVER_EGP:
             continue
-        rows.append({"t": p["code"], "name": p["name"], "price": price, "pct": pct, "turnover": turnover})
+        rows.append({"t": p["code"], "name": p["name"], "ar": ar.get(p["code"]), "price": price, "pct": pct, "turnover": turnover})
     out = rank(rows)
     out.update(session=session, basis=f"All EGX stocks that traded at least EGP 1m ({out['count']} on the day)")
     return out, f"EGX: {session}, {out['count']} stocks"
@@ -75,6 +84,31 @@ def us():
     return out, f"US: {d}, {out['count']} companies"
 
 
+def leads(saved):
+    """News leads for the top five gainers and losers in each market, from the last two days."""
+    sys.path.insert(0, os.path.dirname(__file__))
+    import stock_news as sn
+    for m in ("egx", "us"):
+        X = saved.get(m)
+        if not X:
+            continue
+        print(f"\n# {m.upper()} {X['session']}")
+        for side in ("gainers", "losers"):
+            for r in X[side][:5]:
+                q = f'"{r["ar"]}"' if m == "egx" and r.get("ar") else f'"{r["name"]}" stock'
+                core = (r.get("ar") or r["name"]).split()[0] if m == "egx" else r["name"].split()[0]
+                try:
+                    rows = sn.google(q, 3, arabic=(m == "egx" and bool(r.get("ar"))))
+                except Exception as e:
+                    rows = []
+                rows = [x for x in sorted(rows, key=lambda x: x[0], reverse=True) if core in x[2]][:4]
+                print(f"## {r['t']} {r['pct']:+.1f}%  {r['name']}")
+                for w, o, t, l in rows:
+                    print(f"- {w:%a %d %b} | {o} | {t}\n  {sn.resolve(l)}")
+                if not rows:
+                    print("- no headlines found")
+
+
 def main():
     saved = json.load(open(OUT)) if os.path.exists(OUT) else {}
     for name, fn in (("egx", egx), ("us", us)):
@@ -83,12 +117,22 @@ def main():
         except Exception as e:
             data, line = None, f"{name.upper()}: failed ({e}); kept the saved session"
         if data and data["session"] >= (saved.get(name) or {}).get("session", ""):
+            old = saved.get(name) or {}
+            if old.get("session") == data["session"]:   # same session again: keep the reasons already written
+                notes = {r["t"]: r for side in ("gainers", "losers") for r in old.get(side, []) if r.get("why")}
+                for side in ("gainers", "losers"):
+                    for r in data[side]:
+                        for k in ("why", "source", "url"):
+                            if r["t"] in notes and k in notes[r["t"]]:
+                                r[k] = notes[r["t"]][k]
             saved[name] = data
         print(line)
     saved["note"] = "Biggest gainers and losers of the last finished session across the whole market. Written by fetch_movers.py."
     with open(OUT, "w") as f:
         json.dump(saved, f, separators=(",", ":"), ensure_ascii=False)
         f.write("\n")
+    if "--leads" in sys.argv:
+        leads(saved)
 
 
 if __name__ == "__main__":

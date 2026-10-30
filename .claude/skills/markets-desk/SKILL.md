@@ -34,6 +34,10 @@ closes are the last session's; the news, stock research and analysis are still u
    losers of the last session (`desk/movers.json`): all EGX stocks that traded at least EGP 1m, and US
    companies worth $10bn or more. The EGX and Wall Street pages show them under "Whole market"; mention a
    standout mover from outside the 12 in the stories or News when there is a reason behind it.
+   Run it with `--leads` to list news for the top five each way, find why each moved (a disclosure,
+   results, a deal, a rating, a sector move), check it at the outlet, and add `why`, `source` and `url` to
+   that stock's row in `desk/movers.json`. One short line; leave it out when no reason is found, and write
+   "No company news found." only for moves of 5% or more. Never guess a reason.
 6. Add the session's flows to `desk/flows.json` when the EGX traded, and the date to `desk/index.json`
    with a one-line summary.
 7. Run `python3 .claude/skills/markets-desk/check_desk.py`, fix every ERROR, then commit and push as for
