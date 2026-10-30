@@ -77,7 +77,15 @@
   const draw = (p) => { M.chart(M.$('chart'), fx, p[1], 'USD/EGP', Charts.fmt.dec(2), { markAt: 0.02 }); const c = M.change(fx, p[1]); M.$('cap').innerHTML = `${p[2]}: <span class="num ${M.cls(c)}">${M.pct(c, 2)}</span> · this year <span class="num ${M.cls(M.ytd(fx))}">${M.pct(M.ytd(fx))}</span>`; };
   M.segment(M.$('seg'), '1M', draw, M.PERIODS.slice(1)); draw(M.PERIODS[2]);
   const dx = M.series((e) => e.dxy, 'us'), dash = '<span class="dash">—</span>';
-  M.$('stats').innerHTML = M.kv([['Market mid-rate', M.num(M.last(fx))], ...(P.rates || []).map((r) => [r.label, r.value == null ? dash : M.esc(r.value)]), ['Dollar index (DXY)', M.num(M.last(dx))]]);
+  // the central bank's rate and policy rates come from the data log; the day's file adds what the log lacks
+  const lg = (k) => M.series((e) => e[k], 'fx'), lv = (k) => M.last(lg(k));
+  const pair = (a, b, d = 2, u = '') => lv(a) == null ? dash : `${M.num(lv(a), d)}${u} / ${M.num(lv(b), d)}${u}`;
+  const tb = [['tbill_91', '91-day'], ['tbill_182', '182-day'], ['tbill_364', '364-day']].filter(([k]) => lv(k) != null).map(([k, n]) => [`${n} T-bill`, M.num(lv(k), 2) + '%']);
+  const known = /central bank, buy|deposit rate|lending rate|t-bill/i;
+  M.$('stats').innerHTML = M.kv([['Market mid-rate', M.num(M.last(fx))], ['Central bank, buy / sell', pair('cbe_usd_buy', 'cbe_usd_sell')],
+    ['Deposit / lending rate', pair('cbe_deposit', 'cbe_lending', 2, '%')], ...tb,
+    ...(P.rates || []).filter((r) => !known.test(r.label) || (/t-bill/i.test(r.label) && !tb.length)).map((r) => [r.label, r.value == null ? dash : M.esc(r.value)]),
+    ['Dollar index (DXY)', M.num(M.last(dx))]]);
   const [lo, hi] = M.range52(fx); M.$('range').innerHTML = M.rangeBar(lo, hi, M.last(fx));
   // pound or dollar: both rebased to 100 a month ago
   const f30 = fx.filter(([d]) => d >= M.cut(M.ASOF, 30));

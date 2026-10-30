@@ -77,7 +77,7 @@ window.Desk = (function () {
   }
   // a line chart of one series over a period (at least a month), with the biggest day marked when it stands out
   function chart(el, s, back, name, fmt, opts = {}) {
-    const pts = s.filter(([d]) => d >= cut(ASOF, Math.max(back, 30))); el.innerHTML = '';
+    const pts = s.filter(([d]) => d >= cut(ASOF, Math.max(back, 7))); el.innerHTML = '';
     if (pts.length < 2) { el.textContent = 'Not enough closes logged yet.'; return; }
     const vals = pts.map((x) => x[1]), lo = Math.min(...vals), hi = Math.max(...vals), pad = (hi - lo) * 0.15 || lo * 0.01;
     const ann = opts.mark !== false ? bigMove(pts, opts.markAt || 0.025) : [];

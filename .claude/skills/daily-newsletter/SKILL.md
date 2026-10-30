@@ -450,6 +450,19 @@ next to table rows and the recap can compute weekly and monthly changes. From th
 python3 .claude/skills/daily-newsletter/log_figures.py DATE usd_egp=56.20 eur_egp=62.57 sar_egp=14.99 aed_egp=15.30 kwd_egp=181.19 qar_egp=15.41 gbp_egp=74.69 dxy=102.19 gold21_egp=6385 gold24_egp=7295 gold18_egp=5475 goldpound_egp=51080 gold_usd=4076 brent=113.88 egx30=49723.72 sp500=7743.98 nasdaq=26549.85 dow=52475.10 btc=81231 egx.COMI=120.30 us.AAPL=347.10
 ```
 
+Also log, every day, with the same command:
+
+- **Volume:** the `vol.TICKER` values fetch_figures.py prints for all 24 stocks (shares traded in the last
+  finished session; it leaves out Egyptian volumes while the EGX is trading).
+- **The central bank's dollar rate:** `cbe_usd_buy` and `cbe_usd_sell` at the latest close, checked in two
+  outlets (Egyptian news sites publish it daily, for example Al-Masry Al-Youm and Akhbar El-Youm).
+- **Policy rates:** `cbe_deposit` and `cbe_lending`, every day, so the log shows when they change.
+- **EGX turnover:** `egx_turnover`, the session's value traded in stocks in EGP bn.
+- **T-bill yields:** `tbill_91`, `tbill_182`, `tbill_273`, `tbill_364` (average yields, %) only on the day
+  after an auction, from the auction's results; never repeat an old auction's yields.
+
+The weekly log check does not expect the rates and T-bill yields every day.
+
 Then refresh the spreadsheet copy, `data/markets.xlsx`, and commit it too:
 
 ```

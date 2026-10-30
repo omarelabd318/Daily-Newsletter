@@ -491,7 +491,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
     $('chart-name').textContent = S.chartName;
     $('chart-more').textContent = key === 'egypt' ? 'EGX page →' : 'US page →'; $('chart-more').href = key === 'egypt' ? '/desk/egx/' : '/desk/us/';
     function drawIdx(p) {
-      const back = Math.max(p[1], 30), pts = idx.filter(([d]) => d >= cut(ASOF, back)), el = $('egx-chart'); el.innerHTML = '';
+      const back = Math.max(p[1], 7), pts = idx.filter(([d]) => d >= cut(ASOF, back)), el = $('egx-chart'); el.innerHTML = '';
       if (pts.length < 2) { el.textContent = 'Not enough closes logged yet.'; $('egx-cap').textContent = ''; return; }
       const ann = bigMove(pts);
       const lo = Math.min(...pts.map((x) => x[1]));

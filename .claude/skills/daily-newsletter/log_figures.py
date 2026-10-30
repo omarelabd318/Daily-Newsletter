@@ -7,8 +7,13 @@ Usage:
 Keys (numbers only; leave out anything not confirmed):
   usd_egp eur_egp sar_egp aed_egp kwd_egp qar_egp gbp_egp dxy
   gold21_egp gold24_egp gold18_egp goldpound_egp gold_usd brent egx30 sp500 nasdaq dow btc
+  cbe_usd_buy cbe_usd_sell     the central bank's official dollar rate, buy and sell
+  cbe_deposit cbe_lending      the central bank's overnight deposit and lending rates, %
+  tbill_91 tbill_182 tbill_273 tbill_364   average T-bill yields from the latest auction, % (on auction days)
+  egx_turnover                 the EGX session's turnover in stocks, EGP bn
   egx.TICKER  for the Egypt Stocks Watch rows, e.g. egx.COMI=120.30
   us.TICKER   for the USA Stocks Watch rows, e.g. us.AAPL=347.10
+  vol.TICKER  shares traded in the session, e.g. vol.COMI=4357823
 
 Running it again for the same DATE updates that entry (keys you pass replace old values; others stay).
 It also rewrites data/markets-recent.json, the last 400 days that the site loads.
@@ -22,7 +27,8 @@ import sys
 
 KEYS = {"usd_egp", "eur_egp", "sar_egp", "aed_egp", "kwd_egp", "qar_egp", "gbp_egp", "dxy",
         "gold21_egp", "gold24_egp", "gold18_egp", "goldpound_egp", "gold_usd", "brent",
-        "egx30", "sp500", "nasdaq", "dow", "btc"}
+        "egx30", "sp500", "nasdaq", "dow", "btc", "cbe_usd_buy", "cbe_usd_sell", "cbe_deposit", "cbe_lending",
+        "tbill_91", "tbill_182", "tbill_273", "tbill_364", "egx_turnover"}
 PATH = os.path.join(os.path.dirname(__file__), "..", "..", "..", "data", "markets.json")
 
 
@@ -59,13 +65,13 @@ def main(args):
             sys.exit(f"Not a number: {p}")
         if not math.isfinite(num):
             sys.exit(f"Not a finite number: {p}")
-        m = re.fullmatch(r"(egx|us)\.([A-Z.]{2,6})", k)
+        m = re.fullmatch(r"(egx|us|vol)\.([A-Z.]{2,6})", k)
         if m:
             entry.setdefault(m.group(1), {})[m.group(2)] = num
         elif k in KEYS:
             entry[k] = num
         else:
-            sys.exit(f"Unknown key: {k} (allowed: {', '.join(sorted(KEYS))}, egx.TICKER, us.TICKER)")
+            sys.exit(f"Unknown key: {k} (allowed: {', '.join(sorted(KEYS))}, egx.TICKER, us.TICKER, vol.TICKER)")
     data["days"].sort(key=lambda e: e["date"])
     with open(path, "w") as f:
         json.dump(data, f, indent=1)

@@ -13,7 +13,11 @@ HEADLINE = [("usd_egp", "USD/EGP"), ("eur_egp", "EUR/EGP"), ("sar_egp", "SAR/EGP
             ("kwd_egp", "KWD/EGP"), ("qar_egp", "QAR/EGP"), ("gbp_egp", "GBP/EGP"), ("dxy", "US dollar index"),
             ("gold21_egp", "Gold 21K (EGP/g)"), ("gold24_egp", "Gold 24K (EGP/g)"), ("gold18_egp", "Gold 18K (EGP/g)"),
             ("goldpound_egp", "Gold pound (EGP)"), ("gold_usd", "Gold ($/oz)"), ("brent", "Brent ($/bbl)"),
-            ("egx30", "EGX30"), ("sp500", "S&P 500"), ("nasdaq", "Nasdaq"), ("dow", "Dow Jones"), ("btc", "Bitcoin ($)")]
+            ("egx30", "EGX30"), ("sp500", "S&P 500"), ("nasdaq", "Nasdaq"), ("dow", "Dow Jones"), ("btc", "Bitcoin ($)"),
+            ("cbe_usd_buy", "USD/EGP central bank buy"), ("cbe_usd_sell", "USD/EGP central bank sell"),
+            ("cbe_deposit", "Deposit rate (%)"), ("cbe_lending", "Lending rate (%)"), ("tbill_91", "91-day T-bill (%)"),
+            ("tbill_182", "182-day T-bill (%)"), ("tbill_273", "273-day T-bill (%)"), ("tbill_364", "364-day T-bill (%)"),
+            ("egx_turnover", "EGX turnover (EGP bn)")]
 
 
 def main():
@@ -43,7 +47,7 @@ def main():
 
     sheet(wb.active, HEADLINE, lambda d, k: d.get(k))
     wb.active.title = "Headline figures"
-    for name, group in (("Egypt stocks", "egx"), ("US stocks", "us")):
+    for name, group in (("Egypt stocks", "egx"), ("US stocks", "us"), ("Volume (shares)", "vol")):
         tickers = sorted({t for d in days for t in d.get(group, {})})
         sheet(wb.create_sheet(name), [(t, t) for t in tickers], lambda d, k, g=group: d.get(g, {}).get(k))
     out = os.path.join(ROOT, "data", "markets.xlsx")

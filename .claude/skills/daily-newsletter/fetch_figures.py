@@ -76,7 +76,9 @@ def mubasher(path):
     if not (prev and change and pct):
         raise RuntimeError("page layout changed (no previous close or change)")
     prev, change = number(prev.group(1)), number(change.group(1))
+    vol = re.search(r'Volume</span>\s*<span[^>]*>([\d,]+)', page)
     return {"prev": prev, "value": round(prev + change, 4), "pct": number(pct.group(1)),
+            "volume": number(vol.group(1)) if vol else None,
             "when": when.group(1).replace("Last update:", "").strip().rstrip(".") if when else "time not shown"}
 
 
@@ -139,6 +141,15 @@ def nasdaq(sym, cls="stocks"):
             "when": p.get("lastTradeTimestamp", ""), "src": "Nasdaq"}
 
 
+def nasdaq_volume(sym):
+    """Shares traded in the latest completed US session, from Nasdaq's daily history."""
+    today = datetime.date.today()
+    url = (f"https://api.nasdaq.com/api/quote/{urllib.parse.quote(sym)}/historical?assetclass=stocks"
+           f"&fromdate={today - datetime.timedelta(days=10)}&todate={today}&limit=10")
+    rows = json.loads(get(url))["data"]["tradesTable"]["rows"]
+    return number(rows[0]["volume"]), rows[0]["date"]
+
+
 def coingecko():
     j = json.loads(get("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd"
                        "&include_24hr_change=true"))["bitcoin"]
@@ -187,6 +198,9 @@ def main(args):
         val = r["prev"] if is_live else r["value"]
         if log_key and val is not None:
             log.append(f"{log_key}={round(val, 4)}")
+        # Volume only for a finished session: while the EGX trades, the page shows today's partial volume.
+        if log_key and log_key.startswith("egx.") and r.get("volume") and not is_live:
+            log.append(f"vol.{log_key[4:]}={int(r['volume'])}")
 
     extras = []
     for a in args[1:]:
@@ -200,6 +214,11 @@ def main(args):
     add("egx30", "EGX30", lambda: dict(mubasher("indices/EGX30"), src="Mubasher"), "egx30", egx_live)
     for t in US:
         add(t, f"US {t}", lambda t=t: first(lambda: yahoo(t.replace(".", "-")), lambda: nasdaq(t)), f"us.{t}")
+        try:
+            v, d = nasdaq_volume(t)
+            log.append(f"vol.{t}={int(v)}")
+        except Exception as e:
+            missing.append(f"US {t} volume: {e}")
     add("sp500", "S&P 500", lambda: yahoo("^GSPC"), "sp500")
     add("nasdaq", "Nasdaq", lambda: first(lambda: yahoo("^IXIC"), lambda: nasdaq("COMP", "index")), "nasdaq")
     add("dow", "Dow Jones", lambda: first(lambda: yahoo("^DJI"), lambda: fred("DJIA")), "dow")

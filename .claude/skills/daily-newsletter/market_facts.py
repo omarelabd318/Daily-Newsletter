@@ -21,7 +21,11 @@ NAMES = {"usd_egp": "USD/EGP", "eur_egp": "EUR/EGP", "sar_egp": "SAR/EGP", "aed_
          "kwd_egp": "KWD/EGP", "qar_egp": "QAR/EGP", "gbp_egp": "GBP/EGP", "dxy": "US dollar index",
          "gold21_egp": "Gold 21K", "gold24_egp": "Gold 24K", "gold18_egp": "Gold 18K",
          "goldpound_egp": "Gold pound", "gold_usd": "Gold ($/oz)",
-         "brent": "Brent", "egx30": "EGX30", "sp500": "S&P 500", "nasdaq": "Nasdaq", "dow": "Dow Jones", "btc": "Bitcoin"}
+         "brent": "Brent", "egx30": "EGX30", "sp500": "S&P 500", "nasdaq": "Nasdaq", "dow": "Dow Jones", "btc": "Bitcoin",
+         "cbe_usd_buy": "USD/EGP, central bank buy", "cbe_usd_sell": "USD/EGP, central bank sell",
+         "cbe_deposit": "Overnight deposit rate", "cbe_lending": "Overnight lending rate", "tbill_91": "91-day T-bill",
+         "tbill_182": "182-day T-bill", "tbill_273": "273-day T-bill", "tbill_364": "364-day T-bill",
+         "egx_turnover": "EGX turnover (EGP bn)"}
 
 
 def series(days, upto):

@@ -97,9 +97,16 @@
     M.$('valnote').hidden = false;
     M.$('valnote').textContent = `${V.source} last updated these on ${M.day(V.asOf).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}${V.basis ? ', on ' + V.basis : ''}: too old to rely on.`;
   }
-  const T = p.trading;
-  M.$('trade').innerHTML = M.kv(T ? rows(T.rows) : [['Volume', dash], ['Against 30-day average', dash]]);
-  M.$('tdate').textContent = T ? M.short(T.date) : '';
+  // volume from the data log: the last session against the average of the 30 before it
+  const vs_ = M.series((e) => (e.vol || {})[t], egx ? 'egx' : 'us'), lastV = vs_.length ? vs_.at(-1) : null;
+  const prior = vs_.slice(-31, -1).map((x) => x[1]), avg = prior.length >= 10 ? prior.reduce((a, b) => a + b, 0) / prior.length : null;
+  const big = (v) => v >= 1e6 ? (v / 1e6).toFixed(2) + 'm' : v >= 1e3 ? (v / 1e3).toFixed(1) + 'k' : String(Math.round(v));
+  const vsAvg = lastV && avg ? (lastV[1] / avg - 1) * 100 : null;
+  const T = p.trading, extra = T ? T.rows.filter((r) => !/^Volume|30-day/.test(r.label)) : [];
+  M.$('trade').innerHTML = M.kv([['Volume', lastV ? big(lastV[1]) + ' shares' : dash], ...rows(extra),
+    ['30-session average', avg ? big(avg) + ' shares' : `<span class="dash">${vs_.length} of 10 sessions logged</span>`],
+    ['Against the average', vsAvg == null ? dash : `<span class="${M.cls(vsAvg)}">${M.pct(vsAvg, 0)}</span>`]]);
+  M.$('tdate').textContent = lastV ? M.short(lastV[0]) : (T ? M.short(T.date) : '');
   M.$('tnote').innerHTML = egx ? 'Volume against its usual level shows when big money is moving. Buying and selling by investor group is only published for the whole market: see the <a href="/desk/egx/">EGX page</a>.' : 'Volume against its usual level shows when big money is moving.';
   M.$('next').innerHTML = (p.next || []).map((n) => `<div class="wk" style="grid-template-columns:minmax(0,1fr) auto"><b>${M.esc(n.event)}</b><span class="imp${n.impact === 'high' ? ' high' : ''}">${M.esc(n.impact[0].toUpperCase() + n.impact.slice(1))}</span><span class="why" style="grid-column:1/-1"><span class="num">${M.esc(n.when)}</span> · ${M.esc(n.why)}</span></div>`).join('') || '<p class="sub">No dates found yet.</p>';
   const PILL = { 'open': 'open', 'on track': 'ok', 'right': 'ok', 'wrong': 'bad', 'closed': 'open' };
