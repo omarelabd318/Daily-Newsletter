@@ -56,13 +56,31 @@ window.Desk = (function () {
     const xy = pts.map((v, i) => [2 + i * st, h - 2 - (v - min) / sp * (h - 4)]);
     return `<svg class="spark" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true"><path d="${xy.map((c, i) => (i ? 'L' : 'M') + c[0].toFixed(1) + ' ' + c[1].toFixed(1)).join('')}"/><circle cx="${xy.at(-1)[0].toFixed(1)}" cy="${xy.at(-1)[1].toFixed(1)}" r="2.2"/></svg>`;
   }
+  // the biggest move on the chart: consecutive sessions in the same direction count as one move, shaded
+  // across its days ("22–25 Oct −6.9%"); a one-day move keeps a marker line. Only moves above the threshold.
+  function bigMove(pts, at = 0.025) {
+    let best = null;
+    for (let i = 1; i < pts.length;) {
+      const dir = Math.sign(pts[i][1] - pts[i - 1][1]); let j = i;
+      while (j + 1 < pts.length && Math.sign(pts[j + 1][1] - pts[j][1]) === dir && dir) j++;
+      const m = pts[j][1] / pts[i - 1][1] - 1;
+      if (!best || Math.abs(m) > Math.abs(best.m)) best = { a: i - 1, b: j, m };
+      i = j + 1;
+    }
+    if (!best || Math.abs(best.m) <= at) return [];
+    const p = (v) => (v > 0 ? '+' : '−') + Math.abs(v * 100).toFixed(1) + '%';
+    const d = (i) => new Date(pts[i][0] + 'T12:00:00'), dd = (i) => d(i).toLocaleDateString('en-GB', { day: 'numeric' });
+    const mon = (i) => d(i).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+    if (best.b - best.a === 1) return [{ at: best.b, label: `${mon(best.b)} ${p(best.m)}`, short: p(best.m) }];
+    const first = best.a + 1, same = d(first).getMonth() === d(best.b).getMonth();
+    return [{ from: best.a, to: best.b, label: `${same ? dd(first) : mon(first)}–${mon(best.b)} ${p(best.m)}`, short: p(best.m) }];
+  }
   // a line chart of one series over a period (at least a month), with the biggest day marked when it stands out
   function chart(el, s, back, name, fmt, opts = {}) {
     const pts = s.filter(([d]) => d >= cut(ASOF, Math.max(back, 30))); el.innerHTML = '';
     if (pts.length < 2) { el.textContent = 'Not enough closes logged yet.'; return; }
     const vals = pts.map((x) => x[1]), lo = Math.min(...vals), hi = Math.max(...vals), pad = (hi - lo) * 0.15 || lo * 0.01;
-    const big = pts.reduce((m, x, i) => i && Math.abs(x[1] / pts[i - 1][1] - 1) > Math.abs(m.v) ? { i, v: x[1] / pts[i - 1][1] - 1 } : m, { i: -1, v: 0 });
-    const ann = opts.mark !== false && big.i > 0 && Math.abs(big.v) > (opts.markAt || 0.025) ? [{ at: big.i, label: `${short(pts[big.i][0])} ${pct(big.v * 100)}`, short: pct(big.v * 100) }] : [];
+    const ann = opts.mark !== false ? bigMove(pts, opts.markAt || 0.025) : [];
     Charts.line(el, { labels: pts.map((x) => short(x[0])), series: [{ name, values: vals, muted: !!opts.muted }], format: fmt, annotations: ann, endLabel: true, height: el.clientHeight, min: lo - pad, xAt: opts.xAt ? [0, Math.floor((pts.length - 1) / 2), pts.length - 1] : null });
   }
   function movers(el, tickers, back, n = 3) {
