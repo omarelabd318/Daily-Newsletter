@@ -42,14 +42,14 @@ closes are the last session's; the news, stock research and analysis are still u
   bought and who sold with the foreign-flow history, the 12 stocks, then Bullish and bearish.
 - **EGP** `/desk/egp/`: the dollar in pounds, the central bank's and banks' rates, Pound or dollar?, what
   is moving the pound, the other currencies and the desk's view on the pound.
-- **US** `/desk/us/`: S&P 500, Nasdaq and Dow, rates and data, biggest movers among the 12 US stocks,
+- **Wall Street** `/desk/us/`: S&P 500, Nasdaq and Dow, rates and data, biggest movers among the 12 US stocks,
   results after the bell, the 12 stocks, then Bullish and bearish.
 - **Global** `/desk/global/`: Brent, gold, the dollar index and Bitcoin, each with one line on why it
   matters for Egypt, and gold prices in Egypt.
 - **Stocks** `/desk/stock/?t=TICKER`: one page per stock: chart against its index, performance,
   valuation, trading, dates coming up, the desk's projections and views on it, and its news.
 
-The menu order is Dashboard, EGX, EGP, US, Global, Stocks. Shared code is `desk/desk.js` and `desk/desk.css`
+The menu order is Dashboard, EGX, EGP, Wall Street, Global, Stocks. Shared code is `desk/desk.js` and `desk/desk.css`
 (the dashboard keeps its own copy of the styles: change both together).
 
 ## Files
