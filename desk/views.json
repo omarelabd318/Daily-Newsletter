@@ -2,6 +2,37 @@
  "note": "Every view and projection the Markets Desk has made, newest first, with the news that bears on each, until it is right, wrong or closed. Never delete an entry: a wrong call stays on the record, marked wrong.",
  "views": [
   {
+   "id": "2026-10-31-chips",
+   "opened": "2026-10-31",
+   "market": "us",
+   "kind": "view",
+   "title": "Chip stocks stay under pressure into Apple's results",
+   "confidence": "medium",
+   "detail": "Intel fell 28.6%, Qualcomm 11.1%, Broadcom 5.5% and Nvidia 4.2% on Friday as investors question AI spending; Nvidia is at its lowest since 1 August.",
+   "wrong": "Nvidia closes above $220 by 13 November.",
+   "due": "2026-11-13",
+   "track": {
+    "key": "us.NVDA",
+    "label": "Nvidia",
+    "start": 204.64,
+    "good": "down"
+   },
+   "tickers": [
+    "NVDA",
+    "AVGO"
+   ],
+   "status": "open",
+   "updates": [
+    {
+     "date": "2026-10-30",
+     "text": "Intel guided fourth-quarter revenue to $15bn–$16bn against about $17bn expected; Qualcomm fell 11% and Broadcom 5.5%.",
+     "source": "TechCrunch",
+     "url": "https://techcrunch.com/2026/10/30/intels-stock-crashes-knocking-12b-from-governments-stake/",
+     "effect": "supports"
+    }
+   ]
+  },
+  {
    "id": "2026-10-30-hike-pound",
    "opened": "2026-10-30",
    "market": "egp",
@@ -35,6 +66,13 @@
      "text": "The central bank's dollar rate eased to 55.98 to buy and 56.12 to sell at Thursday's close, from 56.06 and 56.20 on Wednesday.",
      "source": "Al-Masry Al-Youm",
      "url": "https://www.almasryalyoum.com/news/details/4396829",
+     "effect": "supports"
+    },
+    {
+     "date": "2026-10-30",
+     "text": "Analysts said the hike aims to preserve the appeal of local debt and limit outflows with the dollar near EGP 56; the dollar stood at 56.12 at the central bank.",
+     "source": "Egypt Independent",
+     "url": "https://www.egyptindependent.com/why-the-cbe-raised-interest-rates-by-1-amid-currency-pressures/",
      "effect": "supports"
     }
    ]
@@ -104,6 +142,13 @@
      "source": "FinanceFeeds",
      "url": "https://financefeeds.com/brent-crude-oil-price-116-friday-hormuz-mine-strikes-december-expiry-fourth-monthly-gain-bull-120-bear-108/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-10-30",
+     "text": "January Brent settled at $113.43 and December at $117.64, a six-month high, after tanker strikes in Hormuz.",
+     "source": "The National",
+     "url": "https://www.thenationalnews.com/business/markets/2026/10/30/oil-prices-set-for-sharp-monthly-rise-on-hormuz-strikes-and-us-threat-to-hit-iran",
+     "effect": "supports"
     }
    ]
   },
@@ -140,6 +185,13 @@
      "source": "InvestingLive",
      "url": "https://investinglive.com/stocks/nasdaq-leads-stocks-lower-intel-and-amazon-tumble-after-hours/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-10-30",
+     "text": "Money left technology on Friday while Walmart rose 1.9% to $123.51 and Alphabet fell 1.4% to $279.84.",
+     "source": "InvestingLive",
+     "url": "https://investinglive.com/stocks/nasdaq-suffers-worst-month-since-march-2025-as-technology-stocks-tumble/",
+     "effect": "supports"
     }
    ]
   },
@@ -169,6 +221,13 @@
      "text": "Amazon fell about 6% in extended trading after missing on earnings and revenue.",
      "source": "InvestingLive",
      "url": "https://investinglive.com/stocks/nasdaq-leads-stocks-lower-intel-and-amazon-tumble-after-hours/",
+     "effect": "supports"
+    },
+    {
+     "date": "2026-10-30",
+     "text": "Amazon closed at $240.35 on Friday as AI-related selling spread across the Nasdaq.",
+     "source": "InvestingLive",
+     "url": "https://investinglive.com/stocks/nasdaq-suffers-worst-month-since-march-2025-as-technology-stocks-tumble/",
      "effect": "supports"
     }
    ]
@@ -263,7 +322,15 @@
     "ORAS"
    ],
    "status": "open",
-   "updates": []
+   "updates": [
+    {
+     "date": "2026-10-30",
+     "text": "OCI shareholders approved the Orascom Construction combination; Amsterdam delisting is set for November (headline-level report).",
+     "source": "TradingView",
+     "url": "https://www.tradingview.com/news/tradingview:3032b0a026730:0-oci-n-v-shareholders-approve-orascom-construction-combination/",
+     "effect": "neutral"
+    }
+   ]
   },
   {
    "id": "2026-10-30-tmgh-bear",
@@ -398,6 +465,13 @@
      "source": "Free Malaysia Today (AFP)",
      "url": "https://www.freemalaysiatoday.com/category/business/2026/10/30/exxonmobil-profits-double-to-us-15-4bil-on-oil-price-surge/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-10-30",
+     "text": "Exxon rose 2.2% to a record $187.25, inside the projected range, with Brent at a six-month high.",
+     "source": "The National",
+     "url": "https://www.thenationalnews.com/business/markets/2026/10/30/oil-prices-set-for-sharp-monthly-rise-on-hormuz-strikes-and-us-threat-to-hit-iran",
+     "effect": "supports"
     }
    ]
   },
@@ -492,6 +566,13 @@
      "source": "Yahoo Finance",
      "url": "https://ca.finance.yahoo.com/news/alphabet-faces-ubs-target-cut-103000032.html",
      "effect": "neutral"
+    },
+    {
+     "date": "2026-10-30",
+     "text": "Alphabet closed at $279.84, inside the projected $265–280 range, as AI-spending worries spread.",
+     "source": "TechCrunch",
+     "url": "https://techcrunch.com/2026/10/30/cracks-are-emerging-in-the-ai-spending-boom/",
+     "effect": "supports"
     }
    ]
   }

@@ -249,7 +249,7 @@
     "asOf": "2026-10-31",
     "period": "2026-06-30",
     "basis": "the four quarters to Jun 2026",
-    "price": 183.29,
+    "price": 187.25,
     "rows": [
      {
       "label": "Market value",
@@ -257,11 +257,11 @@
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "22.2"
+      "value": "22.6"
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "13.5"
+      "value": "13.8"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -299,7 +299,7 @@
     "asOf": "2026-10-31",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 530.14,
+    "price": 521.91,
     "rows": [
      {
       "label": "Market value",
@@ -307,11 +307,11 @@
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "29.4"
+      "value": "28.9"
      },
      {
       "label": "Forecast P/E (fiscal 2027)",
-      "value": "26.9"
+      "value": "26.5"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -349,7 +349,7 @@
     "asOf": "2026-10-31",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 283.82,
+    "price": 279.84,
     "rows": [
      {
       "label": "Market value",
@@ -357,11 +357,11 @@
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "14.8"
+      "value": "14.6"
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "13.9"
+      "value": "13.7"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -399,7 +399,7 @@
     "asOf": "2026-10-31",
     "period": "2026-07-31",
     "basis": "the four quarters to Jul 2026",
-    "price": 345.0,
+    "price": 326.08,
     "rows": [
      {
       "label": "Market value",
@@ -407,11 +407,11 @@
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "40.3"
+      "value": "38.0"
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "33.3"
+      "value": "31.4"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -540,7 +540,15 @@
       "value": "EGP 447.88"
      }
     ]
-   }
+   },
+   "news": [
+    {
+     "date": "2026-10-30",
+     "text": "OCI N.V. shareholders approved the Orascom Construction combination; Amsterdam delisting is set for November (headline-level, TradingView and TipRanks).",
+     "source": "TradingView",
+     "url": "https://www.tradingview.com/news/tradingview:3032b0a026730:0-oci-n-v-shareholders-approve-orascom-construction-combination/"
+    }
+   ]
   },
   "FWRY": {
    "sector": "Payments",
@@ -616,7 +624,15 @@
       "value": "EGP 26.06"
      }
     ]
-   }
+   },
+   "news": [
+    {
+     "date": "2026-10-29",
+     "text": "Banque du Caire's retail tranche closed about 27 times covered; trading is expected on Monday 2 November.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/10/29/banque-du-caires-retail-book-closed-27x-covered-days-before-trading/"
+    }
+   ]
   },
   "CLHO": {
    "sector": "Healthcare",
@@ -745,7 +761,7 @@
     "asOf": "2026-10-31",
     "period": "2026-06-30",
     "basis": "the four quarters to Jun 2026",
-    "price": 348.91,
+    "price": 344.63,
     "rows": [
      {
       "label": "Market value",
@@ -753,11 +769,11 @@
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "40.5"
+      "value": "40.0"
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "39.9"
+      "value": "39.4"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -772,7 +788,15 @@
       "value": "$335.00"
      }
     ]
-   }
+   },
+   "news": [
+    {
+     "date": "2026-10-30",
+     "text": "Apple overtook Nvidia as the world's most valuable company as the AI-spending sell-off prompted a rotation into more capital-disciplined names.",
+     "source": "Yahoo Finance (Investing.com)",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/apple-overtakes-nvidia-become-world-214753575.html"
+    }
+   ]
   },
   "NVDA": {
    "sector": "Semiconductors",
@@ -787,7 +811,7 @@
     "asOf": "2026-10-31",
     "period": "2026-07-31",
     "basis": "the four quarters to Jul 2026",
-    "price": 213.66,
+    "price": 204.64,
     "rows": [
      {
       "label": "Market value",
@@ -795,11 +819,11 @@
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "31.0"
+      "value": "29.7"
      },
      {
       "label": "Forecast P/E (fiscal 2027)",
-      "value": "23.0"
+      "value": "22.0"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -814,7 +838,15 @@
       "value": "$315.00"
      }
     ]
-   }
+   },
+   "news": [
+    {
+     "date": "2026-10-30",
+     "text": "Nvidia fell 4.2% as chip stocks sold off; Apple overtook it as the most valuable company.",
+     "source": "Yahoo Finance (Investing.com)",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/apple-overtakes-nvidia-become-world-214753575.html"
+    }
+   ]
   },
   "AMZN": {
    "sector": "Retail and cloud",
@@ -829,7 +861,7 @@
     "asOf": "2026-10-31",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 243.79,
+    "price": 240.35,
     "rows": [
      {
       "label": "Market value",
@@ -837,11 +869,11 @@
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "33.5"
+      "value": "33.0"
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "30.5"
+      "value": "30.0"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -871,7 +903,7 @@
     "asOf": "2026-10-31",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 624.52,
+    "price": 614.99,
     "rows": [
      {
       "label": "Market value",
@@ -879,11 +911,11 @@
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "21.0"
+      "value": "20.7"
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "21.5"
+      "value": "21.2"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -898,7 +930,15 @@
       "value": "$850.00"
      }
     ]
-   }
+   },
+   "news": [
+    {
+     "date": "2026-10-30",
+     "text": "S&P Global revised Meta's outlook to negative on AI spending and cash-flow worries.",
+     "source": "MarketScreener",
+     "url": "https://www.marketscreener.com/quote/stock/META-PLATFORMS-INC-10547141/news/S-P-Global-revises-Meta-s-outlook-to-negative-on-AI-spending-cash-flow-worries-54619888/"
+    }
+   ]
   },
   "TSLA": {
    "sector": "Cars",
@@ -913,7 +953,7 @@
     "asOf": "2026-10-31",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 403.3,
+    "price": 399.81,
     "rows": [
      {
       "label": "Market value",
@@ -921,11 +961,11 @@
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "552.5"
+      "value": "547.7"
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "601.9"
+      "value": "596.7"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -955,7 +995,7 @@
     "asOf": "2026-10-31",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 343.58,
+    "price": 337.04,
     "rows": [
      {
       "label": "Market value",
@@ -963,11 +1003,11 @@
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "14.9"
+      "value": "14.6"
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "14.3"
+      "value": "14.1"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -997,7 +1037,7 @@
     "asOf": "2026-10-31",
     "period": null,
     "basis": "no reported earnings on Nasdaq",
-    "price": 541.96,
+    "price": 542.49,
     "rows": [
      {
       "label": "Market value",
@@ -1027,7 +1067,7 @@
     "asOf": "2026-10-31",
     "period": "2026-07-31",
     "basis": "the four quarters to Jul 2026",
-    "price": 121.25,
+    "price": 123.51,
     "rows": [
      {
       "label": "Market value",
@@ -1035,11 +1075,11 @@
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "42.8"
+      "value": "43.6"
      },
      {
       "label": "Forecast P/E (fiscal 2027)",
-      "value": "42.1"
+      "value": "42.9"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -1168,7 +1208,15 @@
       "value": "EGP 2.55"
      }
     ]
-   }
+   },
+   "news": [
+    {
+     "date": "2026-10-29",
+     "text": "The board approved buying 34.6 million treasury shares, 1% of capital, in the open market within a month, funded from its own resources.",
+     "source": "Hapi Journal",
+     "url": "https://hapijournal.com/2026/10/29/%D8%A5%D9%8A-%D9%81%D8%A7%D9%8A%D9%86%D8%A7%D9%86%D8%B3-%D8%AA%D9%88%D8%A7%D9%81%D9%82-%D8%B9%D9%84%D9%89-%D8%B4%D8%B1%D8%A7%D8%A1-34-6-%D9%85%D9%84%D9%8A%D9%88%D9%86-%D8%B3%D9%87%D9%85-%D8%AE%D8%B2/"
+    }
+   ]
   },
   "EMFD": {
    "sector": "Real estate",
@@ -1252,7 +1300,7 @@
      },
      {
       "label": "Forecast P/E (fiscal 2027)",
-      "value": "27.3"
+      "value": "27.5"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -1282,7 +1330,7 @@
     "asOf": "2026-10-31",
     "period": "2026-08-31",
     "basis": "the four quarters to Aug 2026",
-    "price": 139.56,
+    "price": 130.67,
     "rows": [
      {
       "label": "Market value",
@@ -1290,11 +1338,11 @@
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "20.5"
+      "value": "19.2"
      },
      {
       "label": "Forecast P/E (fiscal 2027)",
-      "value": "20.8"
+      "value": "19.4"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -1324,7 +1372,7 @@
     "asOf": "2026-10-31",
     "period": "2026-08-31",
     "basis": "the four quarters to Aug 2026",
-    "price": 996.08,
+    "price": 1012.28,
     "rows": [
      {
       "label": "Market value",
@@ -1332,11 +1380,11 @@
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "48.7"
+      "value": "49.5"
      },
      {
       "label": "Forecast P/E (fiscal 2027)",
-      "value": "43.9"
+      "value": "44.6"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -1389,7 +1437,15 @@
       "value": "EGP 82.16"
      }
     ]
-   }
+   },
+   "news": [
+    {
+     "date": "2026-10-30",
+     "text": "Net profit rose 52% to EGP 15.491bn in the year to June 2026; renewal projects are 30.3% complete and delayed by Bab el-Mandeb disruption.",
+     "source": "Youm7",
+     "url": "https://www.youm7.com/story/2026/10/30/%D8%AA%D8%A3%D8%AE%D9%8A%D8%B1-%D8%A8%D8%A7%D9%84%D9%85%D9%84%D9%8A%D8%A7%D8%B1%D8%A7%D8%AA-%D8%A8%D8%A7%D8%A8-%D8%A7%D9%84%D9%85%D9%86%D8%AF%D8%A8-%D9%8A%D9%81%D8%B1%D9%85%D9%84-%D9%85%D8%B4%D8%B1%D9%88%D8%B9%D8%A7%D8%AA-%D8%A5%D8%AD%D9%84%D8%A7%D9%84-%D9%88%D8%AA%D8%AC%D8%AF%D9%8A%D8%AF-%D9%85%D8%B5%D8%A7%D9%86%D8%B9-%D9%85%D8%B5%D8%B1/7599709"
+    }
+   ]
   },
   "AMOC": {
    "sector": "Oil refining",
