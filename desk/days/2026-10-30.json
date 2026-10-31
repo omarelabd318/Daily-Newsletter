@@ -460,7 +460,8 @@
      "url": "https://cairoscene.com/News/Talaat-Moustafa-Group-Signs-EGP-11-Trillion-Development-Deal",
      "tickers": [
       "TMGH"
-     ]
+     ],
+     "impact": "bullish"
     },
     {
      "headline": "Abu Qir Fertilizers' nine-month profit roughly doubles to EGP 13bn",
@@ -469,7 +470,8 @@
      "url": "https://www.elmostqpalelyuom.com/38926",
      "tickers": [
       "ABUK"
-     ]
+     ],
+     "impact": "bullish"
     },
     {
      "headline": "Al Ahly Pharos values Palm Hills at EGP 21.40",
@@ -478,7 +480,8 @@
      "url": "https://economyplusme.com/ar/news/33801",
      "tickers": [
       "PHDC"
-     ]
+     ],
+     "impact": "bullish"
     },
     {
      "headline": "Banque du Caire's retail tranche 27 times covered",
@@ -487,14 +490,16 @@
      "url": "https://enterpriseam.com/egypt/weekend/",
      "tickers": [
       "HRHO"
-     ]
+     ],
+     "impact": "bullish"
     },
     {
      "headline": "Enppi to list in the second half of January",
      "text": "The state plans to sell 10% to 20% of the engineering contractor, priced in dollars, as part of a push to raise dollar inflows before the IMF programme ends.",
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/weekend/",
-     "tickers": []
+     "tickers": [],
+     "impact": "mixed"
     },
     {
      "headline": "MNT-Halan's EGP 4bn injection into its Egyptian unit is fully paid",
@@ -693,7 +698,8 @@
      "url": "https://www.nbcnews.com/business/markets/alphabet-google-stock-ai-advertising-rcna606322",
      "tickers": [
       "GOOGL"
-     ]
+     ],
+     "impact": "bearish"
     },
     {
      "headline": "Amazon and Intel fall after the bell",
@@ -702,14 +708,16 @@
      "url": "https://investinglive.com/stocks/nasdaq-leads-stocks-lower-intel-and-amazon-tumble-after-hours/",
      "tickers": [
       "AMZN"
-     ]
+     ],
+     "impact": "bearish"
     },
     {
      "headline": "US growth hits 3.4% as PCE inflation stays at 3.6%",
      "text": "Third-quarter growth beat the 3.2% expected and core PCE rose 3.1%, supporting bets on another Fed hike in December.",
      "source": "Kitco",
      "url": "https://www.kitco.com/news/article/2026-10-29/spot-gold-4025oz-us-gdp-growth-rises-34-q3-core-pce-rises-25",
-     "tickers": []
+     "tickers": [],
+     "impact": "mixed"
     },
     {
      "headline": "ExxonMobil's profit doubles to $15.4bn",
@@ -718,7 +726,8 @@
      "url": "https://www.freemalaysiatoday.com/category/business/2026/10/30/exxonmobil-profits-double-to-us-15-4bil-on-oil-price-surge/",
      "tickers": [
       "XOM"
-     ]
+     ],
+     "impact": "bullish"
     },
     {
      "headline": "Microsoft lines up $25bn bond sale for AI",
@@ -727,7 +736,8 @@
      "url": "https://247wallst.com/investing/2026/10/30/microsoft-is-borrowing-25-billion-for-ai-its-first-bond-sale-since-2017/",
      "tickers": [
       "MSFT"
-     ]
+     ],
+     "impact": "mixed"
     }
    ]
   },

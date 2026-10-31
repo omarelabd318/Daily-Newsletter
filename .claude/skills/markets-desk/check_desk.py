@@ -118,6 +118,8 @@ def main(args):
             for t in n.get("tickers", []):
                 if t not in ALL:
                     errors.append(f"pages.{page} news: unknown ticker {t}.")
+            if n.get("impact") not in (None, "bullish", "bearish", "mixed"):
+                errors.append(f"pages.{page} news: impact must be bullish, bearish or mixed ({n.get('headline')}).")
         O = X.get("outlook")
         if page in ("egx", "us"):
             if not O:

@@ -337,3 +337,5 @@ td.name a{text-decoration:none}
 .rsv-part .h{grid-column:1/-1;display:flex;justify-content:space-between;gap:12px} .rsv-part .n{color:var(--muted)} .rsv-part .s{min-width:48px;text-align:right;color:var(--muted);font-size:13px}
 .rsv-track{height:10px;border-radius:3px;background:var(--raised);overflow:hidden}
 .rsv-track span{display:block;height:100%;border-radius:3px;background:var(--chart-1)}
+.news .impact{display:inline-flex;align-items:center;margin-bottom:3px;font-size:12px;font-weight:600;letter-spacing:.01em}
+.news .impact.flat{color:var(--muted)} .news .impact .chg.flat::before{display:none}

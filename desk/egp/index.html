@@ -137,28 +137,36 @@
     M.$('rcap').innerHTML = (Pm && Math.abs(g) >= 0.5 ? `Gold ${g > 0 ? 'gained' : 'lost'} <span class="num">${bn(Math.abs(g))}</span> in value this month as its price moved: the central bank values its gold at market prices, so ${g > 0 ? 'a rise does not mean any was bought' : 'a fall does not mean any was sold'}. ` : 'Gold is valued at market prices each month, so its share moves with the gold price. ')
       + `Source: <a href="${M.esc(L.url)}" target="_blank" rel="noopener">${M.esc(L.source)}</a>, reporting the central bank's figures.`;
   }
-  // inflation, or the real one-year yield: the T-bill yield in force minus the inflation in force on each day
-  let iReal = false, iPer = M.PERIODS[4];
+  // inflation, the one-year T-bill yield, or the real one-year yield: the T-bill yield in force minus the inflation in force on each day
+  let iMode = 0, iPer = M.PERIODS[4];
   const real = () => {
     const tb = lg('tbill_364'), inf = lg('infl_headline'), ds = [...new Set(tb.concat(inf).map((x) => x[0]))].sort();
     return ds.map((d) => { const a = M.valueAt(tb, d), b = M.valueAt(inf, d); return a != null && b != null ? [d, +(a - b).toFixed(2)] : null; }).filter(Boolean);
   };
+  const MODES = [
+    { tab: 'Inflation', title: 'Inflation', s: () => lg('infl_headline'), u: '%', d: 1, inv: true, since: 'on the month',
+      meta: 'Headline, annual, urban', note: 'published monthly by the central bank, about the 10th' },
+    { tab: 'T-bill', title: 'One-year T-bill yield', s: () => lg('tbill_364'), u: '%', d: 2, since: 'since the last auction',
+      meta: 'Weighted average accepted yield at the central bank\'s auctions', note: 'set at the central bank\'s weekly auctions' },
+    { tab: 'Real yield', title: 'Real one-year yield', s: real, u: ' pts', d: 1, month: true, since: 'in a month',
+      meta: 'One-year T-bill yield minus headline inflation', note: 'above zero, T-bills pay more than prices rise' },
+  ];
   const drawI = async () => {
     if (iPer[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; }
-    const s = iReal ? real() : lg('infl_headline'), v = M.last(s), u = iReal ? ' pts' : '%', y = M.valueAt(s, M.cut(M.ASOF, iPer[1]));
-    M.$('ih').textContent = iReal ? 'Real one-year yield' : 'Inflation';
-    M.$('ilvl').textContent = v == null ? '—' : M.num(v, 1) + u;
-    // the change in points: inflation from the month before (falling shows green), the real yield over the last month
-    const pts = (c) => `${c > 0 ? '+' : c < 0 ? '−' : ''}${M.num(Math.abs(c), 1)} pts`;
-    const before = iReal ? M.valueAt(s, M.cut(M.ASOF, 30)) : ([...s].reverse().find(([, x]) => x !== v) || [])[1];
-    const c = v != null && before != null ? +(v - before).toFixed(2) : null;
-    M.$('ichg').innerHTML = c == null ? '' : `<span class="${M.cls(c)}${iReal ? '' : ' inv'}">${pts(c)}</span> ${iReal ? 'in a month' : 'on the month'}`;
-    M.$('imeta').textContent = iReal ? 'One-year T-bill yield minus headline inflation' : 'Headline, annual, urban';
-    M.chart(M.$('ichart'), s, iPer[1], iReal ? 'Real yield' : 'Inflation', Charts.fmt.dec(1), { mark: false });
-    M.$('icap').innerHTML = (y != null && v != null ? `${iPer[2]}: from <span class="num">${M.num(y, 1)}${u}</span> to <span class="num">${M.num(v, 1)}${u}</span> (<span class="num">${pts(v - y)}</span>) · ` : '')
-      + (iReal ? 'above zero, T-bills pay more than prices rise' : 'published monthly by the central bank, about the 10th');
+    const m = MODES[iMode], s = m.s(), v = M.last(s), u = m.u, y = M.valueAt(s, M.cut(M.ASOF, iPer[1]));
+    M.$('ih').textContent = m.title;
+    M.$('ilvl').textContent = v == null ? '—' : M.num(v, m.d) + u;
+    // the change in points: inflation from the month before (falling shows green), the T-bill from the auction
+    // before, the real yield over the last month
+    const pts = (c) => `${c > 0 ? '+' : c < 0 ? '−' : ''}${M.num(Math.abs(c), m.d)} pts`;
+    const before = m.month ? M.valueAt(s, M.cut(M.ASOF, 30)) : ([...s].reverse().find(([, x]) => x !== v) || [])[1];
+    const c = v != null && before != null ? +(v - before).toFixed(3) : null;
+    M.$('ichg').innerHTML = c == null ? '' : `<span class="${M.cls(c)}${m.inv ? ' inv' : ''}">${pts(c)}</span> ${m.since}`;
+    M.$('imeta').textContent = m.meta;
+    M.chart(M.$('ichart'), s, iPer[1], m.title, Charts.fmt.dec(m.d === 2 ? 2 : 1), { mark: false });
+    M.$('icap').innerHTML = (y != null && v != null ? `${iPer[2]}: from <span class="num">${M.num(y, m.d)}${u}</span> to <span class="num">${M.num(v, m.d)}${u}</span> (<span class="num">${pts(v - y)}</span>) · ` : '') + m.note;
   };
-  M.toggle(M.$('itab'), ['Inflation', 'Real yield'], (i) => { iReal = i === 1; drawI(); });
+  M.toggle(M.$('itab'), MODES.map((m) => m.tab), (i) => { iMode = i; drawI(); });
   M.segment(M.$('iseg'), '1Y', (p) => { iPer = p; drawI(); }, [M.PERIODS[4]].concat(M.LONG)); drawI();
   const CUR = [['eur_egp', 'Euro', 'EUR'], ['sar_egp', 'Saudi riyal', 'SAR'], ['aed_egp', 'UAE dirham', 'AED'], ['kwd_egp', 'Kuwaiti dinar', 'KWD'], ['qar_egp', 'Qatari riyal', 'QAR'], ['gbp_egp', 'Sterling', 'GBP']];
   const drawT = (p) => {

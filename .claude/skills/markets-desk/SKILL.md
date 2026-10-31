@@ -198,6 +198,10 @@ The EGX, EGP, US and Global pages each have a News card: the day's stories for t
 each with a headline, one or two sentences in figures, the outlet and a link to the story's own page.
 Tag every story with the tickers it names or clearly affects (`"tickers": ["COMI"]`); a tagged story also
 shows on those stocks' pages. Take them from the newsletter's research and from the stock research below.
+On the EGX and Wall Street pages, also give each story an `"impact"`: `"bullish"`, `"bearish"` or `"mixed"`
+for the stocks it names (for the market when it names none), shown as a tag on the card. Judge the effect on
+the price, not whether the news is good in general (a strong economy that brings rate-hike bets is mixed). Leave
+it out when a story has no clear effect either way.
 
 ## Stock research, every day
 

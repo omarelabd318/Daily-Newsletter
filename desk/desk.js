@@ -217,8 +217,12 @@ window.Desk = (function () {
   }
 
   // the day's news for a page: headline, a line or two, the outlet's link, and chips for the stocks it touches
-  function news(el, items) {
-    el.innerHTML = (items || []).map((n) => `<div class="news"><b class="nh">${esc(n.headline)}</b><p>${esc(n.text)}</p>
+  // a story's tag on the EGX and Wall Street pages: bullish, bearish or mixed for the stocks it names (or for the
+  // market when it names none); a story with no clear effect has no tag
+  const IMPACT = { bullish: ['up', 'Bullish'], bearish: ['down', 'Bearish'], mixed: ['flat', 'Mixed'] };
+  const impact = (n, tagged) => { const x = tagged && IMPACT[n.impact]; return x ? `<span class="impact ${x[0]}"><span class="chg ${x[0]}" aria-hidden="true"></span>${x[1]}</span>` : ''; };
+  function news(el, items, tagged = false) {
+    el.innerHTML = (items || []).map((n) => `<div class="news">${impact(n, tagged)}<b class="nh">${esc(n.headline)}</b><p>${esc(n.text)}</p>
       <div class="nf">${n.url ? `<a class="src" href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.source)} →</a>` : `<span class="src">${esc(n.source || '')}</span>`}${(n.tickers || []).filter((t) => NAMES[t]).map((t) => `<a class="chip" href="/desk/stock/?t=${encodeURIComponent(t)}">${esc(t)}</a>`).join('')}</div></div>`).join('')
       || '<p class="sub">No market news today.</p>';
   }
@@ -269,5 +273,5 @@ window.Desk = (function () {
       location.reload();
     });
   }
-  return { get ASOF() { return ASOF; }, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, startPeriod, get INTRA() { return INTRA; }, init };
+  return { get ASOF() { return ASOF; }, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, startPeriod, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
 })();

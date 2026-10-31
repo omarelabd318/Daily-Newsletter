@@ -9,7 +9,8 @@ For the reasons: open the leads, check the cause at the outlet, and write it int
 "why" (one short line), "source" and "url" on that stock's row. Leave "why" out when no reason is found;
 "no news found" is a fact worth stating only when the move is large (5% or more).
 
-Writes desk/movers.json: the ten biggest rises and falls among all EGX stocks (Mubasher's price list) and
+Writes desk/movers.json: the EGX session's breadth (how many stocks that traded rose, fell or were unchanged),
+and the ten biggest rises and falls among all EGX stocks (Mubasher's price list) and
 among US companies worth $10bn or more (Nasdaq's screener of every listed stock). Thinly traded stocks are
 left out so a few trades cannot top the list: on the EGX, those that traded under EGP 1m in the session.
 A market still trading keeps the session already saved. Prints one line per market.
@@ -58,14 +59,17 @@ def egx():
     now = datetime.datetime.now(CAIRO)
     if session == now.date().isoformat() and now.strftime("%H:%M") < "14:45":
         return None, f"EGX: {session} is still trading; kept the saved session"
-    rows = []
+    rows, breadth = [], {"up": 0, "down": 0, "flat": 0}
     for p in d["prices"]:
         pct, price, turnover = num(p.get("changePercentage")), num(p.get("value")), num(p.get("turnover"))
+        # market breadth: every stock that traded in the session, however little
+        if pct is not None and (turnover or 0) > 0:
+            breadth["up" if pct > 0 else "down" if pct < 0 else "flat"] += 1
         if pct is None or price is None or (turnover or 0) < MIN_TURNOVER_EGP:
             continue
         rows.append({"t": p["code"], "name": p["name"], "ar": ar.get(p["code"]), "price": price, "pct": pct, "turnover": turnover})
     out = rank(rows)
-    out.update(session=session, basis=f"All EGX stocks that traded at least EGP 1m ({out['count']} on the day)")
+    out.update(session=session, basis=f"All EGX stocks that traded at least EGP 1m ({out['count']} on the day)", breadth=breadth)
     return out, f"EGX: {session}, {out['count']} stocks"
 
 

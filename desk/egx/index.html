@@ -87,8 +87,15 @@
   M.toggle(M.$('cur'), ['EGP', 'USD'], (i) => { inUSD = i === 1; draw(); });
   M.segment(M.$('seg'), per[0], (p) => { per = p; draw(); }, M.PERIODS.concat(M.LONG)); draw();
   const signed = (c) => `<span class="${M.cls(c)}">${M.pct(c)}</span>`, dash = '<span class="dash">—</span>', S = P.session || {};
+  // the session's turnover from the data log (its 90-day comparison once about 60 sessions are logged) and the
+  // market's breadth from the movers file; figures the day's file gives take precedence
+  const TV = M.series((e) => e.egx_turnover, 'egx'), tov = TV.length && TV.at(-1)[0] === M.ASOF ? TV.at(-1)[1] : null;
+  const t90 = TV.filter(([d]) => d >= M.cut(M.ASOF, 90) && d < M.ASOF).map((x) => x[1]);
+  const vs90 = tov != null && t90.length >= 60 ? (tov / (t90.reduce((a, b) => a + b, 0) / t90.length) - 1) * 100 : null;
+  const MV = M.MOVERS && M.MOVERS.egx, B = MV && MV.session === M.ASOF ? MV.breadth : null;
   M.$('stats').innerHTML = M.kv([['Close', M.num(M.last(idx))], ['Day', `<span class="${M.cls(dc)}">${M.pct(dc, 2)}</span>`], ['Week', signed(M.change(idx, 7))], ['Month', signed(M.change(idx, 30))], ['This year', signed(M.ytd(idx))],
-    ['Turnover', S.turnover ? M.esc(S.turnover) : dash], ['Against 90-day average', S.vs90 ? M.esc(S.vs90) : dash], ['Advancers / decliners', S.breadth ? M.esc(S.breadth) : dash]]);
+    ['Turnover', S.turnover ? M.esc(S.turnover) : tov != null ? `EGP ${M.num(tov, 1)}bn` : dash], ['Against 90-day average', S.vs90 ? M.esc(S.vs90) : vs90 != null ? signed(vs90) : dash],
+    ['Advancers / decliners', S.breadth ? M.esc(S.breadth) : B ? `${B.up} / ${B.down} <span class="meta">(${B.flat} unchanged; Mubasher)</span>` : dash]]);
   const [lo, hi] = M.range52(idx); M.$('range').innerHTML = M.rangeBar(lo, hi, M.last(idx), (x) => M.num(x, 0));
   // the whole market's movers of the last session, or the desk's 12 stocks over any period
   let mback = 0, mall = true;
@@ -126,7 +133,7 @@
   M.toggle(M.$('scur'), ['EGP', 'USD'], (i) => { tUSD = i === 1; drawT(); });
   M.segment(M.$('sseg'), '1D', (p) => { tper = p; drawT(); }, M.PERIODS.concat(M.LONG)); drawT();
   M.outlook(M.$('outlook'), P.outlook, 'EGP');
-  M.news(M.$('news'), P.news);
+  M.news(M.$('news'), P.news, true);
 })();
 </script>
 </body>
