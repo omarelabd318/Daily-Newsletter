@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Global · Markets Desk</title>
-<meta name="description" content="Brent, gold, the dollar index and Bitcoin, each with why it matters for Egypt, and gold prices in Egypt.">
+<meta name="description" content="Brent, gold, the dollar index and Bitcoin, each with why it matters for Egypt.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,600&display=swap">
@@ -20,14 +20,6 @@
   </div><div class="actions"><span class="samp" data-sample hidden>Sample desk</span></div></div>
   <div class="pages" id="cards-top" style="margin-bottom:var(--gap)"></div>
   <div class="pages" style="margin-bottom:var(--gap)">
-    <section class="card c12">
-      <div class="card-h"><h2>Gold in Egypt</h2><div class="seg" id="gseg"></div></div>
-      <div class="ctabs" id="gtabs" style="margin-bottom:10px"></div>
-      <div class="hero"><span class="lvl num" id="glvl"></span><span class="d num" id="gd"></span><span class="meta" id="gunit"></span></div>
-      <div class="gold-grid"><div class="midchart" id="gch" style="height:240px"></div><div id="gkv"></div></div>
-      <p class="chart-cap" id="gcap"></p>
-      <p class="stock-note">Egyptian gold follows the world price in dollars times the pound's rate, so a weaker pound lifts it even when gold falls abroad.</p>
-    </section>
   </div>
   <div class="pages" id="cards"></div>
   <div class="pages" style="margin-top:var(--gap)">
@@ -46,7 +38,7 @@
   const P = D.pages.global, notes = P.notes || {};
   M.$('title').textContent = 'Global · ' + M.dateLine(M.ASOF); document.title = 'Global · Markets Desk';
   M.$('finding').textContent = P.finding;
-  // Brent and the dollar index on top, then Gold in Egypt, then world gold beside Bitcoin
+  // Brent and the dollar index on top, then world gold beside Bitcoin (Gold in Egypt is on the EGP page)
   const C = [['brent', 'Brent crude', '$ per barrel', 2], ['dxy', 'Dollar index', 'DXY, against six major currencies', 2], ['gold_usd', 'Gold', '$ per ounce', 0], ['btc', 'Bitcoin', '$', 0]];
   const cardHtml = C.map(([k, n, u], i) => `<section class="card c6"><div class="card-h"><h2>${n}</h2><div class="seg" id="seg${i}"></div></div><div class="hero"><span class="lvl num" id="lvl${i}"></span><span class="d num" id="d${i}"></span><span class="meta">${u}</span></div><div class="midchart" id="ch${i}"></div><p class="chart-cap" id="cap${i}"></p><div id="kv${i}" style="margin-top:12px"></div><p class="pvd-read">${M.esc(notes[k] || '')}</p></section>`).join('');
   M.$('cards-top').innerHTML = cardHtml.split('</section>').slice(0, 2).map((x) => x + '</section>').join('');
@@ -71,22 +63,6 @@
     const [lo, hi] = M.range52(s), signed = (c) => `<span class="${M.cls(c)}">${M.pct(c)}</span>`;
     M.$('kv' + i).innerHTML = M.kv([['Month', signed(M.change(s, 30))], ['This year', signed(M.ytd(s))], ['52-week range', `${M.num(lo, dp)} – ${M.num(hi, dp)}`]]);
   });
-  // Gold in Egypt: one chart, switched between 24K, 21K, 18K and the gold pound
-  const G = [['gold24_egp', '24K', 'EGP per gram'], ['gold21_egp', '21K', 'EGP per gram, the most bought'], ['gold18_egp', '18K', 'EGP per gram'], ['goldpound_egp', 'Gold pound', 'EGP, 8 grams of 21K']];
-  let gi = 0, gp = M.PERIODS[2];
-  const drawG = async () => {
-    if (gp[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; }
-    const [k, n, unit] = G[gi], s = M.series((e) => e[k], 'all'), signed = (c) => `<span class="${M.cls(c)}">${M.pct(c)}</span>`;
-    const dc = M.change(s, 0);
-    M.$('glvl').textContent = M.num(M.last(s), 0); M.$('gd').innerHTML = M.heroChg(s, gp); M.$('gunit').textContent = unit;
-    M.chart(M.$('gch'), s, gp[1], `Gold ${n}`, Charts.fmt.int, { xAt: true });
-    const c = M.change(s, gp[1]); M.$('gcap').innerHTML = `${gp[2]}: <span class="num ${M.cls(c)}">${M.pct(c, 2)}</span>`;
-    const [lo, hi] = M.range52(s);
-    M.$('gkv').innerHTML = M.kv([['Day', signed(dc)], ['Week', signed(M.change(s, 7))], ['Month', signed(M.change(s, 30))], ['This year', signed(M.ytd(s))]]) + M.rangeBar(lo, hi, M.last(s), (x) => M.num(x, 0));
-  };
-  M.$('gtabs').innerHTML = G.map((g, j) => `<button type="button" aria-pressed="${!j}">${g[1]}</button>`).join('');
-  M.$('gtabs').querySelectorAll('button').forEach((b, j) => b.addEventListener('click', () => { M.$('gtabs').querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); gi = j; drawG(); }));
-  M.segment(M.$('gseg'), '1M', (p) => { gp = p; drawG(); }, M.PERIODS.slice(1).concat(M.LONG)); drawG();
   M.news(M.$('news'), P.news);
 })();
 </script>

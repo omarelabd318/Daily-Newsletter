@@ -72,7 +72,7 @@ logged daily (fetch_figures.py lists them as "Desk only") but are not rows in th
 - **Wall Street** `/desk/us/`: S&P 500, Nasdaq and Dow, rates and data, biggest movers (US companies worth $10bn or more, or the desk's stocks),
   results after the bell, the desk's US stocks, then Bullish and bearish.
 - **Global** `/desk/global/`: Brent, gold, the dollar index and Bitcoin, each with one line on why it
-  matters for Egypt, and gold prices in Egypt.
+  matters for Egypt. Gold in Egypt (24K, 21K, 18K, the gold pound) is on the EGP page and the EGY dashboard.
 - **EGX stocks** `/desk/stocks/egypt/` and **Wall Street stocks** `/desk/stocks/us/`: all 12 of each as cards (price, change over
   the chosen period, trend line, YTD, 52-week range, market value, latest news, open views), sortable by
   list order, market value (largest first), or best and worst; each opens its stock's page. fetch_movers.py

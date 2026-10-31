@@ -343,3 +343,6 @@ td.name a{text-decoration:none}
 table.mini{width:100%;border-collapse:collapse;font-size:13px} table.mini th{font-weight:500;color:var(--muted);text-align:left;padding:0 0 4px}
 table.mini td{padding:5px 0;border-top:1px solid var(--rule)} table.mini .num{text-align:right}
 table.mini th,table.mini td{height:auto}
+/* section headings that group a page's cards: Today, Why, The bigger picture, Reference */
+.pages > .sec-h{grid-column:1/-1;margin:10px 0 -10px;font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.pages > .sec-h:first-child{margin-top:0}

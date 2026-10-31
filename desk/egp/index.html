@@ -20,6 +20,7 @@
   </div><div class="actions"><span class="samp" data-sample hidden>Sample desk</span></div></div>
 
   <div class="pages">
+    <h2 class="sec-h">The pound today</h2>
     <section class="card c8">
       <div class="card-h"><h2>Dollar in pounds</h2><div class="seg" id="seg"></div></div>
       <div class="hero"><span class="lvl num" id="lvl"></span><span class="d num" id="dchg"></span><span class="meta">USD/EGP, market mid-rate</span></div>
@@ -31,7 +32,16 @@
       <div id="stats"></div>
       <div id="range"></div>
     </section>
+    <section class="card c12" id="c-view" hidden>
+      <div class="card-h" style="margin-bottom:6px"><span class="meta">The desk's view</span><span class="conf" id="v-conf"></span></div>
+      <div class="read" style="grid-template-columns:minmax(0,1fr)"><div>
+        <h2 class="call" id="v-head"></h2>
+        <p id="v-body"></p>
+        <dl><dt>Stocks it moves</dt><dd id="v-moves"></dd><dt>Wrong if</dt><dd id="v-wrong"></dd></dl>
+      </div></div>
+    </section>
 
+    <h2 class="sec-h">Why it's moving</h2>
     <section class="card c6">
       <div class="card-h"><h2>Pound or dollar?</h2><span class="meta">Last 30 days, start = 100</span></div>
       <div class="legend" id="pvd-legend"></div>
@@ -42,39 +52,38 @@
       <div class="card-h"><h2>What is moving the pound</h2></div>
       <div id="drivers"></div>
     </section>
-
     <section class="card c12">
+      <div class="card-h"><h2>News</h2><span class="meta">Checked against the day's research</span></div>
+      <div id="news"></div>
+    </section>
+
+    <h2 class="sec-h">The bigger picture</h2>
+    <section class="card c12">
+      <div class="card-h"><h2>Gold in Egypt</h2><div class="seg" id="gseg"></div></div>
+      <div class="ctabs" id="gtabs" style="margin-bottom:10px"></div>
+      <div class="hero"><span class="lvl num" id="glvl"></span><span class="d num" id="gd"></span><span class="meta" id="gunit"></span></div>
+      <div class="gold-grid"><div class="midchart" id="gch" style="height:240px"></div><div id="gkv"></div></div>
+      <p class="chart-cap" id="gcap"></p>
+      <p class="stock-note">Egyptian gold follows the world price in dollars times the pound's rate, so a weaker pound lifts it even when gold falls abroad.</p>
+    </section>
+    <section class="card c8">
       <div class="card-h"><div class="hgroup"><h2 id="ih">Inflation</h2><div class="ctabs" id="itab" aria-label="Measure"></div></div><div class="seg" id="iseg"></div></div>
       <div class="hero"><span class="lvl num" id="ilvl"></span><span class="d num" id="ichg"></span><span class="meta" id="imeta"></span></div>
       <div class="midchart" id="ichart"></div>
       <p class="chart-cap" id="icap"></p>
     </section>
-
-    <section class="card c12" id="c-rsv" hidden>
+    <section class="card c4" id="c-rsv" hidden>
       <div class="card-h"><h2>Foreign reserves</h2><span class="meta">Net international reserves, $bn</span></div>
       <div class="hero"><span class="lvl num" id="rlvl"></span><span class="d num" id="rchg"></span><span class="meta" id="rmonth"></span></div>
       <div id="rparts"></div>
       <p class="chart-cap" id="rcap"></p>
     </section>
 
-    <section class="card c12">
-      <div class="card-h"><h2>News</h2><span class="meta">Checked against the day's research</span></div>
-      <div id="news"></div>
-    </section>
-
+    <h2 class="sec-h">Reference</h2>
     <section class="card c12">
       <div class="card-h"><h2>Other currencies against the pound</h2><div class="seg" id="cseg"></div></div>
       <table><thead><tr><th>Currency</th><th class="trend" id="trend-h">Last 7 days</th><th class="num">Level</th><th class="num" id="chg-h">Change (1D)</th><th class="num">YTD</th></tr></thead><tbody id="body"></tbody></table>
       <p class="stock-note">The Gulf currencies are pegged to the dollar, so they move with USD/EGP; the euro and sterling also carry the dollar's own moves.</p>
-    </section>
-
-    <section class="card c12" id="c-view" hidden>
-      <div class="card-h" style="margin-bottom:6px"><span class="meta">The desk's view</span><span class="conf" id="v-conf"></span></div>
-      <div class="read" style="grid-template-columns:minmax(0,1fr)"><div>
-        <h2 class="call" id="v-head"></h2>
-        <p id="v-body"></p>
-        <dl><dt>Stocks it moves</dt><dd id="v-moves"></dd><dt>Wrong if</dt><dd id="v-wrong"></dd></dl>
-      </div></div>
     </section>
   </div>
 </main>
@@ -177,6 +186,22 @@
   M.segment(M.$('cseg'), '1D', drawT); drawT(M.PERIODS[0]);
   const V = P.view;
   if (V) { M.$('c-view').hidden = false; M.$('v-head').textContent = V.headline; M.$('v-body').textContent = V.body; M.$('v-moves').textContent = V.moves; M.$('v-wrong').textContent = V.wrong; M.$('v-conf').textContent = 'Confidence: ' + V.confidence; }
+  // Gold in Egypt: one chart, switched between 24K, 21K, 18K and the gold pound
+  const G = [['gold24_egp', '24K', 'EGP per gram'], ['gold21_egp', '21K', 'EGP per gram, the most bought'], ['gold18_egp', '18K', 'EGP per gram'], ['goldpound_egp', 'Gold pound', 'EGP, 8 grams of 21K']];
+  let gi = 0, gp = M.PERIODS[2];
+  const drawG = async () => {
+    if (gp[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; }
+    const [k, n, unit] = G[gi], s = M.series((e) => e[k], 'all'), signed = (c) => `<span class="${M.cls(c)}">${M.pct(c)}</span>`;
+    const dc = M.change(s, 0);
+    M.$('glvl').textContent = M.num(M.last(s), 0); M.$('gd').innerHTML = M.heroChg(s, gp); M.$('gunit').textContent = unit;
+    M.chart(M.$('gch'), s, gp[1], `Gold ${n}`, Charts.fmt.int, { xAt: true });
+    const c = M.change(s, gp[1]); M.$('gcap').innerHTML = `${gp[2]}: <span class="num ${M.cls(c)}">${M.pct(c, 2)}</span>`;
+    const [lo, hi] = M.range52(s);
+    M.$('gkv').innerHTML = M.kv([['Day', signed(dc)], ['Week', signed(M.change(s, 7))], ['Month', signed(M.change(s, 30))], ['This year', signed(M.ytd(s))]]) + M.rangeBar(lo, hi, M.last(s), (x) => M.num(x, 0));
+  };
+  M.$('gtabs').innerHTML = G.map((g, j) => `<button type="button" aria-pressed="${!j}">${g[1]}</button>`).join('');
+  M.$('gtabs').querySelectorAll('button').forEach((b, j) => b.addEventListener('click', () => { M.$('gtabs').querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); gi = j; drawG(); }));
+  M.segment(M.$('gseg'), '1M', (p) => { gp = p; drawG(); }, M.PERIODS.slice(1).concat(M.LONG)); drawG();
   M.news(M.$('news'), P.news);
 })();
 </script>
