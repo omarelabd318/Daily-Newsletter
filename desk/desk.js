@@ -16,7 +16,7 @@ window.Desk = (function () {
     AAPL: 'Apple', MSFT: 'Microsoft', NVDA: 'Nvidia', AMZN: 'Amazon', GOOGL: 'Alphabet', META: 'Meta', TSLA: 'Tesla', JPM: 'JPMorgan Chase', XOM: 'Exxon Mobil', AVGO: 'Broadcom', 'BRK.B': 'Berkshire Hathaway', WMT: 'Walmart', V: 'Visa', ORCL: 'Oracle', COST: 'Costco' };
   const GROUP = { egx: ['COMI', 'TMGH', 'ETEL', 'PHDC', 'SWDY', 'ORAS', 'FWRY', 'ABUK', 'HRHO', 'CLHO', 'JUFO', 'ALCN', 'MFPC', 'EAST', 'EFIH', 'EMFD', 'BQDC'], us: ['AAPL', 'MSFT', 'NVDA', 'AMZN', 'GOOGL', 'META', 'TSLA', 'JPM', 'XOM', 'AVGO', 'BRK.B', 'WMT', 'V', 'ORCL', 'COST'] };
   // the menu, by market: Egypt (dashboard, EGP, EGX, stocks), USA (dashboard, Wall Street, stocks), then Global and Views
-  const PAGES = [['/desk/egypt/', 'Egypt dashboard', 'M2 13h12M4 10l3-3 2 2 4-5'],
+  const PAGES = [['/desk/egypt/', 'EGY dashboard', 'M2 13h12M4 10l3-3 2 2 4-5'],
     ['/desk/egp/', 'EGP', 'M8 2v12M11 4.5H6.5a2 2 0 000 4h3a2 2 0 010 4H5'],
     ['/desk/egx/', 'EGX', 'M2 13h12M3 10h2v3H3zM7 7h2v6H7zM11 4h2v9h-2z'],
     ['/desk/stocks/egypt/', 'EGY stocks', 'M3 3h10v10H3zM3 6.5h10M6.5 6.5V13'],
