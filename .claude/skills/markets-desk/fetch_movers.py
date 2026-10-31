@@ -14,7 +14,7 @@ and the reasons written in the last 31 days ("why_log"), which those lists reuse
 
 Writes desk/movers.json: the EGX session's breadth (how many stocks that traded rose, fell or were unchanged),
 and the ten biggest rises and falls among all EGX stocks (Mubasher's price list) and
-among US companies worth $10bn or more (Nasdaq's screener of every listed stock). Thinly traded stocks are
+among US companies worth $10bn or more (TradingView's screener). Thinly traded stocks are
 left out so a few trades cannot top the list: on the EGX, those that traded under EGP 1m in the session.
 A market still trading keeps the session already saved. Prints one line per market.
 
@@ -193,13 +193,21 @@ def us():
     d = now.date() if now.weekday() < 5 and now.strftime("%H:%M") >= "16:15" else now.date() - datetime.timedelta(days=1)
     while d.weekday() >= 5:
         d -= datetime.timedelta(days=1)
+    # TradingView's screener: Nasdaq's download serves the session before last even the next day, so its changes
+    # would be a day late. New York exchanges, common stock, $10bn or more.
+    body = json.dumps({"filter": [{"left": "type", "operation": "equal", "right": "stock"},
+                                  {"left": "market_cap_basic", "operation": "greater", "right": MIN_CAP_USD},
+                                  {"left": "exchange", "operation": "in_range", "right": ["NYSE", "NASDAQ", "AMEX"]}],
+                       "columns": ["name", "description", "close", "change", "market_cap_basic"], "range": [0, 3000]}).encode()
+    req = urllib.request.Request("https://scanner.tradingview.com/america/scan", data=body, headers={"User-Agent": UA, "Content-Type": "application/json"})
     rows = []
-    for r in screener():
-        cap, pct, price = num(r.get("marketCap")), num(r.get("pctchange")), num(r.get("lastsale"))
-        if not cap or cap < MIN_CAP_USD or pct is None or price is None or "^" in r["symbol"] or "/" in r["symbol"]:
+    for r in json.loads(urllib.request.urlopen(req, timeout=40).read())["data"]:
+        sym, name, price, pct, cap = r["d"]
+        if pct is None or not price or "/" in sym:
             continue
-        name = re.sub(r"\s+(Common Stock|Ordinary Shares|Class [A-C].*|American Depositary Shares.*|Inc\.?$).*$", "", r["name"]).strip(" ,.")
-        rows.append({"t": r["symbol"], "name": name, "price": price, "pct": pct, "cap": cap})
+        name = re.sub(r"\s+Class [A-C]\b.*$", "", name)
+        name = re.sub(r",?\s+(Inc\.?|Corp\.?|Corporation|Co\.?|plc|N\.V\.|Ltd\.?|Company)$", "", name).strip(" ,.")
+        rows.append({"t": sym, "name": name, "price": price, "pct": round(pct, 3), "cap": cap})
     out = rank(rows)
     out.update(session=d.isoformat(), basis=f"US companies worth $10bn or more ({out['count']})")
     return out, f"US: {d}, {out['count']} companies"

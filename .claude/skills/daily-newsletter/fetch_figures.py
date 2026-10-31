@@ -288,7 +288,7 @@ def main(args):
 
     extras = []
     for a in args[1:]:
-        m = re.fullmatch(r"(egx|us)\.([A-Z.]{2,6})", a)
+        m = re.fullmatch(r"(egx|us)\.([A-Z.]{1,6})", a)
         if not m:
             sys.exit(f"Not a ticker: {a} (use egx.TICKER or us.TICKER)")
         extras.append((m.group(1), m.group(2)))

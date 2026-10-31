@@ -160,6 +160,14 @@ def main(args):
         if dates_ != sorted(dates_, reverse=True):
             warnings.append(f"stocks.json {t}: news is not newest first.")
     load("desk/flows.json")
+    # every top-five mover of 5% or more needs its reason, or "No company news found." after a search
+    MV = load("desk/movers.json") or {}
+    for m, label in (("egx", "EGX"), ("us", "US")):
+        for side in ("gainers", "losers"):
+            for r in (MV.get(m) or {}).get(side, [])[:5]:
+                if abs(r.get("pct") or 0) >= 5 and not r.get("why"):
+                    warnings.append(f"desk/movers.json: {label} {r.get('t')} {r.get('pct', 0):+.1f}% has no reason: research it (fetch_movers.py --leads) "
+                                    "and add why, source and url, or write \"No company news found.\"")
     RS = load("desk/reserves.json") or {}
     months = [r.get("month", "") for r in RS.get("months", [])]
     if months != sorted(months):

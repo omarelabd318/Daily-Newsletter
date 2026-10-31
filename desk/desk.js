@@ -190,10 +190,25 @@ window.Desk = (function () {
     const ann = opts.mark !== false && back > 7 ? bigMove(pts, opts.markAt || 0.025) : [];
     Charts.line(el, { ...axis(pts.map((x) => x[0]), Math.max(back, 7), el.clientWidth), series: [{ name, values: vals, muted: !!opts.muted }], format: fmt, annotations: ann, endLabel: true, marks: pts.length <= 12, height: el.clientHeight, min: lo - pad });
   }
-  function movers(el, tickers, back, n = 3) {
-    const rows = tickers.map((t) => ({ t, c: change(stock(t), back), v: last(stock(t)) })).filter((r) => r.c != null).sort((a, b) => b.c - a.c);
-    const row = (r) => `<div class="mv"><a href="/desk/stock/?t=${encodeURIComponent(r.t)}"><b>${esc(NAMES[r.t])}</b><span class="t">${esc(r.t)}</span></a><span class="num">${num(r.v)}</span><span class="num ${cls(r.c)}">${pct(r.c)}</span></div>`;
+  // the desk's stocks over a period; notes ({ticker: {why, source, url}}, from deskNotes) add a line under each on 1D
+  function movers(el, tickers, back, n = 3, notes = null) {
+    // only stocks with a close for their market's last session, so a missed day never shows an older move
+    const rows = tickers.filter((t) => { const s = stock(t); return s.length && s[s.length - 1][0] === asOfFor(GROUP.egx.includes(t) ? 'egx' : 'us'); })
+      .map((t) => ({ t, c: change(stock(t), back), v: last(stock(t)) })).filter((r) => r.c != null).sort((a, b) => b.c - a.c);
+    const why = (t) => { const w = notes && notes[t]; return w ? `<p class="mvwhy">${esc(w.why)}${w.url ? ` <a href="${esc(w.url)}" target="_blank" rel="noopener">${esc(w.source || 'Source')} →</a>` : ''}</p>` : ''; };
+    const row = (r) => `<div class="mv"><a href="/desk/stock/?t=${encodeURIComponent(r.t)}"><b>${esc(NAMES[r.t])}</b><span class="t">${esc(r.t)}</span></a><span class="num">${num(r.v)}</span><span class="num ${cls(r.c)}">${pct(r.c)}</span></div>` + why(r.t);
     el.innerHTML = `<div class="movers"><div><h3><span class="chg up" aria-hidden="true"></span>Biggest gainers</h3>${rows.slice(0, n).map(row).join('')}</div><div><h3><span class="chg down" aria-hidden="true"></span>Biggest losers</h3>${rows.slice(-n).reverse().map(row).join('')}</div></div>`;
+  }
+  // why each of the desk's stocks moved on its last session: the whole-market list's reason when it was a market-wide
+  // mover, else its latest checked story from the daily stock research (desk/stocks.json) within three days
+  function deskNotes(S, market) {
+    const out = {}, X = MOVERS && MOVERS[market], since = cut(asOfFor(market), 3);
+    for (const t of GROUP[market]) {
+      const n = (((S || {})[t] || {}).news || []).find((x) => x.date && x.date >= since && x.text);
+      if (n) out[t] = { why: n.text, source: n.source, url: n.url };
+    }
+    if (X) for (const r of (X.gainers || []).concat(X.losers || [])) if (r.why && GROUP[market].includes(r.t)) out[r.t] = r;
+    return out;
   }
   const intraOf = (t) => { const m = GROUP.egx.includes(t) ? 'egx' : 'us'; return INTRA && INTRA[m] && INTRA[m].series[t]; };
   // the trend column's heading: on 1D, the session its lines show when one is saved for that market
@@ -323,5 +338,5 @@ window.Desk = (function () {
       location.reload();
     });
   }
-  return { get ASOF() { return ASOF; }, asOfFor, lastDate, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, weekChart, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
+  return { get ASOF() { return ASOF; }, asOfFor, lastDate, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, weekChart, deskNotes, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
 })();

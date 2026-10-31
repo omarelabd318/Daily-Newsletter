@@ -43,7 +43,8 @@ closes are the last session's; the news, stock research and analysis are still u
    Run it with `--leads` to list news for the top five each way, find why each moved (a disclosure,
    results, a deal, a rating, a sector move), check it at the outlet, and add `why`, `source` and `url` to
    that stock's row in `desk/movers.json`. One short line; leave it out when no reason is found, and write
-   "No company news found." only for moves of 5% or more. Never guess a reason.
+   "No company news found." only for moves of 5% or more. Never guess a reason. Do it for both markets, the EGX
+   and the US: check_desk.py warns about any top-five mover of 5% or more left without a reason.
    The same script saves the past week's and month's biggest movers across each market (TradingView's changes, shown
    on the EGX and Wall Street pages under a 1D | 1W | 1M switch, labelled "Past week, TradingView" and "Past month,
    TradingView"); they reuse any reason written for that stock in the last 31 days, so no separate research is needed.

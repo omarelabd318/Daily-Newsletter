@@ -50,7 +50,8 @@ def main(args):
             if missing:
                 problems.append(f"{d['date']}: missing {', '.join(missing)} (logged the day before).")
         for k, v in cur.items():
-            if d["date"] > start and k in last and last[k] and v != last[k]:
+            # volumes swing widely from one session to the next, so only prices are checked for jumps
+            if d["date"] > start and k in last and last[k] and v != last[k] and k != "egx30_vol":
                 move = (v / last[k] - 1) * 100
                 if abs(move) > 15:
                     problems.append(f"{d['date']}: {k} moved {move:+.1f}% ({last[k]:,.2f} to {v:,.2f}); check it.")

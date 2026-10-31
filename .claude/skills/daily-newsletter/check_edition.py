@@ -84,7 +84,7 @@ def check_stocks(parts, days, date):
         series = [(d["date"], d.get(group) or {}) for d in days if d.get("date", "") <= date]
         for line in body:
             cells = [c.strip() for c in line.strip().strip("|").split("|")]
-            m = re.search(r"\(([A-Z.]{2,6})\)", cells[0]) if len(cells) >= 3 else None
+            m = re.search(r"\(([A-Z.]{1,6})\)", cells[0]) if len(cells) >= 3 else None
             if not m:
                 continue
             t, close, change = m.group(1), num(cells[1]), num(cells[2])

@@ -27,7 +27,7 @@
   const longDate = day(D.date).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
 
   // the data log: each entry holds the closes its edition showed, so a close belongs to the day before the entry
-  const INTRA = await get('/desk/intraday.json'), MOVERS = await get('/desk/movers.json');
+  const INTRA = await get('/desk/intraday.json'), MOVERS = await get('/desk/movers.json'), STOCKS = ((await get('/desk/stocks.json')) || {}).stocks || {};
   const log = await get('/data/markets-recent.json');
   let days = (log && log.days) || [];
   function series(pick, market) {
@@ -276,7 +276,10 @@
         return;
       }
       // the desk's stocks on the day, from the data log; a reason carries over when the stock is also a whole-market mover
-      const notes = {}; if (MV) for (const r of MV.gainers.concat(MV.losers)) if (r.why) notes[r.t] = r;
+      // a reason: the whole-market list's when the stock was a market-wide mover, else its latest checked story within three days
+      const notes = {}, since = cut(asOf(S.group), 3);
+      for (const t of GROUP[S.group]) { const n = ((STOCKS[t] || {}).news || []).find((x) => x.date && x.date >= since && x.text); if (n) notes[t] = { why: n.text, source: n.source, url: n.url }; }
+      if (MV) for (const r of MV.gainers.concat(MV.losers)) if (r.why) notes[r.t] = r;
       const rows = GROUP[S.group].map((t) => { const s = series((e) => (e[S.group] || {})[t], S.group), fresh = s.length && s[s.length - 1][0] === asOf(S.group);
         return fresh && s.length > 1 ? { t, price: s[s.length - 1][1], pct: change(s, 0), why: (notes[t] || {}).why, url: (notes[t] || {}).url, source: (notes[t] || {}).source } : null; }).filter((r) => r && r.pct != null).sort((a, b) => b.pct - a.pct);
       $('movers').innerHTML = mlists(rows.filter((r) => r.pct > 0).slice(0, 3), rows.filter((r) => r.pct < 0).reverse().slice(0, 3));

@@ -69,7 +69,7 @@ def main(args):
             sys.exit(f"Not a number: {p}")
         if not math.isfinite(num):
             sys.exit(f"Not a finite number: {p}")
-        m = re.fullmatch(r"(egx|us|vol)\.([A-Z.]{2,6})", k)
+        m = re.fullmatch(r"(egx|us|vol)\.([A-Z.]{1,6})", k)
         if m:
             entry.setdefault(m.group(1), {})[m.group(2)] = num
         elif k in KEYS:

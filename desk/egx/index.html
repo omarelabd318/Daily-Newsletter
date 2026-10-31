@@ -129,9 +129,10 @@
   // the whole market's movers of the last session, or the desk's 12 stocks over any period
   // the whole market over the last session, week or month, or the desk's stocks over any period
   let mback = 0, wback = 0, mall = true;
+  const STK = ((await M.get('/desk/stocks.json')) || {}).stocks || {};
   const dm = () => {
     if (mall) { M.$('mnote').textContent = M.marketMovers(M.$('movers'), 'egx', 5, { 7: 'week', 30: 'month' }[wback] || ''); return; }
-    M.movers(M.$('movers'), M.GROUP.egx, mback); M.$('mnote').textContent = 'Among the desk\'s ' + M.GROUP.egx.length + ' Egyptian stocks. Tap one for its page.';
+    M.movers(M.$('movers'), M.GROUP.egx, mback, 3, mback === 0 ? M.deskNotes(STK, 'egx') : null); M.$('mnote').textContent = 'Among the desk\'s ' + M.GROUP.egx.length + ' Egyptian stocks. Tap one for its page.';
   };
   const mseg = () => (mall ? M.segment(M.$('mseg'), M.PERIODS.find((p) => p[1] === wback)[0], (p) => { wback = p[1]; dm(); }, M.PERIODS.slice(0, 3))
     : M.segment(M.$('mseg'), M.PERIODS.find((p) => p[1] === mback)[0], (p) => { mback = p[1]; dm(); }));
