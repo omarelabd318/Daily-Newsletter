@@ -346,3 +346,8 @@ table.mini th,table.mini td{height:auto}
 /* section headings that group a page's cards: Today, Why, The bigger picture, Reference */
 .pages > .sec-h{grid-column:1/-1;margin:10px 0 -10px;font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
 .pages > .sec-h:first-child{margin-top:0}
+/* "Show all" under long lists, and "More" for the long chart periods */
+.more-btn{display:inline-flex;align-items:center;height:32px;margin-top:10px;padding:0 12px;border:1px solid var(--border);border-radius:var(--radius-control);background:var(--surface);color:var(--text);font:inherit;font-size:13px;font-weight:500;cursor:pointer}
+.more-btn:hover{background:var(--raised)}
+tbody.clip tr:nth-child(n+9){display:none}
+.seg .seg-more{color:var(--muted)}

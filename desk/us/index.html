@@ -20,6 +20,7 @@
   </div><div class="actions"><span class="samp" data-sample hidden>Sample desk</span></div></div>
 
   <div class="pages">
+    <h2 class="sec-h">Today</h2>
     <section class="card c8">
       <div class="card-h"><div class="ctabs" id="itabs"></div><div class="seg" id="seg"></div></div>
       <div class="hero"><span class="lvl num" id="lvl"></span><span class="d num" id="dchg"></span></div>
@@ -33,6 +34,7 @@
       <div id="rates"></div>
     </section>
 
+    <h2 class="sec-h">Why it moved</h2>
     <section class="card c6">
       <div class="card-h"><div class="hgroup"><h2>Biggest movers</h2><div class="ctabs" id="mscope" aria-label="Which stocks"></div></div><div class="seg" id="mseg" hidden></div></div>
       <div id="movers"></div>
@@ -48,6 +50,7 @@
       <div id="news"></div>
     </section>
 
+    <h2 class="sec-h">The stocks</h2>
     <section class="card c12">
       <div class="card-h"><h2>US stocks</h2><div class="seg" id="sseg"></div></div>
       <table><thead><tr><th>Stock</th><th class="trend" id="trend-h">Last 7 days</th><th class="num">Close</th><th class="num" id="chg-h">Change (1D)</th><th class="num">YTD</th></tr></thead><tbody id="body"></tbody></table>
@@ -91,9 +94,10 @@
   M.toggle(M.$('mscope'), ['Whole market', 'Desk stocks'], (i) => { mall = i === 0; dm(); });
   M.segment(M.$('mseg'), '1D', (p) => { mback = p[1]; dm(); }); dm();
   if (P.afterBell && P.afterBell.length) { M.$('c-bell').hidden = false; M.$('bell-date').textContent = M.short(M.ASOF); M.$('bell').innerHTML = M.drivers(P.afterBell); }
+  const UST = M.byCap(M.GROUP.us, ((await M.get('/desk/stocks.json')) || {}).stocks);   // largest first; the first eight show
   const drawT = async (p) => {
     if (p[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; }   // 3Y and 5Y load the full log
-    M.$('chg-h').textContent = `Change (${p[0]})`; M.$('trend-h').textContent = M.trendHead(p[1], 'us', p[2]); M.stockTable(M.$('body'), M.GROUP.us, p[1]);
+    M.$('chg-h').textContent = `Change (${p[0]})`; M.$('trend-h').textContent = M.trendHead(p[1], 'us', p[2]); M.stockTable(M.$('body'), UST, p[1]); M.clipRows(M.$('body'), UST.length, 'stocks');
   };
   M.segment(M.$('sseg'), '1D', drawT, M.PERIODS.concat(M.LONG)); drawT(M.PERIODS[0]);
   M.outlook(M.$('outlook'), P.outlook, '$');

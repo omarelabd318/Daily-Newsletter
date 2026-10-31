@@ -20,6 +20,7 @@
   </div><div class="actions"><span class="samp" data-sample hidden>Sample desk</span></div></div>
 
   <div class="pages">
+    <h2 class="sec-h">Today</h2>
     <section class="card c8">
       <div class="card-h"><div class="hgroup"><h2 id="iname">EGX30</h2><div class="ctabs" id="itabs" aria-label="Index" hidden></div><div class="ctabs" id="cur" aria-label="Currency"></div></div><div class="seg" id="seg"></div></div>
       <div class="hero"><span class="lvl num" id="lvl"></span><span class="d num" id="dchg"></span></div>
@@ -37,6 +38,7 @@
       </div>
     </section>
 
+    <h2 class="sec-h">Why it moved</h2>
     <section class="card c6">
       <div class="card-h"><div class="hgroup"><h2>Biggest movers</h2><div class="ctabs" id="mscope" aria-label="Which stocks"></div></div><div class="seg" id="mseg" hidden></div></div>
       <div id="movers"></div>
@@ -57,6 +59,7 @@
       <div id="news"></div>
     </section>
 
+    <h2 class="sec-h">The stocks</h2>
     <section class="card c12">
       <div class="card-h"><div class="hgroup"><h2>Egyptian stocks</h2><div class="ctabs" id="scur" aria-label="Currency"></div></div><div class="seg" id="sseg"></div></div>
       <table><thead><tr><th>Stock</th><th class="trend" id="trend-h">Last 7 days</th><th class="num" id="close-h">Close</th><th class="num" id="chg-h">Change (1D)</th><th class="num">YTD</th></tr></thead><tbody id="body"></tbody></table>
@@ -148,11 +151,12 @@
 
   // the table in pounds or dollars, over 1D to 5Y (3Y and 5Y load the full log)
   let tper = M.PERIODS[0], tUSD = false;
+  const EGXT = M.byCap(M.GROUP.egx, ((await M.get('/desk/stocks.json')) || {}).stocks);   // largest first; the first eight show
   const drawT = async () => {
     if (tper[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; }
     M.$('chg-h').textContent = `Change (${tper[0]})`; M.$('trend-h').textContent = M.trendHead(tper[1], 'egx', tper[2]);
     M.$('close-h').textContent = tUSD ? 'Close ($)' : 'Close';
-    M.stockTable(M.$('body'), M.GROUP.egx, tper[1], tUSD);
+    M.stockTable(M.$('body'), EGXT, tper[1], tUSD); M.clipRows(M.$('body'), EGXT.length, 'stocks');
   };
   M.toggle(M.$('scur'), ['EGP', 'USD'], (i) => { tUSD = i === 1; drawT(); });
   M.segment(M.$('sseg'), '1D', (p) => { tper = p; drawT(); }, M.PERIODS.concat(M.LONG)); drawT();

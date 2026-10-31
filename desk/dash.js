@@ -54,11 +54,14 @@
   const PERIODS = [['1D', 0, 'Last 7 days'], ['1W', 7, 'Last 7 days'], ['1M', 30, 'Last 30 days'], ['6M', 182, 'Last 6 months'], ['1Y', 365, 'Last 12 months']];
   // every visit opens on the defaults; clear the choices an earlier version of the desk remembered
   try { Object.keys(localStorage).filter((k) => k.startsWith('desk:')).forEach((k) => localStorage.removeItem(k)); } catch (e) {}
+  // a row of period buttons; 3Y and 5Y sit behind "More" unless one of them is the starting period
   const segment = (el, start, onPick, list = PERIODS) => {
-    el.innerHTML = list.map((p) => `<button type="button" aria-pressed="${p[0] === start}">${p[0]}</button>`).join('');
-    el.querySelectorAll('button').forEach((b, i) => b.addEventListener('click', () => {
-      el.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); onPick(list[i]);
-    }));
+    const long = (p) => p[1] > 400, tuck = list.some(long) && !long(list.find((p) => p[0] === start) || [0, 0]);
+    el.innerHTML = list.map((p) => `<button type="button" aria-pressed="${p[0] === start}"${tuck && long(p) ? ' hidden' : ''}>${p[0]}</button>`).join('')
+      + (tuck ? '<button type="button" class="seg-more" aria-label="More periods">More</button>' : '');
+    const bs = [...el.querySelectorAll('button:not(.seg-more)')], more = el.querySelector('.seg-more');
+    bs.forEach((b, i) => b.addEventListener('click', () => { bs.forEach((x) => x.setAttribute('aria-pressed', x === b)); onPick(list[i]); }));
+    if (more) more.addEventListener('click', () => { bs.forEach((b) => { b.hidden = false; }); more.remove(); });
   };
   const NAMES = { COMI: 'Commercial International Bank', TMGH: 'Talaat Moustafa', ETEL: 'Telecom Egypt', PHDC: 'Palm Hills', SWDY: 'Elsewedy Electric', ORAS: 'Orascom Construction', FWRY: 'Fawry', ABUK: 'Abu Qir Fertilizers', HRHO: 'EFG Holding', CLHO: 'Cleopatra Hospital', JUFO: 'Juhayna', ALCN: 'Alexandria Containers', MFPC: 'MOPCO', EAST: 'Eastern Company', EFIH: 'e-finance', EMFD: 'Emaar Misr', BQDC: 'Banque du Caire', EGAL: 'Egypt Aluminium', AMOC: 'Alexandria Mineral Oils', SKPC: 'Sidi Kerir Petrochemicals', EFID: 'Edita Food Industries',
     AAPL: 'Apple', MSFT: 'Microsoft', NVDA: 'Nvidia', AMZN: 'Amazon', GOOGL: 'Alphabet', META: 'Meta', TSLA: 'Tesla', JPM: 'JPMorgan Chase', XOM: 'Exxon Mobil', AVGO: 'Broadcom', 'BRK.B': 'Berkshire Hathaway', WMT: 'Walmart', V: 'Visa', ORCL: 'Oracle', COST: 'Costco' };

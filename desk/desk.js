@@ -72,11 +72,14 @@ window.Desk = (function () {
 
   // every visit opens on the defaults; clear the choices an earlier version of the desk remembered
   try { Object.keys(localStorage).filter((k) => k.startsWith('desk:')).forEach((k) => localStorage.removeItem(k)); } catch (e) {}
+  // a row of period buttons; 3Y and 5Y sit behind "More" unless one of them is the starting period
   function segment(el, start, onPick, list = PERIODS) {
-    el.innerHTML = list.map((p) => `<button type="button" aria-pressed="${p[0] === start}">${p[0]}</button>`).join('');
-    el.querySelectorAll('button').forEach((b, i) => b.addEventListener('click', () => {
-      el.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); onPick(list[i]);
-    }));
+    const long = (p) => p[1] > 400, tuck = list.some(long) && !long(list.find((p) => p[0] === start) || [0, 0]);
+    el.innerHTML = list.map((p) => `<button type="button" aria-pressed="${p[0] === start}"${tuck && long(p) ? ' hidden' : ''}>${p[0]}</button>`).join('')
+      + (tuck ? '<button type="button" class="seg-more" aria-label="More periods">More</button>' : '');
+    const bs = [...el.querySelectorAll('button:not(.seg-more)')], more = el.querySelector('.seg-more');
+    bs.forEach((b, i) => b.addEventListener('click', () => { bs.forEach((x) => x.setAttribute('aria-pressed', x === b)); onPick(list[i]); }));
+    if (more) more.addEventListener('click', () => { bs.forEach((b) => { b.hidden = false; }); more.remove(); });
   }
   // a trend line: the period's closes, or on 1D the last session through the day when it is saved (intra)
   function spark(s, back, intra = null) {
@@ -198,6 +201,16 @@ window.Desk = (function () {
       return `<tr class="click" onclick="location='/desk/stock/?t=${encodeURIComponent(t)}'"><td class="name"><a href="/desk/stock/?t=${encodeURIComponent(t)}"><b>${esc(NAMES[t])}</b><span>${esc(t)}</span></a></td><td class="trend">${spark(s, back, intraOf(t))}</td><td class="num">${num(last(s))}</td><td class="num"><span class="${cls(c)}">${pct(c)}</span></td><td class="num"><span class="${cls(y)}">${pct(y)}</span></td></tr>`;
     }).join('');
   }
+  // a long table shows its first eight rows; the button under it shows the rest (the rows can be redrawn freely)
+  function clipRows(tbody, total, noun) {
+    if (total <= 8 || tbody.dataset.clip) return;
+    tbody.dataset.clip = '1'; tbody.classList.add('clip');
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'more-btn'; b.textContent = `Show all ${total} ${noun}`;
+    b.addEventListener('click', () => { const on = tbody.classList.toggle('clip'); b.textContent = on ? `Show all ${total} ${noun}` : 'Show fewer'; });
+    tbody.closest('table').after(b);
+  }
+  // tickers by market value, largest first (those without one last)
+  const byCap = (tickers, S) => { const v = (t) => (((S || {})[t] || {}).cap || {}).value ?? -1; return [...tickers].sort((a, b) => v(b) - v(a)); };
   const kv = (rows) => '<div class="kv">' + rows.map(([k, v]) => `<span class="k">${esc(k)}</span><span class="v num">${v}</span>`).join('') + '</div>';
   const rangeBar = (lo, hi, v, f = (x) => num(x)) => lo == null ? '' : `<div class="range"><i style="left:calc(${((v - lo) / (hi - lo || 1) * 100).toFixed(1)}% - 1px)"></i></div><div class="range-l"><span>52-week low ${f(lo)}</span><span>high ${f(hi)}</span></div>`;
 
@@ -222,9 +235,13 @@ window.Desk = (function () {
   const IMPACT = { bullish: ['up', 'Bullish'], bearish: ['down', 'Bearish'], mixed: ['flat', 'Mixed'] };
   const impact = (n, tagged) => { const x = tagged && IMPACT[n.impact]; return x ? `<span class="impact ${x[0]}"><span class="chg ${x[0]}" aria-hidden="true"></span>${x[1]}</span>` : ''; };
   function news(el, items, tagged = false) {
-    el.innerHTML = (items || []).map((n) => `<div class="news">${impact(n, tagged)}<b class="nh">${esc(n.headline)}</b><p>${esc(n.text)}</p>
+    const list = items || [], SHOW = 3;
+    el.innerHTML = list.map((n, i) => `<div class="news"${i >= SHOW ? ' hidden' : ''}>${impact(n, tagged)}<b class="nh">${esc(n.headline)}</b><p>${esc(n.text)}</p>
       <div class="nf">${n.url ? `<a class="src" href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.source)} →</a>` : `<span class="src">${esc(n.source || '')}</span>`}${(n.tickers || []).filter((t) => NAMES[t]).map((t) => `<a class="chip" href="/desk/stock/?t=${encodeURIComponent(t)}">${esc(t)}</a>`).join('')}</div></div>`).join('')
+      + (list.length > SHOW ? `<button type="button" class="more-btn">Show all ${list.length} stories</button>` : '')
       || '<p class="sub">No market news today.</p>';
+    const b = el.querySelector('.more-btn');
+    if (b) b.addEventListener('click', () => { el.querySelectorAll('.news[hidden]').forEach((x) => { x.hidden = false; }); b.remove(); });
   }
 
   async function init(page) {
@@ -273,5 +290,5 @@ window.Desk = (function () {
       location.reload();
     });
   }
-  return { get ASOF() { return ASOF; }, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, startPeriod, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
+  return { get ASOF() { return ASOF; }, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
 })();
