@@ -207,7 +207,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
   .grid,.leftcol,.main{display:contents}
   .canvas{display:flex;flex-direction:column}
   .canvas > .grid{display:flex;flex-direction:column;gap:var(--gap)}
-  #c-read{order:1} #c-close{order:2} #c-chart{order:3} #c-movers{order:3} #c-board{order:3} #c-flows{order:4} #c-stocks{order:5} #c-pvd{order:6} #c-week{order:7} #c-views{order:8}
+  #c-read{order:1} #c-close{order:2} #c-chart{order:3} #c-gold{order:3} #c-movers{order:3} #c-board{order:3} #c-flows{order:4} #c-stocks{order:5} #c-pvd{order:6} #c-week{order:7} #c-views{order:8}
 }
 /* phone */
 @media (max-width:860px){
@@ -236,3 +236,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
   .read dt{margin-top:4px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+/* Gold in Egypt on the EGY dashboard: the chart with the period changes beside it */
+.gold-row{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:24px;align-items:start}
+.gold-chart{height:240px} .gold-row .figs{margin-top:0;border-top:0}
+@media (max-width:860px){.gold-row{grid-template-columns:minmax(0,1fr);gap:8px}}

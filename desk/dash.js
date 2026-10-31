@@ -179,9 +179,9 @@
     const SPAN = { 0: 'on the day', 7: 'in a week', 30: 'in a month', 182: 'in 6 months', 365: 'in a year', 1095: 'in 3 years', 1826: 'in 5 years' };
     async function drawIdx(p) {
       per = p; $('egx-chart').style.height = '';
-      if (p[1] > 400 && !fullLoaded) {   // 3Y and 5Y need the full log, loaded once
-        const f = await get('/data/markets.json'); fullLoaded = true;
-        if (f && f.days) { days = f.days; idx = series((e) => e[cur.k], S.market); }
+      if (p[1] > 400) {   // 3Y and 5Y need the full log, loaded once (the gold card may have loaded it already)
+        if (!fullLoaded) { const f = await get('/data/markets.json'); fullLoaded = true; if (f && f.days) days = f.days; }
+        idx = series((e) => e[cur.k], S.market);
       }
       $('chart-name').textContent = IDX.length < 2 ? cur.n : 'Wall Street';
       const lv = idx.length ? idx[idx.length - 1][1] : null, hc = change(idx, p[1]);
@@ -206,6 +206,31 @@
     // opens on 1D when the last session through the day is saved, otherwise on 1M
     const start = INTRA && INTRA[S.market] && INTRA[S.market].series[cur.intra] ? PERIODS[0] : PERIODS[2];
     segment($('egx-seg'), start[0], drawIdx, PERIODS.concat(LONG)); drawIdx(start);
+
+    // Gold in Egypt (EGY dashboard only): 24K first, then 21K, 18K and the gold pound, over any period
+    $('c-gold').hidden = key !== 'egypt';
+    if (key === 'egypt') {
+      const G = [['gold24_egp', '24K', 'EGP per gram'], ['gold21_egp', '21K', 'EGP per gram, the most bought'], ['gold18_egp', '18K', 'EGP per gram'], ['goldpound_egp', 'Gold pound', 'EGP, 8 grams of 21K']];
+      let gi = 0, gper = PERIODS[2];
+      const drawGold = async () => {
+        if (gper[1] > 400 && !fullLoaded) { const f = await get('/data/markets.json'); fullLoaded = true; if (f && f.days) days = f.days; }
+        const [k, n, unit] = G[gi], s = series((e) => e[k], 'all'), lv = s.length ? s[s.length - 1][1] : null, hc = change(s, gper[1]);
+        $('glvl').textContent = lv == null ? '—' : lv.toLocaleString('en-GB', { maximumFractionDigits: 0 });
+        $('gchg').innerHTML = `<span class="${cls(hc)}">${pct(hc, 2)}</span> <span class="span-l">${SPAN[gper[1]] || ''}</span>`;
+        $('gunit').textContent = unit;
+        const back = Math.max(gper[1], 7), pts = s.filter(([d]) => d >= cut(ASOF, back)), el = $('gchart'); el.innerHTML = '';
+        if (pts.length < 2) el.textContent = 'Not enough prices logged yet.';
+        else {
+          const vals = pts.map((x) => x[1]), lo = Math.min(...vals), hi = Math.max(...vals);
+          Charts.line(el, { ...axis(pts.map((x) => x[0]), back, el.clientWidth), series: [{ name: `Gold ${n}`, values: vals }], format: Charts.fmt.int, annotations: bigMove(pts), endLabel: true, height: el.clientHeight, min: lo - (hi - lo) * 0.15 });
+        }
+        const row = (label, c) => `<div class="lrow"><span class="k">${label}</span><span class="v"></span><span class="d num"><span class="${cls(c)}">${pct(c)}</span></span></div>`;
+        $('gfigs').innerHTML = row('Day', change(s, 0)) + row('Week', change(s, 7)) + row('Month', change(s, 30)) + row('This year', ytd(s));
+      };
+      $('gtabs').innerHTML = G.map((g, j) => `<button type="button" aria-pressed="${!j}">${g[1]}</button>`).join('');
+      $('gtabs').querySelectorAll('button').forEach((b, j) => b.addEventListener('click', () => { $('gtabs').querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); gi = j; drawGold(); }));
+      segment($('gseg'), '1M', (p) => { gper = p; drawGold(); }, PERIODS.slice(1).concat(LONG)); drawGold();
+    }
 
     // the whole market's biggest movers of the last session, three each way, with the reason where one was found
     const MV = MOVERS && MOVERS[S.market];

@@ -17,7 +17,8 @@ closes are the last session's; the news, stock research and analysis are still u
 
 1. Copy the newest `desk/days/*.json` as a template to `desk/days/DATE.json` (DATE is the edition date) and
    rewrite every part for today: set `date`, `asOf` (the latest close, the day before DATE on a trading
-   day), `fetched`, and remove `"sample": true`. The close card figures come from today's logged figures.
+   day), `fetched`, and remove `"sample": true`. The close card figures come from today's logged figures. Egypt's group lists the EGX30, the EGX70 EWI, USD/EGP and gold 24K
+   per gram (24K, not 21K: the dashboard's Gold in Egypt card has 21K, 18K and the gold pound).
 2. Run `python3 .claude/skills/markets-desk/stock_news.py` (`3` on Sundays) and do the stock research
    below; update `desk/stocks.json`.
 3. Write each section: finding, one to three stories (`calls`), who it helps and hurts, the Stocks note,
@@ -106,7 +107,7 @@ both together); each page names its section on `<body data-section>`. `/desk/` f
   card reads turnover from the log (`egx_turnover`), advancers and decliners from desk/movers.json, and, until
   turnover has about 60 sessions logged, compares the EGX30 companies' shares traded (`egx30_vol`) with its 90-day
   average. Its "Blue chips against small and mid caps" table comes from the movers file (TradingView's EGX30 and
-  EGX70 EWI); list the EGX70 EWI in the Egypt close card's group with the EGX30. Give `session.breadth` in the day's
+  EGX70 EWI); Give `session.breadth` in the day's
   file only when the exchange's official count is reported (it takes precedence over Mubasher's count).
 - The charts, the Stocks tables and every change and YTD figure are drawn by the page from
   `data/markets-recent.json`, so log the day's figures before publishing a desk.
