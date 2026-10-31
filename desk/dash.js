@@ -66,17 +66,9 @@
   const NAMES = { COMI: 'Commercial International Bank', TMGH: 'Talaat Moustafa', ETEL: 'Telecom Egypt', PHDC: 'Palm Hills', SWDY: 'Elsewedy Electric', ORAS: 'Orascom Construction', FWRY: 'Fawry', ABUK: 'Abu Qir Fertilizers', HRHO: 'EFG Holding', CLHO: 'Cleopatra Hospital', JUFO: 'Juhayna', ALCN: 'Alexandria Containers', MFPC: 'MOPCO', EAST: 'Eastern Company', EFIH: 'e-finance', EMFD: 'Emaar Misr', BQDC: 'Banque du Caire', EGAL: 'Egypt Aluminium', AMOC: 'Alexandria Mineral Oils', SKPC: 'Sidi Kerir Petrochemicals', EFID: 'Edita Food Industries',
     AAPL: 'Apple', MSFT: 'Microsoft', NVDA: 'Nvidia', AMZN: 'Amazon', GOOGL: 'Alphabet', META: 'Meta', TSLA: 'Tesla', JPM: 'JPMorgan Chase', XOM: 'Exxon Mobil', AVGO: 'Broadcom', 'BRK.B': 'Berkshire Hathaway', WMT: 'Walmart', V: 'Visa', ORCL: 'Oracle', COST: 'Costco' };
   const GROUP = { egx: ['COMI', 'TMGH', 'ETEL', 'PHDC', 'SWDY', 'ORAS', 'FWRY', 'ABUK', 'HRHO', 'CLHO', 'JUFO', 'ALCN', 'MFPC', 'EAST', 'EFIH', 'EMFD', 'BQDC', 'EGAL', 'AMOC', 'SKPC', 'EFID'], us: ['AAPL', 'MSFT', 'NVDA', 'AMZN', 'GOOGL', 'META', 'TSLA', 'JPM', 'XOM', 'AVGO', 'BRK.B', 'WMT', 'V', 'ORCL', 'COST'] };
-  const STOCK = {}; for (const g in GROUP) for (const t of GROUP[g]) STOCK[t] = series((e) => (e[g] || {})[t], g);
   const callRows = (rows) => rows.map((c) => `<div class="call-row"><b>${esc(c.name)}</b><span class="conf">${esc(c.confidence[0].toUpperCase() + c.confidence.slice(1))}</span><span class="why">${esc(c.why)}</span></div>`).join('');
   const PILL = { 'open': 'open', 'on track': 'ok', 'right': 'ok', 'wrong': 'bad', 'closed': 'open' };
-  // a trend line: the period's closes, or on 1D the last session through the day when it is saved (intra)
-  function spark(s, back, intra = null) {
-    const pts = !back && intra && intra.length > 1 ? intra.map((x) => x[1]) : (back <= 7 ? s.slice(-7) : s.filter(([d]) => d >= cut(ASOF, back))).map((x) => x[1]);
-    if (pts.length < 2) return '';
-    const w = 72, h = 18, min = Math.min(...pts), max = Math.max(...pts), sp = max - min || 1, st = (w - 4) / (pts.length - 1);
-    const xy = pts.map((v, i) => [2 + i * st, h - 2 - (v - min) / sp * (h - 4)]);
-    return `<svg class="spark" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true"><path d="${xy.map((c, i) => (i ? 'L' : 'M') + c[0].toFixed(1) + ' ' + c[1].toFixed(1)).join('')}"/><circle cx="${xy.at(-1)[0].toFixed(1)}" cy="${xy.at(-1)[1].toFixed(1)}" r="2.2"/></svg>`;
-  }
+
 
   // the biggest move on the chart: consecutive sessions in the same direction count as one move, shaded
   // across its days ("22–25 Oct −6.9%"); a one-day move keeps a marker line. Only moves above the threshold.
@@ -138,10 +130,10 @@
     document.title = 'Markets Desk · ' + S.name + ' · ' + day(D.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }).replace('Sept', 'Sep');
     $('finding').innerHTML = esc(X.finding) + (X.next ? ' <span class="when">' + esc(X.next) + '</span>' : '');
 
-    $('stk-more').textContent = key === 'egypt' ? 'EGX page →' : 'Wall Street page →'; $('stk-more').href = key === 'egypt' ? '/desk/egx/' : '/desk/us/';
     $('h-close').textContent = X.close.title || 'Close';
-    $('close-rows').innerHTML = X.close.groups.map((g) => '<h3>' + esc(g.name) + '</h3>' + g.rows.map((r) =>
-      `<div class="lrow${r.lead ? ' lead' : ''}"><span class="k">${esc(r.label)}</span><span class="v num${r.value == null ? ' dash' : ''}">${r.value == null ? '—' : esc(r.value)}</span><span class="d num ${cls(r.change)}">${r.change == null ? '—' : pct(r.change, 2)}</span></div>`).join('')).join('');
+    $('close-rows').innerHTML = X.close.groups.map((g) => `<div class="strip-g"><h3>${esc(g.name)}</h3><div class="strip-row">` + g.rows.map((r) =>
+      `<div class="fig${r.lead ? ' lead' : ''}"><span class="k">${esc(r.label)}</span><span class="v num${r.value == null ? ' dash' : ''}">${r.value == null ? '—' : esc(r.value)}</span>`
+      + `<span class="d num ${cls(r.change)}">${r.change == null ? '<span class="dash">—</span>' : pct(r.change, 2)}</span></div>`).join('') + '</div></div>').join('');
     $('close-note').textContent = X.close.note || '';
 
     // the day's stories: the top call first, then up to two more, one at a time; arrows, dots, keys or a swipe move between them
@@ -247,75 +239,6 @@
       $('movers').innerHTML = `<div class="movers"><div><h3><span class="chg up" aria-hidden="true"></span>Biggest gainers</h3>${MV.gainers.slice(0, 3).map(row).join('')}</div><div><h3><span class="chg down" aria-hidden="true"></span>Biggest losers</h3>${MV.losers.slice(0, 3).map(row).join('') || '<p class="chart-cap">No stock fell.</p>'}</div></div>`;
       const sd = day(MV.session); $('movers-note').textContent = `${MV.basis}, ${WD[sd.getDay()]} ${sd.getDate()} ${MON[sd.getMonth()]}.`;
     }
-
-    // side card: Egypt asks whether the pound's move is local; USA shows oil, the price that reaches Egypt most
-    $('pvd-legend').innerHTML = ''; $('pvd').innerHTML = '';
-    if (key === 'egypt') {
-      $('h-pvd').textContent = 'Dollar in pounds'; $('side-meta').textContent = 'EGP page →'; $('side-meta').href = '/desk/egp/';
-      const fx = series((e) => e.usd_egp, 'fx').filter(([d]) => d >= cut(ASOF, 30));
-      if (fx.length < 2) { $('pvd-read').textContent = 'Not enough logged rates yet.'; }
-      else {
-        const pv = $('pvd'), vals = fx.map((x) => x[1]), lo = Math.min(...vals), hi = Math.max(...vals);
-        Charts.line(pv, { ...axis(fx.map((x) => x[0]), 30, pv.clientWidth), series: [{ name: 'USD/EGP', values: vals }], format: Charts.fmt.dec(2), height: pv.clientHeight, min: lo - (hi - lo) * 0.15, endLabel: true });
-        const ch = (vals[vals.length - 1] / vals[0] - 1) * 100, now = vals[vals.length - 1];
-        const yr = series((e) => e.usd_egp, 'fx').filter(([d]) => d >= cut(ASOF, 365)).map((x) => x[1]), lo52 = Math.min(...yr), hi52 = Math.max(...yr);
-        const where = now >= hi52 - (hi52 - lo52) * 0.05 ? 'near its 52-week high' : now <= lo52 + (hi52 - lo52) * 0.05 ? 'near its 52-week low'
-          : `between its 52-week low of <span class="num">${lo52.toFixed(2)}</span> and high of <span class="num">${hi52.toFixed(2)}</span>`;
-        $('pvd-read').innerHTML = `The dollar buys <span class="num">EGP ${now.toFixed(2)}</span>, <span class="num ${cls(ch)}">${pct(ch)}</span> over the month and ${where}. Whether the pound's move is local is on the EGP page.`;
-      }
-      // the pound's figures: inflation (a fall shows green), the real one-year yield and reserves
-      const lg = (k) => series((e) => e[k], 'fx'), lastOf = (s) => (s.length ? s[s.length - 1][1] : null);
-      const pts = (c) => `${c > 0 ? '+' : c < 0 ? MINUS : ''}${Math.abs(c).toFixed(1)} pts`, rows = [];
-      const inf = lg('infl_headline'), iv = lastOf(inf), ip = ([...inf].reverse().find(([, x]) => x !== iv) || [])[1], tb = lastOf(lg('tbill_364'));
-      if (iv != null) rows.push(['Inflation (annual)', iv.toFixed(1) + '%', ip != null ? `<span class="chg ${iv > ip ? 'up' : iv < ip ? 'down' : 'flat'} inv">${pts(iv - ip)}</span>` : '']);
-      if (iv != null && tb != null) rows.push(['Real one-year yield', (tb - iv).toFixed(1) + ' pts', '']);
-      const R = ((await get('/desk/reserves.json')) || {}).months || [], RL = R[R.length - 1], RP = R[R.length - 2];
-      if (RL) { const rc = RP ? (RL.total / RP.total - 1) * 100 : null; rows.push(['Foreign reserves', '$' + RL.total.toFixed(2) + 'bn', rc == null ? '' : `<span class="${cls(rc)}">${pct(rc, 2)}</span>`]); }
-      $('pvd-figs').hidden = !rows.length;
-      $('pvd-figs').innerHTML = rows.map(([k, v, d]) => `<div class="lrow"><span class="k">${esc(k)}</span><span class="v num">${v}</span><span class="d num">${d}</span></div>`).join('');
-    } else {
-      $('pvd-figs').hidden = true;
-      const br = series((e) => e.brent, 'us').filter(([d]) => d >= cut(ASOF, 30));
-      $('h-pvd').textContent = 'Oil'; $('side-meta').textContent = 'Global page →'; $('side-meta').href = '/desk/global/';
-      if (br.length < 2) { $('pvd-read').textContent = 'Not enough logged prices yet.'; }
-      else {
-        const pv = $('pvd'), vals = br.map((x) => x[1]);
-        Charts.line(pv, { ...axis(br.map((x) => x[0]), 30, pv.clientWidth), series: [{ name: 'Brent', values: vals, muted: true }], format: Charts.fmt.dec(2), height: pv.clientHeight, min: Math.floor(Math.min(...vals) - 2), endLabel: true });
-        const ch = (vals[vals.length - 1] / vals[0] - 1) * 100, lastDay = short(br[br.length - 1][0]);
-        $('pvd-read').innerHTML = `Brent is <span class="num">${pct(ch)}</span> over the month, last logged at <span class="num">$${vals[vals.length - 1].toFixed(2)}</span> (${lastDay}). Oil feeds Egypt's import bill and fuel prices.`;
-      }
-    }
-
-    // who bought and who sold (Egypt only): net flows by investor group, bought to the right of the centre line
-    const F = X.flows;
-    $('c-flows').hidden = !F;
-    if (F) {
-      const max = Math.max(...F.rows.map((r) => Math.abs(r.net))) || 1;
-      $('h-flows').textContent = F.title || 'Who bought and who sold';
-      $('flows-sub').textContent = F.sub || '';
-      $('flows').innerHTML = F.rows.map((r) => `<div class="flow"><div class="flow-top"><span>${esc(r.who)}</span><span class="num">${r.net > 0 ? '+' : r.net < 0 ? MINUS : ''}${Math.abs(r.net).toFixed(2)}</span></div><div class="flow-bar"><i class="${r.net >= 0 ? 'buy' : 'sell'}" style="width:${(Math.abs(r.net) / max * 50).toFixed(1)}%"></i></div></div>`).join('')
-        + '<div class="flow-axis"><span>Net sold</span><span>Net bought</span></div>';
-      $('flows-read').textContent = F.read || '';
-      $('flows-note').hidden = !!F.confirmed;
-      $('flows-note').textContent = F.confirmed ? '' : 'Not yet confirmed: ' + (F.source || 'one source only') ;
-    }
-
-    // stocks for this section
-    let period = PERIODS[0];
-    function drawStocks() {
-      const back = period[1];
-      $('chg-h').textContent = `Change (${period[0]})`;
-      const I1 = INTRA && INTRA[S.group];
-      $('trend-h').textContent = back > 7 ? period[2] : !back && I1 && I1.session ? `${WD[day(I1.session).getDay()]} ${day(I1.session).getDate()} ${MON[day(I1.session).getMonth()]} session` : 'Last 7 days';
-      $('stk-note').innerHTML = X.stocksNote || '';
-      $('stk-body').innerHTML = GROUP[S.group].map((t) => {
-        const s = STOCK[t], fresh = s.length && s[s.length - 1][0] === ASOF;
-        const last = fresh ? s[s.length - 1][1] : null, c = fresh ? change(s, back) : null, y = fresh ? ytd(s) : null;
-        return `<tr style="cursor:pointer" onclick="location='/desk/stock/?t=${encodeURIComponent(t)}'"><td class="name"><b>${NAMES[t]}</b><span>${t}</span></td><td class="trend">${fresh ? spark(s, back, INTRA && INTRA[S.group] && INTRA[S.group].series[t]) : ''}</td><td class="num${last == null ? ' dash' : ''}">${last == null ? '—' : last.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td><td class="num"><span class="${cls(c)}">${pct(c)}</span></td><td class="num"><span class="${cls(y)}">${pct(y)}</span></td></tr>`;
-      }).join('');
-    }
-    segment($('stk-seg'), '1D', (p) => { period = p; drawStocks(); });
-    drawStocks();
   }
   // each dashboard is its own page: /desk/egypt/ and /desk/usa/
   const pick = () => (document.body.dataset.section === 'usa' ? 'global' : 'egypt');

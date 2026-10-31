@@ -200,14 +200,7 @@ td.trend svg{display:inline-block;vertical-align:middle}
 .mvwhy{margin:-6px 0 8px;font-size:12px;line-height:17px;color:var(--muted)}
 .mvwhy a{color:var(--muted)}
 @media (max-width:1180px){
-  .grid{grid-template-columns:minmax(0,1fr)}
-  .leftcol{position:static;grid-template-columns:repeat(2,minmax(0,1fr))}
   .read{grid-template-columns:minmax(0,1fr)}
-  /* one column: the day's answer first, then the closes, then the rest */
-  .grid,.leftcol,.main{display:contents}
-  .canvas{display:flex;flex-direction:column}
-  .canvas > .grid{display:flex;flex-direction:column;gap:var(--gap)}
-  #c-read{order:1} #c-close{order:2} #c-chart{order:3} #c-gold{order:3} #c-movers{order:3} #c-board{order:3} #c-flows{order:4} #c-stocks{order:5} #c-pvd{order:6} #c-week{order:7} #c-views{order:8}
 }
 /* phone */
 @media (max-width:860px){
@@ -240,3 +233,13 @@ td.trend svg{display:inline-block;vertical-align:middle}
 .gold-row{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:24px;align-items:start}
 .gold-chart{height:240px} .gold-row .figs{margin-top:0;border-top:0}
 @media (max-width:860px){.gold-row{grid-template-columns:minmax(0,1fr);gap:8px}}
+/* the close as a strip across the top: each group a row of figures */
+.strip{margin-bottom:var(--gap)}
+.strip-g{display:grid;grid-template-columns:72px minmax(0,1fr);gap:12px;align-items:start;padding:10px 0;border-top:1px solid var(--rule)}
+.strip-g:first-child{border-top:0;padding-top:2px}
+.strip-g h3{margin:2px 0 0;font-size:13px;font-weight:600}
+.strip-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px 20px}
+.fig{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0 8px;align-items:baseline}
+.fig .k{grid-column:1/-1;font-size:12px;color:var(--muted)} .fig .v{font-size:17px;font-weight:600} .fig.lead .v{font-size:20px}
+.fig .d{font-size:13px;text-align:right}
+@media (max-width:860px){.strip-g{grid-template-columns:minmax(0,1fr);gap:6px}.strip-row{grid-template-columns:repeat(2,minmax(0,1fr))}.fig .v,.fig.lead .v{font-size:16px}.fig .d{font-size:12px}}

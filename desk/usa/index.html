@@ -58,92 +58,65 @@
         </div>
       </div>
 
-      <div class="grid">
-        <div class="leftcol">
-          <section class="card ledger" id="c-close" aria-labelledby="h-close">
-            <div class="card-h"><h2 id="h-close">Close</h2><span class="meta">Day change</span></div>
-            <div id="close-rows"></div>
-            <p class="ledger-note" id="close-note"></p>
-          </section>
-          <section class="card" id="c-pvd" aria-labelledby="h-pvd">
-            <div class="card-h"><h2 id="h-pvd">Dollar in pounds</h2><a class="meta" id="side-meta" href="/desk/egp/">EGP page →</a></div>
-            <div class="legend" id="pvd-legend"></div>
-            <div class="pvd-plot" id="pvd"></div>
-            <p class="pvd-read" id="pvd-read"></p>
-            <div class="figs" id="pvd-figs" hidden></div>
-          </section>
-          <section class="card" id="c-flows" aria-labelledby="h-flows" hidden>
-            <div class="card-h"><h2 id="h-flows">Who bought and who sold</h2></div>
-            <p class="meta" id="flows-sub" style="margin:-6px 0 10px"></p>
-            <div id="flows"></div>
-            <p class="pvd-read" id="flows-read"></p>
-            <div class="notice" id="flows-note" hidden></div>
-          </section>
+      <section class="card strip" id="c-close" aria-labelledby="h-close">
+        <div class="card-h"><h2 id="h-close">Close</h2><span class="meta">Day change</span></div>
+        <div id="close-rows"></div>
+        <p class="ledger-note" id="close-note"></p>
+      </section>
+
+      <div class="main">
+      <section class="card span2" id="c-read" aria-labelledby="h-read">
+          <div class="story read" id="story" aria-roledescription="carousel" aria-label="The day's stories">
+            <div class="card-h" style="margin-bottom:6px"><span class="meta" id="story-n">Top call</span><span class="story-nav"><span class="conf" id="top-conf"></span><span class="arrows" id="story-arrows" hidden><button type="button" id="story-prev" aria-label="Previous story">&#8249;</button><button type="button" id="story-next" aria-label="Next story">&#8250;</button></span></span></div>
+            <h2 class="call" id="h-read"></h2>
+            <p id="top-body"></p>
+            <dl>
+              <dt>The view</dt><dd id="top-view"></dd>
+              <dt>Stocks it moves</dt><dd id="top-moves"></dd>
+              <dt>Wrong if</dt><dd id="top-wrong"></dd>
+            </dl>
+            <div class="notice" id="top-notice" hidden></div>
+            <div class="dots" id="story-dots" role="tablist" aria-label="Stories" hidden></div>
+          </div>
+      </section>
+
+      <section class="card span2" id="c-chart" aria-labelledby="chart-name">
+        <div class="card-h"><div class="hgroup"><h2 id="chart-name">EGX30</h2><div class="ctabs" id="itabs" aria-label="Index" hidden></div></div><span class="story-nav"><a class="meta" id="chart-more" href="/desk/egx/">EGX page →</a><span class="seg" role="group" aria-label="Chart period" id="egx-seg"></span></span></div>
+        <div class="hero"><span class="lvl num" id="ilvl"></span><span class="d num" id="ichg"></span></div>
+        <div class="chartbox" id="egx-chart"></div>
+        <p class="chart-cap" id="egx-cap"></p>
+      </section>
+
+      <section class="card span2" id="c-gold" aria-labelledby="h-gold" hidden>
+        <div class="card-h"><div class="hgroup"><h2 id="h-gold">Gold in Egypt</h2><div class="ctabs" id="gtabs" aria-label="Karat"></div></div><span class="story-nav"><a class="meta" href="/desk/global/">Global page →</a><span class="seg" role="group" aria-label="Chart period" id="gseg"></span></span></div>
+        <div class="hero"><span class="lvl num" id="glvl"></span><span class="d num" id="gchg"></span><span class="span-l" id="gunit"></span></div>
+        <div class="gold-row"><div class="chartbox gold-chart" id="gchart"></div><div class="figs" id="gfigs"></div></div>
+        <p class="chart-cap">Egyptian gold follows the world price in dollars times the pound's rate, so a weaker pound lifts it even when gold falls abroad.</p>
+      </section>
+
+      <section class="card span2" id="c-movers" aria-labelledby="h-movers">
+        <div class="card-h"><h2 id="h-movers">Biggest movers, whole market</h2><a class="meta" id="movers-more" href="/desk/egx/">EGX page →</a></div>
+        <div id="movers"></div>
+        <p class="chart-cap" id="movers-note"></p>
+      </section>
+
+      <section class="card span2" id="c-board" aria-labelledby="h-board">
+        <div class="card-h"><h2 id="h-board">Who it helps, who it hurts</h2><span class="meta" id="board-h"></span></div>
+        <div class="board">
+          <div><h3><span class="chg up" aria-hidden="true"></span>Helped</h3><div id="helped"></div></div>
+          <div><h3><span class="chg down" aria-hidden="true"></span>Hurt</h3><div id="hurt"></div></div>
         </div>
+      </section>
 
-        <div class="main">
-          <section class="card span2" id="c-read" aria-labelledby="h-read">
-              <div class="story read" id="story" aria-roledescription="carousel" aria-label="The day's stories">
-                <div class="card-h" style="margin-bottom:6px"><span class="meta" id="story-n">Top call</span><span class="story-nav"><span class="conf" id="top-conf"></span><span class="arrows" id="story-arrows" hidden><button type="button" id="story-prev" aria-label="Previous story">&#8249;</button><button type="button" id="story-next" aria-label="Next story">&#8250;</button></span></span></div>
-                <h2 class="call" id="h-read"></h2>
-                <p id="top-body"></p>
-                <dl>
-                  <dt>The view</dt><dd id="top-view"></dd>
-                  <dt>Stocks it moves</dt><dd id="top-moves"></dd>
-                  <dt>Wrong if</dt><dd id="top-wrong"></dd>
-                </dl>
-                <div class="notice" id="top-notice" hidden></div>
-                <div class="dots" id="story-dots" role="tablist" aria-label="Stories" hidden></div>
-              </div>
-          </section>
+      <section class="card" id="c-week" aria-labelledby="h-week">
+        <div class="card-h"><h2 id="h-week">The week ahead</h2><span class="meta">Cairo time</span></div>
+        <div id="week"></div>
+      </section>
 
-          <section class="card span2" id="c-chart" aria-labelledby="chart-name">
-            <div class="card-h"><div class="hgroup"><h2 id="chart-name">EGX30</h2><div class="ctabs" id="itabs" aria-label="Index" hidden></div></div><span class="story-nav"><a class="meta" id="chart-more" href="/desk/egx/">EGX page →</a><span class="seg" role="group" aria-label="Chart period" id="egx-seg"></span></span></div>
-            <div class="hero"><span class="lvl num" id="ilvl"></span><span class="d num" id="ichg"></span></div>
-            <div class="chartbox" id="egx-chart"></div>
-            <p class="chart-cap" id="egx-cap"></p>
-          </section>
-
-          <section class="card span2" id="c-gold" aria-labelledby="h-gold" hidden>
-            <div class="card-h"><div class="hgroup"><h2 id="h-gold">Gold in Egypt</h2><div class="ctabs" id="gtabs" aria-label="Karat"></div></div><span class="story-nav"><a class="meta" href="/desk/global/">Global page →</a><span class="seg" role="group" aria-label="Chart period" id="gseg"></span></span></div>
-            <div class="hero"><span class="lvl num" id="glvl"></span><span class="d num" id="gchg"></span><span class="span-l" id="gunit"></span></div>
-            <div class="gold-row"><div class="chartbox gold-chart" id="gchart"></div><div class="figs" id="gfigs"></div></div>
-            <p class="chart-cap">Egyptian gold follows the world price in dollars times the pound's rate, so a weaker pound lifts it even when gold falls abroad.</p>
-          </section>
-
-          <section class="card span2" id="c-movers" aria-labelledby="h-movers">
-            <div class="card-h"><h2 id="h-movers">Biggest movers, whole market</h2><a class="meta" id="movers-more" href="/desk/egx/">EGX page →</a></div>
-            <div id="movers"></div>
-            <p class="chart-cap" id="movers-note"></p>
-          </section>
-
-          <section class="card span2" id="c-board" aria-labelledby="h-board">
-            <div class="card-h"><h2 id="h-board">Who it helps, who it hurts</h2><span class="meta" id="board-h"></span></div>
-            <div class="board">
-              <div><h3><span class="chg up" aria-hidden="true"></span>Helped</h3><div id="helped"></div></div>
-              <div><h3><span class="chg down" aria-hidden="true"></span>Hurt</h3><div id="hurt"></div></div>
-            </div>
-          </section>
-
-          <section class="card span2" id="c-stocks" aria-labelledby="h-stocks">
-            <div class="card-h"><h2 id="h-stocks">Stocks <a class="meta" id="stk-more" href="/desk/egx/" style="font-weight:400;margin-left:8px">EGX page →</a></h2><div class="seg" role="group" aria-label="Change period" id="stk-seg"></div></div>
-            <table>
-              <thead><tr><th>Stock</th><th class="trend" id="trend-h">Last 7 days</th><th class="num">Close</th><th class="num" id="chg-h">Change (1D)</th><th class="num">YTD</th></tr></thead>
-              <tbody id="stk-body"></tbody>
-            </table>
-            <p class="stock-note" id="stk-note"></p>
-          </section>
-
-          <section class="card" id="c-week" aria-labelledby="h-week">
-            <div class="card-h"><h2 id="h-week">The week ahead</h2><span class="meta">Cairo time</span></div>
-            <div id="week"></div>
-          </section>
-
-          <section class="card" id="c-views" aria-labelledby="h-views">
-            <div class="card-h"><h2 id="h-views">Open views</h2><a class="meta" href="/desk/views/">All views and projections →</a></div>
-            <div id="views"></div>
-          </section>
-        </div>
+      <section class="card" id="c-views" aria-labelledby="h-views">
+        <div class="card-h"><h2 id="h-views">Open views</h2><a class="meta" href="/desk/views/">All views and projections →</a></div>
+        <div id="views"></div>
+      </section>
       </div>
     </main>
   </div>
