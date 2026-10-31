@@ -135,6 +135,20 @@
       `<div class="fig${r.lead ? ' lead' : ''}"><span class="k">${esc(r.label)}</span><span class="v num${r.value == null ? ' dash' : ''}">${r.value == null ? '—' : esc(r.value)}</span>`
       + `<span class="d num ${cls(r.change)}">${r.change == null ? '<span class="dash">—</span>' : pct(r.change, 2)}</span></div>`).join('') + '</div></div>').join('');
     $('close-note').textContent = X.close.note || '';
+    // EGY: the pound's other figures as a row of the strip (inflation, the one-year T-bill, the real yield, reserves)
+    if (key === 'egypt') {
+      const lg = (k) => series((e) => e[k], 'fx'), lastOf = (x) => (x.length ? x[x.length - 1][1] : null);
+      const pts = (c) => `${c > 0 ? '+' : c < 0 ? MINUS : ''}${Math.abs(c).toFixed(1)} pts`, figs = [];
+      const fig = (k, v, d) => `<div class="fig"><span class="k">${k}</span><span class="v num">${v}</span><span class="d num">${d || ''}</span></div>`;
+      const inf = lg('infl_headline'), iv = lastOf(inf), ip = ([...inf].reverse().find(([, x]) => x !== iv) || [])[1], tb = lastOf(lg('tbill_364'));
+      if (iv != null) figs.push(fig('Inflation, annual', iv.toFixed(1) + '%', ip != null ? `<span class="chg ${iv > ip ? 'up' : iv < ip ? 'down' : 'flat'} inv">${pts(iv - ip)}</span>` : ''));
+      if (tb != null) figs.push(fig('One-year T-bill', tb.toFixed(2) + '%'));
+      if (iv != null && tb != null) figs.push(fig('Real one-year yield', (tb - iv).toFixed(1) + ' pts'));
+      const R = ((await get('/desk/reserves.json')) || {}).months || [], RL = R[R.length - 1], RP = R[R.length - 2];
+      if (RL) { const rc = RP ? (RL.total / RP.total - 1) * 100 : null; figs.push(fig('Foreign reserves', '$' + RL.total.toFixed(2) + 'bn', rc == null ? '' : `<span class="${cls(rc)}">${pct(rc, 2)}</span>`)); }
+      if (figs.length) document.querySelector('#c-close .card-h .meta').textContent = 'Day change; the pound\'s on the month';
+      if (figs.length) $('close-rows').insertAdjacentHTML('beforeend', `<div class="strip-g"><h3>The pound<a class="strip-more" href="/desk/egp/">EGP page →</a></h3><div class="strip-row">${figs.join('')}</div></div>`);
+    }
 
     // the day's stories: the top call first, then up to two more, one at a time; arrows, dots, keys or a swipe move between them
     const calls = (X.calls || [X.top]).filter(Boolean).slice(0, 3);
@@ -227,18 +241,30 @@
       segment($('gseg'), '1M', (p) => { gper = p; drawGold(); }, PERIODS.slice(1).concat(LONG)); drawGold();
     }
 
-    // the whole market's biggest movers of the last session, three each way, with the reason where one was found
-    const MV = MOVERS && MOVERS[S.market];
+    // biggest movers of the last session: the whole market (with the reason where one was found) or the desk's own stocks
+    const MV = MOVERS && MOVERS[S.market], f2 = (v) => v.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     $('movers-more').textContent = key === 'egypt' ? 'EGX page →' : 'Wall Street page →'; $('movers-more').href = key === 'egypt' ? '/desk/egx/' : '/desk/us/';
-    if (!MV) { $('movers').innerHTML = '<p class="chart-cap">Not saved yet; the morning run saves the last session\'s movers once it has closed.</p>'; $('movers-note').textContent = ''; }
-    else {
-      const f2 = (v) => v.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-      const row = (r) => { const own = NAMES[r.t], nm = `<b>${esc(own || r.name)}</b><span class="t">${esc(r.t)}</span>`;
-        return `<div class="mv">${own ? `<a href="/desk/stock/?t=${encodeURIComponent(r.t)}">${nm}</a>` : `<span class="nm">${nm}</span>`}<span class="num">${f2(r.price)}</span><span class="num ${cls(r.pct)}">${pct(r.pct)}</span></div>`
-          + (r.why ? `<p class="mvwhy">${esc(r.why)}${r.url ? ` <a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.source || 'Source')} →</a>` : ''}</p>` : ''); };
-      $('movers').innerHTML = `<div class="movers"><div><h3><span class="chg up" aria-hidden="true"></span>Biggest gainers</h3>${MV.gainers.slice(0, 3).map(row).join('')}</div><div><h3><span class="chg down" aria-hidden="true"></span>Biggest losers</h3>${MV.losers.slice(0, 3).map(row).join('') || '<p class="chart-cap">No stock fell.</p>'}</div></div>`;
-      const sd = day(MV.session); $('movers-note').textContent = `${MV.basis}, ${WD[sd.getDay()]} ${sd.getDate()} ${MON[sd.getMonth()]}.`;
-    }
+    const mrow = (r) => { const own = NAMES[r.t], nm = `<b>${esc(own || r.name)}</b><span class="t">${esc(r.t)}</span>`;
+      return `<div class="mv">${own ? `<a href="/desk/stock/?t=${encodeURIComponent(r.t)}">${nm}</a>` : `<span class="nm">${nm}</span>`}<span class="num">${f2(r.price)}</span><span class="num ${cls(r.pct)}">${pct(r.pct)}</span></div>`
+        + (r.why ? `<p class="mvwhy">${esc(r.why)}${r.url ? ` <a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.source || 'Source')} →</a>` : ''}</p>` : ''); };
+    const mlists = (up, down) => `<div class="movers"><div><h3><span class="chg up" aria-hidden="true"></span>Biggest gainers</h3>${up.map(mrow).join('') || '<p class="chart-cap">No stock rose.</p>'}</div><div><h3><span class="chg down" aria-hidden="true"></span>Biggest losers</h3>${down.map(mrow).join('') || '<p class="chart-cap">No stock fell.</p>'}</div></div>`;
+    const drawMovers = (whole) => {
+      if (whole) {
+        if (!MV) { $('movers').innerHTML = '<p class="chart-cap">Not saved yet; the morning run saves the last session\'s movers once it has closed.</p>'; $('movers-note').textContent = ''; return; }
+        $('movers').innerHTML = mlists(MV.gainers.slice(0, 3), MV.losers.slice(0, 3));
+        const sd = day(MV.session); $('movers-note').textContent = `${MV.basis}, ${WD[sd.getDay()]} ${sd.getDate()} ${MON[sd.getMonth()]}.`;
+        return;
+      }
+      // the desk's stocks on the day, from the data log; a reason carries over when the stock is also a whole-market mover
+      const notes = {}; if (MV) for (const r of MV.gainers.concat(MV.losers)) if (r.why) notes[r.t] = r;
+      const rows = GROUP[S.group].map((t) => { const s = series((e) => (e[S.group] || {})[t], S.group), fresh = s.length && s[s.length - 1][0] === ASOF;
+        return fresh && s.length > 1 ? { t, price: s[s.length - 1][1], pct: change(s, 0), why: (notes[t] || {}).why, url: (notes[t] || {}).url, source: (notes[t] || {}).source } : null; }).filter((r) => r && r.pct != null).sort((a, b) => b.pct - a.pct);
+      $('movers').innerHTML = mlists(rows.filter((r) => r.pct > 0).slice(0, 3), rows.filter((r) => r.pct < 0).reverse().slice(0, 3));
+      const ad = day(ASOF); $('movers-note').textContent = `Among the desk's ${GROUP[S.group].length} ${key === 'egypt' ? 'Egyptian' : 'US'} stocks, ${WD[ad.getDay()]} ${ad.getDate()} ${MON[ad.getMonth()]}. Tap one for its page.`;
+    };
+    $('mscope').innerHTML = ['Whole market', 'Desk stocks'].map((n, j) => `<button type="button" aria-pressed="${!j}">${n}</button>`).join('');
+    $('mscope').querySelectorAll('button').forEach((b, j) => b.addEventListener('click', () => { $('mscope').querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); drawMovers(j === 0); }));
+    drawMovers(true);
   }
   // each dashboard is its own page: /desk/egypt/ and /desk/usa/
   const pick = () => (document.body.dataset.section === 'usa' ? 'global' : 'egypt');
