@@ -71,15 +71,15 @@ logged daily (fetch_figures.py lists them as "Desk only") but are not rows in th
   results after the bell, the desk's US stocks, then Bullish and bearish.
 - **Global** `/desk/global/`: Brent, gold, the dollar index and Bitcoin, each with one line on why it
   matters for Egypt, and gold prices in Egypt.
-- **EGY stocks** `/desk/stocks/egypt/` and **US stocks** `/desk/stocks/us/`: all 12 of each as cards (price, change over
+- **EGX stocks** `/desk/stocks/egypt/` and **Wall Street stocks** `/desk/stocks/us/`: all 12 of each as cards (price, change over
   the chosen period, trend line, YTD, 52-week range, market value, latest news, open views), sortable by
   list order, market value (largest first), or best and worst; each opens its stock's page. fetch_movers.py
   refreshes the market values (`cap` in desk/stocks.json) each morning.
 - **Stock page** `/desk/stock/?t=TICKER`: one page per stock: chart against its index, performance,
   valuation, trading, dates coming up, the desk's projections and views on it, and its news.
 
-The menu is grouped by market: Egypt (EGY dashboard, EGP, EGX, EGY stocks), USA (US dashboard, Wall Street,
-US stocks), then Global and Views. Shared code is
+The menu is grouped by market: Egypt (EGY dashboard, EGP, EGX, EGX stocks), USA (US dashboard, Wall Street,
+Wall Street stocks), then Global and Views. Shared code is
 `desk/desk.js` and `desk/desk.css`. The two dashboards share `desk/dash.js` and `desk/dash.css` (their own copy of the styles: change
 both together); each page names its section on `<body data-section>`. `/desk/` forwards to the EGY dashboard.
 
@@ -251,7 +251,7 @@ periods and YTD come from `data/markets.json`.
 
 ## Wording
 
-Label the stock tables "Egyptian stocks" and "US stocks" (the list page and menu item are "EGY stocks"), and the dashboard's "Stocks": never "your stocks",
+Label the stock tables "Egyptian stocks" and "US stocks" (the list pages and menu items are "EGX stocks" and "Wall Street stocks"), and the dashboard's "Stocks": never "your stocks",
 in labels or in the text.
 
 ## Design

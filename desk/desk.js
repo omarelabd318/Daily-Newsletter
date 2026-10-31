@@ -19,10 +19,10 @@ window.Desk = (function () {
   const PAGES = [['/desk/egypt/', 'EGY dashboard', 'M2 13h12M4 10l3-3 2 2 4-5'],
     ['/desk/egp/', 'EGP', 'M8 2v12M11 4.5H6.5a2 2 0 000 4h3a2 2 0 010 4H5'],
     ['/desk/egx/', 'EGX', 'M2 13h12M3 10h2v3H3zM7 7h2v6H7zM11 4h2v9h-2z'],
-    ['/desk/stocks/egypt/', 'EGY stocks', 'M3 3h10v10H3zM3 6.5h10M6.5 6.5V13'],
+    ['/desk/stocks/egypt/', 'EGX stocks', 'M3 3h10v10H3zM3 6.5h10M6.5 6.5V13'],
     ['/desk/usa/', 'US dashboard', 'M8 2.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2.5 8h11'],
     ['/desk/us/', 'Wall Street', 'M2 4h12v8H2zM2 7h12'],
-    ['/desk/stocks/us/', 'US stocks', 'M3 3h10v10H3zM3 6.5h10M6.5 6.5V13'],
+    ['/desk/stocks/us/', 'Wall Street stocks', 'M3 3h10v10H3zM3 6.5h10M6.5 6.5V13'],
     ['/desk/global/', 'Global', 'M8 2.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2.5 8h11M8 2.5c1.8 1.6 1.8 9.4 0 11M8 2.5c-1.8 1.6-1.8 9.4 0 11'],
     ['/desk/views/', 'Views', 'M3 3.5h10M3 8h10M3 12.5h6M12 11l1.5 1.5L16 10']];
 
