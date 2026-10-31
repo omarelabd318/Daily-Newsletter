@@ -7,7 +7,9 @@ window.Desk = (function () {
   const cls = (v) => v == null ? 'dash' : v > 0 ? 'chg up' : v < 0 ? 'chg down' : 'chg flat';
   const num = (v, d = 2) => v == null ? '—' : v.toLocaleString('en-GB', { minimumFractionDigits: d, maximumFractionDigits: d });
   const get = (u) => fetch(u, { cache: 'no-cache' }).then((r) => r.ok ? r.json() : null).catch(() => null);
-  let ASOF = null, DESK = null, INTRA = null, MOVERS = null;
+  // ASOF is the EGX's last session; each market has its own last close (ASOF_M), since at weekends Wall Street
+  // last traded on Friday and the EGX on Thursday. Every series runs up to the day before the desk's date (CUTOFF).
+  let ASOF = null, CUTOFF = null, ASOF_M = {}, DESK = null, INTRA = null, MOVERS = null;
   const day = (iso) => new Date(iso + 'T12:00:00');
   const cut = (iso, back) => new Date(day(iso) - back * 864e5).toISOString().slice(0, 10);
   const short = (iso) => day(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }).replace('Sept', 'Sep');
@@ -51,7 +53,7 @@ window.Desk = (function () {
     for (const e of days) {
       const v = pick(e); if (typeof v !== 'number') continue;
       const d = new Date(day(e.date) - 864e5), wd = d.getDay(), iso = d.toISOString().slice(0, 10);
-      if (iso > ASOF) continue;
+      if (iso > CUTOFF) continue;
       if (market === 'egx' && (wd === 5 || wd === 6)) continue;
       if (market === 'us' && (wd === 6 || wd === 0)) continue;
       if (out.length && out[out.length - 1][0] === iso) continue;
@@ -59,15 +61,18 @@ window.Desk = (function () {
     }
     return out;
   }
+  // a series' own last date: periods count back from it, so each market measures from its own last close
+  const lastDate = (s) => (s.length ? s[s.length - 1][0] : ASOF);
+  const asOfFor = (m) => ASOF_M[m] || ASOF;
   const valueAt = (s, iso) => { let v = null; for (const [d, x] of s) { if (d <= iso) v = x; else break; } return v; };
   const last = (s) => s.length ? s[s.length - 1][1] : null;
   const change = (s, back) => {
     if (s.length < 2) return null;
-    const base = back ? valueAt(s, cut(ASOF, back)) : s[s.length - 2][1];
+    const base = back ? valueAt(s, cut(lastDate(s), back)) : s[s.length - 2][1];
     return base ? (last(s) / base - 1) * 100 : null;
   };
-  const ytd = (s) => { const b = valueAt(s, (ASOF.slice(0, 4) - 1) + '-12-31'); return b && s.length ? (last(s) / b - 1) * 100 : null; };
-  const range52 = (s) => { const p = s.filter(([d]) => d >= cut(ASOF, 365)).map((x) => x[1]); return p.length ? [Math.min(...p), Math.max(...p)] : [null, null]; };
+  const ytd = (s) => { const b = valueAt(s, (lastDate(s).slice(0, 4) - 1) + '-12-31'); return b && s.length ? (last(s) / b - 1) * 100 : null; };
+  const range52 = (s) => { const p = s.filter(([d]) => d >= cut(lastDate(s), 365)).map((x) => x[1]); return p.length ? [Math.min(...p), Math.max(...p)] : [null, null]; };
   const stock = (t) => series((e) => (e[GROUP.egx.includes(t) ? 'egx' : 'us'] || {})[t], GROUP.egx.includes(t) ? 'egx' : 'us');
 
   // every visit opens on the defaults; clear the choices an earlier version of the desk remembered
@@ -83,7 +88,7 @@ window.Desk = (function () {
   }
   // a trend line: the period's closes, or on 1D the last session through the day when it is saved (intra)
   function spark(s, back, intra = null) {
-    const pts = !back && intra && intra.length > 1 ? intra.map((x) => x[1]) : (back <= 7 ? s.slice(-7) : s.filter(([d]) => d >= cut(ASOF, back))).map((x) => x[1]);
+    const pts = !back && intra && intra.length > 1 ? intra.map((x) => x[1]) : (back <= 7 ? s.slice(-7) : s.filter(([d]) => d >= cut(lastDate(s), back))).map((x) => x[1]);
     if (pts.length < 2) return '';
     const w = 72, h = 18, min = Math.min(...pts), max = Math.max(...pts), sp = max - min || 1, st = (w - 4) / (pts.length - 1);
     const xy = pts.map((v, i) => [2 + i * st, h - 2 - (v - min) / sp * (h - 4)]);
@@ -118,7 +123,7 @@ window.Desk = (function () {
   const rateOn = (iso) => valueAt(series((e) => e.usd_egp, 'fx'), iso);
   function weekChart(el, market, key, name, fmt, inUSD = false) {
     const W = INTRA && INTRA.week && INTRA.week[market];
-    const ss = (W || []).filter((x) => x.session <= ASOF && x.series[key] && x.series[key].length > 1 && (!inUSD || rateOn(x.session)));
+    const ss = (W || []).filter((x) => x.session <= asOfFor(market) && x.series[key] && x.series[key].length > 1 && (!inUSD || rateOn(x.session)));
     if (ss.length < 2) return null;
     const labels = [], vals = [], text = [], at = [];
     ss.forEach((x) => { const d = day(x.session), dl = `${WD[d.getDay()]} ${d.getDate()}`, r = inUSD ? rateOn(x.session) : 1; at.push(labels.length);
@@ -178,7 +183,7 @@ window.Desk = (function () {
   }
   // a line chart of one series over a period (at least a month), with the biggest day marked when it stands out
   function chart(el, s, back, name, fmt, opts = {}) {
-    const pts = s.filter(([d]) => d >= cut(ASOF, Math.max(back, 7))); el.innerHTML = '';
+    const pts = s.filter(([d]) => d >= cut(lastDate(s), Math.max(back, 7))); el.innerHTML = '';
     if (pts.length < 2) { el.textContent = 'Not enough closes logged yet.'; return; }
     const vals = pts.map((x) => x[1]), lo = Math.min(...vals), hi = Math.max(...vals), pad = (hi - lo) * 0.15 || lo * 0.01;
     // a week has no shaded move (the change beside the price says it); short series get a dot on each close
@@ -284,13 +289,14 @@ window.Desk = (function () {
     const latest = idx && idx.desks && idx.desks.length ? idx.desks.map((d) => d.date).sort().at(-1) : null;
     DESK = latest ? await get('/desk/days/' + latest + '.json') : null;
     if (!DESK) { main.innerHTML = '<p class="finding">No desk has been published yet.</p>'; return null; }
-    ASOF = DESK.asOf;
+    ASOF = DESK.asOf; CUTOFF = new Date(day(DESK.date) - 864e5).toISOString().slice(0, 10);
     INTRA = await get('/desk/intraday.json');
-    // a session saved after the desk's closes (a re-run later in the day) would not match its figures: leave it out
-    if (INTRA) for (const m of ['egx', 'us']) if (INTRA[m] && INTRA[m].session > ASOF) delete INTRA[m];
     MOVERS = await get('/desk/movers.json');
     const log = await get('/data/markets-recent.json');
     days = (log && log.days) || [];
+    ASOF_M = { egx: ASOF, us: lastDate(series((e) => e.sp500, 'us')), fx: lastDate(series((e) => e.usd_egp, 'fx')) };
+    // a session saved after its market's last logged close (a re-run later in the day) would not match the figures
+    if (INTRA) for (const m of ['egx', 'us']) if (INTRA[m] && INTRA[m].session > asOfFor(m)) delete INTRA[m];
     if (DESK.sample) document.querySelectorAll('[data-sample]').forEach((e) => { e.hidden = false; });
     return DESK;
   }
@@ -310,5 +316,5 @@ window.Desk = (function () {
       location.reload();
     });
   }
-  return { get ASOF() { return ASOF; }, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, weekChart, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
+  return { get ASOF() { return ASOF; }, asOfFor, lastDate, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, weekChart, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
 })();

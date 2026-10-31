@@ -12,8 +12,11 @@
   const latest = idx && idx.desks && idx.desks.length ? idx.desks.slice().sort((a, b) => b.date < a.date ? -1 : 1)[0].date : null;
   const D = latest ? await get('/desk/days/' + latest + '.json') : null;
   if (!D) { $('finding').textContent = 'No desk has been published yet.'; return; }
+  // ASOF is the EGX's last session; each market has its own last close (ASOF_M: Wall Street's is Friday at weekends,
+  // the EGX's Thursday). Every series runs up to the day before the desk's date (CUTOFF).
   const ASOF = D.asOf;
   const day = (iso) => new Date(iso + 'T12:00:00');
+  const CUTOFF = new Date(day(D.date) - 864e5).toISOString().slice(0, 10);
   const cut = (iso, back) => new Date(day(iso) - back * 864e5).toISOString().slice(0, 10);
   const short = (iso) => day(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }).replace('Sept', 'Sep');
 
@@ -22,12 +25,9 @@
     global: { name: 'USA', chart: 'nasdaq', chartName: 'Nasdaq', market: 'us', group: 'us' },
   };
   const longDate = day(D.date).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
-  $('stamp').innerHTML = 'Closes to ' + esc(day(ASOF).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }).replace('Sept', 'Sep').replace(',', '')) + '<br>Fetched ' + esc(D.fetched || '');
 
   // the data log: each entry holds the closes its edition showed, so a close belongs to the day before the entry
   const INTRA = await get('/desk/intraday.json'), MOVERS = await get('/desk/movers.json');
-  // a session saved after the desk's closes (a re-run later in the day) would not match its figures: leave it out
-  if (INTRA) for (const m of ['egx', 'us']) if (INTRA[m] && INTRA[m].session > ASOF) delete INTRA[m];
   const log = await get('/data/markets-recent.json');
   let days = (log && log.days) || [];
   function series(pick, market) {
@@ -35,7 +35,7 @@
     for (const e of days) {
       const v = pick(e); if (typeof v !== 'number') continue;
       const d = new Date(day(e.date) - 864e5), wd = d.getDay(), iso = d.toISOString().slice(0, 10);
-      if (iso > ASOF) continue;
+      if (iso > CUTOFF) continue;
       if (market === 'egx' && (wd === 5 || wd === 6)) continue;   // the EGX trades Sunday to Thursday
       if (market === 'us' && (wd === 6 || wd === 0)) continue;
       if (out.length && out[out.length - 1][0] === iso) continue;
@@ -43,13 +43,18 @@
     }
     return out;
   }
+  // a series' own last date: periods count back from it, so each market measures from its own last close
+  const lastDate = (s) => (s.length ? s[s.length - 1][0] : ASOF);
   const valueAt = (s, iso) => { let v = null; for (const [d, x] of s) { if (d <= iso) v = x; else break; } return v; };
   const change = (s, back) => {
     if (s.length < 2) return null;
-    const last = s[s.length - 1][1], base = back ? valueAt(s, cut(ASOF, back)) : s[s.length - 2][1];
+    const last = s[s.length - 1][1], base = back ? valueAt(s, cut(lastDate(s), back)) : s[s.length - 2][1];
     return base ? (last / base - 1) * 100 : null;
   };
-  const ytd = (s) => { const b = valueAt(s, (ASOF.slice(0, 4) - 1) + '-12-31'); return b && s.length ? (s[s.length - 1][1] / b - 1) * 100 : null; };
+  const ytd = (s) => { const b = valueAt(s, (lastDate(s).slice(0, 4) - 1) + '-12-31'); return b && s.length ? (s[s.length - 1][1] / b - 1) * 100 : null; };
+  const ASOF_M = { egx: ASOF, us: lastDate(series((e) => e.sp500, 'us')) }, asOf = (m) => ASOF_M[m] || ASOF;
+  // a session saved after its market's last logged close (a re-run later in the day) would not match the figures
+  if (INTRA) for (const m of ['egx', 'us']) if (INTRA[m] && INTRA[m].session > asOf(m)) delete INTRA[m];
   const LONG = [['3Y', 1095, 'Last 3 years'], ['5Y', 1826, 'Last 5 years']]; let fullLoaded = false;
   const PERIODS = [['1D', 0, 'Last 7 days'], ['1W', 7, 'Last 7 days'], ['1M', 30, 'Last 30 days'], ['6M', 182, 'Last 6 months'], ['1Y', 365, 'Last 12 months']];
   // every visit opens on the defaults; clear the choices an earlier version of the desk remembered
@@ -128,6 +133,7 @@
     document.querySelectorAll('[data-sec]').forEach((a) => { if (a.dataset.sec === key) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
     $('title').textContent = S.name + ' · ' + longDate;
     document.title = 'Markets Desk · ' + S.name + ' · ' + day(D.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }).replace('Sept', 'Sep');
+    $('stamp').innerHTML = 'Closes to ' + esc(day(asOf(S.market)).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }).replace('Sept', 'Sep').replace(',', '')) + '<br>Fetched ' + esc(D.fetched || '');
     $('finding').innerHTML = esc(X.finding) + (X.next ? ' <span class="when">' + esc(X.next) + '</span>' : '');
 
     $('h-close').textContent = X.close.title || 'Close';
@@ -207,7 +213,7 @@
         return;
       }
       if (p[1] === 7) {   // a week through the day, once two or more sessions are saved
-        const W = ((INTRA && INTRA.week && INTRA.week[S.market]) || []).filter((x) => x.session <= ASOF && x.series[cur.intra] && x.series[cur.intra].length > 1);
+        const W = ((INTRA && INTRA.week && INTRA.week[S.market]) || []).filter((x) => x.session <= asOf(S.market) && x.series[cur.intra] && x.series[cur.intra].length > 1);
         if (W.length >= 2) {
           const el = $('egx-chart'), labels = [], vals = [], text = [], at = []; el.innerHTML = '';
           W.forEach((x) => { const d = day(x.session), dl = `${WD[d.getDay()]} ${d.getDate()}`; at.push(labels.length); x.series[cur.intra].forEach(([t, v]) => { labels.push(`${dl} ${t}`); vals.push(v); text.push(dl); }); });
@@ -218,7 +224,7 @@
           return;
         }
       }
-      const back = Math.max(p[1], 7), pts = idx.filter(([d]) => d >= cut(ASOF, back)), el = $('egx-chart'); el.innerHTML = '';
+      const back = Math.max(p[1], 7), pts = idx.filter(([d]) => d >= cut(lastDate(idx), back)), el = $('egx-chart'); el.innerHTML = '';
       if (pts.length < 2) { el.textContent = 'Not enough closes logged yet.'; $('egx-cap').textContent = ''; return; }
       // a week has no shaded move; short series get a dot on each close
       const ann = back > 7 ? bigMove(pts) : [], vals = pts.map((x) => x[1]), lo = Math.min(...vals), hi = Math.max(...vals);
@@ -241,7 +247,7 @@
         $('glvl').textContent = lv == null ? '—' : lv.toLocaleString('en-GB', { maximumFractionDigits: 0 });
         $('gchg').innerHTML = `<span class="${cls(hc)}">${pct(hc, 2)}</span> <span class="span-l">${SPAN[gper[1]] || ''}</span>`;
         $('gunit').textContent = unit;
-        const back = Math.max(gper[1], 7), pts = s.filter(([d]) => d >= cut(ASOF, back)), el = $('gchart'); el.innerHTML = '';
+        const back = Math.max(gper[1], 7), pts = s.filter(([d]) => d >= cut(lastDate(s), back)), el = $('gchart'); el.innerHTML = '';
         if (pts.length < 2) el.textContent = 'Not enough prices logged yet.';
         else {
           const vals = pts.map((x) => x[1]), lo = Math.min(...vals), hi = Math.max(...vals);
@@ -271,10 +277,10 @@
       }
       // the desk's stocks on the day, from the data log; a reason carries over when the stock is also a whole-market mover
       const notes = {}; if (MV) for (const r of MV.gainers.concat(MV.losers)) if (r.why) notes[r.t] = r;
-      const rows = GROUP[S.group].map((t) => { const s = series((e) => (e[S.group] || {})[t], S.group), fresh = s.length && s[s.length - 1][0] === ASOF;
+      const rows = GROUP[S.group].map((t) => { const s = series((e) => (e[S.group] || {})[t], S.group), fresh = s.length && s[s.length - 1][0] === asOf(S.group);
         return fresh && s.length > 1 ? { t, price: s[s.length - 1][1], pct: change(s, 0), why: (notes[t] || {}).why, url: (notes[t] || {}).url, source: (notes[t] || {}).source } : null; }).filter((r) => r && r.pct != null).sort((a, b) => b.pct - a.pct);
       $('movers').innerHTML = mlists(rows.filter((r) => r.pct > 0).slice(0, 3), rows.filter((r) => r.pct < 0).reverse().slice(0, 3));
-      const ad = day(ASOF); $('movers-note').textContent = `Among the desk's ${GROUP[S.group].length} ${key === 'egypt' ? 'Egyptian' : 'US'} stocks, ${WD[ad.getDay()]} ${ad.getDate()} ${MON[ad.getMonth()]}. Tap one for its page.`;
+      const ad = day(asOf(S.group)); $('movers-note').textContent = `Among the desk's ${GROUP[S.group].length} ${key === 'egypt' ? 'Egyptian' : 'US'} stocks, ${WD[ad.getDay()]} ${ad.getDate()} ${MON[ad.getMonth()]}. Tap one for its page.`;
     };
     $('mscope').innerHTML = ['Whole market', 'Desk stocks'].map((n, j) => `<button type="button" aria-pressed="${!j}">${n}</button>`).join('');
     $('mscope').querySelectorAll('button').forEach((b, j) => b.addEventListener('click', () => { $('mscope').querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); drawMovers(j === 0); }));

@@ -93,7 +93,7 @@
 (async () => {
   const M = Desk, D = await M.init('/desk/egp/'); if (!D) return;
   const P = D.pages.egp;
-  M.$('title').textContent = 'EGP · ' + M.dateLine(M.ASOF); document.title = 'EGP · Markets Desk';
+  M.$('title').textContent = 'EGP · ' + M.dateLine(D.date); document.title = 'EGP · Markets Desk';
   M.$('finding').textContent = P.finding; M.$('rdate').textContent = M.short(M.ASOF);
   const fx = M.series((e) => e.usd_egp, 'fx'), dc = M.change(fx, 0);
   M.$('lvl').textContent = M.num(M.last(fx)); M.$('dchg').innerHTML = `<span class="${M.cls(dc)}">${M.pct(dc, 2)}</span>`;

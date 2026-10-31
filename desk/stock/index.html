@@ -87,13 +87,14 @@ try {
   M.$('crumb').textContent = M.NAMES[t]; M.$('mkt').textContent = egx ? 'EGX stocks' : 'Wall Street stocks'; M.$('mkt').href = egx ? '/desk/stocks/egypt/' : '/desk/stocks/us/'; M.$('deskcrumb').href = egx ? '/desk/egypt/' : '/desk/usa/';
   M.$('name').innerHTML = `${M.esc(M.NAMES[t])} <span class="meta" style="font-size:15px;font-weight:400">${M.esc(t)}${p.sector ? ' · ' + M.esc(p.sector) : ''}</span>`;
   document.title = M.NAMES[t] + ' · Markets Desk';
-  const fresh = s.length && s.at(-1)[0] === M.ASOF, dc = fresh ? M.change(s, 0) : null, y = M.ytd(s);
-  const when = M.day(M.ASOF).toLocaleDateString('en-GB', { weekday: 'long' });
+  const mAsOf = M.asOfFor(egx ? 'egx' : 'us');   // the stock's market's last session (Thursday for the EGX, Friday for Wall Street at weekends)
+  const fresh = s.length && s.at(-1)[0] === mAsOf, dc = fresh ? M.change(s, 0) : null, y = M.ytd(s);
+  const when = M.day(mAsOf).toLocaleDateString('en-GB', { weekday: 'long' });
   const nxt = (p.next || [])[0];
   if (!s.length) { M.$('sub').textContent = `Not trading yet${nxt ? ` · ${nxt.event}: ${nxt.when}. ${nxt.why}` : '.'}`; }
   else M.$('sub').innerHTML = fresh ? `Closed at ${cur}${M.num(M.last(s))} on ${when}, <span class="${M.cls(dc)}">${M.pct(dc)}</span> on the day and <span class="${M.cls(y)}">${M.pct(y)}</span> this year.` : `No close logged for ${when}.`;
   M.$('lvl').textContent = M.num(M.last(s)); M.$('dchg').innerHTML = `<span class="${M.cls(dc)}">${M.pct(dc, 2)}</span>`; M.$('cur').textContent = egx ? 'EGP' : 'USD';
-  M.$('pdate').textContent = 'to ' + M.short(M.ASOF);
+  M.$('pdate').textContent = 'to ' + M.short(mAsOf);
   // the chart in the stock's currency or, for Egyptian stocks, in dollars; 3Y and 5Y load the full log
   let sx = s, per = M.startPeriod(egx ? 'egx' : 'us', t), inUSD = false;
   const draw = async () => {

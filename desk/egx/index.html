@@ -78,7 +78,7 @@
 (async () => {
   const M = Desk, D = await M.init('/desk/egx/'); if (!D) return;
   const P = D.pages.egx, X = D.egypt;
-  M.$('title').textContent = 'EGX · ' + M.dateLine(M.ASOF); document.title = 'EGX · Markets Desk';
+  M.$('title').textContent = 'EGX · ' + M.dateLine(D.date); document.title = 'EGX · Markets Desk';
   M.$('finding').textContent = P.finding;
   M.$('sess-date').textContent = M.short(M.ASOF);
   let ikey = 'egx30', idx = M.series((e) => e.egx30, 'egx'), per = M.startPeriod('egx', 'EGX30'), inUSD = false;

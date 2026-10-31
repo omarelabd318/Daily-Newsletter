@@ -69,7 +69,7 @@
 (async () => {
   const M = Desk, D = await M.init('/desk/us/'); if (!D) return;
   const P = D.pages.us;
-  M.$('title').textContent = 'Wall Street · ' + M.dateLine(M.ASOF); document.title = 'Wall Street · Markets Desk';
+  M.$('title').textContent = 'Wall Street · ' + M.dateLine(D.date); document.title = 'Wall Street · Markets Desk';
   M.$('finding').textContent = P.finding;
   const IDX = [['sp500', 'S&P 500'], ['nasdaq', 'Nasdaq'], ['dow', 'Dow Jones']].map(([k, n]) => ({ k, n, s: M.series((e) => e[k], 'us') }));
   let cur = IDX[0], per = M.startPeriod('us', cur.k === 'nasdaq' ? 'COMP' : cur.k);
@@ -95,7 +95,7 @@
   };
   M.toggle(M.$('mscope'), ['Whole market', 'Desk stocks'], (i) => { mall = i === 0; dm(); });
   M.segment(M.$('mseg'), '1D', (p) => { mback = p[1]; dm(); }); dm();
-  if (P.afterBell && P.afterBell.length) { M.$('c-bell').hidden = false; M.$('bell-date').textContent = M.short(M.ASOF); M.$('bell').innerHTML = M.drivers(P.afterBell); }
+  if (P.afterBell && P.afterBell.length) { M.$('c-bell').hidden = false; M.$('bell-date').textContent = M.short(M.asOfFor('us')); M.$('bell').innerHTML = M.drivers(P.afterBell); }
   const UST = M.byCap(M.GROUP.us, ((await M.get('/desk/stocks.json')) || {}).stocks);   // largest first; the first eight show
   const drawT = async (p) => {
     if (p[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; }   // 3Y and 5Y load the full log
