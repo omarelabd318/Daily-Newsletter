@@ -1,6 +1,6 @@
 ---
 name: markets-desk
-description: House rules for the Markets Desk, the daily markets analysis page planned next to the Daily Newsletter (what moved and why, which EGX sectors it helps or hurts, the desk's 32 stocks, the week ahead, open views). Use whenever writing, designing or reviewing the desk.
+description: House rules for the Markets Desk, the daily markets analysis page planned next to the Daily Newsletter (what moved and why, which EGX sectors it helps or hurts, the desk's 33 stocks, the week ahead, open views). Use whenever writing, designing or reviewing the desk.
 ---
 
 # Markets Desk
@@ -52,10 +52,11 @@ closes are the last session's; the news, stock research and analysis are still u
 
 ## The desk's stocks
 
-17 Egyptian: the newsletter's 12 Stocks Watch names (CIB, Talaat Moustafa, Telecom Egypt, Palm Hills,
+18 Egyptian: the newsletter's 12 Stocks Watch names (CIB, Talaat Moustafa, Telecom Egypt, Palm Hills,
 Elsewedy, Orascom Construction, Fawry, Abu Qir, EFG Holding, Cleopatra, Juhayna, Alexandria Containers)
-plus MOPCO, Eastern Company, e-finance, Emaar Misr and Banque du Caire (trading from 2 November 2026).
-15 US: the 12 Stocks Watch names plus Visa, Oracle and Costco. The extra eight are desk-only: they are
+plus MOPCO, Eastern Company, e-finance, Emaar Misr, Banque du Caire (trading from 2 November 2026) and Egypt
+Aluminium.
+15 US: the 12 Stocks Watch names plus Visa, Oracle and Costco. The extra nine are desk-only: they are
 logged daily (fetch_figures.py lists them as "Desk only") but are not rows in the newsletter's tables.
 
 ## Pages

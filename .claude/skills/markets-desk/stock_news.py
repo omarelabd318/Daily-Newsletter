@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""List recent news for each of the desk's 24 stocks, as leads for the stock pages.
+"""List recent news for each of the desk's stocks, as leads for the stock pages.
 
 Usage:
   python3 .claude/skills/markets-desk/stock_news.py [DAYS] [TICKER ...]
 
-DAYS defaults to 2 (use 3 on Sundays, to cover the weekend). With no tickers it covers all 24.
+DAYS defaults to 2 (use 3 on Sundays, to cover the weekend). With no tickers it covers all of them.
 For each stock it prints headlines from Google News (English, plus Arabic for the Egyptian stocks), newest
 first, each with its date, outlet and the story's own link at the outlet (Google's redirect is resolved;
 if that fails the Google link is shown). Headlines are leads, not facts: open the story at the outlet
@@ -42,6 +42,7 @@ STOCKS = {
     "EFIH": ('"e-finance" Egypt', '"إي فاينانس"'),
     "EMFD": ('"Emaar Misr"', '"إعمار مصر"'),
     "BQDC": ('"Banque du Caire"', '"بنك القاهرة"'),
+    "EGAL": ('"Egypt Aluminium" OR "Egyptalum" OR "Egypt Aluminum"', '"مصر للألومنيوم"'),
     "AAPL": ('Apple stock OR "Apple Inc"', None),
     "MSFT": ('Microsoft stock', None),
     "NVDA": ('Nvidia stock', None),
@@ -68,6 +69,7 @@ MUST = {
     "JUFO": ["Juhayna", "جهينة"], "ALCN": ["Alexandria Container", "الحاويات"],
     "MFPC": ["MOPCO", "Mopco", "موبكو", "مصر لإنتاج الأسمدة"], "EAST": ["Eastern Company", "الشرقية للدخان", "إيسترن"],
     "EFIH": ["e-finance", "E-Finance", "إي فاينانس"], "EMFD": ["Emaar Misr", "إعمار مصر"], "BQDC": ["Banque du Caire", "بنك القاهرة"],
+    "EGAL": ["Egypt Aluminium", "Egypt Aluminum", "Egyptalum", "مصر للألومنيوم", "مصر للالومنيوم"],
     "AAPL": ["Apple"], "MSFT": ["Microsoft"], "NVDA": ["Nvidia"], "AMZN": ["Amazon"], "GOOGL": ["Alphabet", "Google"],
     "META": ["Meta"], "TSLA": ["Tesla"], "JPM": ["JPMorgan", "JP Morgan", "Dimon"], "XOM": ["Exxon"],
     "AVGO": ["Broadcom"], "BRK.B": ["Berkshire", "Buffett"], "WMT": ["Walmart"], "V": ["Visa"], "ORCL": ["Oracle"], "COST": ["Costco"],

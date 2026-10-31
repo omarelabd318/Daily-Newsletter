@@ -35,7 +35,7 @@ UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chr
 EGX = ["COMI", "TMGH", "ETEL", "PHDC", "SWDY", "ORAS", "FWRY", "ABUK", "HRHO", "CLHO", "JUFO", "ALCN"]
 US = ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA", "JPM", "XOM", "AVGO", "BRK.B", "WMT"]
 # The Markets Desk follows these too; they are logged every day but are not Stocks Watch rows.
-DESK_EGX = ["MFPC", "EAST", "EFIH", "EMFD", "BQDC"]
+DESK_EGX = ["MFPC", "EAST", "EFIH", "EMFD", "BQDC", "EGAL"]
 DESK_US = ["V", "ORCL", "COST"]
 
 
