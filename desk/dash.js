@@ -169,7 +169,8 @@
     $('story-prev').onclick = () => show(at - 1); $('story-next').onclick = () => show(at + 1);
     show(0);
 
-    $('board-h').textContent = X.board.horizon || '';
+    // from the whole day's news and moves, not only the top call; the horizon comes from the day's file
+    $('board-h').textContent = `From the day's news and moves · ${(X.board.horizon || 'next 1–4 weeks').replace(/^.*·\s*/, '')}`;
     $('helped').innerHTML = callRows(X.board.helped); $('hurt').innerHTML = callRows(X.board.hurt);
     $('week').innerHTML = X.week.map((w) => `<div class="wk"><span class="day">${esc(w.day)}</span><b>${esc(w.event)}</b><span class="imp${w.impact === 'high' ? ' high' : ''}">${esc(w.impact[0].toUpperCase() + w.impact.slice(1))}</span><span class="why">${esc(w.why)}</span></div>`).join('');
     $('views').innerHTML = X.views.map((v) => `<div class="view"><b>${esc(v.call)}</b><span class="pill ${PILL[v.status] || 'open'}">${esc(v.status[0].toUpperCase() + v.status.slice(1))}</span><span class="why">${esc(v.note)}</span></div>`).join('');

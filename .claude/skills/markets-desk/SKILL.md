@@ -21,7 +21,7 @@ closes are the last session's; the news, stock research and analysis are still u
    per gram (24K, not 21K: the dashboard's Gold in Egypt card has 21K, 18K and the gold pound).
 2. Run `python3 .claude/skills/markets-desk/stock_news.py` (`3` on Sundays) and do the stock research
    below; update `desk/stocks.json`.
-3. Write each section: finding, one to three stories (`calls`), who it helps and hurts, the Stocks note,
+3. Write each section: finding, one to three stories (`calls`), winners and losers (`board`), the Stocks note,
    the week ahead and open views, then update `desk/views.json` (see Views: the record): new entries, news, and judgements.
 4. Write `pages`: EGX (finding, session, news, outlook), EGP (finding, rates, drivers, news, view), US
    (finding, rates, afterBell, news, outlook), Global (finding, notes, news). Carry each projection
@@ -64,8 +64,8 @@ logged daily (fetch_figures.py lists them as "Desk only") but are not rows in th
 
 - **EGY dashboard** `/desk/egypt/` and **US dashboard** `/desk/usa/`: the day on one screen for each market, kept short:
   the close as a strip of figures across the top, the stories, the index chart (EGX30; or S&P 500, Nasdaq and Dow, in
-  that order), Gold in Egypt (EGY only), the whole market's three biggest gainers and losers with reasons, who it helps
-  and hurts, the week ahead and open views. The dollar, flows and the stock tables live on the EGP, EGX and stock-list
+  that order), Gold in Egypt (EGY only), the whole market's three biggest gainers and losers with reasons, winners and
+  losers, the week ahead and open views. The dollar, flows and the stock tables live on the EGP, EGX and stock-list
   pages. The EGX, EGP and Wall Street pages group their cards under small headings (Today, Why it moved, The stocks;
   the EGP page: The pound today, Why it's moving, The bigger picture, Reference).
 - **EGX** `/desk/egx/`: EGX30 chart and the session, biggest movers (the whole market, or the desk's stocks), who
@@ -170,7 +170,8 @@ Never present an unconfirmed claim as fact. A claim from a single source goes in
 ## Winners and losers
 
 Two short lists, helped and hurt: EGX sectors or stocks, each with its driver, one line of reasoning
-grounded in real figures, and a confidence level. Use the sector-overview skill for what drives a sector.
+grounded in real figures, and a confidence level. They come from the whole day's news and moves, not only
+the top call, over the next one to four weeks (the dashboard card is titled "Winners and losers"). Use the sector-overview skill for what drives a sector.
 
 ## Who bought and who sold
 
@@ -273,5 +274,5 @@ in labels or in the text.
 The achromatic-ledger style from the design-taste-frontend skill, on the newsletter's colours and fonts
 with its dark mode. Dashboard: a close column on the left with a side card (Egypt: the dollar in pounds;
 USA: oil) and, for Egypt, who bought and who sold; on the right the stories first, then the index chart
-(EGX30 or Nasdaq) as its own card, then who it helps and hurts, Stocks with the 1D–1Y switch, the week
+(EGX30 or Nasdaq) as its own card, then winners and losers, Stocks with the 1D–1Y switch, the week
 ahead and open views. On a phone the stories come first.
