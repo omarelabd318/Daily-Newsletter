@@ -30,7 +30,8 @@ closes are the last session's; the news, stock research and analysis are still u
    through the day (`desk/intraday.json`, for the 1D charts: the EGX30, the Nasdaq and the desk's stocks, and
    the last 24 hours of Bitcoin; the S&P 500 and Dow from Yahoo or else traced from the SPY and DIA funds;
    Brent, gold and the dollar index only when Yahoo answers).
-   It keeps the saved session if a market is still trading, and takes under a minute. The dollar in pounds
+   It keeps the saved session if a market is still trading, and takes under a minute. It also keeps the last
+   five sessions (`week`, every 15 minutes), which the 1W charts draw once two or more are saved. The dollar in pounds
    has no 1D chart: the official rate barely moves within a day. Then run
    `python3 .claude/skills/markets-desk/fetch_valuation.py` to refresh each stock's Valuation card in
    `desk/stocks.json` (TradingView's screener and Mubasher for Egyptian stocks, taking whichever runs to the newer quarter; Nasdaq

@@ -90,6 +90,8 @@
     const nm = ikey === 'egx70' ? 'EGX70 EWI' : 'EGX30';
     if (!per[1]) { const c1 = M.dayChart(M.$('chart'), 'egx', ikey === 'egx70' ? 'EGX70EWI' : 'EGX30', nm, Charts.fmt.int); M.$('cap').innerHTML = c1 ? `${c1} (in pounds) · on the day <span class="num ${M.cls(dc)}">${M.pct(dc, 2)}</span>` : ''; return; }
     if (per[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; idx = M.series((e) => e[ikey], 'egx'); return draw(); }
+    const w1 = per[1] === 7 && !inUSD ? M.weekChart(M.$('chart'), 'egx', ikey === 'egx70' ? 'EGX70EWI' : 'EGX30', nm, Charts.fmt.int) : null;
+    if (w1) { M.$('cap').innerHTML = `${w1} · this year <span class="num ${M.cls(M.ytd(s))}">${M.pct(M.ytd(s))}</span>`; return; }
     M.chart(M.$('chart'), s, per[1], nm + unit, Charts.fmt.int); const c = M.change(s, per[1]);
     M.$('cap').innerHTML = `${per[2]}${unit}: <span class="num ${M.cls(c)}">${M.pct(c, 2)}</span> · this year <span class="num ${M.cls(M.ytd(s))}">${M.pct(M.ytd(s))}</span>`;
   };

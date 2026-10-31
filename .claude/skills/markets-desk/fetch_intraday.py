@@ -4,7 +4,8 @@
 Usage:
   python3 .claude/skills/markets-desk/fetch_intraday.py
 
-Writes desk/intraday.json: the EGX30 and the 12 Egyptian stocks from Mubasher (Cairo time), and the
+Writes desk/intraday.json ("week" also keeps the last five sessions of each market every 15 minutes, for
+the 1W charts): the EGX30 and the 12 Egyptian stocks from Mubasher (Cairo time), and the
 Nasdaq Composite and the 12 US stocks from Nasdaq (New York time, regular session only), and the last
 24 hours of Bitcoin (CoinGecko). Yahoo adds the S&P 500, the Dow, Brent, gold and the dollar index on the
 days it answers (it often refuses cloud requests). When it refuses, the S&P 500 and the Dow are drawn from
@@ -33,6 +34,12 @@ NY, CAIRO = ZoneInfo("America/New_York"), ZoneInfo("Africa/Cairo")
 def get(url):
     req = urllib.request.Request(url, headers={"User-Agent": UA})
     return urllib.request.urlopen(req, timeout=30).read().decode("utf-8", "replace")
+
+
+def every15(points):
+    """A session's 5-minute prices thinned to every 15 minutes, keeping the last: enough for a week's chart."""
+    keep = [p for p in points if int(p[0][3:5]) % 15 == 0]
+    return keep + ([points[-1]] if points and (not keep or keep[-1] != points[-1]) else [])
 
 
 def every5(points):
@@ -181,6 +188,17 @@ def main():
                 data["proxy"] = {k: f for k, f in PROXY.items() if k in data["series"]}
             out[name] = data
         print(line)
+    # the week: the last five sessions of each market, every 15 minutes, for the 1W charts (built up one
+    # session per run; a session saved again replaces its earlier copy)
+    week = saved.get("week") or {}
+    for name in ("egx", "us"):
+        latest = out.get(name)
+        if not latest:
+            continue
+        keep = [x for x in week.get(name, []) if x["session"] != latest["session"]]
+        keep.append({"session": latest["session"], "series": {k: every15(v) for k, v in latest["series"].items()}})
+        week[name] = sorted(keep, key=lambda x: x["session"])[-5:]
+    out["week"] = week
     data, line = global_market()
     if data:
         out["global"] = data

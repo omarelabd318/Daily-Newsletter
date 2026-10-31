@@ -20,7 +20,7 @@
 // [{ from, to, label: 'Cloud' }]. Their labels sit in rows above the plot, measured once the fonts have loaded, and no
 // leader line crosses another label; the rows are reserved only when a label exists. reference: { value, label }, its
 // label set where no series passes.
-// line takes step: true for a balance that only changes on given days; today: index (the forecast after it is dashed)
+// line takes step: true for a balance that only changes on given days; marks: true (a dot on each point); today: index (the forecast after it is dashed)
 // with todayLabel: 'Now 20:34' (set clear of the line); endLabel: true (the last value at the line's end); max: caps a
 // flat series with one spike (the peak is labelled); yTicks: fixed ticks for a bounded quantity (0–100%); tickFormat:
 // axis labels apart from the tooltip format; xAt: the indices to label, with xText: their own text (labels stay the
@@ -246,7 +246,7 @@
   function settle(draw) { if (document.fonts) { document.fonts.ready.then(draw); document.fonts.addEventListener?.('loadingdone', draw, { once: true }); } }
   const heightOf = (h) => (typeof h === 'function' ? h() : h);
 
-  function line(el, { labels, series, format = fmt.int, tickFormat = null, height = 220, fill = false, min, max, step = false, annotations, reference, today = null, todayLabel = 'Today', endLabel = false, yTicks = null, xAt = null, xText = null, legend = null }) {
+  function line(el, { labels, series, format = fmt.int, tickFormat = null, height = 220, fill = false, min, max, step = false, marks = false, annotations, reference, today = null, todayLabel = 'Today', endLabel = false, yTicks = null, xAt = null, xText = null, legend = null }) {
     el._fmt = format;
     const colourOf = (sr, k) => sr.colour || (k === 0 ? css(el, '--chart-1', '#2f6fdf') : css(el, `--chart-${k + 1}`, css(el, '--chart-muted', '#a3a3a3')));
     const draw = () => {
@@ -292,6 +292,8 @@
           svg('path', { d, fill: 'none', stroke: col, 'stroke-width': 2, 'stroke-dasharray': '5 4', opacity: 0.8, 'clip-path': 'url(#' + id + 'b)' }, g);
           if (k === 0) { svg('line', { x1: cut, x2: cut, y1: padT, y2: h - padB, stroke: css(el, '--axis-ink', '#6b6b6b'), 'stroke-width': 1, opacity: 0.4 }, g); if (todayBox) text(g, todayLabel, { x: todayBox.x0, y: todayBox.base, 'font-size': 11, fill: css(el, '--axis-ink', '#6b6b6b') }); }
         }
+        // marks: a dot on each point, for short series of daily closes so a few joined points read as days
+        if (marks) pts.forEach((p) => { if (p) svg('circle', { cx: p[0], cy: p[1], r: 3, fill: col, stroke: css(el, '--surface', '#fff'), 'stroke-width': 1.5 }, g); });
         if (endLabel && k === 0) { const li = sr.values.map((v, i) => (v == null ? -1 : i)).filter((i) => i >= 0).at(-1); text(g, format(sr.values[li]), { x: x(li) + 6, y: y(Math.min(sr.values[li], yt.at(-1))) + 4, 'font-size': 12, 'font-weight': 600, fill: css(el, '--ink', '#111') }); }
       });
       references(g, el, reference, { y, padL, w, lines: linesAt(y).slice(0, series.length) });

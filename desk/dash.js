@@ -206,10 +206,23 @@
         $('egx-cap').innerHTML = `${day(INTRA[mk].session).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short' }).replace('Sept', 'Sep')}, ${I[0][0]}–${I.at(-1)[0]} ${mk === 'egx' ? 'Cairo' : 'New York'} time: <span class="num ${cls(ch)}">${pct(ch, 2)}</span> from the first trade${INTRA[mk].proxy && INTRA[mk].proxy[cur.intra] ? ` · traced by the ${esc(INTRA[mk].proxy[cur.intra])} fund, which tracks it` : ''}`;
         return;
       }
+      if (p[1] === 7) {   // a week through the day, once two or more sessions are saved
+        const W = ((INTRA && INTRA.week && INTRA.week[S.market]) || []).filter((x) => x.session <= ASOF && x.series[cur.intra] && x.series[cur.intra].length > 1);
+        if (W.length >= 2) {
+          const el = $('egx-chart'), labels = [], vals = [], text = [], at = []; el.innerHTML = '';
+          W.forEach((x) => { const d = day(x.session), dl = `${WD[d.getDay()]} ${d.getDate()}`; at.push(labels.length); x.series[cur.intra].forEach(([t, v]) => { labels.push(`${dl} ${t}`); vals.push(v); text.push(dl); }); });
+          const lo = Math.min(...vals), hi = Math.max(...vals);
+          Charts.line(el, { labels, xAt: el.clientWidth < 520 && at.length > 3 ? at.filter((_, j) => (at.length - 1 - j) % 2 === 0) : at, xText: text, series: [{ name: cur.n, values: vals }], format: Charts.fmt.int, endLabel: true, height: el.clientHeight, min: lo - (hi - lo) * 0.15 });
+          const ch = (vals.at(-1) / vals[0] - 1) * 100;
+          $('egx-cap').innerHTML = `${esc(cur.n)}, last ${W.length} sessions through the day: <span class="num ${cls(ch)}">${pct(ch, 2)}</span> from the first trade`;
+          return;
+        }
+      }
       const back = Math.max(p[1], 7), pts = idx.filter(([d]) => d >= cut(ASOF, back)), el = $('egx-chart'); el.innerHTML = '';
       if (pts.length < 2) { el.textContent = 'Not enough closes logged yet.'; $('egx-cap').textContent = ''; return; }
-      const ann = bigMove(pts), vals = pts.map((x) => x[1]), lo = Math.min(...vals), hi = Math.max(...vals);
-      Charts.line(el, { ...axis(pts.map((x) => x[0]), back, el.clientWidth), series: [{ name: cur.n, values: vals }], format: Charts.fmt.int, annotations: ann, endLabel: true, height: el.clientHeight, min: lo - (hi - lo) * 0.15 });
+      // a week has no shaded move; short series get a dot on each close
+      const ann = back > 7 ? bigMove(pts) : [], vals = pts.map((x) => x[1]), lo = Math.min(...vals), hi = Math.max(...vals);
+      Charts.line(el, { ...axis(pts.map((x) => x[0]), back, el.clientWidth), series: [{ name: cur.n, values: vals }], format: Charts.fmt.int, annotations: ann, endLabel: true, marks: pts.length <= 12, height: el.clientHeight, min: lo - (hi - lo) * 0.15 });
       const y = ytd(idx);
       $('egx-cap').innerHTML = `${esc(cur.n)}, ${p[2].toLowerCase()} · this year <span class="num ${cls(y)}">${pct(y)}</span>`;
     }
@@ -232,7 +245,7 @@
         if (pts.length < 2) el.textContent = 'Not enough prices logged yet.';
         else {
           const vals = pts.map((x) => x[1]), lo = Math.min(...vals), hi = Math.max(...vals);
-          Charts.line(el, { ...axis(pts.map((x) => x[0]), back, el.clientWidth), series: [{ name: `Gold ${n}`, values: vals }], format: Charts.fmt.int, annotations: bigMove(pts), endLabel: true, height: el.clientHeight, min: lo - (hi - lo) * 0.15 });
+          Charts.line(el, { ...axis(pts.map((x) => x[0]), back, el.clientWidth), series: [{ name: `Gold ${n}`, values: vals }], format: Charts.fmt.int, annotations: back > 7 ? bigMove(pts) : [], endLabel: true, marks: pts.length <= 12, height: el.clientHeight, min: lo - (hi - lo) * 0.15 });
         }
         const row = (label, c) => `<div class="lrow"><span class="k">${label}</span><span class="v"></span><span class="d num"><span class="${cls(c)}">${pct(c)}</span></span></div>`;
         $('gfigs').innerHTML = row('Day', change(s, 0)) + row('Week', change(s, 7)) + row('Month', change(s, 30)) + row('This year', ytd(s));

@@ -112,6 +112,22 @@ window.Desk = (function () {
   // 'EGX30' or 'COMP'. Returns a caption, or null when there is no one-day data for it.
   // stock and index charts open on 1D when the last session through the day is saved, otherwise on 1M
   const startPeriod = (market, key) => (INTRA && INTRA[market] && INTRA[market].series && INTRA[market].series[key] ? PERIODS[0] : PERIODS[2]);
+  // a week through the day: the last five sessions the morning run saved (every 15 minutes), one label per day.
+  // Returns the caption, or null when fewer than two sessions are saved (the page then draws the daily closes).
+  function weekChart(el, market, key, name, fmt) {
+    const W = INTRA && INTRA.week && INTRA.week[market];
+    const ss = (W || []).filter((x) => x.session <= ASOF && x.series[key] && x.series[key].length > 1);
+    if (ss.length < 2) return null;
+    const labels = [], vals = [], text = [], at = [];
+    ss.forEach((x) => { const d = day(x.session), dl = `${WD[d.getDay()]} ${d.getDate()}`; at.push(labels.length);
+      x.series[key].forEach(([t, v]) => { labels.push(`${dl} ${t}`); vals.push(v); text.push(dl); }); });
+    el.innerHTML = '';
+    const lo = Math.min(...vals), hi = Math.max(...vals), pad = (hi - lo) * 0.15 || lo * 0.002;
+    Charts.line(el, { labels, xAt: el.clientWidth < 520 && at.length > 3 ? at.filter((_, j) => (at.length - 1 - j) % 2 === 0) : at, xText: text,
+      series: [{ name, values: vals }], format: fmt, endLabel: true, height: el.clientHeight, min: lo - pad });
+    const ch = (vals.at(-1) / vals[0] - 1) * 100;
+    return `Last ${ss.length} sessions through the day: <span class="num ${cls(ch)}">${pct(ch, 2)}</span> from the first trade`;
+  }
   function dayChart(el, market, key, name, fmt) {
     const M_ = INTRA && INTRA[market], I = M_ && M_.series && M_.series[key]; el.innerHTML = '';
     if (!I) { el.innerHTML = `<p class="sub" style="padding:24px 0">No one-day data for ${esc(name)}: ${/^(sp500|dow|brent|gold_usd|dxy)$/.test(key) ? 'not saved for the last session.' : 'not saved for the last session.'}</p>`; return null; }
@@ -162,8 +178,9 @@ window.Desk = (function () {
     const pts = s.filter(([d]) => d >= cut(ASOF, Math.max(back, 7))); el.innerHTML = '';
     if (pts.length < 2) { el.textContent = 'Not enough closes logged yet.'; return; }
     const vals = pts.map((x) => x[1]), lo = Math.min(...vals), hi = Math.max(...vals), pad = (hi - lo) * 0.15 || lo * 0.01;
-    const ann = opts.mark !== false ? bigMove(pts, opts.markAt || 0.025) : [];
-    Charts.line(el, { ...axis(pts.map((x) => x[0]), Math.max(back, 7), el.clientWidth), series: [{ name, values: vals, muted: !!opts.muted }], format: fmt, annotations: ann, endLabel: true, height: el.clientHeight, min: lo - pad });
+    // a week has no shaded move (the change beside the price says it); short series get a dot on each close
+    const ann = opts.mark !== false && back > 7 ? bigMove(pts, opts.markAt || 0.025) : [];
+    Charts.line(el, { ...axis(pts.map((x) => x[0]), Math.max(back, 7), el.clientWidth), series: [{ name, values: vals, muted: !!opts.muted }], format: fmt, annotations: ann, endLabel: true, marks: pts.length <= 12, height: el.clientHeight, min: lo - pad });
   }
   function movers(el, tickers, back, n = 3) {
     const rows = tickers.map((t) => ({ t, c: change(stock(t), back), v: last(stock(t)) })).filter((r) => r.c != null).sort((a, b) => b.c - a.c);
@@ -290,5 +307,5 @@ window.Desk = (function () {
       location.reload();
     });
   }
-  return { get ASOF() { return ASOF; }, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
+  return { get ASOF() { return ASOF; }, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, weekChart, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
 })();

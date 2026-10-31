@@ -76,6 +76,8 @@
   const draw = () => {
     M.$('lvl').textContent = M.num(M.last(cur.s)); M.$('dchg').innerHTML = M.heroChg(cur.s, per);
     if (!per[1]) { const c1 = M.dayChart(M.$('chart'), 'us', cur.k === 'nasdaq' ? 'COMP' : cur.k, cur.n, Charts.fmt.int), dc1 = M.change(cur.s, 0); M.$('cap').innerHTML = c1 ? `${c1} · on the day <span class="num ${M.cls(dc1)}">${M.pct(dc1, 2)}</span>` : ''; return; }
+    const w1 = per[1] === 7 ? M.weekChart(M.$('chart'), 'us', cur.k === 'nasdaq' ? 'COMP' : cur.k, cur.n, Charts.fmt.int) : null;
+    if (w1) { M.$('cap').innerHTML = `${M.esc(cur.n)}: ${w1}`; return; }
     M.chart(M.$('chart'), cur.s, per[1], cur.n, Charts.fmt.int);
     const c = M.change(cur.s, per[1]); M.$('cap').innerHTML = `${M.esc(cur.n)}, ${per[2].toLowerCase()}: <span class="num ${M.cls(c)}">${M.pct(c, 2)}</span> · this year <span class="num ${M.cls(M.ytd(cur.s))}">${M.pct(M.ytd(cur.s))}</span>`;
   };
