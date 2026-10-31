@@ -114,22 +114,25 @@ window.Desk = (function () {
   const startPeriod = (market, key) => (INTRA && INTRA[market] && INTRA[market].series && INTRA[market].series[key] ? PERIODS[0] : PERIODS[2]);
   // a week through the day: the last five sessions the morning run saved (every 15 minutes), one label per day.
   // Returns the caption, or null when fewer than two sessions are saved (the page then draws the daily closes).
-  function weekChart(el, market, key, name, fmt) {
+  // the pound's rate on a day, for prices through the day in dollars (the market rate is set once a day)
+  const rateOn = (iso) => valueAt(series((e) => e.usd_egp, 'fx'), iso);
+  function weekChart(el, market, key, name, fmt, inUSD = false) {
     const W = INTRA && INTRA.week && INTRA.week[market];
-    const ss = (W || []).filter((x) => x.session <= ASOF && x.series[key] && x.series[key].length > 1);
+    const ss = (W || []).filter((x) => x.session <= ASOF && x.series[key] && x.series[key].length > 1 && (!inUSD || rateOn(x.session)));
     if (ss.length < 2) return null;
     const labels = [], vals = [], text = [], at = [];
-    ss.forEach((x) => { const d = day(x.session), dl = `${WD[d.getDay()]} ${d.getDate()}`; at.push(labels.length);
-      x.series[key].forEach(([t, v]) => { labels.push(`${dl} ${t}`); vals.push(v); text.push(dl); }); });
+    ss.forEach((x) => { const d = day(x.session), dl = `${WD[d.getDay()]} ${d.getDate()}`, r = inUSD ? rateOn(x.session) : 1; at.push(labels.length);
+      x.series[key].forEach(([t, v]) => { labels.push(`${dl} ${t}`); vals.push(v / r); text.push(dl); }); });
     el.innerHTML = '';
     const lo = Math.min(...vals), hi = Math.max(...vals), pad = (hi - lo) * 0.15 || lo * 0.002;
     Charts.line(el, { labels, xAt: el.clientWidth < 520 && at.length > 3 ? at.filter((_, j) => (at.length - 1 - j) % 2 === 0) : at, xText: text,
       series: [{ name, values: vals }], format: fmt, endLabel: true, height: el.clientHeight, min: lo - pad });
     const ch = (vals.at(-1) / vals[0] - 1) * 100;
-    return `Last ${ss.length} sessions through the day: <span class="num ${cls(ch)}">${pct(ch, 2)}</span> from the first trade`;
+    return `Last ${ss.length} sessions through the day${inUSD ? ', in dollars at each day\'s rate' : ''}: <span class="num ${cls(ch)}">${pct(ch, 2)}</span> from the first trade`;
   }
-  function dayChart(el, market, key, name, fmt) {
-    const M_ = INTRA && INTRA[market], I = M_ && M_.series && M_.series[key]; el.innerHTML = '';
+  function dayChart(el, market, key, name, fmt, inUSD = false) {
+    const M_ = INTRA && INTRA[market], I0 = M_ && M_.series && M_.series[key]; el.innerHTML = '';
+    const r = inUSD && M_ ? rateOn(M_.session) : 1, I = I0 && r ? I0.map(([t, v]) => [t, v / r]) : I0;
     if (!I) { el.innerHTML = `<p class="sub" style="padding:24px 0">No one-day data for ${esc(name)}: ${/^(sp500|dow|brent|gold_usd|dxy)$/.test(key) ? 'not saved for the last session.' : 'not saved for the last session.'}</p>`; return null; }
     const vals = I.map((x) => x[1]), lo = Math.min(...vals), hi = Math.max(...vals), pad = (hi - lo) * 0.15 || lo * 0.002;
     Charts.line(el, { ...dayAxis(I.map((x) => x[0]), el.clientWidth, !!M_.window), series: [{ name, values: vals }], format: fmt, endLabel: true, height: el.clientHeight, min: lo - pad });
@@ -139,7 +142,7 @@ window.Desk = (function () {
       return `Last 24 hours to ${to.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }).replace('Sept', 'Sep')} ${M_.to.slice(11)} Cairo time: <span class="num ${cls(ch)}">${pct(ch, 2)}</span>`;
     }
     const via = M_.proxy && M_.proxy[key] ? ` · traced by the ${esc(M_.proxy[key])} fund, which tracks it` : '';
-    return `${day(M_.session).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short' }).replace('Sept', 'Sep')}, ${I[0][0]}–${I.at(-1)[0]} ${market === 'egx' ? 'Cairo' : 'New York'} time: <span class="num ${cls(ch)}">${pct(ch, 2)}</span> from the first trade${via}`;
+    return `${day(M_.session).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short' }).replace('Sept', 'Sep')}, ${I[0][0]}–${I.at(-1)[0]} ${market === 'egx' ? 'Cairo' : 'New York'} time${inUSD ? ', in dollars at the day\'s rate' : ''}: <span class="num ${cls(ch)}">${pct(ch, 2)}</span> from the first trade${via}`;
   }
   // x-axis labels on round, evenly spaced points: each day for a week, one weekday for a month, each month
   // for six months, every other month for a year, the hour through a session, every six hours for 24 hours.

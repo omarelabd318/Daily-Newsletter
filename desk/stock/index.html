@@ -97,12 +97,12 @@ try {
   // the chart in the stock's currency or, for Egyptian stocks, in dollars; 3Y and 5Y load the full log
   let sx = s, per = M.startPeriod(egx ? 'egx' : 'us', t), inUSD = false;
   const draw = async () => {
-    if (!per[1]) { M.$('dchg').innerHTML = M.heroChg(inUSD ? M.usd(sx) : sx, per); const c1 = M.dayChart(M.$('chart'), egx ? 'egx' : 'us', t, t, Charts.fmt.dec(2)); M.$('cap').innerHTML = c1 ? `${c1}${egx ? ' (in pounds)' : ''} · on the day <span class="num ${M.cls(dc)}">${M.pct(dc, 2)}</span>` : ''; return; }
+    if (!per[1]) { M.$('lvl').textContent = M.num(M.last(inUSD ? M.usd(sx) : sx)); M.$('cur').textContent = egx && !inUSD ? 'EGP' : 'USD'; M.$('dchg').innerHTML = M.heroChg(inUSD ? M.usd(sx) : sx, per); const c1 = M.dayChart(M.$('chart'), egx ? 'egx' : 'us', t, t, Charts.fmt.dec(2), egx && inUSD); const d1 = inUSD ? M.change(M.usd(sx), 0) : dc; M.$('cap').innerHTML = c1 ? `${c1} · on the day <span class="num ${M.cls(d1)}">${M.pct(d1, 2)}</span>` : ''; return; }
     if (per[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; sx = M.stock(t); idxAll = M.series((e) => e[egx ? 'egx30' : 'sp500'], egx ? 'egx' : 'us'); return draw(); }
     const v = inUSD ? M.usd(sx) : sx, vi = inUSD ? M.usd(idxAll) : idxAll, unit = inUSD ? ' in dollars' : '';
     M.$('lvl').textContent = M.num(M.last(v)); M.$('dchg').innerHTML = M.heroChg(v, per); M.$('cur').textContent = egx && !inUSD ? 'EGP' : 'USD';
-    const w1 = per[1] === 7 && !inUSD ? M.weekChart(M.$('chart'), egx ? 'egx' : 'us', t, t, Charts.fmt.dec(2)) : null;
-    if (w1) { M.$('lvl').textContent = M.num(M.last(v)); M.$('dchg').innerHTML = M.heroChg(v, per); M.$('cap').innerHTML = `${w1}${egx ? ' (in pounds)' : ''} · ${idxN} in a week <span class="num ${M.cls(M.change(vi, 7))}">${M.pct(M.change(vi, 7), 2)}</span>`; return; }
+    const w1 = per[1] === 7 ? M.weekChart(M.$('chart'), egx ? 'egx' : 'us', t, t, Charts.fmt.dec(2), egx && inUSD) : null;
+    if (w1) { M.$('lvl').textContent = M.num(M.last(v)); M.$('dchg').innerHTML = M.heroChg(v, per); M.$('cap').innerHTML = `${w1} · ${idxN} in a week <span class="num ${M.cls(M.change(vi, 7))}">${M.pct(M.change(vi, 7), 2)}</span>`; return; }
     M.chart(M.$('chart'), v, per[1], t + unit, Charts.fmt.dec(2)); const c = M.change(v, per[1]), ci = M.change(vi, per[1]);
     M.$('cap').innerHTML = `${per[2]}${unit}: <span class="num ${M.cls(c)}">${M.pct(c, 2)}</span> · ${idxN} <span class="num ${M.cls(ci)}">${M.pct(ci, 2)}</span>`;
   };
