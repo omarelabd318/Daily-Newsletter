@@ -56,7 +56,7 @@ logged daily (fetch_figures.py lists them as "Desk only") but are not rows in th
 
 ## Pages
 
-- **EGY dashboard** `/desk/egypt/` and **USA dashboard** `/desk/usa/`: the day on one screen for each market (below): the stories,
+- **EGY dashboard** `/desk/egypt/` and **US dashboard** `/desk/usa/`: the day on one screen for each market (below): the stories,
   the index chart (EGX30; or S&P 500, Nasdaq and Dow, in that order), the whole market's three biggest gainers and
   losers with reasons, the dollar in pounds with inflation, the real yield and reserves, flows, stocks, the week and views.
 - **EGX** `/desk/egx/`: EGX30 chart and the session, biggest movers (the whole market, or the desk's stocks), who
@@ -74,7 +74,7 @@ logged daily (fetch_figures.py lists them as "Desk only") but are not rows in th
 - **Stock page** `/desk/stock/?t=TICKER`: one page per stock: chart against its index, performance,
   valuation, trading, dates coming up, the desk's projections and views on it, and its news.
 
-The menu is grouped by market: Egypt (EGY dashboard, EGP, EGX, EGY stocks), USA (USA dashboard, Wall Street,
+The menu is grouped by market: Egypt (EGY dashboard, EGP, EGX, EGY stocks), USA (US dashboard, Wall Street,
 US stocks), then Global and Views. Shared code is
 `desk/desk.js` and `desk/desk.css`. The two dashboards share `desk/dash.js` and `desk/dash.css` (their own copy of the styles: change
 both together); each page names its section on `<body data-section>`. `/desk/` forwards to the EGY dashboard.
