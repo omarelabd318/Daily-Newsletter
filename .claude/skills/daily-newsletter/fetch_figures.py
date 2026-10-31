@@ -85,6 +85,29 @@ def mubasher(path):
             "when": when.group(1).replace("Last update:", "").strip().rstrip(".") if when else "time not shown"}
 
 
+# Brent (front-month future, as Yahoo's BZ=F), gold (COMEX future, as GC=F) and the dollar index on TradingView
+TV_GLOBAL = {"brent": ("futures", "ICEEUR:BRN1!"), "gold_usd": ("futures", "COMEX:GC1!"), "dxy": ("cfd", "TVC:DXY"),
+             "sp500": ("america", "SP:SPX"), "dow": ("america", "DJ:DJI")}
+
+
+def tradingview(key):
+    """The second source for Brent, gold and the dollar index, and the first when Yahoo refuses: TradingView's
+    screener, last price and the change from the previous session's close. These markets trade almost round the
+    clock on weekdays, so a weekday run counts as live (the log takes the previous close)."""
+    market, sym = TV_GLOBAL[key]
+    body = json.dumps({"symbols": {"tickers": [sym]}, "columns": ["close", "change", "change_abs"]}).encode()
+    req = urllib.request.Request(f"https://scanner.tradingview.com/{market}/scan", data=body, headers={"User-Agent": UA, "Content-Type": "application/json"})
+    close, pct, chg = json.loads(urllib.request.urlopen(req, timeout=30).read())["data"][0]["d"]
+    now = datetime.datetime.now(CAIRO)
+    if market == "america":   # US indices trade only in New York's regular session
+        ny = datetime.datetime.now(ZoneInfo("America/New_York"))
+        live = ny.weekday() < 5 and "09:30" <= ny.strftime("%H:%M") < "16:00"
+    else:
+        live = now.weekday() < 5
+    return {"value": round(close, 4), "prev": round(close - chg, 4), "pct": pct, "live": live,
+            "when": now.strftime("%a %d %b %H:%M") + (" (trading)" if live else ""), "src": "TradingView"}
+
+
 def tradingview_index(sym):
     """An EGX index Mubasher no longer carries (the EGX70 EWI): TradingView's screener, close and day change."""
     body = json.dumps({"symbols": {"tickers": [f"EGX:{sym}"]}, "columns": ["close", "change", "change_abs"]}).encode()
@@ -294,13 +317,16 @@ def main(args):
             log.append(f"vol.{t}={int(v)}")
         except Exception as e:
             missing.append(f"US {t} volume: {e}")
-    add("sp500", "S&P 500", lambda: yahoo("^GSPC"), "sp500")
+    add("sp500", "S&P 500", lambda: first(lambda: yahoo("^GSPC"), lambda: tradingview("sp500"), lambda: fred("SP500")), "sp500")
     add("nasdaq", "Nasdaq", lambda: first(lambda: yahoo("^IXIC"), lambda: nasdaq("COMP", "index")), "nasdaq")
-    add("dow", "Dow Jones", lambda: first(lambda: yahoo("^DJI"), lambda: fred("DJIA")), "dow")
-    add("brent", "Brent ($/bbl)", lambda: yahoo("BZ=F"), "brent")
-    add("gold_usd", "Gold ($/oz)", lambda: yahoo("GC=F"), "gold_usd")
+    add("dow", "Dow Jones", lambda: first(lambda: yahoo("^DJI"), lambda: tradingview("dow"), lambda: fred("DJIA")), "dow")
+    # Brent, gold and the dollar index: Yahoo first, TradingView when it refuses; when both answer, TradingView's
+    # figure is listed too (not logged) as the second source to check against
+    for key, label, ysym in (("brent", "Brent ($/bbl)", "BZ=F"), ("gold_usd", "Gold ($/oz)", "GC=F"), ("dxy", "US dollar index (DXY)", "DX-Y.NYB")):
+        add(key, label, lambda ysym=ysym, key=key: first(lambda: yahoo(ysym), lambda: tradingview(key)), key)
+        if rows and rows[-1][0] == label and rows[-1][1].get("src") == "Yahoo":
+            add(None, f"{label}, check: TradingView", lambda key=key: tradingview(key))
     add("btc", "Bitcoin ($)", lambda: first(lambda: yahoo("BTC-USD"), coingecko), "btc")
-    add("dxy", "US dollar index (DXY)", lambda: yahoo("DX-Y.NYB"), "dxy")
 
     for group, t in extras:
         if group == "egx":
