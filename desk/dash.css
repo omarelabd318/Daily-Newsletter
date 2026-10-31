@@ -114,7 +114,12 @@ h2{margin:0;font-size:16px;line-height:22px;font-weight:600}
 
 /* the read */
 .read{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:24px}
-.story.read{display:block;max-width:880px}
+/* the story on the left at a readable width; the view, the stocks it moves and what proves it wrong on the right */
+.story.read{display:grid;grid-template-columns:minmax(0,1fr) 300px;grid-template-rows:auto auto auto 1fr auto auto;column-gap:28px;row-gap:0;align-items:start}
+.story.read > .card-h{grid-column:1/-1;grid-row:1;margin-bottom:12px !important} .story.read > .notice{grid-column:1/-1;grid-row:5} .story.read > .dots{grid-column:1/-1;grid-row:6}
+.story.read > h2.call{grid-column:1;grid-row:2} .story.read > p{grid-column:1;grid-row:3}
+.story.read > dl{grid-column:2;grid-row:2 / span 3;margin:0;padding:0 0 0 20px;border-top:0;border-left:1px solid var(--rule);grid-template-columns:minmax(0,1fr);gap:2px 0}
+.story.read > dl dt{margin-top:10px} .story.read > dl dt:first-child{margin-top:0}
 .read h2.call,#c-read h2.call{font-size:20px;line-height:26px;letter-spacing:-.01em;margin-bottom:8px}
 .read p{margin:0 0 10px;font-size:14px;line-height:21px}
 .read dl{display:grid;grid-template-columns:118px minmax(0,1fr);gap:8px 12px;margin:14px 0 0;padding-top:14px;border-top:1px solid var(--rule)}
@@ -201,6 +206,10 @@ td.trend svg{display:inline-block;vertical-align:middle}
 .mvwhy a{color:var(--muted)}
 @media (max-width:1180px){
   .read{grid-template-columns:minmax(0,1fr)}
+  .story.read{grid-template-columns:minmax(0,1fr);grid-template-rows:none}
+  .story.read > *{grid-row:auto !important}
+  .story.read > dl{grid-column:1;grid-row:auto;margin:14px 0 0;padding:14px 0 0;border-left:0;border-top:1px solid var(--rule);grid-template-columns:118px minmax(0,1fr);gap:8px 12px}
+  .story.read > dl dt{margin-top:0}
 }
 /* phone */
 @media (max-width:860px){
@@ -225,7 +234,8 @@ td.trend svg{display:inline-block;vertical-align:middle}
   .movers{grid-template-columns:minmax(0,1fr);gap:18px}
   td.trend,th.trend{display:none}
   .card{padding:16px}
-  .read dl{grid-template-columns:minmax(0,1fr)}
+  .read dl,.story.read > dl{grid-template-columns:minmax(0,1fr);gap:2px 0}
+  .story.read > dl dt{margin-top:10px} .story.read > dl dt:first-child{margin-top:0}
   .read dt{margin-top:4px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
