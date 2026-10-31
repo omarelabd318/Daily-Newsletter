@@ -9,8 +9,8 @@ For the reasons: open the leads, check the cause at the outlet, and write it int
 "why" (one short line), "source" and "url" on that stock's row. Leave "why" out when no reason is found;
 "no news found" is a fact worth stating only when the move is large (5% or more).
 
-Also saves each market's biggest movers over the past week ("week", from TradingView's screener) and the reasons
-written in the last eight days ("why_log"), which the weekly lists reuse.
+Also saves each market's biggest movers over the past week and month ("week", "month", from TradingView's screener)
+and the reasons written in the last 31 days ("why_log"), which those lists reuse.
 
 Writes desk/movers.json: the EGX session's breadth (how many stocks that traded rose, fell or were unchanged),
 and the ten biggest rises and falls among all EGX stocks (Mubasher's price list) and
@@ -53,15 +53,16 @@ def rank(rows):
 
 
 def weekly(market):
-    """The past week's ten biggest rises and falls across the whole market, from TradingView's screener (its weekly
-    change, measured from a slightly different day than the desk's own week, so the page labels the source). The
+    """The past week's and past month's ten biggest rises and falls across the whole market, from TradingView's screener
+    (its weekly and monthly changes, measured from slightly different days than the desk's own, so the page labels the
+    source). Returns {"week": ..., "month": ...}. The
     same liquidity rules as the day's list: EGX stocks trading at least EGP 1m a day on average, US companies worth
     $10bn or more (common stock only)."""
     flt = [{"left": "type", "operation": "equal", "right": "stock"}]
     if market == "us":
         flt += [{"left": "market_cap_basic", "operation": "greater", "right": MIN_CAP_USD},
                 {"left": "exchange", "operation": "in_range", "right": ["NYSE", "NASDAQ", "AMEX"]}]   # not over-the-counter shares
-    body = json.dumps({"filter": flt, "columns": ["name", "description", "close", "Perf.W", "average_volume_10d_calc"],
+    body = json.dumps({"filter": flt, "columns": ["name", "description", "close", "Perf.W", "Perf.1M", "average_volume_10d_calc"],
                        "range": [0, 3000]}).encode()
     req = urllib.request.Request(f"https://scanner.tradingview.com/{'egypt' if market == 'egx' else 'america'}/scan",
                                  data=body, headers={"User-Agent": UA, "Content-Type": "application/json"})
@@ -71,19 +72,23 @@ def weekly(market):
             names = {p["code"]: p["name"] for p in json.loads(get("https://english.mubasher.info/api/1/stocks/prices?country=eg"))["prices"]}
         except Exception:
             pass
-    rows = []
+    rows = {"week": [], "month": []}
     for r in json.loads(urllib.request.urlopen(req, timeout=40).read())["data"]:
-        sym, name, close, wk, vol = r["d"]
+        sym, name, close, wk, mo, vol = r["d"]
         name = names.get(sym, name)
-        if wk is None or not close or "/" in sym or "." in sym and market == "egx":
+        if not close or "/" in sym or "." in sym and market == "egx":
             continue
         if market == "egx" and (vol or 0) * close < MIN_TURNOVER_EGP:
             continue
         name = re.sub(r"\s+Class [A-C]\b.*$", "", name)
         name = re.sub(r",?\s+(Inc\.?|Corp\.?|Corporation|Co\.?|plc|N\.V\.|S\.A\.E\.?|SAE|Ltd\.?|Company)$", "", name).strip(" ,.")
-        rows.append({"t": sym, "name": name, "price": close, "pct": round(wk, 2)})
-    out = rank(rows)
-    out.update(basis="Past week, TradingView", note=("EGX stocks trading at least EGP 1m a day on average" if market == "egx" else "US companies worth $10bn or more") + f" ({out['count']})")
+        for key, v in (("week", wk), ("month", mo)):
+            if v is not None:
+                rows[key].append({"t": sym, "name": name, "price": close, "pct": round(v, 2)})
+    out = {}
+    for key, label in (("week", "Past week, TradingView"), ("month", "Past month, TradingView")):
+        out[key] = rank(rows[key])
+        out[key].update(basis=label, note=("EGX stocks trading at least EGP 1m a day on average" if market == "egx" else "US companies worth $10bn or more") + f" ({out[key]['count']})")
     return out
 
 
@@ -227,7 +232,7 @@ def leads(saved):
 
 def main():
     saved = json.load(open(OUT)) if os.path.exists(OUT) else {}
-    # reasons written for earlier sessions' movers, kept a week so the weekly lists can reuse them
+    # reasons written for earlier sessions' movers, kept a month so the weekly and monthly lists can reuse them
     why_log = {}
     for name in ("egx", "us"):
         X = saved.get(name) or {}
@@ -236,7 +241,7 @@ def main():
             for r in X.get(side, []):
                 if r.get("why"):
                     log[r["t"]] = {k: r[k] for k in ("why", "source", "url") if k in r} | {"session": X.get("session", "")}
-        cutoff = (datetime.date.today() - datetime.timedelta(days=8)).isoformat()
+        cutoff = (datetime.date.today() - datetime.timedelta(days=31)).isoformat()
         why_log[name] = {t: v for t, v in log.items() if v.get("session", "") >= cutoff}
     for name, fn in (("egx", egx), ("us", us)):
         try:
@@ -257,10 +262,10 @@ def main():
         if saved.get(name) is not None:
             saved[name]["why_log"] = why_log.get(name, {})
             try:
-                saved[name]["week"] = weekly(name)
-                print(f"{name.upper()} week: {saved[name]['week']['note']}")
+                saved[name].update(weekly(name))
+                print(f"{name.upper()} week and month: {saved[name]['week']['note']}")
             except Exception as e:
-                print(f"{name.upper()} week: failed ({e}); kept the saved list")
+                print(f"{name.upper()} week and month: failed ({e}); kept the saved lists")
     print(caps())
     saved["note"] = "Biggest gainers and losers of the last finished session across the whole market. Written by fetch_movers.py."
     with open(OUT, "w") as f:

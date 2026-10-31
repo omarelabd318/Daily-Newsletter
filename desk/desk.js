@@ -204,12 +204,12 @@ window.Desk = (function () {
   }
   // the whole market's biggest gainers and losers of the last session (desk/movers.json); a stock on the
   // desk links to its page
-  // the whole market's biggest movers: the last session, or the past week (from TradingView, with a reason carried
-  // over when one was written for the stock in the last eight days)
-  function marketMovers(el, market, n = 5, week = false) {
-    const X0 = MOVERS && MOVERS[market], X = week ? X0 && X0.week : X0;
-    if (!X) { el.innerHTML = `<p class="sub">Not saved yet; the morning run saves ${week ? 'the past week\'s movers' : 'the last session\'s movers once it has closed'}.</p>`; return ''; }
-    if (week) {
+  // the whole market's biggest movers: the last session, or the past week or month (span 'week' or 'month', from
+  // TradingView, with a reason carried over when one was written for the stock in the last 31 days)
+  function marketMovers(el, market, n = 5, span = '') {
+    const X0 = MOVERS && MOVERS[market], X = span ? X0 && X0[span] : X0;
+    if (!X) { el.innerHTML = `<p class="sub">Not saved yet; the morning run saves ${span ? `the past ${span}'s movers` : 'the last session\'s movers once it has closed'}.</p>`; return ''; }
+    if (span) {
       const notes = Object.assign({}, X0.why_log || {}); for (const r of (X0.gainers || []).concat(X0.losers || [])) if (r.why) notes[r.t] = r;
       for (const r of X.gainers.concat(X.losers)) if (!r.why && notes[r.t]) Object.assign(r, { why: notes[r.t].why, url: notes[r.t].url, source: notes[r.t].source });
     }
@@ -217,7 +217,7 @@ window.Desk = (function () {
       return `<div class="mv">${own ? `<a href="/desk/stock/?t=${encodeURIComponent(r.t)}">${nm}</a>` : `<span style="min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${nm}</span>`}<span class="num">${num(r.price)}</span><span class="num ${cls(r.pct)}">${pct(r.pct)}</span></div>`
         + (r.why ? `<p class="mvwhy">${esc(r.why)}${r.url ? ` <a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.source || 'Source')} →</a>` : ''}</p>` : ''); };
     el.innerHTML = `<div class="movers"><div><h3><span class="chg up" aria-hidden="true"></span>Biggest gainers</h3>${X.gainers.slice(0, n).map(row).join('')}</div><div><h3><span class="chg down" aria-hidden="true"></span>Biggest losers</h3>${X.losers.slice(0, n).map(row).join('') || '<p class="sub">No stock fell.</p>'}</div></div>`;
-    if (week) return `${X.basis}. ${X.note}.`;
+    if (span) return `${X.basis}. ${X.note}.`;
     const d = day(X.session);
     return `${X.basis}, ${WD[d.getDay()]} ${d.getDate()} ${MON[d.getMonth()]}.`;
   }
