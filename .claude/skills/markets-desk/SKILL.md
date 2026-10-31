@@ -56,7 +56,7 @@ logged daily (fetch_figures.py lists them as "Desk only") but are not rows in th
 
 ## Pages
 
-- **Dashboard** `/desk/` (`desk/index.html`): the day on one screen, in two sections, Egypt and USA (below): the stories,
+- **Egypt dashboard** `/desk/egypt/` and **USA dashboard** `/desk/usa/`: the day on one screen for each market (below): the stories,
   the index chart (EGX30; or S&P 500, Nasdaq and Dow, in that order), the whole market's three biggest gainers and
   losers with reasons, the dollar in pounds with inflation, the real yield and reserves, flows, stocks, the week and views.
 - **EGX** `/desk/egx/`: EGX30 chart and the session, biggest movers (the whole market, or the desk's stocks), who
@@ -74,8 +74,9 @@ logged daily (fetch_figures.py lists them as "Desk only") but are not rows in th
 - **Stock page** `/desk/stock/?t=TICKER`: one page per stock: chart against its index, performance,
   valuation, trading, dates coming up, the desk's projections and views on it, and its news.
 
-The menu order is Dashboard, EGX, EGP, Wall Street, Global, Egyptian stocks, US stocks, Views. Shared code is `desk/desk.js` and `desk/desk.css`
-(the dashboard keeps its own copy of the styles: change both together).
+The menu order is Egypt dashboard, USA dashboard, EGX, EGP, Wall Street, Global, Egyptian stocks, US stocks, Views. Shared code is
+`desk/desk.js` and `desk/desk.css`. The two dashboards share `desk/dash.js` and `desk/dash.css` (their own copy of the styles: change
+both together); each page names its section on `<body data-section>`. `/desk/` forwards to the Egypt dashboard.
 
 ## Files
 
@@ -107,7 +108,7 @@ and the same research as the newsletter.
 
 ## Two sections
 
-The desk has two sections, switched from the sidebar (`#egypt`, `#global`): **Egypt** (the EGX, the pound,
+The desk has two sections, each with its own dashboard page (`/desk/egypt/`, `/desk/usa/`): **Egypt** (the EGX, the pound,
 Egyptian gold and rates, the desk's Egyptian stocks) and **USA** (US markets and the desk's US stocks; its close
 card lists the S&P 500 first, then the Nasdaq and the Dow Jones). Both close
 cards also carry a Global group: oil, gold in dollars, the dollar index and Bitcoin. Each has its own top call, winners and losers, stocks, week ahead
