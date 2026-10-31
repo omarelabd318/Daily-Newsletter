@@ -44,6 +44,9 @@ closes are the last session's; the news, stock research and analysis are still u
    results, a deal, a rating, a sector move), check it at the outlet, and add `why`, `source` and `url` to
    that stock's row in `desk/movers.json`. One short line; leave it out when no reason is found, and write
    "No company news found." only for moves of 5% or more. Never guess a reason.
+   The same script saves the past week's biggest movers across each market (TradingView's weekly change, shown on
+   the EGX and Wall Street pages under a 1D | 1W switch, labelled "Past week, TradingView"); they reuse any reason
+   written for that stock in the last eight days, so no separate research is needed for them.
 6. Add the session's flows to `desk/flows.json` when the EGX traded, and the date to `desk/index.json`
    with a one-line summary. When the central bank has published a new month of reserves (about the 7th;
    `fetch_figures.py` shows a new `reserves_usd`), add that month to `desk/reserves.json`: total, foreign
