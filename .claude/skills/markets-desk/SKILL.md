@@ -27,9 +27,13 @@ closes are the last session's; the news, stock research and analysis are still u
    forward until its date, and score it when the date passes.
 5. Run `python3 .claude/skills/markets-desk/fetch_intraday.py` to save the last finished session's prices
    through the day (`desk/intraday.json`, for the 1D charts: the EGX30, the Nasdaq and the desk's stocks, and
-   the last 24 hours of Bitcoin; the S&P 500, Dow, Brent, gold and the dollar index only when Yahoo answers).
+   the last 24 hours of Bitcoin; the S&P 500 and Dow from Yahoo or else traced from the SPY and DIA funds;
+   Brent, gold and the dollar index only when Yahoo answers).
    It keeps the saved session if a market is still trading, and takes under a minute. The dollar in pounds
-   has no 1D chart: the official rate barely moves within a day.
+   has no 1D chart: the official rate barely moves within a day. Then run
+   `python3 .claude/skills/markets-desk/fetch_valuation.py` to refresh each stock's Valuation card in
+   `desk/stocks.json` (Mubasher for Egyptian stocks, Nasdaq for US ones; P/E and P/B are worked out at the
+   latest close, with the results period they rest on). It keeps a stock's card if its fetch fails.
    Then run `python3 .claude/skills/markets-desk/fetch_movers.py` for the whole market's biggest gainers and
    losers of the last session (`desk/movers.json`): all EGX stocks that traded at least EGP 1m, and US
    companies worth $10bn or more. The EGX and Wall Street pages show them under "Whole market"; mention a
@@ -88,7 +92,8 @@ both together); each page names its section on `<body data-section>`. `/desk/` f
   drivers, news, view), `us` (finding, rates, afterBell, news, outlook) and `global` (finding, notes, news).
 - Each section's `calls` holds the dashboard's stories, one to three, the top call first.
 - `desk/index.json`: `{"desks": [{"date": "DATE", "summary": "..."}]}`; every page opens the newest.
-- `desk/stocks.json`: one entry per stock for its page: sector, valuation (source, date, basis), the
+- `desk/stocks.json`: one entry per stock for its page: sector, valuation (written by fetch_valuation.py: source, date, results
+  period and basis), the
   latest session's trading, dates coming up, views and news. News and views are added newest first and
   never deleted. Valuation figures older than about a quarter are flagged on the page, not hidden.
 - `desk/flows.json`: net equity flows by investor group, one entry per session, for the flow history.

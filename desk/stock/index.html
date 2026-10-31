@@ -115,10 +115,13 @@ try {
   const V = p.valuation, rows = (r) => r.map((x) => [x.label, x.value == null ? dash : M.esc(x.value)]);
   M.$('val').innerHTML = M.kv(V ? rows(V.rows) : [['Market value', dash], ['P/E', dash], ['P/B', dash]]);
   M.$('valmeta').textContent = V ? `${V.source}, ${M.short(V.asOf)}` : 'Not fetched yet';
-  // figures more than about a quarter old are flagged rather than trusted
-  if (V && (M.day(M.ASOF) - M.day(V.asOf)) / 864e5 > 100) {
-    M.$('valnote').hidden = false;
-    M.$('valnote').textContent = `${V.source} last updated these on ${M.day(V.asOf).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}${V.basis ? ', on ' + V.basis : ''}: too old to rely on.`;
+  // what the figures rest on: the results period behind the ratios (P/E and P/B are worked out at the latest close)
+  if (V) {
+    const old = V.period ? (M.day(M.ASOF) - M.day(V.period)) / 864e5 : 0, fetched = (M.day(M.ASOF) - M.day(V.asOf)) / 864e5;
+    const note = (t) => { M.$('valnote').hidden = false; M.$('valnote').textContent = t; };
+    if (fetched > 100) note(`${V.source} last updated these on ${M.day(V.asOf).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}${V.basis ? ', on ' + V.basis : ''}: too old to rely on.`);
+    else if (V.period && old > 200) note(`Based on ${V.basis}, the latest ${V.source} carries; newer results are likely out, so treat the ratios as a guide.`);
+    else if (V.period) M.$('valmeta').textContent += ` · ${V.basis.replace(/^results for the 12 months to /, 'earnings to ').replace(/^the four quarters to /, 'earnings to ')}`;
   }
   // volume from the data log: the last session against the average of the 30 before it
   const vs_ = M.series((e) => (e.vol || {})[t], egx ? 'egx' : 'us'), lastV = vs_.length ? vs_.at(-1) : null;
