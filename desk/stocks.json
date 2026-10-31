@@ -4,10 +4,10 @@
   "COMI": {
    "sector": "Banks",
    "valuation": {
-    "source": "Mubasher",
+    "source": "TradingView",
     "asOf": "2026-10-31",
-    "period": "2025-06-30",
-    "basis": "results for the 12 months to June 2025",
+    "period": "2026-06-30",
+    "basis": "results for the 12 months to June 2026",
     "price": 120.47,
     "rows": [
      {
@@ -16,19 +16,19 @@
      },
      {
       "label": "P/E",
-      "value": "5.5"
+      "value": "5.7"
      },
      {
       "label": "P/B",
-      "value": "2.1"
+      "value": "1.7"
      },
      {
       "label": "Earnings per share (12 months)",
-      "value": "EGP 21.77"
+      "value": "EGP 21.16"
      },
      {
       "label": "Book value per share",
-      "value": "EGP 57.67"
+      "value": "EGP 70.01"
      }
     ]
    },
@@ -101,10 +101,10 @@
     "source": "Mubasher"
    },
    "valuation": {
-    "source": "Mubasher",
+    "source": "TradingView",
     "asOf": "2026-10-31",
-    "period": "2026-03-31",
-    "basis": "results for the 12 months to March 2026",
+    "period": "2026-06-30",
+    "basis": "results for the 12 months to June 2026",
     "price": 80.4,
     "rows": [
      {
@@ -113,19 +113,19 @@
      },
      {
       "label": "P/E",
-      "value": "10.0"
+      "value": "10.7"
      },
      {
       "label": "P/B",
-      "value": "1.7"
+      "value": "1.8"
      },
      {
       "label": "Earnings per share (12 months)",
-      "value": "EGP 8.07"
+      "value": "EGP 7.49"
      },
      {
       "label": "Book value per share",
-      "value": "EGP 46.26"
+      "value": "EGP 44.49"
      }
     ]
    }
@@ -153,10 +153,10 @@
     "source": "Mubasher"
    },
    "valuation": {
-    "source": "Mubasher",
+    "source": "TradingView",
     "asOf": "2026-10-31",
-    "period": "2026-03-31",
-    "basis": "results for the 12 months to March 2026",
+    "period": "2026-06-30",
+    "basis": "results for the 12 months to June 2026",
     "price": 88.03,
     "rows": [
      {
@@ -165,19 +165,19 @@
      },
      {
       "label": "P/E",
-      "value": "21.2"
+      "value": "10.4"
      },
      {
       "label": "P/B",
-      "value": "4.7"
+      "value": "3.8"
      },
      {
       "label": "Earnings per share (12 months)",
-      "value": "EGP 4.15"
+      "value": "EGP 8.48"
      },
      {
       "label": "Book value per share",
-      "value": "EGP 18.93"
+      "value": "EGP 23.35"
      }
     ]
    }
@@ -475,10 +475,10 @@
     "source": "Mubasher"
    },
    "valuation": {
-    "source": "Mubasher",
+    "source": "TradingView",
     "asOf": "2026-10-31",
-    "period": "2026-03-31",
-    "basis": "results for the 12 months to March 2026",
+    "period": "2026-06-30",
+    "basis": "results for the 12 months to June 2026",
     "price": 112.25,
     "rows": [
      {
@@ -487,19 +487,19 @@
      },
      {
       "label": "P/E",
-      "value": "12.4"
+      "value": "14.7"
      },
      {
       "label": "P/B",
-      "value": "3.3"
+      "value": "3.4"
      },
      {
       "label": "Earnings per share (12 months)",
-      "value": "EGP 9.05"
+      "value": "EGP 7.62"
      },
      {
       "label": "Book value per share",
-      "value": "EGP 33.98"
+      "value": "EGP 32.88"
      }
     ]
    }
@@ -513,10 +513,10 @@
     "source": "Mubasher"
    },
    "valuation": {
-    "source": "Mubasher",
+    "source": "TradingView",
     "asOf": "2026-10-31",
-    "period": null,
-    "basis": "per-share figures that do not match the price",
+    "period": "2026-06-30",
+    "basis": "results for the 12 months to June 2026",
     "price": 822.0,
     "rows": [
      {
@@ -524,8 +524,20 @@
       "value": "EGP 90.6bn"
      },
      {
-      "label": "Ratios",
-      "value": "Not shown: Mubasher's per-share figures do not match the price"
+      "label": "P/E",
+      "value": "8.0"
+     },
+     {
+      "label": "P/B",
+      "value": "1.8"
+     },
+     {
+      "label": "Earnings per share (12 months)",
+      "value": "EGP 103.27"
+     },
+     {
+      "label": "Book value per share",
+      "value": "EGP 447.88"
      }
     ]
    }
@@ -539,10 +551,10 @@
     "source": "Mubasher"
    },
    "valuation": {
-    "source": "Mubasher",
+    "source": "TradingView",
     "asOf": "2026-10-31",
-    "period": "2024-12-31",
-    "basis": "results for the 12 months to December 2024",
+    "period": "2026-06-30",
+    "basis": "results for the 12 months to June 2026",
     "price": 17.05,
     "rows": [
      {
@@ -551,19 +563,19 @@
      },
      {
       "label": "P/E",
-      "value": "28.9"
+      "value": "17.9"
      },
      {
       "label": "P/B",
-      "value": "11.8"
+      "value": "6.4"
      },
      {
       "label": "Earnings per share (12 months)",
-      "value": "EGP 0.59"
+      "value": "EGP 0.95"
      },
      {
       "label": "Book value per share",
-      "value": "EGP 1.45"
+      "value": "EGP 2.66"
      }
     ]
    }
@@ -653,10 +665,10 @@
     "source": "Mubasher"
    },
    "valuation": {
-    "source": "Mubasher",
+    "source": "TradingView",
     "asOf": "2026-10-31",
-    "period": "2026-03-31",
-    "basis": "results for the 12 months to March 2026",
+    "period": "2026-06-30",
+    "basis": "results for the 12 months to June 2026",
     "price": 23.3,
     "rows": [
      {
@@ -665,19 +677,19 @@
      },
      {
       "label": "P/E",
-      "value": "10.3"
+      "value": "15.3"
      },
      {
       "label": "P/B",
-      "value": "3.1"
+      "value": "3.9"
      },
      {
       "label": "Earnings per share (12 months)",
-      "value": "EGP 2.27"
+      "value": "EGP 1.52"
      },
      {
       "label": "Book value per share",
-      "value": "EGP 7.56"
+      "value": "EGP 5.94"
      }
     ]
    }
@@ -691,10 +703,10 @@
     "source": "Mubasher"
    },
    "valuation": {
-    "source": "Mubasher",
+    "source": "TradingView",
     "asOf": "2026-10-31",
-    "period": "2025-06-30",
-    "basis": "results for the 12 months to June 2025",
+    "period": "2026-06-30",
+    "basis": "results for the 12 months to June 2026",
     "price": 31.57,
     "rows": [
      {
@@ -703,19 +715,19 @@
      },
      {
       "label": "P/E",
-      "value": "15.6"
+      "value": "14.6"
      },
      {
       "label": "P/B",
-      "value": "12.2"
+      "value": "11.6"
      },
      {
       "label": "Earnings per share (12 months)",
-      "value": "EGP 2.02"
+      "value": "EGP 2.16"
      },
      {
       "label": "Book value per share",
-      "value": "EGP 2.58"
+      "value": "EGP 2.72"
      }
     ]
    }
@@ -1053,10 +1065,10 @@
     "source": "Mubasher"
    },
    "valuation": {
-    "source": "Mubasher",
+    "source": "TradingView",
     "asOf": "2026-10-31",
-    "period": null,
-    "basis": "no recent results on Mubasher",
+    "period": "2026-06-30",
+    "basis": "results for the 12 months to June 2026",
     "price": 44.85,
     "rows": [
      {
@@ -1064,8 +1076,20 @@
       "value": "EGP 128.6bn"
      },
      {
-      "label": "Ratios",
-      "value": "Not shown: no recent results on Mubasher"
+      "label": "P/E",
+      "value": "8.4"
+     },
+     {
+      "label": "P/B",
+      "value": "2.9"
+     },
+     {
+      "label": "Earnings per share (12 months)",
+      "value": "EGP 5.36"
+     },
+     {
+      "label": "Book value per share",
+      "value": "EGP 15.70"
      }
     ]
    }
@@ -1079,10 +1103,10 @@
     "source": "Mubasher"
    },
    "valuation": {
-    "source": "Mubasher",
+    "source": "TradingView",
     "asOf": "2026-10-31",
-    "period": "2025-09-30",
-    "basis": "results for the 12 months to September 2025",
+    "period": "2026-03-31",
+    "basis": "results for the 12 months to March 2026",
     "price": 32.44,
     "rows": [
      {
@@ -1091,19 +1115,19 @@
      },
      {
       "label": "P/E",
-      "value": "14.9"
+      "value": "11.0"
      },
      {
       "label": "P/B",
-      "value": "6.9"
+      "value": "6.7"
      },
      {
       "label": "Earnings per share (12 months)",
-      "value": "EGP 2.17"
+      "value": "EGP 2.96"
      },
      {
       "label": "Book value per share",
-      "value": "EGP 4.67"
+      "value": "EGP 4.83"
      }
     ]
    }

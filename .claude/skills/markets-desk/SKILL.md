@@ -32,8 +32,8 @@ closes are the last session's; the news, stock research and analysis are still u
    It keeps the saved session if a market is still trading, and takes under a minute. The dollar in pounds
    has no 1D chart: the official rate barely moves within a day. Then run
    `python3 .claude/skills/markets-desk/fetch_valuation.py` to refresh each stock's Valuation card in
-   `desk/stocks.json` (Mubasher for Egyptian stocks, Nasdaq for US ones; P/E and P/B are worked out at the
-   latest close, with the results period they rest on). It keeps a stock's card if its fetch fails.
+   `desk/stocks.json` (TradingView's screener and Mubasher for Egyptian stocks, taking whichever runs to the newer quarter; Nasdaq
+   for US ones; P/E and P/B are worked out at the latest close, with the results period they rest on). It keeps a stock's card if its fetch fails.
    Then run `python3 .claude/skills/markets-desk/fetch_movers.py` for the whole market's biggest gainers and
    losers of the last session (`desk/movers.json`): all EGX stocks that traded at least EGP 1m, and US
    companies worth $10bn or more. The EGX and Wall Street pages show them under "Whole market"; mention a
