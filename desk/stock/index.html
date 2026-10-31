@@ -82,7 +82,7 @@ try {
   const dash = '<span class="dash">—</span>', signed = (c) => `<span class="${M.cls(c)}">${M.pct(c)}</span>`;
   M.$('pick').innerHTML = ['egx', 'us'].map((g) => `<optgroup label="${g === 'egx' ? 'Egypt' : 'USA'}">${M.GROUP[g].map((x) => `<option value="${x}"${x === t ? ' selected' : ''}>${M.esc(M.NAMES[x])} (${x})</option>`).join('')}</optgroup>`).join('');
   M.$('pick').addEventListener('change', (e) => { location.search = '?t=' + encodeURIComponent(e.target.value); });
-  M.$('crumb').textContent = M.NAMES[t]; M.$('mkt').textContent = egx ? 'Egyptian stocks' : 'US stocks'; M.$('mkt').href = egx ? '/desk/stocks/egypt/' : '/desk/stocks/us/'; M.$('deskcrumb').href = egx ? '/desk/egypt/' : '/desk/usa/';
+  M.$('crumb').textContent = M.NAMES[t]; M.$('mkt').textContent = egx ? 'EGY stocks' : 'US stocks'; M.$('mkt').href = egx ? '/desk/stocks/egypt/' : '/desk/stocks/us/'; M.$('deskcrumb').href = egx ? '/desk/egypt/' : '/desk/usa/';
   M.$('name').innerHTML = `${M.esc(M.NAMES[t])} <span class="meta" style="font-size:15px;font-weight:400">${M.esc(t)}${p.sector ? ' · ' + M.esc(p.sector) : ''}</span>`;
   document.title = M.NAMES[t] + ' · Markets Desk';
   const fresh = s.length && s.at(-1)[0] === M.ASOF, dc = fresh ? M.change(s, 0) : null, y = M.ytd(s);
