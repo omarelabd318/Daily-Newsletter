@@ -74,7 +74,8 @@ logged daily (fetch_figures.py lists them as "Desk only") but are not rows in th
 - **Stock page** `/desk/stock/?t=TICKER`: one page per stock: chart against its index, performance,
   valuation, trading, dates coming up, the desk's projections and views on it, and its news.
 
-The menu order is Egypt dashboard, USA dashboard, EGX, EGP, Wall Street, Global, Egyptian stocks, US stocks, Views. Shared code is
+The menu is grouped by market: Egypt (Egypt dashboard, EGP, EGX, Egyptian stocks), USA (USA dashboard, Wall Street,
+US stocks), then Global and Views. Shared code is
 `desk/desk.js` and `desk/desk.css`. The two dashboards share `desk/dash.js` and `desk/dash.css` (their own copy of the styles: change
 both together); each page names its section on `<body data-section>`. `/desk/` forwards to the Egypt dashboard.
 
