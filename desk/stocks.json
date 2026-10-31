@@ -1390,6 +1390,120 @@
      }
     ]
    }
+  },
+  "AMOC": {
+   "sector": "Oil refining",
+   "cap": {
+    "value": 18.1,
+    "currency": "EGP",
+    "date": "2026-10-31",
+    "source": "Mubasher"
+   },
+   "valuation": {
+    "source": "Mubasher",
+    "asOf": "2026-10-31",
+    "period": "2025-06-30",
+    "basis": "results for the 12 months to June 2025",
+    "price": 14.0,
+    "rows": [
+     {
+      "label": "Market value",
+      "value": "EGP 18.1bn"
+     },
+     {
+      "label": "P/E",
+      "value": "30.4"
+     },
+     {
+      "label": "P/B",
+      "value": "4.1"
+     },
+     {
+      "label": "Earnings per share (12 months)",
+      "value": "EGP 0.46"
+     },
+     {
+      "label": "Book value per share",
+      "value": "EGP 3.43"
+     }
+    ]
+   }
+  },
+  "SKPC": {
+   "sector": "Petrochemicals",
+   "cap": {
+    "value": 13.6,
+    "currency": "EGP",
+    "date": "2026-10-31",
+    "source": "Mubasher"
+   },
+   "valuation": {
+    "source": "Mubasher",
+    "asOf": "2026-10-31",
+    "period": "2025-09-30",
+    "basis": "results for the 12 months to September 2025",
+    "price": 15.0,
+    "rows": [
+     {
+      "label": "Market value",
+      "value": "EGP 13.6bn"
+     },
+     {
+      "label": "P/E",
+      "value": "7.1"
+     },
+     {
+      "label": "P/B",
+      "value": "1.8"
+     },
+     {
+      "label": "Earnings per share (12 months)",
+      "value": "EGP 2.10"
+     },
+     {
+      "label": "Book value per share",
+      "value": "EGP 8.42"
+     }
+    ]
+   }
+  },
+  "EFID": {
+   "sector": "Food",
+   "cap": {
+    "value": 24.9,
+    "currency": "EGP",
+    "date": "2026-10-31",
+    "source": "Mubasher"
+   },
+   "valuation": {
+    "source": "TradingView",
+    "asOf": "2026-10-31",
+    "period": "2026-06-30",
+    "basis": "results for the 12 months to June 2026",
+    "price": 17.75,
+    "rows": [
+     {
+      "label": "Market value",
+      "value": "EGP 24.9bn"
+     },
+     {
+      "label": "P/E",
+      "value": "11.9"
+     },
+     {
+      "label": "P/B",
+      "value": "6.2"
+     },
+     {
+      "label": "Earnings per share (12 months)",
+      "value": "EGP 1.50"
+     },
+     {
+      "label": "Book value per share",
+      "value": "EGP 2.85"
+     }
+    ]
+   }
   }
  }
 }

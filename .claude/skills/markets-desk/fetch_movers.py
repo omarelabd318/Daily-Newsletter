@@ -49,6 +49,18 @@ def rank(rows):
     return {"gainers": rows[:TOP], "losers": [r for r in reversed(rows) if r["pct"] < 0][:TOP], "count": len(rows)}
 
 
+def indices():
+    """The EGX30 and the EGX70 EWI over the day, week, month and year so far, from TradingView's screener: the EGX70
+    EWI has no history the desk can backfill (Mubasher carries the index it replaced), so its changes come from here."""
+    body = json.dumps({"symbols": {"tickers": ["EGX:EGX30", "EGX:EGX70EWI"]}, "columns": ["close", "change", "Perf.W", "Perf.1M", "Perf.YTD"]}).encode()
+    req = urllib.request.Request("https://scanner.tradingview.com/egypt/scan", data=body, headers={"User-Agent": UA, "Content-Type": "application/json"})
+    out = {}
+    for r in json.loads(urllib.request.urlopen(req, timeout=30).read())["data"]:
+        close, day, w, m, ytd = r["d"]
+        out[r["s"].split(":")[1]] = {"close": close, "day": day, "week": w, "month": m, "ytd": ytd}
+    return out
+
+
 def egx():
     d = json.loads(get("https://english.mubasher.info/api/1/stocks/prices?country=eg"))
     try:   # Arabic names, for searching Egyptian news about smaller companies
@@ -70,10 +82,14 @@ def egx():
         rows.append({"t": p["code"], "name": p["name"], "ar": ar.get(p["code"]), "price": price, "pct": pct, "turnover": turnover})
     out = rank(rows)
     out.update(session=session, basis=f"All EGX stocks that traded at least EGP 1m ({out['count']} on the day)", breadth=breadth)
+    try:
+        out["indices"] = indices()
+    except Exception:
+        pass
     return out, f"EGX: {session}, {out['count']} stocks"
 
 
-DESK = {"egx": ["COMI", "TMGH", "ETEL", "PHDC", "SWDY", "ORAS", "FWRY", "ABUK", "HRHO", "CLHO", "JUFO", "ALCN", "MFPC", "EAST", "EFIH", "EMFD", "BQDC", "EGAL"],
+DESK = {"egx": ["COMI", "TMGH", "ETEL", "PHDC", "SWDY", "ORAS", "FWRY", "ABUK", "HRHO", "CLHO", "JUFO", "ALCN", "MFPC", "EAST", "EFIH", "EMFD", "BQDC", "EGAL", "AMOC", "SKPC", "EFID"],
         "us": ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA", "JPM", "XOM", "AVGO", "BRK.B", "WMT", "V", "ORCL", "COST"]}
 SCREENER = []
 # listed but not yet trading: Mubasher's market value for them predates the offering

@@ -339,3 +339,7 @@ td.name a{text-decoration:none}
 .rsv-track span{display:block;height:100%;border-radius:3px;background:var(--chart-1)}
 .news .impact{display:inline-flex;align-items:center;margin-bottom:3px;font-size:12px;font-weight:600;letter-spacing:.01em}
 .news .impact.flat{color:var(--muted)} .news .impact .chg.flat::before{display:none}
+.mini-h{margin:16px 0 6px;font-size:13px;font-weight:600}
+table.mini{width:100%;border-collapse:collapse;font-size:13px} table.mini th{font-weight:500;color:var(--muted);text-align:left;padding:0 0 4px}
+table.mini td{padding:5px 0;border-top:1px solid var(--rule)} table.mini .num{text-align:right}
+table.mini th,table.mini td{height:auto}

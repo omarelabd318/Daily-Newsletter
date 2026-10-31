@@ -35,7 +35,7 @@ UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chr
 EGX = ["COMI", "TMGH", "ETEL", "PHDC", "SWDY", "ORAS", "FWRY", "ABUK", "HRHO", "CLHO", "JUFO", "ALCN"]
 US = ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA", "JPM", "XOM", "AVGO", "BRK.B", "WMT"]
 # The Markets Desk follows these too; they are logged every day but are not Stocks Watch rows.
-DESK_EGX = ["MFPC", "EAST", "EFIH", "EMFD", "BQDC", "EGAL"]
+DESK_EGX = ["MFPC", "EAST", "EFIH", "EMFD", "BQDC", "EGAL", "AMOC", "SKPC", "EFID"]
 DESK_US = ["V", "ORCL", "COST"]
 
 
@@ -83,6 +83,14 @@ def mubasher(path):
     return {"prev": prev, "value": round(prev + change, 4), "pct": number(pct.group(1)),
             "volume": number(vol.group(1)) if vol else None,
             "when": when.group(1).replace("Last update:", "").strip().rstrip(".") if when else "time not shown"}
+
+
+def tradingview_index(sym):
+    """An EGX index Mubasher no longer carries (the EGX70 EWI): TradingView's screener, close and day change."""
+    body = json.dumps({"symbols": {"tickers": [f"EGX:{sym}"]}, "columns": ["close", "change", "change_abs"]}).encode()
+    req = urllib.request.Request("https://scanner.tradingview.com/egypt/scan", data=body, headers={"User-Agent": UA, "Content-Type": "application/json"})
+    close, pct, chg = json.loads(urllib.request.urlopen(req, timeout=30).read())["data"][0]["d"]
+    return {"prev": round(close - chg, 4), "value": close, "pct": pct, "src": "TradingView", "when": "last close"}
 
 
 YAHOO_DOWN = []
@@ -267,6 +275,11 @@ def main(args):
     for t in DESK_EGX:
         add(t, f"Desk only: EGX {t}", lambda t=t: dict(mubasher(f"stocks/{t}"), src="Mubasher"), f"egx.{t}", egx_live)
     add("egx30", "EGX30", lambda: dict(mubasher("indices/EGX30"), src="Mubasher"), "egx30", egx_live)
+    # shares traded in the EGX30's companies, for the desk's comparison with the 90-day average (finished sessions only)
+    e30 = next((r for label, r, _ in rows if label == "EGX30"), None)
+    if e30 and e30.get("volume") and not egx_live:
+        log.append(f"egx30_vol={int(e30['volume'])}")
+    add("egx70", "EGX70 EWI (small and mid caps)", lambda: tradingview_index("EGX70EWI"), "egx70", egx_live)
     for t in US:
         add(t, f"US {t}", lambda t=t: first(lambda: yahoo(t.replace(".", "-")), lambda: nasdaq(t)), f"us.{t}")
         try:

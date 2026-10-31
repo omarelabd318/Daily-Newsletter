@@ -25,7 +25,7 @@ NAMES = {"usd_egp": "USD/EGP", "eur_egp": "EUR/EGP", "sar_egp": "SAR/EGP", "aed_
          "cbe_usd_buy": "USD/EGP, central bank buy", "cbe_usd_sell": "USD/EGP, central bank sell",
          "cbe_deposit": "Overnight deposit rate", "cbe_lending": "Overnight lending rate", "tbill_91": "91-day T-bill",
          "tbill_182": "182-day T-bill", "tbill_273": "273-day T-bill", "tbill_364": "364-day T-bill",
-         "egx_turnover": "EGX turnover (EGP bn)", "infl_headline": "Inflation, headline (%)", "infl_core": "Inflation, core (%)", "reserves_usd": "Net international reserves ($bn)"}
+         "egx_turnover": "EGX turnover (EGP bn)", "infl_headline": "Inflation, headline (%)", "infl_core": "Inflation, core (%)", "reserves_usd": "Net international reserves ($bn)", "egx70": "EGX70 EWI", "egx30_vol": "EGX30 shares traded"}
 
 
 def series(days, upto):

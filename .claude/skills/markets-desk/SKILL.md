@@ -1,6 +1,6 @@
 ---
 name: markets-desk
-description: House rules for the Markets Desk, the daily markets analysis page planned next to the Daily Newsletter (what moved and why, which EGX sectors it helps or hurts, the desk's 33 stocks, the week ahead, open views). Use whenever writing, designing or reviewing the desk.
+description: House rules for the Markets Desk, the daily markets analysis page planned next to the Daily Newsletter (what moved and why, which EGX sectors it helps or hurts, the desk's 36 stocks, the week ahead, open views). Use whenever writing, designing or reviewing the desk.
 ---
 
 # Markets Desk
@@ -52,11 +52,11 @@ closes are the last session's; the news, stock research and analysis are still u
 
 ## The desk's stocks
 
-18 Egyptian: the newsletter's 12 Stocks Watch names (CIB, Talaat Moustafa, Telecom Egypt, Palm Hills,
+21 Egyptian: the newsletter's 12 Stocks Watch names (CIB, Talaat Moustafa, Telecom Egypt, Palm Hills,
 Elsewedy, Orascom Construction, Fawry, Abu Qir, EFG Holding, Cleopatra, Juhayna, Alexandria Containers)
-plus MOPCO, Eastern Company, e-finance, Emaar Misr, Banque du Caire (trading from 2 November 2026) and Egypt
-Aluminium.
-15 US: the 12 Stocks Watch names plus Visa, Oracle and Costco. The extra nine are desk-only: they are
+plus MOPCO, Eastern Company, e-finance, Emaar Misr, Banque du Caire (trading from 2 November 2026), Egypt
+Aluminium, Alexandria Mineral Oils, Sidi Kerir Petrochemicals and Edita Food Industries.
+15 US: the 12 Stocks Watch names plus Visa, Oracle and Costco. The extra 12 are desk-only: they are
 logged daily (fetch_figures.py lists them as "Desk only") but are not rows in the newsletter's tables.
 
 ## Pages
@@ -102,7 +102,12 @@ both together); each page names its section on `<body data-section>`. `/desk/` f
   first; the EGP page shows the latest month, split by what the reserves are held in.
 - Stock pages read each stock's volume (`vol`) from the data log and compare the last session with the
   average of the 30 before it; the EGP page reads the central bank's dollar rate, policy rates, the one-year T-bill
-  yield and inflation from the log. The day's file only adds what the log does not hold.
+  yield and inflation from the log. The day's file only adds what the log does not hold. The EGX page's session
+  card reads turnover from the log (`egx_turnover`), advancers and decliners from desk/movers.json, and, until
+  turnover has about 60 sessions logged, compares the EGX30 companies' shares traded (`egx30_vol`) with its 90-day
+  average. Its "Blue chips against small and mid caps" table comes from the movers file (TradingView's EGX30 and
+  EGX70 EWI); list the EGX70 EWI in the Egypt close card's group with the EGX30. Give `session.breadth` in the day's
+  file only when the exchange's official count is reported (it takes precedence over Mubasher's count).
 - The charts, the Stocks tables and every change and YTD figure are drawn by the page from
   `data/markets-recent.json`, so log the day's figures before publishing a desk.
 
