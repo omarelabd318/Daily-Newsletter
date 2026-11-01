@@ -107,6 +107,9 @@ both together); each page names its section on `<body data-section>`. `/desk/` f
   latest session's trading, dates coming up, views and news. News and views are added newest first and
   never deleted. Valuation figures older than about a quarter are flagged on the page, not hidden.
 - `desk/flows.json`: net equity flows by investor group, one entry per session, for the flow history.
+- `desk/rolls.json`: futures contract switches (Brent's front month rolls each month). When fetch_figures.py
+  prints "CONTRACT SWITCH?", add an entry (session = the first close on the new contract, from, to); the Global
+  page's Brent chart marks the switch and explains the step under it.
 - `desk/reserves.json`: net international reserves by what they are held in, one entry per month, oldest
   first; the EGP page shows the latest month, split by what the reserves are held in.
 - Stock pages read each stock's volume (`vol`) from the data log and compare the last session with the

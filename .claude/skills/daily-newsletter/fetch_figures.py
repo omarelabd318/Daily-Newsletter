@@ -321,11 +321,24 @@ def main(args):
     add("nasdaq", "Nasdaq", lambda: first(lambda: yahoo("^IXIC"), lambda: nasdaq("COMP", "index")), "nasdaq")
     add("dow", "Dow Jones", lambda: first(lambda: yahoo("^DJI"), lambda: tradingview("dow"), lambda: fred("DJIA")), "dow")
     # Brent, gold and the dollar index: Yahoo first, TradingView when it refuses; when both answer, TradingView's
-    # figure is listed too (not logged) as the second source to check against
+    # figure is listed too (not logged) as the second source to check against. A previous close far from the last
+    # logged price means the front-month future has switched contracts (see the note printed after the table).
     for key, label, ysym in (("brent", "Brent ($/bbl)", "BZ=F"), ("gold_usd", "Gold ($/oz)", "GC=F"), ("dxy", "US dollar index (DXY)", "DX-Y.NYB")):
         add(key, label, lambda ysym=ysym, key=key: first(lambda: yahoo(ysym), lambda: tradingview(key)), key)
         if rows and rows[-1][0] == label and rows[-1][1].get("src") == "Yahoo":
             add(None, f"{label}, check: TradingView", lambda key=key: tradingview(key))
+    roll_notes = []
+    try:
+        logged = [d for d in json.load(open(os.path.join(os.path.dirname(__file__), "..", "..", "..", "data", "markets.json")))["days"] if d["date"] < date]
+        for key, label in (("brent", "Brent"), ("gold_usd", "Gold")):
+            r = next((x for lbl, x, _ in rows if lbl.startswith(label + " (") and x.get("src") in ("Yahoo", "TradingView")), None)
+            last = next((d[key] for d in reversed(logged) if isinstance(d.get(key), (int, float))), None)
+            if r and last and r.get("prev") and abs(r["prev"] / last - 1) > 0.015:
+                roll_notes.append(f"{label}: the previous close here ({r['prev']:,.2f}) is {abs(r['prev'] / last - 1) * 100:.1f}% from the last logged price ({last:,.2f}), "
+                                  "which usually means the front-month future switched contracts. Use the like-for-like day change, and add the switch to "
+                                  "desk/rolls.json (session = the first close on the new contract) so the desk's chart marks it.")
+    except Exception:
+        pass
     add("btc", "Bitcoin ($)", lambda: first(lambda: yahoo("BTC-USD"), coingecko), "btc")
 
     for group, t in extras:
@@ -423,6 +436,8 @@ def main(args):
         print("table, and write n/a in the edition for any that still cannot be confirmed. Never guess.")
         for m in missing:
             print(f"- {m}")
+    for n in roll_notes:
+        print("\nCONTRACT SWITCH? " + n)
     print("\nThese are first-source figures: still check them against a second source as the skill describes.")
     print("Exchange rates are market mid-rates; use the central bank's rate in the edition when you have it,")
     print("and log the figure the edition shows. Add any figure you found by hand to the command below.\n")

@@ -44,6 +44,7 @@
   const cardHtml = C.map(([k, n, u], i) => `<section class="card c6"><div class="card-h"><h2>${n}</h2><div class="seg" id="seg${i}"></div></div><div class="hero"><span class="lvl num" id="lvl${i}"></span><span class="d num" id="d${i}"></span><span class="meta">${u}</span></div><div class="midchart" id="ch${i}"></div><p class="chart-cap" id="cap${i}"></p><div id="kv${i}" style="margin-top:12px"></div><p class="pvd-read">${M.esc(notes[k] || '')}</p></section>`).join('');
   M.$('cards-top').innerHTML = cardHtml.split('</section>').slice(0, 2).map((x) => x + '</section>').join('');
   M.$('cards').innerHTML = cardHtml.split('</section>').slice(2, 4).map((x) => x + '</section>').join('');
+  const ROLLS = (await M.get('/desk/rolls.json')) || {};
   C.forEach(([k, n, u, dp], i) => {
     const s = M.series((e) => e[k], k === 'btc' ? 'all' : 'us');
     if (!s.length) { M.$('ch' + i).textContent = 'Not logged yet.'; return; }
@@ -57,7 +58,9 @@
       if (!p[1]) { const c1 = M.dayChart(M.$('ch' + i), 'global', k, n, dp ? Charts.fmt.dec(dp) : Charts.fmt.int); M.$('cap' + i).innerHTML = c1 || ''; return; }
       if (p[1] > 400) { if (!M.full.done) { await M.full(); M.full.done = true; } sAll = M.series((e) => e[k], k === 'btc' ? 'all' : 'us'); }
       M.$('cap' + i).innerHTML = ''; M.$('d' + i).innerHTML = M.heroChg(sAll, p);
-      M.chart(M.$('ch' + i), sAll, p[1], n, dp ? Charts.fmt.dec(dp) : Charts.fmt.int);
+      // Brent: a futures contract switch in view is marked on the chart and explained under it
+      const shown = M.chart(M.$('ch' + i), sAll, p[1], n, dp ? Charts.fmt.dec(dp) : Charts.fmt.int, { rolls: (ROLLS[k] || []).filter((r) => r.session >= M.cut(M.lastDate(sAll), 45)) }) || [];
+      if (shown.length) M.$('cap' + i).innerHTML = shown.map((r) => `The step on ${M.short(r.session)} is the switch from the ${M.esc(r.from)} to the ${M.esc(r.to)} contract, which trades at a different price, not a move in oil; the day's change compares like with like.`).join(' ');
       if (p[1] > 400) { const c = M.change(sAll, p[1]); M.$('cap' + i).innerHTML = `${p[2]}: <span class="num ${M.cls(c)}">${M.pct(c, 1)}</span>`; }
     };
     M.segment(M.$('seg' + i), '1M', draw, (has1D ? M.PERIODS : M.PERIODS.slice(1)).concat(M.LONG)); draw(M.PERIODS[2]);

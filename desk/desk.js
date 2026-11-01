@@ -186,9 +186,13 @@ window.Desk = (function () {
     const pts = s.filter(([d]) => d >= cut(lastDate(s), Math.max(back, 7))); el.innerHTML = '';
     if (pts.length < 2) { el.textContent = 'Not enough closes logged yet.'; return; }
     const vals = pts.map((x) => x[1]), lo = Math.min(...vals), hi = Math.max(...vals), pad = (hi - lo) * 0.15 || lo * 0.01;
-    // a week has no shaded move (the change beside the price says it); short series get a dot on each close
-    const ann = opts.mark !== false && back > 7 ? bigMove(pts, opts.markAt || 0.025) : [];
+    // a week has no shaded move (the change beside the price says it); short series get a dot on each close.
+    // opts.rolls ([{session, to}]) marks a futures contract switch, and then no move is shaded (it could be the step)
+    const rolls = (opts.rolls || []).map((r) => ({ r, at: pts.findIndex(([d]) => d >= r.session) })).filter((x) => x.at > 0);
+    const ann = rolls.length ? rolls.map(({ r, at }) => ({ at, label: `Switched to the ${r.to} contract`, short: 'Contract switch' }))
+      : opts.mark !== false && back > 7 ? bigMove(pts, opts.markAt || 0.025) : [];
     Charts.line(el, { ...axis(pts.map((x) => x[0]), Math.max(back, 7), el.clientWidth), series: [{ name, values: vals, muted: !!opts.muted }], format: fmt, annotations: ann, endLabel: true, marks: pts.length <= 12, height: el.clientHeight, min: lo - pad });
+    return rolls.map(({ r }) => r);
   }
   // the desk's stocks over a period; notes ({ticker: {why, source, url}}, from deskNotes) add a line under each on 1D
   function movers(el, tickers, back, n = 3, notes = null) {

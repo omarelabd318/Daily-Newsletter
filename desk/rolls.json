@@ -1,0 +1,6 @@
+{
+ "note": "Futures contract switches (rolls) in the data log, which keeps each day's front-month price as quoted: the chart marks the switch so the step between contracts is not read as a price move. Add an entry when fetch_figures.py reports a likely switch. session is the first close on the new contract.",
+ "brent": [
+  {"session": "2026-10-30", "from": "December", "to": "January"}
+ ]
+}
