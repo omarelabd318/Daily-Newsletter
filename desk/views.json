@@ -74,6 +74,13 @@
      "source": "Egypt Independent",
      "url": "https://www.egyptindependent.com/why-the-cbe-raised-interest-rates-by-1-amid-currency-pressures/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-01",
+     "text": "Banks begin repricing certificates after the hike; EGP 110bn of bills are at auction today. The dollar is unchanged at EGP 56.12 at the central bank.",
+     "source": "Daily News Egypt",
+     "url": "https://dailynewsegypt.com/2026/10/31/banks-to-review-savings-lending-rates-following-cbes-1-rate-hike/",
+     "effect": "neutral"
     }
    ]
   },
@@ -149,6 +156,13 @@
      "source": "The National",
      "url": "https://www.thenationalnews.com/business/markets/2026/10/30/oil-prices-set-for-sharp-monthly-rise-on-hormuz-strikes-and-us-threat-to-hit-iran",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-01",
+     "text": "Iran says a plan with Qatari mediators to reopen Hormuz within two days is under discussion; a deal would pull Brent down from $113.43.",
+     "source": "Al Jazeera",
+     "url": "https://www.aljazeera.com/news/liveblog/2026/11/1/iran-war-live-araghchi-says-talks-under-way-on-2-day-plan-to-reopen-hormuz",
+     "effect": "against"
     }
    ]
   },
