@@ -113,9 +113,11 @@
     if (V.length && V.at(-1)[0] === M.ASOF && v90.length >= 40) { vs90 = (V.at(-1)[1] / (v90.reduce((a, b) => a + b, 0) / v90.length) - 1) * 100; vsLabel = 'EGX30 volume against 90-day average'; }
   }
   const MV = M.MOVERS && M.MOVERS.egx, B = MV && MV.session === M.ASOF ? MV.breadth : null;
+  // advancers in green, decliners in red ("189 / 35", or the exchange's own figure from the day's file)
+  const updown = (t) => { const m = String(t).match(/^\s*(\d[\d,]*)\s*\/\s*(\d[\d,]*)(.*)$/); return m ? `<span class="up">${m[1]}</span> / <span class="down">${m[2]}</span>${M.esc(m[3])}` : M.esc(t); };
   M.$('stats').innerHTML = M.kv([['Close', M.num(M.last(idx))], ['Day', `<span class="${M.cls(dc)}">${M.pct(dc, 2)}</span>`], ['Week', signed(M.change(idx, 7))], ['Month', signed(M.change(idx, 30))], ['This year', signed(M.ytd(idx))],
     ['Turnover', S.turnover ? M.esc(S.turnover) : tov != null ? `EGP ${M.num(tov, 1)}bn` : dash], [S.vs90 ? 'Against 90-day average' : vsLabel, S.vs90 ? M.esc(S.vs90) : vs90 != null ? signed(vs90) : dash],
-    ['Advancers / decliners', S.breadth ? M.esc(S.breadth) : B ? `${B.up} / ${B.down} <span class="meta">(${B.flat} unchanged; Mubasher)</span>` : dash]]);
+    ['Advancers / decliners', S.breadth ? updown(S.breadth) : B ? `${updown(`${B.up} / ${B.down}`)} <span class="meta">(${B.flat} unchanged; Mubasher)</span>` : dash]]);
   const [lo, hi] = M.range52(idx); M.$('range').innerHTML = M.rangeBar(lo, hi, M.last(idx), (x) => M.num(x, 0));
   // the EGX30 against the EGX70 EWI (equal-weighted small and mid caps), both from TradingView so the periods match
   const IX = MV && MV.session === M.ASOF && MV.indices;
