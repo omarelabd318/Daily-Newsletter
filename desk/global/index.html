@@ -58,9 +58,8 @@
       if (!p[1]) { const c1 = M.dayChart(M.$('ch' + i), 'global', k, n, dp ? Charts.fmt.dec(dp) : Charts.fmt.int); M.$('cap' + i).innerHTML = c1 || ''; return; }
       if (p[1] > 400) { if (!M.full.done) { await M.full(); M.full.done = true; } sAll = M.series((e) => e[k], k === 'btc' ? 'all' : 'us'); }
       M.$('cap' + i).innerHTML = ''; M.$('d' + i).innerHTML = M.heroChg(sAll, p);
-      // Brent: a futures contract switch in view is marked on the chart and explained under it
-      const shown = M.chart(M.$('ch' + i), sAll, p[1], n, dp ? Charts.fmt.dec(dp) : Charts.fmt.int, { rolls: (ROLLS[k] || []).filter((r) => r.session >= M.cut(M.lastDate(sAll), 45)) }) || [];
-      if (shown.length) M.$('cap' + i).innerHTML = shown.map((r) => `The step on ${M.short(r.session)} is the switch from the ${M.esc(r.from)} to the ${M.esc(r.to)} contract, which trades at a different price, not a move in oil; the day's change compares like with like.`).join(' ');
+      // Brent: a futures contract switch in view is marked on the chart
+      M.chart(M.$('ch' + i), sAll, p[1], n, dp ? Charts.fmt.dec(dp) : Charts.fmt.int, { rolls: (ROLLS[k] || []).filter((r) => r.session >= M.cut(M.lastDate(sAll), 45)) });
       if (p[1] > 400) { const c = M.change(sAll, p[1]); M.$('cap' + i).innerHTML = `${p[2]}: <span class="num ${M.cls(c)}">${M.pct(c, 1)}</span>`; }
     };
     M.segment(M.$('seg' + i), '1M', draw, (has1D ? M.PERIODS : M.PERIODS.slice(1)).concat(M.LONG)); draw(M.PERIODS[2]);
