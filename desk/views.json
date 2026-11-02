@@ -81,6 +81,13 @@
      "source": "Daily News Egypt",
      "url": "https://dailynewsegypt.com/2026/10/31/banks-to-review-savings-lending-rates-following-cbes-1-rate-hike/",
      "effect": "neutral"
+    },
+    {
+     "date": "2026-11-02",
+     "text": "The central bank's dollar selling rate fell to EGP 55.86 on Sunday from 56.12.",
+     "source": "Central Bank of Egypt",
+     "url": "https://www.cbe.org.eg/en/economic-research/statistics/cbe-exchange-rates",
+     "effect": "supports"
     }
    ]
   },
@@ -121,6 +128,13 @@
      "source": "Economy Plus",
      "url": "https://economyplusme.com/ar/news/33801",
      "effect": "against"
+    },
+    {
+     "date": "2026-11-02",
+     "text": "Talaat Moustafa closed at EGP 79.50 and Palm Hills at EGP 10.60 (−7.0%, lowest since April).",
+     "source": "Mubasher",
+     "url": "https://english.mubasher.info/markets/EGX/stocks/TMGH",
+     "effect": "supports"
     }
    ]
   },
@@ -163,6 +177,13 @@
      "source": "Al Jazeera",
      "url": "https://www.aljazeera.com/news/liveblog/2026/11/1/iran-war-live-araghchi-says-talks-under-way-on-2-day-plan-to-reopen-hormuz",
      "effect": "against"
+    },
+    {
+     "date": "2026-11-02",
+     "text": "Brent settled at $113.43 on Friday and traded near $110–112 on Monday as two tankers burned in Hormuz.",
+     "source": "Al Jazeera",
+     "url": "https://www.aljazeera.com/news/liveblog/2026/11/2/iran-war-live-tankers-hit-in-hormuz-trump-again-says-conflict-to-end-soon",
+     "effect": "supports"
     }
    ]
   },
@@ -275,6 +296,13 @@
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/2026/10/30/cbe-raises-key-rates-by-100-bps/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-02",
+     "text": "CIB fell 2.1% to EGP 118.00, its lowest since March, as the EGX30 lost 1.7%.",
+     "source": "Mubasher",
+     "url": "https://english.mubasher.info/markets/EGX/stocks/COMI",
+     "effect": "against"
     }
    ]
   },
@@ -309,6 +337,13 @@
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/2026/10/30/cbe-raises-key-rates-by-100-bps/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-02",
+     "text": "CIB closed at EGP 118.00, 8% below the 50-day average the projection targets and above the EGP 114 stop.",
+     "source": "Mubasher",
+     "url": "https://english.mubasher.info/markets/EGX/stocks/COMI",
+     "effect": "neutral"
     }
    ]
   },
@@ -342,6 +377,13 @@
      "text": "OCI shareholders approved the Orascom Construction combination; Amsterdam delisting is set for November (headline-level report).",
      "source": "TradingView",
      "url": "https://www.tradingview.com/news/tradingview:3032b0a026730:0-oci-n-v-shareholders-approve-orascom-construction-combination/",
+     "effect": "neutral"
+    },
+    {
+     "date": "2026-11-02",
+     "text": "Orascom Construction expects to complete the OCI merger in December; the stock fell 1.3% to EGP 811.02.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/02/companies-paying-for-nuca-land-in-usd-from-abroad-will-skip-the-line-and-the-bidding-from-november/",
      "effect": "neutral"
     }
    ]
@@ -377,6 +419,13 @@
      "source": "CairoScene",
      "url": "https://cairoscene.com/News/Talaat-Moustafa-Group-Signs-EGP-11-Trillion-Development-Deal",
      "effect": "against"
+    },
+    {
+     "date": "2026-11-02",
+     "text": "Talaat Moustafa closed at EGP 79.50, still above the projected EGP 72–76 range.",
+     "source": "Mubasher",
+     "url": "https://english.mubasher.info/markets/EGX/stocks/TMGH",
+     "effect": "supports"
     }
    ]
   },
@@ -411,6 +460,13 @@
      "source": "Economy Plus",
      "url": "https://economyplusme.com/ar/news/33801",
      "effect": "against"
+    },
+    {
+     "date": "2026-11-02",
+     "text": "Palm Hills closed at EGP 10.60, inside the projected EGP 10.2–10.8 range.",
+     "source": "Mubasher",
+     "url": "https://english.mubasher.info/markets/EGX/stocks/PHDC",
+     "effect": "supports"
     }
    ]
   },
@@ -445,6 +501,13 @@
      "source": "Al-Mostaqbal Al-Youm",
      "url": "https://www.elmostqpalelyuom.com/38926",
      "effect": "neutral"
+    },
+    {
+     "date": "2026-11-02",
+     "text": "Abu Qir fell 4.0% to EGP 84.55, inside the projected EGP 80–85 range.",
+     "source": "Mubasher",
+     "url": "https://english.mubasher.info/markets/EGX/stocks/ABUK",
+     "effect": "supports"
     }
    ]
   },
@@ -587,6 +650,36 @@
      "source": "TechCrunch",
      "url": "https://techcrunch.com/2026/10/30/cracks-are-emerging-in-the-ai-spending-boom/",
      "effect": "supports"
+    }
+   ]
+  },
+  {
+   "id": "2026-11-02-bqdc-floor",
+   "opened": "2026-11-02",
+   "market": "egx",
+   "kind": "view",
+   "title": "Banque du Caire holds above its EGP 5.30 offer price in its first week",
+   "confidence": "low",
+   "detail": "The retail tranche was 27 times covered, retail buyers can sell back at the offer price for 30 days, and the private placement drew EGP 205.8bn of orders; a weak EGX30 limits any pop.",
+   "wrong": "Banque du Caire trades below EGP 5.30 in its first week.",
+   "due": "2026-11-09",
+   "track": {
+    "key": "egx.BQDC",
+    "label": "Banque du Caire",
+    "start": 5.3,
+    "good": "up"
+   },
+   "tickers": [
+    "BQDC"
+   ],
+   "status": "open",
+   "updates": [
+    {
+     "date": "2026-11-02",
+     "text": "Shares begin trading today; the first session had not opened at the time of writing.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/02/companies-paying-for-nuca-land-in-usd-from-abroad-will-skip-the-line-and-the-bidding-from-november/",
+     "effect": "neutral"
     }
    ]
   }
