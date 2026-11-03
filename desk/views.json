@@ -21,7 +21,7 @@
     "NVDA",
     "AVGO"
    ],
-   "status": "open",
+   "status": "on track",
    "updates": [
     {
      "date": "2026-10-30",
@@ -29,6 +29,13 @@
      "source": "TechCrunch",
      "url": "https://techcrunch.com/2026/10/30/intels-stock-crashes-knocking-12b-from-governments-stake/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-03",
+     "text": "The semiconductor index fell about 3.4% on Monday and Nvidia closed at $202.06, its lowest since 1 August; Apple fell about 3% after hours.",
+     "source": "Yahoo Finance",
+     "effect": "supports",
+     "url": "https://finance.yahoo.com/technology/ai/articles/u-chip-stocks-extend-losses-092307317.html"
     }
    ]
   },
@@ -52,7 +59,7 @@
     "COMI",
     "HRHO"
    ],
-   "status": "open",
+   "status": "on track",
    "updates": [
     {
      "date": "2026-10-29",
@@ -88,6 +95,13 @@
      "source": "Central Bank of Egypt",
      "url": "https://www.cbe.org.eg/en/economic-research/statistics/cbe-exchange-rates",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-03",
+     "text": "Central bank dollar rate EGP 55.51 on Monday against 56.04 on 30 October (the pound's leg holds); JPMorgan now sees inflation at 14.3% by year-end and no cuts before the second half of 2027.",
+     "source": "EnterpriseAM",
+     "effect": "supports",
+     "url": "https://enterpriseam.com/egypt/2026/11/03/petrojet-will-build-the-usd-170-mn-pipeline-carrying-cypriot-gas-to-damietta-for-export/"
     }
    ]
   },
@@ -113,7 +127,7 @@
     "TMGH",
     "PHDC"
    ],
-   "status": "open",
+   "status": "on track",
    "updates": [
     {
      "date": "2026-10-28",
@@ -135,6 +149,13 @@
      "source": "Mubasher",
      "url": "https://english.mubasher.info/markets/EGX/stocks/TMGH",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-03",
+     "text": "Talaat Moustafa fell 1.9% to EGP 78.00 and Palm Hills was flat at EGP 10.60; both are below their starting levels while the EGX30 is down 2.4%.",
+     "source": "EnterpriseAM",
+     "effect": "supports",
+     "url": "https://enterpriseam.com/egypt/2026/11/03/banque-du-caire-lands-on-egx-the-treasury-to-take-up-to-half-the-proceeds/"
     }
    ]
   },
@@ -184,6 +205,13 @@
      "source": "Al Jazeera",
      "url": "https://www.aljazeera.com/news/liveblog/2026/11/2/iran-war-live-tankers-hit-in-hormuz-trump-again-says-conflict-to-end-soon",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-03",
+     "text": "January Brent settled at $104.77 on Monday, down 7.6% and below the $110 the call needs, while the pound firmed to EGP 55.51; the premise has lapsed unless oil rebounds.",
+     "source": "CNBC",
+     "effect": "against",
+     "url": "https://www.cnbc.com/2026/11/02/oil-prices-fall-as-iran-us-pursue-diplomacy.html"
     }
    ]
   },
@@ -212,7 +240,7 @@
     "GOOGL",
     "AMZN"
    ],
-   "status": "open",
+   "status": "on track",
    "updates": [
     {
      "date": "2026-10-29",
@@ -227,6 +255,13 @@
      "source": "InvestingLive",
      "url": "https://investinglive.com/stocks/nasdaq-suffers-worst-month-since-march-2025-as-technology-stocks-tumble/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-03",
+     "text": "Walmart rose 3.4% to $127.69 (+5.3% since 30 Oct), Visa and Costco rose, Oracle fell 8.8% and chipmakers 3.4%: money moved from AI names to steady earners.",
+     "source": "AP",
+     "effect": "supports",
+     "url": "https://wtop.com/national/2026/11/how-major-us-stock-indexes-fared-monday-11-2-2026"
     }
    ]
   },
@@ -249,7 +284,7 @@
    "tickers": [
     "AMZN"
    ],
-   "status": "open",
+   "status": "wrong",
    "updates": [
     {
      "date": "2026-10-29",
@@ -264,8 +299,18 @@
      "source": "InvestingLive",
      "url": "https://investinglive.com/stocks/nasdaq-suffers-worst-month-since-march-2025-as-technology-stocks-tumble/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-03",
+     "text": "Amazon rose 2.2% to $245.63 on Monday, above $245.",
+     "source": "Data log (Nasdaq close)",
+     "effect": "against"
     }
-   ]
+   ],
+   "result": {
+    "date": "2026-11-03",
+    "text": "Amazon closed at $245.63 on 2 November, above the $245 level that made the call wrong, within two weeks of its results (from $243.79 on 30 October)."
+   }
   },
   {
    "id": "2026-10-30-cib-margins",
@@ -288,7 +333,7 @@
    "tickers": [
     "COMI"
    ],
-   "status": "open",
+   "status": "on track",
    "updates": [
     {
      "date": "2026-10-29",
@@ -303,6 +348,13 @@
      "source": "Mubasher",
      "url": "https://english.mubasher.info/markets/EGX/stocks/COMI",
      "effect": "against"
+    },
+    {
+     "date": "2026-11-03",
+     "text": "On Monday the central bank sold the dollar at EGP 55.51 (from 56.04 on 30 Oct) and CIB rose 2.9% to EGP 121.40, above its EGP 120.47 start, though the EGX30 fell to 48,403.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/03/banque-du-caire-lands-on-egx-the-treasury-to-take-up-to-half-the-proceeds/",
+     "effect": "supports"
     }
    ]
   },
@@ -344,6 +396,13 @@
      "source": "Mubasher",
      "url": "https://english.mubasher.info/markets/EGX/stocks/COMI",
      "effect": "neutral"
+    },
+    {
+     "date": "2026-11-03",
+     "text": "CIB closed at EGP 121.40, up 2.9%, as funds concentrated in the most liquid name; the range is EGP 128–132 by end of December.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/03/banque-du-caire-lands-on-egx-the-treasury-to-take-up-to-half-the-proceeds/",
+     "effect": "supports"
     }
    ]
   },
@@ -385,6 +444,13 @@
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/2026/11/02/companies-paying-for-nuca-land-in-usd-from-abroad-will-skip-the-line-and-the-bidding-from-november/",
      "effect": "neutral"
+    },
+    {
+     "date": "2026-11-03",
+     "text": "Orascom fell 3.7% to EGP 781, just above the EGP 780 level that would make the call wrong; the OCI merger board meeting is on Thursday.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/03/banque-du-caire-lands-on-egx-the-treasury-to-take-up-to-half-the-proceeds/",
+     "effect": "against"
     }
    ]
   },
@@ -426,6 +492,13 @@
      "source": "Mubasher",
      "url": "https://english.mubasher.info/markets/EGX/stocks/TMGH",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-03",
+     "text": "Talaat Moustafa fell 1.9% to EGP 78.00, its lowest since April, inside sight of the EGP 72–76 range.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/03/banque-du-caire-lands-on-egx-the-treasury-to-take-up-to-half-the-proceeds/",
+     "effect": "supports"
     }
    ]
   },
@@ -452,7 +525,7 @@
    "tickers": [
     "PHDC"
    ],
-   "status": "open",
+   "status": "on track",
    "updates": [
     {
      "date": "2026-10-27",
@@ -467,6 +540,13 @@
      "source": "Mubasher",
      "url": "https://english.mubasher.info/markets/EGX/stocks/PHDC",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-03",
+     "text": "Palm Hills was flat at EGP 10.60 after Sunday's 7.0% fall; it is inside the EGP 10.2–10.8 range, due 31 December.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/03/banque-du-caire-lands-on-egx-the-treasury-to-take-up-to-half-the-proceeds/",
+     "effect": "neutral"
     }
    ]
   },
@@ -493,7 +573,7 @@
    "tickers": [
     "ABUK"
    ],
-   "status": "open",
+   "status": "on track",
    "updates": [
     {
      "date": "2026-10-29",
@@ -507,6 +587,13 @@
      "text": "Abu Qir fell 4.0% to EGP 84.55, inside the projected EGP 80–85 range.",
      "source": "Mubasher",
      "url": "https://english.mubasher.info/markets/EGX/stocks/ABUK",
+     "effect": "supports"
+    },
+    {
+     "date": "2026-11-03",
+     "text": "Abu Qir fell 4.7% to EGP 80.60, already inside the EGP 80–85 range; judged on 30 November, and the desk drops it from the active list while it sits in range.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/03/banque-du-caire-lands-on-egx-the-treasury-to-take-up-to-half-the-proceeds/",
      "effect": "supports"
     }
    ]
@@ -549,6 +636,13 @@
      "source": "The National",
      "url": "https://www.thenationalnews.com/business/markets/2026/10/30/oil-prices-set-for-sharp-monthly-rise-on-hormuz-strikes-and-us-threat-to-hit-iran",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-03",
+     "text": "Exxon Mobil fell 4.1% to $179.67 as Brent dropped 7.6% to $104.77 on US-Iran deal hopes; wrong if Brent closes below $100.",
+     "source": "CNBC",
+     "url": "https://www.cnbc.com/2026/11/02/oil-prices-fall-as-iran-us-pursue-diplomacy.html",
+     "effect": "against"
     }
    ]
   },
@@ -575,8 +669,15 @@
    "tickers": [
     "WMT"
    ],
-   "status": "open",
-   "updates": []
+   "status": "on track",
+   "updates": [
+    {
+     "date": "2026-11-03",
+     "text": "Walmart rose 3.4% to $127.69, at the top of the $124–128 range, due 31 December.",
+     "source": "Data log (Nasdaq close)",
+     "effect": "supports"
+    }
+   ]
   },
   {
    "id": "2026-10-30-amzn-bear",
@@ -601,7 +702,7 @@
    "tickers": [
     "AMZN"
    ],
-   "status": "open",
+   "status": "wrong",
    "updates": [
     {
      "date": "2026-10-29",
@@ -609,8 +710,18 @@
      "source": "InvestingLive",
      "url": "https://investinglive.com/stocks/nasdaq-leads-stocks-lower-intel-and-amazon-tumble-after-hours/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-03",
+     "text": "Amazon rose 2.2% to $245.63 on Monday, above $245.",
+     "source": "Data log (Nasdaq close)",
+     "effect": "against"
     }
-   ]
+   ],
+   "result": {
+    "date": "2026-11-03",
+    "text": "Amazon closed at $245.63 on 2 November, above the $245 level that made the projection wrong, within two weeks of the results; the $225–235 range was not reached."
+   }
   },
   {
    "id": "2026-10-30-googl-bear",
@@ -635,7 +746,7 @@
    "tickers": [
     "GOOGL"
    ],
-   "status": "open",
+   "status": "on track",
    "updates": [
     {
      "date": "2026-10-30",
@@ -649,6 +760,13 @@
      "text": "Alphabet closed at $279.84, inside the projected $265–280 range, as AI-spending worries spread.",
      "source": "TechCrunch",
      "url": "https://techcrunch.com/2026/10/30/cracks-are-emerging-in-the-ai-spending-boom/",
+     "effect": "supports"
+    },
+    {
+     "date": "2026-11-03",
+     "text": "Alphabet raised EUR 6bn in bonds on EUR 17bn of orders and closed at $278.99, inside the $265–280 range.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/03/alphabets-eur-bond-drew-eur-17-bn-in-orders-despite-the-stock-rout/",
      "effect": "supports"
     }
    ]
@@ -672,13 +790,20 @@
    "tickers": [
     "BQDC"
    ],
-   "status": "open",
+   "status": "on track",
    "updates": [
     {
      "date": "2026-11-02",
      "text": "Shares begin trading today; the first session had not opened at the time of writing.",
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/2026/11/02/companies-paying-for-nuca-land-in-usd-from-abroad-will-skip-the-line-and-the-bidding-from-november/",
+     "effect": "neutral"
+    },
+    {
+     "date": "2026-11-03",
+     "text": "Debut close EGP 5.31 (+0.19%) against the EGP 5.30 offer. It touched EGP 5.25 intraday, below the offer, but closed above it; the view is judged on closes.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/03/banque-du-caire-lands-on-egx-the-treasury-to-take-up-to-half-the-proceeds/",
      "effect": "neutral"
     }
    ]
