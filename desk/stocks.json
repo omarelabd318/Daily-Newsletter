@@ -5,22 +5,22 @@
    "sector": "Banks",
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
-    "price": 121.4,
+    "price": 123.48,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 372.8bn"
+      "value": "EGP 379.2bn"
      },
      {
       "label": "P/E",
-      "value": "5.7"
+      "value": "5.8"
      },
      {
       "label": "P/B",
-      "value": "1.7"
+      "value": "1.8"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -65,6 +65,12 @@
    ],
    "news": [
     {
+     "date": "2026-11-04",
+     "text": "Raised its monthly floating-rate certificate to 20.50% from 19.50% and its daily one to 20.25% after the central bank's 100 bps hike; the floors are 17.50% and 17.25%.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/04/the-government-is-weighing-a-large-egyptalum-stake-sale-on-the-egx-before-year-end/"
+    },
+    {
      "date": "2026-11-02",
      "text": "CIB led listed banks on Monday, rising 2.9% to EGP 121.40, while ADIB Egypt fell 3.4% and Crédit Agricole Egypt 3.0%; an asset manager said funds are concentrating in the most liquid name.",
      "source": "EnterpriseAM",
@@ -84,9 +90,9 @@
     }
    ],
    "cap": {
-    "value": 372.8,
+    "value": 379.2,
     "currency": "EGP",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Mubasher"
    }
   },
@@ -101,25 +107,25 @@
     }
    ],
    "cap": {
-    "value": 160.7,
+    "value": 164.4,
     "currency": "EGP",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
-    "price": 78.0,
+    "price": 79.8,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 160.7bn"
+      "value": "EGP 164.4bn"
      },
      {
       "label": "P/E",
-      "value": "10.4"
+      "value": "10.6"
      },
      {
       "label": "P/B",
@@ -140,6 +146,18 @@
    "sector": "Fertilisers",
    "news": [
     {
+     "date": "2026-11-04",
+     "text": "CI Capital expects lower gas allocations to weigh on Abu Qir, Mopco and Valmore's Alexfert in the fourth quarter and possibly through 2027; granular urea is fetching about $535 a ton FOB, up 17% since September.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/04/egyptian-granular-urea-at-usd-535-as-gas-supplies-to-fertilizer-plants-cut-20/"
+    },
+    {
+     "date": "2026-11-04",
+     "text": "Told the EGX it reduced its natural gas intake from 1 November after receiving a supply-cut notice, without giving the percentage; production continues under contingency plans for inventory and rescheduled maintenance. Kima and Mopco each reported a 20% cut. The stock fell 3.6% to EGP 77.71.",
+     "source": "Egypt Oil & Gas",
+     "url": "https://egyptoil-gas.com/news/abu-qir-fertilizers-adjusts-operations-following-natural-gas-supply-cut/"
+    },
+    {
      "date": "2026-10-29",
      "text": "Unaudited nine-month profit rose to about EGP 12.97bn, roughly double a year earlier, helped by steadier gas supplies.",
      "source": "Al-Mostaqbal Al-Youm",
@@ -153,29 +171,29 @@
     }
    ],
    "cap": {
-    "value": 101.7,
+    "value": 98.1,
     "currency": "EGP",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "Mubasher",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2026-03-31",
     "basis": "results for the 12 months to March 2026",
-    "price": 80.6,
+    "price": 77.71,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 101.7bn"
+      "value": "EGP 98.1bn"
      },
      {
       "label": "P/E",
-      "value": "19.4"
+      "value": "18.7"
      },
      {
       "label": "P/B",
-      "value": "4.3"
+      "value": "4.1"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -199,29 +217,29 @@
     }
    ],
    "cap": {
-    "value": 30.3,
+    "value": 32.4,
     "currency": "EGP",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "Mubasher",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2026-03-31",
     "basis": "results for the 12 months to March 2026",
-    "price": 10.6,
+    "price": 11.32,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 30.3bn"
+      "value": "EGP 32.4bn"
      },
      {
       "label": "P/E",
-      "value": "6.3"
+      "value": "6.7"
      },
      {
       "label": "P/B",
-      "value": "1.6"
+      "value": "1.7"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -245,29 +263,29 @@
     }
    ],
    "cap": {
-    "value": 770.0,
+    "value": 738.8,
     "currency": "USD",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Nasdaq"
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 179.67,
+    "price": 177.46,
     "rows": [
      {
       "label": "Market value",
-      "value": "$738.8bn"
+      "value": "$729.7bn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "16.9"
+      "value": "16.7"
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "13.2"
+      "value": "13.0"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -279,7 +297,7 @@
      },
      {
       "label": "Analysts' one-year target",
-      "value": "$180.50"
+      "value": "$183.00"
      }
     ]
    }
@@ -295,29 +313,29 @@
     }
    ],
    "cap": {
-    "value": 3875.8,
+    "value": 3766.0,
     "currency": "USD",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Nasdaq"
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 507.12,
+    "price": 520.99,
     "rows": [
      {
       "label": "Market value",
-      "value": "$3.77tn"
+      "value": "$3.87tn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "28.1"
+      "value": "28.9"
      },
      {
       "label": "Forecast P/E (fiscal 2027)",
-      "value": "25.6"
+      "value": "26.2"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -325,7 +343,7 @@
      },
      {
       "label": "Dividend yield",
-      "value": "0.7%"
+      "value": "0.72%"
      },
      {
       "label": "Analysts' one-year target",
@@ -351,21 +369,21 @@
     }
    ],
    "cap": {
-    "value": 3440.4,
+    "value": 3429.9,
     "currency": "USD",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Nasdaq"
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 278.99,
+    "price": 280.03,
     "rows": [
      {
       "label": "Market value",
-      "value": "$3.43tn"
+      "value": "$3.44tn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -373,7 +391,7 @@
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "13.9"
+      "value": "14.1"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -381,7 +399,7 @@
      },
      {
       "label": "Dividend yield",
-      "value": "0.31%"
+      "value": "0.32%"
      },
      {
       "label": "Analysts' one-year target",
@@ -401,29 +419,29 @@
     }
    ],
    "cap": {
-    "value": 1556.6,
+    "value": 1538.2,
     "currency": "USD",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Nasdaq"
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2026-07-31",
     "basis": "the four quarters to Jul 2026",
-    "price": 322.23,
+    "price": 332.13,
     "rows": [
      {
       "label": "Market value",
-      "value": "$1.54tn"
+      "value": "$1.59tn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "37.6"
+      "value": "38.8"
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "31.1"
+      "value": "32.0"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -431,7 +449,7 @@
      },
      {
       "label": "Dividend yield",
-      "value": "0.8%"
+      "value": "0.81%"
      },
      {
       "label": "Analysts' one-year target",
@@ -443,25 +461,25 @@
   "ETEL": {
    "sector": "Telecoms",
    "cap": {
-    "value": 207.3,
+    "value": 209.8,
     "currency": "EGP",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "Mubasher",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2026-03-31",
     "basis": "results for the 12 months to March 2026",
-    "price": 121.45,
+    "price": 122.88,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 207.3bn"
+      "value": "EGP 209.8bn"
      },
      {
       "label": "P/E",
-      "value": "14.5"
+      "value": "14.7"
      },
      {
       "label": "P/B",
@@ -481,25 +499,25 @@
   "SWDY": {
    "sector": "Cables and electrical",
    "cap": {
-    "value": 232.1,
+    "value": 232.5,
     "currency": "EGP",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
-    "price": 108.4,
+    "price": 108.6,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 232.1bn"
+      "value": "EGP 232.5bn"
      },
      {
       "label": "P/E",
-      "value": "14.2"
+      "value": "14.3"
      },
      {
       "label": "P/B",
@@ -527,29 +545,29 @@
   "ORAS": {
    "sector": "Construction",
    "cap": {
-    "value": 86.1,
+    "value": 87.1,
     "currency": "EGP",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
-    "price": 781.0,
+    "price": 790.05,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 86.1bn"
+      "value": "EGP 87.1bn"
      },
      {
       "label": "P/E",
-      "value": "7.6"
+      "value": "7.7"
      },
      {
       "label": "P/B",
-      "value": "1.7"
+      "value": "1.8"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -562,6 +580,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-04",
+     "text": "The board is due on 5 November to approve a capital increase to $207.4m from $110.2m through 97.2m new shares for OCI N.V., the step behind their merger, per an EGX disclosure.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/04/the-government-is-weighing-a-large-egyptalum-stake-sale-on-the-egx-before-year-end/"
+    },
     {
      "date": "2026-11-02",
      "text": "Expects to complete the OCI merger in December; the board meets on Thursday to approve a capital increase and allot 97.2 million new shares, with listing targeted for 24 November.",
@@ -579,29 +603,29 @@
   "FWRY": {
    "sector": "Payments",
    "cap": {
-    "value": 53.7,
+    "value": 54.9,
     "currency": "EGP",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
-    "price": 15.75,
+    "price": 16.12,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 53.7bn"
+      "value": "EGP 54.9bn"
      },
      {
       "label": "P/E",
-      "value": "16.5"
+      "value": "16.9"
      },
      {
       "label": "P/B",
-      "value": "5.9"
+      "value": "6.1"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -617,21 +641,21 @@
   "HRHO": {
    "sector": "Investment banking",
    "cap": {
-    "value": 32.6,
+    "value": 32.8,
     "currency": "EGP",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "Mubasher",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2026-03-31",
     "basis": "results for the 12 months to March 2026",
-    "price": 22.36,
+    "price": 22.5,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 32.6bn"
+      "value": "EGP 32.8bn"
      },
      {
       "label": "P/E",
@@ -681,29 +705,29 @@
   "CLHO": {
    "sector": "Healthcare",
    "cap": {
-    "value": 18.8,
+    "value": 19.1,
     "currency": "EGP",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "Mubasher",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2026-03-31",
     "basis": "results for the 12 months to March 2026",
-    "price": 13.03,
+    "price": 13.23,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 18.8bn"
+      "value": "EGP 19.1bn"
      },
      {
       "label": "P/E",
-      "value": "39.5"
+      "value": "40.1"
      },
      {
       "label": "P/B",
-      "value": "5.0"
+      "value": "5.1"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -719,29 +743,29 @@
   "JUFO": {
    "sector": "Food",
    "cap": {
-    "value": 21.4,
+    "value": 21.7,
     "currency": "EGP",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
-    "price": 22.77,
+    "price": 23.0,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 21.4bn"
+      "value": "EGP 21.7bn"
      },
      {
       "label": "P/E",
-      "value": "15.0"
+      "value": "15.2"
      },
      {
       "label": "P/B",
-      "value": "3.8"
+      "value": "3.9"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -757,29 +781,29 @@
   "ALCN": {
    "sector": "Ports",
    "cap": {
-    "value": 91.1,
+    "value": 96.1,
     "currency": "EGP",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
-    "price": 30.58,
+    "price": 32.25,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 91.1bn"
+      "value": "EGP 96.1bn"
      },
      {
       "label": "P/E",
-      "value": "14.1"
+      "value": "14.9"
      },
      {
       "label": "P/B",
-      "value": "11.2"
+      "value": "11.9"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -803,45 +827,51 @@
   "AAPL": {
    "sector": "Hardware",
    "cap": {
-    "value": 5029.6,
+    "value": 4937.5,
     "currency": "USD",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Nasdaq"
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-03",
-    "period": "2026-06-30",
-    "basis": "the four quarters to Jun 2026",
-    "price": 338.32,
+    "asOf": "2026-11-04",
+    "period": "2026-09-30",
+    "basis": "the four quarters to Sep 2026",
+    "price": 331.9,
     "rows": [
      {
       "label": "Market value",
-      "value": "$4.94tn"
+      "value": "$4.84tn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "39.3"
+      "value": "37.7"
      },
      {
-      "label": "Forecast P/E (fiscal 2026)",
-      "value": "38.7"
+      "label": "Forecast P/E (fiscal 2027)",
+      "value": "34.7"
      },
      {
       "label": "Earnings per share (12 months)",
-      "value": "$8.61"
+      "value": "$8.81"
      },
      {
       "label": "Dividend yield",
-      "value": "0.31%"
+      "value": "0.32%"
      },
      {
       "label": "Analysts' one-year target",
-      "value": "$335.00"
+      "value": "$332.50"
      }
     ]
    },
    "news": [
+    {
+     "date": "2026-11-03",
+     "text": "Fell 1.9% to $331.90 after Monday's results; CNBC headlined oil prices as a pressure on its margin outlook.",
+     "source": "CNBC",
+     "url": "https://www.cnbc.com/2026/11/03/apple-margin-oil-iran.html"
+    },
     {
      "date": "2026-11-02",
      "text": "First results under CEO John Ternus: revenue $114.5bn (+12%) and $2.10 a share beat estimates, but December-quarter growth guidance of 8–9% was below the 10.7% expected; shares fell about 3% after hours.",
@@ -865,29 +895,29 @@
   "NVDA": {
    "sector": "Semiconductors",
    "cap": {
-    "value": 4931.8,
+    "value": 4869.6,
     "currency": "USD",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Nasdaq"
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2026-07-31",
     "basis": "the four quarters to Jul 2026",
-    "price": 202.06,
+    "price": 206.69,
     "rows": [
      {
       "label": "Market value",
-      "value": "$4.87tn"
+      "value": "$4.98tn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "29.3"
+      "value": "30.0"
      },
      {
       "label": "Forecast P/E (fiscal 2027)",
-      "value": "21.7"
+      "value": "22.2"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -921,29 +951,29 @@
   "AMZN": {
    "sector": "Retail and cloud",
    "cap": {
-    "value": 2592.5,
+    "value": 2656.0,
     "currency": "USD",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Nasdaq"
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 245.63,
+    "price": 250.69,
     "rows": [
      {
       "label": "Market value",
-      "value": "$2.65tn"
+      "value": "$2.71tn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "33.7"
+      "value": "34.4"
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "30.7"
+      "value": "32.0"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -963,29 +993,29 @@
   "META": {
    "sector": "Internet",
    "cap": {
-    "value": 1572.1,
+    "value": 1550.9,
     "currency": "USD",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Nasdaq"
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 606.73,
+    "price": 621.03,
     "rows": [
      {
       "label": "Market value",
-      "value": "$1.55tn"
+      "value": "$1.59tn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "20.4"
+      "value": "20.9"
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "20.9"
+      "value": "21.4"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -993,7 +1023,7 @@
      },
      {
       "label": "Dividend yield",
-      "value": "0.34%"
+      "value": "0.35%"
      },
      {
       "label": "Analysts' one-year target",
@@ -1013,29 +1043,29 @@
   "TSLA": {
    "sector": "Cars",
    "cap": {
-    "value": 1580.4,
+    "value": 1596.2,
     "currency": "USD",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Nasdaq"
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 403.82,
+    "price": 398.5,
     "rows": [
      {
       "label": "Market value",
-      "value": "$1.60tn"
+      "value": "$1.58tn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "553.2"
+      "value": "545.9"
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "602.7"
+      "value": "594.8"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -1050,34 +1080,42 @@
       "value": "$426.50"
      }
     ]
-   }
+   },
+   "news": [
+    {
+     "date": "2026-11-04",
+     "text": "Tesla and SpaceX shares fell roughly 4–6% in late trading as Democrats gained in the midterms; reports link it to scrutiny of a Tesla–SpaceX merger.",
+     "source": "CNBC",
+     "url": "https://www.cnbc.com/2026/11/03/stock-market-today-live-updates.html"
+    }
+   ]
   },
   "JPM": {
    "sector": "Banks",
    "cap": {
-    "value": 895.9,
+    "value": 905.3,
     "currency": "USD",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Nasdaq"
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 340.58,
+    "price": 337.98,
     "rows": [
      {
       "label": "Market value",
-      "value": "$905.3bn"
+      "value": "$898.4bn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "14.8"
+      "value": "14.7"
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "14.2"
+      "value": "14.1"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -1097,17 +1135,17 @@
   "BRK.B": {
    "sector": "Conglomerate",
    "cap": {
-    "value": 1196.9,
+    "value": 1227.0,
     "currency": "USD",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Nasdaq"
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": null,
     "basis": "no reported earnings on Nasdaq",
-    "price": 556.11,
+    "price": 557.07,
     "rows": [
      {
       "label": "Market value",
@@ -1127,29 +1165,29 @@
   "WMT": {
    "sector": "Retail",
    "cap": {
-    "value": 979.9,
+    "value": 1013.1,
     "currency": "USD",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Nasdaq"
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2026-07-31",
     "basis": "the four quarters to Jul 2026",
-    "price": 127.69,
+    "price": 124.86,
     "rows": [
      {
       "label": "Market value",
-      "value": "$1.01tn"
+      "value": "$990.6bn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "45.1"
+      "value": "44.1"
      },
      {
       "label": "Forecast P/E (fiscal 2027)",
-      "value": "44.5"
+      "value": "43.4"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -1157,7 +1195,7 @@
      },
      {
       "label": "Dividend yield",
-      "value": "0.8%"
+      "value": "0.78%"
      },
      {
       "label": "Analysts' one-year target",
@@ -1169,25 +1207,25 @@
   "MFPC": {
    "sector": "Fertilisers",
    "cap": {
-    "value": 118.5,
+    "value": 114.9,
     "currency": "EGP",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
-    "price": 41.3,
+    "price": 40.07,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 118.5bn"
+      "value": "EGP 114.9bn"
      },
      {
       "label": "P/E",
-      "value": "7.7"
+      "value": "7.5"
      },
      {
       "label": "P/B",
@@ -1202,34 +1240,42 @@
       "value": "EGP 15.70"
      }
     ]
-   }
+   },
+   "news": [
+    {
+     "date": "2026-11-03",
+     "text": "Told the EGX operations continue without interruption and that it is adjusting production rates to the gas actually available, without saying whether the 20% cut applies to its plants.",
+     "source": "Egypt Oil & Gas",
+     "url": "https://egyptoil-gas.com/news/mopco-reports-uninterrupted-operations-despite-reported-gas-supply-cuts-to-fertilizer-plants/"
+    }
+   ]
   },
   "EAST": {
    "sector": "Tobacco",
    "cap": {
-    "value": 90.5,
+    "value": 96.0,
     "currency": "EGP",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2026-03-31",
     "basis": "results for the 12 months to March 2026",
-    "price": 30.15,
+    "price": 32.0,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 90.5bn"
+      "value": "EGP 96.0bn"
      },
      {
       "label": "P/E",
-      "value": "10.2"
+      "value": "10.8"
      },
      {
       "label": "P/B",
-      "value": "6.2"
+      "value": "6.6"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -1245,29 +1291,29 @@
   "EFIH": {
    "sector": "Payments",
    "cap": {
-    "value": 79.7,
+    "value": 81.4,
     "currency": "EGP",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "Mubasher",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2026-03-31",
     "basis": "results for the 12 months to March 2026",
-    "price": 23.0,
+    "price": 23.49,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 79.7bn"
+      "value": "EGP 81.4bn"
      },
      {
       "label": "P/E",
-      "value": "23.2"
+      "value": "23.7"
      },
      {
       "label": "P/B",
-      "value": "9.0"
+      "value": "9.2"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -1291,25 +1337,25 @@
   "EMFD": {
    "sector": "Real estate",
    "cap": {
-    "value": 64.9,
+    "value": 66.5,
     "currency": "EGP",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "Mubasher",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2025-06-30",
     "basis": "results for the 12 months to June 2025",
-    "price": 11.92,
+    "price": 12.21,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 64.9bn"
+      "value": "EGP 66.5bn"
      },
      {
       "label": "P/E",
-      "value": "27.7"
+      "value": "28.4"
      },
      {
       "label": "P/B",
@@ -1338,6 +1384,12 @@
    ],
    "news": [
     {
+     "date": "2026-11-03",
+     "text": "Second session: closed at EGP 5.38 (+1.32%) on 147m shares worth EGP 787.8m, the most traded stock on the exchange; one source.",
+     "source": "Mubasher",
+     "url": "https://www.mubasher.info/news/4695701/"
+    },
+    {
      "date": "2026-11-02",
      "text": "Debut: closed at EGP 5.31, up 0.19% on the EGP 5.30 offer price, after EGP 5.68 early and EGP 5.25 low; 373.1m shares traded worth EGP 2.02bn. The Finance Ministry will take up to half of the EGP 36.37bn raised.",
      "source": "EnterpriseAM",
@@ -1352,7 +1404,7 @@
    ],
    "valuation": {
     "source": "TradingView and Mubasher",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": null,
     "basis": "no recent results",
     "price": 5.31,
@@ -1370,36 +1422,36 @@
    "cap": {
     "value": 20.5,
     "currency": "EGP",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Mubasher"
    }
   },
   "V": {
    "sector": "Payments",
    "cap": {
-    "value": 739.0,
+    "value": 760.3,
     "currency": "USD",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Nasdaq"
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 425.51,
+    "price": 420.42,
     "rows": [
      {
       "label": "Market value",
-      "value": "$760.3bn"
+      "value": "$751.2bn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "32.0"
+      "value": "31.7"
      },
      {
       "label": "Forecast P/E (fiscal 2027)",
-      "value": "28.3"
+      "value": "28.0"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -1411,7 +1463,7 @@
      },
      {
       "label": "Analysts' one-year target",
-      "value": "$445.00"
+      "value": "$450.00"
      }
     ]
    },
@@ -1427,29 +1479,29 @@
   "ORCL": {
    "sector": "Software and cloud",
    "cap": {
-    "value": 395.1,
+    "value": 360.5,
     "currency": "USD",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Nasdaq"
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2026-08-31",
     "basis": "the four quarters to Aug 2026",
-    "price": 119.22,
+    "price": 126.19,
     "rows": [
      {
       "label": "Market value",
-      "value": "$360.5bn"
+      "value": "$381.6bn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "17.5"
+      "value": "18.6"
      },
      {
       "label": "Forecast P/E (fiscal 2027)",
-      "value": "17.7"
+      "value": "18.8"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -1477,29 +1529,29 @@
   "COST": {
    "sector": "Retail",
    "cap": {
-    "value": 448.6,
+    "value": 461.1,
     "currency": "USD",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Nasdaq"
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2026-08-31",
     "basis": "the four quarters to Aug 2026",
-    "price": 1040.55,
+    "price": 1019.26,
     "rows": [
      {
       "label": "Market value",
-      "value": "$461.1bn"
+      "value": "$451.7bn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "50.9"
+      "value": "49.8"
      },
      {
       "label": "Forecast P/E (fiscal 2027)",
-      "value": "45.8"
+      "value": "44.9"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -1507,7 +1559,7 @@
      },
      {
       "label": "Dividend yield",
-      "value": "0.58%"
+      "value": "0.57%"
      },
      {
       "label": "Analysts' one-year target",
@@ -1519,29 +1571,29 @@
   "EGAL": {
    "sector": "Metals",
    "cap": {
-    "value": 122.7,
+    "value": 125.0,
     "currency": "EGP",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
-    "price": 297.5,
+    "price": 303.0,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 122.7bn"
+      "value": "EGP 125.0bn"
      },
      {
       "label": "P/E",
-      "value": "7.9"
+      "value": "8.1"
      },
      {
       "label": "P/B",
-      "value": "3.6"
+      "value": "3.7"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -1554,6 +1606,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-04",
+     "text": "The government is weighing a large stake sale on the EGX before year-end, size pending a fair-value study; the state holds about 90% through MIH and the real public float is near 3%. The cash dividend's right ends after the 16 November session.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/04/the-government-is-weighing-a-large-egyptalum-stake-sale-on-the-egx-before-year-end/"
+    },
     {
      "date": "2026-11-02",
      "text": "The exchange says the right to the cash coupon (EGP 16 a share from 19 November) ends after the session of Monday 16 November; one report says the assembly approved EGP 15, so the amount is unconfirmed.",
@@ -1571,29 +1629,29 @@
   "AMOC": {
    "sector": "Oil refining",
    "cap": {
-    "value": 17.6,
+    "value": 17.4,
     "currency": "EGP",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "Mubasher",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2025-06-30",
     "basis": "results for the 12 months to June 2025",
-    "price": 13.65,
+    "price": 13.5,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 17.6bn"
+      "value": "EGP 17.4bn"
      },
      {
       "label": "P/E",
-      "value": "29.7"
+      "value": "29.3"
      },
      {
       "label": "P/B",
-      "value": "4.0"
+      "value": "3.9"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -1609,25 +1667,25 @@
   "SKPC": {
    "sector": "Petrochemicals",
    "cap": {
-    "value": 13.3,
+    "value": 13.1,
     "currency": "EGP",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "Mubasher",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2025-09-30",
     "basis": "results for the 12 months to September 2025",
-    "price": 14.61,
+    "price": 14.44,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 13.3bn"
+      "value": "EGP 13.1bn"
      },
      {
       "label": "P/E",
-      "value": "7.0"
+      "value": "6.9"
      },
      {
       "label": "P/B",
@@ -1647,29 +1705,29 @@
   "EFID": {
    "sector": "Food",
    "cap": {
-    "value": 25.0,
+    "value": 25.5,
     "currency": "EGP",
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-03",
+    "asOf": "2026-11-04",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
-    "price": 17.89,
+    "price": 18.2,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 25.0bn"
+      "value": "EGP 25.5bn"
      },
      {
       "label": "P/E",
-      "value": "12.0"
+      "value": "12.2"
      },
      {
       "label": "P/B",
-      "value": "6.3"
+      "value": "6.4"
      },
      {
       "label": "Earnings per share (12 months)",

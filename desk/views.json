@@ -36,6 +36,13 @@
      "source": "Yahoo Finance",
      "effect": "supports",
      "url": "https://finance.yahoo.com/technology/ai/articles/u-chip-stocks-extend-losses-092307317.html"
+    },
+    {
+     "date": "2026-11-04",
+     "text": "Nvidia rose 2.3% and Broadcom 3.1% on Tuesday; AMD rose 5–7% after hours on better-than-expected earnings.",
+     "source": "CNBC",
+     "url": "https://www.cnbc.com/2026/11/03/stock-market-today-live-updates.html",
+     "effect": "against"
     }
    ]
   },
@@ -102,6 +109,13 @@
      "source": "EnterpriseAM",
      "effect": "supports",
      "url": "https://enterpriseam.com/egypt/2026/11/03/petrojet-will-build-the-usd-170-mn-pipeline-carrying-cypriot-gas-to-damietta-for-export/"
+    },
+    {
+     "date": "2026-11-04",
+     "text": "Central bank dollar selling rate EGP 55.42 on Tuesday, a fourth straight easing; NBE, CIB and Banque Misr lifted floating certificates by 100 bps.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/04/the-government-is-weighing-a-large-egyptalum-stake-sale-on-the-egx-before-year-end/",
+     "effect": "supports"
     }
    ]
   },
@@ -156,6 +170,13 @@
      "source": "EnterpriseAM",
      "effect": "supports",
      "url": "https://enterpriseam.com/egypt/2026/11/03/banque-du-caire-lands-on-egx-the-treasury-to-take-up-to-half-the-proceeds/"
+    },
+    {
+     "date": "2026-11-04",
+     "text": "Palm Hills rose 6.8% to EGP 11.32 and Talaat Moustafa 2.3% to EGP 79.80 on Tuesday, in line with the EGX30's month so far; contractual property sales reached EGP 1.048 trillion in nine months.",
+     "source": "CairoScene",
+     "url": "https://cairoscene.com/News/Real-Estate-Sales-Reach-EGP-1-048-Trillion-in-Nine-Months",
+     "effect": "against"
     }
    ]
   },
@@ -212,6 +233,13 @@
      "source": "CNBC",
      "effect": "against",
      "url": "https://www.cnbc.com/2026/11/02/oil-prices-fall-as-iran-us-pursue-diplomacy.html"
+    },
+    {
+     "date": "2026-11-04",
+     "text": "January Brent eased 1.1% to $103.60 on Tuesday, below the $110 the call needs.",
+     "source": "CNBC",
+     "url": "https://www.cnbc.com/2026/11/03/us-treasury-yields-bonds.html",
+     "effect": "against"
     }
    ]
   },
@@ -262,6 +290,13 @@
      "source": "AP",
      "effect": "supports",
      "url": "https://wtop.com/national/2026/11/how-major-us-stock-indexes-fared-monday-11-2-2026"
+    },
+    {
+     "date": "2026-11-04",
+     "text": "Microsoft, Nvidia and Oracle rebounded on Tuesday while Walmart fell 2.2%; the 10-year yield rose to 4.96%.",
+     "source": "CNBC",
+     "url": "https://www.cnbc.com/2026/11/03/us-treasury-yields-bonds.html",
+     "effect": "against"
     }
    ]
   },
@@ -403,6 +438,13 @@
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/2026/11/03/banque-du-caire-lands-on-egx-the-treasury-to-take-up-to-half-the-proceeds/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-04",
+     "text": "CIB rose 1.7% to EGP 123.48 and lifted its floating certificate to 20.50%.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/04/the-government-is-weighing-a-large-egyptalum-stake-sale-on-the-egx-before-year-end/",
+     "effect": "supports"
     }
    ]
   },
@@ -451,6 +493,13 @@
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/2026/11/03/banque-du-caire-lands-on-egx-the-treasury-to-take-up-to-half-the-proceeds/",
      "effect": "against"
+    },
+    {
+     "date": "2026-11-04",
+     "text": "The board is due on 5 November to approve the capital increase behind the OCI merger; the stock rose 1.2% to EGP 790.05.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/04/the-government-is-weighing-a-large-egyptalum-stake-sale-on-the-egx-before-year-end/",
+     "effect": "neutral"
     }
    ]
   },
@@ -525,7 +574,7 @@
    "tickers": [
     "PHDC"
    ],
-   "status": "on track",
+   "status": "open",
    "updates": [
     {
      "date": "2026-10-27",
@@ -547,6 +596,13 @@
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/2026/11/03/banque-du-caire-lands-on-egx-the-treasury-to-take-up-to-half-the-proceeds/",
      "effect": "neutral"
+    },
+    {
+     "date": "2026-11-04",
+     "text": "Palm Hills rose 6.8% to EGP 11.32, above the projected EGP 10.2–10.8 range.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/04/the-government-is-weighing-a-large-egyptalum-stake-sale-on-the-egx-before-year-end/",
+     "effect": "against"
     }
    ]
   },
@@ -594,6 +650,13 @@
      "text": "Abu Qir fell 4.7% to EGP 80.60, already inside the EGP 80–85 range; judged on 30 November, and the desk drops it from the active list while it sits in range.",
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/2026/11/03/banque-du-caire-lands-on-egx-the-treasury-to-take-up-to-half-the-proceeds/",
+     "effect": "supports"
+    },
+    {
+     "date": "2026-11-04",
+     "text": "Gas to fertiliser plants cut 20% from 1 November; Abu Qir confirmed it reduced intake and closed at EGP 77.71, below the projected EGP 80–85 range. CI Capital expects fourth-quarter volumes to suffer.",
+     "source": "Egypt Oil & Gas",
+     "url": "https://egyptoil-gas.com/news/abu-qir-fertilizers-adjusts-operations-following-natural-gas-supply-cut/",
      "effect": "supports"
     }
    ]
@@ -643,6 +706,13 @@
      "source": "CNBC",
      "url": "https://www.cnbc.com/2026/11/02/oil-prices-fall-as-iran-us-pursue-diplomacy.html",
      "effect": "against"
+    },
+    {
+     "date": "2026-11-04",
+     "text": "Exxon fell 1.2% to $177.46 as Brent eased 1.1%; US strikes on Qeshm and a Hormuz standoff keep the risk premium.",
+     "source": "CNBC",
+     "url": "https://www.cnbc.com/2026/11/03/us-treasury-yields-bonds.html",
+     "effect": "neutral"
     }
    ]
   },
@@ -716,6 +786,13 @@
      "text": "Amazon rose 2.2% to $245.63 on Monday, above $245.",
      "source": "Data log (Nasdaq close)",
      "effect": "against"
+    },
+    {
+     "date": "2026-11-04",
+     "text": "Amazon rose 2.1% to $250.69, well above the projected $225–235 range.",
+     "source": "Nasdaq",
+     "url": "https://www.nasdaq.com/market-activity/stocks/amzn",
+     "effect": "against"
     }
    ],
    "result": {
@@ -768,6 +845,13 @@
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/2026/11/03/alphabets-eur-bond-drew-eur-17-bn-in-orders-despite-the-stock-rout/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-04",
+     "text": "Alphabet rose 0.4% to $280.03, still within 2.4% of its 52-week low.",
+     "source": "Nasdaq",
+     "url": "https://www.nasdaq.com/market-activity/stocks/googl",
+     "effect": "neutral"
     }
    ]
   },
@@ -804,6 +888,74 @@
      "text": "Debut close EGP 5.31 (+0.19%) against the EGP 5.30 offer. It touched EGP 5.25 intraday, below the offer, but closed above it; the view is judged on closes.",
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/2026/11/03/banque-du-caire-lands-on-egx-the-treasury-to-take-up-to-half-the-proceeds/",
+     "effect": "neutral"
+    },
+    {
+     "date": "2026-11-03",
+     "text": "Second session: Banque du Caire closed at EGP 5.38 (+1.32%), above the offer price (one source).",
+     "source": "Mubasher",
+     "url": "https://www.mubasher.info/news/4695701/",
+     "effect": "supports"
+    }
+   ]
+  },
+  {
+   "id": "2026-11-04-fert-gas",
+   "opened": "2026-11-04",
+   "market": "egx",
+   "kind": "view",
+   "title": "Gas rationing keeps fertiliser stocks under pressure through November",
+   "confidence": "low",
+   "detail": "Gas to fertiliser plants was cut 20% from 1 November; urea prices ($535 a ton) cover part of the volume loss, but Abu Qir and Mopco have run hard this year and fell four sessions in a row.",
+   "wrong": "Abu Qir closes above EGP 85, or the gas allocations are restored in full.",
+   "due": "2026-11-30",
+   "track": {
+    "key": "egx.ABUK",
+    "label": "Abu Qir Fertilizers",
+    "start": 77.71,
+    "good": "down"
+   },
+   "tickers": [
+    "ABUK",
+    "MFPC"
+   ],
+   "status": "open",
+   "updates": [
+    {
+     "date": "2026-11-04",
+     "text": "Kima reported a 20% cut from 1 November; Abu Qir said it reduced intake; Mopco is adjusting to available gas.",
+     "source": "Egypt Oil & Gas",
+     "url": "https://egyptoil-gas.com/news/abu-qir-fertilizers-adjusts-operations-following-natural-gas-supply-cut/",
+     "effect": "supports"
+    }
+   ]
+  },
+  {
+   "id": "2026-11-04-brent-range",
+   "opened": "2026-11-04",
+   "market": "global",
+   "kind": "view",
+   "title": "Brent stays between $100 and $110 until the Hormuz talks resolve",
+   "confidence": "medium",
+   "detail": "Diplomacy and strikes pull in opposite directions: January Brent eased 1.1% to $103.60 even after US strikes on Qeshm, and Iran called the US reply to its Hormuz plan unconvincing.",
+   "wrong": "Brent closes above $112 on renewed strikes, or below $100 on a signed deal.",
+   "due": "2026-11-20",
+   "track": {
+    "key": "brent",
+    "label": "Brent",
+    "start": 103.6,
+    "good": "up"
+   },
+   "tickers": [
+    "XOM"
+   ],
+   "status": "open",
+   "updates": [
+    {
+     "date": "2026-11-04",
+     "text": "Iran says the US reply to its Hormuz plan is not convincing; Trump confirmed strikes on an anti-aircraft site on Qeshm Island.",
+     "source": "Al Jazeera",
+     "url": "https://www.aljazeera.com/news/2026/11/4/iran-says-us-reply-to-hormuz-plan-unconvincing-trump-confirms-strikes",
      "effect": "neutral"
     }
    ]

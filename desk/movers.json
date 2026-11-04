@@ -2,206 +2,213 @@
  "egx": {
   "gainers": [
    {
-    "t": "SEIG",
-    "name": "Saudi Egyptian Investment & Finance",
-    "ar": "السعودية المصرية للاستثمار والتمويل",
-    "price": 247.5,
-    "pct": 10.65,
-    "turnover": 43693852.0,
-    "why": "Disclosed nine-month results on 2 November; trading was halted for 10 minutes after the stock passed the 10% limit.",
+    "t": "CAED",
+    "name": "Cairo Educational Services",
+    "ar": "القاهرة للخدمات التعليمية",
+    "price": 99.24,
+    "pct": 20.0,
+    "turnover": 65591116.0,
+    "why": "The listing committee took a decision on 3 November and trading was halted for 10 minutes after the stock passed the 10% limit; the decision's content was not checked.",
     "source": "Mubasher",
-    "url": "https://www.mubasher.info/news/4694802/%D8%A7%D9%84%D8%B9%D9%86%D9%88%D8%A7%D9%86-%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9-%D8%A7%D9%84%D9%85%D8%B5%D8%B1%D9%8A%D8%A9-%D9%84%D9%84%D8%A7%D8%B3%D8%AA%D8%AB%D9%85%D8%A7%D8%B1-%D9%88%D8%A7%D9%84%D8%AA%D9%85%D9%88%D9%8A%D9%84-SEIG-CA-SEIGA-CA-%D8%AA%D8%B9%D9%84%D9%86-%D9%86%D8%AA%D8%A7%D8%A6%D8%AC-%D8%A3%D8%B9%D9%85%D8%A7%D9%84%D9%87%D8%A7-%D8%B9%D9%86-%D8%A7%D9%84%D9%81%D8%AA%D8%B1%D8%A9-%D9%85%D9%86-01-01-2026-%D8%A5%D9%84%D9%89-30-09-2026%D8%A7%D8%B3%D9%85-%D8%A7%D9%84%D8%B4%D8%B1%D9%83%D8%A9-%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9/"
+    "url": "https://www.mubasher.info/news/4695384/"
    },
    {
-    "t": "PRCL",
-    "name": "Sheeni",
-    "ar": "شينى",
-    "price": 21.22,
-    "pct": 5.36,
-    "turnover": 73547048.0,
-    "why": "No company news found."
+    "t": "KWIN",
+    "name": "El Kahera El Watania Investment",
+    "ar": "القاهرة الوطنية للاستثمار والاوراق المالية",
+    "price": 63.55,
+    "pct": 20.0,
+    "turnover": 36007624.0,
+    "why": "No company news found.",
+    "source": "Mubasher",
+    "url": "https://www.mubasher.info/"
    },
    {
-    "t": "GTWL",
-    "name": "Goldentex",
-    "ar": "جولدن تكس",
-    "price": 125.0,
-    "pct": 5.31,
-    "turnover": 709989504.0,
-    "why": "No company news found."
+    "t": "TYCN",
+    "name": "Tycoon Holding Company For Financial Investments",
+    "ar": "تايكون إنفستمنتس هولدنج",
+    "price": 11.11,
+    "pct": 19.98,
+    "turnover": 28157076.0,
+    "why": "Trading was halted for 10 minutes after the stock passed the 10% limit on 3 November. No company news found.",
+    "source": "Mubasher",
+    "url": "https://www.mubasher.info/news/4695420/"
    },
    {
-    "t": "MMAT",
-    "name": "Marsa Marsa Alam",
-    "ar": "مرسى مرسى علم",
-    "price": 4.9,
-    "pct": 4.93,
-    "turnover": 1182739.75
+    "t": "GRCA",
+    "name": "Grand Investment Capital",
+    "ar": "جراند انفستمنت القابضة للاستثمارات المالية",
+    "price": 29.31,
+    "pct": 19.98,
+    "turnover": 21965278.0,
+    "why": "Disclosed the minutes of a board meeting on 3 November; trading rose by the 20% daily limit.",
+    "source": "Mubasher",
+    "url": "https://www.mubasher.info/news/4695309/"
    },
    {
-    "t": "POUL",
-    "name": "Cairo Poultry",
-    "ar": "القاهرة للدواجن",
-    "price": 9.9,
-    "pct": 4.87,
-    "turnover": 195205280.0
+    "t": "KASABF",
+    "name": "Odin Investments",
+    "ar": "أودن للاستثمارات المالية",
+    "price": 6.1,
+    "pct": 19.84,
+    "turnover": 8748218.0,
+    "why": "No company news found.",
+    "source": "Mubasher",
+    "url": "https://www.mubasher.info/"
    },
    {
-    "t": "CPME",
-    "name": "Catalyst Partners Middle East",
-    "ar": "كاتليست بارتنرز ميديل ايست",
-    "price": 37.7,
-    "pct": 4.72,
-    "turnover": 4735754.0
+    "t": "EGREF",
+    "name": "Egyptians for Real Estate Investment Fund",
+    "ar": "صندوق المصريين للاستثمار العقاري",
+    "price": 20.66,
+    "pct": 16.79,
+    "turnover": 19910764.0
    },
    {
-    "t": "BIGP",
-    "name": "Barbary Investment Group",
-    "ar": "بى اى جى للتجارة والاستثمار",
-    "price": 0.22,
-    "pct": 3.32,
-    "turnover": 1026788.94
+    "t": "BIOC",
+    "name": "Glaxo Smith Kline",
+    "ar": "جلاكسو سميثكلاين",
+    "price": 305.0,
+    "pct": 15.53,
+    "turnover": 139854832.0
    },
    {
-    "t": "ETEL",
-    "name": "Telecom Egypt",
-    "ar": "المصرية للاتصالات",
-    "price": 121.45,
-    "pct": 3.08,
-    "turnover": 201285392.0
+    "t": "TANM",
+    "name": "Tanmiya for Real Estate Investment",
+    "ar": "تنمية للاستثمار العقارى",
+    "price": 5.67,
+    "pct": 13.17,
+    "turnover": 41368272.0
    },
    {
-    "t": "COMI",
-    "name": "CIB",
-    "ar": "سي أي بي",
-    "price": 121.4,
-    "pct": 2.88,
-    "turnover": 740411136.0
+    "t": "EASB",
+    "name": "EAC",
+    "ar": "ثمار",
+    "price": 6.52,
+    "pct": 10.88,
+    "turnover": 14550192.0
    },
    {
-    "t": "AMIA",
-    "name": "Arab Moltaqa Investments",
-    "ar": "الملتقى العربي للاستثمارات",
-    "price": 17.8,
-    "pct": 2.77,
-    "turnover": 8141774.5
+    "t": "FNAR",
+    "name": "Al Fanar Contracting Construction Trade Import And Export Co",
+    "ar": "الفنار للمقاولات",
+    "price": 9.91,
+    "pct": 9.99,
+    "turnover": 3543826.0
    }
   ],
   "losers": [
    {
-    "t": "NIPH",
-    "name": "Nile Pharmaceuticals",
-    "ar": "النيل للادوية",
-    "price": 263.03,
-    "pct": -6.89,
-    "turnover": 152481744.0,
-    "why": "No company news found."
-   },
-   {
-    "t": "MAAL",
-    "name": "Marseilia",
-    "ar": "مرسيليا",
-    "price": 6.47,
-    "pct": -6.5,
-    "turnover": 7091855.0,
-    "why": "No company news found."
-   },
-   {
-    "t": "MBEG",
-    "name": "MB",
-    "ar": "إم بي",
-    "price": 4.87,
-    "pct": -6.17,
-    "turnover": 24556858.0,
-    "why": "No company news found."
+    "t": "ABUK",
+    "name": "Abou Kir Fertilizers",
+    "ar": "ابوقير للاسمدة",
+    "price": 77.71,
+    "pct": -3.59,
+    "turnover": 91297456.0
    },
    {
     "t": "MFPC",
     "name": "Mopco",
     "ar": "موبكو",
-    "price": 41.3,
-    "pct": -6.14,
-    "turnover": 65200292.0,
-    "why": "No company news found."
+    "price": 40.07,
+    "pct": -2.98,
+    "turnover": 75075736.0
    },
    {
-    "t": "QNBE",
-    "name": "QNB",
-    "ar": "بنك قطر الوطني",
-    "price": 50.5,
-    "pct": -6.13,
-    "turnover": 51599644.0,
-    "why": "No company news found."
+    "t": "ADRI",
+    "name": "Arab for Development & Real Estate Investment",
+    "ar": "أراب للتنمية و الاستثمار العقاري",
+    "price": 12.13,
+    "pct": -2.96,
+    "turnover": 35880940.0
    },
    {
-    "t": "EGTS",
-    "name": "Egyptian Resorts",
-    "ar": "المصرية للمنتجعات السياحية",
-    "price": 11.54,
-    "pct": -6.03,
-    "turnover": 4312882.5
+    "t": "VLMRA",
+    "name": "Valmore",
+    "ar": "فالمور",
+    "price": 23.31,
+    "pct": -2.51,
+    "turnover": 118918992.0
    },
    {
-    "t": "MTIE",
-    "name": "MTI",
-    "ar": "إم تي أي",
-    "price": 6.52,
-    "pct": -5.92,
-    "turnover": 13341950.0
+    "t": "SUGR",
+    "name": "Delta Sugar",
+    "ar": "الدلتا للسكر",
+    "price": 47.31,
+    "pct": -1.44,
+    "turnover": 16927432.0
    },
    {
-    "t": "NINH",
-    "name": "Nozha International Hospital",
-    "ar": "مستشفى النزهه الدولي",
-    "price": 14.01,
-    "pct": -5.85,
-    "turnover": 4699975.5
+    "t": "DSCW",
+    "name": "Dice",
+    "ar": "دايس",
+    "price": 1.4,
+    "pct": -1.41,
+    "turnover": 19268432.0
    },
    {
-    "t": "EAST",
-    "name": "Eastern Co",
-    "ar": "ايسترن كومباني",
-    "price": 30.15,
-    "pct": -5.75,
-    "turnover": 16809262.0
+    "t": "GDWA",
+    "name": "Gadwa for Industrial Development",
+    "ar": "جدوى للتنمية الصناعية",
+    "price": 0.53,
+    "pct": -1.31,
+    "turnover": 9545019.0
    },
    {
-    "t": "MPCI",
-    "name": "Memphis Pharmaceuticals",
-    "ar": "ممفيس للادوية",
-    "price": 299.99,
-    "pct": -5.69,
-    "turnover": 125533680.0
+    "t": "SKPC",
+    "name": "Sidi Kerir Petrochemicals - SIDPEC",
+    "ar": "سيدى كرير للبتروكيماويات - سيدبك",
+    "price": 14.44,
+    "pct": -1.16,
+    "turnover": 33201694.0
+   },
+   {
+    "t": "AMOC",
+    "name": "AMOC",
+    "ar": "أموك",
+    "price": 13.5,
+    "pct": -1.1,
+    "turnover": 90459808.0
+   },
+   {
+    "t": "AMIA",
+    "name": "Arab Moltaqa Investments",
+    "ar": "الملتقى العربي للاستثمارات",
+    "price": 17.63,
+    "pct": -0.96,
+    "turnover": 21545736.0
    }
   ],
-  "count": 206,
-  "session": "2026-11-02",
-  "basis": "All EGX stocks that traded at least EGP 1m (206 on the day)",
+  "count": 197,
+  "session": "2026-11-03",
+  "basis": "All EGX stocks that traded at least EGP 1m (197 on the day)",
   "breadth": {
-   "up": 38,
-   "down": 194,
-   "flat": 19
+   "up": 188,
+   "down": 34,
+   "flat": 11
   },
   "indices": {
    "EGX30": {
-    "close": 48403.1,
-    "day": -0.6993681273592677,
-    "week": -1.7098147836028357,
-    "month": -6.7456708872465585,
-    "ytd": 15.678997003054304
+    "close": 49255.7,
+    "day": 1.761457427313537,
+    "week": 1.5514440284352373,
+    "month": -7.453760418467284,
+    "ytd": 17.71663328760641
    },
    "EGX70EWI": {
-    "close": 16293.7,
-    "day": -2.2338893555742185,
-    "week": 6.542123296628566,
-    "month": -12.67224422636816,
-    "ytd": 23.92531183449955
+    "close": 16648.2,
+    "day": 2.1756875356732968,
+    "week": 8.520956912847929,
+    "month": -14.202226345083485,
+    "ytd": 26.62153939762702
    }
   },
   "why_log": {
    "SEIG": {
-    "why": "No company news found.",
-    "session": "2026-11-01"
+    "why": "Disclosed nine-month results on 2 November; trading was halted for 10 minutes after the stock passed the 10% limit.",
+    "source": "Mubasher",
+    "url": "https://www.mubasher.info/news/4694802/%D8%A7%D9%84%D8%B9%D9%86%D9%88%D8%A7%D9%86-%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9-%D8%A7%D9%84%D9%85%D8%B5%D8%B1%D9%8A%D8%A9-%D9%84%D9%84%D8%A7%D8%B3%D8%AA%D8%AB%D9%85%D8%A7%D8%B1-%D9%88%D8%A7%D9%84%D8%AA%D9%85%D9%88%D9%8A%D9%84-SEIG-CA-SEIGA-CA-%D8%AA%D8%B9%D9%84%D9%86-%D9%86%D8%AA%D8%A7%D8%A6%D8%AC-%D8%A3%D8%B9%D9%85%D8%A7%D9%84%D9%87%D8%A7-%D8%B9%D9%86-%D8%A7%D9%84%D9%81%D8%AA%D8%B1%D8%A9-%D9%85%D9%86-01-01-2026-%D8%A5%D9%84%D9%89-30-09-2026%D8%A7%D8%B3%D9%85-%D8%A7%D9%84%D8%B4%D8%B1%D9%83%D8%A9-%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9/",
+    "session": "2026-11-02"
    },
    "CRST": {
     "why": "No company news found.",
@@ -220,10 +227,8 @@
     "session": "2026-10-29"
    },
    "NIPH": {
-    "why": "The Cabinet approved a capital increase for Nile and Memphis Pharmaceuticals.",
-    "source": "Mubasher",
-    "url": "https://www.mubasher.info/news/4692168/",
-    "session": "2026-10-29"
+    "why": "No company news found.",
+    "session": "2026-11-02"
    },
    "ABUK": {
     "why": "Fell despite reporting nine-month profit roughly doubling to about EGP 13bn: profit-taking after a 73% run this year.",
@@ -233,7 +238,7 @@
    },
    "GTWL": {
     "why": "No company news found.",
-    "session": "2026-11-01"
+    "session": "2026-11-02"
    },
    "LUTS": {
     "why": "No company news found.",
@@ -262,6 +267,26 @@
    "CPME": {
     "why": "No company news found.",
     "session": "2026-11-01"
+   },
+   "PRCL": {
+    "why": "No company news found.",
+    "session": "2026-11-02"
+   },
+   "MAAL": {
+    "why": "No company news found.",
+    "session": "2026-11-02"
+   },
+   "MBEG": {
+    "why": "No company news found.",
+    "session": "2026-11-02"
+   },
+   "MFPC": {
+    "why": "No company news found.",
+    "session": "2026-11-02"
+   },
+   "QNBE": {
+    "why": "No company news found.",
+    "session": "2026-11-02"
    }
   },
   "week": {
@@ -269,124 +294,124 @@
     {
      "t": "SEIG",
      "name": "Saudi Egyptian Investment & Finance",
-     "price": 247.5,
-     "pct": 65.47
-    },
-    {
-     "t": "CRST",
-     "name": "Creast mark For Contracting",
-     "price": 2.68,
-     "pct": 48.07
+     "price": 266.15,
+     "pct": 76.75
     },
     {
      "t": "GTWL",
      "name": "Goldentex",
-     "price": 125,
-     "pct": 47.32
+     "price": 127.5,
+     "pct": 55.68
+    },
+    {
+     "t": "CAED",
+     "name": "Cairo Educational Services",
+     "price": 99.24,
+     "pct": 43.39
+    },
+    {
+     "t": "CRST",
+     "name": "Creast mark For Contracting",
+     "price": 2.72,
+     "pct": 41.67
     },
     {
      "t": "LUTS",
      "name": "Lotus For Agricultural Investments And Development",
-     "price": 0.699,
-     "pct": 37.33
+     "price": 0.713,
+     "pct": 37.91
     },
     {
-     "t": "IEEC",
-     "name": "I.E.E",
-     "price": 0.705,
-     "pct": 28.18
+     "t": "AMII",
+     "name": "Arabian Metal Industries and Industrial Investments",
+     "price": 7.5,
+     "pct": 36.86
     },
     {
-     "t": "HBCO",
-     "name": "Hepco",
-     "price": 7.96,
-     "pct": 25.95
+     "t": "BIOC",
+     "name": "Glaxo Smith Kline",
+     "price": 305,
+     "pct": 35.6
     },
     {
-     "t": "EGS3I0S1C019",
-     "name": "Future Care For Medical Industries",
-     "price": 7.95,
-     "pct": 24.61
+     "t": "MBEG",
+     "name": "MB",
+     "price": 5,
+     "pct": 35.5
     },
     {
-     "t": "MAAL",
-     "name": "Marseilia",
-     "price": 6.47,
-     "pct": 23.0
+     "t": "KWIN",
+     "name": "El Kahera El Watania Investment",
+     "price": 63.55,
+     "pct": 32.7
     },
     {
-     "t": "TWSA",
-     "name": "Tawasoa For Factoring",
-     "price": 6.43,
-     "pct": 22.48
-    },
-    {
-     "t": "PRCL",
-     "name": "Sheeni",
-     "price": 21.22,
-     "pct": 21.05
+     "t": "TYCN",
+     "name": "Tycoon Holding Company For Financial Investments",
+     "price": 11.11,
+     "pct": 30.55
     }
    ],
    "losers": [
     {
-     "t": "MFPC",
-     "name": "Mopco",
-     "price": 41.3,
-     "pct": -12.5
-    },
-    {
-     "t": "RTVC",
-     "name": "Remco",
-     "price": 2.69,
-     "pct": -11.51
-    },
-    {
-     "t": "BINV",
-     "name": "B Investments Holding",
-     "price": 51.03,
-     "pct": -11.19
-    },
-    {
-     "t": "PHDC",
-     "name": "Palm Hills",
-     "price": 10.6,
-     "pct": -11.0
-    },
-    {
-     "t": "NARE",
-     "name": "Naeem Real Estate",
-     "price": 12.16,
-     "pct": -10.72
-    },
-    {
      "t": "ABUK",
      "name": "Abou Kir Fertilizers",
-     "price": 80.6,
-     "pct": -9.96
+     "price": 77.71,
+     "pct": -12.32
     },
     {
-     "t": "FWRY",
-     "name": "Fawry",
-     "price": 15.75,
-     "pct": -9.53
+     "t": "MFPC",
+     "name": "Mopco",
+     "price": 40.07,
+     "pct": -10.16
+    },
+    {
+     "t": "VLMRA",
+     "name": "Valmore",
+     "price": 23.31,
+     "pct": -8.59
     },
     {
      "t": "VALU",
      "name": "Valu",
-     "price": 9.06,
-     "pct": -9.49
+     "price": 9.04,
+     "pct": -8.5
+    },
+    {
+     "t": "ADRI",
+     "name": "Arab for Development & Real Estate Investment",
+     "price": 12.13,
+     "pct": -6.11
     },
     {
      "t": "GBCO",
      "name": "GB",
-     "price": 21.5,
-     "pct": -9.09
+     "price": 21.63,
+     "pct": -5.92
     },
     {
-     "t": "HDBK",
-     "name": "Housing & Development Bank",
-     "price": 95,
-     "pct": -8.35
+     "t": "HRHO",
+     "name": "EFG Holding",
+     "price": 22.5,
+     "pct": -5.9
+    },
+    {
+     "t": "RTVC",
+     "name": "Remco",
+     "price": 2.74,
+     "pct": -5.19
+    },
+    {
+     "t": "EPPK",
+     "name": "El Ahram Co. for Printing & Packing",
+     "price": 9.78,
+     "pct": -4.96
+    },
+    {
+     "t": "IFAP",
+     "name": "International Agricultural Products",
+     "price": 15.65,
+     "pct": -4.28
     }
    ],
    "count": 209,
@@ -396,126 +421,126 @@
   "month": {
    "gainers": [
     {
-     "t": "AJWA",
-     "name": "Ajwa",
-     "price": 214.92,
-     "pct": 19.35
-    },
-    {
      "t": "SEIG",
      "name": "Saudi Egyptian Investment & Finance",
-     "price": 247.5,
-     "pct": 16.59
+     "price": 266.15,
+     "pct": 17.37
+    },
+    {
+     "t": "AJWA",
+     "name": "Ajwa",
+     "price": 213.45,
+     "pct": 17.24
     },
     {
      "t": "ELNA",
      "name": "El Nasr for Manufacturing Agricultural Crops",
-     "price": 40.97,
-     "pct": 16.33
+     "price": 39.68,
+     "pct": 12.66
     },
     {
      "t": "SCEM",
      "name": "Sinai Cement",
-     "price": 87.03,
-     "pct": 14.65
+     "price": 88.04,
+     "pct": 9.8
+    },
+    {
+     "t": "EAST",
+     "name": "Eastern",
+     "price": 32,
+     "pct": 8.59
     },
     {
      "t": "CPME",
      "name": "Catalyst Partners Middle East",
-     "price": 37.7,
-     "pct": 13.49
-    },
-    {
-     "t": "ICFC",
-     "name": "International Company For Fertilizers & Chemicals",
-     "price": 22.9,
-     "pct": 10.52
-    },
-    {
-     "t": "UNIT",
-     "name": "United Housing & Development",
-     "price": 17.75,
-     "pct": 6.41
+     "price": 38,
+     "pct": 5.56
     },
     {
      "t": "LCSW",
      "name": "Lecico",
      "price": 35.3,
-     "pct": 6.01
+     "pct": 5.4
     },
     {
-     "t": "EAST",
-     "name": "Eastern",
-     "price": 30.15,
-     "pct": 5.75
+     "t": "ICFC",
+     "name": "International Company For Fertilizers & Chemicals",
+     "price": 23.16,
+     "pct": 5.37
     },
     {
-     "t": "ADRI",
-     "name": "Arab for Development & Real Estate Investment",
-     "price": 12.51,
-     "pct": 5.13
+     "t": "EGS3I0S1C019",
+     "name": "Future Care For Medical Industries",
+     "price": 8.1,
+     "pct": 5.06
+    },
+    {
+     "t": "BIDI",
+     "name": "El Badr Investment and Development - BID",
+     "price": 2.12,
+     "pct": 4.95
     }
    ],
    "losers": [
     {
      "t": "KORA",
      "name": "Korra for Energy and Investment Projects",
-     "price": 1.66,
-     "pct": -50.92
+     "price": 1.75,
+     "pct": -48.26
     },
     {
      "t": "MAAL",
      "name": "Marseilia",
-     "price": 6.47,
-     "pct": -36.82
-    },
-    {
-     "t": "RREI",
-     "name": "ALICO",
-     "price": 2.56,
-     "pct": -34.53
+     "price": 6.7,
+     "pct": -38.08
     },
     {
      "t": "DTPP",
      "name": "Delta for Printing & Packaging",
-     "price": 45.32,
-     "pct": -34.47
-    },
-    {
-     "t": "GIHD",
-     "name": "Gharbia Islamic Housing Development",
-     "price": 40.89,
-     "pct": -34.31
-    },
-    {
-     "t": "MFSC",
-     "name": "Misr Duty Free Shops",
-     "price": 31.8,
-     "pct": -34.02
+     "price": 46.75,
+     "pct": -36.0
     },
     {
      "t": "AMII",
      "name": "Arabian Metal Industries and Industrial Investments",
-     "price": 7.22,
-     "pct": -33.7
+     "price": 7.5,
+     "pct": -33.92
+    },
+    {
+     "t": "MOED",
+     "name": "The Egyptian Modern Education Systems",
+     "price": 0.457,
+     "pct": -32.7
+    },
+    {
+     "t": "GIHD",
+     "name": "Gharbia Islamic Housing Development",
+     "price": 42.81,
+     "pct": -32.59
     },
     {
      "t": "FNAR",
      "name": "Al Fanar Contracting Construction Trade Import And Export",
-     "price": 9.04,
-     "pct": -33.68
+     "price": 9.91,
+     "pct": -32.59
     },
     {
      "t": "MILS",
      "name": "North Cairo Mills",
-     "price": 121.36,
-     "pct": -31.11
+     "price": 124.85,
+     "pct": -32.0
     },
     {
-     "t": "KWIN",
-     "name": "El Kahera El Watania Investment",
-     "price": 53,
-     "pct": -30.74
+     "t": "RREI",
+     "name": "ALICO",
+     "price": 2.68,
+     "pct": -31.63
+    },
+    {
+     "t": "INEG",
+     "name": "Integrated Engineering Group",
+     "price": 0.505,
+     "pct": -31.29
     }
    ],
    "count": 209,
@@ -527,177 +552,181 @@
  "us": {
   "gainers": [
    {
-    "t": "IDXX",
-    "name": "IDEXX Laboratories",
-    "price": 671.64,
-    "pct": 21.848,
-    "cap": 52912553748.01851,
-    "why": "Third-quarter results beat estimates and the outlook was raised.",
-    "source": "Seeking Alpha",
-    "url": "https://seekingalpha.com/news/4662829-idexx-laboratories-surges-22-on-q3-beat-raised-outlook"
-   },
-   {
-    "t": "NXT",
-    "name": "Nextpower",
-    "price": 91.13,
-    "pct": 14.875,
-    "cap": 13827111723.242407,
-    "why": "Quarterly results beat estimates and guidance was raised.",
+    "t": "FN",
+    "name": "Fabrinet",
+    "price": 363.33,
+    "pct": 15.453,
+    "cap": 13019519081.949955,
+    "why": "Reported fiscal first-quarter results on 3 November; headlines cite record results alongside margin pressure.",
     "source": "Yahoo Finance",
-    "url": "https://finance.yahoo.com/markets/stocks/articles/nextpower-nxt-stock-jumps-q2-042750284.html"
+    "url": "https://finance.yahoo.com/markets/stocks/articles/record-results-may-change-case-061930708.html"
    },
    {
-    "t": "TEM",
-    "name": "Tempus AI",
-    "price": 78.48,
-    "pct": 8.668,
-    "cap": 14302353652.011076,
-    "why": "Third-quarter results beat estimates and the 2026 revenue outlook was raised.",
-    "source": "GuruFocus",
-    "url": "https://www.gurufocus.com/news/9163030/tempus-ai-tem-shares-jump-11-after-q3-earnings-beat-and-raised-2026-revenue-outlook"
+    "t": "NBIX",
+    "name": "Neurocrine Biosciences",
+    "price": 164.85,
+    "pct": 13.416,
+    "cap": 16756867622.417957,
+    "why": "Reported third-quarter results on 3 November; the move followed the earnings release (headline only, details not checked).",
+    "source": "Simply Wall St",
+    "url": "https://simplywall.st/stocks/us/pharmaceuticals-biotech/nasdaq-nbix/neurocrine-biosciences/news/neurocrine-biosciences-nbix-stock-jumps-as-q3-earnings-fuel"
    },
    {
-    "t": "RIVN",
-    "name": "Rivian Automotive",
-    "price": 13.19,
-    "pct": 8.47,
-    "cap": 19098435465.032894,
-    "why": "UBS upgraded the stock to Buy and the quarterly loss narrowed to $0.48 a share from $0.65.",
+    "t": "FISV",
+    "name": "Fiserv",
+    "price": 58.4,
+    "pct": 12.459,
+    "cap": 31055176843.18121,
+    "why": "Third-quarter adjusted profit of $1.75 a share beat the $1.72 expected, the cost-savings target was doubled to $1bn and a $500m buyback resumes in the fourth quarter; revenue fell 1%.",
     "source": "The Motley Fool",
-    "url": "https://www.fool.com/coverage/stock-market-today/2026/11/02/stock-market-today-nov-2-rivian-rallies-on-ubs-upgrade-and-solid-r2-demand-outlook/"
+    "url": "https://www.fool.com/investing/2026/11/03/why-fiserv-stock-triumphed-on-tuesday/"
    },
    {
-    "t": "RKT",
-    "name": "Rocket Companies",
-    "price": 13.77,
-    "pct": 7.578,
-    "cap": 38980975173.771095,
-    "why": "Third-quarter earnings beat expectations.",
-    "source": "Timothy Sykes",
-    "url": "https://timothysykes.com/news/rocket-companies-inc-rkt-news-2026_11_02-3/"
+    "t": "RRX",
+    "name": "Regal Rexnord",
+    "price": 179.93,
+    "pct": 11.806,
+    "cap": 11981873821.72137,
+    "why": "Reported third-quarter results on 3 November with organic growth accelerating, per an earnings-call summary.",
+    "source": "Yahoo Finance",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/regal-rexnord-corporation-q3-2026-225024954.html"
    },
    {
-    "t": "HWM",
-    "name": "Howmet Aerospace",
-    "price": 212.99,
-    "pct": 6.912,
-    "cap": 84697708697.58609
+    "t": "INIO",
+    "name": "INNIO",
+    "price": 18.31,
+    "pct": 11.578,
+    "cap": 13732499872.80073,
+    "why": "Order backlog rose as AI data centres build their own power plants, per a report (headline only).",
+    "source": "Crypto Briefing",
+    "url": "https://cryptobriefing.com/innio-backlog-ai-data-center-power/"
    },
    {
-    "t": "BAM",
-    "name": "Brookfield Asset Management",
-    "price": 51.47,
-    "pct": 6.651,
-    "cap": 84319807476.99214
+    "t": "LSCC",
+    "name": "Lattice Semiconductor",
+    "price": 105.92,
+    "pct": 10.981,
+    "cap": 15043845330.752728
    },
    {
-    "t": "PNR",
-    "name": "Pentair",
-    "price": 70.56,
-    "pct": 6.49,
-    "cap": 11265235543.613644
+    "t": "GRAB",
+    "name": "Grab Holdings Limited",
+    "price": 3.12,
+    "pct": 9.091,
+    "cap": 12724972853.454546
    },
    {
-    "t": "CRH",
-    "name": "CRH public limited company",
-    "price": 96.59,
-    "pct": 6.365,
-    "cap": 64254638725.91169
+    "t": "BE",
+    "name": "Bloom Energy",
+    "price": 214.01,
+    "pct": 9.05,
+    "cap": 63273485497.93171
    },
    {
-    "t": "DASH",
-    "name": "DoorDash",
-    "price": 190.07,
-    "pct": 6.19,
-    "cap": 82300107234.95084
+    "t": "DD",
+    "name": "DuPont de Nemours",
+    "price": 153.46,
+    "pct": 8.606,
+    "cap": 20723694431.42364
+   },
+   {
+    "t": "RVTY",
+    "name": "Revvity",
+    "price": 163.48,
+    "pct": 7.836,
+    "cap": 18242144632.100525
    }
   ],
   "losers": [
    {
-    "t": "LITE",
-    "name": "Lumentum Holdings",
-    "price": 684.4,
-    "pct": -18.592,
-    "cap": 61994912237.36266,
-    "why": "Marvell agreed to buy it in an all-stock deal valued at about $115bn; with Marvell's shares falling, the offer was worth about $771 a share against the $1,132 headline price.",
+    "t": "DT",
+    "name": "Dynatrace",
+    "price": 47.03,
+    "pct": -14.693,
+    "cap": 13591770730.189915,
+    "why": "Fell about 15% after trimming its earnings guidance and starting a share buyback.",
+    "source": "Seeking Alpha",
+    "url": "https://seekingalpha.com/news/4664019-dynatrace-falls-15-on-trimmed-earnings-guidance"
+   },
+   {
+    "t": "IT",
+    "name": "Gartner",
+    "price": 204.22,
+    "pct": -13.194,
+    "cap": 12896283449.238205,
+    "why": "Revenue of $1.505bn beat estimates but fell 1.3% from a year earlier, despite a raised 2026 outlook; investors appear to have focused on the shrinking top line.",
+    "source": "Financial-News",
+    "url": "https://www.financial-news.co.uk/gartner-q3-2026-earnings-beat-fails-to-stop-13-share-slide/"
+   },
+   {
+    "t": "TRI",
+    "name": "Thomson Reuters",
+    "price": 110.18,
+    "pct": -9.866,
+    "cap": 47735637334.95465,
+    "why": "Third-quarter revenue of $1.83bn and adjusted earnings of $0.81 a share missed estimates of $1.91bn and $0.89, though it raised its 2026 revenue growth forecast to 9.5%.",
     "source": "Yahoo Finance",
-    "url": "https://finance.yahoo.com/markets/stocks/article/marvell-to-purchase-lumentum-in-115-billion-deal-as-ai-124702761.html"
+    "url": "https://finance.yahoo.com/markets/stocks/articles/why-thomson-reuters-stock-plummeted-235526724.html"
    },
    {
-    "t": "VG",
-    "name": "Venture Global",
-    "price": 12.87,
-    "pct": -12.982,
-    "cap": 32176195042.588234,
-    "why": "No company news found."
-   },
-   {
-    "t": "MRVL",
-    "name": "Marvell Technology",
-    "price": 171.41,
-    "pct": -12.724,
-    "cap": 150309428513.87286,
-    "why": "Fell on its all-stock agreement to buy Lumentum for about $115bn, on concerns over size, dilution and the long closing timeline.",
+    "t": "SYY",
+    "name": "Sysco",
+    "price": 74.11,
+    "pct": -9.334,
+    "cap": 36456738563.18657,
+    "why": "No company news found.",
     "source": "Yahoo Finance",
-    "url": "https://finance.yahoo.com/markets/stocks/articles/why-marvell-technology-plunged-today-194534312.html"
+    "url": "https://finance.yahoo.com/"
    },
    {
-    "t": "CBRS",
-    "name": "Cerebras Systems",
-    "price": 96.36,
-    "pct": -11.742,
-    "cap": 21570044647.876167,
-    "why": "UBS cut its price target to $250 from $330 and kept a Buy rating; a short-seller report and a share lock-up expiry were also cited.",
-    "source": "The Motley Fool",
-    "url": "https://www.fool.com/investing/2026/11/02/why-cerebras-systems-stock-is-plummeting-today/"
+    "t": "ZBRA",
+    "name": "Zebra Technologies",
+    "price": 329.5,
+    "pct": -8.759,
+    "cap": 15588863114.346638,
+    "why": "Reported results with a raised outlook, yet the shares fell 8.8% (headline only).",
+    "source": "Yahoo Finance",
+    "url": "https://finance.yahoo.com/"
    },
    {
-    "t": "CIEN",
-    "name": "Ciena",
-    "price": 284.34,
-    "pct": -11.343,
-    "cap": 40321838345.24475,
-    "why": "No company news found."
+    "t": "SHOP",
+    "name": "Shopify",
+    "price": 142.57,
+    "pct": -8.738,
+    "cap": 183405616787.0328
    },
    {
-    "t": "ASTS",
-    "name": "AST SpaceMobile",
-    "price": 36.33,
-    "pct": -11.325,
-    "cap": 14138455537.476934
+    "t": "BALL",
+    "name": "Ball",
+    "price": 63.21,
+    "pct": -7.14,
+    "cap": 16731897959.080214
    },
    {
-    "t": "OKTA",
-    "name": "Okta",
-    "price": 184.87,
-    "pct": -11.223,
-    "cap": 32319113875.099453
+    "t": "ADM",
+    "name": "Archer-Daniels-Midland",
+    "price": 70.6,
+    "pct": -6.823,
+    "cap": 34026345880.625576
    },
    {
-    "t": "ALAB",
-    "name": "Astera Labs",
-    "price": 229.67,
-    "pct": -11.221,
-    "cap": 39844326501.87615
+    "t": "LDOS",
+    "name": "Leidos Holdings",
+    "price": 134.72,
+    "pct": -6.548,
+    "cap": 16906311012.850166
    },
    {
-    "t": "P",
-    "name": "Everpure",
-    "price": 113.78,
-    "pct": -10.395,
-    "cap": 37914599146.54544
-   },
-   {
-    "t": "FROG",
-    "name": "JFrog",
-    "price": 85.11,
-    "pct": -9.832,
-    "cap": 10494174878.307766
+    "t": "KDP",
+    "name": "Keurig Dr Pepper",
+    "price": 34.74,
+    "pct": -5.649,
+    "cap": 47275096578.839226
    }
   ],
-  "count": 851,
-  "session": "2026-11-02",
-  "basis": "US companies worth $10bn or more (851)",
+  "count": 855,
+  "session": "2026-11-03",
+  "basis": "US companies worth $10bn or more (855)",
   "why_log": {
    "FDXF": {
     "why": "Results for the four months to September showed revenue up 9.3% to $3.3bn, and analysts backed its medium-term targets; its biggest one-day rise.",
@@ -756,6 +785,62 @@
     "source": "Yahoo Finance",
     "url": "https://finance.yahoo.com/markets/stocks/articles/twlo-stock-track-post-worst-162808174.html",
     "session": "2026-10-30"
+   },
+   "IDXX": {
+    "why": "Third-quarter results beat estimates and the outlook was raised.",
+    "source": "Seeking Alpha",
+    "url": "https://seekingalpha.com/news/4662829-idexx-laboratories-surges-22-on-q3-beat-raised-outlook",
+    "session": "2026-11-02"
+   },
+   "NXT": {
+    "why": "Quarterly results beat estimates and guidance was raised.",
+    "source": "Yahoo Finance",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/nextpower-nxt-stock-jumps-q2-042750284.html",
+    "session": "2026-11-02"
+   },
+   "TEM": {
+    "why": "Third-quarter results beat estimates and the 2026 revenue outlook was raised.",
+    "source": "GuruFocus",
+    "url": "https://www.gurufocus.com/news/9163030/tempus-ai-tem-shares-jump-11-after-q3-earnings-beat-and-raised-2026-revenue-outlook",
+    "session": "2026-11-02"
+   },
+   "RIVN": {
+    "why": "UBS upgraded the stock to Buy and the quarterly loss narrowed to $0.48 a share from $0.65.",
+    "source": "The Motley Fool",
+    "url": "https://www.fool.com/coverage/stock-market-today/2026/11/02/stock-market-today-nov-2-rivian-rallies-on-ubs-upgrade-and-solid-r2-demand-outlook/",
+    "session": "2026-11-02"
+   },
+   "RKT": {
+    "why": "Third-quarter earnings beat expectations.",
+    "source": "Timothy Sykes",
+    "url": "https://timothysykes.com/news/rocket-companies-inc-rkt-news-2026_11_02-3/",
+    "session": "2026-11-02"
+   },
+   "LITE": {
+    "why": "Marvell agreed to buy it in an all-stock deal valued at about $115bn; with Marvell's shares falling, the offer was worth about $771 a share against the $1,132 headline price.",
+    "source": "Yahoo Finance",
+    "url": "https://finance.yahoo.com/markets/stocks/article/marvell-to-purchase-lumentum-in-115-billion-deal-as-ai-124702761.html",
+    "session": "2026-11-02"
+   },
+   "VG": {
+    "why": "No company news found.",
+    "session": "2026-11-02"
+   },
+   "MRVL": {
+    "why": "Fell on its all-stock agreement to buy Lumentum for about $115bn, on concerns over size, dilution and the long closing timeline.",
+    "source": "Yahoo Finance",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/why-marvell-technology-plunged-today-194534312.html",
+    "session": "2026-11-02"
+   },
+   "CBRS": {
+    "why": "UBS cut its price target to $250 from $330 and kept a Buy rating; a short-seller report and a share lock-up expiry were also cited.",
+    "source": "The Motley Fool",
+    "url": "https://www.fool.com/investing/2026/11/02/why-cerebras-systems-stock-is-plummeting-today/",
+    "session": "2026-11-02"
+   },
+   "CIEN": {
+    "why": "No company news found.",
+    "session": "2026-11-02"
    }
   },
   "week": {
@@ -763,258 +848,258 @@
     {
      "t": "GKOS",
      "name": "Glaukos",
-     "price": 238.61,
-     "pct": 34.54
-    },
-    {
-     "t": "PNR",
-     "name": "Pentair",
-     "price": 70.56,
-     "pct": 27.76
-    },
-    {
-     "t": "JLL",
-     "name": "Jones Lang LaSalle Incorporated",
-     "price": 379.29,
-     "pct": 26.85
+     "price": 233.04,
+     "pct": 30.56
     },
     {
      "t": "FTAI",
      "name": "FTAI Aviation",
-     "price": 197.75,
-     "pct": 26.79
+     "price": 200.74,
+     "pct": 26.83
+    },
+    {
+     "t": "JLL",
+     "name": "Jones Lang LaSalle Incorporated",
+     "price": 374.48,
+     "pct": 24.1
+    },
+    {
+     "t": "NXT",
+     "name": "Nextpower",
+     "price": 96.02,
+     "pct": 23.91
     },
     {
      "t": "CVNA",
      "name": "Carvana",
-     "price": 72,
-     "pct": 24.42
-    },
-    {
-     "t": "GPN",
-     "name": "Global Payments",
-     "price": 99.63,
-     "pct": 20.98
+     "price": 71.28,
+     "pct": 23.45
     },
     {
      "t": "GEN",
      "name": "Gen Digital",
-     "price": 29.89,
-     "pct": 20.18
+     "price": 29.71,
+     "pct": 22.82
     },
     {
-     "t": "EVR",
-     "name": "Evercore",
-     "price": 303.26,
-     "pct": 20.17
+     "t": "FISV",
+     "name": "Fiserv",
+     "price": 58.4,
+     "pct": 21.02
     },
     {
-     "t": "VSAT",
-     "name": "ViaSat",
-     "price": 74.11,
-     "pct": 19.78
+     "t": "REGN",
+     "name": "Regeneron Pharmaceuticals",
+     "price": 973.36,
+     "pct": 20.51
     },
     {
-     "t": "FDXF",
-     "name": "FedEx Freight Holding Company",
-     "price": 131.85,
-     "pct": 19.54
+     "t": "GPN",
+     "name": "Global Payments",
+     "price": 98,
+     "pct": 19.85
+    },
+    {
+     "t": "RKT",
+     "name": "Rocket Companies",
+     "price": 13.81,
+     "pct": 19.46
     }
    ],
    "losers": [
     {
+     "t": "INTC",
+     "name": "Intel",
+     "price": 60.55,
+     "pct": -34.52
+    },
+    {
      "t": "RDDT",
      "name": "Reddit",
-     "price": 90.97,
-     "pct": -36.94
+     "price": 96.15,
+     "pct": -30.52
     },
     {
      "t": "NOW",
      "name": "ServiceNow",
-     "price": 106.01,
-     "pct": -33.14
-    },
-    {
-     "t": "INTC",
-     "name": "Intel",
-     "price": 59.97,
-     "pct": -31.8
+     "price": 109.16,
+     "pct": -30.07
     },
     {
      "t": "FTNT",
      "name": "Fortinet",
-     "price": 126.21,
-     "pct": -30.4
+     "price": 128.11,
+     "pct": -29.38
     },
     {
      "t": "ALNY",
      "name": "Alnylam Pharmaceuticals",
-     "price": 158,
-     "pct": -30.16
+     "price": 159.89,
+     "pct": -28.94
     },
     {
      "t": "FFIV",
      "name": "F5",
-     "price": 324.55,
-     "pct": -29.19
+     "price": 331.15,
+     "pct": -28.24
     },
     {
      "t": "MRVL",
      "name": "Marvell Technology",
-     "price": 171.41,
-     "pct": -25.16
+     "price": 171.97,
+     "pct": -27.45
     },
     {
-     "t": "TWLO",
-     "name": "Twilio",
-     "price": 207.6,
-     "pct": -21.03
+     "t": "DT",
+     "name": "Dynatrace",
+     "price": 47.03,
+     "pct": -26.76
     },
     {
      "t": "DDOG",
      "name": "Datadog",
-     "price": 216.1,
-     "pct": -20.42
+     "price": 220.52,
+     "pct": -20.95
     },
     {
-     "t": "NET",
-     "name": "Cloudflare",
-     "price": 265.17,
-     "pct": -19.14
+     "t": "LITE",
+     "name": "Lumentum Holdings",
+     "price": 680.16,
+     "pct": -19.64
     }
    ],
-   "count": 851,
+   "count": 855,
    "basis": "Past week, TradingView",
-   "note": "US companies worth $10bn or more (851)"
+   "note": "US companies worth $10bn or more (855)"
   },
   "month": {
    "gainers": [
     {
      "t": "RRC",
      "name": "Range Resources",
-     "price": 54.47,
-     "pct": 46.19
+     "price": 54.01,
+     "pct": 44.95
     },
     {
      "t": "GKOS",
      "name": "Glaukos",
-     "price": 238.61,
-     "pct": 42.39
+     "price": 233.04,
+     "pct": 39.07
     },
     {
      "t": "EFX",
      "name": "Equifax",
-     "price": 192.51,
-     "pct": 39.13
+     "price": 187.72,
+     "pct": 35.67
     },
     {
      "t": "BSP",
      "name": "Bending Spoons S.p.A",
-     "price": 45.38,
-     "pct": 38.44
+     "price": 43.75,
+     "pct": 33.47
     },
     {
      "t": "GEN",
      "name": "Gen Digital",
-     "price": 29.89,
-     "pct": 33.38
+     "price": 29.71,
+     "pct": 32.57
     },
     {
-     "t": "ROP",
-     "name": "Roper Technologies",
-     "price": 479.54,
-     "pct": 32.15
-    },
-    {
-     "t": "PNR",
-     "name": "Pentair",
-     "price": 70.56,
-     "pct": 31.76
-    },
-    {
-     "t": "HAS",
-     "name": "Hasbro",
-     "price": 118.36,
-     "pct": 31.37
-    },
-    {
-     "t": "CCI",
-     "name": "Crown Castle",
-     "price": 87.03,
-     "pct": 31.29
+     "t": "REGN",
+     "name": "Regeneron Pharmaceuticals",
+     "price": 973.36,
+     "pct": 31.45
     },
     {
      "t": "PTC",
      "name": "PTC",
-     "price": 194.31,
-     "pct": 31.27
+     "price": 194.06,
+     "pct": 31.1
+    },
+    {
+     "t": "CART",
+     "name": "Maplebear",
+     "price": 58.31,
+     "pct": 30.95
+    },
+    {
+     "t": "HAS",
+     "name": "Hasbro",
+     "price": 117.97,
+     "pct": 30.94
+    },
+    {
+     "t": "CCI",
+     "name": "Crown Castle",
+     "price": 86.58,
+     "pct": 30.61
     }
    ],
    "losers": [
     {
      "t": "INTC",
      "name": "Intel",
-     "price": 59.97,
-     "pct": -51.64
-    },
-    {
-     "t": "CRWV",
-     "name": "CoreWeave",
-     "price": 50.15,
-     "pct": -44.86
+     "price": 60.55,
+     "pct": -51.17
     },
     {
      "t": "CBRS",
      "name": "Cerebras Systems",
-     "price": 96.36,
-     "pct": -44.1
+     "price": 97.82,
+     "pct": -43.26
     },
     {
-     "t": "SITM",
-     "name": "SiTime",
-     "price": 417.9,
-     "pct": -40.39
-    },
-    {
-     "t": "NBIS",
-     "name": "Nebius Group",
-     "price": 141.39,
-     "pct": -40.03
-    },
-    {
-     "t": "TER",
-     "name": "Teradyne",
-     "price": 261.01,
-     "pct": -39.41
-    },
-    {
-     "t": "SNDK",
-     "name": "Sandisk",
-     "price": 1075.08,
-     "pct": -39.37
-    },
-    {
-     "t": "RDDT",
-     "name": "Reddit",
-     "price": 90.97,
-     "pct": -39.26
+     "t": "CRWV",
+     "name": "CoreWeave",
+     "price": 53.74,
+     "pct": -40.91
     },
     {
      "t": "MRVL",
      "name": "Marvell Technology",
-     "price": 171.41,
-     "pct": -38.34
+     "price": 171.97,
+     "pct": -38.14
     },
     {
-     "t": "IONQ",
-     "name": "IonQ",
-     "price": 28.17,
-     "pct": -37.62
+     "t": "TER",
+     "name": "Teradyne",
+     "price": 269.35,
+     "pct": -37.48
+    },
+    {
+     "t": "SITM",
+     "name": "SiTime",
+     "price": 444.88,
+     "pct": -36.54
+    },
+    {
+     "t": "SNDK",
+     "name": "Sandisk",
+     "price": 1126.52,
+     "pct": -36.47
+    },
+    {
+     "t": "DOCN",
+     "name": "DigitalOcean Holdings",
+     "price": 90.5,
+     "pct": -36.21
+    },
+    {
+     "t": "RDDT",
+     "name": "Reddit",
+     "price": 96.15,
+     "pct": -35.8
+    },
+    {
+     "t": "NBIS",
+     "name": "Nebius Group",
+     "price": 151.64,
+     "pct": -35.68
     }
    ],
-   "count": 851,
+   "count": 855,
    "basis": "Past month, TradingView",
-   "note": "US companies worth $10bn or more (851)"
+   "note": "US companies worth $10bn or more (855)"
   }
  }
 }
