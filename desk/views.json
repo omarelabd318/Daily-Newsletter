@@ -43,6 +43,13 @@
      "source": "CNBC",
      "url": "https://www.cnbc.com/2026/11/03/stock-market-today-live-updates.html",
      "effect": "against"
+    },
+    {
+     "date": "2026-11-05",
+     "text": "Nvidia fell 3.2% to $200.13 on Wednesday, its lowest close since 31 July, while Asian chip stocks sold off.",
+     "source": "CNBC",
+     "url": "https://www.cnbc.com/2026/11/04/stock-market-today-live-updates.html",
+     "effect": "supports"
     }
    ]
   },
@@ -116,6 +123,13 @@
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/2026/11/04/the-government-is-weighing-a-large-egyptalum-stake-sale-on-the-egx-before-year-end/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-05",
+     "text": "Central bank dollar selling rate EGP 54.77 on Wednesday, a fifth straight easing.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/am-edition/",
+     "effect": "supports"
     }
    ]
   },
@@ -177,6 +191,13 @@
      "source": "CairoScene",
      "url": "https://cairoscene.com/News/Real-Estate-Sales-Reach-EGP-1-048-Trillion-in-Nine-Months",
      "effect": "against"
+    },
+    {
+     "date": "2026-11-05",
+     "text": "Palm Hills fell 0.4% and Orascom Development 0.5% while the EGX30 rose 2.8%.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/am-edition/",
+     "effect": "supports"
     }
    ]
   },
@@ -197,7 +218,7 @@
     "good": "up"
    },
    "tickers": [],
-   "status": "open",
+   "status": "wrong",
    "updates": [
     {
      "date": "2026-10-30",
@@ -240,8 +261,19 @@
      "source": "CNBC",
      "url": "https://www.cnbc.com/2026/11/03/us-treasury-yields-bonds.html",
      "effect": "against"
+    },
+    {
+     "date": "2026-11-05",
+     "text": "Brent fell about 9% to roughly $94.6, below the $100 level that makes the call wrong.",
+     "source": "CNBC",
+     "url": "https://www.cnbc.com/2026/11/04/stock-market-today-live-updates.html",
+     "effect": "against"
     }
-   ]
+   ],
+   "result": {
+    "date": "2026-11-05",
+    "text": "Brent closed near $94.6 on Wednesday, below $100, and the pound firmed to EGP 54.77."
+   }
   },
   {
    "id": "2026-10-30-rotation",
@@ -297,6 +329,13 @@
      "source": "CNBC",
      "url": "https://www.cnbc.com/2026/11/03/us-treasury-yields-bonds.html",
      "effect": "against"
+    },
+    {
+     "date": "2026-11-05",
+     "text": "Walmart rose 3.5% to $129.17 and Alphabet 3.2% to $288.93 as megacaps rallied on the midterm result.",
+     "source": "CNBC",
+     "url": "https://www.cnbc.com/2026/11/04/apple-and-other-big-tech-stocks-surge-after-2026-midterm-elections.html",
+     "effect": "neutral"
     }
    ]
   },
@@ -390,6 +429,13 @@
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/2026/11/03/banque-du-caire-lands-on-egx-the-treasury-to-take-up-to-half-the-proceeds/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-05",
+     "text": "CIB rose 2.5% to EGP 126.51, outpacing its 2.1% gain since 30 October on the EGX30.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/am-edition/",
+     "effect": "supports"
     }
    ]
   },
@@ -444,6 +490,13 @@
      "text": "CIB rose 1.7% to EGP 123.48 and lifted its floating certificate to 20.50%.",
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/2026/11/04/the-government-is-weighing-a-large-egyptalum-stake-sale-on-the-egx-before-year-end/",
+     "effect": "supports"
+    },
+    {
+     "date": "2026-11-05",
+     "text": "CIB closed at EGP 126.51 (+2.5%), within 1.1% of the bottom of the projected range.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/am-edition/",
      "effect": "supports"
     }
    ]
@@ -500,6 +553,13 @@
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/2026/11/04/the-government-is-weighing-a-large-egyptalum-stake-sale-on-the-egx-before-year-end/",
      "effect": "neutral"
+    },
+    {
+     "date": "2026-11-05",
+     "text": "Orascom Construction rose 0.9% to EGP 797.02; its board votes today on the OCI capital increase.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/am-edition/",
+     "effect": "neutral"
     }
    ]
   },
@@ -548,6 +608,13 @@
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/2026/11/03/banque-du-caire-lands-on-egx-the-treasury-to-take-up-to-half-the-proceeds/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-05",
+     "text": "Talaat Moustafa rose 1.6% to EGP 81.08, above its EGP 80.40 start.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/am-edition/",
+     "effect": "against"
     }
    ]
   },
@@ -603,6 +670,13 @@
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/2026/11/04/the-government-is-weighing-a-large-egyptalum-stake-sale-on-the-egx-before-year-end/",
      "effect": "against"
+    },
+    {
+     "date": "2026-11-05",
+     "text": "Palm Hills fell 0.4% to EGP 11.27 while the EGX30 rose 2.8%.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/am-edition/",
+     "effect": "supports"
     }
    ]
   },
@@ -658,6 +732,13 @@
      "source": "Egypt Oil & Gas",
      "url": "https://egyptoil-gas.com/news/abu-qir-fertilizers-adjusts-operations-following-natural-gas-supply-cut/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-05",
+     "text": "Abu Qir rose 3.0% to EGP 80.00 after four falls, at the bottom of the projected range; nine-month profit more than doubled (one outlet).",
+     "source": "ad-hoc-news",
+     "url": "https://www.ad-hoc-news.de/boerse/news/nebenwerte/abu-qir-fertilizers-stock-profit-more-than-doubles-in-nine-months/70453432",
+     "effect": "neutral"
     }
    ]
   },
@@ -713,6 +794,13 @@
      "source": "CNBC",
      "url": "https://www.cnbc.com/2026/11/03/us-treasury-yields-bonds.html",
      "effect": "neutral"
+    },
+    {
+     "date": "2026-11-05",
+     "text": "Exxon fell 4.6% to $169.27 as WTI settled 8% lower, further below the projected range.",
+     "source": "CNBC",
+     "url": "https://www.cnbc.com/2026/11/04/stock-market-today-live-updates.html",
+     "effect": "against"
     }
    ]
   },
@@ -745,6 +833,13 @@
      "date": "2026-11-03",
      "text": "Walmart rose 3.4% to $127.69, at the top of the $124–128 range, due 31 December.",
      "source": "Data log (Nasdaq close)",
+     "effect": "supports"
+    },
+    {
+     "date": "2026-11-05",
+     "text": "Walmart rose 3.5% to $129.17, above the projected $124–128 range ahead of its December date.",
+     "source": "CNBC",
+     "url": "https://www.cnbc.com/2026/11/04/stock-market-today-live-updates.html",
      "effect": "supports"
     }
    ]
@@ -823,7 +918,7 @@
    "tickers": [
     "GOOGL"
    ],
-   "status": "on track",
+   "status": "open",
    "updates": [
     {
      "date": "2026-10-30",
@@ -852,6 +947,13 @@
      "source": "Nasdaq",
      "url": "https://www.nasdaq.com/market-activity/stocks/googl",
      "effect": "neutral"
+    },
+    {
+     "date": "2026-11-05",
+     "text": "Alphabet rose 3.2% to $288.93, above the projected range, as hyperscalers rallied.",
+     "source": "Yahoo Finance",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/why-alphabet-stock-popped-wednesday-001301263.html",
+     "effect": "against"
     }
    ]
   },
@@ -927,6 +1029,13 @@
      "source": "Egypt Oil & Gas",
      "url": "https://egyptoil-gas.com/news/abu-qir-fertilizers-adjusts-operations-following-natural-gas-supply-cut/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-05",
+     "text": "Abu Qir rose 3.0% to EGP 80.00 and Mopco 3.2% to EGP 41.37 after four falls; the gas cut remains in force.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/am-edition/",
+     "effect": "against"
     }
    ]
   },
@@ -949,7 +1058,7 @@
    "tickers": [
     "XOM"
    ],
-   "status": "open",
+   "status": "wrong",
    "updates": [
     {
      "date": "2026-11-04",
@@ -957,8 +1066,83 @@
      "source": "Al Jazeera",
      "url": "https://www.aljazeera.com/news/2026/11/4/iran-says-us-reply-to-hormuz-plan-unconvincing-trump-confirms-strikes",
      "effect": "neutral"
+    },
+    {
+     "date": "2026-11-05",
+     "text": "Brent closed near $94.6, below the $100 floor of the range, as hopes of an Iran deal grew.",
+     "source": "CNBC",
+     "url": "https://www.cnbc.com/2026/11/04/stock-market-today-live-updates.html",
+     "effect": "against"
     }
-   ]
+   ],
+   "result": {
+    "date": "2026-11-05",
+    "text": "Brent closed near $94.6 on Wednesday, below $100, before the 20 November date."
+   }
+  },
+  {
+   "id": "2026-11-05-egx-rebound",
+   "opened": "2026-11-05",
+   "market": "egx",
+   "kind": "view",
+   "title": "The EGX30 holds above 49,255 while foreign institutions keep buying",
+   "confidence": "medium",
+   "detail": "The EGX30 rose 2.83% to 50,650.18 with foreign institutions net buyers; it needs follow-through on higher turnover and a good T-bill auction.",
+   "wrong": "The EGX30 closes below 49,255.66.",
+   "due": "2026-11-12",
+   "track": {
+    "key": "egx30",
+    "label": "EGX30",
+    "start": 50650.18,
+    "good": "up"
+   },
+   "tickers": [
+    "COMI"
+   ],
+   "status": "open",
+   "updates": []
+  },
+  {
+   "id": "2026-11-05-pound-firm",
+   "opened": "2026-11-05",
+   "market": "egp",
+   "kind": "view",
+   "title": "The pound holds EGP 54–55.5 per dollar into the IMF review",
+   "confidence": "medium",
+   "detail": "A cheaper barrel and a wide real yield (one-year bill 26.08% against 13.9% inflation) keep foreign holders in Egyptian debt.",
+   "wrong": "The dollar closes above EGP 56 (central bank sell rate).",
+   "due": "2026-11-26",
+   "track": {
+    "key": "usd_egp",
+    "label": "USD/EGP",
+    "start": 54.77,
+    "good": "down"
+   },
+   "tickers": [],
+   "status": "open",
+   "updates": []
+  },
+  {
+   "id": "2026-11-05-brent-hormuz",
+   "opened": "2026-11-05",
+   "market": "global",
+   "kind": "view",
+   "title": "Brent stays below $105 while Iran talks continue",
+   "confidence": "low",
+   "detail": "Brent fell about 9% to roughly $95 on peace hopes; Goldman sees $105 by December, and Hormuz incidents keep a risk premium.",
+   "wrong": "Brent closes above $105.",
+   "due": "2026-11-20",
+   "track": {
+    "key": "brent",
+    "label": "Brent",
+    "start": 94.62,
+    "good": "down"
+   },
+   "tickers": [
+    "XOM"
+   ],
+   "status": "open",
+   "updates": []
   }
  ]
 }

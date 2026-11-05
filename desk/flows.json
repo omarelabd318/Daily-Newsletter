@@ -18,6 +18,22 @@
     "Newsroom"
    ],
    "turnover": 43.9
+  },
+  {
+   "date": "2026-11-04",
+   "confirmed": false,
+   "rows": {
+    "Egyptian institutions": -0.2478,
+    "Egyptian individuals": -0.139,
+    "Arab institutions": 0.0635,
+    "Arab individuals": -0.0132,
+    "Foreign institutions": 0.3387,
+    "Foreign individuals": -0.0022
+   },
+   "sources": [
+    "Youm7"
+   ],
+   "turnover": 9.0
   }
  ]
 }
