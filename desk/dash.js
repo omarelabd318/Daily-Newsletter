@@ -185,6 +185,28 @@
     $('helped').innerHTML = callRows(X.board.helped); $('hurt').innerHTML = callRows(X.board.hurt);
     $('week').innerHTML = X.week.map((w) => `<div class="wk"><span class="day">${esc(w.day)}</span><b>${esc(w.event)}</b><span class="imp${w.impact === 'high' ? ' high' : ''}">${esc(w.impact[0].toUpperCase() + w.impact.slice(1))}</span><span class="why">${esc(w.why)}</span></div>`).join('');
     $('views').innerHTML = X.views.map((v) => `<div class="view"><b>${esc(v.call)}</b><span class="pill ${PILL[v.status] || 'open'}">${esc(v.status[0].toUpperCase() + v.status.slice(1))}</span><span class="why">${esc(v.note)}</span></div>`).join('');
+    // on a phone, long lists show their first few items, with a button for the rest
+    const fold = (el, sel, n, noun) => {
+      if (!matchMedia('(max-width:860px)').matches) return;
+      const items = [...el.querySelectorAll(sel)];
+      if (items.length <= n) return;
+      items.slice(n).forEach((x) => { x.hidden = true; });
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'more-btn'; b.textContent = `Show all ${items.length} ${noun}`;
+      b.addEventListener('click', () => { items.forEach((x) => { x.hidden = false; }); b.remove(); });
+      el.after(b);
+    };
+    fold($('week'), '.wk', 3, 'events'); fold($('views'), '.view', 2, 'views');
+    // the top story's text and the close strip's sources note: a few lines, then "Read more"
+    const clamp = (el, lines, label) => {
+      if (!matchMedia('(max-width:860px)').matches || !el || !el.textContent) return;
+      el.classList.add('clamp'); el.style.setProperty('--lines', lines);
+      if (el.scrollHeight <= el.clientHeight + 4) { el.classList.remove('clamp'); return; }
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'readmore'; b.textContent = label;
+      b.addEventListener('click', () => { el.classList.remove('clamp'); b.remove(); });
+      el.after(b);
+    };
+    clamp($('top-body'), 6, 'Read more'); clamp($('close-note'), 2, 'Sources and notes');
+    fold($('helped'), '.call-row', 2, 'helped'); fold($('hurt'), '.call-row', 2, 'hurt');
 
     // the section's index, in the one chart hue: the EGX30, or the S&P 500, Nasdaq and Dow in the Wall Street page's order
     const IDX = key === 'egypt' ? [{ k: 'egx30', n: 'EGX30', intra: 'EGX30' }]
