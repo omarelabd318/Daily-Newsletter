@@ -204,6 +204,36 @@ def check_links(text, errors, warnings):
         warnings.append(f"Sources: {len(unsure)} of {len(urls)} links could not be checked (the site refused or timed out); open them by hand if in doubt.")
 
 
+def check_closes(date, errors, warnings):
+    """Each stock's logged close against the desk's intraday prices for the same session (desk/intraday.json). A close
+    left at the day before's figure while the stock traded elsewhere is an error; any other gap over 1% a warning."""
+    try:
+        days = json.load(open(os.path.join(ROOT, "data", "markets.json")))["days"]
+        week = json.load(open(os.path.join(ROOT, "desk", "intraday.json"))).get("week") or {}
+    except Exception:
+        return
+    i = next((k for k, d in enumerate(days) if d["date"] == date), None)
+    if i is None:
+        return
+    E, P = days[i], (days[i - 1] if i else {})
+    for mk in ("egx", "us"):
+        sess = [w for w in week.get(mk, []) if w["session"] < date]
+        if not sess:
+            continue
+        ser = sess[-1].get("series") or {}
+        for t, v in (E.get(mk) or {}).items():
+            pts = ser.get(t)
+            if v is None or not pts:
+                continue
+            last = pts[-1][1]
+            if abs(last - v) <= 0.01 * abs(last):
+                continue
+            if v == (P.get(mk) or {}).get(t):
+                errors.append(f"{t}: the log repeats the day before's close ({v}) but it traded at {last} at the end of the {sess[-1]['session']} session: take the session's close.")
+            else:
+                warnings.append(f"{t}: logged close {v}, but the desk's intraday prices end the {sess[-1]['session']} session at {last}: check it.")
+
+
 def main(path):
     errors, warnings = [], []
     text = open(path, encoding="utf-8").read()
@@ -363,6 +393,7 @@ def main(path):
 
     if m and not recap:
         check_figures(text, m.group(1), warnings)
+        check_closes(m.group(1), errors, warnings)
 
     # Sources: every link opened (skip with --no-links when offline)
     if "--no-links" not in sys.argv:
