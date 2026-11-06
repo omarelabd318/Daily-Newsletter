@@ -20,6 +20,30 @@ LEVELS = {"high", "medium", "low"}
 errors, warnings = [], []
 
 
+def tags(lst, where, text, lo, hi, story):
+    """The Moves / Affects tags (desk/tags.js): sector first, then the stocks most exposed, then markets."""
+    if not isinstance(lst, list) or not lo <= len(lst) <= hi:
+        (errors if isinstance(lst, list) and lst else warnings).append(
+            f"{where}: {lo} to {hi} tags in affects ({'sectors, stocks and markets' if story else 'what the story affects'}), not {len(lst) if isinstance(lst, list) else 'none'}.")
+        if not isinstance(lst, list):
+            return
+    low = text.lower()
+    for x in lst:
+        k, nm, t = x.get("kind"), x.get("name") or "", x.get("t") or ""
+        if k not in ("sector", "stock", "market"):
+            errors.append(f"{where}: tag kind must be sector, stock or market ({nm or t}).")
+        if x.get("dir") not in ("up", "down", "mixed"):
+            errors.append(f"{where}: tag dir must be up, down or mixed ({nm or t}).")
+        if not (nm or t in ALL):
+            errors.append(f"{where}: a tag needs a name (a desk stock's ticker alone will do).")
+        if not story and k == "stock" and nm and not (t and t in text.upper()) and not any(w.lower() in low for w in re.findall(r"[A-Za-z][\w&'-]{2,}", nm)[:1]):
+            warnings.append(f"{where}: the tag {nm} is not named in the story: tag what the story says, not the desk's list.")
+        if x.get("chg") is not None and not isinstance(x["chg"], (int, float)):
+            errors.append(f"{where}: chg must be a number ({nm or t}).")
+    if story and lst and not any(x.get("kind") == "sector" for x in lst):
+        warnings.append(f"{where}: no sector tag: name the sector the story moves first, then the stocks.")
+
+
 def load(rel):
     try:
         with open(os.path.join(ROOT, rel)) as f:
@@ -83,11 +107,19 @@ def main(args):
         X = D.get(key) or {}
         need(X, ["finding", "close", "calls", "board", "week", "views"], name)
         calls = X.get("calls") or []
-        if not 1 <= len(calls) <= 3:
-            errors.append(f"{name}: one to three stories in calls, not {len(calls)}.")
+        if not 1 <= len(calls) <= 5:
+            errors.append(f"{name}: one to five stories in calls, not {len(calls)}.")
+        elif len(calls) < 3:
+            warnings.append(f"{name}: {len(calls)} stories; three to five on a normal day (fewer only when the day has no more).")
         for i, c in enumerate(calls):
-            need(c, ["headline", "body", "view", "moves", "wrong", "confidence"], f"{name} story {i + 1}")
-            level(c.get("confidence"), f"{name} story {i + 1}")
+            w = f"{name} story {i + 1}"
+            need(c, ["headline", "body", "view", "affects", "wrong", "confidence"], w)
+            level(c.get("confidence"), w)
+            tags(c.get("affects"), w, " ".join(str(c.get(k, "")) for k in ("headline", "body", "view")), 2, 8, True)
+            if len(str(c.get("headline", "")).split()) > 20:
+                warnings.append(f"{w}: the headline runs to {len(c['headline'].split())} words; keep it to 20.")
+            if i and not c.get("line"):
+                warnings.append(f"{w}: no line: one sentence on why it matters, shown on its card under \"Also today\".")
         for side in ("helped", "hurt"):
             for r in (X.get("board") or {}).get(side, []):
                 need(r, ["name", "why", "confidence"], f"{name} board")
@@ -118,8 +150,11 @@ def main(args):
             for t in n.get("tickers", []):
                 if t not in ALL:
                     errors.append(f"pages.{page} news: unknown ticker {t}.")
-            if n.get("impact") not in (None, "bullish", "bearish", "mixed"):
-                errors.append(f"pages.{page} news: impact must be bullish, bearish or mixed ({n.get('headline')}).")
+            if n.get("impact") not in ("bullish", "bearish", "mixed"):
+                (errors if n.get("impact") else warnings).append(f"pages.{page} news: impact must be bullish, bearish or mixed ({n.get('headline')}).")
+            tags(n.get("affects"), f"pages.{page} news ({str(n.get('headline'))[:40]})", f"{n.get('headline', '')} {n.get('text', '')}", 1, 4, False)
+            if len(str(n.get("headline", "")).split()) > 12:
+                warnings.append(f"pages.{page} news: the headline runs to {len(n['headline'].split())} words; keep it to 12 ({n['headline'][:50]}).")
         O = X.get("outlook")
         if page in ("egx", "us"):
             if not O:

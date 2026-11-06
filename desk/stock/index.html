@@ -72,6 +72,7 @@ try {
 } catch (e) {}
 </script>
 <script src="/desk/charts.js"></script>
+<script src="/desk/tags.js"></script>
 <script src="/desk/desk.js"></script>
 <script>
 (async () => {
@@ -150,7 +151,7 @@ try {
     || '<p class="sub">No open view on this stock.</p>';
   // news: today's market news that names this stock, then its own news from desk/stocks.json, newest first
   const tagged = [];
-  for (const k of ['egx', 'egp', 'us', 'global']) for (const n of ((D.pages[k] || {}).news || [])) if ((n.tickers || []).includes(t)) tagged.push({ date: M.ASOF, text: n.headline + '. ' + n.text, source: n.source, url: n.url });
+  for (const k of ['egx', 'egp', 'us', 'global']) for (const n of ((D.pages[k] || {}).news || [])) if ((n.tickers || []).includes(t) || (n.affects || []).some((x) => x.t === t)) tagged.push({ date: M.ASOF, text: n.headline + '. ' + n.text, source: n.source, url: n.url });
   const seen = new Set(), items = [...(p.news || []), ...tagged].filter((n) => { const k = n.url || n.text.slice(0, 60); if (seen.has(k)) return false; seen.add(k); return true; })
     .sort((x, y) => (y.date > x.date ? 1 : y.date < x.date ? -1 : 0));
   const link = (n) => n.url ? `<a class="src" href="${M.esc(n.url)}" target="_blank" rel="noopener">${M.esc(n.source || 'Source')} →</a>` : n.edition ? `<a class="src" href="/#${n.edition}">Newsletter, ${M.short(n.edition)} →</a>` : '';

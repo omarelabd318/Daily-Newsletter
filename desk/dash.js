@@ -156,24 +156,28 @@
       if (figs.length) $('close-rows').insertAdjacentHTML('beforeend', `<div class="strip-g"><h3>The pound<a class="strip-more" href="/desk/egp/">EGP page →</a></h3><div class="strip-row">${figs.join('')}</div></div>`);
     }
 
-    // the day's stories: the top call first, then up to two more, one at a time; arrows, dots, keys or a swipe move between them
-    const calls = (X.calls || [X.top]).filter(Boolean).slice(0, 3);
-    let at = 0;
-    const show = (i) => {
-      at = (i + calls.length) % calls.length;
-      const T = calls[at];
-      $('story-n').textContent = calls.length > 1 ? (at ? `Story ${at + 1} of ${calls.length}` : `Top call · 1 of ${calls.length}`) : 'Top call';
-      $('h-read').textContent = T.headline; $('top-body').textContent = T.body;
-      $('top-view').textContent = T.view; $('top-moves').textContent = T.moves; $('top-wrong').textContent = T.wrong;
-      $('top-conf').textContent = 'Confidence: ' + T.confidence;
-      $('top-notice').hidden = !T.notice; $('top-notice').textContent = T.notice || '';
-      $('story-dots').querySelectorAll('button').forEach((b, j) => b.setAttribute('aria-selected', j === at));
-    };
-    $('story-arrows').hidden = $('story-dots').hidden = calls.length < 2;
-    $('story-dots').innerHTML = calls.map((c, j) => `<button type="button" role="tab" aria-label="${esc(c.headline)}"></button>`).join('');
-    $('story-dots').querySelectorAll('button').forEach((b, j) => { b.onclick = () => show(j); });
-    $('story-prev').onclick = () => show(at - 1); $('story-next').onclick = () => show(at + 1);
-    show(0);
+    // the day's stories: the top call in full, then up to four more as compact cards ("Also today"), each tap-to-open.
+    // "What it moves" is the story's tags (sector first, then the stocks most exposed and the markets it touches);
+    // older days carry a sentence instead, shown as it is
+    const calls = (X.calls || [X.top]).filter(Boolean).slice(0, 5);
+    const moves = (T) => Array.isArray(T.affects) && T.affects.length ? Tags.html(T.affects, { names: NAMES }) : T.moves ? `<p class="moves-txt">${esc(T.moves)}</p>` : '';
+    const T = calls[0];
+    $('story-n').textContent = 'Top call';
+    $('h-read').textContent = T.headline; $('top-body').textContent = T.body;
+    $('top-view').textContent = T.view; $('top-wrong').textContent = T.wrong;
+    $('top-moves').innerHTML = moves(T); $('top-moves').parentElement.hidden = !$('top-moves').innerHTML;
+    $('top-conf').textContent = 'Confidence: ' + T.confidence;
+    $('top-notice').hidden = !T.notice; $('top-notice').textContent = T.notice || '';
+    const rest = calls.slice(1);
+    $('also').hidden = !rest.length;
+    $('also-g').innerHTML = rest.map((c) => `<article class="also-i">
+        <h3>${esc(c.headline)}</h3>
+        <p>${esc(c.line || c.view)}</p>
+        ${moves(c)}
+        <details><summary>The story, the view and when it is wrong</summary>
+          <p>${esc(c.body)}</p>${c.line ? `<p><b>The view</b> ${esc(c.view)}</p>` : ''}<p><b>Wrong if</b> ${esc(c.wrong)}</p>
+          <p class="meta">Confidence: ${esc(c.confidence)}</p>${c.notice ? `<div class="notice">${esc(c.notice)}</div>` : ''}
+        </details></article>`).join('');
 
     // from the whole day's news and moves, not only the top call; the horizon comes from the day's file
     $('board-h').textContent = `From the day's news and moves · ${(X.board.horizon || 'next 1–4 weeks').replace(/^.*·\s*/, '')}`;
@@ -291,11 +295,6 @@
   }
   // each dashboard is its own page: /desk/egypt/ and /desk/usa/
   const pick = () => (document.body.dataset.section === 'usa' ? 'global' : 'egypt');
-  // swipe and arrow keys for the stories, set once
-  const story = $('story'); let x0 = null;
-  story.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; }, { passive: true });
-  story.addEventListener('touchend', (e) => { if (x0 == null) return; const dx = e.changedTouches[0].clientX - x0; x0 = null; if (Math.abs(dx) > 50) $(dx < 0 ? 'story-next' : 'story-prev').click(); });
-  story.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight') $('story-next').click(); if (e.key === 'ArrowLeft') $('story-prev').click(); });
   render(pick());
 })();
 

@@ -67,17 +67,24 @@
 
       <div class="main">
       <section class="card span2" id="c-read" aria-labelledby="h-read">
-          <div class="story read" id="story" aria-roledescription="carousel" aria-label="The day's stories">
-            <div class="card-h" style="margin-bottom:6px"><span class="meta" id="story-n">Top call</span><span class="story-nav"><span class="conf" id="top-conf"></span><span class="arrows" id="story-arrows" hidden><button type="button" id="story-prev" aria-label="Previous story">&#8249;</button><button type="button" id="story-next" aria-label="Next story">&#8250;</button></span></span></div>
-            <h2 class="call" id="h-read"></h2>
-            <p id="top-body"></p>
-            <dl>
-              <dt>The view</dt><dd id="top-view"></dd>
-              <dt>Stocks it moves</dt><dd id="top-moves"></dd>
-              <dt>Wrong if</dt><dd id="top-wrong"></dd>
-            </dl>
+          <div class="lead-story" id="story">
+            <div class="card-h" style="margin-bottom:6px"><span class="meta" id="story-n">Top call</span><span class="conf" id="top-conf"></span></div>
+            <div class="lead-g">
+              <div class="lead-main">
+                <h2 class="call" id="h-read"></h2>
+                <p id="top-body"></p>
+                <div class="moves"><span class="tags-h">What it moves</span><div id="top-moves"></div></div>
+              </div>
+              <dl class="lead-side">
+                <dt>The view</dt><dd id="top-view"></dd>
+                <dt>Wrong if</dt><dd id="top-wrong"></dd>
+              </dl>
+            </div>
             <div class="notice" id="top-notice" hidden></div>
-            <div class="dots" id="story-dots" role="tablist" aria-label="Stories" hidden></div>
+          </div>
+          <div class="also" id="also" hidden>
+            <h3 class="also-h">Also today</h3>
+            <div class="also-g" id="also-g"></div>
           </div>
       </section>
 
@@ -124,6 +131,7 @@
 </div>
 
 <script src="/desk/charts.js"></script>
+<script src="/desk/tags.js"></script>
 <script src="/desk/dash.js"></script>
 </body>
 </html>

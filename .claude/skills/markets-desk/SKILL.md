@@ -21,7 +21,7 @@ closes are the last session's; the news, stock research and analysis are still u
    per gram (24K, not 21K: the dashboard's Gold in Egypt card has 21K, 18K and the gold pound).
 2. Run `python3 .claude/skills/markets-desk/stock_news.py` (`3` on Sundays) and do the stock research
    below; update `desk/stocks.json`.
-3. Write each section: finding, one to three stories (`calls`), winners and losers (`board`), the Stocks note,
+3. Write each section: finding, three to five stories (`calls`), winners and losers (`board`), the Stocks note,
    the week ahead and open views, then update `desk/views.json` (see Views: the record): new entries, news, and judgements.
 4. Write `pages`: EGX (finding, session, news, outlook), EGP (finding, rates, drivers, news, view), US
    (finding, rates, afterBell, news, outlook), Global (finding, notes, news). Carry each projection
@@ -100,7 +100,9 @@ both together); each page names its section on `<body data-section>`. `/desk/` f
   `desk/days/2026-10-30.json` is the reference for its shape. `"sample": true` marks sample content.
 - `desk/days/DATE.json` also holds `pages`: `egx` (finding, session, news, outlook), `egp` (finding, rates,
   drivers, news, view), `us` (finding, rates, afterBell, news, outlook) and `global` (finding, notes, news).
-- Each section's `calls` holds the dashboard's stories, one to three, the top call first.
+- Each section's `calls` holds the dashboard's stories, three to five (fewer only on a day with no more), the top call
+  first. Each has `headline`, `body`, `view`, `affects` (tags, below), `wrong`, `confidence`, and from the second on a
+  `line`: one sentence on why it matters, shown on its "Also today" card.
 - `desk/index.json`: `{"desks": [{"date": "DATE", "summary": "..."}]}`; every page opens the newest.
 - `desk/stocks.json`: one entry per stock for its page: sector, valuation (written by fetch_valuation.py: source, date, results
   period and basis), the
@@ -154,12 +156,27 @@ reader's US stocks.
 - **Prefer the story that ties the day together**: the pound, the EGX30's move and who was buying, the
   central bank, rather than the loudest headline.
 
-## Two or three stories
+## Three to five stories
 
-The dashboard shows up to three stories in each section, one at a time, with arrows, dots and a swipe
-between them. The first is the top call (above); add a second and third only when another story moves
-markets or the reader's stocks in its own right, each written like the top call (below). One strong
-story is better than three thin ones.
+The dashboard shows the top call in full (above), then up to four more as compact cards under "Also today":
+headline, the one-sentence `line`, the tags, and the body, view and wrong-if behind a tap. Aim for three to
+five: each extra story must move markets or the reader's stocks in its own right and is written like the top
+call (below). On a quiet day fewer is right; never pad with a thin story to reach five.
+
+## Tags: what a story moves (`affects`)
+
+Stories and news items carry `affects`, a list of tags drawn as chips (desk/tags.js):
+`{"kind": "sector" | "stock" | "market", "name": "Banks", "dir": "up" | "down" | "mixed", "t": "COMI", "chg": 2.5}`.
+
+- **Sector first**, then the stocks most exposed, then markets (`EGX30`, `Pound`, `Brent`, `T-bill yields`,
+  `Rate-cut odds`). Two to eight tags on a story, one to four on a news item.
+- **Any stock, not only the desk's**: name the companies the story is about or most exposed to, with `t` for
+  their ticker. A desk stock links to its page (its `name` can be left out); others show as plain chips.
+  Never tag a desk stock just because it is on the desk's list.
+- `dir` is the story's effect on it (up, down or mixed), not necessarily the day's move. `chg` is the % change
+  the source gives for the session, only when it does (the page never fills it in).
+- On a news item, tag only what the headline or text names (check_desk warns otherwise); a story's tags may
+  add the stocks most exposed, as the view argues.
 
 ## How a call is written
 
@@ -168,7 +185,7 @@ Follow the morning-note skill in this repo (lead with the one thing that matters
 
 - **what happened**, in figures, from checked sources;
 - **the view**: a plain statement, kept apart from the facts;
-- **the stocks it moves**, named;
+- **what it moves**: the sectors first, then the stocks most exposed and the markets (`affects`, above);
 - **wrong if**: what would show the view is wrong, specific enough to check (thesis-tracker skill);
 - **a confidence level**: high, medium or low. "Momentum, not news" or "no company news found" means low.
 
@@ -213,13 +230,18 @@ over the next one to three months.
 ## News
 
 The EGX, EGP, US and Global pages each have a News card: the day's stories for that market, two to six,
-each with a headline, one or two sentences in figures, the outlet and a link to the story's own page.
-Tag every story with the tickers it names or clearly affects (`"tickers": ["COMI"]`); a tagged story also
-shows on those stocks' pages. Take them from the newsletter's research and from the stock research below.
-On the EGX and Wall Street pages, also give each story an `"impact"`: `"bullish"`, `"bearish"` or `"mixed"`
-for the stocks it names (for the market when it names none), shown as a tag on the card. Judge the effect on
-the price, not whether the news is good in general (a strong economy that brings rate-hike bets is mixed). Leave
-it out when a story has no clear effect either way.
+each with a headline, one or two sentences in figures, `affects` (tags, above), an `impact`, the outlet and a
+link to the story's own page. Take them from the newsletter's research and from the stock research below.
+
+- **Headline:** who did what, with the number, in 12 words or fewer: "Pharma and food stocks lead a 2.8%
+  EGX30 jump; locals sell", not "EGX30 jumps 2.8% to 50,650 as local investors sell". Lead with what the
+  reader's money cares about.
+- **Affects:** one to four tags for what the story names; a desk stock tagged with `t` also shows the story on
+  its page.
+- **Impact** on every item: `"bullish"`, `"bearish"` or `"mixed"`, for the market the page covers (the EGX and
+  Wall Street pages: the stocks it names, or the market; EGP: the pound and rates; Global: oil, gold and world
+  markets). Judge the effect on the price, not whether the news is good in general (a strong economy that brings
+  rate-hike bets is mixed).
 
 ## Stock research, every day
 

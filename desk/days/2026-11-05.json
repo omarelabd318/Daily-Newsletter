@@ -155,17 +155,100 @@
     "headline": "The EGX30 jumps 2.83% to 50,650.18 as foreign institutions buy and the pound strengthens",
     "body": "The EGX30 rose 2.83% on Wednesday from 49,255.66 to 50,650.18, up 21.1% this year, and the EGX70 EWI gained 3.0% to 17,151.50. EnterpriseAM puts turnover at about EGP 9bn, 18.5% below the 90-day average, and says local investors were the only net sellers; Youm7's investor table shows foreign institutions buying a net EGP 338.7m and Egyptian institutions selling EGP 247.8m (one report; unconfirmed). Telecom Egypt rose 4.2% to EGP 128.00, EFG Holding 4.4% to EGP 23.50, Fawry 6.1% to EGP 17.10 and CIB 2.5% to EGP 126.51, while Palm Hills slipped 0.4% (Mubasher).",
     "view": "A second session of foreign-led buying after the lowest close since April makes the rebound more than a bounce, helped by a firmer pound and cheaper oil. Turnover is still below average, so it needs follow-through: the EGX30 is 2.1% above its 30 October level and back above the 49,596 start of the desk's views.",
-    "moves": "CIB, EFG Holding, Telecom Egypt and Fawry led among the desk's stocks; developers lagged.",
     "wrong": "The EGX30 closes below Tuesday's 49,255.66 before the next T-bill auction results are absorbed, or foreigners turn net sellers on a day it rises.",
-    "confidence": "medium"
+    "confidence": "medium",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "Banks & brokers",
+      "dir": "up"
+     },
+     {
+      "kind": "sector",
+      "name": "Developers",
+      "dir": "down"
+     },
+     {
+      "kind": "stock",
+      "t": "ETEL",
+      "dir": "up",
+      "chg": 4.2
+     },
+     {
+      "kind": "stock",
+      "t": "HRHO",
+      "dir": "up",
+      "chg": 4.4
+     },
+     {
+      "kind": "stock",
+      "t": "FWRY",
+      "dir": "up",
+      "chg": 6.1
+     },
+     {
+      "kind": "stock",
+      "t": "COMI",
+      "dir": "up",
+      "chg": 2.5
+     },
+     {
+      "kind": "stock",
+      "t": "PHDC",
+      "dir": "down",
+      "chg": -0.4
+     },
+     {
+      "kind": "market",
+      "name": "EGX30",
+      "dir": "up"
+     }
+    ]
    },
    {
     "headline": "The dollar falls to EGP 54.77, a fifth straight easing, as oil drops about 9% and the PMI stays weak",
     "body": "The central bank sold the dollar at EGP 54.77 (buy 54.63) on Wednesday against 55.42, the lowest in that series in at least a year. Brent fell to about $94.60 and WTI settled at $88.12 (CNBC) on hopes of an end to the Iran war. The S&P Global Egypt PMI held at 47.2, a tenth month below 50, with input costs at a five-month high (EnterpriseAM). The deposit and lending rates are 20% and 21%, and the one-year bill cleared at 26.08% on 29 October.",
     "view": "A cheaper barrel narrows the fuel-import bill and the 100 bps hike keeps the real yield wide, so the pound can hold EGP 54–55.5 while the Iran talks last. The PMI argues against early rate cuts: prices are still rising despite weak demand. Importers gain from a cheaper dollar and exporters lose some pound earnings.",
-    "moves": "Banks and importers such as Juhayna and Edita gain; dollar earners such as Abu Qir, Elsewedy and Orascom Construction lose some translation gains.",
     "wrong": "The dollar closes above EGP 56 before the end of November, or Brent returns above $105.",
-    "confidence": "medium"
+    "confidence": "medium",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "Importers",
+      "dir": "up"
+     },
+     {
+      "kind": "sector",
+      "name": "Exporters",
+      "dir": "down"
+     },
+     {
+      "kind": "stock",
+      "t": "JUFO",
+      "dir": "up"
+     },
+     {
+      "kind": "stock",
+      "t": "EFID",
+      "dir": "up"
+     },
+     {
+      "kind": "stock",
+      "t": "ABUK",
+      "dir": "down"
+     },
+     {
+      "kind": "stock",
+      "t": "SWDY",
+      "dir": "down"
+     },
+     {
+      "kind": "market",
+      "name": "Pound",
+      "dir": "up"
+     }
+    ],
+    "line": "A cheaper barrel and a wide real yield let the pound hold EGP 54–55.5, but the weak PMI argues against early rate cuts."
    }
   ]
  },
@@ -305,17 +388,99 @@
     "headline": "The Dow gains 3% for its best day since April 2025 as Democrats win Congress and oil falls 8%",
     "body": "The Dow rose more than 1,500 points to 53,356.12, the S&P 500 1.58% to 7,688.62 and the Nasdaq 1.44% to 25,736.51; WTI settled 8% lower at $88.12 and energy shares lost 4.7% (CNBC, EnterpriseAM). Democrats won control of both chambers, which JPMorgan Asset Management's David Kelly said brings 'less uncertainty'. Exxon fell 4.6% and Nvidia 3.2%, while the S&P 500 sits 1.7% and the Dow 1.8% below their 52-week highs.",
     "view": "The rally is a repricing of political and oil risk: gridlock in Washington and a cheaper barrel lift cyclicals and consumers and hurt energy. The peace hopes behind the oil move are fragile, because Iran said tankers burned in Hormuz on Thursday.",
-    "moves": "Walmart, Berkshire and JPMorgan gain; Exxon and the oil-sensitive names lose.",
     "wrong": "Brent closes back above $105 or the Dow closes below Tuesday's 51,786.72 by 13 November.",
-    "confidence": "medium"
+    "confidence": "medium",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "Consumer & cyclicals",
+      "dir": "up"
+     },
+     {
+      "kind": "sector",
+      "name": "Energy",
+      "dir": "down"
+     },
+     {
+      "kind": "stock",
+      "t": "WMT",
+      "name": "Walmart",
+      "dir": "up"
+     },
+     {
+      "kind": "stock",
+      "t": "JPM",
+      "name": "JPMorgan",
+      "dir": "up"
+     },
+     {
+      "kind": "stock",
+      "t": "XOM",
+      "name": "Exxon",
+      "dir": "down",
+      "chg": -4.6
+     },
+     {
+      "kind": "market",
+      "name": "WTI",
+      "dir": "down"
+     }
+    ]
    },
    {
     "headline": "Apple and Microsoft hit records and Amazon gains 6.1% as hyperscalers rally, while chips slide",
     "body": "Apple rose 5.3% to $349.51 and Microsoft 6.7% to $555.80, both 52-week highs, and Amazon 6.1% to $266.03; Alphabet gained 3.2% (CNBC, Motley Fool via Yahoo). Needham's Laura Martin argued that tougher data-centre regulation favours the biggest operators. Nvidia fell 3.2% to $200.13, its lowest since 31 July, and Broadcom 2.0%. Nasdaq-100 futures were down about 1.2% early Thursday, and Advantest and SK Hynix fell 11.7% and 9.0% in Asia (CNBC).",
     "view": "Big platforms are treated as winners from regulation they can afford, while chip suppliers carry the risk of slower AI spending. The split suggests the rally is selective, not a return to risk appetite across technology.",
-    "moves": "Apple, Microsoft, Amazon and Alphabet lead; Nvidia, Broadcom and Oracle are the exposed names.",
     "wrong": "Nvidia closes above $220 or the Nasdaq closes below 25,372.01 by 13 November.",
-    "confidence": "low"
+    "confidence": "low",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "Big tech platforms",
+      "dir": "up"
+     },
+     {
+      "kind": "sector",
+      "name": "Chipmakers",
+      "dir": "down"
+     },
+     {
+      "kind": "stock",
+      "t": "AAPL",
+      "name": "Apple",
+      "dir": "up",
+      "chg": 5.3
+     },
+     {
+      "kind": "stock",
+      "t": "MSFT",
+      "name": "Microsoft",
+      "dir": "up",
+      "chg": 6.7
+     },
+     {
+      "kind": "stock",
+      "t": "AMZN",
+      "name": "Amazon",
+      "dir": "up",
+      "chg": 6.1
+     },
+     {
+      "kind": "stock",
+      "t": "NVDA",
+      "name": "Nvidia",
+      "dir": "down",
+      "chg": -3.2
+     },
+     {
+      "kind": "stock",
+      "t": "AVGO",
+      "name": "Broadcom",
+      "dir": "down",
+      "chg": -2.0
+     }
+    ],
+    "line": "Investors are backing the platforms that can afford tougher regulation and selling the chip suppliers exposed to slower AI spending."
    }
   ]
  },
@@ -416,53 +581,119 @@
    },
    "news": [
     {
-     "headline": "EGX30 jumps 2.8% to 50,650 as local investors sell",
+     "headline": "Pharma and food stocks lead a 2.8% EGX30 jump; locals sell",
      "text": "Turnover about EGP 9bn, 18.5% below the 90-day average; Rameda rose 7.0%, Ibnsina Pharma 6.9% and Edita 6.6%; Palm Hills fell 0.4%.",
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/am-edition/",
-     "tickers": [
-      "COMI",
-      "PHDC",
-      "EFID"
-     ],
-     "impact": "bullish"
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "sector",
+       "name": "Pharma",
+       "dir": "up"
+      },
+      {
+       "kind": "stock",
+       "t": "RMDA",
+       "name": "Rameda",
+       "dir": "up",
+       "chg": 7.0
+      },
+      {
+       "kind": "stock",
+       "t": "ISPH",
+       "name": "Ibnsina Pharma",
+       "dir": "up",
+       "chg": 6.9
+      },
+      {
+       "kind": "stock",
+       "t": "EFID",
+       "name": "Edita",
+       "dir": "up",
+       "chg": 6.6
+      }
+     ]
     },
     {
      "headline": "EGX30 fell 4.43% in October, its second monthly loss in a row",
      "text": "The EGX70 lost 9.91%; stock turnover fell 20.9% to EGP 211bn and banks closed on a trailing P/E of 5.05, per the bourse's monthly report.",
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/2026/11/05/egx30-sheds-4-43-in-october-to-post-its-first-back-to-back-monthly-loss-of-2026/",
-     "tickers": [
-      "COMI"
-     ],
-     "impact": "mixed"
+     "impact": "mixed",
+     "affects": [
+      {
+       "kind": "market",
+       "name": "EGX30",
+       "dir": "down"
+      },
+      {
+       "kind": "market",
+       "name": "EGX70",
+       "dir": "down"
+      },
+      {
+       "kind": "sector",
+       "name": "Banks",
+       "dir": "mixed"
+      }
+     ]
     },
     {
      "headline": "Orascom Construction's board votes today on the OCI capital increase",
      "text": "Capital would rise to $207.4m from $110.2m through 97.2m new shares for OCI N.V.; the board meets on 5 November, per an EGX disclosure.",
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/2026/11/04/the-government-is-weighing-a-large-egyptalum-stake-sale-on-the-egx-before-year-end/",
-     "tickers": [
-      "ORAS"
-     ],
-     "impact": "mixed"
+     "impact": "mixed",
+     "affects": [
+      {
+       "kind": "stock",
+       "t": "ORAS",
+       "name": "Orascom Construction",
+       "dir": "mixed"
+      },
+      {
+       "kind": "sector",
+       "name": "Construction",
+       "dir": "mixed"
+      }
+     ]
     },
     {
      "headline": "Abu Qir's nine-month profit more than doubles to EGP 12.97bn",
      "text": "Revenue rose 89.9% to EGP 31.49bn in the filing of 29 October, reported by one outlet; the stock rose 3.0% to EGP 80.00 after four falls on the gas cut.",
      "source": "ad-hoc-news",
      "url": "https://www.ad-hoc-news.de/boerse/news/nebenwerte/abu-qir-fertilizers-stock-profit-more-than-doubles-in-nine-months/70453432",
-     "tickers": [
-      "ABUK"
-     ],
-     "impact": "mixed"
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "stock",
+       "t": "ABUK",
+       "name": "Abu Qir",
+       "dir": "up",
+       "chg": 3.0
+      },
+      {
+       "kind": "sector",
+       "name": "Fertilisers",
+       "dir": "up"
+      }
+     ]
     },
     {
      "headline": "EGX suspends trading in Digitize for Investment and Technology",
      "text": "The bourse cancelled all orders and began delisting proceedings for missing FY 2025 and 2026 statements; the shares are down about three-quarters over the year.",
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/am-edition/",
-     "tickers": []
+     "impact": "bearish",
+     "affects": [
+      {
+       "kind": "stock",
+       "t": "DGTZ",
+       "name": "Digitize",
+       "dir": "down"
+      }
+     ]
     }
    ]
   },
@@ -504,15 +735,32 @@
      "text": "Output and new orders fell at the fastest pace in four months; input inflation hit a five-month high (S&P Global).",
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/2026/11/05/egypts-pmi-holds-at-47-2-in-october-but-output-and-new-orders-fall-at-their-fastest-pace-in-four-months/",
-     "tickers": []
+     "impact": "bearish",
+     "affects": [
+      {
+       "kind": "sector",
+       "name": "Manufacturers",
+       "dir": "down"
+      },
+      {
+       "kind": "market",
+       "name": "Rate-cut odds",
+       "dir": "down"
+      }
+     ]
     },
     {
      "headline": "Central bank governor wants the pound convertible abroad within five years",
      "text": "Hassan Abdalla called it 'legally convertible'; economists quoted say it is a policy aim, not an achievement.",
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/2026/11/05/egypt-wants-convertible-and-bankable-egp-abroad-in-five-years-here-is-what-has-to-change/",
-     "tickers": [
-      "COMI"
+     "impact": "mixed",
+     "affects": [
+      {
+       "kind": "market",
+       "name": "Pound",
+       "dir": "mixed"
+      }
      ]
     },
     {
@@ -520,8 +768,18 @@
      "text": "NBE, Banque Misr and Arab African International Bank, citing an unnamed bank source, with about $9bn across all Egyptian borrowers.",
      "source": "EnterpriseAM (Asharq Business)",
      "url": "https://enterpriseam.com/egypt/am-edition/",
-     "tickers": [
-      "COMI"
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "sector",
+       "name": "Banks",
+       "dir": "up"
+      },
+      {
+       "kind": "market",
+       "name": "Dollar liquidity",
+       "dir": "up"
+      }
      ]
     },
     {
@@ -529,7 +787,19 @@
      "text": "Thirty basic goods are sold at 15–25% discounts; the government will cut its own fuel and energy use.",
      "source": "Daily News Egypt",
      "url": "https://dailynewsegypt.com/2026/11/02/egypt-to-cut-government-spending-boost-strategic-reserves-amid-regional-tensions/",
-     "tickers": []
+     "impact": "mixed",
+     "affects": [
+      {
+       "kind": "market",
+       "name": "Reserves",
+       "dir": "mixed"
+      },
+      {
+       "kind": "sector",
+       "name": "Retail",
+       "dir": "mixed"
+      }
+     ]
     }
    ]
   },
@@ -644,44 +914,97 @@
      "text": "The S&P 500 rose 1.6%; WTI settled 8% lower at $88.12 and energy stocks lost 4.7% as Democrats won Congress.",
      "source": "CNBC",
      "url": "https://www.cnbc.com/2026/11/04/stock-market-today-live-updates.html",
-     "tickers": [
-      "XOM"
-     ],
-     "impact": "mixed"
+     "impact": "mixed",
+     "affects": [
+      {
+       "kind": "sector",
+       "name": "Energy",
+       "dir": "down"
+      },
+      {
+       "kind": "market",
+       "name": "Dow",
+       "dir": "up"
+      },
+      {
+       "kind": "market",
+       "name": "WTI",
+       "dir": "down"
+      }
+     ]
     },
     {
      "headline": "Apple, Microsoft and Amazon surge after the midterm result",
      "text": "Needham's Laura Martin says tougher regulation favours the largest AI operators; Apple rose 5.3% and Microsoft 6.7% to records.",
      "source": "CNBC",
      "url": "https://www.cnbc.com/2026/11/04/apple-and-other-big-tech-stocks-surge-after-2026-midterm-elections.html",
-     "tickers": [
-      "AAPL",
-      "MSFT",
-      "AMZN",
-      "GOOGL"
-     ],
-     "impact": "bullish"
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "sector",
+       "name": "Big tech",
+       "dir": "up"
+      },
+      {
+       "kind": "stock",
+       "t": "AAPL",
+       "name": "Apple",
+       "dir": "up",
+       "chg": 5.3
+      },
+      {
+       "kind": "stock",
+       "t": "MSFT",
+       "name": "Microsoft",
+       "dir": "up",
+       "chg": 6.7
+      },
+      {
+       "kind": "stock",
+       "t": "AMZN",
+       "name": "Amazon",
+       "dir": "up"
+      }
+     ]
     },
     {
      "headline": "Microsoft reportedly turns down a Texas expansion with Nscale",
      "text": "The Financial Times, via Reuters, says Microsoft declined an option that would have more than doubled their compute agreement; Reuters could not verify it.",
      "source": "Reuters (via Investing.com)",
      "url": "https://www.investing.com/news/stock-market-news/microsoft-rejects-multibilliondollar-ai-deal-with-uks-nscale-ft-reports-5002300",
-     "tickers": [
-      "MSFT"
-     ],
-     "impact": "mixed"
+     "impact": "mixed",
+     "affects": [
+      {
+       "kind": "stock",
+       "t": "MSFT",
+       "name": "Microsoft",
+       "dir": "mixed"
+      },
+      {
+       "kind": "sector",
+       "name": "AI compute",
+       "dir": "mixed"
+      }
+     ]
     },
     {
      "headline": "Asian chip stocks sell off as Nasdaq-100 futures slip",
      "text": "Advantest fell 11.7% and SK Hynix 9.0% on Thursday; Nasdaq-100 futures were down about 1.2% early.",
      "source": "CNBC",
      "url": "https://www.cnbc.com/2026/11/04/stock-market-today-live-updates.html",
-     "tickers": [
-      "NVDA",
-      "AVGO"
-     ],
-     "impact": "bearish"
+     "impact": "bearish",
+     "affects": [
+      {
+       "kind": "sector",
+       "name": "Chipmakers",
+       "dir": "down"
+      },
+      {
+       "kind": "market",
+       "name": "Nasdaq-100 futures",
+       "dir": "down"
+      }
+     ]
     }
    ]
   },
@@ -699,8 +1022,18 @@
      "text": "The Revolutionary Guards blamed an 'unauthorised route'; they also claimed two US drones were captured. Neither claim is verified.",
      "source": "Al Jazeera",
      "url": "https://www.aljazeera.com/news/liveblog/2026/11/5/iran-war-live-trump-admits-war-caused-election-loss-but-had-to-do-it",
-     "tickers": [
-      "XOM"
+     "impact": "bearish",
+     "affects": [
+      {
+       "kind": "market",
+       "name": "Brent",
+       "dir": "up"
+      },
+      {
+       "kind": "sector",
+       "name": "Shipping",
+       "dir": "down"
+      }
      ]
     },
     {
@@ -708,15 +1041,37 @@
      "text": "Brent $105 by December, up from $90, and an $88 average for 2027, with $140 possible if Gulf output stays about 3.5m barrels a day below 2025.",
      "source": "Egypt Independent",
      "url": "https://www.egyptindependent.com/goldman-sachs-raises-2027-oil-price-forecast-to-us-88-per-barrel/",
-     "tickers": []
+     "impact": "mixed",
+     "affects": [
+      {
+       "kind": "market",
+       "name": "Brent",
+       "dir": "up"
+      },
+      {
+       "kind": "sector",
+       "name": "Oil producers",
+       "dir": "up"
+      }
+     ]
     },
     {
      "headline": "Oil falls as Democrats win Congress and Iran-war talks hope grows",
      "text": "Brent was down 3% at $100.40 in early trading, then closed near $94.6; WTI settled at $88.12.",
      "source": "Al Jazeera",
      "url": "https://www.aljazeera.com/economy/2026/11/4/us-markets-rise-as-democrats-sweep-midterm-elections",
-     "tickers": [
-      "XOM"
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "market",
+       "name": "Brent",
+       "dir": "down"
+      },
+      {
+       "kind": "market",
+       "name": "WTI",
+       "dir": "down"
+      }
      ]
     },
     {
@@ -724,7 +1079,24 @@
      "text": "The FTSE 100 rose 1.8% and the Euro Stoxx 50 2.0%; Nikkei fell 1.4% on Wednesday and Kospi gained 0.6% (EnterpriseAM).",
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/am-edition/",
-     "tickers": []
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "market",
+       "name": "FTSE 100",
+       "dir": "up"
+      },
+      {
+       "kind": "market",
+       "name": "Euro Stoxx 50",
+       "dir": "up"
+      },
+      {
+       "kind": "market",
+       "name": "Nikkei",
+       "dir": "down"
+      }
+     ]
     }
    ]
   }

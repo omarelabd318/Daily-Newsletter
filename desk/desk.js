@@ -291,15 +291,17 @@ window.Desk = (function () {
       <p class="ol-key"><b>Confidence.</b> High: several independent reasons and the figures agree. Medium: a clear driver, with cross-currents. Low: momentum, or one reason only. Projections are the desk's view, not advice; each is scored here, right or wrong, when its date passes.</p>`;
   }
 
-  // the day's news for a page: headline, a line or two, the outlet's link, and chips for the stocks it touches
-  // a story's tag on the EGX and Wall Street pages: bullish, bearish or mixed for the stocks it names (or for the
-  // market when it names none); a story with no clear effect has no tag
+  // the day's news for a page: its impact (bullish, bearish or mixed, for the market the page covers), the headline, a
+  // line or two, what it affects (tags from desk/tags.js: sectors, stocks and markets, each with its direction) and the
+  // outlet's link. Older days carry desk tickers instead of tags; they show as chips.
   const IMPACT = { bullish: ['up', 'Bullish'], bearish: ['down', 'Bearish'], mixed: ['flat', 'Mixed'] };
-  const impact = (n, tagged) => { const x = tagged && IMPACT[n.impact]; return x ? `<span class="impact ${x[0]}"><span class="chg ${x[0]}" aria-hidden="true"></span>${x[1]}</span>` : ''; };
-  function news(el, items, tagged = false) {
+  const impact = (n) => { const x = IMPACT[n.impact]; return x ? `<span class="impact ${x[0]}"><span class="chg ${x[0]}" aria-hidden="true"></span>${x[1]}</span>` : ''; };
+  function news(el, items) {
     const list = items || [], SHOW = 3;
-    el.innerHTML = list.map((n, i) => `<div class="news"${i >= SHOW ? ' hidden' : ''}>${impact(n, tagged)}<b class="nh">${esc(n.headline)}</b><p>${esc(n.text)}</p>
-      <div class="nf">${n.url ? `<a class="src" href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.source)} →</a>` : `<span class="src">${esc(n.source || '')}</span>`}${(n.tickers || []).filter((t) => NAMES[t]).map((t) => `<a class="chip" href="/desk/stock/?t=${encodeURIComponent(t)}">${esc(t)}</a>`).join('')}</div></div>`).join('')
+    const chips = (n) => (n.tickers || []).filter((t) => NAMES[t]).map((t) => `<a class="chip" href="/desk/stock/?t=${encodeURIComponent(t)}">${esc(t)}</a>`).join('');
+    const tags = (n) => (Array.isArray(n.affects) && n.affects.length ? `<div class="naff"><span class="tags-h">Affects</span>${Tags.html(n.affects, { names: NAMES, max: 4 })}</div>` : '');
+    el.innerHTML = list.map((n, i) => `<div class="news"${i >= SHOW ? ' hidden' : ''}>${impact(n)}<b class="nh">${esc(n.headline)}</b><p>${esc(n.text)}</p>${tags(n)}
+      <div class="nf">${n.url ? `<a class="src" href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.source)} →</a>` : `<span class="src">${esc(n.source || '')}</span>`}${Array.isArray(n.affects) && n.affects.length ? '' : chips(n)}</div></div>`).join('')
       + (list.length > SHOW ? `<button type="button" class="more-btn">Show all ${list.length} stories</button>` : '')
       || '<p class="sub">No market news today.</p>';
     const b = el.querySelector('.more-btn');
