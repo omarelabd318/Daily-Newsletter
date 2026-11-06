@@ -94,7 +94,12 @@ window.Desk = (function () {
       + (tuck ? '<button type="button" class="seg-more" aria-label="More periods">More</button>' : '');
     const bs = [...el.querySelectorAll('button:not(.seg-more)')], more = el.querySelector('.seg-more');
     bs.forEach((b, i) => b.addEventListener('click', () => { bs.forEach((x) => x.setAttribute('aria-pressed', x === b)); onPick(list[i]); }));
-    if (more) more.addEventListener('click', () => { bs.forEach((b) => { b.hidden = false; }); more.remove(); });
+    if (more) more.addEventListener('click', () => {
+      const open = more.getAttribute('aria-expanded') !== 'true';
+      bs.forEach((b, i) => { b.hidden = !open && long(list[i]) && b.getAttribute('aria-pressed') !== 'true'; });
+      more.setAttribute('aria-expanded', open); more.textContent = open ? 'Fewer' : 'More';
+      more.setAttribute('aria-label', open ? 'Fewer periods' : 'More periods');
+    });
   }
   // a trend line: the period's closes, or on 1D the last session through the day when it is saved (intra)
   // week: on 1W, the last sessions through the day (weekOf), when saved; otherwise the last seven closes
@@ -310,7 +315,7 @@ window.Desk = (function () {
       + (rows.length > SHOW ? `<button type="button" class="more-btn">Show all ${rows.length} dates</button>` : '')
       + `<p class="stock-note">Results dates are TradingView's, often its estimate until the company announces one ("Expected"); "Desk" marks dates the desk confirmed.</p>`;
     const b = el.querySelector('.more-btn');
-    if (b) b.addEventListener('click', () => { el.querySelectorAll('.cal-r[hidden]').forEach((r) => { r.hidden = false; }); b.remove(); });
+    if (b) moreToggle(b, [...el.querySelectorAll('.cal-r')].slice(SHOW), `Show all ${rows.length} dates`);
   }
   // the stock tables' Change and YTD headers sort the rows: one tap puts the highest first, a second the lowest, a third
   // goes back to market value. A sorted table shows every row, so "best" is the best of all the desk's stocks.
@@ -335,12 +340,21 @@ window.Desk = (function () {
   }
   // a header's text, kept inside its sort button when it has one
   const headText = (el, t) => { const l = el.querySelector('.lab'); (l || el).textContent = t; };
+  // a "Show all" button that opens the hidden items and, pressed again, folds them back ("Show fewer"), keeping itself on screen
+  function moreToggle(b, items, label) {
+    b.addEventListener('click', () => {
+      const open = b.getAttribute('aria-expanded') !== 'true';
+      items.forEach((x) => { x.hidden = !open; });
+      b.setAttribute('aria-expanded', open); b.textContent = open ? 'Show fewer' : label;
+      if (!open) b.scrollIntoView({ block: 'nearest' });
+    });
+  }
   // a long table shows its first eight rows; the button under it shows the rest (the rows can be redrawn freely)
   function clipRows(tbody, total, noun) {
     if (total <= 8 || tbody.dataset.clip) return;
     tbody.dataset.clip = '1'; tbody.classList.add('clip');
     const b = document.createElement('button'); b.type = 'button'; b.className = 'more-btn'; b.textContent = b.dataset.label = `Show all ${total} ${noun}`;
-    b.addEventListener('click', () => { const on = tbody.classList.toggle('clip'); b.textContent = on ? b.dataset.label : 'Show fewer'; });
+    b.addEventListener('click', () => { const on = tbody.classList.toggle('clip'); b.textContent = on ? b.dataset.label : 'Show fewer'; if (on) b.scrollIntoView({ block: 'nearest' }); });
     tbody.closest('table').after(b);
   }
   // tickers by market value, largest first (those without one last)
@@ -377,7 +391,7 @@ window.Desk = (function () {
       + (list.length > SHOW ? `<button type="button" class="more-btn">Show all ${list.length} stories</button>` : '')
       || '<p class="sub">No market news today.</p>';
     const b = el.querySelector('.more-btn');
-    if (b) b.addEventListener('click', () => { el.querySelectorAll('.news[hidden]').forEach((x) => { x.hidden = false; }); b.remove(); });
+    if (b) moreToggle(b, [...el.querySelectorAll('.news')].slice(SHOW), `Show all ${list.length} stories`);
   }
 
   async function init(page) {

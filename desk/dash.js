@@ -67,7 +67,12 @@
       + (tuck ? '<button type="button" class="seg-more" aria-label="More periods">More</button>' : '');
     const bs = [...el.querySelectorAll('button:not(.seg-more)')], more = el.querySelector('.seg-more');
     bs.forEach((b, i) => b.addEventListener('click', () => { bs.forEach((x) => x.setAttribute('aria-pressed', x === b)); onPick(list[i]); }));
-    if (more) more.addEventListener('click', () => { bs.forEach((b) => { b.hidden = false; }); more.remove(); });
+    if (more) more.addEventListener('click', () => {
+      const open = more.getAttribute('aria-expanded') !== 'true';
+      bs.forEach((b, i) => { b.hidden = !open && long(list[i]) && b.getAttribute('aria-pressed') !== 'true'; });
+      more.setAttribute('aria-expanded', open); more.textContent = open ? 'Fewer' : 'More';
+      more.setAttribute('aria-label', open ? 'Fewer periods' : 'More periods');
+    });
   };
   const NAMES = { COMI: 'Commercial International Bank', TMGH: 'Talaat Moustafa', ETEL: 'Telecom Egypt', PHDC: 'Palm Hills', SWDY: 'Elsewedy Electric', ORAS: 'Orascom Construction', FWRY: 'Fawry', ABUK: 'Abu Qir Fertilizers', HRHO: 'EFG Holding', CLHO: 'Cleopatra Hospital', JUFO: 'Juhayna', ALCN: 'Alexandria Containers', MFPC: 'MOPCO', EAST: 'Eastern Company', EFIH: 'e-finance', EMFD: 'Emaar Misr', BQDC: 'Banque du Caire', EGAL: 'Egypt Aluminium', AMOC: 'Alexandria Mineral Oils', SKPC: 'Sidi Kerir Petrochemicals', EFID: 'Edita Food Industries',
     AAPL: 'Apple', MSFT: 'Microsoft', NVDA: 'Nvidia', AMZN: 'Amazon', GOOGL: 'Alphabet', META: 'Meta', TSLA: 'Tesla', JPM: 'JPMorgan Chase', XOM: 'Exxon Mobil', AVGO: 'Broadcom', 'BRK.B': 'Berkshire Hathaway', WMT: 'Walmart', V: 'Visa', ORCL: 'Oracle', COST: 'Costco' };
@@ -192,7 +197,13 @@
       if (items.length <= n) return;
       items.slice(n).forEach((x) => { x.hidden = true; });
       const b = document.createElement('button'); b.type = 'button'; b.className = 'more-btn'; b.textContent = `Show all ${items.length} ${noun}`;
-      b.addEventListener('click', () => { items.forEach((x) => { x.hidden = false; }); b.remove(); });
+      const label = b.textContent;
+      b.addEventListener('click', () => {
+        const open = b.getAttribute('aria-expanded') !== 'true';
+        items.slice(n).forEach((x) => { x.hidden = !open; });
+        b.setAttribute('aria-expanded', open); b.textContent = open ? 'Show fewer' : label;
+        if (!open) b.scrollIntoView({ block: 'nearest' });
+      });
       el.after(b);
     };
     fold($('week'), '.wk', 3, 'events'); fold($('views'), '.view', 2, 'views');
@@ -202,7 +213,11 @@
       el.classList.add('clamp'); el.style.setProperty('--lines', lines);
       if (el.scrollHeight <= el.clientHeight + 4) { el.classList.remove('clamp'); return; }
       const b = document.createElement('button'); b.type = 'button'; b.className = 'readmore'; b.textContent = label;
-      b.addEventListener('click', () => { el.classList.remove('clamp'); b.remove(); });
+      b.addEventListener('click', () => {
+        const open = el.classList.toggle('clamp') === false;
+        b.setAttribute('aria-expanded', open); b.textContent = open ? 'Show less' : label;
+        if (!open) b.scrollIntoView({ block: 'nearest' });
+      });
       el.after(b);
     };
     clamp($('top-body'), 6, 'Read more'); clamp($('close-note'), 2, 'Sources and notes');

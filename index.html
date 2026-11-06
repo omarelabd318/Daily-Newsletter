@@ -272,6 +272,7 @@ td.trend{vertical-align:middle}
 .srcs summary::-webkit-details-marker{display:none}
 .srcs summary::before{content:"+ ";color:var(--accent)} .srcs[open] summary::before{content:"\2212  "}
 .srcs summary:hover{color:var(--accent)}
+.srcs .hd,.srcs[open] .sh{display:none} .srcs[open] .hd{display:inline}
 .srcs[open] summary{margin-bottom:12px}
 </style>
 </head>
@@ -465,7 +466,7 @@ td.trend{vertical-align:middle}
       $('content').innerHTML = r.sections.map(function(s){
         var src = s.title.toLowerCase()==='sources' ? ' src' : '', body = s.html;
         // the Sources list starts folded, with its count
-        if(src){ var n = (body.match(/<li[\s>]/g) || []).length; body = '<details class="srcs"><summary>Show all ' + (n || '') + ' sources</summary>' + body + '</details>'; }
+        if(src){ var n = (body.match(/<li[\s>]/g) || []).length; body = '<details class="srcs"><summary><span class="sh">Show all ' + (n || '') + ' sources</span><span class="hd">Hide sources</span></summary>' + body + '</details>'; }
         return '<section class="s'+src+'" id="'+s.id+'"><div class="frame"><div class="s-in"><h2 class="rv">'+esc(s.title)+'</h2><div class="s-body">'+body+'</div></div></div></section>';
       }).join('');
       // each story that opens with a bold lead-in gets an anchor, so Today at a Glance can link to it
