@@ -70,7 +70,7 @@
       ${progress(v)}
       <p class="vwrong"><b>Wrong if</b> ${M.esc(v.wrong)}</p>
       ${v.result ? `<p class="vresult"><b>${M.esc(v.status === 'right' ? 'Right' : v.status === 'wrong' ? 'Wrong' : 'Closed')}, ${fmtDate(v.result.date)}:</b> ${M.esc(v.result.text)}</p>` : ''}
-      ${chips ? `<div class="nf" style="margin-top:10px">${chips}</div>` : ''}
+      ${chips ? `<div class="nf" style="margin-top:10px;display:flex;flex-wrap:wrap;gap:6px">${chips}</div>` : ''}
       <h3>News that bears on it</h3>
       ${ups ? `<ul class="vnews">${ups}</ul>` : '<p class="sub">No news on it yet.</p>'}
     </article>`;

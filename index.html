@@ -423,7 +423,10 @@ td.trend{vertical-align:middle}
       return r.text();
     }).then(function(md){
       var r = render(md);
-      $('leadwrap').innerHTML = r.lead ? '<div class="lead">'+r.lead.replace(/<\/?p>/g,'')+'</div>' : '';
+      // the intro line opens with the date, which the dateline above already shows: drop it there
+      var lead = r.lead ? r.lead.replace(/<\/?p>/g,'') : '';
+      lead = lead.replace(/^(\s*<(em|i)>)?\s*(Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday),?\s+[^:<]{3,30}?\d{4}\s*[:,\u2014\u2013-]\s*([a-z])/i, function(m, open, tag, wd, c){ return (open || '') + c.toUpperCase(); });
+      $('leadwrap').innerHTML = lead ? '<div class="lead">'+lead+'</div>' : '';
       $('toc').innerHTML = r.sections.filter(function(s){return s.title.toLowerCase()!=='sources'}).map(function(s){return '<a href="#'+s.id+'" data-jump="1">'+esc(s.title)+'</a>'}).join('');
       $('toc').hidden = !r.sections.length;
       requestAnimationFrame(balanceToc); if(document.fonts && document.fonts.ready) document.fonts.ready.then(balanceToc);

@@ -121,7 +121,7 @@ window.Desk = (function () {
     const mon = (i) => d(i).toLocaleDateString('en-US', { day: 'numeric', month: 'short' }).replace('Sept', 'Sep');
     if (best.b - best.a === 1) return [{ at: best.b, label: `${mon(best.b)} ${p(best.m)}`, short: p(best.m) }];
     const first = best.a + 1, same = d(first).getMonth() === d(best.b).getMonth();
-    return [{ from: best.a, to: best.b, label: `${same ? dd(first) : mon(first)}–${mon(best.b)} ${p(best.m)}`, short: p(best.m) }];
+    return [{ from: best.a, to: best.b, label: `${mon(first)}–${same ? dd(best.b) : mon(best.b)} ${p(best.m)}`, short: p(best.m) }];
   }
   // the last session's prices through the day (desk/intraday.json): market 'egx' or 'us', key a ticker,
   // 'EGX30' or 'COMP'. Returns a caption, or null when there is no one-day data for it.

@@ -92,7 +92,7 @@
     const mon = (i) => d(i).toLocaleDateString('en-US', { day: 'numeric', month: 'short' }).replace('Sept', 'Sep');
     if (best.b - best.a === 1) return [{ at: best.b, label: `${mon(best.b)} ${p(best.m)}`, short: p(best.m) }];
     const first = best.a + 1, same = d(first).getMonth() === d(best.b).getMonth();
-    return [{ from: best.a, to: best.b, label: `${same ? dd(first) : mon(first)}–${mon(best.b)} ${p(best.m)}`, short: p(best.m) }];
+    return [{ from: best.a, to: best.b, label: `${mon(first)}–${same ? dd(best.b) : mon(best.b)} ${p(best.m)}`, short: p(best.m) }];
   }
 
   // x-axis labels on round, evenly spaced points: each day for a week, one weekday for a month, each month
@@ -133,7 +133,7 @@
     document.querySelectorAll('[data-sec]').forEach((a) => { if (a.dataset.sec === key) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
     $('title').textContent = S.name + ' · ' + longDate;
     document.title = 'Markets Desk · ' + S.name + ' · ' + day(D.date).toLocaleDateString('en-US', { day: 'numeric', month: 'short' }).replace('Sept', 'Sep');
-    $('stamp').innerHTML = 'Closes to ' + esc(day(asOf(S.market)).toLocaleDateString('en-US', { weekday: 'short', day: 'numeric', month: 'short' }).replace('Sept', 'Sep').replace(',', '')) + '<br>Fetched ' + esc(D.fetched || '');
+    $('stamp').innerHTML = 'Closes to ' + esc(day(asOf(S.market)).toLocaleDateString('en-US', { weekday: 'short', day: 'numeric', month: 'short' }).replace('Sept', 'Sep').replace(',', '')) + '<br>Fetched ' + esc(String(D.fetched || '').replace(/\b(\d{1,2}) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\b/, '$2 $1'));
     $('finding').innerHTML = esc(X.finding) + (X.next ? ' <span class="when">' + esc(X.next) + '</span>' : '');
 
     $('h-close').textContent = X.close.title || 'Close';

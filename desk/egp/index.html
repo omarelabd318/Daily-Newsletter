@@ -129,7 +129,7 @@
     // each line's change over the 30 days, beside its name in the legend
     if (res && res.legend) { [da, db].forEach((c, i) => { const li = res.legend.children[i]; if (li) li.insertAdjacentHTML('beforeend', `<span class="num ${M.cls(c)}">${M.pct(c)}</span>`); }); M.$('pvd-legend').appendChild(res.legend); }
     M.$('pvd-read').innerHTML = da > 0.5
-      ? `The dollar is <span class="num">${M.pct(da)}</span> against the pound and <span class="num">${M.pct(db)}</span> against major currencies, so about <b>${Math.max(0, Math.min(100, Math.round((1 - Math.max(0, db) / da) * 100)))}%</b> of the pound's fall is local.`
+      ? `The dollar is <span class="num">${M.pct(da)}</span> against the pound and <span class="num">${M.pct(db)}</span> against major currencies, so ${((sh) => sh >= 95 ? 'the pound\'s fall is <b>almost entirely local</b>, not a stronger dollar' : `about <b>${sh}%</b> of the pound's fall is local`)(Math.max(0, Math.min(100, Math.round((1 - Math.max(0, db) / da) * 100))))}.`
       : `The dollar is <span class="num">${M.pct(da)}</span> against the pound and <span class="num">${M.pct(db)}</span> against major currencies over the month.`;
   }
   M.$('drivers').innerHTML = M.drivers(P.drivers || []);
