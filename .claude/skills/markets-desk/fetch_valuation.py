@@ -114,7 +114,9 @@ def egx(t):
     cap = next((c[1] for c in sorted(cands, key=lambda c: c[0] != "Mubasher") if c[1]), None)
     # a sanity check: per-share figures that cannot match the price (Mubasher's for Orascom look dollar-based
     # though labelled in pounds) are left out rather than shown as ratios of 150 or more
-    sane = lambda c: price and c[2] and c[3] and 0 < price / c[3] < 40 and (c[2] <= 0 or price / c[2] < 300)
+    # a source may have the newer earnings but no book value (TradingView often does): its P/E still counts, and the
+    # book value comes from the other source, with its own period named
+    sane = lambda c: price and c[2] and (c[3] is None or 0 < price / c[3] < 40) and (c[2] <= 0 or price / c[2] < 300)
     usable = sorted([c for c in cands if fresh(c[4]) and sane(c)], key=lambda c: c[4], reverse=True)
     rows = [{"label": "Market value", "value": big(cap, "EGP") if cap else None}]
     if not usable:
@@ -126,9 +128,14 @@ def egx(t):
     other = next((c for c in usable[1:] if c[4] == period), None)
     if other:
         basis += f"; {other[0]} agrees" if abs(other[2] - eps) <= 0.1 * abs(eps) else f"; {other[0]} gives EGP {other[2]:,.2f} a share for the same period"
+    if bvps is None:
+        bv = next((c for c in usable[1:] if c[3]), None)
+        if bv:
+            bvps = bv[3]
+            basis += f"; book value from {bv[0]}, to {datetime.date.fromisoformat(bv[4]):%B %Y}"
     rows += [{"label": "P/E", "value": ratio(price, eps)}, {"label": "P/B", "value": ratio(price, bvps)},
              {"label": "Earnings per share (12 months)", "value": f"EGP {eps:,.2f}"},
-             {"label": "Book value per share", "value": f"EGP {bvps:,.2f}"}]
+             {"label": "Book value per share", "value": f"EGP {bvps:,.2f}" if bvps is not None else None}]
     return {"source": src, "asOf": TODAY.isoformat(), "period": period, "basis": basis, "price": price, "rows": rows}
 
 
@@ -158,6 +165,21 @@ def nasdaq(t):
             rows.append({"label": "Earnings per share (12 months)", "value": f"${ttm:,.2f}"})
     except Exception:
         pass
+    if period is None:   # Nasdaq has no earnings for some (Berkshire's B shares): TradingView's US screener instead
+        try:
+            ex = {"BRK.B": "NYSE"}.get(t, "NASDAQ")
+            body = json.dumps({"symbols": {"tickers": [f"{ex}:{t}"]}, "columns": ["earnings_per_share_basic_ttm", "book_value_per_share_fq", "fiscal_period_end_fq"]}).encode()
+            req = urllib.request.Request("https://scanner.tradingview.com/america/scan", data=body, headers={"User-Agent": UA, "Content-Type": "application/json"})
+            eps_, bv, end = json.loads(urllib.request.urlopen(req, timeout=40).read())["data"][0]["d"]
+            if eps_ and end:
+                period = datetime.datetime.fromtimestamp(end, datetime.timezone.utc).date().isoformat()
+                basis = f"results for the 12 months to {datetime.date.fromisoformat(period):%B %Y} (TradingView)"
+                rows += [{"label": "P/E (last 12 months)", "value": ratio(price, eps_)}]
+                if bv:
+                    rows.append({"label": "P/B", "value": ratio(price, bv)})
+                rows.append({"label": "Earnings per share (12 months)", "value": f"${eps_:,.2f}"})
+        except Exception:
+            pass
     y = val("Yield")
     rows.append({"label": "Dividend yield", "value": y if y and y not in ("N/A", "0%", "0.00%") else "None"})
     tgt = val("OneYrTarget")

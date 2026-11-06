@@ -125108,7 +125108,8 @@
    },
    "infl_headline": 13.9,
    "reserves_usd": 57.35,
-   "egx30_vol": 175113754
+   "egx30_vol": 175113754,
+   "gold_usd": 4051.6
   },
   {
    "date": "2026-10-30",
@@ -125217,7 +125218,8 @@
    "infl_core": 14.1,
    "reserves_usd": 57.35,
    "egx30_vol": 339456038,
-   "egx70": 16779.7
+   "egx70": 16779.7,
+   "dxy": 102.04
   },
   {
    "date": "2026-10-31",
@@ -125541,7 +125543,8 @@
    "reserves_usd": 57.35,
    "tbill_91": 25.0,
    "tbill_273": 26.359,
-   "egx_turnover": 7.2
+   "egx_turnover": 7.2,
+   "btc": 78248.45
   },
   {
    "date": "2026-11-03",
@@ -125649,7 +125652,8 @@
    "infl_headline": 13.9,
    "infl_core": 14.1,
    "reserves_usd": 57.35,
-   "eur_egp": 62.0366
+   "eur_egp": 62.0366,
+   "btc": 76677.3
   },
   {
    "date": "2026-11-04",
@@ -125756,7 +125760,9 @@
    "cbe_lending": 21.0,
    "infl_headline": 13.9,
    "infl_core": 14.1,
-   "reserves_usd": 57.35
+   "reserves_usd": 57.35,
+   "dxy": 101.87,
+   "btc": 77345.05
   },
   {
    "date": "2026-11-05",
@@ -125780,7 +125786,8 @@
     "EGAL": 320.0,
     "AMOC": 13.33,
     "SKPC": 14.7,
-    "EFID": 19.4
+    "EFID": 19.4,
+    "BQDC": 5.5
    },
    "us": {
     "AAPL": 349.51,
