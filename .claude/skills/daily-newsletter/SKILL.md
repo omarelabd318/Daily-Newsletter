@@ -553,7 +553,7 @@ The site's Listen button reads every edition aloud with the device's own voice; 
 also get a recorded natural voice. Once the edition is final and checked, run
 `python3 .claude/skills/daily-newsletter/make_audio.py EDITION` (EDITION is the file key, e.g. 2026-11-06). It
 records the edition (around 5 minutes, plus a few minutes the first time to install the voice model), publishes the
-MP3 on the repo's `audio` branch (which holds only the last 14 editions' audio and is rewritten each time: never
+MP3 on the repo's `audio` branch (which holds only the last 3 editions' audio and is rewritten each time: never
 commit an MP3 to main) and writes `data/audio/EDITION.json`; commit `data/audio/` with the edition. If it prints
 "Audio not made", go on: the site falls back to the device's voice, and say so in the final reply.
 

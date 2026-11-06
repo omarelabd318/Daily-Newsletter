@@ -33,7 +33,7 @@ CACHE = os.path.expanduser("~/.cache/daily-newsletter/kokoro")
 HF = "https://huggingface.co/onnx-community/Kokoro-82M-v1.0-ONNX/resolve/main"
 REPO = "omarelabd318/Daily-Newsletter"
 BRANCH = "audio"
-KEEP = 14
+KEEP = 3
 VOICE = "af_heart"   # the site's voice; others: af_bella, af_nicole, am_michael, am_puck, am_fenrir, bf_emma, bm_george
 NAMES = {"af_heart": "Heart", "af_bella": "Bella", "af_nicole": "Nicole", "am_michael": "Michael", "am_puck": "Puck",
          "am_fenrir": "Fenrir", "bf_emma": "Emma", "bm_george": "George"}
