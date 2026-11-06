@@ -285,6 +285,32 @@ window.Desk = (function () {
       + `<div class="secd">${r.n > 1 ? `${r.n} stocks · best ${esc(r.cs[0].t)} <span class="${cls(r.cs[0].c)}">${pct(r.cs[0].c)}</span> · worst ${esc(r.cs.at(-1).t)} <span class="${cls(r.cs.at(-1).c)}">${pct(r.cs.at(-1).c)}</span>` : esc(r.cs[0].t) + ' only'}</div></div>`).join('') + '</div>'
       + `<p class="stock-note">Equal-weighted average of the desk's stocks in each sector${label ? ', ' + esc(label) : ''}${inUSD ? ', in dollars' : ''}.</p>`;
   }
+  // coming up for the desk's stocks: results dates and dividends from desk/calendar.json (TradingView), and the dates
+  // the desk confirmed itself (each stock's "next" in desk/stocks.json); the next 30 days first
+  function calendar(el, market, CAL, ST) {
+    const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], cur = market === 'egx' ? 'EGP ' : '$';
+    const when = (iso) => day(iso).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+    const items = ((CAL && CAL.items) || []).filter((x) => x.market === market && GROUP[market].includes(x.t)).map((x) => ({ date: x.date, t: x.t,
+      what: x.kind === 'results' ? `Results${x.period ? ` for the quarter to ${MON[+x.period.slice(5, 7) - 1]} ${x.period.slice(0, 4)}` : ''}${x.time ? ', ' + x.time : ''}` : `Goes ex-dividend: ${cur}${num(x.amount, x.amount < 10 ? 2 : 0)} a share${x.pay ? `, paid ${when(x.pay)}` : ''}`,
+      tag: x.kind === 'results' ? (x.expected ? 'Expected' : '') : 'Dividend' }));
+    // the desk's own dates: kept unless they repeat a results date already listed
+    for (const t of GROUP[market]) for (const n of ((ST || {})[t] || {}).next || []) {
+      if (/results/i.test(n.event) && items.some((x) => x.t === t && /^Results/.test(x.what))) continue;
+      items.push({ date: n.date || null, t, what: n.event, note: n.when, tag: 'Desk' });
+    }
+    const today = new Date().toISOString().slice(0, 10);
+    const dated = items.filter((x) => x.date && x.date >= today).sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : a.t < b.t ? -1 : 1));
+    const later = items.filter((x) => !x.date);
+    const rows = [...dated, ...later];
+    if (!rows.length) { el.innerHTML = '<p class="sub">Nothing scheduled in the next few weeks.</p>'; return; }
+    const SHOW = 8;
+    el.innerHTML = '<div class="cal">' + rows.map((x, i) => `<div class="cal-r"${i >= SHOW ? ' hidden' : ''}><span class="cal-d">${x.date ? when(x.date) : esc(x.note || 'Date to come')}</span>`
+      + `<a href="/desk/stock/?t=${encodeURIComponent(x.t)}"><b>${esc(NAMES[x.t])}</b> <span class="t">${esc(x.t)}</span></a><span class="cal-w">${esc(x.what)}</span>${x.tag ? `<span class="pill open">${esc(x.tag)}</span>` : '<span></span>'}</div>`).join('') + '</div>'
+      + (rows.length > SHOW ? `<button type="button" class="more-btn">Show all ${rows.length} dates</button>` : '')
+      + `<p class="stock-note">Results dates are TradingView's, often its estimate until the company announces one ("Expected"); "Desk" marks dates the desk confirmed.</p>`;
+    const b = el.querySelector('.more-btn');
+    if (b) b.addEventListener('click', () => { el.querySelectorAll('.cal-r[hidden]').forEach((r) => { r.hidden = false; }); b.remove(); });
+  }
   // the stock tables' Change and YTD headers sort the rows: one tap puts the highest first, a second the lowest, a third
   // goes back to market value. A sorted table shows every row, so "best" is the best of all the desk's stocks.
   function sortable(table, redraw) {
@@ -402,5 +428,5 @@ window.Desk = (function () {
       location.reload();
     });
   }
-  return { get ASOF() { return ASOF; }, SECTORS, sortable, headText, sectorMoves, asOfFor, lastDate, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, weekChart, deskNotes, weekOf, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
+  return { get ASOF() { return ASOF; }, SECTORS, sortable, headText, sectorMoves, calendar, asOfFor, lastDate, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, weekChart, deskNotes, weekOf, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
 })();

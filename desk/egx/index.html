@@ -72,6 +72,12 @@
       <div id="sectors"></div>
     </section>
 
+    <section class="card c12">
+      <div class="card-h"><h2>Coming up for the desk's stocks</h2><span class="meta">Results and dividends</span></div>
+      <div id="calendar"></div>
+    </section>
+
+
 
     <section class="card c12">
       <div class="card-h"><h2>Bullish and bearish</h2><span class="meta">Next 1–3 months <span class="samp" data-sample hidden>Sample</span></span></div>
@@ -191,6 +197,7 @@
   const TSORT = M.sortable(M.$('body').closest('table'), () => drawT());
   M.toggle(M.$('scur'), ['EGP', 'USD'], (i) => { tUSD = i === 1; drawT(); });
   M.segment(M.$('sseg'), '1D', (p) => { tper = p; drawT(); }, M.PERIODS.concat(M.LONG)); drawT();
+  M.calendar(M.$('calendar'), 'egx', await M.get('/desk/calendar.json'), ((await M.get('/desk/stocks.json')) || {}).stocks);
   M.outlook(M.$('outlook'), P.outlook, 'EGP');
   M.news(M.$('news'), P.news, true);
 })();

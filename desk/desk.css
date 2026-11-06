@@ -379,3 +379,9 @@ th.desc .sorth i,th.asc .sorth i{opacity:1} th.desc .sorth i::before{content:"\2
 .secd{margin-top:4px;font-size:12px;color:var(--muted)}
 .flow-bar i.pos{left:50%;background:var(--positive)} .flow-bar i.neg{right:50%;background:var(--negative)}
 @media (max-width:860px){.secmoves{columns:1}}
+
+/* coming up for the desk's stocks */
+.cal-r{display:grid;grid-template-columns:110px minmax(0,1.1fr) minmax(0,2fr) auto;gap:4px 16px;align-items:baseline;padding:9px 0;border-top:1px solid var(--rule);font-size:13px}
+.cal-r:first-child{border-top:0}
+.cal-d{color:var(--muted);white-space:nowrap} .cal-r a{text-decoration:none;color:var(--text)} .cal-r .t{color:var(--muted);font-size:12px}
+@media (max-width:860px){.cal-r{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:'d tag' 'n n' 'w w'}.cal-d{grid-area:d}.cal-r>a{grid-area:n}.cal-w{grid-area:w;color:var(--muted)}.cal-r>.pill,.cal-r>span:last-child{grid-area:tag;justify-self:end}}

@@ -261,7 +261,11 @@ Each of the desk's stocks gets its own search every morning, on top of the newsl
 5. Let it change the analysis: news can move a stock onto or off the Bullish and bearish lists, change a
    projection or its confidence, or add a date to Coming up (results dates, general assemblies).
 
-6. **Results:** when an Egyptian desk stock publishes results, record them the same day with
+6. **Calendar:** run `python3 .claude/skills/markets-desk/fetch_calendar.py` (results dates and dividends for
+   every desk stock, shown on the EGX and Wall Street pages). When a company announces its own results or
+   assembly date, add it to that stock's `next` with `"date": "YYYY-MM-DD"`: the page then lists it as the desk's
+   confirmed date in place of TradingView's estimate.
+7. **Results:** when an Egyptian desk stock publishes results, record them the same day with
    `set_results.py TICKER --period QUARTER-END --ytd ... --prior-fy ... --prior-ytd ... --shares ... --equity ...
    --source ... --url ...` (profit attributable to shareholders, from the filing or two outlets that agree), then
    run `fetch_valuation.py TICKER`. The P/E then reflects the new quarter at once, instead of weeks later when

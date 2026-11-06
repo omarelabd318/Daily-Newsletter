@@ -1,0 +1,258 @@
+{
+ "note": "The desk's stocks' coming results and dividends, from TradingView (fetch_calendar.py). Results dates for Egyptian companies are often TradingView's estimate until the company announces one.",
+ "fetched": "2026-11-06",
+ "items": [
+  {
+   "t": "JUFO",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-09",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "V",
+   "market": "us",
+   "kind": "dividend",
+   "date": "2026-11-10",
+   "pay": "2026-12-01",
+   "amount": 0.78,
+   "cur": "$"
+  },
+  {
+   "t": "COMI",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-11",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "AAPL",
+   "market": "us",
+   "kind": "dividend",
+   "date": "2026-11-12",
+   "pay": "2026-11-16",
+   "amount": 0.27,
+   "cur": "$"
+  },
+  {
+   "t": "ETEL",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-12",
+   "period": "2026-09-30",
+   "time": "before the open",
+   "expected": true
+  },
+  {
+   "t": "CLHO",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-16",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "PHDC",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-16",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "SWDY",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-16",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "XOM",
+   "market": "us",
+   "kind": "dividend",
+   "date": "2026-11-16",
+   "pay": "2026-12-10",
+   "amount": 1.07,
+   "cur": "$"
+  },
+  {
+   "t": "EGAL",
+   "market": "egx",
+   "kind": "dividend",
+   "date": "2026-11-17",
+   "pay": "2026-11-19",
+   "amount": 16,
+   "cur": "EGP"
+  },
+  {
+   "t": "NVDA",
+   "market": "us",
+   "kind": "results",
+   "date": "2026-11-17",
+   "period": "2026-10-31",
+   "time": "after the close",
+   "expected": true
+  },
+  {
+   "t": "EAST",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-18",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "EFIH",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-18",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "HRHO",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-18",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "MSFT",
+   "market": "us",
+   "kind": "dividend",
+   "date": "2026-11-19",
+   "pay": "2026-12-10",
+   "amount": 0.98,
+   "cur": "$"
+  },
+  {
+   "t": "ALCN",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-12-02",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "AMOC",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-12-02",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "EGAL",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-12-02",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "EMFD",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-12-02",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "FWRY",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-12-02",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "MFPC",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-12-02",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "SKPC",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-12-02",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "TMGH",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-12-02",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "GOOGL",
+   "market": "us",
+   "kind": "dividend",
+   "date": "2026-12-07",
+   "pay": "2026-12-14",
+   "amount": 0.22,
+   "cur": "$"
+  },
+  {
+   "t": "AVGO",
+   "market": "us",
+   "kind": "results",
+   "date": "2026-12-10",
+   "period": "2026-10-31",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "COST",
+   "market": "us",
+   "kind": "results",
+   "date": "2026-12-10",
+   "period": "2026-11-30",
+   "time": "after the close",
+   "expected": true
+  },
+  {
+   "t": "ORCL",
+   "market": "us",
+   "kind": "results",
+   "date": "2026-12-14",
+   "period": "2026-11-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "JPM",
+   "market": "us",
+   "kind": "results",
+   "date": "2027-01-14",
+   "period": "2026-12-31",
+   "time": "before the open",
+   "expected": true
+  }
+ ]
+}
