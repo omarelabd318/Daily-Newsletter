@@ -239,6 +239,9 @@ td.trend{vertical-align:middle}
   :root[data-width="wide"] .toc{margin-inline:calc(var(--pad) * -1);gap:2px 12px;font-size:12px}
 }
 @media print{#widthBtn{display:none!important}}
+.desklink{color:inherit;text-decoration:none;border-bottom:1px dotted var(--ink2)} .desklink:hover{color:var(--accent);border-color:var(--accent)}
+.s-body .deskline{margin:-4px 0 24px;font:600 13px/1.4 var(--sans);letter-spacing:.02em}
+.s-body .deskline a{color:var(--accent)}
 /* Sources start folded */
 .srcs summary{cursor:pointer;font:600 13px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);padding:8px 0;list-style:none}
 .srcs summary::-webkit-details-marker{display:none}
@@ -459,6 +462,7 @@ td.trend{vertical-align:middle}
       document.querySelectorAll('.mast > *').forEach(function(el){el.classList.add('rv')});
       pending = Array.prototype.slice.call(document.querySelectorAll('.rv'));
       addSparks(ed.date, /-recap$/.test(key(ed)));
+      linkDesk();
       markChanges();
       if(pendingStory && document.getElementById(pendingStory)) jumpTo(pendingStory); else window.scrollTo(0,0);
       pendingStory = null;
@@ -466,6 +470,33 @@ td.trend{vertical-align:middle}
     }).catch(function(){state('Could not load this edition','Please try again in a moment.')});
   }
 
+
+  // ---- links into the Markets Desk: each desk stock in Stocks Watch opens its desk page, and the market parts
+  // end with a line to the matching desk page ----
+  var DESK_T = ['COMI','TMGH','ETEL','PHDC','SWDY','ORAS','FWRY','ABUK','HRHO','CLHO','JUFO','ALCN','MFPC','EAST','EFIH','EMFD','BQDC','EGAL','AMOC','SKPC','EFID',
+    'AAPL','MSFT','NVDA','AMZN','GOOGL','META','TSLA','JPM','XOM','AVGO','BRK.B','WMT','V','ORCL','COST'];
+  function linkDesk(){
+    [].forEach.call(document.querySelectorAll('#stocks-watch td:first-child, #stocks-this-week td:first-child'), function(td){
+      if(td.querySelector('a')) return;
+      var m = td.textContent.match(/\(([A-Z][A-Z.]{0,5})\)/);
+      if(m && DESK_T.indexOf(m[1]) >= 0) td.innerHTML = '<a class="desklink" href="/desk/stock/?t=' + encodeURIComponent(m[1]) + '" title="Its page on the Markets Desk">' + td.innerHTML + '</a>';
+    });
+    var MAP = [[/^Egypt Markets$/i, '/desk/egx/', 'The EGX on the Markets Desk'], [/^Global Markets$/i, '/desk/us/', 'Wall Street on the Markets Desk'],
+      [/^Egypt$/i, '/desk/stocks/egypt/', "All the desk's Egyptian stocks"], [/^USA$/i, '/desk/stocks/us/', "All the desk's US stocks"]];
+    [].forEach.call(document.querySelectorAll('#markets h3, #stocks-watch h3'), function(h){
+      for(var i = 0; i < MAP.length; i++) if(MAP[i][0].test(h.textContent.trim())){
+        // the line goes at the end of the part: just before the next subhead, or at the end of the section
+        var end = h.nextElementSibling;
+        while(end && end.nextElementSibling && !/^H[23]$/.test(end.nextElementSibling.tagName)) end = end.nextElementSibling;
+        var p = document.createElement('p'); p.className = 'deskline';
+        p.innerHTML = '<a href="' + MAP[i][1] + '">' + MAP[i][2] + ' →</a>';
+        (end || h).insertAdjacentElement('afterend', p);
+        break;
+      }
+    });
+    var cc = document.querySelector('#currency-and-commodities-watch .s-body');
+    if(cc){ var q = document.createElement('p'); q.className = 'deskline'; q.innerHTML = '<a href="/desk/egp/">The pound on the Markets Desk →</a> · <a href="/desk/global/">Oil, gold and the dollar →</a>'; cc.appendChild(q); }
+  }
   // light/dark switch, remembered on this device
   function syncThemeBtn(){
     var dark = document.documentElement.getAttribute('data-theme') === 'dark';
