@@ -178,10 +178,11 @@
   const EGXT = M.byCap(M.GROUP.egx, ((await M.get('/desk/stocks.json')) || {}).stocks);   // largest first; the first eight show
   const drawT = async () => {
     if (tper[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; }
-    M.$('chg-h').textContent = `Change (${tper[0]})`; M.$('trend-h').textContent = M.trendHead(tper[1], 'egx', tper[2]);
+    M.headText(M.$('chg-h'), `Change (${tper[0]})`); M.$('trend-h').textContent = M.trendHead(tper[1], 'egx', tper[2]);
     M.$('close-h').textContent = tUSD ? 'Close ($)' : 'Close';
-    M.stockTable(M.$('body'), EGXT, tper[1], tUSD); M.clipRows(M.$('body'), EGXT.length, 'stocks');
+    M.stockTable(M.$('body'), EGXT, tper[1], tUSD, TSORT); M.clipRows(M.$('body'), EGXT.length, 'stocks');
   };
+  const TSORT = M.sortable(M.$('body').closest('table'), () => drawT());
   M.toggle(M.$('scur'), ['EGP', 'USD'], (i) => { tUSD = i === 1; drawT(); });
   M.segment(M.$('sseg'), '1D', (p) => { tper = p; drawT(); }, M.PERIODS.concat(M.LONG)); drawT();
   M.outlook(M.$('outlook'), P.outlook, 'EGP');

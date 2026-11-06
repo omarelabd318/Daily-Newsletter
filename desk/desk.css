@@ -367,3 +367,9 @@ a.tag:hover{background:var(--active)}
 .sgroups{display:grid;gap:28px}
 .sgroup-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin:0 0 10px;font-size:16px;font-weight:600}
 .sgroup-h .meta{font-size:13px;font-weight:400;color:var(--muted)}
+/* sortable table headers (Change and YTD on the EGX and Wall Street tables) */
+.sorth{display:inline-flex;align-items:center;gap:4px;padding:0;border:0;background:none;color:inherit;font:inherit;cursor:pointer;white-space:nowrap}
+.sorth:hover,th.asc .sorth,th.desc .sorth{color:var(--text)}
+.sorth:focus-visible{outline:2px solid var(--focus,currentColor);outline-offset:2px;border-radius:2px}
+.sorth i{font-style:normal;font-size:11px;line-height:1;opacity:.45} .sorth i::before{content:"\2195"}
+th.desc .sorth i,th.asc .sorth i{opacity:1} th.desc .sorth i::before{content:"\2193"} th.asc .sorth i::before{content:"\2191"}

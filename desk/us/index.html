@@ -102,10 +102,13 @@
   mseg(); dm();
   if (P.afterBell && P.afterBell.length) { M.$('c-bell').hidden = false; M.$('bell-date').textContent = M.short(M.asOfFor('us')); M.$('bell').innerHTML = M.drivers(P.afterBell); }
   const UST = M.byCap(M.GROUP.us, ((await M.get('/desk/stocks.json')) || {}).stocks);   // largest first; the first eight show
-  const drawT = async (p) => {
+  let tp = M.PERIODS[0];
+  const drawT = async (p = tp) => {
+    tp = p;
     if (p[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; }   // 3Y and 5Y load the full log
-    M.$('chg-h').textContent = `Change (${p[0]})`; M.$('trend-h').textContent = M.trendHead(p[1], 'us', p[2]); M.stockTable(M.$('body'), UST, p[1]); M.clipRows(M.$('body'), UST.length, 'stocks');
+    M.headText(M.$('chg-h'), `Change (${p[0]})`); M.$('trend-h').textContent = M.trendHead(p[1], 'us', p[2]); M.stockTable(M.$('body'), UST, p[1], false, TSORT); M.clipRows(M.$('body'), UST.length, 'stocks');
   };
+  const TSORT = M.sortable(M.$('body').closest('table'), () => drawT());
   M.segment(M.$('sseg'), '1D', drawT, M.PERIODS.concat(M.LONG)); drawT(M.PERIODS[0]);
   M.outlook(M.$('outlook'), P.outlook, '$');
   M.news(M.$('news'), P.news, true);

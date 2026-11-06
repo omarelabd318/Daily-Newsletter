@@ -265,18 +265,41 @@ window.Desk = (function () {
     const back = p ? p[1] : 0, c = change(s, back);
     return `<span class="${cls(c)}">${pct(c, 2)}</span> <span class="span-l">${SPAN[back] || ''}</span>`;
   }
-  function stockTable(body, tickers, back, inUSD = false) {
-    body.innerHTML = tickers.map((t) => {
-      const s = inUSD ? usd(stock(t)) : stock(t), c = change(s, back), y = ytd(s);
-      return `<tr class="click" onclick="location='/desk/stock/?t=${encodeURIComponent(t)}'"><td class="name"><a href="/desk/stock/?t=${encodeURIComponent(t)}"><b>${esc(NAMES[t])}</b><span>${esc(t)}</span></a></td><td class="trend">${spark(s, back, intraOf(t), back === 7 ? weekOf(t, inUSD) : null)}</td><td class="num">${num(last(s))}</td><td class="num"><span class="${cls(c)}">${pct(c)}</span></td><td class="num"><span class="${cls(y)}">${pct(y)}</span></td></tr>`;
-    }).join('');
+  // sort: { key: 'chg' | 'ytd' | null, dir: -1 (highest first) | 1 } from sortable(); without a key, the order given
+  function stockTable(body, tickers, back, inUSD = false, sort = null) {
+    const rows = tickers.map((t) => { const s = inUSD ? usd(stock(t)) : stock(t); return { t, s, c: change(s, back), y: ytd(s) }; });
+    if (sort && sort.key) { const v = (r) => (sort.key === 'chg' ? r.c : r.y); rows.sort((a, b) => (v(a) == null) - (v(b) == null) || sort.dir * (v(a) - v(b))); }
+    body.innerHTML = rows.map(({ t, s, c, y }) => `<tr class="click" onclick="location='/desk/stock/?t=${encodeURIComponent(t)}'"><td class="name"><a href="/desk/stock/?t=${encodeURIComponent(t)}"><b>${esc(NAMES[t])}</b><span>${esc(t)}</span></a></td><td class="trend">${spark(s, back, intraOf(t), back === 7 ? weekOf(t, inUSD) : null)}</td><td class="num">${num(last(s))}</td><td class="num"><span class="${cls(c)}">${pct(c)}</span></td><td class="num"><span class="${cls(y)}">${pct(y)}</span></td></tr>`).join('');
   }
+  // the stock tables' Change and YTD headers sort the rows: one tap puts the highest first, a second the lowest, a third
+  // goes back to market value. A sorted table shows every row, so "best" is the best of all the desk's stocks.
+  function sortable(table, redraw) {
+    const ths = [...table.querySelectorAll('thead th')], state = { key: null, dir: -1 };
+    for (const [i, key] of [[3, 'chg'], [4, 'ytd']]) {
+      const th = ths[i];
+      th.innerHTML = `<button type="button" class="sorth" title="Sort by this column"><span class="lab">${esc(th.textContent)}</span><i aria-hidden="true"></i></button>`;
+      th.querySelector('button').addEventListener('click', () => {
+        if (state.key !== key) { state.key = key; state.dir = -1; } else if (state.dir === -1) state.dir = 1; else state.key = null;
+        ths.forEach((x) => { x.removeAttribute('aria-sort'); x.classList.remove('asc', 'desc'); });
+        if (state.key) { th.setAttribute('aria-sort', state.dir < 0 ? 'descending' : 'ascending'); th.classList.add(state.dir < 0 ? 'desc' : 'asc'); }
+        const tb = table.querySelector('tbody'), more = table.nextElementSibling;
+        if (tb.dataset.clip) {
+          tb.classList.toggle('clip', !state.key);
+          if (more && more.classList.contains('more-btn')) { more.hidden = !!state.key; more.textContent = more.dataset.label; }
+        }
+        redraw();
+      });
+    }
+    return state;
+  }
+  // a header's text, kept inside its sort button when it has one
+  const headText = (el, t) => { const l = el.querySelector('.lab'); (l || el).textContent = t; };
   // a long table shows its first eight rows; the button under it shows the rest (the rows can be redrawn freely)
   function clipRows(tbody, total, noun) {
     if (total <= 8 || tbody.dataset.clip) return;
     tbody.dataset.clip = '1'; tbody.classList.add('clip');
-    const b = document.createElement('button'); b.type = 'button'; b.className = 'more-btn'; b.textContent = `Show all ${total} ${noun}`;
-    b.addEventListener('click', () => { const on = tbody.classList.toggle('clip'); b.textContent = on ? `Show all ${total} ${noun}` : 'Show fewer'; });
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'more-btn'; b.textContent = b.dataset.label = `Show all ${total} ${noun}`;
+    b.addEventListener('click', () => { const on = tbody.classList.toggle('clip'); b.textContent = on ? b.dataset.label : 'Show fewer'; });
     tbody.closest('table').after(b);
   }
   // tickers by market value, largest first (those without one last)
@@ -365,5 +388,5 @@ window.Desk = (function () {
       location.reload();
     });
   }
-  return { get ASOF() { return ASOF; }, SECTORS, asOfFor, lastDate, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, weekChart, deskNotes, weekOf, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
+  return { get ASOF() { return ASOF; }, SECTORS, sortable, headText, asOfFor, lastDate, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, weekChart, deskNotes, weekOf, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
 })();
