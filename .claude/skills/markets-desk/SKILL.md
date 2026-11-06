@@ -261,6 +261,12 @@ Each of the desk's stocks gets its own search every morning, on top of the newsl
 5. Let it change the analysis: news can move a stock onto or off the Bullish and bearish lists, change a
    projection or its confidence, or add a date to Coming up (results dates, general assemblies).
 
+6. **Results:** when an Egyptian desk stock publishes results, record them the same day with
+   `set_results.py TICKER --period QUARTER-END --ytd ... --prior-fy ... --prior-ytd ... --shares ... --equity ...
+   --source ... --url ...` (profit attributable to shareholders, from the filing or two outlets that agree), then
+   run `fetch_valuation.py TICKER`. The P/E then reflects the new quarter at once, instead of weeks later when
+   TradingView or Mubasher catch up. Add the results date to Coming up when a company announces it.
+
 No news is a valid result: never pad a stock with filler. Its page then shows its figures and older news.
 
 ## The week ahead

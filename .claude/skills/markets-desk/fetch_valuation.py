@@ -5,8 +5,8 @@ Usage:
   python3 .claude/skills/markets-desk/fetch_valuation.py [TICKER ...]
 
 With no tickers it covers all the desk's stocks. Egyptian stocks: trailing earnings and book value per share
-from TradingView's screener and from each stock's Mubasher page, each with the results period it runs to; the
-card takes the newer, and when both run to the same quarter it notes whether they agree. Market value from Mubasher. US stocks:
+from the company's own filing when one is recorded (set_results.py), TradingView's screener and each stock's
+Mubasher page, each with the results period it runs to; the card takes the newest, and when both run to the same quarter it notes whether they agree. Market value from Mubasher. US stocks:
 the last four reported quarters' earnings per share, the analysts' forecast P/E for this year, the dividend
 yield, the analysts' one-year target and the market value, from Nasdaq.
 
@@ -103,6 +103,10 @@ def mubasher(t):
 def egx(t):
     """The newest usable figures of the two sources; when both run to the same quarter, the other one checks it."""
     price, cands = last_close("egx", t), []
+    # the company's own filing, recorded with set_results.py: first, so it wins a tie on the period
+    F = (json.load(open(STOCKS))["stocks"].get(t) or {}).get("filed")
+    if F and F.get("eps_ttm") is not None:
+        cands.append((f"Company filing ({F.get('source')})", None, F["eps_ttm"], F.get("bvps"), F["period"]))
     if TV.get(t):
         cands.append(("TradingView", *TV[t]))
     try:
