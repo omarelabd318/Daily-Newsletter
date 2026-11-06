@@ -222,6 +222,28 @@ def main(args):
         errors.append("judge_views.py has verdicts to record: run it with --write. " + "; ".join(pending[:3]))
     warnings.extend("judge_views: " + l[8:] for l in jv if l.startswith("WARNING "))
 
+    # research: the day's log (research_log.py, desk part), and every desk stock that moved 3% or more checked
+    import research_log
+    RL = research_log.load(date).get("desk")
+    if not RL:
+        errors.append("Research: no desk log in data/research/DATE.json. Log searches, pages and each stock checked with research_log.py.")
+    else:
+        T = research_log.TARGETS["desk"]
+        for k in ("searches", "pages"):
+            n = len(set(RL.get(k, [])))
+            if n < T[k] / 2:
+                errors.append(f"Research: only {n} desk {k} logged (aim for {T[k]}+).")
+            elif n < T[k]:
+                warnings.append(f"Research: {n} desk {k} logged, below the {T[k]} a full desk usually takes.")
+        LOGD = (load("data/markets-recent.json") or {}).get("days", [])
+        if len(LOGD) >= 2:
+            a, b = LOGD[-2], LOGD[-1]
+            for grp in ("egx", "us"):
+                for t, v in (b.get(grp) or {}).items():
+                    pv = (a.get(grp) or {}).get(t)
+                    if t in ALL and pv and isinstance(v, (int, float)) and v != pv and abs(v / pv - 1) >= 0.03 and t not in RL.get("stocks", {}):
+                        warnings.append(f"Research: {t} moved {(v / pv - 1) * 100:+.1f}% but no check is logged for it (research_log.py DATE desk stock {t} ...).")
+
     # US English across the day's text (links and quotes aside)
     us_txt = []
     def us_walk(o, k=""):

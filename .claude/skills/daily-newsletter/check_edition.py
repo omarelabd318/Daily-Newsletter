@@ -252,6 +252,23 @@ def main(path):
         warnings.append(f"US English: {len(found)} British spelling(s) or day-first date(s): {shown}"
                         + (" …" if len(found) > 12 else "") + ". Proper names keep their own spelling.")
 
+    # Research: the day's log (research_log.py) shows how much was searched and read for the edition.
+    m = re.match(r"(\d{4}-\d{2}-\d{2})(?:-v\d+)?\.md$", os.path.basename(path))
+    if m and not recap:
+        import research_log
+        log = research_log.load(m.group(1)).get("newsletter")
+        if not log:
+            errors.append("Research: no log for this edition (data/research/DATE.json). Log every search and page opened "
+                          "with research_log.py as you go.")
+        else:
+            T = research_log.TARGETS["newsletter"]
+            for k in ("searches", "pages"):
+                n = len(set(log.get(k, [])))
+                if n < T[k] / 2:
+                    errors.append(f"Research: only {n} {k} logged (aim for {T[k]}+): research more widely before publishing.")
+                elif n < T[k]:
+                    warnings.append(f"Research: {n} {k} logged, below the {T[k]} a full edition usually takes.")
+
     # Quick Hits carries a Number of the day (daily editions only).
     if not recap and not any(re.match(r"^\s*(?:[-*]\s+)?\*\*Number of the day:\*\*", l)
                              for l in sections.get("Quick Hits", {}).get("body", [])):

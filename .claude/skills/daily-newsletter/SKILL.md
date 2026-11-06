@@ -191,6 +191,14 @@ closing or a LIVE price, the quote time and the source. Then:
   rate instead of the market mid-rate, when that is what the edition shows). It already holds closing
   prices only, including previous closes while the EGX is trading.
 
+## Research log
+
+Log the research as you do it, with `python3 .claude/skills/daily-newsletter/research_log.py DATE newsletter search "query"`
+for every web search and `... DATE newsletter page URL` for every page opened (read_enterprise.py counts as the pages it
+prints). A full edition takes at least 25 searches across many outlets and 30 pages opened; the checker warns below
+that and blocks publishing below half. The log is the honest record of the work: never log a search or a page that
+was not made. End the final reply with the line `research_log.py DATE newsletter summary` prints.
+
 ## Attribution in the text
 
 - **Name the outlet** whenever a claim is attributed: "according to Reuters", "Ahram Online reported",

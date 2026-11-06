@@ -251,6 +251,12 @@ link to the story's own page. Take them from the newsletter's research and from 
 
 ## Stock research, every day
 
+Log the desk's research as you go with `research_log.py DATE desk search|page ...`, and one line per stock with
+`research_log.py DATE desk stock TICKER "what was found"` (or "no news"). A full desk takes at least 15 searches and
+15 pages beyond the edition; every desk stock that moved 3% or more on the session, or has a lead in stock_news.py,
+needs its leads opened and a stock line logged (the checker names any mover without one). Never log work not done.
+End the final reply with the line `research_log.py DATE desk summary` prints.
+
 Each of the desk's stocks gets its own search every morning, on top of the newsletter's research:
 
 1. Run `python3 .claude/skills/markets-desk/stock_news.py` (add `3` on Sundays to cover the weekend). It
