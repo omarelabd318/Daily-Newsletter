@@ -436,6 +436,7 @@ td.trend{vertical-align:middle}
     if(date === 'topics'){ showTopics(); return; }
     if(date.indexOf('topic/') === 0){ showTopic(date.slice(6)); return; }
     $('topicsLink').removeAttribute('aria-current');
+    $('topicsLink').setAttribute('aria-expanded', 'false');
     var idx = editions.findIndex(function(e){return key(e)===date});
     if(idx < 0) idx = editions.findIndex(function(e){return e.date===date});
     if(idx < 0) idx = 0;
@@ -447,7 +448,7 @@ td.trend{vertical-align:middle}
     $('summary').hidden = !ed.summary;
     $('edition').hidden = false;
     document.title = 'Daily Newsletter · ' + tabTitle(ed);
-    current = key(ed);
+    current = key(ed); lastEdition = current;
     buildArchive(key(ed)); setNav(idx);
     fetch('editions/'+key(ed)+'.md',{cache:'no-cache'}).then(function(r){
       if(!r.ok) throw new Error(r.status);
@@ -529,7 +530,15 @@ td.trend{vertical-align:middle}
 
   // ---- running topics (data/topics.json): a label under each story that belongs to one, a Topics list, a page
   // per topic with every story on it, newest first ----
-  var topicsP = null;
+  var topicsP = null, lastEdition = '';
+  // a second click on Topics closes it, back to the edition that was open (or the newest), like the archive button
+  $('topicsLink').addEventListener('click', function(ev){
+    var h = (location.hash || '').replace('#', '');
+    if(h === 'topics' || h.indexOf('topic/') === 0){
+      ev.preventDefault();
+      location.hash = lastEdition || (editions.length ? key(editions[0]) : '');
+    }
+  });
   function getTopics(){ if(!topicsP) topicsP = fetch('data/topics.json', {cache:'no-cache'}).then(function(r){ return r.ok ? r.json() : {topics:[], stories:[]}; }).catch(function(){ return {topics:[], stories:[]}; }); return topicsP; }
   function topicStats(T){
     var st = {};
@@ -555,7 +564,7 @@ td.trend{vertical-align:middle}
   function topicFrame(inner){
     $('edition').hidden = true; $('toc').hidden = true;
     $('archive').classList.remove('open'); $('archiveBtn').setAttribute('aria-expanded','false');
-    $('topicsLink').setAttribute('aria-current', 'page');
+    $('topicsLink').setAttribute('aria-current', 'page'); $('topicsLink').setAttribute('aria-expanded', 'true');
     $('content').innerHTML = '<section class="s tp"><div class="frame"><div class="s-in"><div class="s-body">' + inner + '</div></div></div></section>';
     window.scrollTo(0,0);
   }
