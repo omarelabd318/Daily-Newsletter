@@ -53,15 +53,11 @@
 
     <h2 class="sec-h">The stocks</h2>
     <section class="card c12">
-      <div class="card-h"><h2>US stocks</h2><div class="seg" id="sseg"></div></div>
+      <div class="card-h"><div class="hgroup"><h2>US stocks</h2><div class="ctabs" id="sview" aria-label="Group"></div></div><div class="seg" id="sseg"></div></div>
       <table><thead><tr><th>Stock</th><th class="trend" id="trend-h">Last 7 days</th><th class="num">Close</th><th class="num" id="chg-h">Change (1D)</th><th class="num">YTD</th></tr></thead><tbody id="body"></tbody></table>
       <p class="stock-note">Tap a stock for its own page.</p>
     </section>
 
-    <section class="card c12">
-      <div class="card-h"><h2>Sectors</h2><span class="meta" id="sec-meta"></span></div>
-      <div id="sectors"></div>
-    </section>
 
     <section class="card c12">
       <div class="card-h"><h2>Coming up for the desk's stocks</h2><span class="meta">Results and dividends</span></div>
@@ -114,13 +110,14 @@
   mseg(); dm();
   if (P.afterBell && P.afterBell.length) { M.$('c-bell').hidden = false; M.$('bell-date').textContent = M.short(M.asOfFor('us')); M.$('bell').innerHTML = M.drivers(P.afterBell); }
   const UST = M.byCap(M.GROUP.us, ((await M.get('/desk/stocks.json')) || {}).stocks);   // largest first; the first eight show
-  let tp = M.PERIODS[0];
+  let tp = M.PERIODS[0], tSEC = false;
   const drawT = async (p = tp) => {
     tp = p;
     if (p[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; }   // 3Y and 5Y load the full log
-    M.headText(M.$('chg-h'), `Change (${p[0]})`); M.$('trend-h').textContent = M.trendHead(p[1], 'us', p[2]); M.stockTable(M.$('body'), UST, p[1], false, TSORT); M.clipRows(M.$('body'), UST.length, 'stocks'); const sl = { 0: 'on the day', 7: 'over the week', 30: 'over the month', 182: 'over six months', 365: 'over the year' }[p[1]] || p[2].toLowerCase(); M.sectorMoves(M.$('sectors'), 'us', p[1], false, sl); M.$('sec-meta').textContent = sl[0].toUpperCase() + sl.slice(1);
+    M.headText(M.$('chg-h'), `Change (${p[0]})`); M.$('trend-h').textContent = M.trendHead(p[1], 'us', p[2]); M.stockTable(M.$('body'), UST, p[1], false, TSORT, tSEC ? 'us' : null); M.clipRows(M.$('body'), UST.length, 'stocks'); M.showAllRows(M.$('body'));
   };
   const TSORT = M.sortable(M.$('body').closest('table'), () => drawT());
+  M.toggle(M.$('sview'), ['All', 'By sector'], (i) => { tSEC = i === 1; drawT(); });
   M.segment(M.$('sseg'), '1D', drawT, M.PERIODS.concat(M.LONG)); drawT(M.PERIODS[0]);
   M.calendar(M.$('calendar'), 'us', await M.get('/desk/calendar.json'), ((await M.get('/desk/stocks.json')) || {}).stocks);
   M.outlook(M.$('outlook'), P.outlook, '$');

@@ -62,15 +62,11 @@
 
     <h2 class="sec-h">The stocks</h2>
     <section class="card c12">
-      <div class="card-h"><div class="hgroup"><h2>Egyptian stocks</h2><div class="ctabs" id="scur" aria-label="Currency"></div></div><div class="seg" id="sseg"></div></div>
+      <div class="card-h"><div class="hgroup"><h2>Egyptian stocks</h2><div class="ctabs" id="scur" aria-label="Currency"></div><div class="ctabs" id="sview" aria-label="Group"></div></div><div class="seg" id="sseg"></div></div>
       <table><thead><tr><th>Stock</th><th class="trend" id="trend-h">Last 7 days</th><th class="num" id="close-h">Close</th><th class="num" id="chg-h">Change (1D)</th><th class="num">YTD</th></tr></thead><tbody id="body"></tbody></table>
       <p class="stock-note">Tap a stock for its own page.</p>
     </section>
 
-    <section class="card c12">
-      <div class="card-h"><h2>Sectors</h2><span class="meta" id="sec-meta"></span></div>
-      <div id="sectors"></div>
-    </section>
 
     <section class="card c12">
       <div class="card-h"><h2>Coming up for the desk's stocks</h2><span class="meta">Results and dividends</span></div>
@@ -186,16 +182,17 @@
   else { M.$('fhist').style.height = 'auto'; M.$('fhist').innerHTML = `<p class="sub">${fd.length ? `Logged since ${M.short(fd[0].date)}: ` + fd.map((d, i) => `${M.short(d.date)} <span class="num ${M.cls(foreign[i])}">${foreign[i] > 0 ? '+' : ''}${foreign[i].toFixed(2)}</span>`).join(', ') + '. The chart appears after three sessions.' : 'No sessions logged yet.'}</p>`; }
 
   // the table in pounds or dollars, over 1D to 5Y (3Y and 5Y load the full log)
-  let tper = M.PERIODS[0], tUSD = false;
+  let tper = M.PERIODS[0], tUSD = false, tSEC = false;
   const EGXT = M.byCap(M.GROUP.egx, ((await M.get('/desk/stocks.json')) || {}).stocks);   // largest first; the first eight show
   const drawT = async () => {
     if (tper[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; }
     M.headText(M.$('chg-h'), `Change (${tper[0]})`); M.$('trend-h').textContent = M.trendHead(tper[1], 'egx', tper[2]);
     M.$('close-h').textContent = tUSD ? 'Close ($)' : 'Close';
-    M.stockTable(M.$('body'), EGXT, tper[1], tUSD, TSORT); M.clipRows(M.$('body'), EGXT.length, 'stocks'); const sl = { 0: 'on the day', 7: 'over the week', 30: 'over the month', 182: 'over six months', 365: 'over the year' }[tper[1]] || tper[2].toLowerCase(); M.sectorMoves(M.$('sectors'), 'egx', tper[1], tUSD, sl); M.$('sec-meta').textContent = sl[0].toUpperCase() + sl.slice(1);
+    M.stockTable(M.$('body'), EGXT, tper[1], tUSD, TSORT, tSEC ? 'egx' : null); M.clipRows(M.$('body'), EGXT.length, 'stocks'); M.showAllRows(M.$('body'));
   };
   const TSORT = M.sortable(M.$('body').closest('table'), () => drawT());
   M.toggle(M.$('scur'), ['EGP', 'USD'], (i) => { tUSD = i === 1; drawT(); });
+  M.toggle(M.$('sview'), ['All', 'By sector'], (i) => { tSEC = i === 1; drawT(); });
   M.segment(M.$('sseg'), '1D', (p) => { tper = p; drawT(); }, M.PERIODS.concat(M.LONG)); drawT();
   M.calendar(M.$('calendar'), 'egx', await M.get('/desk/calendar.json'), ((await M.get('/desk/stocks.json')) || {}).stocks);
   M.outlook(M.$('outlook'), P.outlook, 'EGP');

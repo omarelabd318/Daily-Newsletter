@@ -273,23 +273,33 @@ window.Desk = (function () {
     return `<span class="${cls(c)}">${pct(c, 2)}</span> <span class="span-l">${SPAN[back] || ''}</span>`;
   }
   // sort: { key: 'chg' | 'ytd' | null, dir: -1 (highest first) | 1 } from sortable(); without a key, the order given
-  function stockTable(body, tickers, back, inUSD = false, sort = null) {
+  // the EGX and Wall Street tables. group (a market: 'egx' or 'us') lists the stocks under the desk's broad sectors,
+  // each headed by the equal-weighted average of its stocks' change and YTD, best sector first (or by the sorted column)
+  function stockTable(body, tickers, back, inUSD = false, sort = null, group = null) {
     const rows = tickers.map((t) => { const s = inUSD ? usd(stock(t)) : stock(t); return { t, s, c: change(s, back), y: ytd(s) }; });
-    if (sort && sort.key) { const v = (r) => (sort.key === 'chg' ? r.c : r.y); rows.sort((a, b) => (v(a) == null) - (v(b) == null) || sort.dir * (v(a) - v(b))); }
-    body.innerHTML = rows.map(({ t, s, c, y }) => `<tr class="click" onclick="location='/desk/stock/?t=${encodeURIComponent(t)}'"><td class="name"><a href="/desk/stock/?t=${encodeURIComponent(t)}"><b>${esc(NAMES[t])}</b><span>${esc(t)}</span></a></td><td class="trend">${spark(s, back, intraOf(t), back === 7 ? weekOf(t, inUSD) : null)}</td><td class="num">${num(last(s))}</td><td class="num"><span class="${cls(c)}">${pct(c)}</span></td><td class="num"><span class="${cls(y)}">${pct(y)}</span></td></tr>`).join('');
+    const v = (r) => (sort && sort.key === 'ytd' ? r.y : r.c);
+    if (sort && sort.key) rows.sort((a, b) => (v(a) == null) - (v(b) == null) || sort.dir * (v(a) - v(b)));
+    const row = ({ t, s, c, y }) => `<tr class="click" onclick="location='/desk/stock/?t=${encodeURIComponent(t)}'"><td class="name"><a href="/desk/stock/?t=${encodeURIComponent(t)}"><b>${esc(NAMES[t])}</b><span>${esc(t)}</span></a></td><td class="trend">${spark(s, back, intraOf(t), back === 7 ? weekOf(t, inUSD) : null)}</td><td class="num">${num(last(s))}</td><td class="num"><span class="${cls(c)}">${pct(c)}</span></td><td class="num"><span class="${cls(y)}">${pct(y)}</span></td></tr>`;
+    body.dataset.grouped = group ? '1' : '';
+    if (!group) { body.innerHTML = rows.map(row).join(''); return; }
+    const avg = (rs, k) => { const xs = rs.map((r) => r[k]).filter((x) => x != null); return xs.length ? xs.reduce((a, x) => a + x, 0) / xs.length : null; };
+    const groups = SECTORS[group].map(([name, ts]) => ({ name, rs: rows.filter((r) => ts.includes(r.t)) }));
+    const left = rows.filter((r) => !SECTORS[group].some(([, ts]) => ts.includes(r.t)));
+    if (left.length) groups.push({ name: 'Other', rs: left });
+    groups.forEach((g) => { g.c = avg(g.rs, 'c'); g.y = avg(g.rs, 'y'); });
+    const gv = (g) => (sort && sort.key === 'ytd' ? g.y : g.c), dir = sort && sort.key ? sort.dir : -1;
+    const shown = groups.filter((g) => g.rs.length).sort((a, b) => (gv(a) == null) - (gv(b) == null) || dir * (gv(a) - gv(b)));
+    body.innerHTML = shown.map((g) => `<tr class="sec-row"><th scope="rowgroup">${esc(g.name)}<span>${g.rs.length > 1 ? `${g.rs.length} stocks, average` : '1 stock'}</span></th><td class="trend"></td><td></td>`
+      + `<td class="num"><span class="${cls(g.c)}">${pct(g.c)}</span></td><td class="num"><span class="${cls(g.y)}">${pct(g.y)}</span></td></tr>` + g.rs.map(row).join('')).join('');
   }
-  // each broad sector's move: the equal-weighted average of the desk's stocks in it over the period, as bars either
-  // side of zero (the table's period and currency), with the best and worst stock named
-  function sectorMoves(el, market, back, inUSD = false, label = '') {
-    const rows = SECTORS[market].map(([name, ts]) => {
-      const cs = ts.map((t) => { const s = inUSD ? usd(stock(t)) : stock(t); return { t, c: s.length && lastDate(s) >= cut(asOfFor(market), 7) ? change(s, back) : null }; }).filter((x) => x.c != null);
-      return { name, n: cs.length, avg: cs.length ? cs.reduce((a, x) => a + x.c, 0) / cs.length : null, cs: cs.sort((a, b) => b.c - a.c) };
-    }).filter((r) => r.avg != null).sort((a, b) => b.avg - a.avg);
-    const max = Math.max(...rows.map((r) => Math.abs(r.avg)), 0.1);
-    el.innerHTML = '<div class="secmoves">' + rows.map((r) => `<div class="flow"><div class="flow-top"><span>${esc(r.name)}</span><span class="num ${cls(r.avg)}">${pct(r.avg)}</span></div>`
-      + `<div class="flow-bar"><i class="${r.avg >= 0 ? 'pos' : 'neg'}" style="width:${(Math.abs(r.avg) / max * 50).toFixed(1)}%"></i></div>`
-      + `<div class="secd">${r.n > 1 ? `${r.n} stocks · best ${esc(r.cs[0].t)} <span class="${cls(r.cs[0].c)}">${pct(r.cs[0].c)}</span> · worst ${esc(r.cs.at(-1).t)} <span class="${cls(r.cs.at(-1).c)}">${pct(r.cs.at(-1).c)}</span>` : esc(r.cs[0].t) + ' only'}</div></div>`).join('') + '</div>'
-      + `<p class="stock-note">Equal-weighted average of the desk's stocks in each sector${label ? ', ' + esc(label) : ''}${inUSD ? ', in dollars' : ''}.</p>`;
+  // a clipped table shows every row while it is sorted or grouped by sector, and its first eight again after
+  function showAllRows(tbody) {
+    if (!tbody.dataset.clip) return;
+    const all = !!tbody.dataset.grouped || !!tbody.dataset.sorted, more = tbody.closest('table').nextElementSibling;
+    if (tbody.dataset.allRows === String(all)) return;   // unchanged: a table opened with "Show all" stays open
+    tbody.dataset.allRows = String(all);
+    tbody.classList.toggle('clip', !all);
+    if (more && more.classList.contains('more-btn')) { more.hidden = all; more.textContent = more.dataset.label; }
   }
   // coming up for the desk's stocks: results dates and dividends from desk/calendar.json (TradingView), and the dates
   // the desk confirmed itself (each stock's "next" in desk/stocks.json); the next 30 days first
@@ -328,12 +338,9 @@ window.Desk = (function () {
         if (state.key !== key) { state.key = key; state.dir = -1; } else if (state.dir === -1) state.dir = 1; else state.key = null;
         ths.forEach((x) => { x.removeAttribute('aria-sort'); x.classList.remove('asc', 'desc'); });
         if (state.key) { th.setAttribute('aria-sort', state.dir < 0 ? 'descending' : 'ascending'); th.classList.add(state.dir < 0 ? 'desc' : 'asc'); }
-        const tb = table.querySelector('tbody'), more = table.nextElementSibling;
-        if (tb.dataset.clip) {
-          tb.classList.toggle('clip', !state.key);
-          if (more && more.classList.contains('more-btn')) { more.hidden = !!state.key; more.textContent = more.dataset.label; }
-        }
-        redraw();
+        const tb = table.querySelector('tbody');
+        tb.dataset.sorted = state.key ? '1' : '';
+        redraw(); showAllRows(tb);
       });
     }
     return state;
@@ -443,5 +450,5 @@ window.Desk = (function () {
       location.reload();
     });
   }
-  return { get ASOF() { return ASOF; }, SECTORS, sortable, headText, sectorMoves, calendar, asOfFor, lastDate, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, weekChart, deskNotes, weekOf, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
+  return { get ASOF() { return ASOF; }, SECTORS, sortable, headText, showAllRows, calendar, asOfFor, lastDate, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, weekChart, deskNotes, weekOf, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
 })();
