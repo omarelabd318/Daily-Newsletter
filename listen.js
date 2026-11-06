@@ -108,12 +108,13 @@
       }
       // a unit said after a figure ("98.29 dollars", "3.9 percent") stays on the figure
       // (unless the page says it too: "$125 million", "100 basis points")
-      if(cur >= 0 && UNITW.test(k) && /\d/.test(dw[cur].k) && !(dw[cur + 1] && same(k, dw[cur + 1].k))){ map[s] = cur; continue; }
+      var prev = s ? map[s - 1] : -1;
+      if(prev >= 0 && UNITW.test(k) && /\d|^(million|billion|trillion|thousand)$/.test(dw[prev].k) && !(dw[prev + 1] && same(k, dw[prev + 1].k))){ map[s] = prev; continue; }
       // a short word ("to", "a") only matches the next word or the one after, so it cannot jump ahead past real words;
       // after a run of spoken words with no match on the page (a score read as "3 to 6, 6 to 4") the search reaches further
       if(k) for(var j = cur + 1; j < Math.min(dw.length, cur + (k.length <= 3 ? 3 : 7) + miss); j++) if(same(k, dw[j].k)){ found = j; break; }
       if(found >= 0){ cur = found; miss = 0; } else miss++;
-      map[s] = found >= 0 ? found : cur >= 0 && (UNITW.test(k) || /\d/.test(dw[cur].k)) ? cur : Math.min(cur + 1, dw.length - 1);
+      map[s] = found >= 0 ? found : cur >= 0 && /\d/.test(dw[cur].k) ? cur : Math.min(cur + 1, dw.length - 1);
     }
     return map;
   }
@@ -313,6 +314,9 @@
     sw.text = text; sw.map = align(sw.map(function(x){ return x.w; }), domWords(b));
     return (b.sw = sw);
   }
+  // characters a second the device voice speaks at 1x, learned from each sentence it finishes (for voices that do not
+  // report each word, the highlight moves at this pace instead)
+  var CPS = 14;
   function speakFrom(i, fromWord){
     if(!synth) return;
     var my = ++token;
@@ -320,28 +324,54 @@
     S.i = i; paint();
     var b = S.list[i]; if(!b){ S.playing = false; paint(); return; }
     var sw = spokenWords(b), base = fromWord && sw[fromWord] ? sw[fromWord].at : 0;
-    var parts = sentences(sw.text.slice(base)), k = 0;
+    var parts = sentences(sw.text.slice(base)), k = 0, timer = null;
     if(fromWord) markWord(b, sw.map[fromWord]);
+    var wordAt = function(at){ var wi = 0; while(wi + 1 < sw.length && sw[wi + 1].at <= at) wi++; return wi; };
     var next = function(){
+      clearInterval(timer);
       if(my !== token || !S) return;
       if(k >= parts.length){
         setTimeout(function(){ if(my === token && S && S.playing) speakFrom(i + 1); }, b.kind === 'text' ? 250 : 450);
         return;
       }
-      var part = parts[k++], u = new SpeechSynthesisUtterance(part.t);
+      say(parts[k++], 0);
+    };
+    var say = function(part, tries){
+      var u = new SpeechSynthesisUtterance(part.t), started = 0, sent = Date.now(), heard = false;
       if(S.voice){ u.voice = S.voice; u.lang = S.voice.lang; } else u.lang = 'en-US';
       u.rate = S.rate;
-      // the word being said, where the voice reports it (most do; some network voices do not)
+      u.onstart = function(){
+        if(my !== token) return;
+        started = Date.now();
+        markWord(b, sw.map[wordAt(base + part.off)]);
+        // no word reports from this voice: move the highlight at its speaking pace
+        clearInterval(timer);
+        timer = setInterval(function(){
+          if(my !== token || !S || !S.playing){ clearInterval(timer); return; }
+          if(heard) return;
+          var c = (Date.now() - started) / 1000 * CPS * S.rate;
+          if(c < part.t.length) markWord(b, sw.map[wordAt(base + part.off + c)]);
+        }, 120);
+      };
+      // the word being said, where the voice reports it (most do; some do not, or stop after a restart)
       u.onboundary = function(e){
         if(my !== token || (e.name && e.name !== 'word')) return;
-        var at = base + part.off + e.charIndex, wi = 0;
-        while(wi + 1 < sw.length && sw[wi + 1].at <= at) wi++;
-        markWord(b, sw.map[wi]);
+        heard = true;
+        markWord(b, sw.map[wordAt(base + part.off + e.charIndex)]);
       };
-      u.onend = next; u.onerror = function(e){ if(e.error !== 'interrupted' && e.error !== 'canceled') next(); };
+      u.onend = function(){
+        if(my !== token) return;
+        // Safari can drop a sentence spoken straight after a cancel and report it finished at once: say it again
+        if(!started && Date.now() - sent < 250 && tries < 2){ setTimeout(function(){ if(my === token) say(part, tries + 1); }, 200); return; }
+        var secs = started ? (Date.now() - started) / 1000 : 0;
+        if(secs > 1 && part.t.length > 20){ var c = part.t.length / secs / S.rate; if(c > 6 && c < 30) CPS = CPS * 0.6 + c * 0.4; }
+        next();
+      };
+      u.onerror = function(e){ if(my === token && e.error !== 'interrupted' && e.error !== 'canceled') next(); };
       synth.speak(u);
     };
-    next();
+    // a short pause after the cancel: speaking at once is what Safari drops
+    setTimeout(function(){ if(my === token && S) next(); }, 150);
   }
 
   // ---- tap a word to read from there (while the player is open) ----
