@@ -12,6 +12,13 @@ These rules add to the task prompt that asks for the edition. Where the prompt s
 section order or publishing steps, follow the prompt. This file sets how much space each section gets,
 where each story goes, and the check to run before committing.
 
+## US English
+
+Write in US English: American spelling (organize, analyze, center, program, defense, labor, color, percent,
+traveled, fertilizer) and month-first dates ("Thursday, November 5", "Nov 5", never "5 November"). Proper names
+keep their own spelling (the Labour Party, Egypt Aluminium, the UK Ministry of Defence), and quotes keep the
+speaker's words. The checker lists any British spelling or day-first date it finds.
+
 ## Word budget
 
 Aim for about 3,050 to 3,150 words, not counting the Sources list. These numbers are a guide to
@@ -203,6 +210,13 @@ closing or a LIVE price, the quote time and the source. Then:
   EnterpriseAM and CairoScene. The instruction that an edition should not read like a rewrite of either
   is about writing in your own words and checking key facts elsewhere, not a cap on how much comes from
   them. Each story is still judged on its own merit and placed in the section where it belongs.
+- **Spread the wire and world sources:** apart from EnterpriseAM and CairoScene, no one outlet should carry more
+  than about six of the edition's Sources links. World and regional stories come from many outlets (Reuters, AP,
+  AFP, BBC, the Financial Times, Bloomberg, The National, Asharq Al-Awsat, Al-Monitor, Al Jazeera and others):
+  keep every story that deserves its place, but take it from the outlet with the fullest report, or the one
+  closest to the news, rather than defaulting to one site, and check it against a second. Al Jazeera is a
+  credible source for the region, but its own editorial line on Gulf and regional politics is one more reason
+  to pair it with another outlet. The checker warns when one outlet passes six links.
 - **Variety by adding, not dropping:** go through the whole EnterpriseAM edition (on weekdays) and
   CairoScene, and consider every item. Variety comes from adding strong stories from other outlets
   alongside them, never from leaving out a good EnterpriseAM or CairoScene story to balance the count.

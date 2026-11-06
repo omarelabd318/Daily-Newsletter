@@ -298,6 +298,9 @@ periods and YTD come from `data/markets.json`.
 
 ## Wording
 
+US English throughout, as in the newsletter's skill: American spelling (fertilizer, favor, organize, percent) and
+month-first dates ("Thu, Nov 5", "November 5"). The checker flags British spellings and day-first dates in the day's file.
+
 Label the stock tables "Egyptian stocks" and "US stocks" (the list pages and menu items are "EGX stocks" and "Wall Street stocks"), and the dashboard's "Stocks": never "your stocks",
 in labels or in the text.
 

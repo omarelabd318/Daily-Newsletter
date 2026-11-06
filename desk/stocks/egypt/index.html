@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en-US">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -75,14 +75,14 @@
     const card = (r) => r.now == null ? `<a class="card scard" href="/desk/stock/?t=${encodeURIComponent(r.t)}">
       <div class="sh"><span><b>${M.esc(M.NAMES[r.t])}</b><span class="t">${M.esc(r.t)}${(prof[r.t] || {}).sector ? ' · ' + M.esc(prof[r.t].sector) : ''}</span></span><span class="pill open">Not trading yet</span></div>
       <div class="sp"><span class="meta">${M.esc(soon(r.t))}</span></div>
-      <p class="snews">${r.news ? `<span class="when">${M.day(r.news.date).getDate()} ${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][M.day(r.news.date).getMonth()]}</span> ${M.esc(r.news.text.length > 120 ? r.news.text.slice(0, 117) + '…' : r.news.text)}` : ''}</p>
+      <p class="snews">${r.news ? `<span class="when">${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][M.day(r.news.date).getMonth()]} ${M.day(r.news.date).getDate()}</span> ${M.esc(r.news.text.length > 120 ? r.news.text.slice(0, 117) + '…' : r.news.text)}` : ''}</p>
     </a>` : `<a class="card scard" href="/desk/stock/?t=${encodeURIComponent(r.t)}">
       <div class="sh"><span><b>${M.esc(M.NAMES[r.t])}</b><span class="t">${M.esc(r.t)}${(prof[r.t] || {}).sector ? ' · ' + M.esc(prof[r.t].sector) : ''}${capText(r.t)}</span></span>${r.open ? `<span class="pill open">${r.open} open view${r.open > 1 ? 's' : ''}</span>` : ''}</div>
       <div class="sp"><span class="lvl num">${cur}${M.num(M.last(r.s))}</span>${M.heroChg(r.s, per)}</div>
       ${line(r.pts)}
       <div class="sk"><span>This year <span class="num ${M.cls(r.y)}">${M.pct(r.y)}</span></span><span class="num">52w ${M.num(r.lo, r.lo < 10 ? 2 : 0)}–${M.num(r.hi, r.hi < 10 ? 2 : 0)}</span></div>
       <div class="range" style="margin:8px 0 0"><i style="left:calc(${((r.now - r.lo) / (r.hi - r.lo || 1) * 100).toFixed(1)}% - 1px)"></i></div>
-      <p class="snews">${r.news ? `<span class="when">${M.day(r.news.date).getDate()} ${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][M.day(r.news.date).getMonth()]}</span> ${M.esc(r.news.text.length > 120 ? r.news.text.slice(0, 117) + '…' : r.news.text)}` : '<span class="when">No recent news</span>'}</p>
+      <p class="snews">${r.news ? `<span class="when">${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][M.day(r.news.date).getMonth()]} ${M.day(r.news.date).getDate()}</span> ${M.esc(r.news.text.length > 120 ? r.news.text.slice(0, 117) + '…' : r.news.text)}` : '<span class="when">No recent news</span>'}</p>
     </a>`;
     // by sector: the desk's broad sectors, each headed by its equal-weighted change over the period; ordered by
     // combined market value, or by that change when sorting best or worst. Inside a sector the chosen order holds.

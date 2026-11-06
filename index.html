@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-US">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2352d6b5'/%3E%3Cpath d='M18 14h14c11 0 18 7 18 18s-7 18-18 18H18z' fill='%230e1216'/%3E%3C/svg%3E">
-<script>document.documentElement.className='js';try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+<script>document.documentElement.className='js';try{if(localStorage.getItem('width')==='wide')document.documentElement.setAttribute('data-width','wide');var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
 <style>
 :root{
   --ground:#0e1216; --raised:#151b21; --ink:#eef2f4; --ink2:#a9b4be; --accent:#52d6b5; --accent-ink:#07201a;
@@ -219,11 +219,37 @@ td.trend{vertical-align:middle}
   a{color:inherit;text-decoration:none}
   td{background:#f2f2f2!important}
 }
+
+/* wide layout (a reader's choice on large screens, remembered on this device): the page uses the screen's width
+   and each section's stories run in two columns, like a broadsheet; tables, subheads and boxes span both */
+#widthBtn{display:none;position:absolute;top:14px;left:0;background:none;border:0;cursor:pointer;color:var(--ink2);font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;padding:8px 0}
+#widthBtn:hover{color:var(--accent)}
+@media (min-width:1100px){
+  #widthBtn{display:block}
+  :root[data-width="wide"] .frame{max-width:1320px}
+  :root[data-width="wide"] .s-body{column-count:2;column-gap:56px;column-rule:1px solid var(--rule)}
+  :root[data-width="wide"] .s-body > p,:root[data-width="wide"] .s-body > blockquote,:root[data-width="wide"] .s-body li{break-inside:avoid}
+  :root[data-width="wide"] .s-body > ol,:root[data-width="wide"] .s-body > ul{margin-top:0}
+  :root[data-width="wide"] .s-body > h3,:root[data-width="wide"] .s-body > .tablewrap,:root[data-width="wide"] .s-body > .pbar,
+  :root[data-width="wide"] .s-body > blockquote,:root[data-width="wide"] .s-body > .sp{column-span:all}
+  :root[data-width="wide"] .s-body > h3{margin-top:36px}
+  :root[data-width="wide"] .s.src .s-body{column-count:1}
+  :root[data-width="wide"] .s.src .s-body ul{columns:3;column-gap:40px}
+  :root[data-width="wide"] .edition .sum{max-width:60ch}
+}
+@media print{#widthBtn{display:none!important}}
+/* Sources start folded */
+.srcs summary{cursor:pointer;font:600 13px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);padding:8px 0;list-style:none}
+.srcs summary::-webkit-details-marker{display:none}
+.srcs summary::before{content:"+ ";color:var(--accent)} .srcs[open] summary::before{content:"\2212  "}
+.srcs summary:hover{color:var(--accent)}
+.srcs[open] summary{margin-bottom:12px}
 </style>
 </head>
 <body>
 <div class="frame">
   <header class="mast">
+    <button id="widthBtn" type="button" aria-pressed="false">Wide</button>
     <button id="themeBtn" type="button" aria-label="Switch to dark mode">Dark</button>
     <h1>Daily Newsletter</h1>
     <p class="what">A daily briefing on Egypt, World News, Markets, Sports and Culture.</p>
@@ -351,7 +377,7 @@ td.trend{vertical-align:middle}
   function pretty(d){
     var dt = new Date(d+'T12:00:00');
     if(isNaN(dt)) return d;
-    return dt.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+    return dt.toLocaleDateString('en-US',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
   }
   // an edition's key is its id when it has one (a second edition on the same day), otherwise its date
   function key(e){return e.id || e.date}
@@ -359,7 +385,7 @@ td.trend{vertical-align:middle}
   // short form for the browser tab, e.g. "Wed 28 Oct" or "Sat 31 Oct · Weekly Recap"
   function tabTitle(e){
     var dt = new Date(e.date+'T12:00:00');
-    var d = isNaN(dt) ? e.date : dt.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'}).replace(',','');
+    var d = isNaN(dt) ? e.date : dt.toLocaleDateString('en-US',{weekday:'short',day:'numeric',month:'short'}).replace(',','');
     return d + (e.label ? ' · ' + e.label : '');
   }
   function state(title,msg){
@@ -400,8 +426,10 @@ td.trend{vertical-align:middle}
       $('toc').innerHTML = r.sections.filter(function(s){return s.title.toLowerCase()!=='sources'}).map(function(s){return '<a href="#'+s.id+'" data-jump="1">'+esc(s.title)+'</a>'}).join('');
       $('toc').hidden = !r.sections.length;
       $('content').innerHTML = r.sections.map(function(s){
-        var src = s.title.toLowerCase()==='sources' ? ' src' : '';
-        return '<section class="s'+src+'" id="'+s.id+'"><div class="frame"><div class="s-in"><h2 class="rv">'+esc(s.title)+'</h2><div class="s-body">'+s.html+'</div></div></div></section>';
+        var src = s.title.toLowerCase()==='sources' ? ' src' : '', body = s.html;
+        // the Sources list starts folded, with its count
+        if(src){ var n = (body.match(/<li[\s>]/g) || []).length; body = '<details class="srcs"><summary>Show all ' + (n || '') + ' sources</summary>' + body + '</details>'; }
+        return '<section class="s'+src+'" id="'+s.id+'"><div class="frame"><div class="s-in"><h2 class="rv">'+esc(s.title)+'</h2><div class="s-body">'+body+'</div></div></div></section>';
       }).join('');
       // each story that opens with a bold lead-in gets an anchor, so Today at a Glance can link to it
       var used = {};
@@ -437,6 +465,20 @@ td.trend{vertical-align:middle}
     syncThemeBtn();
   });
   syncThemeBtn();
+  // wide or narrow page, remembered on this device (offered on large screens only)
+  function syncWidthBtn(){
+    var wide = document.documentElement.getAttribute('data-width') === 'wide';
+    $('widthBtn').textContent = wide ? 'Narrow' : 'Wide';
+    $('widthBtn').setAttribute('aria-pressed', wide ? 'true' : 'false');
+    $('widthBtn').setAttribute('aria-label', wide ? 'Switch to the single-column page' : 'Switch to the full-width page with stories in two columns');
+  }
+  $('widthBtn').addEventListener('click',function(){
+    var wide = document.documentElement.getAttribute('data-width') !== 'wide';
+    if(wide) document.documentElement.setAttribute('data-width','wide'); else document.documentElement.removeAttribute('data-width');
+    try{ localStorage.setItem('width', wide ? 'wide' : 'narrow'); }catch(e){}
+    syncWidthBtn();
+  });
+  syncWidthBtn();
 
   // ---- colour signed percentage changes in tables, with an arrow so colour is never the only cue ----
   function markChanges(){
@@ -482,7 +524,7 @@ td.trend{vertical-align:middle}
     var span = max - min || 1, step = (w - 2*p) / (pts.length - 1);
     var xy = pts.map(function(x,i){ return [p + i*step, h - p - (x.v - min) / span * (h - 2*p)]; });
     var d = xy.map(function(c,i){ return (i ? 'L' : 'M') + c[0].toFixed(1) + ' ' + c[1].toFixed(1); }).join('');
-    var last = xy[xy.length-1], nf = function(v){ return v.toLocaleString('en-GB'); };
+    var last = xy[xy.length-1], nf = function(v){ return v.toLocaleString('en-US'); };
     var tip = (long || title) ? ((title || 'Last 12 months') + ': ' + nf(pts[0].v) + ' → ' + nf(pts[pts.length-1].v) + ' (low ' + nf(min) + ', high ' + nf(max) + ')')
                    : pts.map(function(x){ return x.d.slice(5) + ': ' + nf(x.v); }).join('  ·  ');
     return '<svg class="spark" viewBox="0 0 '+w+' '+h+'" width="'+w+'" height="'+h+'" role="img" aria-label="Trend: '+esc(tip)+'"><title>'+esc(tip)+'</title>'+

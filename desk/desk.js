@@ -5,14 +5,14 @@ window.Desk = (function () {
   const MINUS = '−';
   const pct = (v, d = 1) => v == null ? '—' : (v > 0 ? '+' : v < 0 ? MINUS : '') + Math.abs(v).toFixed(d) + '%';
   const cls = (v) => v == null ? 'dash' : v > 0 ? 'chg up' : v < 0 ? 'chg down' : 'chg flat';
-  const num = (v, d = 2) => v == null ? '—' : v.toLocaleString('en-GB', { minimumFractionDigits: d, maximumFractionDigits: d });
+  const num = (v, d = 2) => v == null ? '—' : v.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
   const get = (u) => fetch(u, { cache: 'no-cache' }).then((r) => r.ok ? r.json() : null).catch(() => null);
   // ASOF is the EGX's last session; each market has its own last close (ASOF_M), since at weekends Wall Street
   // last traded on Friday and the EGX on Thursday. Every series runs up to the day before the desk's date (CUTOFF).
   let ASOF = null, CUTOFF = null, ASOF_M = {}, DESK = null, INTRA = null, MOVERS = null;
   const day = (iso) => new Date(iso + 'T12:00:00');
   const cut = (iso, back) => new Date(day(iso) - back * 864e5).toISOString().slice(0, 10);
-  const short = (iso) => day(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }).replace('Sept', 'Sep');
+  const short = (iso) => day(iso).toLocaleDateString('en-US', { day: 'numeric', month: 'short' }).replace('Sept', 'Sep');
   const PERIODS = [['1D', 0, 'Last 7 days'], ['1W', 7, 'Last 7 days'], ['1M', 30, 'Last 30 days'], ['6M', 182, 'Last 6 months'], ['1Y', 365, 'Last 12 months']];
   const NAMES = { COMI: 'Commercial International Bank', TMGH: 'Talaat Moustafa', ETEL: 'Telecom Egypt', PHDC: 'Palm Hills', SWDY: 'Elsewedy Electric', ORAS: 'Orascom Construction', FWRY: 'Fawry', ABUK: 'Abu Qir Fertilizers', HRHO: 'EFG Holding', CLHO: 'Cleopatra Hospital', JUFO: 'Juhayna', ALCN: 'Alexandria Containers', MFPC: 'MOPCO', EAST: 'Eastern Company', EFIH: 'e-finance', EMFD: 'Emaar Misr', BQDC: 'Banque du Caire', EGAL: 'Egypt Aluminium', AMOC: 'Alexandria Mineral Oils', SKPC: 'Sidi Kerir Petrochemicals', EFID: 'Edita Food Industries',
     AAPL: 'Apple', MSFT: 'Microsoft', NVDA: 'Nvidia', AMZN: 'Amazon', GOOGL: 'Alphabet', META: 'Meta', TSLA: 'Tesla', JPM: 'JPMorgan Chase', XOM: 'Exxon Mobil', AVGO: 'Broadcom', 'BRK.B': 'Berkshire Hathaway', WMT: 'Walmart', V: 'Visa', ORCL: 'Oracle', COST: 'Costco' };
@@ -20,7 +20,7 @@ window.Desk = (function () {
   // broad sectors for grouping the stock lists (stocks.json's sector is finer: 15 for 21 Egyptian stocks)
   const SECTORS = {
     egx: [['Banks and financials', ['COMI', 'BQDC', 'HRHO', 'FWRY', 'EFIH']], ['Real estate and construction', ['TMGH', 'PHDC', 'EMFD', 'ORAS']],
-      ['Fertilisers, chemicals and oil', ['ABUK', 'MFPC', 'SKPC', 'AMOC']], ['Industrials and transport', ['SWDY', 'EGAL', 'ALCN']],
+      ['Fertilizers, chemicals and oil', ['ABUK', 'MFPC', 'SKPC', 'AMOC']], ['Industrials and transport', ['SWDY', 'EGAL', 'ALCN']],
       ['Consumer', ['JUFO', 'EFID', 'EAST']], ['Telecoms', ['ETEL']], ['Healthcare', ['CLHO']]],
     us: [['Software and hardware', ['AAPL', 'MSFT', 'ORCL']], ['Semiconductors', ['NVDA', 'AVGO']], ['Internet and e-commerce', ['GOOGL', 'META', 'AMZN']],
       ['Financials', ['JPM', 'V', 'BRK.B']], ['Retail', ['WMT', 'COST']], ['Energy', ['XOM']], ['Cars', ['TSLA']]],
@@ -117,8 +117,8 @@ window.Desk = (function () {
     }
     if (!best || Math.abs(best.m) <= at) return [];
     const p = (v) => (v > 0 ? '+' : '−') + Math.abs(v * 100).toFixed(1) + '%';
-    const d = (i) => new Date(pts[i][0] + 'T12:00:00'), dd = (i) => d(i).toLocaleDateString('en-GB', { day: 'numeric' });
-    const mon = (i) => d(i).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }).replace('Sept', 'Sep');
+    const d = (i) => new Date(pts[i][0] + 'T12:00:00'), dd = (i) => d(i).toLocaleDateString('en-US', { day: 'numeric' });
+    const mon = (i) => d(i).toLocaleDateString('en-US', { day: 'numeric', month: 'short' }).replace('Sept', 'Sep');
     if (best.b - best.a === 1) return [{ at: best.b, label: `${mon(best.b)} ${p(best.m)}`, short: p(best.m) }];
     const first = best.a + 1, same = d(first).getMonth() === d(best.b).getMonth();
     return [{ from: best.a, to: best.b, label: `${same ? dd(first) : mon(first)}–${mon(best.b)} ${p(best.m)}`, short: p(best.m) }];
@@ -162,10 +162,10 @@ window.Desk = (function () {
     const ch = (vals.at(-1) / vals[0] - 1) * 100;
     if (M_.window) {   // round-the-clock markets: the last 24 hours, Cairo time
       const to = new Date(M_.to.replace(' ', 'T'));
-      return `Last 24 hours to ${to.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }).replace('Sept', 'Sep')} ${M_.to.slice(11)} Cairo time: <span class="num ${cls(ch)}">${pct(ch, 2)}</span>`;
+      return `Last 24 hours to ${to.toLocaleDateString('en-US', { weekday: 'short', day: 'numeric', month: 'short' }).replace('Sept', 'Sep')} ${M_.to.slice(11)} Cairo time: <span class="num ${cls(ch)}">${pct(ch, 2)}</span>`;
     }
     const via = M_.proxy && M_.proxy[key] ? ` · traced by the ${esc(M_.proxy[key])} fund, which tracks it` : '';
-    return `${day(M_.session).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short' }).replace('Sept', 'Sep')}, ${I[0][0]}–${I.at(-1)[0]} ${market === 'egx' ? 'Cairo' : 'New York'} time${inUSD ? ', in dollars at the day\'s rate' : ''}: <span class="num ${cls(ch)}">${pct(ch, 2)}</span> from the first trade${via}`;
+    return `${day(M_.session).toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'short' }).replace('Sept', 'Sep')}, ${I[0][0]}–${I.at(-1)[0]} ${market === 'egx' ? 'Cairo' : 'New York'} time${inUSD ? ', in dollars at the day\'s rate' : ''}: <span class="num ${cls(ch)}">${pct(ch, 2)}</span> from the first trade${via}`;
   }
   // x-axis labels on round, evenly spaced points: each day for a week, one weekday for a month, each month
   // for six months, every other month for a year, the hour through a session, every six hours for 24 hours.
@@ -173,7 +173,7 @@ window.Desk = (function () {
   const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], WD = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   function axis(dates, back, width) {
     const ds = dates.map((iso) => new Date(iso + 'T12:00:00')), n = ds.length;
-    const labels = ds.map((d) => `${d.getDate()} ${MON[d.getMonth()]}`);
+    const labels = ds.map((d) => `${MON[d.getMonth()]} ${d.getDate()}`);
     let at = [], text = labels.slice();
     if (back <= 7) { at = [...Array(n).keys()]; text = ds.map((d) => `${WD[d.getDay()]} ${d.getDate()}`); }
     else if (back <= 31) {   // weekly, counting back from the latest point; a week with no session that day takes its last one before
@@ -238,7 +238,7 @@ window.Desk = (function () {
     if (back > 7) return label;
     if (back === 7) { const n = weekSessions(market).length; return n >= 2 ? `Last ${n} sessions` : 'Last 7 days'; }
     const I = INTRA && INTRA[market];
-    return !back && I && I.session ? `${WD[day(I.session).getDay()]} ${day(I.session).getDate()} ${MON[day(I.session).getMonth()]} session` : 'Last 7 days';
+    return !back && I && I.session ? `${WD[day(I.session).getDay()]}, ${MON[day(I.session).getMonth()]} ${day(I.session).getDate()} session` : 'Last 7 days';
   }
   // the whole market's biggest gainers and losers of the last session (desk/movers.json); a stock on the
   // desk links to its page
@@ -257,7 +257,7 @@ window.Desk = (function () {
     el.innerHTML = `<div class="movers"><div><h3><span class="chg up" aria-hidden="true"></span>Biggest gainers</h3>${X.gainers.slice(0, n).map(row).join('')}</div><div><h3><span class="chg down" aria-hidden="true"></span>Biggest losers</h3>${X.losers.slice(0, n).map(row).join('') || '<p class="sub">No stock fell.</p>'}</div></div>`;
     if (span) return `${X.basis}. ${X.note}.`;
     const d = day(X.session);
-    return `${X.basis}, ${WD[d.getDay()]} ${d.getDate()} ${MON[d.getMonth()]}.`;
+    return `${X.basis}, ${WD[d.getDay()]}, ${MON[d.getMonth()]} ${d.getDate()}.`;
   }
   // the change beside a chart's big number follows the chosen period, labelled ('in a month'); 1D is the day
   const SPAN = { 0: 'on the day', 7: 'in a week', 30: 'in a month', 182: 'in 6 months', 365: 'in a year', 1095: 'in 3 years', 1826: 'in 5 years' };
@@ -372,7 +372,7 @@ window.Desk = (function () {
     if (DESK.sample) document.querySelectorAll('[data-sample]').forEach((e) => { e.hidden = false; });
     return DESK;
   }
-  const dateLine = (iso) => day(iso).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
+  const dateLine = (iso) => day(iso).toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'long' });
   const conf = (c) => `<span class="conf ${c === 'high' ? 'high' : ''}">${esc(c[0].toUpperCase() + c.slice(1))}</span>`;
   // rows of a named driver, a confidence level and a line of reasoning
   const drivers = (rows) => rows.map((r) => `<div class="drv"><b>${esc(r.name)}</b>${r.move ? `<span class="num ${r.move.trim().startsWith('−') || r.move.trim().startsWith('-') ? 'chg down' : 'chg up'}">${esc(r.move)}</span>` : conf(r.confidence)}<span class="why">${esc(r.why)}</span></div>`).join('');

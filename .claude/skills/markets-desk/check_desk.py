@@ -12,6 +12,9 @@ import os
 import re
 import sys
 
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "daily-newsletter"))
+import us_english  # noqa: E402
+
 ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 TICKERS = {"egx": ["COMI", "TMGH", "ETEL", "PHDC", "SWDY", "ORAS", "FWRY", "ABUK", "HRHO", "CLHO", "JUFO", "ALCN", "MFPC", "EAST", "EFIH", "EMFD", "BQDC", "EGAL", "AMOC", "SKPC", "EFID"],
            "us": ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA", "JPM", "XOM", "AVGO", "BRK.B", "WMT", "V", "ORCL", "COST"]}
@@ -204,6 +207,23 @@ def main(args):
         warnings.append(f"desk/flows.json has no entry for the {D['asOf']} session: add who bought and who sold (and egypt.flows in the day's file).")
     if not (D.get("egypt") or {}).get("flows"):
         warnings.append("egypt.flows is missing from the day's file: the EGX page shows the flow history's entry instead, if there is one.")
+    # US English across the day's text (links and quotes aside)
+    us_txt = []
+    def us_walk(o, k=""):
+        if isinstance(o, dict):
+            for kk, v in o.items():
+                if kk not in ("url", "source", "sources", "sub"):
+                    us_walk(v, kk)
+        elif isinstance(o, list):
+            for v in o:
+                us_walk(v, k)
+        elif isinstance(o, str):
+            us_txt.append(re.sub(r"[\"“'‘][^\"”'’]{12,}[\"”'’]", "", o))
+    us_walk(D)
+    found = [x for t in us_txt for x in us_english.find(t)]
+    if found:
+        warnings.append(f"US English: {len(found)} British spelling(s) or day-first date(s) in the day's file: "
+                        + "; ".join(f"{b} → {a}" for b, a in found[:12]) + (" …" if len(found) > 12 else "") + ".")
     # every top-five mover of 5% or more needs its reason, or "No company news found." after a search
     MV = load("desk/movers.json") or {}
     for m, label in (("egx", "EGX"), ("us", "US")):

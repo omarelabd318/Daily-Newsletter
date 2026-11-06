@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en-US">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -139,7 +139,7 @@
     const L = R.at(-1), Pm = R.at(-2), bn = (v) => '$' + M.num(v, 2) + 'bn';
     const PARTS = [['fx', 'Foreign currencies'], ['gold', 'Gold'], ['sdr', 'IMF drawing rights']];
     M.$('c-rsv').hidden = false; M.$('rlvl').textContent = bn(L.total);
-    M.$('rmonth').textContent = 'End of ' + new Date(L.month + '-15T12:00:00').toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+    M.$('rmonth').textContent = 'End of ' + new Date(L.month + '-15T12:00:00').toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
     if (Pm) { const c = (L.total / Pm.total - 1) * 100; M.$('rchg').innerHTML = `<span class="${M.cls(c)}">${M.pct(c, 2)}</span> on the month`; }
     // one bar per part, its length its share of the total; beside the amount, its change on the month
     M.$('rparts').innerHTML = PARTS.map(([k, n]) => `<div class="rsv-part"><div class="h"><span class="n">${n}</span><span class="num">${bn(L[k])}${Pm && Pm[k] ? ` <span class="${M.cls(L[k] / Pm[k] - 1)}">${M.pct((L[k] / Pm[k] - 1) * 100)}</span>` : ''}</span></div>`

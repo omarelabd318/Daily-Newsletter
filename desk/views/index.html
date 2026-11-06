@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en-US">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -42,7 +42,7 @@
   const MK = { egx: 'Egypt', egp: 'Egypt', global: 'Global', us: 'Wall Street' };
   const PILL = { 'open': 'open', 'on track': 'ok', 'right': 'ok', 'wrong': 'bad', 'closed': 'open' };
   const EFF = { supports: ['ok', 'Supports'], against: ['bad', 'Against'], neutral: ['open', 'Neutral'] };
-  const fmtDate = (iso) => { const d = M.day(iso); return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: d.getFullYear() !== M.day(M.ASOF).getFullYear() ? 'numeric' : undefined }).replace('Sept', 'Sep'); };
+  const fmtDate = (iso) => { const d = M.day(iso); return d.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: d.getFullYear() !== M.day(M.ASOF).getFullYear() ? 'numeric' : undefined }).replace('Sept', 'Sep'); };
   // the tracked figure from the data log: the stock or rate the view rests on, now against when it was opened
   const seriesFor = (key) => { const [g, t] = key.split('.'); return t ? M.series((e) => (e[g] || {})[t], g) : M.series((e) => e[key], key === 'egx30' ? 'egx' : key === 'usd_egp' ? 'fx' : 'us'); };
   function progress(v) {

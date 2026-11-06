@@ -143,7 +143,7 @@
    }
   },
   "ABUK": {
-   "sector": "Fertilisers",
+   "sector": "Fertilizers",
    "news": [
     {
      "date": "2026-11-05",
@@ -1243,7 +1243,7 @@
    }
   },
   "MFPC": {
-   "sector": "Fertilisers",
+   "sector": "Fertilizers",
    "cap": {
     "value": 118.7,
     "currency": "EGP",

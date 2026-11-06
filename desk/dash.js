@@ -18,13 +18,13 @@
   const day = (iso) => new Date(iso + 'T12:00:00');
   const CUTOFF = new Date(day(D.date) - 864e5).toISOString().slice(0, 10);
   const cut = (iso, back) => new Date(day(iso) - back * 864e5).toISOString().slice(0, 10);
-  const short = (iso) => day(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }).replace('Sept', 'Sep');
+  const short = (iso) => day(iso).toLocaleDateString('en-US', { day: 'numeric', month: 'short' }).replace('Sept', 'Sep');
 
   const SECTIONS = {
     egypt: { name: 'Egypt', chart: 'egx30', chartName: 'EGX30', market: 'egx', group: 'egx' },
     global: { name: 'USA', chart: 'nasdaq', chartName: 'Nasdaq', market: 'us', group: 'us' },
   };
-  const longDate = day(D.date).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
+  const longDate = day(D.date).toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'long' });
 
   // the data log: each entry holds the closes its edition showed, so a close belongs to the day before the entry
   const INTRA = await get('/desk/intraday.json'), MOVERS = await get('/desk/movers.json'), STOCKS = ((await get('/desk/stocks.json')) || {}).stocks || {};
@@ -88,8 +88,8 @@
     }
     if (!best || Math.abs(best.m) <= at) return [];
     const p = (v) => (v > 0 ? '+' : '−') + Math.abs(v * 100).toFixed(1) + '%';
-    const d = (i) => new Date(pts[i][0] + 'T12:00:00'), dd = (i) => d(i).toLocaleDateString('en-GB', { day: 'numeric' });
-    const mon = (i) => d(i).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }).replace('Sept', 'Sep');
+    const d = (i) => new Date(pts[i][0] + 'T12:00:00'), dd = (i) => d(i).toLocaleDateString('en-US', { day: 'numeric' });
+    const mon = (i) => d(i).toLocaleDateString('en-US', { day: 'numeric', month: 'short' }).replace('Sept', 'Sep');
     if (best.b - best.a === 1) return [{ at: best.b, label: `${mon(best.b)} ${p(best.m)}`, short: p(best.m) }];
     const first = best.a + 1, same = d(first).getMonth() === d(best.b).getMonth();
     return [{ from: best.a, to: best.b, label: `${same ? dd(first) : mon(first)}–${mon(best.b)} ${p(best.m)}`, short: p(best.m) }];
@@ -101,7 +101,7 @@
   const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], WD = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   function axis(dates, back, width) {
     const ds = dates.map((iso) => new Date(iso + 'T12:00:00')), n = ds.length;
-    const labels = ds.map((d) => `${d.getDate()} ${MON[d.getMonth()]}`);
+    const labels = ds.map((d) => `${MON[d.getMonth()]} ${d.getDate()}`);
     let at = [], text = labels.slice();
     if (back <= 7) { at = [...Array(n).keys()]; text = ds.map((d) => `${WD[d.getDay()]} ${d.getDate()}`); }
     else if (back <= 31) {   // weekly, counting back from the latest point; a week with no session that day takes its last one before
@@ -132,8 +132,8 @@
     const S = SECTIONS[key], X = D[key];
     document.querySelectorAll('[data-sec]').forEach((a) => { if (a.dataset.sec === key) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
     $('title').textContent = S.name + ' · ' + longDate;
-    document.title = 'Markets Desk · ' + S.name + ' · ' + day(D.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }).replace('Sept', 'Sep');
-    $('stamp').innerHTML = 'Closes to ' + esc(day(asOf(S.market)).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }).replace('Sept', 'Sep').replace(',', '')) + '<br>Fetched ' + esc(D.fetched || '');
+    document.title = 'Markets Desk · ' + S.name + ' · ' + day(D.date).toLocaleDateString('en-US', { day: 'numeric', month: 'short' }).replace('Sept', 'Sep');
+    $('stamp').innerHTML = 'Closes to ' + esc(day(asOf(S.market)).toLocaleDateString('en-US', { weekday: 'short', day: 'numeric', month: 'short' }).replace('Sept', 'Sep').replace(',', '')) + '<br>Fetched ' + esc(D.fetched || '');
     $('finding').innerHTML = esc(X.finding) + (X.next ? ' <span class="when">' + esc(X.next) + '</span>' : '');
 
     $('h-close').textContent = X.close.title || 'Close';
@@ -205,7 +205,7 @@
       }
       $('chart-name').textContent = IDX.length < 2 ? cur.n : 'Wall Street';
       const lv = idx.length ? idx[idx.length - 1][1] : null, hc = change(idx, p[1]);
-      $('ilvl').textContent = lv == null ? '—' : lv.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      $('ilvl').textContent = lv == null ? '—' : lv.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
       $('ichg').innerHTML = `<span class="${cls(hc)}">${pct(hc, 2)}</span> <span class="span-l">${SPAN[p[1]] || ''}</span>`;
       if (!p[1]) {   // the last session through the day, from desk/intraday.json
         const el = $('egx-chart'), mk = S.market, I = INTRA && INTRA[mk] && INTRA[mk].series[cur.intra]; el.innerHTML = '';
@@ -213,7 +213,7 @@
         const v = I.map((x) => x[1]), lo = Math.min(...v), hi = Math.max(...v);
         Charts.line(el, { ...dayAxis(I.map((x) => x[0]), el.clientWidth), series: [{ name: cur.n, values: v }], format: Charts.fmt.int, endLabel: true, height: el.clientHeight, min: lo - (hi - lo) * 0.15 });
         const ch = (v.at(-1) / v[0] - 1) * 100;
-        $('egx-cap').innerHTML = `${day(INTRA[mk].session).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short' }).replace('Sept', 'Sep')}, ${I[0][0]}–${I.at(-1)[0]} ${mk === 'egx' ? 'Cairo' : 'New York'} time: <span class="num ${cls(ch)}">${pct(ch, 2)}</span> from the first trade${INTRA[mk].proxy && INTRA[mk].proxy[cur.intra] ? ` · traced by the ${esc(INTRA[mk].proxy[cur.intra])} fund, which tracks it` : ''}`;
+        $('egx-cap').innerHTML = `${day(INTRA[mk].session).toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'short' }).replace('Sept', 'Sep')}, ${I[0][0]}–${I.at(-1)[0]} ${mk === 'egx' ? 'Cairo' : 'New York'} time: <span class="num ${cls(ch)}">${pct(ch, 2)}</span> from the first trade${INTRA[mk].proxy && INTRA[mk].proxy[cur.intra] ? ` · traced by the ${esc(INTRA[mk].proxy[cur.intra])} fund, which tracks it` : ''}`;
         return;
       }
       if (p[1] === 7) {   // a week through the day, once two or more sessions are saved
@@ -240,33 +240,8 @@
     const start = INTRA && INTRA[S.market] && INTRA[S.market].series[cur.intra] ? PERIODS[0] : PERIODS[2];
     segment($('egx-seg'), start[0], drawIdx, PERIODS.concat(LONG)); drawIdx(start);
 
-    // Gold in Egypt (EGY dashboard only): 24K first, then 21K, 18K and the gold pound, over any period
-    $('c-gold').hidden = key !== 'egypt';
-    if (key === 'egypt') {
-      const G = [['gold24_egp', '24K', 'EGP per gram'], ['gold21_egp', '21K', 'EGP per gram, the most bought'], ['gold18_egp', '18K', 'EGP per gram'], ['goldpound_egp', 'Gold pound', 'EGP, 8 grams of 21K']];
-      let gi = 0, gper = PERIODS[2];
-      const drawGold = async () => {
-        if (gper[1] > 400 && !fullLoaded) { const f = await get('/data/markets.json'); fullLoaded = true; if (f && f.days) days = f.days; }
-        const [k, n, unit] = G[gi], s = series((e) => e[k], 'all'), lv = s.length ? s[s.length - 1][1] : null, hc = change(s, gper[1]);
-        $('glvl').textContent = lv == null ? '—' : lv.toLocaleString('en-GB', { maximumFractionDigits: 0 });
-        $('gchg').innerHTML = `<span class="${cls(hc)}">${pct(hc, 2)}</span> <span class="span-l">${SPAN[gper[1]] || ''}</span>`;
-        $('gunit').textContent = unit;
-        const back = Math.max(gper[1], 7), pts = s.filter(([d]) => d >= cut(lastDate(s), back)), el = $('gchart'); el.innerHTML = '';
-        if (pts.length < 2) el.textContent = 'Not enough prices logged yet.';
-        else {
-          const vals = pts.map((x) => x[1]), lo = Math.min(...vals), hi = Math.max(...vals);
-          Charts.line(el, { ...axis(pts.map((x) => x[0]), back, el.clientWidth), series: [{ name: `Gold ${n}`, values: vals }], format: Charts.fmt.int, annotations: back > 7 ? bigMove(pts) : [], endLabel: true, marks: pts.length <= 12, height: el.clientHeight, min: lo - (hi - lo) * 0.15 });
-        }
-        const row = (label, c) => `<div class="lrow"><span class="k">${label}</span><span class="v"></span><span class="d num"><span class="${cls(c)}">${pct(c)}</span></span></div>`;
-        $('gfigs').innerHTML = row('Day', change(s, 0)) + row('Week', change(s, 7)) + row('Month', change(s, 30)) + row('This year', ytd(s));
-      };
-      $('gtabs').innerHTML = G.map((g, j) => `<button type="button" aria-pressed="${!j}">${g[1]}</button>`).join('');
-      $('gtabs').querySelectorAll('button').forEach((b, j) => b.addEventListener('click', () => { $('gtabs').querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); gi = j; drawGold(); }));
-      segment($('gseg'), '1M', (p) => { gper = p; drawGold(); }, PERIODS.slice(1).concat(LONG)); drawGold();
-    }
-
     // biggest movers of the last session: the whole market (with the reason where one was found) or the desk's own stocks
-    const MV = MOVERS && MOVERS[S.market], f2 = (v) => v.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const MV = MOVERS && MOVERS[S.market], f2 = (v) => v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     $('movers-more').textContent = key === 'egypt' ? 'EGX page →' : 'Wall Street page →'; $('movers-more').href = key === 'egypt' ? '/desk/egx/' : '/desk/us/';
     const mrow = (r) => { const own = NAMES[r.t], nm = `<b>${esc(own || r.name)}</b><span class="t">${esc(r.t)}</span>`;
       return `<div class="mv">${own ? `<a href="/desk/stock/?t=${encodeURIComponent(r.t)}">${nm}</a>` : `<span class="nm">${nm}</span>`}<span class="num">${f2(r.price)}</span><span class="num ${cls(r.pct)}">${pct(r.pct)}</span></div>`
@@ -276,7 +251,7 @@
       if (whole) {
         if (!MV) { $('movers').innerHTML = '<p class="chart-cap">Not saved yet; the morning run saves the last session\'s movers once it has closed.</p>'; $('movers-note').textContent = ''; return; }
         $('movers').innerHTML = mlists(MV.gainers.slice(0, 3), MV.losers.slice(0, 3));
-        const sd = day(MV.session); $('movers-note').textContent = `${MV.basis}, ${WD[sd.getDay()]} ${sd.getDate()} ${MON[sd.getMonth()]}.`;
+        const sd = day(MV.session); $('movers-note').textContent = `${MV.basis}, ${WD[sd.getDay()]}, ${MON[sd.getMonth()]} ${sd.getDate()}.`;
         return;
       }
       // the desk's stocks on the day, from the data log; a reason carries over when the stock is also a whole-market mover
@@ -287,7 +262,7 @@
       const rows = GROUP[S.group].map((t) => { const s = series((e) => (e[S.group] || {})[t], S.group), fresh = s.length && s[s.length - 1][0] === asOf(S.group);
         return fresh && s.length > 1 ? { t, price: s[s.length - 1][1], pct: change(s, 0), why: (notes[t] || {}).why, url: (notes[t] || {}).url, source: (notes[t] || {}).source } : null; }).filter((r) => r && r.pct != null).sort((a, b) => b.pct - a.pct);
       $('movers').innerHTML = mlists(rows.filter((r) => r.pct > 0).slice(0, 3), rows.filter((r) => r.pct < 0).reverse().slice(0, 3));
-      const ad = day(asOf(S.group)); $('movers-note').textContent = `Among the desk's ${GROUP[S.group].length} ${key === 'egypt' ? 'Egyptian' : 'US'} stocks, ${WD[ad.getDay()]} ${ad.getDate()} ${MON[ad.getMonth()]}. Tap one for its page.`;
+      const ad = day(asOf(S.group)); $('movers-note').textContent = `Among the desk's ${GROUP[S.group].length} ${key === 'egypt' ? 'Egyptian' : 'US'} stocks, ${WD[ad.getDay()]}, ${MON[ad.getMonth()]} ${ad.getDate()}. Tap one for its page.`;
     };
     $('mscope').innerHTML = ['Whole market', 'Desk stocks'].map((n, j) => `<button type="button" aria-pressed="${!j}">${n}</button>`).join('');
     $('mscope').querySelectorAll('button').forEach((b, j) => b.addEventListener('click', () => { $('mscope').querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); drawMovers(j === 0); }));

@@ -237,6 +237,21 @@ def main(path):
         if hit:
             warnings.append(f"Line {i}: '{hit.group(0)}' may break the voice rules: {line.strip()[:90]}")
 
+    # US English: American spelling and month-first dates (quotes and Sources keep their own wording).
+    import us_english
+    found = []
+    current = None
+    for i, line in enumerate(lines, 1):
+        if line.startswith("## "):
+            current = line[3:].strip()
+        if current == "Sources" or line.lstrip().startswith(">"):
+            continue
+        found += [(i, b, a) for b, a in us_english.find(re.sub(r"\]\([^)]*\)", "]", strip_quotes(line)))]
+    if found:
+        shown = "; ".join(f"line {i}: {b} → {a}" for i, b, a in found[:12])
+        warnings.append(f"US English: {len(found)} British spelling(s) or day-first date(s): {shown}"
+                        + (" …" if len(found) > 12 else "") + ". Proper names keep their own spelling.")
+
     # Quick Hits carries a Number of the day (daily editions only).
     if not recap and not any(re.match(r"^\s*(?:[-*]\s+)?\*\*Number of the day:\*\*", l)
                              for l in sections.get("Quick Hits", {}).get("body", [])):
@@ -305,6 +320,16 @@ def main(path):
                 warned.add(u)
                 warnings.append(f"Sources: {u} is a homepage or edition page; link each story's own page, or add "
                                 "'(used for N items)' to this line.")
+    # Any other outlet: more than about six links means the world and regional news lean on one site.
+    hosts = {}
+    for _, u in re.findall(r"\[([^\]]*)\]\((https?://[^)\s]+)\)", src):
+        h = re.sub(r"^(www|en|english|m)\.", "", re.match(r"https?://([^/]+)", u).group(1).lower())
+        if not re.search(r"enterpriseam\.com|cairoscene\.com", h):
+            hosts[h] = hosts.get(h, 0) + 1
+    for h, n in sorted(hosts.items(), key=lambda x: -x[1]):
+        if n > 6:
+            warnings.append(f"Sources: {n} links from {h}; keep the stories but source some from other outlets "
+                            "(Reuters, AP, AFP, BBC, The National, Asharq Al-Awsat…) and check each against a second.")
     if not recap and total and two / total > 1 / 3:
         warnings.append(f"EnterpriseAM and CairoScene account for {two} of {total} sourced items; research wider "
                         "for more strong stories from other outlets (never cut a good one).")
