@@ -124670,7 +124670,6 @@
   },
   {
    "date": "2026-10-24",
-   "seed": true,
    "egx": {},
    "us": {
     "AAPL": 347.73,
@@ -124718,7 +124717,11 @@
     "COST": 2408131
    },
    "infl_headline": 13.9,
-   "reserves_usd": 57.35
+   "reserves_usd": 57.35,
+   "aed_egp": 15.0497,
+   "qar_egp": 15.1841,
+   "sar_egp": 14.7387,
+   "usd_egp": 55.27
   },
   {
    "date": "2026-10-25",

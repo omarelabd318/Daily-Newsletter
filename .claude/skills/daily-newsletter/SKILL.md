@@ -491,6 +491,13 @@ estimates), then run `corporate_actions.py --apply TICKER EXDATE BONUS` once (BO
 share: 0.25 for one for every four) and refresh the spreadsheet. Without it, the charts show a fall that
 never happened to holders and the changes and YTD figures come out too low. Cash dividends are not adjusted.
 
+**Gaps:** every run, after logging, run `python3 .claude/skills/daily-newsletter/fill_gaps.py DATE 10 --write`.
+It finds figures missing from the last ten entries although the entries around them have them, and fills each
+from a dated source (Yahoo, Nasdaq or CoinGecko history; the desk's intraday file for Egyptian stocks; the last
+weekday's pound rates for Friday and Saturday closes), printing every value beside its neighbours. Check any line
+it marks as more than 8% from a neighbour, and fill the `MANUAL` lines it lists by hand with log_figures.py when a
+source confirms the figure (or leave them, and say so in the final reply).
+
 Then refresh the spreadsheet copy, `data/markets.xlsx`, and commit it too:
 
 ```
