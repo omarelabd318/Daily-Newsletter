@@ -1,2 +1,5 @@
 .taste-skill/
 __pycache__/
+data/audio/*.mp3
+data/audio/*.wav
+voice-samples/

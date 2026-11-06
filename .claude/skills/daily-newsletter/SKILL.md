@@ -547,6 +547,21 @@ the stock's page) and the EGX30's previous close instead of the intraday figures
 stays in the log for good and skews every change, streak and YTD figure worked out from it. Weekend editions log what they show; the recap does not log. Commit
 `data/markets.json` together with the edition.
 
+## Listen (the edition read aloud)
+
+The site's Listen button reads every edition aloud with the device's own voice; each daily edition and the recap
+also get a recorded natural voice. Once the edition is final and checked, run
+`python3 .claude/skills/daily-newsletter/make_audio.py EDITION` (EDITION is the file key, e.g. 2026-11-06). It
+records the edition (around 5 minutes, plus a few minutes the first time to install the voice model), publishes the
+MP3 on the repo's `audio` branch (which holds only the last 14 editions' audio and is rewritten each time: never
+commit an MP3 to main) and writes `data/audio/EDITION.json`; commit `data/audio/` with the edition. If it prints
+"Audio not made", go on: the site falls back to the device's voice, and say so in the final reply.
+
+What it reads is `read_aloud.py`'s list: every section but Sources and the two watch tables, headings, paragraphs,
+list items and Explained boxes, with figures written as they are said (EGP 54.01 as "54.01 pounds", 3.9% as "3.9
+percent"). `listen.js` on the site builds the same list from the page to highlight the block being read; change
+both together.
+
 ## Corrections
 
 Before writing, compare the previous edition's key figures and facts against what is now known (the

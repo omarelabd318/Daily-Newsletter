@@ -404,6 +404,12 @@ def main(path):
         warnings.append(f"Trend lines: no data/weeks/{m.group(1)}.json: run fetch_intraday.py, then week_snapshot.py {m.group(1)}, "
                         "so Stocks Watch shows the week hour by hour.")
 
+    # Listen: the recorded voice (make_audio.py), made once the edition is final
+    ekey = os.path.basename(path)[:-3]
+    if m and not os.path.exists(os.path.join(ROOT, "data", "audio", ekey + ".json")):
+        warnings.append(f"Listen: no data/audio/{ekey}.json: once the edition is final, run make_audio.py {ekey} "
+                        "(the site uses the device's voice until then).")
+
     # Running topics: the edition's stories tagged (topics.py tag), and each topic it moved given a fresh
     # "where it stands"
     key = os.path.basename(path)[:-3]
