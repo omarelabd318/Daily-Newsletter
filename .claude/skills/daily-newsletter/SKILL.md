@@ -206,12 +206,14 @@ closing or a LIVE price, the quote time and the source. Then:
   10 to 20 credits in an edition reads naturally. The checker blocks publishing above 25 credits, when
   more than half the stories in a section carry a credit, or when one outlet is credited in more than half
   of a section's stories; it warns at 3 or more credits in one item.
-- **No limit per source:** take as many stories from one outlet as are relevant and credible, including
-  EnterpriseAM and CairoScene. The instruction that an edition should not read like a rewrite of either
-  is about writing in your own words and checking key facts elsewhere, not a cap on how much comes from
-  them. Each story is still judged on its own merit and placed in the section where it belongs.
-- **Spread the wire and world sources:** apart from EnterpriseAM and CairoScene, no one outlet should carry more
-  than about six of the edition's Sources links. World and regional stories come from many outlets (Reuters, AP,
+- **EnterpriseAM and CairoScene are trusted, not the backbone:** treat both as very good, credible sources with
+  strong stories, and use them freely, but check their stories against other outlets where they carry them too,
+  and keep the two together under a third of the edition's sourced items (the checker warns above that). Never
+  leave out a good story from either to balance the count: add strong stories from other outlets instead. Write
+  in your own words so the edition never reads like a rewrite of either. Each story is still judged on its own
+  merit and placed in the section where it belongs.
+- **Spread the wire and world sources:** no other single outlet should carry more than about six of the
+  edition's Sources links (EnterpriseAM and CairoScene fall under the one-third rule above instead). World and regional stories come from many outlets (Reuters, AP,
   AFP, BBC, the Financial Times, Bloomberg, The National, Asharq Al-Awsat, Al-Monitor, Al Jazeera and others):
   keep every story that deserves its place, but take it from the outlet with the fullest report, or the one
   closest to the news, rather than defaulting to one site, and check it against a second. Al Jazeera is a

@@ -236,6 +236,7 @@ td.trend{vertical-align:middle}
   :root[data-width="wide"] .s.src .s-body{column-count:1}
   :root[data-width="wide"] .s.src .s-body ul{columns:3;column-gap:40px}
   :root[data-width="wide"] .edition .sum{max-width:60ch}
+  :root[data-width="wide"] .toc{margin-inline:calc(var(--pad) * -1);gap:2px 12px;font-size:12px}
 }
 @media print{#widthBtn{display:none!important}}
 /* Sources start folded */
@@ -425,6 +426,7 @@ td.trend{vertical-align:middle}
       $('leadwrap').innerHTML = r.lead ? '<div class="lead">'+r.lead.replace(/<\/?p>/g,'')+'</div>' : '';
       $('toc').innerHTML = r.sections.filter(function(s){return s.title.toLowerCase()!=='sources'}).map(function(s){return '<a href="#'+s.id+'" data-jump="1">'+esc(s.title)+'</a>'}).join('');
       $('toc').hidden = !r.sections.length;
+      requestAnimationFrame(balanceToc); if(document.fonts && document.fonts.ready) document.fonts.ready.then(balanceToc);
       $('content').innerHTML = r.sections.map(function(s){
         var src = s.title.toLowerCase()==='sources' ? ' src' : '', body = s.html;
         // the Sources list starts folded, with its count
@@ -479,6 +481,18 @@ td.trend{vertical-align:middle}
     syncWidthBtn();
   });
   syncWidthBtn();
+  // the section menu: when it has to wrap, the rows are evened out so no one link sits alone on the last line
+  function balanceToc(){
+    var t = $('toc'); if(!t || t.hidden) return;
+    t.style.maxWidth = ''; t.style.marginLeft = t.style.marginRight = '';
+    var rows = function(){ return new Set([].map.call(t.querySelectorAll('a'), function(a){ return a.offsetTop; })).size; };
+    var n = rows(); if(n < 2) return;
+    var lo = 120, hi = t.clientWidth;
+    while(hi - lo > 4){ var mid = (lo + hi) >> 1; t.style.maxWidth = mid + 'px'; if(rows() > n) lo = mid; else hi = mid; }
+    t.style.maxWidth = hi + 'px'; t.style.marginLeft = t.style.marginRight = 'auto';
+  }
+  var tocTimer; window.addEventListener('resize', function(){ clearTimeout(tocTimer); tocTimer = setTimeout(balanceToc, 150); });
+  $('widthBtn').addEventListener('click', function(){ requestAnimationFrame(balanceToc); });
 
   // ---- colour signed percentage changes in tables, with an arrow so colour is never the only cue ----
   function markChanges(){
