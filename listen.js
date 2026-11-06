@@ -379,6 +379,16 @@
     if(busy) setTimeout(function(){ if(my === token && S) next(); }, 150); else next();
   }
 
+  // ---- the space bar plays and pauses while the player is open (not while typing, or on a focused button,
+  // which the space bar already presses) ----
+  document.addEventListener('keydown', function(e){
+    if(!S || e.key !== ' ' || e.ctrlKey || e.metaKey || e.altKey) return;
+    var t = e.target;
+    if(t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT|BUTTON|A|SUMMARY)$/.test(t.tagName))) return;
+    e.preventDefault();   // not the page scroll
+    S.playing ? pause() : play();
+  });
+
   // ---- tap a word to read from there (while the player is open) ----
   function caretAt(x, y){
     if(document.caretPositionFromPoint){ var p = document.caretPositionFromPoint(x, y); return p && {node: p.offsetNode, offset: p.offset}; }
