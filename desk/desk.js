@@ -87,8 +87,10 @@ window.Desk = (function () {
     if (more) more.addEventListener('click', () => { bs.forEach((b) => { b.hidden = false; }); more.remove(); });
   }
   // a trend line: the period's closes, or on 1D the last session through the day when it is saved (intra)
-  function spark(s, back, intra = null) {
-    const pts = !back && intra && intra.length > 1 ? intra.map((x) => x[1]) : (back <= 7 ? s.slice(-7) : s.filter(([d]) => d >= cut(lastDate(s), back))).map((x) => x[1]);
+  // week: on 1W, the last sessions through the day (weekOf), when saved; otherwise the last seven closes
+  function spark(s, back, intra = null, week = null) {
+    const pts = !back && intra && intra.length > 1 ? intra.map((x) => x[1]) : back === 7 && week && week.length > 1 ? week
+      : (back <= 7 ? s.slice(-7) : s.filter(([d]) => d >= cut(lastDate(s), back))).map((x) => x[1]);
     if (pts.length < 2) return '';
     const w = 72, h = 18, min = Math.min(...pts), max = Math.max(...pts), sp = max - min || 1, st = (w - 4) / (pts.length - 1);
     const xy = pts.map((v, i) => [2 + i * st, h - 2 - (v - min) / sp * (h - 4)]);
@@ -121,6 +123,14 @@ window.Desk = (function () {
   // Returns the caption, or null when fewer than two sessions are saved (the page then draws the daily closes).
   // the pound's rate on a day, for prices through the day in dollars (the market rate is set once a day)
   const rateOn = (iso) => valueAt(series((e) => e.usd_egp, 'fx'), iso);
+  // a stock's or index's last sessions through the day (every 15 minutes), joined, for the 1W trend lines; null
+  // until two sessions are saved. In dollars, each session at its own day's rate.
+  const weekSessions = (m) => ((INTRA && INTRA.week && INTRA.week[m]) || []).filter((x) => x.session <= asOfFor(m));
+  function weekOf(t, inUSD = false) {
+    const m = GROUP.egx.includes(t) || /^EGX/.test(t) ? 'egx' : 'us';
+    const ss = weekSessions(m).filter((x) => x.series[t] && x.series[t].length > 1 && (!inUSD || rateOn(x.session)));
+    return ss.length < 2 ? null : ss.flatMap((x) => { const r = inUSD ? rateOn(x.session) : 1; return x.series[t].map(([, v]) => v / r); });
+  }
   function weekChart(el, market, key, name, fmt, inUSD = false) {
     const W = INTRA && INTRA.week && INTRA.week[market];
     const ss = (W || []).filter((x) => x.session <= asOfFor(market) && x.series[key] && x.series[key].length > 1 && (!inUSD || rateOn(x.session)));
@@ -218,6 +228,7 @@ window.Desk = (function () {
   // the trend column's heading: on 1D, the session its lines show when one is saved for that market
   function trendHead(back, market, label) {
     if (back > 7) return label;
+    if (back === 7) { const n = weekSessions(market).length; return n >= 2 ? `Last ${n} sessions` : 'Last 7 days'; }
     const I = INTRA && INTRA[market];
     return !back && I && I.session ? `${WD[day(I.session).getDay()]} ${day(I.session).getDate()} ${MON[day(I.session).getMonth()]} session` : 'Last 7 days';
   }
@@ -249,7 +260,7 @@ window.Desk = (function () {
   function stockTable(body, tickers, back, inUSD = false) {
     body.innerHTML = tickers.map((t) => {
       const s = inUSD ? usd(stock(t)) : stock(t), c = change(s, back), y = ytd(s);
-      return `<tr class="click" onclick="location='/desk/stock/?t=${encodeURIComponent(t)}'"><td class="name"><a href="/desk/stock/?t=${encodeURIComponent(t)}"><b>${esc(NAMES[t])}</b><span>${esc(t)}</span></a></td><td class="trend">${spark(s, back, intraOf(t))}</td><td class="num">${num(last(s))}</td><td class="num"><span class="${cls(c)}">${pct(c)}</span></td><td class="num"><span class="${cls(y)}">${pct(y)}</span></td></tr>`;
+      return `<tr class="click" onclick="location='/desk/stock/?t=${encodeURIComponent(t)}'"><td class="name"><a href="/desk/stock/?t=${encodeURIComponent(t)}"><b>${esc(NAMES[t])}</b><span>${esc(t)}</span></a></td><td class="trend">${spark(s, back, intraOf(t), back === 7 ? weekOf(t, inUSD) : null)}</td><td class="num">${num(last(s))}</td><td class="num"><span class="${cls(c)}">${pct(c)}</span></td><td class="num"><span class="${cls(y)}">${pct(y)}</span></td></tr>`;
     }).join('');
   }
   // a long table shows its first eight rows; the button under it shows the rest (the rows can be redrawn freely)
@@ -342,5 +353,5 @@ window.Desk = (function () {
       location.reload();
     });
   }
-  return { get ASOF() { return ASOF; }, asOfFor, lastDate, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, weekChart, deskNotes, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
+  return { get ASOF() { return ASOF; }, asOfFor, lastDate, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, weekChart, deskNotes, weekOf, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
 })();

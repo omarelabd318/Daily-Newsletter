@@ -58,7 +58,8 @@
     const rows = tickers.map((t) => {
       const raw = M.stock(t), s = inUSD ? M.usd(raw) : raw, c = M.change(s, per[1]), y = M.ytd(s);
       const intra = !per[1] && M.INTRA && M.INTRA[MKT] && M.INTRA[MKT].series[t];
-      const pts = intra ? intra.map((x) => x[1]) : (per[1] <= 7 ? s.slice(-7) : s.filter(([d]) => d >= M.cut(M.lastDate(s), Math.max(per[1], 7)))).map((x) => x[1]);
+      const wk = per[1] === 7 ? M.weekOf(t, inUSD) : null;   // 1W: the last sessions through the day, once saved
+      const pts = intra ? intra.map((x) => x[1]) : wk ? wk : (per[1] <= 7 ? s.slice(-7) : s.filter(([d]) => d >= M.cut(M.lastDate(s), Math.max(per[1], 7)))).map((x) => x[1]);
       const [lo, hi] = M.range52(raw), now = M.last(raw);
       const open = views.filter((v) => (v.tickers || []).includes(t) && ['open', 'on track'].includes(v.status)).length;
       return { t, s, c, y, pts, lo, hi, now, open, news: latest(t) };
