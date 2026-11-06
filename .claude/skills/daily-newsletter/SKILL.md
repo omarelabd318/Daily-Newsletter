@@ -166,7 +166,10 @@ covered in full further down.
   stories about individual companies; Stocks Watch just lists the prices.
 - **Currency and Commodities Watch:** figures and a short note for each row. No story narrative; the
   story behind a move belongs in Markets.
-- **Economic Calendar:** upcoming events only, not news already covered above.
+- **Economic Calendar:** upcoming events only, not news already covered above. Start from
+  `python3 .claude/skills/daily-newsletter/calendar_facts.py DATE 14`, which lists the holidays and EGX closures,
+  the desk's stocks' results dates ("expected" unless confirmed) and dividends already in the repo's data, so the
+  dates known are in and right; add the rest (central bank meetings, data releases, auctions, fixtures) from research.
 
 ## Fetch the figures first
 
@@ -301,7 +304,7 @@ a figure could not be confirmed. These pages are for figures; news still comes f
 | Net international reserves (monthly, $bn) | https://tradingeconomics.com/egypt/foreign-exchange-reserves (the central bank's figure, published about the 7th; its own reserves page has not been updated since 2023). fetch_figures.py logs `reserves_usd` | News reports of the central bank's announcement (Daily News Egypt, Ahram Online) |
 | Treasury bill yields | The central bank's auction page, https://www.cbe.org.eg/en/auctions/egp-t-bills (latest results: weighted average accepted yield by tenor, with the auction date). fetch_figures.py reads it and logs each tenor once, on the first edition after its auction. 91- and 273-day bills are auctioned on Sundays, 182- and 364-day bills on Thursdays | News reports of the auction (Amwal Al Ghad, Al-Borsa, EnterpriseAM) |
 | Public holidays and bank closures | https://www.officeholidays.com/countries/egypt/2026 (verify any holiday shift against a news report of the official announcement) | Search |
-| Cairo weather, today and next two days | https://wttr.in/Cairo?format=j1 (JSON: daily max and min °C) | Search |
+| Cairo weather, today and next two days | `python3 .claude/skills/daily-newsletter/weather.py` (two services side by side: Open-Meteo or MET Norway, and wttr.in) | Egyptian Meteorological Authority |
 | Egyptian football | https://www.kingfut.com/ (English) | https://www.kooora.com/ (Arabic) |
 | European football results | https://www.bbc.com/sport/football/scores-fixtures/YYYY-MM-DD (use the date of the matches) | https://www.espn.com/soccer/scoreboard |
 | Tennis | https://www.bbc.com/sport/tennis | https://www.wtatennis.com/scores |
@@ -561,6 +564,11 @@ It reports:
   a top-level `#` title, HTML, a first line that is not an italic intro, a Today at a Glance item with no
   link or a link to an anchor that does not exist, a missing What to watch today line, or an
   `editions/index.json` that does not parse or has no entry for the date. Fix all of these before committing.
+- **Figures and links** (also errors or warnings): each currency-table level and each EGX30, S&P 500, Nasdaq, Dow,
+  Brent and Bitcoin level written in the text is compared with the data log for the date; a mismatch is a warning
+  to fix the text or the log. Every Sources link is opened: a dead page (not found) is an error, to be replaced with
+  a working link to the same story; links a site refuses to check are only counted. `--no-links` skips the link
+  check when offline.
 - **Warnings:** first-person words or names outside quotes, sections far outside their word budget, and
   bold lead-ins that look like the same story in two sections. Read each one and fix the real problems;
   some are false alarms (a quoted "we", "US" as a country). A word-count warning is information only:

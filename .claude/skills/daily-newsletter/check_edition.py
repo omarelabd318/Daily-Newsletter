@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Check a Daily Newsletter edition before it is committed.
 
-Usage: python3 .claude/skills/daily-newsletter/check_edition.py editions/YYYY-MM-DD.md
+Usage: python3 .claude/skills/daily-newsletter/check_edition.py editions/YYYY-MM-DD.md [--no-links]
+
+It opens every Sources link (about 20 seconds); --no-links skips that when offline.
 
 Errors exit with code 1. Warnings are printed for a human (or Claude) to judge.
 """
@@ -9,6 +11,8 @@ import json
 import os
 import re
 import sys
+
+ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
 
 SECTIONS = [
     "Today at a Glance", "Quick Hits", "Weather", "Egypt News", "Top World Headlines",
@@ -110,6 +114,94 @@ def check_stocks(parts, days, date):
                 out.append(f"Stocks Watch {t}: table change {change:+.1f}% but the log implies {implied:+.1f}% "
                            f"({base:,.2f} to {close:,.2f}); check one of them.")
     return out
+
+
+# Figures written in the edition against the data log entry for its date (the closes it shows).
+TABLE_KEYS = [(r"USD/EGP|US dollar\b(?! index)", ["usd_egp", "cbe_usd_sell", "cbe_usd_buy"]), (r"dollar index|DXY", ["dxy"]), (r"EUR/EGP|Euro", ["eur_egp"]),
+              (r"SAR/EGP|Saudi riyal", ["sar_egp"]), (r"AED/EGP|dirham", ["aed_egp"]), (r"KWD/EGP|Kuwaiti", ["kwd_egp"]), (r"QAR/EGP|Qatari", ["qar_egp"]),
+              (r"GBP/EGP|sterling|British pound", ["gbp_egp"]), (r"Gold 21K|21K", ["gold21_egp"]), (r"Gold 24K|24K", ["gold24_egp"]), (r"Gold 18K|18K", ["gold18_egp"]),
+              (r"Gold pound", ["goldpound_egp"]), (r"Gold \(\$|Gold, \$|Gold \$", ["gold_usd"]), (r"Brent", ["brent"])]
+PROSE_KEYS = [("EGX30", r"EGX30", ["egx30"]), ("S&P 500", r"S&P 500", ["sp500"]), ("Nasdaq", r"Nasdaq(?![- ]100)(?: Composite)?", ["nasdaq"]),
+              ("Dow", r"\bDow\b(?! Jones Transportation)", ["dow"]), ("Brent", r"\bBrent\b", ["brent"]), ("Bitcoin", r"\bBitcoin\b", ["btc"])]
+
+
+def check_figures(text, date, warnings):
+    try:
+        days = json.load(open(os.path.join(ROOT, "data", "markets.json")))["days"]
+    except Exception:
+        return
+    E = next((d for d in days if d["date"] == date), None)
+    if not E:
+        return
+    numre = re.compile(r"(?<![\w.])\$?(\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?)(?![\d%])")
+    # the currency table: each row's Level against the log
+    sec = text.split("## Currency and Commodities Watch", 1)
+    if len(sec) == 2:
+        for line in sec[1].split("\n## ", 1)[0].splitlines():
+            cells = [c.strip() for c in line.strip().strip("|").split("|")]
+            if len(cells) < 2 or set(cells[1]) <= set("-: "):
+                continue
+            for pat, keys in TABLE_KEYS:
+                if re.search(pat, cells[0], re.I):
+                    m = numre.search(cells[1])
+                    refs = [E[k] for k in keys if isinstance(E.get(k), (int, float))]
+                    if m and refs:
+                        v = float(m.group(1).replace(",", ""))
+                        if not any(abs(v / r - 1) <= 0.005 for r in refs):
+                            warnings.append(f"Figures: {cells[0]} is {cells[1]} in the table but the log has {', '.join(f'{r:,.2f}' for r in refs)} for {date}: "
+                                            "fix the table or the log.")
+                    break
+    # levels in the text: near each mention, a number close to the logged close should be that close
+    body = text.split("## Sources", 1)[0]
+    for name, pat, keys in PROSE_KEYS:
+        ref = E.get(keys[0])
+        if not isinstance(ref, (int, float)):
+            continue
+        near, exact = [], False
+        for m in re.finditer(pat, body):
+            win = body[m.end(): m.end() + 120]
+            for n in numre.finditer(win):
+                raw = n.group(1)
+                v = float(raw.replace(",", ""))
+                # as precise as it is written: 51,152.73 must match to the cent, "about 95" within half a percent
+                dec = len(raw.split(".")[1]) if "." in raw else 0
+                tol = 0.5 * 10 ** -dec + 1e-9 if dec else max(0.5, abs(ref) * 0.005)
+                if abs(v - ref) <= tol or (dec and abs(v - round(ref, dec)) <= 10 ** -dec + 1e-9):
+                    exact = True
+                elif abs(v / ref - 1) <= 0.03 and not re.search(r"(?:from|high|low|peak|since|above|below|record|target|forecast|range)\W+\S*\W*$", win[:n.start()][-40:], re.I):
+                    near.append(n.group(1))
+        if near and not exact:
+            warnings.append(f"Figures: the text gives {name} as {', '.join(sorted(set(near))[:3])}, but the log has {ref:,.2f} for {date}: check which is right.")
+
+
+def check_links(text, errors, warnings):
+    """Open every Sources link: a page that is gone (404, 410, no such site) blocks publishing; one that refuses
+    automated visits (401, 403, 429) or times out cannot be judged and is only counted."""
+    import concurrent.futures
+    import urllib.error
+    import urllib.request
+    src = text.split("## Sources", 1)[1] if "## Sources" in text else ""
+    urls = sorted(set(re.findall(r"\((https?://[^)\s]+)\)", src)))
+    ua = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36"
+
+    def one(u):
+        try:
+            r = urllib.request.urlopen(urllib.request.Request(u, headers={"User-Agent": ua}), timeout=15)
+            return u, r.status
+        except urllib.error.HTTPError as e:
+            return u, e.code
+        except urllib.error.URLError as e:
+            return u, "gone" if "Name or service not known" in str(e.reason) or "nodename" in str(e.reason) else "timeout"
+        except Exception:
+            return u, "timeout"
+    with concurrent.futures.ThreadPoolExecutor(10) as ex:
+        res = list(ex.map(one, urls))
+    dead = [u for u, c in res if c in (404, 410, "gone")]
+    unsure = [u for u, c in res if c not in (404, 410, "gone") and not (isinstance(c, int) and c < 400)]
+    for u in dead:
+        errors.append(f"Sources: {u} is dead (page not found): replace it with a working link to the same story.")
+    if unsure:
+        warnings.append(f"Sources: {len(unsure)} of {len(urls)} links could not be checked (the site refused or timed out); open them by hand if in doubt.")
 
 
 def main(path):
@@ -269,6 +361,13 @@ def main(path):
                 elif n < T[k]:
                     warnings.append(f"Research: {n} {k} logged, below the {T[k]} a full edition usually takes.")
 
+    if m and not recap:
+        check_figures(text, m.group(1), warnings)
+
+    # Sources: every link opened (skip with --no-links when offline)
+    if "--no-links" not in sys.argv:
+        check_links(text, errors, warnings)
+
     # Quick Hits carries a Number of the day (daily editions only).
     if not recap and not any(re.match(r"^\s*(?:[-*]\s+)?\*\*Number of the day:\*\*", l)
                              for l in sections.get("Quick Hits", {}).get("body", [])):
@@ -324,13 +423,13 @@ def main(path):
     # Dependence: EnterpriseAM and CairoScene are core sources, but the edition should not rest on them.
     src = text.split("## Sources", 1)[1] if "## Sources" in text else ""
     # Each link counts once, or as many items as its "(used for N items)" note says.
-    total = two = 0
+    items = two = 0
     warned = set()
     general = re.compile(r"https?://(www\.)?(cairoscene\.com/?|enterpriseam\.com/egypt/am-edition/?)")
     for label, u in re.findall(r"\[([^\]]*)\]\((https?://[^)\s]+)\)", src):
         used = re.search(r"used for (\d+) items?", label, re.I)
         n = int(used.group(1)) if used else 1
-        total += n
+        items += n
         if re.search(r"enterpriseam\.com|cairoscene\.com", u):
             two += n
             if general.fullmatch(u) and not used and u not in warned:
@@ -347,8 +446,8 @@ def main(path):
         if n > 6:
             warnings.append(f"Sources: {n} links from {h}; keep the stories but source some from other outlets "
                             "(Reuters, AP, AFP, BBC, The National, Asharq Al-Awsat…) and check each against a second.")
-    if not recap and total and two / total > 1 / 3:
-        warnings.append(f"EnterpriseAM and CairoScene account for {two} of {total} sourced items; research wider "
+    if not recap and items and two / items > 1 / 3:
+        warnings.append(f"EnterpriseAM and CairoScene account for {two} of {items} sourced items; research wider "
                         "for more strong stories from other outlets (never cut a good one).")
     # Credits in the text: about one per item reads naturally.
     credit = re.compile(r"\b((?i:according to|reported|citing)|told [A-Z]|per (?=[A-Z]))")
@@ -462,6 +561,7 @@ def main(path):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
+    paths = [a for a in sys.argv[1:] if not a.startswith("--")]
+    if len(paths) != 1:
         sys.exit(__doc__)
-    sys.exit(main(sys.argv[1]))
+    sys.exit(main(paths[0]))
