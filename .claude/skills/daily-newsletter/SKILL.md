@@ -528,6 +528,11 @@ weekday's pound rates for Friday and Saturday closes), printing every value besi
 it marks as more than 8% from a neighbour, and fill the `MANUAL` lines it lists by hand with log_figures.py when a
 source confirms the figure (or leave them, and say so in the final reply).
 
+**The week behind the trend lines:** then run `python3 .claude/skills/markets-desk/fetch_intraday.py` (brings the desk's
+intraday prices up to the last session, about a minute) and `python3 .claude/skills/daily-newsletter/week_snapshot.py DATE`.
+It saves `data/weeks/DATE.json`, the last five sessions hour by hour for the desk's stocks and the indexes, which the
+site draws as this edition's "Last 7 days" lines; commit it, and `desk/intraday.json`, with the edition.
+
 Then refresh the spreadsheet copy, `data/markets.xlsx`, and commit it too:
 
 ```

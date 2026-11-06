@@ -368,6 +368,11 @@ def main(path):
     if "--no-links" not in sys.argv:
         check_links(text, errors, warnings)
 
+    # The week behind the Stocks Watch lines (week_snapshot.py), saved with each daily edition
+    if m and not recap and not os.path.exists(os.path.join(ROOT, "data", "weeks", m.group(1) + ".json")):
+        warnings.append(f"Trend lines: no data/weeks/{m.group(1)}.json: run fetch_intraday.py, then week_snapshot.py {m.group(1)}, "
+                        "so Stocks Watch shows the week hour by hour.")
+
     # Running topics: the edition's stories tagged (topics.py tag), and each topic it moved given a fresh
     # "where it stands"
     key = os.path.basename(path)[:-3]

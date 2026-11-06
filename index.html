@@ -677,7 +677,7 @@ td.trend{vertical-align:middle}
   var tickerSet = null;
   function isTicker(tk){ return tickerSet && tickerSet[tk]; }
   function pick(day, label){
-    var t = label.match(/\(([A-Z.]{2,6})\)/);
+    var t = label.match(/\(([A-Z][A-Z.]{0,5})\)/);
     if(t){
       var tk = t[1];
       if(day.egx && day.egx[tk] != null) return day.egx[tk];
@@ -698,6 +698,27 @@ td.trend{vertical-align:middle}
     return '<svg class="spark" viewBox="0 0 '+w+' '+h+'" width="'+w+'" height="'+h+'" role="img" aria-label="Trend: '+esc(tip)+'"><title>'+esc(tip)+'</title>'+
       '<path d="'+d+'"/><circle cx="'+last[0].toFixed(1)+'" cy="'+last[1].toFixed(1)+'" r="2.5"/></svg>';
   }
+  // the week's snapshot saved with each edition: the last five sessions of the desk's stocks and the indexes, hourly
+  var weekCache = {};
+  function weekFor(date){
+    if(!weekCache[date]) weekCache[date] = fetch('data/weeks/' + date + '.json', {cache:'no-cache'}).then(function(r){ return r.ok ? r.json() : null; }).catch(function(){ return null; });
+    return weekCache[date];
+  }
+  var WKEY = [[/^EGX30/i, 'egx', 'EGX30'], [/^S&P 500/i, 'us', 'sp500'], [/^Nasdaq/i, 'us', 'COMP'], [/^Dow/i, 'us', 'dow']];
+  function weekPts(WK, label){
+    if(!WK) return null;
+    var mk = null, k = null, t = label.match(/\(([A-Z][A-Z.]{0,5})\)/);
+    if(t){ k = t[1]; mk = (WK.egx || []).some(function(w){ return w.series[k]; }) ? 'egx' : 'us'; }
+    else for(var i = 0; i < WKEY.length; i++) if(WKEY[i][0].test(label.trim())){ mk = WKEY[i][1]; k = WKEY[i][2]; break; }
+    if(!mk) return null;
+    var S = WK[mk] || [];
+    // only a full week: the row's prices must run to the market's latest saved session, over three sessions or more
+    var has = S.filter(function(w){ return w.series[k] && w.series[k].length >= 2; });
+    if(has.length < 3 || !S.length || has[has.length - 1].session !== S[S.length - 1].session) return null;
+    var pts = [];
+    has.forEach(function(w){ w.series[k].forEach(function(p){ pts.push({d: w.session.slice(5) + ' ' + p[0], v: p[1]}); }); });
+    return pts;
+  }
   function addSparks(upto, long){
     market.then(function(m){
       var from = new Date(new Date(upto+'T12:00:00') - 380 * 864e5).toISOString().slice(0,10);
@@ -707,6 +728,7 @@ td.trend{vertical-align:middle}
       if(!m || !m.days) return;
       var days = m.days.filter(function(x){ return x.date <= upto; });
       if(!tickerSet){ tickerSet = {}; m.days.forEach(function(x){ Object.keys(x.egx||{}).concat(Object.keys(x.us||{})).forEach(function(k){ tickerSet[k] = 1; }); }); }
+      return weekFor(upto).then(function(WK){
       document.querySelectorAll('#content .s-body table').forEach(function(table){
         if(table.querySelector('.trend')) return;
         var series = [].map.call(table.querySelectorAll('tbody tr'), function(tr){
@@ -714,7 +736,10 @@ td.trend{vertical-align:middle}
           if(cell) days.forEach(function(x){ var v = pick(x, cell.textContent); if(typeof v === 'number') pts.push({d:x.date, v:v}); });
           return pts.length && pts[pts.length-1].d === upto ? pts : [];
         });
-        var lines = series.map(function(pts){
+        // the week through each session, hour by hour, where the edition's snapshot has it (data/weeks/DATE.json)
+        var weeks = [].map.call(table.querySelectorAll('tbody tr'), function(tr){ var c = tr.querySelector('td'); return !long && c ? weekPts(WK, c.textContent) : null; });
+        var lines = series.map(function(pts, i){
+          if(weeks[i] && pts.length) return spark(weeks[i], false, 'Last 5 sessions, hourly');
           pts = pts.slice(long ? -260 : -7);
           return pts.length >= 2 ? spark(pts, long) : '';
         });
@@ -727,7 +752,8 @@ td.trend{vertical-align:middle}
           if(lines[i]) tr.classList.add('has-trend'); if(lines[i] && long) tr.classList.add('trend-long');
         });
         var sec = table.closest('.s'), name = sec && sec.querySelector('h2') ? sec.querySelector('h2').textContent.trim() : '';
-        if(!long && /^(Stocks Watch|Currency and Commodities Watch)$/.test(name)) addPeriods(table, series, upto, name !== 'Stocks Watch');
+        if(!long && /^(Stocks Watch|Currency and Commodities Watch)$/.test(name)) addPeriods(table, series, upto, name !== 'Stocks Watch', weeks);
+      });
       });
     });
   }
@@ -749,7 +775,7 @@ td.trend{vertical-align:middle}
     else { var cut = cutoff(upto, back); for(var j = pts.length-1; j >= 0; j--) if(pts[j].d <= cut){ base = pts[j].v; break; } }
     return base ? (last / base - 1) * 100 : null;
   }
-  function addPeriods(table, series, upto, addColumn){
+  function addPeriods(table, series, upto, addColumn, weeks){
     var heads = [].slice.call(table.querySelectorAll('thead th')), ci;
     if(addColumn){   // the currency table gets a Change column after Level
       var li = heads.findIndex(function(th){ return th.textContent.trim() === 'Level'; });
@@ -773,7 +799,7 @@ td.trend{vertical-align:middle}
         var t = tr.querySelector('td.trend');
         if(t){
           var win = p[1] <= 7 ? pts.slice(-7) : pts.filter(function(x){ return x.d >= cutoff(upto, p[1]); });
-          t.innerHTML = win.length >= 2 ? spark(win, false, p[1] > 7 ? p[2] : null) : '';
+          t.innerHTML = p[1] <= 7 && weeks && weeks[i] ? spark(weeks[i], false, 'Last 5 sessions, hourly') : win.length >= 2 ? spark(win, false, p[1] > 7 ? p[2] : null) : '';
           t.setAttribute('data-label', p[2]);
         }
       });
