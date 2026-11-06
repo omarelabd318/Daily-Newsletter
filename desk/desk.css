@@ -373,3 +373,9 @@ a.tag:hover{background:var(--active)}
 .sorth:focus-visible{outline:2px solid var(--focus,currentColor);outline-offset:2px;border-radius:2px}
 .sorth i{font-style:normal;font-size:11px;line-height:1;opacity:.45} .sorth i::before{content:"\2195"}
 th.desc .sorth i,th.asc .sorth i{opacity:1} th.desc .sorth i::before{content:"\2193"} th.asc .sorth i::before{content:"\2191"}
+
+/* sector moves (EGX and Wall Street pages) */
+.secmoves{columns:2;column-gap:40px} .secmoves .flow{break-inside:avoid;padding:6px 0 8px}
+.secd{margin-top:4px;font-size:12px;color:var(--muted)}
+.flow-bar i.pos{left:50%;background:var(--positive)} .flow-bar i.neg{right:50%;background:var(--negative)}
+@media (max-width:860px){.secmoves{columns:1}}

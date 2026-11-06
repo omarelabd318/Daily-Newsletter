@@ -3,8 +3,9 @@ window.Desk = (function () {
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   const MINUS = '−';
-  const pct = (v, d = 1) => v == null ? '—' : (v > 0 ? '+' : v < 0 ? MINUS : '') + Math.abs(v).toFixed(d) + '%';
-  const cls = (v) => v == null ? 'dash' : v > 0 ? 'chg up' : v < 0 ? 'chg down' : 'chg flat';
+  // a change that rounds to zero shows as 0.0%, with no sign
+  const pct = (v, d = 1) => { if (v == null) return '—'; const r = +v.toFixed(d); return (r > 0 ? '+' : r < 0 ? MINUS : '') + Math.abs(r).toFixed(d) + '%'; };
+  const cls = (v) => v == null ? 'dash' : v >= 0.05 ? 'chg up' : v <= -0.05 ? 'chg down' : 'chg flat';
   const num = (v, d = 2) => v == null ? '—' : v.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
   const get = (u) => fetch(u, { cache: 'no-cache' }).then((r) => r.ok ? r.json() : null).catch(() => null);
   // ASOF is the EGX's last session; each market has its own last close (ASOF_M), since at weekends Wall Street
@@ -271,6 +272,19 @@ window.Desk = (function () {
     if (sort && sort.key) { const v = (r) => (sort.key === 'chg' ? r.c : r.y); rows.sort((a, b) => (v(a) == null) - (v(b) == null) || sort.dir * (v(a) - v(b))); }
     body.innerHTML = rows.map(({ t, s, c, y }) => `<tr class="click" onclick="location='/desk/stock/?t=${encodeURIComponent(t)}'"><td class="name"><a href="/desk/stock/?t=${encodeURIComponent(t)}"><b>${esc(NAMES[t])}</b><span>${esc(t)}</span></a></td><td class="trend">${spark(s, back, intraOf(t), back === 7 ? weekOf(t, inUSD) : null)}</td><td class="num">${num(last(s))}</td><td class="num"><span class="${cls(c)}">${pct(c)}</span></td><td class="num"><span class="${cls(y)}">${pct(y)}</span></td></tr>`).join('');
   }
+  // each broad sector's move: the equal-weighted average of the desk's stocks in it over the period, as bars either
+  // side of zero (the table's period and currency), with the best and worst stock named
+  function sectorMoves(el, market, back, inUSD = false, label = '') {
+    const rows = SECTORS[market].map(([name, ts]) => {
+      const cs = ts.map((t) => { const s = inUSD ? usd(stock(t)) : stock(t); return { t, c: s.length && lastDate(s) >= cut(asOfFor(market), 7) ? change(s, back) : null }; }).filter((x) => x.c != null);
+      return { name, n: cs.length, avg: cs.length ? cs.reduce((a, x) => a + x.c, 0) / cs.length : null, cs: cs.sort((a, b) => b.c - a.c) };
+    }).filter((r) => r.avg != null).sort((a, b) => b.avg - a.avg);
+    const max = Math.max(...rows.map((r) => Math.abs(r.avg)), 0.1);
+    el.innerHTML = '<div class="secmoves">' + rows.map((r) => `<div class="flow"><div class="flow-top"><span>${esc(r.name)}</span><span class="num ${cls(r.avg)}">${pct(r.avg)}</span></div>`
+      + `<div class="flow-bar"><i class="${r.avg >= 0 ? 'pos' : 'neg'}" style="width:${(Math.abs(r.avg) / max * 50).toFixed(1)}%"></i></div>`
+      + `<div class="secd">${r.n > 1 ? `${r.n} stocks · best ${esc(r.cs[0].t)} <span class="${cls(r.cs[0].c)}">${pct(r.cs[0].c)}</span> · worst ${esc(r.cs.at(-1).t)} <span class="${cls(r.cs.at(-1).c)}">${pct(r.cs.at(-1).c)}</span>` : esc(r.cs[0].t) + ' only'}</div></div>`).join('') + '</div>'
+      + `<p class="stock-note">Equal-weighted average of the desk's stocks in each sector${label ? ', ' + esc(label) : ''}${inUSD ? ', in dollars' : ''}.</p>`;
+  }
   // the stock tables' Change and YTD headers sort the rows: one tap puts the highest first, a second the lowest, a third
   // goes back to market value. A sorted table shows every row, so "best" is the best of all the desk's stocks.
   function sortable(table, redraw) {
@@ -388,5 +402,5 @@ window.Desk = (function () {
       location.reload();
     });
   }
-  return { get ASOF() { return ASOF; }, SECTORS, sortable, headText, asOfFor, lastDate, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, weekChart, deskNotes, weekOf, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
+  return { get ASOF() { return ASOF; }, SECTORS, sortable, headText, sectorMoves, asOfFor, lastDate, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, weekChart, deskNotes, weekOf, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
 })();

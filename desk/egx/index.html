@@ -68,6 +68,12 @@
     </section>
 
     <section class="card c12">
+      <div class="card-h"><h2>Sectors</h2><span class="meta" id="sec-meta"></span></div>
+      <div id="sectors"></div>
+    </section>
+
+
+    <section class="card c12">
       <div class="card-h"><h2>Bullish and bearish</h2><span class="meta">Next 1–3 months <span class="samp" data-sample hidden>Sample</span></span></div>
       <div id="outlook"></div>
     </section>
@@ -180,7 +186,7 @@
     if (tper[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; }
     M.headText(M.$('chg-h'), `Change (${tper[0]})`); M.$('trend-h').textContent = M.trendHead(tper[1], 'egx', tper[2]);
     M.$('close-h').textContent = tUSD ? 'Close ($)' : 'Close';
-    M.stockTable(M.$('body'), EGXT, tper[1], tUSD, TSORT); M.clipRows(M.$('body'), EGXT.length, 'stocks');
+    M.stockTable(M.$('body'), EGXT, tper[1], tUSD, TSORT); M.clipRows(M.$('body'), EGXT.length, 'stocks'); const sl = { 0: 'on the day', 7: 'over the week', 30: 'over the month', 182: 'over six months', 365: 'over the year' }[tper[1]] || tper[2].toLowerCase(); M.sectorMoves(M.$('sectors'), 'egx', tper[1], tUSD, sl); M.$('sec-meta').textContent = sl[0].toUpperCase() + sl.slice(1);
   };
   const TSORT = M.sortable(M.$('body').closest('table'), () => drawT());
   M.toggle(M.$('scur'), ['EGP', 'USD'], (i) => { tUSD = i === 1; drawT(); });
