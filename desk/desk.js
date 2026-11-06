@@ -35,7 +35,8 @@ window.Desk = (function () {
     ['/desk/us/', 'Wall Street', 'M2 4h12v8H2zM2 7h12'],
     ['/desk/stocks/us/', 'Wall Street stocks', 'M3 3h10v10H3zM3 6.5h10M6.5 6.5V13'],
     ['/desk/global/', 'Global', 'M8 2.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2.5 8h11M8 2.5c1.8 1.6 1.8 9.4 0 11M8 2.5c-1.8 1.6-1.8 9.4 0 11'],
-    ['/desk/views/', 'Views', 'M3 3.5h10M3 8h10M3 12.5h6M12 11l1.5 1.5L16 10']];
+    ['/desk/views/', 'Views', 'M3 3.5h10M3 8h10M3 12.5h6M12 11l1.5 1.5L16 10'],
+    ['/desk/week/', 'The week', 'M3 3.5h10v10H3zM3 6.5h10M6 2v3M10 2v3']];
 
   let days = [], FULL = false;
   // 3Y and 5Y: the long periods, offered on the EGP, EGX30, Gold in Egypt and stock charts; they load the full log
@@ -388,7 +389,7 @@ window.Desk = (function () {
     shell.className = 'app';
     shell.innerHTML = `<aside class="side" aria-label="Markets Desk">
       <div class="brand"><span class="mark" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18"><path d="M2 14l4-4 3 2.5L16 5" fill="none" stroke="#0e1216" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Markets Desk</b></span></div>
-      <nav class="nav" aria-label="Main"><div class="navgroup">Egypt</div>${links.slice(0, 4).join('')}<div class="navgroup">USA</div>${links.slice(4, 7).join('')}<div class="navgroup">Global and record</div>${links[7]}${links[8]}
+      <nav class="nav" aria-label="Main"><div class="navgroup">Egypt</div>${links.slice(0, 4).join('')}<div class="navgroup">USA</div>${links.slice(4, 7).join('')}<div class="navgroup">Global and record</div>${links[7]}${links[8]}${links[9]}
       <div class="navgroup">Newsletter</div><a href="/">${icon('M3 2.5h10v11H3zM5.5 5.5h5M5.5 8h5M5.5 10.5h3')}Today's newsletter</a></nav>
       <div class="side-foot"><button type="button" class="theme"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2a6 6 0 100 12A4.5 4.5 0 018 2z"/></svg><span>Dark mode</span></button>Cairo · prices in EGP unless marked</div></aside>
       <div><header class="topbar"><div class="brand"><span class="mark" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18"><path d="M2 14l4-4 3 2.5L16 5" fill="none" stroke="#0e1216" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Markets Desk</b></span></div><a class="btn" href="/">Newsletter</a></header>

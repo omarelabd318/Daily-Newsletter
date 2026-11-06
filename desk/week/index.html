@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2352d6b5'/%3E%3Cpath d='M6 22l7-7 5 4 9-11' fill='none' stroke='%230e1216' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<title>The week · Markets Desk</title>
+<meta name="description" content="The week on the Markets Desk: how the markets moved, the biggest movers, foreign flows, the stories, the views judged and what comes next.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,600&display=swap">
+<script>try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+<link rel="stylesheet" href="/desk/desk.css">
+</head>
+<body>
+<main class="canvas">
+  <div class="titlerow"><div>
+    <div class="crumbs"><a href="/desk/">Desk</a> / The week</div>
+    <h1 id="title">The week</h1>
+    <p class="finding" id="finding"></p>
+  </div></div>
+
+  <div class="pages">
+    <section class="card c6">
+      <div class="card-h"><h2>Markets over the week</h2><span class="meta" id="mk-meta"></span></div>
+      <table><thead><tr><th>Market</th><th class="trend">Week</th><th class="num">Close</th><th class="num">Week</th></tr></thead><tbody id="mk"></tbody></table>
+    </section>
+    <section class="card c6">
+      <div class="card-h"><h2>The desk's record</h2><a class="meta" href="/desk/views/">All views →</a></div>
+      <div id="record"></div>
+    </section>
+
+    <section class="card c12">
+      <div class="card-h"><h2>The week's stories</h2><span class="meta">Each day's top call</span></div>
+      <div id="stories"></div>
+    </section>
+
+    <section class="card c6">
+      <div class="card-h"><h2>Biggest movers, EGX</h2><span class="meta" id="mv-egx-m"></span></div>
+      <div id="mv-egx"></div>
+    </section>
+    <section class="card c6">
+      <div class="card-h"><h2>Biggest movers, Wall Street</h2><span class="meta" id="mv-us-m"></span></div>
+      <div id="mv-us"></div>
+    </section>
+
+    <section class="card c6">
+      <div class="card-h"><h2>Foreign investors on the EGX</h2><span class="meta">Net, EGP bn</span></div>
+      <div id="flows"></div>
+    </section>
+    <section class="card c6">
+      <div class="card-h"><h2>Next week</h2><span class="meta">The desk's stocks</span></div>
+      <div id="next"></div>
+    </section>
+  </div>
+</main>
+<script src="/desk/charts.js"></script>
+<script src="/desk/tags.js"></script>
+<script src="/desk/desk.js"></script>
+<script>
+(async () => {
+  // the week: built from what the desk already keeps (the data log, the day files, movers, flows, views, calendar)
+  const M = Desk, D = await M.init('/desk/week/'); if (!D) return;
+  const end = D.date, start = M.cut(end, 6);
+  const span = `${M.short(start)}–${M.short(end)}`;
+  M.$('title').textContent = 'The week · ' + span; document.title = 'The week · Markets Desk';
+
+  // markets: the close and the change over the last seven days
+  const MK = [['egx30', 'EGX30', 'egx', 2], ['egx70', 'EGX70 EWI', 'egx', 2], ['usd_egp', 'Dollar in pounds', 'fx', 2], ['sp500', 'S&P 500', 'us', 2], ['nasdaq', 'Nasdaq', 'us', 2],
+    ['dow', 'Dow', 'us', 2], ['brent', 'Brent, $', 'us', 2], ['gold_usd', 'Gold, $ an ounce', 'us', 0], ['btc', 'Bitcoin, $', 'all', 0]];
+  const rows = MK.map(([k, n, m, dp]) => { const s = M.series((e) => e[k], m); return { n, s, c: M.change(s, 7), v: M.last(s), dp }; }).filter((r) => r.s.length);
+  M.$('mk').innerHTML = rows.map((r) => `<tr><td>${M.esc(r.n)}</td><td class="trend">${M.spark(r.s, 7)}</td><td class="num">${M.num(r.v, r.dp)}</td><td class="num"><span class="${M.cls(r.c)}">${M.pct(r.c)}</span></td></tr>`).join('');
+  M.$('mk-meta').textContent = 'Last seven days';
+  const eg = rows[0], sp = rows.find((r) => r.n === 'S&P 500'), fx = rows.find((r) => r.n === 'Dollar in pounds');
+
+  // the stories: each desk day's top call for Egypt and the USA
+  const days = ((await M.get('/desk/index.json')) || { desks: [] }).desks.filter((d) => d.date >= start && d.date <= end).sort((a, b) => (a.date < b.date ? -1 : 1));
+  const files = await Promise.all(days.map((d) => M.get('/desk/days/' + d.date + '.json')));
+  M.$('stories').innerHTML = days.map((d, i) => { const F = files[i] || {}, e = ((F.egypt || {}).calls || [])[0], u = ((F.global || {}).calls || [])[0];
+    return `<div class="wkday"><span class="cal-d">${M.day(d.date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}</span><div>${e ? `<p><span class="t">Egypt</span> ${M.esc(e.headline)}</p>` : ''}${u ? `<p><span class="t">USA</span> ${M.esc(u.headline)}</p>` : ''}</div></div>`; }).join('') || '<p class="sub">No desk this week.</p>';
+
+  // movers over the week, from TradingView (the whole market)
+  const MV = M.MOVERS || {};
+  for (const mk of ['egx', 'us']) {
+    const W = (MV[mk] || {}).week, el = M.$('mv-' + mk);
+    if (!W) { el.innerHTML = '<p class="sub">Not saved this week.</p>'; continue; }
+    M.$('mv-' + mk + '-m').textContent = W.basis;
+    const r = (x) => `<div class="mv">${M.NAMES[x.t] ? `<a href="/desk/stock/?t=${encodeURIComponent(x.t)}"><b>${M.esc(M.NAMES[x.t])}</b><span class="t">${M.esc(x.t)}</span></a>` : `<span class="nm"><b>${M.esc(x.name)}</b><span class="t">${M.esc(x.t)}</span></span>`}<span class="num ${M.cls(x.pct)}">${M.pct(x.pct)}</span></div>`;
+    el.innerHTML = `<div class="movers"><div><h3><span class="chg up" aria-hidden="true"></span>Gainers</h3>${W.gainers.slice(0, 5).map(r).join('')}</div><div><h3><span class="chg down" aria-hidden="true"></span>Losers</h3>${W.losers.slice(0, 5).map(r).join('')}</div></div>`;
+  }
+
+  // foreign investors: each session's net, and the week's total (a session dominated by a one-off deal is named)
+  const FL = ((await M.get('/desk/flows.json')) || {}).days || [];
+  const fw = FL.filter((d) => d.date >= M.cut(end, 7) && d.date < end);
+  const fsum = (d) => Object.entries(d.rows).filter(([k]) => /^foreign/i.test(k)).reduce((a, [, v]) => a + v, 0);
+  if (fw.length) {
+    const tot = fw.filter((d) => !d.oneoff).reduce((a, d) => a + fsum(d), 0);
+    M.$('flows').innerHTML = M.kv(fw.map((d) => [M.day(d.date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }) + (d.oneoff ? ' (one-off deal)' : '') + (d.confirmed === false ? ' · unconfirmed' : ''), `<span class="${M.cls(fsum(d))}">${fsum(d) > 0 ? '+' : fsum(d) < 0 ? '−' : ''}${Math.abs(fsum(d)).toFixed(2)}</span>`]))
+      + `<p class="stock-note">Over the week: foreign investors were net <b>${tot >= 0 ? 'buyers' : 'sellers'} of EGP ${Math.abs(tot).toFixed(2)}bn</b>${fw.some((d) => d.oneoff) ? ', leaving out one-off deals' : ''}.</p>`;
+  } else M.$('flows').innerHTML = '<p class="sub">No sessions logged this week.</p>';
+
+  // the record: views opened and judged this week, and the hit rate so far
+  const V = ((await M.get('/desk/views.json')) || {}).views || [];
+  const opened = V.filter((v) => v.opened >= start && v.opened <= end), judged = V.filter((v) => v.result && v.result.date >= start && v.result.date <= end && ['right', 'wrong'].includes(v.status));
+  const right = V.filter((v) => v.status === 'right').length, wrong = V.filter((v) => v.status === 'wrong').length;
+  M.$('record').innerHTML = M.kv([['New views and projections', opened.length], ['Judged this week', judged.length ? `${judged.filter((v) => v.status === 'right').length} right, ${judged.filter((v) => v.status === 'wrong').length} wrong` : 'none'],
+    ['Still open', V.filter((v) => ['open', 'on track'].includes(v.status)).length], ['Hit rate so far', right + wrong ? `${Math.round(right / (right + wrong) * 100)}% (${right} of ${right + wrong})` : '—']])
+    + (judged.length ? '<div class="wkjudged">' + judged.map((v) => `<div class="view"><b>${M.esc(v.title)}</b><span class="pill ${v.status}">${v.status[0].toUpperCase() + v.status.slice(1)}</span><span class="why">${M.esc(v.result.text)}</span></div>`).join('') + '</div>' : '');
+
+  // next week: the calendar's dates in the coming seven days
+  const CAL = await M.get('/desk/calendar.json'), today = new Date().toISOString().slice(0, 10), wk = M.cut(today, -7);
+  const nx = ((CAL && CAL.items) || []).filter((x) => x.date >= today && x.date <= wk);
+  M.$('next').innerHTML = nx.length ? '<div class="cal">' + nx.map((x) => `<div class="cal-r"><span class="cal-d">${M.day(x.date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}</span><a href="/desk/stock/?t=${encodeURIComponent(x.t)}"><b>${M.esc(M.NAMES[x.t] || x.t)}</b></a><span class="cal-w">${x.kind === 'results' ? 'Results (expected)' : `Ex-dividend, ${x.cur === '$' ? '$' : 'EGP '}${x.amount}`}</span><span></span></div>`).join('') + '</div>'
+    : '<p class="sub">No results or dividends for the desk\'s stocks in the next seven days.</p>';
+
+  M.$('finding').textContent = `The EGX30 ${eg && eg.c != null ? `${eg.c >= 0 ? 'gained' : 'lost'} ${Math.abs(eg.c).toFixed(1)}%` : 'had no full week logged'} over the last seven days${fx && fx.c != null ? `, the dollar ${fx.c >= 0 ? 'rose' : 'fell'} ${Math.abs(fx.c).toFixed(1)}% against the pound` : ''}${sp && sp.c != null ? ` and the S&P 500 ${sp.c >= 0 ? 'gained' : 'lost'} ${Math.abs(sp.c).toFixed(1)}%` : ''}. ${judged.length ? `${judged.length} of the desk's calls were judged this week.` : 'None of the desk\'s calls reached a verdict this week.'}`;
+})();
+</script>
+</body>
+</html>

@@ -278,6 +278,13 @@ No news is a valid result: never pad a stock with filler. Its page then shows it
 The events that can move Egyptian markets and the reader's stocks, each rated high, medium or low impact,
 with one line on why it matters (catalyst-calendar skill). Dates are checked like any other fact.
 
+## The week
+
+`/desk/week/` (The week, in the menu) builds itself from the files the desk already keeps: the markets' moves over
+seven days, each day's top calls, the weekly movers, the foreign flows, the views judged that week and next week's
+dates. It needs no writing; it is only as good as those files, so keep flows.json, movers.json, views.json and
+calendar.json current every day.
+
 ## Views: the record
 
 `desk/views.json` holds every view and projection the desk has made, shown on the Views page

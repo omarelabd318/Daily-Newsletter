@@ -391,3 +391,8 @@ th.desc .sorth i,th.asc .sorth i{opacity:1} th.desc .sorth i::before{content:"\2
 .cmp[aria-pressed="true"]{background:var(--text);border-color:var(--text);color:var(--surface)}
 .cmp:disabled{opacity:.45;cursor:default}
 .chart-cap .legend,.chart-cap ul{display:inline-flex;margin-right:10px;vertical-align:middle}
+/* the week */
+.wkday{display:grid;grid-template-columns:110px minmax(0,1fr);gap:4px 16px;padding:10px 0;border-top:1px solid var(--rule);font-size:14px;line-height:20px}
+.wkday:first-child{border-top:0} .wkday p{margin:0 0 4px} .wkday .t{display:inline-block;min-width:48px;color:var(--muted);font-size:12px}
+.wkjudged{margin-top:12px}
+@media (max-width:860px){.wkday{grid-template-columns:minmax(0,1fr)}}
