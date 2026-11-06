@@ -312,7 +312,7 @@ window.Desk = (function () {
     const shell = document.createElement('div');
     shell.className = 'app';
     shell.innerHTML = `<aside class="side" aria-label="Markets Desk">
-      <div class="brand"><span class="mark" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18"><path d="M2 13l4-4 3 2.5L16 4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Markets Desk</b><span>Daily Newsletter · EGP</span></span></div>
+      <div class="brand"><span class="mark" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18"><path d="M2 13l4-4 3 2.5L16 4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Markets Desk</b></span></div>
       <nav class="nav" aria-label="Main"><div class="navgroup">Egypt</div>${links.slice(0, 4).join('')}<div class="navgroup">USA</div>${links.slice(4, 7).join('')}<div class="navgroup">Global and record</div>${links[7]}${links[8]}
       <div class="navgroup">Newsletter</div><a href="/">${icon('M3 2.5h10v11H3zM5.5 5.5h5M5.5 8h5M5.5 10.5h3')}Today's newsletter</a></nav>
       <div class="side-foot"><button type="button" class="theme"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2a6 6 0 100 12A4.5 4.5 0 018 2z"/></svg><span>Dark mode</span></button>Cairo · prices in EGP unless marked</div></aside>
