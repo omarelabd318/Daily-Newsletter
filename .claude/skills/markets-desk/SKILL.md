@@ -11,8 +11,12 @@ These are the rules agreed so far; add to them as the desk is finished.
 
 ## Daily run
 
-Run after the newsletter edition is pushed, from the same research, so a desk problem never holds up the
-edition. On days with no session (Friday and Saturday for the EGX, Saturday and Sunday for the US) the
+The desk has its own scheduled run, about 45 minutes after the newsletter's, so a desk problem never holds up
+the edition and the desk gets a full session to itself. Start from the day's research: pull the repo and read
+today's edition (`editions/DATE.md`) in full, its figures already checked and logged; if it is not there yet,
+check again every few minutes for up to half an hour, then research the markets yourself. Add your own searches
+for anything the desk needs beyond the edition (the stock research below, flows, movers' reasons). Do not write
+or change the newsletter, and do not log figures the edition already logged. On days with no session (Friday and Saturday for the EGX, Saturday and Sunday for the US) the
 closes are the last session's; the news, stock research and analysis are still updated.
 
 1. Copy the newest `desk/days/*.json` as a template to `desk/days/DATE.json` (DATE is the edition date) and
