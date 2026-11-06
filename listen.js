@@ -176,7 +176,7 @@
     $('plVoice').addEventListener('change', function(){ if(!S) return; var v = this.value; store.set('nl:voice', v); var was = S.playing, at = S.i; halt(); choose(v); if(was){ S.i = at; play(); } else paint(); });
     $('plSeek').addEventListener('input', function(){
       if(!S) return;
-      var f = this.value / 1000;
+      var f = this.value / 1000; this.style.setProperty('--p', (this.value / 10) + '%');
       if(S.mode === 'rec' && S.audio.duration) S.audio.currentTime = f * S.audio.duration;
       else { S.i = Math.min(S.list.length - 1, Math.floor(f * S.list.length)); if(S.playing) speakFrom(S.i); else paint(); }
     });
@@ -186,9 +186,10 @@
   function fillVoices(){
     var sel = $('plVoice'); if(!sel || !S) return;
     var html = '';
-    if(S.rec) html += '<optgroup label="Natural voice">' + S.rec.voices.map(function(v){ return '<option value="rec:' + v.voice + '">' + v.name + '</option>'; }).join('') + '</optgroup>';
+    // an edition with recorded voices offers only those; the device's voices are for the editions without
+    if(S.rec) html += S.rec.voices.map(function(v){ return '<option value="rec:' + v.voice + '">' + v.name + '</option>'; }).join('');
     var dv = deviceVoices();
-    if(dv.length) html += '<optgroup label="This device">' + dv.map(function(v){ return '<option value="dev:' + v.voiceURI.replace(/"/g, '&quot;') + '">' + v.name.replace(/</g, '') + '</option>'; }).join('') + '</optgroup>';
+    if(!S.rec && dv.length) html += '<optgroup label="This device">' + dv.map(function(v){ return '<option value="dev:' + v.voiceURI.replace(/"/g, '&quot;') + '">' + v.name.replace(/</g, '') + '</option>'; }).join('') + '</optgroup>';
     sel.innerHTML = html || '<option>No voice available</option>';
     sel.value = (S.mode === 'rec' ? 'rec:' + S.recVoice.voice : 'dev:' + (S.voice ? S.voice.voiceURI : ''));
   }
@@ -237,6 +238,7 @@
   }
   var ticking = false;
   window.addEventListener('scroll', function(){ if(!S || ticking) return; ticking = true; requestAnimationFrame(function(){ ticking = false; backBtn(); }); }, {passive: true});
+  function seekTo(v){ var e = $('plSeek'); e.value = v; e.style.setProperty('--p', (v / 10) + '%'); }
   function paint(){
     if(!S) return;
     var b = S.list[S.i] || {};
@@ -249,11 +251,11 @@
     if(S.mode === 'rec'){
       var d = S.audio.duration || S.recVoice.duration || 0, t = S.audio.currentTime || 0;
       $('plCur').textContent = fmt(t / S.rate); $('plDur').textContent = fmt(d / S.rate);
-      $('plSeek').value = d ? Math.round(t / d * 1000) : 0;
+      seekTo(d ? Math.round(t / d * 1000) : 0);
     } else {
       var left = words(S.list.slice(S.i)) / (165 * S.rate) * 60;
       $('plCur').textContent = ''; $('plDur').textContent = 'About ' + Math.max(1, Math.round(left / 60)) + ' min left';
-      $('plSeek').value = Math.round(S.i / S.list.length * 1000);
+      seekTo(Math.round(S.i / S.list.length * 1000));
     }
     mark(b.el || null);
     if('mediaSession' in navigator){
@@ -455,7 +457,7 @@
     if(RATES.indexOf(S.rate) < 0) S.rate = 1;
     $('plRate').value = String(S.rate);
     var saved = store.get('nl:voice');
-    choose(saved && (saved.indexOf('dev:') === 0 || rec) ? saved : (rec ? 'rec:' + rec.voices[0].voice : 'dev:'));
+    choose(rec ? (saved && saved.indexOf('rec:') === 0 ? saved : 'rec:' + rec.voices[0].voice) : (saved && saved.indexOf('dev:') === 0 ? saved : 'dev:'));
     fillVoices();
     $('player').hidden = false; document.body.classList.add('listening');
     if('mediaSession' in navigator){
@@ -481,7 +483,7 @@
     fetch('data/audio/' + key + '.json', {cache: 'no-cache'}).then(function(r){ return r.ok ? r.json() : null; }).then(function(m){
       if(!m || !m.voices || !m.voices.length) return;
       rec = m;
-      $('listenMeta') && ($('listenMeta').textContent = Math.max(1, Math.round(m.voices[0].duration / 60)) + ' min · natural voice');
+      $('listenMeta') && ($('listenMeta').textContent = Math.max(1, Math.round(m.voices[0].duration / 60)) + ' min');
     }).catch(function(){});
     $('listenBtn').addEventListener('click', function(){
       if(S && S.key === key){ S.playing ? pause() : play(); return; }
