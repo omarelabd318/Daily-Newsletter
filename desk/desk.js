@@ -17,6 +17,14 @@ window.Desk = (function () {
   const NAMES = { COMI: 'Commercial International Bank', TMGH: 'Talaat Moustafa', ETEL: 'Telecom Egypt', PHDC: 'Palm Hills', SWDY: 'Elsewedy Electric', ORAS: 'Orascom Construction', FWRY: 'Fawry', ABUK: 'Abu Qir Fertilizers', HRHO: 'EFG Holding', CLHO: 'Cleopatra Hospital', JUFO: 'Juhayna', ALCN: 'Alexandria Containers', MFPC: 'MOPCO', EAST: 'Eastern Company', EFIH: 'e-finance', EMFD: 'Emaar Misr', BQDC: 'Banque du Caire', EGAL: 'Egypt Aluminium', AMOC: 'Alexandria Mineral Oils', SKPC: 'Sidi Kerir Petrochemicals', EFID: 'Edita Food Industries',
     AAPL: 'Apple', MSFT: 'Microsoft', NVDA: 'Nvidia', AMZN: 'Amazon', GOOGL: 'Alphabet', META: 'Meta', TSLA: 'Tesla', JPM: 'JPMorgan Chase', XOM: 'Exxon Mobil', AVGO: 'Broadcom', 'BRK.B': 'Berkshire Hathaway', WMT: 'Walmart', V: 'Visa', ORCL: 'Oracle', COST: 'Costco' };
   const GROUP = { egx: ['COMI', 'TMGH', 'ETEL', 'PHDC', 'SWDY', 'ORAS', 'FWRY', 'ABUK', 'HRHO', 'CLHO', 'JUFO', 'ALCN', 'MFPC', 'EAST', 'EFIH', 'EMFD', 'BQDC', 'EGAL', 'AMOC', 'SKPC', 'EFID'], us: ['AAPL', 'MSFT', 'NVDA', 'AMZN', 'GOOGL', 'META', 'TSLA', 'JPM', 'XOM', 'AVGO', 'BRK.B', 'WMT', 'V', 'ORCL', 'COST'] };
+  // broad sectors for grouping the stock lists (stocks.json's sector is finer: 15 for 21 Egyptian stocks)
+  const SECTORS = {
+    egx: [['Banks and financials', ['COMI', 'BQDC', 'HRHO', 'FWRY', 'EFIH']], ['Real estate and construction', ['TMGH', 'PHDC', 'EMFD', 'ORAS']],
+      ['Fertilisers, chemicals and oil', ['ABUK', 'MFPC', 'SKPC', 'AMOC']], ['Industrials and transport', ['SWDY', 'EGAL', 'ALCN']],
+      ['Consumer', ['JUFO', 'EFID', 'EAST']], ['Telecoms', ['ETEL']], ['Healthcare', ['CLHO']]],
+    us: [['Software and hardware', ['AAPL', 'MSFT', 'ORCL']], ['Semiconductors', ['NVDA', 'AVGO']], ['Internet and e-commerce', ['GOOGL', 'META', 'AMZN']],
+      ['Financials', ['JPM', 'V', 'BRK.B']], ['Retail', ['WMT', 'COST']], ['Energy', ['XOM']], ['Cars', ['TSLA']]],
+  };
   // the menu, by market: Egypt (dashboard, EGP, EGX, stocks), USA (dashboard, Wall Street, stocks), then Global and Views
   const PAGES = [['/desk/egypt/', 'EGY dashboard', 'M2 13h12M4 10l3-3 2 2 4-5'],
     ['/desk/egp/', 'EGP', 'M8 2v12M11 4.5H6.5a2 2 0 000 4h3a2 2 0 010 4H5'],
@@ -310,7 +318,9 @@ window.Desk = (function () {
 
   async function init(page) {
     const icon = (d) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke-width="1.5"><path d="${d}"/></svg>`;
-    const links = PAGES.map(([h, n, d]) => `<a href="${h}"${h === page ? ' aria-current="page"' : ''}>${icon(d)}${n}</a>`);
+    // the sidebar sits under its market's heading, so its labels drop the market (the phone's page row keeps them)
+    const SHORT = { '/desk/egypt/': 'Dashboard', '/desk/stocks/egypt/': 'Stocks', '/desk/usa/': 'Dashboard', '/desk/stocks/us/': 'Stocks' };
+    const links = PAGES.map(([h, n, d]) => `<a href="${h}"${h === page ? ' aria-current="page"' : ''}>${icon(d)}${SHORT[h] || n}</a>`);
     const shell = document.createElement('div');
     shell.className = 'app';
     shell.innerHTML = `<aside class="side" aria-label="Markets Desk">
@@ -355,5 +365,5 @@ window.Desk = (function () {
       location.reload();
     });
   }
-  return { get ASOF() { return ASOF; }, asOfFor, lastDate, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, weekChart, deskNotes, weekOf, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
+  return { get ASOF() { return ASOF; }, SECTORS, asOfFor, lastDate, $, esc, pct, cls, num, get, dateLine, conf, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, weekChart, deskNotes, weekOf, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
 })();

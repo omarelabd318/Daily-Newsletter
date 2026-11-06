@@ -21,6 +21,7 @@
   </div></div>
   <div class="vfilters" style="margin-bottom:var(--gap)">
     <div class="seg" id="seg"></div>
+    <div class="ctabs" id="view" aria-label="Layout"></div>
     <div class="ctabs" id="sort" aria-label="Order"></div>
     <div class="ctabs" id="cur" aria-label="Currency" hidden></div>
   </div>
@@ -37,7 +38,7 @@
   const views = (VL && VL.views) || [], prof = (ST && ST.stocks) || {};
   // today's market news tagged with a stock counts as its latest news too
   const tagged = {};
-  for (const k of ['egx', 'egp', 'us', 'global']) for (const n of ((D.pages[k] || {}).news || [])) for (const t of (n.tickers || [])) (tagged[t] = tagged[t] || []).push({ date: M.ASOF, text: n.headline, source: n.source, url: n.url });
+  for (const k of ['egx', 'egp', 'us', 'global']) for (const n of ((D.pages[k] || {}).news || [])) for (const t of new Set([...(n.tickers || []), ...(n.affects || []).map((x) => x.t).filter(Boolean)])) (tagged[t] = tagged[t] || []).push({ date: M.ASOF, text: n.headline, source: n.source, url: n.url });
   // a story in both lists keeps its own date from the stock's news
   const latest = (t) => { const own = (prof[t] || {}).news || [], urls = new Set(own.map((n) => n.url));
     return [...own, ...(tagged[t] || []).filter((n) => !urls.has(n.url))].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0))[0]; };
@@ -53,7 +54,7 @@
   // market value, e.g. 'EGP 370bn' or '$5.1tn'
   const capText = (t) => { const c = (prof[t] || {}).cap; if (!c) return ''; const v = c.value, cur = c.currency === 'USD' ? '$' : 'EGP ';
     return ' · ' + (v >= 1000 ? `${cur}${(v / 1000).toFixed(1)}tn` : `${cur}${v >= 100 ? Math.round(v) : v.toFixed(1)}bn`); };
-  let per = M.PERIODS[2], inUSD = false, order = 0;
+  let per = M.PERIODS[2], inUSD = false, order = 0, bySector = false;
   const draw = async () => {
     if (per[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; }
     const rows = tickers.map((t) => {
@@ -71,7 +72,7 @@
     const cur = inUSD || !egx ? '$' : 'EGP ';
     // a listed stock with no session yet shows when it starts trading instead of figures
     const soon = (t) => { const n = ((prof[t] || {}).next || [])[0]; return n ? `${n.event}: ${n.when}` : 'No prices logged yet'; };
-    M.$('grid').innerHTML = rows.map((r) => r.now == null ? `<a class="card scard" href="/desk/stock/?t=${encodeURIComponent(r.t)}">
+    const card = (r) => r.now == null ? `<a class="card scard" href="/desk/stock/?t=${encodeURIComponent(r.t)}">
       <div class="sh"><span><b>${M.esc(M.NAMES[r.t])}</b><span class="t">${M.esc(r.t)}${(prof[r.t] || {}).sector ? ' · ' + M.esc(prof[r.t].sector) : ''}</span></span><span class="pill open">Not trading yet</span></div>
       <div class="sp"><span class="meta">${M.esc(soon(r.t))}</span></div>
       <p class="snews">${r.news ? `<span class="when">${M.day(r.news.date).getDate()} ${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][M.day(r.news.date).getMonth()]}</span> ${M.esc(r.news.text.length > 120 ? r.news.text.slice(0, 117) + '…' : r.news.text)}` : ''}</p>
@@ -82,9 +83,23 @@
       <div class="sk"><span>This year <span class="num ${M.cls(r.y)}">${M.pct(r.y)}</span></span><span class="num">52w ${M.num(r.lo, r.lo < 10 ? 2 : 0)}–${M.num(r.hi, r.hi < 10 ? 2 : 0)}</span></div>
       <div class="range" style="margin:8px 0 0"><i style="left:calc(${((r.now - r.lo) / (r.hi - r.lo || 1) * 100).toFixed(1)}% - 1px)"></i></div>
       <p class="snews">${r.news ? `<span class="when">${M.day(r.news.date).getDate()} ${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][M.day(r.news.date).getMonth()]}</span> ${M.esc(r.news.text.length > 120 ? r.news.text.slice(0, 117) + '…' : r.news.text)}` : '<span class="when">No recent news</span>'}</p>
-    </a>`).join('');
+    </a>`;
+    // by sector: the desk's broad sectors, each headed by its equal-weighted change over the period; ordered by
+    // combined market value, or by that change when sorting best or worst. Inside a sector the chosen order holds.
+    if (!bySector) { M.$('grid').className = 'sgrid'; M.$('grid').innerHTML = rows.map(card).join(''); return; }
+    const cap = (t) => ((prof[t] || {}).cap || {}).value || 0;
+    const groups = M.SECTORS[MKT].map(([name, ts]) => {
+      const rs = rows.filter((r) => ts.includes(r.t)), cs = rs.map((r) => r.c).filter((c) => c != null);
+      return { name, rs, avg: cs.length ? cs.reduce((a, b) => a + b, 0) / cs.length : null, cap: ts.reduce((a, t) => a + cap(t), 0) };
+    }).filter((g) => g.rs.length);
+    const left = rows.filter((r) => !M.SECTORS[MKT].some(([, ts]) => ts.includes(r.t)));
+    if (left.length) groups.push({ name: 'Other', rs: left, avg: null, cap: 0 });
+    if (order === 2) groups.sort((a, b) => (b.avg ?? -1e9) - (a.avg ?? -1e9)); else if (order === 3) groups.sort((a, b) => (a.avg ?? 1e9) - (b.avg ?? 1e9)); else groups.sort((a, b) => b.cap - a.cap);
+    M.$('grid').className = 'sgroups';
+    M.$('grid').innerHTML = groups.map((g) => `<section class="sgroup"><h2 class="sgroup-h">${M.esc(g.name)}<span class="meta">${g.rs.length} stock${g.rs.length > 1 ? "s" : ""}${g.avg != null ? ` · ${g.rs.length > 1 ? "average " : ""}<span class="num ${M.cls(g.avg)}">${M.pct(g.avg)}</span> (${per[0]})` : ''}</span></h2><div class="sgrid">${g.rs.map(card).join('')}</div></section>`).join('');
   };
   M.segment(M.$('seg'), '1M', (p) => { per = p; draw(); }, M.PERIODS.concat(M.LONG));
+  M.toggle(M.$('view'), ['All', 'By sector'], (i) => { bySector = i === 1; draw(); });
   M.toggle(M.$('sort'), ['List order', 'Largest', 'Best', 'Worst'], (i) => { order = i; draw(); });
   if (egx) { M.$('cur').hidden = false; M.toggle(M.$('cur'), ['EGP', 'USD'], (i) => { inUSD = i === 1; draw(); }); }
   draw();

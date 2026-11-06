@@ -363,3 +363,7 @@ a.tag:hover{background:var(--active)}
 .tag.flat .chg::before{content:"";width:6px;height:2px;border:0;background:var(--muted);vertical-align:3px}
 .tags-h{display:block;margin:0 0 6px;color:var(--muted);font-size:12px}
 .news .naff{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin-top:8px} .news .naff .tags-h{margin:0}
+/* stock lists grouped by sector */
+.sgroups{display:grid;gap:28px}
+.sgroup-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin:0 0 10px;font-size:16px;font-weight:600}
+.sgroup-h .meta{font-size:13px;font-weight:400;color:var(--muted)}

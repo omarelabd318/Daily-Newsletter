@@ -97,7 +97,7 @@
     M.chart(M.$('chart'), s, per[1], nm + unit, Charts.fmt.int); const c = M.change(s, per[1]);
     M.$('cap').innerHTML = `${per[2]}${unit}: <span class="num ${M.cls(c)}">${M.pct(c, 2)}</span> · this year <span class="num ${M.cls(M.ytd(s))}">${M.pct(M.ytd(s))}</span>`;
   };
-  M.toggle(M.$('cur'), ['EGP', 'USD'], (i) => { inUSD = i === 1; draw(); });
+  M.toggle(M.$('cur'), ['EGP', 'USD'], (i) => { inUSD = i === 1; draw(); sess(inUSD); });
   // the EGX70 EWI on the chart once about a month of its closes is logged (it has no history to backfill)
   if (M.series((e) => e.egx70, 'egx').length >= 20) {
     M.$('itabs').hidden = false; M.$('iname').hidden = true;
@@ -117,10 +117,18 @@
   const MV = M.MOVERS && M.MOVERS.egx, B = MV && MV.session === M.ASOF ? MV.breadth : null;
   // advancers in green, decliners in red ("189 / 35", or the exchange's own figure from the day's file)
   const updown = (t) => { const m = String(t).match(/^\s*(\d[\d,]*)\s*\/\s*(\d[\d,]*)(.*)$/); return m ? `<span class="up">${m[1]}</span> / <span class="down">${m[2]}</span>${M.esc(m[3])}` : M.esc(t); };
-  M.$('stats').innerHTML = M.kv([['Close', M.num(M.last(idx))], ['Day', `<span class="${M.cls(dc)}">${M.pct(dc, 2)}</span>`], ['Week', signed(M.change(idx, 7))], ['Month', signed(M.change(idx, 30))], ['This year', signed(M.ytd(idx))],
-    ['Turnover', S.turnover ? M.esc(S.turnover) : tov != null ? `EGP ${M.num(tov, 1)}bn` : dash], [S.vs90 ? 'Against 90-day average' : vsLabel, S.vs90 ? M.esc(S.vs90) : vs90 != null ? signed(vs90) : dash],
-    ['Advancers / decliners', S.breadth ? updown(S.breadth) : B ? `${updown(`${B.up} / ${B.down}`)} <span class="meta">(${B.flat} unchanged; Mubasher)</span>` : dash]]);
-  const [lo, hi] = M.range52(idx); M.$('range').innerHTML = M.rangeBar(lo, hi, M.last(idx), (x) => M.num(x, 0));
+  // the session card follows the chart's currency: the EGX30's close and its moves in dollars (each day's close divided by
+  // that day's dollar rate); turnover stays in pounds, as the exchange reports it, and breadth is a count
+  const ix30 = M.series((e) => e.egx30, 'egx');
+  const sess = (usd) => {
+    const x = usd ? M.usd(ix30) : ix30, d = M.change(x, 0);
+    M.$('stats').innerHTML = M.kv([['Close' + (usd ? ' ($)' : ''), M.num(M.last(x), usd ? 1 : 2)], ['Day', `<span class="${M.cls(d)}">${M.pct(d, 2)}</span>`], ['Week', signed(M.change(x, 7))], ['Month', signed(M.change(x, 30))], ['This year', signed(M.ytd(x))],
+      ['Turnover', typeof S.turnover === 'number' ? `EGP ${M.num(S.turnover, 1)}bn` : S.turnover ? M.esc(S.turnover) : tov != null ? `EGP ${M.num(tov, 1)}bn` : dash], [S.vs90 != null ? 'Against 90-day average' : vsLabel, typeof S.vs90 === 'number' ? signed(S.vs90) : S.vs90 ? M.esc(S.vs90) : vs90 != null ? signed(vs90) : dash],
+      ['Advancers / decliners', S.breadth ? updown(S.breadth) : B ? `${updown(`${B.up} / ${B.down}`)} <span class="meta">(${B.flat} unchanged; Mubasher)</span>` : dash]]);
+    const [lo, hi] = M.range52(x); M.$('range').innerHTML = M.rangeBar(lo, hi, M.last(x), (v) => M.num(v, 0));
+    M.$('sess-date').textContent = M.short(M.ASOF) + (usd ? ' · EGX30 in dollars' : '');
+  };
+  sess(false);
   // the EGX30 against the EGX70 EWI (equal-weighted small and mid caps), both from TradingView so the periods match
   const IX = MV && MV.session === M.ASOF && MV.indices;
   if (IX && IX.EGX30 && IX.EGX70EWI) {
