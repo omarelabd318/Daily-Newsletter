@@ -142,7 +142,10 @@
   M.toggle(M.$('mscope'), ['Whole market', 'Desk stocks'], (i) => { mall = i === 0; mseg(); dm(); });
   mseg(); dm();
 
-  const F = X.flows;
+  // the session's flows: from the day's file, or else the flow history's entry for the same session
+  const FL = await M.get('/desk/flows.json'), FH = ((FL && FL.days) || []).find((d) => d.date === M.ASOF);
+  const F = X.flows || (FH && { rows: Object.entries(FH.rows).map(([who, net]) => ({ who, net })), confirmed: FH.confirmed !== false,
+    source: (FH.sources || []).join(', '), sub: `Net EGX equity flows, ${M.short(FH.date)}, EGP bn` + (FH.sources ? ` · ${FH.sources.join(', ')}` : '') });
   if (F) {
     M.$('c-flows').hidden = false;
     const max = Math.max(...F.rows.map((r) => Math.abs(r.net))) || 1;
@@ -152,7 +155,7 @@
     M.$('flows-note').hidden = !!F.confirmed; M.$('flows-note').textContent = F.confirmed ? '' : 'Not yet confirmed: ' + (F.source || 'one source only');
   }
   // foreign net buying by session, from desk/flows.json
-  const FL = await M.get('/desk/flows.json'), fd = ((FL && FL.days) || []).filter((d) => d.date <= M.ASOF).slice(-20);
+  const fd = ((FL && FL.days) || []).filter((d) => d.date <= M.ASOF).slice(-20);
   const foreign = fd.map((d) => Object.entries(d.rows).filter(([k]) => /^foreign/i.test(k)).reduce((a, [, v]) => a + v, 0));
   if (fd.length >= 3) Charts.diverging(M.$('fhist'), { labels: fd.map((d) => M.short(d.date)), values: foreign, above: 'Bought', below: 'Sold', format: Charts.fmt.dec(2), height: 120 });
   else { M.$('fhist').style.height = 'auto'; M.$('fhist').innerHTML = `<p class="sub">${fd.length ? `Logged since ${M.short(fd[0].date)}: ` + fd.map((d, i) => `${M.short(d.date)} <span class="num ${M.cls(foreign[i])}">${foreign[i] > 0 ? '+' : ''}${foreign[i].toFixed(2)}</span>`).join(', ') + '. The chart appears after three sessions.' : 'No sessions logged yet.'}</p>`; }

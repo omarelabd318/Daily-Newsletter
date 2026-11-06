@@ -159,7 +159,12 @@ def main(args):
         dates_ = [n.get("date", "") for n in e.get("news", [])]
         if dates_ != sorted(dates_, reverse=True):
             warnings.append(f"stocks.json {t}: news is not newest first.")
-    load("desk/flows.json")
+    FLW = load("desk/flows.json") or {}
+    # the EGX traded in the desk's session: its flows belong in the day's file and the flow history
+    if D.get("asOf") and not any(d.get("date") == D["asOf"] for d in FLW.get("days", [])):
+        warnings.append(f"desk/flows.json has no entry for the {D['asOf']} session: add who bought and who sold (and egypt.flows in the day's file).")
+    if not (D.get("egypt") or {}).get("flows"):
+        warnings.append("egypt.flows is missing from the day's file: the EGX page shows the flow history's entry instead, if there is one.")
     # every top-five mover of 5% or more needs its reason, or "No company news found." after a search
     MV = load("desk/movers.json") or {}
     for m, label in (("egx", "EGX"), ("us", "US")):
