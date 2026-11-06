@@ -46,12 +46,16 @@
         if(el.tagName === 'P' && el.closest('li, blockquote')) return false;   // a list item is read whole
         return true;
       });
-      var items = [];
+      var items = [], sub = '';
       els.forEach(function(el){
         var c = el.cloneNode(true);
         [].forEach.call(c.querySelectorAll('.topics, svg, sup, .chg'), function(x){ x.remove(); });
         var text = c.textContent.replace(/\s+/g, ' ').trim();
-        if(text) items.push({el: el, kind: /^H[34]$/.test(el.tagName) ? 'heading' : 'text', text: text});
+        if(!text) return;
+        var kind = /^H[34]$/.test(el.tagName) ? 'heading' : 'text', f = el.firstElementChild;
+        if(kind === 'heading') sub = text;
+        var lead = kind === 'text' && f && f.tagName === 'STRONG' && el.firstChild === f ? f.textContent.replace(/[:.]\s*$/, '').trim() : '';
+        items.push({el: el, kind: kind, text: text, story: lead || sub});
       });
       // a subhead with no text under it (Stocks Watch's "Egypt" over a table) is skipped
       items = items.filter(function(b, i){ if(b.kind !== 'heading') return true; var nx = items[i + 1]; return nx && nx.kind === 'text'; });
@@ -158,7 +162,9 @@
   function paint(){
     if(!S) return;
     var b = S.list[S.i] || {};
-    $('plSec').textContent = b.sec || 'Daily Newsletter';
+    var head = (b.sec || 'Daily Newsletter').replace(/</g, '&lt;'), story = b.story && b.story !== b.sec ? b.story.replace(/</g, '&lt;') : '';
+    $('plSec').innerHTML = '<strong>' + head + '</strong>' + (story ? ' · ' + story : '');
+    $('plSec').title = $('plSec').textContent;
     var btn = document.querySelector('#player .pl-play');
     btn.innerHTML = S.playing ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>' : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5v14l12-7z"/></svg>';
     btn.setAttribute('aria-label', S.playing ? 'Pause' : 'Play');
