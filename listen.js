@@ -320,7 +320,10 @@
   function speakFrom(i, fromWord){
     if(!synth) return;
     var my = ++token;
-    synth.cancel();
+    // stop only what is still speaking (a tap, a skip): moving on to the next paragraph needs no stop, and a stop is
+    // what makes Safari drop the next sentence
+    var busy = synth.speaking || synth.pending;
+    if(busy) synth.cancel();
     S.i = i; paint();
     var b = S.list[i]; if(!b){ S.playing = false; paint(); return; }
     var sw = spokenWords(b), base = fromWord && sw[fromWord] ? sw[fromWord].at : 0;
@@ -370,8 +373,8 @@
       u.onerror = function(e){ if(my === token && e.error !== 'interrupted' && e.error !== 'canceled') next(); };
       synth.speak(u);
     };
-    // a short pause after the cancel: speaking at once is what Safari drops
-    setTimeout(function(){ if(my === token && S) next(); }, 150);
+    // after a stop, a short pause first: speaking at once is what Safari drops
+    if(busy) setTimeout(function(){ if(my === token && S) next(); }, 150); else next();
   }
 
   // ---- tap a word to read from there (while the player is open) ----
