@@ -50,6 +50,13 @@
      "source": "CNBC",
      "url": "https://www.cnbc.com/2026/11/04/stock-market-today-live-updates.html",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-06",
+     "text": "Nasdaq fell 5.5% into a correction and chips lost about 12% on Thursday; Nvidia closed at $182.29.",
+     "source": "The National",
+     "url": "https://www.thenationalnews.com/business/markets/2026/11/06/nasdaq-plunges-5-as-investors-dump-ai-stocks-after-midterms/",
+     "effect": "supports"
     }
    ],
    "wrongIf": [
@@ -138,6 +145,13 @@
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/am-edition/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-06",
+     "text": "Central bank dollar rate fell for a sixth session to EGP 54.01; CIB rose to EGP 128.00.",
+     "source": "Central Bank of Egypt",
+     "url": "https://www.cbe.org.eg/en/economic-research/statistics/cbe-exchange-rates",
+     "effect": "supports"
     }
    ],
    "wrongIf": [
@@ -179,7 +193,7 @@
     "TMGH",
     "PHDC"
    ],
-   "status": "on track",
+   "status": "open",
    "updates": [
     {
      "date": "2026-10-28",
@@ -222,6 +236,13 @@
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/am-edition/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-06",
+     "text": "Palm Hills rose 5.7% and Talaat Moustafa 2.7% on Thursday, beating the EGX30's 1.0%; Emaar Misr awarded an EGP 7.1bn Marassi Red contract.",
+     "source": "Osoul Misr",
+     "url": "https://www.osoulmisrmagazine.com/451878",
+     "effect": "against"
     }
    ],
    "driver": "egp-rates"
@@ -377,6 +398,13 @@
      "source": "CNBC",
      "url": "https://www.cnbc.com/2026/11/04/apple-and-other-big-tech-stocks-surge-after-2026-midterm-elections.html",
      "effect": "neutral"
+    },
+    {
+     "date": "2026-11-06",
+     "text": "Nasdaq fell 5.5% into a correction and chips lost about 12% on Thursday; Nvidia closed at $182.29.",
+     "source": "The National",
+     "url": "https://www.thenationalnews.com/business/markets/2026/11/06/nasdaq-plunges-5-as-investors-dump-ai-stocks-after-midterms/",
+     "effect": "supports"
     }
    ],
    "driver": "ai-spending"
@@ -486,6 +514,13 @@
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/am-edition/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-06",
+     "text": "Central bank dollar rate fell for a sixth session to EGP 54.01; CIB rose to EGP 128.00.",
+     "source": "Central Bank of Egypt",
+     "url": "https://www.cbe.org.eg/en/economic-research/statistics/cbe-exchange-rates",
+     "effect": "supports"
     }
    ],
    "driver": "egp-rates"
@@ -513,7 +548,7 @@
    "tickers": [
     "COMI"
    ],
-   "status": "open",
+   "status": "on track",
    "updates": [
     {
      "date": "2026-10-29",
@@ -548,6 +583,13 @@
      "text": "CIB closed at EGP 126.51 (+2.5%), within 1.1% of the bottom of the projected range.",
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/am-edition/",
+     "effect": "supports"
+    },
+    {
+     "date": "2026-11-06",
+     "text": "Central bank dollar rate fell for a sixth session to EGP 54.01; CIB rose to EGP 128.00.",
+     "source": "Central Bank of Egypt",
+     "url": "https://www.cbe.org.eg/en/economic-research/statistics/cbe-exchange-rates",
      "effect": "supports"
     }
    ],
@@ -682,6 +724,13 @@
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/am-edition/",
      "effect": "against"
+    },
+    {
+     "date": "2026-11-06",
+     "text": "Palm Hills rose 5.7% and Talaat Moustafa 2.7% on Thursday, beating the EGX30's 1.0%; Emaar Misr awarded an EGP 7.1bn Marassi Red contract.",
+     "source": "Osoul Misr",
+     "url": "https://www.osoulmisrmagazine.com/451878",
+     "effect": "against"
     }
    ],
    "wrongIf": [
@@ -752,6 +801,13 @@
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/am-edition/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-06",
+     "text": "Palm Hills rose 5.7% and Talaat Moustafa 2.7% on Thursday, beating the EGX30's 1.0%; Emaar Misr awarded an EGP 7.1bn Marassi Red contract.",
+     "source": "Osoul Misr",
+     "url": "https://www.osoulmisrmagazine.com/451878",
+     "effect": "against"
     }
    ],
    "wrongIf": [
@@ -822,6 +878,13 @@
      "source": "ad-hoc-news",
      "url": "https://www.ad-hoc-news.de/boerse/news/nebenwerte/abu-qir-fertilizers-stock-profit-more-than-doubles-in-nine-months/70453432",
      "effect": "neutral"
+    },
+    {
+     "date": "2026-11-06",
+     "text": "Abu Qir confirmed a gas-supply cut from November 1 and reorganized production; Mopco and KIMA report 20% cuts.",
+     "source": "Egypt Oil & Gas",
+     "url": "https://egyptoil-gas.com/news/abu-qir-fertilizers-adjusts-operations-following-natural-gas-supply-cut/",
+     "effect": "supports"
     }
    ],
    "wrongIf": [
@@ -943,6 +1006,13 @@
      "text": "Walmart rose 3.5% to $129.17, above the projected $124–128 range ahead of its December date.",
      "source": "CNBC",
      "url": "https://www.cnbc.com/2026/11/04/stock-market-today-live-updates.html",
+     "effect": "supports"
+    },
+    {
+     "date": "2026-11-06",
+     "text": "Nasdaq fell 5.5% into a correction and chips lost about 12% on Thursday; Nvidia closed at $182.29.",
+     "source": "The National",
+     "url": "https://www.thenationalnews.com/business/markets/2026/11/06/nasdaq-plunges-5-as-investors-dump-ai-stocks-after-midterms/",
      "effect": "supports"
     }
    ],
@@ -1073,6 +1143,13 @@
      "source": "Yahoo Finance",
      "url": "https://finance.yahoo.com/markets/stocks/articles/why-alphabet-stock-popped-wednesday-001301263.html",
      "effect": "against"
+    },
+    {
+     "date": "2026-11-06",
+     "text": "Nasdaq fell 5.5% into a correction and chips lost about 12% on Thursday; Nvidia closed at $182.29.",
+     "source": "The National",
+     "url": "https://www.thenationalnews.com/business/markets/2026/11/06/nasdaq-plunges-5-as-investors-dump-ai-stocks-after-midterms/",
+     "effect": "neutral"
     }
    ],
    "wrongIf": [
@@ -1175,6 +1252,13 @@
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/am-edition/",
      "effect": "against"
+    },
+    {
+     "date": "2026-11-06",
+     "text": "Abu Qir confirmed a gas-supply cut from November 1 and reorganized production; Mopco and KIMA report 20% cuts.",
+     "source": "Egypt Oil & Gas",
+     "url": "https://egyptoil-gas.com/news/abu-qir-fertilizers-adjusts-operations-following-natural-gas-supply-cut/",
+     "effect": "supports"
     }
    ],
    "wrongIf": [
@@ -1259,7 +1343,7 @@
    "tickers": [
     "COMI"
    ],
-   "status": "open",
+   "status": "on track",
    "updates": [],
    "wrongIf": [
     {
@@ -1287,8 +1371,16 @@
     "good": "down"
    },
    "tickers": [],
-   "status": "open",
-   "updates": [],
+   "status": "on track",
+   "updates": [
+    {
+     "date": "2026-11-06",
+     "text": "Central bank dollar rate fell for a sixth session to EGP 54.01; CIB rose to EGP 128.00.",
+     "source": "Central Bank of Egypt",
+     "url": "https://www.cbe.org.eg/en/economic-research/statistics/cbe-exchange-rates",
+     "effect": "supports"
+    }
+   ],
    "wrongIf": [
     {
      "key": "cbe_usd_sell",
@@ -1318,7 +1410,15 @@
     "XOM"
    ],
    "status": "open",
-   "updates": [],
+   "updates": [
+    {
+     "date": "2026-11-06",
+     "text": "Brent rose 3.9% to $98.29 after Iran exempted ships from four countries from Hormuz limits.",
+     "source": "Al Jazeera",
+     "url": "https://www.aljazeera.com/news/2026/11/6/why-is-iran-exempting-india-china-qatar-iraq-from-hormuz-restrictions",
+     "effect": "neutral"
+    }
+   ],
    "wrongIf": [
     {
      "key": "brent",

@@ -78,6 +78,21 @@
     "Aleqaria"
    ],
    "turnover": 9.0
+  },
+  {
+   "date": "2026-11-05",
+   "confirmed": false,
+   "rows": {
+    "Egyptian investors": -0.191,
+    "Arab investors": -0.0208,
+    "Foreign investors": 0.2119
+   },
+   "sources": [
+    "Youlyou",
+    "Youm7",
+    "Masrawy"
+   ],
+   "turnover": 10.2
   }
  ]
 }
