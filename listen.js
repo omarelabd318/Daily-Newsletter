@@ -14,9 +14,9 @@
   var MONTHS = {Jan:'January',Feb:'February',Mar:'March',Apr:'April',Jun:'June',Jul:'July',Aug:'August',Sep:'September',Sept:'September',Oct:'October',Nov:'November',Dec:'December'};
   var UNITS = {tn:'trillion',bn:'billion',mn:'million',m:'million',k:'thousand'};
   var WORDS = [['YTD','year to date'],['YoY','year on year'],['EGX30','E G X thirty'],['EGX70','E G X seventy'],['EGX100','E G X one hundred'],
-    ['S&P 500','S and P five hundred'],['S&P','S and P'],['CBE','C B E'],['IMF','I M F'],['GDP','G D P'],['OPEC+','OPEC plus'],
+    ['S&P 500','S and P 500'],['S&P','S and P'],['CBE','C B E'],['IMF','I M F'],['GDP','G D P'],['OPEC+','OPEC plus'],
     ['Q1','the first quarter'],['Q2','the second quarter'],['Q3','the third quarter'],['Q4','the fourth quarter']];
-  var NUM = '(\\d[\\d,]*(?:\\.\\d+)?)';
+  var NUM = '(\\d+(?:,\\d{3})*(?:\\.\\d+)?)';   // 76,000 or 4.5, never a comma after it
   function esc(re){ return re.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
   function speakable(t){
     t = t.replace(new RegExp('\\bEGP\\s?' + NUM + '\\s?(tn|bn|mn|m|k)?\\b', 'g'), function(m, n, u){ return n + (u ? ' ' + UNITS[u] : '') + ' pounds'; });
@@ -79,21 +79,40 @@
       var n, m, re = /\S+/g;
       while((n = walk.nextNode())){
         re.lastIndex = 0;
-        while((m = re.exec(n.data))){ var r = document.createRange(); r.setStart(n, m.index); r.setEnd(n, m.index + m[0].length); out.push({r: r, k: wkey(m[0])}); }
+        while((m = re.exec(n.data))){
+          var a = m.index, w = m[0];
+          // "EGP 54.01" is one word on the page, said as "54.01 pounds"
+          if(/^(EGP|US\$)$/.test(w)){ var nx = /^\s+(\S+)/.exec(n.data.slice(a + w.length)); if(nx && /^\d/.test(nx[1])){ re.lastIndex = a + w.length + nx[0].length; w = n.data.slice(a, re.lastIndex); } }
+          var r = document.createRange(); r.setStart(n, a); r.setEnd(n, a + w.length); out.push({r: r, k: wkey(w.replace(/^(EGP|US\$)\s+/, ''))});
+        }
       }
     }
     return (b.dw = out);
   }
   var UNITW = /^(percent|pounds?|dollars?|degrees|basis|points|million|billion|trillion|thousand|am|pm)$/;
-  function same(a, b){ return a === b || (a.length >= 3 && b.length >= 3 && (a.indexOf(b) === 0 || b.indexOf(a) === 0)); }
+  function same(a, b){
+    if(a === b) return true;
+    return a.length >= 3 && b.length >= 3 && (a.indexOf(b) === 0 || b.indexOf(a) === 0);
+  }
   // spoken word -> page word: each spoken word that matches one a little ahead moves the place on; the others (units,
   // spelled-out letters) stay with the figure they belong to or go to the next word
   function align(spoken, dw){
-    var map = [], cur = -1;
+    var map = [], cur = -1, miss = 0;
     for(var s = 0; s < spoken.length; s++){
       var k = wkey(spoken[s]), found = -1;
-      if(k) for(var j = cur + 1; j < Math.min(dw.length, cur + 7); j++) if(same(k, dw[j].k)){ found = j; break; }
-      if(found >= 0) cur = found;
+      // a range or score on the page ("3-2", "7-6(5)", "2026-27") is said "3 to 2": the three spoken words are that one page word
+      if(/^\d+$/.test(k) && wkey(spoken[s + 1] || '') === 'to' && /^\d/.test(wkey(spoken[s + 2] || ''))){
+        var kk = k + wkey(spoken[s + 2]);
+        for(var j2 = cur + 1; j2 < Math.min(dw.length, cur + 4 + miss); j2++) if(dw[j2].k === kk){ map[s] = map[s + 1] = map[s + 2] = cur = j2; miss = 0; found = j2; break; }
+        if(found >= 0){ s += 2; continue; }
+      }
+      // a unit said after a figure ("98.29 dollars", "3.9 percent") stays on the figure
+      // (unless the page says it too: "$125 million", "100 basis points")
+      if(cur >= 0 && UNITW.test(k) && /\d/.test(dw[cur].k) && !(dw[cur + 1] && same(k, dw[cur + 1].k))){ map[s] = cur; continue; }
+      // a short word ("to", "a") only matches the next word or the one after, so it cannot jump ahead past real words;
+      // after a run of spoken words with no match on the page (a score read as "3 to 6, 6 to 4") the search reaches further
+      if(k) for(var j = cur + 1; j < Math.min(dw.length, cur + (k.length <= 3 ? 3 : 7) + miss); j++) if(same(k, dw[j].k)){ found = j; break; }
+      if(found >= 0){ cur = found; miss = 0; } else miss++;
       map[s] = found >= 0 ? found : cur >= 0 && (UNITW.test(k) || /\d/.test(dw[cur].k)) ? cur : Math.min(cur + 1, dw.length - 1);
     }
     return map;

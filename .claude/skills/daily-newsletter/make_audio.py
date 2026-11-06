@@ -76,19 +76,24 @@ def model(voices):
     return m, {v: np.fromfile(os.path.join(CACHE, "voices", v + ".bin"), dtype=np.float32).reshape(-1, 1, 256) for v in voices}
 
 
-def sentences(text, tokenize, limit=480):
-    """The text in sentences, each short enough for one pass of the model (long ones split at commas)."""
+def sentences(text, size, limit=460):
+    """The text in sentences, each short enough for one pass of the model (size: its length in phonemes; the model
+    takes 510). A longer sentence is split at the comma nearest its middle, or else at a space."""
     out = []
     # a sentence ends at . ! or ? followed by a space and a capital, a digit or a quote (so not inside 54.01 or a.m.)
     for s in re.findall(r"\S.*?(?:[.!?]+[\"”’)]*(?=\s+[A-Z0-9\"“‘(])|$)", text):
-        s = s.strip()
-        while s and len(tokenize(s)) > limit:
-            cut = s.rfind(",", 0, len(s) // 2 + 40)
-            cut = cut + 1 if cut > 20 else len(s) // 2
-            out.append(s[:cut].strip())
-            s = s[cut:].strip()
-        if s:
-            out.append(s)
+        todo = [s.strip()]
+        while todo:
+            s = todo.pop(0)
+            if not s:
+                continue
+            if size(s) <= limit:
+                out.append(s)
+                continue
+            mid = len(s) // 2
+            commas = [i for i, c in enumerate(s) if c == "," and 20 < i < len(s) - 20]
+            cut = min(commas, key=lambda i: abs(i - mid)) + 1 if commas else (s.rfind(" ", 0, mid) if s.rfind(" ", 0, mid) > 0 else mid)
+            todo[:0] = [s[:cut].strip(), s[cut:].strip()]
     return out
 
 
@@ -149,7 +154,7 @@ def record(key, voice, out_mp3):
         if b["kind"] in ("section", "heading") and not text.endswith((".", "?", "!")):
             text += "."
         seg = {"sec": b["sec"], "n": b["n"], "t": round(t, 2), "w": []}
-        for j, sent in enumerate(sentences(text, lambda x: V.tok.tokenize(V.phon(x)))):
+        for j, sent in enumerate(sentences(text, lambda x: len(V.phon(x)))):
             if j:
                 t += pause(0.12)
             a, words = V.say(sent)

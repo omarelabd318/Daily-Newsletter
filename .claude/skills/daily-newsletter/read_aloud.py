@@ -15,7 +15,7 @@ import sys
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
 SKIP = {"Sources", "Stocks Watch", "Stocks This Week", "Currency and Commodities Watch"}   # tables: read on the page
 WORDS = {"YTD": "year to date", "YoY": "year on year", "y/y": "year on year", "m/m": "month on month", "q/q": "quarter on quarter",
-         "EGX30": "E G X thirty", "EGX70": "E G X seventy", "EGX100": "E G X one hundred", "S&P 500": "S and P five hundred",
+         "EGX30": "E G X thirty", "EGX70": "E G X seventy", "EGX100": "E G X one hundred", "S&P 500": "S and P 500",
          "S&P": "S and P", "CBE": "C B E", "IMF": "I M F", "GDP": "G D P", "OPEC+": "OPEC plus", "vs": "versus", "vs.": "versus",
          "Q1": "the first quarter", "Q2": "the second quarter", "Q3": "the third quarter", "Q4": "the fourth quarter"}
 MONTHS = {"Jan": "January", "Feb": "February", "Mar": "March", "Apr": "April", "Jun": "June", "Jul": "July", "Aug": "August",
@@ -32,7 +32,7 @@ def strip_md(t):
 
 def speakable(t):
     """Figures and abbreviations as they are said: EGP 54.01 -> 54.01 pounds, 3.9% -> 3.9 percent, $4bn -> 4 billion dollars."""
-    num = r"(\d[\d,]*(?:\.\d+)?)"
+    num = r"(\d+(?:,\d{3})*(?:\.\d+)?)"   # 76,000 or 4.5, never a comma after it
     t = re.sub(r"\bEGP\s?" + num + r"\s?(tn|bn|mn|m|k)?\b", lambda m: m.group(1) + (" " + UNITS[m.group(2)] if m.group(2) else "") + " pounds", t)
     t = re.sub(r"\$" + num + r"\s?(tn|bn|mn|m|k)\b", lambda m: m.group(1) + " " + UNITS[m.group(2)] + " dollars", t)
     t = re.sub(r"\$" + num + r"(?:\s(trillion|billion|million|thousand))?", lambda m: m.group(1) + (" " + m.group(2) if m.group(2) else "") + " dollars", t)
