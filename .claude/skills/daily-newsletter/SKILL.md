@@ -552,7 +552,8 @@ stays in the log for good and skews every change, streak and YTD figure worked o
 The site's Listen button reads every edition aloud with the device's own voice; each daily edition and the recap
 also get a recorded natural voice. Once the edition is final and checked, run
 `python3 .claude/skills/daily-newsletter/make_audio.py EDITION` (EDITION is the file key, e.g. 2026-11-06). It
-records the edition (around 5 minutes, plus a few minutes the first time to install the voice model), publishes the
+records the edition in the site's two natural voices, Heart and Michael (around 10 minutes, plus a few minutes the
+first time to install the voice model; a voice already recorded from the same text is kept), publishes the
 MP3 on the repo's `audio` branch (which holds only the last 8 editions' audio, a week plus the recap, and is rewritten each time: never
 commit an MP3 to main) and writes `data/audio/EDITION.json`; commit `data/audio/` with the edition. If it prints
 "Audio not made", go on: the site falls back to the device's voice, and say so in the final reply.

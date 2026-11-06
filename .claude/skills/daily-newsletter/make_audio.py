@@ -3,7 +3,7 @@
 that runs here; no account or key).
 
 Usage (from the repo root, after the edition is final):
-  python3 .claude/skills/daily-newsletter/make_audio.py EDITION [--voice af_heart] [--local]
+  python3 .claude/skills/daily-newsletter/make_audio.py EDITION [--voice af_heart,am_michael] [--local]
 
 EDITION is the file key (2026-11-06, or 2026-10-28-v2). It reads the blocks read_aloud.py gives (the same ones the
 site highlights), writes an MP3 and data/audio/EDITION.json (when each block starts), and publishes the MP3 on the
@@ -13,7 +13,8 @@ piles up in the repo's history); the site plays it through the jsDelivr CDN. Com
 
 The first run of a session installs kokoro-onnx and downloads the model (about 330 MB, from Hugging Face; the export
 that also reports each sound's length, so the site can highlight the word being read): a few
-minutes in all, then about a fifth of the audio's length to record (around 5 minutes for a full edition). If anything
+minutes in all, then about a fifth of the audio's length to record (around 5 minutes a voice for a full edition, so
+about 10 for the site's two). A voice already recorded from the same text is kept, not recorded again. If anything
 fails it says so and exits 0: the site then reads the edition with the device's own voice, so the run goes on.
 """
 import datetime
@@ -36,9 +37,10 @@ HF = "https://huggingface.co/onnx-community/Kokoro-82M-v1.0-ONNX"
 REPO = "omarelabd318/Daily-Newsletter"
 BRANCH = "audio"
 KEEP = 8   # a week of editions plus the Saturday recap
-VOICE = "af_heart"   # the site's voice; others: af_bella, af_nicole, am_michael, am_puck, am_fenrir, bf_emma, bm_george
+VOICES = ["af_heart", "am_michael"]   # the site's voices, the first the default; others: af_bella, af_nicole, am_puck,
+                                      # am_fenrir, am_onyx, am_echo, bf_emma, bm_george
 NAMES = {"af_heart": "Heart", "af_bella": "Bella", "af_nicole": "Nicole", "am_michael": "Michael", "am_puck": "Puck",
-         "am_fenrir": "Fenrir", "bf_emma": "Emma", "bm_george": "George"}
+         "am_fenrir": "Fenrir", "am_onyx": "Onyx", "am_echo": "Echo", "bf_emma": "Emma", "bm_george": "George"}
 GAP = {"title": 0.8, "section": 0.55, "heading": 0.4, "text": 0.5}   # silence after each kind of block, in seconds
 GAP_BEFORE_SECTION = 0.5
 
@@ -196,44 +198,66 @@ def publish(files):
     raise RuntimeError(r.stderr.strip())
 
 
+def warm(url):
+    """Fetch a little of a new file so the CDN has it cached (its first answer cannot be read part by part, which Safari
+    needs to play and seek)."""
+    try:
+        urllib.request.urlopen(urllib.request.Request(url, headers={"Range": "bytes=0-1023", "User-Agent": "DailyNewsletter/1.0"}), timeout=60).read()
+    except Exception:
+        pass
+
+
 def main(a):
     args = [x for x in a if not x.startswith("--")]
+    voices = a[a.index("--voice") + 1].split(",") if "--voice" in a else VOICES
+    if "--voice" in a:
+        args.remove(a[a.index("--voice") + 1])
     if len(args) != 1:
         sys.exit(__doc__)
     key = args[0]
-    voice = a[a.index("--voice") + 1] if "--voice" in a else VOICE
-    if voice in args:
-        args.remove(voice)
     local = "--local" in a
-    if not os.path.exists(os.path.join(ROOT, "editions", key + ".md")):
+    src = os.path.join(ROOT, "editions", key + ".md")
+    if not os.path.exists(src):
         sys.exit(f"No edition {key}")
+    import hashlib
+    digest = hashlib.sha1(open(src, "rb").read()).hexdigest()[:12]   # the text the audio was made from
     os.makedirs(AUDIO, exist_ok=True)
+    man = os.path.join(AUDIO, key + ".json")
+    try:
+        old = json.load(open(man)) if os.path.exists(man) else {}
+    except Exception:
+        old = {}
+    done = {v["voice"]: v for v in old.get("voices", [])} if old.get("source") == digest and not local else {}
     try:
         deps()
-        t0 = time.time()
-        name = f"{key}-{voice}.mp3"
-        mp3 = os.path.join(AUDIO if local else tempfile.mkdtemp(), name)
-        segs, dur = record(key, voice, mp3)
-        size = os.path.getsize(mp3)
-        entry = {"voice": voice, "name": NAMES.get(voice, voice), "duration": dur, "file": name, "segments": segs}
+        t0, entries, made, report = time.time(), [], {}, []
+        for voice in voices:
+            name = f"{key}-{voice}.mp3"
+            if voice in done:   # recorded already from this same text: kept as it is
+                entries.append(done[voice])
+                report.append(f"{NAMES.get(voice, voice)} kept")
+                continue
+            t1 = time.time()
+            mp3 = os.path.join(AUDIO if local else tempfile.mkdtemp(), name)
+            segs, dur = record(key, voice, mp3)
+            made[name] = mp3
+            entries.append({"voice": voice, "name": NAMES.get(voice, voice), "duration": dur, "file": name, "segments": segs})
+            report.append(f"{NAMES.get(voice, voice)} {dur / 60:.1f} min, {os.path.getsize(mp3) / 1e6:.1f} MB in {time.time() - t1:.0f}s")
         if local:
-            entry["url"] = f"data/audio/{name}"
-            json.dump({"edition": key, "voices": [entry]}, open(os.path.join(AUDIO, key + ".json"), "w"), separators=(",", ":"))
-            print(f"Recorded {key} locally: {dur / 60:.1f} min, {size / 1e6:.1f} MB, in {time.time() - t0:.0f}s.")
+            for e in entries:
+                e["url"] = f"data/audio/{e['file']}"
+            json.dump({"edition": key, "source": digest, "voices": entries}, open(man, "w"), separators=(",", ":"))
+            print(f"Recorded {key} locally: " + "; ".join(report) + ".")
             return
         # keep the newest KEEP editions' audio; the older manifests go (the site then uses the device's voice)
         mans = sorted(f[:-5] for f in os.listdir(AUDIO) if f.endswith(".json"))
         keep = sorted(set(mans + [key]))[-KEEP:]
         files, kept = {}, {}
         for k2 in keep:
-            if k2 == key:
-                files[name] = mp3
-                kept[k2] = {"edition": key, "voices": [entry]}
-            else:
-                m = json.load(open(os.path.join(AUDIO, k2 + ".json")))
-                for v in m["voices"]:
-                    files[v["file"]] = None
-                kept[k2] = m
+            m = {"edition": key, "source": digest, "voices": entries} if k2 == key else json.load(open(os.path.join(AUDIO, k2 + ".json")))
+            for v in m["voices"]:
+                files[v["file"]] = made.get(v["file"])   # None: already on the branch
+            kept[k2] = m
         sha = publish(files)
         for k2, m in kept.items():
             for v in m["voices"]:
@@ -242,8 +266,11 @@ def main(a):
         for k2 in mans:
             if k2 not in kept:
                 os.remove(os.path.join(AUDIO, k2 + ".json"))
-        print(f"Audio for {key}: {dur / 60:.1f} min in the {NAMES.get(voice, voice)} voice, {size / 1e6:.1f} MB, recorded in "
-              f"{time.time() - t0:.0f}s; published on the {BRANCH} branch ({len(kept)} editions kept). Commit data/audio/.")
+        for k2, m in kept.items():
+            for v in m["voices"]:
+                warm(v["url"])
+        print(f"Audio for {key}: " + "; ".join(report) + f"; {time.time() - t0:.0f}s in all; published on the {BRANCH} branch "
+              f"({len(kept)} editions kept). Commit data/audio/.")
     except Exception as e:
         print(f"Audio not made ({type(e).__name__}: {e}). The site reads this edition with the device's voice instead.")
 
