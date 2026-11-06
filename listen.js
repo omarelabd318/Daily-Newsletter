@@ -148,14 +148,18 @@
     var p = $('player');
     if(p) return p;
     p = document.createElement('div'); p.id = 'player'; p.hidden = true; p.setAttribute('role', 'region'); p.setAttribute('aria-label', 'Listen to this edition');
+    // left: what is being read; middle: the controls over the progress bar; right: speed, voice, close
     p.innerHTML = '<div class="pl-in">'
+      + '<div class="pl-l"><b id="plSec"></b></div>'
+      + '<div class="pl-ctl">'
       + '<button type="button" class="pl-b" data-a="prev" aria-label="Previous section"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>'
       + '<button type="button" class="pl-b pl-play" data-a="play" aria-label="Pause"></button>'
       + '<button type="button" class="pl-b" data-a="next" aria-label="Next section"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg></button>'
-      + '<div class="pl-now"><b id="plSec"></b><span id="plTime"></span><input id="plSeek" type="range" min="0" max="1000" value="0" aria-label="Position"></div>'
-      + '<select id="plRate" aria-label="Speed">' + RATES.map(function(r){ return '<option value="' + r + '"' + (r === 1 ? ' selected' : '') + '>' + r + '×</option>'; }).join('') + '</select>'
-      + '<select id="plVoice" aria-label="Voice"></select>'
-      + '<button type="button" class="pl-b pl-x" data-a="close" aria-label="Stop listening"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12 19 6.4 17.6 5 12 10.6z"/></svg></button>'
+      + '</div>'
+      + '<div class="pl-prog"><span id="plCur"></span><input id="plSeek" type="range" min="0" max="1000" value="0" aria-label="Position"><span id="plDur"></span></div>'
+      + '<div class="pl-r"><select id="plRate" aria-label="Speed">' + RATES.map(function(r){ return '<option value="' + r + '"' + (r === 1 ? ' selected' : '') + '>' + r + '×</option>'; }).join('') + '</select>'
+      + '<div class="pl-rr"><select id="plVoice" aria-label="Voice"></select>'
+      + '<button type="button" class="pl-b pl-x" data-a="close" aria-label="Stop listening"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12 19 6.4 17.6 5 12 10.6z"/></svg></button></div></div>'
       + '</div><button type="button" class="pl-back" id="plBack" hidden></button>';
     document.body.appendChild(p);
     $('plBack').addEventListener('click', function(){ if(lastEl) lastEl.scrollIntoView({block: 'center', behavior: 'smooth'}); });
@@ -243,11 +247,11 @@
     btn.setAttribute('aria-label', S.playing ? 'Pause' : 'Play');
     if(S.mode === 'rec'){
       var d = S.audio.duration || S.recVoice.duration || 0, t = S.audio.currentTime || 0;
-      $('plTime').textContent = fmt(t / S.rate) + ' / ' + fmt(d / S.rate);
+      $('plCur').textContent = fmt(t / S.rate); $('plDur').textContent = fmt(d / S.rate);
       $('plSeek').value = d ? Math.round(t / d * 1000) : 0;
     } else {
       var left = words(S.list.slice(S.i)) / (165 * S.rate) * 60;
-      $('plTime').textContent = 'About ' + Math.max(1, Math.round(left / 60)) + ' min left';
+      $('plCur').textContent = ''; $('plDur').textContent = 'About ' + Math.max(1, Math.round(left / 60)) + ' min left';
       $('plSeek').value = Math.round(S.i / S.list.length * 1000);
     }
     mark(b.el || null);

@@ -249,17 +249,21 @@ td.trend{vertical-align:middle}
 .reading{background:color-mix(in srgb,var(--accent) 12%,transparent);box-shadow:0 0 0 6px color-mix(in srgb,var(--accent) 12%,transparent);border-radius:2px;transition:background .3s var(--ease)}
 #player{position:fixed;left:0;right:0;bottom:0;z-index:50;padding:10px var(--pad) calc(10px + env(safe-area-inset-bottom));background:var(--ground);border-top:1px solid var(--ink);box-shadow:0 -8px 24px rgba(0,0,0,.08)}
 #player[hidden]{display:none}
-.pl-in{max-width:1080px;margin:0 auto;display:flex;align-items:center;gap:10px}
+.pl-in{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,1.3fr) minmax(0,1fr);grid-template-areas:"now ctl right" "now prog right";align-items:center;gap:2px 24px}
+.pl-l{grid-area:now;min-width:0;font:13px/1.35 var(--sans)}
+.pl-l b{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-weight:400;color:var(--ink2)}
+.pl-l b strong{font-weight:600;color:var(--ink)}
+.pl-ctl{grid-area:ctl;display:flex;align-items:center;justify-content:center;gap:18px}
+.pl-prog{grid-area:prog;display:flex;align-items:center;gap:10px;font:12px var(--sans);color:var(--ink2);font-variant-numeric:tabular-nums;white-space:nowrap}
+#plSeek{flex:1;min-width:0;margin:0;accent-color:var(--accent);height:16px}
+.pl-r{grid-area:right;display:flex;align-items:center;justify-content:flex-end;gap:8px}
+.pl-rr{display:flex;align-items:center;gap:8px;min-width:0}
 .pl-b{flex:none;display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;padding:0;border:0;border-radius:50%;background:none;color:var(--ink);cursor:pointer}
 .pl-b svg{width:20px;height:20px;fill:currentColor}
 .pl-b:hover{color:var(--accent)}
-.pl-play{width:44px;height:44px;background:var(--ink);color:var(--ground)} .pl-play:hover{background:var(--accent);color:var(--accent-ink)}
-.pl-now{flex:1;min-width:0;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:0 10px;font:13px var(--sans)}
-.pl-now b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400;color:var(--ink2)}
-.pl-now b strong{font-weight:600;color:var(--ink)}
-.pl-now span{color:var(--ink2);font-variant-numeric:tabular-nums;white-space:nowrap}
-#plSeek{grid-column:1/-1;width:100%;margin:4px 0 0;accent-color:var(--accent);height:16px}
-#player select{flex:none;max-width:170px;height:34px;padding:0 6px;border:1px solid var(--rule);border-radius:6px;background:var(--ground);color:var(--ink);font:13px var(--sans)}
+.pl-play{width:46px;height:46px;background:var(--ink);color:var(--ground)} .pl-play:hover{background:var(--accent);color:var(--accent-ink)}
+#player select{height:34px;padding:0 6px;border:1px solid var(--rule);border-radius:6px;background:var(--ground);color:var(--ink);font:13px var(--sans)}
+#plVoice{width:160px}
 body.listening footer{padding-bottom:96px}
 ::highlight(nl-word){background-color:color-mix(in srgb,var(--accent) 30%,transparent);color:inherit}
 body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
@@ -267,12 +271,19 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 .pl-back:hover{background:var(--accent);color:var(--accent-ink)}
 .pl-back[hidden]{display:none}
 @media (max-width:720px){
-  .pl-in{flex-wrap:wrap;gap:6px 8px}
-  .pl-now{order:-1;flex-basis:100%}
-  #player select{flex:1;max-width:none;min-width:0}
-  #plRate{flex:0 0 72px}
-  body.listening footer{padding-bottom:150px}
+  .pl-in{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);grid-template-areas:"now now x" "prog prog prog" "rate ctl right";gap:4px 8px}
+  .pl-rr{display:contents}
+  .pl-x{grid-area:x;justify-self:end;width:30px;height:30px;margin:-6px -6px -6px 0}
+  #plVoice{grid-area:right;justify-self:end}
+  .pl-l b{-webkit-line-clamp:1}
+  .pl-r{display:contents}
+  #plRate{grid-area:rate;justify-self:start;width:68px}
+  #plVoice{width:100%;min-width:0;max-width:130px}
+  .pl-ctl{gap:10px}
+  body.listening footer{padding-bottom:160px}
 }
+@media (max-width:420px){.top a,.top .off,#archiveBtn{letter-spacing:.07em}}
+@media (max-width:380px){.top a,.top .off,#archiveBtn{font-size:11px;letter-spacing:.04em} .top .grp{gap:0} .top{gap:4px}}
 @media print{#listenwrap,#player{display:none!important}}
 
 .desklink{color:inherit;text-decoration:none} .desklink:hover{color:var(--accent)}
