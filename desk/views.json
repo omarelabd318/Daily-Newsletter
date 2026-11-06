@@ -51,7 +51,15 @@
      "url": "https://www.cnbc.com/2026/11/04/stock-market-today-live-updates.html",
      "effect": "supports"
     }
-   ]
+   ],
+   "wrongIf": [
+    {
+     "key": "us.NVDA",
+     "op": ">",
+     "level": 220
+    }
+   ],
+   "driver": "ai-spending"
   },
   {
    "id": "2026-10-30-hike-pound",
@@ -131,7 +139,15 @@
      "url": "https://enterpriseam.com/egypt/am-edition/",
      "effect": "supports"
     }
-   ]
+   ],
+   "wrongIf": [
+    {
+     "key": "usd_egp",
+     "op": ">",
+     "level": 57
+    }
+   ],
+   "driver": "egp-rates"
   },
   {
    "id": "2026-10-30-developers",
@@ -145,11 +161,19 @@
    "due": "2026-11-27",
    "track": {
     "key": "egx.TMGH",
-    "label": "Talaat Moustafa",
+    "label": "Talaat Moustafa and Palm Hills",
     "start": 80.4,
     "vs": "egx30",
     "vsStart": 49596.14,
-    "good": "lag"
+    "good": "lag",
+    "basket": [
+     "egx.TMGH",
+     "egx.PHDC"
+    ],
+    "vsBasket": [
+     "egx30"
+    ],
+    "vsLabel": "the EGX30"
    },
    "tickers": [
     "TMGH",
@@ -199,7 +223,8 @@
      "url": "https://enterpriseam.com/egypt/am-edition/",
      "effect": "supports"
     }
-   ]
+   ],
+   "driver": "egp-rates"
   },
   {
    "id": "2026-10-30-oil-pound",
@@ -273,7 +298,15 @@
    "result": {
     "date": "2026-11-05",
     "text": "Brent closed near $94.6 on Wednesday, below $100, and the pound firmed to EGP 54.77."
-   }
+   },
+   "wrongIf": [
+    {
+     "key": "brent",
+     "op": "<",
+     "level": 100
+    }
+   ],
+   "driver": "oil"
   },
   {
    "id": "2026-10-30-rotation",
@@ -287,12 +320,20 @@
    "due": "2026-11-27",
    "track": {
     "key": "us.WMT",
-    "label": "Walmart",
+    "label": "Walmart and JPMorgan",
     "start": 121.25,
     "vs": "us.GOOGL",
     "vsStart": 283.82,
-    "vsLabel": "Alphabet",
-    "good": "lead"
+    "vsLabel": "Alphabet and Amazon",
+    "good": "lead",
+    "basket": [
+     "us.WMT",
+     "us.JPM"
+    ],
+    "vsBasket": [
+     "us.GOOGL",
+     "us.AMZN"
+    ]
    },
    "tickers": [
     "WMT",
@@ -337,7 +378,8 @@
      "url": "https://www.cnbc.com/2026/11/04/apple-and-other-big-tech-stocks-surge-after-2026-midterm-elections.html",
      "effect": "neutral"
     }
-   ]
+   ],
+   "driver": "ai-spending"
   },
   {
    "id": "2026-10-30-amzn",
@@ -384,7 +426,15 @@
    "result": {
     "date": "2026-11-03",
     "text": "Amazon closed at $245.63 on 2 November, above the $245 level that made the call wrong, within two weeks of its results (from $243.79 on 30 October)."
-   }
+   },
+   "wrongIf": [
+    {
+     "key": "us.AMZN",
+     "op": ">",
+     "level": 245
+    }
+   ],
+   "driver": "ai-spending"
   },
   {
    "id": "2026-10-30-cib-margins",
@@ -437,7 +487,8 @@
      "url": "https://enterpriseam.com/egypt/am-edition/",
      "effect": "supports"
     }
-   ]
+   ],
+   "driver": "egp-rates"
   },
   {
    "id": "2026-10-30-comi-bull",
@@ -499,7 +550,15 @@
      "url": "https://enterpriseam.com/egypt/am-edition/",
      "effect": "supports"
     }
-   ]
+   ],
+   "wrongIf": [
+    {
+     "key": "egx.COMI",
+     "op": "<",
+     "level": 114
+    }
+   ],
+   "driver": "egp-rates"
   },
   {
    "id": "2026-10-30-oras-bull",
@@ -561,7 +620,15 @@
      "url": "https://enterpriseam.com/egypt/am-edition/",
      "effect": "neutral"
     }
-   ]
+   ],
+   "wrongIf": [
+    {
+     "key": "egx.ORAS",
+     "op": "<",
+     "level": 780
+    }
+   ],
+   "driver": "egp-weak"
   },
   {
    "id": "2026-10-30-tmgh-bear",
@@ -616,7 +683,15 @@
      "url": "https://enterpriseam.com/egypt/am-edition/",
      "effect": "against"
     }
-   ]
+   ],
+   "wrongIf": [
+    {
+     "key": "egx.TMGH",
+     "op": ">",
+     "level": 88
+    }
+   ],
+   "driver": "egp-rates"
   },
   {
    "id": "2026-10-30-phdc-bear",
@@ -678,7 +753,15 @@
      "url": "https://enterpriseam.com/egypt/am-edition/",
      "effect": "supports"
     }
-   ]
+   ],
+   "wrongIf": [
+    {
+     "key": "egx.PHDC",
+     "op": ">",
+     "level": 12.5
+    }
+   ],
+   "driver": "egp-rates"
   },
   {
    "id": "2026-10-30-abuk-bear",
@@ -740,7 +823,15 @@
      "url": "https://www.ad-hoc-news.de/boerse/news/nebenwerte/abu-qir-fertilizers-stock-profit-more-than-doubles-in-nine-months/70453432",
      "effect": "neutral"
     }
-   ]
+   ],
+   "wrongIf": [
+    {
+     "key": "egx.ABUK",
+     "op": ">",
+     "level": 95.75
+    }
+   ],
+   "driver": "gas-supply"
   },
   {
    "id": "2026-10-30-xom-bull",
@@ -806,7 +897,15 @@
    "result": {
     "date": "2026-11-05",
     "text": "Brent closed near $94.62 on November 4, below the $100 that would prove the call wrong; Exxon Mobil closed at $169.27, 7.6% below its $183.29 start and under the $185–195 range."
-   }
+   },
+   "wrongIf": [
+    {
+     "key": "brent",
+     "op": "<",
+     "level": 100
+    }
+   ],
+   "driver": "oil"
   },
   {
    "id": "2026-10-30-wmt-bull",
@@ -846,7 +945,15 @@
      "url": "https://www.cnbc.com/2026/11/04/stock-market-today-live-updates.html",
      "effect": "supports"
     }
-   ]
+   ],
+   "wrongIf": [
+    {
+     "key": "us.WMT",
+     "op": "<",
+     "level": 115
+    }
+   ],
+   "driver": "ai-spending"
   },
   {
    "id": "2026-10-30-amzn-bear",
@@ -897,7 +1004,15 @@
    "result": {
     "date": "2026-11-03",
     "text": "Amazon closed at $245.63 on 2 November, above the $245 level that made the projection wrong, within two weeks of the results; the $225–235 range was not reached."
-   }
+   },
+   "wrongIf": [
+    {
+     "key": "us.AMZN",
+     "op": ">",
+     "level": 245
+    }
+   ],
+   "driver": "ai-spending"
   },
   {
    "id": "2026-10-30-googl-bear",
@@ -959,7 +1074,15 @@
      "url": "https://finance.yahoo.com/markets/stocks/articles/why-alphabet-stock-popped-wednesday-001301263.html",
      "effect": "against"
     }
-   ]
+   ],
+   "wrongIf": [
+    {
+     "key": "us.GOOGL",
+     "op": ">",
+     "level": 300
+    }
+   ],
+   "driver": "ai-spending"
   },
   {
    "id": "2026-11-02-bqdc-floor",
@@ -1007,7 +1130,15 @@
    "result": {
     "date": "2026-11-02",
     "text": "In its first session on November 2 it traded as low as EGP 5.29 in the desk's intraday prices, below the EGP 5.30 offer price, before closing at EGP 5.31; it has since closed at EGP 5.38 and EGP 5.50."
-   }
+   },
+   "wrongIf": [
+    {
+     "key": "egx.BQDC",
+     "op": "<",
+     "level": 5.3,
+     "intraday": true
+    }
+   ]
   },
   {
    "id": "2026-11-04-fert-gas",
@@ -1045,7 +1176,15 @@
      "url": "https://enterpriseam.com/egypt/am-edition/",
      "effect": "against"
     }
-   ]
+   ],
+   "wrongIf": [
+    {
+     "key": "egx.ABUK",
+     "op": ">",
+     "level": 85
+    }
+   ],
+   "driver": "gas-supply"
   },
   {
    "id": "2026-11-04-brent-range",
@@ -1086,7 +1225,20 @@
    "result": {
     "date": "2026-11-05",
     "text": "Brent closed near $94.6 on Wednesday, below $100, before the 20 November date."
-   }
+   },
+   "wrongIf": [
+    {
+     "key": "brent",
+     "op": ">",
+     "level": 112
+    },
+    {
+     "key": "brent",
+     "op": "<",
+     "level": 100
+    }
+   ],
+   "driver": "oil"
   },
   {
    "id": "2026-11-05-egx-rebound",
@@ -1108,7 +1260,15 @@
     "COMI"
    ],
    "status": "open",
-   "updates": []
+   "updates": [],
+   "wrongIf": [
+    {
+     "key": "egx30",
+     "op": "<",
+     "level": 49255.66
+    }
+   ],
+   "driver": "foreign-flows"
   },
   {
    "id": "2026-11-05-pound-firm",
@@ -1128,7 +1288,15 @@
    },
    "tickers": [],
    "status": "open",
-   "updates": []
+   "updates": [],
+   "wrongIf": [
+    {
+     "key": "cbe_usd_sell",
+     "op": ">",
+     "level": 56
+    }
+   ],
+   "driver": "egp-rates"
   },
   {
    "id": "2026-11-05-brent-hormuz",
@@ -1150,7 +1318,15 @@
     "XOM"
    ],
    "status": "open",
-   "updates": []
+   "updates": [],
+   "wrongIf": [
+    {
+     "key": "brent",
+     "op": ">",
+     "level": 105
+    }
+   ],
+   "driver": "oil"
   }
  ]
 }

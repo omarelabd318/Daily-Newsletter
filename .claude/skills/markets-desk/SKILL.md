@@ -285,11 +285,32 @@ Every day:
 2. **Add news** that bears on an open entry to its `updates`: date, one line, source, url, and `effect`
    (supports, against or neutral). Take it from the day's research and the stock research; only news
    checked at the outlet. The same story can go on several entries.
-3. **Judge** an entry when its date passes, or earlier when its "wrong if" happens: set `status` to right
-   or wrong and add `result` (date and one line with the figures). `on track` marks an open entry whose
-   figures are going its way. Never delete or rewrite a judged entry: wrong calls stay on the record.
+3. **Judge** with `python3 .claude/skills/markets-desk/judge_views.py --write`, after logging the day's figures.
+   It marks an entry wrong as soon as a close (or, for tests marked `"intraday": true`, a price inside the
+   session) meets one of its `wrongIf` tests, judges each entry on its due date from its `track`, keeps
+   "on track" and "open" current, and writes each verdict's result line. Judge by hand only what it reports it
+   cannot decide (a wrong-if that is not a price, such as "the gas allocations are restored"). Never delete or
+   rewrite a judged entry: wrong calls stay on the record.
 
-The dashboard's Open views card shows the day's views and links to the full record.
+**Every new entry needs:**
+- `wrongIf`: the price test behind its "wrong if", e.g. `[{"key": "brent", "op": "<", "level": 100}]`, keys as in
+  the data log. A comparison view instead has a `track` with `vs` (one series) or `basket` and `vsBasket` (lists of
+  keys) and is judged on its date.
+- `driver`: the one thing it rests on, as a short slug (`oil`, `egp-rates`, `ai-spending`, `gas-supply`…).
+
+**Make views that can be meaningfully right or wrong:**
+- **Room to be right:** put the wrong-if level well beyond an ordinary day's move. judge_views.py warns when a
+  level sits within 1.5 times the series' usual daily move of the start (a $245 test on Amazon at $243.79, a floor
+  at the exact offer price): one routine day would decide it, which tests nothing.
+- **One idea, one entry:** never record the same call as a view and a projection, and keep at most two open
+  entries on one driver. When three calls all need oil to stay high, they are one bet: make the best-grounded one
+  and leave the rest as notes. Early on, three calls broke on the same 18% fall in Brent.
+- **Reason, not the day's move:** ground each in a driver with figures (rates, earnings, flows, supply), say what
+  the market already prices, and set the confidence by the evidence, not the story. Low is a fine answer.
+- A view can be proven wrong on any day but right only on its due date, so a young record shows wrong calls first;
+  never shorten due dates to collect quick wins.
+
+The dashboard's views card shows the day's views, including any judged that day, and links to the full record.
 ## Figures
 
 The same sources and checks as the newsletter: `fetch_figures.py` first, a second source for every figure,

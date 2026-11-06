@@ -207,6 +207,21 @@ def main(args):
         warnings.append(f"desk/flows.json has no entry for the {D['asOf']} session: add who bought and who sold (and egypt.flows in the day's file).")
     if not (D.get("egypt") or {}).get("flows"):
         warnings.append("egypt.flows is missing from the day's file: the EGX page shows the flow history's entry instead, if there is one.")
+    # views: open entries need a price test, and nothing judge_views.py would change should be left pending
+    for v in (load("desk/views.json") or {}).get("views", []):
+        if v.get("status") in ("open", "on track") and not v.get("wrongIf") and not (v.get("track") or {}).get("vs") \
+                and not (v.get("track") or {}).get("basket"):
+            errors.append(f"views.json {v.get('id')}: no wrongIf test (see Views: the record).")
+        if v.get("status") in ("open", "on track") and not v.get("driver"):
+            warnings.append(f"views.json {v.get('id')}: no driver.")
+    import subprocess
+    jv = subprocess.run([sys.executable, os.path.join(os.path.dirname(os.path.abspath(__file__)), "judge_views.py")],
+                        capture_output=True, text=True).stdout.strip().splitlines()
+    pending = [l for l in jv if "->" in l]
+    if pending:
+        errors.append("judge_views.py has verdicts to record: run it with --write. " + "; ".join(pending[:3]))
+    warnings.extend("judge_views: " + l[8:] for l in jv if l.startswith("WARNING "))
+
     # US English across the day's text (links and quotes aside)
     us_txt = []
     def us_walk(o, k=""):

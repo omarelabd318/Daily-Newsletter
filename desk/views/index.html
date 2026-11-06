@@ -78,7 +78,7 @@
   // the record: open calls, and the hit rate of those already judged
   const n = (st) => all.filter((v) => v.status === st).length, right = n('right'), wrong = n('wrong');
   M.$('score').innerHTML = [['Open', all.filter((v) => ['open', 'on track'].includes(v.status)).length], ['Right', right], ['Wrong', wrong], ['Hit rate', right + wrong ? Math.round(right / (right + wrong) * 100) + '%' : '—']]
-    .map(([k, x]) => `<div><span class="meta">${k}</span><b class="num">${x}</b></div>`).join('') + `<p class="sub">${right + wrong ? '' : 'No view has reached its date yet; the record fills in as they do. '}Views are checked against the data log each morning, and news that supports or cuts against them is added as it comes.</p>`;
+    .map(([k, x]) => `<div><span class="meta">${k}</span><b class="num">${x}</b></div>`).join('') + `<p class="sub">${right + wrong ? '' : 'No view has reached its date yet; the record fills in as they do. '}${(() => { const due = all.filter((v) => ['open', 'on track'].includes(v.status) && v.due).map((v) => v.due).sort()[0]; return due && !right ? `A view can be proven wrong on any day but right only on its date, so a young record shows wrong calls first; the next date is ${M.short(due)}. ` : ''; })()}Views are checked against the data log each morning, and news that supports or cuts against them is added as it comes.</p>`;
   let fs = 0, fm = 0, fk = 0;
   const draw = () => {
     const list = all.filter((v) => (fs === 0 || (fs === 1 ? ['open', 'on track'].includes(v.status) : !['open', 'on track'].includes(v.status)))
