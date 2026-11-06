@@ -67,6 +67,48 @@
     return out;
   }
 
+  // ---- words: each block's words on the page (as ranges, for the word highlight and for clicks), and how the
+  // spoken words (figures written out: "3.9 percent", "E G X thirty") line up with them ----
+  function wkey(w){ return w.toLowerCase().replace(/[^a-z0-9]/g, ''); }
+  function domWords(b){
+    if(b.dw) return b.dw;
+    var out = [];
+    if(b.el){
+      var walk = document.createTreeWalker(b.el, NodeFilter.SHOW_TEXT, {acceptNode: function(n){
+        return n.parentElement && n.parentElement.closest('.topics, svg, sup, .chg') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT; }});
+      var n, m, re = /\S+/g;
+      while((n = walk.nextNode())){
+        re.lastIndex = 0;
+        while((m = re.exec(n.data))){ var r = document.createRange(); r.setStart(n, m.index); r.setEnd(n, m.index + m[0].length); out.push({r: r, k: wkey(m[0])}); }
+      }
+    }
+    return (b.dw = out);
+  }
+  var UNITW = /^(percent|pounds?|dollars?|degrees|basis|points|million|billion|trillion|thousand|am|pm)$/;
+  function same(a, b){ return a === b || (a.length >= 3 && b.length >= 3 && (a.indexOf(b) === 0 || b.indexOf(a) === 0)); }
+  // spoken word -> page word: each spoken word that matches one a little ahead moves the place on; the others (units,
+  // spelled-out letters) stay with the figure they belong to or go to the next word
+  function align(spoken, dw){
+    var map = [], cur = -1;
+    for(var s = 0; s < spoken.length; s++){
+      var k = wkey(spoken[s]), found = -1;
+      if(k) for(var j = cur + 1; j < Math.min(dw.length, cur + 7); j++) if(same(k, dw[j].k)){ found = j; break; }
+      if(found >= 0) cur = found;
+      map[s] = found >= 0 ? found : cur >= 0 && (UNITW.test(k) || /\d/.test(dw[cur].k)) ? cur : Math.min(cur + 1, dw.length - 1);
+    }
+    return map;
+  }
+  var HL = window.CSS && CSS.highlights && window.Highlight ? new Highlight() : null;
+  if(HL) CSS.highlights.set('nl-word', HL);
+  var wordAt = null;
+  function markWord(b, d){
+    if(!HL) return;
+    var dw = b ? domWords(b) : [], r = d != null && d >= 0 && dw[d] ? dw[d].r : null;
+    if(r === wordAt) return;
+    HL.clear(); wordAt = r;
+    if(r) HL.add(r);
+  }
+
   // ---- voices on this device: English ones, the natural-sounding first; the novelty voices left out ----
   var JUNK = /^(Albert|Bad News|Bahh|Bells|Boing|Bubbles|Cellos|Good News|Jester|Organ|Superstar|Trinoids|Whisper|Wobble|Zarvox|Junior|Ralph|Fred|Kathy|Grandma|Grandpa|Rocko|Shelley|Eddy|Flo|Reed|Sandy)\b/;
   function deviceVoices(){
@@ -95,8 +137,9 @@
       + '<select id="plRate" aria-label="Speed">' + RATES.map(function(r){ return '<option value="' + r + '"' + (r === 1 ? ' selected' : '') + '>' + r + '×</option>'; }).join('') + '</select>'
       + '<select id="plVoice" aria-label="Voice"></select>'
       + '<button type="button" class="pl-b pl-x" data-a="close" aria-label="Stop listening"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12 19 6.4 17.6 5 12 10.6z"/></svg></button>'
-      + '</div>';
+      + '</div><button type="button" class="pl-back" id="plBack" hidden></button>';
     document.body.appendChild(p);
+    $('plBack').addEventListener('click', function(){ if(lastEl) lastEl.scrollIntoView({block: 'center', behavior: 'smooth'}); });
     p.addEventListener('click', function(e){
       var b = e.target.closest('[data-a]'); if(!b || !S) return;
       var a = b.getAttribute('data-a');
@@ -153,12 +196,23 @@
     if(el === lastEl) return;
     var follow = lastEl ? (function(r){ return r.bottom > 0 && r.top < innerHeight; })(lastEl.getBoundingClientRect()) : true;
     if(lastEl) lastEl.classList.remove('reading');
-    lastEl = el;
-    if(!el) return;
+    lastEl = el; markWord(null);
+    if(!el){ backBtn(); return; }
     el.classList.add('reading');
     var r = el.getBoundingClientRect();
     if(follow && (r.top < 80 || r.bottom > innerHeight - 110)) el.scrollIntoView({block: 'center', behavior: 'smooth'});
+    else backBtn();
   }
+  // scrolled away from the block being read: a button above the bar goes back to it
+  function backBtn(){
+    var b = $('plBack'); if(!b) return;
+    var off = '';
+    if(S && lastEl){ var r = lastEl.getBoundingClientRect(), bar = $('player').getBoundingClientRect().top; off = r.bottom < 0 ? 'up' : r.top > bar ? 'down' : ''; }
+    b.hidden = !off;
+    if(off) b.innerHTML = '<span aria-hidden="true">' + (off === 'up' ? '↑' : '↓') + '</span> Back to where it\u2019s reading';
+  }
+  var ticking = false;
+  window.addEventListener('scroll', function(){ if(!S || ticking) return; ticking = true; requestAnimationFrame(function(){ ticking = false; backBtn(); }); }, {passive: true});
   function paint(){
     if(!S) return;
     var b = S.list[S.i] || {};
@@ -191,6 +245,18 @@
     var s = seg[k];
     if(s){ var idx = indexOf(s.sec, s.n); if(idx >= 0) S.i = idx; }
     paint();
+    var b = S.list[S.i];
+    if(s && s.w && s.w.length && b){
+      if(!s.map) s.map = align(s.w.map(function(x){ return x[1]; }), domWords(b));
+      var wi = -1, rel = (t - s.t) * 100;
+      while(wi + 1 < s.w.length && s.w[wi + 1][0] <= rel + 4) wi++;
+      markWord(b, wi >= 0 ? s.map[wi] : null);
+    }
+  }
+  function segOf(i){
+    var b = S.list[i], seg = S.recVoice.segments;
+    for(var k = 0; k < seg.length; k++) if(seg[k].sec === b.sec && seg[k].n === b.n) return seg[k];
+    return null;
   }
   function indexOf(sec, n){ for(var i = 0; i < S.list.length; i++) if(S.list[i].sec === sec && S.list[i].n === n) return i; return -1; }
   function timeOf(i){
@@ -202,31 +268,96 @@
   // ---- device voice: one sentence at a time (long utterances stop early in some browsers) ----
   var token = 0;
   function sentences(t){
-    var out = [], parts = t.match(/[^.!?]+(?:[.!?]+["”’)]*|$)\s*/g) || [t];
-    parts.forEach(function(p){ p = p.trim(); if(!p) return; while(p.length > 220){ var cut = p.lastIndexOf(',', 220); cut = cut > 80 ? cut + 1 : 220; out.push(p.slice(0, cut)); p = p.slice(cut).trim(); } out.push(p); });
+    // a sentence ends at . ! or ? followed by a space and a capital, a digit or a quote (so not inside 54.01 or a.m.)
+    var out = [], re = /\S.*?(?:[.!?]+["”’)]*(?=\s+[A-Z0-9"“‘(])|$)/g, m;
+    while((m = re.exec(t)) && m[0]){
+      var p = m[0], off = m.index + (p.length - p.replace(/^\s+/, '').length);
+      p = p.trim(); if(!p) continue;
+      while(p.length > 220){
+        var cut = p.lastIndexOf(',', 220); cut = cut > 80 ? cut + 1 : 220;
+        out.push({t: p.slice(0, cut), off: off});
+        var rest = p.slice(cut); off += cut + (rest.length - rest.replace(/^\s+/, '').length); p = rest.trim();
+      }
+      if(p) out.push({t: p, off: off});
+    }
     return out;
   }
-  function speakFrom(i){
+  // the block's spoken words with where each starts in the spoken text, and their page words
+  function spokenWords(b){
+    if(b.sw) return b.sw;
+    var sw = [], re = /\S+/g, m, text = speakable(b.text);
+    while((m = re.exec(text))) sw.push({w: m[0], at: m.index});
+    sw.text = text; sw.map = align(sw.map(function(x){ return x.w; }), domWords(b));
+    return (b.sw = sw);
+  }
+  function speakFrom(i, fromWord){
     if(!synth) return;
     var my = ++token;
     synth.cancel();
     S.i = i; paint();
     var b = S.list[i]; if(!b){ S.playing = false; paint(); return; }
-    var parts = sentences(speakable(b.text)), k = 0;
+    var sw = spokenWords(b), base = fromWord && sw[fromWord] ? sw[fromWord].at : 0;
+    var parts = sentences(sw.text.slice(base)), k = 0;
+    if(fromWord) markWord(b, sw.map[fromWord]);
     var next = function(){
       if(my !== token || !S) return;
       if(k >= parts.length){
         setTimeout(function(){ if(my === token && S && S.playing) speakFrom(i + 1); }, b.kind === 'text' ? 250 : 450);
         return;
       }
-      var u = new SpeechSynthesisUtterance(parts[k++]);
+      var part = parts[k++], u = new SpeechSynthesisUtterance(part.t);
       if(S.voice){ u.voice = S.voice; u.lang = S.voice.lang; } else u.lang = 'en-US';
       u.rate = S.rate;
+      // the word being said, where the voice reports it (most do; some network voices do not)
+      u.onboundary = function(e){
+        if(my !== token || (e.name && e.name !== 'word')) return;
+        var at = base + part.off + e.charIndex, wi = 0;
+        while(wi + 1 < sw.length && sw[wi + 1].at <= at) wi++;
+        markWord(b, sw.map[wi]);
+      };
       u.onend = next; u.onerror = function(e){ if(e.error !== 'interrupted' && e.error !== 'canceled') next(); };
       synth.speak(u);
     };
     next();
   }
+
+  // ---- tap a word to read from there (while the player is open) ----
+  function caretAt(x, y){
+    if(document.caretPositionFromPoint){ var p = document.caretPositionFromPoint(x, y); return p && {node: p.offsetNode, offset: p.offset}; }
+    if(document.caretRangeFromPoint){ var r = document.caretRangeFromPoint(x, y); return r && {node: r.startContainer, offset: r.startOffset}; }
+    return null;
+  }
+  function readFrom(i, d){
+    S.i = i;
+    if(S.mode === 'rec'){
+      var seg = segOf(i); if(!seg) return;
+      var t = seg.t;
+      if(seg.w && seg.w.length){
+        if(!seg.map) seg.map = align(seg.w.map(function(x){ return x[1]; }), domWords(S.list[i]));
+        for(var s = 0; s < seg.w.length; s++) if(seg.map[s] >= d){ t = seg.t + seg.w[s][0] / 100; break; }
+      }
+      S.audio.currentTime = Math.max(0, t - 0.05);
+      if(!S.playing) play(); else paint();
+    } else {
+      var sw = spokenWords(S.list[i]), from = 0;
+      for(var k = 0; k < sw.length; k++) if(sw.map[k] >= d){ from = k; break; }
+      S.playing = true; speakFrom(i, from);
+    }
+  }
+  document.addEventListener('click', function(e){
+    if(!S || e.button !== 0 || e.target.closest('a, button, select, input, summary, label, #player')) return;
+    var sel = window.getSelection ? getSelection() : null; if(sel && !sel.isCollapsed) return;
+    var i = -1;
+    for(var j = 0; j < S.list.length; j++) if(S.list[j].el && S.list[j].el.contains(e.target)) i = j;
+    if(i < 0) return;
+    var pos = caretAt(e.clientX, e.clientY), dw = domWords(S.list[i]), d = 0;
+    if(pos) for(var k = 0; k < dw.length; k++){
+      var c; try { c = dw[k].r.comparePoint(pos.node, pos.offset); } catch(err){ break; }
+      if(c === 0){ d = k; break; }
+      if(c > 0) d = Math.min(k + 1, dw.length - 1); else break;
+    }
+    readFrom(i, d);
+  });
 
   // ---- controls ----
   function play(){
@@ -256,7 +387,7 @@
   function stop(){
     halt();
     if(S && S.audio){ S.audio.removeAttribute('src'); S.audio.load(); }
-    S = null; mark(null); lastEl = null;
+    S = null; mark(null); lastEl = null; markWord(null); backBtn();
     var p = $('player'); if(p) p.hidden = true;
     document.body.classList.remove('listening');
   }

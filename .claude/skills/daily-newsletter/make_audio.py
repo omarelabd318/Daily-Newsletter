@@ -11,13 +11,15 @@ repo's "audio" branch, which holds only the last KEEP editions' audio (it is rew
 piles up in the repo's history); the site plays it through the jsDelivr CDN. Commit data/audio/ afterwards.
 --local writes the MP3 next to the manifest instead, for testing (do not commit it).
 
-The first run of a session installs kokoro-onnx and downloads the model (about 330 MB, from Hugging Face): a few
+The first run of a session installs kokoro-onnx and downloads the model (about 330 MB, from Hugging Face; the export
+that also reports each sound's length, so the site can highlight the word being read): a few
 minutes in all, then about a fifth of the audio's length to record (around 5 minutes for a full edition). If anything
 fails it says so and exits 0: the site then reads the edition with the device's own voice, so the run goes on.
 """
 import datetime
 import json
 import os
+import re
 import subprocess
 import sys
 import tempfile
@@ -30,7 +32,7 @@ import read_aloud as R   # noqa: E402
 ROOT = R.ROOT
 AUDIO = os.path.join(ROOT, "data", "audio")
 CACHE = os.path.expanduser("~/.cache/daily-newsletter/kokoro")
-HF = "https://huggingface.co/onnx-community/Kokoro-82M-v1.0-ONNX/resolve/main"
+HF = "https://huggingface.co/onnx-community/Kokoro-82M-v1.0-ONNX"
 REPO = "omarelabd318/Daily-Newsletter"
 BRANCH = "audio"
 KEEP = 8   # a week of editions plus the Saturday recap
@@ -63,40 +65,99 @@ def deps():
 def model(voices):
     import numpy as np
     os.makedirs(os.path.join(CACHE, "voices"), exist_ok=True)
-    m = os.path.join(CACHE, "model.onnx")
+    m = os.path.join(CACHE, "model-timestamped.onnx")   # the export that also reports how long each sound lasts
     if not os.path.exists(m) or os.path.getsize(m) < 300e6:
-        urllib.request.urlretrieve(f"{HF}/onnx/model.onnx", m + ".part")
+        urllib.request.urlretrieve(f"{HF}-timestamped/resolve/main/onnx/model.onnx", m + ".part")
         os.replace(m + ".part", m)
     for v in voices:
         f = os.path.join(CACHE, "voices", v + ".bin")
         if not os.path.exists(f):
-            urllib.request.urlretrieve(f"{HF}/voices/{v}.bin", f)
-    npz = os.path.join(CACHE, "voices-" + "-".join(sorted(voices)) + ".npz")
-    np.savez(npz, **{v: np.fromfile(os.path.join(CACHE, "voices", v + ".bin"), dtype=np.float32).reshape(-1, 1, 256) for v in voices})
-    return m, npz
+            urllib.request.urlretrieve(f"{HF}/resolve/main/voices/{v}.bin", f)
+    return m, {v: np.fromfile(os.path.join(CACHE, "voices", v + ".bin"), dtype=np.float32).reshape(-1, 1, 256) for v in voices}
+
+
+def sentences(text, tokenize, limit=480):
+    """The text in sentences, each short enough for one pass of the model (long ones split at commas)."""
+    out = []
+    # a sentence ends at . ! or ? followed by a space and a capital, a digit or a quote (so not inside 54.01 or a.m.)
+    for s in re.findall(r"\S.*?(?:[.!?]+[\"”’)]*(?=\s+[A-Z0-9\"“‘(])|$)", text):
+        s = s.strip()
+        while s and len(tokenize(s)) > limit:
+            cut = s.rfind(",", 0, len(s) // 2 + 40)
+            cut = cut + 1 if cut > 20 else len(s) // 2
+            out.append(s[:cut].strip())
+            s = s[cut:].strip()
+        if s:
+            out.append(s)
+    return out
+
+
+class Voice:
+    """Kokoro run directly: each sentence's audio, and when each of its words starts."""
+
+    def __init__(self, voice):
+        import numpy as np
+        import onnxruntime as ort
+        from kokoro_onnx.tokenizer import Tokenizer
+        m, styles = model([voice])
+        self.np, self.style = np, styles[voice]
+        self.sess = ort.InferenceSession(m)
+        self.tok = Tokenizer()
+        self.lang = "en-gb" if voice.startswith("b") else "en-us"
+
+    def phon(self, t):
+        return self.tok.phonemize(t, self.lang)
+
+    def say(self, sentence):
+        np = self.np
+        ph = self.phon(sentence)
+        ids = self.tok.tokenize(ph)
+        wav, dur = self.sess.run(None, {"input_ids": np.array([[0, *ids, 0]], dtype=np.int64), "style": self.style[len(ids)],
+                                        "speed": np.array([1.0], dtype=np.float32)})
+        wav, dur = wav.ravel().astype(np.float32), dur.ravel()
+        per = len(wav) / max(dur.sum(), 1e-6)                        # samples per duration frame
+        starts = np.concatenate([[0], np.cumsum(dur)])[1:-1] * per   # each phoneme's first sample (the pads dropped)
+        # each spoken word's place in the sentence's phonemes: in proportion to its own phonemes, snapped to the
+        # nearest word gap, so the timing stays right where the sentence joins words ("for a") or splits them ("54.01")
+        words = sentence.split()
+        own = [len(self.phon(w)) + 1 for w in words]
+        gaps = [i + 1 for i, c in enumerate(ph) if c == " "]
+        kept = [c for c in ph if c in self.tok.vocab]
+        pos, acc, out = 0, 0, []
+        for w, n in zip(words, own):
+            at = round(acc / sum(own) * len(kept))
+            near = min(gaps, key=lambda g: abs(g - at)) if gaps and acc else 0
+            prev = pos if out else -1
+            pos = near if abs(near - at) <= 4 and near > prev else max(at, prev + 1)
+            out.append((w, float(starts[min(pos, len(starts) - 1)]) / 24000 if len(starts) else 0.0))
+            acc += n
+        return wav, out
 
 
 def record(key, voice, out_mp3):
     import numpy as np
     import soundfile as sf
-    from kokoro_onnx import Kokoro
-    m, npz = model([voice])
-    k = Kokoro(m, npz)
+    V = Voice(voice)
     d = datetime.date.fromisoformat(key[:10])
     bl = [{"sec": "", "n": 0, "kind": "title", "text": f"Daily Newsletter. {d:%A, %B} {d.day}, {d.year}."}] + R.load(key)
-    lang = "en-gb" if voice.startswith("b") else "en-us"
     sr, parts, segs, t = 24000, [], [], 0.0
+    pause = lambda s: (parts.append(np.zeros(int(sr * s), dtype=np.float32)), s)[1]
     for i, b in enumerate(bl):
         if b["kind"] == "section" and i:
-            parts.append(np.zeros(int(sr * GAP_BEFORE_SECTION), dtype=np.float32))
-            t += GAP_BEFORE_SECTION
+            t += pause(GAP_BEFORE_SECTION)
         text = R.speakable(b["text"])
         if b["kind"] in ("section", "heading") and not text.endswith((".", "?", "!")):
             text += "."
-        a, sr = k.create(text, voice=voice, speed=1.0, lang=lang)
-        segs.append({"sec": b["sec"], "n": b["n"], "t": round(t, 2)})
-        parts += [a.astype(np.float32), np.zeros(int(sr * GAP[b["kind"]]), dtype=np.float32)]
-        t += len(a) / sr + GAP[b["kind"]]
+        seg = {"sec": b["sec"], "n": b["n"], "t": round(t, 2), "w": []}
+        for j, sent in enumerate(sentences(text, lambda x: V.tok.tokenize(V.phon(x)))):
+            if j:
+                t += pause(0.12)
+            a, words = V.say(sent)
+            seg["w"] += [[round((t + at - seg["t"]) * 100), w] for w, at in words]
+            parts.append(a)
+            t += len(a) / sr
+        segs.append(seg)
+        t += pause(GAP[b["kind"]])
     wav = out_mp3[:-4] + ".wav"
     sf.write(wav, np.concatenate(parts), sr)
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", wav, "-ac", "1", "-b:a", "48k", out_mp3], check=True)
