@@ -1,0 +1,1008 @@
+{
+ "note": "Running topics across editions (topics.py). Each story entry: edition, anchor id, lead-in, section, a short text, its topics; 'added' and 'removed' record changes made by hand.",
+ "topics": [
+  {
+   "id": "iran-war",
+   "name": "Iran war and Hormuz",
+   "match": "\\b(Iran|Iranian|Tehran|Hormuz|Revolutionary Guards?|IRGC|Araghchi)\\b",
+   "related": [
+    [
+     "Brent on the Markets Desk",
+     "/desk/global/"
+    ]
+   ],
+   "drivers": [
+    "oil"
+   ],
+   "now": "Iran says ships from India, China, Iraq and Qatar may pass the Strait of Hormuz freely despite its restrictions, and its security chief carried a message to Moscow, while talks with Washington continue through Qatari mediators. Tanker incidents have not stopped, but Brent is well below its late-October peak near $118 on hopes of a deal.",
+   "now_date": "2026-11-06"
+  },
+  {
+   "id": "pound-cbe",
+   "name": "The pound and the central bank",
+   "match": "(Egyptian pound|\\bthe pound\\b|Central Bank of Egypt|\\bCBE\\b|central bank's (dollar|selling|buying)|dollar rate|EGP 5\\d\\.\\d+ (per|a|to the) dollar|\\bT-bills?\\b|Treasury bills?|deposit and lending rates)",
+   "related": [
+    [
+     "The pound on the Markets Desk",
+     "/desk/egp/"
+    ]
+   ],
+   "drivers": [
+    "egp-rates"
+   ],
+   "now": "The central bank's dollar rate fell for a sixth session to EGP 54.01 on November 5, from EGP 56.04 on October 30, after the 100 basis point hike that took the deposit and lending rates to 20% and 21% from November 1. The one-year Treasury bill cleared at 26.03% at the November 5 auction.",
+   "now_date": "2026-11-06"
+  },
+  {
+   "id": "ai-chips",
+   "name": "AI spending and chip stocks",
+   "match": "\\b(Nvidia|chipmakers?|chip stocks?|semiconductors?|AI spending|data cent(er|re)s?|Broadcom|hyperscalers?|AI build-?out)\\b",
+   "related": [
+    [
+     "Wall Street on the Markets Desk",
+     "/desk/us/"
+    ]
+   ],
+   "drivers": [
+    "ai-spending"
+   ],
+   "now": "The Nasdaq fell 5.5% into a correction on November 5 as chip stocks had their worst day since March 2020; Nvidia fell 8.9% to $182.29. Investors are questioning returns on AI spending and expect tighter scrutiny of data centers after the midterms.",
+   "now_date": "2026-11-06"
+  },
+  {
+   "id": "us-midterms",
+   "name": "US midterms",
+   "match": "\\b(midterms?|Democrats? (won|win|wins|take|took|retake)|control of (the )?(Senate|House|Congress))\\b",
+   "related": [],
+   "drivers": [],
+   "now": "Democrats won control of both the Senate and the House, with a few races still too close to call. Markets read divided government as less policy uncertainty, while rules on data centers may tighten.",
+   "now_date": "2026-11-06"
+  },
+  {
+   "id": "bqdc",
+   "name": "Banque du Caire listing",
+   "match": "Banque du Caire",
+   "related": [
+    [
+     "Banque du Caire on the Markets Desk",
+     "/desk/stock/?t=BQDC"
+    ]
+   ],
+   "drivers": [],
+   "now": "Banque du Caire began trading on November 2 at its EGP 5.30 offer price and closed at EGP 5.38 on November 3 and EGP 5.50 on November 4. Retail buyers can sell their shares back at the offer price for 30 days.",
+   "now_date": "2026-11-06"
+  },
+  {
+   "id": "gas-fertilizer",
+   "name": "Gas supply to fertilizer plants",
+   "match": "\\b(fertili[sz]ers?|Abu Qir|MOPCO)\\b|\\bKima\\b(?! Aswan)|gas (cuts?|rationing|supply|allocations?) to",
+   "related": [
+    [
+     "Abu Qir on the Markets Desk",
+     "/desk/stock/?t=ABUK"
+    ],
+    [
+     "MOPCO on the Markets Desk",
+     "/desk/stock/?t=MFPC"
+    ]
+   ],
+   "drivers": [
+    "gas-supply"
+   ],
+   "now": "Gas supplies to fertilizer plants were cut by about 20% from November 1. Abu Qir and MOPCO fell for four sessions before Abu Qir rebounded 3.0% to EGP 80.00 on November 4; the cut remains in force.",
+   "now_date": "2026-11-06"
+  },
+  {
+   "id": "imf",
+   "name": "Egypt and the IMF",
+   "match": "\\bIMF\\b|International Monetary Fund",
+   "related": [
+    [
+     "The pound on the Markets Desk",
+     "/desk/egp/"
+    ]
+   ],
+   "drivers": [],
+   "now": "Egypt is in the eighth and final review of its IMF program, which ends on December 15; state asset sales, including Banque du Caire's listing, are among its requirements.",
+   "now_date": "2026-11-06"
+  },
+  {
+   "id": "gaza-lebanon",
+   "name": "Gaza and Lebanon",
+   "match": "\\b(Gaza|Hamas|Hezbollah|Lebanon|Lebanese)\\b",
+   "related": [],
+   "drivers": [],
+   "now": "Israeli strikes killed Palestinians in Gaza on November 1 and 2 despite the ceasefire.",
+   "now_date": "2026-11-06"
+  },
+  {
+   "id": "oil",
+   "name": "Oil prices",
+   "match": "\\b(Brent|WTI|oil prices?|crude)\\b",
+   "related": [
+    [
+     "Brent on the Markets Desk",
+     "/desk/global/"
+    ]
+   ],
+   "drivers": [
+    "oil"
+   ],
+   "now": "Brent closed at $98.29 on November 5, up 3.9% on the day but about 13% lower than at the start of the month, as hopes of a US-Iran deal pulled prices down from their late-October highs near $118.",
+   "now_date": "2026-11-06"
+  }
+ ],
+ "stories": [
+  {
+   "ed": "2026-11-06",
+   "id": "story-treasury-bill-auction",
+   "lead": "Treasury bill auction",
+   "sec": "Markets",
+   "text": "The central bank sold 364-day bills at a weighted average yield of 26.03% and 182-day bills at 25.25% on Thursday, slightly below the previous week's 26.08% and 25.46%. The one-year yield sits 0.2% below its 52-week high, so investors…",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-11-06",
+   "id": "story-iran-s-diplomacy",
+   "lead": "Iran's diplomacy",
+   "sec": "Regional and Gulf",
+   "text": "Mohsen Rezaei, secretary of Iran's Supreme National Security Council, met Russian President Vladimir Putin in Moscow with a message from Supreme Leader Mojtaba Khamenei. Separately, Trump spoke with Qatar's emir about de-escalation while…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-06",
+   "id": "story-hormuz-exemptions",
+   "lead": "Hormuz exemptions",
+   "sec": "Regional and Gulf",
+   "text": "A senior Iranian lawmaker, Amir Hayat Moqaddam, said ships from India, China, Iraq and Qatar may cross the Strait of Hormuz freely despite Iran's restrictions. Analysts say Iran may collect fees from Indian and Chinese vessels, and that…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-06",
+   "id": "story-data-center-backlash",
+   "lead": "Data-center backlash",
+   "sec": "In Other News",
+   "text": "Meta warned that voter opposition to data centers after the midterms could make expanding its AI infrastructure harder. Voters rejected data center measures in 39 of 40 ballot questions with complete counts, which helps explain Thursday's…",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-11-06",
+   "id": "story-ai-stock-rout",
+   "lead": "AI stock rout",
+   "sec": "Markets",
+   "text": "The S&P 500 lost 4.36% to 7,353.73, the Nasdaq 5.52% to 24,315.00 and the Dow Jones 3.44% to 51,523.06, a drop of about 1,833 points, with both the S&P 500 and Nasdaq suffering their worst days since April 2025. The Nasdaq entered a…",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-11-05",
+   "id": "story-wall-street-rally",
+   "lead": "Wall Street rally",
+   "sec": "Markets",
+   "text": "The S&P 500 gained 1.58% to 7,688.62, the Nasdaq 1.44% to 25,736.51 and the Dow Jones 3.03% to 53,356.12, a rise of more than 1,500 points and the Dow's best day since April 2025. The Dow and S&P 500 are within 2% of their 52-week highs.…",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-11-05",
+   "id": "story-pound-strengthens",
+   "lead": "Pound strengthens",
+   "sec": "Markets",
+   "text": "The central bank's dollar selling rate eased for a fifth session to EGP 54.77, from 55.42, the lowest in the central bank series for at least a year, 2.5% below its 52-week high of EGP 56.20. The deposit and lending rates stand at 20% and…",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-11-05",
+   "id": "story-oil-and-gold",
+   "lead": "Oil and gold",
+   "sec": "Markets",
+   "text": "Brent fell to about $94.60 a barrel, down 16.6% in the month, as hopes of an earlier end to the Iran war outweighed the Hormuz incidents; WTI settled at $88.12. Goldman Sachs raised its December Brent forecast to $105 and its 2027 average…",
+   "topics": [
+    "iran-war",
+    "oil"
+   ]
+  },
+  {
+   "ed": "2026-11-05",
+   "id": "story-hormuz-fires",
+   "lead": "Hormuz fires",
+   "sec": "Regional and Gulf",
+   "text": "Iran's Revolutionary Guards said two tankers and a tugboat caught fire in the Strait of Hormuz after trying an \"unauthorised route\", and claimed to have captured two US drones intact; neither claim has been independently verified. Supreme…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-05",
+   "id": "story-democrats-take-congress",
+   "lead": "Democrats take Congress",
+   "sec": "Top World Headlines",
+   "text": "Democrats won both the Senate and the House, though races in Alaska and Mississippi were still too close to call. Passing laws will be hard: Trump has said he will veto bills he dislikes, 60 Senate votes are needed to beat a filibuster and…",
+   "topics": [
+    "us-midterms"
+   ]
+  },
+  {
+   "ed": "2026-11-05",
+   "id": "story-data-centres-after-the-midterms",
+   "lead": "Data centres after the midterms",
+   "sec": "In Other News",
+   "text": "TechCrunch reports that a divided Washington may bring a bigger fight over data-centre rules, a worry that weighed on AI-linked shares such as CoreWeave.",
+   "topics": [
+    "ai-chips",
+    "us-midterms"
+   ]
+  },
+  {
+   "ed": "2026-11-04",
+   "id": "story-us-midterms",
+   "lead": "US midterms",
+   "sec": "Top World Headlines",
+   "text": "Democrats won control of the Senate, which the Associated Press called late on Tuesday, and they also appeared to be winning the House. The party needed a net gain of four seats and had taken at least seven, with flips in North Carolina…",
+   "topics": [
+    "us-midterms"
+   ]
+  },
+  {
+   "ed": "2026-11-04",
+   "id": "story-tankers-at-sea",
+   "lead": "Tankers at sea",
+   "sec": "Regional and Gulf",
+   "text": "Two unknown projectiles hit a tanker's engine room near Oman, with no casualties. The Revolutionary Guards claim three or four tankers hit mines and two ships were seized; the claims could not be independently verified. Renewed disruption…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-04",
+   "id": "story-pound-and-rates",
+   "lead": "Pound and rates",
+   "sec": "Markets",
+   "text": "The central bank's dollar selling rate eased for a fourth straight session to EGP 55.42, within 1.6% of its 52-week high of EGP 56.35 in the market series. The deposit and lending rates stand at 20% and 21%, and the one-year Treasury bill…",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-11-04",
+   "id": "story-oil-and-gold",
+   "lead": "Oil and gold",
+   "sec": "Markets",
+   "text": "Brent edged down 1.1% to $103.60, a day after its biggest fall since July, and WTI fell to about $96, as hopes of a deal competed with the Qeshm strikes. Gold traded near $3,940 an ounce, within about 1% of its one-year low, and is down 9%…",
+   "topics": [
+    "oil"
+   ]
+  },
+  {
+   "ed": "2026-11-04",
+   "id": "story-hormuz-plan-and-strikes",
+   "lead": "Hormuz plan and strikes",
+   "sec": "Regional and Gulf",
+   "text": "Iran proposed reopening the Strait of Hormuz over two days if the United States meets seven demands, including lifting sanctions and ending the naval blockade, but Mohsen Rezaei, secretary of its Supreme National Security Council, said…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-04",
+   "id": "story-gas-rationing",
+   "lead": "Gas rationing",
+   "sec": "Egypt News",
+   "text": "Gas allocations to fertiliser and methanol plants have been cut by 20% since 1 November, and Kima told the EGX its supplies fell 20% from noon on Sunday while its urea plant keeps running. The squeeze reflects a market that the…",
+   "topics": [
+    "gas-fertilizer"
+   ]
+  },
+  {
+   "ed": "2026-11-04",
+   "id": "story-fertiliser-stocks",
+   "lead": "Fertiliser stocks",
+   "sec": "Markets",
+   "text": "Abu Qir Fertilizers fell 3.6% to EGP 77.71, its fourth straight decline, and Mopco lost 3.0%, as the 20% gas cut hit the sector. CI Capital expects lower allocations to weigh on Abu Qir, Mopco and Valmore's Alexfert in the fourth quarter…",
+   "topics": [
+    "gas-fertilizer"
+   ]
+  },
+  {
+   "ed": "2026-11-03",
+   "id": "story-winners-and-losers",
+   "lead": "Winners and losers",
+   "sec": "Markets",
+   "text": "Telecom Egypt rose 3.08% to EGP 121.45 and CIB 2.88% to EGP 121.40, while Mopco lost 6.14%, Eastern Company 5.75% and Abu Qir Fertilizers 4.67%. EFG Holding fell 3.41% to EGP 22.36, a fresh 52-week low and its fourth straight decline.…",
+   "topics": [
+    "bqdc",
+    "gas-fertilizer"
+   ]
+  },
+  {
+   "ed": "2026-11-03",
+   "id": "story-us-midterms",
+   "lead": "US midterms",
+   "sec": "Top World Headlines",
+   "text": "Voting takes place on Tuesday across the United States, with all 435 House seats, 35 of 100 Senate seats and 36 governorships at stake. More than 50 million Americans had already voted early. One pre-election polling average had Democrats…",
+   "topics": [
+    "us-midterms"
+   ]
+  },
+  {
+   "ed": "2026-11-03",
+   "id": "story-us-iran-diplomacy",
+   "lead": "US-Iran diplomacy",
+   "sec": "Regional and Gulf",
+   "text": "Hopes of a deal with Tehran rose on Monday, with Trump saying Iran wants to \"make a deal and that could happen\", and Iran's foreign minister Abbas Araghchi saying an agreement is possible if Washington shows goodwill, CNBC reported. Qatari…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-03",
+   "id": "story-tankers-in-hormuz",
+   "lead": "Tankers in Hormuz",
+   "sec": "Regional and Gulf",
+   "text": "Iran's Revolutionary Guards say two crude tankers caught fire after hitting mines in the strait, and Gulf states condemned an attack on a Qatari LNG carrier. Iran rejects US claims that the shipping lanes are clear and has demanded…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-03",
+   "id": "story-pound-and-rates",
+   "lead": "Pound and rates",
+   "sec": "Markets",
+   "text": "The central bank's dollar rate eased to EGP 55.51 for selling on Monday from 55.86, a 0.6% gain for the pound, yet it remains within 1.5% of its 52-week high of 56.35. The deposit and lending rates stand at 20% and 21% after the 100 basis…",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-11-03",
+   "id": "story-oil-and-gold",
+   "lead": "Oil and gold",
+   "sec": "Markets",
+   "text": "Brent settled 7.6% lower at $104.77, its biggest daily fall since 27 July, and WTI lost 7.4% to $96.46 on hopes of a US-Iran deal, CNBC reported. The fall is exaggerated by the roll from the expiring December contract, which settled at…",
+   "topics": [
+    "oil"
+   ]
+  },
+  {
+   "ed": "2026-11-03",
+   "id": "story-gaza-and-lebanon",
+   "lead": "Gaza and Lebanon",
+   "sec": "Regional and Gulf",
+   "text": "Israeli strikes killed Palestinians in Gaza on 1 and 2 November, including five in the Al-Mawasi zone and five police officers, despite the ceasefire. Israeli attacks also hit four districts of southern Lebanon, and Israel is said to be…",
+   "topics": [
+    "gaza-lebanon"
+   ]
+  },
+  {
+   "ed": "2026-11-03",
+   "id": "story-chip-rout-and-oracle",
+   "lead": "Chip rout and Oracle",
+   "sec": "Markets",
+   "text": "Oracle fell 8.8% to $119.22 after announcing it would limit extra capital raising through fiscal 2030 to $20 billion, split evenly between equity and debt, to fund its AI buildout. Reports differ on the exact size of the drop. The shares…",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-11-03",
+   "id": "story-banque-du-caire-debut",
+   "lead": "Banque du Caire debut",
+   "sec": "Egypt News",
+   "text": "The state-owned lender made a quiet start on the EGX on Monday, closing 0.19% higher at EGP 5.31 against an offer price of EGP 5.30, after touching EGP 5.68 in the opening minutes and dipping as low as EGP 5.25. A senior government…",
+   "topics": [
+    "bqdc"
+   ]
+  },
+  {
+   "ed": "2026-11-02",
+   "id": "story-us-midterms",
+   "lead": "US midterms",
+   "sec": "Top World Headlines",
+   "text": "Americans vote on Tuesday in congressional elections widely expected to return the House to Democrats. Data centres have become a campaign issue, and OpenAI is reportedly preparing a post-election public-relations push. In Michigan,…",
+   "topics": [
+    "us-midterms"
+   ]
+  },
+  {
+   "ed": "2026-11-02",
+   "id": "story-treasury-bills-after-the-hike",
+   "lead": "Treasury bills after the hike",
+   "sec": "Markets",
+   "text": "The Finance Ministry's auction on Sunday cleared the 91-day bill at 25.00% and the 273-day bill at 26.36%, per the central bank, the 273-day yield at its highest since September 2025. The one-year bill cleared at 26.08% on Thursday. The…",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-11-02",
+   "id": "story-oil-gold-and-the-world-bank",
+   "lead": "Oil, gold and the World Bank",
+   "sec": "Markets",
+   "text": "Brent settled Friday at $113.43 a barrel and traded around $110 to $112 on Monday, with quotes from different sources differing. Gold closed Friday at $3,898.90 an ounce, its lowest in a year. The World Bank's October outlook sees…",
+   "topics": [
+    "oil"
+   ]
+  },
+  {
+   "ed": "2026-11-02",
+   "id": "story-hormuz-tankers",
+   "lead": "Hormuz tankers",
+   "sec": "Regional and Gulf",
+   "text": "Iran's Revolutionary Guard said two crude tankers caught fire after hitting mines in the Strait of Hormuz, and Gulf states condemned Friday's attack on a Qatari LNG carrier. President Donald Trump said the war will end \"very soon, one way…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-02",
+   "id": "story-fears-of-a-restart",
+   "lead": "Fears of a restart",
+   "sec": "Regional and Gulf",
+   "text": "Residents across the region fear fighting could resume after Tuesday's US election, as Iran's parliament speaker says progress requires agreement on Iran's \"seven conditions\" and Houthi strikes have intensified in Saudi Arabia. US envoy…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-02",
+   "id": "story-banque-du-caire-debut",
+   "lead": "Banque du Caire debut",
+   "sec": "Markets",
+   "text": "Banque du Caire shares begin trading under the ticker BQDC today, following offerings that closed on 29 October. The public offering was 27 times subscribed, and the private placement drew EGP 205.8 billion in orders, the most an EGX…",
+   "topics": [
+    "bqdc"
+   ]
+  },
+  {
+   "ed": "2026-11-01",
+   "id": "story-wall-street-s-tech-rout",
+   "lead": "Wall Street's tech rout",
+   "sec": "Markets",
+   "text": "The S&P 500 lost 1.82% to 7,580.07, the Nasdaq 2.86% to 25,437.00 and the Dow Jones 1.09% to 51,770.31 on Friday. The Nasdaq ended October down 5.30%, its worst month since March 2025, as doubts over the cost of AI spending hit chipmakers.…",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-11-01",
+   "id": "story-rate-hike-aftermath",
+   "lead": "Rate hike aftermath",
+   "sec": "Markets",
+   "text": "Banks begin reviewing savings and lending rates today after the Monetary Policy Committee raised the overnight deposit rate to 20.00% and the lending rate to 21.00% on Thursday, its first increase since March 2024. Variable-rate…",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-11-01",
+   "id": "story-hormuz-reopening-plan",
+   "lead": "Hormuz reopening plan",
+   "sec": "Regional and Gulf",
+   "text": "Iran's foreign minister Abbas Araghchi said that Tehran has a plan with Qatari mediators to reopen the Strait of Hormuz within two days, provided the United States cooperates, and called Washington's offer of dialogue \"a positive step\" as…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-01",
+   "id": "story-egx30-and-the-treasury-bill-test",
+   "lead": "EGX30 and the Treasury bill test",
+   "sec": "Markets",
+   "text": "The EGX30 closed Thursday at 49,596.14, up 0.6% on turnover of EGP 7.5 billion, 32.8% below its 90-day average, with local investors the only net sellers. The index is up 18.6% for the year and 4.4% lower in October. Beltone Holding gained…",
+   "topics": [
+    "pound-cbe"
+   ],
+   "removed": [
+    "gas-fertilizer"
+   ]
+  },
+  {
+   "ed": "2026-10-31-recap",
+   "id": "story-the-pound",
+   "lead": "The pound",
+   "sec": "Egypt This Week",
+   "text": "The dollar passed EGP 56 in banks during the week, a record for the pound, and the central bank's selling rate was EGP 56.12 on Saturday, roughly 1.5% weaker than a week earlier (unconfirmed). Importers report sourcing commissions of 0.1%…",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-10-31-recap",
+   "id": "story-iran-and-hormuz",
+   "lead": "Iran and Hormuz",
+   "sec": "Region and World",
+   "text": "Two tankers were hit in the Strait of Hormuz within 24 hours, one by a naval mine and one by explosives attached to its hull. Iran's Revolutionary Guards said four tankers struck mines on an unauthorised route. President Trump said the…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-10-31-recap",
+   "id": "story-imf-final-review",
+   "lead": "IMF final review",
+   "sec": "Egypt This Week",
+   "text": "A Fund mission arrived in Cairo to begin the eighth and last review of the $8 billion Extended Fund Facility, together with the final review under the Resilience and Sustainability Facility, according to EnterpriseAM. Completion could…",
+   "topics": [
+    "imf"
+   ]
+  },
+  {
+   "ed": "2026-10-31-recap",
+   "id": "story-houthis-and-saudi-arabia",
+   "lead": "Houthis and Saudi Arabia",
+   "sec": "Region and World",
+   "text": "The Houthis claimed six attacks on Saudi airports and oil sites on 29 and 30 October, including the Ras Tanura and Rabigh refineries, with no independent corroboration. The Saudi-led coalition said it destroyed two ballistic missiles aimed…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-10-31-recap",
+   "id": "story-gaza-sudan-and-lebanon",
+   "lead": "Gaza, Sudan and Lebanon",
+   "sec": "Region and World",
+   "text": "Israeli strikes continued in Gaza despite the ceasefire, and the territory's Health Ministry urged the opening of the Rafah crossing for patients, according to Al Jazeera. In Sudan, senior Rapid Support Forces commander Siddiq Ander…",
+   "topics": [
+    "gaza-lebanon"
+   ]
+  },
+  {
+   "ed": "2026-10-31-recap",
+   "id": "story-banque-du-caire-retail-offering",
+   "lead": "Banque du Caire retail offering",
+   "sec": "How It Played Out",
+   "text": "The retail book closed about 27 times covered, with orders for roughly 9.29 billion shares against 343.1 million offered, so applicants receive about 3.7% of their orders. The offer price is EGP 5.30 and trading is expected to begin on…",
+   "topics": [
+    "bqdc"
+   ]
+  },
+  {
+   "ed": "2026-10-31-recap",
+   "id": "story-ai-spending-doubts",
+   "lead": "AI spending doubts",
+   "sec": "Culture and Tech",
+   "text": "Alphabet's weaker search advertising and its plan to spend more than $200 billion this year drove the week's selloff in technology shares, and investors are questioning how long AI investment will take to pay back.",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-10-31",
+   "id": "story-us-midterms",
+   "lead": "US midterms",
+   "sec": "Top World Headlines",
+   "text": "Americans vote on Tuesday 3 November in elections that will decide control of both houses of Congress. Republicans hold the House 220 to 215, and Democrats need a net gain of three House seats and four Senate seats to take both chambers.…",
+   "topics": [
+    "us-midterms"
+   ]
+  },
+  {
+   "ed": "2026-10-31",
+   "id": "story-rates-and-the-pound",
+   "lead": "Rates and the pound",
+   "sec": "Markets",
+   "text": "The overnight deposit and lending rates are 20.00% and 21.00%, after the Monetary Policy Committee's hike on Thursday. Headline inflation was 13.9% in September, with core at 14.1%, and the one-year Treasury bill yielded 26.08% at the 29…",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-10-31",
+   "id": "story-nasdaq-s-worst-month-in-19-months",
+   "lead": "Nasdaq's worst month in 19 months",
+   "sec": "Markets",
+   "text": "Wall Street fell sharply on Friday as worries over the cost of AI spending hit technology stocks. The S&P 500 lost 1.82% to 7,580.07, the Nasdaq 2.86% to 25,437.00 and the Dow Jones 1.09% to 51,770.31, according to InvestingLive. The…",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-10-31",
+   "id": "story-lebanon",
+   "lead": "Lebanon",
+   "sec": "Regional and Gulf",
+   "text": "A Lebanese military court charged 13 people linked to Hezbollah with trafficking explosives, after a truck carrying 780kg of explosives, including 250kg of TNT and 250kg of C-4, was seized at a checkpoint on the Beirut-Bekaa road. Eleven…",
+   "topics": [
+    "gaza-lebanon"
+   ]
+  },
+  {
+   "ed": "2026-10-31",
+   "id": "story-iran-warnings-and-mediation",
+   "lead": "Iran warnings and mediation",
+   "sec": "Regional and Gulf",
+   "text": "Iran warned of an \"earth-shattering blow\" if it is attacked, and a drone targeted Riyadh, according to Al Jazeera. President Trump said the war, now in its ninth month, would \"end soon\", and reports said he expected that after the…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-10-31",
+   "id": "story-google-s-orbital-data-centre",
+   "lead": "Google's orbital data centre",
+   "sec": "In Other News",
+   "text": "Google's prototype Suncatcher satellite, carrying four Tensor chips, is online after launching this month, and its first test prompt asked the pre-loaded Gemma 4 model to write a haiku about space. The satellite can run a chip for only…",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-10-31",
+   "id": "story-egyptian-premier-league",
+   "lead": "Egyptian Premier League",
+   "sec": "In Other News",
+   "text": "Round-eight matches continue today, with Abu Qir Fertilizers v Ghazl El Mahalla, Ceramica Cleopatra v ZED and Petrojet v Smouha on the schedule. Pyramids lead the table.",
+   "topics": [
+    "gas-fertilizer"
+   ]
+  },
+  {
+   "ed": "2026-10-31",
+   "id": "story-egx30-and-the-sunday-reopening",
+   "lead": "EGX30 and the Sunday reopening",
+   "sec": "Markets",
+   "text": "The Egyptian Exchange has been closed since Thursday and reopens on Sunday for its first session since the central bank raised rates by 100 basis points. The EGX30 last closed at 49,596.14, up 18.6% for the year but 4.4% lower in October…",
+   "topics": [],
+   "removed": [
+    "gas-fertilizer"
+   ]
+  },
+  {
+   "ed": "2026-10-31",
+   "id": "story-crude-imports-on-supplier-credit",
+   "lead": "Crude imports on supplier credit",
+   "sec": "Egypt News",
+   "text": "The Oil Ministry plans to import about 15 million barrels of crude in the fourth quarter, 8% more than a year earlier, and pay through supplier credit, according to EnterpriseAM citing Al Arabiya Business. The cargoes, from Saudi Arabia,…",
+   "topics": [
+    "oil"
+   ]
+  },
+  {
+   "ed": "2026-10-31",
+   "id": "story-banque-du-caire-listing",
+   "lead": "Banque du Caire listing",
+   "sec": "Markets",
+   "text": "The state lender's retail tranche closed about 27 times covered, with orders for roughly 9.29 billion shares against 343.1 million offered, so applicants receive about 3.7% of their orders, according to EnterpriseAM. Shares are expected to…",
+   "topics": [
+    "bqdc"
+   ]
+  },
+  {
+   "ed": "2026-10-30",
+   "id": "story-us-midterms",
+   "lead": "US midterms",
+   "sec": "Top World Headlines",
+   "text": "The US votes on Tuesday 3 November. Trump cancelled planned events in Iowa and Kansas in favour of \"tele-rallies\", with the Republican National Committee announcing broadcasts in nearly 20 states, according to Al Jazeera. His…",
+   "topics": [
+    "us-midterms"
+   ]
+  },
+  {
+   "ed": "2026-10-30",
+   "id": "story-saturday-s-egyptian-fixtures",
+   "lead": "Saturday's Egyptian fixtures",
+   "sec": "In Other News",
+   "text": "Abu Qir Fertilizers meet Ghazl El Mahalla at 5pm, and Ceramica Cleopatra v ZED and Petrojet v Smouha follow at 8pm, according to Africa Soccer.",
+   "topics": [
+    "gas-fertilizer"
+   ]
+  },
+  {
+   "ed": "2026-10-30",
+   "id": "story-oil-gold-and-bitcoin",
+   "lead": "Oil, gold and bitcoin",
+   "sec": "Markets",
+   "text": "Brent settled at $114.88 a barrel, down 0.4%, according to Reuters, within 3% of its 52-week high and up about 89% this year. December Brent was near $116 on Friday after the Revolutionary Guards' mine claims, a rise that further deepens…",
+   "topics": [
+    "oil"
+   ]
+  },
+  {
+   "ed": "2026-10-30",
+   "id": "story-imf-final-review",
+   "lead": "IMF final review",
+   "sec": "Egypt News",
+   "text": "An IMF mission has arrived in Cairo to start the eighth and last review of Egypt's $8 billion Extended Fund Facility, together with the final review under the Resilience and Sustainability Facility, according to EnterpriseAM. Completing…",
+   "topics": [
+    "imf"
+   ]
+  },
+  {
+   "ed": "2026-10-30",
+   "id": "story-hormuz-and-houthi-claims",
+   "lead": "Hormuz and Houthi claims",
+   "sec": "Regional and Gulf",
+   "text": "Iran's Revolutionary Guards said four tankers struck mines while using an unauthorised route south of the Strait of Hormuz, and the UK Maritime Trade Operations centre said a tanker was hit by explosive devices late on Thursday with its…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-10-30",
+   "id": "story-gaza-and-the-west-bank",
+   "lead": "Gaza and the West Bank",
+   "sec": "Regional and Gulf",
+   "text": "Israeli strikes continued in Gaza despite the ceasefire, and Gaza's Health Ministry urged the opening of the Rafah crossing for patients, according to Al Jazeera. In the West Bank, Israeli restrictions at ten entrances to Hebron have…",
+   "topics": [
+    "gaza-lebanon"
+   ]
+  },
+  {
+   "ed": "2026-10-30",
+   "id": "story-egx30-and-the-pound",
+   "lead": "EGX30 and the pound",
+   "sec": "Markets",
+   "text": "The EGX30 closed Thursday at 49,596, up about 0.6% from Wednesday's 49,281 and 18.6% higher for the year. The decision came after a week in which the EGX70 fell 11.07% in a single session on Sunday, and the benchmark touched fresh lows.…",
+   "topics": [
+    "pound-cbe"
+   ],
+   "removed": [
+    "gas-fertilizer"
+   ]
+  },
+  {
+   "ed": "2026-10-30",
+   "id": "story-banque-du-caire-listing",
+   "lead": "Banque du Caire listing",
+   "sec": "Markets",
+   "text": "The state lender's retail tranche closed about 27 times covered, with orders for roughly 9.29 billion shares against 343.1 million offered, so allocations are pro rata and applicants receive about 3.7% of their requests, according to…",
+   "topics": [
+    "bqdc"
+   ]
+  },
+  {
+   "ed": "2026-10-29",
+   "id": "story-us-midterms",
+   "lead": "US midterms",
+   "sec": "Top World Headlines",
+   "text": "The US votes on Tuesday 3 November in midterm elections, with the Fed's independence and Washington's bandwidth for the Ukraine talks both in focus. Warsh said politics played \"no role\" in this week's decision.",
+   "topics": [
+    "us-midterms"
+   ]
+  },
+  {
+   "ed": "2026-10-29",
+   "id": "story-crude-imports-on-credit",
+   "lead": "Crude imports on credit",
+   "sec": "Egypt News",
+   "text": "The Oil Ministry plans to import about 15 million barrels of crude in the fourth quarter, 8% more than a year earlier, at an estimated $1.4 billion to $1.5 billion, according to EnterpriseAM. Supplies come from Saudi Arabia, Libya and…",
+   "topics": [
+    "oil"
+   ]
+  },
+  {
+   "ed": "2026-10-29",
+   "id": "story-banque-du-caire-ipo",
+   "lead": "Banque du Caire IPO",
+   "sec": "Markets",
+   "text": "The retail tranche closed about 27 times oversubscribed, with retail investors ordering roughly 9.29 billion shares against 343.1 million offered, according to EnterpriseAM. The price is EGP 5.30 and allocation is pro rata, so applicants…",
+   "topics": [
+    "bqdc"
+   ]
+  },
+  {
+   "ed": "2026-10-28-v2",
+   "id": "story-oil-gold-and-bitcoin",
+   "lead": "Oil, gold and bitcoin",
+   "sec": "Markets",
+   "text": "Brent settled at $113.88 a barrel, down 1.7%, still near its highest since late April, and US crude fell 1.83% to $99.90. Gold was little changed at about $4,076 an ounce and bitcoin rose 1.0% to $80,860. For Egypt, which imports fuel and…",
+   "topics": [
+    "oil"
+   ]
+  },
+  {
+   "ed": "2026-10-28-v2",
+   "id": "story-iran-talks",
+   "lead": "Iran talks",
+   "sec": "Regional and Gulf",
+   "text": "Iran was reported to be hosting security talks with Saudi Arabia, Turkey and Pakistan this week, with Qatar acting as a mediator, though details have not been published. The outcome matters for the Strait of Hormuz, through which a large…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-10-28-v2",
+   "id": "story-banque-du-caire-ipo",
+   "lead": "Banque du Caire IPO",
+   "sec": "Markets",
+   "text": "The retail tranche of Banque du Caire's offering closes today. The state raised the stake on offer from 30% to 45%, and earlier reports put retail demand at about 1.98 times the 228.75 million shares allocated to individuals, with the…",
+   "topics": [
+    "bqdc"
+   ]
+  },
+  {
+   "ed": "2026-10-27",
+   "id": "story-record-weak-pound",
+   "lead": "Record-weak pound",
+   "sec": "Egypt News",
+   "text": "The Central Bank of Egypt quoted the dollar at about EGP 56.21 to buy and 56.35 to sell on Tuesday, up from about EGP 55.9 on Sunday. The currency has lost roughly 14% this year. Importers of food, medicine and fuel absorb the cost first,…",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-10-27",
+   "id": "story-lebanon",
+   "lead": "Lebanon",
+   "sec": "Regional and Gulf",
+   "text": "Lebanese sources say Hezbollah is rearming with fresh Iranian funding, rebuilding drone and explosives capabilities, which raises the risk of renewed conflict with Israel.",
+   "topics": [
+    "gaza-lebanon"
+   ]
+  },
+  {
+   "ed": "2026-10-27",
+   "id": "story-iran-and-hormuz",
+   "lead": "Iran and Hormuz",
+   "sec": "Top World Headlines",
+   "text": "Washington and Tehran remain on the brink. Delegations from Saudi Arabia, Pakistan and Turkey have been in Tehran, Qatar is mediating, and CNN reports that Netanyahu pressed for a strike on Iran before the election but that President…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-10-27",
+   "id": "story-egyptian-and-arab-music",
+   "lead": "Egyptian and Arab music",
+   "sec": "In Other News",
+   "text": "Lebanese pop artist Nurzy released \"Bayt El Ayle\", the first preview of her upcoming album, drawing on family history and Lebanese folklore. Lebanese artist Nic Merheb plays Cairo Jazz Club on 6 November.",
+   "topics": [],
+   "removed": [
+    "gaza-lebanon"
+   ]
+  },
+  {
+   "ed": "2026-10-27",
+   "id": "story-banque-du-caire-ipo",
+   "lead": "Banque du Caire IPO",
+   "sec": "Markets",
+   "text": "The offering priced at EGP 5.30, the top of the indicative EGP 4.82-5.30 range. Institutional orders reached EGP 205.8 billion (about $3.72 billion), the largest private tranche in EGX history, equal to about six times coverage, or 19.8…",
+   "topics": [
+    "bqdc"
+   ]
+  },
+  {
+   "ed": "2026-10-26",
+   "id": "story-record-low-pound",
+   "lead": "Record-low pound",
+   "sec": "Egypt News",
+   "text": "The dollar reached EGP 55.89 at the Central Bank of Egypt on Sunday, above the previous peak of EGP 54.73 set on 7 April. The pound has lost about 14% this year and about 5% in October. Foreign and regional investors net sold roughly $1.13…",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-10-26",
+   "id": "story-oil-price",
+   "lead": "Oil price",
+   "sec": "Top World Headlines",
+   "text": "Brent settled around $117 a barrel on Friday and traded near $114 on Monday morning. ING has said its $80 average forecast for the fourth quarter now looks unattainable. For Egypt, a net energy importer, each sustained dollar on the price…",
+   "topics": [
+    "oil"
+   ]
+  },
+  {
+   "ed": "2026-10-26",
+   "id": "story-imf-final-review",
+   "lead": "IMF final review",
+   "sec": "Egypt News",
+   "text": "An IMF mission arrived on Sunday for the eighth and final review of the $8 billion Extended Fund Facility and the last review under the Resilience and Sustainability Facility. Passing both would release about $2.3 billion. Talks, expected…",
+   "topics": [
+    "imf"
+   ]
+  },
+  {
+   "ed": "2026-10-26",
+   "id": "story-houthi-attacks-and-mediation",
+   "lead": "Houthi attacks and mediation",
+   "sec": "Top World Headlines",
+   "text": "The Houthis say they have fired at Riyadh, Dammam and Najran airports, energy sites and an air base, and Saudi forces continue to intercept missiles. Qatari mediators have travelled to Tehran in coordination with Washington, and Iran's…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-10-26",
+   "id": "story-hormuz-tension",
+   "lead": "Hormuz tension",
+   "sec": "Top World Headlines",
+   "text": "On Friday Iran claimed four tankers were hit and three mined near the Strait of Hormuz, a claim the Associated Press could not verify and President Donald Trump called a stunt. Aramco evacuated staff from its Dhahran area. Trump is…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-10-26",
+   "id": "story-banque-du-caire-ipo",
+   "lead": "Banque du Caire IPO",
+   "sec": "Markets",
+   "text": "Price confirmation is due today, with trading expected around 2 November. The indicative range was EGP 4.82-5.30 a share, and Banque Misr has raised the sale to 45% from 30%, which at the top of the range implies about $680 million by…",
+   "topics": [
+    "bqdc"
+   ]
+  },
+  {
+   "ed": "2026-10-25",
+   "id": "story-us-posture-in-the-gulf",
+   "lead": "US posture in the Gulf",
+   "sec": "Top World Headlines",
+   "text": "Washington has ordered non-emergency personnel and all family members to leave Saudi Arabia. Reports also point to US preparations for possible strikes on Iran, with mines and tanker attacks reported near Hormuz. The risk is a wider…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-10-25",
+   "id": "story-the-pound",
+   "lead": "The pound",
+   "sec": "Egypt News",
+   "text": "The Central Bank of Egypt quoted the dollar at about EGP 52.4 at the start of October, roughly 9% weaker than before the Iran war began, and some market trackers showed further weakness in recent sessions. Reserves are a cushion: net…",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-10-25",
+   "id": "story-iran-s-threats",
+   "lead": "Iran's threats",
+   "sec": "Top World Headlines",
+   "text": "Two senior Iranian security officials told Reuters that Tehran has plans to target undersea internet cables in the Gulf if the US and Israel launch fresh attacks. Foreign Minister Abbas Araqchi blamed the US for tensions around the Strait…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-10-25",
+   "id": "story-imf-programme",
+   "lead": "IMF programme",
+   "sec": "Egypt News",
+   "text": "About $7.3 billion has been disbursed under the current IMF loans, and the 48-month programme ends in December 2026. The World Bank has raised its FY2025/26 growth estimate for Egypt to 5.1%, giving policymakers some room as negotiations…",
+   "topics": [
+    "imf"
+   ]
+  },
+  {
+   "ed": "2026-10-25",
+   "id": "story-hormuz",
+   "lead": "Hormuz",
+   "sec": "Regional and Gulf",
+   "text": "Reports of mines and tanker attacks near the strait keep insurance premiums high and shipping cautious, adding to freight costs across the region.",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-10-25",
+   "id": "story-gaza",
+   "lead": "Gaza",
+   "sec": "Top World Headlines",
+   "text": "Israeli strikes killed at least seven Palestinians this week, according to news roundups, keeping pressure on the ceasefire framework in which Egypt remains a central mediator.",
+   "topics": [
+    "gaza-lebanon"
+   ]
+  },
+  {
+   "ed": "2026-10-25",
+   "id": "story-banque-du-caire-ipo",
+   "lead": "Banque du Caire IPO",
+   "sec": "Markets",
+   "text": "The Financial Regulatory Authority approved the prospectus for a 30% stake worth up to about EGP 24.25 billion ($453 million), which can be upsized to 45% on demand. The EBRD and IFC have each agreed to take up to 15.74% of the enlarged…",
+   "topics": [
+    "bqdc"
+   ]
+  }
+ ]
+}

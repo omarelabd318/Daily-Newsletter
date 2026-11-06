@@ -194,6 +194,25 @@ closing or a LIVE price, the quote time and the source. Then:
   rate instead of the market mid-rate, when that is what the edition shows). It already holds closing
   prices only, including previous closes while the EGX is trading.
 
+## Running topics
+
+The site groups stories into running topics (Iran war and Hormuz, the pound and the central bank…): a label under
+each story, a Topics list and a page per topic with every story on it (`data/topics.json`, managed with
+`python3 .claude/skills/daily-newsletter/topics.py`).
+
+After writing the edition (and the recap, as `DATE-recap`):
+1. Run `topics.py tag DATE`. It tags each story whose lead-in names a topic, or whose text names it at least twice,
+   and prints the list. Read it: `topics.py remove DATE "Lead-in" TOPIC` for a wrong match, `topics.py add DATE
+   "Lead-in" TOPIC` for a story the keywords missed. Hand changes survive later re-tagging.
+2. For each topic the edition moved, rewrite its "Where it stands" with `topics.py now TOPIC "..."`: two or three
+   sentences on where the story stands today, figures checked, in the edition's voice and US English. The checker
+   warns when a topic the edition moved still has an older one.
+3. When a new story is likely to run for days (a war, a rate cycle, a listing, a scandal), start a topic:
+   `topics.py new id "Name" "keyword regex"`, then tag the recent editions it appeared in. Keep names plain and the
+   keywords specific (a company or place name, not a common word). Use `topics.py list` to see them all.
+4. Commit `data/topics.json` with the edition. The checker blocks publishing when the edition has stories that
+   match a topic but was never tagged.
+
 ## Research log
 
 Log the research as you do it, with `python3 .claude/skills/daily-newsletter/research_log.py DATE newsletter search "query"`

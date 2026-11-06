@@ -242,6 +242,31 @@ td.trend{vertical-align:middle}
 .desklink{color:inherit;text-decoration:none;border-bottom:1px dotted var(--ink2)} .desklink:hover{color:var(--accent);border-color:var(--accent)}
 .s-body .deskline{margin:-4px 0 24px;font:600 13px/1.4 var(--sans);letter-spacing:.02em}
 .s-body .deskline a{color:var(--accent)}
+/* running topics */
+#edition[hidden],#toc[hidden]{display:none!important}
+.grp-l{align-items:center;gap:18px!important}
+#topicsLink{font:600 12px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink);text-decoration:none;padding:0}
+#topicsLink:hover,#topicsLink[aria-current="page"]{color:var(--accent)}
+.topics{display:block;margin-top:6px}
+.topic{display:inline-flex;align-items:center;gap:6px;margin:4px 8px 0 0;padding:2px 10px;border:1px solid var(--rule);border-radius:999px;font:600 12px/1.6 var(--sans);color:var(--accent);text-decoration:none;background:var(--raised)}
+.topic:hover{text-decoration:none;border-color:var(--accent)} .topic .n{color:var(--ink2);font-weight:500}
+.tp .s-body{max-width:none}
+.tp-k{font:600 12px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0} .tp-k a{color:inherit}
+.s .tp-h,.tp-h{font:700 clamp(30px,4vw,40px)/1.15 var(--serif);margin:6px 0 6px;letter-spacing:-.01em;text-transform:none;color:var(--ink);border:0;padding:0;position:static}
+.tp-sub{font:400 16px var(--sans);color:var(--ink2);margin:0 0 20px}
+.tp-now{font:400 19px/1.55 var(--serif);background:var(--raised);padding:16px 20px;margin:0 0 24px!important;border-left:3px solid var(--accent);max-width:none!important}
+.tlist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 28px;font-family:var(--sans)}
+.tlist a{display:flex;justify-content:space-between;gap:12px;padding:12px 14px;border:1px solid var(--rule);color:var(--ink);text-decoration:none;font-size:15px;font-weight:600}
+.tlist a:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+.tlist a>span{color:var(--ink2);font-weight:500;font-size:13px;white-space:nowrap} .tlist .live{color:var(--up,#1d7a3a)}
+.tl{list-style:none;margin:0;padding:0!important;border-left:2px solid var(--rule)}
+.tl-i{display:grid;grid-template-columns:110px minmax(0,1fr);gap:4px 18px;padding:10px 0 14px 18px;position:relative;margin:0!important}
+.tl-i::before{content:"";position:absolute;left:-6px;top:18px;width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.tl-i::marker{content:none}
+.tl-d{font:600 13px var(--sans);color:var(--ink2);padding-top:4px}
+.tl-s{display:block;margin-top:4px;font:500 13px var(--sans);color:var(--ink2)} .tl-s a{color:var(--accent)}
+.tp-rel{font:500 14px var(--sans);color:var(--ink2);margin-top:20px!important} .tp-rel a{color:var(--accent);margin-right:14px;display:inline-block}
+@media (max-width:860px){.tlist{grid-template-columns:minmax(0,1fr)} .tl-i{grid-template-columns:minmax(0,1fr)} .grp-l{gap:12px!important}}
 /* Sources start folded */
 .srcs summary{cursor:pointer;font:600 13px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);padding:8px 0;list-style:none}
 .srcs summary::-webkit-details-marker{display:none}
@@ -258,7 +283,7 @@ td.trend{vertical-align:middle}
     <h1>Daily Newsletter</h1>
     <p class="what">A daily briefing on Egypt, World News, Markets, Sports and Culture.</p>
     <div class="top" id="top" hidden>
-      <button id="archiveBtn" type="button" aria-expanded="false" aria-controls="archive">Browse the archive</button>
+      <div class="grp grp-l"><button id="archiveBtn" type="button" aria-expanded="false" aria-controls="archive">Browse the archive</button><a id="topicsLink" href="#topics">Topics</a></div>
       <div class="grp"><span id="prev"></span><span id="next"></span></div>
     </div>
     <div id="archive"><input id="q" type="search" placeholder="Search all editions" aria-label="Search all editions" autocomplete="off"><div id="archList" role="list"></div><div id="results" role="list" hidden></div></div>
@@ -408,6 +433,9 @@ td.trend{vertical-align:middle}
 
   function show(){
     var date = (location.hash||'').replace('#','');
+    if(date === 'topics'){ showTopics(); return; }
+    if(date.indexOf('topic/') === 0){ showTopic(date.slice(6)); return; }
+    $('topicsLink').removeAttribute('aria-current');
     var idx = editions.findIndex(function(e){return key(e)===date});
     if(idx < 0) idx = editions.findIndex(function(e){return e.date===date});
     if(idx < 0) idx = 0;
@@ -463,6 +491,7 @@ td.trend{vertical-align:middle}
       pending = Array.prototype.slice.call(document.querySelectorAll('.rv'));
       addSparks(ed.date, /-recap$/.test(key(ed)));
       linkDesk();
+      topicChips(key(ed));
       markChanges();
       if(pendingStory && document.getElementById(pendingStory)) jumpTo(pendingStory); else window.scrollTo(0,0);
       pendingStory = null;
@@ -497,6 +526,79 @@ td.trend{vertical-align:middle}
     var cc = document.querySelector('#currency-and-commodities-watch .s-body');
     if(cc){ var q = document.createElement('p'); q.className = 'deskline'; q.innerHTML = '<a href="/desk/egp/">The pound on the Markets Desk →</a> · <a href="/desk/global/">Oil, gold and the dollar →</a>'; cc.appendChild(q); }
   }
+
+  // ---- running topics (data/topics.json): a label under each story that belongs to one, a Topics list, a page
+  // per topic with every story on it, newest first ----
+  var topicsP = null;
+  function getTopics(){ if(!topicsP) topicsP = fetch('data/topics.json', {cache:'no-cache'}).then(function(r){ return r.ok ? r.json() : {topics:[], stories:[]}; }).catch(function(){ return {topics:[], stories:[]}; }); return topicsP; }
+  function topicStats(T){
+    var st = {};
+    T.topics.forEach(function(t){ st[t.id] = {n:0, eds:{}, last:''}; });
+    T.stories.forEach(function(s){ (s.topics || []).forEach(function(id){ var x = st[id]; if(!x) return; x.n++; x.eds[s.ed.slice(0,10)] = 1; if(s.ed > x.last) x.last = s.ed; }); });
+    return st;
+  }
+  function edDate(k){ var d = new Date(k.slice(0,10) + 'T12:00:00'); return d.toLocaleDateString('en-US', {weekday:'short', month:'short', day:'numeric'}); }
+  function topicChips(edKey){
+    getTopics().then(function(T){
+      var st = topicStats(T), names = {};
+      T.topics.forEach(function(t){ names[t.id] = t.name; });
+      T.stories.forEach(function(s){
+        if(s.ed !== edKey || !(s.topics || []).length) return;
+        var el = document.getElementById(s.id);
+        if(!el || el.querySelector('.topic')) return;
+        var html = s.topics.filter(function(id){ return st[id] && st[id].n >= 2; }).map(function(id){
+          return '<a class="topic" href="#topic/' + id + '">' + esc(names[id]) + ' <span class="n">· ' + st[id].n + ' stories</span></a>'; }).join('');
+        if(html) el.insertAdjacentHTML('beforeend', '<span class="topics">' + html + '</span>');
+      });
+    });
+  }
+  function topicFrame(inner){
+    $('edition').hidden = true; $('toc').hidden = true;
+    $('archive').classList.remove('open'); $('archiveBtn').setAttribute('aria-expanded','false');
+    $('topicsLink').setAttribute('aria-current', 'page');
+    $('content').innerHTML = '<section class="s tp"><div class="frame"><div class="s-in"><div class="s-body">' + inner + '</div></div></div></section>';
+    window.scrollTo(0,0);
+  }
+  function showTopics(){
+    document.title = 'Topics · Daily Newsletter';
+    getTopics().then(function(T){
+      var st = topicStats(T), today = editions.length ? editions[0].date : '';
+      var list = T.topics.filter(function(t){ return st[t.id].n >= 3; }).sort(function(a, b){ return (st[b.id].last > st[a.id].last) - (st[b.id].last < st[a.id].last) || st[b.id].n - st[a.id].n; });
+      topicFrame('<p class="tp-k">Topics</p><h2 class="tp-h">Running stories</h2><p class="tp-sub">Every story the newsletter has run on each, newest first. Topics in the latest edition come first.</p><div class="tlist">'
+        + list.map(function(t){ var x = st[t.id], live = x.last.slice(0,10) === today;
+          return '<a href="#topic/' + t.id + '">' + esc(t.name) + '<span>' + (live ? '<span class="live">Today</span>' : esc(edDate(x.last))) + ' · ' + x.n + ' stories</span></a>'; }).join('') + '</div>');
+    });
+  }
+  function showTopic(id){
+    getTopics().then(function(T){
+      var t = T.topics.filter(function(x){ return x.id === id; })[0];
+      if(!t){ topicFrame('<p class="tp-sub">No such topic. <a href="#topics">All topics →</a></p>'); return; }
+      document.title = t.name + ' · Daily Newsletter';
+      var ss = T.stories.filter(function(s){ return (s.topics || []).indexOf(id) >= 0; }).sort(function(a, b){ return a.ed < b.ed ? 1 : a.ed > b.ed ? -1 : 0; });
+      var eds = {}; ss.forEach(function(s){ eds[s.ed.slice(0,10)] = 1; });
+      var first = ss.length ? ss[ss.length - 1].ed : '';
+      var rel = (t.related || []).map(function(r){ return '<a href="' + esc(r[1]) + '">' + esc(r[0]) + ' →</a>'; });
+      var items = ss.map(function(s){
+        var recap = /-recap$/.test(s.ed);
+        return '<li class="tl-i"><span class="tl-d">' + esc(edDate(s.ed)) + (recap ? '<br>Weekly Recap' : '') + '</span><div><b>' + esc(s.lead) + ':</b> ' + esc(s.text)
+          + '<span class="tl-s">' + esc(s.sec) + ' · <a href="#' + esc(s.ed) + '" data-story="' + esc(s.id) + '">Read in the edition →</a></span></div></li>'; }).join('');
+      var go = function(views){
+        var vrel = views.filter(function(v){ return ['open', 'on track'].indexOf(v.status) >= 0 && (t.drivers || []).indexOf(v.driver) >= 0; }).slice(0, 3)
+          .map(function(v){ return '<a href="/desk/views/">The desk\'s view: ' + esc(v.title) + ' →</a>'; });
+        var all = rel.concat(vrel);
+        topicFrame('<p class="tp-k"><a href="#topics">Topics</a></p><h2 class="tp-h">' + esc(t.name) + '</h2>'
+          + '<p class="tp-sub">' + ss.length + ' stories in ' + Object.keys(eds).length + ' editions' + (first ? ' · since ' + esc(edDate(first)) : '') + '</p>'
+          + (t.now ? '<p class="tp-now"><b>Where it stands' + (t.now_date ? ' (' + esc(edDate(t.now_date)) + ')' : '') + ':</b> ' + esc(t.now) + '</p>' : '')
+          + '<ol class="tl">' + items + '</ol>' + (all.length ? '<p class="tp-rel">Related: ' + all.join('') + '</p>' : ''));
+      };
+      fetch('desk/views.json', {cache:'no-cache'}).then(function(r){ return r.ok ? r.json() : {views:[]}; }).catch(function(){ return {views:[]}; }).then(function(V){ go(V.views || []); });
+    });
+  }
+  // a story link on a topic page opens its edition at that story
+  document.addEventListener('click', function(ev){
+    var a = ev.target.closest && ev.target.closest('.tl-s a[data-story]');
+    if(a) pendingStory = a.getAttribute('data-story');
+  });
   // light/dark switch, remembered on this device
   function syncThemeBtn(){
     var dark = document.documentElement.getAttribute('data-theme') === 'dark';
@@ -739,7 +841,7 @@ td.trend{vertical-align:middle}
   window.addEventListener('hashchange',function(){
     var h = (location.hash||'').replace('#','');
     if(!editions.length) return;
-    if(/^\d{4}-\d{2}-\d{2}(-[a-z0-9]+)?$/.test(h)) show();   // section links are plain in-page anchors
+    if(/^\d{4}-\d{2}-\d{2}(-[a-z0-9]+)?$/.test(h) || h === 'topics' || h.indexOf('topic/') === 0) show();   // section links are plain in-page anchors
   });
 
   fetch('editions/index.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(data){
@@ -751,7 +853,7 @@ td.trend{vertical-align:middle}
     $('top').hidden = false;
     // a refresh always opens the newest edition; a shared link to a dated edition still opens that one
     var nav = window.performance && performance.getEntriesByType ? performance.getEntriesByType('navigation')[0] : null;
-    if(nav && nav.type === 'reload' && location.hash) history.replaceState(null, '', location.pathname + location.search);
+    if(nav && nav.type === 'reload' && /^#\d{4}-/.test(location.hash)) history.replaceState(null, '', location.pathname + location.search);
     show();
   }).catch(function(){state('Could not load the newsletter','Please try again in a moment.')});
 })();

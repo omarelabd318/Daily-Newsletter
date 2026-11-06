@@ -368,6 +368,26 @@ def main(path):
     if "--no-links" not in sys.argv:
         check_links(text, errors, warnings)
 
+    # Running topics: the edition's stories tagged (topics.py tag), and each topic it moved given a fresh
+    # "where it stands"
+    key = os.path.basename(path)[:-3]
+    try:
+        import topics as TP
+        TD = TP.load()
+        mine = [x for x in TD.get("stories", []) if x["ed"] == key]
+        rx = {t["id"]: re.compile(t["match"], re.I) for t in TD.get("topics", []) if t.get("match")}
+        would = [st for st in TP.stories(key) if any(r.search(st["lead"]) or len(r.findall(st["text"])) >= 2 for r in rx.values())]
+        if would and not mine:
+            errors.append(f"Topics: {len(would)} stories match running topics but the edition is not tagged: run "
+                          f"topics.py tag {key}, review the list, and commit data/topics.json.")
+        elif not recap and m:
+            moved = {tid for x in mine for tid in x.get("topics", [])}
+            stale = [t["name"] for t in TD["topics"] if t["id"] in moved and (t.get("now_date") or "") < m.group(1)]
+            if stale:
+                warnings.append(f"Topics: 'where it stands' not updated today for {', '.join(stale)}: topics.py now TOPIC \"...\".")
+    except FileNotFoundError:
+        pass
+
     # Quick Hits carries a Number of the day (daily editions only).
     if not recap and not any(re.match(r"^\s*(?:[-*]\s+)?\*\*Number of the day:\*\*", l)
                              for l in sections.get("Quick Hits", {}).get("body", [])):
