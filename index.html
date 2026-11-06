@@ -227,13 +227,13 @@ td.trend{vertical-align:middle}
 @media (min-width:1100px){
   #widthBtn{display:block}
   :root[data-width="wide"] .frame{max-width:1320px}
-  :root[data-width="wide"] .s-body{column-count:2;column-gap:56px;column-rule:1px solid var(--rule)}
-  :root[data-width="wide"] .s-body > p,:root[data-width="wide"] .s-body > blockquote,:root[data-width="wide"] .s-body li{break-inside:avoid}
-  :root[data-width="wide"] .s-body > ol,:root[data-width="wide"] .s-body > ul{margin-top:0}
-  :root[data-width="wide"] .s-body > h3,:root[data-width="wide"] .s-body > .tablewrap,:root[data-width="wide"] .s-body > .pbar,
-  :root[data-width="wide"] .s-body > blockquote,:root[data-width="wide"] .s-body > .sp{column-span:all}
+  /* stories run in two columns inside each .run (the blocks between subheads and tables, grouped by the script);
+     nothing spans the columns, which Safari draws badly */
+  :root[data-width="wide"] .s-body .run{column-count:2;column-gap:56px;column-rule:1px solid var(--rule)}
+  :root[data-width="wide"] .run > p,:root[data-width="wide"] .run > blockquote,:root[data-width="wide"] .run li{break-inside:avoid}
+  :root[data-width="wide"] .run > blockquote.explain{margin-top:0}
+  :root[data-width="wide"] .run > ol,:root[data-width="wide"] .run > ul{margin-top:0}
   :root[data-width="wide"] .s-body > h3{margin-top:36px}
-  :root[data-width="wide"] .s.src .s-body{column-count:1}
   :root[data-width="wide"] .s.src .s-body ul{columns:3;column-gap:40px}
   :root[data-width="wide"] .edition .sum{max-width:60ch}
   :root[data-width="wide"] .toc{margin-inline:calc(var(--pad) * -1);gap:2px 12px;font-size:12px}
@@ -444,6 +444,15 @@ td.trend{vertical-align:middle}
       });
       // only each section's heading and opening block animate in; the rest of the text is always visible
       document.querySelectorAll('#content .s-body > *:first-child').forEach(function(el){el.classList.add('rv')});
+      // group each section's stories into runs between subheads and tables, for the wide page's two columns
+      document.querySelectorAll('#content section:not(.src) .s-body').forEach(function(body){
+        var run = null;
+        [].slice.call(body.children).forEach(function(el){
+          if(/^H[2-4]$/.test(el.tagName) || el.classList.contains('tablewrap') || el.classList.contains('pbar') || el.classList.contains('sp')){ run = null; return; }
+          if(!run){ run = document.createElement('div'); run.className = 'run'; body.insertBefore(run, el); }
+          run.appendChild(el);
+        });
+      });
       document.querySelectorAll('.mast > *').forEach(function(el){el.classList.add('rv')});
       pending = Array.prototype.slice.call(document.querySelectorAll('.rv'));
       addSparks(ed.date, /-recap$/.test(key(ed)));
