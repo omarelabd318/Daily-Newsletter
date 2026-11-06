@@ -2,7 +2,7 @@
 """Write data/markets.xlsx from data/markets.json: one sheet of headline figures, one per stock list.
 
 Usage: python3 .claude/skills/daily-newsletter/export_xlsx.py
-Needs openpyxl; if it is missing, says so and exits without failing the run.
+Needs openpyxl, which it installs with pip when it is missing; if that fails, it says so and exits without failing the run.
 """
 import json
 import os
@@ -21,13 +21,25 @@ HEADLINE = [("usd_egp", "USD/EGP"), ("eur_egp", "EUR/EGP"), ("sar_egp", "SAR/EGP
 
 
 def main():
-    try:
-        from openpyxl import Workbook
-        from openpyxl.styles import Font, PatternFill
-        from openpyxl.utils import get_column_letter
-    except ImportError:
-        print("openpyxl is not installed; skipped data/markets.xlsx")
-        return
+    # a fresh run's container may not have openpyxl: install it once (PyPI is reachable from the runs), then retry
+    for attempt in (1, 2):
+        try:
+            from openpyxl import Workbook
+            from openpyxl.styles import Font, PatternFill
+            from openpyxl.utils import get_column_letter
+            break
+        except ImportError:
+            if attempt == 2:
+                print("openpyxl could not be installed; skipped data/markets.xlsx")
+                return
+            import subprocess
+            r = subprocess.run([sys.executable, "-m", "pip", "install", "--quiet", "--disable-pip-version-check", "openpyxl"],
+                               capture_output=True, text=True)
+            if r.returncode:   # system Pythons can refuse a plain install
+                subprocess.run([sys.executable, "-m", "pip", "install", "--quiet", "--disable-pip-version-check",
+                                "--break-system-packages", "openpyxl"], capture_output=True, text=True)
+            import importlib
+            importlib.invalidate_caches()
     days = json.load(open(os.path.join(ROOT, "data", "markets.json"))).get("days", [])
     wb = Workbook()
     head_font, head_fill = Font(bold=True), PatternFill("solid", fgColor="F0EBE0")
