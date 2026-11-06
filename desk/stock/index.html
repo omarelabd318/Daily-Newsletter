@@ -22,7 +22,7 @@
 
   <div class="pages">
     <section class="card c8">
-      <div class="card-h"><div class="hgroup"><h2>Price</h2><div class="ctabs" id="curtog" aria-label="Currency" hidden></div></div><div class="seg" id="seg"></div></div>
+      <div class="card-h"><div class="hgroup"><h2>Price</h2><div class="ctabs" id="curtog" aria-label="Currency" hidden></div><button type="button" class="cmp" id="cmp" aria-pressed="false"></button></div><div class="seg" id="seg"></div></div>
       <div class="hero"><span class="lvl num" id="lvl"></span><span class="d num" id="dchg"></span><span class="meta" id="cur"></span></div>
       <div class="bigchart" id="chart"></div>
       <p class="chart-cap" id="cap"></p>
@@ -98,11 +98,25 @@ try {
   M.$('lvl').textContent = M.num(M.last(s)); M.$('dchg').innerHTML = `<span class="${M.cls(dc)}">${M.pct(dc, 2)}</span>`; M.$('cur').textContent = egx ? 'EGP' : 'USD';
   M.$('pdate').textContent = 'to ' + M.short(mAsOf);
   // the chart in the stock's currency or, for Egyptian stocks, in dollars; 3Y and 5Y load the full log
-  let sx = s, per = M.startPeriod(egx ? 'egx' : 'us', t), inUSD = false;
+  let sx = s, per = M.startPeriod(egx ? 'egx' : 'us', t), inUSD = false, cmp = false;
   const draw = async () => {
     if (!per[1]) { M.$('lvl').textContent = M.num(M.last(inUSD ? M.usd(sx) : sx)); M.$('cur').textContent = egx && !inUSD ? 'EGP' : 'USD'; M.$('dchg').innerHTML = M.heroChg(inUSD ? M.usd(sx) : sx, per); const c1 = M.dayChart(M.$('chart'), egx ? 'egx' : 'us', t, t, Charts.fmt.dec(2), egx && inUSD); const d1 = inUSD ? M.change(M.usd(sx), 0) : dc; M.$('cap').innerHTML = c1 ? `${c1} · on the day <span class="num ${M.cls(d1)}">${M.pct(d1, 2)}</span>` : ''; return; }
     if (per[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; sx = M.stock(t); idxAll = M.series((e) => e[egx ? 'egx30' : 'sp500'], egx ? 'egx' : 'us'); return draw(); }
     const v = inUSD ? M.usd(sx) : sx, vi = inUSD ? M.usd(idxAll) : idxAll, unit = inUSD ? ' in dollars' : '';
+    // against the index: both lines start at 100 on the period's first close, so the gap is the stock's lead or lag
+    if (cmp && per[1]) {
+      const back = Math.max(per[1], 7), pts = v.filter(([d]) => d >= M.cut(M.lastDate(v), back)), b0 = pts.length ? pts[0][1] : null, i0 = pts.length ? M.valueAt(vi, pts[0][0]) : null;
+      M.$('lvl').textContent = M.num(M.last(v)); M.$('dchg').innerHTML = M.heroChg(v, per); M.$('cur').textContent = egx && !inUSD ? 'EGP' : 'USD';
+      if (pts.length >= 2 && b0 && i0) {
+        const a = pts.map(([, x]) => x / b0 * 100), bb = pts.map(([d]) => (M.valueAt(vi, d) || i0) / i0 * 100), el = M.$('chart'); el.innerHTML = '';
+        const pad = (Math.max(...a, ...bb) - Math.min(...a, ...bb)) * 0.15 || 1;
+        const res = Charts.line(el, { ...M.axis(pts.map((x) => x[0]), back, el.clientWidth), series: [{ name: t, values: a }, { name: idxN, values: bb, muted: true }], format: Charts.fmt.dec(1), endLabel: true, height: el.clientHeight, marks: pts.length <= 12, min: Math.min(...a, ...bb) - pad, max: Math.max(...a, ...bb) + pad });
+        const ca = a.at(-1) - 100, cb = bb.at(-1) - 100;
+        M.$('cap').innerHTML = `Both start at 100 on ${M.short(pts[0][0])}${unit}: ${t} <span class="num ${M.cls(ca)}">${M.pct(ca, 1)}</span>, ${idxN} <span class="num ${M.cls(cb)}">${M.pct(cb, 1)}</span> · ${Math.abs(ca - cb) < 0.05 ? 'level with' : `${M.num(Math.abs(ca - cb), 1)} pts ${ca > cb ? 'ahead of' : 'behind'}`} the index`;
+        if (res && res.legend) M.$('cap').prepend(res.legend);
+      }
+      return;
+    }
     M.$('lvl').textContent = M.num(M.last(v)); M.$('dchg').innerHTML = M.heroChg(v, per); M.$('cur').textContent = egx && !inUSD ? 'EGP' : 'USD';
     const w1 = per[1] === 7 ? M.weekChart(M.$('chart'), egx ? 'egx' : 'us', t, t, Charts.fmt.dec(2), egx && inUSD) : null;
     if (w1) { M.$('lvl').textContent = M.num(M.last(v)); M.$('dchg').innerHTML = M.heroChg(v, per); M.$('cap').innerHTML = `${w1} · ${idxN} in a week <span class="num ${M.cls(M.change(vi, 7))}">${M.pct(M.change(vi, 7), 2)}</span>`; return; }
@@ -110,7 +124,10 @@ try {
     M.$('cap').innerHTML = `${per[2]}${unit}: <span class="num ${M.cls(c)}">${M.pct(c, 2)}</span> · ${idxN} <span class="num ${M.cls(ci)}">${M.pct(ci, 2)}</span>`;
   };
   if (egx) { M.$('curtog').hidden = false; M.toggle(M.$('curtog'), ['EGP', 'USD'], (i) => { inUSD = i === 1; draw(); perfCard(inUSD); }); }
-  M.segment(M.$('seg'), per[0], (q) => { per = q; draw(); }, M.PERIODS.concat(M.LONG)); draw();
+  // the compare switch: off on 1D (the index has no intraday line here), where it reads as unavailable
+  const cmpSync = () => { const b = M.$('cmp'); b.textContent = `vs ${idxN}`; b.disabled = !per[1]; b.title = per[1] ? `Draw ${idxN} beside the stock, both from 100` : 'Pick 1W or longer to compare'; b.setAttribute('aria-pressed', cmp && per[1] ? 'true' : 'false'); };
+  M.$('cmp').addEventListener('click', () => { cmp = !cmp; cmpSync(); draw(); });
+  M.segment(M.$('seg'), per[0], (q) => { per = q; cmpSync(); draw(); }, M.PERIODS.concat(M.LONG)); cmpSync(); draw();
   // the stock's move next to its index's over the same period, and the gap between them in percentage points;
   // in dollars (an Egyptian stock with USD picked) both the stock and the EGX30 are divided by each day's dollar rate
   const perfCard = (usd) => {
