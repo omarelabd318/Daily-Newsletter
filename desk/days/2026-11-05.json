@@ -726,8 +726,49 @@
     "headline": "A cheaper barrel and the wide real yield keep the dollar near 54–55.5 into the IMF review",
     "confidence": "medium",
     "body": "The central bank's rate fell to EGP 54.77 on Wednesday, a fifth straight easing and 2.3% below 30 October's EGP 56.04. With the one-year bill at 26.08% and September inflation at 13.9%, the real yield stays wide enough to pay foreign holders to stay; the PMI argues against early cuts.",
-    "moves": "CIB and brokers gain on inflows; importers such as Juhayna and Edita gain from a cheaper dollar; dollar earners such as Abu Qir and Orascom lose some translation gains.",
-    "wrong": "The dollar closes above EGP 56 before the end of November, or the auction's average yield falls rather than rises."
+    "wrong": "The dollar closes above EGP 56 before the end of November, or the auction's average yield falls rather than rises.",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "Banks & brokers",
+      "dir": "up"
+     },
+     {
+      "kind": "sector",
+      "name": "Importers",
+      "dir": "up"
+     },
+     {
+      "kind": "sector",
+      "name": "Exporters",
+      "dir": "down"
+     },
+     {
+      "kind": "stock",
+      "t": "COMI",
+      "dir": "up"
+     },
+     {
+      "kind": "stock",
+      "t": "JUFO",
+      "dir": "up"
+     },
+     {
+      "kind": "stock",
+      "t": "EFID",
+      "dir": "up"
+     },
+     {
+      "kind": "stock",
+      "t": "ABUK",
+      "dir": "down"
+     },
+     {
+      "kind": "market",
+      "name": "Pound",
+      "dir": "up"
+     }
+    ]
    },
    "news": [
     {

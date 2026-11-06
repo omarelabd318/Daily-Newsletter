@@ -140,6 +140,10 @@ def main(args):
             errors.append(f"pages.{page} is missing.")
             continue
         need(X, ["finding"], f"pages.{page}")
+        if page == "egp" and X.get("view"):
+            V = X["view"]
+            need(V, ["headline", "body", "affects", "wrong", "confidence"], "pages.egp view")
+            tags(V.get("affects"), "pages.egp view", f"{V.get('headline', '')} {V.get('body', '')}", 2, 8, True)
         news = X.get("news") or []
         if not news:
             warnings.append(f"pages.{page}: no news today. Fine if there was none; otherwise add the day's stories.")

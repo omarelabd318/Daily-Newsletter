@@ -38,7 +38,7 @@
       <div class="read" style="grid-template-columns:minmax(0,1fr)"><div>
         <h2 class="call" id="v-head"></h2>
         <p id="v-body"></p>
-        <dl><dt>Stocks it moves</dt><dd id="v-moves"></dd><dt>Wrong if</dt><dd id="v-wrong"></dd></dl>
+        <dl><dt>What it moves</dt><dd id="v-moves"></dd><dt>Wrong if</dt><dd id="v-wrong"></dd></dl>
       </div></div>
     </section>
 
@@ -187,7 +187,7 @@
   };
   M.segment(M.$('cseg'), '1D', drawT); drawT(M.PERIODS[0]);
   const V = P.view;
-  if (V) { M.$('c-view').hidden = false; M.$('v-head').textContent = V.headline; M.$('v-body').textContent = V.body; M.$('v-moves').textContent = V.moves; M.$('v-wrong').textContent = V.wrong; M.$('v-conf').textContent = 'Confidence: ' + V.confidence; }
+  if (V) { M.$('c-view').hidden = false; M.$('v-head').textContent = V.headline; M.$('v-body').textContent = V.body; if (Array.isArray(V.affects) && V.affects.length) M.$('v-moves').innerHTML = Tags.html(V.affects, { names: M.NAMES }); else M.$('v-moves').textContent = V.moves || ''; M.$('v-wrong').textContent = V.wrong; M.$('v-conf').textContent = 'Confidence: ' + V.confidence; }
   // Gold in Egypt: one chart, switched between 24K, 21K, 18K and the gold pound
   const G = [['gold24_egp', '24K', 'EGP per gram'], ['gold21_egp', '21K', 'EGP per gram, the most bought'], ['gold18_egp', '18K', 'EGP per gram'], ['goldpound_egp', 'Gold pound', 'EGP, 8 grams of 21K']];
   let gi = 0, gp = M.PERIODS[2];

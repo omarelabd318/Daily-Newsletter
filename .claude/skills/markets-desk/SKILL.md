@@ -168,6 +168,8 @@ call (below). On a quiet day fewer is right; never pad with a thin story to reac
 Stories and news items carry `affects`, a list of tags drawn as chips (desk/tags.js):
 `{"kind": "sector" | "stock" | "market", "name": "Banks", "dir": "up" | "down" | "mixed", "t": "COMI", "chg": 2.5}`.
 
+The EGP page's own view (`pages.egp.view`) carries `affects` the same way, in place of a `moves` sentence.
+
 - **Sector first**, then the stocks most exposed, then markets (`EGX30`, `Pound`, `Brent`, `T-bill yields`,
   `Rate-cut odds`). Two to eight tags on a story, one to four on a news item.
 - **Any stock, not only the desk's**: name the companies the story is about or most exposed to, with `t` for
