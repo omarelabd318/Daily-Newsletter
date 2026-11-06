@@ -1,5 +1,5 @@
 {
- "note": "Net equity flows on the EGX by investor group, EGP bn, one entry per session (the session's date, not the edition's). From the EGX's daily report as carried by Mubasher, EnterpriseAM, Youm7 or Arab Finance; confirmed is false until a second report matches.",
+ "note": "Net equity flows on the EGX by investor group, EGP bn, one entry per session (the session's date, not the edition's). From the EGX's daily report as carried by Mubasher, EnterpriseAM, Youm7 or Arab Finance; confirmed is false until a second report matches. Where only the totals by nationality were reported, rows are Egyptian, Arab and Foreign investors. A session dominated by a one-off deal carries \"oneoff\" (what the deal was): the foreign-investors chart leaves it out and says so.",
  "days": [
   {
    "date": "2026-10-29",
@@ -17,11 +17,53 @@
     "Masr Times",
     "Newsroom"
    ],
-   "turnover": 43.9
+   "turnover": 43.9,
+   "oneoff": "Banque du Caire's EGP 36.4bn offering"
+  },
+  {
+   "date": "2026-11-01",
+   "confirmed": true,
+   "rows": {
+    "Egyptian investors": 0.1302,
+    "Arab investors": -0.0896,
+    "Foreign investors": -0.0406
+   },
+   "sources": [
+    "Egypt Today",
+    "Masrawy"
+   ],
+   "turnover": 7.2
+  },
+  {
+   "date": "2026-11-02",
+   "confirmed": false,
+   "rows": {
+    "Egyptian investors": 0.0571,
+    "Arab investors": 0.081,
+    "Foreign investors": -0.1381
+   },
+   "sources": [
+    "Masrawy"
+   ]
+  },
+  {
+   "date": "2026-11-03",
+   "confirmed": true,
+   "rows": {
+    "Egyptian investors": -0.1285,
+    "Arab investors": -0.0014,
+    "Foreign investors": 0.13
+   },
+   "sources": [
+    "Masrawy",
+    "Amwal Al Ghad",
+    "Aleqaria"
+   ],
+   "turnover": 7.4
   },
   {
    "date": "2026-11-04",
-   "confirmed": false,
+   "confirmed": true,
    "rows": {
     "Egyptian institutions": -0.2478,
     "Egyptian individuals": -0.139,
@@ -31,7 +73,9 @@
     "Foreign individuals": -0.0022
    },
    "sources": [
-    "Youm7"
+    "Youm7",
+    "Masrawy",
+    "Aleqaria"
    ],
    "turnover": 9.0
   }

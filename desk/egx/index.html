@@ -155,9 +155,13 @@
     M.$('flows-note').hidden = !!F.confirmed; M.$('flows-note').textContent = F.confirmed ? '' : 'Not yet confirmed: ' + (F.source || 'one source only');
   }
   // foreign net buying by session, from desk/flows.json
-  const fd = ((FL && FL.days) || []).filter((d) => d.date <= M.ASOF).slice(-20);
+  const fsum = (d) => Object.entries(d.rows).filter(([k]) => /^foreign/i.test(k)).reduce((a, [, v]) => a + v, 0);
+  const fall = ((FL && FL.days) || []).filter((d) => d.date <= M.ASOF).slice(-20);
+  // a session dominated by a one-off deal would flatten every other bar, so it is left out and named under the chart
+  const fd = fall.filter((d) => !d.oneoff), skipped = fall.filter((d) => d.oneoff);
   const foreign = fd.map((d) => Object.entries(d.rows).filter(([k]) => /^foreign/i.test(k)).reduce((a, [, v]) => a + v, 0));
   if (fd.length >= 3) Charts.diverging(M.$('fhist'), { labels: fd.map((d) => M.short(d.date)), values: foreign, above: 'Bought', below: 'Sold', format: Charts.fmt.dec(2), height: 120 });
+  if (fd.length >= 3 && skipped.length) M.$('fhist').insertAdjacentHTML('afterend', `<p class="sub" style="margin-top:6px">Leaves out ${skipped.map((d) => `${M.short(d.date)} (${M.esc(d.oneoff)}: foreign investors ${fsum(d) > 0 ? '+' : '−'}${Math.abs(fsum(d)).toFixed(2)})`).join(', ')}.</p>`);
   else { M.$('fhist').style.height = 'auto'; M.$('fhist').innerHTML = `<p class="sub">${fd.length ? `Logged since ${M.short(fd[0].date)}: ` + fd.map((d, i) => `${M.short(d.date)} <span class="num ${M.cls(foreign[i])}">${foreign[i] > 0 ? '+' : ''}${foreign[i].toFixed(2)}</span>`).join(', ') + '. The chart appears after three sessions.' : 'No sessions logged yet.'}</p>`; }
 
   // the table in pounds or dollars, over 1D to 5Y (3Y and 5Y load the full log)
