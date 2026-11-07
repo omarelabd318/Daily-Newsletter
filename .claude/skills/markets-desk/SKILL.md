@@ -360,6 +360,25 @@ search "Reuters <company> <subject>" and use the Reuters story where there is on
 Finance)` with the Yahoo link; otherwise the company's own release or filing, then CNBC, the FT, Bloomberg, the WSJ
 or AP. Keep the rewrite sites as leads, not as the source a reader is sent to.
 
+**FactIQ (connector, when the run has it): use it wherever it holds the answer, not only for US companies.** It is a
+read-only data service of official statistics and filings. What it has that the desk can use:
+- **Shipping through Suez, Bab el-Mandeb and Hormuz:** daily transit calls and cargo tonnage by ship type (IMF PortWatch,
+  satellite AIS, `portwatch` schema, about two to three weeks behind). The hard figures for any story on Suez Canal
+  revenue, the Red Sea or the Iran war: compare the latest weeks with the same weeks a year earlier.
+- **Central banks and macro abroad:** Fed, Treasury, BLS and BEA figures (payrolls, CPI, PCE, GDP, yields), ECB and
+  Bank of England data, BIS policy rates, and what central bankers said (search_media_appearances: the Fed, ECB, BoE,
+  BoJ and others; not the Central Bank of Egypt).
+- **Companies:** filed results, segments and guidance (search_company_filings) and what management said on earnings
+  calls, with verbatim quotes (search_earnings_transcripts), for the desk's US stocks and any company a story turns on.
+- **Commodities and currencies:** Brent, gold, gas and FX (get_market_data), as a check on fetch_figures.py, and the
+  IMF's forecasts for Egypt and other countries (World Economic Outlook, yearly, marked as projections).
+It has nothing for Egypt's own markets or months: no EGX prices, no monthly Egyptian inflation, reserves or central-bank
+rates, no Central Bank of Egypt statements, and almost no Egyptian news; its dollar-pound rate is a market rate, not the
+central bank's. Those stay with the usual sources. Credit the underlying source (IMF PortWatch, the company's 10-Q, the
+BLS), not FactIQ, link the source URL it returns, and check a figure that moves a story against a second source as
+always. Log a FactIQ lookup as a page (`research_log.py DATE desk page factiq:<what>`). If the connector is missing or
+signed out, carry on without it.
+
 ## Wording
 
 US English throughout, as in the newsletter's skill: American spelling (fertilizer, favor, organize, percent) and
