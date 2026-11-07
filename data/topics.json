@@ -30,7 +30,7 @@
    "drivers": [
     "egp-rates"
    ],
-   "now": "The central bank's dollar selling rate ended the week of November 5 at EGP 54.01, the pound's strongest in at least a year after six straight gains. Annual inflation eased to 12.0% in October, the overnight deposit rate is 20% after the November 1 hike, and the biggest banks raise fixed-rate certificates to 18.75% from November 8. The Monetary Policy Committee next meets on December 17.",
+   "now": "The central bank's dollar selling rate ended the week at EGP 54.01 on November 5, a 3.8% recovery for the pound after six straight gains and its strongest level since about October 20. Annual inflation eased to 12.0% in October, the overnight deposit rate is 20% after the November 1 hike, and the biggest banks raise fixed-rate certificates to 18.75% from November 8. The Monetary Policy Committee next meets on December 17.",
    "now_date": "2026-11-07"
   },
   {
@@ -69,8 +69,8 @@
     ]
    ],
    "drivers": [],
-   "now": "Banque du Caire began trading on November 2 at its EGP 5.30 offer price and closed at EGP 5.38 on November 3 and EGP 5.50 on November 4. Retail buyers can sell their shares back at the offer price for 30 days.",
-   "now_date": "2026-11-06"
+   "now": "Banque du Caire began trading on November 2, closing its first session at EGP 5.31 against the EGP 5.30 offer price, and edged up to about EGP 5.58 by November 5. The Finance Ministry will take up to half of the EGP 36.37 billion raised to ease debt pressure.",
+   "now_date": "2026-11-07"
   },
   {
    "id": "gas-fertilizer",
@@ -89,8 +89,8 @@
    "drivers": [
     "gas-supply"
    ],
-   "now": "Gas supplies to fertilizer plants were cut by about 20% from November 1. Abu Qir and MOPCO fell for four sessions before Abu Qir rebounded 3.0% to EGP 80.00 on November 4; the cut remains in force.",
-   "now_date": "2026-11-06"
+   "now": "Gas supplies to fertilizer and methanol plants have been cut by about 20% since the start of November, and five of November's 15 LNG cargoes were deferred as each shipment topped $100 million. Abu Qir Fertilizers lost 8.0% and MOPCO 8.6% in the week to November 5; the cut remains in force.",
+   "now_date": "2026-11-07"
   },
   {
    "id": "imf",
@@ -103,8 +103,8 @@
     ]
    ],
    "drivers": [],
-   "now": "Egypt is in the eighth and final review of its IMF program, which ends on December 15; state asset sales, including Banque du Caire's listing, are among its requirements.",
-   "now_date": "2026-11-06"
+   "now": "The IMF mission on Egypt's eighth and final review aims to take it to the Fund's board before the program ends on December 15, with about $2.3 billion at stake. The government plans an Egypt Aluminum stake sale and has put off a freezone levy of up to 4% until after the review.",
+   "now_date": "2026-11-07"
   },
   {
    "id": "gaza-lebanon",
@@ -133,6 +133,118 @@
   }
  ],
  "stories": [
+  {
+   "ed": "2026-11-07-recap",
+   "id": "story-us-strikes-on-iran",
+   "lead": "US strikes on Iran",
+   "sec": "How It Played Out",
+   "text": "US media had reported that full-scale strikes could resume as soon as Wednesday, once the midterms were over. They did not: Washington carried out only limited strikes on Qeshm and kept talking through Qatar.",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-07-recap",
+   "id": "story-treasury-bills-after-the-hike",
+   "lead": "Treasury bills after the hike",
+   "sec": "How It Played Out",
+   "text": "The first auctions were expected to test demand at higher rates. The 273-day bill cleared at 26.36% on November 1, its highest since September 2025, but by Thursday the one-year yield had eased to 26.03% from 26.08% as foreign demand…",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-11-07-recap",
+   "id": "story-state-finances",
+   "lead": "State finances",
+   "sec": "Egypt This Week",
+   "text": "The government is preparing for the IMF's eighth and final review, which the Fund aims to take to its board before the program ends in mid-December, with about $2.3 billion at stake. The Finance Ministry will take up to half of the EGP…",
+   "topics": [
+    "imf"
+   ],
+   "added": [
+    "imf"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-07-recap",
+   "id": "story-pound-and-savings-rates",
+   "lead": "Pound and savings rates",
+   "sec": "Egypt This Week",
+   "text": "The pound regained ground every session after the hike took effect on November 1. The central bank's dollar selling rate fell from EGP 56.12 to EGP 54.01 by Thursday's close, its strongest level since about October 20, as foreign…",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-11-07-recap",
+   "id": "story-iran-and-hormuz",
+   "lead": "Iran and Hormuz",
+   "sec": "Region and World",
+   "text": "Talks to end the nine-month war made little headway. Iran offered to reopen the Strait of Hormuz over two days if the United States met seven demands, including lifting sanctions and its naval blockade, then called Washington's reply \"not…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-07-recap",
+   "id": "story-inflation-eases",
+   "lead": "Inflation eases",
+   "sec": "Egypt This Week",
+   "text": "Annual headline inflation across Egypt slowed to 12.0% in October from 12.8% in September, the statistics agency CAPMAS said on Thursday, with prices up 0.6% on the month against 1.5% in September. Food and drink rose 0.8% on the month,…",
+   "topics": [
+    "pound-cbe"
+   ],
+   "added": [
+    "pound-cbe"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-07-recap",
+   "id": "story-gas-rationing",
+   "lead": "Gas rationing",
+   "sec": "Egypt This Week",
+   "text": "Gas allocations to fertilizer and methanol plants have been cut by 20% since the start of November, and Kima told the EGX its supply had fallen by that amount while its urea plant kept running. The government also asked suppliers to defer…",
+   "topics": [
+    "gas-fertilizer"
+   ]
+  },
+  {
+   "ed": "2026-11-07-recap",
+   "id": "story-democrats-take-congress",
+   "lead": "Democrats take Congress",
+   "sec": "Region and World",
+   "text": "Democrats won the Senate and the House in Tuesday's midterms, with gains in North Carolina, Ohio, Texas, Maine and Iowa, and Michigan's Abdul El-Sayed, whose parents emigrated from Egypt, became the first Muslim senator-elect. Vice…",
+   "topics": [
+    "us-midterms"
+   ]
+  },
+  {
+   "ed": "2026-11-07-recap",
+   "id": "story-banque-du-caire-debut",
+   "lead": "Banque du Caire debut",
+   "sec": "How It Played Out",
+   "text": "After a public offering 27 times covered, a strong first day was expected; the shares closed Monday just 0.19% above the EGP 5.30 offer price at EGP 5.31, and edged up to about EGP 5.58 by Thursday, according to Investing.com data…",
+   "topics": [
+    "bqdc"
+   ]
+  },
+  {
+   "ed": "2026-11-07-recap",
+   "id": "story-ai-money-cools",
+   "lead": "AI money cools",
+   "sec": "Culture and Tech",
+   "text": "OpenAI has raised $11 billion of a round that could reach about $20 billion at a $1.25 trillion valuation, below earlier targets, TechCrunch reported, and its president Greg Brockman said the company could be ready to list in 2027. Canva…",
+   "topics": [
+    "ai-chips"
+   ],
+   "added": [
+    "ai-chips"
+   ],
+   "removed": []
+  },
   {
    "ed": "2026-11-07",
    "id": "story-treasury-bills-and-rates",
