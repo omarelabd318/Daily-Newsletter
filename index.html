@@ -95,6 +95,8 @@ td:first-child{font-weight:600}
 footer{background:var(--raised);padding:clamp(56px,8vw,104px) 0 clamp(40px,5vw,64px)}
 .s:last-of-type+footer{background:var(--ground)}
 footer .mark{font:700 clamp(44px,9vw,132px)/.95 var(--serif);letter-spacing:-.04em;overflow-wrap:break-word}
+footer .todesk{font:600 13px var(--sans);letter-spacing:.12em;text-transform:uppercase}
+footer .todesk a{color:var(--ink);text-decoration:none} footer .todesk a:hover{color:var(--accent)}
 footer p{margin:clamp(16px,2vw,24px) 0 0;max-width:60ch;text-wrap:balance;color:var(--ink2);font-size:18px;line-height:1.5}
 
 /* motion: content is visible unless the script has marked it to reveal */
@@ -312,6 +314,9 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
   body.listening footer{padding-bottom:160px}
 }
 @media (max-width:420px){.top a,.top .off,#archiveBtn{letter-spacing:.07em}}
+/* phones: the top bar's labels shorten so Archive, Topics, Desk and Older/Newer fit on one line */
+@media (max-width:600px){.top .lg{display:none} .grp-l{gap:12px!important}}
+@media (max-width:440px){.top .lg2{display:none}}
 @media (max-width:380px){.top a,.top .off,#archiveBtn{font-size:11px;letter-spacing:.04em} .top .grp{gap:0} .top{gap:4px}}
 @media print{#listenwrap,#player{display:none!important}}
 
@@ -321,8 +326,8 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 /* running topics */
 #edition[hidden],#toc[hidden]{display:none!important}
 .grp-l{align-items:center;gap:18px!important}
-#topicsLink{font:600 12px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink);text-decoration:none;padding:0}
-#topicsLink:hover,#topicsLink[aria-current="page"]{color:var(--accent)}
+#topicsLink,#deskLink{font:600 12px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink);text-decoration:none;padding:0}
+#topicsLink:hover,#topicsLink[aria-current="page"],#deskLink:hover{color:var(--accent)}
 .topics{display:block;margin-top:6px}
 .topic{display:inline-flex;align-items:center;gap:6px;margin:4px 8px 0 0;padding:2px 10px;border:1px solid var(--rule);border-radius:999px;font:600 12px/1.6 var(--sans);color:var(--accent);text-decoration:none;background:var(--raised)}
 .topic:hover{text-decoration:none;border-color:var(--accent)} .topic .n{color:var(--ink2);font-weight:500}
@@ -360,7 +365,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     <h1>Daily Newsletter</h1>
     <p class="what">A daily briefing on Egypt, World News, Markets, Sports and Culture.</p>
     <div class="top" id="top" hidden>
-      <div class="grp grp-l"><button id="archiveBtn" type="button" aria-expanded="false" aria-controls="archive">Browse the archive</button><a id="topicsLink" href="#topics">Topics</a></div>
+      <div class="grp grp-l"><button id="archiveBtn" type="button" aria-expanded="false" aria-controls="archive"><span class="lg">Browse the </span>archive</button><a id="topicsLink" href="#topics">Topics</a><a id="deskLink" href="/desk/" aria-label="Markets Desk"><span class="lg2">Markets </span>Desk</a></div>
       <div class="grp"><span id="prev"></span><span id="next"></span></div>
     </div>
     <div id="archive"><input id="q" type="search" placeholder="Search all editions" aria-label="Search all editions" autocomplete="off"><div id="archList" role="list"></div><div id="results" role="list" hidden></div></div>
@@ -376,6 +381,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
   <div class="frame">
     <div class="mark">Daily Newsletter</div>
     <p>A new edition every day, with the full archive kept here.</p>
+    <p class="todesk"><a href="/desk/">Markets Desk →</a></p>
   </div>
 </footer>
 <noscript><div class="frame"><p style="padding:24px 0">This newsletter needs JavaScript to load its editions.</p></div></noscript>
