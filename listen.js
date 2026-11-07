@@ -122,11 +122,14 @@
   if(HL) CSS.highlights.set('nl-word', HL);
   var wordAt = null;
   function markWord(b, d){
+    if(S && b) S.at = d;
     if(!HL) return;
     var dw = b ? domWords(b) : [], r = d != null && d >= 0 && dw[d] ? dw[d].r : null;
     if(r === wordAt) return;
-    HL.clear(); wordAt = r;
-    if(r) HL.add(r);
+    wordAt = r;
+    // a new Highlight each time, not the old one changed: Safari does not redraw a changed one until something else
+    // on the page moves, so the word looked stuck
+    if(r) CSS.highlights.set('nl-word', new Highlight(r)); else CSS.highlights.delete('nl-word');
   }
 
   // ---- voices on this device: English ones, the natural-sounding first; the novelty voices left out ----
@@ -381,8 +384,7 @@
 
   // ---- the space bar plays and pauses while the player is open (not while typing, or on a focused button,
   // which the space bar already presses) ----
-  // the arrow keys skip like the bar's buttons: left and right to the previous or next section, with Shift to the
-  // previous or next paragraph
+  // the arrow keys skip back or forward 10 seconds, and with Shift to the previous or next paragraph
   document.addEventListener('keydown', function(e){
     if(!S || e.ctrlKey || e.metaKey || e.altKey || !/^( |ArrowLeft|ArrowRight)$/.test(e.key)) return;
     var t = e.target;
@@ -391,8 +393,23 @@
     e.preventDefault();   // not the page scroll
     if(e.key === ' ') S.playing ? pause() : play();
     else if(e.shiftKey) jumpBlock(e.key === 'ArrowLeft' ? -1 : 1);
-    else jumpSection(e.key === 'ArrowLeft' ? -1 : 1);
+    else skip(e.key === 'ArrowLeft' ? -10 : 10);
   });
+  // 10 seconds of the recording; with the device voice, about as much text (it has no clock to seek)
+  function skip(secs){
+    if(S.mode === 'rec'){
+      var d = S.audio.duration || S.recVoice.duration || 0;
+      S.audio.currentTime = Math.max(0, Math.min(d ? d - 0.5 : Infinity, S.audio.currentTime + secs));
+      paint(); return;
+    }
+    var b = S.list[S.i], sw = spokenWords(b), wi = 0;
+    var cur = 0; if(S.at != null){ for(var k = 0; k < sw.length; k++) if(sw.map[k] >= S.at){ cur = sw[k].at; break; } }
+    var to = cur + secs * CPS * S.rate;
+    if(to < 0){ if(S.i > 0){ S.playing = true; speakFrom(S.i - 1); } else { S.playing = true; speakFrom(S.i); } return; }
+    if(to >= sw.text.length){ if(S.i + 1 < S.list.length){ S.playing = true; speakFrom(S.i + 1); } return; }
+    while(wi + 1 < sw.length && sw[wi + 1].at <= to) wi++;
+    S.playing = true; speakFrom(S.i, wi);
+  }
   function jumpBlock(dir){
     var i = Math.max(0, Math.min(S.list.length - 1, S.i + dir));
     if(i === S.i) return;

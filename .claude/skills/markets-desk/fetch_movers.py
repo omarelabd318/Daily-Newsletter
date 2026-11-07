@@ -73,13 +73,19 @@ def weekly(market):
         except Exception:
             pass
     rows = {"week": [], "month": []}
+    # TradingView lists a few EGX stocks only by their ISIN (EGS3I0S1C019): find the ticker on Mubasher by company name
+    namekey = lambda n: re.sub(r"[^a-z]", "", re.sub(r"\(.*?\)", "", n.lower()))[:24]
+    by_name = {namekey(n): c for c, n in names.items()}
     for r in json.loads(urllib.request.urlopen(req, timeout=40).read())["data"]:
         sym, name, close, wk, mo, vol, alltime = r["d"]
+        if market == "egx" and re.fullmatch(r"EG[A-Z0-9]{10}", sym or ""):
+            sym = by_name.get(namekey(name or ""), sym)
         name = names.get(sym, name)
         if not close or "/" in sym or "." in sym and market == "egx":
             continue
         if market == "egx" and (vol or 0) * close < MIN_TURNOVER_EGP:
             continue
+        name = re.sub(r"\s*\([A-Z0-9]{2,6}\)$", "", name)   # Mubasher's "(FCMI)" after a name
         name = re.sub(r"\s+Class [A-C]\b.*$", "", name)
         name = re.sub(r",?\s+(Inc\.?|Corp\.?|Corporation|Co\.?|plc|N\.V\.|S\.A\.E\.?|SAE|Ltd\.?|Company)$", "", name).strip(" ,.")
         for key, v in (("week", wk), ("month", mo)):
