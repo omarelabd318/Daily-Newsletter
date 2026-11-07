@@ -92,7 +92,7 @@
    "cap": {
     "value": 393.1,
     "currency": "EGP",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Mubasher"
    }
   },
@@ -109,7 +109,7 @@
    "cap": {
     "value": 171.5,
     "currency": "EGP",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Mubasher"
    },
    "valuation": {
@@ -179,7 +179,7 @@
    "cap": {
     "value": 102.2,
     "currency": "EGP",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Mubasher"
    },
    "valuation": {
@@ -225,7 +225,7 @@
    "cap": {
     "value": 34.1,
     "currency": "EGP",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Mubasher"
    },
    "valuation": {
@@ -269,9 +269,9 @@
     }
    ],
    "cap": {
-    "value": 690.5,
+    "value": 676.3,
     "currency": "USD",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Nasdaq"
    },
    "valuation": {
@@ -325,9 +325,9 @@
     }
    ],
    "cap": {
-    "value": 4127.5,
+    "value": 3993.1,
     "currency": "USD",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Nasdaq"
    },
    "valuation": {
@@ -387,9 +387,9 @@
     }
    ],
    "cap": {
-    "value": 3552.1,
+    "value": 3478.1,
     "currency": "USD",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Nasdaq"
    },
    "valuation": {
@@ -437,9 +437,9 @@
     }
    ],
    "cap": {
-    "value": 1553.7,
+    "value": 1396.0,
     "currency": "USD",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Nasdaq"
    },
    "valuation": {
@@ -481,7 +481,7 @@
    "cap": {
     "value": 219.4,
     "currency": "EGP",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Mubasher"
    },
    "valuation": {
@@ -519,7 +519,7 @@
    "cap": {
     "value": 248.6,
     "currency": "EGP",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Mubasher"
    },
    "valuation": {
@@ -565,7 +565,7 @@
    "cap": {
     "value": 89.3,
     "currency": "EGP",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Mubasher"
    },
    "valuation": {
@@ -629,7 +629,7 @@
    "cap": {
     "value": 59.1,
     "currency": "EGP",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Mubasher"
    },
    "valuation": {
@@ -667,7 +667,7 @@
    "cap": {
     "value": 34.7,
     "currency": "EGP",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Mubasher"
    },
    "valuation": {
@@ -731,7 +731,7 @@
    "cap": {
     "value": 19.7,
     "currency": "EGP",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Mubasher"
    },
    "valuation": {
@@ -769,7 +769,7 @@
    "cap": {
     "value": 22.4,
     "currency": "EGP",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Mubasher"
    },
    "valuation": {
@@ -807,7 +807,7 @@
    "cap": {
     "value": 98.3,
     "currency": "EGP",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Mubasher"
    },
    "valuation": {
@@ -851,9 +851,9 @@
   "AAPL": {
    "sector": "Hardware",
    "cap": {
-    "value": 5079.1,
+    "value": 5015.8,
     "currency": "USD",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Nasdaq"
    },
    "valuation": {
@@ -925,9 +925,9 @@
   "NVDA": {
    "sector": "Semiconductors",
    "cap": {
-    "value": 4823.1,
+    "value": 4393.2,
     "currency": "USD",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Nasdaq"
    },
    "valuation": {
@@ -981,9 +981,9 @@
   "AMZN": {
    "sector": "Retail and cloud",
    "cap": {
-    "value": 2876.6,
+    "value": 2819.3,
     "currency": "USD",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Nasdaq"
    },
    "valuation": {
@@ -1031,9 +1031,9 @@
   "META": {
    "sector": "Internet",
    "cap": {
-    "value": 1610.4,
+    "value": 1552.1,
     "currency": "USD",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Nasdaq"
    },
    "valuation": {
@@ -1081,9 +1081,9 @@
   "TSLA": {
    "sector": "Cars",
    "cap": {
-    "value": 1522.6,
+    "value": 1360.2,
     "currency": "USD",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Nasdaq"
    },
    "valuation": {
@@ -1131,9 +1131,9 @@
   "JPM": {
    "sector": "Banks",
    "cap": {
-    "value": 935.1,
+    "value": 896.1,
     "currency": "USD",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Nasdaq"
    },
    "valuation": {
@@ -1173,9 +1173,9 @@
   "BRK.B": {
    "sector": "Conglomerate",
    "cap": {
-    "value": 1277.7,
+    "value": 1262.7,
     "currency": "USD",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Nasdaq"
    },
    "valuation": {
@@ -1215,9 +1215,9 @@
   "WMT": {
    "sector": "Retail",
    "cap": {
-    "value": 1024.8,
+    "value": 1015.4,
     "currency": "USD",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Nasdaq"
    },
    "valuation": {
@@ -1259,7 +1259,7 @@
    "cap": {
     "value": 117.6,
     "currency": "EGP",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Mubasher"
    },
    "valuation": {
@@ -1305,7 +1305,7 @@
    "cap": {
     "value": 100.0,
     "currency": "EGP",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Mubasher"
    },
    "valuation": {
@@ -1343,7 +1343,7 @@
    "cap": {
     "value": 81.5,
     "currency": "EGP",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Mubasher"
    },
    "valuation": {
@@ -1389,7 +1389,7 @@
    "cap": {
     "value": 66.7,
     "currency": "EGP",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Mubasher"
    },
    "valuation": {
@@ -1472,16 +1472,16 @@
    "cap": {
     "value": 20.5,
     "currency": "EGP",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Mubasher"
    }
   },
   "V": {
    "sector": "Payments",
    "cap": {
-    "value": 780.0,
+    "value": 755.6,
     "currency": "USD",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Nasdaq"
    },
    "valuation": {
@@ -1529,9 +1529,9 @@
   "ORCL": {
    "sector": "Software and cloud",
    "cap": {
-    "value": 374.1,
+    "value": 348.3,
     "currency": "USD",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Nasdaq"
    },
    "valuation": {
@@ -1579,9 +1579,9 @@
   "COST": {
    "sector": "Retail",
    "cap": {
-    "value": 463.7,
+    "value": 472.1,
     "currency": "USD",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Nasdaq"
    },
    "valuation": {
@@ -1623,7 +1623,7 @@
    "cap": {
     "value": 132.4,
     "currency": "EGP",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Mubasher"
    },
    "valuation": {
@@ -1681,7 +1681,7 @@
    "cap": {
     "value": 17.1,
     "currency": "EGP",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Mubasher"
    },
    "valuation": {
@@ -1719,7 +1719,7 @@
    "cap": {
     "value": 13.6,
     "currency": "EGP",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Mubasher"
    },
    "valuation": {
@@ -1757,7 +1757,7 @@
    "cap": {
     "value": 26.3,
     "currency": "EGP",
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "source": "Mubasher"
    },
    "valuation": {

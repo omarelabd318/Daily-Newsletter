@@ -162,6 +162,20 @@
       if (figs.length) $('close-rows').insertAdjacentHTML('beforeend', `<div class="strip-g"><h3>The pound<a class="strip-more" href="/desk/egp/">EGP page →</a></h3><div class="strip-row">${figs.join('')}</div></div>`);
     }
 
+    // USA: a row for the VIX and the 2-, 10- and 30-year Treasury yields (desk/rates.json, from Cboe and the US
+    // Treasury), at the desk's US session with their change on the day, between the indices and the global markets
+    if (key === 'global') {
+      const RT = ((await get('/desk/rates.json')) || {}).series || {}, at = asOf('us');
+      const pair = (s) => { const i = (s || []).filter(([d]) => d <= at).length - 1; return i >= 0 ? [s[i][1], i ? s[i - 1][1] : null] : [null, null]; };
+      const fig = (k, v, d) => `<div class="fig"><span class="k">${k}</span><span class="v num">${v}</span><span class="d num">${d}</span></div>`;
+      const bp = (v, p) => { if (p == null) return '<span class="dash">—</span>'; const b = Math.round((v - p) * 100); return `<span class="${cls(b)}">${b > 0 ? '+' : b < 0 ? MINUS : ''}${Math.abs(b)} bp</span>`; };
+      const out = [], [vx, vp] = pair(RT.vix);
+      if (vx != null) { const c = vp ? (vx / vp - 1) * 100 : null; out.push(fig('VIX (volatility)', vx.toFixed(2), c == null ? '<span class="dash">—</span>' : `<span class="${cls(c)}">${pct(c, 1)}</span>`)); }
+      for (const [k, lab] of [['us2y', '2-year Treasury'], ['us10y', '10-year Treasury'], ['us30y', '30-year Treasury']]) { const [v, p] = pair(RT[k]); if (v != null) out.push(fig(lab, v.toFixed(2) + '%', bp(v, p))); }
+      const row = [...document.querySelectorAll('#close-rows .strip-g')].find((g) => /^USA/.test(g.querySelector('h3').textContent));
+      if (out.length && row) row.insertAdjacentHTML('afterend', `<div class="strip-g"><h3>Volatility and yields</h3><div class="strip-row">${out.join('')}</div></div>`);
+    }
+
     // the day's stories: the top call in full, then up to four more as compact cards ("Also today"), each tap-to-open.
     // "What it moves" is the story's tags (sector first, then the stocks most exposed and the markets it touches);
     // older days carry a sentence instead, shown as it is

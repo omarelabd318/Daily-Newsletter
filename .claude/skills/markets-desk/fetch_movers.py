@@ -62,7 +62,7 @@ def weekly(market):
     if market == "us":
         flt += [{"left": "market_cap_basic", "operation": "greater", "right": MIN_CAP_USD},
                 {"left": "exchange", "operation": "in_range", "right": ["NYSE", "NASDAQ", "AMEX"]}]   # not over-the-counter shares
-    body = json.dumps({"filter": flt, "columns": ["name", "description", "close", "Perf.W", "Perf.1M", "average_volume_10d_calc"],
+    body = json.dumps({"filter": flt, "columns": ["name", "description", "close", "Perf.W", "Perf.1M", "average_volume_10d_calc", "Perf.All"],
                        "range": [0, 3000]}).encode()
     req = urllib.request.Request(f"https://scanner.tradingview.com/{'egypt' if market == 'egx' else 'america'}/scan",
                                  data=body, headers={"User-Agent": UA, "Content-Type": "application/json"})
@@ -74,7 +74,7 @@ def weekly(market):
             pass
     rows = {"week": [], "month": []}
     for r in json.loads(urllib.request.urlopen(req, timeout=40).read())["data"]:
-        sym, name, close, wk, mo, vol = r["d"]
+        sym, name, close, wk, mo, vol, alltime = r["d"]
         name = names.get(sym, name)
         if not close or "/" in sym or "." in sym and market == "egx":
             continue
@@ -83,6 +83,11 @@ def weekly(market):
         name = re.sub(r"\s+Class [A-C]\b.*$", "", name)
         name = re.sub(r",?\s+(Inc\.?|Corp\.?|Corporation|Co\.?|plc|N\.V\.|S\.A\.E\.?|SAE|Ltd\.?|Company)$", "", name).strip(" ,.")
         for key, v in (("week", wk), ("month", mo)):
+            # a stock listed within the period has no price before it: TradingView then measures the change from an
+            # old reference price (Banque du Caire's EGP 4.00 par against its 5.30 offer), the same figure as its
+            # all-time change, so it is left off that list
+            if v is not None and alltime is not None and abs(v - alltime) < 0.01:
+                continue
             if v is not None:
                 rows[key].append({"t": sym, "name": name, "price": close, "pct": round(v, 2)})
     out = {}
