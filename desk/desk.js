@@ -148,8 +148,9 @@ window.Desk = (function () {
   }
   function weekChart(el, market, key, name, fmt, inUSD = false) {
     const W = INTRA && INTRA.week && INTRA.week[market];
-    const ss = (W || []).filter((x) => x.session <= asOfFor(market) && x.series[key] && x.series[key].length > 1 && (!inUSD || rateOn(x.session)));
-    if (ss.length < 2) return null;
+    const all = (W || []).filter((x) => x.session <= asOfFor(market)), ss = all.filter((x) => x.series[key] && x.series[key].length > 1 && (!inUSD || rateOn(x.session)));
+    // only a week that runs to the latest session: one missing at the end would stop the line a day short (daily closes instead)
+    if (ss.length < 2 || ss.at(-1) !== all.at(-1)) return null;
     const labels = [], vals = [], text = [], at = [];
     ss.forEach((x) => { const d = day(x.session), dl = `${WD[d.getDay()]} ${d.getDate()}`, r = inUSD ? rateOn(x.session) : 1; at.push(labels.length);
       x.series[key].forEach(([t, v]) => { labels.push(`${dl} ${t}`); vals.push(v / r); text.push(dl); }); });
@@ -161,7 +162,10 @@ window.Desk = (function () {
     return `Last ${ss.length} sessions through the day${inUSD ? ', in dollars at each day\'s rate' : ''}: <span class="num ${cls(ch)}">${pct(ch, 2)}</span> from the first trade`;
   }
   function dayChart(el, market, key, name, fmt, inUSD = false) {
-    const M_ = INTRA && INTRA[market], I0 = M_ && M_.series && M_.series[key]; el.innerHTML = '';
+    const M_ = INTRA && INTRA[market]; el.innerHTML = '';
+    // the session's 5-minute line, or else the same session's 15-minute line from the week, where only that was saved
+    const wk = !M_ || M_.window ? null : ((INTRA.week || {})[market] || []).find((x) => x.session === M_.session);
+    const I0 = (M_ && M_.series && M_.series[key]) || (wk && wk.series[key] && wk.series[key].length > 1 ? wk.series[key] : null);
     const r = inUSD && M_ ? rateOn(M_.session) : 1, I = I0 && r ? I0.map(([t, v]) => [t, v / r]) : I0;
     if (!I) { el.innerHTML = `<p class="sub" style="padding:24px 0">No one-day data for ${esc(name)}: ${/^(sp500|dow|brent|gold_usd|dxy)$/.test(key) ? 'not saved for the last session.' : 'not saved for the last session.'}</p>`; return null; }
     const vals = I.map((x) => x[1]), lo = Math.min(...vals), hi = Math.max(...vals), pad = (hi - lo) * 0.15 || lo * 0.002;

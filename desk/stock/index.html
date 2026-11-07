@@ -98,13 +98,18 @@ try {
   M.$('lvl').textContent = M.num(M.last(s)); M.$('dchg').innerHTML = `<span class="${M.cls(dc)}">${M.pct(dc, 2)}</span>`; M.$('cur').textContent = egx ? 'EGP' : 'USD';
   M.$('pdate').textContent = 'to ' + M.short(mAsOf);
   // the chart in the stock's currency or, for Egyptian stocks, in dollars; 3Y and 5Y load the full log
-  const dayPair = () => { const E = M.INTRA && M.INTRA.egx, S = E && E.series; return egx && S && S[t] && S.EGX30 ? [S[t], S.EGX30, E.session] : null; };
+  // the index's line through the day, for the compare switch: the EGX30 for Egyptian stocks, the S&P 500 for US ones
+  const IK = egx ? 'EGX30' : 'sp500', MK = egx ? 'egx' : 'us';
+  const dayPair = () => { const E = M.INTRA && M.INTRA[MK], S = E && E.series; return S && S[t] && S[IK] && E.session <= M.asOfFor(MK) ? [S[t], S[IK], E.session] : null; };
+  // the week, every 15 minutes, the sessions that have both lines (as the 1W chart draws the stock alone)
+  const weekPair = () => { const W = M.INTRA && M.INTRA.week && M.INTRA.week[MK]; const ss = (W || []).filter((x) => x.session <= M.asOfFor(MK) && x.series[t] && x.series[t].length > 1 && x.series[IK] && x.series[IK].length > 1); const all = (W || []).filter((x) => x.session <= M.asOfFor(MK)); return ss.length >= 2 && ss.at(-1) === all.at(-1) ? ss : null; };
+  const atTime = (X, tm) => { let v = null; for (const [u, x] of X) { if (u <= tm) v = x; else break; } return v; };
   let sx = s, per = M.startPeriod(egx ? 'egx' : 'us', t), inUSD = false, cmp = false;
   const draw = async () => {
     // 1D against the EGX30: the session's five-minute prices, both from 100 at the first trade
     const dp = !per[1] && cmp ? dayPair() : null;
     if (dp) {
-      const [S, X, ses] = dp, xAt = (tm) => { let v = null; for (const [u, x] of X) { if (u <= tm) v = x; else break; } return v; };
+      const [S, X, ses] = dp, xAt = (tm) => atTime(X, tm);
       const pts = S.filter(([tm]) => xAt(tm) != null), b0 = pts.length ? pts[0][1] : null, i0 = pts.length ? xAt(pts[0][0]) : null;
       M.$('lvl').textContent = M.num(M.last(inUSD ? M.usd(sx) : sx)); M.$('cur').textContent = egx && !inUSD ? 'EGP' : 'USD'; M.$('dchg').innerHTML = M.heroChg(inUSD ? M.usd(sx) : sx, per);
       if (pts.length >= 2 && b0 && i0) {
@@ -121,6 +126,22 @@ try {
     if (per[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; sx = M.stock(t); idxAll = M.series((e) => e[egx ? 'egx30' : 'sp500'], egx ? 'egx' : 'us'); return draw(); }
     const v = inUSD ? M.usd(sx) : sx, vi = inUSD ? M.usd(idxAll) : idxAll, unit = inUSD ? ' in dollars' : '';
     // against the index: both lines start at 100 on the period's first close, so the gap is the stock's lead or lag
+    const wp = cmp && per[1] === 7 && !inUSD ? weekPair() : null;
+    if (wp) {
+      const WD = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], labels = [], a0 = [], b0 = [], text = [], at = [];
+      wp.forEach((x) => { const d = M.day(x.session), dl = `${WD[d.getDay()]} ${d.getDate()}`; at.push(labels.length);
+        x.series[t].forEach(([tm, v]) => { const iv = atTime(x.series[IK], tm); if (iv == null) return; labels.push(`${dl} ${tm}`); a0.push(v); b0.push(iv); text.push(dl); }); });
+      M.$('lvl').textContent = M.num(M.last(sx)); M.$('dchg').innerHTML = M.heroChg(sx, per); M.$('cur').textContent = egx ? 'EGP' : 'USD';
+      if (a0.length >= 2) {
+        const a = a0.map((x) => x / a0[0] * 100), bb = b0.map((x) => x / b0[0] * 100), el = M.$('chart'); el.innerHTML = '';
+        const pad = (Math.max(...a, ...bb) - Math.min(...a, ...bb)) * 0.15 || 0.2;
+        const res = Charts.line(el, { labels, xAt: el.clientWidth < 520 && at.length > 3 ? at.filter((_, j) => (at.length - 1 - j) % 2 === 0) : at, xText: text, series: [{ name: t, values: a }, { name: idxN, values: bb, muted: true }], format: Charts.fmt.dec(1), endLabel: true, height: el.clientHeight, min: Math.min(...a, ...bb) - pad, max: Math.max(...a, ...bb) + pad });
+        const ca = a.at(-1) - 100, cb = bb.at(-1) - 100;
+        M.$('cap').innerHTML = `Last ${wp.length} sessions through the day, both from 100 at the first trade: ${t} <span class="num ${M.cls(ca)}">${M.pct(ca, 1)}</span>, ${idxN} <span class="num ${M.cls(cb)}">${M.pct(cb, 1)}</span> · ${Math.abs(ca - cb) < 0.05 ? 'level with' : `${M.num(Math.abs(ca - cb), 1)} pts ${ca > cb ? 'ahead of' : 'behind'}`} the index`;
+        if (res && res.legend) M.$('cap').prepend(res.legend);
+        return;
+      }
+    }
     if (cmp && per[1]) {
       const back = Math.max(per[1], 7), pts = v.filter(([d]) => d >= M.cut(M.lastDate(v), back)), b0 = pts.length ? pts[0][1] : null, i0 = pts.length ? M.valueAt(vi, pts[0][0]) : null;
       M.$('lvl').textContent = M.num(M.last(v)); M.$('dchg').innerHTML = M.heroChg(v, per); M.$('cur').textContent = egx && !inUSD ? 'EGP' : 'USD';
@@ -141,8 +162,8 @@ try {
     M.$('cap').innerHTML = `${per[2]}${unit}: <span class="num ${M.cls(c)}">${M.pct(c, 2)}</span> · ${idxN} <span class="num ${M.cls(ci)}">${M.pct(ci, 2)}</span>`;
   };
   if (egx) { M.$('curtog').hidden = false; M.toggle(M.$('curtog'), ['EGP', 'USD'], (i) => { inUSD = i === 1; draw(); perfCard(inUSD); }); }
-  // the compare switch: on 1D it needs the session's line for both the stock and the index (Egyptian stocks and the EGX30)
-  const cmpSync = () => { const b = M.$('cmp'), ok = !!per[1] || !!dayPair(); b.textContent = `vs ${idxN}`; b.disabled = !ok; b.title = ok ? `Draw ${idxN} beside the stock, both from 100` : 'No one-day line for this stock: pick 1W or longer to compare'; b.setAttribute('aria-pressed', cmp && ok ? 'true' : 'false'); };
+  // the compare switch: on 1D it needs the session's line for both the stock and its index
+  const cmpSync = () => { const b = M.$('cmp'), ok = !!per[1] || !!dayPair(); b.textContent = `vs ${idxN}`; b.disabled = !ok; b.title = ok ? `Draw ${idxN} beside the stock, both from 100` : `No one-day line for ${idxN} saved for the last session: pick 1W or longer to compare`; b.setAttribute('aria-pressed', cmp && ok ? 'true' : 'false'); };
   M.$('cmp').addEventListener('click', () => { cmp = !cmp; cmpSync(); draw(); });
   M.segment(M.$('seg'), per[0], (q) => { per = q; cmpSync(); draw(); }, M.PERIODS.concat(M.LONG)); cmpSync(); draw();
   // the stock's move next to its index's over the same period, and the gap between them in percentage points;

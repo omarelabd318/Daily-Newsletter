@@ -11,7 +11,9 @@ Nasdaq Composite and the 12 US stocks from Nasdaq (New York time, regular sessio
 days it answers (it often refuses cloud requests). When it refuses, the S&P 500 and the Dow are drawn from
 the funds that track them on Nasdaq (SPY, DIA), scaled so the line ends at the index's logged close; the
 file names the fund under "proxy". Brent, gold and the dollar index are simply left out on other days. A market whose fetch fails, or whose feed still shows an unfinished
-session, keeps the session already saved. Prints one line per market; it takes about a minute.
+session, keeps the session already saved. A stock the feed refuses is asked for again one at a time, then taken from
+Yahoo; a stock missing from a saved US session is filled from Yahoo's last five sessions. Prints one line per market;
+it takes about a minute.
 """
 import datetime
 import json
@@ -153,10 +155,35 @@ def global_market():
     return {"window": "24h", "to": to.strftime("%Y-%m-%d %H:%M"), "series": series}, f"GLOBAL: last 24 hours to {to:%a %H:%M} Cairo, {', '.join(series)}"
 
 
+def yahoo_sessions(key):
+    """A US stock's last five regular sessions from Yahoo, every 5 minutes, New York time: {day: [[hm, v], ...]}.
+    The fallback when Nasdaq refuses a stock, and the source that fills a stock missing from a saved session."""
+    url = f"https://query2.finance.yahoo.com/v8/finance/chart/{urllib.parse.quote(key.replace('.', '-'))}?range=5d&interval=5m"
+    r = json.loads(get(url))["chart"]["result"][0]
+    days = {}
+    for t, c in zip(r["timestamp"], r["indicators"]["quote"][0]["close"]):
+        if c is None:
+            continue
+        n = datetime.datetime.fromtimestamp(t, datetime.timezone.utc).astimezone(NY)
+        if "09:30" <= n.strftime("%H:%M") <= "16:00":
+            days.setdefault(n.date().isoformat(), []).append((n.strftime("%H:%M"), float(c)))
+    return {d: every5(v) for d, v in days.items()}
+
+
 def market(name, keys, fn, done):
     with ThreadPoolExecutor(6) as pool:
         res = dict(zip(keys, pool.map(lambda k: _try(fn, k), keys)))
+    # a feed that refuses some requests under load: ask again one at a time for what is missing
+    for k in [k for k in keys if not res.get(k)]:
+        res[k] = _try(fn, k)
     ok = {k: v for k, v in res.items() if v}
+    # US stocks Nasdaq still refused: Yahoo's copy of the same session
+    if name == "US" and ok:
+        day0 = max(v[0] for v in ok.values())
+        for k in [k for k in keys if k in US and not res.get(k)]:
+            y = _try(yahoo_sessions, k)
+            if y and day0 in y:
+                ok[k] = (day0, y[day0])
     if not ok:
         return None, f"{name}: nothing fetched"
     day = max(v[0] for v in ok.values())
@@ -198,6 +225,16 @@ def main():
         keep = [x for x in week.get(name, []) if x["session"] != latest["session"]]
         keep.append({"session": latest["session"], "series": {k: every15(v) for k, v in latest["series"].items()}})
         week[name] = sorted(keep, key=lambda x: x["session"])[-5:]
+    # a stock missing from a saved US session (a fetch that failed that day) is filled from Yahoo's last five sessions
+    holes = sorted({k for x in week.get("us", []) for k in US if k not in x["series"]})
+    for k in holes:
+        y = _try(yahoo_sessions, k)
+        for x in week.get("us", []):
+            if k not in x["series"] and y and len(y.get(x["session"], [])) >= 6:
+                x["series"][k] = every15(y[x["session"]])
+    filled = [k for k in holes if all(k in x["series"] for x in week.get("us", []))]
+    if holes:
+        print(f"US week: filled {', '.join(filled) or 'nothing'} from Yahoo" + (f"; still missing {', '.join(sorted(set(holes) - set(filled)))}" if set(holes) - set(filled) else ""))
     out["week"] = week
     data, line = global_market()
     if data:
