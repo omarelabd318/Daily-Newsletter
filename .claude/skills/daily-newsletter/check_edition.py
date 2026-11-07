@@ -500,8 +500,13 @@ def main(path):
                                 "'(used for N items)' to this line.")
     # Any other outlet: more than about six links means the world and regional news lean on one site.
     hosts = {}
-    for _, u in re.findall(r"\[([^\]]*)\]\((https?://[^)\s]+)\)", src):
+    for label, u in re.findall(r"\[([^\]]*)\]\((https?://[^)\s]+)\)", src):
         h = re.sub(r"^(www|en|english|m)\.", "", re.match(r"https?://([^/]+)", u).group(1).lower())
+        # a wire story on Yahoo ("Reuters (via Yahoo Finance)") counts as the agency's
+        if "yahoo." in h:
+            wire = re.search(r"\b(Reuters|AP|Associated Press|AFP)\b", label)
+            if wire:
+                h = {"Reuters": "reuters.com", "AFP": "afp.com"}.get(wire.group(1), "apnews.com")
         if not re.search(r"enterpriseam\.com|cairoscene\.com", h):
             hosts[h] = hosts.get(h, 0) + 1
     for h, n in sorted(hosts.items(), key=lambda x: -x[1]):

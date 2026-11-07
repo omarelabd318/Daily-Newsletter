@@ -249,6 +249,15 @@ was not made. End the final reply with the line `research_log.py DATE newsletter
   closest to the news, rather than defaulting to one site, and check it against a second. Al Jazeera is a
   credible source for the region, but its own editorial line on Gulf and regional politics is one more reason
   to pair it with another outlet. The checker warns when one outlet passes six links.
+- **Reuters via Yahoo Finance:** Yahoo Finance (finance.yahoo.com, and yahoo.com/news) republishes Reuters wire
+  stories in full and free to read, marked "Reuters" at the top. It is Reuters' own reporting, word for word, so it
+  is as reliable as Reuters itself: one of the most dependable sources there is for markets, economies, companies
+  and world news. Use it freely, above all when reuters.com asks for a login or will not open. Credit Reuters in the
+  text ("according to Reuters") and in Sources write `Reuters (via Yahoo Finance)` with the Yahoo link. It counts as
+  Reuters, not Yahoo, for the six-links rule. The same goes for other wire stories Yahoo carries (AP, AFP): credit
+  the agency. Yahoo's own articles and its contributor or partner pieces (Motley Fool, Zacks, Investopedia and the
+  like) are not wire reporting: treat those as the outlet that wrote them. Summary services such as Finimize, which
+  rewrite Reuters or Bloomberg stories, are leads only: find and cite the original.
 - **Variety by adding, not dropping:** go through the whole EnterpriseAM edition (on weekdays) and
   CairoScene, and consider every item. Variety comes from adding strong stories from other outlets
   alongside them, never from leaving out a good EnterpriseAM or CairoScene story to balance the count.
