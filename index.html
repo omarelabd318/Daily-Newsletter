@@ -368,7 +368,11 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     pending = pending.filter(function(el){
       if(el.getBoundingClientRect().top < vh*0.96){
         el.style.setProperty('--d', Math.min(n,5)*70+'ms'); n++;
-        el.classList.add('in'); return false;
+        el.classList.add('in');
+        // once it has faded in, it goes back to plain text: Safari keeps an animated block on a layer of its own,
+        // where the Listen word highlight does not redraw
+        setTimeout(function(){ el.classList.remove('rv', 'in'); el.style.removeProperty('--d'); }, Math.min(n, 5) * 70 + 800);
+        return false;
       }
       return true;
     });
