@@ -57,6 +57,13 @@
      "source": "The National",
      "url": "https://www.thenationalnews.com/business/markets/2026/11/06/nasdaq-plunges-5-as-investors-dump-ai-stocks-after-midterms/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-07",
+     "text": "Nvidia rose 2.8% to $186.64 as chips bounced after Thursday's rout, still 8.8% below the $204.64 start; Microsoft's retreat from rented AI capacity and Microchip's 10% fall on guidance keep the pressure on the sector.",
+     "source": "Yahoo Finance",
+     "url": "https://finance.yahoo.com/markets/live/stock-market-today-friday-november-6-dow-sp-500-nasdaq-jobs-report-earnings-135953863.html",
+     "effect": "neutral"
     }
    ],
    "wrongIf": [
@@ -148,6 +155,13 @@
      "source": "Osoul Misr",
      "url": "https://www.osoulmisrmagazine.com/451878",
      "effect": "against"
+    },
+    {
+     "date": "2026-11-07",
+     "text": "On the week Talaat Moustafa rose 3.54% and Palm Hills 4.47%, ahead of the EGX30's 3.1% (Youm7); fixed certificates at 18.75% from Sunday add competition for savings.",
+     "source": "Youm7",
+     "url": "https://www.youm7.com/story/2026/11/7/%D8%B3%D8%A8%D8%A7%D9%82-%D8%A7%D9%84%D9%85%D9%84%D9%8A%D8%A7%D8%B1%D8%A7%D8%AA-%D8%A8%D8%A7%D9%84%D8%A8%D9%88%D8%B1%D8%B5%D8%A9-10-%D8%A3%D8%B3%D9%87%D9%85-%D8%AA%D8%AD%D8%AA%D9%83%D8%B1-15-5-%D9%85%D9%84%D9%8A%D8%A7%D8%B1-%D8%AC%D9%86%D9%8A%D9%87/7608592",
+     "effect": "against"
     }
    ],
    "driver": "egp-rates"
@@ -228,6 +242,20 @@
      "source": "The National",
      "url": "https://www.thenationalnews.com/business/markets/2026/11/06/nasdaq-plunges-5-as-investors-dump-ai-stocks-after-midterms/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-07",
+     "text": "Walmart fell 1.7% to $125.52 as money rotated back into rebounding tech, with no company news (Investing.com); Alphabet rose 0.8%. A reminder that the rotation reverses on tech bounces.",
+     "source": "Investing.com",
+     "url": "https://www.investing.com/news/stock-market-news/why-is-walmart-stock-sliding-today-93CH-5008687",
+     "effect": "against"
+    },
+    {
+     "date": "2026-11-07",
+     "text": "Costco's October sales rose 12.6% and comparable sales 11.1%, while Microsoft is ending a 2023 AI capacity deal with Oracle: steady earners keep delivering as AI spenders retrench.",
+     "source": "Zacks (via TradingView)",
+     "url": "https://www.tradingview.com/news/zacks:593161f8a094b:0-costco-s-october-net-sales-jump-1",
+     "effect": "supports"
     }
    ],
    "driver": "ai-spending"
@@ -288,6 +316,13 @@
      "text": "Central bank dollar rate fell for a sixth session to EGP 54.01; CIB rose to EGP 128.00.",
      "source": "Central Bank of Egypt",
      "url": "https://www.cbe.org.eg/en/economic-research/statistics/cbe-exchange-rates",
+     "effect": "supports"
+    },
+    {
+     "date": "2026-11-07",
+     "text": "CIB rose 6.25% on the week to EGP 128.00 on EGP 2.47bn of trading (Youm7), and October inflation eased to 12.0% against a 20% deposit rate, widening the real yield banks earn.",
+     "source": "Youm7",
+     "url": "https://www.youm7.com/story/2026/11/7/%D8%B3%D8%A8%D8%A7%D9%82-%D8%A7%D9%84%D9%85%D9%84%D9%8A%D8%A7%D8%B1%D8%A7%D8%AA-%D8%A8%D8%A7%D9%84%D8%A8%D9%88%D8%B1%D8%B5%D8%A9-10-%D8%A3%D8%B3%D9%87%D9%85-%D8%AA%D8%AD%D8%AA%D9%83%D8%B1-15-5-%D9%85%D9%84%D9%8A%D8%A7%D8%B1-%D8%AC%D9%86%D9%8A%D9%87/7608592",
      "effect": "supports"
     }
    ],
@@ -366,7 +401,15 @@
     "COMI"
    ],
    "status": "on track",
-   "updates": [],
+   "updates": [
+    {
+     "date": "2026-11-07",
+     "text": "Wall Street steadied on Friday (Nasdaq +1.09%) after Thursday's 4.4% S&P 500 fall, easing the risk-off threat to Sunday's reopening; the EGX30 ended the week at 51,152.73, up 3.1%.",
+     "source": "Yahoo Finance",
+     "url": "https://finance.yahoo.com/markets/live/stock-market-today-friday-november-6-dow-sp-500-nasdaq-jobs-report-earnings-135953863.html",
+     "effect": "supports"
+    }
+   ],
    "wrongIf": [
     {
      "key": "egx30",
@@ -401,6 +444,20 @@
      "source": "Central Bank of Egypt",
      "url": "https://www.cbe.org.eg/en/economic-research/statistics/cbe-exchange-rates",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-07",
+     "text": "Inflation eased to 12.0% in October from 12.8%, widening the real yield on the 26.03% one-year bill to about 14 points.",
+     "source": "Amwal Al Ghad",
+     "url": "https://en.amwalalghad.com/urgent-egypts-annual-inflation-eases-to-12-in-october-2026-capmas/",
+     "effect": "supports"
+    },
+    {
+     "date": "2026-11-07",
+     "text": "A strong US jobs report lifted the dollar index 0.7% to 102.28, near its 52-week high, and December Fed hike odds to about 77–80%, a headwind for emerging-market currencies.",
+     "source": "Pound Sterling Live",
+     "url": "https://www.poundsterlinglive.com/usd/23852-pound-to-dollar-rate-us-payrolls-fed-december-hike",
+     "effect": "against"
     }
    ],
    "wrongIf": [
@@ -439,6 +496,13 @@
      "source": "Al Jazeera",
      "url": "https://www.aljazeera.com/news/2026/11/6/why-is-iran-exempting-india-china-qatar-iraq-from-hormuz-restrictions",
      "effect": "neutral"
+    },
+    {
+     "date": "2026-11-07",
+     "text": "The US struck Iranian air defenses on Qeshm island and a third carrier heads for the region, raising the risk of renewed war; Brent held at $98.32.",
+     "source": "Al Jazeera",
+     "url": "https://www.aljazeera.com/news/2026/11/7/trump-confirms-new-us-strikes-on-irans-qeshm-island",
+     "effect": "against"
     }
    ],
    "wrongIf": [

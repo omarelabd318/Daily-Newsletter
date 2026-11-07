@@ -1,0 +1,1208 @@
+{
+ "date": "2026-11-07",
+ "asOf": "2026-11-06",
+ "fetched": "Sat, Nov 7, 13:20 Cairo",
+ "egypt": {
+  "finding": "Egypt's annual inflation eased to 12.0% in October from 12.8%, widening the gap to the central bank's 20% deposit rate and the 26.03% one-year bill to about 14 points, as the dollar ended the week at EGP 54.01 after six straight falls; the EGX30 closed Thursday at 51,152.73, up 3.1% on the week, and reopens Sunday after a calmer Friday on Wall Street but a firmer dollar.",
+  "next": "Next session: Sunday, November 8, with the 91- and 273-day bill auction and new 18.75% fixed certificates at NBE and Banque Misr; US consumer prices on Tuesday.",
+  "close": {
+   "title": "Thursday's close",
+   "groups": [
+    {
+     "name": "Egypt",
+     "rows": [
+      {
+       "label": "EGX30",
+       "value": "51,152.73",
+       "change": 0.99,
+       "lead": true
+      },
+      {
+       "label": "EGX70 EWI",
+       "value": "17,567.20",
+       "change": 2.42
+      },
+      {
+       "label": "USD/EGP (central bank, sell)",
+       "value": "54.01",
+       "change": -1.38
+      },
+      {
+       "label": "Gold 24K, per gram",
+       "value": "7,095",
+       "change": -0.84
+      }
+     ]
+    },
+    {
+     "name": "Global",
+     "rows": [
+      {
+       "label": "Brent, $ per barrel (front month)",
+       "value": "98.32",
+       "change": 0.03
+      },
+      {
+       "label": "Gold, $ per ounce",
+       "value": "4,074.90",
+       "change": -0.94
+      },
+      {
+       "label": "Dollar index",
+       "value": "102.28",
+       "change": 0.7
+      },
+      {
+       "label": "Bitcoin, $",
+       "value": "76,036",
+       "change": -0.02
+      }
+     ]
+    }
+   ],
+   "note": "The Egyptian Exchange is closed Friday and Saturday, so the EGX30, EGX70 and the central bank's rate are Thursday's closes, as checked for the newsletter (Mubasher, Masrawy, Youm7; the central bank's own page). Gold 24K is Saturday's retail price (Gold Price Today Egypt, Youm7). The Global rows are Friday's closes; Brent is the front month, checked against FactIQ's futures data ($98.41)."
+  },
+  "board": {
+   "horizon": "EGX sectors · next 1–4 weeks",
+   "helped": [
+    {
+     "name": "Banks: CIB, Banque du Caire",
+     "why": "October inflation of 12.0% against a 20% deposit rate and 26.03% one-year bills widens the real yield to about 14 points; CIB rose 6.3% on the week to EGP 128.00 on EGP 2.47bn of trading, and Banque du Caire 5.3% to EGP 5.58, the week's most traded stock (Youm7). CIB reports on Wednesday.",
+     "confidence": "medium"
+    },
+    {
+     "name": "Telecom Egypt",
+     "why": "Up 7.0% on the week to EGP 128.55 and 95.5% this year; it signed a digital-services agreement covering the Suez Canal Economic Zone's industrial zones and ports (no value disclosed) and reports on Thursday. Much is priced in at nearly double January's level.",
+     "confidence": "low"
+    },
+    {
+     "name": "Egypt Aluminium",
+     "why": "Its CEO told Youm7 profit was about EGP 15.4bn on EGP 53bn of revenue last fiscal year, with exports of about $650m aiming for $1bn; the EGP 16 cash dividend is a near-term support, though a firmer pound trims the pound value of exports.",
+     "confidence": "low"
+    }
+   ],
+   "hurt": [
+    {
+     "name": "Fertilizers: Abu Qir, Mopco",
+     "why": "Gas to fertilizer plants is still cut, with Mopco and KIMA reporting 20% less and Abu Qir reorganizing production from November 1 (Egypt Oil & Gas); Abu Qir is at EGP 80.98, below its October 30 price.",
+     "confidence": "medium"
+    },
+    {
+     "name": "Developers: Talaat Moustafa, Palm Hills",
+     "why": "NBE and Banque Misr lift fixed certificates to 18.75% from Sunday, a strong pull on savings that might buy property; Talaat Moustafa (EGP 83.25) and Palm Hills (EGP 11.91) rose 3.5% and 4.5% on the week but stay below their 50-day averages of about EGP 88.6 and 12.9.",
+     "confidence": "low"
+    }
+   ]
+  },
+  "stocksNote": "<b>No trading since Thursday, when 11 of the 12 Egyptian stocks rose.</b> On the week (Youm7): Telecom Egypt +7.0%, CIB +6.3%, Palm Hills +4.5% and Talaat Moustafa +3.5%, while Orascom Construction fell 1.5%. Outside the 12, Banque du Caire rose 5.3% to EGP 5.58 on EGP 3.49bn of trading and Alexandria Mineral Oils fell 5.2%. Juhayna's new prices take effect Sunday, a day before its results.",
+  "week": [
+   {
+    "day": "Sun, Nov 8",
+    "event": "EGX reopens; 91- and 273-day bill auction; new fixed certificate rates",
+    "impact": "high",
+    "why": "The first session since Friday's US jobs surprise and dollar rally; the auction shows whether yields hold near 26% after inflation fell to 12%."
+   },
+   {
+    "day": "Mon, Nov 9",
+    "event": "Juhayna third-quarter results (expected)",
+    "impact": "medium",
+    "why": "Shows whether volumes held through price rises; new prices of 4–11% on key dairy lines start the day before."
+   },
+   {
+    "day": "Tue, Nov 10",
+    "event": "US October consumer prices (3:30pm Cairo)",
+    "impact": "high",
+    "why": "With December Fed hike odds near 77–80%, a hot number lifts the dollar and tests foreign appetite for Egyptian debt."
+   },
+   {
+    "day": "Wed, Nov 11",
+    "event": "CIB third-quarter results (expected)",
+    "impact": "high",
+    "why": "The EGX30's biggest weight; the first read on margins after the 100 basis point hike."
+   },
+   {
+    "day": "Thu, Nov 12",
+    "event": "Telecom Egypt results (expected); 182- and 364-day bills",
+    "impact": "medium",
+    "why": "Tests a stock up 95.5% this year; the one-year bill cleared at 26.03% last week."
+   },
+   {
+    "day": "Thu, Dec 17",
+    "event": "Central bank Monetary Policy Committee",
+    "impact": "high",
+    "why": "Inflation at 12% and a 20% deposit rate leave room to hold; a cut would be early with the Fed leaning to a hike."
+   }
+  ],
+  "views": [
+   {
+    "call": "The pound stays firmer than EGP 56 per dollar into the IMF review",
+    "status": "on track",
+    "note": "From Nov 5: USD/EGP 54.77. On Thursday: central bank sell rate 54.01, a sixth easing; October inflation fell to 12.0%, widening the real yield, while a stronger dollar abroad is the headwind. Wrong if the dollar closes above EGP 56; judged November 26."
+   },
+   {
+    "call": "Higher rates protect CIB's margins",
+    "status": "on track",
+    "note": "From Oct 30: CIB EGP 120.47, EGX30 49,596. On Thursday: CIB EGP 128.00 (+6.3%) against the EGX30's 51,152.73 (+3.1%), ahead of the index; results on Wednesday. Judged November 13."
+   },
+   {
+    "call": "The EGX30 holds above 49,255 while foreign institutions keep buying",
+    "status": "on track",
+    "note": "From Nov 5: 50,650.18. Thursday's close 51,152.73 with foreign institutions net buyers of about EGP 0.22bn; Sunday is the first session after Friday's calmer Wall Street. Wrong if it closes below 49,255.66; judged November 12."
+   },
+   {
+    "call": "Developers lag while rates stay high",
+    "status": "open",
+    "note": "From Oct 30: Talaat Moustafa EGP 80.40, Palm Hills EGP 11.40, EGX30 49,596. Now EGP 83.25 (+3.5%) and EGP 11.91 (+4.5%) against the EGX30's +3.1%: both slightly ahead, against the call. Judged November 27."
+   }
+  ],
+  "calls": [
+   {
+    "headline": "Inflation eases to 12% as Egypt's real yield widens to about 14 points",
+    "body": "Annual headline inflation slowed to 12.0% in October from 12.8%, with prices up 0.6% on the month, CAPMAS said (Amwal Al Ghad); urban inflation, the central bank's target measure, was reported at 12.7% from 13.9% (Rio Times, not yet confirmed by the central bank). The overnight deposit rate is 20% after November's 100 basis point rise, and Thursday's 364-day bill cleared at 26.03%. National Bank of Egypt and Banque Misr raise their main fixed certificates by a point to 18.75% from Sunday (Youm7). The central bank's dollar rate ended the week at EGP 54.01, a sixth straight fall and 3.8% lower in November.",
+    "view": "Falling inflation under unchanged rates is the best case for the carry trade: foreign holders of bills now earn about 14 points over inflation, which supports the pound toward EGP 53–54.5 and keeps December 17 a likely hold. Banks gain most: high asset yields and still-cheap current accounts, with CIB's results on Wednesday the test. Banks lifting fixed rates shows they expect rates to stay high for a while.",
+    "wrong": "The dollar closes above EGP 56 before the end of November, or Sunday's and Thursday's auctions clear well below last week's yields as foreign demand fades.",
+    "confidence": "medium",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "Banks",
+      "dir": "up"
+     },
+     {
+      "kind": "stock",
+      "t": "COMI",
+      "dir": "up"
+     },
+     {
+      "kind": "stock",
+      "t": "BQDC",
+      "dir": "up"
+     },
+     {
+      "kind": "sector",
+      "name": "Importers",
+      "dir": "up"
+     },
+     {
+      "kind": "market",
+      "name": "Pound",
+      "dir": "up"
+     },
+     {
+      "kind": "market",
+      "name": "T-bill yields",
+      "dir": "mixed"
+     },
+     {
+      "kind": "market",
+      "name": "EGX30",
+      "dir": "up"
+     }
+    ]
+   },
+   {
+    "headline": "Wall Street steadies, but a hot US jobs report lifts the dollar",
+    "line": "Sunday's reopening faces a calmer Nasdaq but a dollar near its 52-week high and rising Fed hike odds.",
+    "body": "The Nasdaq rose 1.09% and the S&P 500 0.31% on Friday after Thursday's 4.4% fall, though the S&P 500 still lost 2.7% on the week. US employers added 165,000 jobs in October against forecasts near 65,000–70,000 and unemployment fell to 4.1% (BLS). The dollar index rose 0.7% to 102.28, within 0.3% of its 52-week high, and the 10-year Treasury yield to 4.86%. Traders priced about a 77–80% chance of a Fed hike on December 9, per CME FedWatch as reported by The Rio Times and Coinpaper.",
+    "view": "Thursday's risk-off fear, the reason foreign money might sell Egyptian stocks on Sunday, eased on Friday; the new pressure is US rates. A 25 basis point Fed hike barely dents a 26% bill, so the pound's carry holds, but a stronger dollar slows the flows that lifted the pound six sessions running. Expect a flat-to-firm open led by banks.",
+    "wrong": "Foreign investors are net sellers on Sunday and the EGX30 closes below 50,500.",
+    "confidence": "low",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "Banks & brokers",
+      "dir": "mixed"
+     },
+     {
+      "kind": "stock",
+      "t": "COMI",
+      "dir": "mixed"
+     },
+     {
+      "kind": "stock",
+      "t": "HRHO",
+      "dir": "mixed"
+     },
+     {
+      "kind": "market",
+      "name": "EGX30",
+      "dir": "mixed"
+     },
+     {
+      "kind": "market",
+      "name": "Pound",
+      "dir": "mixed"
+     },
+     {
+      "kind": "market",
+      "name": "Rate-cut odds",
+      "dir": "down"
+     }
+    ]
+   },
+   {
+    "headline": "Banque du Caire's EGP 36bn sale tops the EGX's weekly turnover",
+    "line": "The state's 45% offering cleared 27 times on retail demand and trades above its price, a good sign for the next listings.",
+    "body": "The sale of 45% of Banque du Caire, raised from 30% on investor demand, brought in EGP 36bn; the institutional tranche was covered 7 times and the retail tranche 27 times, said Hisham El Sayed, who runs the cabinet's state-owned companies unit (Osoul Misr). The bank was the most traded stock of the week at EGP 3.49bn and closed at EGP 5.58, up 5.3% on the week and 5.3% above the EGP 5.30 offer price; CIB came second at EGP 2.47bn (Youm7). The EBRD, the IFC and foreign investment banks took part.",
+    "view": "A sale this size absorbed without draining the market, and trading above its price, strengthens the case for more state listings that the IMF program requires, and adds fees and trading for brokers. The stock's 30-day buy-back at the offer price for retail buyers limits the downside for now.",
+    "wrong": "Banque du Caire closes below EGP 5.10, about 4% under the offer price.",
+    "confidence": "medium",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "Banks",
+      "dir": "up"
+     },
+     {
+      "kind": "stock",
+      "t": "BQDC",
+      "dir": "up"
+     },
+     {
+      "kind": "stock",
+      "t": "HRHO",
+      "dir": "up"
+     },
+     {
+      "kind": "sector",
+      "name": "Brokers",
+      "dir": "up"
+     },
+     {
+      "kind": "market",
+      "name": "EGX30",
+      "dir": "up"
+     }
+    ]
+   },
+   {
+    "headline": "Juhayna raises dairy prices by up to 11% before Monday's results",
+    "line": "Price rises protect margins as costs climb; Monday's results show whether volumes held.",
+    "body": "From Sunday, Juhayna's 1 kg Bekhayro laban rises to EGP 44 from EGP 42.5 (+3.5%), its 200 ml Mix drink to EGP 15 from EGP 13.5 (+11.1%) and 200 ml Juhayna laban to EGP 15 from EGP 14 (+7.1%), citing production and operating costs (Masrawy, Al Khabar Live). Dairy and egg prices rose 2.5% in October (CAPMAS). Juhayna slipped 0.5% to EGP 23.83 on Thursday and is up 17.9% this year; its results for the quarter to September are expected Monday.",
+    "view": "Raising prices while overall inflation slows to 12% means real price gains, which supports margins; the risk is volume, after the pound's October slide squeezed household budgets. The results matter more than the price list.",
+    "wrong": "Juhayna closes below EGP 21.50, about 10% under Thursday, after its results.",
+    "confidence": "low",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "Food",
+      "dir": "mixed"
+     },
+     {
+      "kind": "stock",
+      "t": "JUFO",
+      "dir": "up"
+     },
+     {
+      "kind": "stock",
+      "t": "EFID",
+      "dir": "mixed"
+     }
+    ]
+   }
+  ]
+ },
+ "global": {
+  "finding": "The Nasdaq rose 1.09% to 24,579.42 and the S&P 500 0.31% to 7,376.86 on Friday as chips bounced (Nvidia +2.8%), while the Dow fell 0.46%; the S&P 500 still lost 2.7% on the week, its worst since June. Payrolls rose 165,000 in October against forecasts near 65,000–70,000, lifting the 10-year yield to 4.86%, the dollar index 0.7% to 102.28 and December Fed hike odds to about 77–80%.",
+  "next": "Next session: Monday, November 9; October consumer prices on Tuesday at 3:30pm Cairo, Nvidia's results on November 17.",
+  "close": {
+   "title": "Friday's close",
+   "groups": [
+    {
+     "name": "USA",
+     "rows": [
+      {
+       "label": "S&P 500",
+       "value": "7,376.86",
+       "change": 0.31,
+       "lead": true
+      },
+      {
+       "label": "Nasdaq",
+       "value": "24,579.42",
+       "change": 1.09
+      },
+      {
+       "label": "Dow Jones",
+       "value": "51,285.73",
+       "change": -0.46
+      }
+     ]
+    },
+    {
+     "name": "Global",
+     "rows": [
+      {
+       "label": "Brent, $ per barrel (front month)",
+       "value": "98.32",
+       "change": 0.03
+      },
+      {
+       "label": "Gold, $ per ounce",
+       "value": "4,074.90",
+       "change": -0.94
+      },
+      {
+       "label": "Dollar index",
+       "value": "102.28",
+       "change": 0.7
+      },
+      {
+       "label": "Bitcoin, $",
+       "value": "76,036",
+       "change": -0.02
+      }
+     ]
+    }
+   ],
+   "note": "The S&P 500, Nasdaq and Dow agree with the newsletter's checked figures (Yahoo Finance, CNBC). Brent is the front month, checked against FactIQ's futures data. The dollar index's 0.7% gain agrees with Tokenpost's report of its biggest one-day rise since June."
+  },
+  "board": {
+   "horizon": "US sectors · next 1–4 weeks",
+   "helped": [
+    {
+     "name": "Steady earners with strong sales: Costco",
+     "why": "October net sales rose 12.6% to $24.50bn and comparable sales 11.1% (7.3% without gasoline and currency), with digital sales up 22.5%; the trade-off is a P/E of about 51.",
+     "confidence": "medium"
+    },
+    {
+     "name": "Banks: JPMorgan",
+     "why": "A hike now priced near 77–80% and a 2-year yield up to 4.51% favor lending margins; JPMorgan still fell 0.8% to $334.51 on Friday, so the case is about earnings, not the tape.",
+     "confidence": "low"
+    }
+   ],
+   "hurt": [
+    {
+     "name": "AI capacity renters: Oracle and the neoclouds",
+     "why": "Microsoft is ending a 2023 Oracle rental deal and tightening oversight of Nebius, IREN and Nscale projects (Bloomberg, via Reuters); Oracle closed at $116.01, within 0.9% of its 52-week low and down 40.5% this year.",
+     "confidence": "high"
+    },
+    {
+     "name": "High-multiple defensives: Walmart",
+     "why": "Walmart fell 1.7% to $125.52 as money returned to tech, at about 44 times trailing earnings; a hike in December would lower what such multiples are worth. Results on November 19.",
+     "confidence": "low"
+    },
+    {
+     "name": "Chips on guidance: Microchip, Broadcom",
+     "why": "Microchip fell 10.0% on December-quarter guidance of −3% to +1% revenue; Broadcom rose 0.7% to $293.69 but sits 0.7% above its 52-week low after a 39% fall from its high.",
+     "confidence": "medium"
+    }
+   ]
+  },
+  "stocksNote": "<b>Six of the 12 US stocks rose on Friday and six fell.</b> Best: Tesla +4.2%, Nvidia +2.8%, Alphabet +0.8%, Meta +0.8% and Broadcom +0.7%. Worst: Walmart −1.7%, Microsoft −1.0% and JPMorgan −0.8%. Outside the 12, Oracle rose 0.7% to $116.01 after an intraday fall of about 4%, Visa was little changed and Costco fell 1.1%. Musk said Cybertruck production will wind down around mid-2027 to make room for the Cybercab.",
+  "week": [
+   {
+    "day": "Sat, Nov 7",
+    "event": "Berkshire Hathaway third-quarter results",
+    "impact": "medium",
+    "why": "Shows whether Greg Abel kept buying back shares and how much cash is left to deploy; the stock is 1.4% below its 52-week high."
+   },
+   {
+    "day": "Tue, Nov 10",
+    "event": "US October consumer prices (3:30pm Cairo)",
+    "impact": "high",
+    "why": "Early estimates near 3.9%; a hot print after payrolls makes a December hike close to certain."
+   },
+   {
+    "day": "Fri, Nov 13",
+    "event": "US producer prices; the desk's chip view is judged",
+    "impact": "medium",
+    "why": "Nvidia must stay below $220 for the call to stand; it closed at $186.64."
+   },
+   {
+    "day": "Tue, Nov 17",
+    "event": "Nvidia results (expected)",
+    "impact": "high",
+    "why": "The test of AI demand after the worst week for chips since 2020 (date per TradingView's calendar)."
+   },
+   {
+    "day": "Thu, Nov 19",
+    "event": "Walmart third-quarter results",
+    "impact": "medium",
+    "why": "Tests the rotation into steady earners at about 44 times earnings (date per Investing.com)."
+   },
+   {
+    "day": "Tue, Dec 8",
+    "event": "Federal Reserve meeting (to Dec 9)",
+    "impact": "high",
+    "why": "A hike is priced near 77–80% after payrolls; the dollar and emerging markets hang on it."
+   }
+  ],
+  "views": [
+   {
+    "call": "Chip stocks stay under pressure into Apple's results",
+    "status": "on track",
+    "note": "From Oct 31: Nvidia $204.64. On Friday: $186.64 (−8.8%) after a 2.8% bounce. Wrong if Nvidia closes above $220; judged November 13."
+   },
+   {
+    "call": "Money rotates from AI spenders to steady earners",
+    "status": "open",
+    "note": "From Oct 30: Walmart $121.25, Alphabet $283.82. On Friday: Walmart $125.52 (+3.5%), Alphabet $284.78 (+0.3%); Walmart slipped 1.7% as tech bounced. Judged November 27."
+   },
+   {
+    "call": "Brent stays below $105 while Iran talks continue",
+    "status": "open",
+    "note": "From Nov 5: $94.62. On Friday: $98.32 as the US struck Qeshm island. Wrong if Brent closes above $105; judged November 20."
+   }
+  ],
+  "calls": [
+   {
+    "headline": "A 165,000-job surprise revives December hike bets as chips bounce",
+    "body": "US employers added 165,000 jobs in October, against forecasts near 65,000–70,000; September was revised up to 60,000 from 29,000, unemployment fell to 4.1% and hourly pay rose 0.4% (BLS, Pound Sterling Live). San Francisco Fed President Mary Daly said further tightening is likely (CNBC). The 2-year Treasury yield rose to 4.51% and the 10-year to 4.86%, and the dollar index 0.7% to 102.28; CME FedWatch put a December 9 hike near 77–80% (The Rio Times, Coinpaper). Stocks still rose: the Nasdaq gained 1.09%, Nvidia 2.8%, Intel about 8% and Tesla 4.2%, while the S&P 500 lost 2.7% on the week.",
+    "view": "Friday was a relief bounce after the worst chip day since 2020, not a vote for higher rates; a hike is now the base case and Tuesday's CPI decides it. Higher yields hurt the stocks priced for the long term (growth, and defensives at 40-plus times earnings) and help banks' margins. Expect the bounce in chips to be tested before Nvidia reports on November 17.",
+    "wrong": "October CPI comes in well below forecasts (under 3.6%) and the 2-year yield falls below 4.30%, taking the hike off the table.",
+    "confidence": "medium",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "Semiconductors",
+      "dir": "mixed"
+     },
+     {
+      "kind": "sector",
+      "name": "Defensives",
+      "dir": "down"
+     },
+     {
+      "kind": "stock",
+      "t": "NVDA",
+      "dir": "up",
+      "chg": 2.8
+     },
+     {
+      "kind": "stock",
+      "t": "TSLA",
+      "dir": "up",
+      "chg": 4.2
+     },
+     {
+      "kind": "stock",
+      "t": "WMT",
+      "dir": "down",
+      "chg": -1.7
+     },
+     {
+      "kind": "stock",
+      "t": "JPM",
+      "dir": "mixed",
+      "chg": -0.8
+     },
+     {
+      "kind": "market",
+      "name": "Rate-cut odds",
+      "dir": "down"
+     },
+     {
+      "kind": "market",
+      "name": "Dollar index",
+      "dir": "up"
+     }
+    ]
+   },
+   {
+    "headline": "Microsoft retreats from rented AI capacity, hitting Oracle and the neoclouds",
+    "line": "The biggest buyer of rented AI capacity is rationing it, a demand risk for every company that sells it.",
+    "body": "Microsoft has tightened oversight of data center projects run by Nebius, IREN and Nscale, will not take an option to more than double its Nscale contract in Texas, and earlier dropped an Nscale site in Essex over grid delays, Bloomberg reported (via Reuters); Nebius fell about 14%, IREN 17% and CoreWeave 10% on Thursday. On Friday Bloomberg reported that Microsoft is ending a 2023 deal to rent AI computing capacity on older Nvidia chips from Oracle (via Cryptopolitan). Oracle fell about 4% during the day and closed at $116.01, within 0.9% of its 52-week low and 40.5% lower this year; Microsoft fell 1.0% to $530.61.",
+    "view": "For Microsoft this is cost discipline as it builds its own sites; for those renting out capacity it is demand risk, with Oracle the most exposed after planning a $20bn capital raise. It backs the desk's view that AI spenders and suppliers lag steadier earners.",
+    "wrong": "Oracle closes above $135 by the end of November.",
+    "confidence": "medium",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "AI infrastructure",
+      "dir": "down"
+     },
+     {
+      "kind": "stock",
+      "t": "ORCL",
+      "dir": "down"
+     },
+     {
+      "kind": "stock",
+      "t": "MSFT",
+      "dir": "mixed",
+      "chg": -1.0
+     },
+     {
+      "kind": "stock",
+      "name": "Nebius",
+      "t": "NBIS",
+      "dir": "down"
+     },
+     {
+      "kind": "stock",
+      "name": "IREN",
+      "t": "IREN",
+      "dir": "down"
+     },
+     {
+      "kind": "stock",
+      "name": "CoreWeave",
+      "t": "CRWV",
+      "dir": "down"
+     },
+     {
+      "kind": "market",
+      "name": "Nasdaq",
+      "dir": "down"
+     }
+    ]
+   },
+   {
+    "headline": "Guidance sets the biggest moves: JFrog +35%, Atlassian −16%, Axon −18%",
+    "line": "Investors paid for raised outlooks and punished any slowdown, however good the quarter.",
+    "body": "JFrog jumped 35.3% after cloud revenue rose 60% and it raised its 2026 outlook to $680–682m; Ubiquiti gained 15.3% on a $1.07 EPS beat. Atlassian fell 16.2% after guiding fiscal 2027 growth to about 13.75% despite a 24% rise in quarterly revenue, Axon 18.2% after resetting its free cash flow outlook to $350–400m, and Microchip 10.0% on weak December-quarter guidance (GuruFocus, Simply Wall St, MarketBeat).",
+    "view": "With the market down 2.7% on the week, results that only meet forecasts are being sold; the premium goes to visible demand (cloud security, networking). That favors buying strength after reports over buying dips before them.",
+    "wrong": "Atlassian and Axon recover their losses by the end of November, which would make the selling positioning rather than a verdict on guidance.",
+    "confidence": "low",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "Software",
+      "dir": "mixed"
+     },
+     {
+      "kind": "stock",
+      "name": "JFrog",
+      "t": "FROG",
+      "dir": "up",
+      "chg": 35.3
+     },
+     {
+      "kind": "stock",
+      "name": "Atlassian",
+      "t": "TEAM",
+      "dir": "down",
+      "chg": -16.2
+     },
+     {
+      "kind": "stock",
+      "name": "Axon",
+      "t": "AXON",
+      "dir": "down",
+      "chg": -18.2
+     },
+     {
+      "kind": "stock",
+      "name": "Microchip",
+      "t": "MCHP",
+      "dir": "down",
+      "chg": -10.0
+     },
+     {
+      "kind": "market",
+      "name": "Nasdaq",
+      "dir": "mixed"
+     }
+    ]
+   },
+   {
+    "headline": "Costco's October sales jump 12.6% while Walmart slips on rotation",
+    "line": "Steady earners keep reporting strong numbers, but rich valuations leave them exposed when money returns to tech.",
+    "body": "Costco's net sales rose 12.6% to $24.50bn in the four weeks to November 1, with comparable sales up 11.1% (7.3% without gasoline and currency) and digital sales up 22.5% (Zacks); the stock fell 1.1% to $1,053.56 and trades at about 51 times earnings. Walmart fell 1.7% to $125.52 on a rotation out of defensive stocks, with no company news (Investing.com); it trades at about 44 times earnings and reports on November 19. Berkshire Hathaway, 1.4% below its 52-week high, reports on Saturday.",
+    "view": "The rotation into steady earners is real in the numbers but expensive in the price; Friday showed how quickly it reverses on a tech bounce. Costco's sales justify its premium better than Walmart's.",
+    "wrong": "Walmart closes below $118 before its results.",
+    "confidence": "low",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "Retail",
+      "dir": "mixed"
+     },
+     {
+      "kind": "stock",
+      "t": "COST",
+      "dir": "up"
+     },
+     {
+      "kind": "stock",
+      "t": "WMT",
+      "dir": "down",
+      "chg": -1.7
+     },
+     {
+      "kind": "stock",
+      "t": "BRK.B",
+      "dir": "mixed"
+     },
+     {
+      "kind": "market",
+      "name": "S&P 500",
+      "dir": "mixed"
+     }
+    ]
+   }
+  ]
+ },
+ "pages": {
+  "egx": {
+   "finding": "No session since Thursday, when the EGX30 rose 0.99% to 51,152.73 and the EGX70 EWI 2.4% to a 52-week high, ending the week up 3.1%; Banque du Caire (EGP 3.49bn) and CIB (EGP 2.47bn) led the week's turnover, and trading reopens Sunday.",
+   "session": {
+    "turnover": 10.2,
+    "vs90": -7.6,
+    "breadth": null
+   },
+   "outlook": {
+    "bull": {
+     "sectors": [
+      {
+       "name": "Banks",
+       "confidence": "medium",
+       "why": "Inflation fell to 12.0% in October while the deposit rate is 20%, so banks earn wide real yields on bills and loans; CIB rose 6.3% on the week to EGP 128.00, at its 50-day average, and reports Wednesday."
+      },
+      {
+       "name": "Investment banks and brokers",
+       "confidence": "medium",
+       "why": "Banque du Caire's EGP 36bn sale, 27 times covered by retail buyers, was the week's most traded stock; more state listings mean more fees and trading."
+      },
+      {
+       "name": "Telecoms",
+       "confidence": "low",
+       "why": "Telecom Egypt rose 7.0% on the week and signed a digital-services deal with the Suez Canal Economic Zone; it reports Thursday, but at 95.5% up this year expectations are high."
+      }
+     ],
+     "stocks": [
+      {
+       "t": "COMI",
+       "range": [
+        128,
+        132
+       ],
+       "dp": 0,
+       "by": "end of December",
+       "confidence": "medium",
+       "why": "A return to and hold above its 50-day average (about EGP 128.3) toward 132. Inflation at 12% against 26% bills widens margins; CIB closed at EGP 128.00 on Thursday, up 6.3% on the week and 6.2% above its EGP 120.47 start on October 30, still 10.8% below its 52-week high. Results on Wednesday are the test.",
+       "wrong": "it closes below EGP 114, or results show margins narrowing."
+      },
+      {
+       "t": "ORAS",
+       "range": [
+        860,
+        900
+       ],
+       "dp": 0,
+       "by": "end of January",
+       "confidence": "low",
+       "why": "Dollar revenue from Gulf and US projects; Orascom closed at EGP 810.02, down 1.5% on the week and below its 50-day average of about EGP 836. A firmer pound trims the pound value of that revenue, so confidence stays low.",
+       "wrong": "it closes below EGP 780, or the dollar falls below EGP 52."
+      }
+     ]
+    },
+    "bear": {
+     "sectors": [
+      {
+       "name": "Real estate developers",
+       "confidence": "low",
+       "why": "Fixed certificates at 18.75% from Sunday compete for the savings that fund property down payments; Talaat Moustafa and Palm Hills rose 3.5% and 4.5% on the week, ahead of the EGX30's 3.1%, which argues against the call, and stay below their 50-day averages."
+      },
+      {
+       "name": "Food and consumer",
+       "confidence": "low",
+       "why": "Dairy and egg prices rose 2.5% in October and Juhayna raises prices up to 11% from Sunday; pricing power protects margins, but volumes are at risk while households are squeezed."
+      }
+     ],
+     "stocks": [
+      {
+       "t": "TMGH",
+       "range": [
+        72,
+        76
+       ],
+       "dp": 0,
+       "by": "end of December",
+       "confidence": "low",
+       "why": "At EGP 83.25, up 3.5% on the week and ahead of the EGX30, so the call is going against the desk; it trades below its 50-day average of about EGP 88.6, and dearer money weighs on its buyers and its debt, while its state partnerships are long-term offsets. Confidence is low.",
+       "wrong": "it closes back above EGP 88, near its 50-day average, or a big sales launch beats expectations."
+      },
+      {
+       "t": "PHDC",
+       "range": [
+        10.2,
+        10.8
+       ],
+       "dp": 1,
+       "by": "end of December",
+       "confidence": "low",
+       "why": "At EGP 11.91, up 4.5% on the week after Thursday's 5.7% jump, below its 50-day average of about EGP 12.9; the same rate pressure applies. Al Ahly Pharos values it at EGP 21.40 on existing assets alone, which argues against a deep fall.",
+       "wrong": "it closes above EGP 12.50."
+      }
+     ]
+    }
+   },
+   "news": [
+    {
+     "headline": "Banque du Caire's 45% sale raises EGP 36bn; retail covered 27 times",
+     "text": "Institutions covered their tranche 7 times; the stock led the week's turnover at EGP 3.49bn and closed at EGP 5.58, up 5.3% on the week (Youm7).",
+     "source": "Osoul Misr",
+     "url": "https://www.osoulmisrmagazine.com/451988",
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "sector",
+       "name": "Banks",
+       "dir": "up"
+      },
+      {
+       "kind": "stock",
+       "t": "BQDC",
+       "dir": "up",
+       "chg": 5.28
+      }
+     ]
+    },
+    {
+     "headline": "Banque du Caire and CIB lead the EGX's weekly trading",
+     "text": "CIB rose 6.25% on the week, Telecom Egypt 7.04% and Palm Hills 4.47%; Alexandria Mineral Oils fell 5.21% and Orascom Construction 1.46%.",
+     "source": "Youm7",
+     "url": "https://www.youm7.com/story/2026/11/7/%D8%B3%D8%A8%D8%A7%D9%82-%D8%A7%D9%84%D9%85%D9%84%D9%8A%D8%A7%D8%B1%D8%A7%D8%AA-%D8%A8%D8%A7%D9%84%D8%A8%D9%88%D8%B1%D8%B5%D8%A9-10-%D8%A3%D8%B3%D9%87%D9%85-%D8%AA%D8%AD%D8%AA%D9%83%D8%B1-15-5-%D9%85%D9%84%D9%8A%D8%A7%D8%B1-%D8%AC%D9%86%D9%8A%D9%87/7608592",
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "stock",
+       "t": "COMI",
+       "dir": "up",
+       "chg": 6.25
+      },
+      {
+       "kind": "stock",
+       "t": "ETEL",
+       "dir": "up",
+       "chg": 7.04
+      },
+      {
+       "kind": "stock",
+       "t": "AMOC",
+       "dir": "down",
+       "chg": -5.21
+      }
+     ]
+    },
+    {
+     "headline": "Juhayna raises dairy prices up to 11% from Sunday",
+     "text": "Bekhayro 1 kg goes to EGP 44 from EGP 42.5 and Mix 200 ml to EGP 15 from EGP 13.5; results are expected Monday.",
+     "source": "Al Khabar Live",
+     "url": "https://alkhabrlive.com/%D8%A7%D9%82%D8%AA%D8%B5%D8%A7%D8%AF/%D8%A7%D8%B1%D8%AA%D9%81%D8%A7%D8%B9-%D8%A3%D8%B3%D8%B9%D8%A7%D8%B1-%D9%85%D9%86%D8%AA%D8%AC%D8%A7%D8%AA-%D8%A7%D9%84%D8%A3%D9%84%D8%A8%D8%A7%D9%86-%D9%82%D8%A7%D8%A6%D9%85%D8%A9-%D8%A7%D9%84%D8%B2%D9%8A%D8%A7%D8%AF%D8%A7%D8%AA-%D8%A7%D9%84%D8%AC%D8%AF%D9%8A%D8%AF%D8%A9-%D9%84%D9%80-%D8%AC%D9%87%D9%8A%D9%86%D8%A9-%D9%88%D8%A8%D8%AE%D9%8A%D8%B1%D8%A9-%D9%88%D9%85%D9%8A%D9%83%D8%B3-%D9%88%D9%85%D9%88%D8%B9%D8%AF-%D8%A7%D9%84%D8%AA%D8%B7%D8%A8%D9%8A%D9%82",
+     "impact": "mixed",
+     "affects": [
+      {
+       "kind": "sector",
+       "name": "Food",
+       "dir": "mixed"
+      },
+      {
+       "kind": "stock",
+       "t": "JUFO",
+       "dir": "mixed"
+      }
+     ]
+    },
+    {
+     "headline": "Telecom Egypt signs digital-services deal with the Suez Canal zone",
+     "text": "It will build networks for the zone's industrial areas and ports; no value was disclosed.",
+     "source": "Sada Elbalad English",
+     "url": "https://see.news/sczone-telecom-egypt-sign-strategic-agreement-to-upgrade-digital-services-across-industrial-zones-ports",
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "sector",
+       "name": "Telecoms",
+       "dir": "up"
+      },
+      {
+       "kind": "stock",
+       "t": "ETEL",
+       "dir": "up"
+      }
+     ]
+    },
+    {
+     "headline": "Egypt Aluminium targets $1bn exports after an EGP 15.4bn profit",
+     "text": "Its CEO said revenue was about EGP 53bn last fiscal year and a 300,000-ton expansion with Trafigura is planned.",
+     "source": "Youm7",
+     "url": "https://www.youm7.com/story/2026/11/6/%D8%A7%D9%84%D8%B1%D8%A6%D9%8A%D8%B3-%D8%A7%D9%84%D8%AA%D9%86%D9%81%D9%8A%D8%B0%D9%89-%D9%84%D8%B4%D8%B1%D9%83%D8%A9-%D9%85%D8%B5%D8%B1-%D9%84%D9%84%D8%A3%D9%84%D9%88%D9%85%D9%86%D9%8A%D9%88%D9%85-%D9%81%D9%89-%D8%AD%D9%88%D8%A7%D8%B1-%D9%84%D9%80-%D8%A7%D9%84%D9%8A%D9%88%D9%85-%D8%A7%D9%84%D8%B3%D8%A7%D8%A8%D8%B9/7602275",
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "sector",
+       "name": "Metals",
+       "dir": "up"
+      },
+      {
+       "kind": "stock",
+       "t": "EGAL",
+       "dir": "up"
+      }
+     ]
+    }
+   ]
+  },
+  "egp": {
+   "finding": "Inflation eased to 12.0% in October from 12.8% while the deposit rate stays at 20% and the one-year bill at 26.03%, a real yield of about 14 points; the central bank's dollar rate ended the week at EGP 54.01 after six straight falls, as NBE and Banque Misr lift fixed certificates to 18.75% from Sunday.",
+   "rates": [],
+   "drivers": [
+    {
+     "name": "Inflation slows to 12.0%",
+     "confidence": "high",
+     "why": "Annual headline inflation eased to 12.0% in October from 12.8%, with prices up 0.6% on the month (CAPMAS, via Amwal Al Ghad); urban inflation was reported at 12.7% (Rio Times, not yet confirmed by the central bank). The data log still shows the central bank's September figure until it publishes."
+    },
+    {
+     "name": "Rates held high: 20% and 26% bills",
+     "confidence": "high",
+     "why": "Deposit 20.00%, lending 21.00% since November 1; the 364-day bill cleared at 26.03% on Thursday and the 182-day at 25.25%. NBE and Banque Misr raise fixed certificates to 18.75% from Sunday (Youm7), a sign banks expect rates to stay high."
+    },
+    {
+     "name": "A stronger dollar abroad",
+     "confidence": "medium",
+     "why": "The dollar index rose 0.7% to 102.28 on Friday, within 0.3% of its 52-week high, after a strong US jobs report raised December Fed hike odds to about 77–80%; that slows emerging-market inflows without undoing a 14-point real yield."
+    },
+    {
+     "name": "Oil near $98 and Hormuz",
+     "confidence": "medium",
+     "why": "Brent held at $98.32, 13.3% lower this month; US strikes on Qeshm island keep the risk alive. Hormuz averaged 3.4 transits a day in the four weeks to October 18 against 87.8 a year earlier, while Suez averaged 42.3 against 40.8 (IMF PortWatch)."
+    }
+   ],
+   "view": {
+    "headline": "Slowing inflation and a 14-point real yield keep the dollar in EGP 53–54.5",
+    "confidence": "medium",
+    "body": "October's 12.0% inflation against a 26.03% one-year bill pays foreign holders well to stay, and the six straight falls in the central bank's rate to EGP 54.01 show the flows arriving. Friday's US jobs report and a dollar near its 52-week high are the counterweight: they can slow the pound's gains, but a 25 basis point Fed hike barely narrows a gap this wide. Sunday's auction is the first test.",
+    "wrong": "The dollar closes above EGP 56 before the end of November, or the bill auctions clear far below last week's yields.",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "Banks",
+      "dir": "up"
+     },
+     {
+      "kind": "sector",
+      "name": "Importers",
+      "dir": "up"
+     },
+     {
+      "kind": "sector",
+      "name": "Exporters",
+      "dir": "down"
+     },
+     {
+      "kind": "stock",
+      "t": "COMI",
+      "dir": "up"
+     },
+     {
+      "kind": "market",
+      "name": "Pound",
+      "dir": "up"
+     },
+     {
+      "kind": "market",
+      "name": "T-bill yields",
+      "dir": "mixed"
+     }
+    ]
+   },
+   "news": [
+    {
+     "headline": "Egypt's annual inflation eases to 12.0% in October",
+     "text": "Down from 12.8% in September; prices rose 0.6% on the month, led by meat, poultry and dairy (CAPMAS).",
+     "source": "Amwal Al Ghad",
+     "url": "https://en.amwalalghad.com/urgent-egypts-annual-inflation-eases-to-12-in-october-2026-capmas/",
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "market",
+       "name": "Pound",
+       "dir": "up"
+      },
+      {
+       "kind": "market",
+       "name": "T-bill yields",
+       "dir": "mixed"
+      }
+     ]
+    },
+    {
+     "headline": "NBE and Banque Misr lift fixed certificates to 18.75%",
+     "text": "Monthly-payout certificates rise a point from Sunday; quarterly versions go to 18.85%.",
+     "source": "Youm7",
+     "url": "https://www.youm7.com/story/2026/11/7/غدا-رفع-أسعار-الفائدة-على-شهادات-الادخار-فى-بنكى-الأهلى/7607372",
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "sector",
+       "name": "Banks",
+       "dir": "mixed"
+      },
+      {
+       "kind": "market",
+       "name": "Pound",
+       "dir": "up"
+      }
+     ]
+    },
+    {
+     "headline": "Suez traffic edges above last year as Hormuz stays shut",
+     "text": "Suez averaged 42.3 transits a day in the four weeks to October 18, against 40.8 a year earlier; Hormuz 3.4 against 87.8.",
+     "source": "IMF PortWatch",
+     "url": "https://portwatch.imf.org/",
+     "impact": "mixed",
+     "affects": [
+      {
+       "kind": "sector",
+       "name": "Shipping",
+       "dir": "mixed"
+      },
+      {
+       "kind": "market",
+       "name": "Pound",
+       "dir": "mixed"
+      }
+     ]
+    }
+   ]
+  },
+  "us": {
+   "finding": "The Nasdaq rose 1.09% and the S&P 500 0.31% on Friday as chips rebounded, the Dow fell 0.46%, and the S&P 500 lost 2.7% on the week; 165,000 new jobs lifted the 2-year yield to 4.51% and December Fed hike odds to about 77–80%.",
+   "rates": [
+    {
+     "label": "October payrolls",
+     "value": "+165,000"
+    },
+    {
+     "label": "Unemployment rate",
+     "value": "4.1%"
+    },
+    {
+     "label": "Fed December hike odds",
+     "value": "about 77–80%"
+    }
+   ],
+   "afterBell": [
+    {
+     "name": "JFrog",
+     "move": "+35.3% on Friday",
+     "why": "Cloud revenue rose 60% and it raised its 2026 revenue outlook to $680–682m (Insider Monkey, via Yahoo Finance)."
+    },
+    {
+     "name": "Atlassian",
+     "move": "−16.2% on Friday",
+     "why": "Revenue rose 24% to $1.77bn, but it guided fiscal 2027 growth to about 13.75% (GuruFocus, via Yahoo Finance)."
+    },
+    {
+     "name": "Axon Enterprise",
+     "move": "−18.2% on Friday",
+     "why": "Revenue rose 28% to $908.6m, but it set 2026 free cash flow at $350–400m and flagged memory costs (Simply Wall St)."
+    }
+   ],
+   "outlook": {
+    "bull": {
+     "sectors": [
+      {
+       "name": "Steady earners",
+       "confidence": "medium",
+       "why": "Costco's October sales rose 12.6% and comparable sales 11.1%; Walmart is up 3.5% since October 30 but fell 1.7% on Friday as money returned to tech, so the rotation can reverse in a rebound."
+      },
+      {
+       "name": "Banks",
+       "confidence": "low",
+       "why": "A December hike priced near 77–80% and a 2-year yield of 4.51% support lending margins; JPMorgan fell 0.8% to $334.51, so the market has not yet paid for it."
+      }
+     ],
+     "stocks": [
+      {
+       "t": "XOM",
+       "range": [
+        185,
+        195
+       ],
+       "dp": 0,
+       "by": "end of December",
+       "confidence": "low",
+       "why": "At $165.87, up 37.8% this year and below its 50-day average of about $170 and 52-week high of $187.25. The range needs Brent back above $105, which runs against the desk's own view that Brent stays below $105 while Iran talks go on, so confidence is low.",
+       "wrong": "Brent falls below $100, for example on a Gulf de-escalation."
+      }
+     ]
+    },
+    "bear": {
+     "sectors": [
+      {
+       "name": "AI chips and infrastructure",
+       "confidence": "medium",
+       "why": "Microsoft is cutting back on rented AI capacity (Oracle, Nebius, IREN, Nscale) and Microchip fell 10% on guidance; Friday's 2.8% Nvidia bounce leaves it 15% below its 50-day average of about $219."
+      },
+      {
+       "name": "Highly valued growth",
+       "confidence": "medium",
+       "why": "A December hike is now priced near 77–80% after 165,000 new jobs and the 10-year yield is 4.86%; higher rates cut what distant profits are worth."
+      }
+     ],
+     "stocks": [
+      {
+       "t": "GOOGL",
+       "range": [
+        265,
+        280
+       ],
+       "dp": 0,
+       "by": "end of November",
+       "confidence": "low",
+       "why": "Rose 0.8% to $284.78 on Friday, above the projected $265–280 and well below its 50-day average of about $330; it is taking over Crusoe's Wyoming data center site with a planned $17bn, more AI spending before returns. Wrong if it closes above $300.",
+       "wrong": "it closes above $300 by mid-November."
+      }
+     ]
+    }
+   },
+   "news": [
+    {
+     "headline": "US adds 165,000 jobs, far above forecasts; unemployment 4.1%",
+     "text": "September was revised up to 60,000 and hourly pay rose 0.4%; December hike odds rose to about 77–80%.",
+     "source": "Pound Sterling Live",
+     "url": "https://www.poundsterlinglive.com/usd/23852-pound-to-dollar-rate-us-payrolls-fed-december-hike",
+     "impact": "bearish",
+     "affects": [
+      {
+       "kind": "market",
+       "name": "Rate-cut odds",
+       "dir": "down"
+      },
+      {
+       "kind": "market",
+       "name": "Dollar index",
+       "dir": "up"
+      }
+     ]
+    },
+    {
+     "headline": "Microsoft ends Oracle AI capacity deal; Oracle near two-year low",
+     "text": "The 2023 deal used older Nvidia chips, Bloomberg reported; Oracle fell about 4% intraday before closing at $116.01.",
+     "source": "Cryptopolitan (citing Bloomberg)",
+     "url": "https://www.cryptopolitan.com/microsoft-oracle-deal-to-rent-ai-capacity/",
+     "impact": "bearish",
+     "affects": [
+      {
+       "kind": "sector",
+       "name": "AI infrastructure",
+       "dir": "down"
+      },
+      {
+       "kind": "stock",
+       "t": "ORCL",
+       "dir": "down"
+      },
+      {
+       "kind": "stock",
+       "t": "MSFT",
+       "dir": "mixed"
+      }
+     ]
+    },
+    {
+     "headline": "Microsoft tightens oversight of Nebius, IREN and Nscale projects",
+     "text": "It will not take an option to more than double its Nscale Texas contract; Nebius fell about 14% and IREN 17% on Thursday.",
+     "source": "Reuters (via Investing.com)",
+     "url": "https://www.investing.com/news/stock-market-news/microsoft-tightens-oversight-of-neocloud-data-center-projects-bloomberg-news-reports-5005281",
+     "impact": "bearish",
+     "affects": [
+      {
+       "kind": "sector",
+       "name": "AI infrastructure",
+       "dir": "down"
+      },
+      {
+       "kind": "stock",
+       "t": "MSFT",
+       "dir": "mixed"
+      },
+      {
+       "kind": "stock",
+       "name": "Nebius",
+       "t": "NBIS",
+       "dir": "down",
+       "chg": -14.0
+      }
+     ]
+    },
+    {
+     "headline": "Costco's October sales rise 12.6%; comparable sales up 11.1%",
+     "text": "Net sales reached $24.50bn in the four weeks to November 1, with digital sales up 22.5%.",
+     "source": "Zacks (via TradingView)",
+     "url": "https://www.tradingview.com/news/zacks:593161f8a094b:0-costco-s-october-net-sales-jump-1",
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "sector",
+       "name": "Retail",
+       "dir": "up"
+      },
+      {
+       "kind": "stock",
+       "t": "COST",
+       "dir": "up"
+      }
+     ]
+    }
+   ]
+  },
+  "global": {
+   "finding": "Brent held at $98.32, 13.3% lower this month, as the US struck Iranian air defenses on Qeshm island; gold fell 0.9% to $4,074.90 and the dollar index rose 0.7% to 102.28 after the US jobs report, while Bitcoin held near $76,000.",
+   "notes": {
+    "brent": "Egypt imports fuel and LNG, so oil near $98 keeps the import bill high; Hormuz traffic is still a fraction of last year's (IMF PortWatch), which keeps Gulf risk in the price.",
+    "gold_usd": "Sets the base for Egyptian gold: it fell 0.9% on the dollar's rise and the 24K gram eased 0.8% to EGP 7,095 on Saturday.",
+    "dxy": "At 102.28, up 0.7% and within 0.3% of its 52-week high after strong US payrolls; a firmer dollar slows money into emerging markets, Egypt's included.",
+    "btc": "A gauge of risk appetite; flat near $76,000 and down 13.1% this year after US bitcoin funds lost about $430m."
+   },
+   "news": [
+    {
+     "headline": "US strikes Iranian air defenses on Qeshm island in Hormuz",
+     "text": "Trump called them minor and said a decision on resuming the war would come soon; Iran said it shot down a US drone.",
+     "source": "Al Jazeera",
+     "url": "https://www.aljazeera.com/news/2026/11/7/trump-confirms-new-us-strikes-on-irans-qeshm-island",
+     "impact": "mixed",
+     "affects": [
+      {
+       "kind": "market",
+       "name": "Brent",
+       "dir": "up"
+      },
+      {
+       "kind": "sector",
+       "name": "Shipping",
+       "dir": "down"
+      }
+     ]
+    },
+    {
+     "headline": "Hormuz averages 3.4 transits a day against 87.8 a year ago",
+     "text": "Four weeks to October 18; Bab el-Mandeb averaged 27.9 against 33.9 and Suez 42.3 against 40.8.",
+     "source": "IMF PortWatch",
+     "url": "https://portwatch.imf.org/",
+     "impact": "mixed",
+     "affects": [
+      {
+       "kind": "market",
+       "name": "Brent",
+       "dir": "up"
+      },
+      {
+       "kind": "sector",
+       "name": "Shipping",
+       "dir": "mixed"
+      }
+     ]
+    },
+    {
+     "headline": "US bitcoin funds lose about $430m as Bitcoin holds near $76,000",
+     "text": "Bitcoin is down 13.1% this year as risk appetite fades.",
+     "source": "Yahoo Finance",
+     "url": "https://finance.yahoo.com/markets/crypto/articles/bitcoin-etfs-bleed-430-million-183603359.html",
+     "impact": "bearish",
+     "affects": [
+      {
+       "kind": "market",
+       "name": "Bitcoin",
+       "dir": "down"
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

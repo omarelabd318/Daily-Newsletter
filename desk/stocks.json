@@ -5,7 +5,7 @@
    "sector": "Banks",
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
     "price": 128.0,
@@ -114,7 +114,7 @@
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
     "price": 83.25,
@@ -184,7 +184,7 @@
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-09-30",
     "basis": "results for the 12 months to September 2026; book value from Mubasher, to March 2026",
     "price": 80.98,
@@ -230,7 +230,7 @@
    },
    "valuation": {
     "source": "Mubasher",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-03-31",
     "basis": "results for the 12 months to March 2026",
     "price": 11.91,
@@ -276,14 +276,14 @@
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 165.79,
+    "price": 165.87,
     "rows": [
      {
       "label": "Market value",
-      "value": "$669.7bn"
+      "value": "$676.6bn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -291,7 +291,7 @@
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "12.2"
+      "value": "12.4"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -311,6 +311,12 @@
   "MSFT": {
    "sector": "Software",
    "news": [
+    {
+     "date": "2026-11-06",
+     "text": "Is ending a 2023 deal to rent AI computing capacity from Oracle, which runs on older Nvidia chips, Bloomberg reported; Microsoft fell 1.0% to $530.61.",
+     "source": "Cryptopolitan (citing Bloomberg)",
+     "url": "https://www.cryptopolitan.com/microsoft-oracle-deal-to-rent-ai-capacity/"
+    },
     {
      "date": "2026-11-05",
      "text": "Microsoft reportedly declined an option that would have more than doubled its Texas compute agreement with Nscale; Reuters could not verify the Financial Times report. The stock rose 6.7% to a record $555.80.",
@@ -332,10 +338,10 @@
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 537.705,
+    "price": 530.61,
     "rows": [
      {
       "label": "Market value",
@@ -343,11 +349,11 @@
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "29.8"
+      "value": "29.4"
      },
      {
       "label": "Forecast P/E (fiscal 2027)",
-      "value": "27.0"
+      "value": "26.7"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -355,7 +361,7 @@
      },
      {
       "label": "Dividend yield",
-      "value": "0.65%"
+      "value": "0.68%"
      },
      {
       "label": "Analysts' one-year target",
@@ -394,10 +400,10 @@
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 282.91,
+    "price": 284.78,
     "rows": [
      {
       "label": "Market value",
@@ -405,11 +411,11 @@
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "14.8"
+      "value": "14.9"
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "14.2"
+      "value": "14.3"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -417,7 +423,7 @@
      },
      {
       "label": "Dividend yield",
-      "value": "0.3%"
+      "value": "0.31%"
      },
      {
       "label": "Analysts' one-year target",
@@ -444,22 +450,22 @@
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-07-31",
     "basis": "the four quarters to Jul 2026",
-    "price": 292.43,
+    "price": 293.69,
     "rows": [
      {
       "label": "Market value",
-      "value": "$1.46tn"
+      "value": "$1.40tn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "34.1"
+      "value": "34.3"
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "28.2"
+      "value": "28.3"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -467,7 +473,7 @@
      },
      {
       "label": "Dividend yield",
-      "value": "0.8%"
+      "value": "0.89%"
      },
      {
       "label": "Analysts' one-year target",
@@ -486,7 +492,7 @@
    },
    "valuation": {
     "source": "Mubasher",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-03-31",
     "basis": "results for the 12 months to March 2026",
     "price": 128.55,
@@ -512,7 +518,21 @@
       "value": "EGP 36.77"
      }
     ]
-   }
+   },
+   "news": [
+    {
+     "date": "2026-11-06",
+     "text": "Signed a strategic agreement with the Suez Canal Economic Zone to build telecom networks and digital services across its industrial zones and ports; no value was disclosed.",
+     "source": "Sada Elbalad English",
+     "url": "https://see.news/sczone-telecom-egypt-sign-strategic-agreement-to-upgrade-digital-services-across-industrial-zones-ports"
+    },
+    {
+     "date": "2026-11-05",
+     "text": "The board approved a 2027 budget guiding low double-digit revenue growth and an EBITDA margin in the low-to-mid 40s.",
+     "source": "Telecompaper",
+     "url": "https://www.telecompaper.com/news/telecom-egypt-approves-2027-budget-with-low-double-digit-revenue-growth-guidance--1587958"
+    }
+   ]
   },
   "SWDY": {
    "sector": "Cables and electrical",
@@ -524,7 +544,7 @@
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
     "price": 116.11,
@@ -570,7 +590,7 @@
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
     "price": 810.02,
@@ -634,7 +654,7 @@
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
     "price": 17.36,
@@ -672,7 +692,7 @@
    },
    "valuation": {
     "source": "Mubasher",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-03-31",
     "basis": "results for the 12 months to March 2026",
     "price": 23.78,
@@ -736,7 +756,7 @@
    },
    "valuation": {
     "source": "Mubasher",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-03-31",
     "basis": "results for the 12 months to March 2026",
     "price": 13.6,
@@ -774,7 +794,7 @@
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
     "price": 23.83,
@@ -800,7 +820,15 @@
       "value": "EGP 5.94"
      }
     ]
-   }
+   },
+   "news": [
+    {
+     "date": "2026-11-06",
+     "text": "Raises prices from November 8: Bekhayro laban 1 kg to EGP 44 from EGP 42.5, Mix 200 ml to EGP 15 from EGP 13.5 and Juhayna laban 200 ml to EGP 15 from EGP 14, citing production costs (Masrawy, Al Khabar Live).",
+     "source": "Al Khabar Live",
+     "url": "https://alkhabrlive.com/%D8%A7%D9%82%D8%AA%D8%B5%D8%A7%D8%AF/%D8%A7%D8%B1%D8%AA%D9%81%D8%A7%D8%B9-%D8%A3%D8%B3%D8%B9%D8%A7%D8%B1-%D9%85%D9%86%D8%AA%D8%AC%D8%A7%D8%AA-%D8%A7%D9%84%D8%A3%D9%84%D8%A8%D8%A7%D9%86-%D9%82%D8%A7%D8%A6%D9%85%D8%A9-%D8%A7%D9%84%D8%B2%D9%8A%D8%A7%D8%AF%D8%A7%D8%AA-%D8%A7%D9%84%D8%AC%D8%AF%D9%8A%D8%AF%D8%A9-%D9%84%D9%80-%D8%AC%D9%87%D9%8A%D9%86%D8%A9-%D9%88%D8%A8%D8%AE%D9%8A%D8%B1%D8%A9-%D9%88%D9%85%D9%8A%D9%83%D8%B3-%D9%88%D9%85%D9%88%D8%B9%D8%AF-%D8%A7%D9%84%D8%AA%D8%B7%D8%A8%D9%8A%D9%82"
+    }
+   ]
   },
   "ALCN": {
    "sector": "Ports",
@@ -812,7 +840,7 @@
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
     "price": 33.0,
@@ -858,22 +886,22 @@
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 345.15,
+    "price": 342.37,
     "rows": [
      {
       "label": "Market value",
-      "value": "$4.95tn"
+      "value": "$4.98tn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "39.2"
+      "value": "38.9"
      },
      {
       "label": "Forecast P/E (fiscal 2027)",
-      "value": "35.8"
+      "value": "35.3"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -932,22 +960,22 @@
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-07-31",
     "basis": "the four quarters to Jul 2026",
-    "price": 182.29,
+    "price": 186.64,
     "rows": [
      {
       "label": "Market value",
-      "value": "$4.56tn"
+      "value": "$4.50tn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "26.4"
+      "value": "27.0"
      },
      {
       "label": "Forecast P/E (fiscal 2027)",
-      "value": "19.6"
+      "value": "20.1"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -955,7 +983,7 @@
      },
      {
       "label": "Dividend yield",
-      "value": "0.5%"
+      "value": "0.55%"
      },
      {
       "label": "Analysts' one-year target",
@@ -988,22 +1016,22 @@
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 260.725,
+    "price": 259.3,
     "rows": [
      {
       "label": "Market value",
-      "value": "$2.79tn"
+      "value": "$2.80tn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "35.8"
+      "value": "35.6"
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "33.4"
+      "value": "33.2"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -1038,22 +1066,22 @@
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 607.17,
+    "price": 610.15,
     "rows": [
      {
       "label": "Market value",
-      "value": "$1.55tn"
+      "value": "$1.56tn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "20.4"
+      "value": "20.5"
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "20.9"
+      "value": "21.0"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -1061,7 +1089,7 @@
      },
      {
       "label": "Dividend yield",
-      "value": "0.33%"
+      "value": "0.35%"
      },
      {
       "label": "Analysts' one-year target",
@@ -1088,22 +1116,22 @@
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 344.125,
+    "price": 358.22,
     "rows": [
      {
       "label": "Market value",
-      "value": "$1.38tn"
+      "value": "$1.42tn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "471.4"
+      "value": "490.7"
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "513.6"
+      "value": "534.7"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -1120,6 +1148,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-06",
+     "text": "Musk said Cybertruck production in Texas will wind down around mid-2027 to free space for the two-seat Cybercab robotaxi; the stock rose 4.2% to $358.22 with the tech rebound.",
+     "source": "MLive (via Yahoo Finance)",
+     "url": "https://finance.yahoo.com/technology/articles/tesla-cybertruck-faces-uncertain-future-080103125.html"
+    },
     {
      "date": "2026-11-04",
      "text": "Tesla and SpaceX shares fell roughly 4–6% in late trading as Democrats gained in the midterms; reports link it to scrutiny of a Tesla–SpaceX merger.",
@@ -1138,22 +1172,22 @@
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 337.435,
+    "price": 334.51,
     "rows": [
      {
       "label": "Market value",
-      "value": "$893.6bn"
+      "value": "$888.3bn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "14.6"
+      "value": "14.5"
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "14.1"
+      "value": "14.0"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -1180,14 +1214,14 @@
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026 (TradingView)",
-    "price": 572.32,
+    "price": 571.06,
     "rows": [
      {
       "label": "Market value",
-      "value": "$1.25tn"
+      "value": "$1.26tn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -1222,22 +1256,22 @@
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-07-31",
     "basis": "the four quarters to Jul 2026",
-    "price": 127.99,
+    "price": 125.52,
     "rows": [
      {
       "label": "Market value",
-      "value": "$994.5bn"
+      "value": "$995.8bn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "45.2"
+      "value": "44.4"
      },
      {
       "label": "Forecast P/E (fiscal 2027)",
-      "value": "44.4"
+      "value": "43.6"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -1252,7 +1286,23 @@
       "value": "$130.00"
      }
     ]
-   }
+   },
+   "news": [
+    {
+     "date": "2026-11-06",
+     "text": "Fell 1.7% to $125.52 as investors rotated from defensive stocks into rebounding tech; no company news, Investing.com said, noting a valuation of about 45 times forward earnings. Results are due November 19.",
+     "source": "Investing.com",
+     "url": "https://www.investing.com/news/stock-market-news/why-is-walmart-stock-sliding-today-93CH-5008687"
+    }
+   ],
+   "next": [
+    {
+     "event": "Q3 results",
+     "when": "Thu, Nov 19",
+     "why": "Tests whether the defensive rotation holds at about 45 times forward earnings.",
+     "impact": "high"
+    }
+   ]
   },
   "MFPC": {
    "sector": "Fertilizers",
@@ -1264,7 +1314,7 @@
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
     "price": 41.0,
@@ -1310,7 +1360,7 @@
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-03-31",
     "basis": "results for the 12 months to March 2026",
     "price": 33.33,
@@ -1348,7 +1398,7 @@
    },
    "valuation": {
     "source": "Mubasher",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-03-31",
     "basis": "results for the 12 months to March 2026",
     "price": 23.5,
@@ -1394,7 +1444,7 @@
    },
    "valuation": {
     "source": "Mubasher",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2025-06-30",
     "basis": "results for the 12 months to June 2025",
     "price": 12.25,
@@ -1420,7 +1470,15 @@
       "value": "EGP 11.87"
      }
     ]
-   }
+   },
+   "news": [
+    {
+     "date": "2026-11-05",
+     "text": "Awarded Innovo Construction about EGP 7.1bn to build and finish 213 villas and townhouses on two Marassi Red parcels over 27 months.",
+     "source": "Eleqtisadenews",
+     "url": "https://eleqtisadenews.com/en/innovo-construction-signs-egp-7-1-billion-contract-with-emaar-misr/"
+    }
+   ]
   },
   "BQDC": {
    "sector": "Banks",
@@ -1433,6 +1491,12 @@
     }
    ],
    "news": [
+    {
+     "date": "2026-11-06",
+     "text": "The state's offering of 45% (raised from 30%) raised EGP 36bn; the institutional tranche was covered 7 times and the retail tranche 27 times, said Hisham El Sayed of the state-owned companies unit. It was the EGX's most traded stock of the week, EGP 3.49bn, closing at EGP 5.58 (+5.3%) (Youm7).",
+     "source": "Osoul Misr",
+     "url": "https://www.osoulmisrmagazine.com/451988"
+    },
     {
      "date": "2026-11-03",
      "text": "Second session: closed at EGP 5.38 (+1.32%) on 147m shares worth EGP 787.8m, the most traded stock on the exchange; one source.",
@@ -1454,10 +1518,10 @@
    ],
    "valuation": {
     "source": "TradingView and Mubasher",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": null,
     "basis": "no recent results",
-    "price": 5.5,
+    "price": 5.58,
     "rows": [
      {
       "label": "Market value",
@@ -1486,14 +1550,14 @@
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 422.865,
+    "price": 422.86,
     "rows": [
      {
       "label": "Market value",
-      "value": "$742.6bn"
+      "value": "$755.5bn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -1513,7 +1577,7 @@
      },
      {
       "label": "Analysts' one-year target",
-      "value": "$454.00"
+      "value": "$455.00"
      }
     ]
    },
@@ -1536,22 +1600,22 @@
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-08-31",
     "basis": "the four quarters to Aug 2026",
-    "price": 115.195,
+    "price": 116.01,
     "rows": [
      {
       "label": "Market value",
-      "value": "$357.8bn"
+      "value": "$350.8bn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "16.9"
+      "value": "17.1"
      },
      {
       "label": "Forecast P/E (fiscal 2027)",
-      "value": "17.1"
+      "value": "17.3"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -1568,6 +1632,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-06",
+     "text": "Microsoft is ending a 2023 deal to rent AI computing capacity from Oracle and will not renew it, Bloomberg reported; Oracle fell about 4% intraday and closed at $116.01.",
+     "source": "Cryptopolitan (citing Bloomberg)",
+     "url": "https://www.cryptopolitan.com/microsoft-oracle-deal-to-rent-ai-capacity/"
+    },
     {
      "date": "2026-11-02",
      "text": "Plans to raise $20bn through fiscal 2030, split evenly between equity and debt; the stock fell 8.8% to $119.22, about 54% below its 52-week high.",
@@ -1586,22 +1656,22 @@
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-08-31",
     "basis": "the four quarters to Aug 2026",
-    "price": 1065.285,
+    "price": 1053.56,
     "rows": [
      {
       "label": "Market value",
-      "value": "$464.6bn"
+      "value": "$466.9bn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "52.1"
+      "value": "51.5"
      },
      {
       "label": "Forecast P/E (fiscal 2027)",
-      "value": "46.9"
+      "value": "46.4"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -1609,14 +1679,22 @@
      },
      {
       "label": "Dividend yield",
-      "value": "0.56%"
+      "value": "0.55%"
      },
      {
       "label": "Analysts' one-year target",
       "value": "$1,100.00"
      }
     ]
-   }
+   },
+   "news": [
+    {
+     "date": "2026-11-05",
+     "text": "October net sales rose 12.6% to $24.50bn; comparable sales rose 11.1%, or 7.3% excluding gasoline and currency, and digital sales 22.5%.",
+     "source": "Zacks (via TradingView)",
+     "url": "https://www.tradingview.com/news/zacks:593161f8a094b:0-costco-s-october-net-sales-jump-1"
+    }
+   ]
   },
   "EGAL": {
    "sector": "Metals",
@@ -1628,7 +1706,7 @@
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
     "price": 321.08,
@@ -1656,6 +1734,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-06",
+     "text": "Its CEO told Youm7 the company earned about EGP 15.4bn on EGP 53bn of revenue last fiscal year, sales rose to about 320,000 tons, exports are about $650m against a $1bn goal, and a 300,000-ton expansion with Trafigura is planned.",
+     "source": "Youm7",
+     "url": "https://www.youm7.com/story/2026/11/6/%D8%A7%D9%84%D8%B1%D8%A6%D9%8A%D8%B3-%D8%A7%D9%84%D8%AA%D9%86%D9%81%D9%8A%D8%B0%D9%89-%D9%84%D8%B4%D8%B1%D9%83%D8%A9-%D9%85%D8%B5%D8%B1-%D9%84%D9%84%D8%A3%D9%84%D9%88%D9%85%D9%86%D9%8A%D9%88%D9%85-%D9%81%D9%89-%D8%AD%D9%88%D8%A7%D8%B1-%D9%84%D9%80-%D8%A7%D9%84%D9%8A%D9%88%D9%85-%D8%A7%D9%84%D8%B3%D8%A7%D8%A8%D8%B9/7602275"
+    },
     {
      "date": "2026-11-04",
      "text": "The government is weighing a large stake sale on the EGX before year-end, size pending a fair-value study; the state holds about 90% through MIH and the real public float is near 3%. The cash dividend's right ends after the 16 November session.",
@@ -1686,7 +1770,7 @@
    },
    "valuation": {
     "source": "Mubasher",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2025-06-30",
     "basis": "results for the 12 months to June 2025",
     "price": 13.27,
@@ -1724,7 +1808,7 @@
    },
    "valuation": {
     "source": "Mubasher",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2025-09-30",
     "basis": "results for the 12 months to September 2025",
     "price": 15.01,
@@ -1762,7 +1846,7 @@
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-07",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
     "price": 18.81,
