@@ -164,8 +164,14 @@ covered in full further down.
   and Gulf does not repeat it.
 - **Stocks Watch:** two tables of figures only (see below). Markets keeps its own coverage, including
   stories about individual companies; Stocks Watch just lists the prices.
-- **Currency and Commodities Watch:** figures and a short note for each row. No story narrative; the
-  story behind a move belongs in Markets.
+- **Currency and Commodities Watch:** figures, with a note only where it adds something the figures do not
+  show: a cause in a few words ("Bank of England hiked", "Haven demand returns"), a source or basis ("Retail
+  price" on the first gold row, "November 5 auction"), a milestone ("Lowest in a year"). Leave the Note cell
+  empty otherwise: no "Down five sessions running" on row after row, no repeat of the day's change, which the
+  site shows in its own column. Keep a note to about five words so the row stays one line. No story narrative;
+  the story behind a move belongs in Markets. Keep every row: the site shows USD/EGP, the dollar index, EUR,
+  GBP, gold 24K, gold in dollars, Brent and the rates first and folds the Gulf currencies (pegged to the dollar)
+  and the other gold carats behind "Show all", but they are still checked and logged every day.
 - **Economic Calendar:** upcoming events only, not news already covered above. Start from
   `python3 .claude/skills/daily-newsletter/calendar_facts.py DATE 14`, which lists the holidays and EGX closures,
   the desk's stocks' results dates ("expected" unless confirmed) and dividends already in the repo's data, so the

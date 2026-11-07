@@ -127,6 +127,21 @@ footer p{margin:clamp(16px,2vw,24px) 0 0;max-width:40ch;color:var(--ink2);font-s
   tr td.trend::before{display:block;min-width:0;margin:0 0 3px;font-size:9.5px;letter-spacing:.08em}
   tr td.trend .spark{margin:0 auto}
   tr:not(.has-trend) td.trend{display:none}
+  /* watch tables on a phone: one compact row per item, like a stock app: name and YTD on the left, the trend line,
+     then the price over its change; a currency's note runs underneath */
+  #content table.watch tbody tr{display:grid;grid-template-columns:minmax(0,1fr) 64px minmax(78px,auto);grid-template-areas:"name trend val" "sub trend chg" "note note note";column-gap:12px;row-gap:1px;align-items:center;padding:10px 14px;margin:0 0 4px}
+  #content table.watch:not(.all) tr.xrow{display:none}
+  #content table.watch td{padding:0;font-size:16px;line-height:22px}
+  #content table.watch td::before{display:none}
+  #content table.watch td:first-child{grid-area:name;font-size:15px;line-height:20px;padding:0}
+  #content table.watch td.trend{grid-area:trend;position:static;transform:none;width:64px}
+  #content table.watch td.trend::before{display:none}
+  #content table.watch td[data-label="Close"],#content table.watch td[data-label="Level"]{grid-area:val;text-align:right;font-weight:600}
+  #content table.watch td[data-label^="Change"]{grid-area:chg;text-align:right;font-size:14px}
+  #content table.watch td[data-label="YTD"]{grid-area:sub;white-space:nowrap;font-size:13px;color:var(--ink2)}
+  #content table.watch td[data-label="YTD"]::before{display:inline;content:"YTD ";min-width:0;margin:0 4px 0 0;font-size:10.5px}
+  #content table.watch td[data-label="Note"]{grid-area:note;font-size:13px;line-height:18px;color:var(--ink2);padding-top:4px}
+  #content table.watch td[data-label="Note"] .chg{font-size:13px}
   .s-in,.edition,#archive a{grid-template-columns:minmax(0,1fr)}
   .s h2{position:static;margin-bottom:24px}
   .edition{gap:20px}
@@ -196,6 +211,16 @@ td.num.na{text-align:center}
 .pbar button{font:600 13px/1 var(--sans);padding:8px 12px;min-height:34px;border:1px solid var(--rule);background:transparent;color:var(--ink2);cursor:pointer}
 .pbar button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--ground)}
 @media print{.pbar{display:none}}
+/* the watch tables: notes stay on one or two lines; the less-watched currency and gold rows fold behind a button */
+#content table.watch td,#content table.watch th{padding-left:12px;padding-right:12px}
+#content table.watch td{padding-top:10px;padding-bottom:10px}
+#content table.watch td.num,#content table.watch td[data-label="Level"]{white-space:nowrap}
+#content table.watch td.c3[data-label="Note"]{min-width:140px;font-size:15px;line-height:21px}
+#content table.watch:not(.all) tr.xrow{display:none}
+.morerows{display:block;cursor:pointer;font:600 13px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);background:none;border:0;padding:8px 0;margin:4px 0 0}
+.morerows::before{content:"+ ";color:var(--accent)} .morerows[aria-expanded="true"]::before{content:"\2212  "}
+.morerows:hover{color:var(--accent)}
+@media print{.morerows{display:none}#content table.watch tr.xrow{display:revert}}
 td.trend{vertical-align:middle}
 .unc{color:var(--accent);font-weight:700;margin-left:2px}
 .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -553,6 +578,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
       pending = Array.prototype.slice.call(document.querySelectorAll('.rv'));
       addSparks(ed.date, /-recap$/.test(key(ed)));
       linkDesk();
+      watchTables();
       topicChips(key(ed));
       markChanges();
       if(window.Listen) Listen.setup(key(ed), 'Daily Newsletter. ' + title(ed) + '.');
@@ -567,6 +593,22 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
   // end with a line to the matching desk page ----
   var DESK_T = ['COMI','TMGH','ETEL','PHDC','SWDY','ORAS','FWRY','ABUK','HRHO','CLHO','JUFO','ALCN','MFPC','EAST','EFIH','EMFD','BQDC','EGAL','AMOC','SKPC','EFID',
     'AAPL','MSFT','NVDA','AMZN','GOOGL','META','TSLA','JPM','XOM','AVGO','BRK.B','WMT','V','ORCL','COST'];
+  // ---- Stocks Watch and the currency table: compact rows on a phone, and in the currency table the rows that
+  // move with another (the Gulf currencies pegged to the dollar, gold's other carats) fold behind "Show all" ----
+  var FOLD = /^(SAR|AED|QAR|KWD|BHD|OMR)\/EGP|^Gold (21|18)K|^Gold pound/i;
+  function watchTables(){
+    [].forEach.call(document.querySelectorAll('#stocks-watch table, #currency-and-commodities-watch table'), function(table){
+      table.classList.add('watch');
+      if(!table.closest('#currency-and-commodities-watch')) return;
+      var rows = [].filter.call(table.querySelectorAll('tbody tr'), function(tr){ var c = tr.querySelector('td'); return c && FOLD.test(c.textContent.trim()); });
+      if(rows.length < 2) return;
+      rows.forEach(function(tr){ tr.classList.add('xrow'); });
+      var b = document.createElement('button'), more = 'Show all ' + table.querySelectorAll('tbody tr').length + ' rows';
+      b.type = 'button'; b.className = 'morerows'; b.textContent = more; b.setAttribute('aria-expanded', 'false');
+      b.addEventListener('click', function(){ var on = table.classList.toggle('all'); b.setAttribute('aria-expanded', on); b.textContent = on ? 'Show fewer' : more; });
+      table.closest('.tablewrap').insertAdjacentElement('afterend', b);
+    });
+  }
   function linkDesk(){
     [].forEach.call(document.querySelectorAll('#stocks-watch td:first-child, #stocks-this-week td:first-child'), function(td){
       if(td.querySelector('a')) return;
