@@ -14,8 +14,8 @@
    "drivers": [
     "oil"
    ],
-   "now": "Iran says ships from India, China, Iraq and Qatar may pass the Strait of Hormuz freely despite its restrictions, and its security chief carried a message to Moscow, while talks with Washington continue through Qatari mediators. Tanker incidents have not stopped, but Brent is well below its late-October peak near $118 on hopes of a deal.",
-   "now_date": "2026-11-06"
+   "now": "The United States carried out limited strikes on Iranian air defenses on Qeshm island on November 6, the first since the midterms, while President Trump said talks with Tehran had made progress and Qatar urged a deal. A third US carrier, the USS Theodore Roosevelt, is due in the Arabian Sea in mid-November, and a seafarer was killed in a tanker attack in the Strait of Hormuz on November 5.",
+   "now_date": "2026-11-07"
   },
   {
    "id": "pound-cbe",
@@ -30,8 +30,8 @@
    "drivers": [
     "egp-rates"
    ],
-   "now": "The central bank's dollar rate fell for a sixth session to EGP 54.01 on November 5, from EGP 56.04 on October 30, after the 100 basis point hike that took the deposit and lending rates to 20% and 21% from November 1. The one-year Treasury bill cleared at 26.03% at the November 5 auction.",
-   "now_date": "2026-11-06"
+   "now": "The central bank's dollar selling rate ended the week of November 5 at EGP 54.01, the pound's strongest in at least a year after six straight gains. Annual inflation eased to 12.0% in October, the overnight deposit rate is 20% after the November 1 hike, and the biggest banks raise fixed-rate certificates to 18.75% from November 8. The Monetary Policy Committee next meets on December 17.",
+   "now_date": "2026-11-07"
   },
   {
    "id": "ai-chips",
@@ -46,8 +46,8 @@
    "drivers": [
     "ai-spending"
    ],
-   "now": "The Nasdaq fell 5.5% into a correction on November 5 as chip stocks had their worst day since March 2020; Nvidia fell 8.9% to $182.29. Investors are questioning returns on AI spending and expect tighter scrutiny of data centers after the midterms.",
-   "now_date": "2026-11-06"
+   "now": "Chip stocks bounced on November 6 after the November 5 rout that put the Nasdaq into a correction, but the Nasdaq still fell 3.4% on the week. OpenAI has raised $11 billion at a $1.25 trillion valuation, below its earlier target, and Nvidia reports on November 17.",
+   "now_date": "2026-11-07"
   },
   {
    "id": "us-midterms",
@@ -55,8 +55,8 @@
    "match": "\\b(midterms?|Democrats? (won|win|wins|take|took|retake)|control of (the )?(Senate|House|Congress))\\b",
    "related": [],
    "drivers": [],
-   "now": "Democrats won control of both the Senate and the House, with a few races still too close to call. Markets read divided government as less policy uncertainty, while rules on data centers may tighten.",
-   "now_date": "2026-11-06"
+   "now": "Democrats won control of Congress in the November 3 midterms. President Trump named Stephen Miller White House chief of staff after Susie Wiles resigned on November 5, and the new Congress convenes in January.",
+   "now_date": "2026-11-07"
   },
   {
    "id": "bqdc",
@@ -128,11 +128,137 @@
    "drivers": [
     "oil"
    ],
-   "now": "Brent closed at $98.29 on November 5, up 3.9% on the day but about 13% lower than at the start of the month, as hopes of a US-Iran deal pulled prices down from their late-October highs near $118.",
-   "now_date": "2026-11-06"
+   "now": "Brent ended the week of November 6 at about $98 a barrel, down 13% in November but up about 62% this year, as traders weigh the risk of renewed war with Iran against talk of a deal.",
+   "now_date": "2026-11-07"
   }
  ],
  "stories": [
+  {
+   "ed": "2026-11-07",
+   "id": "story-treasury-bills-and-rates",
+   "lead": "Treasury bills and rates",
+   "sec": "Markets",
+   "text": "The one-year treasury bill yield stood at 26.03% at Thursday's auction, about 14 points above October's headline inflation, which keeps foreign carry-trade money flowing into local debt. The overnight deposit and lending rates are 20% and…",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-11-07",
+   "id": "story-third-carrier",
+   "lead": "Third carrier",
+   "sec": "Regional and Gulf",
+   "text": "The USS Theodore Roosevelt is heading for the Arabian Sea and is due late next week, which would give the US three carrier groups in the region at once, The National reported. Some analysts read it as a sign of renewed combat, others as a…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-07",
+   "id": "story-strikes-on-qeshm",
+   "lead": "Strikes on Qeshm",
+   "sec": "Regional and Gulf",
+   "text": "Trump confirmed \"minor strikes\" on Iranian air defenses on Qeshm island in the Strait of Hormuz on Friday, the first since the US midterms, while Iran said it shot down a US MQ-9 drone. He also said talks with Tehran had made \"a lot of…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-07",
+   "id": "story-pound-and-egx30",
+   "lead": "Pound and EGX30",
+   "sec": "Markets",
+   "text": "The Egyptian Exchange closed the week on Thursday with the EGX30 up 0.99% at 51,152.73, a weekly gain of 3.1% and up 22.3% this year, though still about 10% below its September peak. The small- and mid-cap EGX70 closed at a 52-week high of…",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-11-07",
+   "id": "story-openai-s-new-money",
+   "lead": "OpenAI's new money",
+   "sec": "In Other News",
+   "text": "OpenAI has raised $11 billion of a round that could reach about $20 billion at a $1.25 trillion valuation, Bloomberg reported, below the $1.4 trillion it was said to be targeting in September. Bloomberg also said buyers of shares in rival…",
+   "topics": [
+    "ai-chips"
+   ],
+   "added": [
+    "ai-chips"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-07",
+   "id": "story-oil-gold-and-bitcoin",
+   "lead": "Oil, gold and bitcoin",
+   "sec": "Markets",
+   "text": "Brent was little changed at $98.32 a barrel, still 13.3% lower this month, as traders weighed the risk of renewed war with Iran. Gold fell 0.9% to $4,074.90 an ounce as the dollar rose, and bitcoin held near $76,000, down 13.1% this year,…",
+   "topics": [
+    "oil"
+   ],
+   "added": [
+    "oil"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-07",
+   "id": "story-october-inflation",
+   "lead": "October inflation",
+   "sec": "Egypt News",
+   "text": "Annual headline inflation across Egypt eased to 12.0% in October from 12.8% in September, statistics agency CAPMAS said on Thursday, while prices rose 0.6% on the month. Food and drink rose 0.8%, led by meat and poultry, up 3.2%, and dairy…",
+   "topics": [
+    "pound-cbe"
+   ],
+   "added": [
+    "pound-cbe"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-07",
+   "id": "story-miller-takes-over",
+   "lead": "Miller takes over",
+   "sec": "Top World Headlines",
+   "text": "President Donald Trump named Stephen Miller, the architect of his mass-deportation program, as White House chief of staff after Susie Wiles resigned on Thursday, days after Republicans lost control of Congress in the midterms. Trump said…",
+   "topics": [
+    "us-midterms"
+   ]
+  },
+  {
+   "ed": "2026-11-07",
+   "id": "story-jobs-led-rebound",
+   "lead": "Jobs-led rebound",
+   "sec": "Markets",
+   "text": "The S&P 500 gained 0.31% to 7,376.86 and the Nasdaq 1.09% to 24,579.42 on Friday, while the Dow Jones lost 0.46% to 51,285.73. Chip stocks bounced after Thursday's rout, with Nvidia up 2.8% and Intel up about 8%, but the week was still…",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-11-07",
+   "id": "story-fixed-certificates-rise",
+   "lead": "Fixed certificates rise",
+   "sec": "Markets",
+   "text": "National Bank of Egypt and Banque Misr will raise the rates on their main fixed-return certificates by one percentage point from Sunday, Youm7 reported: the monthly-payout Platinum and Al-Qimma certificates go to 18.75% from 17.75%, and…",
+   "topics": [
+    "pound-cbe"
+   ],
+   "added": [
+    "pound-cbe"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-07",
+   "id": "story-deadly-tanker-attack",
+   "lead": "Deadly tanker attack",
+   "sec": "Regional and Gulf",
+   "text": "A seafarer was killed on the Greek-owned tanker Velos Sapphire in the Strait of Hormuz after an unidentified projectile hit the ship on Thursday, its owner said, while Iranian media blamed mines for fires on several tankers. For Egypt,…",
+   "topics": [
+    "iran-war"
+   ]
+  },
   {
    "ed": "2026-11-06",
    "id": "story-treasury-bill-auction",
