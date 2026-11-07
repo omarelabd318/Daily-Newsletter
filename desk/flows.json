@@ -13,12 +13,21 @@
     "Foreign individuals": 0.01
    },
    "sources": [
-    "Youm7",
-    "Masr Times",
-    "Newsroom"
+    "Masrawy",
+    "Youm7"
    ],
    "turnover": 43.9,
-   "oneoff": "Banque du Caire's EGP 36.4bn offering"
+   "oneoff": "Banque du Caire's EGP 36.4bn offering",
+   "links": [
+    {
+     "source": "Masrawy",
+     "url": "https://www.masrawy.com/news/news_economy/details/2026/10/29/3070564/%D9%85%D8%A4%D8%B4%D8%B1%D8%A7%D8%AA-%D8%A7%D9%84%D8%A8%D9%88%D8%B1%D8%B5%D8%A9-%D8%AA%D9%88%D8%A7%D8%B5%D9%84-%D8%A7%D9%84%D8%A7%D8%B1%D8%AA%D9%81%D8%A7%D8%B9-%D9%85%D8%B9-%D8%AE%D8%AA%D8%A7%D9%85-%D8%AA%D8%B9%D8%A7%D9%85%D9%84%D8%A7%D8%AA-%D8%AC%D9%84%D8%B3%D8%A9-%D8%A7%D9%84%D9%8A%D9%88%D9%85"
+    },
+    {
+     "source": "Youm7",
+     "url": "https://www.youm7.com/story/2026/10/29/%D8%A7%D9%84%D8%A8%D9%88%D8%B1%D8%B5%D8%A9-%D8%AA%D9%88%D8%AF%D8%B9-%D8%A3%D9%83%D8%AA%D9%88%D8%A8%D8%B1-%D8%A8%D9%85%D9%83%D8%A7%D8%B3%D8%A8-33%D9%85%D9%84%D9%8A%D8%A7%D8%B1-%D8%AC%D9%86%D9%8A%D9%87-%D9%82%D9%8A%D9%85-%D8%AA%D8%AF%D8%A7%D9%88%D9%84-%D8%AA%D8%A7%D8%B1%D9%8A%D8%AE%D9%8A%D8%A9-%D8%AA%D9%82%D8%AA%D8%B1%D8%A8/7598612"
+    }
+   ]
   },
   {
    "date": "2026-11-01",
@@ -29,10 +38,15 @@
     "Foreign investors": -0.0406
    },
    "sources": [
-    "Egypt Today",
     "Masrawy"
    ],
-   "turnover": 7.2
+   "turnover": 7.2,
+   "links": [
+    {
+     "source": "Masrawy",
+     "url": "https://www.masrawy.com/news/news_economy/details/2026/11/1/3071965/%D9%85%D8%A4%D8%B4%D8%B1%D8%A7%D8%AA-%D8%A7%D9%84%D8%A8%D9%88%D8%B1%D8%B5%D8%A9-%D8%AA%D9%88%D8%A7%D8%B5%D9%84-%D8%A7%D9%84%D8%A7%D9%86%D8%AE%D9%81%D8%A7%D8%B6-%D9%85%D8%B9-%D8%AE%D8%AA%D8%A7%D9%85-%D8%AA%D8%B9%D8%A7%D9%85%D9%84%D8%A7%D8%AA-%D8%AC%D9%84%D8%B3%D8%A9-%D8%A7%D9%84%D9%8A%D9%88%D9%85"
+    }
+   ]
   },
   {
    "date": "2026-11-02",
@@ -43,7 +57,13 @@
     "Foreign investors": -0.1381
    },
    "sources": [
-    "Masrawy"
+    "Banker News"
+   ],
+   "links": [
+    {
+     "source": "Banker News",
+     "url": "https://www.banker.news/158545"
+    }
    ]
   },
   {
@@ -56,10 +76,19 @@
    },
    "sources": [
     "Masrawy",
-    "Amwal Al Ghad",
     "Aleqaria"
    ],
-   "turnover": 7.4
+   "turnover": 7.4,
+   "links": [
+    {
+     "source": "Masrawy",
+     "url": "https://www.masrawy.com/news/news_economy/details/2026/11/3/3073107/%D8%A7%D8%B1%D8%AA%D9%81%D8%A7%D8%B9-%D9%85%D8%A4%D8%B4%D8%B1%D8%A7%D8%AA-%D8%A7%D9%84%D8%A8%D9%88%D8%B1%D8%B5%D8%A9-%D9%85%D8%B9-%D8%AE%D8%AA%D8%A7%D9%85-%D8%AA%D8%B9%D8%A7%D9%85%D9%84%D8%A7%D8%AA-%D8%AC%D9%84%D8%B3%D8%A9-%D8%A7%D9%84%D9%8A%D9%88%D9%85-%D8%A7%D9%84%D8%AB%D9%84%D8%A7%D8%AB%D8%A7%D8%A1"
+    },
+    {
+     "source": "Aleqaria",
+     "url": "https://www.aleqaria.com.eg/post/details/356601/%D8%A7%D9%84%D8%A8%D9%88%D8%B1%D8%B5%D8%A9-%D8%A7%D9%84%D9%85%D8%B5%D8%B1%D9%8A%D8%A9-15850"
+    }
+   ]
   },
   {
    "date": "2026-11-04",
@@ -73,26 +102,47 @@
     "Foreign individuals": -0.0022
    },
    "sources": [
-    "Youm7",
-    "Masrawy",
-    "Aleqaria"
+    "Aleqaria",
+    "Masrawy"
    ],
-   "turnover": 9.0
+   "turnover": 9.0,
+   "links": [
+    {
+     "source": "Aleqaria",
+     "url": "https://www.aleqaria.com.eg/post/details/356738/%D8%A7%D9%84%D8%A8%D9%88%D8%B1%D8%B5%D8%A9-%D8%A7%D9%84%D9%85%D8%B5%D8%B1%D9%8A%D8%A9-98112"
+    },
+    {
+     "source": "Masrawy",
+     "url": "https://www.masrawy.com/news/news_economy/details/2026/11/4/3073629/%D8%A7%D9%84%D9%85%D8%A4%D8%B4%D8%B1-%D8%A7%D9%84%D8%B1%D8%A6%D9%8A%D8%B3%D9%8A-%D9%84%D9%84%D8%A8%D9%88%D8%B1%D8%B5%D8%A9-%D9%8A%D9%82%D9%81%D8%B2-2-83-%D9%85%D8%B9-%D8%AE%D8%AA%D8%A7%D9%85-%D8%AA%D8%B9%D8%A7%D9%85%D9%84%D8%A7%D8%AA-%D8%AC%D9%84%D8%B3%D8%A9-%D8%A7%D9%84%D9%8A%D9%88%D9%85"
+    }
+   ]
   },
   {
    "date": "2026-11-05",
-   "confirmed": false,
+   "confirmed": true,
    "rows": {
-    "Egyptian investors": -0.191,
-    "Arab investors": -0.0208,
-    "Foreign investors": 0.2119
+    "Egyptian institutions": -0.0856,
+    "Egyptian individuals": -0.1078,
+    "Arab institutions": -0.0173,
+    "Arab individuals": -0.0118,
+    "Foreign institutions": 0.2199,
+    "Foreign individuals": 0.0027
    },
    "sources": [
-    "Youlyou",
-    "Youm7",
-    "Masrawy"
+    "Hapi Journal",
+    "Youm7"
    ],
-   "turnover": 10.2
+   "turnover": 10.2,
+   "links": [
+    {
+     "source": "Hapi Journal",
+     "url": "https://hapijournal.com/2026/11/05/%D8%A7%D9%84%D8%A8%D9%88%D8%B1%D8%B5%D8%A9-%D8%AA%D8%B1%D8%AA%D9%81%D8%B9-%D9%86%D8%AD%D9%88-1-%D9%88%D8%B3%D8%B7-%D8%AA%D8%AF%D8%A7%D9%88%D9%84%D8%A7%D8%AA-%D8%AA%D8%AA%D8%AC%D8%A7%D9%88%D8%B2-10/"
+    },
+    {
+     "source": "Youm7",
+     "url": "https://www.youm7.com/story/2026/11/5/%D8%A3%D8%AE%D8%A8%D8%A7%D8%B1-%D8%A7%D9%84%D8%A8%D9%88%D8%B1%D8%B5%D8%A9-%D8%A7%D9%84%D9%8A%D9%88%D9%85-%D8%A7%D9%84%D8%AE%D9%85%D9%8A%D8%B3-5-11-2026/7607346"
+    }
+   ]
   }
  ]
 }

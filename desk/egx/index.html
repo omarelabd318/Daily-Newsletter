@@ -162,13 +162,16 @@
   // the session's flows: from the day's file, or else the flow history's entry for the same session
   const FL = await M.get('/desk/flows.json'), FH = ((FL && FL.days) || []).find((d) => d.date === M.ASOF);
   const F = X.flows || (FH && { rows: Object.entries(FH.rows).map(([who, net]) => ({ who, net })), confirmed: FH.confirmed !== false,
-    source: (FH.sources || []).join(', '), sub: `Net EGX equity flows, ${M.short(FH.date)}, EGP bn` + (FH.sources ? ` · ${FH.sources.join(', ')}` : '') });
+    source: (FH.sources || []).join(', '), sub: `Net EGX equity flows, ${M.short(FH.date)}, EGP bn` });
+  // the reports the figures came from, as links, for the session shown
+  const FLINK = ((FH && FH.links) || []).filter((x) => x && x.url);
   if (F) {
     M.$('c-flows').hidden = false;
     const max = Math.max(...F.rows.map((r) => Math.abs(r.net))) || 1;
     M.$('flows').innerHTML = F.rows.map((r) => `<div class="flow"><div class="flow-top"><span>${M.esc(r.who)}</span><span class="num">${r.net > 0 ? '+' : r.net < 0 ? '−' : ''}${Math.abs(r.net).toFixed(2)}</span></div><div class="flow-bar"><i class="${r.net >= 0 ? 'buy' : 'sell'}" style="width:${(Math.abs(r.net) / max * 50).toFixed(1)}%"></i></div></div>`).join('') + '<div class="flow-axis"><span>Net sold</span><span>Net bought</span></div>';
     M.$('flows-sub').textContent = F.sub || '';
     M.$('flows-read').textContent = F.read || '';
+    if (FLINK.length) M.$('flows-read').insertAdjacentHTML('afterend', `<p class="src-links">From the EGX's daily report as carried by ${FLINK.map((x) => `<a href="${M.esc(x.url)}" target="_blank" rel="noopener">${M.esc(x.source)}</a>`).join(', ')}</p>`);
     M.$('flows-note').hidden = !!F.confirmed; M.$('flows-note').textContent = F.confirmed ? '' : 'Not yet confirmed: ' + (F.source || 'one source only');
   }
   // foreign net buying by session, from desk/flows.json

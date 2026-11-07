@@ -116,7 +116,11 @@ both together); each page names its section on `<body data-section>`. `/desk/` f
   period and basis), the
   latest session's trading, dates coming up, views and news. News and views are added newest first and
   never deleted. Valuation figures older than about a quarter are flagged on the page, not hidden.
-- `desk/flows.json`: net equity flows by investor group, one entry per session, for the flow history. When only totals by nationality are reported, use the rows Egyptian, Arab and Foreign investors. A session dominated by a one-off deal (an IPO or block sale) gets `"oneoff": "<the deal>"`, so the foreign-investors chart leaves it out and names it.
+- `desk/flows.json`: net equity flows by investor group, one entry per session, for the flow history. Each entry
+  has `links`, `[{"source": "Youm7", "url": "https://..."}]`, the article for every report the figures came from
+  (the EGX's own site blocks scripts, so the figures come from the outlets that carry its daily report); the EGX page
+  shows them as links under the card, and check_desk.py fails an entry without them. `confirmed` is true once two
+  reports agree. When only totals by nationality are reported, use the rows Egyptian, Arab and Foreign investors. A session dominated by a one-off deal (an IPO or block sale) gets `"oneoff": "<the deal>"`, so the foreign-investors chart leaves it out and names it.
 - `desk/rolls.json`: futures contract switches (Brent's front month rolls each month). When fetch_figures.py
   prints "CONTRACT SWITCH?", add an entry (session = the first close on the new contract, from, to); the Global
   page's Brent chart marks the switch.

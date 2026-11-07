@@ -202,6 +202,11 @@ def main(args):
         if dates_ != sorted(dates_, reverse=True):
             warnings.append(f"stocks.json {t}: news is not newest first.")
     FLW = load("desk/flows.json") or {}
+    # every session's flows carry a link to each report they came from, so a reader can check them
+    for fday in (FLW.get("days") or [])[-10:]:
+        links = fday.get("links") or []
+        if not links or not all(isinstance(x, dict) and str(x.get("url", "")).startswith("http") and x.get("source") for x in links):
+            errors.append(f"desk/flows.json {fday.get('date')}: add 'links', [{{'source': ..., 'url': ...}}], one for each report the figures came from.")
     # the EGX traded in the desk's session: its flows belong in the day's file and the flow history
     if D.get("asOf") and not any(d.get("date") == D["asOf"] for d in FLW.get("days", [])):
         warnings.append(f"desk/flows.json has no entry for the {D['asOf']} session: add who bought and who sold (and egypt.flows in the day's file).")
