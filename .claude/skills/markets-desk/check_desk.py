@@ -286,6 +286,16 @@ def main(args):
     logged = [v for v in (d.get("reserves_usd") for d in log.get("days", [])) if v]
     if logged and months and abs(logged[-1] - RS["months"][-1]["total"]) > 0.05:
         warnings.append(f"desk/reserves.json ends at {months[-1]} ({RS['months'][-1]['total']}bn) but the log has {logged[-1]}bn: add the new month.")
+    # the 1D and 1W charts: the last session saved for each market should hold every desk stock
+    IN = load("desk/intraday.json") or {}
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("fi", os.path.join(os.path.dirname(os.path.abspath(__file__)), "fetch_intraday.py"))
+    fi = importlib.util.module_from_spec(spec); spec.loader.exec_module(fi)
+    for mk, keys in (("egx", ["EGX30"] + fi.EGX), ("us", ["COMP"] + fi.US)):
+        got = (IN.get(mk) or {}).get("series", {})
+        miss = [k for k in keys if k not in got]
+        if got and miss:
+            warnings.append(f"desk/intraday.json: the {mk.upper()} session {IN[mk].get('session')} has no one-day line for {', '.join(miss)}; run fetch_intraday.py again (it retries, then tries Yahoo).")
     VL = load("desk/views.json") or {}
     ids = set()
     for v in VL.get("views", []):
