@@ -352,6 +352,14 @@ The same sources and checks as the newsletter: `fetch_figures.py` first, a secon
 closing prices only, and a grey dash for any figure not confirmed that morning. Trend lines, changes over
 periods and YTD come from `data/markets.json`.
 
+**News for the US stocks and world markets: Reuters first.** Reuters is the original, most dependable report for
+company results, deals, guidance, analyst moves and market wraps, and Yahoo Finance republishes its stories in full,
+free to read (see the newsletter skill's "Reuters via Yahoo Finance"). When stock_news.py turns up a story from a site
+that rewrites others (24/7 Wall St., TheStreet, TradingKey, Motley Fool, Zacks, Benzinga, Investing.com's rewrites),
+search "Reuters <company> <subject>" and use the Reuters story where there is one, credited `Reuters (via Yahoo
+Finance)` with the Yahoo link; otherwise the company's own release or filing, then CNBC, the FT, Bloomberg, the WSJ
+or AP. Keep the rewrite sites as leads, not as the source a reader is sent to.
+
 ## Wording
 
 US English throughout, as in the newsletter's skill: American spelling (fertilizer, favor, organize, percent) and
