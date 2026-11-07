@@ -28,7 +28,7 @@ closes are the last session's; the news, stock research and analysis are still u
 3. Write each section: finding, three to five stories (`calls`), winners and losers (`board`), the Stocks note,
    the week ahead and open views, then update `desk/views.json` (see Views: the record): new entries, news, and judgements.
 4. Write `pages`: EGX (finding, session, news, outlook), EGP (finding, rates, drivers, news, view), US
-   (finding, rates, afterBell, news, outlook), Global (finding, notes, news). Carry each projection
+   (finding, rates: the day's extra items only, see step 5; afterBell, news, outlook), Global (finding, notes, news). Carry each projection
    forward until its date, and score it when the date passes.
 5. Run `python3 .claude/skills/markets-desk/fetch_intraday.py` to save the last finished session's prices
    through the day (`desk/intraday.json`, for the 1D charts: the EGX30, the Nasdaq and the desk's stocks, and
@@ -37,6 +37,10 @@ closes are the last session's; the news, stock research and analysis are still u
    It keeps the saved session if a market is still trading, and takes under a minute. It also keeps the last
    five sessions (`week`, every 15 minutes), which the 1W charts draw once two or more are saved. The dollar in pounds
    has no 1D chart: the official rate barely moves within a day. Then run
+   `python3 .claude/skills/markets-desk/fetch_rates.py` (`desk/rates.json`: the VIX from Cboe and the 3-month, 2-, 10- and
+   30-year Treasury yields from the US Treasury, a year of daily closes): the Wall Street page's "Rates and data" shows
+   them every day, with the dollar index from the log, each with its change on the day. So `pages.us.rates` holds only
+   the day's extra items (a data release, Fed odds, a central bank decision), never the VIX or yields. Then run
    `python3 .claude/skills/markets-desk/fetch_valuation.py` to refresh each stock's Valuation card in
    `desk/stocks.json` (TradingView's screener and Mubasher for Egyptian stocks, taking whichever runs to the newer quarter; Nasdaq
    for US ones; P/E and P/B are worked out at the latest close, with the results period they rest on). It keeps a stock's card if its fetch fails.

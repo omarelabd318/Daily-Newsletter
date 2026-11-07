@@ -95,7 +95,19 @@
   M.$('itabs').querySelectorAll('button').forEach((b, i) => b.addEventListener('click', () => { M.$('itabs').querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); cur = IDX[i]; draw(); }));
   M.segment(M.$('seg'), per[0], (p) => { per = p; draw(); }); draw();
   M.$('idx').innerHTML = IDX.map((x, i) => { const c = M.change(x.s, 0); return `<div class="lrow${i ? '' : ' lead'}"><span class="k">${M.esc(x.n)}</span><span class="v num">${M.num(M.last(x.s))}</span><span class="d num ${M.cls(c)}">${M.pct(c, 2)}</span></div>`; }).join('');
-  M.$('rates').innerHTML = (P.rates || []).map((r) => `<div class="lrow"><span class="k">${M.esc(r.label)}</span><span class="v num${r.value == null ? ' dash' : ''}">${r.value == null ? '—' : M.esc(r.value)}</span><span class="d"></span></div>`).join('');
+  // the fixed rows (desk/rates.json, from Cboe and the US Treasury; the dollar index from the log), each at the desk's
+  // US session with its change on the day, then the day's own items (data releases, Fed odds) the desk adds
+  const RT = ((await M.get('/desk/rates.json')) || {}).series || {}, usAt = M.asOfFor('us');
+  const at = (s) => { const i = (s || []).map((x) => x[0]).filter((d) => d <= usAt).length - 1; return i >= 0 ? [s[i][1], i ? s[i - 1][1] : null] : [null, null]; };
+  const bp = (v, p) => { if (v == null || p == null) return ''; const d = Math.round((v - p) * 100); return `<span class="d num ${M.cls(d)}">${d > 0 ? '+' : d < 0 ? '−' : ''}${Math.abs(d)} bp</span>`; };
+  const pc = (v, p) => (v == null || p == null ? '<span class="d"></span>' : `<span class="d num ${M.cls((v / p - 1) * 100)}">${M.pct((v / p - 1) * 100, 1)}</span>`);
+  const FIX = [['VIX (volatility)', RT.vix, (v) => M.num(v, 2), pc], ['3-month bill', RT.us3m, (v) => v.toFixed(2) + '%', bp],
+    ['2-year Treasury', RT.us2y, (v) => v.toFixed(2) + '%', bp], ['10-year Treasury', RT.us10y, (v) => v.toFixed(2) + '%', bp],
+    ['30-year Treasury', RT.us30y, (v) => v.toFixed(2) + '%', bp], ['Dollar index', M.series((e) => e.dxy), (v) => M.num(v, 2), pc]];
+  const fixed = FIX.map(([k, s, f, ch]) => { const [v, p] = at(s); return v == null ? '' : `<div class="lrow"><span class="k">${k}</span><span class="v num">${f(v)}</span>${ch(v, p) || '<span class="d"></span>'}</div>`; }).join('');
+  const dup = /vix|volatility|(2|10|30)[- ]year|3[- ]month|dollar index|dxy/i;
+  const extra = (P.rates || []).filter((r) => !dup.test(r.label)).map((r) => `<div class="lrow wrap"><span class="k">${M.esc(r.label)}</span><span class="v num${r.value == null ? ' dash' : ''}">${r.value == null ? '—' : M.esc(r.value)}</span></div>`).join('');
+  M.$('rates').innerHTML = fixed + (extra ? `<div class="lsep">Also today</div>${extra}` : '');
   // the whole market's movers of the last session, or the desk's 12 stocks over any period
   // the whole market over the last session, week or month, or the desk's stocks over any period
   let mback = 0, wback = 0, mall = true;

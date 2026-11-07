@@ -542,6 +542,8 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
           if(!run){ run = document.createElement('div'); run.className = 'run'; body.insertBefore(run, el); }
           run.appendChild(el);
         });
+        // a lone paragraph (a table's caption) gets no columns, or the wide page draws the column line beside it
+        [].slice.call(body.querySelectorAll(':scope > .run')).forEach(function(r){ if(r.children.length < 2 && !/^(OL|UL)$/.test(r.firstElementChild.tagName)){ while(r.firstChild) body.insertBefore(r.firstChild, r); r.remove(); } });
       });
       document.querySelectorAll('.mast > *').forEach(function(el){el.classList.add('rv')});
       pending = Array.prototype.slice.call(document.querySelectorAll('.rv'));

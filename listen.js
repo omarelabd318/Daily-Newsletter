@@ -381,13 +381,25 @@
 
   // ---- the space bar plays and pauses while the player is open (not while typing, or on a focused button,
   // which the space bar already presses) ----
+  // the arrow keys skip like the bar's buttons: left and right to the previous or next section, with Shift to the
+  // previous or next paragraph
   document.addEventListener('keydown', function(e){
-    if(!S || e.key !== ' ' || e.ctrlKey || e.metaKey || e.altKey) return;
+    if(!S || e.ctrlKey || e.metaKey || e.altKey || !/^( |ArrowLeft|ArrowRight)$/.test(e.key)) return;
     var t = e.target;
-    if(t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT|BUTTON|A|SUMMARY)$/.test(t.tagName))) return;
+    if(t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+    if(e.key === ' ' && t && /^(BUTTON|A|SUMMARY)$/.test(t.tagName)) return;
     e.preventDefault();   // not the page scroll
-    S.playing ? pause() : play();
+    if(e.key === ' ') S.playing ? pause() : play();
+    else if(e.shiftKey) jumpBlock(e.key === 'ArrowLeft' ? -1 : 1);
+    else jumpSection(e.key === 'ArrowLeft' ? -1 : 1);
   });
+  function jumpBlock(dir){
+    var i = Math.max(0, Math.min(S.list.length - 1, S.i + dir));
+    if(i === S.i) return;
+    S.i = i;
+    if(S.mode === 'rec'){ var t = timeOf(i); if(t != null) S.audio.currentTime = t; paint(); }
+    else if(S.playing) speakFrom(i); else paint();
+  }
 
   // ---- tap a word to read from there (while the player is open) ----
   function caretAt(x, y){
