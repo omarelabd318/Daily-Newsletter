@@ -258,6 +258,16 @@ was not made. End the final reply with the line `research_log.py DATE newsletter
   the agency. Yahoo's own articles and its contributor or partner pieces (Motley Fool, Zacks, Investopedia and the
   like) are not wire reporting: treat those as the outlet that wrote them. Summary services such as Finimize, which
   rewrite Reuters or Bloomberg stories, are leads only: find and cite the original.
+- **FactIQ (connector, when the run has it, the mcp__factiq__ tools):** a read-only service of official statistics
+  and filings. Use it where it holds the figure: Suez Canal, Bab el-Mandeb and Hormuz shipping (daily transits and
+  cargo tonnage from IMF PortWatch, two to three weeks behind) for Suez, Red Sea and Iran-war stories; US data
+  (payrolls, CPI, GDP from BLS and BEA, Treasury yields) and what Fed, ECB, Bank of England and other central bankers
+  said, with quotes, for Global Markets; Brent, gold and FX as a second source for the currency table; company
+  filings and earnings calls for a big company story; the IMF's forecasts for Egypt (yearly, marked as projections).
+  It has no Egyptian news, EGX prices, monthly Egyptian figures or Central Bank of Egypt statements, and its
+  dollar-pound rate is a market rate, not the central bank's: those stay with the usual sources. Credit the
+  underlying source (IMF PortWatch, the BLS, the company's filing) with the link FactIQ returns, never FactIQ itself;
+  log each lookup as a page (`research_log.py DATE newsletter page factiq:<what>`); without the connector, carry on.
 - **Variety by adding, not dropping:** go through the whole EnterpriseAM edition (on weekdays) and
   CairoScene, and consider every item. Variety comes from adding strong stories from other outlets
   alongside them, never from leaving out a good EnterpriseAM or CairoScene story to balance the count.
