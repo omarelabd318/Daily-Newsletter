@@ -308,6 +308,21 @@ def main(args):
             need(x, ["date", "text", "source", "effect"], f"{where} update")
             if x.get("effect") not in ("supports", "against", "neutral"):
                 errors.append(f"{where} update: effect must be supports, against or neutral.")
+        # confidence moves with the news: an update may set a new level, one step at a time, with the news as its reason
+        RANK, cur = {"low": 0, "medium": 1, "high": 2}, v.get("confidence")
+        for x in sorted(v.get("updates", []), key=lambda x: x.get("date", "")):
+            c = x.get("confidence")
+            if c is None:
+                continue
+            level(c, f"{where} update {x.get('date')}")
+            if c in RANK and cur in RANK:
+                if c == cur:
+                    errors.append(f"{where} update {x.get('date')}: confidence is already {c}; set it only when it changes.")
+                elif abs(RANK[c] - RANK[cur]) > 1:
+                    errors.append(f"{where} update {x.get('date')}: confidence moves one step at a time ({cur} to {c}).")
+            if (v.get("result") or {}).get("date") and x.get("date", "") > v["result"]["date"]:
+                errors.append(f"{where} update {x.get('date')}: confidence cannot change after the view is judged.")
+            cur = c
 
     for s in list(texts(D)) + list(texts(S)):
         if re.search(r"\byour (stocks?|names|egyptian|us)\b", s, re.I):

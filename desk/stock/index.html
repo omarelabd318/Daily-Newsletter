@@ -169,7 +169,7 @@ try {
   // the desk's projections for this stock from today's bullish and bearish lists come first
   // the desk's views and projections on this stock, from the record on the Views page (desk/views.json)
   const VL = await M.get('/desk/views.json'), mine = ((VL && VL.views) || []).filter((v) => (v.tickers || []).includes(t));
-  M.$('views').innerHTML = mine.map((v) => `<div class="view"><b>${M.esc(v.title)}</b><span><span class="pill ${PILL[v.status] || 'open'}">${M.esc(v.status[0].toUpperCase() + v.status.slice(1))}</span> ${M.conf(v.confidence)}</span><span class="why">${M.esc(v.detail)} Wrong if: ${M.esc(v.wrong)}${(v.updates || []).length ? ` · ${v.updates.length} news item${v.updates.length > 1 ? 's' : ''}` : ''}</span></div>`).join('')
+  M.$('views').innerHTML = mine.map((v) => `<div class="view"><b>${M.esc(v.title)}</b><span><span class="pill ${PILL[v.status] || 'open'}">${M.esc(v.status[0].toUpperCase() + v.status.slice(1))}</span> ${M.conf(M.confNow(v))}</span><span class="why">${M.esc(v.detail)} Wrong if: ${M.esc(v.wrong)}${(v.updates || []).length ? ` · ${v.updates.length} news item${v.updates.length > 1 ? 's' : ''}` : ''}</span></div>`).join('')
     + (mine.length ? '<p class="sub" style="margin-top:10px"><a href="/desk/views/">All views and the news on each →</a></p>' : '')
     || '<p class="sub">No open view on this stock.</p>';
   // news: today's market news that names this stock, then its own news from desk/stocks.json, newest first

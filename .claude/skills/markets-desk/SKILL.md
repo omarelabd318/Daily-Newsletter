@@ -320,6 +320,13 @@ Every day:
 2. **Add news** that bears on an open entry to its `updates`: date, one line, source, url, and `effect`
    (supports, against or neutral). Take it from the day's research and the stock research; only news
    checked at the outlet. The same story can go on several entries.
+   **Confidence moves with the news.** When an update changes how likely the call now looks, give it a
+   `confidence` (the new level, one step at a time: low, medium, high); the update's text is the reason, so say
+   why in it ("the CBE held rates, removing the main risk"). Change it for evidence: news checked at the outlet,
+   a figure the view rests on (rates, flows, supply, earnings), not because the price moved its way for a day or
+   two, which the status already shows. The entry's own `confidence` stays the level it opened at; the pages show
+   the latest level, with "opened at low confidence" and each change in the news list. It cannot change once
+   the entry is judged.
 3. **Judge** with `python3 .claude/skills/markets-desk/judge_views.py --write`, after logging the day's figures.
    It marks an entry wrong as soon as a close (or, for tests marked `"intraday": true`, a price inside the
    session) meets one of its `wrongIf` tests, judges each entry on its due date from its `track`, keeps
