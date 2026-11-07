@@ -3,7 +3,7 @@
 that runs here; no account or key).
 
 Usage (from the repo root, after the edition is final):
-  python3 .claude/skills/daily-newsletter/make_audio.py EDITION [--voice af_heart,am_michael] [--local]
+  python3 .claude/skills/daily-newsletter/make_audio.py EDITION [--voice af_heart,am_michael] [--local] [--force]
 
 EDITION is the file key (2026-11-06, or 2026-10-28-v2). It reads the blocks read_aloud.py gives (the same ones the
 site highlights), writes an MP3 and data/audio/EDITION.json (when each block starts), and publishes the MP3 on the
@@ -227,7 +227,8 @@ def main(a):
         old = json.load(open(man)) if os.path.exists(man) else {}
     except Exception:
         old = {}
-    done = {v["voice"]: v for v in old.get("voices", [])} if old.get("source") == digest and not local else {}
+    # --force records again even from the same text (after a change to how figures and abbreviations are read)
+    done = {v["voice"]: v for v in old.get("voices", [])} if old.get("source") == digest and not local and "--force" not in a else {}
     try:
         deps()
         t0, entries, made, report = time.time(), [], {}, []

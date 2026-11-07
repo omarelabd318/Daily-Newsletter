@@ -20,6 +20,9 @@ WORDS = {"YTD": "year to date", "YoY": "year on year", "y/y": "year on year", "m
          "Q1": "the first quarter", "Q2": "the second quarter", "Q3": "the third quarter", "Q4": "the fourth quarter"}
 MONTHS = {"Jan": "January", "Feb": "February", "Mar": "March", "Apr": "April", "Jun": "June", "Jul": "July", "Aug": "August",
           "Sep": "September", "Sept": "September", "Oct": "October", "Nov": "November", "Dec": "December"}
+SAY = {"NATO", "OPEC", "NASA", "FIFA", "UEFA", "COVID", "ASEAN", "BRICS", "SWIFT", "LIBOR", "SOFR", "MENA", "NEOM",
+       "AFCON", "AIDS", "IKEA", "LEGO", "ISIS", "CAPMAS", "UNICEF", "UNESCO", "SIM", "PIN", "LASER", "RAM", "GIF"}
+ROMAN = re.compile(r"(?:X{0,3})(?:IX|IV|V?I{0,3})")
 UNITS = {"tn": "trillion", "bn": "billion", "mn": "million", "m": "million", "k": "thousand"}
 
 
@@ -47,6 +50,8 @@ def speakable(t):
         t = re.sub(r"\b" + k + r"\.?(?= \d)", v, t)
     for k, v in WORDS.items():
         t = re.sub(r"(?<![\w&])" + re.escape(k) + r"(?![\w&])", v, t)
+    # short all-caps abbreviations are spelled out (IPO, CIB, US, AI), except those said as words (NATO, OPEC)
+    t = re.sub(r"\b[A-Z]{2,5}\b", lambda m: m.group(0) if m.group(0) in SAY or ROMAN.fullmatch(m.group(0)) else " ".join(m.group(0)), t)
     t = t.replace("&", " and ").replace("/", " ").replace("·", ",").replace("→", "")
     return re.sub(r"\s+", " ", t).strip()
 

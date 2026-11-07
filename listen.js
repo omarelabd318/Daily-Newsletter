@@ -16,6 +16,7 @@
   var WORDS = [['YTD','year to date'],['YoY','year on year'],['EGX30','E G X thirty'],['EGX70','E G X seventy'],['EGX100','E G X one hundred'],
     ['S&P 500','S and P 500'],['S&P','S and P'],['CBE','C B E'],['IMF','I M F'],['GDP','G D P'],['OPEC+','OPEC plus'],
     ['Q1','the first quarter'],['Q2','the second quarter'],['Q3','the third quarter'],['Q4','the fourth quarter']];
+  var SAY = /^(NATO|OPEC|NASA|FIFA|UEFA|COVID|ASEAN|BRICS|SWIFT|LIBOR|SOFR|MENA|NEOM|AFCON|AIDS|IKEA|LEGO|ISIS|CAPMAS|UNICEF|UNESCO|SIM|PIN|LASER|RAM|GIF)$/;
   var NUM = '(\\d+(?:,\\d{3})*(?:\\.\\d+)?)';   // 76,000 or 4.5, never a comma after it
   function esc(re){ return re.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
   function speakable(t){
@@ -31,6 +32,8 @@
     t = t.replace(/(^|[^\w.])([+−-])(\d)/g, function(m, pre, s, d){ return pre + (s === '+' ? 'plus ' : 'minus ') + d; });
     Object.keys(MONTHS).forEach(function(k){ t = t.replace(new RegExp('\\b' + k + '\\.?(?= \\d)', 'g'), MONTHS[k]); });
     WORDS.forEach(function(w){ t = t.replace(new RegExp('(^|[^\\w&])' + esc(w[0]) + '(?![\\w&])', 'g'), '$1' + w[1]); });
+    // short all-caps abbreviations are spelled out (IPO, CIB, US, AI), except those said as words (NATO, OPEC)
+    t = t.replace(/\b[A-Z]{2,5}\b/g, function(w){ return SAY.test(w) || /^(?:X{0,3})(?:IX|IV|V?I{0,3})$/.test(w) ? w : w.split('').join(' '); });
     return t.replace(/&/g, ' and ').replace(/\//g, ' ').replace(/·/g, ',').replace(/→/g, '').replace(/\s+/g, ' ').trim();
   }
 
@@ -70,22 +73,30 @@
   // ---- words: each block's words on the page (as ranges, for the word highlight and for clicks), and how the
   // spoken words (figures written out: "3.9 percent", "E G X thirty") line up with them ----
   function wkey(w){ return w.toLowerCase().replace(/[^a-z0-9]/g, ''); }
+  // each word is wrapped in its own <span> when the block is first read (the text looks the same), and the word being
+  // said gets a class: a plain style change, which every browser redraws (Safari did not always redraw a text highlight)
   function domWords(b){
     if(b.dw) return b.dw;
     var out = [];
     if(b.el){
       var walk = document.createTreeWalker(b.el, NodeFilter.SHOW_TEXT, {acceptNode: function(n){
-        return n.parentElement && n.parentElement.closest('.topics, svg, sup, .chg') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT; }});
-      var n, m, re = /\S+/g;
-      while((n = walk.nextNode())){
+        return n.parentElement && n.parentElement.closest('.topics, svg, sup, .chg, .w') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT; }});
+      var nodes = [], n;
+      while((n = walk.nextNode())) nodes.push(n);
+      // "EGP 54.01" is one word on the page, said as "54.01 pounds"
+      var re = /(?:EGP|US\$)\s+\d\S*|\S+/g;
+      nodes.forEach(function(n){
+        var t = n.data, m, last = 0, frag = document.createDocumentFragment();
         re.lastIndex = 0;
-        while((m = re.exec(n.data))){
-          var a = m.index, w = m[0];
-          // "EGP 54.01" is one word on the page, said as "54.01 pounds"
-          if(/^(EGP|US\$)$/.test(w)){ var nx = /^\s+(\S+)/.exec(n.data.slice(a + w.length)); if(nx && /^\d/.test(nx[1])){ re.lastIndex = a + w.length + nx[0].length; w = n.data.slice(a, re.lastIndex); } }
-          var r = document.createRange(); r.setStart(n, a); r.setEnd(n, a + w.length); out.push({r: r, k: wkey(w.replace(/^(EGP|US\$)\s+/, ''))});
+        while((m = re.exec(t))){
+          if(m.index > last) frag.appendChild(document.createTextNode(t.slice(last, m.index)));
+          var sp = document.createElement('span'); sp.className = 'w'; sp.textContent = m[0]; frag.appendChild(sp);
+          out.push({el: sp, k: wkey(m[0].replace(/^(EGP|US\$)\s+/, ''))});
+          last = m.index + m[0].length;
         }
-      }
+        if(last < t.length) frag.appendChild(document.createTextNode(t.slice(last)));
+        if(n.parentNode) n.parentNode.replaceChild(frag, n);
+      });
     }
     return (b.dw = out);
   }
@@ -118,18 +129,14 @@
     }
     return map;
   }
-  var HL = window.CSS && CSS.highlights && window.Highlight ? new Highlight() : null;
-  if(HL) CSS.highlights.set('nl-word', HL);
   var wordAt = null;
   function markWord(b, d){
     if(S && b) S.at = d;
-    if(!HL) return;
-    var dw = b ? domWords(b) : [], r = d != null && d >= 0 && dw[d] ? dw[d].r : null;
-    if(r === wordAt) return;
-    wordAt = r;
-    // a new Highlight each time, not the old one changed: Safari does not redraw a changed one until something else
-    // on the page moves, so the word looked stuck
-    if(r) CSS.highlights.set('nl-word', new Highlight(r)); else CSS.highlights.delete('nl-word');
+    var dw = b ? domWords(b) : [], el = d != null && d >= 0 && dw[d] ? dw[d].el : null;
+    if(el === wordAt) return;
+    if(wordAt) wordAt.classList.remove('w-on');
+    wordAt = el;
+    if(el) el.classList.add('w-on');
   }
 
   // ---- voices on this device: English ones, the natural-sounding first; the novelty voices left out ----
@@ -447,12 +454,13 @@
     var i = -1;
     for(var j = 0; j < S.list.length; j++) if(S.list[j].el && S.list[j].el.contains(e.target)) i = j;
     if(i < 0) return;
-    var pos = caretAt(e.clientX, e.clientY), dw = domWords(S.list[i]), d = 0;
-    if(pos) for(var k = 0; k < dw.length; k++){
-      var c; try { c = dw[k].r.comparePoint(pos.node, pos.offset); } catch(err){ break; }
-      if(c === 0){ d = k; break; }
-      if(c > 0) d = Math.min(k + 1, dw.length - 1); else break;
+    var dw = domWords(S.list[i]), d = 0, hit = e.target.closest && e.target.closest('span.w');
+    if(!hit){   // between words: the word at the point tapped, or the next one
+      var pos = caretAt(e.clientX, e.clientY), nd = pos && pos.node;
+      hit = nd && (nd.nodeType === 1 ? nd : nd.parentElement).closest('span.w');
+      if(!hit && nd && nd.nodeType === 3){ var nx = nd.nextSibling; while(nx && !(nx.nodeType === 1 && nx.classList.contains('w'))) nx = nx.nextSibling; hit = nx; }
     }
+    for(var k = 0; k < dw.length; k++) if(dw[k].el === hit){ d = k; break; }
     readFrom(i, d);
   });
 
