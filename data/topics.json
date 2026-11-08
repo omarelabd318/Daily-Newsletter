@@ -14,8 +14,8 @@
    "drivers": [
     "oil"
    ],
-   "now": "The United States carried out limited strikes on Iranian air defenses on Qeshm island on November 6, the first since the midterms, while President Trump said talks with Tehran had made progress and Qatar urged a deal. A third US carrier, the USS Theodore Roosevelt, is due in the Arabian Sea in mid-November, and a seafarer was killed in a tanker attack in the Strait of Hormuz on November 5.",
-   "now_date": "2026-11-07"
+   "now": "The US carried out what President Trump called minor strikes on Iranian air defenses on Qeshm island on November 6, the first since the midterms, and set up Task Force Iron Gate to cut Iran's land supply routes while enforcing a naval blockade. Qatar says US-Iran mediation is still active and Trump says Iran wants a deal, but no agreement has been signed.",
+   "now_date": "2026-11-08"
   },
   {
    "id": "pound-cbe",
@@ -30,8 +30,8 @@
    "drivers": [
     "egp-rates"
    ],
-   "now": "The central bank's dollar selling rate ended the week at EGP 54.01 on November 5, a 3.8% recovery for the pound after six straight gains and its strongest level since about October 20. Annual inflation eased to 12.0% in October, the overnight deposit rate is 20% after the November 1 hike, and the biggest banks raise fixed-rate certificates to 18.75% from November 8. The Monetary Policy Committee next meets on December 17.",
-   "now_date": "2026-11-07"
+   "now": "The central bank's dollar selling rate closed the week of November 5 at EGP 54.01, about 4% below the record 56.35 of late October, after a surprise 100 basis point hike took the overnight deposit rate to 20%. Goldman Sachs calls the pound more than 30% undervalued and sees it at 50 to the dollar within a year; the next rate meeting is December 17.",
+   "now_date": "2026-11-08"
   },
   {
    "id": "ai-chips",
@@ -46,8 +46,8 @@
    "drivers": [
     "ai-spending"
    ],
-   "now": "Chip stocks bounced on November 6 after the November 5 rout that put the Nasdaq into a correction, but the Nasdaq still fell 3.4% on the week. OpenAI has raised $11 billion at a $1.25 trillion valuation, below its earlier target, and Nvidia reports on November 17.",
-   "now_date": "2026-11-07"
+   "now": "The Nasdaq fell 5.5% on November 5, its worst day since April 2025, on fears the Democrats' midterm sweep will slow the US data center buildout, and ended the week down 3.4%. Anthropic's planned mid-November listing now targets a lower valuation of  trillion to .5 trillion, and Nvidia reports on November 17.",
+   "now_date": "2026-11-08"
   },
   {
    "id": "us-midterms",
@@ -55,8 +55,8 @@
    "match": "\\b(midterms?|Democrats? (won|win|wins|take|took|retake)|control of (the )?(Senate|House|Congress))\\b",
    "related": [],
    "drivers": [],
-   "now": "Democrats won control of Congress in the November 3 midterms. President Trump named Stephen Miller White House chief of staff after Susie Wiles resigned on November 5, and the new Congress convenes in January.",
-   "now_date": "2026-11-07"
+   "now": "Democrats won both chambers of Congress in the November 3 midterms and take control in January. President Trump has ordered the Justice Department to investigate Democrats he accuses of threatening officials, while Republican Thomas Massie plans articles of impeachment against Defense Secretary Pete Hegseth.",
+   "now_date": "2026-11-08"
   },
   {
    "id": "bqdc",
@@ -112,8 +112,8 @@
    "match": "\\b(Gaza|Hamas|Hezbollah|Lebanon|Lebanese)\\b",
    "related": [],
    "drivers": [],
-   "now": "Israeli strikes killed Palestinians in Gaza on November 1 and 2 despite the ceasefire.",
-   "now_date": "2026-11-06"
+   "now": "A fragile ceasefire holds in Gaza, but the first winter storm flooded about 70,000 tents of displaced people on November 7, and aid deliveries remain far below the 600 trucks a day agreed. Israel and Hezbollah have been at war in Lebanon since March.",
+   "now_date": "2026-11-08"
   },
   {
    "id": "oil",
@@ -128,11 +128,149 @@
    "drivers": [
     "oil"
    ],
-   "now": "Brent ended the week of November 6 at about $98 a barrel, down 13% in November but up about 62% this year, as traders weigh the risk of renewed war with Iran against talk of a deal.",
-   "now_date": "2026-11-07"
+   "now": "Brent settled at $98.32 a barrel on November 6, down 13% to 16% on the week, its steepest weekly fall since 2020, on bets that the US and Iran are nearing a deal. It remains about 62% higher this year.",
+   "now_date": "2026-11-08"
   }
  ],
  "stories": [
+  {
+   "ed": "2026-11-08",
+   "id": "story-trump-orders-democrat-probe",
+   "lead": "Trump orders Democrat probe",
+   "sec": "Top World Headlines",
+   "text": "President Trump told the Justice Department on Saturday to investigate Democrats he accused, without evidence, of threatening officials and Republican donors with impeachment and prison. The order follows the Democrats' midterm win of both…",
+   "topics": [
+    "us-midterms"
+   ],
+   "added": [
+    "us-midterms"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-08",
+   "id": "story-talks-still-alive",
+   "lead": "Talks still alive",
+   "sec": "Regional and Gulf",
+   "text": "Qatar's prime minister rejected reports that US-Iran negotiations had failed, calling them \"false and misleading,\" and said mediation remains active. Trump said Washington has made \"a lot of progress\" and that Iran wants a deal.",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-08",
+   "id": "story-rates-and-the-dollar",
+   "lead": "Rates and the dollar",
+   "sec": "Markets",
+   "text": "October's 165,000 new US jobs kept a Federal Reserve rate rise in December on the table, and the 10-year Treasury yield settled near 4.86%. The dollar index closed at 102.28, within 0.3% of its 52-week high. October consumer prices on…",
+   "topics": [],
+   "added": [],
+   "removed": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-11-08",
+   "id": "story-qeshm-and-iron-gate",
+   "lead": "Qeshm and Iron Gate",
+   "sec": "Regional and Gulf",
+   "text": "President Trump confirmed \"minor strikes\" on Iranian air defenses on Qeshm island in the Strait of Hormuz, the first since Tuesday's midterms, while Iran said it shot down a US MQ-9 drone. Central Command also set up Task Force Iron Gate…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-08",
+   "id": "story-pound-and-egx30",
+   "lead": "Pound and EGX30",
+   "sec": "Markets",
+   "text": "The EGX30 closed Thursday up 1.0% at 51,152.73 on turnover of EGP 10.2 billion, with international investors the only net buyers; it gained 3.1% over the week and is up 22.3% this year, though still about 10% below its September peak. The…",
+   "topics": [
+    "pound-cbe"
+   ],
+   "added": [
+    "pound-cbe"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-08",
+   "id": "story-oil-gold-and-bitcoin",
+   "lead": "Oil, gold and bitcoin",
+   "sec": "Markets",
+   "text": "Brent settled at $98.32 a barrel, down 13% to 16% on the week depending on how the December contract roll is counted, its steepest weekly fall since 2020, on bets that the US and Iran are nearing a deal. Gold slipped 0.9% to $4,074.90 an…",
+   "topics": [
+    "oil"
+   ],
+   "added": [
+    "oil"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-08",
+   "id": "story-nvidia-s-chief-summoned",
+   "lead": "Nvidia's chief summoned",
+   "sec": "In Other News",
+   "text": "Three House Republican committee chairs asked Nvidia chief executive Jensen Huang to a closed-door briefing on November 18 about his dealings with Alice Huang, an executive at Singapore-based customer Megaspeed whom reports describe as a…",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-11-08",
+   "id": "story-hegseth-under-pressure",
+   "lead": "Hegseth under pressure",
+   "sec": "Top World Headlines",
+   "text": "Defense Secretary Pete Hegseth posted a defiant \"We Stand, We Fight\" video as Republican Representative Thomas Massie prepares articles of impeachment for next week. The House could vote to impeach, but there is no sign of the two-thirds…",
+   "topics": [
+    "us-midterms"
+   ],
+   "added": [
+    "us-midterms"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-08",
+   "id": "story-goldman-on-the-pound",
+   "lead": "Goldman on the pound",
+   "sec": "Markets",
+   "text": "Goldman Sachs says the pound is trading more than 30% below fair value after October's slide past 56 to the dollar, making it one of the most undervalued emerging-market currencies, according to a research note reported by Asharq Bloomberg…",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-11-08",
+   "id": "story-gaza-floods",
+   "lead": "Gaza floods",
+   "sec": "Regional and Gulf",
+   "text": "The season's first winter storm flooded about 70,000 tents of displaced Palestinians in Gaza within 12 hours and knocked out Al-Shifa hospital's emergency ward for four hours, Al Jazeera reported. Around 50,000 tents are said to be waiting…",
+   "topics": [
+    "gaza-lebanon"
+   ]
+  },
+  {
+   "ed": "2026-11-08",
+   "id": "story-anthropic-s-listing-and-the-backlash",
+   "lead": "Anthropic's listing and the backlash",
+   "sec": "In Other News",
+   "text": "Anthropic is still aiming for a Nasdaq debut in mid-November, CNBC reported, but the target valuation has slipped to $1 trillion to $1.5 trillion after the AI selloff. More than half of midterm voters told an NBC News exit poll that AI…",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-11-08",
+   "id": "story-ai-rout-week",
+   "lead": "AI rout week",
+   "sec": "Markets",
+   "text": "The S&P 500 gained 0.31% to 7,376.86 on Friday, the Nasdaq 1.09% to 24,579.42 and the Dow lost 0.46% to 51,285.73, but the week was the S&P 500's worst since June, down 2.7%, with the Nasdaq off 3.4%. On Thursday the Nasdaq fell 5.5%, its…",
+   "topics": [
+    "ai-chips"
+   ]
+  },
   {
    "ed": "2026-11-07-recap",
    "id": "story-us-strikes-on-iran",
