@@ -4,6 +4,7 @@
   {"month": "2026-06", "total": 55.072, "fx": 37.85, "gold": 16.784, "sdr": 0.438, "source": "Daily News Egypt; Egypt Today", "url": "https://www.dailynewsegypt.com/2026/07/18/egypts-net-international-reserves-rise-3-6bn-in-h1-2026-to-record-55-1bn/"},
   {"month": "2026-07", "total": 56.294, "fx": 38.711, "gold": 17.139, "sdr": 0.444, "source": "Daily News Egypt", "url": "https://www.dailynewsegypt.com/2026/09/07/egypts-net-international-reserves-rise-to-57-214bn-in-august/"},
   {"month": "2026-08", "total": 57.214, "fx": 37.553, "gold": 19.058, "sdr": 0.603, "source": "Daily News Egypt", "url": "https://www.dailynewsegypt.com/2026/09/07/egypts-net-international-reserves-rise-to-57-214bn-in-august/"},
-  {"month": "2026-09", "total": 57.348, "fx": 39.292, "gold": 17.456, "sdr": 0.6, "source": "Economy Middle East; Arab Finance", "url": "https://economymiddleeast.com/news/egypts-foreign-reserves-climb-to-record-57-35-billion-as-currency-holdings-jump-1-74-billion/"}
+  {"month": "2026-09", "total": 57.348, "fx": 39.292, "gold": 17.456, "sdr": 0.6, "source": "Economy Middle East; Arab Finance", "url": "https://economymiddleeast.com/news/egypts-foreign-reserves-climb-to-record-57-35-billion-as-currency-holdings-jump-1-74-billion/"},
+  {"month": "2026-10", "total": 57.5, "fx": 40.06, "gold": 16.843, "sdr": 0.597, "source": "Arab Finance (total also Banky 24); foreign currencies printed as 400.60, read as 40.060 to match its gross 57.502", "url": "https://www.arabfinance.com/en/news/newdetails/egypt-net-international-reserves-reach-october-2026"}
  ]
 }

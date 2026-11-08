@@ -64,6 +64,13 @@
      "source": "Yahoo Finance",
      "url": "https://finance.yahoo.com/markets/live/stock-market-today-friday-november-6-dow-sp-500-nasdaq-jobs-report-earnings-135953863.html",
      "effect": "neutral"
+    },
+    {
+     "date": "2026-11-07",
+     "text": "The FT reported US officials believe Jensen Huang was close to an alleged Chinese spy; House chairs want a briefing on November 18, a political risk to Nvidia's China sales.",
+     "source": "Financial Times",
+     "url": "https://www.ft.com/content/a55a2a22-4479-4f93-a445-6147a5c6d790",
+     "effect": "supports"
     }
    ],
    "wrongIf": [
@@ -458,6 +465,13 @@
      "source": "Pound Sterling Live",
      "url": "https://www.poundsterlinglive.com/usd/23852-pound-to-dollar-rate-us-payrolls-fed-december-hike",
      "effect": "against"
+    },
+    {
+     "date": "2026-11-08",
+     "text": "Goldman Sachs sees EGP 53 per dollar in three months and keeps its buy call, though it estimates foreign holdings of local debt fell to about $20bn from $30bn; the Cabinet also put foreign-currency spending under Finance Ministry approval.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/08/goldman-sachs-calls-egp-undervalued-by-30-sees-it-at-50-per-usd/",
+     "effect": "supports"
     }
    ],
    "wrongIf": [
@@ -502,6 +516,13 @@
      "text": "The US struck Iranian air defenses on Qeshm island and a third carrier heads for the region, raising the risk of renewed war; Brent held at $98.32.",
      "source": "Al Jazeera",
      "url": "https://www.aljazeera.com/news/2026/11/7/trump-confirms-new-us-strikes-on-irans-qeshm-island",
+     "effect": "against"
+    },
+    {
+     "date": "2026-11-08",
+     "text": "Iran's Revolutionary Guards said two tankers hit mines and caught fire in Hormuz, and the Houthis claimed strikes on Aramco sites; neither claim was confirmed and Brent had not yet traded on them.",
+     "source": "Asharq Al-Awsat",
+     "url": "https://english.aawsat.com/world/5338803-iran-says-two-tankers-caught-fire-hormuz-after-hitting-mines",
      "effect": "against"
     }
    ],
