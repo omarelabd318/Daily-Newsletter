@@ -1,7 +1,16 @@
 {
- "note": "The desk's stocks' coming results and dividends, from TradingView (fetch_calendar.py). Results dates for Egyptian companies are often TradingView's estimate until the company announces one.",
+ "note": "The desk's stocks' coming results and dividends, from TradingView (fetch_calendar.py); for the US stocks, declared dividends and stock splits from Polygon. Results dates for Egyptian companies are often TradingView's estimate until the company announces one.",
  "fetched": "2026-11-09",
  "items": [
+  {
+   "t": "EFID",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-09",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
   {
    "t": "JUFO",
    "market": "egx",
@@ -18,7 +27,9 @@
    "date": "2026-11-10",
    "pay": "2026-12-01",
    "amount": 0.78,
-   "cur": "$"
+   "cur": "$",
+   "declared": "2026-10-27",
+   "src": "Polygon"
   },
   {
    "t": "COMI",
@@ -36,7 +47,9 @@
    "date": "2026-11-12",
    "pay": "2026-11-16",
    "amount": 0.27,
-   "cur": "$"
+   "cur": "$",
+   "declared": "2026-11-02",
+   "src": "Polygon"
   },
   {
    "t": "ETEL",
@@ -81,7 +94,9 @@
    "date": "2026-11-16",
    "pay": "2026-12-10",
    "amount": 1.07,
-   "cur": "$"
+   "cur": "$",
+   "declared": "2026-10-29",
+   "src": "Polygon"
   },
   {
    "t": "EGAL",
@@ -135,7 +150,9 @@
    "date": "2026-11-19",
    "pay": "2026-12-10",
    "amount": 0.98,
-   "cur": "$"
+   "cur": "$",
+   "declared": "2026-09-14",
+   "src": "Polygon"
   },
   {
    "t": "ALCN",
@@ -216,7 +233,9 @@
    "date": "2026-12-07",
    "pay": "2026-12-14",
    "amount": 0.22,
-   "cur": "$"
+   "cur": "$",
+   "declared": "2026-10-27",
+   "src": "Polygon"
   },
   {
    "t": "AVGO",
@@ -237,6 +256,17 @@
    "expected": true
   },
   {
+   "t": "WMT",
+   "market": "us",
+   "kind": "dividend",
+   "date": "2026-12-11",
+   "pay": "2027-01-04",
+   "amount": 0.2475,
+   "cur": "$",
+   "declared": "2026-02-19",
+   "src": "Polygon"
+  },
+  {
    "t": "ORCL",
    "market": "us",
    "kind": "results",
@@ -254,5 +284,60 @@
    "time": "before the open",
    "expected": true
   }
- ]
+ ],
+ "recentSplits": [],
+ "polygon": {
+  "fetched": "2026-11-09",
+  "dividends": [
+   {
+    "t": "AAPL",
+    "date": "2026-11-12",
+    "pay": "2026-11-16",
+    "amount": 0.27,
+    "declared": "2026-11-02",
+    "cur": "$"
+   },
+   {
+    "t": "MSFT",
+    "date": "2026-11-19",
+    "pay": "2026-12-10",
+    "amount": 0.98,
+    "declared": "2026-09-14",
+    "cur": "$"
+   },
+   {
+    "t": "GOOGL",
+    "date": "2026-12-07",
+    "pay": "2026-12-14",
+    "amount": 0.22,
+    "declared": "2026-10-27",
+    "cur": "$"
+   },
+   {
+    "t": "XOM",
+    "date": "2026-11-16",
+    "pay": "2026-12-10",
+    "amount": 1.07,
+    "declared": "2026-10-29",
+    "cur": "$"
+   },
+   {
+    "t": "WMT",
+    "date": "2026-12-11",
+    "pay": "2027-01-04",
+    "amount": 0.2475,
+    "declared": "2026-02-19",
+    "cur": "$"
+   },
+   {
+    "t": "V",
+    "date": "2026-11-10",
+    "pay": "2026-12-01",
+    "amount": 0.78,
+    "declared": "2026-10-27",
+    "cur": "$"
+   }
+  ],
+  "splits": []
+ }
 }
