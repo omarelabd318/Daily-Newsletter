@@ -185,6 +185,11 @@ window.Desk = (function () {
     const ch = (vals.at(-1) / vals[0] - 1) * 100;
     return `Last ${ss.length} sessions through the day${inUSD ? ', in dollars at each day\'s rate' : ''}: <span class="num ${cls(ch)}">${pct(ch, 2)}</span> from the first trade`;
   }
+  // a day's line spans at least 2% of its level, so a quiet session reads as quiet instead of filling the chart
+  function dayRange(vals) {
+    const lo = Math.min(...vals), hi = Math.max(...vals), mid = (lo + hi) / 2, half = Math.max((hi - lo) * 0.6, mid * 0.01);
+    return [mid - half, mid + half];
+  }
   function dayChart(el, market, key, name, fmt, inUSD = false) {
     const M_ = INTRA && INTRA[market]; el.innerHTML = '';
     // the session's 5-minute line, or else the same session's 15-minute line from the week, where only that was saved
@@ -192,15 +197,16 @@ window.Desk = (function () {
     const I0 = (M_ && M_.series && M_.series[key]) || (wk && wk.series[key] && wk.series[key].length > 1 ? wk.series[key] : null);
     const r = inUSD && M_ ? rateOn(M_.session) : 1, I = I0 && r ? I0.map(([t, v]) => [t, v / r]) : I0;
     if (!I) { el.innerHTML = `<p class="sub" style="padding:24px 0">No one-day data for ${esc(name)}: ${/^(sp500|dow|brent|gold_usd|dxy)$/.test(key) ? 'not saved for the last session.' : 'not saved for the last session.'}</p>`; return null; }
-    const vals = I.map((x) => x[1]), lo = Math.min(...vals), hi = Math.max(...vals), pad = (hi - lo) * 0.15 || lo * 0.002;
-    Charts.line(el, { ...dayAxis(I.map((x) => x[0]), el.clientWidth, !!M_.window), series: [{ name, values: vals }], format: fmt, endLabel: true, height: el.clientHeight, min: lo - pad });
+    const vals = I.map((x) => x[1]), [ymin, ymax] = dayRange(vals);
+    Charts.line(el, { ...dayAxis(I.map((x) => x[0]), el.clientWidth, !!M_.window), series: [{ name, values: vals }], format: fmt, endLabel: true, height: el.clientHeight, min: ymin, max: ymax });
     const ch = (vals.at(-1) / vals[0] - 1) * 100;
     if (M_.window) {   // round-the-clock markets: the last 24 hours, Cairo time
       const to = new Date(M_.to.replace(' ', 'T'));
       return `Last 24 hours to ${to.toLocaleDateString('en-US', { weekday: 'short', day: 'numeric', month: 'short' }).replace('Sept', 'Sep')} ${M_.to.slice(11)} Cairo time: <span class="num ${cls(ch)}">${pct(ch, 2)}</span>`;
     }
     const via = M_.proxy && M_.proxy[key] ? ` · traced by the ${esc(M_.proxy[key])} fund, which tracks it` : '';
-    return `${day(M_.session).toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'short' }).replace('Sept', 'Sep')}, ${I[0][0]}–${I.at(-1)[0]} ${market === 'egx' ? 'Cairo' : 'New York'} time${inUSD ? ', in dollars at the day\'s rate' : ''}: <span class="num ${cls(ch)}">${pct(ch, 2)}</span> from the first trade${via}`;
+    // one change in the caption: the caller adds the day's change from the previous close
+    return `${day(M_.session).toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'short' }).replace('Sept', 'Sep')}, ${I[0][0]}–${I.at(-1)[0]} ${market === 'egx' ? 'Cairo' : 'New York'} time${inUSD ? ', in dollars at the day\'s rate' : ''}${via}`;
   }
   // x-axis labels on round, evenly spaced points: each day for a week, one weekday for a month, each month
   // for six months, every other month for a year, the hour through a session, every six hours for 24 hours.
@@ -470,6 +476,8 @@ window.Desk = (function () {
     if (DESK.sample) document.querySelectorAll('[data-sample]').forEach((e) => { e.hidden = false; });
     return DESK;
   }
+  // a finding's first sentence in bold: the day's point, then the detail
+  const lede = (t) => { const m = String(t || '').match(/^(.+?[.!?])\s+(?=[A-Z"“])/); return m ? `<b>${esc(m[1])}</b> ${esc(t.slice(m[0].length))}` : `<b>${esc(t)}</b>`; };
   const dateLine = (iso) => day(iso).toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'long' });
   const conf = (c) => `<span class="conf ${c === 'high' ? 'high' : ''}">${esc(c[0].toUpperCase() + c.slice(1))}</span>`;
   // a view's confidence now: the latest update that changed it (desk/views.json updates[].confidence), else the opening level
@@ -488,5 +496,5 @@ window.Desk = (function () {
       location.reload();
     });
   }
-  return { get ASOF() { return ASOF; }, SECTORS, sortable, headText, showAllRows, calendar, asOfFor, lastDate, $, esc, pct, cls, num, get, dateLine, conf, confNow, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, weekChart, deskNotes, weekOf, monthOf, intraPeriod, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
+  return { get ASOF() { return ASOF; }, SECTORS, lede, sortable, headText, showAllRows, calendar, asOfFor, lastDate, $, esc, pct, cls, num, get, dateLine, conf, confNow, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, weekChart, deskNotes, weekOf, monthOf, intraPeriod, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
 })();

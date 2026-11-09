@@ -25,7 +25,9 @@ closes are the last session's; the news, stock research and analysis are still u
    per gram (24K, not 21K: the dashboard's Gold in Egypt card has 21K, 18K and the gold pound).
 2. Run `python3 .claude/skills/markets-desk/stock_news.py` (`3` on Sundays) and do the stock research
    below; update `desk/stocks.json`.
-3. Write each section: finding, three to five stories (`calls`), winners and losers (`board`), the Stocks note,
+3. Write each section: finding (the page shows its first sentence in bold, so make that sentence the day's
+   point; at most two more, about 50 words in all; the coming dates go in the week ahead, not here; `next` is no
+   longer shown), three to five stories (`calls`), winners and losers (`board`), the Stocks note,
    the week ahead and open views, then update `desk/views.json` (see Views: the record): new entries, news, and judgements.
 4. Write `pages`: EGX (finding, session, news, outlook), EGP (finding, rates, drivers, news, view), US
    (finding, rates: the day's extra items only, see step 5; afterBell, news, outlook), Global (finding, notes, news). Carry each projection
@@ -284,7 +286,9 @@ Each of the desk's stocks gets its own search every morning, on top of the newsl
 
 6. **Calendar:** run `python3 .claude/skills/markets-desk/fetch_calendar.py` (results dates and dividends for
    every desk stock, shown on the EGX and Wall Street pages). When a company announces its own results or
-   assembly date, add it to that stock's `next` with `"date": "YYYY-MM-DD"`: the page then lists it as the desk's
+   assembly date, add it to that stock's `next` with `"date": "YYYY-MM-DD"` (an undated note carries
+   `"added": "YYYY-MM-DD"` instead, and names dates, never "Thursday's"; check_desk.py flags notes that have passed or
+   sat undated for ten days; the stock page adds the calendar's own dates beside them): the page then lists it as the desk's
    confirmed date in place of TradingView's estimate. For the US stocks it also takes the dividends their boards
    have declared and any stock splits from Polygon, refreshed once a week (about three minutes that day; the
    other days reuse the saved copy). After a split, check_desk.py warns until the data log's earlier prices are

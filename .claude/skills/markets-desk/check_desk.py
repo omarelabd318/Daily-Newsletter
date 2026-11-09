@@ -7,6 +7,7 @@ Usage:
 
 DATE defaults to the newest desk in desk/index.json.
 """
+import datetime
 import json
 import os
 import re
@@ -111,6 +112,8 @@ def main(args):
     for key, name in (("egypt", "Egypt"), ("global", "USA")):
         X = D.get(key) or {}
         need(X, ["finding", "close", "calls", "board", "week", "views"], name)
+        if len(str(X.get("finding", "")).split()) > 55:
+            warnings.append(f"{name} finding: {len(str(X['finding']).split())} words; keep it to the day's point in one sentence and up to two more (about 50 words). The coming dates belong in the week ahead.")
         calls = X.get("calls") or []
         if not 1 <= len(calls) <= 5:
             errors.append(f"{name}: one to five stories in calls, not {len(calls)}.")
@@ -145,6 +148,8 @@ def main(args):
             errors.append(f"pages.{page} is missing.")
             continue
         need(X, ["finding"], f"pages.{page}")
+        if len(str(X.get("finding", "")).split()) > 55:
+            warnings.append(f"pages.{page} finding: {len(str(X['finding']).split())} words; one sentence with the point, then up to two more (about 50 words).")
         if page == "egp" and X.get("view"):
             V = X["view"]
             need(V, ["headline", "body", "affects", "wrong", "confidence"], "pages.egp view")
@@ -288,6 +293,22 @@ def main(args):
     logged = [v for v in (d.get("reserves_usd") for d in log.get("days", [])) if v]
     if logged and months and abs(logged[-1] - RS["months"][-1]["total"]) > 0.05:
         warnings.append(f"desk/reserves.json ends at {months[-1]} ({RS['months'][-1]['total']}bn) but the log has {logged[-1]}bn: add the new month.")
+    # each stock's "Coming up" notes (desk/stocks.json "next"): a dated note that has passed, an undated one with no
+    # "added" date or added more than ten days ago, and one that names a day relative to when it was written
+    # ("Thursday's hike") all go stale on the page: date them, refresh them or remove them
+    ST_ = (load("desk/stocks.json") or {}).get("stocks", {})
+    old_ = (datetime.date.fromisoformat(date) - datetime.timedelta(days=10)).isoformat()
+    for t, e in ST_.items():
+        for n in e.get("next") or []:
+            w = f"desk/stocks.json {t} next '{n.get('event')}'"
+            if n.get("date") and n["date"] < date:
+                warnings.append(f"{w}: its date ({n['date']}) has passed; remove it or move it to the stock's news.")
+            elif not n.get("date") and not n.get("added"):
+                warnings.append(f"{w}: no date; give it \"date\" when known, else \"added\": \"{date}\" so it can be checked again.")
+            elif not n.get("date") and n["added"] < old_:
+                warnings.append(f"{w}: undated since {n['added']}; check it is still right and refresh \"added\", or remove it.")
+            if re.search(r"\b(yesterday|today|tomorrow|this week|last week|(Sun|Mon|Tues|Wednes|Thurs|Fri|Satur)day'?s?)\b", f"{n.get('why', '')}", re.I) and not n.get("date"):
+                warnings.append(f"{w}: says '{re.search(r'(yesterday|today|tomorrow|this week|last week|[A-Z][a-z]+day)', n.get('why', '')).group(0)}', which goes stale; name the date instead.")
     # a split in the last two weeks (desk/calendar.json, from Polygon): the log's prices before it must be adjusted,
     # or the charts and changes show a fall (or jump) of the split's size
     for x in (load("desk/calendar.json") or {}).get("recentSplits", []):

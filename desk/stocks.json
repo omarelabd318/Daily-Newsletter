@@ -51,15 +51,10 @@
    },
    "next": [
     {
-     "event": "Q3 results",
-     "when": "Mid-November",
-     "why": "Date not yet announced.",
-     "impact": "high"
-    },
-    {
      "event": "Central bank, next rate meeting",
-     "when": "Not confirmed",
-     "why": "Thursday's 100 bps hike widens lending margins; another move would matter as much.",
+     "when": "Thu, Dec 17",
+     "date": "2026-12-17",
+     "why": "The October 29 hike of 100 basis points widened lending margins; another move would matter as much.",
      "impact": "medium"
     }
    ],
@@ -1391,7 +1386,8 @@
      "event": "Q3 results",
      "when": "Thu, Nov 19",
      "why": "Tests whether the defensive rotation holds at about 45 times forward earnings.",
-     "impact": "high"
+     "impact": "high",
+     "date": "2026-11-19"
     }
    ]
   },
@@ -1605,14 +1601,7 @@
   },
   "BQDC": {
    "sector": "Banks",
-   "next": [
-    {
-     "event": "First day of trading",
-     "when": "Mon 2 Nov",
-     "why": "Banque du Caire lists at the EGP 5.30 offer price; retail buyers can sell back at that price for 30 days.",
-     "impact": "high"
-    }
-   ],
+   "next": [],
    "news": [
     {
      "date": "2026-11-07",

@@ -6,6 +6,8 @@
   // a change that rounds to zero shows as 0.0%, with no sign
   const pct = (v, d = 1) => { if (v == null) return '—'; const r = +v.toFixed(d); return (r > 0 ? '+' : r < 0 ? MINUS : '') + Math.abs(r).toFixed(d) + '%'; };
   const cls = (v) => v == null ? 'dash' : v >= 0.05 ? 'chg up' : v <= -0.05 ? 'chg down' : 'chg flat';
+  // a finding's first sentence in bold (a sentence ends at . ! or ? before a space and a capital, never inside 54.31)
+  const lede = (t) => { const m = String(t || '').match(/^(.+?[.!?])\s+(?=[A-Z"“])/); return m ? `<b>${esc(m[1])}</b> ${esc(t.slice(m[0].length))}` : `<b>${esc(t)}</b>`; };
   const get = (u) => fetch(u, { cache: 'no-cache' }).then((r) => r.ok ? r.json() : null).catch(() => null);
 
   // today's desk: the newest entry in desk/index.json
@@ -142,7 +144,8 @@
     $('title').textContent = S.name + ' · ' + longDate;
     document.title = 'Markets Desk · ' + S.name + ' · ' + day(D.date).toLocaleDateString('en-US', { day: 'numeric', month: 'short' }).replace('Sept', 'Sep');
     $('stamp').innerHTML = 'Closes to ' + esc(day(asOf(S.market)).toLocaleDateString('en-US', { weekday: 'short', day: 'numeric', month: 'short' }).replace('Sept', 'Sep').replace(',', '')) + '<br>Fetched ' + esc(String(D.fetched || '').replace(/\b(\d{1,2}) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\b/, '$2 $1'));
-    $('finding').innerHTML = esc(X.finding) + (X.next ? ' <span class="when">' + esc(X.next) + '</span>' : '');
+    // the finding: its first sentence in bold, the day's point; the coming dates live in the Week ahead card
+    $('finding').innerHTML = lede(X.finding);
 
     $('h-close').textContent = X.close.title || 'Close';
     $('close-rows').innerHTML = X.close.groups.map((g) => `<div class="strip-g"><h3>${esc(g.name)}</h3><div class="strip-row">` + g.rows.map((r) =>
@@ -295,10 +298,10 @@
       if (!p[1]) {   // the last session through the day, from desk/intraday.json
         const el = $('egx-chart'), mk = S.market, I = INTRA && INTRA[mk] && INTRA[mk].series[cur.intra]; el.innerHTML = '';
         if (!I) { el.style.height = 'auto'; el.innerHTML = '<p class="chart-cap">The last session through the day is not saved yet; the morning run saves it once the session has closed.</p>'; $('egx-cap').textContent = ''; return; }
-        const v = I.map((x) => x[1]), lo = Math.min(...v), hi = Math.max(...v);
-        Charts.line(el, { ...dayAxis(I.map((x) => x[0]), el.clientWidth), series: [{ name: cur.n, values: v }], format: Charts.fmt.int, endLabel: true, height: el.clientHeight, min: lo - (hi - lo) * 0.15 });
-        const ch = (v.at(-1) / v[0] - 1) * 100;
-        $('egx-cap').innerHTML = `${day(INTRA[mk].session).toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'short' }).replace('Sept', 'Sep')}, ${I[0][0]}–${I.at(-1)[0]} ${mk === 'egx' ? 'Cairo' : 'New York'} time: <span class="num ${cls(ch)}">${pct(ch, 2)}</span> from the first trade${INTRA[mk].proxy && INTRA[mk].proxy[cur.intra] ? ` · traced by the ${esc(INTRA[mk].proxy[cur.intra])} fund, which tracks it` : ''}`;
+        const v = I.map((x) => x[1]), lo = Math.min(...v), hi = Math.max(...v), mid = (lo + hi) / 2, half = Math.max((hi - lo) * 0.6, mid * 0.01);
+        Charts.line(el, { ...dayAxis(I.map((x) => x[0]), el.clientWidth), series: [{ name: cur.n, values: v }], format: Charts.fmt.int, endLabel: true, height: el.clientHeight, min: mid - half, max: mid + half });
+        const ch = change(idx, 0);
+        $('egx-cap').innerHTML = `${day(INTRA[mk].session).toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'short' }).replace('Sept', 'Sep')}, ${I[0][0]}–${I.at(-1)[0]} ${mk === 'egx' ? 'Cairo' : 'New York'} time · on the day <span class="num ${cls(ch)}">${pct(ch, 2)}</span>${INTRA[mk].proxy && INTRA[mk].proxy[cur.intra] ? ` · traced by the ${esc(INTRA[mk].proxy[cur.intra])} fund, which tracks it` : ''}`;
         return;
       }
       if (p[1] === 7 || p[1] === 30) {   // a week (every 15 minutes) or a month (every 30) through the day, once the saved sessions cover it

@@ -206,7 +206,23 @@ try {
     ['Against the average', vsAvg == null ? dash : `<span class="${M.cls(vsAvg)}">${M.pct(vsAvg, 0)}</span>`]]);
   M.$('tdate').textContent = lastV ? M.short(lastV[0]) : (T ? M.short(T.date) : '');
   M.$('tnote').innerHTML = egx ? 'Volume against its usual level shows when big money is moving. Buying and selling by investor group is only published for the whole market: see the <a href="/desk/egx/">EGX page</a>.' : 'Volume against its usual level shows when big money is moving.';
-  M.$('next').innerHTML = (p.next || []).map((n) => `<div class="wk" style="grid-template-columns:minmax(0,1fr) auto"><b>${M.esc(n.event)}</b><span class="imp${n.impact === 'high' ? ' high' : ''}">${M.esc(n.impact[0].toUpperCase() + n.impact.slice(1))}</span><span class="why" style="grid-column:1/-1"><span class="num">${M.esc(n.when)}</span> · ${M.esc(n.why)}</span></div>`).join('') || '<p class="sub">No dates found yet.</p>';
+  // coming up: the calendar's dates for this stock (results, dividends, splits) and the desk's own notes (stocks.json
+  // "next"); a dated note that has passed is left out, and the calendar's results date replaces an undated results note
+  {
+    const CAL = ((await M.get('/desk/calendar.json')) || {}).items || [], today = new Date(Date.now() + 2 * 3600e3).toISOString().slice(0, 10);
+    const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const dl = (iso) => M.day(iso).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+    const cal = CAL.filter((x) => x.t === t && x.date >= today).map((x) => ({ date: x.date, when: dl(x.date),
+      event: x.kind === 'results' ? `Results${x.period ? `, quarter to ${MON[+x.period.slice(5, 7) - 1]} ${x.period.slice(0, 4)}` : ''}` : x.kind === 'split' ? `Stock split, ${x.ratio}` : 'Goes ex-dividend',
+      why: x.kind === 'results' ? (x.expected ? 'Expected date (TradingView); the company has not confirmed it.' : 'Confirmed by the company.') + (x.time ? ` ${x.time[0].toUpperCase() + x.time.slice(1)}.` : '')
+        : x.kind === 'split' ? `The share price divides by ${M.num(x.factor, x.factor % 1 ? 2 : 0)}; nothing else changes.`
+        : `${x.cur === '$' ? '$' : 'EGP '}${M.num(x.amount, 2)} a share${x.pay ? `, paid ${dl(x.pay)}` : ''}${x.declared ? `; declared ${dl(x.declared)}` : ''}.`,
+      impact: x.kind === 'results' ? 'high' : 'low' }));
+    const hasResults = cal.some((x) => /^Results/.test(x.event));
+    const own = (p.next || []).filter((n) => !(n.date && n.date < today) && !(hasResults && !n.date && /results/i.test(n.event)));
+    const all = [...cal, ...own].sort((a, b) => (a.date || '9999') < (b.date || '9999') ? -1 : 1);
+    M.$('next').innerHTML = all.map((n) => `<div class="wk" style="grid-template-columns:minmax(0,1fr) auto"><b>${M.esc(n.event)}</b><span class="imp${n.impact === 'high' ? ' high' : ''}">${M.esc(n.impact[0].toUpperCase() + n.impact.slice(1))}</span><span class="why" style="grid-column:1/-1"><span class="num">${M.esc(n.when)}</span> · ${M.esc(n.why)}</span></div>`).join('') || '<p class="sub">No dates found yet.</p>';
+  }
   const PILL = { 'open': 'open', 'on track': 'ok', 'right': 'ok', 'wrong': 'bad', 'closed': 'open' };
   // the desk's projections for this stock from today's bullish and bearish lists come first
   // the desk's views and projections on this stock, from the record on the Views page (desk/views.json)
