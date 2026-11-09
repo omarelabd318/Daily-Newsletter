@@ -258,7 +258,8 @@ def main(a):
             mp3 = os.path.join(AUDIO if local else tempfile.mkdtemp(), name)
             segs, dur = record(key, voice, mp3)
             made[name] = mp3
-            entries.append({"voice": voice, "name": NAMES.get(voice, voice), "duration": dur, "file": name, "segments": segs})
+            entries.append({"voice": voice, "name": NAMES.get(voice, voice), "duration": dur, "file": name, "segments": segs,
+                            "bytes": os.path.getsize(mp3)})
             report.append(f"{NAMES.get(voice, voice)} {dur / 60:.1f} min, {os.path.getsize(mp3) / 1e6:.1f} MB in {time.time() - t1:.0f}s")
         if local:
             for e in entries:
@@ -288,6 +289,11 @@ def main(a):
                 warm(v["url"])
         print(f"Audio for {key}: " + "; ".join(report) + f"; {time.time() - t0:.0f}s in all; published on the {BRANCH} branch "
               f"({len(kept)} editions kept). Commit data/audio/.")
+        try:   # the podcast feeds (data/audio/feed-*.xml) list what the branch now holds
+            import podcast_feed
+            podcast_feed.main()
+        except Exception as e:
+            print(f"Podcast feeds not updated ({type(e).__name__}: {e}).")
     except Exception as e:
         print(f"Audio not made ({type(e).__name__}: {e}). The site reads this edition with the device's voice instead.")
 

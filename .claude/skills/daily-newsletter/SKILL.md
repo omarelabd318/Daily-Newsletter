@@ -589,6 +589,9 @@ first time to install the voice model; a voice already recorded from the same te
 MP3 on the repo's `audio` branch (which holds only the last 8 editions' audio, a week plus the recap, and is rewritten each time: never
 commit an MP3 to main) and writes `data/audio/EDITION.json`; commit `data/audio/` with the edition. If it prints
 "Audio not made", go on: the site falls back to the device's voice, and say so in the final reply.
+It also rewrites the two podcast feeds (`data/audio/feed-heart.xml` and `feed-michael.xml`, served at
+/podcast/heart.xml and /podcast/michael.xml, with `data/audio/cover.png` as their artwork), which list the editions
+the audio branch holds; they go in with `data/audio/`.
 
 What it reads is `read_aloud.py`'s list: every section but Sources and the two watch tables, headings, paragraphs,
 list items and Explained boxes, with figures written as they are said (EGP 54.01 as "54.01 pounds", 3.9% as "3.9

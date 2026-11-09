@@ -4,5 +4,34 @@
       "claude/**": false,
       "audio": false
     }
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/podcast/heart.xml",
+      "destination": "/data/audio/feed-heart.xml"
+    },
+    {
+      "source": "/podcast/michael.xml",
+      "destination": "/data/audio/feed-michael.xml"
+    },
+    {
+      "source": "/podcast/cover.png",
+      "destination": "/data/audio/cover.png"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/podcast/(.*).xml",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/rss+xml; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=300"
+        }
+      ]
+    }
+  ]
 }
