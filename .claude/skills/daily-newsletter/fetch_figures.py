@@ -241,6 +241,14 @@ def coingecko():
             "when": "now (24-hour change)", "src": "CoinGecko"}
 
 
+def polygon_close(sym):
+    """A US stock's last two daily closes from Polygon (polygon.py), the third source after Yahoo and Nasdaq."""
+    import polygon
+    d = polygon.daily(sym)
+    (pd_, prev), (day, value) = sorted(d.items())[-2:]
+    return {"value": value, "prev": prev, "pct": (value / prev - 1) * 100, "live": False, "when": f"close {day}", "src": "Polygon"}
+
+
 def first(*fns):
     errors = []
     for fn in fns:
@@ -304,14 +312,14 @@ def main(args):
         log.append(f"egx30_vol={int(e30['volume'])}")
     add("egx70", "EGX70 EWI (small and mid caps)", lambda: tradingview_index("EGX70EWI"), "egx70", egx_live)
     for t in US:
-        add(t, f"US {t}", lambda t=t: first(lambda: yahoo(t.replace(".", "-")), lambda: nasdaq(t)), f"us.{t}")
+        add(t, f"US {t}", lambda t=t: first(lambda: yahoo(t.replace(".", "-")), lambda: nasdaq(t), lambda: polygon_close(t)), f"us.{t}")
         try:
             v, d = nasdaq_volume(t)
             log.append(f"vol.{t}={int(v)}")
         except Exception as e:
             missing.append(f"US {t} volume: {e}")
     for t in DESK_US:
-        add(t, f"Desk only: US {t}", lambda t=t: first(lambda: yahoo(t.replace(".", "-")), lambda: nasdaq(t)), f"us.{t}")
+        add(t, f"Desk only: US {t}", lambda t=t: first(lambda: yahoo(t.replace(".", "-")), lambda: nasdaq(t), lambda: polygon_close(t)), f"us.{t}")
         try:
             v, d = nasdaq_volume(t)
             log.append(f"vol.{t}={int(v)}")

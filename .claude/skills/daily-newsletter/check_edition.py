@@ -207,13 +207,21 @@ def check_links(text, errors, warnings):
 
 def source_close(mk, t, v):
     """True when the stock's quote at its source (Mubasher for the EGX, Nasdaq for the US) gives v as its latest close
-    or the close before it."""
+    or the close before it, or for a US stock when Polygon has v as one of its last daily closes."""
     try:
         import fetch_figures as FF
         q = FF.mubasher(f"stocks/{t}") if mk == "egx" else FF.nasdaq(t)
-        return any(x is not None and abs(x - v) <= max(0.005, abs(v) * 0.0005) for x in (q.get("value"), q.get("prev")))
+        if any(x is not None and abs(x - v) <= max(0.005, abs(v) * 0.0005) for x in (q.get("value"), q.get("prev"))):
+            return True
     except Exception:
-        return False
+        pass
+    if mk == "us":   # Polygon's official daily closes for the last sessions
+        try:
+            import polygon
+            return any(abs(x - v) <= max(0.005, abs(v) * 0.0005) for x in polygon.daily(t).values())
+        except Exception:
+            return False
+    return False
 
 
 def check_closes(date, errors, warnings):

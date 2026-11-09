@@ -11,8 +11,8 @@ Nasdaq Composite and the 12 US stocks from Nasdaq (New York time, regular sessio
 days it answers (it often refuses cloud requests). When it refuses, the S&P 500 and the Dow are drawn from
 the funds that track them on Nasdaq (SPY, DIA), scaled so the line ends at the index's logged close; the
 file names the fund under "proxy". Brent, gold and the dollar index are simply left out on other days. A market whose fetch fails, or whose feed still shows an unfinished
-session, keeps the session already saved. A stock the feed refuses is asked for again one at a time, then taken from
-Yahoo; a stock missing from a saved US session is filled from Yahoo's last five sessions. Prints one line per market;
+session, keeps the session already saved. A series the feed refuses is asked for again one at a time, then taken from
+Polygon (polygon.py), then Yahoo; a stock missing from a saved US session is filled from Yahoo's last five sessions. Prints one line per market;
 it takes about a minute.
 """
 import datetime
@@ -26,6 +26,7 @@ import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 from zoneinfo import ZoneInfo
 
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "daily-newsletter"))   # polygon.py
 ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 OUT = os.path.join(ROOT, "desk", "intraday.json")
 UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36"
@@ -57,27 +58,22 @@ YMONTH = {"COMP": "^IXIC", "sp500": "^GSPC", "dow": "^DJI"}
 PFUND = {"COMP": ("ONEQ", "nasdaq"), "sp500": ("SPY", "sp500"), "dow": ("DIA", "dow")}
 
 
-def polygon_month(key):
-    """A US series' last month from Polygon (its key is added by the session's network proxy, never stored here),
-    every 30 minutes, New York time: {day: [[hm, v], ...]}. A bar's close is the price at the bar's end; the first
-    point of each session is the open at 09:30."""
+def polygon_bars(key, step, frm, to):
+    """A US series from Polygon (shared helper polygon.py; five requests a minute), every `step` minutes, New York
+    time, regular session only: {day: [[hm, v], ...]}. A bar's close is the price at the bar's end; the first point
+    of each session is the open at 09:30. An index comes from its fund, scaled each day to the logged close."""
+    import polygon
     sym, logkey = PFUND.get(key, (key, None))
-    end = datetime.date.today()
-    url = (f"https://api.polygon.io/v2/aggs/ticker/{urllib.parse.quote(sym)}/range/30/minute/"
-           f"{(end - datetime.timedelta(days=40)).isoformat()}/{end.isoformat()}?adjusted=true&sort=asc&limit=50000")
-    r = json.loads(get(url))
-    if r.get("status") not in ("OK", "DELAYED") or not r.get("results"):
-        raise ValueError(r.get("message") or r.get("status"))
     days = {}
-    for b in r["results"]:
+    for b in polygon.bars(sym, step, "minute", frm, to):
         t = datetime.datetime.fromtimestamp(b["t"] / 1000, datetime.timezone.utc).astimezone(NY)
         if not ("09:30" <= t.strftime("%H:%M") < "16:00"):
             continue
         d = days.setdefault(t.date().isoformat(), [])
         if t.strftime("%H:%M") == "09:30":
             d.append(["09:30", float(b["o"])])
-        d.append([(t + datetime.timedelta(minutes=30)).strftime("%H:%M"), float(b["c"])])
-    if logkey:   # the fund's line scaled to the index's close that day
+        d.append([(t + datetime.timedelta(minutes=step)).strftime("%H:%M"), float(b["c"])])
+    if logkey:
         out = {}
         for d, pts in days.items():
             close = logged_close(logkey, d)
@@ -88,20 +84,15 @@ def polygon_month(key):
     return days
 
 
-def yahoo_month(key):
-    """A US series' last month from Yahoo, every 30 minutes, New York time: {day: [[hm, v], ...]}; fills the month's
-    US sessions saved before the month store began."""
-    sym = YMONTH.get(key, key.replace(".", "-"))
-    url = f"https://query2.finance.yahoo.com/v8/finance/chart/{urllib.parse.quote(sym)}?range=1mo&interval=30m"
-    r = json.loads(get(url))["chart"]["result"][0]
-    days = {}
-    for t, c in zip(r["timestamp"], r["indicators"]["quote"][0]["close"]):
-        if c is None:
-            continue
-        n = datetime.datetime.fromtimestamp(t, datetime.timezone.utc).astimezone(NY)
-        if "09:30" <= n.strftime("%H:%M") <= "16:00":
-            days.setdefault(n.date().isoformat(), []).append([n.strftime("%H:%M"), round(float(c), 4)])
-    return days
+def polygon_month(key):
+    """The last month every 30 minutes (the US month's backfill)."""
+    end = datetime.date.today()
+    return polygon_bars(key, 30, (end - datetime.timedelta(days=40)).isoformat(), end.isoformat())
+
+
+def polygon_day(key, day):
+    """One session every 5 minutes (the backup when Nasdaq refuses a series)."""
+    return polygon_bars(key, 5, day, day).get(day)
 
 
 def every5(points):
@@ -237,10 +228,14 @@ def market(name, keys, fn, done):
     for k in [k for k in keys if not res.get(k)]:
         res[k] = _try(fn, k)
     ok = {k: v for k, v in res.items() if v}
-    # US stocks Nasdaq still refused: Yahoo's copy of the same session
+    # US series Nasdaq still refused: Polygon's copy of the same session, then Yahoo's
     if name == "US" and ok:
         day0 = max(v[0] for v in ok.values())
-        for k in [k for k in keys if k in US and not res.get(k)]:
+        for k in [k for k in keys if (k in US or k in PFUND) and not res.get(k)]:
+            pts = _try(lambda k: polygon_day(k, day0), k)
+            if pts and len(pts) >= 6:
+                ok[k] = (day0, pts)
+                continue
             y = _try(yahoo_sessions, k)
             if y and day0 in y:
                 ok[k] = (day0, y[day0])
@@ -288,13 +283,14 @@ def main():
     # a stock missing from a saved US session (a fetch that failed that day) is filled from Yahoo's last five sessions
     holes = sorted({k for x in week.get("us", []) for k in US if k not in x["series"]})
     for k in holes:
-        y = _try(yahoo_sessions, k)
+        ss = [x["session"] for x in week.get("us", [])]
+        y = (_try(lambda k: polygon_bars(k, 15, ss[0], ss[-1]), k) if ss else None) or _try(yahoo_sessions, k)
         for x in week.get("us", []):
             if k not in x["series"] and y and len(y.get(x["session"], [])) >= 6:
                 x["series"][k] = every15(y[x["session"]])
     filled = [k for k in holes if all(k in x["series"] for x in week.get("us", []))]
     if holes:
-        print(f"US week: filled {', '.join(filled) or 'nothing'} from Yahoo" + (f"; still missing {', '.join(sorted(set(holes) - set(filled)))}" if set(holes) - set(filled) else ""))
+        print(f"US week: filled {', '.join(filled) or 'nothing'} from Polygon or Yahoo" + (f"; still missing {', '.join(sorted(set(holes) - set(filled)))}" if set(holes) - set(filled) else ""))
     out["week"] = week
     # the month: the last 23 sessions of each market, every 30 minutes, for the 1M charts. Each run adds the week's
     # sessions (a session still in the week replaces its month copy); the EGX's past sessions cannot be fetched again,
@@ -309,9 +305,7 @@ def main():
     if len(month.get("us", [])) < 21 or holes_us:
         got = 0
         for i, k in enumerate(["COMP", "sp500", "dow"] + US):
-            # Polygon first (five requests a minute on its free plan), Yahoo if it fails
-            if i:
-                time.sleep(12.5)
+            # Polygon first (polygon.py paces it at five requests a minute), Yahoo if it fails
             y = _try(polygon_month, k) or _try(yahoo_month, k)
             if not y:
                 continue

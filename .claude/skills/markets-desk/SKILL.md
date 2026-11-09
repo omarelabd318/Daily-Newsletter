@@ -33,7 +33,10 @@ closes are the last session's; the news, stock research and analysis are still u
 5. Run `python3 .claude/skills/markets-desk/fetch_intraday.py` to save the last finished session's prices
    through the day (`desk/intraday.json`, for the 1D charts: the EGX30, the Nasdaq and the desk's stocks, and
    the last 24 hours of Bitcoin; the S&P 500 and Dow from Yahoo or else traced from the SPY and DIA funds;
-   Brent, gold and the dollar index only when Yahoo answers).
+   Brent, gold and the dollar index only when Yahoo answers). It also keeps the last five sessions every 15
+   minutes (1W) and the last 23 every 30 minutes (1M). A US series Nasdaq refuses comes from Polygon, then Yahoo;
+   Polygon also fills gaps in the saved US sessions (its key is a network secret on the environment, added by the
+   proxy; five requests a minute, so a few gaps add a minute or two to the run).
    It keeps the saved session if a market is still trading, and takes under a minute. It also keeps the last
    five sessions (`week`, every 15 minutes), which the 1W charts draw once two or more are saved. The dollar in pounds
    has no 1D chart: the official rate barely moves within a day. Then run
