@@ -262,6 +262,28 @@ link to the story's own page. Take them from the newsletter's research and from 
   markets). Judge the effect on the price, not whether the news is good in general (a strong economy that brings
   rate-hike bets is mixed).
 
+## Results days
+
+From mid-October to late November, and again each quarter, the desk's stocks report. Two steps, both kept in
+`desk/stocks.json` and shown on the stock's page (Coming up) and, on the day, in the dashboards' Since yesterday:
+
+- **Before (up to three days ahead):** follow the earnings-preview skill's Steps 1, 2 and 4 to write `"preview"`:
+  `{"date", "period", "consensus", "watch": [...], "source", "url", "written"}`. `consensus` is one sentence with the
+  published estimates and where they come from ("Analysts expect EPS of $1.25 on revenue of $35bn, LSEG"); leave it
+  out when none is published, as for most Egyptian companies, rather than guessing. `watch` is the three to five
+  things that will decide the reaction, ranked, one line each in figures (for a bank: net interest margin, loan
+  growth, provisions; for a fertilizer maker: volumes after the gas cuts, urea prices). Skip the skill's
+  scenario table and options-implied move unless a source publishes them. check_desk.py warns when a stock reports
+  within three days without one.
+- **After (the day they come out):** follow the earnings-analysis skill's method, not its format (no 8-12 page
+  report, no charts): lead with the verdict, quantify the gap, say why, and say what it means for the desk's view.
+  Write `"lastResults"`: `{"date", "period", "verdict" (beat, miss, in line or mixed), "headline" (one line in
+  figures), "points": [two to four lines: the numbers against the estimate or last year, the guidance], "thesis"
+  (one sentence: what it changes for the desk's view or projection on the stock), "source", "url"}`. With no
+  published estimate, judge against last year's quarter and the preview's watch list, and say so in the headline.
+  For an Egyptian stock, also record the figures with set_results.py (step 7). Then add the news to any open view on
+  the stock, and change its confidence if the results move the case (Views: the record).
+
 ## Stock research, every day
 
 Log the desk's research as you go with `research_log.py DATE desk search|page ...`, and one line per stock with

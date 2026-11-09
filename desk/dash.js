@@ -251,6 +251,8 @@
         if (yr.length > 200 && last > Math.max(...yr)) out.push([4, `${tag('52-week high', 'ok')} ${link}`]);
         if (yr.length > 200 && last < Math.min(...yr)) out.push([4, `${tag('52-week low', 'bad')} ${link}`]);
       }
+      for (const t of GROUP[S.group]) { const R = (STOCKS[t] || {}).lastResults;
+        if (R && R.date && R.date >= cut(D.date, 1)) out.push([0, `${tag('Results: ' + (({ beat: 'beat', miss: 'missed', 'in line': 'in line', mixed: 'mixed' })[R.verdict] || 'out'), R.verdict === 'beat' ? 'ok' : R.verdict === 'miss' ? 'bad' : 'open')} <a href="/desk/stock/?t=${encodeURIComponent(t)}">${esc(NAMES[t] || t)}</a><span class="meta"> · ${esc(R.headline)}</span>`]); }
       for (const c of CAL.filter((c) => c.market === S.group && c.date === D.date))
         out.push([5, `${tag(c.kind === 'results' ? (c.expected ? 'Results expected' : 'Results today') : c.kind === 'split' ? `Stock split ${c.ratio}` : 'Goes ex-dividend', 'open')} <a href="/desk/stock/?t=${encodeURIComponent(c.t)}">${esc(NAMES[c.t] || c.t)}</a>${c.time ? `<span class="meta"> · ${esc(c.time)}</span>` : ''}`]);
       out.sort((a, b) => a[0] - b[0]);

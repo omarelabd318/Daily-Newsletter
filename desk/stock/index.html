@@ -46,6 +46,7 @@
     </section>
     <section class="card c4">
       <div class="card-h"><h2>Coming up</h2></div>
+      <div id="results"></div>
       <div id="next"></div>
     </section>
 
@@ -221,6 +222,18 @@ try {
     const hasResults = cal.some((x) => /^Results/.test(x.event));
     const own = (p.next || []).filter((n) => !(n.date && n.date < today) && !(hasResults && !n.date && /results/i.test(n.event)));
     const all = [...cal, ...own].sort((a, b) => (a.date || '9999') < (b.date || '9999') ? -1 : 1);
+    // results days (desk/stocks.json): the latest results for 30 days after they come out, with the desk's verdict,
+    // and before the next ones a "what to watch" preview (earnings-preview and earnings-analysis skills)
+    const R = p.lastResults, PV = p.preview, VERD = { beat: ['ok', 'Beat'], miss: ['bad', 'Missed'], 'in line': ['open', 'In line'], mixed: ['open', 'Mixed'] };
+    let rh = '';
+    if (R && R.date && R.date >= M.cut(today, 30)) {
+      const v = VERD[R.verdict] || ['open', R.verdict || 'Out'];
+      rh += `<div class="rbox"><div class="rbox-h"><span class="meta">Latest results · ${M.esc(dl(R.date))}</span><span class="pill ${v[0]}">${M.esc(v[1])}</span></div><b>${M.esc(R.headline)}</b>${(R.points || []).length ? `<ul>${R.points.map((x) => `<li>${M.esc(x)}</li>`).join('')}</ul>` : ''}${R.thesis ? `<p><b>For the desk's view:</b> ${M.esc(R.thesis)}</p>` : ''}${R.url ? `<a class="src" href="${M.esc(R.url)}" target="_blank" rel="noopener">${M.esc(R.source || 'Source')}&nbsp;→</a>` : ''}</div>`;
+    }
+    if (PV && PV.date && PV.date >= today && !(R && R.period && PV.period && R.period >= PV.period)) {
+      rh += `<div class="rbox"><div class="rbox-h"><span class="meta">Results due ${M.esc(dl(PV.date))} · what to watch</span></div>${PV.consensus ? `<p>${M.esc(PV.consensus)}</p>` : ''}<ol>${(PV.watch || []).map((x) => `<li>${M.esc(x)}</li>`).join('')}</ol>${PV.url ? `<a class="src" href="${M.esc(PV.url)}" target="_blank" rel="noopener">${M.esc(PV.source || 'Source')}&nbsp;→</a>` : ''}</div>`;
+    }
+    M.$('results').innerHTML = rh;
     M.$('next').innerHTML = all.map((n) => `<div class="wk" style="grid-template-columns:minmax(0,1fr) auto"><b>${M.esc(n.event)}</b><span class="imp${n.impact === 'high' ? ' high' : ''}">${M.esc(n.impact[0].toUpperCase() + n.impact.slice(1))}</span><span class="why" style="grid-column:1/-1"><span class="num">${M.esc(n.when)}</span> · ${M.esc(n.why)}</span></div>`).join('') || '<p class="sub">No dates found yet.</p>';
   }
   const PILL = { 'open': 'open', 'on track': 'ok', 'right': 'ok', 'wrong': 'bad', 'closed': 'open' };

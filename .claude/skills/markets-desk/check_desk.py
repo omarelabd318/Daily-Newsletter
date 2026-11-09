@@ -309,6 +309,24 @@ def main(args):
                 warnings.append(f"{w}: undated since {n['added']}; check it is still right and refresh \"added\", or remove it.")
             if re.search(r"\b(yesterday|today|tomorrow|this week|last week|(Sun|Mon|Tues|Wednes|Thurs|Fri|Satur)day'?s?)\b", f"{n.get('why', '')}", re.I) and not n.get("date"):
                 warnings.append(f"{w}: says '{re.search(r'(yesterday|today|tomorrow|this week|last week|[A-Z][a-z]+day)', n.get('why', '')).group(0)}', which goes stale; name the date instead.")
+    # results days: a desk stock reporting within three days needs a "preview" (what to watch), and one whose
+    # previewed date has passed needs "lastResults" for that quarter (the beat-or-miss verdict)
+    CALI = (load("desk/calendar.json") or {}).get("items", [])
+    soon = (datetime.date.fromisoformat(date) + datetime.timedelta(days=3)).isoformat()
+    for c in CALI:
+        if c.get("kind") == "results" and date <= c["date"] <= soon:
+            pv = (ST_.get(c["t"]) or {}).get("preview") or {}
+            if pv.get("date") != c["date"] and pv.get("period") != c.get("period"):
+                warnings.append(f"{c['t']} reports {c['date']} (expected): add its \"preview\" in desk/stocks.json, the three to five things that will decide "
+                                f"the reaction, with the consensus where published (earnings-preview skill; see the desk skill's Results days).")
+    for t, e in ST_.items():
+        pv, R = e.get("preview") or {}, e.get("lastResults") or {}
+        if pv.get("date") and pv["date"] < date and not (R.get("period") and pv.get("period") and R["period"] >= pv["period"]):
+            warnings.append(f"{t}: its results were due {pv['date']}; if they are out, record \"lastResults\" (verdict, headline, the points, what it means for the desk's view, source); if delayed, move the preview's date.")
+        if R:
+            need(R, ["date", "period", "verdict", "headline", "source"], f"stocks.json {t} lastResults")
+            if R.get("verdict") not in ("beat", "miss", "in line", "mixed"):
+                errors.append(f"stocks.json {t} lastResults: verdict must be beat, miss, in line or mixed.")
     # a split in the last two weeks (desk/calendar.json, from Polygon): the log's prices before it must be adjusted,
     # or the charts and changes show a fall (or jump) of the split's size
     for x in (load("desk/calendar.json") or {}).get("recentSplits", []):
