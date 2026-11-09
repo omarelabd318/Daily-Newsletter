@@ -71,6 +71,13 @@
      "source": "Financial Times",
      "url": "https://www.ft.com/content/a55a2a22-4479-4f93-a445-6147a5c6d790",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-09",
+     "text": "Nvidia's board opened an independent inquiry into Jensen Huang, a week before results; the shares slipped about 2.4% overnight.",
+     "source": "Al Jazeera",
+     "url": "https://www.aljazeera.com/news/2026/11/8/us-chipmaker-nvidia-investigates-ceo-jensen-huang-over-affair",
+     "effect": "supports"
     }
    ],
    "wrongIf": [
@@ -169,6 +176,13 @@
      "source": "Youm7",
      "url": "https://www.youm7.com/story/2026/11/7/%D8%B3%D8%A8%D8%A7%D9%82-%D8%A7%D9%84%D9%85%D9%84%D9%8A%D8%A7%D8%B1%D8%A7%D8%AA-%D8%A8%D8%A7%D9%84%D8%A8%D9%88%D8%B1%D8%B5%D8%A9-10-%D8%A3%D8%B3%D9%87%D9%85-%D8%AA%D8%AD%D8%AA%D9%83%D8%B1-15-5-%D9%85%D9%84%D9%8A%D8%A7%D8%B1-%D8%AC%D9%86%D9%8A%D9%87/7608592",
      "effect": "against"
+    },
+    {
+     "date": "2026-11-09",
+     "text": "An insider sold 443,600 Palm Hills shares on Sunday; both developers remain below their 50-day averages.",
+     "source": "Youm7",
+     "url": "https://www.youm7.com/story/2026/11/9/بوصلة-الكبار-تتجه-للشراء-اقتناص-أسهم-فوري-والقلعة-والتخلي-عن/7611328",
+     "effect": "supports"
     }
    ],
    "driver": "egp-rates"
@@ -331,6 +345,13 @@
      "source": "Youm7",
      "url": "https://www.youm7.com/story/2026/11/7/%D8%B3%D8%A8%D8%A7%D9%82-%D8%A7%D9%84%D9%85%D9%84%D9%8A%D8%A7%D8%B1%D8%A7%D8%AA-%D8%A8%D8%A7%D9%84%D8%A8%D9%88%D8%B1%D8%B5%D8%A9-10-%D8%A3%D8%B3%D9%87%D9%85-%D8%AA%D8%AD%D8%AA%D9%83%D8%B1-15-5-%D9%85%D9%84%D9%8A%D8%A7%D8%B1-%D8%AC%D9%86%D9%8A%D9%87/7608592",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-09",
+     "text": "CIB's deputy chief executive said its Yomo digital bank has preliminary central bank approval; results are expected Wednesday.",
+     "source": "Banky",
+     "url": "https://www.bankygate.com/202206",
+     "effect": "neutral"
     }
    ],
    "driver": "egp-rates"
@@ -340,7 +361,7 @@
    "opened": "2026-11-04",
    "market": "egx",
    "kind": "view",
-   "title": "Gas rationing keeps fertiliser stocks under pressure through November",
+   "title": "Gas rationing keeps fertilizer stocks under pressure through November",
    "confidence": "low",
    "detail": "Gas to fertiliser plants was cut 20% from 1 November; urea prices ($535 a ton) cover part of the volume loss, but Abu Qir and Mopco have run hard this year and fell four sessions in a row.",
    "wrong": "Abu Qir closes above EGP 85, or the gas allocations are restored in full.",
@@ -355,7 +376,7 @@
     "ABUK",
     "MFPC"
    ],
-   "status": "open",
+   "status": "on track",
    "updates": [
     {
      "date": "2026-11-04",
@@ -377,6 +398,14 @@
      "source": "Egypt Oil & Gas",
      "url": "https://egyptoil-gas.com/news/abu-qir-fertilizers-adjusts-operations-following-natural-gas-supply-cut/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-09",
+     "text": "The government raised gas cuts for fertilizer and methanol plants to 33% from 20%, with no end date, to save on LNG cargoes near $120m each; Abu Qir fell 5.8% to EGP 76.30. A deeper, open-ended cut makes the call more likely.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/09/govt-deepens-industrial-gas-rationing-raising-curtailments-on-fertilizer-and-methanol-plants-to-33-and-notifying-ezz-steel-of-a-30-cut/",
+     "effect": "supports",
+     "confidence": "medium"
     }
    ],
    "wrongIf": [
@@ -415,6 +444,13 @@
      "source": "Yahoo Finance",
      "url": "https://finance.yahoo.com/markets/live/stock-market-today-friday-november-6-dow-sp-500-nasdaq-jobs-report-earnings-135953863.html",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-09",
+     "text": "The EGX30 fell 0.67% to 50,812.07 on Sunday as foreign investors sold a net EGP 27.9m, a small amount against EGP 10.5bn traded.",
+     "source": "Al Mal",
+     "url": "https://almalnews.com/2145881/",
+     "effect": "neutral"
     }
    ],
    "wrongIf": [
@@ -472,6 +508,13 @@
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/2026/11/08/goldman-sachs-calls-egp-undervalued-by-30-sees-it-at-50-per-usd/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-09",
+     "text": "The central bank's rate rose to EGP 54.31 from 54.01 after six straight falls, while the 91-day bill eased to 24.86% from 25.00%, a sign demand for local debt held.",
+     "source": "Central Bank of Egypt",
+     "url": "https://www.cbe.org.eg/en/auctions/egp-t-bills",
+     "effect": "neutral"
     }
    ],
    "wrongIf": [
@@ -524,6 +567,13 @@
      "source": "Asharq Al-Awsat",
      "url": "https://english.aawsat.com/world/5338803-iran-says-two-tankers-caught-fire-hormuz-after-hitting-mines",
      "effect": "against"
+    },
+    {
+     "date": "2026-11-09",
+     "text": "Brent traded near $96 on Monday, down about 2%, after Trump called new strikes on Iran \"highly unlikely\" if talks progress; the Houthis' strike on Riyadh's Aramco tower caused only minor damage.",
+     "source": "Reuters (via Business Recorder)",
+     "url": "https://brecorder.com/news/40448086/oil-steadies-after-trump-signals-restraint-on-iran-hormuz-risks-persist",
+     "effect": "supports"
     }
    ],
    "wrongIf": [
@@ -534,6 +584,40 @@
     }
    ],
    "driver": "oil"
+  },
+  {
+   "id": "2026-11-09-egal-earnings",
+   "opened": "2026-11-09",
+   "market": "egx",
+   "kind": "projection",
+   "title": "Egypt Aluminium returns to EGP 335–345 by end of December",
+   "confidence": "medium",
+   "detail": "First-quarter profit rose 104% to EGP 4.93bn on sales up 6.4%, putting the stock at about 7.3 times the last 12 months' earnings at EGP 317.00, below its 50-day average of about EGP 338. A planned state stake sale is the risk to the timing.",
+   "wrong": "It closes below EGP 290.",
+   "due": "2026-12-31",
+   "track": {
+    "key": "egx.EGAL",
+    "label": "Egypt Aluminium",
+    "start": 317.0,
+    "target": [
+     335,
+     345
+    ],
+    "side": "bull"
+   },
+   "tickers": [
+    "EGAL"
+   ],
+   "status": "open",
+   "updates": [],
+   "wrongIf": [
+    {
+     "key": "egx.EGAL",
+     "op": "<",
+     "level": 290
+    }
+   ],
+   "driver": "metals-earnings"
   }
  ]
 }
