@@ -47,7 +47,8 @@ TOTAL = (2850, 3450)
 MIN_ITEMS = {"Egypt News": 4, "Top World Headlines": 6, "Tech and AI": 3, "Sports": 5,
              "Entertainment and Culture": 3}
 # Words that break the voice rules. "US" is left out on purpose: it is usually the country.
-VOICE = re.compile(r"\b(I|I'm|I've|we|We|we're|We're|our|Our|ours|my|My|me|Omar)\b")
+# "Omar" alone is the reader's name; Omar al-Bashir, Omar Marmoush and other full names are not
+VOICE = re.compile(r"\b(I|I'm|I've|we|We|we're|We're|our|Our|ours|my|My|me|Omar(?![ -](?:al-|el-|bin |ibn |[A-Z])))\b")
 # A single shared word in two lead-ins usually means the same running story.
 STORY = set("""houthi houthis hormuz iran iranian saudi israel israeli gaza hamas hezbollah lebanon syria
 sudan libya ukraine russia imf brent opec suez""".split())
@@ -204,19 +205,37 @@ def check_links(text, errors, warnings):
         warnings.append(f"Sources: {len(unsure)} of {len(urls)} links could not be checked (the site refused or timed out); open them by hand if in doubt.")
 
 
+def source_close(mk, t, v):
+    """True when the stock's quote at its source (Mubasher for the EGX, Nasdaq for the US) gives v as its latest close
+    or the close before it."""
+    try:
+        import fetch_figures as FF
+        q = FF.mubasher(f"stocks/{t}") if mk == "egx" else FF.nasdaq(t)
+        return any(x is not None and abs(x - v) <= max(0.005, abs(v) * 0.0005) for x in (q.get("value"), q.get("prev")))
+    except Exception:
+        return False
+
+
 def check_closes(date, errors, warnings):
     """Each stock's logged close against the desk's intraday prices for the same session (desk/intraday.json). A close
-    left at the day before's figure while the stock traded elsewhere is an error; any other gap over 1% a warning."""
+    left at the day before's figure while the stock traded elsewhere is an error, and so is a gap over 0.5% (EGX) or 1%
+    (US, where the closing auction often sits a little off the last five-minute price) until the close is fixed or
+    checked at its source and logged with research_log.py DATE newsletter close TICKER PRICE SOURCE. An EGX close can
+    differ from the last trade (the exchange sets it from the session's final trades), so a gap alone is not proof."""
     try:
         days = json.load(open(os.path.join(ROOT, "data", "markets.json")))["days"]
         week = json.load(open(os.path.join(ROOT, "desk", "intraday.json"))).get("week") or {}
     except Exception:
         return
+    try:
+        ok = (json.load(open(os.path.join(ROOT, "data", "research", f"{date}.json"))).get("newsletter") or {}).get("closes") or {}
+    except Exception:
+        ok = {}
     i = next((k for k, d in enumerate(days) if d["date"] == date), None)
     if i is None:
         return
     E, P = days[i], (days[i - 1] if i else {})
-    for mk in ("egx", "us"):
+    for mk, limit in (("egx", 0.005), ("us", 0.01)):
         sess = [w for w in week.get(mk, []) if w["session"] < date]
         if not sess:
             continue
@@ -226,12 +245,19 @@ def check_closes(date, errors, warnings):
             if v is None or not pts:
                 continue
             last = pts[-1][1]
-            if abs(last - v) <= 0.01 * abs(last):
+            if abs(last - v) <= limit * abs(last):
                 continue
             if v == (P.get(mk) or {}).get(t):
                 errors.append(f"{t}: the log repeats the day before's close ({v}) but it traded at {last} at the end of the {sess[-1]['session']} session: take the session's close.")
+            elif t in ok and abs(ok[t]["price"] - v) < 0.005:
+                continue   # checked at its source by the run
+            elif source_close(mk, t, v):
+                continue   # the source's own quote has it as the close (before the open: the latest close, else the one before)
             else:
-                warnings.append(f"{t}: logged close {v}, but the desk's intraday prices end the {sess[-1]['session']} session at {last}: check it.")
+                errors.append(f"{t}: logged close {v}, but its last trade in the {sess[-1]['session']} session was {last} "
+                              f"({abs(v / last - 1) * 100:.1f}% apart). Check the close at the source "
+                              f"({'Mubasher' if mk == 'egx' else 'Nasdaq or Yahoo'}): fix the log if it is wrong, or record it with "
+                              f"research_log.py {date} newsletter close {t} {v} SOURCE.")
 
 
 def main(path):

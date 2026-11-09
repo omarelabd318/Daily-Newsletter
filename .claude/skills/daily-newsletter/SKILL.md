@@ -424,6 +424,13 @@ date, and the change with the move from the previous logged close (from the prev
 price for an intraday table). A warning there means one of the two figures is wrong: recheck both at the
 source and fix the table or re-run log_figures.py before publishing.
 
+It also compares each logged close with the stock's last trade in the desk's intraday prices for that session. A
+gap over 0.5% on the EGX or 1% in the US is an error that blocks publishing, unless the stock's own quote at its
+source (Mubasher, Nasdaq) gives the logged figure as its close, which the checker looks up itself (an EGX close can
+sit off the last trade, since the exchange sets it from the session's final trades). If it still errors, open the
+quote: fix the log if it is wrong, or, where the close is right but the source would not answer the checker, record
+it with `python3 .claude/skills/daily-newsletter/research_log.py DATE newsletter close TICKER PRICE "Mubasher"`.
+
 ## Egyptian holidays
 
 `data/holidays.json` lists the public holidays that close the EGX. Use it in Today at a Glance's What to
