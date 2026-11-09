@@ -527,3 +527,21 @@ a.tag:hover{color:var(--text);text-decoration:underline;text-underline-offset:2p
 /* Style C: groups of switches stand apart, each after a thin divider */
 .seg + .ctabs,.ctabs + .ctabs,.ctabs + .seg,.seg + .seg{margin-left:6px;padding-left:20px!important;border-left:1px solid var(--border)}
 .vprog{background:none;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);border-radius:0;padding:8px 0}
+
+/* the stock lists as a table (Cards | Table) */
+.stable table{width:100%}
+.stable td{height:auto;padding:10px 0}
+.stable td + td,.stable th + th{padding-left:14px}
+.stable td.name a{text-decoration:none}
+.stable tr.click{cursor:pointer} .stable tr.click:hover td{background:var(--raised)}
+.stable th.tsort-h{cursor:pointer;user-select:none;white-space:nowrap} .stable th.tsort-h.on{color:var(--accent)} .stable th.tsort-h:hover{color:var(--text)}
+.stable tr.grp th{padding:18px 0 6px;font-size:11px;letter-spacing:.14em;color:var(--text);border-bottom:1px solid var(--text);text-align:left}
+.stable .st-range{width:150px} .stable .st-range .range{margin:0 0 3px}
+@media (max-width:860px){ .stable .st-m{display:none} .stable td,.stable th{font-size:13px} .stable td.name span{display:block;margin:0} }
+@media (max-width:860px){
+  .stable table{display:table} .stable thead{display:table-header-group} .stable tbody{display:table-row-group}
+  .stable tr{display:table-row} .stable td,.stable th{display:table-cell;vertical-align:middle}
+  .stable .st-m{display:none!important}
+  .stable td + td,.stable th + th{padding-left:10px}
+  .stable th{font-size:10px;letter-spacing:.06em}
+}

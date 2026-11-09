@@ -24,6 +24,7 @@
     <div class="ctabs" id="view" aria-label="Layout"></div>
     <div class="ctabs" id="sort" aria-label="Order"></div>
     <div class="ctabs" id="cur" aria-label="Currency" hidden></div>
+    <div class="ctabs" id="layout" aria-label="Show as"></div>
   </div>
   <div class="sgrid" id="grid"></div>
 </main>
@@ -54,7 +55,9 @@
   // market value, e.g. 'EGP 370bn' or '$5.1tn'
   const capText = (t) => { const c = (prof[t] || {}).cap; if (!c) return ''; const v = c.value, cur = c.currency === 'USD' ? '$' : 'EGP ';
     return ' · ' + (v >= 1000 ? `${cur}${(v / 1000).toFixed(1)}tn` : `${cur}${v >= 100 ? Math.round(v) : v.toFixed(1)}bn`); };
-  let per = M.PERIODS[2], inUSD = false, order = 0, bySector = false;
+  let per = M.PERIODS[2], inUSD = false, order = 0, bySector = false, tsort = null;
+  // cards or a table, remembered in this browser
+  let asTable = false; try { asTable = localStorage.getItem('deskpref:stocks-layout') === 'table'; } catch (e) {}
   const draw = async () => {
     if (per[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; }
     const rows = tickers.map((t) => {
@@ -86,6 +89,30 @@
     </a>`;
     // by sector: the desk's broad sectors, each headed by its equal-weighted change over the period; ordered by
     // combined market value, or by that change when sorting best or worst. Inside a sector the chosen order holds.
+    // the table: one line a stock; a column heading sorts by it (again: the other way), over the order chosen above
+    if (asTable) {
+      const key = { day: (r) => M.change(r.s, 0), per: (r) => r.c, ytd: (r) => r.y, close: (r) => M.last(r.s), name: (r) => M.NAMES[r.t] };
+      if (tsort) rows.sort((a, b) => { const x = key[tsort.k](a), y = key[tsort.k](b); if (x == null) return 1; if (y == null) return -1; return (typeof x === 'string' ? x.localeCompare(y) : x - y) * tsort.dir; });
+      const th = (k, label, num = true) => `<th class="${num ? 'num ' : ''}${k === 'per' ? 'st-m ' : ''}tsort-h${tsort && tsort.k === k ? ' on' : ''}" data-k="${k}">${label}${tsort && tsort.k === k ? (tsort.dir < 0 ? ' ▾' : ' ▴') : ''}</th>`;
+      const trow = (r) => { const d = M.change(r.s, 0), pos = r.now == null ? null : ((r.now - r.lo) / (r.hi - r.lo || 1) * 100);
+        return `<tr class="click" onclick="location='/desk/stock/?t=${encodeURIComponent(r.t)}'"><td class="name"><a href="/desk/stock/?t=${encodeURIComponent(r.t)}"><b>${M.esc(M.NAMES[r.t])}</b><span>${M.esc(r.t)}</span></a>${r.open ? `<span class="pill open" style="margin-left:8px">${r.open} view${r.open > 1 ? 's' : ''}</span>` : ''}</td>
+          <td class="st-m meta">${M.esc((prof[r.t] || {}).sector || '')}</td>
+          <td class="trend st-m">${r.pts.length > 1 ? M.spark([], 7, null, r.pts) : ''}</td>
+          <td class="num">${r.now == null ? '<span class="dash">—</span>' : M.num(M.last(r.s))}</td>
+          <td class="num"><span class="${M.cls(d)}">${M.pct(d)}</span></td>
+          <td class="num st-m"><span class="${M.cls(r.c)}">${M.pct(r.c)}</span></td>
+          <td class="num"><span class="${M.cls(r.y)}">${M.pct(r.y)}</span></td>
+          <td class="st-m st-range">${pos == null ? '' : `<div class="range"><i style="left:calc(${pos.toFixed(1)}% - 1px)"></i></div><span class="meta num">${M.num(r.lo, r.lo < 10 ? 2 : 0)} – ${M.num(r.hi, r.hi < 10 ? 2 : 0)}</span>`}</td></tr>`; };
+      const head = `<thead><tr>${th('name', 'Company', false)}<th class="st-m">Sector</th><th class="trend st-m">${M.esc(per[2])}</th>${th('close', 'Close' + (cur === '$' ? ', $' : ', EGP'))}${th('day', 'Day')}${per[1] ? th('per', per[0]) : ''}${th('ytd', 'This year')}<th class="st-m">52-week range</th></tr></thead>`;
+      const fixRow = (h) => per[1] ? h : h.replace(/<td class="num st-m"><span[^>]*>[^<]*<\/span><\/td>/, '');
+      let body;
+      if (!bySector) body = rows.map((r) => fixRow(trow(r))).join('');
+      else body = M.SECTORS[MKT].map(([name, ts]) => { const rs = rows.filter((r) => ts.includes(r.t)); return rs.length ? `<tr class="grp"><th colspan="8">${M.esc(name)}</th></tr>` + rs.map((r) => fixRow(trow(r))).join('') : ''; }).join('');
+      M.$('grid').className = 'stable';
+      M.$('grid').innerHTML = `<table>${head}<tbody>${body}</tbody></table>`;
+      M.$('grid').querySelectorAll('th.tsort-h').forEach((h) => h.addEventListener('click', () => { const k = h.dataset.k; tsort = tsort && tsort.k === k ? { k, dir: -tsort.dir } : { k, dir: k === 'name' ? 1 : -1 }; draw(); }));
+      return;
+    }
     if (!bySector) { M.$('grid').className = 'sgrid'; M.$('grid').innerHTML = rows.map(card).join(''); return; }
     const cap = (t) => ((prof[t] || {}).cap || {}).value || 0;
     const groups = M.SECTORS[MKT].map(([name, ts]) => {
@@ -100,7 +127,9 @@
   };
   M.segment(M.$('seg'), '1M', (p) => { per = p; draw(); }, M.PERIODS.concat(M.LONG));
   M.toggle(M.$('view'), ['All', 'By sector'], (i) => { bySector = i === 1; draw(); });
-  M.toggle(M.$('sort'), ['List order', 'Largest', 'Best', 'Worst'], (i) => { order = i; draw(); });
+  M.toggle(M.$('sort'), ['List order', 'Largest', 'Best', 'Worst'], (i) => { order = i; tsort = null; draw(); });
+  M.toggle(M.$('layout'), ['Cards', 'Table'], (i) => { asTable = i === 1; try { localStorage.setItem('deskpref:stocks-layout', asTable ? 'table' : 'cards'); } catch (e) {} draw(); });
+  if (asTable) { const b = M.$('layout').querySelectorAll('button'); b.forEach((x, i) => x.setAttribute('aria-pressed', i === 1)); }
   if (egx) { M.$('cur').hidden = false; M.toggle(M.$('cur'), ['EGP', 'USD'], (i) => { inUSD = i === 1; draw(); }); }
   draw();
 })();
