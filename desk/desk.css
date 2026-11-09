@@ -572,3 +572,8 @@ h2.sec-h{display:none}
 .drv2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 48px}
 .drv2 > *{border-top:1px solid var(--rule)!important;padding-top:14px!important;margin-top:0!important}
 @media (max-width:860px){.drv2{grid-template-columns:minmax(0,1fr)} .drv2 > :first-child{border-top:0!important;padding-top:0!important}}
+/* movers: when the section beside them is empty that day (After the bell, flows), take the full width with gainers and losers side by side */
+@media (min-width:861px){
+  section.c6:has(#movers):has(+ section[hidden]){grid-column:span 12}
+  section.c6:has(#movers):has(+ section[hidden]) .movers{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 48px}
+}
