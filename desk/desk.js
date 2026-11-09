@@ -440,31 +440,20 @@ window.Desk = (function () {
 
   // the Find a stock box (desk/search.js, shared with the dashboards), loaded once
   const withSearch = (cb) => { if (window.DeskSearch) return cb(window.DeskSearch); const sc = document.createElement('script'); sc.src = '/desk/search.js'; sc.onload = () => cb(window.DeskSearch); document.head.appendChild(sc); };
+  // the shared masthead and menu (desk/nav.js), loaded once
+  const withNav = () => new Promise((ok) => { if (window.DeskNav) return ok(window.DeskNav); const sc = document.createElement('script'); sc.src = '/desk/nav.js'; sc.onload = () => ok(window.DeskNav); document.head.appendChild(sc); });
   async function init(page) {
-    const icon = (d) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke-width="1.5"><path d="${d}"/></svg>`;
-    // the sidebar sits under its market's heading, so its labels drop the market (the phone's page row keeps them)
-    const SHORT = { '/desk/egypt/': 'Dashboard', '/desk/stocks/egypt/': 'Stocks', '/desk/usa/': 'Dashboard', '/desk/stocks/us/': 'Stocks' };
-    const links = PAGES.map(([h, n, d]) => `<a href="${h}"${h === page ? ' aria-current="page"' : ''}>${icon(d)}${SHORT[h] || n}</a>`);
-    const SEARCH = `<div class="dsearch" role="search"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5L14 14"/></svg><input type="search" placeholder="Find a stock" aria-label="Find a stock" autocomplete="off" spellcheck="false"><div class="dsr" role="listbox" hidden></div></div>`;
     const shell = document.createElement('div');
     shell.className = 'app';
-    shell.innerHTML = `<aside class="side" aria-label="Markets Desk">
-      <div class="brand"><span class="mark" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18"><path d="M2 14l4-4 3 2.5L16 5" fill="none" stroke="#0e1216" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Markets Desk</b></span></div>
-      ${SEARCH}
-      <nav class="nav" aria-label="Main"><div class="navgroup">Egypt</div>${links.slice(0, 4).join('')}<div class="navgroup">USA</div>${links.slice(4, 7).join('')}<div class="navgroup">Global and record</div>${links[7]}${links[8]}${links[9]}${links[10]}
-      <div class="navgroup">Newsletter</div><a href="/">${icon('M3 2.5h10v11H3zM5.5 5.5h5M5.5 8h5M5.5 10.5h3')}Today's newsletter</a></nav>
-      <div class="side-foot"><button type="button" class="theme"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2a6 6 0 100 12A4.5 4.5 0 018 2z"/></svg><span>Dark mode</span></button>Cairo · prices in EGP unless marked</div></aside>
-      <div><header class="topbar"><div class="brand"><span class="mark" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18"><path d="M2 14l4-4 3 2.5L16 5" fill="none" stroke="#0e1216" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Markets Desk</b></span></div><div class="tb-r">${SEARCH}<a class="btn" href="/">Newsletter</a></div></header>
-      <nav class="pagenav" aria-label="Pages">${PAGES.map(([h, n]) => `<a href="${h}"${h === page ? ' aria-current="page"' : ''}>${n}</a>`).join('')}</nav></div>`;
     const main = document.querySelector('main.canvas');
-    shell.lastElementChild.appendChild(main);
+    shell.appendChild(main);
     document.body.prepend(shell);
-    theme();
-    withSearch((f) => shell.querySelectorAll('.dsearch').forEach((x) => f(x, NAMES, GROUP)));
+    (await withNav()).mount(page, NAMES, GROUP);
     const idx = await get('/desk/index.json');
     const latest = idx && idx.desks && idx.desks.length ? idx.desks.map((d) => d.date).sort().at(-1) : null;
     DESK = latest ? await get('/desk/days/' + latest + '.json') : null;
     if (!DESK) { main.innerHTML = '<p class="finding">No desk has been published yet.</p>'; return null; }
+    { const lb = document.getElementById('dm-label'); if (lb) { lb.dataset.base = lb.dataset.base || lb.textContent; lb.textContent = `${lb.dataset.base} · ${day(DESK.date).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}`; } }
     ASOF = DESK.asOf; CUTOFF = new Date(day(DESK.date) - 864e5).toISOString().slice(0, 10);
     INTRA = await get('/desk/intraday.json');
     MOVERS = await get('/desk/movers.json');

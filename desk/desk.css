@@ -433,3 +433,97 @@ tbody tr.sec-row:first-child th,tbody tr.sec-row:first-child td{padding-top:8px;
 .rbox-h{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
 .rbox ul,.rbox ol{margin:6px 0 0;padding-left:18px} .rbox li{margin:3px 0}
 .rbox p{margin:6px 0 0} .rbox .src{display:inline-block;margin-top:6px;font-size:12px;color:var(--muted)}
+
+/* ===== Style C: a research note. Ivory paper, ink rules instead of boxes, serif headlines and figures, navy for
+   the data and red for labels; dark mode is the newsletter's blue-black with its teal. Kept the same in desk.css
+   and dash.css. ===== */
+:root{
+  --ground:#fbfaf7; --surface:#fbfaf7; --raised:#f3efe6; --active:#ebe6da;
+  --border:#d9d4c7; --rule:#e7e2d6; --control:#cfc8b8;
+  --text:#1c1c1a; --muted:#6d6a63; --faint:#8a867d;
+  --primary:#1c1c1a; --primary-ink:#fbfaf7; --brand:#a1281e;
+  --chart-1:#14365d; --chart-muted:#9a958a; --grid:#ebe6da; --axis-ink:#6d6a63; --ink:#1c1c1a;
+  --positive:#1f6f43; --negative:#a1281e; --negative-ink:#a1281e; --sell:#a1281e;
+  --pill-pos-bg:transparent; --pill-pos-ink:#1f6f43; --pill-neg-bg:transparent; --pill-neg-ink:#a1281e;
+  --accent:#14365d; --kick:#a1281e;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif; --brand-font:var(--serif);
+  --radius-card:0; --radius-control:0; --radius-chip:0;
+}
+:root[data-theme="dark"]{
+  --ground:#0e1216; --surface:#0e1216; --raised:#151b21; --active:#1b2229;
+  --border:#2a333c; --rule:#1d242b; --control:#38424c;
+  --text:#eef2f4; --muted:#a9b4be; --faint:#7d8791;
+  --primary:#eef2f4; --primary-ink:#0e1216; --brand:#ef7d6d;
+  --chart-1:#52d6b5; --chart-muted:#7d8791; --grid:#1d242b; --axis-ink:#a9b4be; --ink:#eef2f4;
+  --positive:#52d6b5; --negative:#ef7d6d; --negative-ink:#ef7d6d; --sell:#ef7d6d;
+  --pill-pos-bg:transparent; --pill-pos-ink:#52d6b5; --pill-neg-bg:transparent; --pill-neg-ink:#ef7d6d;
+  --accent:#52d6b5; --kick:#ef7d6d;
+}
+/* the page: one column under the masthead (desk/nav.js), no sidebar */
+.app{display:block!important;max-width:1440px;margin:0 auto;min-height:0}
+.side,.topbar,.pagenav,.secswitch{display:none!important}
+.canvas{padding:22px 48px 56px}
+.titlerow{margin-bottom:22px}
+h1{font:700 34px/1.15 var(--serif);letter-spacing:-.01em}
+.finding{margin-top:10px;max-width:82ch;font:400 17px/1.55 var(--serif);color:var(--text)}
+.finding b{font-weight:700}
+.stamp{font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.crumbs{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.crumbs a{text-decoration:none}
+/* sections: a rule over a small capital heading, no boxes or shadows */
+.card{background:transparent;border:0;border-top:1px solid var(--text);border-radius:0;padding:10px 0 0;box-shadow:none}
+.card-h{margin-bottom:10px}
+.card-h h2,.card-h > .hgroup > h2{font-size:11px;line-height:16px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.card-h .meta{font-size:12px}
+/* switches as text: the current choice underlined */
+.seg,.ctabs{background:none;padding:0;gap:16px;border-radius:0}
+.seg button,.ctabs button{height:auto;min-width:0;padding:2px 0 3px;border:0;border-bottom:2px solid transparent;border-radius:0;background:none;color:var(--muted);font-size:12px;letter-spacing:.06em;font-weight:500}
+.seg button[aria-pressed="true"],.ctabs button[aria-pressed="true"]{background:none;color:var(--accent);border-color:var(--accent);font-weight:600}
+.seg button:hover,.ctabs button:hover{color:var(--text)}
+.cmp{height:auto;padding:2px 0 3px;border:0;border-bottom:2px solid transparent;border-radius:0;background:none;color:var(--muted);font-size:12px;letter-spacing:.06em}
+.cmp[aria-pressed="true"]{background:none;color:var(--accent);border-color:var(--accent)}
+/* labels instead of tags */
+.pill,.conf,.chip{height:auto;padding:0;background:none!important;border-radius:0;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+.pill.open,.conf{color:var(--muted)} .conf.high{color:var(--kick)}
+.chip{color:var(--accent);letter-spacing:.06em;text-transform:none;font-size:12px}
+.more-btn,.btn{border-radius:0}
+/* tables: fine rules, figures aligned */
+th{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:500}
+td{border-top-color:var(--rule)}
+.num,td.num,.v{font-variant-numeric:tabular-nums}
+/* story headlines and figures in the serif */
+.vcard h2,.lead-story h3,.read h3,.story h3,.news .nh{font-family:var(--serif);font-weight:700;letter-spacing:-.005em}
+.lrow.lead .v,.fig .v,.fig.lead .v,.big,.lvl,#lvl{font-family:var(--serif)}
+.dsearch{border-radius:0}
+@media (max-width:860px){
+  .canvas{padding:16px 16px 40px}
+  h1{font-size:27px}
+  .finding{font-size:16px}
+}
+/* Style C, the day's stories and figures */
+.finding b{font-weight:600}
+.imp{height:auto;padding:0;background:none!important;border-radius:0;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--muted)}
+.imp.high{color:var(--kick)}
+#story-n{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--kick);font-weight:600}
+.read h2.call,#c-read h2.call,#h-read{font:700 30px/1.18 var(--serif);letter-spacing:-.01em;margin:8px 0 12px;text-transform:none}
+.read p,.lead-story p{font:400 16px/1.6 var(--serif)}
+.read dt{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text);font-weight:600}
+.read dd{font-size:14px;line-height:21px}
+.also-i h3{font:700 18px/1.3 var(--serif);letter-spacing:-.005em}
+.strip-g h3{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.fig .v,.hero .lvl,.lvl{font-family:var(--serif);font-weight:700}
+.chart-cap,.ledger-note{color:var(--muted)}
+.notice{border-radius:0}
+@media (max-width:860px){ .read h2.call,#c-read h2.call,#h-read{font-size:24px} }
+/* Style C, more stories and their tags: rules, not boxes */
+.also-h{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--text)}
+.also-g{gap:0 32px}
+.also-i{border:0;border-top:1px solid var(--rule);border-radius:0;padding:12px 0 14px;background:none}
+.also-i p{font:400 15px/1.5 var(--serif);color:var(--text)}
+.tag{height:auto;padding:0;background:none!important;box-shadow:none!important;border-radius:0;font-size:12px;gap:3px;color:var(--muted)}
+.tag.sector{color:var(--text)}
+.tags{gap:4px 14px}
+a.tag:hover{color:var(--text);text-decoration:underline;text-underline-offset:2px}
+/* Style C: groups of switches stand apart, each after a thin divider */
+.seg + .ctabs,.ctabs + .ctabs,.ctabs + .seg,.seg + .seg{margin-left:6px;padding-left:20px!important;border-left:1px solid var(--border)}
+.vprog{background:none;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);border-radius:0;padding:8px 0}

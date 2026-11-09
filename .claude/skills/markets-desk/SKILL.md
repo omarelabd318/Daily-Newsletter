@@ -103,7 +103,9 @@ logged daily (fetch_figures.py lists them as "Desk only") but are not rows in th
 
 The menu is grouped by market: Egypt (EGY dashboard, EGP, EGX, EGX stocks), USA (US dashboard, Wall Street,
 Wall Street stocks), then Global and Views. Shared code is
-`desk/desk.js` and `desk/desk.css`. The two dashboards share `desk/dash.js` and `desk/dash.css` (their own copy of the styles: change
+`desk/desk.js` and `desk/desk.css`. The masthead and two-row menu on every page come from `desk/nav.js`. The look is style C (ivory paper, ink rules
+instead of boxes, serif headlines and figures, navy data and red labels; dark is the newsletter's blue-black and teal),
+set by the Style C blocks at the end of `desk/desk.css` and `desk/dash.css`. The two dashboards share `desk/dash.js` and `desk/dash.css` (their own copy of the styles: change
 both together); each page names its section on `<body data-section>`. `/desk/` forwards to the EGY dashboard.
 
 ## Files

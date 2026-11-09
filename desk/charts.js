@@ -111,19 +111,22 @@
     if (!t) { t = document.createElement('div'); t.className = 'chart-tip'; t.style.cssText = 'position:absolute;pointer-events:none;padding:6px 8px;font:inherit;font-size:12px;line-height:1.35;border-radius:6px;white-space:nowrap;opacity:0;transition:opacity 120ms ease;background:var(--surface,#fff);color:var(--ink,#111);border:1px solid var(--grid,#e5e7eb)'; if (getComputedStyle(el).position === 'static') el.style.position = 'relative'; el.appendChild(t); }
     return t;
   }
-  function axes(g, el, { w, h, padL, padB, yt, y, labels, x, band = false, at = null, tick, avoid = null, xText = null }) {
+  // right: the price axis on the right (line charts, as a financial page prints them), its width in pixels
+  function axes(g, el, { w, h, padL, padB, yt, y, labels, x, band = false, at = null, tick, avoid = null, xText = null, right = 0 }) {
     const grid = css(el, '--grid', '#e8e8e8'), ink = css(el, '--axis-ink', '#6b6b6b'), s = g.ownerSVGElement;
     for (const v of yt) {
       const yy = y(v);
-      svg('line', { x1: padL, x2: w, y1: yy, y2: yy, stroke: grid, 'stroke-width': 1, 'shape-rendering': 'crispEdges' }, g);
-      text(g, tick(v), { x: padL - 8, y: yy + 4, 'text-anchor': 'end', 'font-size': 12, fill: ink });
+      svg('line', { x1: padL, x2: right ? w - right + 4 : w, y1: yy, y2: yy, stroke: grid, 'stroke-width': 1, 'shape-rendering': 'crispEdges' }, g);
+      if (right) text(g, tick(v), { x: w - right + 10, y: yy + 4, 'font-size': 12, fill: ink });
+      else text(g, tick(v), { x: padL - 8, y: yy + 4, 'text-anchor': 'end', 'font-size': 12, fill: ink });
     }
+    if (right) svg('line', { x1: padL, x2: w - right + 4, y1: y(yt[0]) + 0.5, y2: y(yt[0]) + 0.5, stroke: css(el, '--ink', '#111'), 'stroke-width': 1, 'shape-rendering': 'crispEdges' }, g);
     const n = labels.length;
-    for (const i of xPicks(labels, w - padL, at)) {
+    for (const i of xPicks(labels, w - padL - right, at)) {
       const lab = String(xText ? xText[i] : labels[i]), tw = measure(s, lab, 12), xx = x(i);
       // the first and last labels are pulled inside the plot; none runs past either edge
       let left = band ? xx - tw / 2 : i === 0 ? xx : i === n - 1 ? xx - tw : xx - tw / 2;
-      left = Math.max(band ? 0 : padL, Math.min(w - tw, left));
+      left = Math.max(band ? 0 : padL, Math.min(w - (right ? right - 6 : 0) - tw, left));
       if (avoid && left < avoid[1] + 8 && left + tw > avoid[0] - 8) continue;
       text(g, lab, { x: left, y: h - padB + 18, 'font-size': 12, fill: ink });
     }
@@ -257,7 +260,8 @@
       const yt = yTicks || ticks(min ?? Math.min(0, ...all), top, 4);
       const tick = tickFormat || format;
       const lastVal = series[0].values.filter((v) => v != null).at(-1);
-      const padL = 12 + Math.max(...yt.map((v) => measure(s, tick(v), 12))), padB = 26, padR = endLabel ? 10 + measure(s, format(lastVal), 12, 600) : 0;
+      // the price axis on the right, wide enough for its ticks and the tag on the last value
+      const padL = 2, padB = 26, padR = 14 + Math.max(...yt.map((v) => measure(s, tick(v), 12)), endLabel ? measure(s, format(lastVal), 12, 600) + 10 : 0);
       const x = (i) => padL + (i * (w - padL - padR)) / Math.max(1, labels.length - 1);
       // the peaks clipped by max are labelled in the rows above the plot, where the line leaves it
       const peaks = [];
@@ -273,7 +277,7 @@
         if (!todayBox) { N = prepNotes(s, annotations, x, w, [...peaks, { x: cut, leader: cut, drawn: true, label: todayLabel }]); ({ padT, y } = scale(N)); }
       }
       const g = svg('g', {}, s);
-      axes(g, el, { w, h, padL, padB, yt, y, labels, x, at: xAt, tick, xText });
+      axes(g, el, { w, h, padL, padB, yt, y, labels, x, at: xAt, tick, xText, right: padR });
       notesUnder(g, el, N, { padT, h, padB });
       series.forEach((sr, k) => {
         const col = colourOf(sr, k);
@@ -294,7 +298,11 @@
         }
         // marks: a dot on each point, for short series of daily closes so a few joined points read as days
         if (marks) pts.forEach((p) => { if (p) svg('circle', { cx: p[0], cy: p[1], r: 3, fill: col, stroke: css(el, '--surface', '#fff'), 'stroke-width': 1.5 }, g); });
-        if (endLabel && k === 0) { const li = sr.values.map((v, i) => (v == null ? -1 : i)).filter((i) => i >= 0).at(-1); text(g, format(sr.values[li]), { x: x(li) + 6, y: y(Math.min(sr.values[li], yt.at(-1))) + 4, 'font-size': 12, 'font-weight': 600, fill: css(el, '--ink', '#111') }); }
+        // the last value as a tag on the price axis, in the line's colour, with a dot where the line ends
+        if (endLabel && k === 0) { const li = sr.values.map((v, i) => (v == null ? -1 : i)).filter((i) => i >= 0).at(-1), ly = y(Math.min(sr.values[li], yt.at(-1))), lab = format(sr.values[li]), tw = measure(s, lab, 12, 600);
+          svg('circle', { cx: x(li), cy: ly, r: 3, fill: col }, g);
+          svg('rect', { x: w - padR + 4, y: ly - 10, width: tw + 12, height: 20, fill: col }, g);
+          text(g, lab, { x: w - padR + 10, y: ly + 4, 'font-size': 12, 'font-weight': 600, fill: css(el, '--ground', '#fff') }); }
       });
       references(g, el, reference, { y, padL, w, lines: linesAt(y).slice(0, series.length) });
       notesOver(g, el, N, { padT, h, padB });
