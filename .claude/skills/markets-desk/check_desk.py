@@ -288,6 +288,15 @@ def main(args):
     logged = [v for v in (d.get("reserves_usd") for d in log.get("days", [])) if v]
     if logged and months and abs(logged[-1] - RS["months"][-1]["total"]) > 0.05:
         warnings.append(f"desk/reserves.json ends at {months[-1]} ({RS['months'][-1]['total']}bn) but the log has {logged[-1]}bn: add the new month.")
+    # a split in the last two weeks (desk/calendar.json, from Polygon): the log's prices before it must be adjusted,
+    # or the charts and changes show a fall (or jump) of the split's size
+    for x in (load("desk/calendar.json") or {}).get("recentSplits", []):
+        days_ = (log or {}).get("days", [])
+        before = [e["us"][x["t"]] for e in days_ if e["date"] <= x["date"] and (e.get("us") or {}).get(x["t"])]
+        after = [e["us"][x["t"]] for e in days_ if e["date"] > x["date"] and (e.get("us") or {}).get(x["t"])]
+        if before and after and abs(before[-1] / after[0] / x["factor"] - 1) < 0.25:
+            warnings.append(f"{x['t']} split {x['ratio']} on {x['date']}, and the data log's prices before it are not adjusted: "
+                            f"divide them by {x['factor']:g} (data/markets.json and markets-recent.json), or every chart shows a fake move.")
     # the 1D and 1W charts: the last session saved for each market should hold every desk stock
     IN = load("desk/intraday.json") or {}
     import importlib.util

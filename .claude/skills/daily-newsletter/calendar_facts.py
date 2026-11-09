@@ -46,8 +46,11 @@ def main(a):
             q = x.get("period")
             rows.append((d, f"{x['t']} results" + (f" for the quarter to {datetime.date.fromisoformat(q):%b %Y}" if q else "") + (f", {x['time']}" if x.get("time") else "")
                          + " [expected, TradingView]"))
+        elif x["kind"] == "split":
+            rows.append((d, f"{x['t']} stock split, {x['ratio']} [Polygon]"))
         else:
-            rows.append((d, f"{x['t']} goes ex-dividend, {'$' if x.get('cur') == '$' else 'EGP '}{x['amount']} a share" + (f", paid {x['pay']}" if x.get("pay") else "") + " [TradingView]"))
+            rows.append((d, f"{x['t']} goes ex-dividend, {'$' if x.get('cur') == '$' else 'EGP '}{x['amount']} a share" + (f", paid {x['pay']}" if x.get("pay") else "")
+                         + (f" [declared {x['declared']}, Polygon]" if x.get("declared") else " [TradingView]")))
     for t, e in st.items():
         for n in e.get("next", []) or []:
             if n.get("date"):

@@ -329,14 +329,17 @@ window.Desk = (function () {
     tbody.classList.toggle('clip', !all);
     if (more && more.classList.contains('more-btn')) { more.hidden = all; more.textContent = more.dataset.label; }
   }
-  // coming up for the desk's stocks: results dates and dividends from desk/calendar.json (TradingView), and the dates
+  // coming up for the desk's stocks: results dates and dividends from desk/calendar.json (TradingView; for the US,
+  // declared dividends and splits from Polygon), and the dates
   // the desk confirmed itself (each stock's "next" in desk/stocks.json); the next 30 days first
   function calendar(el, market, CAL, ST) {
     const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], cur = market === 'egx' ? 'EGP ' : '$';
     const when = (iso) => day(iso).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
     const items = ((CAL && CAL.items) || []).filter((x) => x.market === market && GROUP[market].includes(x.t)).map((x) => ({ date: x.date, t: x.t,
-      what: x.kind === 'results' ? `Results${x.period ? ` for the quarter to ${MON[+x.period.slice(5, 7) - 1]} ${x.period.slice(0, 4)}` : ''}${x.time ? ', ' + x.time : ''}` : `Goes ex-dividend: ${cur}${num(x.amount, x.amount < 10 ? 2 : 0)} a share${x.pay ? `, paid ${when(x.pay)}` : ''}`,
-      tag: x.kind === 'results' ? (x.expected ? 'Expected' : '') : 'Dividend' }));
+      what: x.kind === 'results' ? `Results${x.period ? ` for the quarter to ${MON[+x.period.slice(5, 7) - 1]} ${x.period.slice(0, 4)}` : ''}${x.time ? ', ' + x.time : ''}`
+        : x.kind === 'split' ? `Stock split, ${x.ratio}: the share price divides by ${num(x.factor, x.factor % 1 ? 2 : 0)}, nothing else changes`
+        : `Goes ex-dividend: ${cur}${num(x.amount, x.amount < 10 ? 2 : 0)} a share${x.pay ? `, paid ${when(x.pay)}` : ''}${x.declared ? ` (declared ${when(x.declared)})` : ''}`,
+      tag: x.kind === 'results' ? (x.expected ? 'Expected' : '') : x.kind === 'split' ? 'Split' : 'Dividend' }));
     // the desk's own dates: kept unless they repeat a results date already listed
     for (const t of GROUP[market]) for (const n of ((ST || {})[t] || {}).next || []) {
       if (/results/i.test(n.event) && items.some((x) => x.t === t && /^Results/.test(x.what))) continue;

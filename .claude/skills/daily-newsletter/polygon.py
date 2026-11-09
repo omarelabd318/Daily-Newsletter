@@ -18,15 +18,33 @@ GAP = 12.5   # seconds between calls: five a minute
 _last = [0.0]
 
 
-def bars(sym, mult, span, frm, to):
-    """Bars for a ticker: [{t (ms, UTC), o, h, l, c, v}, ...] from frm to to (dates, inclusive)."""
+def _get(url):
     wait = _last[0] + GAP - time.time()
     if wait > 0:
         time.sleep(wait)
     _last[0] = time.time()
+    return json.loads(urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": UA}), timeout=30).read())
+
+
+def call(path, pages=1):
+    """A reference endpoint's results (dividends, splits), following up to `pages` pages."""
+    url, out = "https://api.polygon.io" + path, []
+    for _ in range(pages):
+        r = _get(url)
+        if r.get("status") not in ("OK", "DELAYED"):
+            raise RuntimeError("Polygon: " + str(r.get("message") or r.get("status")))
+        out += r.get("results") or []
+        url = r.get("next_url")
+        if not url:
+            break
+    return out
+
+
+def bars(sym, mult, span, frm, to):
+    """Bars for a ticker: [{t (ms, UTC), o, h, l, c, v}, ...] from frm to to (dates, inclusive)."""
     url = (f"https://api.polygon.io/v2/aggs/ticker/{urllib.parse.quote(sym)}/range/{mult}/{span}/{frm}/{to}"
            f"?adjusted=true&sort=asc&limit=50000")
-    r = json.loads(urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": UA}), timeout=30).read())
+    r = _get(url)
     if r.get("status") not in ("OK", "DELAYED") or not r.get("results"):
         raise RuntimeError("Polygon: " + str(r.get("message") or r.get("status") or "no data"))
     return r["results"]

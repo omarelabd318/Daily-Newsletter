@@ -285,7 +285,10 @@ Each of the desk's stocks gets its own search every morning, on top of the newsl
 6. **Calendar:** run `python3 .claude/skills/markets-desk/fetch_calendar.py` (results dates and dividends for
    every desk stock, shown on the EGX and Wall Street pages). When a company announces its own results or
    assembly date, add it to that stock's `next` with `"date": "YYYY-MM-DD"`: the page then lists it as the desk's
-   confirmed date in place of TradingView's estimate.
+   confirmed date in place of TradingView's estimate. For the US stocks it also takes the dividends their boards
+   have declared and any stock splits from Polygon, refreshed once a week (about three minutes that day; the
+   other days reuse the saved copy). After a split, check_desk.py warns until the data log's earlier prices are
+   divided by the split's factor; do that the same day, or every chart shows a fake fall.
 7. **Results:** when an Egyptian desk stock publishes results, record them the same day with
    `set_results.py TICKER --period QUARTER-END --ytd ... --prior-fy ... --prior-ytd ... --shares ... --equity ...
    --source ... --url ...` (profit attributable to shareholders, from the filing or two outlets that agree), then

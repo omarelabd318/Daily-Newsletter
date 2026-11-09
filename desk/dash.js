@@ -249,7 +249,7 @@
         if (yr.length > 200 && last < Math.min(...yr)) out.push([4, `${tag('52-week low', 'bad')} ${link}`]);
       }
       for (const c of CAL.filter((c) => c.market === S.group && c.date === D.date))
-        out.push([5, `${tag(c.kind === 'results' ? (c.expected ? 'Results expected' : 'Results today') : 'Dividend', 'open')} <a href="/desk/stock/?t=${encodeURIComponent(c.t)}">${esc(NAMES[c.t] || c.t)}</a>${c.time ? `<span class="meta"> · ${esc(c.time)}</span>` : ''}`]);
+        out.push([5, `${tag(c.kind === 'results' ? (c.expected ? 'Results expected' : 'Results today') : c.kind === 'split' ? `Stock split ${c.ratio}` : 'Goes ex-dividend', 'open')} <a href="/desk/stock/?t=${encodeURIComponent(c.t)}">${esc(NAMES[c.t] || c.t)}</a>${c.time ? `<span class="meta"> · ${esc(c.time)}</span>` : ''}`]);
       out.sort((a, b) => a[0] - b[0]);
       el.innerHTML = out.length ? out.map(([, h]) => `<div class="since-row">${h}</div>`).join('')
         : `<p class="sub">A quiet day for the record: no view judged, opened or re-rated, and none of the desk's stocks moved 5% or more.</p>`;
