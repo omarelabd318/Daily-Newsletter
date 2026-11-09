@@ -7,8 +7,8 @@
     <description>The Daily Newsletter read aloud each morning: Egypt, the world, the region and the markets, about half an hour. Read by Heart.</description>
     <language>en-us</language>
     <itunes:author>Daily Newsletter</itunes:author>
-    <itunes:image href="https://daily-newsletter-eg.vercel.app/podcast/cover.png"/>
-    <image><url>https://daily-newsletter-eg.vercel.app/podcast/cover.png</url><title>Daily Newsletter (Heart)</title><link>https://daily-newsletter-eg.vercel.app/</link></image>
+    <itunes:image href="https://daily-newsletter-eg.vercel.app/podcast/cover.png?v=dark"/>
+    <image><url>https://daily-newsletter-eg.vercel.app/podcast/cover.png?v=dark</url><title>Daily Newsletter (Heart)</title><link>https://daily-newsletter-eg.vercel.app/</link></image>
     <itunes:category text="News"><itunes:category text="Daily News"/></itunes:category>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>

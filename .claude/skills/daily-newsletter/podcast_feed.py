@@ -86,8 +86,8 @@ def main():
     <description>The Daily Newsletter read aloud each morning: Egypt, the world, the region and the markets, about half an hour. Read by {name}.</description>
     <language>en-us</language>
     <itunes:author>Daily Newsletter</itunes:author>
-    <itunes:image href="{SITE}/podcast/cover.png"/>
-    <image><url>{SITE}/podcast/cover.png</url><title>Daily Newsletter ({name})</title><link>{SITE}/</link></image>
+    <itunes:image href="{SITE}/podcast/cover.png?v=dark"/>
+    <image><url>{SITE}/podcast/cover.png?v=dark</url><title>Daily Newsletter ({name})</title><link>{SITE}/</link></image>
     <itunes:category text="News"><itunes:category text="Daily News"/></itunes:category>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
