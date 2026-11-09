@@ -20,6 +20,7 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.parse
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
@@ -51,6 +52,40 @@ def every_n(points, step):
 
 
 YMONTH = {"COMP": "^IXIC", "sp500": "^GSPC", "dow": "^DJI"}
+# Polygon's free plan has stocks and funds but not the indexes: each index is drawn from the fund that tracks it,
+# scaled each session so the line ends at the index's logged close
+PFUND = {"COMP": ("ONEQ", "nasdaq"), "sp500": ("SPY", "sp500"), "dow": ("DIA", "dow")}
+
+
+def polygon_month(key):
+    """A US series' last month from Polygon (its key is added by the session's network proxy, never stored here),
+    every 30 minutes, New York time: {day: [[hm, v], ...]}. A bar's close is the price at the bar's end; the first
+    point of each session is the open at 09:30."""
+    sym, logkey = PFUND.get(key, (key, None))
+    end = datetime.date.today()
+    url = (f"https://api.polygon.io/v2/aggs/ticker/{urllib.parse.quote(sym)}/range/30/minute/"
+           f"{(end - datetime.timedelta(days=40)).isoformat()}/{end.isoformat()}?adjusted=true&sort=asc&limit=50000")
+    r = json.loads(get(url))
+    if r.get("status") not in ("OK", "DELAYED") or not r.get("results"):
+        raise ValueError(r.get("message") or r.get("status"))
+    days = {}
+    for b in r["results"]:
+        t = datetime.datetime.fromtimestamp(b["t"] / 1000, datetime.timezone.utc).astimezone(NY)
+        if not ("09:30" <= t.strftime("%H:%M") < "16:00"):
+            continue
+        d = days.setdefault(t.date().isoformat(), [])
+        if t.strftime("%H:%M") == "09:30":
+            d.append(["09:30", float(b["o"])])
+        d.append([(t + datetime.timedelta(minutes=30)).strftime("%H:%M"), float(b["c"])])
+    if logkey:   # the fund's line scaled to the index's close that day
+        out = {}
+        for d, pts in days.items():
+            close = logged_close(logkey, d)
+            if close and pts:
+                k = close / pts[-1][1]
+                out[d] = [[hm, round(v * k, 2)] for hm, v in pts]
+        days = out
+    return days
 
 
 def yahoo_month(key):
@@ -270,10 +305,14 @@ def main():
         for x in week.get(name, []):
             have[x["session"]] = {"session": x["session"], "series": {k: every_n(v, 30) for k, v in x["series"].items()}}
         month[name] = [have[k] for k in sorted(have)][-23:]
-    if len(month.get("us", [])) < 21:
+    holes_us = any(k not in x["series"] for x in month.get("us", []) for k in ["COMP", "sp500"] + US)
+    if len(month.get("us", [])) < 21 or holes_us:
         got = 0
-        for k in ["COMP", "sp500", "dow"] + US:
-            y = _try(yahoo_month, k)
+        for i, k in enumerate(["COMP", "sp500", "dow"] + US):
+            # Polygon first (five requests a minute on its free plan), Yahoo if it fails
+            if i:
+                time.sleep(12.5)
+            y = _try(polygon_month, k) or _try(yahoo_month, k)
             if not y:
                 continue
             got += 1
@@ -282,7 +321,7 @@ def main():
                 if len(pts) >= 6 and d <= (out.get("us") or {}).get("session", d):
                     have.setdefault(d, {"session": d, "series": {}})["series"].setdefault(k, pts)
             month["us"] = [have[d] for d in sorted(have)][-23:]
-        print(f"US month: {len(month.get('us', []))} sessions" + (" (Yahoo refused the backfill)" if not got else ""))
+        print(f"US month: {len(month.get('us', []))} sessions" + (" (Polygon and Yahoo refused the backfill)" if not got else f", {got} series filled"))
     out["month"] = month
     data, line = global_market()
     if data:
