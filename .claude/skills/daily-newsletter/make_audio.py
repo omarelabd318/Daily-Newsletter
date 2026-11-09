@@ -99,6 +99,9 @@ def sentences(text, size, limit=460):
     return out
 
 
+SPELLED = re.compile(r"(\b[A-Z](?:-[A-Z])+\b)")
+
+
 class Voice:
     """Kokoro run directly: each sentence's audio, and when each of its words starts."""
 
@@ -113,7 +116,19 @@ class Voice:
         self.lang = "en-gb" if voice.startswith("b") else "en-us"
 
     def phon(self, t):
-        return self.tok.phonemize(t, self.lang)
+        # spelled-out letters (A-I, I-P-O, U-A-E) get each letter's name: left to the phonemizer, a lone "A" reads as
+        # the article ("Tech and uh-eye") and a middle one is swallowed
+        parts = [p for p in SPELLED.split(t) if p.strip()]
+        out = [self.letter(p) if SPELLED.fullmatch(p) else self.tok.phonemize(p, self.lang).strip() for p in parts]
+        return " ".join(x for x in out if x).replace(" .", ".").replace(" ,", ",")
+
+    def letter(self, run):
+        if not hasattr(self, "_names"):
+            self._names = {}
+        for L in run.split("-"):
+            if L not in self._names:
+                self._names[L] = self.tok.phonemize(L + ".", self.lang).rstrip(".").strip()
+        return "".join(self._names[L] for L in run.split("-"))
 
     def say(self, sentence):
         np = self.np
@@ -152,7 +167,8 @@ def record(key, voice, out_mp3):
     for i, b in enumerate(bl):
         if b["kind"] == "section" and i:
             t += pause(GAP_BEFORE_SECTION)
-        text = R.speakable(b["text"])
+        # letters spelled out ("A I") become one word ("A-I"): said as letter names, and timed as the one word on the page
+        text = re.sub(r"\b[A-Z](?: [A-Z])+\b", lambda m: m.group(0).replace(" ", "-"), R.speakable(b["text"]))
         if b["kind"] in ("section", "heading") and not text.endswith((".", "?", "!")):
             text += "."
         seg = {"sec": b["sec"], "n": b["n"], "t": round(t, 2), "w": []}
