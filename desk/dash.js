@@ -221,6 +221,37 @@
       el.after(b);
     };
     fold($('week'), '.wk', 3, 'events'); fold($('views'), '.view', 2, 'views');
+    // since yesterday: what the day changed for this market: views judged, opened or re-rated, the desk's stocks that
+    // moved 5% or more or reached a 52-week high or low, and results or dividends dated today
+    (async () => {
+      const el = $('since'); if (!el) return;
+      const VL = ((await get('/desk/views.json')) || {}).views || [], CAL = ((await get('/desk/calendar.json')) || {}).items || [];
+      const mine = (v) => (key === 'egypt' ? ['egx', 'egp'] : ['us', 'global']).includes(v.market), out = [];
+      const tag = (k, c) => `<span class="pill ${c}">${k}</span>`, vlink = (v) => `<a href="/desk/views/">${esc(v.title)}</a>`;
+      for (const v of VL.filter(mine)) {
+        if (v.result && v.result.date === D.date) out.push([0, `${tag(v.status === 'right' ? 'Right' : v.status === 'wrong' ? 'Wrong' : 'Closed', v.status === 'right' ? 'ok' : v.status === 'wrong' ? 'bad' : 'open')} ${vlink(v)}`]);
+        if (v.opened === D.date) out.push([1, `${tag('New ' + v.kind, 'open')} ${vlink(v)}`]);
+        let prev = v.confidence;
+        (v.updates || []).slice().sort((a, b) => (a.date < b.date ? -1 : 1)).forEach((u) => {
+          if (u.confidence && u.confidence !== prev && u.date === D.date) out.push([2, `${tag('Confidence ' + ({ low: 0, medium: 1, high: 2 }[u.confidence] > { low: 0, medium: 1, high: 2 }[prev] ? 'up' : 'down') + ' to ' + u.confidence, 'open')} ${vlink(v)}`]);
+          if (u.confidence) prev = u.confidence;
+        });
+      }
+      const at = asOf(S.group);
+      for (const t of GROUP[S.group]) {
+        const sr = series((e) => (e[S.group] || {})[t], S.group); if (!sr.length || sr[sr.length - 1][0] !== at) continue;
+        const last = sr[sr.length - 1][1], d1 = change(sr, 0), yr = sr.filter(([d]) => d >= cut(at, 365) && d < at).map((x) => x[1]);
+        const link = `<a href="/desk/stock/?t=${encodeURIComponent(t)}">${esc(NAMES[t] || t)}</a>`;
+        if (d1 != null && Math.abs(d1) >= 5) out.push([3, `<span class="num ${cls(d1)}">${pct(d1)}</span> ${link}`]);
+        if (yr.length > 200 && last > Math.max(...yr)) out.push([4, `${tag('52-week high', 'ok')} ${link}`]);
+        if (yr.length > 200 && last < Math.min(...yr)) out.push([4, `${tag('52-week low', 'bad')} ${link}`]);
+      }
+      for (const c of CAL.filter((c) => c.market === S.group && c.date === D.date))
+        out.push([5, `${tag(c.kind === 'results' ? (c.expected ? 'Results expected' : 'Results today') : 'Dividend', 'open')} <a href="/desk/stock/?t=${encodeURIComponent(c.t)}">${esc(NAMES[c.t] || c.t)}</a>${c.time ? `<span class="meta"> · ${esc(c.time)}</span>` : ''}`]);
+      out.sort((a, b) => a[0] - b[0]);
+      el.innerHTML = out.length ? out.map(([, h]) => `<div class="since-row">${h}</div>`).join('')
+        : `<p class="sub">A quiet day for the record: no view judged, opened or re-rated, and none of the desk's stocks moved 5% or more.</p>`;
+    })();
     // the top story's text and the close strip's sources note: a few lines, then "Read more"
     const clamp = (el, lines, label) => {
       if (!matchMedia('(max-width:860px)').matches || !el || !el.textContent) return;
