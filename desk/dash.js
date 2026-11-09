@@ -301,11 +301,16 @@
         $('egx-cap').innerHTML = `${day(INTRA[mk].session).toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'short' }).replace('Sept', 'Sep')}, ${I[0][0]}–${I.at(-1)[0]} ${mk === 'egx' ? 'Cairo' : 'New York'} time: <span class="num ${cls(ch)}">${pct(ch, 2)}</span> from the first trade${INTRA[mk].proxy && INTRA[mk].proxy[cur.intra] ? ` · traced by the ${esc(INTRA[mk].proxy[cur.intra])} fund, which tracks it` : ''}`;
         return;
       }
-      if (p[1] === 7) {   // a week through the day, once two or more sessions are saved
-        const W = ((INTRA && INTRA.week && INTRA.week[S.market]) || []).filter((x) => x.session <= asOf(S.market) && x.series[cur.intra] && x.series[cur.intra].length > 1);
-        if (W.length >= 2) {
-          const el = $('egx-chart'), labels = [], vals = [], text = [], at = []; el.innerHTML = '';
-          W.forEach((x) => { const d = day(x.session), dl = `${WD[d.getDay()]} ${d.getDate()}`; at.push(labels.length); x.series[cur.intra].forEach(([t, v]) => { labels.push(`${dl} ${t}`); vals.push(v); text.push(dl); }); });
+      if (p[1] === 7 || p[1] === 30) {   // a week (every 15 minutes) or a month (every 30) through the day, once the saved sessions cover it
+        const mo = p[1] === 30, src = (INTRA && INTRA[mo ? 'month' : 'week'] && INTRA[mo ? 'month' : 'week'][S.market]) || [];
+        const all = src.filter((x) => x.session <= asOf(S.market) && (!mo || x.session > cut(asOf(S.market), 30)));
+        const W = all.filter((x) => x.series[cur.intra] && x.series[cur.intra].length > 1);
+        const full = W.length >= 2 && W.at(-1) === all.at(-1) && (!mo || (W.length === all.length && W.length >= 15 && W[0].session <= cut(asOf(S.market), 25)));
+        if (full) {
+          const el = $('egx-chart'), labels = [], vals = [], text = [], at = []; el.innerHTML = ''; let wk = null;
+          W.forEach((x) => { const d = day(x.session), dl = mo ? `${MON[d.getMonth()]} ${d.getDate()}` : `${WD[d.getDay()]} ${d.getDate()}`, w = Math.floor((d - day('2026-01-04')) / 6048e5);
+            if (!mo || w !== wk) at.push(labels.length); wk = w;
+            x.series[cur.intra].forEach(([t, v]) => { labels.push(`${dl} ${t}`); vals.push(v); text.push(dl); }); });
           const lo = Math.min(...vals), hi = Math.max(...vals);
           Charts.line(el, { labels, xAt: el.clientWidth < 520 && at.length > 3 ? at.filter((_, j) => (at.length - 1 - j) % 2 === 0) : at, xText: text, series: [{ name: cur.n, values: vals }], format: Charts.fmt.int, endLabel: true, height: el.clientHeight, min: lo - (hi - lo) * 0.15 });
           const ch = (vals.at(-1) / vals[0] - 1) * 100;

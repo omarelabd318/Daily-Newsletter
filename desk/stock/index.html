@@ -156,8 +156,8 @@ try {
       return;
     }
     M.$('lvl').textContent = M.num(M.last(v)); M.$('dchg').innerHTML = M.heroChg(v, per); M.$('cur').textContent = egx && !inUSD ? 'EGP' : 'USD';
-    const w1 = per[1] === 7 ? M.weekChart(M.$('chart'), egx ? 'egx' : 'us', t, t, Charts.fmt.dec(2), egx && inUSD) : null;
-    if (w1) { M.$('lvl').textContent = M.num(M.last(v)); M.$('dchg').innerHTML = M.heroChg(v, per); M.$('cap').innerHTML = `${w1} · ${idxN} in a week <span class="num ${M.cls(M.change(vi, 7))}">${M.pct(M.change(vi, 7), 2)}</span>`; return; }
+    const w1 = per[1] === 7 || per[1] === 30 ? M.weekChart(M.$('chart'), egx ? 'egx' : 'us', t, t, Charts.fmt.dec(2), egx && inUSD, per[1]) : null;
+    if (w1) { M.$('lvl').textContent = M.num(M.last(v)); M.$('dchg').innerHTML = M.heroChg(v, per); M.$('cap').innerHTML = `${w1} · ${idxN} in a ${per[1] === 7 ? 'week' : 'month'} <span class="num ${M.cls(M.change(vi, per[1]))}">${M.pct(M.change(vi, per[1]), 2)}</span>`; return; }
     M.chart(M.$('chart'), v, per[1], t + unit, Charts.fmt.dec(2)); const c = M.change(v, per[1]), ci = M.change(vi, per[1]);
     M.$('cap').innerHTML = `${per[2]}${unit}: <span class="num ${M.cls(c)}">${M.pct(c, 2)}</span> · ${idxN} <span class="num ${M.cls(ci)}">${M.pct(ci, 2)}</span>`;
   };

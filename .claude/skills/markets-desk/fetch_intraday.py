@@ -5,7 +5,7 @@ Usage:
   python3 .claude/skills/markets-desk/fetch_intraday.py
 
 Writes desk/intraday.json ("week" also keeps the last five sessions of each market every 15 minutes, for
-the 1W charts): the EGX30 and the 12 Egyptian stocks from Mubasher (Cairo time), and the
+the 1W charts, and "month" the last 23 every 30 minutes, for the 1M charts): the EGX30 and the 12 Egyptian stocks from Mubasher (Cairo time), and the
 Nasdaq Composite and the 12 US stocks from Nasdaq (New York time, regular session only), and the last
 24 hours of Bitcoin (CoinGecko). Yahoo adds the S&P 500, the Dow, Brent, gold and the dollar index on the
 days it answers (it often refuses cloud requests). When it refuses, the S&P 500 and the Dow are drawn from
@@ -42,6 +42,31 @@ def every15(points):
     """A session's 5-minute prices thinned to every 15 minutes, keeping the last: enough for a week's chart."""
     keep = [p for p in points if int(p[0][3:5]) % 15 == 0]
     return keep + ([points[-1]] if points and (not keep or keep[-1] != points[-1]) else [])
+
+
+def every_n(points, step):
+    """A session's prices thinned to every `step` minutes, keeping the last."""
+    keep = [p for p in points if int(p[0][3:5]) % step == 0]
+    return keep + ([points[-1]] if points and (not keep or keep[-1] != points[-1]) else [])
+
+
+YMONTH = {"COMP": "^IXIC", "sp500": "^GSPC", "dow": "^DJI"}
+
+
+def yahoo_month(key):
+    """A US series' last month from Yahoo, every 30 minutes, New York time: {day: [[hm, v], ...]}; fills the month's
+    US sessions saved before the month store began."""
+    sym = YMONTH.get(key, key.replace(".", "-"))
+    url = f"https://query2.finance.yahoo.com/v8/finance/chart/{urllib.parse.quote(sym)}?range=1mo&interval=30m"
+    r = json.loads(get(url))["chart"]["result"][0]
+    days = {}
+    for t, c in zip(r["timestamp"], r["indicators"]["quote"][0]["close"]):
+        if c is None:
+            continue
+        n = datetime.datetime.fromtimestamp(t, datetime.timezone.utc).astimezone(NY)
+        if "09:30" <= n.strftime("%H:%M") <= "16:00":
+            days.setdefault(n.date().isoformat(), []).append([n.strftime("%H:%M"), round(float(c), 4)])
+    return days
 
 
 def every5(points):
@@ -236,6 +261,29 @@ def main():
     if holes:
         print(f"US week: filled {', '.join(filled) or 'nothing'} from Yahoo" + (f"; still missing {', '.join(sorted(set(holes) - set(filled)))}" if set(holes) - set(filled) else ""))
     out["week"] = week
+    # the month: the last 23 sessions of each market, every 30 minutes, for the 1M charts. Each run adds the week's
+    # sessions (a session still in the week replaces its month copy); the EGX's past sessions cannot be fetched again,
+    # so its month fills one session a run; the US month is filled from Yahoo while it is short
+    month = saved.get("month") or {}
+    for name in ("egx", "us"):
+        have = {x["session"]: x for x in month.get(name, [])}
+        for x in week.get(name, []):
+            have[x["session"]] = {"session": x["session"], "series": {k: every_n(v, 30) for k, v in x["series"].items()}}
+        month[name] = [have[k] for k in sorted(have)][-23:]
+    if len(month.get("us", [])) < 21:
+        got = 0
+        for k in ["COMP", "sp500", "dow"] + US:
+            y = _try(yahoo_month, k)
+            if not y:
+                continue
+            got += 1
+            have = {x["session"]: x for x in month.get("us", [])}
+            for d, pts in y.items():
+                if len(pts) >= 6 and d <= (out.get("us") or {}).get("session", d):
+                    have.setdefault(d, {"session": d, "series": {}})["series"].setdefault(k, pts)
+            month["us"] = [have[d] for d in sorted(have)][-23:]
+        print(f"US month: {len(month.get('us', []))} sessions" + (" (Yahoo refused the backfill)" if not got else ""))
+    out["month"] = month
     data, line = global_market()
     if data:
         out["global"] = data

@@ -147,13 +147,22 @@ window.Desk = (function () {
     const ss = weekSessions(m).filter((x) => x.series[t] && x.series[t].length > 1 && (!inUSD || rateOn(x.session)));
     return ss.length < 2 ? null : ss.flatMap((x) => { const r = inUSD ? rateOn(x.session) : 1; return x.series[t].map(([, v]) => v / r); });
   }
-  function weekChart(el, market, key, name, fmt, inUSD = false) {
-    const W = INTRA && INTRA.week && INTRA.week[market];
-    const all = (W || []).filter((x) => x.session <= asOfFor(market)), ss = all.filter((x) => x.series[key] && x.series[key].length > 1 && (!inUSD || rateOn(x.session)));
-    // only a week that runs to the latest session: one missing at the end would stop the line a day short (daily closes instead)
+  // a week (1W, every 15 minutes) or a month (1M, every 30 minutes) through each session, from desk/intraday.json's
+  // "week" and "month"; null (the caller draws daily closes) until the stored sessions cover the whole period
+  function weekChart(el, market, key, name, fmt, inUSD = false, back = 7) {
+    const W = INTRA && INTRA[back > 7 ? 'month' : 'week'] && INTRA[back > 7 ? 'month' : 'week'][market];
+    const all = (W || []).filter((x) => x.session <= asOfFor(market) && (back <= 7 || x.session > cut(asOfFor(market), back)));
+    const ss = all.filter((x) => x.series[key] && x.series[key].length > 1 && (!inUSD || rateOn(x.session)));
+    // only a period that runs to the latest session, and for a month one that reaches back to its start
     if (ss.length < 2 || ss.at(-1) !== all.at(-1)) return null;
+    if (back > 7 && (ss.length < all.length || ss.length < 15 || ss[0].session > cut(asOfFor(market), back - 5))) return null;
     const labels = [], vals = [], text = [], at = [];
-    ss.forEach((x) => { const d = day(x.session), dl = `${WD[d.getDay()]} ${d.getDate()}`, r = inUSD ? rateOn(x.session) : 1; at.push(labels.length);
+    let wk = null;
+    ss.forEach((x) => { const d = day(x.session), r = inUSD ? rateOn(x.session) : 1;
+      const dl = back > 7 ? `${MON[d.getMonth()]} ${d.getDate()}` : `${WD[d.getDay()]} ${d.getDate()}`;
+      // a week's labels: every session; a month's: the first session of each week
+      const w = Math.floor((d - day('2026-01-04')) / 6048e5);
+      if (back <= 7 || w !== wk) at.push(labels.length); wk = w;
       x.series[key].forEach(([t, v]) => { labels.push(`${dl} ${t}`); vals.push(v / r); text.push(dl); }); });
     el.innerHTML = '';
     const lo = Math.min(...vals), hi = Math.max(...vals), pad = (hi - lo) * 0.15 || lo * 0.002;
