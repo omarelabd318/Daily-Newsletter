@@ -14,8 +14,8 @@
    "drivers": [
     "oil"
    ],
-   "now": "The US carried out what President Trump called minor strikes on Iranian air defenses on Qeshm island on November 6, the first since the midterms, and set up Task Force Iron Gate to cut Iran's land supply routes while enforcing a naval blockade. Qatar says US-Iran mediation is still active and Trump says Iran wants a deal, but no agreement has been signed.",
-   "now_date": "2026-11-08"
+   "now": "President Trump says a US blockade of Iran's land supply routes is in effect but calls new strikes highly unlikely while talks on Iran's nuclear program and reopening the Strait of Hormuz progress. Iran threatens to retaliate against any attack, and Yemen's Houthis hit Aramco's Riyadh tower on November 8. Brent traded near $97 a barrel on November 9 after a 16% weekly fall.",
+   "now_date": "2026-11-09"
   },
   {
    "id": "pound-cbe",
@@ -30,8 +30,8 @@
    "drivers": [
     "egp-rates"
    ],
-   "now": "The central bank's dollar selling rate closed the week of November 5 at EGP 54.01, about 4% below the record 56.35 of late October, after a surprise 100 basis point hike took the overnight deposit rate to 20%. Goldman Sachs calls the pound more than 30% undervalued and sees it at 50 to the dollar within a year; the next rate meeting is December 17.",
-   "now_date": "2026-11-08"
+   "now": "The central bank's dollar selling rate stood at EGP 54.31 on November 8, up from 54.01 three days earlier but below the late-October record of 56.20. Policy rates are 20% for deposits and 21% for lending, and the one-year T-bill yielded 26.03% at the November 5 auction; the next rate meeting is December 17.",
+   "now_date": "2026-11-09"
   },
   {
    "id": "ai-chips",
@@ -46,8 +46,8 @@
    "drivers": [
     "ai-spending"
    ],
-   "now": "The Nasdaq fell 5.5% on November 5, its worst day since April 2025, on fears the Democrats' midterm sweep will slow the US data center buildout, and ended the week down 3.4%. Anthropic's planned mid-November listing now targets a lower valuation of  trillion to .5 trillion, and Nvidia reports on November 17.",
-   "now_date": "2026-11-08"
+   "now": "Wall Street's AI selloff eased on November 6, with Nvidia up 2.8%, but the S&P 500 still had its worst week since June. Nvidia's board is now investigating chief executive Jensen Huang over a relationship with a woman accused of spying for China, and Anthropic faces pressure to cut its planned $1.5 trillion IPO valuation.",
+   "now_date": "2026-11-09"
   },
   {
    "id": "us-midterms",
@@ -55,8 +55,8 @@
    "match": "\\b(midterms?|Democrats? (won|win|wins|take|took|retake)|control of (the )?(Senate|House|Congress))\\b",
    "related": [],
    "drivers": [],
-   "now": "Democrats won both chambers of Congress in the November 3 midterms and take control in January. President Trump has ordered the Justice Department to investigate Democrats he accuses of threatening officials, while Republican Thomas Massie plans articles of impeachment against Defense Secretary Pete Hegseth.",
-   "now_date": "2026-11-08"
+   "now": "Democrats won both chambers of Congress on November 3 and take control in January. House Democratic leader Hakeem Jeffries backs impeaching Defense Secretary Pete Hegseth, while Trump has asked the Justice Department to investigate Democrats; removal of Hegseth would need two-thirds of the Senate.",
+   "now_date": "2026-11-09"
   },
   {
    "id": "bqdc",
@@ -89,8 +89,8 @@
    "drivers": [
     "gas-supply"
    ],
-   "now": "Gas supplies to fertilizer and methanol plants have been cut by about 20% since the start of November, and five of November's 15 LNG cargoes were deferred as each shipment topped $100 million. Abu Qir Fertilizers lost 8.0% and MOPCO 8.6% in the week to November 5; the cut remains in force.",
-   "now_date": "2026-11-07"
+   "now": "The government raised gas curtailments for fertilizer and methanol plants to 33% on November 8, from 20% imposed on November 1, and notified Ezz Steel of a 30% cut, as spot LNG cargoes cost close to $120 million each. Mopco and Abu Qir Fertilizers each fell almost 6% on the EGX that day; no producer has yet put a figure on the lost output.",
+   "now_date": "2026-11-09"
   },
   {
    "id": "imf",
@@ -112,8 +112,8 @@
    "match": "\\b(Gaza|Hamas|Hezbollah|Lebanon|Lebanese)\\b",
    "related": [],
    "drivers": [],
-   "now": "A fragile ceasefire holds in Gaza, but the first winter storm flooded about 70,000 tents of displaced people on November 7, and aid deliveries remain far below the 600 trucks a day agreed. Israel and Hezbollah have been at war in Lebanon since March.",
-   "now_date": "2026-11-08"
+   "now": "Gadi Eisenkot formally received Israel's mandate to form a government on November 8 and has 28 days, extendable by 14; he says he is open to including Benjamin Netanyahu, who remains caretaker prime minister.",
+   "now_date": "2026-11-09"
   },
   {
    "id": "oil",
@@ -128,11 +128,149 @@
    "drivers": [
     "oil"
    ],
-   "now": "Brent settled at $98.32 a barrel on November 6, down 13% to 16% on the week, its steepest weekly fall since 2020, on bets that the US and Iran are nearing a deal. It remains about 62% higher this year.",
-   "now_date": "2026-11-08"
+   "now": "Brent settled at $98.32 a barrel on November 6 after a 16% weekly fall, its steepest since the pandemic, on bets of a US-Iran deal, and traded near $97 on November 9 after Trump signaled restraint. JPMorgan sees a supply surplus of 1.4 million barrels a day in October.",
+   "now_date": "2026-11-09"
   }
  ],
  "stories": [
+  {
+   "ed": "2026-11-09",
+   "id": "story-t-bill-yields",
+   "lead": "T-bill yields",
+   "sec": "Markets",
+   "text": "At Sunday's auction, the 91-day bill cleared at 24.86% and the 273-day bill at 26.25%, near its highest in a year, according to central bank results, as the state keeps leaning on short-term domestic debt.",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-11-09",
+   "id": "story-rebound-attempt",
+   "lead": "Rebound attempt",
+   "sec": "Markets",
+   "text": "The S&P 500 gained 0.31% to 7,376.86 on Friday, the Nasdaq 1.09% to 24,579.42 and the Dow lost 0.46% to 51,285.73, ending the S&P 500's worst week since June. The tech rout followed fears that the Democrats' midterm sweep will slow the US…",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-11-09",
+   "id": "story-pound-eases",
+   "lead": "Pound eases",
+   "sec": "Markets",
+   "text": "The central bank's dollar selling rate rose to EGP 54.31 on Sunday from 54.01 on Thursday, a 0.6% slip for the pound, though the currency is still about 3% stronger than at the start of November, after its late-October record low of 56.20.",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-11-09",
+   "id": "story-oil-and-gold",
+   "lead": "Oil and gold",
+   "sec": "Markets",
+   "text": "Brent settled at $98.32 a barrel on Friday after a 16% weekly drop, its steepest since the pandemic, and traded near $96.8 on Monday after Trump's softer tone on Iran. JPMorgan estimates an oil surplus of 1.4 million barrels a day in…",
+   "topics": [
+    "oil"
+   ],
+   "added": [
+    "oil"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-09",
+   "id": "story-nvidia-investigates-its-chief",
+   "lead": "Nvidia investigates its chief",
+   "sec": "In Other News",
+   "text": "Nvidia's board said on Sunday that independent directors, advised by outside counsel, will investigate chief executive Jensen Huang after he admitted an affair with a woman whom The New York Times reported was seeking Nvidia technology for…",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-11-09",
+   "id": "story-iran-blockade-and-restraint",
+   "lead": "Iran: blockade and restraint",
+   "sec": "Regional and Gulf",
+   "text": "President Trump said a US blockade of Iran's land supply routes is now in effect, but called new strikes \"highly unlikely\" as long as talks on Tehran's nuclear program and the reopening of the Strait of Hormuz make progress. Tehran warned…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-09",
+   "id": "story-hegseth-vote-nears",
+   "lead": "Hegseth vote nears",
+   "sec": "Top World Headlines",
+   "text": "House Democratic leader Hakeem Jeffries said he is \"a hard yes\" on impeaching Defense Secretary Pete Hegseth, in a resolution led by Republican Thomas Massie, and promised aggressive investigations once Democrats take both chambers in…",
+   "topics": [
+    "us-midterms"
+   ],
+   "added": [
+    "us-midterms"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-09",
+   "id": "story-gas-cuts-deepen",
+   "lead": "Gas cuts deepen",
+   "sec": "Egypt News",
+   "text": "The government has raised gas curtailments for fertilizer and methanol plants to 33%, from 20% imposed on November 1, Mopco told the bourse on Sunday, and has notified Ezz Steel of a 30% cut with no end date, Asharq Business reported. The…",
+   "topics": [
+    "gas-fertilizer"
+   ]
+  },
+  {
+   "ed": "2026-11-09",
+   "id": "story-eisenkot-gets-to-work",
+   "lead": "Eisenkot gets to work",
+   "sec": "Regional and Gulf",
+   "text": "Former army chief Gadi Eisenkot formally received the mandate to form Israel's next government on Sunday and said he is open to including Benjamin Netanyahu and Finance Minister Bezalel Smotrich. He has 28 days, extendable by 14; winning…",
+   "topics": [
+    "gaza-lebanon"
+   ],
+   "added": [
+    "gaza-lebanon"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-09",
+   "id": "story-egx30-slips",
+   "lead": "EGX30 slips",
+   "sec": "Markets",
+   "text": "The EGX30 fell 0.7% on Sunday to 50,812.07, on turnover of EGP 8.3 billion, about 25% below its 90-day average, with international investors the only net sellers, according to EnterpriseAM. Mopco fell 5.9% and Abu Qir Fertilizers 5.8% as…",
+   "topics": [
+    "gas-fertilizer"
+   ]
+  },
+  {
+   "ed": "2026-11-09",
+   "id": "story-beirut-on-record",
+   "lead": "Beirut on record",
+   "sec": "In Other News",
+   "text": "Lebanese musician Karl Mattar released *The Weather of the World*, a 15-track debut solo album recorded in Beirut in April during Israeli attacks on Lebanon.",
+   "topics": [],
+   "removed": [
+    "gaza-lebanon"
+   ],
+   "added": []
+  },
+  {
+   "ed": "2026-11-09",
+   "id": "story-aramco-tower-hit",
+   "lead": "Aramco Tower hit",
+   "sec": "Regional and Gulf",
+   "text": "Yemen's Houthis claimed a missile attack on Riyadh's financial district on Sunday that blew out windows across several floors of Aramco's tower, France 24 reported. Saudi Arabia's energy ministry called it an attempted attack, with \"minor…",
+   "topics": [
+    "iran-war"
+   ],
+   "added": [
+    "iran-war"
+   ],
+   "removed": []
+  },
   {
    "ed": "2026-11-08",
    "id": "story-trump-orders-democrat-probe",
