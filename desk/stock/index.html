@@ -134,6 +134,7 @@ try {
       wp.forEach((x) => { const d = M.day(x.session), mo = per[1] === 30, dl = mo ? `${MON[d.getMonth()]} ${d.getDate()}` : `${WD[d.getDay()]} ${d.getDate()}`, w = Math.floor((d - M.day('2026-01-04')) / 6048e5);
         if (!mo || w !== wk) at.push(labels.length); wk = w;
         x.series[t].forEach(([tm, v]) => { const iv = atTime(x.series[IK], tm); if (iv == null) return; labels.push(`${dl} ${tm}`); a0.push(v); b0.push(iv); text.push(dl); }); });
+      if (per[1] === 30 && at.length > 2 && at[1] - at[0] < (at[2] - at[1]) / 2) at.shift();
       M.$('lvl').textContent = M.num(M.last(sx)); M.$('dchg').innerHTML = M.heroChg(sx, per); M.$('cur').textContent = egx ? 'EGP' : 'USD';
       if (a0.length >= 2) {
         const a = a0.map((x) => x / a0[0] * 100), bb = b0.map((x) => x / b0[0] * 100), el = M.$('chart'); el.innerHTML = '';

@@ -177,6 +177,8 @@ window.Desk = (function () {
       if (back <= 7 || w !== wk) at.push(labels.length); wk = w;
       x.series[key].forEach(([t, v]) => { labels.push(`${dl} ${t}`); vals.push(v / r); text.push(dl); }); });
     el.innerHTML = '';
+    // a month's first week, when it has only a session or two, would print its date on top of the next week's
+    if (back > 7 && at.length > 2 && at[1] - at[0] < (at[2] - at[1]) / 2) at.shift();
     const lo = Math.min(...vals), hi = Math.max(...vals), pad = (hi - lo) * 0.15 || lo * 0.002;
     Charts.line(el, { labels, xAt: el.clientWidth < 520 && at.length > 3 ? at.filter((_, j) => (at.length - 1 - j) % 2 === 0) : at, xText: text,
       series: [{ name, values: vals }], format: fmt, endLabel: true, height: el.clientHeight, min: lo - pad });

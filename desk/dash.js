@@ -311,6 +311,7 @@
           W.forEach((x) => { const d = day(x.session), dl = mo ? `${MON[d.getMonth()]} ${d.getDate()}` : `${WD[d.getDay()]} ${d.getDate()}`, w = Math.floor((d - day('2026-01-04')) / 6048e5);
             if (!mo || w !== wk) at.push(labels.length); wk = w;
             x.series[cur.intra].forEach(([t, v]) => { labels.push(`${dl} ${t}`); vals.push(v); text.push(dl); }); });
+          if (mo && at.length > 2 && at[1] - at[0] < (at[2] - at[1]) / 2) at.shift();
           const lo = Math.min(...vals), hi = Math.max(...vals);
           Charts.line(el, { labels, xAt: el.clientWidth < 520 && at.length > 3 ? at.filter((_, j) => (at.length - 1 - j) % 2 === 0) : at, xText: text, series: [{ name: cur.n, values: vals }], format: Charts.fmt.int, endLabel: true, height: el.clientHeight, min: lo - (hi - lo) * 0.15 });
           const ch = (vals.at(-1) / vals[0] - 1) * 100;
