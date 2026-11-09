@@ -13,7 +13,7 @@
   // ---- figures and abbreviations as they are said (the same rules as read_aloud.py's speakable) ----
   var MONTHS = {Jan:'January',Feb:'February',Mar:'March',Apr:'April',Jun:'June',Jul:'July',Aug:'August',Sep:'September',Sept:'September',Oct:'October',Nov:'November',Dec:'December'};
   var UNITS = {tn:'trillion',bn:'billion',mn:'million',m:'million',k:'thousand'};
-  var WORDS = [['YTD','year to date'],['YoY','year on year'],['EGX30','E G X thirty'],['EGX70','E G X seventy'],['EGX100','E G X one hundred'],
+  var WORDS = [['Sisi','Seesee'],['YTD','year to date'],['YoY','year on year'],['EGX30','E G X thirty'],['EGX70','E G X seventy'],['EGX100','E G X one hundred'],
     ['S&P 500','S and P 500'],['S&P','S and P'],['CBE','C B E'],['IMF','I M F'],['GDP','G D P'],['OPEC+','OPEC plus'],
     ['Q1','the first quarter'],['Q2','the second quarter'],['Q3','the third quarter'],['Q4','the fourth quarter']];
   var SAY = /^(NATO|OPEC|NASA|FIFA|UEFA|COVID|ASEAN|BRICS|SWIFT|LIBOR|SOFR|MENA|NEOM|AFCON|AIDS|IKEA|LEGO|ISIS|CAPMAS|UNICEF|UNESCO|SIM|PIN|LASER|RAM|GIF)$/;
@@ -72,7 +72,8 @@
 
   // ---- words: each block's words on the page (as ranges, for the word highlight and for clicks), and how the
   // spoken words (figures written out: "3.9 percent", "E G X thirty") line up with them ----
-  function wkey(w){ return w.toLowerCase().replace(/[^a-z0-9]/g, ''); }
+  // a word's key for matching the spoken words to the page; a name respelled for the voice (Seesee) keys as written (Sisi)
+  function wkey(w){ return w.toLowerCase().replace(/[^a-z0-9]/g, '').replace(/seesee/g, 'sisi'); }
   // each word is wrapped in its own <span> when the block is first read (the text looks the same), and the word being
   // said gets a class: a plain style change, which every browser redraws (Safari did not always redraw a text highlight)
   function domWords(b){

@@ -14,7 +14,7 @@ import sys
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
 SKIP = {"Sources", "Stocks Watch", "Stocks This Week", "Currency and Commodities Watch"}   # tables: read on the page
-WORDS = {"YTD": "year to date", "YoY": "year on year", "y/y": "year on year", "m/m": "month on month", "q/q": "quarter on quarter",
+WORDS = {"Sisi": "Seesee", "YTD": "year to date", "YoY": "year on year", "y/y": "year on year", "m/m": "month on month", "q/q": "quarter on quarter",
          "EGX30": "E G X thirty", "EGX70": "E G X seventy", "EGX100": "E G X one hundred", "S&P 500": "S and P 500",
          "S&P": "S and P", "CBE": "C B E", "IMF": "I M F", "GDP": "G D P", "OPEC+": "OPEC plus", "vs": "versus", "vs.": "versus",
          "Q1": "the first quarter", "Q2": "the second quarter", "Q3": "the third quarter", "Q4": "the fourth quarter"}
