@@ -103,9 +103,9 @@ window.Desk = (function () {
     });
   }
   // a trend line: the period's closes, or on 1D the last session through the day when it is saved (intra)
-  // week: on 1W, the last sessions through the day (weekOf), when saved; otherwise the last seven closes
+  // week: on 1W, the last sessions through the day (weekOf), and on 1M the month's (monthOf), when saved; otherwise closes
   function spark(s, back, intra = null, week = null) {
-    const pts = !back && intra && intra.length > 1 ? intra.map((x) => x[1]) : back === 7 && week && week.length > 1 ? week
+    const pts = !back && intra && intra.length > 1 ? intra.map((x) => x[1]) : (back === 7 || back === 30) && week && week.length > 1 ? week
       : (back <= 7 ? s.slice(-7) : s.filter(([d]) => d >= cut(lastDate(s), back))).map((x) => x[1]);
     if (pts.length < 2) return '';
     const w = 72, h = 18, min = Math.min(...pts), max = Math.max(...pts), sp = max - min || 1, st = (w - 4) / (pts.length - 1);
@@ -149,13 +149,25 @@ window.Desk = (function () {
   }
   // a week (1W, every 15 minutes) or a month (1M, every 30 minutes) through each session, from desk/intraday.json's
   // "week" and "month"; null (the caller draws daily closes) until the stored sessions cover the whole period
-  function weekChart(el, market, key, name, fmt, inUSD = false, back = 7) {
+  // the saved sessions behind a 1W or 1M line for one or more keys, or null while they do not cover the period: a
+  // period must run to the market's latest session, and a month must reach back to its start with no session missing
+  function intraPeriod(market, keys, back, inUSD = false) {
     const W = INTRA && INTRA[back > 7 ? 'month' : 'week'] && INTRA[back > 7 ? 'month' : 'week'][market];
     const all = (W || []).filter((x) => x.session <= asOfFor(market) && (back <= 7 || x.session > cut(asOfFor(market), back)));
-    const ss = all.filter((x) => x.series[key] && x.series[key].length > 1 && (!inUSD || rateOn(x.session)));
-    // only a period that runs to the latest session, and for a month one that reaches back to its start
+    const ss = all.filter((x) => [].concat(keys).every((k) => x.series[k] && x.series[k].length > 1) && (!inUSD || rateOn(x.session)));
     if (ss.length < 2 || ss.at(-1) !== all.at(-1)) return null;
     if (back > 7 && (ss.length < all.length || ss.length < 15 || ss[0].session > cut(asOfFor(market), back - 5))) return null;
+    return ss;
+  }
+  // a table's trend line over a month: the saved sessions, hourly (enough for a line 72 pixels wide)
+  function monthOf(t, inUSD = false) {
+    const m = GROUP.egx.includes(t) || /^EGX/.test(t) ? 'egx' : 'us', ss = intraPeriod(m, t, 30, inUSD);
+    return ss && ss.flatMap((x) => { const r = inUSD ? rateOn(x.session) : 1, pts = x.series[t];
+      return pts.filter(([tm], i) => tm.endsWith(':00') || i === pts.length - 1).map(([, v]) => v / r); });
+  }
+  function weekChart(el, market, key, name, fmt, inUSD = false, back = 7) {
+    const ss = intraPeriod(market, key, back, inUSD);
+    if (!ss) return null;
     const labels = [], vals = [], text = [], at = [];
     let wk = null;
     ss.forEach((x) => { const d = day(x.session), r = inUSD ? rateOn(x.session) : 1;
@@ -293,7 +305,7 @@ window.Desk = (function () {
     const rows = tickers.map((t) => { const s = inUSD ? usd(stock(t)) : stock(t); return { t, s, c: change(s, back), y: ytd(s) }; });
     const v = (r) => (sort && sort.key === 'ytd' ? r.y : r.c);
     if (sort && sort.key) rows.sort((a, b) => (v(a) == null) - (v(b) == null) || sort.dir * (v(a) - v(b)));
-    const row = ({ t, s, c, y }) => `<tr class="click" onclick="location='/desk/stock/?t=${encodeURIComponent(t)}'"><td class="name"><a href="/desk/stock/?t=${encodeURIComponent(t)}"><b>${esc(NAMES[t])}</b><span>${esc(t)}</span></a></td><td class="trend">${spark(s, back, intraOf(t), back === 7 ? weekOf(t, inUSD) : null)}</td><td class="num">${num(last(s))}</td><td class="num"><span class="${cls(c)}">${pct(c)}</span></td><td class="num"><span class="${cls(y)}">${pct(y)}</span></td></tr>`;
+    const row = ({ t, s, c, y }) => `<tr class="click" onclick="location='/desk/stock/?t=${encodeURIComponent(t)}'"><td class="name"><a href="/desk/stock/?t=${encodeURIComponent(t)}"><b>${esc(NAMES[t])}</b><span>${esc(t)}</span></a></td><td class="trend">${spark(s, back, intraOf(t), back === 7 ? weekOf(t, inUSD) : back === 30 ? monthOf(t, inUSD) : null)}</td><td class="num">${num(last(s))}</td><td class="num"><span class="${cls(c)}">${pct(c)}</span></td><td class="num"><span class="${cls(y)}">${pct(y)}</span></td></tr>`;
     body.dataset.grouped = group ? '1' : '';
     if (!group) { body.innerHTML = rows.map(row).join(''); return; }
     const avg = (rs, k) => { const xs = rs.map((r) => r[k]).filter((x) => x != null); return xs.length ? xs.reduce((a, x) => a + x, 0) / xs.length : null; };
@@ -471,5 +483,5 @@ window.Desk = (function () {
       location.reload();
     });
   }
-  return { get ASOF() { return ASOF; }, SECTORS, sortable, headText, showAllRows, calendar, asOfFor, lastDate, $, esc, pct, cls, num, get, dateLine, conf, confNow, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, weekChart, deskNotes, weekOf, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
+  return { get ASOF() { return ASOF; }, SECTORS, sortable, headText, showAllRows, calendar, asOfFor, lastDate, $, esc, pct, cls, num, get, dateLine, conf, confNow, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, weekChart, deskNotes, weekOf, monthOf, intraPeriod, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
 })();

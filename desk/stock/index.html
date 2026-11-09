@@ -102,7 +102,8 @@ try {
   const IK = egx ? 'EGX30' : 'sp500', MK = egx ? 'egx' : 'us';
   const dayPair = () => { const E = M.INTRA && M.INTRA[MK], S = E && E.series; return S && S[t] && S[IK] && E.session <= M.asOfFor(MK) ? [S[t], S[IK], E.session] : null; };
   // the week, every 15 minutes, the sessions that have both lines (as the 1W chart draws the stock alone)
-  const weekPair = () => { const W = M.INTRA && M.INTRA.week && M.INTRA.week[MK]; const ss = (W || []).filter((x) => x.session <= M.asOfFor(MK) && x.series[t] && x.series[t].length > 1 && x.series[IK] && x.series[IK].length > 1); const all = (W || []).filter((x) => x.session <= M.asOfFor(MK)); return ss.length >= 2 && ss.at(-1) === all.at(-1) ? ss : null; };
+  // a week (every 15 minutes) or a month (every 30) of sessions with both lines, once they cover the period
+  const weekPair = (back = 7) => M.intraPeriod(MK, [t, IK], back);
   const atTime = (X, tm) => { let v = null; for (const [u, x] of X) { if (u <= tm) v = x; else break; } return v; };
   let sx = s, per = M.startPeriod(egx ? 'egx' : 'us', t), inUSD = false, cmp = false;
   const draw = async () => {
@@ -126,10 +127,12 @@ try {
     if (per[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; sx = M.stock(t); idxAll = M.series((e) => e[egx ? 'egx30' : 'sp500'], egx ? 'egx' : 'us'); return draw(); }
     const v = inUSD ? M.usd(sx) : sx, vi = inUSD ? M.usd(idxAll) : idxAll, unit = inUSD ? ' in dollars' : '';
     // against the index: both lines start at 100 on the period's first close, so the gap is the stock's lead or lag
-    const wp = cmp && per[1] === 7 && !inUSD ? weekPair() : null;
+    const wp = cmp && (per[1] === 7 || per[1] === 30) && !inUSD ? weekPair(per[1]) : null;
     if (wp) {
       const WD = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], labels = [], a0 = [], b0 = [], text = [], at = [];
-      wp.forEach((x) => { const d = M.day(x.session), dl = `${WD[d.getDay()]} ${d.getDate()}`; at.push(labels.length);
+      const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; let wk = null;
+      wp.forEach((x) => { const d = M.day(x.session), mo = per[1] === 30, dl = mo ? `${MON[d.getMonth()]} ${d.getDate()}` : `${WD[d.getDay()]} ${d.getDate()}`, w = Math.floor((d - M.day('2026-01-04')) / 6048e5);
+        if (!mo || w !== wk) at.push(labels.length); wk = w;
         x.series[t].forEach(([tm, v]) => { const iv = atTime(x.series[IK], tm); if (iv == null) return; labels.push(`${dl} ${tm}`); a0.push(v); b0.push(iv); text.push(dl); }); });
       M.$('lvl').textContent = M.num(M.last(sx)); M.$('dchg').innerHTML = M.heroChg(sx, per); M.$('cur').textContent = egx ? 'EGP' : 'USD';
       if (a0.length >= 2) {

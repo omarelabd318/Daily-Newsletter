@@ -830,6 +830,24 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     has.forEach(function(w){ w.series[k].forEach(function(p){ pts.push({d: w.session.slice(5) + ' ' + p[0], v: p[1]}); }); });
     return pts;
   }
+  // the month through the day (desk/intraday.json's "month", every 30 minutes): a 1M line drawn hourly, for an
+  // edition whose sessions the store still covers in full; older editions keep their daily closes
+  var monthP = null;
+  function monthPts(MO, label, upto){
+    if(!MO) return null;
+    var mk = null, k = null, t = label.match(/\(([A-Z][A-Z.]{0,5})\)/);
+    if(t){ k = t[1]; mk = (MO.egx || []).some(function(w){ return w.series[k]; }) ? 'egx' : 'us'; }
+    else for(var i = 0; i < WKEY.length; i++) if(WKEY[i][0].test(label.trim())){ mk = WKEY[i][1]; k = WKEY[i][2]; break; }
+    if(!mk) return null;
+    var from = new Date(new Date(upto + 'T12:00:00') - 30 * 864e5).toISOString().slice(0, 10);
+    var S = (MO[mk] || []).filter(function(w){ return w.session < upto && w.session > from; });
+    if(S.length < 15 || S[0].session > new Date(new Date(upto + 'T12:00:00') - 25 * 864e5).toISOString().slice(0, 10)) return null;
+    if(S[S.length - 1].session < new Date(new Date(upto + 'T12:00:00') - 4 * 864e5).toISOString().slice(0, 10)) return null;
+    if(!S.every(function(w){ return w.series[k] && w.series[k].length > 1; })) return null;
+    var pts = [];
+    S.forEach(function(w){ var a = w.series[k]; a.forEach(function(p, j){ if(p[0].slice(3) === '00' || j === a.length - 1) pts.push({d: w.session.slice(5) + ' ' + p[0], v: p[1]}); }); });
+    return pts;
+  }
   function addSparks(upto, long){
     market.then(function(m){
       var from = new Date(new Date(upto+'T12:00:00') - 380 * 864e5).toISOString().slice(0,10);
@@ -839,7 +857,8 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
       if(!m || !m.days) return;
       var days = m.days.filter(function(x){ return x.date <= upto; });
       if(!tickerSet){ tickerSet = {}; m.days.forEach(function(x){ Object.keys(x.egx||{}).concat(Object.keys(x.us||{})).forEach(function(k){ tickerSet[k] = 1; }); }); }
-      return weekFor(upto).then(function(WK){
+      monthP = monthP || fetch('desk/intraday.json', {cache:'no-cache'}).then(function(r){ return r.ok ? r.json() : null; }).then(function(j){ return j && j.month; }).catch(function(){ return null; });
+      return Promise.all([weekFor(upto), monthP]).then(function(R){ var WK = R[0], MO = R[1];
       document.querySelectorAll('#content .s-body table').forEach(function(table){
         if(table.querySelector('.trend')) return;
         var series = [].map.call(table.querySelectorAll('tbody tr'), function(tr){
@@ -863,7 +882,8 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
           if(lines[i]) tr.classList.add('has-trend'); if(lines[i] && long) tr.classList.add('trend-long');
         });
         var sec = table.closest('.s'), name = sec && sec.querySelector('h2') ? sec.querySelector('h2').textContent.trim() : '';
-        if(!long && /^(Stocks Watch|Currency and Commodities Watch)$/.test(name)) addPeriods(table, series, upto, name !== 'Stocks Watch', weeks);
+        var months = [].map.call(table.querySelectorAll('tbody tr'), function(tr){ var c = tr.querySelector('td'); return !long && c ? monthPts(MO, c.textContent, upto) : null; });
+        if(!long && /^(Stocks Watch|Currency and Commodities Watch)$/.test(name)) addPeriods(table, series, upto, name !== 'Stocks Watch', weeks, months);
       });
       });
     });
@@ -886,7 +906,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     else { var cut = cutoff(upto, back); for(var j = pts.length-1; j >= 0; j--) if(pts[j].d <= cut){ base = pts[j].v; break; } }
     return base ? (last / base - 1) * 100 : null;
   }
-  function addPeriods(table, series, upto, addColumn, weeks){
+  function addPeriods(table, series, upto, addColumn, weeks, months){
     var heads = [].slice.call(table.querySelectorAll('thead th')), ci;
     if(addColumn){   // the currency table gets a Change column after Level
       var li = heads.findIndex(function(th){ return th.textContent.trim() === 'Level'; });
@@ -910,7 +930,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
         var t = tr.querySelector('td.trend');
         if(t){
           var win = p[1] <= 7 ? pts.slice(-7) : pts.filter(function(x){ return x.d >= cutoff(upto, p[1]); });
-          t.innerHTML = p[1] <= 7 && weeks && weeks[i] ? spark(weeks[i], false, 'Last 5 sessions, hourly') : win.length >= 2 ? spark(win, false, p[1] > 7 ? p[2] : null) : '';
+          t.innerHTML = p[1] <= 7 && weeks && weeks[i] ? spark(weeks[i], false, 'Last 5 sessions, hourly') : p[1] === 30 && months && months[i] ? spark(months[i], false, 'Last 30 days, hourly') : win.length >= 2 ? spark(win, false, p[1] > 7 ? p[2] : null) : '';
           t.setAttribute('data-label', p[2]);
         }
       });
