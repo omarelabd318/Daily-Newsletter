@@ -36,7 +36,9 @@ def strip_md(t):
 def speakable(t):
     """Figures and abbreviations as they are said: EGP 54.01 -> 54.01 pounds, 3.9% -> 3.9 percent, $4bn -> 4 billion dollars."""
     num = r"(\d+(?:,\d{3})*(?:\.\d+)?)"   # 76,000 or 4.5, never a comma after it
-    t = re.sub(r"\bEGP\s?" + num + r"\s?(tn|bn|mn|m|k)?\b", lambda m: m.group(1) + (" " + UNITS[m.group(2)] if m.group(2) else "") + " pounds", t)
+    # EGP 48bn, EGP 48 billion and EGP 54.01: the amount, its unit, then "pounds" (48 billion pounds)
+    t = re.sub(r"\bEGP\s?" + num + r"(?:\s?(tn|bn|mn|m|k)\b|\s(trillion|billion|million|thousand)\b)?",
+               lambda m: m.group(1) + (" " + UNITS[m.group(2)] if m.group(2) else " " + m.group(3) if m.group(3) else "") + " pounds", t)
     t = re.sub(r"\$" + num + r"\s?(tn|bn|mn|m|k)\b", lambda m: m.group(1) + " " + UNITS[m.group(2)] + " dollars", t)
     t = re.sub(r"\$" + num + r"(?:\s(trillion|billion|million|thousand))?", lambda m: m.group(1) + (" " + m.group(2) if m.group(2) else "") + " dollars", t)
     t = re.sub(r"\b" + num + r"\s?bps?\b", r"\1 basis points", t)

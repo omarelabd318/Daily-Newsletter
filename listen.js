@@ -20,7 +20,7 @@
   var NUM = '(\\d+(?:,\\d{3})*(?:\\.\\d+)?)';   // 76,000 or 4.5, never a comma after it
   function esc(re){ return re.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
   function speakable(t){
-    t = t.replace(new RegExp('\\bEGP\\s?' + NUM + '\\s?(tn|bn|mn|m|k)?\\b', 'g'), function(m, n, u){ return n + (u ? ' ' + UNITS[u] : '') + ' pounds'; });
+    t = t.replace(new RegExp('\\bEGP\\s?' + NUM + '(?:\\s?(tn|bn|mn|m|k)\\b|\\s(trillion|billion|million|thousand)\\b)?', 'g'), function(m, n, u, w){ return n + (u ? ' ' + UNITS[u] : w ? ' ' + w : '') + ' pounds'; });
     t = t.replace(new RegExp('\\$' + NUM + '\\s?(tn|bn|mn|m|k)\\b', 'g'), function(m, n, u){ return n + ' ' + UNITS[u] + ' dollars'; });
     t = t.replace(new RegExp('\\$' + NUM + '(?:\\s(trillion|billion|million|thousand))?', 'g'), function(m, n, u){ return n + (u ? ' ' + u : '') + ' dollars'; });
     t = t.replace(new RegExp('\\b' + NUM + '\\s?bps?\\b', 'g'), '$1 basis points');
