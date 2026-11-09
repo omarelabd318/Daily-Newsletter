@@ -95,10 +95,10 @@
   const dc = M.change(idx, 0);
   // the chart in pounds or in dollars (divided by each day's dollar rate); 3Y and 5Y load the full log
   const draw = async () => {
-    const s = inUSD ? M.usd(idx) : idx, d1 = M.change(s, 0), unit = inUSD ? ' in dollars' : '';
+    const s = inUSD ? M.usd(idx) : idx, unit = inUSD ? ' in dollars' : '';
     M.$('lvl').textContent = M.num(M.last(s), inUSD ? 1 : 2); M.$('dchg').innerHTML = M.heroChg(s, per);
     const nm = ikey === 'egx70' ? 'EGX70 EWI' : 'EGX30';
-    if (!per[1]) { const c1 = M.dayChart(M.$('chart'), 'egx', ikey === 'egx70' ? 'EGX70EWI' : 'EGX30', nm, Charts.fmt.int, inUSD); M.$('cap').innerHTML = c1 ? `${c1} · on the day <span class="num ${M.cls(d1)}">${M.pct(d1, 2)}</span>` : ''; return; }
+    if (!per[1]) { const c1 = M.dayChart(M.$('chart'), 'egx', ikey === 'egx70' ? 'EGX70EWI' : 'EGX30', nm, Charts.fmt.int, inUSD); M.$('cap').innerHTML = c1 || ''; return; }
     if (per[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; idx = M.series((e) => e[ikey], 'egx'); return draw(); }
     const w1 = per[1] === 7 || per[1] === 30 ? M.weekChart(M.$('chart'), 'egx', ikey === 'egx70' ? 'EGX70EWI' : 'EGX30', nm, Charts.fmt.int, inUSD, per[1]) : null;
     if (w1) { M.$('cap').innerHTML = `${w1} · this year <span class="num ${M.cls(M.ytd(s))}">${M.pct(M.ytd(s))}</span>`; return; }
