@@ -176,6 +176,21 @@ covered in full further down.
   `python3 .claude/skills/daily-newsletter/calendar_facts.py DATE 14`, which lists the holidays and EGX closures,
   the desk's stocks' results dates ("expected" unless confirmed) and dividends already in the repo's data, so the
   dates known are in and right; add the rest (central bank meetings, data releases, auctions, fixtures) from research.
+  Layout: the next few days each get their own item (`**Tuesday, November 10:** ...`). Events further out go
+  under `**Coming up:**` as a list, one date per line, in date order, never one running paragraph:
+
+  ```
+  **Coming up:**
+
+  - **Nov 15:** Air Cairo resumes Cairo–Damascus flights
+  - **Nov 16–17:** World Economic Forum's first business meeting in Egypt, New Capital
+  - **Dec 17:** Central bank rate meeting
+
+  *No public holidays or EGX closures in the next two weeks.*
+  ```
+
+  Several events on one date share its line, separated by semicolons. The closing line on holidays and EGX
+  closures is italic and goes last.
 
 ## Fetch the figures first
 

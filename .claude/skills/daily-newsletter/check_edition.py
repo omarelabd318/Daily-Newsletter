@@ -641,6 +641,13 @@ def main(path):
         errors.append("Today at a Glance should end with a '**What to watch today:**' line.")
 
     # index.json must parse and list this date.
+    # the calendar's Coming up is a dated list, not one running paragraph
+    cal = re.search(r"^## Economic Calendar\n(.*?)(?=^## )", text, re.M | re.S)
+    if cal:
+        for para in re.split(r"\n\s*\n", cal.group(1)):
+            p = para.strip()
+            if p.startswith("**Coming up:**") and len(p.split()) > 25 and not re.search(r"^\s*[-*] ", p, re.M):
+                warnings.append("Economic Calendar: write Coming up as a list, one date per line (- **Nov 15:** ...), not one paragraph.")
     date = os.path.splitext(os.path.basename(path))[0]
     index = os.path.join(os.path.dirname(path), "index.json")
     try:
