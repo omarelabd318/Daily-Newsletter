@@ -252,11 +252,20 @@
         if (yr.length > 200 && last < Math.min(...yr)) out.push([4, `${tag('52-week low', 'bad')} ${link}`]);
       }
       for (const t of GROUP[S.group]) { const R = (STOCKS[t] || {}).lastResults;
-        if (R && R.date && R.date >= cut(D.date, 1)) out.push([0, `${tag('Results: ' + (({ beat: 'beat', miss: 'missed', 'in line': 'in line', mixed: 'mixed' })[R.verdict] || 'out'), R.verdict === 'beat' ? 'ok' : R.verdict === 'miss' ? 'bad' : 'open')} <a href="/desk/stock/?t=${encodeURIComponent(t)}">${esc(NAMES[t] || t)}</a><span class="meta"> · ${esc(R.headline)}</span>`]); }
-      for (const c of CAL.filter((c) => c.market === S.group && c.date === D.date))
-        out.push([5, `${tag(c.kind === 'results' ? (c.expected ? 'Results expected' : 'Results today') : c.kind === 'split' ? `Stock split ${c.ratio}` : 'Goes ex-dividend', 'open')} <a href="/desk/stock/?t=${encodeURIComponent(c.t)}">${esc(NAMES[c.t] || c.t)}</a>${c.time ? `<span class="meta"> · ${esc(c.time)}</span>` : ''}`]);
-      out.sort((a, b) => a[0] - b[0]);
-      el.innerHTML = out.length ? out.map(([, h]) => `<div class="since-row">${h}</div>`).join('')
+        if (R && R.date && R.date >= cut(D.date, 1)) out.push([6, `${tag('Results: ' + (({ beat: 'beat', miss: 'missed', 'in line': 'in line', mixed: 'mixed' })[R.verdict] || 'out'), R.verdict === 'beat' ? 'ok' : R.verdict === 'miss' ? 'bad' : 'open')} <a href="/desk/stock/?t=${encodeURIComponent(t)}">${esc(NAMES[t] || t)}</a><span class="meta"> · ${esc(R.headline)}</span>`]); }
+      // today's dates, one line per kind: "Results expected · Edita Food Industries, Juhayna"
+      const kinds = {};
+      for (const c of CAL.filter((c) => c.market === S.group && c.date === D.date)) {
+        const k = c.kind === 'results' ? (c.expected ? 'Results expected' : 'Results today') : c.kind === 'split' ? `Stock split ${c.ratio}` : 'Goes ex-dividend';
+        (kinds[k] = kinds[k] || []).push(`<a href="/desk/stock/?t=${encodeURIComponent(c.t)}">${esc(NAMES[c.t] || c.t)}</a>${c.time ? `<span class="meta"> (${esc(c.time)})</span>` : ''}`);
+      }
+      for (const [k, list] of Object.entries(kinds)) out.push([5, `${tag(k, 'open')} <span>${list.join(', ')}</span>`]);
+      // grouped by kind, one labelled row each, so unrelated items never share a line
+      const GROUPS = [['Views', [0, 1, 2]], ['Results', [6]], ['Big moves', [3]], ['52-week highs and lows', [4]], ['Today', [5]]];
+      const rowsOf = (ks) => out.filter((x) => ks.includes(x[0]));
+      el.innerHTML = out.length ? GROUPS.map(([g, ks]) => { const r = rowsOf(ks); if (!r.length) return '';
+        const inline = ks[0] === 3 || ks[0] === 4;
+        return `<div class="since-g"><h3>${g}</h3><div class="since-i${inline ? ' inline' : ''}">${r.map(([, h]) => `<div class="since-row">${h}</div>`).join('')}</div></div>`; }).join('')
         : `<p class="sub">A quiet day for the record: no view judged, opened or re-rated, and none of the desk's stocks moved 5% or more.</p>`;
     })();
     // the top story's text and the close strip's sources note: a few lines, then "Read more"
