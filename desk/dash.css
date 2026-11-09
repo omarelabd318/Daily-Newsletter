@@ -426,3 +426,7 @@ a.tag:hover{color:var(--text);text-decoration:underline;text-underline-offset:2p
 .since-i .since-row{border:0!important;padding:2px 0!important}
 .since-i.inline{display:flex;flex-wrap:wrap;gap:2px 28px}
 @media (max-width:860px){ .since-g{grid-template-columns:minmax(0,1fr)} }
+
+/* a "Show more" button placed straight in the page grid spans it, its label on one line */
+.pages > .more-btn{grid-column:1/-1;justify-self:start}
+.more-btn{white-space:nowrap}
