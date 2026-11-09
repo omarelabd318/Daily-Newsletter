@@ -294,7 +294,16 @@ No news is a valid result: never pad a stock with filler. Its page then shows it
 ## The week ahead
 
 The events that can move Egyptian markets and the reader's stocks, each rated high, medium or low impact,
-with one line on why it matters (catalyst-calendar skill). Dates are checked like any other fact.
+with one line on why it matters (catalyst-calendar skill). Dates are checked like any other fact. Rate impact
+the same way every day (the dashboards print this key under the card):
+- **High:** could move the whole market on the day: the EGX30, the pound or the S&P 500. Central bank decisions
+  (the CBE, the Fed), inflation, jobs and GDP releases, the IMF review, a results day for one of the market's
+  largest companies (CIB, Nvidia, Apple), and a large state offering or auction that sets rates.
+- **Medium:** could move a sector or a few stocks: other desk stocks' results, a sector's data (fertilizer gas
+  allocations, oil inventories), a T-bill auction with no expected change, a company's general assembly or
+  dividend date.
+- **Low:** worth knowing but unlikely to move prices much: minor data, conferences, scheduled speeches with
+  nothing new expected, holidays (rate a closure that shuts the market for several days medium).
 
 ## The week
 
