@@ -416,7 +416,7 @@ tbody tr.sec-row:first-child th,tbody tr.sec-row:first-child td{padding-top:8px;
 .tb-r{display:flex;align-items:center;gap:8px}
 .topbar .dsearch{margin:0;height:32px;width:150px}
 .topbar .dsr{position:fixed;left:16px;right:16px;top:52px;min-width:0}
-@media (max-width:480px){.topbar .brand > span:last-child{display:none}.topbar .dsearch{width:auto;flex:1}.topbar .tb-r{flex:1;margin-left:10px}}
+@media (max-width:480px){.topbar .brand > span:last-child{display:none}.topbar .dsearch{width:auto;flex:1;min-width:0}.topbar .tb-r{flex:1;min-width:0;margin-left:10px}}
 
 /* the Runs page: one card a day, a row for each run */
 #runs{display:grid;gap:16px}
