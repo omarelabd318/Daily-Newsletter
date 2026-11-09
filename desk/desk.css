@@ -553,3 +553,10 @@ h2.sec-h{display:none}
 /* a "Show more" button placed straight in the page grid spans it, its label on one line */
 .pages > .more-btn{grid-column:1/-1;justify-self:start}
 .more-btn{white-space:nowrap}
+
+/* every chart names its source under it (data-src on the caption) */
+.chart-cap[data-src]:not(:empty)::after{content:" · Source: " attr(data-src) "."}
+/* changes carry their sign and colour; the arrows go (tags keep theirs, which mark direction without a figure) */
+.chg::before{display:none!important}
+.tag .chg::before,.tags .chg::before,h3 > .chg::before{display:inline-block!important}
+.chart-cap[data-src]:empty::after{content:"Source: " attr(data-src) "."}

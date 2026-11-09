@@ -430,3 +430,30 @@ a.tag:hover{color:var(--text);text-decoration:underline;text-underline-offset:2p
 /* a "Show more" button placed straight in the page grid spans it, its label on one line */
 .pages > .more-btn{grid-column:1/-1;justify-self:start}
 .more-btn{white-space:nowrap}
+
+/* every chart names its source under it (data-src on the caption) */
+.chart-cap[data-src]:not(:empty)::after{content:" · Source: " attr(data-src) "."}
+/* changes carry their sign and colour; the arrows go (tags keep theirs, which mark direction without a figure) */
+.chg::before{display:none!important}
+.tag .chg::before,.tags .chg::before,h3 > .chg::before{display:inline-block!important}
+
+/* the dashboards: figures and the chart full width, then two columns: the stories on the left, quick checks on the right */
+#c-close{border-top:1px solid var(--text)}
+#c-chart{margin-bottom:var(--gap)}
+#c-chart .hero{display:none}
+#chart-name{font:700 21px/1.2 var(--serif);letter-spacing:-.005em;text-transform:none}
+#chart-name .num{font:500 15px var(--font);margin-left:6px}
+.dcols{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:var(--gap) 48px;align-items:start}
+.dleft,.dright{display:grid;gap:var(--gap);align-content:start;min-width:0}
+.dright .board{grid-template-columns:minmax(0,1fr)}
+.dright #movers > div,.dright .mv-cols{grid-template-columns:minmax(0,1fr)!important}
+.tlede{font:400 19px/1.5 var(--serif)!important;margin:0 0 10px!important;color:var(--text)}
+@media (max-width:1100px){
+  .dcols{display:flex;flex-direction:column}
+  .dleft,.dright{display:contents}
+  #c-since{order:1} #c-read{order:2} #c-movers{order:3} #c-board{order:4} #c-week{order:5} #c-views{order:6}
+}
+
+.dright .movers{grid-template-columns:minmax(0,1fr);gap:16px}
+.dright .call-row{grid-template-columns:minmax(0,1fr) auto}
+.chart-cap[data-src]:empty::after{content:"Source: " attr(data-src) "."}

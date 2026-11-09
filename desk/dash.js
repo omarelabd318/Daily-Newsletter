@@ -187,11 +187,17 @@
     const calls = (X.calls || [X.top]).filter(Boolean).slice(0, 5);
     const moves = (T) => Array.isArray(T.affects) && T.affects.length ? Tags.html(T.affects, { names: NAMES }) : T.moves ? `<p class="moves-txt">${esc(T.moves)}</p>` : '';
     const T = calls[0];
-    $('story-n').textContent = 'Top call';
-    $('h-read').textContent = T.headline; $('top-body').textContent = T.body;
+    { const sec = ((T.affects || []).find((x) => x.kind === 'sector') || {}).name;
+      $('story-n').textContent = ['Top call', sec, T.confidence ? 'Confidence ' + T.confidence : null].filter(Boolean).join(' · '); }
+    $('h-read').textContent = T.headline;
+    // the story's first sentence or two as its lead, in larger type; the rest under it (a sentence ends at . ! or ?
+    // before a space and a capital, so 54.31 or 0.67% never splits it)
+    { const sents = String(T.body || '').split(/(?<=[.!?])\s+(?=[A-Z"“(])/); let n = 1;
+      if (sents.length > 2 && (sents[0] + ' ' + sents[1]).split(/\s+/).length <= 45) n = 2;
+      $('top-lede').textContent = sents.slice(0, n).join(' '); $('top-body').textContent = sents.slice(n).join(' '); $('top-body').hidden = !$('top-body').textContent; }
     $('top-view').textContent = T.view; $('top-wrong').textContent = T.wrong;
     $('top-moves').innerHTML = moves(T); $('top-moves').parentElement.hidden = !$('top-moves').innerHTML;
-    $('top-conf').textContent = 'Confidence: ' + T.confidence;
+    $('top-conf').textContent = ''; $('top-conf').hidden = true;
     $('top-notice').hidden = !T.notice; $('top-notice').textContent = T.notice || '';
     const rest = calls.slice(1);
     $('also').hidden = !rest.length;
@@ -302,7 +308,8 @@
         if (!fullLoaded) { const f = await get('/data/markets.json'); fullLoaded = true; if (f && f.days) days = f.days; }
         idx = series((e) => e[cur.k], S.market);
       }
-      $('chart-name').textContent = IDX.length < 2 ? cur.n : 'Wall Street';
+      const TTL = { 0: 'today', 7: 'last week', 30: 'last month', 182: 'last 6 months', 365: 'last 12 months', 1095: 'last 3 years', 1826: 'last 5 years' };
+      $('chart-name').innerHTML = `${esc(cur.n)}, ${TTL[p[1]] || ''} <span class="num ${cls(change(idx, p[1]))}">${pct(change(idx, p[1]), 2)}</span>`;
       const lv = idx.length ? idx[idx.length - 1][1] : null, hc = change(idx, p[1]);
       $('ilvl').textContent = lv == null ? '—' : lv.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
       $('ichg').innerHTML = `<span class="${cls(hc)}">${pct(hc, 2)}</span> <span class="span-l">${SPAN[p[1]] || ''}</span>`;

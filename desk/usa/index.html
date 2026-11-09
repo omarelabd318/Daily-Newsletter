@@ -39,25 +39,23 @@
         <p class="ledger-note" id="close-note"></p>
       </section>
 
-      <section class="card strip" id="c-since" aria-labelledby="h-since">
-        <div class="card-h"><h2 id="h-since">Since yesterday</h2><span class="meta">What the day changed</span></div>
-        <div id="since"></div>
-      </section>
-
-      <div class="main">
-      <section class="card span2" id="c-chart" aria-labelledby="chart-name">
+      <section class="card strip" id="c-chart" aria-labelledby="chart-name">
         <div class="card-h"><div class="hgroup"><h2 id="chart-name">EGX30</h2><div class="ctabs" id="itabs" aria-label="Index" hidden></div></div><span class="story-nav"><a class="meta" id="chart-more" href="/desk/egx/">EGX page →</a><span class="seg" role="group" aria-label="Chart period" id="egx-seg"></span></span></div>
         <div class="hero"><span class="lvl num" id="ilvl"></span><span class="d num" id="ichg"></span></div>
         <div class="chartbox" id="egx-chart"></div>
-        <p class="chart-cap" id="egx-cap"></p>
+        <p class="chart-cap" id="egx-cap" data-src="Yahoo Finance, Nasdaq"></p>
       </section>
 
+      <!-- two columns on a laptop: the stories on the left, the quick checks on the right; one column on a phone -->
+      <div class="dcols">
+      <div class="dleft">
       <section class="card span2" id="c-read" aria-labelledby="h-read">
           <div class="lead-story" id="story">
             <div class="card-h" style="margin-bottom:6px"><span class="meta" id="story-n">Top call</span><span class="conf" id="top-conf"></span></div>
             <div class="lead-g">
               <div class="lead-main">
                 <h2 class="call" id="h-read"></h2>
+                <p class="tlede" id="top-lede"></p>
                 <p id="top-body"></p>
                 <div class="moves"><span class="tags-h">What it moves</span><div id="top-moves"></div></div>
               </div>
@@ -74,14 +72,6 @@
           </div>
       </section>
 
-
-
-      <section class="card span2" id="c-movers" aria-labelledby="h-movers">
-        <div class="card-h"><div class="hgroup"><h2 id="h-movers">Biggest movers</h2><div class="ctabs" id="mscope" aria-label="Which stocks"></div></div><a class="meta" id="movers-more" href="/desk/egx/">EGX page →</a></div>
-        <div id="movers"></div>
-        <p class="chart-cap" id="movers-note"></p>
-      </section>
-
       <section class="card span2" id="c-board" aria-labelledby="h-board">
         <div class="card-h"><h2 id="h-board">Winners and losers</h2><span class="meta" id="board-h"></span></div>
         <div class="board">
@@ -89,6 +79,18 @@
           <div><h3><span class="chg down" aria-hidden="true"></span>Hurt</h3><div id="hurt"></div></div>
         </div>
         <p class="ledger-note"><b>Confidence.</b> High: several independent reasons and the figures agree. Medium: a clear driver, with things pulling the other way. Low: momentum, or one reason only.</p>
+      </section>
+      </div>
+      <div class="dright">
+      <section class="card strip" id="c-since" aria-labelledby="h-since">
+        <div class="card-h"><h2 id="h-since">Since yesterday</h2><span class="meta">What the day changed</span></div>
+        <div id="since"></div>
+      </section>
+
+      <section class="card span2" id="c-movers" aria-labelledby="h-movers">
+        <div class="card-h"><div class="hgroup"><h2 id="h-movers">Biggest movers</h2><div class="ctabs" id="mscope" aria-label="Which stocks"></div></div><a class="meta" id="movers-more" href="/desk/egx/">EGX page →</a></div>
+        <div id="movers"></div>
+        <p class="chart-cap" id="movers-note"></p>
       </section>
 
       <section class="card" id="c-week" aria-labelledby="h-week">
@@ -101,6 +103,7 @@
         <div class="card-h"><h2 id="h-views">The desk's views</h2><a class="meta" href="/desk/views/">All views and projections →</a></div>
         <div id="views"></div>
       </section>
+      </div>
       </div>
     </main>
   </div>
