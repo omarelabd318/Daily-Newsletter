@@ -98,7 +98,20 @@
    "https://www.tennismajors.com/wta-tour-news/wta-finals/gauff-survives-missed-match-point-to-edge-pegula-at-wta-finals-866476.html",
    "https://english.mubasher.info/markets/EGX/stocks/EMFD"
   ],
-  "stocks": {}
+  "stocks": {},
+  "check": {
+   "at": "2026-11-09 19:05",
+   "errors": [],
+   "warnings": [
+    "Egypt Markets: 446 words (guide 280-340; fine if the stories justify it, never cut a story to fit).",
+    "Tech and AI: 226 words (guide 130-170; fine if the stories justify it, never cut a story to fit).",
+    "Sports: 317 words (guide 150-200; fine if the stories justify it, never cut a story to fit).",
+    "Health and Science: 165 words (guide 70-100; fine if the stories justify it, never cut a story to fit).",
+    "Total 4266 words without Sources (guide about 3,050-3,150; never cut a worthwhile story to fit).",
+    "Sources: 6 of 52 links could not be checked (the site refused or timed out); open them by hand if in doubt."
+   ],
+   "words": 4266
+  }
  },
  "desk": {
   "searches": [
@@ -193,6 +206,11 @@
    "V": "Two investor conferences this week; no company news",
    "ORCL": "Walked away from a $7bn Tencent chip-access deal (Barchart via Yahoo); UBS $250 target item is old",
    "COST": "Store closure item only; no market news"
+  },
+  "check": {
+   "at": "2026-11-09 19:05",
+   "errors": [],
+   "warnings": []
   }
  }
 }

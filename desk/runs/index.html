@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2352d6b5'/%3E%3Cpath d='M6 22l7-7 5 4 9-11' fill='none' stroke='%230e1216' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<title>Runs · Markets Desk</title>
+<meta name="description" content="Each scheduled run of the newsletter and the desk: whether it published, when, how much it researched and what its checker left.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,600&display=swap">
+<script>try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+<link rel="stylesheet" href="/desk/desk.css">
+</head>
+<body>
+<main class="canvas">
+  <div class="titlerow"><div>
+    <div class="crumbs"><a href="/desk/">Desk</a> / Runs</div>
+    <h1>Runs</h1>
+    <p class="finding">Each day's scheduled runs: whether the newsletter, the desk and the Saturday recap were published, when their checker last passed, how much was researched, whether the edition was recorded, and any warning left unfixed.</p>
+  </div></div>
+  <div class="pages">
+    <section class="card c12"><div class="score" id="score"></div></section>
+    <div class="c12" id="runs"></div>
+  </div>
+</main>
+<script src="/desk/charts.js"></script>
+<script src="/desk/tags.js"></script>
+<script src="/desk/desk.js"></script>
+<script>
+(async () => {
+  const M = Desk; await M.init('/desk/runs/');
+  const DAYS = 14, today = new Date(Date.now() + 2 * 3600e3).toISOString().slice(0, 10);
+  const dates = [...Array(DAYS).keys()].map((i) => new Date(new Date(today + 'T12:00:00Z') - i * 864e5).toISOString().slice(0, 10));
+  const [ED, DI] = await Promise.all([M.get('/editions/index.json'), M.get('/desk/index.json')]);
+  const eds = new Set(((ED && ED.editions) || []).map((e) => e.id || e.date)), desks = new Set(((DI && DI.desks) || []).map((d) => d.date));
+  const logs = await Promise.all(dates.map((d) => M.get('/data/research/' + d + '.json')));
+  const keys = [...eds].filter((k) => k.slice(0, 10) >= dates.at(-1));
+  const audio = Object.fromEntries(await Promise.all(keys.filter((k) => eds.has(k)).map(async (k) => [k, await M.get('/data/audio/' + k + '.json')])));
+  const first = (set) => [...set].filter((k) => /^\d{4}-\d\d-\d\d$/.test(k)).sort()[0] || '9999';
+  const firstRecap = [...eds].filter((k) => k.endsWith('-recap')).sort()[0] || '9999';
+  const fmtDay = (iso) => M.day(iso).toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' }).replace('Sept', 'Sep');
+  const ok = (b, yes, no) => `<span class="pill ${b ? 'ok' : 'bad'}">${b ? yes : no}</span>`;
+  let pub = 0, due = 0, warnLeft = 0;
+  const row = (label, published, P, part, key, isDesk) => {
+    const c = P && P.check, s = P ? (P.searches || []).length : 0, pg = P ? new Set(P.pages || []).size : 0, st = P ? Object.keys(P.stocks || {}).length : 0;
+    const A = key && audio[key], voices = A ? A.voices.map((v) => v.name).join(', ') : '';
+    const fq = P ? [...(P.searches || []), ...(P.pages || [])].filter((x) => /factiq/i.test(x)).length : 0;
+    due++; if (published) pub++; if (c) warnLeft += (c.warnings || []).length;
+    const det = c && ((c.errors || []).length || (c.warnings || []).length)
+      ? `<details class="rdet"><summary>${(c.errors || []).length ? `${c.errors.length} error${c.errors.length > 1 ? 's' : ''}, ` : ''}${c.warnings.length} warning${c.warnings.length === 1 ? '' : 's'} left</summary><ul>${(c.errors || []).map((e) => `<li class="bad">${M.esc(e)}</li>`).join('')}${(c.warnings || []).map((w) => `<li>${M.esc(w)}</li>`).join('')}</ul></details>`
+      : c ? '<span class="sub">Checker clean</span>' : '';
+    return `<div class="rrow"><b>${label}</b>${ok(published, 'Published', 'Missing')}
+      <span class="rcell"><span class="meta">Checked</span>${c ? M.esc(c.at.slice(11)) + ' Cairo' : '—'}</span>
+      <span class="rcell"><span class="meta">Research</span>${P ? `${s} searches, ${pg} pages${isDesk ? `, ${st} stocks` : ''}${fq ? `, ${fq} FactIQ` : ''}` : '—'}</span>
+      <span class="rcell">${isDesk ? '' : `<span class="meta">Length and audio</span>${c && c.words ? M.num(c.words, 0) + ' words · ' : ''}${A ? 'recorded (' + M.esc(voices) + ')' : published ? 'device voice only' : '—'}`}</span>
+      <div class="rcheck">${det}</div></div>`;
+  };
+  M.$('runs').innerHTML = dates.map((d, i) => {
+    const L = logs[i] || {}, sat = M.day(d).getDay() === 6, rows = [];
+    // a run counts from the first day it published (the desk began on October 30)
+    // the day's edition: its date, or a second version of it (2026-10-28-v2)
+    const nk = [...eds].find((k) => k === d || (k.startsWith(d + '-') && !k.endsWith('-recap'))) || d;
+    if (d >= first(eds)) rows.push(row('Newsletter', eds.has(nk), L.newsletter, 'newsletter', nk, false));
+    if (d >= first(desks)) rows.push(row('Markets Desk', desks.has(d), L.desk, 'desk', null, true));
+    if (sat && d >= firstRecap) rows.push(row('Weekly Recap', eds.has(d + '-recap'), L.recap, 'recap', d + '-recap', false));
+    if (!rows.length) return '';
+    return `<section class="card rday"><h2>${fmtDay(d)}</h2>${rows.join('')}</section>`;
+  }).join('');
+  M.$('score').innerHTML = [['Days shown', DAYS], ['Runs published', `${pub} of ${due}`], ['Warnings left', warnLeft]].map(([k, x]) => `<div><span class="meta">${k}</span><b class="num">${x}</b></div>`).join('')
+    + '<p class="sub">Each run\'s checker saves its last result in the day\'s research log (data/research/DATE.json); runs before November 9 have no saved result. Run costs are not shown here: they are in each run\'s session record.</p>';
+})();
+</script>
+</body>
+</html>

@@ -36,7 +36,8 @@ window.Desk = (function () {
     ['/desk/stocks/us/', 'Wall Street stocks', 'M3 3h10v10H3zM3 6.5h10M6.5 6.5V13'],
     ['/desk/global/', 'Global', 'M8 2.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2.5 8h11M8 2.5c1.8 1.6 1.8 9.4 0 11M8 2.5c-1.8 1.6-1.8 9.4 0 11'],
     ['/desk/views/', 'Views', 'M3 3.5h10M3 8h10M3 12.5h6M12 11l1.5 1.5L16 10'],
-    ['/desk/week/', 'The week', 'M3 3.5h10v10H3zM3 6.5h10M6 2v3M10 2v3']];
+    ['/desk/week/', 'The week', 'M3 3.5h10v10H3zM3 6.5h10M6 2v3M10 2v3'],
+    ['/desk/runs/', 'Runs', 'M8 2.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM8 5v3l2 1.5']];
 
   let days = [], FULL = false;
   // 3Y and 5Y: the long periods, offered on the EGP, EGX30, Gold in Egypt and stock charts; they load the full log
@@ -405,24 +406,55 @@ window.Desk = (function () {
     if (b) moreToggle(b, [...el.querySelectorAll('.news')].slice(SHOW), `Show all ${list.length} stories`);
   }
 
+  // find a stock: type a ticker or part of a name (CIB, nvidia, palm), arrows to pick, Enter to open its page
+  const ALIAS = { COMI: 'cib', HRHO: 'efg hermes', 'BRK.B': 'berkshire', GOOGL: 'google', META: 'facebook', ETEL: 'we', EFIH: 'efinance', EMFD: 'emaar' };
+  function searchBox(box) {
+    const inp = box.querySelector('input'), out = box.querySelector('.dsr');
+    let hits = [], at = 0;
+    const norm = (x) => x.toLowerCase().replace(/[^a-z0-9.]/g, '');
+    const draw = () => {
+      out.hidden = !hits.length;
+      out.innerHTML = hits.map((t, i) => `<a role="option" href="/desk/stock/?t=${encodeURIComponent(t)}"${i === at ? ' aria-selected="true"' : ''}><b>${esc(t)}</b><span>${esc(NAMES[t])}</span><i>${GROUP.egx.includes(t) ? 'EGX' : 'US'}</i></a>`).join('');
+    };
+    inp.addEventListener('input', () => {
+      const q = norm(inp.value); at = 0;
+      if (!q) { hits = []; return draw(); }
+      const all = [...GROUP.egx, ...GROUP.us], score = (t) => {
+        const tk = norm(t), nm = norm(NAMES[t] || ''), al = norm(ALIAS[t] || '');
+        return tk === q ? 0 : tk.startsWith(q) ? 1 : nm.startsWith(q) || al.startsWith(q) ? 2 : nm.includes(q) || al.includes(q) ? 3 : 9;
+      };
+      hits = all.filter((t) => score(t) < 9).sort((a, b) => score(a) - score(b)).slice(0, 7); draw();
+    });
+    inp.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); if (hits.length) { at = (at + (e.key === 'ArrowDown' ? 1 : hits.length - 1)) % hits.length; draw(); } }
+      else if (e.key === 'Enter' && hits[at]) { e.preventDefault(); location.href = '/desk/stock/?t=' + encodeURIComponent(hits[at]); }
+      else if (e.key === 'Escape') { inp.value = ''; hits = []; draw(); inp.blur(); }
+    });
+    inp.addEventListener('blur', () => setTimeout(() => { out.hidden = true; }, 150));
+    inp.addEventListener('focus', () => { if (hits.length) out.hidden = false; });
+  }
+
   async function init(page) {
     const icon = (d) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke-width="1.5"><path d="${d}"/></svg>`;
     // the sidebar sits under its market's heading, so its labels drop the market (the phone's page row keeps them)
     const SHORT = { '/desk/egypt/': 'Dashboard', '/desk/stocks/egypt/': 'Stocks', '/desk/usa/': 'Dashboard', '/desk/stocks/us/': 'Stocks' };
     const links = PAGES.map(([h, n, d]) => `<a href="${h}"${h === page ? ' aria-current="page"' : ''}>${icon(d)}${SHORT[h] || n}</a>`);
+    const SEARCH = `<div class="dsearch" role="search"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5L14 14"/></svg><input type="search" placeholder="Find a stock" aria-label="Find a stock" autocomplete="off" spellcheck="false"><div class="dsr" role="listbox" hidden></div></div>`;
     const shell = document.createElement('div');
     shell.className = 'app';
     shell.innerHTML = `<aside class="side" aria-label="Markets Desk">
       <div class="brand"><span class="mark" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18"><path d="M2 14l4-4 3 2.5L16 5" fill="none" stroke="#0e1216" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Markets Desk</b></span></div>
-      <nav class="nav" aria-label="Main"><div class="navgroup">Egypt</div>${links.slice(0, 4).join('')}<div class="navgroup">USA</div>${links.slice(4, 7).join('')}<div class="navgroup">Global and record</div>${links[7]}${links[8]}${links[9]}
+      ${SEARCH}
+      <nav class="nav" aria-label="Main"><div class="navgroup">Egypt</div>${links.slice(0, 4).join('')}<div class="navgroup">USA</div>${links.slice(4, 7).join('')}<div class="navgroup">Global and record</div>${links[7]}${links[8]}${links[9]}${links[10]}
       <div class="navgroup">Newsletter</div><a href="/">${icon('M3 2.5h10v11H3zM5.5 5.5h5M5.5 8h5M5.5 10.5h3')}Today's newsletter</a></nav>
       <div class="side-foot"><button type="button" class="theme"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2a6 6 0 100 12A4.5 4.5 0 018 2z"/></svg><span>Dark mode</span></button>Cairo · prices in EGP unless marked</div></aside>
-      <div><header class="topbar"><div class="brand"><span class="mark" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18"><path d="M2 14l4-4 3 2.5L16 5" fill="none" stroke="#0e1216" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Markets Desk</b></span></div><a class="btn" href="/">Newsletter</a></header>
+      <div><header class="topbar"><div class="brand"><span class="mark" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 18 18"><path d="M2 14l4-4 3 2.5L16 5" fill="none" stroke="#0e1216" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Markets Desk</b></span></div><div class="tb-r">${SEARCH}<a class="btn" href="/">Newsletter</a></div></header>
       <nav class="pagenav" aria-label="Pages">${PAGES.map(([h, n]) => `<a href="${h}"${h === page ? ' aria-current="page"' : ''}>${n}</a>`).join('')}</nav></div>`;
     const main = document.querySelector('main.canvas');
     shell.lastElementChild.appendChild(main);
     document.body.prepend(shell);
     theme();
+    shell.querySelectorAll('.dsearch').forEach(searchBox);
     const idx = await get('/desk/index.json');
     const latest = idx && idx.desks && idx.desks.length ? idx.desks.map((d) => d.date).sort().at(-1) : null;
     DESK = latest ? await get('/desk/days/' + latest + '.json') : null;

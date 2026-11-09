@@ -402,3 +402,28 @@ tbody tr.sec-row:first-child th,tbody tr.sec-row:first-child td{padding-top:8px;
 .wkday:first-child{border-top:0} .wkday p{margin:0 0 4px} .wkday .t{display:inline-block;min-width:48px;color:var(--muted);font-size:12px}
 .wkjudged{margin-top:12px}
 @media (max-width:860px){.wkday{grid-template-columns:minmax(0,1fr)}}
+
+/* find a stock: in the sidebar under the brand, and in the phone's top bar */
+.dsearch{position:relative;display:flex;align-items:center;gap:8px;margin:0 4px 16px;padding:0 10px;height:34px;border:1px solid var(--border);border-radius:var(--radius-control);background:var(--surface);color:var(--muted)}
+.dsearch:focus-within{border-color:var(--text)}
+.dsearch input{flex:1;min-width:0;border:0;background:none;outline:none;font:inherit;font-size:13px;color:var(--text)}
+.dsearch input::-webkit-search-cancel-button{display:none}
+.dsr{position:absolute;left:-1px;right:-1px;top:calc(100% + 4px);z-index:20;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-control);box-shadow:0 8px 24px rgba(0,0,0,.14);padding:4px;min-width:240px}
+.dsr a{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:8px;align-items:baseline;padding:8px;border-radius:6px;color:var(--text);text-decoration:none;font-size:13px}
+.dsr a span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--muted)}
+.dsr a i{font-style:normal;font-size:11px;color:var(--muted)}
+.dsr a[aria-selected="true"],.dsr a:hover{background:var(--active)}
+.tb-r{display:flex;align-items:center;gap:8px}
+.topbar .dsearch{margin:0;height:32px;width:150px}
+.topbar .dsr{position:fixed;left:16px;right:16px;top:52px;min-width:0}
+@media (max-width:480px){.topbar .brand > span:last-child{display:none}.topbar .dsearch{width:auto;flex:1}.topbar .tb-r{flex:1;margin-left:10px}}
+
+/* the Runs page: one card a day, a row for each run */
+#runs{display:grid;gap:16px}
+.rday h2{margin:0 0 8px;font-size:15px}
+.rrow{display:grid;grid-template-columns:120px 92px repeat(3,minmax(0,1fr));gap:6px 16px;align-items:baseline;padding:12px 0;border-top:1px solid var(--rule);font-size:13px}
+.rrow .rcell{display:flex;flex-direction:column;gap:2px}
+.rrow .rcheck{grid-column:3/-1}
+.rdet summary{cursor:pointer;color:var(--muted)}
+.rdet ul{margin:6px 0 0;padding-left:18px;color:var(--muted)} .rdet li{margin:3px 0} .rdet li.bad{color:var(--down,#c0392b)}
+@media (max-width:860px){.rrow{grid-template-columns:minmax(0,1fr) auto}.rrow .rcell,.rrow .rcheck{grid-column:1/-1;flex-direction:row;gap:8px}}

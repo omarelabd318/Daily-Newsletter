@@ -98,6 +98,8 @@ def main(args):
     if not date or date not in dates:
         errors.append(f"desk/index.json has no entry for {date}.")
         return
+    global CHECKED
+    CHECKED = date
     D = load(f"desk/days/{date}.json")
     log = load("data/markets-recent.json") or {}
     if not D:
@@ -348,4 +350,10 @@ if __name__ == "__main__":
         print("WARNING:", w)
     if not errors and not warnings:
         print("Desk OK")
+    if globals().get("CHECKED"):   # the result, for the Runs page
+        try:
+            import research_log
+            research_log.record_check(CHECKED, "desk", errors, warnings)
+        except Exception:
+            pass
     sys.exit(1 if errors else 0)

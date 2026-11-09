@@ -46,6 +46,24 @@ def summary(log, name):
     return f"Research: {s} searches, {pg} pages opened" + (f", {st} stocks checked" if name == "desk" else "") + "."
 
 
+def record_check(date, name, errors, warnings, **extra):
+    """The checker's last result for the day's newsletter, recap or desk, kept in the log for the site's Runs page
+    (/desk/runs/). Only for today's or yesterday's work (Cairo), so checking an old edition leaves its log alone."""
+    try:
+        cairo = datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=2)
+        if date < (cairo.date() - datetime.timedelta(days=1)).isoformat():
+            return
+        log = load(date)
+        log.setdefault(name, {"searches": [], "pages": [], "stocks": {}})["check"] = {
+            "at": cairo.strftime("%Y-%m-%d %H:%M"), "errors": errors, "warnings": warnings, **extra}
+        os.makedirs(DIR, exist_ok=True)
+        with open(path(date), "w") as f:
+            json.dump(log, f, indent=1, ensure_ascii=False)
+            f.write("\n")
+    except Exception:
+        pass
+
+
 def main(a):
     if len(a) < 3 or a[1] not in TARGETS:
         sys.exit(__doc__)

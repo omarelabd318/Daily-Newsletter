@@ -650,6 +650,11 @@ def main(path):
     for w in warnings:
         print("WARNING:", w)
     print(f"{len(errors)} error(s), {len(warnings)} warning(s). Words without Sources: {total}.")
+    try:   # the result, for the Runs page
+        import research_log
+        research_log.record_check(date[:10], "recap" if date.endswith("-recap") else "newsletter", errors, warnings, words=total)
+    except Exception:
+        pass
     return 1 if errors else 0
 
 
