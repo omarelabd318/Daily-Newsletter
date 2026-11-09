@@ -406,3 +406,14 @@ a.tag:hover{color:var(--text);text-decoration:underline;text-underline-offset:2p
 /* Style C: the phone's jump links as plain text */
 .jump a{background:none!important;border:0!important;border-radius:0!important;padding:4px 0!important;height:auto!important;font-size:12px;letter-spacing:.06em;color:var(--muted);text-decoration:none}
 .jump{gap:18px!important;border-bottom:1px solid var(--rule);padding-bottom:8px!important}
+
+/* the top call: the view and "wrong if" under the story, full width (as on the EGP page) */
+.lead-g{grid-template-columns:minmax(0,1fr)!important}
+.lead-side{display:grid;grid-template-columns:110px minmax(0,1fr);gap:8px 20px;margin:16px 0 0!important;padding:14px 0 0!important;border-left:0!important;border-top:1px solid var(--rule)}
+.lead-side dt{margin:0!important;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text);font-weight:600;padding-top:2px}
+.lead-side dd{margin:0!important;font-size:15px;line-height:23px}
+@media (max-width:860px){ .lead-side{grid-template-columns:minmax(0,1fr)} }
+/* the figure groups' labels on one line, the page link under them */
+.strip-g h3{white-space:nowrap} .strip-g h3 .strip-more{display:block;margin-top:4px;white-space:nowrap;letter-spacing:0;text-transform:none;font-weight:400}
+/* the opening paragraph runs up to the date stamp */
+.titlerow > div:first-child{flex:1;min-width:0} .finding{max-width:none}

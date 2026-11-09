@@ -31,7 +31,7 @@
         </div>
       </div>
 
-      <nav class="jump" aria-label="Jump to"><a href="#c-close">Close</a><a href="#c-since">Since yesterday</a><a href="#c-read">Stories</a><a href="#c-chart">Chart</a><a href="#c-movers">Movers</a><a href="#c-board">Winners and losers</a><a href="#c-week">Week ahead</a><a href="#c-views">Views</a></nav>
+      <nav class="jump" aria-label="Jump to"><a href="#c-close">Close</a><a href="#c-since">Since yesterday</a><a href="#c-chart">Chart</a><a href="#c-read">Stories</a><a href="#c-movers">Movers</a><a href="#c-board">Winners and losers</a><a href="#c-week">Week ahead</a><a href="#c-views">Views</a></nav>
 
       <section class="card strip" id="c-close" aria-labelledby="h-close">
         <div class="card-h"><h2 id="h-close">Close</h2><span class="meta">Day change</span></div>
@@ -45,6 +45,13 @@
       </section>
 
       <div class="main">
+      <section class="card span2" id="c-chart" aria-labelledby="chart-name">
+        <div class="card-h"><div class="hgroup"><h2 id="chart-name">EGX30</h2><div class="ctabs" id="itabs" aria-label="Index" hidden></div></div><span class="story-nav"><a class="meta" id="chart-more" href="/desk/egx/">EGX page →</a><span class="seg" role="group" aria-label="Chart period" id="egx-seg"></span></span></div>
+        <div class="hero"><span class="lvl num" id="ilvl"></span><span class="d num" id="ichg"></span></div>
+        <div class="chartbox" id="egx-chart"></div>
+        <p class="chart-cap" id="egx-cap"></p>
+      </section>
+
       <section class="card span2" id="c-read" aria-labelledby="h-read">
           <div class="lead-story" id="story">
             <div class="card-h" style="margin-bottom:6px"><span class="meta" id="story-n">Top call</span><span class="conf" id="top-conf"></span></div>
@@ -67,12 +74,6 @@
           </div>
       </section>
 
-      <section class="card span2" id="c-chart" aria-labelledby="chart-name">
-        <div class="card-h"><div class="hgroup"><h2 id="chart-name">EGX30</h2><div class="ctabs" id="itabs" aria-label="Index" hidden></div></div><span class="story-nav"><a class="meta" id="chart-more" href="/desk/egx/">EGX page →</a><span class="seg" role="group" aria-label="Chart period" id="egx-seg"></span></span></div>
-        <div class="hero"><span class="lvl num" id="ilvl"></span><span class="d num" id="ichg"></span></div>
-        <div class="chartbox" id="egx-chart"></div>
-        <p class="chart-cap" id="egx-cap"></p>
-      </section>
 
 
       <section class="card span2" id="c-movers" aria-labelledby="h-movers">

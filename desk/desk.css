@@ -545,3 +545,7 @@ a.tag:hover{color:var(--text);text-decoration:underline;text-underline-offset:2p
   .stable td + td,.stable th + th{padding-left:10px}
   .stable th{font-size:10px;letter-spacing:.06em}
 }
+
+/* the opening paragraph runs up to the date stamp; one level of section heading (the grey group headings go) */
+.titlerow > div:first-child{flex:1;min-width:0} .finding{max-width:none}
+h2.sec-h{display:none}

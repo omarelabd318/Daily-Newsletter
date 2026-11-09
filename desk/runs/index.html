@@ -67,6 +67,12 @@
     if (!rows.length) return '';
     return `<section class="card rday"><h2>${fmtDay(d)}</h2>${rows.join('')}</section>`;
   }).join('');
+  // the last three days open; the rest behind a button
+  { const days_ = [...M.$('runs').querySelectorAll('.rday')];
+    if (days_.length > 3) { days_.slice(3).forEach((d) => { d.hidden = true; });
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'more-btn'; b.textContent = `Show ${days_.length - 3} earlier days`;
+      b.addEventListener('click', () => { const open = b.getAttribute('aria-expanded') !== 'true'; days_.slice(3).forEach((d) => { d.hidden = !open; }); b.setAttribute('aria-expanded', open); b.textContent = open ? 'Show fewer days' : `Show ${days_.length - 3} earlier days`; });
+      M.$('runs').after(b); } }
   M.$('score').innerHTML = [['Days shown', DAYS], ['Runs published', `${pub} of ${due}`], ['Warnings left', warnLeft]].map(([k, x]) => `<div><span class="meta">${k}</span><b class="num">${x}</b></div>`).join('')
     + '<p class="sub">Each run\'s checker saves its last result in the day\'s research log (data/research/DATE.json); runs before November 9 have no saved result. Run costs are not shown here: they are in each run\'s session record.</p>';
 })();

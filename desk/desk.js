@@ -258,7 +258,7 @@ window.Desk = (function () {
     // only stocks with a close for their market's last session, so a missed day never shows an older move
     const rows = tickers.filter((t) => { const s = stock(t); return s.length && s[s.length - 1][0] === asOfFor(GROUP.egx.includes(t) ? 'egx' : 'us'); })
       .map((t) => ({ t, c: change(stock(t), back), v: last(stock(t)) })).filter((r) => r.c != null).sort((a, b) => b.c - a.c);
-    const why = (t) => { const w = notes && notes[t]; return w ? `<p class="mvwhy">${esc(w.why)}${w.url ? ` <a href="${esc(w.url)}" target="_blank" rel="noopener">${esc(w.source || 'Source')} →</a>` : ''}</p>` : ''; };
+    const why = (t) => { const w = notes && notes[t]; return w && !/^no company news found/i.test(String(w.why || '').trim()) ? `<p class="mvwhy">${esc(w.why)}${w.url ? ` <a href="${esc(w.url)}" target="_blank" rel="noopener">${esc(w.source || 'Source')} →</a>` : ''}</p>` : ''; };
     const row = (r) => `<div class="mv"><a href="/desk/stock/?t=${encodeURIComponent(r.t)}"><b>${esc(NAMES[r.t])}</b><span class="t">${esc(r.t)}</span></a><span class="num">${num(r.v)}</span><span class="num ${cls(r.c)}">${pct(r.c)}</span></div>` + why(r.t);
     el.innerHTML = `<div class="movers"><div><h3><span class="chg up" aria-hidden="true"></span>Biggest gainers</h3>${rows.slice(0, n).map(row).join('')}</div><div><h3><span class="chg down" aria-hidden="true"></span>Biggest losers</h3>${rows.slice(-n).reverse().map(row).join('')}</div></div>`;
   }
@@ -294,7 +294,7 @@ window.Desk = (function () {
     }
     const row = (r) => { const own = NAMES[r.t], nm = `<b>${esc(own || r.name)}</b><span class="t">${esc(r.t)}</span>`;
       return `<div class="mv">${own ? `<a href="/desk/stock/?t=${encodeURIComponent(r.t)}">${nm}</a>` : `<span style="min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${nm}</span>`}<span class="num">${num(r.price)}</span><span class="num ${cls(r.pct)}">${pct(r.pct)}</span></div>`
-        + (r.why ? `<p class="mvwhy">${esc(r.why)}${r.url ? ` <a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.source || 'Source')} →</a>` : ''}</p>` : ''); };
+        + (r.why && !/^no company news found/i.test(String(r.why).trim()) ? `<p class="mvwhy">${esc(r.why)}${r.url ? ` <a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.source || 'Source')} →</a>` : ''}</p>` : ''); };
     el.innerHTML = `<div class="movers"><div><h3><span class="chg up" aria-hidden="true"></span>Biggest gainers</h3>${X.gainers.slice(0, n).map(row).join('')}</div><div><h3><span class="chg down" aria-hidden="true"></span>Biggest losers</h3>${X.losers.slice(0, n).map(row).join('') || '<p class="sub">No stock fell.</p>'}</div></div>`;
     if (span) return `${X.basis}. ${X.note}.`;
     const d = day(X.session);
