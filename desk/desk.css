@@ -568,3 +568,7 @@ h2.sec-h{display:none}
 .news-g .news .impact{font-size:11px;line-height:16px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
 .news-g .news .nh{font-size:18px;line-height:24px;margin-bottom:6px}
 .news-g > .more-btn,.news-g > .sub{grid-column:1/-1;justify-self:start;margin-top:4px}
+/* EGP: the pound's drivers in two columns under the full-width chart */
+.drv2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 48px}
+.drv2 > *{border-top:1px solid var(--rule)!important;padding-top:14px!important;margin-top:0!important}
+@media (max-width:860px){.drv2{grid-template-columns:minmax(0,1fr)} .drv2 > :first-child{border-top:0!important;padding-top:0!important}}
