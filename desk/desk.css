@@ -560,3 +560,11 @@ h2.sec-h{display:none}
 .chg::before{display:none!important}
 .tag .chg::before,.tags .chg::before,h3 > .chg::before{display:inline-block!important}
 .chart-cap[data-src]:empty::after{content:"Source: " attr(data-src) "."}
+/* news: stories side by side in columns where there is room, like the dashboard's Also today */
+.news-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 40px;align-items:start}
+@media (max-width:1100px){.news-g{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.news-g{grid-template-columns:minmax(0,1fr)}}
+.news-g .news,.news-g .news:first-of-type{border-top:1px solid var(--rule);padding:14px 0 18px}
+.news-g .news .impact{font-size:11px;line-height:16px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.news-g .news .nh{font-size:18px;line-height:24px;margin-bottom:6px}
+.news-g > .more-btn,.news-g > .sub{grid-column:1/-1;justify-self:start;margin-top:4px}

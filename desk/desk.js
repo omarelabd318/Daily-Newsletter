@@ -428,6 +428,7 @@ window.Desk = (function () {
   const impact = (n) => { const x = IMPACT[n.impact]; return x ? `<span class="impact ${x[0]}"><span class="chg ${x[0]}" aria-hidden="true"></span>${x[1]}</span>` : ''; };
   function news(el, items) {
     const list = items || [], SHOW = 3;
+    el.classList.add('news-g');
     const chips = (n) => (n.tickers || []).filter((t) => NAMES[t]).map((t) => `<a class="chip" href="/desk/stock/?t=${encodeURIComponent(t)}">${esc(t)}</a>`).join('');
     const tags = (n) => (Array.isArray(n.affects) && n.affects.length ? `<div class="naff"><span class="tags-h">Affects</span>${Tags.html(n.affects, { names: NAMES, max: 4 })}</div>` : '');
     el.innerHTML = list.map((n, i) => `<div class="news"${i >= SHOW ? ' hidden' : ''}>${impact(n)}<b class="nh">${esc(n.headline)}</b><p>${esc(n.text)}</p>${tags(n)}
