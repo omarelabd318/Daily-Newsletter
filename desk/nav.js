@@ -37,6 +37,7 @@
 .dm-n2 a[aria-current]{color:var(--accent);font-weight:600;border-bottom-color:var(--accent)}
 .dm-n1 a:hover,.dm-n2 a:hover{color:var(--text)}
 .dm-n2{align-items:center} .dm-stamp{margin-left:auto;padding-left:24px;font-size:11px;line-height:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.dm-n1 .dm-runs{margin-left:auto}
 .dm-phone{display:none}
 @media (max-width:860px){
   .dmast{padding:0 16px}
@@ -56,7 +57,8 @@
     const w = where(path, egxStock);
     const st = document.createElement('style'); st.textContent = CSS; document.head.appendChild(st);
     const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-    const top = TOP.map((x) => x ? `<a href="${x[2]}"${x[0] === w.top ? ' aria-current="page"' : ''}>${x[1]}</a>` : '<span class="dm-sep" aria-hidden="true"></span>').join('');
+    // Runs (how the daily runs went) is about the site, not the markets: it sits apart, at the right of the row
+    const top = TOP.map((x) => x ? `<a href="${x[2]}"${x[0] === w.top ? ' aria-current="page"' : ''}${x[0] === 'runs' ? ' class="dm-runs"' : ''}>${x[1]}</a>` : '<span class="dm-sep" aria-hidden="true"></span>').join('');
     const sub = w.top && SUB[w.top] ? `<nav class="dm-n2" aria-label="${w.top === 'egypt' ? 'Egypt' : 'United States'}">${SUB[w.top].map(([n, h]) => `<a href="${h}"${h === w.sub ? ' aria-current="page"' : ''}>${n}</a>`).join('')}</nav>` : '';
     const hd = document.createElement('header'); hd.className = 'dmast';
     hd.innerHTML = `<div class="dm-phone">${SEARCH}<a href="/">Newsletter →</a></div>

@@ -469,3 +469,5 @@ a.tag:hover{color:var(--text);text-decoration:underline;text-underline-offset:2p
 .mv.mv-act{grid-template-columns:20px minmax(0,1fr) auto auto 78px} .mv-act .rk{color:var(--muted);font-size:12px} .mv-act .tv{color:var(--muted);text-align:right}
 .movers h3.act-h2{display:none}
 .movers:has(.act-h2){row-gap:0}   /* most active: one continuous list when the halves stack */
+/* the figures run the full width: four equal columns on a laptop (rows of three keep the same columns) */
+@media (min-width:861px){.strip-row{grid-template-columns:repeat(4,minmax(0,1fr));column-gap:48px}}
