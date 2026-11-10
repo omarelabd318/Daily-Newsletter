@@ -33,7 +33,7 @@
 (async () => {
   const MKT = 'us', egx = MKT === 'egx';
   const M = Desk, D = await M.init(egx ? '/desk/stocks/egypt/' : '/desk/stocks/us/'); if (!D) return;
-  M.$('title').textContent = 'Wall Street stocks · ' + M.dateLine(D.date);
+  M.$('title').textContent = 'Wall Street stocks';
   const ST = await M.get('/desk/stocks.json'), VL = await M.get('/desk/views.json');
   const views = (VL && VL.views) || [], prof = (ST && ST.stocks) || {};
   // today's market news tagged with a stock counts as its latest news too

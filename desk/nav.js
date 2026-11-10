@@ -75,7 +75,7 @@
     // the current tab stays in view on a phone
     hd.querySelectorAll('[aria-current]').forEach((a) => { const n = a.parentElement; n.scrollLeft = Math.max(0, a.offsetLeft - 16); });
   }
-  // the page and its date beside the name, once the day's desk is known
+  // the desk's date beside the name (a dateline), once the day's desk is known; the page's own name is its title
   function label(text) { const el = document.getElementById('dm-label'); if (el) el.textContent = text; }
   window.DeskNav = { mount, label };
 })();

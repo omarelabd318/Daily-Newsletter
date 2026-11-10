@@ -78,7 +78,7 @@
 (async () => {
   const M = Desk, D = await M.init('/desk/us/'); if (!D) return;
   const P = D.pages.us;
-  M.$('title').textContent = 'Wall Street · ' + M.dateLine(D.date); document.title = 'Wall Street · Markets Desk';
+  M.$('title').textContent = 'Wall Street'; document.title = 'Wall Street · Markets Desk';
   M.$('finding').innerHTML = M.lede(P.finding);
   const IDX = [['sp500', 'S&P 500'], ['nasdaq', 'Nasdaq'], ['dow', 'Dow Jones']].map(([k, n]) => ({ k, n, s: M.series((e) => e[k], 'us') }));
   let cur = IDX[0], per = M.startPeriod('us', cur.k === 'nasdaq' ? 'COMP' : cur.k);

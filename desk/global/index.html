@@ -37,7 +37,7 @@
 (async () => {
   const M = Desk, D = await M.init('/desk/global/'); if (!D) return;
   const P = D.pages.global, notes = P.notes || {};
-  M.$('title').textContent = 'Global · ' + M.dateLine(D.date); document.title = 'Global · Markets Desk';
+  M.$('title').textContent = 'Global'; document.title = 'Global · Markets Desk';
   M.$('finding').innerHTML = M.lede(P.finding);
   // Brent and the dollar index on top, then world gold beside Bitcoin (Gold in Egypt is on the EGP page)
   const DAYROW = { brent: /^Brent/, dxy: /^Dollar index/, gold_usd: /^Gold, \$/, btc: /^Bitcoin/ };

@@ -456,7 +456,7 @@ window.Desk = (function () {
     const latest = idx && idx.desks && idx.desks.length ? idx.desks.map((d) => d.date).sort().at(-1) : null;
     DESK = latest ? await get('/desk/days/' + latest + '.json') : null;
     if (!DESK) { main.innerHTML = '<p class="finding">No desk has been published yet.</p>'; return null; }
-    { const lb = document.getElementById('dm-label'); if (lb) { lb.dataset.base = lb.dataset.base || lb.textContent; lb.textContent = `${lb.dataset.base} · ${day(DESK.date).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}`; } }
+    { const lb = document.getElementById('dm-label'); if (lb) { lb.dataset.base = lb.dataset.base || lb.textContent; lb.textContent = `${day(DESK.date).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}`; } }
     ASOF = DESK.asOf; CUTOFF = new Date(day(DESK.date) - 864e5).toISOString().slice(0, 10);
     INTRA = await get('/desk/intraday.json');
     MOVERS = await get('/desk/movers.json');
