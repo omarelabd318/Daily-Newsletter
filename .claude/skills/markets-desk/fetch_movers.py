@@ -314,9 +314,15 @@ def heatmap(upto=None):
 
     rows, sessions = [], []
     with concurrent.futures.ThreadPoolExecutor(4) as pool:
-        for (code, desc, sector, cap, _), bars in zip(members, pool.map(lambda m: _safe(closes, m[0]), members)):
-            if not bars or len(bars) < 22 or not cap:
-                continue
+        got = list(zip(members, pool.map(lambda m: _safe(closes, m[0]), members)))
+    # every member is measured to the same session, the one most of them end on: a member whose bars already hold
+    # the next session's first trades (e-finance's did on Nov 10) is cut back to it
+    ends = [b[-1][0] for _, b in got if b]
+    common = max(set(ends), key=ends.count) if ends else None
+    for (code, desc, sector, cap, _), bars in got:
+        bars = [b for b in (bars or []) if b[0] <= common]
+        if len(bars) < 22 or not cap or bars[-1][0] != common:
+            continue
             c = [b[1] for b in bars]
             sessions.append(bars[-1][0])
             rows.append({"t": code, "name": desc, "sector": HEAT_SECTOR.get(code) or SECTOR_OF.get(sector, sector), "cap": round(cap), "price": c[-1], "vol": bars[-1][2],
