@@ -78,6 +78,13 @@
      "source": "Al Jazeera",
      "url": "https://www.aljazeera.com/news/2026/11/8/us-chipmaker-nvidia-investigates-ceo-jensen-huang-over-affair",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-10",
+     "text": "Nvidia fell 4.3% to $178.67, its lowest since April, on its board's inquiry into Jensen Huang, while other chip stocks rose 6.9%; the call tracks Nvidia, so it stands.",
+     "source": "Al Jazeera",
+     "url": "https://www.aljazeera.com/economy/2026/11/9/nvidia-shares-slump-amid-investigation-into-ceo-jensen-huang",
+     "effect": "supports"
     }
    ],
    "wrongIf": [
@@ -352,6 +359,13 @@
      "source": "Banky",
      "url": "https://www.bankygate.com/202206",
      "effect": "neutral"
+    },
+    {
+     "date": "2026-11-10",
+     "text": "CIB's nine-month profit rose 1.6% to EGP 63.1bn, 18% on an underlying basis, but its quarterly margin narrowed to 8.02% from 8.40% for the nine months, before the October 29 hike could help; the results are in line rather than a test of the call.",
+     "source": "Mubasher Banks",
+     "url": "https://egyptbanks.info/13127/article/%D8%A3%D8%B1%D8%A8%D8%A7%D8%AD-cib-%D8%AA%D8%B1%D8%AA%D9%81%D8%B9-1-6-%D8%A5%D9%84%D9%89-63-1-%D9%85%D9%84%D9%8A%D8%A7%D8%B1-%D8%AC%D9%86%D9%8A%D9%87-%D8%AE%D9%84%D8%A7%D9%84-%D8%AA%D8%B3%D8%B9%D8%A9-%D8%A3%D8%B4%D9%87%D8%B1-%D9%85%D9%86-2026",
+     "effect": "neutral"
     }
    ],
    "driver": "egp-rates"
@@ -451,6 +465,13 @@
      "source": "Al Mal",
      "url": "https://almalnews.com/2145881/",
      "effect": "neutral"
+    },
+    {
+     "date": "2026-11-10",
+     "text": "The EGX30 rose 1.19% to 51,414.93 on Monday, but foreigners sold a net EGP 302.8m while Egyptians bought EGP 347.8m, so the foreign buying the call rested on has turned to selling.",
+     "source": "Masrawy",
+     "url": "https://www.masrawy.com/news/news_economy/details/2026/11/9/3076151/%D8%A7%D9%84%D9%85%D8%A4%D8%B4%D8%B1-%D8%A7%D9%84%D8%B1%D8%A6%D9%8A%D8%B3%D9%8A-%D9%84%D9%84%D8%A8%D9%88%D8%B1%D8%B5%D8%A9-%D9%8A%D8%B5%D8%B9%D8%AF-1-19-%D9%85%D8%B9-%D8%AE%D8%AA%D8%A7%D9%85-%D8%AA%D8%B9%D8%A7%D9%85%D9%84%D8%A7%D8%AA-%D8%AC%D9%84%D8%B3%D8%A9-%D8%A7%D9%84%D9%8A%D9%88%D9%85",
+     "effect": "against"
     }
    ],
    "wrongIf": [
@@ -515,6 +536,13 @@
      "source": "Central Bank of Egypt",
      "url": "https://www.cbe.org.eg/en/auctions/egp-t-bills",
      "effect": "neutral"
+    },
+    {
+     "date": "2026-11-10",
+     "text": "Urban inflation slowed to 12.7% in October from 13.9%, leaving the 20% deposit rate 7.3 points above prices; the central bank's dollar rate fell to EGP 54.05.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/10/egypts-urban-inflation-slowed-to-12-7-in-october-despite-non-food-momentum/",
+     "effect": "supports"
     }
    ],
    "wrongIf": [
@@ -545,7 +573,7 @@
    "tickers": [
     "XOM"
    ],
-   "status": "open",
+   "status": "on track",
    "updates": [
     {
      "date": "2026-11-06",
@@ -573,6 +601,13 @@
      "text": "Brent traded near $96 on Monday, down about 2%, after Trump called new strikes on Iran \"highly unlikely\" if talks progress; the Houthis' strike on Riyadh's Aramco tower caused only minor damage.",
      "source": "Reuters (via Business Recorder)",
      "url": "https://brecorder.com/news/40448086/oil-steadies-after-trump-signals-restraint-on-iran-hormuz-risks-persist",
+     "effect": "supports"
+    },
+    {
+     "date": "2026-11-10",
+     "text": "Brent fell 5.85% to $92.57 on Monday after President Trump said Iran was \"effectively over\" militarily following talks with Qatar's prime minister.",
+     "source": "Al Jazeera",
+     "url": "https://www.aljazeera.com/news/2026/11/9/trump-calls-iran-war-effectively-over-after-talks-with-qatar-pm",
      "effect": "supports"
     }
    ],

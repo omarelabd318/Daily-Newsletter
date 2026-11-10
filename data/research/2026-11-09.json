@@ -208,9 +208,18 @@
    "COST": "Store closure item only; no market news"
   },
   "check": {
-   "at": "2026-11-09 19:05",
-   "errors": [],
-   "warnings": []
+   "at": "2026-11-10 10:32",
+   "errors": [
+    "judge_views.py has verdicts to record: run it with --write. 2026-11-05-brent-hormuz: open -> on track"
+   ],
+   "warnings": [
+    "Egypt finding: 63 words; keep it to the day's point in one sentence and up to two more (about 50 words). The coming dates belong in the week ahead.",
+    "USA finding: 57 words; keep it to the day's point in one sentence and up to two more (about 50 words). The coming dates belong in the week ahead.",
+    "EFID reports 2026-11-10 (expected): add its \"preview\" in desk/stocks.json, the three to five things that will decide the reaction, with the consensus where published (earnings-preview skill; see the desk skill's Results days).",
+    "JUFO reports 2026-11-10 (expected): add its \"preview\" in desk/stocks.json, the three to five things that will decide the reaction, with the consensus where published (earnings-preview skill; see the desk skill's Results days).",
+    "COMI reports 2026-11-11 (expected): add its \"preview\" in desk/stocks.json, the three to five things that will decide the reaction, with the consensus where published (earnings-preview skill; see the desk skill's Results days).",
+    "ETEL reports 2026-11-12 (expected): add its \"preview\" in desk/stocks.json, the three to five things that will decide the reaction, with the consensus where published (earnings-preview skill; see the desk skill's Results days)."
+   ]
   }
  }
 }

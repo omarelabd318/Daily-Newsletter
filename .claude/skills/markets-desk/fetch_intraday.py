@@ -207,6 +207,22 @@ def global_market():
     return {"window": "24h", "to": to.strftime("%Y-%m-%d %H:%M"), "series": series}, f"GLOBAL: last 24 hours to {to:%a %H:%M} Cairo, {', '.join(series)}"
 
 
+def yahoo_month(key):
+    """A US series' last month from Yahoo, every 30 minutes, New York time: {day: [[hm, v], ...]}; the fallback when
+    Polygon refuses the month's backfill."""
+    sym = YMONTH.get(key, key.replace(".", "-"))
+    url = f"https://query2.finance.yahoo.com/v8/finance/chart/{urllib.parse.quote(sym)}?range=1mo&interval=30m"
+    r = json.loads(get(url))["chart"]["result"][0]
+    days = {}
+    for t, c in zip(r["timestamp"], r["indicators"]["quote"][0]["close"]):
+        if c is None:
+            continue
+        n = datetime.datetime.fromtimestamp(t, datetime.timezone.utc).astimezone(NY)
+        if "09:30" <= n.strftime("%H:%M") <= "16:00":
+            days.setdefault(n.date().isoformat(), []).append([n.strftime("%H:%M"), round(float(c), 4)])
+    return days
+
+
 def yahoo_sessions(key):
     """A US stock's last five regular sessions from Yahoo, every 5 minutes, New York time: {day: [[hm, v], ...]}.
     The fallback when Nasdaq refuses a stock, and the source that fills a stock missing from a saved session."""
