@@ -295,7 +295,8 @@ SECTOR_OF = {"Finance": "Financial services", "Technology Services": "Technology
 
 def heatmap(upto=None):
     """The EGX30's members (TradingView's index membership, so a reshuffle is followed), each with its sector, market
-    value and change over the last finished session, five sessions and 21 sessions, from TradingView's daily bars."""
+    value, last close and shares traded, and change over the last finished session, five sessions and 21 sessions,
+    from TradingView's daily bars."""
     import tradingview
     body = json.dumps({"filter": [{"left": "type", "operation": "equal", "right": "stock"}],
                        "columns": ["name", "description", "sector", "market_cap_basic", "indexes"], "range": [0, 1000]}).encode()
@@ -306,7 +307,7 @@ def heatmap(upto=None):
     trading = now.weekday() not in (4, 5) and now.strftime("%H:%M") < "14:45"
 
     def closes(code):
-        bars = [(t.astimezone(CAIRO).date().isoformat(), v) for t, v in tradingview.bars("EGX:" + code, "1D", 30)]
+        bars = [(t.astimezone(CAIRO).date().isoformat(), v, vol) for t, v, vol in tradingview.bars("EGX:" + code, "1D", 30, volume=True)]
         if trading and bars and bars[-1][0] == now.date().isoformat():
             bars = bars[:-1]   # today's session is still trading
         return [b for b in bars if not upto or b[0] <= upto]   # upto: a backfill for an earlier desk
@@ -316,9 +317,9 @@ def heatmap(upto=None):
         for (code, desc, sector, cap, _), bars in zip(members, pool.map(lambda m: _safe(closes, m[0]), members)):
             if not bars or len(bars) < 22 or not cap:
                 continue
-            c = [v for _, v in bars]
+            c = [b[1] for b in bars]
             sessions.append(bars[-1][0])
-            rows.append({"t": code, "name": desc, "sector": HEAT_SECTOR.get(code) or SECTOR_OF.get(sector, sector), "cap": round(cap),
+            rows.append({"t": code, "name": desc, "sector": HEAT_SECTOR.get(code) or SECTOR_OF.get(sector, sector), "cap": round(cap), "price": c[-1], "vol": bars[-1][2],
                          "d1": round((c[-1] / c[-2] - 1) * 100, 2), "w1": round((c[-1] / c[-6] - 1) * 100, 2), "m1": round((c[-1] / c[-22] - 1) * 100, 2)})
     if len(rows) < 20:
         raise RuntimeError(f"only {len(rows)} members read")

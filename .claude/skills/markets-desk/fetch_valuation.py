@@ -6,7 +6,7 @@ Usage:
 
 With no tickers it covers all the desk's stocks. Egyptian stocks: trailing earnings and book value per share
 from the company's own filing when one is recorded (set_results.py), TradingView's screener and each stock's
-Mubasher page, each with the results period it runs to; the card takes the newest, and when both run to the same quarter it notes whether they agree. Market value from Mubasher. US stocks:
+Mubasher page, each with the results period it runs to; the card takes the newest, and when both run to the same quarter it notes whether they agree. Market value from TradingView (Mubasher when it has none). US stocks:
 the last four reported quarters' earnings per share, the analysts' forecast P/E for this year, the dividend
 yield, the analysts' one-year target and the market value, from Nasdaq.
 
@@ -115,7 +115,9 @@ def egx(t):
         pass
     if not cands:
         raise ValueError("neither TradingView nor Mubasher answered")
-    cap = next((c[1] for c in sorted(cands, key=lambda c: c[0] != "Mubasher") if c[1]), None)
+    # market value: TradingView first, the same figure as the EGX page's heatmap and with share counts kept current
+    # (Mubasher still counted CIB's shares before its December 2025 bonus issue); Mubasher when TradingView has none
+    cap = next((c[1] for c in sorted(cands, key=lambda c: c[0] != "TradingView") if c[1]), None)
     # a sanity check: per-share figures that cannot match the price (Mubasher's for Orascom look dollar-based
     # though labelled in pounds) are left out rather than shown as ratios of 150 or more
     # a source may have the newer earnings but no book value (TradingView often does): its P/E still counts, and the

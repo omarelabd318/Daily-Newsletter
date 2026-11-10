@@ -27,8 +27,9 @@ def _msg(f, p):
     return f"~m~{len(m)}~m~{m}"
 
 
-def bars(symbol, resolution="5", count=2000):
-    """[(datetime in UTC, close), ...] oldest first: the last `count` bars of e.g. "EGX:EGX70EWI" every `resolution` minutes."""
+def bars(symbol, resolution="5", count=2000, volume=False):
+    """[(datetime in UTC, close), ...] oldest first: the last `count` bars of e.g. "EGX:EGX70EWI" every `resolution` minutes
+    ("1D" for days); with volume=True, [(datetime, close, volume), ...]."""
     websocket = _ws()
     ws = websocket.create_connection("wss://data.tradingview.com/socket.io/websocket", header=["Origin: https://www.tradingview.com"], timeout=30)
     cs = "cs_" + "".join(random.choice(string.ascii_lowercase) for _ in range(12))
@@ -51,7 +52,8 @@ def bars(symbol, resolution="5", count=2000):
     for s in re.findall(r'"s":\[(.*?)\],"ns"', raw):
         for b in re.findall(r'"v":\[([^\]]+)\]', s):
             v = [float(x) for x in b.split(",")]
-            out.append((datetime.datetime.fromtimestamp(v[0], datetime.timezone.utc), v[4]))
+            t = datetime.datetime.fromtimestamp(v[0], datetime.timezone.utc)
+            out.append((t, v[4], v[5] if len(v) > 5 else None) if volume else (t, v[4]))
     if not out:
         raise RuntimeError("TradingView: no bars for " + symbol)
     return sorted(set(out))
