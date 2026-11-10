@@ -446,6 +446,7 @@ window.Desk = (function () {
   // the shared masthead and menu (desk/nav.js), loaded once
   const withNav = () => new Promise((ok) => { if (window.DeskNav) return ok(window.DeskNav); const sc = document.createElement('script'); sc.src = '/desk/nav.js'; sc.onload = () => ok(window.DeskNav); document.head.appendChild(sc); });
   async function init(page) {
+    if (location.hash.length > 1) setTimeout(() => { const t = document.getElementById(location.hash.slice(1)); if (t) t.scrollIntoView(); }, 700);
     const shell = document.createElement('div');
     shell.className = 'app';
     const main = document.querySelector('main.canvas');

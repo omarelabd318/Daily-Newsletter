@@ -21,7 +21,7 @@
 
   <div class="pages">
     <h2 class="sec-h">The pound today</h2>
-    <section class="card c8">
+    <section class="card c8" id="c-usd">
       <div class="card-h"><h2>Dollar in pounds</h2><div class="seg" id="seg"></div></div>
       <div class="hero"><span class="lvl num" id="lvl"></span><span class="d num" id="dchg"></span><span class="meta">USD/EGP, market mid-rate</span></div>
       <div class="bigchart" id="chart"></div>
@@ -58,7 +58,7 @@
     </section>
 
     <h2 class="sec-h">The bigger picture</h2>
-    <section class="card c12">
+    <section class="card c12" id="c-gold">
       <div class="card-h"><h2>Gold in Egypt</h2><div class="seg" id="gseg"></div></div>
       <div class="ctabs" id="gtabs" style="margin-bottom:10px"></div>
       <div class="hero"><span class="lvl num" id="glvl"></span><span class="d num" id="gd"></span><span class="meta" id="gunit"></span></div>
@@ -66,7 +66,7 @@
       <p class="chart-cap" id="gcap" data-src="Gold Price Today Egypt"></p>
       <p class="stock-note">Egyptian gold follows the world price in dollars times the pound's rate, so a weaker pound lifts it even when gold falls abroad.</p>
     </section>
-    <section class="card c8">
+    <section class="card c8" id="c-infl">
       <div class="card-h"><div class="hgroup"><h2 id="ih">Inflation</h2><div class="ctabs" id="itab" aria-label="Measure"></div></div><div class="seg" id="iseg"></div></div>
       <div class="hero"><span class="lvl num" id="ilvl"></span><span class="d num" id="ichg"></span><span class="meta" id="imeta"></span></div>
       <div class="midchart" id="ichart"></div>
@@ -177,6 +177,7 @@
     M.$('icap').innerHTML = (y != null && v != null ? `${iPer[2]}: from <span class="num">${M.num(y, m.d)}${u}</span> to <span class="num">${M.num(v, m.d)}${u}</span> (<span class="num">${pts(v - y)}</span>) · ` : '') + m.note;
   };
   M.toggle(M.$('itab'), MODES.map((m) => m.tab), (i) => { iMode = i; drawI(); });
+  { const i = { tbill: 1, real: 2 }[new URLSearchParams(location.search).get('show')]; if (i) M.$('itab').querySelectorAll('button')[i].click(); }   // a dashboard figure's link opens on its measure
   M.segment(M.$('iseg'), '1Y', (p) => { iPer = p; drawI(); }, [M.PERIODS[4]].concat(M.LONG)); drawI();
   const CUR = [['eur_egp', 'Euro', 'EUR'], ['sar_egp', 'Saudi riyal', 'SAR'], ['aed_egp', 'UAE dirham', 'AED'], ['kwd_egp', 'Kuwaiti dinar', 'KWD'], ['qar_egp', 'Qatari riyal', 'QAR'], ['gbp_egp', 'Sterling', 'GBP']];
   const drawT = (p) => {

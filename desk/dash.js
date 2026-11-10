@@ -59,6 +59,7 @@
   // a session saved after its market's last logged close (a re-run later in the day) would not match the figures
   if (INTRA) for (const m of ['egx', 'us']) if (INTRA[m] && INTRA[m].session > asOf(m)) delete INTRA[m];
   const LONG = [['3Y', 1095, 'Last 3 years'], ['5Y', 1826, 'Last 5 years']]; let fullLoaded = false;
+  const SPAN_OF = { 7: 'in a week', 30: 'in a month', 182: 'in 6 months', 365: 'in a year' };
   const PERIODS = [['1D', 0, 'Last 7 days'], ['1W', 7, 'Last 7 days'], ['1M', 30, 'Last 30 days'], ['6M', 182, 'Last 6 months'], ['1Y', 365, 'Last 12 months']];
   // every visit opens on the defaults; clear the choices an earlier version of the desk remembered
   try { Object.keys(localStorage).filter((k) => k.startsWith('desk:')).forEach((k) => localStorage.removeItem(k)); } catch (e) {}
@@ -155,6 +156,25 @@
       `<div class="fig${r.lead ? ' lead' : ''}"><span class="k">${esc(r.label)}</span><span class="v num${r.value == null ? ' dash' : ''}">${r.value == null ? '—' : esc(r.value)}</span>`
       + `<span class="d num ${cls(r.change)}">${r.change == null ? '<span class="dash">—</span>' : pct(r.change, 2)}</span></div>`).join('') + '</div></div>').join('');
     $('close-note').textContent = X.close.note || '';
+    // each figure leads to its chart: an index on this dashboard's own chart, the VIX to its chart below, the
+    // pound's figures to the EGP page, world markets to the Global page; the yields have no chart and no link
+    const GO = [[/^EGX30/, 'EGX30'], [/^S&P 500/, 'S&P 500'], [/^Nasdaq/, 'Nasdaq'], [/^Dow/, 'Dow Jones'], [/^VIX/, '#c-vix'],
+      [/^USD\/EGP/, '/desk/egp/#c-usd'], [/^Gold 24K/, '/desk/egp/#c-gold'], [/^Inflation/, '/desk/egp/#c-infl'], [/^One-year T-bill/, '/desk/egp/?show=tbill#c-infl'],
+      [/^Real one-year/, '/desk/egp/?show=real#c-infl'], [/^Foreign reserves/, '/desk/egp/#c-rsv'],
+      [/^Brent/, '/desk/global/#g-brent'], [/^Gold, \$/, '/desk/global/#g-gold_usd'], [/^Dollar index/, '/desk/global/#g-dxy'], [/^Bitcoin/, '/desk/global/#g-btc']];
+    const go = (to) => {
+      if (to[0] === '/') { location.href = to; return; }
+      const t = $(to[0] === '#' ? to.slice(1) : 'c-chart'); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (to[0] !== '#') { const b = [...$('itabs').querySelectorAll('button')].find((x) => x.textContent === to); if (b && b.getAttribute('aria-pressed') !== 'true') b.click(); }
+    };
+    const linkFigs = () => document.querySelectorAll('#close-rows .fig:not([data-go])').forEach((f) => {
+      const k = (f.querySelector('.k') || {}).textContent || '', hit = GO.find(([re]) => re.test(k));
+      f.dataset.go = hit && !(hit[1] === '#c-vix' && !$('c-vix')) && !(hit[1][0] !== '/' && hit[1][0] !== '#' && hit[1] !== 'EGX30' && key === 'egypt') ? hit[1] : '';
+      if (!f.dataset.go) return;
+      f.classList.add('go'); f.tabIndex = 0; f.setAttribute('role', 'link'); f.title = 'Open its chart';
+      f.addEventListener('click', () => go(f.dataset.go)); f.addEventListener('keydown', (e) => { if (e.key === 'Enter') go(f.dataset.go); });
+    });
+    linkFigs(); new MutationObserver(linkFigs).observe($('close-rows'), { childList: true, subtree: true });
     // EGY: the pound's other figures as a row of the strip (inflation, the one-year T-bill, the real yield, reserves)
     if (key === 'egypt') {
       const lg = (k) => series((e) => e[k], 'fx'), lastOf = (x) => (x.length ? x[x.length - 1][1] : null);
@@ -180,9 +200,24 @@
       const out = [], [vx, vp] = pair(RT.vix);
       const row = [...document.querySelectorAll('#close-rows .strip-g')].find((g) => /^USA/.test(g.querySelector('h3').textContent));
       // the VIX sits in the USA row beside the indices; the yields get their own row
-      if (vx != null && row) { const c = vp ? (vx / vp - 1) * 100 : null; row.querySelector('.strip-row').insertAdjacentHTML('beforeend', fig('VIX (volatility)', vx.toFixed(2), c == null ? '<span class="dash">—</span>' : `<span class="${cls(c)}">${pct(c, 1)}</span>`)); }
+      if (vx != null && row) { const c = vp ? (vx / vp - 1) * 100 : null; row.querySelector('.strip-row').insertAdjacentHTML('beforeend', fig('VIX (volatility)', vx.toFixed(2), c == null ? '<span class="dash">—</span>' : `<span class="${cls(-c)}">${pct(c, 1)}</span>`)); }
       for (const [k, lab] of [['us2y', '2-year Treasury'], ['us10y', '10-year Treasury'], ['us30y', '30-year Treasury']]) { const [v, p] = pair(RT[k]); if (v != null) out.push(fig(lab, v.toFixed(2) + '%', bp(v, p))); }
       if (out.length && row) row.insertAdjacentHTML('afterend', `<div class="strip-g"><h3>Yields</h3><div class="strip-row">${out.join('')}</div></div>`);
+      // the VIX over time, under winners and losers: daily closes from Cboe (desk/rates.json), with the long-run average
+      const VX = (RT.vix || []).filter(([d]) => d <= at);
+      if (VX.length > 20 && $('c-vix')) {
+        $('c-vix').hidden = false;
+        const drawVix = (p) => {
+          const pts = VX.filter(([d]) => d >= cut(lastDate(VX), p[1])), el = $('vix-chart'), v = pts.map((x) => x[1]);
+          Charts.line(el, { ...axis(pts.map((x) => x[0]), p[1], el.clientWidth), series: [{ name: 'VIX', values: v }], format: Charts.fmt.dec(2), endLabel: true, height: el.clientHeight,
+            reference: [{ value: 20, label: 'Long-run average, about 20' }], min: Math.min(...v, 20) - 1 });
+          const c = (v[v.length - 1] / v[0] - 1) * 100;   // shown red when it rises, as fear does
+          $('vix-lvl').textContent = v[v.length - 1].toFixed(2);
+          $('vix-chg').innerHTML = `<span class="${cls(-c)}">${pct(c, 1)}</span> <span class="span-l">${SPAN_OF[p[1]] || ''}</span>`;
+          $('vix-cap').innerHTML = `${p[2]}: from <span class="num">${v[0].toFixed(2)}</span> to <span class="num">${v[v.length - 1].toFixed(2)}</span>. The VIX measures the swings in the S&P 500 that options traders expect over the next 30 days; above about 20, the market is nervous.`;
+        };
+        segment($('vix-seg'), '1M', drawVix, PERIODS.slice(2)); drawVix(PERIODS[2]);
+      }
     }
 
     // the day's stories: the top call in full, then up to four more as compact cards ("Also today"), each tap-to-open.
