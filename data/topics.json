@@ -14,8 +14,8 @@
    "drivers": [
     "oil"
    ],
-   "now": "President Trump says a US blockade of Iran's land supply routes is in effect but calls new strikes highly unlikely while talks on Iran's nuclear program and reopening the Strait of Hormuz progress. Iran threatens to retaliate against any attack, and Yemen's Houthis hit Aramco's Riyadh tower on November 8. Brent traded near $97 a barrel on November 9 after a 16% weekly fall.",
-   "now_date": "2026-11-09"
+   "now": "President Trump called the Iran war 'effectively over' militarily on November 9 after Qatar's prime minister brought him an Iranian proposal, while keeping the US naval blockade and a new land and Caspian trade cordon in place. Tehran's terms include lifting sanctions and recognizing a Hormuz shipping route agreed with Oman. The Houthis keep firing missiles at Saudi Arabia, and shipping lines such as Evergreen are gradually returning to the Suez Canal.",
+   "now_date": "2026-11-10"
   },
   {
    "id": "pound-cbe",
@@ -30,8 +30,8 @@
    "drivers": [
     "egp-rates"
    ],
-   "now": "The central bank's dollar selling rate stood at EGP 54.31 on November 8, up from 54.01 three days earlier but below the late-October record of 56.20. Policy rates are 20% for deposits and 21% for lending, and the one-year T-bill yielded 26.03% at the November 5 auction; the next rate meeting is December 17.",
-   "now_date": "2026-11-09"
+   "now": "The central bank's dollar selling rate stood at EGP 54.05 on November 9, about 3.7% stronger for the pound than at the start of November and well off its late-October record low of 56.20. Urban inflation slowed to 12.7% in October, leaving the 20% overnight deposit rate, raised by 100 basis points on October 29, about 7.3 points above inflation; the next rate meeting is December 17.",
+   "now_date": "2026-11-10"
   },
   {
    "id": "ai-chips",
@@ -46,8 +46,8 @@
    "drivers": [
     "ai-spending"
    ],
-   "now": "Wall Street's AI selloff eased on November 6, with Nvidia up 2.8%, but the S&P 500 still had its worst week since June. Nvidia's board is now investigating chief executive Jensen Huang over a relationship with a woman accused of spying for China, and Anthropic faces pressure to cut its planned $1.5 trillion IPO valuation.",
-   "now_date": "2026-11-09"
+   "now": "US stocks rebounded on November 9, with the S&P 500 up 2.35% and chip stocks up 6.9%, after the previous week's AI-led selloff. Nvidia fell 4.3% to its lowest close since April as its board investigates chief executive Jensen Huang and shareholder lawsuits begin; it reports results on November 17.",
+   "now_date": "2026-11-10"
   },
   {
    "id": "us-midterms",
@@ -55,8 +55,8 @@
    "match": "\\b(midterms?|Democrats? (won|win|wins|take|took|retake)|control of (the )?(Senate|House|Congress))\\b",
    "related": [],
    "drivers": [],
-   "now": "Democrats won both chambers of Congress on November 3 and take control in January. House Democratic leader Hakeem Jeffries backs impeaching Defense Secretary Pete Hegseth, while Trump has asked the Justice Department to investigate Democrats; removal of Hegseth would need two-thirds of the Senate.",
-   "now_date": "2026-11-09"
+   "now": "Democrats won control of both chambers of Congress in the November 3 midterms. On November 9 President Trump questioned whether the vote was honest, without evidence, a day after saying he accepted the result; a Republican-led resolution to impeach Defense Secretary Pete Hegseth is pending.",
+   "now_date": "2026-11-10"
   },
   {
    "id": "bqdc",
@@ -69,8 +69,8 @@
     ]
    ],
    "drivers": [],
-   "now": "Banque du Caire began trading on November 2, closing its first session at EGP 5.31 against the EGP 5.30 offer price, and edged up to about EGP 5.58 by November 5. The Finance Ministry will take up to half of the EGP 36.37 billion raised to ease debt pressure.",
-   "now_date": "2026-11-07"
+   "now": "Banque du Caire closed its first EGX week on November 9 at EGP 5.59, 5.5% above its EGP 5.30 offer price, with turnover down to about EGP 250 million a session from EGP 2.02 billion on the November 2 debut. Cornerstone lock-ups and a 30-day price-support scheme limit selling, and Banque Misr cannot sell more shares for a year.",
+   "now_date": "2026-11-10"
   },
   {
    "id": "gas-fertilizer",
@@ -112,8 +112,8 @@
    "match": "\\b(Gaza|Hamas|Hezbollah|Lebanon|Lebanese)\\b",
    "related": [],
    "drivers": [],
-   "now": "Gadi Eisenkot formally received Israel's mandate to form a government on November 8 and has 28 days, extendable by 14; he says he is open to including Benjamin Netanyahu, who remains caretaker prime minister.",
-   "now_date": "2026-11-09"
+   "now": "A ceasefire has held in Gaza since October 2025, but winter storms flooded about 70,000 tents and a sandbank collapse in Deir el-Balah killed five people on November 8; aid groups say Israel still blocks caravans. In south Lebanon, Israeli shelling and demolitions continue despite a US-brokered framework agreement.",
+   "now_date": "2026-11-10"
   },
   {
    "id": "oil",
@@ -128,11 +128,159 @@
    "drivers": [
     "oil"
    ],
-   "now": "Brent settled at $98.32 a barrel on November 6 after a 16% weekly fall, its steepest since the pandemic, on bets of a US-Iran deal, and traded near $97 on November 9 after Trump signaled restraint. JPMorgan sees a supply surplus of 1.4 million barrels a day in October.",
-   "now_date": "2026-11-09"
+   "now": "Brent settled at $92.57 a barrel on November 9, down 5.85% on the day, after President Trump said new strikes on Iran were unlikely while talks progress, and traded near $91.5 on November 10. It is still up about 52% this year because of the Iran war and the disruption of Hormuz.",
+   "now_date": "2026-11-10"
   }
  ],
  "stories": [
+  {
+   "ed": "2026-11-10",
+   "id": "story-what-it-means-for-egypt",
+   "lead": "What it means for Egypt",
+   "sec": "Markets",
+   "text": "Cheaper crude trims the fuel import bill, and a softer dollar helped the pound firm 0.5% on Monday. A hot US inflation print would raise the odds of a Fed hike and test the appetite of foreign holders of Egyptian treasury bills, whose real…",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-11-10",
+   "id": "story-wall-street-rebounds",
+   "lead": "Wall Street rebounds",
+   "sec": "Markets",
+   "text": "The S&P 500 gained 2.35% to 7,549.94, the Nasdaq 2.74% to 25,253.14 and the Dow 2.15% to 52,389.75 on Monday, recovering most of last week's losses, according to Reuters. Chip stocks surged 6.9%, led by Broadcom's 8.8%, and Apple closed at…",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-11-10",
+   "id": "story-trump-disputes-the-midterms",
+   "lead": "Trump disputes the midterms",
+   "sec": "Top World Headlines",
+   "text": "President Trump questioned whether last week's elections, which handed Democrats both chambers of Congress, were \"honest,\" without offering evidence, a day after saying he accepted the result. Senate Democratic leader Chuck Schumer called…",
+   "topics": [
+    "us-midterms"
+   ]
+  },
+  {
+   "ed": "2026-11-10",
+   "id": "story-oil-dollar-and-gold",
+   "lead": "Oil, dollar and gold",
+   "sec": "Markets",
+   "text": "Brent settled at $92.57 a barrel, down 5.85%, after Trump played down new strikes on Iran, and traded near $91.5 on Tuesday. The dollar index fell 0.6% to 101.68 as the euro climbed, though it remains within 1% of its 52-week high. Gold…",
+   "topics": [
+    "oil"
+   ],
+   "added": [
+    "oil"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-10",
+   "id": "story-nvidia-s-legal-fallout",
+   "lead": "Nvidia's legal fallout",
+   "sec": "In Other News",
+   "text": "Shareholder lawyers moved fast after Nvidia's board opened an inquiry into Jensen Huang's relationship with a woman US intelligence suspects of spying for China: Rosen Law Firm filed a class action in California, and at least four firms…",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-11-10",
+   "id": "story-lebanon-strikes-continue",
+   "lead": "Lebanon strikes continue",
+   "sec": "Regional and Gulf",
+   "text": "Israeli forces shelled and demolished buildings in several south Lebanon border villages on Monday, Lebanese state media reported, despite a US-brokered framework agreement for the area.",
+   "topics": [
+    "gaza-lebanon"
+   ]
+  },
+  {
+   "ed": "2026-11-10",
+   "id": "story-iran-war-effectively-over",
+   "lead": "Iran war \"effectively over\"",
+   "sec": "Regional and Gulf",
+   "text": "After meeting Qatar's prime minister, who brought him an Iranian proposal to end the war, President Trump said Iran was \"effectively over\" militarily but that US forces are \"locked and loaded\" if needed, Al Jazeera reported. The US naval…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-10",
+   "id": "story-inflation-eases",
+   "lead": "Inflation eases",
+   "sec": "Egypt News",
+   "text": "Annual urban inflation slowed for a third month to 12.7% in October from 13.9% in September, its lowest since January, according to CAPMAS and central bank figures; the nationwide rate fell to 12.0% from 12.8%, Amwal Al Ghad reported.…",
+   "topics": [
+    "pound-cbe"
+   ],
+   "added": [
+    "pound-cbe"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-10",
+   "id": "story-houthis-keep-firing-at-saudi-arabia",
+   "lead": "Houthis keep firing at Saudi Arabia",
+   "sec": "Regional and Gulf",
+   "text": "Saudi air defenses destroyed a ballistic and a cruise missile over Riyadh on Tuesday and another missile over the south, and residents were told to take shelter, AFP reported. On Monday a strike caused a \"limited fire\" on the East-West oil…",
+   "topics": [
+    "iran-war"
+   ],
+   "added": [
+    "iran-war"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-10",
+   "id": "story-gaza-floods-turn-deadly",
+   "lead": "Gaza floods turn deadly",
+   "sec": "Regional and Gulf",
+   "text": "A sandbank collapsed onto a tent in Deir el-Balah during the winter's first storm, killing four children and a woman, with two people missing, Al Jazeera reported. About 70,000 tents flooded; aid groups say Israel still blocks the caravans…",
+   "topics": [
+    "gaza-lebanon"
+   ]
+  },
+  {
+   "ed": "2026-11-10",
+   "id": "story-evergreen-back-in-suez",
+   "lead": "Evergreen back in Suez",
+   "sec": "Egypt News",
+   "text": "Taiwan's Evergreen sent its first ship through the Suez Canal in nearly three years on Sunday, when the 16,556-container *Ever Eon* joined the northbound convoy from the Netherlands to Singapore, the Suez Canal Authority said. Evergreen…",
+   "topics": [
+    "iran-war"
+   ],
+   "added": [
+    "iran-war"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-10",
+   "id": "story-egx30-rebounds",
+   "lead": "EGX30 rebounds",
+   "sec": "Markets",
+   "text": "The EGX30 rose 1.2% on Monday to 51,414.93 on turnover of EGP 10.1 billion, its busiest session of the past year in the data log, with local investors the only net buyers. Raya Holding gained 5.8% and e-finance and Juhayna 5.1% each; Abu…",
+   "topics": [],
+   "removed": [
+    "gas-fertilizer"
+   ],
+   "added": []
+  },
+  {
+   "ed": "2026-11-10",
+   "id": "story-banque-du-caire-settles",
+   "lead": "Banque du Caire settles",
+   "sec": "Markets",
+   "text": "The bank closed its first EGX week at EGP 5.59, 5.5% above its EGP 5.30 offer price, but daily turnover has dropped to about EGP 250 million from EGP 2.02 billion on its debut. Lock-ups keep cornerstone investors' shares off the market,…",
+   "topics": [
+    "bqdc"
+   ]
+  },
   {
    "ed": "2026-11-09",
    "id": "story-t-bill-yields",
