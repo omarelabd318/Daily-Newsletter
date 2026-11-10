@@ -117,7 +117,7 @@
     for (const v of yt) {
       const yy = y(v);
       svg('line', { x1: padL, x2: right ? w - right + 4 : w, y1: yy, y2: yy, stroke: grid, 'stroke-width': 1, 'shape-rendering': 'crispEdges' }, g);
-      if (right) text(g, tick(v), { x: w - right + 10, y: yy + 4, 'font-size': 12, fill: ink });
+      if (right) text(g, tick(v), { x: w - right + 10, y: yy + 4, 'font-size': 12, fill: ink, 'data-ytick': 1 });
       else text(g, tick(v), { x: padL - 8, y: yy + 4, 'text-anchor': 'end', 'font-size': 12, fill: ink });
     }
     if (right) svg('line', { x1: padL, x2: w - right + 4, y1: y(yt[0]) + 0.5, y2: y(yt[0]) + 0.5, stroke: css(el, '--ink', '#111'), 'stroke-width': 1, 'shape-rendering': 'crispEdges' }, g);
@@ -215,7 +215,7 @@
       const tw = measure(s, r.label, 11), right = r.at !== 'left';
       const cand = [[right, -5], [right, 13], [!right, -5], [!right, 13]].map(([rt, dy]) => ({ x0: rt ? w - tw : padL + 4, x1: rt ? w : padL + 4 + tw, y0: yy + dy - 9, y1: yy + dy + 2, base: yy + dy }));
       const b = cand.find((c) => !hits(c, lines) && !boxHits(c, boxes)) || cand[0];
-      text(g, r.label, { x: b.x0, y: b.base, 'font-size': 11, fill: ink });
+      text(g, r.label, { x: b.x0, y: b.base, 'font-size': 11, fill: ink, 'data-protect': 1 });
     }
   }
   // One style object per kind of mark draws both the mark and its legend swatch, so the two cannot drift apart.
@@ -301,10 +301,13 @@
         // the last value as a tag on the price axis, in the line's colour, with a dot where the line ends
         if (endLabel && k === 0) { const li = sr.values.map((v, i) => (v == null ? -1 : i)).filter((i) => i >= 0).at(-1), ly = y(Math.min(sr.values[li], yt.at(-1))), lab = format(sr.values[li]), tw = measure(s, lab, 12, 600);
           svg('circle', { cx: x(li), cy: ly, r: 3, fill: col }, g);
-          svg('rect', { x: w - padR + 4, y: ly - 10, width: tw + 12, height: 20, fill: col }, g);
+          svg('rect', { x: w - padR + 4, y: ly - 10, width: tw + 12, height: 20, fill: col, 'data-protect': 1 }, g);
           text(g, lab, { x: w - padR + 10, y: ly + 4, 'font-size': 12, 'font-weight': 600, fill: css(el, '--ground', '#fff') }); }
       });
       references(g, el, reference, { y, padL, w, lines: linesAt(y).slice(0, series.length) });
+      // an axis number under the end tag or a reference label is dropped, so neither is drawn over a price
+      { const keep = [...g.querySelectorAll('[data-protect]')].map((e) => e.getBBox());
+        g.querySelectorAll('[data-ytick]').forEach((t) => { const b = t.getBBox(); if (keep.some((p) => b.x < p.x + p.width && b.x + b.width > p.x && b.y < p.y + p.height + 1 && b.y + b.height > p.y - 1)) t.remove(); }); }
       notesOver(g, el, N, { padT, h, padB });
       // hover: a rule, a dot per series and a bare tooltip
       const tip = tooltip(el), rule = svg('line', { y1: padT, y2: h - padB, stroke: css(el, '--axis-ink', '#6b6b6b'), 'stroke-width': 1, opacity: 0 }, g);
