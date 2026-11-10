@@ -579,3 +579,9 @@ h2.sec-h{display:none}
 }
 /* stock lists: the 52-week low under the bar's left end, the high under its right end */
 .st-rl{display:flex;justify-content:space-between;gap:8px}
+/* The week: the record as one line under the summary on a week with no verdicts; the foreign-investor sessions across the page */
+.wk-rec{margin:10px 0 0;font-size:14px;line-height:21px;color:var(--muted)} .wk-rec b{color:var(--text);font-weight:600}
+@media (min-width:861px){
+  .fw-wide .kv{grid-auto-flow:column;grid-template-rows:auto auto;grid-template-columns:none;grid-auto-columns:minmax(0,1fr)}
+  .fw-wide .kv span{border-top:0;text-align:left} .fw-wide .kv .v{font-size:18px;padding-top:0}
+}

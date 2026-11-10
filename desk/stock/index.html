@@ -18,7 +18,7 @@
     <div class="crumbs"><a href="/desk/egypt/" id="deskcrumb">Desk</a> / <a href="/desk/egx/" id="mkt">EGX</a> / <span id="crumb"></span></div>
     <h1 id="name"></h1>
     <p class="finding" id="sub"></p>
-  </div><div class="actions"><select class="picker" id="pick" aria-label="Choose a stock"></select><span class="samp" data-sample hidden>Sample desk</span></div></div>
+  </div><div class="actions"><span class="samp" data-sample hidden>Sample desk</span></div></div>
 
   <div class="pages">
     <section class="card c8">
@@ -85,8 +85,6 @@ try {
   const ST = await M.get('/desk/stocks.json'), p = (ST && ST.stocks && ST.stocks[t]) || {};
   const s = M.stock(t); let idxAll = M.series((e) => e[egx ? 'egx30' : 'sp500'], egx ? 'egx' : 'us'); const idxS = M.series((e) => e[egx ? 'egx30' : 'sp500'], egx ? 'egx' : 'us'), idxN = egx ? 'EGX30' : 'S&P 500';
   const dash = '<span class="dash">—</span>', signed = (c) => `<span class="${M.cls(c)}">${M.pct(c)}</span>`;
-  M.$('pick').innerHTML = ['egx', 'us'].map((g) => `<optgroup label="${g === 'egx' ? 'Egypt' : 'USA'}">${M.GROUP[g].map((x) => `<option value="${x}"${x === t ? ' selected' : ''}>${M.esc(M.NAMES[x])} (${x})</option>`).join('')}</optgroup>`).join('');
-  M.$('pick').addEventListener('change', (e) => { location.search = '?t=' + encodeURIComponent(e.target.value); });
   M.$('crumb').textContent = M.NAMES[t]; M.$('mkt').textContent = egx ? 'EGX stocks' : 'Wall Street stocks'; M.$('mkt').href = egx ? '/desk/stocks/egypt/' : '/desk/stocks/us/'; M.$('deskcrumb').href = egx ? '/desk/egypt/' : '/desk/usa/';
   M.$('name').innerHTML = `${M.esc(M.NAMES[t])} <span class="meta" style="font-size:15px;font-weight:400">${M.esc(t)}${p.sector ? ' · ' + M.esc(p.sector) : ''}</span>`;
   document.title = M.NAMES[t] + ' · Markets Desk';

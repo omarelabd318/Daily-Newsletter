@@ -16,7 +16,8 @@ Writes desk/movers.json: the EGX session's breadth (how many stocks that traded 
 and the ten biggest rises and falls among all EGX stocks (Mubasher's price list) and
 among US companies worth $10bn or more (TradingView's screener). Thinly traded stocks are
 left out so a few trades cannot top the list: on the EGX, those that traded under EGP 1m in the session.
-A market still trading keeps the session already saved. Prints one line per market.
+While the EGX trades (the desk runs after its 10:00 open), the session that just finished is read from
+TradingView's previous-bar closes; a US market still trading keeps the session already saved. Prints one line per market.
 
 It also refreshes each desk stock's market value in desk/stocks.json ("cap"), which the stock lists sort
 by: Egyptian stocks from Mubasher's stock pages, US stocks from the same Nasdaq screener.
@@ -115,6 +116,47 @@ def indices():
     return out
 
 
+def previous_egx_session(today):
+    """The last finished EGX session before today: the intraday file's session when it is earlier, otherwise the
+    weekday (Sunday to Thursday) before today."""
+    try:
+        sess = json.load(open(os.path.join(ROOT, "desk", "intraday.json")))["egx"]["session"]
+        if sess < today.isoformat():
+            return sess
+    except Exception:
+        pass
+    d = today - datetime.timedelta(days=1)
+    while d.weekday() in (4, 5):   # Friday, Saturday
+        d -= datetime.timedelta(days=1)
+    return d.isoformat()
+
+
+def egx_previous(d, ar, today):
+    """The finished session's movers and breadth while the next session trades: each stock's last two closes
+    (close[1], close[2]) and turnover (Value.Traded[1]) from TradingView's screener, named from Mubasher's list."""
+    names = {p["code"]: p["name"] for p in d["prices"]}
+    body = json.dumps({"filter": [{"left": "type", "operation": "equal", "right": "stock"}],
+                       "columns": ["name", "description", "close[1]", "close[2]", "Value.Traded[1]"], "range": [0, 1000]}).encode()
+    req = urllib.request.Request("https://scanner.tradingview.com/egypt/scan", data=body, headers={"User-Agent": UA, "Content-Type": "application/json"})
+    rows, breadth = [], {"up": 0, "down": 0, "flat": 0}
+    for r in json.loads(urllib.request.urlopen(req, timeout=30).read())["data"]:
+        code, desc, c1, c2, turnover = r["d"]
+        if not c1 or not c2:
+            continue
+        pct = round((c1 / c2 - 1) * 100, 2)
+        if (turnover or 0) > 0:
+            breadth["up" if pct > 0 else "down" if pct < 0 else "flat"] += 1
+        if (turnover or 0) < MIN_TURNOVER_EGP or code not in names:   # Mubasher's list names the stock and drops ISIN-coded duplicates
+            continue
+        rows.append({"t": code, "name": names[code], "ar": ar.get(code), "price": round(c1, 3), "pct": pct, "turnover": round(turnover, 2)})
+    if len(rows) < 50:
+        raise RuntimeError(f"only {len(rows)} stocks")
+    session = previous_egx_session(today)
+    out = rank(rows)
+    out.update(session=session, basis=f"All EGX stocks that traded at least EGP 1m ({out['count']} on the day)", breadth=breadth, breadthSource="TradingView")
+    return out, f"EGX: {session} (read during the next session from TradingView's previous closes), {out['count']} stocks"
+
+
 def egx():
     d = json.loads(get("https://english.mubasher.info/api/1/stocks/prices?country=eg"))
     try:   # Arabic names, for searching Egyptian news about smaller companies
@@ -124,7 +166,12 @@ def egx():
     session = d["lastUpdate"][:10]
     now = datetime.datetime.now(CAIRO)
     if session == now.date().isoformat() and now.strftime("%H:%M") < "14:45":
-        return None, f"EGX: {session} is still trading; kept the saved session"
+        # the desk runs after the 10:00 open, so the session that just finished is read from TradingView's
+        # previous-bar closes instead of Mubasher's live list
+        try:
+            return egx_previous(d, ar, now.date())
+        except Exception as e:
+            return None, f"EGX: {session} is still trading and the previous session could not be read ({e}); kept the saved session"
     rows, breadth = [], {"up": 0, "down": 0, "flat": 0}
     for p in d["prices"]:
         pct, price, turnover = num(p.get("changePercentage")), num(p.get("value")), num(p.get("turnover"))
