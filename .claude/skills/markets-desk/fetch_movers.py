@@ -323,10 +323,10 @@ def heatmap(upto=None):
         bars = [b for b in (bars or []) if b[0] <= common]
         if len(bars) < 22 or not cap or bars[-1][0] != common:
             continue
-            c = [b[1] for b in bars]
-            sessions.append(bars[-1][0])
-            rows.append({"t": code, "name": desc, "sector": HEAT_SECTOR.get(code) or SECTOR_OF.get(sector, sector), "cap": round(cap), "price": c[-1], "vol": bars[-1][2],
-                         "d1": round((c[-1] / c[-2] - 1) * 100, 2), "w1": round((c[-1] / c[-6] - 1) * 100, 2), "m1": round((c[-1] / c[-22] - 1) * 100, 2)})
+        c = [b[1] for b in bars]
+        sessions.append(bars[-1][0])
+        rows.append({"t": code, "name": desc, "sector": HEAT_SECTOR.get(code) or SECTOR_OF.get(sector, sector), "cap": round(cap), "price": c[-1], "vol": bars[-1][2],
+                     "d1": round((c[-1] / c[-2] - 1) * 100, 2), "w1": round((c[-1] / c[-6] - 1) * 100, 2), "m1": round((c[-1] / c[-22] - 1) * 100, 2)})
     if len(rows) < 20:
         raise RuntimeError(f"only {len(rows)} members read")
     return {"session": max(set(sessions), key=sessions.count), "rows": rows,
