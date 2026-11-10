@@ -302,6 +302,18 @@ window.Desk = (function () {
     const d = day(X.session);
     return `${X.basis}, ${WD[d.getDay()]}, ${MON[d.getMonth()]} ${d.getDate()}.`;
   }
+  // the session's most active stocks, by value traded (where the money went), in two columns of five
+  const traded = (v, market) => (market === 'egx' ? 'EGP ' : '$') + (v >= 1e9 ? (v / 1e9).toFixed(2) + 'bn' : (v / 1e6).toFixed(v >= 1e8 ? 0 : 1) + 'm');
+  function marketActive(el, market, n = 10) {
+    const X = MOVERS && MOVERS[market];
+    if (!X || !X.active) { el.innerHTML = '<p class="sub">Not saved yet; the morning run saves the last session\'s most active stocks.</p>'; return ''; }
+    const row = (r, i) => { const own = NAMES[r.t], nm = `<b>${esc(own || r.name)}</b><span class="t">${esc(r.t)}</span>`;
+      return `<div class="mv mv-act"><span class="rk num">${i + 1}</span>${own ? `<a href="/desk/stock/?t=${encodeURIComponent(r.t)}">${nm}</a>` : `<span style="min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${nm}</span>`}<span class="num">${num(r.price)}</span><span class="num ${cls(r.pct)}">${pct(r.pct)}</span><span class="num tv">${traded(r.turnover, market)}</span></div>`; };
+    const rows = X.active.slice(0, n), h = Math.ceil(rows.length / 2);
+    el.innerHTML = `<div class="movers"><div><h3>Most traded, by value</h3>${rows.slice(0, h).map(row).join('')}</div><div><h3 class="act-h2" aria-hidden="true">&nbsp;</h3>${rows.slice(h).map((r, i) => row(r, i + h)).join('')}</div></div>`;
+    const d = day(X.session);
+    return `Ranked by the value of shares traded, ${WD[d.getDay()]}, ${MON[d.getMonth()]} ${d.getDate()}. ${market === 'egx' ? 'All EGX stocks' : 'US companies worth $10bn or more'}.`;
+  }
   // the change beside a chart's big number follows the chosen period, labelled ('in a month'); 1D is the day
   const SPAN = { 0: 'on the day', 7: 'in a week', 30: 'in a month', 182: 'in 6 months', 365: 'in a year', 1095: 'in 3 years', 1826: 'in 5 years' };
   function heroChg(s, p) {
@@ -489,5 +501,5 @@ window.Desk = (function () {
       location.reload();
     });
   }
-  return { get ASOF() { return ASOF; }, SECTORS, lede, sortable, headText, showAllRows, calendar, asOfFor, lastDate, $, esc, pct, cls, num, get, dateLine, conf, confNow, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, weekChart, deskNotes, weekOf, monthOf, intraPeriod, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
+  return { get ASOF() { return ASOF; }, SECTORS, lede, sortable, headText, showAllRows, calendar, asOfFor, lastDate, $, esc, pct, cls, num, get, dateLine, conf, confNow, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, marketActive, traded, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, weekChart, deskNotes, weekOf, monthOf, intraPeriod, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
 })();

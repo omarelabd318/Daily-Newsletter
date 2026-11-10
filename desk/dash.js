@@ -408,7 +408,16 @@
       return `<div class="mv">${own ? `<a href="/desk/stock/?t=${encodeURIComponent(r.t)}">${nm}</a>` : `<span class="nm">${nm}</span>`}<span class="num">${f2(r.price)}</span><span class="num ${cls(r.pct)}">${pct(r.pct)}</span></div>`
         + (r.why && !/^no company news found/i.test(String(r.why).trim()) ? `<p class="mvwhy">${esc(r.why)}${r.url ? ` <a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.source || 'Source')} →</a>` : ''}</p>` : ''); };
     const mlists = (up, down) => `<div class="movers"><div><h3><span class="chg up" aria-hidden="true"></span>Biggest gainers</h3>${up.map(mrow).join('') || '<p class="chart-cap">No stock rose.</p>'}</div><div><h3><span class="chg down" aria-hidden="true"></span>Biggest losers</h3>${down.map(mrow).join('') || '<p class="chart-cap">No stock fell.</p>'}</div></div>`;
+    // most active: the five stocks with the most money traded in the session
+    const drawActive = () => {
+      const tv = (v) => (S.market === 'egx' ? 'EGP ' : '$') + (v >= 1e9 ? (v / 1e9).toFixed(2) + 'bn' : (v / 1e6).toFixed(v >= 1e8 ? 0 : 1) + 'm');
+      const row = (r, i) => { const own = NAMES[r.t], nm = `<b>${esc(own || r.name)}</b><span class="t">${esc(r.t)}</span>`;
+        return `<div class="mv mv-act"><span class="rk num">${i + 1}</span>${own ? `<a href="/desk/stock/?t=${encodeURIComponent(r.t)}">${nm}</a>` : `<span style="min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${nm}</span>`}<span class="num">${f2(r.price)}</span><span class="num ${cls(r.pct)}">${pct(r.pct)}</span><span class="num tv">${tv(r.turnover)}</span></div>`; };
+      $('movers').innerHTML = `<div class="movers"><div><h3>Most traded, by value</h3>${MV.active.slice(0, 5).map(row).join('')}</div></div>`;
+      const sd = day(MV.session); $('movers-note').textContent = `Ranked by the value of shares traded, ${WD[sd.getDay()]}, ${MON[sd.getMonth()]} ${sd.getDate()}.`;
+    };
     const drawMovers = (whole) => {
+      if (whole === 'active') return drawActive();
       if (whole) {
         if (!MV) { $('movers').innerHTML = '<p class="chart-cap">Not saved yet; the morning run saves the last session\'s movers once it has closed.</p>'; $('movers-note').textContent = ''; return; }
         $('movers').innerHTML = mlists(MV.gainers.slice(0, 3), MV.losers.slice(0, 3));
@@ -425,8 +434,8 @@
       $('movers').innerHTML = mlists(rows.filter((r) => r.pct > 0).slice(0, 3), rows.filter((r) => r.pct < 0).reverse().slice(0, 3));
       const ad = day(asOf(S.group)); $('movers-note').textContent = `Among the desk's ${GROUP[S.group].length} ${key === 'egypt' ? 'Egyptian' : 'US'} stocks, ${WD[ad.getDay()]}, ${MON[ad.getMonth()]} ${ad.getDate()}. Tap one for its page.`;
     };
-    $('mscope').innerHTML = ['Whole market', 'Desk stocks'].map((n, j) => `<button type="button" aria-pressed="${!j}">${n}</button>`).join('');
-    $('mscope').querySelectorAll('button').forEach((b, j) => b.addEventListener('click', () => { $('mscope').querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); drawMovers(j === 0); }));
+    $('mscope').innerHTML = ['Whole market', 'Desk stocks'].concat(MV && MV.active ? ['Most active'] : []).map((n, j) => `<button type="button" aria-pressed="${!j}">${n}</button>`).join('');
+    $('mscope').querySelectorAll('button').forEach((b, j) => b.addEventListener('click', () => { $('mscope').querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); drawMovers(j === 2 ? 'active' : j === 0); }));
     drawMovers(true);
   }
   // each dashboard is its own page: /desk/egypt/ and /desk/usa/

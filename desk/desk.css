@@ -585,3 +585,8 @@ h2.sec-h{display:none}
   .fw-wide .kv{grid-auto-flow:column;grid-template-rows:auto auto;grid-template-columns:none;grid-auto-columns:minmax(0,1fr)}
   .fw-wide .kv span{border-top:0;text-align:left} .fw-wide .kv .v{font-size:18px;padding-top:0}
 }
+/* most active: rank, name, close, change, value traded */
+.mv.mv-act{grid-template-columns:20px minmax(0,1fr) auto auto 78px} .mv-act .rk{color:var(--muted);font-size:12px} .mv-act .tv{color:var(--muted);text-align:right}
+.movers h3.act-h2{display:none} section.c6:has(#movers):has(+ section[hidden]) .movers h3.act-h2{display:flex}   /* the spacer heading only when the two halves sit side by side */
+@media (max-width:860px){section.c6:has(#movers):has(+ section[hidden]) .movers h3.act-h2{display:none}}
+.movers:has(.act-h2){row-gap:0}   /* most active: one continuous list when the halves stack */
