@@ -158,7 +158,7 @@
     $('close-note').textContent = X.close.note || '';
     // each figure leads to its chart: an index on this dashboard's own chart, the VIX to its chart below, the
     // pound's figures to the EGP page, world markets to the Global page; the yields have no chart and no link
-    const GO = [[/^EGX30/, 'EGX30'], [/^S&P 500/, 'S&P 500'], [/^Nasdaq/, 'Nasdaq'], [/^Dow/, 'Dow Jones'], [/^VIX/, '#c-vix'],
+    const GO = [[/^EGX30/, 'EGX30'], [/^EGX70/, '/desk/egx/?i=egx70'], [/^S&P 500/, 'S&P 500'], [/^Nasdaq/, 'Nasdaq'], [/^Dow/, 'Dow Jones'], [/^VIX/, '#c-vix'],
       [/^USD\/EGP/, '/desk/egp/#c-usd'], [/^Gold 24K/, '/desk/egp/#c-gold'], [/^Inflation/, '/desk/egp/#c-infl'], [/^One-year T-bill/, '/desk/egp/?show=tbill#c-infl'],
       [/^Real one-year/, '/desk/egp/?show=real#c-infl'], [/^Foreign reserves/, '/desk/egp/#c-rsv'],
       [/^Brent/, '/desk/global/#g-brent'], [/^Gold, \$/, '/desk/global/#g-gold_usd'], [/^Dollar index/, '/desk/global/#g-dxy'], [/^Bitcoin/, '/desk/global/#g-btc']];

@@ -181,7 +181,7 @@ window.Desk = (function () {
     if (back > 7 && at.length > 2 && at[1] - at[0] < (at[2] - at[1]) / 2) at.shift();
     const lo = Math.min(...vals), hi = Math.max(...vals), pad = (hi - lo) * 0.15 || lo * 0.002;
     Charts.line(el, { labels, xAt: el.clientWidth < 520 && at.length > 3 ? at.filter((_, j) => (at.length - 1 - j) % 2 === 0) : at, xText: text,
-      series: [{ name, values: vals }], format: fmt, endLabel: true, height: el.clientHeight, min: lo - pad });
+      series: [{ name, values: vals }], format: fmt, endLabel: true, height: el.clientHeight, min: lo >= 0 ? Math.max(0, lo - pad) : lo - pad });   // a price never gets a negative axis
     const ch = (vals.at(-1) / vals[0] - 1) * 100;
     return `Last ${ss.length} sessions through the day${inUSD ? ', in dollars at each day\'s rate' : ''}: <span class="num ${cls(ch)}">${pct(ch, 2)}</span> from the first trade`;
   }
@@ -252,7 +252,7 @@ window.Desk = (function () {
     const rolls = (opts.rolls || []).map((r) => ({ r, at: pts.findIndex(([d]) => d >= r.session) })).filter((x) => x.at > 0);
     const ann = rolls.length ? rolls.map(({ r, at }) => ({ at, label: `Switched to the ${r.to} contract`, short: 'Contract switch' }))
       : opts.mark !== false && back > 7 ? bigMove(pts, opts.markAt || 0.025) : [];
-    Charts.line(el, { ...axis(pts.map((x) => x[0]), Math.max(back, 7), el.clientWidth), series: [{ name, values: vals, muted: !!opts.muted }], format: fmt, annotations: ann, endLabel: true, marks: pts.length <= 12, height: el.clientHeight, min: lo - pad });
+    Charts.line(el, { ...axis(pts.map((x) => x[0]), Math.max(back, 7), el.clientWidth), series: [{ name, values: vals, muted: !!opts.muted }], format: fmt, annotations: ann, endLabel: true, marks: pts.length <= 12, height: el.clientHeight, min: lo >= 0 ? Math.max(0, lo - pad) : lo - pad });
     return rolls.map(({ r }) => r);
   }
   // the desk's stocks over a period; notes ({ticker: {why, source, url}}, from deskNotes) add a line under each on 1D
