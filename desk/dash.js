@@ -317,8 +317,10 @@
       if (!p[1]) {   // the last session through the day, from desk/intraday.json
         const el = $('egx-chart'), mk = S.market, I = INTRA && INTRA[mk] && INTRA[mk].series[cur.intra]; el.innerHTML = '';
         if (!I) { el.style.height = 'auto'; el.innerHTML = '<p class="chart-cap">The last session through the day is not saved yet; the morning run saves it once the session has closed.</p>'; $('egx-cap').textContent = ''; return; }
-        const v = I.map((x) => x[1]), lo = Math.min(...v), hi = Math.max(...v), mid = (lo + hi) / 2, half = Math.max((hi - lo) * 0.6, mid * 0.01);
-        Charts.line(el, { ...dayAxis(I.map((x) => x[0]), el.clientWidth), series: [{ name: cur.n, values: v }], format: Charts.fmt.int, endLabel: true, height: el.clientHeight, min: mid - half, max: mid + half });
+        // a dotted line at the previous session's close, so a day that opened lower and climbed still reads as down
+        const pv = idx.length > 1 ? idx[idx.length - 2][1] : null, ref = pv != null ? [{ value: pv, label: 'Prev. close ' + Charts.fmt.int(pv) }] : null;
+        const v = I.map((x) => x[1]), vr = ref ? v.concat(pv) : v, lo = Math.min(...vr), hi = Math.max(...vr), mid = (lo + hi) / 2, half = Math.max((hi - lo) * 0.6, mid * 0.01);
+        Charts.line(el, { ...dayAxis(I.map((x) => x[0]), el.clientWidth), series: [{ name: cur.n, values: v }], format: Charts.fmt.int, endLabel: true, height: el.clientHeight, min: mid - half, max: mid + half, reference: ref });
         const ch = change(idx, 0);
         $('egx-cap').innerHTML = `${day(INTRA[mk].session).toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'short' }).replace('Sept', 'Sep')}, ${I[0][0]}–${I.at(-1)[0]} ${mk === 'egx' ? 'Cairo' : 'New York'} time · on the day <span class="num ${cls(ch)}">${pct(ch, 2)}</span>${INTRA[mk].proxy && INTRA[mk].proxy[cur.intra] ? ` · traced by the ${esc(INTRA[mk].proxy[cur.intra])} fund, which tracks it` : ''}`;
         return;

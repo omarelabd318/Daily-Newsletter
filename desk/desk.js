@@ -190,15 +190,17 @@ window.Desk = (function () {
     const lo = Math.min(...vals), hi = Math.max(...vals), mid = (lo + hi) / 2, half = Math.max((hi - lo) * 0.6, mid * 0.01);
     return [mid - half, mid + half];
   }
-  function dayChart(el, market, key, name, fmt, inUSD = false) {
+  function dayChart(el, market, key, name, fmt, inUSD = false, prev = null) {
     const M_ = INTRA && INTRA[market]; el.innerHTML = '';
     // the session's 5-minute line, or else the same session's 15-minute line from the week, where only that was saved
     const wk = !M_ || M_.window ? null : ((INTRA.week || {})[market] || []).find((x) => x.session === M_.session);
     const I0 = (M_ && M_.series && M_.series[key]) || (wk && wk.series[key] && wk.series[key].length > 1 ? wk.series[key] : null);
     const r = inUSD && M_ ? rateOn(M_.session) : 1, I = I0 && r ? I0.map(([t, v]) => [t, v / r]) : I0;
     if (!I) { el.innerHTML = `<p class="sub" style="padding:24px 0">No one-day data for ${esc(name)}: ${/^(sp500|dow|brent|gold_usd|dxy)$/.test(key) ? 'not saved for the last session.' : 'not saved for the last session.'}</p>`; return null; }
-    const vals = I.map((x) => x[1]), [ymin, ymax] = dayRange(vals);
-    Charts.line(el, { ...dayAxis(I.map((x) => x[0]), el.clientWidth, !!M_.window), series: [{ name, values: vals }], format: fmt, endLabel: true, height: el.clientHeight, min: ymin, max: ymax });
+    // a dotted line at the previous session's close, so a day that opened lower and climbed still reads as down
+    const ref = prev != null && !M_.window ? [{ value: prev, label: 'Prev. close ' + fmt(prev) }] : null;
+    const vals = I.map((x) => x[1]), [ymin, ymax] = dayRange(ref ? vals.concat(prev) : vals);
+    Charts.line(el, { ...dayAxis(I.map((x) => x[0]), el.clientWidth, !!M_.window), series: [{ name, values: vals }], format: fmt, endLabel: true, height: el.clientHeight, min: ymin, max: ymax, reference: ref });
     const ch = (vals.at(-1) / vals[0] - 1) * 100;
     if (M_.window) {   // round-the-clock markets: the last 24 hours, Cairo time
       const to = new Date(M_.to.replace(' ', 'T'));

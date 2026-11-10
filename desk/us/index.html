@@ -85,7 +85,7 @@
   let cur = IDX[0], per = M.startPeriod('us', cur.k === 'nasdaq' ? 'COMP' : cur.k);
   const draw = () => {
     M.$('lvl').textContent = M.num(M.last(cur.s)); M.$('dchg').innerHTML = M.heroChg(cur.s, per);
-    if (!per[1]) { const c1 = M.dayChart(M.$('chart'), 'us', cur.k === 'nasdaq' ? 'COMP' : cur.k, cur.n, Charts.fmt.int), dc1 = M.change(cur.s, 0); M.$('cap').innerHTML = c1 ? `${c1} · on the day <span class="num ${M.cls(dc1)}">${M.pct(dc1, 2)}</span>` : ''; return; }
+    if (!per[1]) { const c1 = M.dayChart(M.$('chart'), 'us', cur.k === 'nasdaq' ? 'COMP' : cur.k, cur.n, Charts.fmt.int, false, cur.s.length > 1 ? cur.s.at(-2)[1] : null), dc1 = M.change(cur.s, 0); M.$('cap').innerHTML = c1 ? `${c1} · on the day <span class="num ${M.cls(dc1)}">${M.pct(dc1, 2)}</span>` : ''; return; }
     const w1 = per[1] === 7 || per[1] === 30 ? M.weekChart(M.$('chart'), 'us', cur.k === 'nasdaq' ? 'COMP' : cur.k, cur.n, Charts.fmt.int, false, per[1]) : null;
     if (w1) { M.$('cap').innerHTML = `${M.esc(cur.n)}: ${w1}`; return; }
     M.chart(M.$('chart'), cur.s, per[1], cur.n, Charts.fmt.int);
