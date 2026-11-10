@@ -275,6 +275,64 @@ def us():
     return out, f"US: {d}, {out['count']} companies"
 
 
+# the EGX30's members grouped as readers know them: TradingView files the property developers under "Finance";
+# a member not listed here falls back to its TradingView sector, renamed by SECTOR_OF
+HEAT_SECTOR = {**{t: "Banks" for t in ("COMI", "ADIB", "CIEB", "QNBE", "HDBK", "SAUD", "FAIT")},
+               **{t: "Financial services" for t in ("HRHO", "CCAP", "BTFH", "VLMR", "VLMRA", "CNFN", "EKHO")},
+               **{t: "Real estate" for t in ("TMGH", "PHDC", "EMFD", "HELI", "ORHD", "MASR", "OCDI")},
+               **{t: "Technology" for t in ("FWRY", "EFIH", "RAYA")}, "ETEL": "Telecom",
+               **{t: "Basic materials" for t in ("EGAL", "MCQE", "ABUK", "MFPC", "SKPC", "ESRS", "EGCH", "KIMA")},
+               "AMOC": "Energy", **{t: "Industrials" for t in ("ORAS", "ALCN", "SWDY", "ELEC")},
+               **{t: "Consumer" for t in ("EAST", "EFID", "JUFO", "GBCO", "ORWE", "AUTO")},
+               **{t: "Healthcare" for t in ("ISPH", "RMDA", "CLHO", "PHAR")}}
+SECTOR_OF = {"Finance": "Financial services", "Technology Services": "Technology", "Electronic Technology": "Technology",
+             "Non-Energy Minerals": "Basic materials", "Process Industries": "Basic materials", "Energy Minerals": "Energy",
+             "Consumer Durables": "Consumer", "Consumer Non-Durables": "Consumer", "Consumer Services": "Consumer",
+             "Distribution Services": "Consumer", "Retail Trade": "Consumer", "Health Technology": "Healthcare",
+             "Health Services": "Healthcare", "Communications": "Telecom", "Industrial Services": "Industrials",
+             "Transportation": "Industrials", "Producer Manufacturing": "Industrials", "Utilities": "Utilities"}
+
+
+def heatmap(upto=None):
+    """The EGX30's members (TradingView's index membership, so a reshuffle is followed), each with its sector, market
+    value and change over the last finished session, five sessions and 21 sessions, from TradingView's daily bars."""
+    import tradingview
+    body = json.dumps({"filter": [{"left": "type", "operation": "equal", "right": "stock"}],
+                       "columns": ["name", "description", "sector", "market_cap_basic", "indexes"], "range": [0, 1000]}).encode()
+    req = urllib.request.Request("https://scanner.tradingview.com/egypt/scan", data=body, headers={"User-Agent": UA, "Content-Type": "application/json"})
+    members = [r["d"] for r in json.loads(urllib.request.urlopen(req, timeout=30).read())["data"]
+               if any(i.get("proname") == "EGX:EGX30" for i in (r["d"][4] or []))]
+    now = datetime.datetime.now(CAIRO)
+    trading = now.weekday() not in (4, 5) and now.strftime("%H:%M") < "14:45"
+
+    def closes(code):
+        bars = [(t.astimezone(CAIRO).date().isoformat(), v) for t, v in tradingview.bars("EGX:" + code, "1D", 30)]
+        if trading and bars and bars[-1][0] == now.date().isoformat():
+            bars = bars[:-1]   # today's session is still trading
+        return [b for b in bars if not upto or b[0] <= upto]   # upto: a backfill for an earlier desk
+
+    rows, sessions = [], []
+    with concurrent.futures.ThreadPoolExecutor(4) as pool:
+        for (code, desc, sector, cap, _), bars in zip(members, pool.map(lambda m: _safe(closes, m[0]), members)):
+            if not bars or len(bars) < 22 or not cap:
+                continue
+            c = [v for _, v in bars]
+            sessions.append(bars[-1][0])
+            rows.append({"t": code, "name": desc, "sector": HEAT_SECTOR.get(code) or SECTOR_OF.get(sector, sector), "cap": round(cap),
+                         "d1": round((c[-1] / c[-2] - 1) * 100, 2), "w1": round((c[-1] / c[-6] - 1) * 100, 2), "m1": round((c[-1] / c[-22] - 1) * 100, 2)})
+    if len(rows) < 20:
+        raise RuntimeError(f"only {len(rows)} members read")
+    return {"session": max(set(sessions), key=sessions.count), "rows": rows,
+            "basis": "EGX30 members, sized by market value, coloured by change; TradingView"}
+
+
+def _safe(fn, *a):
+    try:
+        return fn(*a)
+    except Exception:
+        return None
+
+
 def leads(saved):
     """News leads for the top five gainers and losers in each market, from the last two days."""
     sys.path.insert(0, os.path.dirname(__file__))
@@ -336,6 +394,13 @@ def main():
                 print(f"{name.upper()} week and month: {saved[name]['week']['note']}")
             except Exception as e:
                 print(f"{name.upper()} week and month: failed ({e}); kept the saved lists")
+    if saved.get("egx") is not None:
+        try:
+            saved["egx"]["heat"] = heatmap()
+            h = saved["egx"]["heat"]
+            print(f"EGX30 heatmap: {h['session']}, {len(h['rows'])} members")
+        except Exception as e:
+            print(f"EGX30 heatmap: failed ({e}); kept the saved one")
     print(caps())
     saved["note"] = "Biggest gainers and losers of the last finished session across the whole market. Written by fetch_movers.py."
     with open(OUT, "w") as f:

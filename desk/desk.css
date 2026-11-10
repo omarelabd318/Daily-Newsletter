@@ -590,3 +590,12 @@ h2.sec-h{display:none}
 .movers h3.act-h2{display:none} section.c6:has(#movers):has(+ section[hidden]) .movers h3.act-h2{display:flex}   /* the spacer heading only when the two halves sit side by side */
 @media (max-width:860px){section.c6:has(#movers):has(+ section[hidden]) .movers h3.act-h2{display:none}}
 .movers:has(.act-h2){row-gap:0}   /* most active: one continuous list when the halves stack */
+/* the EGX30 by sector: a treemap; each sector a frame with its name and change, each member a box */
+.heat{position:relative;width:100%;margin-top:6px}
+.heat-s{position:absolute;box-sizing:border-box}
+.heat-sh{display:flex;justify-content:space-between;gap:6px;height:18px;padding:0 4px;font-size:11px;line-height:18px;color:var(--muted);white-space:nowrap;overflow:hidden}
+.heat-sh span:first-child{overflow:hidden;text-overflow:ellipsis;color:var(--text)}
+.heat-b{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;overflow:hidden;color:var(--text);text-decoration:none;font-size:12px;line-height:15px;text-align:center}
+.heat-b b{font-weight:600;font-size:13px} .heat-b.strong{color:var(--surface)} a.heat-b:hover{outline:2px solid var(--text);outline-offset:-2px}
+.heat-key{display:flex;align-items:center;gap:3px;justify-content:flex-end;margin-top:8px;font-size:11px;color:var(--muted)} .heat-key i{display:block;width:22px;height:8px} .heat-key span{margin:0 4px}
+[data-theme="dark"] .heat-b.strong{color:#0e1216}   /* bright boxes in dark mode take dark text */
