@@ -274,6 +274,13 @@
         const inline = ks[0] === 3 || ks[0] === 4;
         return `<div class="since-g"><h3>${g}</h3><div class="since-i${inline ? ' inline' : ''}">${r.map(([, h]) => `<div class="since-row">${h}</div>`).join('')}</div></div>`; }).join('')
         : `<p class="sub">A quiet day for the record: no view judged, opened or re-rated, and none of the desk's stocks moved 5% or more.</p>`;
+      // a day with changes: Since yesterday moves up beside the chart; a quiet day leaves it in the right column and
+      // the chart at full width, so there is never a near-empty block beside it
+      if (out.length && !document.querySelector('.toprow')) {
+        const ch = $('c-chart'), si = $('c-since'), w = document.createElement('div');
+        w.className = 'toprow'; ch.before(w); w.append(ch, si);
+        document.dispatchEvent(new Event('desk:relayout'));
+      }
     })();
     // the top story's text and the close strip's sources note: a few lines, then "Read more"
     const clamp = (el, lines, label) => {
@@ -354,6 +361,7 @@
     // opens on 1D when the last session through the day is saved, otherwise on 1M
     const start = INTRA && INTRA[S.market] && INTRA[S.market].series[cur.intra] ? PERIODS[0] : PERIODS[2];
     segment($('egx-seg'), start[0], drawIdx, PERIODS.concat(LONG)); drawIdx(start);
+    document.addEventListener('desk:relayout', () => drawIdx(per));   // the chart narrowed beside Since yesterday
 
     // biggest movers of the last session: the whole market (with the reason where one was found) or the desk's own stocks
     const MV = MOVERS && MOVERS[S.market], f2 = (v) => v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
