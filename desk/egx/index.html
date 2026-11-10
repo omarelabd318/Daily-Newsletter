@@ -111,11 +111,10 @@
     M.$('itabs').hidden = false; M.$('iname').hidden = true;
     M.toggle(M.$('itabs'), ['EGX30', 'EGX70 EWI'], (i) => {
       ikey = i ? 'egx70' : 'egx30'; idx = M.series((e) => e[ikey], 'egx');
-      draw();
+      draw(); sess(inUSD);
     });
   }
   M.segment(M.$('seg'), per[0], (p) => { per = p; draw(); }, M.PERIODS.concat(M.LONG)); draw();
-  if (new URLSearchParams(location.search).get('i') === 'egx70' && !M.$('itabs').hidden) M.$('itabs').querySelectorAll('button')[1].click();   // from the dashboard's EGX70 figure
   const signed = (c) => `<span class="${M.cls(c)}">${M.pct(c)}</span>`, dash = '<span class="dash">—</span>', S = P.session || {};
   // the session's turnover from the data log (its 90-day comparison once about 60 sessions are logged) and the
   // market's breadth from the movers file; figures the day's file gives take precedence
@@ -132,15 +131,17 @@
   // the session card follows the chart's currency: the EGX30's close and its moves in dollars (each day's close divided by
   // that day's dollar rate); turnover stays in pounds, as the exchange reports it, and breadth is a count
   const ix30 = M.series((e) => e.egx30, 'egx');
+  // the index figures follow the chart's index (EGX30 or EGX70 EWI) and currency; turnover and breadth are the whole market's
   const sess = (usd) => {
-    const x = usd ? M.usd(ix30) : ix30, d = M.change(x, 0);
+    const base = ikey === 'egx70' ? M.series((e) => e.egx70, 'egx') : ix30, x = usd ? M.usd(base) : base, d = M.change(x, 0);
     M.$('stats').innerHTML = M.kv([['Close' + (usd ? ' ($)' : ''), M.num(M.last(x), usd ? 1 : 2)], ['Day', `<span class="${M.cls(d)}">${M.pct(d, 2)}</span>`], ['Week', signed(M.change(x, 7))], ['Month', signed(M.change(x, 30))], ['This year', signed(M.ytd(x))],
       ['Turnover', typeof S.turnover === 'number' ? `EGP ${M.num(S.turnover, 1)}bn` : S.turnover ? M.esc(S.turnover) : tov != null ? `EGP ${M.num(tov, 1)}bn` : dash], [S.vs90 != null ? 'Against 90-day average' : vsLabel, typeof S.vs90 === 'number' ? signed(S.vs90) : S.vs90 ? M.esc(S.vs90) : vs90 != null ? signed(vs90) : dash],
       ['Advancers / decliners', S.breadth ? updown(S.breadth) : B ? `${updown(`${B.up} / ${B.down}`)} <span class="meta">(${B.flat} unchanged; ${M.esc(MV.breadthSource || 'Mubasher')})</span>` : dash]].filter(([k, v]) => !(k === 'Advancers / decliners' && v === dash)));   // no breadth for the session: no row
     const [lo, hi] = M.range52(x); M.$('range').innerHTML = M.rangeBar(lo, hi, M.last(x), (v) => M.num(v, 0));
-    M.$('sess-date').textContent = M.short(M.ASOF) + (usd ? ' · EGX30 in dollars' : '');
+    M.$('sess-date').textContent = M.short(M.ASOF) + (ikey === 'egx70' || usd ? ` · ${ikey === 'egx70' ? 'EGX70 EWI' : 'EGX30'}${usd ? ' in dollars' : ''}` : '');
   };
   sess(false);
+  if (new URLSearchParams(location.search).get('i') === 'egx70' && !M.$('itabs').hidden) M.$('itabs').querySelectorAll('button')[1].click();   // from the dashboard's EGX70 figure
   // the EGX30 against the EGX70 EWI (equal-weighted small and mid caps), both from TradingView so the periods match
   const IX = MV && MV.session === M.ASOF && MV.indices;
   if (IX && IX.EGX30 && IX.EGX70EWI) {
