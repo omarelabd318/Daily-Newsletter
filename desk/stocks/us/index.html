@@ -102,7 +102,7 @@
           <td class="num"><span class="${M.cls(d)}">${M.pct(d)}</span></td>
           <td class="num st-m"><span class="${M.cls(r.c)}">${M.pct(r.c)}</span></td>
           <td class="num"><span class="${M.cls(r.y)}">${M.pct(r.y)}</span></td>
-          <td class="st-m st-range">${pos == null ? '' : `<div class="range"><i style="left:calc(${pos.toFixed(1)}% - 1px)"></i></div><span class="meta num">${M.num(r.lo, r.lo < 10 ? 2 : 0)} – ${M.num(r.hi, r.hi < 10 ? 2 : 0)}</span>`}</td></tr>`; };
+          <td class="st-m st-range">${pos == null ? '' : `<div class="range"><i style="left:calc(${pos.toFixed(1)}% - 1px)"></i></div><span class="meta num st-rl"><span>${M.num(r.lo, r.lo < 10 ? 2 : 0)}</span><span>${M.num(r.hi, r.hi < 10 ? 2 : 0)}</span></span>`}</td></tr>`; };
       const head = `<thead><tr>${th('name', 'Company', false)}<th class="st-m">Sector</th><th class="trend st-m">${M.esc(per[2])}</th>${th('close', 'Close' + (cur === '$' ? ', $' : ', EGP'))}${th('day', 'Day')}${per[1] ? th('per', per[0]) : ''}${th('ytd', 'This year')}<th class="st-m">52-week range</th></tr></thead>`;
       const fixRow = (h) => per[1] ? h : h.replace(/<td class="num st-m"><span[^>]*>[^<]*<\/span><\/td>/, '');
       let body;

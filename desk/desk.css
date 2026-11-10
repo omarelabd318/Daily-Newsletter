@@ -577,3 +577,5 @@ h2.sec-h{display:none}
   section.c6:has(#movers):has(+ section[hidden]){grid-column:span 12}
   section.c6:has(#movers):has(+ section[hidden]) .movers{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 48px}
 }
+/* stock lists: the 52-week low under the bar's left end, the high under its right end */
+.st-rl{display:flex;justify-content:space-between;gap:8px}
