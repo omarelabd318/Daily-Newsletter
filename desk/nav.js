@@ -36,6 +36,7 @@
 .dm-n2 a{padding:10px 0 8px;font-size:13px;line-height:18px;color:var(--muted);text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent}
 .dm-n2 a[aria-current]{color:var(--accent);font-weight:600;border-bottom-color:var(--accent)}
 .dm-n1 a:hover,.dm-n2 a:hover{color:var(--text)}
+.dm-n2{align-items:center} .dm-stamp{margin-left:auto;padding-left:24px;font-size:11px;line-height:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
 .dm-phone{display:none}
 @media (max-width:860px){
   .dmast{padding:0 16px}
@@ -47,7 +48,7 @@
   .dm-label{display:block;margin-top:3px;font-size:10px}
   .dm-tools{display:none}
   .dm-n1{gap:18px} .dm-n1 a{font-size:11px;padding:11px 0 8px}
-  .dm-n2{gap:20px}
+  .dm-n2{gap:20px} .dm-stamp{display:none}
 }`;
   function mount(path, NAMES, GROUP) {
     if (document.querySelector('.dmast')) return;
@@ -77,5 +78,7 @@
   }
   // the desk's date beside the name (a dateline), once the day's desk is known; the page's own name is its title
   function label(text) { const el = document.getElementById('dm-label'); if (el) el.textContent = text; }
-  window.DeskNav = { mount, label };
+  // how current the page's figures are (the dashboards' closes and fetch time), on the right of the market's row
+  function stamp(text) { const n2 = document.querySelector('.dm-n2'); if (!n2) return false; let el = n2.querySelector('.dm-stamp'); if (!el) { el = document.createElement('span'); el.className = 'dm-stamp'; n2.appendChild(el); } el.textContent = text; return true; }
+  window.DeskNav = { mount, label, stamp };
 })();

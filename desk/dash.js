@@ -80,7 +80,7 @@
     AAPL: 'Apple', MSFT: 'Microsoft', NVDA: 'Nvidia', AMZN: 'Amazon', GOOGL: 'Alphabet', META: 'Meta', TSLA: 'Tesla', JPM: 'JPMorgan Chase', XOM: 'Exxon Mobil', AVGO: 'Broadcom', 'BRK.B': 'Berkshire Hathaway', WMT: 'Walmart', V: 'Visa', ORCL: 'Oracle', COST: 'Costco' };
   const GROUP = { egx: ['COMI', 'TMGH', 'ETEL', 'PHDC', 'SWDY', 'ORAS', 'FWRY', 'ABUK', 'HRHO', 'CLHO', 'JUFO', 'ALCN', 'MFPC', 'EAST', 'EFIH', 'EMFD', 'BQDC', 'EGAL', 'AMOC', 'SKPC', 'EFID'], us: ['AAPL', 'MSFT', 'NVDA', 'AMZN', 'GOOGL', 'META', 'TSLA', 'JPM', 'XOM', 'AVGO', 'BRK.B', 'WMT', 'V', 'ORCL', 'COST'] };
   // the shared masthead and menu (desk/nav.js, with its Find a stock box)
-  { const sc = document.createElement('script'); sc.src = '/desk/nav.js'; sc.onload = () => { window.DeskNav.mount(location.pathname, NAMES, GROUP); if (D) window.DeskNav.label(longDate); }; document.head.appendChild(sc); }
+  { const sc = document.createElement('script'); sc.src = '/desk/nav.js'; sc.onload = () => { window.DeskNav.mount(location.pathname, NAMES, GROUP); if (window.__deskStamp && window.DeskNav.stamp(window.__deskStamp)) document.body.classList.add('stamp-up'); if (D) window.DeskNav.label(longDate); }; document.head.appendChild(sc); }
   const callRows = (rows) => rows.map((c) => `<div class="call-row"><b>${esc(c.name)}</b><span class="conf">${esc(c.confidence[0].toUpperCase() + c.confidence.slice(1))}</span><span class="why">${esc(c.why)}</span></div>`).join('');
   const PILL = { 'open': 'open', 'on track': 'ok', 'right': 'ok', 'wrong': 'bad', 'closed': 'open' };
 
@@ -144,6 +144,9 @@
     $('title').textContent = S.name;   // the date is in the masthead
     document.title = 'Markets Desk · ' + S.name + ' · ' + day(D.date).toLocaleDateString('en-US', { day: 'numeric', month: 'short' }).replace('Sept', 'Sep');
     $('stamp').innerHTML = 'Closes to ' + esc(day(asOf(S.market)).toLocaleDateString('en-US', { weekday: 'short', day: 'numeric', month: 'short' }).replace('Sept', 'Sep').replace(',', '')) + '<br>Fetched ' + esc(String(D.fetched || '').replace(/\b(\d{1,2}) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\b/, '$2 $1'));
+    // on a laptop the two lines sit on the right of the market's menu row, as one line; a phone keeps them under the title
+    window.__deskStamp = $('stamp').innerText.replace(/\s*\n\s*/g, ' · ');
+    if (window.DeskNav && window.DeskNav.stamp(window.__deskStamp)) document.body.classList.add('stamp-up');
     // the finding: its first sentence in bold, the day's point; the coming dates live in the Week ahead card
     $('finding').innerHTML = lede(X.finding);
 
