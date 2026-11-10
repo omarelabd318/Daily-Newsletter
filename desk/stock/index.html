@@ -88,7 +88,7 @@ try {
   M.$('crumb').textContent = M.NAMES[t]; M.$('mkt').textContent = egx ? 'EGX stocks' : 'Wall Street stocks'; M.$('mkt').href = egx ? '/desk/stocks/egypt/' : '/desk/stocks/us/'; M.$('deskcrumb').href = egx ? '/desk/egypt/' : '/desk/usa/';
   M.$('name').innerHTML = `${M.esc(M.NAMES[t])} <span class="meta" style="font-size:15px;font-weight:400">${M.esc(t)}${p.sector ? ' · ' + M.esc(p.sector) : ''}</span>`;
   document.title = M.NAMES[t] + ' · Markets Desk';
-  M.$('cap').dataset.src = egx ? 'Mubasher' : 'Yahoo Finance, Nasdaq';
+  M.$('cap').dataset.src = egx ? 'Mubasher, TradingView' : 'Yahoo Finance, Nasdaq';
   const mAsOf = M.asOfFor(egx ? 'egx' : 'us');   // the stock's market's last session (Thursday for the EGX, Friday for Wall Street at weekends)
   const fresh = s.length && s.at(-1)[0] === mAsOf, dc = fresh ? M.change(s, 0) : null, y = M.ytd(s);
   const when = M.day(mAsOf).toLocaleDateString('en-US', { weekday: 'long' });

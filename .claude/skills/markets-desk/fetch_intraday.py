@@ -5,7 +5,8 @@ Usage:
   python3 .claude/skills/markets-desk/fetch_intraday.py
 
 Writes desk/intraday.json ("week" also keeps the last five sessions of each market every 15 minutes, for
-the 1W charts, and "month" the last 23 every 30 minutes, for the 1M charts): the EGX30 and the 12 Egyptian stocks from Mubasher (Cairo time), and the
+the 1W charts, and "month" the last 23 every 30 minutes, for the 1M charts): the EGX30 and the 12 Egyptian stocks from Mubasher (Cairo time), the
+EGX70 EWI from TradingView's chart feed (tradingview.py; no other free source publishes it through the session), and the
 Nasdaq Composite and the 12 US stocks from Nasdaq (New York time, regular session only), and the last
 24 hours of Bitcoin (CoinGecko). Yahoo adds the S&P 500, the Dow, Brent, gold and the dollar index on the
 days it answers (it often refuses cloud requests). When it refuses, the S&P 500 and the Dow are drawn from
@@ -249,6 +250,54 @@ def market(name, keys, fn, done):
     return {"session": day, "series": series}, f"{name}: {day}, {len(series)} series" + (f" (missing {', '.join(missing)})" if missing else "")
 
 
+def tv_sessions(symbol, count=2500):
+    """{session (Cairo date): [[HH:MM, close], ...]} from TradingView's 5-minute bars, inside the EGX's hours."""
+    import tradingview
+    by_day = {}
+    for t, v in tradingview.bars(symbol, "5", count):
+        c = t.astimezone(CAIRO)
+        if "10:00" <= c.strftime("%H:%M") <= "14:30":
+            by_day.setdefault(c.date().isoformat(), []).append([c.strftime("%H:%M"), v])
+    return by_day
+
+
+def egx_month(out, now_cairo):
+    """The EGX month (every 30 minutes, for the 1M charts) is built one session a run from Mubasher, which cannot
+    serve past sessions: while it is short, the finished sessions it lacks come from TradingView's bars."""
+    month = out.setdefault("month", {})
+    have = {x["session"]: x for x in month.get("egx", [])}
+    if len(have) >= 21:
+        return f"EGX month: {len(have)} sessions"
+    today = now_cairo.date().isoformat()
+    finished = lambda d: d < today or now_cairo.strftime("%H:%M") >= "14:45"
+    got = {}
+    with ThreadPoolExecutor(4) as pool:
+        for k, res in zip(["EGX30"] + EGX, pool.map(lambda k: _try(tv_sessions, "EGX:" + k), ["EGX30"] + EGX)):
+            if res:
+                got[k] = res
+    days = sorted(d for d in (got.get("EGX30") or {}) if finished(d) and d not in have)[-23:]
+    for d in days:
+        series = {k: every_n(v[d], 30) for k, v in got.items() if len(v.get(d, [])) >= 6}
+        if "EGX30" in series:
+            have[d] = {"session": d, "series": series}
+    month["egx"] = [have[d] for d in sorted(have)][-23:]
+    return f"EGX month: {len(month['egx'])} sessions ({len(days)} added from TradingView, {len(got)} of {1 + len(EGX)} series answered)"
+
+
+def egx70(out):
+    """Adds "EGX70EWI" to each saved EGX session that lacks it: every 5 minutes for the day, 15 for the week, 30 for
+    the month, in Cairo time like Mubasher's series."""
+    by_day = tv_sessions("EGX:EGX70EWI")
+    added = 0
+    targets = [(out.get("egx"), every5)] + [(x, every15) for x in out.get("week", {}).get("egx", [])] + [(x, lambda p: every_n(p, 30)) for x in out.get("month", {}).get("egx", [])]
+    for x, thin in targets:
+        pts = by_day.get((x or {}).get("session"))
+        if x and pts and len(pts) >= 6 and "EGX70EWI" not in x["series"]:
+            x["series"]["EGX70EWI"] = thin(pts)
+            added += 1
+    return f"EGX70 EWI: TradingView, {len(by_day)} sessions fetched, added to {added} saved session{'s' if added != 1 else ''}"
+
+
 def _try(fn, k):
     try:
         return fn(k)
@@ -317,6 +366,16 @@ def main():
             month["us"] = [have[d] for d in sorted(have)][-23:]
         print(f"US month: {len(month.get('us', []))} sessions" + (" (Polygon and Yahoo refused the backfill)" if not got else f", {got} series filled"))
     out["month"] = month
+    # the EGX70 EWI through each saved EGX session (day, week and month): only TradingView publishes it through the
+    # session, so its bars are added beside Mubasher's, a whole month at a time
+    try:
+        print(egx_month(out, now_cairo))
+    except Exception as e:
+        print(f"EGX month: TradingView failed ({e}); kept what was saved")
+    try:
+        print(egx70(out))
+    except Exception as e:
+        print(f"EGX70 EWI: TradingView failed ({e}); its lines keep what was saved")
     data, line = global_market()
     if data:
         out["global"] = data

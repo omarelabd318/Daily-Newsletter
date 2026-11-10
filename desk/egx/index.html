@@ -96,9 +96,8 @@
   const draw = async () => {
     const s = inUSD ? M.usd(idx) : idx, unit = inUSD ? ' in dollars' : '';
     M.$('lvl').textContent = M.num(M.last(s), inUSD ? 1 : 2); M.$('dchg').innerHTML = M.heroChg(s, per);
-    M.$('cap').dataset.src = ikey === 'egx70' ? 'Investing.com history, then the desk\'s log' : 'Mubasher';
+    M.$('cap').dataset.src = ikey !== 'egx70' ? (per[1] === 30 ? 'Mubasher, TradingView' : 'Mubasher') : per[1] && per[1] > 30 ? 'Investing.com history, then the desk\'s log' : 'TradingView';
     const nm = ikey === 'egx70' ? 'EGX70 EWI' : 'EGX30';
-    if (!per[1] && ikey === 'egx70') { M.$('chart').innerHTML = '<p class="sub" style="padding:24px 0">No source publishes the EGX70 EWI through the session, so it has no one-day line: pick 1W or longer.</p>'; M.$('cap').innerHTML = ''; return; }
     if (!per[1]) { const c1 = M.dayChart(M.$('chart'), 'egx', ikey === 'egx70' ? 'EGX70EWI' : 'EGX30', nm, Charts.fmt.int, inUSD, s.length > 1 ? s.at(-2)[1] : null); M.$('cap').innerHTML = c1 || ''; return; }
     if (per[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; idx = M.series((e) => e[ikey], 'egx'); return draw(); }
     const w1 = per[1] === 7 || per[1] === 30 ? M.weekChart(M.$('chart'), 'egx', ikey === 'egx70' ? 'EGX70EWI' : 'EGX30', nm, Charts.fmt.int, inUSD, per[1]) : null;
@@ -112,8 +111,6 @@
     M.$('itabs').hidden = false; M.$('iname').hidden = true;
     M.toggle(M.$('itabs'), ['EGX30', 'EGX70 EWI'], (i) => {
       ikey = i ? 'egx70' : 'egx30'; idx = M.series((e) => e[ikey], 'egx');
-      // no one-day line is saved for the EGX70 EWI (no source publishes its session minute by minute): it opens on 1M
-      if (i && !per[1]) { const b = [...M.$('seg').querySelectorAll('button')].find((x) => x.textContent === '1M'); if (b) return b.click(); }
       draw();
     });
   }
