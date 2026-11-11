@@ -8,9 +8,9 @@
 <meta name="color-scheme" content="light">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&family=Inter:wght@500;600;700&family=UnifrakturCook:wght@700&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2352d6b5'/%3E%3Cpath d='M18 14h14c11 0 18 7 18 18s-7 18-18 18H18z' fill='%230e1216'/%3E%3C/svg%3E">
-<script>document.documentElement.className='js';try{if(localStorage.getItem('width')==='wide')document.documentElement.setAttribute('data-width','wide');var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+<script>document.documentElement.className='js';try{if(localStorage.getItem('width')==='wide')document.documentElement.setAttribute('data-width','wide');var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark');else if(t==='paper')document.documentElement.setAttribute('data-theme','paper')}catch(e){}</script>
 <style>
 :root{
   --ground:#0e1216; --raised:#151b21; --ink:#eef2f4; --ink2:#a9b4be; --accent:#52d6b5; --accent-ink:#07201a;
@@ -444,6 +444,55 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
   .f-band > div{padding:14px 12px} .f-band > :nth-child(odd){padding-left:0} .f-big{font-size:27px} .f-big.q{font-size:18px}
 }
 @media print{.front{display:none}.in-front{display:block}}
+/* the lead image: paper mode only, for now */
+.f-fig{display:none;margin:0 0 14px}
+:root[data-theme="paper"] .f-fig{display:block}
+.f-fig img{display:block;width:100%;max-height:420px;object-fit:cover;object-position:50% 35%;background:var(--raised)}
+.f-fig figcaption{padding-top:6px;font:italic 14px/1.4 var(--serif);color:var(--ink2)}
+.f-fig figcaption span{margin-left:4px;font:600 9.5px/1.4 var(--sans);font-style:normal;letter-spacing:.1em;text-transform:uppercase}
+.f-fig figcaption a{color:inherit;text-decoration:none} .f-fig figcaption a:hover{text-decoration:underline}
+.f-banner{display:none}
+
+/* paper: the page as a printed front page. Newsprint, a blackletter name, a banner headline, justified columns. */
+:root[data-theme="paper"]{color-scheme:light;
+  --ground:#e8e3d6; --raised:#ddd6c5; --ink:#14110d; --ink2:#4f4a40; --accent:#14110d; --accent-ink:#e8e3d6; --rule:#b9b19d;
+  --serif:"Old Standard TT","Newsreader",Georgia,serif; --up:#14110d; --down:#14110d}
+:root[data-theme="paper"] body{background-image:radial-gradient(rgba(60,50,30,.05) 1px,transparent 1px);background-size:3px 3px;font-size:19px}
+:root[data-theme="paper"] .mast h1{font:700 clamp(44px,7.4vw,98px)/1 "UnifrakturCook",var(--serif);letter-spacing:.01em}
+:root[data-theme="paper"] .what{font:italic 15px var(--serif);letter-spacing:0;text-transform:none}
+:root[data-theme="paper"] .f-strip{border-top:3px double var(--ink);border-bottom:3px double var(--ink)}
+:root[data-theme="paper"] .f-strip a,:root[data-theme="paper"] .f-strip div{border-left-color:var(--ink)}
+:root[data-theme="paper"] .f-strip b{font-family:"Playfair Display",var(--serif);font-weight:700}
+:root[data-theme="paper"] .f-up,:root[data-theme="paper"] .f-dn{color:var(--ink)}
+:root[data-theme="paper"] .f-banner{display:block;margin:6px 0 14px;padding-bottom:14px;text-align:center;border-bottom:1px solid var(--ink)}
+:root[data-theme="paper"] .f-banner h2{margin:0;font:900 clamp(30px,4.6vw,62px)/1.03 "Playfair Display",var(--serif);letter-spacing:-.01em;text-transform:uppercase}
+:root[data-theme="paper"] .f-banner h2 a{color:inherit;text-decoration:none}
+:root[data-theme="paper"] .f-banner p{margin:10px auto 0;max-width:1040px;font:600 11px/1.6 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
+:root[data-theme="paper"] .f-lead > h2,:root[data-theme="paper"] .f-lead > .f-kick{display:none}
+:root[data-theme="paper"] .f-main{margin-top:0}
+:root[data-theme="paper"] .f-main > *{border-left-color:var(--ink)}
+:root[data-theme="paper"] .f-fig img{filter:grayscale(1) contrast(1.12) brightness(1.04);border:1px solid var(--ink)}
+:root[data-theme="paper"] .f-dek{font:italic 700 21px/1.3 "Playfair Display",var(--serif)}
+:root[data-theme="paper"] .f-body,:root[data-theme="paper"] .f-col p,:root[data-theme="paper"] .f-band p,:root[data-theme="paper"] .s-body p,:root[data-theme="paper"] .s-body li{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+:root[data-theme="paper"] .f-body{column-rule:1px solid var(--rule)}
+:root[data-theme="paper"] .f-body::first-letter{font-family:"Playfair Display",var(--serif);font-weight:900}
+:root[data-theme="paper"] .f-col h3,:root[data-theme="paper"] .f-big,:root[data-theme="paper"] .s-body h3{font-family:"Playfair Display",var(--serif);font-weight:900}
+:root[data-theme="paper"] .f-col article{border-top-color:var(--ink)}
+:root[data-theme="paper"] .f-col p,:root[data-theme="paper"] .f-band p,:root[data-theme="paper"] .f-watch{color:var(--ink)}
+:root[data-theme="paper"] .f-band{border-top:3px double var(--ink)} :root[data-theme="paper"] .f-band > div{border-left-color:var(--ink)}
+:root[data-theme="paper"] .f-kick,:root[data-theme="paper"] .s h2{color:var(--ink)}
+:root[data-theme="paper"] .s h2{text-align:center;border-top:3px double var(--ink);border-bottom:1px solid var(--ink);padding:8px 0}
+:root[data-theme="paper"] .s+.s{border-top:0}
+:root[data-theme="paper"] .s-body strong:first-child{font-family:"Playfair Display",var(--serif)}
+:root[data-theme="paper"] a{color:var(--ink);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+:root[data-theme="paper"] .f-strip a,:root[data-theme="paper"] .toc a,:root[data-theme="paper"] .top a,:root[data-theme="paper"] .front a{text-decoration:none}
+@media (min-width:1100px){
+  /* a printed page runs its stories in columns: the sections below the front use two, with a rule between */
+  :root[data-theme="paper"] .frame{max-width:1240px}
+  :root[data-theme="paper"] .s-body .run{column-count:2;column-gap:44px;column-rule:1px solid var(--rule)}
+  :root[data-theme="paper"] .run > p,:root[data-theme="paper"] .run > blockquote,:root[data-theme="paper"] .run li{break-inside:avoid}
+  :root[data-theme="paper"] #widthBtn{display:none}
+}
 </style>
 </head>
 <body>
@@ -720,7 +769,12 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     // the lead: its first sentence is the standfirst, the rest runs in two columns
     var lb = body(lead.story), dek = first(lead.story), lhtml = lb.innerHTML.trim(), ltxt = lb.textContent.trim();
     var restTxt = ltxt.indexOf(dek) === 0 ? ltxt.slice(dek.length).trim() : '';
-    var h = '<div class="f-main"><div class="f-lead"><span class="f-kick">'+esc(lead.label || 'The big story')+'</span><h2>'+link(lead, esc(lead.text))+'</h2>'+(restTxt.length > 120 ? '<p class="f-dek">'+esc(dek)+'</p><p class="f-body">'+esc(restTxt)+'</p>' : '<p class="f-body cap">'+lhtml+'</p>')
+    // the edition's lead image, when it has one (editions/index.json: an openly licensed photo, or the site's own chart)
+    var im = ed.image, fig = im && im.src ? '<figure class="f-fig"><img src="'+esc(im.src)+'" alt="'+esc(im.alt || '')+'" loading="eager">'
+      + '<figcaption>'+esc(im.caption || '')+' <span>'+(im.url ? '<a href="'+esc(im.url)+'" target="_blank" rel="noopener">' : '')+esc(im.credit || '')+(im.url ? '</a>' : '')+'</span></figcaption></figure>' : '';
+    // paper mode sets the lead's headline as a banner across the page, with the next stories named under it
+    var h = '<div class="f-banner"><h2>'+link(lead, esc(lead.text))+'</h2><p>'+mid.map(function(it){ return esc(it.text); }).join(' \u00b7 ')+'</p></div>'
+      + '<div class="f-main"><div class="f-lead"><span class="f-kick">'+esc(lead.label || 'The big story')+'</span><h2>'+link(lead, esc(lead.text))+'</h2>'+fig+(restTxt.length > 120 ? '<p class="f-dek">'+esc(dek)+'</p><p class="f-body">'+esc(restTxt)+'</p>' : '<p class="f-body cap">'+lhtml+'</p>')
       + link(lead, '<span class="f-more">Continue in '+esc(sectionOf(lead.story))+' ↓</span>') + '</div><div class="f-col">'
       + mid.map(function(it){ return '<article><span class="f-kick">'+esc(it.label)+'</span><h3>'+link(it, esc(it.text))+'</h3><p>'+esc(first(it.story))+'</p></article>'; }).join('') + '</div><div class="f-rail">'
       + (rest.length ? '<h4>Also today</h4><ol class="f-glance">'+rest.map(function(it, i){ return '<li><span><small>'+esc(it.label)+'</small>'+link(it, esc(it.text))+'</span></li>'; }).join('')+'</ol>' : '')
@@ -895,15 +949,17 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
   });
   // light/dark switch, remembered on this device
   function syncThemeBtn(){
-    var dark = document.documentElement.getAttribute('data-theme') === 'dark';
-    $('themeBtn').textContent = dark ? 'Light' : 'Dark';
-    $('themeBtn').setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+    // three looks, in a cycle: light, dark, paper (a printed front page); the button names the next one
+    var now = document.documentElement.getAttribute('data-theme') || 'light', next = {light:'Dark', dark:'Paper', paper:'Light'}[now] || 'Dark';
+    $('themeBtn').textContent = next;
+    $('themeBtn').setAttribute('aria-label', 'Switch to ' + next.toLowerCase() + ' mode');
   }
   $('themeBtn').addEventListener('click',function(){
-    var dark = document.documentElement.getAttribute('data-theme') !== 'dark';
-    if(dark) document.documentElement.setAttribute('data-theme','dark'); else document.documentElement.removeAttribute('data-theme');
-    try{ localStorage.setItem('theme', dark ? 'dark' : 'light'); }catch(e){}
+    var now = document.documentElement.getAttribute('data-theme') || 'light', next = {light:'dark', dark:'paper', paper:'light'}[now] || 'light';
+    if(next === 'light') document.documentElement.removeAttribute('data-theme'); else document.documentElement.setAttribute('data-theme', next);
+    try{ localStorage.setItem('theme', next); }catch(e){}
     syncThemeBtn();
+    window.dispatchEvent(new Event('resize'));   // the front page's columns are measured again in the new type
   });
   syncThemeBtn();
   // wide or narrow page, remembered on this device (offered on large screens only)
