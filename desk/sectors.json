@@ -1,0 +1,38 @@
+{
+ "note": "The desk's line on each EGX sector for /desk/sectors/: what drives it and what to watch. Written by the run; reviewed on the first Sunday of each month and when the driver changes (a rate decision, a gas cut, a results season). The figures on the page come from desk/fairvalue.json and desk/movers.json.",
+ "written": "2026-11-11",
+ "sectors": {
+  "Banks": {
+   "drivers": "Interest rates and deposit growth. Banks hold large books of treasury bills paying about 26%, so high rates lift their income, and CIB's margin was 8.02% in the third quarter. They trade on about 5 times earnings, the cheapest group on the exchange, because that income falls when rates do.",
+   "watch": "The central bank's December 17 meeting; third-quarter results, where last year's provision releases make growth look weak."
+  },
+  "Real estate": {
+   "drivers": "Interest rates, twice over: buyers pay in instalments and developers borrow to build. Profit is booked on delivery, so it trails sales by years and swings with handovers. Land held at old prices is the hidden asset brokers value and earnings do not show.",
+   "watch": "Palm Hills' results on November 16; whether sales hold with the policy rate at 20%."
+  },
+  "Materials": {
+   "drivers": "Gas supply and world prices. Fertilizer makers (MOPCO, Abu Qir) turn state-supplied gas into urea sold in dollars, and MOPCO's gas is cut by 33%. Egypt Aluminium and the cement makers follow metal and construction prices and the cost of power.",
+   "watch": "Gas allocations through the winter; urea and aluminium prices; the state's planned sale of an Egypt Aluminium stake."
+  },
+  "Industrials": {
+   "drivers": "Orders and the pound. Elsewedy and Orascom Construction earn much of their revenue abroad in hard currency, so a weaker pound flatters them and a firmer one does the opposite. Alexandria Containers follows trade volumes through the ports; Suez traffic is running 36% above last year.",
+   "watch": "Elsewedy's results on November 16; the Orascom–OCI merger, due in December."
+  },
+  "Consumer": {
+   "drivers": "Household spending against input costs. Food makers (Juhayna, Edita) have raised prices faster than costs this year, and Juhayna's nine-month profit rose 60%. Eastern Company's profit depends on cigarette prices the state sets.",
+   "watch": "Whether price rises stick as inflation, 12.7% in October, slows; Eastern's results on November 18."
+  },
+  "Healthcare": {
+   "drivers": "Growth, priced for it. Hospitals and drug makers trade on about 30 times earnings, the highest multiples on the exchange, on steady demand and regulated drug prices that are revised upward after each devaluation.",
+   "watch": "Cleopatra's results on November 16; any new round of drug repricing."
+  },
+  "Technology": {
+   "drivers": "Payment volumes and data. Fawry and e-finance grow with the shift from cash and with inflation; Telecom Egypt earns from data, its Vodafone Egypt stake and subsea cables, where revenue grew 31% last year. Fees and licenses are set by regulators.",
+   "watch": "Telecom Egypt's results on November 12; e-finance's on November 18."
+  },
+  "Financials": {
+   "drivers": "Market turnover and deal flow. Brokers and investment banks (EFG Holding) earn most when trading is busy, and Tuesday's turnover was the highest in a year. Holding companies are valued on what they own, so a P/E says little about them.",
+   "watch": "EFG Holding's results on November 18."
+  }
+ }
+}

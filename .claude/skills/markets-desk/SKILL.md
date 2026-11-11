@@ -103,6 +103,10 @@ logged daily (fetch_figures.py lists them as "Desk only") but are not rows in th
   refreshes the market values (`cap` in desk/stocks.json) each morning.
 - **Views** `/desk/views/`: The record (every view and projection) and Fair value (EGX stocks against the desk's fair
   value; see Fair value below).
+- **Sectors** `/desk/sectors/` (Egypt's menu): the EGX by sector, built from desk/fairvalue.json and the heatmap: each
+  sector's P/E, return on equity, distance to fair value and moves, then its stocks ranked. The two lines of text per
+  sector (`drivers`, `watch`) are in `desk/sectors.json`: review them on the first Sunday of the month and whenever a
+  sector's driver changes (a rate decision, a gas cut, the end of a results season), with checked figures only.
 - **Stock page** `/desk/stock/?t=TICKER`: one page per stock: chart against its index, performance,
   valuation, trading, dates coming up, the desk's projections and views on it, and its news.
 
@@ -338,6 +342,20 @@ Each of the desk's stocks gets its own search every morning, on top of the newsl
    TradingView or Mubasher catch up. Add the results date to Coming up when a company announces it.
 
 No news is a valid result: never pad a stock with filler. Its page then shows its figures and older news.
+
+## The desk's note on a stock
+
+`brief` in `desk/stocks.json`, shown on the stock's page as "The desk's note": the standing view of the company, as
+opposed to the day's news. `{"written", "business", "drivers": [{"name", "text"}], "value", "risks": [...], "change"}`:
+- `business`: what it is and how it makes money, in two sentences with its key figure.
+- `drivers`: the three or four things that move its profit, each with the latest figure the desk has checked.
+- `value`: its multiples and the desk's fair value, in two sentences, with the catch.
+- `risks`: three, specific to the company.
+- `change`: what would change the desk's view, something that can be observed (a results date, a figure, a decision).
+Only facts already checked for the desk (its news, results, valuation card and fair-value table) or checked now at
+the source; no figure from memory. Six were written on November 11, 2026 (CIB, MOPCO, Palm Hills, Elsewedy, Fawry,
+Talaat Moustafa). Write two more each Sunday until every desk stock has one, Egyptian stocks first, then rewrite a
+stock's note on the day it reports and whenever it is three months old.
 
 ## The week ahead
 

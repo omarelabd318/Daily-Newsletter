@@ -649,3 +649,24 @@ table.fv .fv-more td{padding:4px 0 16px;white-space:normal;background:var(--rais
 .fv-how li{margin:0 0 7px}
 @media (max-width:860px){.fv-gw{display:none}table.fv{min-width:760px}.fv-bh,.fv-bc{width:130px}.fv-bar{width:120px}.fv-name{max-width:150px}}
 @media (max-width:860px){.fv-more td > *{position:sticky;left:12px;width:calc(100vw - 72px);max-width:calc(100vw - 72px);margin-right:0}}
+
+/* stock page: the desk's note and fair value line */
+.brief{display:grid;grid-template-columns:1.15fr 1.15fr .8fr;gap:8px 40px}
+.brief h3{margin:14px 0 4px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.brief > div > h3:first-child{margin-top:0}
+.brief p{margin:0 0 8px;font-size:14px;line-height:21px}
+.brief b{font-weight:600}
+.brief .brief-lead{font-size:16px;line-height:24px}
+.brief ul{margin:0;padding-left:16px;font-size:14px;line-height:21px} .brief li{margin-bottom:6px}
+.fv-line{margin:10px 0 0;padding-top:10px;border-top:1px solid var(--rule);font-size:13px}
+.fv-line b{margin:0 4px 0 6px;font-weight:600}
+@media (max-width:1000px){.brief{grid-template-columns:1fr}}
+
+/* sectors */
+table.fv.sx{min-width:760px} table.fv.sx a{color:inherit;text-decoration:none} table.fv.sx a:hover{text-decoration:underline}
+.sx-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap);align-items:start}
+.sx-d{margin:4px 0 8px;font-size:14px;line-height:21px}
+.sx-w{margin:0 0 12px;font-size:13px;line-height:19px;color:var(--muted)} .sx-w b{margin-right:6px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--brand)}
+.sx-t td:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:0;width:46%} .sx-t a{color:inherit;text-decoration:none}
+.sx-n{font-size:12px;color:var(--muted)}
+@media (max-width:1100px){.sx-grid{grid-template-columns:minmax(0,1fr)}}

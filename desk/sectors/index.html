@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2352d6b5'/%3E%3Cpath d='M6 22l7-7 5 4 9-11' fill='none' stroke='%230e1216' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<title>Sectors · Markets Desk</title>
+<meta name="description" content="The EGX by sector: what drives each one, how it is valued and its stocks ranked against the desk's fair value.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap">
+<script>try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+<link rel="stylesheet" href="/desk/desk.css">
+</head>
+<body>
+<main class="canvas">
+  <div class="titlerow"><div>
+    <h1>EGX sectors</h1>
+    <p class="finding">What drives each sector, how it is priced against the rest of the exchange, and its stocks ranked by the desk's fair value.</p>
+  </div></div>
+  <div class="pages">
+    <section class="card c12"><div class="card-h"><h2>The sectors side by side</h2><span class="meta" id="sx-meta"></span></div><div class="fv-wrap"><table class="fv sx" id="sx-all"></table></div>
+      <p class="sub">P/E and upside are the middle stock's in each sector; the month's move is the average of its EGX30 members. Sorted by upside to fair value.</p></section>
+    <div class="c12 sx-grid" id="sx"></div>
+  </div>
+</main>
+<script src="/desk/charts.js"></script>
+<script src="/desk/tags.js"></script>
+<script src="/desk/desk.js"></script>
+<script>
+(async () => {
+  const M = Desk, D = await M.init('/desk/sectors/'); if (!D) return;
+  const [F, N, MV] = await Promise.all([M.get('/desk/fairvalue.json'), M.get('/desk/sectors.json'), M.get('/desk/movers.json')]);
+  if (!F || !F.stocks) { M.$('sx').innerHTML = '<p class="sub">No sector figures yet.</p>'; return; }
+  const heat = {}; (((MV || {}).egx || {}).heat || {}).rows?.forEach((r) => { heat[r.t] = r; });
+  const med = (a) => { const s = a.filter((v) => v != null).sort((x, y) => x - y); return s.length ? (s.length % 2 ? s[(s.length - 1) / 2] : (s[s.length / 2 - 1] + s[s.length / 2]) / 2) : null; };
+  const avg = (a) => { const s = a.filter((v) => v != null); return s.length ? s.reduce((x, y) => x + y, 0) / s.length : null; };
+  const G = {}; F.stocks.forEach((x) => { (G[x.group] = G[x.group] || []).push(x); });
+  const rows = Object.entries(G).filter(([g, l]) => l.length >= 2 && g !== 'Other').map(([g, l]) => ({ g, l: l.slice().sort((a, b) => b.upside - a.upside), pe: med(l.map((x) => x.pe)), up: med(l.map((x) => x.upside)), roe: med(l.map((x) => x.roe)),
+    d1: avg(l.map((x) => heat[x.t] && heat[x.t].d1)), m1: avg(l.map((x) => heat[x.t] && heat[x.t].m1)), cap: l.reduce((s, x) => s + (x.cap || 0), 0) })).sort((a, b) => b.up - a.up);
+  const id = (g) => 's-' + g.toLowerCase().replace(/\W+/g, '-'), n1 = (v, d = 1) => v == null ? '<span class="fv-na">–</span>' : v.toFixed(d);
+  const chg = (v) => v == null ? '<span class="fv-na">–</span>' : `<span class="${M.cls(v)}">${M.pct(v)}</span>`;
+  M.$('sx-meta').textContent = `${F.count} stocks · ${M.short(F.asOf)}`;
+  M.$('sx-all').innerHTML = `<thead><tr><th>Sector</th><th class="num">Stocks</th><th class="num">Market value</th><th class="num">P/E</th><th class="num">Return on equity</th><th class="num">To fair value</th><th class="num">Last session</th><th class="num">Past month</th></tr></thead><tbody>`
+    + rows.map((r) => `<tr><td><a href="#${id(r.g)}"><b>${r.g}</b></a></td><td class="num">${r.l.length}</td><td class="num">EGP ${Math.round(r.cap / 1e9)}bn</td><td class="num">${n1(r.pe)}</td><td class="num">${n1(r.roe, 0)}${r.roe == null ? '' : '%'}</td><td class="num"><b>${chg(r.up)}</b></td><td class="num">${chg(r.d1)}</td><td class="num">${chg(r.m1)}</td></tr>`).join('') + '</tbody>';
+  M.$('sx').innerHTML = rows.map((r) => { const n = ((N || {}).sectors || {})[r.g] || {};
+    return `<section class="card" id="${id(r.g)}"><div class="card-h"><h2>${r.g}</h2><span class="meta">${r.l.length} stocks · P/E ${n1(r.pe)} against ${F.peMedian} for the exchange</span></div>
+      ${n.drivers ? `<p class="sx-d">${M.esc(n.drivers)}</p>` : ''}${n.watch ? `<p class="sx-w"><b>Watch</b> ${M.esc(n.watch)}</p>` : ''}
+      <table class="mini sx-t"><thead><tr><th>Stock</th><th class="num">Price</th><th class="num">P/E</th><th class="num">Month</th><th class="num">Fair value</th><th class="num">Upside</th></tr></thead><tbody>${r.l.map((x) => `<tr><td>${x.desk ? `<a href="/desk/stock/?t=${x.t}"><b>${x.t}</b></a>` : `<b>${x.t}</b>`} <span class="sx-n">${M.esc(x.name.replace(/ (S\.A\.E\.?|SAE|Plc|Company|Co\.?)$/i, '').replace(/ - Egypt.*$/, '').slice(0, 34))}</span></td><td class="num">${x.price.toFixed(2)}</td><td class="num">${x.pe}</td><td class="num">${chg(heat[x.t] ? heat[x.t].m1 : null)}</td><td class="num">${x.fair.toFixed(2)}</td><td class="num"><b>${chg(x.upside)}</b>${x.confidence === 'low' ? ' <span class="sx-n" title="Low confidence: the estimates disagree">?</span>' : ''}</td></tr>`).join('')}</tbody></table></section>`; }).join('');
+  if (location.hash) { const el = document.querySelector(location.hash); if (el) el.scrollIntoView(); }
+})();
+</script>
+</body>
+</html>

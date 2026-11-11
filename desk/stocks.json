@@ -127,6 +127,35 @@
     "thesis": "No change to the desk's margin view: the October 29 hike lifts margins only from the fourth quarter, and at about 4.8 times earnings the results risk has passed.",
     "source": "Mubasher Banks",
     "url": "https://egyptbanks.info/13127/article/%D8%A3%D8%B1%D8%A8%D8%A7%D8%AD-cib-%D8%AA%D8%B1%D8%AA%D9%81%D8%B9-1-6-%D8%A5%D9%84%D9%89-63-1-%D9%85%D9%84%D9%8A%D8%A7%D8%B1-%D8%AC%D9%86%D9%8A%D9%87-%D8%AE%D9%84%D8%A7%D9%84-%D8%AA%D8%B3%D8%B9%D8%A9-%D8%A3%D8%B4%D9%87%D8%B1-%D9%85%D9%86-2026"
+   },
+   "brief": {
+    "written": "2026-11-11",
+    "business": "Egypt's largest private bank and the EGX30's heaviest stock. It earns the gap between what it pays depositors and what loans and government bills pay it: net interest income was EGP 93.3bn in nine months, against profit of EGP 63.1bn.",
+    "drivers": [
+     {
+      "name": "Interest rates",
+      "text": "The margin was 8.02% in the third quarter, down from 8.40% for the nine months as earlier cuts fed through; October's 100-point hike works the other way."
+     },
+     {
+      "name": "Deposit growth",
+      "text": "Deposits rose 30.5% this year to about EGP 1.45tn. More cheap deposits put into bills at 26% is the simplest source of profit."
+     },
+     {
+      "name": "Bad loans",
+      "text": "1.47% of loans, covered 343%, with capital adequacy at 28.8%: there is room to absorb a weak year."
+     },
+     {
+      "name": "Foreign money",
+      "text": "The most liquid Egyptian stock, so it rises first when foreigners return and falls first when they leave."
+     }
+    ],
+    "value": "4.9 times earnings and 1.6 times book for a 34% return on equity. The desk's fair value is about EGP 159, measured against other banks only.",
+    "risks": [
+     "Rate cuts arriving faster than loan growth can make up.",
+     "A tax or reserve change on banks' bill holdings.",
+     "Last year's profit included an EGP 13.1bn provision release, so reported growth looks weak until the fourth quarter laps it."
+    ],
+    "change": "Management targets EGP 80–85bn of profit for 2026. A fourth quarter under about EGP 17bn would miss it and weaken the case."
    }
   },
   "TMGH": {
@@ -173,6 +202,31 @@
       "value": "EGP 44.49"
      }
     ]
+   },
+   "brief": {
+    "written": "2026-11-11",
+    "business": "Talaat Moustafa is Egypt's largest developer by sales (Madinaty, Noor, the North Coast) and owns hotels that earn in dollars. It signed a deal with the state on October 28 to develop four projects with targeted investment of about EGP 11 trillion.",
+    "drivers": [
+     {
+      "name": "Sales and the land bank",
+      "text": "Scale lets it sell on long instalment plans others cannot match."
+     },
+     {
+      "name": "Hotels",
+      "text": "A recurring dollar income that developers without hotels lack."
+     },
+     {
+      "name": "Interest rates",
+      "text": "As for every developer, dear money slows buyers; the desk's open view has developers lagging while rates stay high."
+     }
+    ],
+    "value": "11.5 times earnings and 1.9 times book. Analysts' targets are well above the price on the land bank; today's earnings and book value put it slightly below. The desk's fair value is about EGP 80.",
+    "risks": [
+     "Execution on a deal far larger than anything it has built.",
+     "Rates staying high.",
+     "A richer valuation than other developers leaves less margin."
+    ],
+    "change": "Detail on how the state deal is financed and when it starts to earn."
    }
   },
   "ABUK": {
@@ -301,6 +355,31 @@
       "value": "EGP 6.63"
      }
     ]
+   },
+   "brief": {
+    "written": "2026-11-11",
+    "business": "Palm Hills builds and sells homes in west and east Cairo and on the North Coast, mostly on instalments over several years. Profit is booked when homes are delivered, so it trails sales by years.",
+    "drivers": [
+     {
+      "name": "Interest rates",
+      "text": "Buyers pay in instalments and the company borrows to build; dearer money hurts both. The desk has an open view that developers lag while rates stay high."
+     },
+     {
+      "name": "Sales and deliveries",
+      "text": "New sales show demand today; deliveries decide reported profit."
+     },
+     {
+      "name": "Land",
+      "text": "Al Ahly Pharos values it at EGP 21.40 a share on existing assets alone."
+     }
+    ],
+    "value": "7.2 times earnings and 1.8 times book. The desk's fair value is about EGP 16.50, with all three estimates above the price.",
+    "risks": [
+     "Rates staying high through 2027.",
+     "Cancellations if buyers' incomes lag instalments.",
+     "Construction costs rising faster than contracted prices."
+    ],
+    "change": "Results on November 16: sales holding up at these rates would favor the cheap valuation over the desk's shorter-term caution."
    }
   },
   "XOM": {
@@ -679,7 +758,32 @@
      "source": "Billionaires.Africa",
      "url": "https://www.billionaires.africa/2026/11/01/egyptian-billionaire-ahmed-elsewedys-elsewedy-electric-moves-into-elevators/"
     }
-   ]
+   ],
+   "brief": {
+    "written": "2026-11-11",
+    "business": "Elsewedy Electric makes cables, transformers and meters and builds power and infrastructure projects across Africa and the Gulf. It targets $7bn of revenue this year, much of it earned in hard currency.",
+    "drivers": [
+     {
+      "name": "The order book abroad",
+      "text": "Turnkey projects and cable exports are where growth comes from, and they are paid in dollars."
+     },
+     {
+      "name": "The pound",
+      "text": "A weaker pound flatters its earnings in pounds; the pound's rise to 53.39 does the opposite."
+     },
+     {
+      "name": "Copper and aluminium",
+      "text": "Its main inputs; prices pass through to customers with a lag."
+     }
+    ],
+    "value": "16 times earnings against about 11 for industrials, and 3.7 times book. All three of the desk's estimates sit below the price; fair value is about EGP 95.",
+    "risks": [
+     "A firmer pound cutting translated profit.",
+     "A slow quarter for project awards.",
+     "Paying a full price leaves no room for a miss."
+    ],
+    "change": "Results on November 16. Profit growth well above the 6% of the past year would justify the premium; another flat quarter would not."
+   }
   },
   "ORAS": {
    "sector": "Construction",
@@ -804,7 +908,32 @@
      "source": "Youm7",
      "url": "https://www.youm7.com/story/2026/11/9/بوصلة-الكبار-تتجه-للشراء-اقتناص-أسهم-فوري-والقلعة-والتخلي-عن/7611328"
     }
-   ]
+   ],
+   "brief": {
+    "written": "2026-11-11",
+    "business": "Fawry runs Egypt's largest bill-payment network and has built lending, merchant acquiring and banking services on top of it. First-half revenue was EGP 5.2bn and profit for shareholders EGP 1.6bn.",
+    "drivers": [
+     {
+      "name": "Lending",
+      "text": "Consumer and small-business credit is the fastest-growing line and the most sensitive to rates and bad debts."
+     },
+     {
+      "name": "Payment volumes",
+      "text": "Rise with inflation and with the shift from cash."
+     },
+     {
+      "name": "Regulation",
+      "text": "Fees and licenses are set by the central bank and the FRA."
+     }
+    ],
+    "value": "The estimates disagree more than for any other desk stock: 19 times earnings is dear against its peers, while Al Ahly Pharos puts fair value at EGP 28.60 on its growth. The desk's figure, near the price, is low confidence.",
+    "risks": [
+     "Credit losses rising in the lending book.",
+     "A cap on payment fees.",
+     "Competition from banks' own apps and InstaPay."
+    ],
+    "change": "Two more quarters of profit growth above 40% would settle the argument in the brokers' favor."
+   }
   },
   "HRHO": {
    "sector": "Investment banking",
@@ -1592,7 +1721,32 @@
      "source": "Egypt Oil & Gas",
      "url": "https://egyptoil-gas.com/news/mopco-reports-uninterrupted-operations-despite-reported-gas-supply-cuts-to-fertilizer-plants/"
     }
-   ]
+   ],
+   "brief": {
+    "written": "2026-11-11",
+    "business": "MOPCO makes urea and ammonia at Damietta and sells most of it abroad in dollars. Its main cost is natural gas bought from the state, so profit is the urea price less the gas bill, times how much gas it is given.",
+    "drivers": [
+     {
+      "name": "Gas supply",
+      "text": "It told the exchange on November 8 that its gas has been cut by 33%. Output follows gas almost one for one."
+     },
+     {
+      "name": "Urea prices",
+      "text": "Export prices set revenue; a weaker pound lifts what each dollar of sales is worth in the accounts."
+     },
+     {
+      "name": "The dividend",
+      "text": "A yield above 10% is much of the reason to hold it, and it depends on the first two."
+     }
+    ],
+    "value": "7.1 times earnings with all three of the desk's estimates within about 12% of each other, near EGP 54. Those earnings were made on fuller gas supply than it has now.",
+    "risks": [
+     "The gas cut lasting into 2027 or deepening.",
+     "A fall in urea prices.",
+     "A stronger pound trimming export earnings in pounds."
+    ],
+    "change": "Gas allocations restored: that removes the main reason the stock trades below its fair value. A cut held beyond the winter would lower the fair value itself."
+   }
   },
   "EAST": {
    "sector": "Tobacco",

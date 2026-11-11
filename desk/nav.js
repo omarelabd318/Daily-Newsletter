@@ -6,13 +6,13 @@
   const TOP = [['egypt', 'Egypt', '/desk/egypt/'], ['us', 'United States', '/desk/usa/'], ['global', 'Global', '/desk/global/'], null,
     ['views', 'Views', '/desk/views/'], ['week', 'The week', '/desk/week/'], ['runs', 'Runs', '/desk/runs/']];
   const SUB = {
-    egypt: [['Dashboard', '/desk/egypt/'], ['EGP', '/desk/egp/'], ['EGX', '/desk/egx/'], ['Stocks', '/desk/stocks/egypt/']],
+    egypt: [['Dashboard', '/desk/egypt/'], ['EGP', '/desk/egp/'], ['EGX', '/desk/egx/'], ['Sectors', '/desk/sectors/'], ['Stocks', '/desk/stocks/egypt/']],
     us: [['Dashboard', '/desk/usa/'], ['Wall Street', '/desk/us/'], ['Stocks', '/desk/stocks/us/']],
   };
   // which market and page a path belongs to, and the masthead's label
   function where(path, egxStock) {
     const p = path.replace(/index\.html$/, '');
-    for (const [k, list] of Object.entries(SUB)) for (const [n, h] of list) if (p === h) return { top: k, sub: h, label: k === 'egypt' ? (n === 'Dashboard' ? 'Egypt' : n === 'Stocks' ? 'EGX stocks' : n) : (n === 'Dashboard' ? 'United States' : n === 'Stocks' ? 'Wall Street stocks' : n) };
+    for (const [k, list] of Object.entries(SUB)) for (const [n, h] of list) if (p === h) return { top: k, sub: h, label: k === 'egypt' ? (n === 'Dashboard' ? 'Egypt' : n === 'Stocks' ? 'EGX stocks' : n === 'Sectors' ? 'EGX sectors' : n) : (n === 'Dashboard' ? 'United States' : n === 'Stocks' ? 'Wall Street stocks' : n) };
     if (p === '/desk/stock/') return egxStock ? { top: 'egypt', sub: '/desk/stocks/egypt/', label: 'Egypt · Stocks' } : { top: 'us', sub: '/desk/stocks/us/', label: 'United States · Stocks' };
     for (const x of TOP) if (x && p === x[2]) return { top: x[0], sub: null, label: x[1] };
     return { top: null, sub: null, label: '' };

@@ -50,6 +50,11 @@
       <div id="next"></div>
     </section>
 
+    <!-- the desk's standing note on the company: what drives it, what it is worth, what would change the view -->
+    <section class="card c12" id="briefcard" hidden>
+      <div class="card-h"><h2>The desk&rsquo;s note</h2><span class="meta" id="briefmeta"></span></div>
+      <div class="brief" id="brief"></div>
+    </section>
     <!-- the desk's own view, beside the stock's news -->
     <section class="card c4">
       <div class="card-h"><h2>The desk on this stock</h2></div>
@@ -184,6 +189,19 @@ try {
   };
   perfCard(false);
 
+  // the desk's fair value under the valuation rows, and the standing note
+  M.get('/desk/fairvalue.json').then((F) => {
+    const x = F && [...(F.stocks || []), ...((F.us || {}).stocks || [])].find((y) => y.t === t && y.desk);
+    if (!x || x.fair == null) return;
+    const cur = (F.us && F.us.stocks.includes(x)) ? '$' : 'EGP ';
+    M.$('val').insertAdjacentHTML('beforeend', `<p class="fv-line"><a href="/desk/views/?v=fair">The desk's fair value</a> <b class="num">${cur}${x.fair.toFixed(2)}</b> <span class="num ${M.cls(x.upside)}">${M.pct(x.upside)}</span> <span class="meta">${x.confidence} confidence</span></p>`);
+  });
+  if (p.brief) {
+    const b = p.brief; M.$('briefcard').hidden = false; M.$('briefmeta').textContent = 'Written ' + M.short(b.written);
+    M.$('brief').innerHTML = `<div><p class="brief-lead">${M.esc(b.business)}</p><h3>What it is worth</h3><p>${M.esc(b.value)}</p><h3>What would change the view</h3><p>${M.esc(b.change)}</p></div>
+      <div><h3>What drives it</h3>${b.drivers.map((x) => `<p><b>${M.esc(x.name)}.</b> ${M.esc(x.text)}</p>`).join('')}</div>
+      <div><h3>Risks</h3><ul>${b.risks.map((x) => `<li>${M.esc(x)}</li>`).join('')}</ul></div>`;
+  }
   const V = p.valuation, rows = (r) => r.map((x) => [x.label, x.value == null ? dash : M.esc(x.value)]);
   M.$('val').innerHTML = M.kv(V ? rows(V.rows) : [['Market value', dash], ['P/E', dash], ['P/B', dash]]);
   M.$('valmeta').textContent = V ? `${V.source}, ${M.short(V.asOf)}` : 'Not fetched yet';
