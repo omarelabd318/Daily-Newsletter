@@ -11,8 +11,10 @@ It collects, and never judges:
 3. Running topics: for each topic in data/topics.json, where it stood, what the last edition said about it with its
    figures, and today's headlines on it. Check new figures against the old ones before writing.
 4. Yesterday's "What to watch today", to follow up on what was expected.
-5. Dates already known for the next three days (calendar_facts.py), and the desk stocks reporting now, with where
-   their filing is.
+5. Scheduled data: US and Egyptian releases just out and due (TradingView's economic calendar, with actual, forecast
+   and previous), how old each official figure in the data log is (T-bill yields, the central bank's rates,
+   inflation, reserves), the dates already known for three days (calendar_facts.py), and for desk stocks reporting
+   now: the SEC's filings and filed figures (US), or Mubasher's results headlines and their figures (Egypt).
 6. Regional and world headlines, business and sports leads.
 7. What it could not reach, so the run fetches those by hand.
 Headlines come through Google News's feeds (one request per outlet), so each line is a lead with no link: find the
@@ -104,6 +106,111 @@ def clusters(items):
     return sorted(out, key=lambda g: -len({i["outlet"] for i in g}))
 
 
+CIK = {"AAPL": 320193, "MSFT": 789019, "NVDA": 1045810, "AMZN": 1018724, "GOOGL": 1652044, "META": 1326801, "TSLA": 1318605, "JPM": 19617,
+       "XOM": 34088, "AVGO": 1730168, "BRK.B": 1067983, "WMT": 104169, "V": 1403161, "ORCL": 1341439, "COST": 909832}
+LOGGED = [("cbe_usd_sell", "Central bank dollar rate (sell)", 4), ("tbill_91", "91-day T-bill", 8), ("tbill_182", "182-day T-bill", 8), ("tbill_273", "273-day T-bill", 8),
+          ("tbill_364", "364-day T-bill", 8), ("cbe_deposit", "Overnight deposit rate", 60), ("infl_headline", "Headline inflation", 35), ("infl_core", "Core inflation", 35),
+          ("reserves_usd", "Net international reserves, $bn", 35)]
+
+
+def get_json(url, name, headers=None):
+    try:
+        return json.loads(urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": UA, **(headers or {})}), timeout=30).read())
+    except Exception as e:
+        FAILED.append(f"{name} ({type(e).__name__})")
+        return None
+
+
+def scheduled(date):
+    """Releases due and just out (TradingView's economic calendar, US and Egypt), and how old the logged official
+    figures are, so an auction or a monthly release since the last log is not missed."""
+    d0 = datetime.date.fromisoformat(date)
+    out = ["## Scheduled data"]
+    a, b = (d0 - datetime.timedelta(days=1)).isoformat(), (d0 + datetime.timedelta(days=3)).isoformat()
+    cal = get_json(f"https://economic-calendar.tradingview.com/events?from={a}T00:00:00.000Z&to={b}T00:00:00.000Z&countries=US,EG", "TradingView economic calendar", {"Origin": "https://www.tradingview.com"})
+    rows = []
+    for e in (cal or {}).get("result", []):
+        if e.get("country") == "US" and (e.get("importance") or -1) < 0:
+            continue
+        when = datetime.datetime.fromisoformat(e["date"].replace("Z", "+00:00")) + datetime.timedelta(hours=2)   # Cairo, UTC+2
+        val = lambda k: None if e.get(k) is None else f"{e[k]}{e.get('unit') or ''}{e.get('scale') or ''}"
+        bits = [f"{k} {val(k)}" for k in ("actual", "forecast", "previous") if val(k)]
+        rows.append((when, f"- {when:%a %b %-d, %H:%M} Cairo | {e['country']} | {e['title']}" + (" | " + ", ".join(bits) if bits else "") + (" | HIGH" if e.get("importance") == 1 else "")))
+    rows.sort()
+    out.append("Out since yesterday (figures to check at the source before use):")
+    out += [r for w, r in rows if w.date() < d0 or (w.date() == d0 and "actual" in r)] or ["- Nothing listed."]
+    out.append("Due today and in the next two days:")
+    out += [r for w, r in rows if w.date() >= d0 and "actual" not in r][:40] or ["- Nothing listed."]
+    if cal is None:
+        out.append("- The calendar could not be reached: check the day's US and Egyptian releases by hand.")
+    days = json.load(open(os.path.join(ROOT, "data", "markets.json")))["days"]
+    out.append("Official figures in the data log, and how old each is (fetch_figures.py refreshes what it can; the central bank's own site does not load from here):")
+    for k, name, limit in LOGGED:
+        hit = next(((e["date"], e[k]) for e in reversed(days) if isinstance(e.get(k), (int, float)) and e["date"] <= date), None)
+        if not hit:
+            continue
+        first = next(e["date"] for e in days if e.get(k) == hit[1] and e["date"] <= hit[0] and all(x.get(k) in (hit[1], None) for x in days if e["date"] <= x["date"] <= hit[0]))
+        age = (d0 - datetime.date.fromisoformat(first)).days
+        out.append(f"- {name}: {hit[1]} (unchanged since {first}, {age} days)" + ("  <- likely a newer figure is out: check" if age > limit else ""))
+    return out + [""]
+
+
+def us_filing(t, d0):
+    cik = CIK.get(t)
+    if not cik:
+        return [f"- {t}: no SEC number on file."]
+    out, c10 = [], f"CIK{cik:010d}"
+    sub = get_json(f"https://data.sec.gov/submissions/{c10}.json", f"SEC filings list, {t}")
+    r = ((sub or {}).get("filings") or {}).get("recent") or {}
+    new = [(r["form"][i], r["filingDate"][i], r["accessionNumber"][i], r["primaryDocument"][i]) for i in range(len(r.get("form", [])))
+           if (r["form"][i] in ("10-Q", "10-K") or (r["form"][i] == "8-K" and "2.02" in (r["items"][i] or ""))) and (d0 - datetime.date.fromisoformat(r["filingDate"][i])).days <= 5]
+    for form, filed, acc, doc in new[:3]:
+        out.append(f"- {t}: {form}{' (results release)' if form == '8-K' else ''} filed {filed}: https://www.sec.gov/Archives/edgar/data/{cik}/{acc.replace('-', '')}/{doc}")
+    if not new:
+        out.append(f"- {t}: no results release (8-K item 2.02) or quarterly report filed with the SEC in the last five days yet.")
+    # the last filed quarter's figures from the SEC's own data (they appear once the 10-Q or 10-K is in)
+    for label, concepts, unit in (("Revenue", ["RevenueFromContractWithCustomerExcludingAssessedTax", "Revenues"], "USD"), ("Net income", ["NetIncomeLoss"], "USD"), ("Diluted EPS", ["EarningsPerShareDiluted"], "USD/shares")):
+        cands = []
+        for c in concepts:
+            d = get_json(f"https://data.sec.gov/api/xbrl/companyconcept/{c10}/us-gaap/{c}.json", f"SEC figures, {t} {c}")
+            q = [x for x in ((d or {}).get("units") or {}).get(unit, []) if x.get("start") and 80 <= (datetime.date.fromisoformat(x["end"]) - datetime.date.fromisoformat(x["start"])).days <= 100]
+            if q:
+                cands.append(q)
+        for q in sorted(cands, key=lambda q: max(x["end"] for x in q), reverse=True)[:1]:   # companies change the tag they report revenue under: take the one still in use
+            if q:
+                last = max(q, key=lambda x: (x["end"], x["filed"]))
+                end = datetime.date.fromisoformat(last["end"])
+                ago = next((x for x in q if abs((end - datetime.date.fromisoformat(x["end"])).days - 365) <= 10), None)
+                f = (lambda v: f"${v / 1e9:,.2f}bn") if unit == "USD" else (lambda v: f"${v:,.2f}")
+                out.append(f"    {label}, quarter to {last['end']} ({last['form']} filed {last['filed']}): {f(last['val'])}" + (f"; a year earlier {f(ago['val'])} ({(last['val'] / ago['val'] - 1) * 100:+.1f}%)" if ago and ago["val"] else ""))
+    return out
+
+
+def egx_filing(t):
+    try:
+        page = urllib.request.urlopen(urllib.request.Request(f"https://www.mubasher.info/markets/EGX/stocks/{t}/news", headers={"User-Agent": UA}), timeout=30).read().decode("utf-8", "replace")
+    except Exception as e:
+        FAILED.append(f"Mubasher news, {t} ({type(e).__name__})")
+        return [f"- {t}: Mubasher's news page did not load; find the disclosure by hand."]
+    items = [(u, html.unescape(x).strip(" \u200b")) for u, x in re.findall(r'href="(/news/\d+/[^"]+)"[^>]*>\s*([^<]{15,200})<', page)]
+    hits = [(u, x) for u, x in items if re.search("أرباح|نتائج|القوائم المالية|خسائر|صافي ربح", x)][:4]
+    hits.sort(key=lambda h: not (re.search("أرباح|خسائر|صافي ربح", h[1]) and re.search(r"\d", h[1])))   # a headline with the figure first
+    out = [f"- {t}: " + (f"{len(hits)} results headlines on Mubasher" if hits else "no results headline on Mubasher yet") + f" (https://www.mubasher.info/markets/EGX/stocks/{t}/news)"]
+    for u, x in hits:
+        out.append(f"    {x[:170]}")
+    if hits:   # the newest one's own sentences with figures
+        try:
+            art = urllib.request.urlopen(urllib.request.Request("https://www.mubasher.info" + hits[0][0], headers={"User-Agent": UA}), timeout=30).read().decode("utf-8", "replace")
+            art = re.sub(r"<(script|style)[^>]*>.*?</\1>|<!--.*?-->", " ", art, flags=re.S)
+            m = re.search(r'class="article__content-text"[^>]*>(.*?)<div[^>]+class="mi-article__(?:labels|source|attachments)', art, re.S)
+            text = html.unescape(re.sub(r"<[^>]+>", "\n", m.group(1) if m else ""))
+            sents = [x.strip() for x in re.split(r"(?<=[.؛])\s+|\n", text) if re.search(r"\d", x) and 40 < len(x.strip()) < 420]
+            out += [f"      > {x[:330]}" for x in sents[:6]]
+        except Exception as e:
+            out.append(f"      (the article did not load: {type(e).__name__})")
+    return out
+
+
 def last_edition(date):
     files = sorted(f for f in os.listdir(os.path.join(ROOT, "editions")) if re.match(r"\d{4}-\d{2}-\d{2}(-v\d+)?\.md$", f) and f[:10] < date)
     return files[-1] if files else None
@@ -177,7 +284,7 @@ def main():
     prev_md = open(os.path.join(ROOT, "editions", prev)).read() if prev else ""
     prev_stories = stories_of(prev_md)
     head = [L.index(x) for x in L if x.startswith("## Each outlet")][0]
-    block = [f"## Running topics (last edition: {prev})"]
+    block = ["## Running topics"]
     for tp in T.get("topics", []):
         try:
             rx = re.compile(tp["match"], re.I)
@@ -186,10 +293,20 @@ def main():
         block.append(f"### {tp['name']}")
         if tp.get("now"):
             block.append(f"- Where it stood ({tp.get('now_date')}): {tp['now'][:420]}")
-        for lead, text in prev_stories.items():
-            if rx.search(lead + " " + text):
+        # the last edition that carried the topic (data/topics.json tags every story), with its full text and figures
+        mine = [x for x in T.get("stories", []) if tp["id"] in (x.get("topics") or []) and x["ed"][:10] < date]
+        if mine:
+            ed = max(x["ed"] for x in mine)
+            try:
+                full = stories_of(open(os.path.join(ROOT, "editions", ed + ".md")).read())
+            except OSError:
+                full = {}
+            for x in [x for x in mine if x["ed"] == ed][:4]:
+                text = full.get(x["lead"], x.get("text", ""))
                 figs = re.findall(r"(?:EGP|\$|€)\s?[\d.,]+(?:\s?(?:bn|billion|million|trillion|m))?|\b\d[\d.,]*\s?(?:%|percent|people|killed|injured|dead)", text)
-                block.append(f"- Last edition, \"{lead}\": {text[:260]}" + (f"  [figures then: {', '.join(dict.fromkeys(figs))[:200]}]" if figs else ""))
+                block.append(f"- Last carried {ed}, \"{x['lead']}\": {text[:420]}" + (f"  [figures then: {', '.join(dict.fromkeys(figs))[:220]}]" if figs else ""))
+        else:
+            block.append("- No earlier edition carried it.")
         hits = [i for i in allitems + wires if rx.search(i["title"])]
         seen = set()
         for i in hits[:40]:
@@ -211,14 +328,17 @@ def main():
         tail.append(f"- calendar_facts.py failed ({e})")
     cal = (json.load(open(os.path.join(ROOT, "desk", "calendar.json"))) or {}).get("items", [])
     d0 = datetime.date.fromisoformat(date)
-    now = [c for c in cal if c.get("kind") == "results" and c.get("date") and -1 <= (datetime.date.fromisoformat(c["date"]) - d0).days <= 0]
-    tail += ["", "## Reporting now: read the filing"]
+    forced = next((a.split("=")[1].split(",") for a in sys.argv[1:] if a.startswith("--filings=")), None)
+    now = [c for c in cal if c.get("kind") == "results" and c.get("date") and -2 <= (datetime.date.fromisoformat(c["date"]) - d0).days <= 0]
+    if forced:
+        now = [{"t": t, "market": "us" if t in CIK else "egx", "date": date} for t in forced]
+    tail += ["", "## Reporting now: the filing and its figures",
+             "US: the SEC's list of filings and its own figures (the documents themselves do not load from here: read the release on the company's investor page). Egypt: Mubasher's results headlines and the newest one's figures. Check each against the filing before use."]
     for c in now:
-        where = (f"https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK={c['t'].replace('.', '-')}&type=8-K&dateb=&owner=include&count=5" if c.get("market") == "us"
-                 else f"https://www.mubasher.info/markets/EGX/stocks/{c['t']}/news")
-        tail.append(f"- {c['t']} ({c['date']}{', expected' if c.get('expected') else ''}): {where}")
+        tail += us_filing(c["t"], d0) if c.get("market") == "us" else egx_filing(c["t"])
     if not now:
-        tail.append("- No desk stock has results dated today or yesterday.")
+        tail.append("- No desk stock has results dated today or in the last two days.")
+    tail = scheduled(date) + tail
     tail += ["", "## Could not be reached (fetch by hand if needed)", "- " + (", ".join(FAILED) if FAILED else "Nothing: every feed answered.")]
     empty = [n for n, _, _ in EGYPT if not per[n]]
     if empty:

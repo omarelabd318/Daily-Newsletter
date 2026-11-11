@@ -322,8 +322,11 @@ was not made. End the final reply with the line `research_log.py DATE newsletter
 Before any search, run `python3 .claude/skills/daily-newsletter/run_research.py` (about 20 seconds) and read
 `editions/brief.md`. It gathers, and never judges: the day's headlines from every Egyptian outlet below, with the
 stories two or more of them carry listed first; for each running topic, where it stood, what the last edition said
-with its figures, and today's headlines on it; yesterday's What to watch today, to follow up; the dates already
-known for the next three days and the desk stocks reporting now, with where their filing is; regional outlets and
+with its figures, and today's headlines on it; the last edition that carried each topic, in full; yesterday's What to watch today, to
+follow up; scheduled data (US and Egyptian releases just out and due, with actual, forecast and previous, and how old
+each official figure in the data log is, flagged when a newer one is probably out); the dates already known for the
+next three days; for desk stocks reporting now, the SEC's filings and filed figures (US) or Mubasher's results
+headlines with the article's figures (Egypt); regional outlets and
 wires on Egypt, the Gulf, the economy, sports, culture, and the world, business and technology top headlines; and
 which outlets it could not reach. Use it to choose what to research, not as research: every line is a headline
 with no link, so open the story at its outlet, check it against a second one, and log it with research_log.py as
