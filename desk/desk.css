@@ -618,7 +618,7 @@ table.fv .fv-row{cursor:pointer}
 table.fv .fv-row:hover td,table.fv .fv-row.on td{background:var(--raised)}
 table.fv .fv-row.on td{border-bottom-color:transparent}
 .fv-name{display:block;max-width:230px;overflow:hidden;text-overflow:ellipsis;font-size:12px;color:var(--muted)}
-.fv-desk{margin-left:5px;font-size:8px;vertical-align:2px;color:var(--brand)}
+.fv-desk{margin-left:5px;font-size:8px;vertical-align:2px;color:var(--muted)}
 .fv-bh,.fv-bc{width:200px}
 .fv-bar{position:relative;display:inline-block;width:180px;height:14px;vertical-align:middle}
 .fv-bar::before{content:"";position:absolute;left:0;right:0;top:6.5px;height:1px;background:var(--border)}
@@ -680,3 +680,15 @@ table.fv.sx{min-width:760px} table.fv.sx a{color:inherit;text-decoration:none} t
 .ptabs button[aria-selected="true"]{color:var(--text);font-weight:600;border-bottom-color:var(--text)}
 .ptabs button:hover{color:var(--text)}
 .pages[data-tab] .sec-h,.tab-off{display:none!important}
+
+/* the week: foreign investors by session */
+.wkflow{display:grid;gap:0 18px;margin-top:4px}
+.wf{display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center}
+.wf-v{font-size:17px;font-weight:600}
+.wf-bar{position:relative;width:100%;height:120px;margin:4px 0}
+.wf-bar::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--text)}
+.wf-bar i{position:absolute;left:22%;width:56%;border-radius:1px}
+.wf-bar i.up{bottom:50%;background:var(--positive)} .wf-bar i.down{top:50%;background:var(--negative)}
+.wf.off .wf-bar i{background:none;border:1px dashed var(--muted)} .wf.off .wf-v{color:var(--muted)}
+.wf-d{font-size:13px;font-weight:500} .wf-n{font-size:11.5px;color:var(--muted)}
+@media (max-width:700px){.wkflow{gap:0 6px}.wf-v{font-size:13px}.wf-d{font-size:11px}.wf-n{display:none}.wf-bar{height:90px}}

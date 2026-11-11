@@ -44,11 +44,17 @@
       <div id="mv-us"></div>
     </section>
 
-    <section class="card c6" id="c-flows">
-      <div class="card-h"><h2>Foreign investors on the EGX</h2><span class="meta">Net, EGP bn</span></div>
+    <section class="card c12" id="c-heat" hidden>
+      <div class="card-h"><h2>The EGX30 over the week</h2><div class="seg" id="hseg"></div></div>
+      <div class="heat" id="heat"></div>
+      <div class="heat-key" id="heat-key"></div>
+      <p class="chart-cap" id="heat-cap" data-src="TradingView"></p>
+    </section>
+    <section class="card c12" id="c-flows">
+      <div class="card-h"><h2>Foreign investors on the EGX</h2><span class="meta">Net bought or sold each session, EGP bn</span></div>
       <div id="flows"></div>
     </section>
-    <section class="card c6" id="c-next">
+    <section class="card c12" id="c-next">
       <div class="card-h"><h2>Next week</h2><span class="meta">The desk's stocks</span></div>
       <div id="next"></div>
     </section>
@@ -57,6 +63,7 @@
 <script src="/desk/charts.js"></script>
 <script src="/desk/tags.js"></script>
 <script src="/desk/desk.js"></script>
+<script src="/desk/heat.js"></script>
 <script>
 (async () => {
   // the week: built from what the desk already keeps (the data log, the day files, movers, flows, views, calendar)
@@ -89,14 +96,22 @@
     el.innerHTML = `<div class="movers"><div><h3><span class="chg up" aria-hidden="true"></span>Gainers</h3>${W.gainers.slice(0, 5).map(r).join('')}</div><div><h3><span class="chg down" aria-hidden="true"></span>Losers</h3>${W.losers.slice(0, 5).map(r).join('')}</div></div>`;
   }
 
+  // the EGX30 by sector over the last five sessions (the same map as the EGX page, opening on the week)
+  { const HT = M.MOVERS && M.MOVERS.egx && M.MOVERS.egx.heat; if (HT && HT.rows && HT.rows.length && window.DeskHeat) window.DeskHeat(M, HT, 'w1'); }
   // foreign investors: each session's net, and the week's total (a session dominated by a one-off deal is named)
   const FL = ((await M.get('/desk/flows.json')) || {}).days || [];
   const fw = FL.filter((d) => d.date >= M.cut(end, 7) && d.date < end);
   const fsum = (d) => Object.entries(d.rows).filter(([k]) => /^foreign/i.test(k)).reduce((a, [, v]) => a + v, 0);
   if (fw.length) {
     const tot = fw.filter((d) => !d.oneoff).reduce((a, d) => a + fsum(d), 0);
-    M.$('flows').innerHTML = M.kv(fw.map((d) => [M.day(d.date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }) + (d.oneoff ? ' (one-off deal)' : '') + (d.confirmed === false ? ' · unconfirmed' : ''), `<span class="${M.cls(fsum(d))}">${fsum(d) > 0 ? '+' : fsum(d) < 0 ? '−' : ''}${Math.abs(fsum(d)).toFixed(2)}</span>`]))
-      + `<p class="stock-note">Over the week: foreign investors were net <b>${tot >= 0 ? 'buyers' : 'sellers'} of EGP ${Math.abs(tot).toFixed(2)}bn</b>${fw.some((d) => d.oneoff) ? ', leaving out one-off deals' : ''}.</p>`;
+    // a bar for each session, up for net buying and down for net selling, on one scale; a one-off deal is named and
+    // drawn hollow, since it says nothing about the market
+    const mx = Math.max(...fw.filter((d) => !d.oneoff).map((d) => Math.abs(fsum(d))), 0.01);
+    const sgn = (v) => (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v).toFixed(2);
+    const days = fw.filter((d) => !d.oneoff), buy = days.filter((d) => fsum(d) > 0).length;
+    M.$('flows').innerHTML = `<div class="wkflow" style="grid-template-columns:repeat(${fw.length},minmax(0,1fr))">` + fw.map((d) => { const v = fsum(d), h = Math.min(100, Math.abs(v) / mx * 100);
+      return `<div class="wf${d.oneoff ? ' off' : ''}"><span class="wf-v num ${M.cls(v)}">${sgn(v)}</span><div class="wf-bar"><i class="${v >= 0 ? 'up' : 'down'}" style="height:${(h / 2).toFixed(1)}%"></i></div><span class="wf-d">${M.day(d.date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}</span><span class="wf-n">${d.oneoff ? 'One-off deal' : d.confirmed === false ? 'Unconfirmed' : v > 0 ? 'Net buyers' : v < 0 ? 'Net sellers' : 'Flat'}</span></div>`; }).join('') + '</div>'
+      + `<p class="stock-note">Over the week foreign investors were net <b>${tot >= 0 ? 'buyers' : 'sellers'} of EGP ${Math.abs(tot).toFixed(2)}bn</b>: they bought on ${buy} of ${days.length} session${days.length === 1 ? '' : 's'}${fw.some((d) => d.oneoff) ? ', leaving out one-off deals' : ''}. <a href="/desk/egx/#flows">All investor groups →</a></p>`;
   } else M.$('flows').innerHTML = '<p class="sub">No sessions logged this week.</p>';
 
   // the record: views opened and judged this week, and the hit rate so far
@@ -112,7 +127,7 @@
     const open = V.filter((v) => ['open', 'on track'].includes(v.status)).length;
     M.$('wk-rec').innerHTML = `<b>The desk's record:</b> ${opened.length} new view${opened.length === 1 ? '' : 's'} and projections this week, none judged, ${open} still open${right + wrong ? `; hit rate so far ${Math.round(right / (right + wrong) * 100)}% (${right} of ${right + wrong})` : ''}. <a href="/desk/views/">All views →</a>`;
     M.$('wk-rec').hidden = false; M.$('c-record').hidden = true;
-    M.$('c-markets').after(M.$('c-next')); M.$('c-flows').className = 'card c12 fw-wide';
+    M.$('c-markets').after(M.$('c-next')); M.$('c-next').className = 'card c6';
   }
 
   // next week: the calendar's dates in the coming seven days

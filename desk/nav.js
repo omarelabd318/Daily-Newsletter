@@ -6,8 +6,8 @@
   const TOP = [['egypt', 'Egypt', '/desk/egypt/'], ['us', 'United States', '/desk/usa/'], ['global', 'Global', '/desk/global/'], null,
     ['views', 'Views', '/desk/views/'], ['week', 'The week', '/desk/week/'], ['runs', 'Runs', '/desk/runs/']];
   const SUB = {
-    egypt: [['Dashboard', '/desk/egypt/'], ['EGP', '/desk/egp/'], ['EGX', '/desk/egx/'], ['Sectors', '/desk/sectors/'], ['Fair value', '/desk/fairvalue/'], ['Stocks', '/desk/stocks/egypt/']],
-    us: [['Dashboard', '/desk/usa/'], ['Wall Street', '/desk/us/'], ['Fair value', '/desk/fairvalue/?m=us'], ['Stocks', '/desk/stocks/us/']],
+    egypt: [['Dashboard', '/desk/egypt/'], ['EGP', '/desk/egp/'], ['EGX', '/desk/egx/'], ['Stocks', '/desk/stocks/egypt/'], ['Sectors', '/desk/sectors/'], ['Fair value', '/desk/fairvalue/']],
+    us: [['Dashboard', '/desk/usa/'], ['Wall Street', '/desk/us/'], ['Stocks', '/desk/stocks/us/'], ['Fair value', '/desk/fairvalue/?m=us']],
   };
   // which market and page a path belongs to, and the masthead's label
   function where(path, egxStock) {

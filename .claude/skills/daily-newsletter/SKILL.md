@@ -691,10 +691,12 @@ with it in mind; nothing extra goes in the file:
   Items 2 to 4 sit beside it with their story's first sentence; items 5 on are listed as "Also today".
   So write each glance line as a headline, not a sentence: 12 words or fewer, who did what with the number
   ("Remittances hit a record $38.2 billion in nine months"), and make every story's first sentence carry the news
-  alone: the lead's first sentence is printed as its standfirst, under the headline.
+  alone. The lead story's first sentence is printed as its standfirst, under the headline, with the rest in two
+  columns: keep that sentence to 20 words or fewer ("Egypt's foreign minister gave the first official confirmation that
+  Egyptian forces are in Saudi Arabia."), and put the detail in the sentences after it.
 - **Quick Hits** become four large figures. Open Number of the day and Stat to know with the figure and a period
   ("$13 billion. What Egyptians abroad..."), and Quote of the day with the quote in quotation marks, then the speaker.
-- **The markets strip** (EGX30, USD/EGP, gold 21K, Brent, S&P 500) reads the data log, so log the figures before
+- **The markets strip** (EGX30, USD/EGP, gold 24K, Brent, S&P 500) reads the data log, so log the figures before
   publishing; Cairo's temperature comes from the first Weather paragraph ("a high of 24-25°C").
 The Today at a Glance and Quick Hits sections are hidden on the page (the front page shows them) but stay in the
 file for the archive, search and audio. The Saturday recap has no front page.
