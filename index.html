@@ -403,8 +403,8 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 .f-lead h2{margin:8px 0 14px;font:700 clamp(28px,2.9vw,40px)/1.1 var(--serif);letter-spacing:-.015em}
 .f-lead h2 a,.f-col h3 a,.f-under h3 a,.f-glance a{color:inherit;text-decoration:none}
 .f-lead h2 a:hover,.f-col h3 a:hover,.f-under h3 a:hover,.f-glance a:hover{color:var(--accent)}
-.f-body{columns:2;column-gap:26px;font-size:16.5px;line-height:1.55;margin:0}
-.f-body::first-letter{float:left;font:700 56px/.82 var(--serif);padding:6px 8px 0 0}
+.f-body{font-size:16.5px;line-height:1.55;margin:0;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:var(--f-body-lines,12);overflow:hidden}
+.f-dek::first-letter,.f-body.cap::first-letter{float:left;font:700 68px/56px var(--serif);padding:3px 9px 0 0}
 .f-more{display:inline-block;margin-top:12px;font:500 12.5px var(--sans);color:var(--ink2)}
 .f-col article{padding:15px 0;border-top:1px solid var(--rule)} .f-col article:first-of-type{border-top:0;padding-top:6px}
 .f-col h3{margin:5px 0 6px;font:700 21px/1.2 var(--serif)}
@@ -430,9 +430,9 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
   .f-band{grid-template-columns:1fr 1fr} .f-band > :nth-child(3){border-left:0;padding-left:0} .f-band > :nth-child(n+3){border-top:1px solid var(--rule)}
 }
 @media (max-width:700px){
-  .front{padding-top:14px}
+  .front{padding-top:14px} .f-body{-webkit-line-clamp:14}
   .f-main{display:block} .f-main > *{padding:0!important;border-left:0!important}
-  .f-body{columns:1;font-size:17px} .f-col{margin-top:18px;border-top:1px solid var(--ink)} .f-rail{margin-top:18px}
+  .f-body{font-size:17px} .f-col{margin-top:18px;border-top:1px solid var(--ink)} .f-rail{margin-top:18px}
   .f-strip a,.f-strip div{padding:8px 10px} .f-strip b{font-size:16px;display:block}
   .f-band > div{padding:14px 12px} .f-band > :nth-child(odd){padding-left:0} .f-big{font-size:27px} .f-big.q{font-size:18px}
 }
@@ -713,7 +713,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     // the lead: its first sentence is the standfirst, the rest runs in two columns
     var lb = body(lead.story), dek = first(lead.story), lhtml = lb.innerHTML.trim(), ltxt = lb.textContent.trim();
     var restTxt = ltxt.indexOf(dek) === 0 ? ltxt.slice(dek.length).trim() : '';
-    var h = '<div class="f-main"><div class="f-lead"><span class="f-kick">'+esc(lead.label || 'The big story')+'</span><h2>'+link(lead, esc(lead.text))+'</h2>'+(restTxt.length > 120 ? '<p class="f-dek">'+esc(dek)+'</p><p class="f-body">'+esc(restTxt)+'</p>' : '<p class="f-body">'+lhtml+'</p>')
+    var h = '<div class="f-main"><div class="f-lead"><span class="f-kick">'+esc(lead.label || 'The big story')+'</span><h2>'+link(lead, esc(lead.text))+'</h2>'+(restTxt.length > 120 ? '<p class="f-dek">'+esc(dek)+'</p><p class="f-body">'+esc(restTxt)+'</p>' : '<p class="f-body cap">'+lhtml+'</p>')
       + link(lead, '<span class="f-more">Continue in '+esc(sectionOf(lead.story))+' ↓</span>') + '</div><div class="f-col">'
       + mid.map(function(it){ return '<article><span class="f-kick">'+esc(it.label)+'</span><h3>'+link(it, esc(it.text))+'</h3><p>'+esc(first(it.story))+'</p></article>'; }).join('') + '</div><div class="f-rail">'
       + (rest.length ? '<h4>Also today</h4><ol class="f-glance">'+rest.map(function(it, i){ return '<li><span><small>'+esc(it.label)+'</small>'+link(it, esc(it.text))+'</span></li>'; }).join('')+'</ol>' : '')
@@ -744,8 +744,13 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
       var h = function(el){ var k = [].slice.call(el.children).filter(function(x){ return x.offsetHeight; }); return k.length ? k[k.length-1].offsetTop + k[k.length-1].offsetHeight - k[0].offsetTop : 0; };
       // the side stories' summaries are cut to the number of lines (2 to 6) that brings their column closest to the
       // taller of the lead and the rail, so no column ends far above the others
-      C.style.removeProperty('--f-lines');
+      C.style.removeProperty('--f-lines'); L.style.removeProperty('--f-body-lines');
       if(window.innerWidth <= 1040) return;
+      // first the lead's text is cut to the length of the taller neighbour (at least five lines), then the side
+      // stories are trimmed to match
+      var goal = Math.max(h(C), h(R)), bb = null;
+      for(var n = 5; n <= 40; n++){ L.style.setProperty('--f-body-lines', n); var d0 = Math.abs(h(L) - goal); if(!bb || d0 < bb.d) bb = {d:d0, n:n}; if(h(L) > goal + 40) break; }
+      L.style.setProperty('--f-body-lines', bb.n);
       var target = Math.max(h(L), h(R)), best = null;
       [6,5,4,3,2].forEach(function(n){ C.style.setProperty('--f-lines', n); var d = Math.abs(h(C) - target) + (h(C) > target + 24 ? 60 : 0); if(!best || d < best.d) best = {d:d, n:n}; });
       C.style.setProperty('--f-lines', best.n);
