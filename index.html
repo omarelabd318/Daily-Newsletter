@@ -376,14 +376,16 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 .f-main > :first-child{padding-left:0;border-left:0} .f-main > :last-child{padding-right:0}
 .f-kick{font:600 11px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
 .f-lead h2{margin:8px 0 14px;font:700 clamp(28px,2.9vw,40px)/1.1 var(--serif);letter-spacing:-.015em}
-.f-lead h2 a,.f-col h3 a,.f-glance a{color:inherit;text-decoration:none}
-.f-lead h2 a:hover,.f-col h3 a:hover,.f-glance a:hover{color:var(--accent)}
+.f-lead h2 a,.f-col h3 a,.f-under h3 a,.f-glance a{color:inherit;text-decoration:none}
+.f-lead h2 a:hover,.f-col h3 a:hover,.f-under h3 a:hover,.f-glance a:hover{color:var(--accent)}
 .f-body{columns:2;column-gap:26px;font-size:16.5px;line-height:1.55;margin:0}
 .f-body::first-letter{float:left;font:700 56px/.82 var(--serif);padding:6px 8px 0 0}
 .f-more{display:inline-block;margin-top:12px;font:500 12.5px var(--sans);color:var(--ink2)}
 .f-col article{padding:15px 0;border-top:1px solid var(--rule)} .f-col article:first-of-type{border-top:0;padding-top:6px}
 .f-col h3{margin:5px 0 6px;font:700 21px/1.2 var(--serif)}
 .f-col p{margin:0;font-size:15px;line-height:1.5;color:var(--ink2)}
+.f-under{margin-top:20px;border-top:1px solid var(--ink)} .f-under article{padding:14px 0 0} .f-under article + .f-watch,.f-under .f-watch{margin-top:14px}
+.f-under h3{margin:5px 0 6px;font:700 21px/1.2 var(--serif)} .f-under article p{margin:0;font-size:15px;line-height:1.5;color:var(--ink2)}
 .f-rail h4{margin:0;padding-top:9px;border-top:1px solid var(--ink);font:600 12px var(--sans);letter-spacing:.16em;text-transform:uppercase}
 .f-glance{list-style:none;margin:8px 0 0;padding:0}
 .f-glance li{display:grid;grid-template-columns:26px 1fr;padding:9px 0;border-top:1px solid var(--rule);font-size:15px;line-height:1.4}
@@ -702,6 +704,25 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     G.classList.add('in-front'); if(Q && band) Q.classList.add('in-front');
     [].slice.call($('toc').querySelectorAll('a')).forEach(function(a){ var id = a.getAttribute('href'); if(id === '#today-at-a-glance' || (id === '#quick-hits' && band)) a.remove(); });
     document.documentElement.classList.add('has-front');
+    // even out the columns: when the lead is much shorter than the stories beside it, the last of those (then the
+    // what-to-watch line) moves under the lead, as long as that narrows the gap. Three columns only.
+    function balance(){
+      var L = sec.querySelector('.f-lead'), C = sec.querySelector('.f-col'), R = sec.querySelector('.f-rail'); if(!L || !C) return;
+      var under = L.querySelector('.f-under'); if(under){ [].slice.call(under.children).forEach(function(x){ (x.tagName === 'ARTICLE' ? C : R).appendChild(x); }); under.remove(); }
+      if(window.innerWidth <= 1040) return;
+      var h = function(el){ return [].slice.call(el.children).reduce(function(m, x){ return Math.max(m, x.offsetTop + x.offsetHeight); }, 0) - el.children[0].offsetTop; };
+      var moves = [function(){ var a = C.querySelectorAll('article'); return a.length > 1 ? a[a.length-1] : null; }, function(){ return R.querySelector('.f-watch'); }];
+      moves.forEach(function(pick){
+        var el = pick(); if(!el) return;
+        var before = Math.max(h(C), h(R)) - h(L); if(before < 140) return;
+        var home = el.parentNode; under = L.querySelector('.f-under'); if(!under){ under = document.createElement('div'); under.className = 'f-under'; L.appendChild(under); }
+        under.appendChild(el);
+        var after = Math.max(h(C), h(R)) - h(L);
+        if(Math.abs(after) > before){ home.appendChild(el); if(!under.children.length) under.remove(); }
+      });
+    }
+    balance(); if(document.fonts && document.fonts.ready) document.fonts.ready.then(balance);
+    clearTimeout(window.__fbal); window.onresize = function(){ clearTimeout(window.__fbal); window.__fbal = setTimeout(function(){ if(document.getElementById('front') === sec) balance(); }, 150); };
     // the strip: the session's closes from the data log, each against the last different close, and Cairo's weather
     var W = document.getElementById('weather'), wp = W && W.querySelector('.s-body p'), wx = '';
     if(wp){ var wt = body(wp).textContent, tm = wt.match(/(\d{1,2})(?:\s*[-–]\s*(\d{1,2}))?\s*°C/), ds = wt.split(/[,.]/)[0].trim(); if(tm) wx = '<a href="#weather" data-jump="1"><span>Cairo</span><b>'+(tm[2] || tm[1])+'°</b><em class="f-mu">'+esc(ds.toLowerCase().slice(0,22))+'</em></a>'; }
