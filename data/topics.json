@@ -14,8 +14,8 @@
    "drivers": [
     "oil"
    ],
-   "now": "President Trump called the Iran war 'effectively over' militarily on November 9 after Qatar's prime minister brought him an Iranian proposal, while keeping the US naval blockade and a new land and Caspian trade cordon in place. Tehran's terms include lifting sanctions and recognizing a Hormuz shipping route agreed with Oman. The Houthis keep firing missiles at Saudi Arabia, and shipping lines such as Evergreen are gradually returning to the Suez Canal.",
-   "now_date": "2026-11-10"
+   "now": "The US naval blockade of Iranian ports remains in place and attacks on shipping continue, with four Indian crew injured on a tanker in the Gulf on November 11 after an Adnoc vessel was hit in UAE waters. President Trump says the war could end soon, but Iran's security chief denies talks are under way. In Yemen, the Saudi-led coalition and government forces are fighting the Houthis on several fronts while Houthi missiles keep targeting Riyadh.",
+   "now_date": "2026-11-11"
   },
   {
    "id": "pound-cbe",
@@ -30,8 +30,8 @@
    "drivers": [
     "egp-rates"
    ],
-   "now": "The central bank's dollar selling rate stood at EGP 54.05 on November 9, about 3.7% stronger for the pound than at the start of November and well off its late-October record low of 56.20. Urban inflation slowed to 12.7% in October, leaving the 20% overnight deposit rate, raised by 100 basis points on October 29, about 7.3 points above inflation; the next rate meeting is December 17.",
-   "now_date": "2026-11-10"
+   "now": "The central bank's dollar rate fell to EGP 53.39 on November 10, a 1.2% gain for the pound in a day and about 5% since the start of November, after the pound crossed 55 in late October. Policy rates stand at 20% for deposits and 21% for lending after the October 29 hike, and record remittances of $38.2 billion in January-September support dollar supply. The next rate meeting is December 17.",
+   "now_date": "2026-11-11"
   },
   {
    "id": "ai-chips",
@@ -46,8 +46,8 @@
    "drivers": [
     "ai-spending"
    ],
-   "now": "US stocks rebounded on November 9, with the S&P 500 up 2.35% and chip stocks up 6.9%, after the previous week's AI-led selloff. Nvidia fell 4.3% to its lowest close since April as its board investigates chief executive Jensen Huang and shareholder lawsuits begin; it reports results on November 17.",
-   "now_date": "2026-11-10"
+   "now": "Nvidia fell 5.5% to $168.89 on November 10, its lowest close since March and about 30% below its October record, as its board investigates its chief executive. CoreWeave beat forecasts and raised its outlook, and Anthropic is seeking up to $64.4 billion in an IPO at a valuation of up to $1.4 trillion, with trading expected around November 19-20.",
+   "now_date": "2026-11-11"
   },
   {
    "id": "us-midterms",
@@ -112,8 +112,8 @@
    "match": "\\b(Gaza|Hamas|Hezbollah|Lebanon|Lebanese)\\b",
    "related": [],
    "drivers": [],
-   "now": "A ceasefire has held in Gaza since October 2025, but winter storms flooded about 70,000 tents and a sandbank collapse in Deir el-Balah killed five people on November 8; aid groups say Israel still blocks caravans. In south Lebanon, Israeli shelling and demolitions continue despite a US-brokered framework agreement.",
-   "now_date": "2026-11-10"
+   "now": "Israeli strikes killed at least seven people in Gaza on November 11 despite the ceasefire, and aid parcels remain stuck at the Rafah border. In Lebanon, a UN patrol came under fire in the south, while the main Lebanon-Syria crossing at Abboudieh reopened after two years.",
+   "now_date": "2026-11-11"
   },
   {
    "id": "oil",
@@ -128,11 +128,152 @@
    "drivers": [
     "oil"
    ],
-   "now": "Brent settled at $92.57 a barrel on November 9, down 5.85% on the day, after President Trump said new strikes on Iran were unlikely while talks progress, and traded near $91.5 on November 10. It is still up about 52% this year because of the Iran war and the disruption of Hormuz.",
-   "now_date": "2026-11-10"
+   "now": "Brent settled at $91.49 a barrel on November 10, down 1.2%, after briefly dipping below $90 for the first time since August on hopes of an end to the Iran war. Tanker attacks near Hormuz lifted it back toward $92 on November 11. It is still up about 50% this year.",
+   "now_date": "2026-11-11"
+  },
+  {
+   "id": "saudi-deployment",
+   "name": "Egypt's forces in Saudi Arabia",
+   "match": "Egyptian (troops|forces) in Saudi|deployment to Saudi|Saudi deployment|military presence there|troops in Saudi",
+   "now": "Foreign Minister Badr Abdelatty confirmed on November 11 that Egyptian forces are already in Saudi Arabia protecting sensitive sites, including holy sites, and that the presence is being strengthened. Sources put the troops in the hundreds, with armor and air-defense systems, on a defensive mission under the mandate parliament approved in October. Riyadh has not commented publicly.",
+   "now_date": "2026-11-11",
+   "related": [],
+   "drivers": []
   }
  ],
  "stories": [
+  {
+   "ed": "2026-11-11",
+   "id": "story-yemen-front-escalates",
+   "lead": "Yemen front escalates",
+   "sec": "Regional and Gulf",
+   "text": "Yemen's government said its forces killed or wounded at least 190 Houthi fighters across six governorates, while the Saudi-led coalition said it intercepted two missiles fired at Riyadh and another at the south of the kingdom, according to…",
+   "topics": [
+    "iran-war"
+   ],
+   "added": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-11",
+   "id": "story-troops-in-saudi-arabia",
+   "lead": "Troops in Saudi Arabia",
+   "sec": "Egypt News",
+   "text": "Foreign Minister Badr Abdelatty told France 24 that Egypt already has a military presence in Saudi Arabia \"at the request of our brothers and sisters\" and is \"strengthening that,\" the first official confirmation that Egyptian forces are in…",
+   "topics": [
+    "saudi-deployment"
+   ]
+  },
+  {
+   "ed": "2026-11-11",
+   "id": "story-tanker-attacked-near-hormuz",
+   "lead": "Tanker attacked near Hormuz",
+   "sec": "Regional and Gulf",
+   "text": "Four Indian crew members were injured in an attack on a Liberia-flagged oil tanker in the Gulf, a day after an Adnoc-operated vessel was damaged in UAE waters, The National reported. Iran's security chief Mohsen Rezaei denied that talks…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-11",
+   "id": "story-record-remittances",
+   "lead": "Record remittances",
+   "sec": "Egypt News",
+   "text": "Egyptians working abroad sent home $13 billion in July-September, up 20.4% from a year earlier, the central bank said, taking the total for the first nine months of 2026 to a record $38.2 billion, against about $30.2 billion a year…",
+   "topics": [
+    "pound-cbe"
+   ],
+   "added": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-11-11",
+   "id": "story-pound-firms",
+   "lead": "Pound firms",
+   "sec": "Markets",
+   "text": "The central bank's dollar rate fell about 66 piasters on Tuesday to EGP 53.39, a 1.2% gain for the pound, according to Egyptian bank data; it has now regained about 5% since the start of November, after crossing 55 in late October. The…",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-11-11",
+   "id": "story-oil-gold-and-the-dollar",
+   "lead": "Oil, gold and the dollar",
+   "sec": "Markets",
+   "text": "Brent settled 1.2% lower at $91.49 a barrel, after briefly dipping below $90 for the first time since August on hopes of an end to the Iran war, and was near $92 on Wednesday after the tanker attack. Gold fell 2.0% to about $4,030 an ounce…",
+   "topics": [
+    "oil"
+   ],
+   "added": [
+    "oil"
+   ]
+  },
+  {
+   "ed": "2026-11-11",
+   "id": "story-nvidia-s-slide-deepens",
+   "lead": "Nvidia's slide deepens",
+   "sec": "Markets",
+   "text": "Nvidia fell 5.5% to $168.89, its lowest close since March, as its board investigates chief executive Jensen Huang's relationship with a woman suspected of spying for China; the stock is about 30% below its October record. Goldman Sachs…",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-11-11",
+   "id": "story-lebanon-and-syria",
+   "lead": "Lebanon and Syria",
+   "sec": "Regional and Gulf",
+   "text": "A UN peacekeeping patrol came under fire in south Lebanon, while the Abboudieh-Dabbousieh crossing between Lebanon and Syria reopened after two years, and Beirut set December 14 for the opening of a second airport. A former Iraqi lawmaker,…",
+   "topics": [
+    "gaza-lebanon"
+   ]
+  },
+  {
+   "ed": "2026-11-11",
+   "id": "story-hamilton-at-the-gaza-border",
+   "lead": "Hamilton at the Gaza border",
+   "sec": "Regional and Gulf",
+   "text": "Seven-time Formula 1 champion Lewis Hamilton visited aid facilities in Al-Arish and the Rafah crossing, where Egyptian officials briefed him on relief efforts, and saw parcels waiting to enter Gaza. At least seven people were killed in…",
+   "topics": [
+    "gaza-lebanon"
+   ]
+  },
+  {
+   "ed": "2026-11-11",
+   "id": "story-gaza-survivors-oscar-bid",
+   "lead": "Gaza survivors' Oscar bid",
+   "sec": "In Other News",
+   "text": "Switzerland picked Nicolas Wadimoff's *Who Is Still Alive*, in which nine survivors of the war in Gaza trace the outlines of their lost homes on a sound stage, as its Oscar entry, The National reported, even though Swiss authorities…",
+   "topics": [
+    "gaza-lebanon"
+   ]
+  },
+  {
+   "ed": "2026-11-11",
+   "id": "story-data-centers-to-pay-for-power",
+   "lead": "Data centers to pay for power",
+   "sec": "In Other News",
+   "text": "The US Senate voted 73-25 to take up a bipartisan energy bill that would make data center owners pay about $55 billion over ten years for the grid capacity they need, and speed up permits for energy projects, Al Jazeera reported.…",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-11-11",
+   "id": "story-anthropic-s-giant-ipo",
+   "lead": "Anthropic's giant IPO",
+   "sec": "Markets",
+   "text": "Anthropic launched its roadshow, offering 825 million shares at $70 to $78 to raise up to $64.4 billion at a valuation of up to $1.4 trillion, with trading expected next week, Al Jazeera reported. It reported third-quarter revenue of $17…",
+   "topics": [
+    "ai-chips"
+   ],
+   "added": [
+    "ai-chips"
+   ]
+  },
   {
    "ed": "2026-11-10",
    "id": "story-what-it-means-for-egypt",
@@ -1487,6 +1628,20 @@
   },
   {
    "ed": "2026-10-27",
+   "id": "story-saudi-defence-mandate",
+   "lead": "Saudi defence mandate",
+   "sec": "Egypt News",
+   "text": "The House of Representatives passed the authorisation by the required two-thirds majority after closed sessions on 18, 19 and 26 October. The text lets President al-Sisi take the \"necessary\" measures to support Saudi Arabia against Houthi…",
+   "topics": [
+    "saudi-deployment"
+   ],
+   "added": [
+    "saudi-deployment"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-10-27",
    "id": "story-record-weak-pound",
    "lead": "Record-weak pound",
    "sec": "Egypt News",
@@ -1545,6 +1700,20 @@
    "topics": [
     "pound-cbe"
    ]
+  },
+  {
+   "ed": "2026-10-26",
+   "id": "story-parliament-and-saudi-arabia",
+   "lead": "Parliament and Saudi Arabia",
+   "sec": "Egypt News",
+   "text": "The House of Representatives is due to vote today, after a one-week delay, on President Abdel Fattah al-Sisi's request to authorise air defence and logistical support for Saudi Arabia against Houthi missile and drone attacks. The measure…",
+   "topics": [
+    "saudi-deployment"
+   ],
+   "added": [
+    "saudi-deployment"
+   ],
+   "removed": []
   },
   {
    "ed": "2026-10-26",
@@ -1615,6 +1784,20 @@
    "topics": [
     "pound-cbe"
    ]
+  },
+  {
+   "ed": "2026-10-25",
+   "id": "story-parliament-and-saudi-arabia",
+   "lead": "Parliament and Saudi Arabia",
+   "sec": "Egypt News",
+   "text": "President Abdel Fattah al-Sisi said on 18 October that Egypt would provide Saudi Arabia with \"all necessary and possible\" support against Houthi attacks and asked parliament to authorise deploying Egyptian forces if Riyadh requests help.…",
+   "topics": [
+    "saudi-deployment"
+   ],
+   "added": [
+    "saudi-deployment"
+   ],
+   "removed": []
   },
   {
    "ed": "2026-10-25",
