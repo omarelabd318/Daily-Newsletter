@@ -54,6 +54,8 @@ def main():
     sizes = {}
     for voice, slug in FEEDS.items():
         name = voice.split("_")[1].title()
+        # the default voice's feed is simply "Daily Newsletter"; the other voices are named in brackets
+        show = "Daily Newsletter" if voice == next(iter(FEEDS)) else f"Daily Newsletter ({name})"
         items = []
         for m in mans:
             key = m["edition"]
@@ -80,14 +82,14 @@ def main():
         xml = f"""<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Daily Newsletter ({name})</title>
+    <title>{show}</title>
     <link>{SITE}/</link>
     <atom:link href="{SITE}/podcast/{slug}.xml" rel="self" type="application/rss+xml"/>
     <description>The Daily Newsletter read aloud each morning: Egypt, the world, the region and the markets, about half an hour. Read by {name}.</description>
     <language>en-us</language>
     <itunes:author>Daily Newsletter</itunes:author>
     <itunes:image href="{SITE}/podcast/cover.png?v=dark"/>
-    <image><url>{SITE}/podcast/cover.png?v=dark</url><title>Daily Newsletter ({name})</title><link>{SITE}/</link></image>
+    <image><url>{SITE}/podcast/cover.png?v=dark</url><title>{show}</title><link>{SITE}/</link></image>
     <itunes:category text="News"><itunes:category text="Daily News"/></itunes:category>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>

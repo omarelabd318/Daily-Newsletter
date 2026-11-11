@@ -93,13 +93,23 @@ def sentences(text, size, limit=460):
                 out.append(s)
                 continue
             mid = len(s) // 2
-            commas = [i for i, c in enumerate(s) if c == "," and 20 < i < len(s) - 20]
+            commas = [i for i, c in enumerate(s) if c == "," and 20 < i < len(s) - 20 and s[i + 1:i + 2] == " "]   # not 50,812
             cut = min(commas, key=lambda i: abs(i - mid)) + 1 if commas else (s.rfind(" ", 0, mid) if s.rfind(" ", 0, mid) > 0 else mid)
             todo[:0] = [s[:cut].strip(), s[cut:].strip()]
     return out
 
 
 SPELLED = re.compile(r"(\b[A-Z](?:-[A-Z])+\b)")
+LEX = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "pronounce.json")))
+OWN = LEX["words"]
+OWN_RE = re.compile(r"\b(" + "|".join(sorted(map(re.escape, OWN), key=len, reverse=True)) + r")(?=(?:'s|s)?\b)")
+RE_RE = re.compile(r"\b([Rr])e(" + "|".join(LEX["prefix_re"]) + r")([a-z]*)\b")
+MONTH_NAMES = "January|February|March|April|May|June|July|August|September|October|November|December"
+ORD = ["", "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth", "thirteenth",
+       "fourteenth", "fifteenth", "sixteenth", "seventeenth", "eighteenth", "nineteenth", "twentieth", "twenty-first", "twenty-second",
+       "twenty-third", "twenty-fourth", "twenty-fifth", "twenty-sixth", "twenty-seventh", "twenty-eighth", "twenty-ninth", "thirtieth", "thirty-first"]
+DATE_RE = re.compile(r"\b(" + MONTH_NAMES + r") (\d{1,2})\b(?![.,]\d|\d| percent| million| billion)")
+PUNCT_END = re.compile(r"[,;:.!?\u2014\u2013)\"\u201d]$")
 
 
 class Voice:
@@ -116,11 +126,37 @@ class Voice:
         self.lang = "en-gb" if voice.startswith("b") else "en-us"
 
     def phon(self, t):
+        # dates are said as ordinals ("November 1" -> "November first", as American broadcasters say them)
+        t = DATE_RE.sub(lambda m: m.group(1) + " " + ORD[int(m.group(2))] if 0 < int(m.group(2)) < 32 else m.group(0), t)
         # spelled-out letters (A-I, I-P-O, U-A-E) get each letter's name: left to the phonemizer, a lone "A" reads as
-        # the article ("Tech and uh-eye") and a middle one is swallowed
-        parts = [p for p in SPELLED.split(t) if p.strip()]
-        out = [self.letter(p) if SPELLED.fullmatch(p) else self.tok.phonemize(p, self.lang).strip() for p in parts]
-        return " ".join(x for x in out if x).replace(" .", ".").replace(" ,", ",")
+        # the article ("Tech and uh-eye") and a middle one is swallowed; words in pronounce.json get their own sounds
+        out = []
+        for chunk in [p for p in SPELLED.split(t) if p.strip()]:
+            if SPELLED.fullmatch(chunk):
+                out.append(self.letter(chunk))
+                continue
+            for k, piece in enumerate(re.split(r"(\x00[^\x00]*\x00)", OWN_RE.sub(lambda m: "\x00" + OWN[m.group(1)] + "\x00", RE_RE.sub(self.re_word, chunk)))):
+                if k % 2:
+                    out.append(piece.strip("\x00"))
+                elif piece.strip():
+                    out.append(self.piece(piece))
+        # a plural or possessive after a word in the lexicon ("Houthis'", "Edita's") keeps its ending
+        return " ".join(x for x in out if x).replace(" .", ".").replace(" ,", ",").replace(" ɪz", "z").replace(" z", "z")
+
+    def piece(self, text):
+        """A stretch of text between two lexicon words. One that ends in the article "a" ("claimed a" before
+        "Houthi") would have it read as the letter A on its own, so it is phonemized with a word after it, then cut."""
+        if not re.search(r"(?:^|\s)[aA]\s*$", text):
+            return self.tok.phonemize(text, self.lang).strip()
+        if not hasattr(self, "_tail"):
+            self._tail = self.tok.phonemize("zebra", self.lang).strip()
+        ph = self.tok.phonemize(text.rstrip() + " zebra", self.lang).strip()
+        return ph[: -len(self._tail)].strip() if ph.endswith(self._tail) else self.tok.phonemize(text, self.lang).strip()
+
+    def re_word(self, m):
+        """refinance, rebound: 're' said 'ree', as a prefix, not 'ruh'."""
+        rest = self.tok.phonemize(m.group(2) + m.group(3), self.lang).strip()
+        return "\x00ɹˌiː" + rest + "\x00"
 
     def letter(self, run):
         if not hasattr(self, "_names"):
@@ -129,6 +165,41 @@ class Voice:
             if L not in self._names:
                 self._names[L] = self.tok.phonemize(L + ".", self.lang).rstrip(".").strip()
         return "".join(self._names[L] for L in run.split("-"))
+
+    def trim(self, wav, words):
+        """The model sometimes stops for breath in the middle of a phrase ("a fifth session ... in a row"), or inside a
+        figure. A silence of more than 0.25 seconds that does not follow punctuation is shortened to 0.1 seconds, and the
+        word timings after it move up by the same amount. Pauses after commas and full stops are left alone."""
+        np, sr, fr = self.np, 24000, 240
+        e = np.sqrt(np.convolve(wav ** 2, np.ones(fr) / fr, mode="same"))[::fr]
+        quiet = e < 0.012
+        if not quiet.size or quiet.all():
+            return wav, words
+        a, b = int(np.argmax(~quiet)), len(quiet) - int(np.argmax(~quiet[::-1]))
+        cuts, i = [], a
+        while i < b:
+            if quiet[i]:
+                j = i
+                while j < b and quiet[j]:
+                    j += 1
+                if j - i >= 25:   # 0.25 s
+                    t0 = i * 0.01
+                    prev = [w for w, at in words if at <= t0 + 0.02]
+                    if prev and not PUNCT_END.search(prev[-1]):
+                        cuts.append((i * fr + 5 * fr, (j - i - 10) * fr))   # keep 0.05 s at each side
+                i = j
+            else:
+                i += 1
+        if not cuts:
+            return wav, words
+        keep, last = [], 0
+        for start, n in cuts:
+            keep.append(wav[last:start])
+            last = start + n
+        keep.append(wav[last:])
+        moved = [(w, at - sum(n for s0, n in cuts if s0 < at * sr) / sr) for w, at in words]
+        self.trimmed = getattr(self, "trimmed", 0) + len(cuts)
+        return np.concatenate(keep), moved
 
     def say(self, sentence):
         np = self.np
@@ -153,7 +224,7 @@ class Voice:
             pos = near if abs(near - at) <= 4 and near > prev else max(at, prev + 1)
             out.append((w, float(starts[min(pos, len(starts) - 1)]) / 24000 if len(starts) else 0.0))
             acc += n
-        return wav, out
+        return self.trim(wav, out)
 
 
 def record(key, voice, out_mp3):
@@ -181,6 +252,8 @@ def record(key, voice, out_mp3):
             t += len(a) / sr
         segs.append(seg)
         t += pause(GAP[b["kind"]])
+    if getattr(V, "trimmed", 0):
+        print(f"  {NAMES.get(voice, voice)}: {V.trimmed} mid-phrase pauses shortened")
     wav = out_mp3[:-4] + ".wav"
     sf.write(wav, np.concatenate(parts), sr)
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", wav, "-ac", "1", "-b:a", "48k", out_mp3], check=True)
@@ -223,7 +296,28 @@ def warm(url):
         pass
 
 
+def names(key):
+    """The names in an edition the voice has not been checked on: each with the sounds the voice will use, to read
+    before recording. A wrong one goes into pronounce.json's "words"; a right one into "checked"."""
+    deps()
+    V = Voice(VOICES[0])
+    text = " ".join(b["text"] for b in R.load(key))
+    seen = set(OWN) | set(LEX.get("checked", []))
+    common = set(re.findall(r"\b[a-z][a-z'-]+\b", " ".join(open(os.path.join(ROOT, "editions", f)).read() for f in os.listdir(os.path.join(ROOT, "editions")) if f.endswith(".md"))))
+    found = []
+    for w in re.findall(r"\b[A-Z][a-z\u00c0-\u017f]+(?:-[A-Z][a-z\u00c0-\u017f]+)?\b", text):
+        base = re.sub(r"'s$", "", w)
+        if base in seen or base.lower() in common or base in found:
+            continue
+        found.append(base)
+    for w in found:
+        print(f"{w:24} {V.phon(w)}")
+    print(f"{len(found)} names to check; add wrong ones to pronounce.json 'words' and right ones to 'checked'.")
+
+
 def main(a):
+    if "--names" in a:
+        return names([x for x in a if not x.startswith("--")][0])
     args = [x for x in a if not x.startswith("--")]
     voices = a[a.index("--voice") + 1].split(",") if "--voice" in a else VOICES
     if "--voice" in a:

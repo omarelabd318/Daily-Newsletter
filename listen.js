@@ -23,6 +23,10 @@
     t = t.replace(new RegExp('\\bEGP\\s?' + NUM + '(?:\\s?(tn|bn|mn|m|k)\\b|\\s(trillion|billion|million|thousand)\\b)?', 'g'), function(m, n, u, w){ return n + (u ? ' ' + UNITS[u] : w ? ' ' + w : '') + ' pounds'; });
     t = t.replace(new RegExp('\\$' + NUM + '\\s?(tn|bn|mn|m|k)\\b', 'g'), function(m, n, u){ return n + ' ' + UNITS[u] + ' dollars'; });
     t = t.replace(new RegExp('\\$' + NUM + '(?:\\s(trillion|billion|million|thousand))?', 'g'), function(m, n, u){ return n + (u ? ' ' + u : '') + ' dollars'; });
+    // other currencies (the same rule as read_aloud.py): EUR 4.10 -> 4.1 euros
+    var CUR = {EUR:'euros','€':'euros',GBP:'pounds sterling','£':'pounds sterling',AED:'dirhams',SAR:'riyals',QAR:'riyals',KWD:'dinars'};
+    t = t.replace(new RegExp('(?:\\b(EUR|GBP|AED|SAR|QAR|KWD)\\s?|([€£]))' + NUM + '(?:\\s?(tn|bn|mn|m|k)\\b|\\s(trillion|billion|million|thousand)\\b)?', 'g'), function(m, c, s2, n, u, w){ return n.replace(/(\.\d*?)0+$/, '$1').replace(/\.$/, '') + (u ? ' ' + UNITS[u] : w ? ' ' + w : '') + ' ' + CUR[c || s2]; });
+    t = t.replace(/(\d)-a-(share|day|year|month|week|barrel|ton|tonne|gram|head|night)\b/g, '$1 a $2');
     t = t.replace(new RegExp('\\b' + NUM + '\\s?bps?\\b', 'g'), '$1 basis points');
     t = t.replace(new RegExp(NUM + '\\s?%', 'g'), '$1 percent');
     t = t.replace(/\s?°C\b/g, ' degrees');

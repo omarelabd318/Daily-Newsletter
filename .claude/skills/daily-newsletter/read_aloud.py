@@ -41,10 +41,19 @@ def speakable(t):
                lambda m: m.group(1) + (" " + UNITS[m.group(2)] if m.group(2) else " " + m.group(3) if m.group(3) else "") + " pounds", t)
     t = re.sub(r"\$" + num + r"\s?(tn|bn|mn|m|k)\b", lambda m: m.group(1) + " " + UNITS[m.group(2)] + " dollars", t)
     t = re.sub(r"\$" + num + r"(?:\s(trillion|billion|million|thousand))?", lambda m: m.group(1) + (" " + m.group(2) if m.group(2) else "") + " dollars", t)
+    # other currencies by code or sign: EUR 4.10 -> 4.1 euros (a price's trailing zero is not said)
+    cur = {"EUR": "euros", "€": "euros", "GBP": "pounds sterling", "£": "pounds sterling", "AED": "dirhams", "SAR": "riyals", "QAR": "riyals", "KWD": "dinars"}
+    t = re.sub(r"(?:\b(EUR|GBP|AED|SAR|QAR|KWD)\s?|([€£]))" + num + r"(?:\s?(tn|bn|mn|m|k)\b|\s(trillion|billion|million|thousand)\b)?",
+               lambda m: re.sub(r"(\.\d*?)0+$", r"\1", m.group(3)).rstrip(".") + (" " + UNITS[m.group(4)] if m.group(4) else " " + m.group(5) if m.group(5) else "") + " " + cur[m.group(1) or m.group(2)], t)
+    t = re.sub(r"(\d)-a-(share|day|year|month|week|barrel|ton|tonne|gram|head|night)\b", r"\1 a \2", t)
+    t = re.sub(r"(dollars|pounds|euros|riyals|dirhams)-a-", r"\1 a ", t)
     t = re.sub(r"\b" + num + r"\s?bps?\b", r"\1 basis points", t)
     t = re.sub(num + r"\s?%", r"\1 percent", t)
     t = re.sub(r"\s?°C\b", " degrees", t)
-    t = re.sub(r"\b(\d{1,2}(?::\d\d)?)\s?(am|pm)\b", lambda m: m.group(1) + (" a.m." if m.group(2) == "am" else " p.m."), t)
+    # times: 10pm and 10 p.m. -> "10 P-M", said as two letters (with full stops the voice paused after each)
+    # (a full stop after "p.m." that also ends the sentence is kept)
+    t = re.sub(r"\b(\d{1,2}(?::\d\d)?)\s?(a\.?m\.?|p\.?m\.?)(?=([\s,;)]|$))",
+               lambda m: m.group(1) + (" A-M" if m.group(2)[0] == "a" else " P-M") + ("." if m.group(2).endswith(".") and re.match(r"\s+[A-Z\"\u201c]|\s*$", m.string[m.end():]) else ""), t)
     t = re.sub(r"(\d)\s?[–—-]\s?(\d)", r"\1 to \2", t)            # ranges: 7–20, 2026–27
     t = re.sub(r"\b(\d{1,2}) (Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\b", r"\2 \1", t)
     t = re.sub(r"(?<![\w.])([+−-])(\d)", lambda m: ("plus " if m.group(1) == "+" else "minus ") + m.group(2), t)
@@ -54,6 +63,8 @@ def speakable(t):
         t = re.sub(r"(?<![\w&])" + re.escape(k) + r"(?![\w&])", v, t)
     # short all-caps abbreviations are spelled out (IPO, CIB, US, AI), except those said as words (NATO, OPEC)
     t = re.sub(r"\b[A-Z]{2,5}\b", lambda m: m.group(0) if m.group(0) in SAY or ROMAN.fullmatch(m.group(0)) else " ".join(m.group(0)), t)
+    # a unit said once: "207.4 million dollars from 110.2 million dollars" -> "207.4 million dollars from 110.2 million"
+    t = re.sub(r"(\d[\d.,]*(?: (?:trillion|billion|million|thousand))? (dollars|pounds|euros|percent)) (from|to|against|versus) (\d[\d.,]*(?: (?:trillion|billion|million|thousand))?) \2\b", r"\1 \3 \4", t)
     t = t.replace("&", " and ").replace("/", " ").replace("·", ",").replace("→", "")
     return re.sub(r"\s+", " ", t).strip()
 
