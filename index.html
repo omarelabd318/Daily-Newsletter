@@ -8,9 +8,9 @@
 <meta name="color-scheme" content="light">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&family=Inter:wght@500;600;700&family=UnifrakturCook:wght@700&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Pirata+One&family=Oswald:wght@500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&family=Inter:wght@500;600;700&family=UnifrakturCook:wght@700&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2352d6b5'/%3E%3Cpath d='M18 14h14c11 0 18 7 18 18s-7 18-18 18H18z' fill='%230e1216'/%3E%3C/svg%3E">
-<script>document.documentElement.className='js';try{if(localStorage.getItem('width')==='wide')document.documentElement.setAttribute('data-width','wide');var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark');else if(t==='paper')document.documentElement.setAttribute('data-theme','paper');var pf=(location.search.match(/[?&]pf=(\d)/)||[])[1];if(pf){document.documentElement.setAttribute('data-theme','paper');document.documentElement.setAttribute('data-pf',pf)}}catch(e){}</script>
+<script>document.documentElement.className='js';try{if(localStorage.getItem('width')==='wide')document.documentElement.setAttribute('data-width','wide');var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark');else if(t==='paper')document.documentElement.setAttribute('data-theme','paper')}catch(e){}</script>
 <style>
 :root{
   --ground:#0e1216; --raised:#151b21; --ink:#eef2f4; --ink2:#a9b4be; --accent:#52d6b5; --accent-ink:#07201a;
@@ -455,16 +455,16 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 
 /* paper: the page as a printed front page, laid out as one: ears beside a blackletter name, a dateline bar, a
    one-line market tape, a banner headline with its deck, the lead under its photo in three columns, a boxed markets
-   panel, and justified columns throughout. Three type sets (data-pf) while one is being chosen. */
+   panel, and justified columns throughout. */
 .f-banner,.f-by,.f-mbox,.p-ear,.p-dateline,.f-strip .f-x{display:none}
 :root[data-theme="paper"]{color-scheme:light;
   --ground:#e8e3d6; --raised:#ddd6c5; --ink:#14110d; --ink2:#4f4a40; --accent:#14110d; --accent-ink:#e8e3d6; --rule:#b9b19d; --up:#14110d; --down:#14110d;
   --p-mast:"UnifrakturCook"; --p-head:"Playfair Display"; --p-body:"Old Standard TT"; --p-hw:900; --p-ms:1; --p-caps:uppercase;
   --serif:var(--p-body),"Newsreader",Georgia,serif}
-:root[data-theme="paper"][data-pf="2"]{--p-mast:"Libre Caslon Display"; --p-head:"Libre Caslon Display"; --p-body:"Libre Caslon Text"; --p-hw:400; --p-ms:.86}
-:root[data-theme="paper"][data-pf="3"]{--p-mast:"Pirata One"; --p-head:"Oswald"; --p-body:"Libre Baskerville"; --p-hw:600; --p-ms:1.04}
 :root[data-theme="paper"]{background:#cfc9ba}
-:root[data-theme="paper"] body{background:none;font-size:18px}
+:root[data-theme="paper"] body{background:none;font-size:18px;font-variant-numeric:lining-nums}
+:root[data-theme="paper"] *{font-variant-numeric:lining-nums!important}
+:root[data-theme="paper"] .p-ear b,:root[data-theme="paper"] .f-mbox td,:root[data-theme="paper"] .f-strip b{font-variant-numeric:lining-nums tabular-nums!important}
 :root[data-theme="paper"] .mast-frame,:root[data-theme="paper"] main,:root[data-theme="paper"] footer{max-width:1340px;margin-inline:auto;background-color:var(--ground);background-image:radial-gradient(rgba(60,50,30,.05) 1px,transparent 1px);background-size:3px 3px}
 :root[data-theme="paper"] .mast-frame{margin-top:18px;padding-inline:44px}
 :root[data-theme="paper"] .front .frame,:root[data-theme="paper"] .s .frame,:root[data-theme="paper"] footer .frame{max-width:none;padding-inline:44px}
@@ -485,8 +485,6 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 :root[data-theme="paper"] .f-banner h2{margin:0;font:var(--p-hw) clamp(30px,4.5vw,62px)/1.04 var(--p-head),var(--serif);letter-spacing:-.005em;text-transform:var(--p-caps)}
 :root[data-theme="paper"] .f-banner h2 a{color:inherit}
 :root[data-theme="paper"] .f-deck{margin:10px auto 0;max-width:980px;font:italic 700 clamp(18px,1.8vw,24px)/1.27 "Playfair Display",var(--serif)}
-:root[data-theme="paper"][data-pf="2"] .f-deck{font:italic 400 clamp(19px,1.9vw,25px)/1.3 "Libre Caslon Text",serif}
-:root[data-theme="paper"][data-pf="3"] .f-deck{font:italic 400 clamp(17px,1.7vw,22px)/1.35 "Libre Baskerville",serif}
 :root[data-theme="paper"] .f-others{margin:9px auto 0;max-width:1080px;font:600 11px/1.6 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
 :root[data-theme="paper"] .f-main{margin-top:0;border-top:1px solid var(--ink);grid-template-columns:2.15fr 1fr 1fr}
 :root[data-theme="paper"] .f-main > *{padding-top:14px;border-left-color:var(--ink)}
@@ -535,7 +533,11 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 @media (min-width:1100px){
   /* the sections below run in three columns with rules between, as on a printed page */
   :root[data-theme="paper"] .s-body .run{column-count:3;column-gap:32px;column-rule:1px solid var(--rule)}
-  :root[data-theme="paper"] .run > p,:root[data-theme="paper"] .run > blockquote,:root[data-theme="paper"] .run li{break-inside:avoid}
+  :root[data-theme="paper"] .run > p,:root[data-theme="paper"] .run li{break-inside:auto;orphans:3;widows:3}
+  :root[data-theme="paper"] .run > blockquote,:root[data-theme="paper"] .run .tchips{break-inside:avoid}
+  :root[data-theme="paper"] .run > p + p{margin-top:0}
+  /* a part with only two stories (Weather) runs in two columns, not three with one left empty */
+  :root[data-theme="paper"] .s-body .run:not(:has(> :nth-child(3))){column-count:2}
   :root[data-theme="paper"] #widthBtn{display:none}
 }
 @media (max-width:1040px){
@@ -924,21 +926,8 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
       var m = td.textContent.match(/\(([A-Z][A-Z.]{0,5})\)/);
       if(m && DESK_T.indexOf(m[1]) >= 0) td.innerHTML = '<a class="desklink" href="/desk/stock/?t=' + encodeURIComponent(m[1]) + '" title="Its page on the Markets Desk">' + td.innerHTML + '</a>';
     });
-    var MAP = [[/^Egypt Markets$/i, '/desk/egx/', 'The EGX on the Markets Desk'], [/^Global Markets$/i, '/desk/us/', 'Wall Street on the Markets Desk'],
-      [/^Egypt$/i, '/desk/stocks/egypt/', "All the desk's Egyptian stocks"], [/^USA$/i, '/desk/stocks/us/', "All the desk's US stocks"]];
-    [].forEach.call(document.querySelectorAll('#markets h3, #stocks-watch h3'), function(h){
-      for(var i = 0; i < MAP.length; i++) if(MAP[i][0].test(h.textContent.trim())){
-        // the line goes at the end of the part: just before the next subhead, or at the end of the section
-        var end = h.nextElementSibling;
-        while(end && end.nextElementSibling && !/^H[23]$/.test(end.nextElementSibling.tagName)) end = end.nextElementSibling;
-        var p = document.createElement('p'); p.className = 'deskline';
-        p.innerHTML = '<a href="' + MAP[i][1] + '">' + MAP[i][2] + ' →</a>';
-        (end || h).insertAdjacentElement('afterend', p);
-        break;
-      }
-    });
-    var cc = document.querySelector('#currency-and-commodities-watch .s-body');
-    if(cc){ var q = document.createElement('p'); q.className = 'deskline'; q.innerHTML = '<a href="/desk/egp/">The pound on the Markets Desk →</a> · <a href="/desk/global/">Oil, gold and the dollar →</a>'; cc.appendChild(q); }
+    // the section-end lines to the desk ("The EGX on the Markets Desk →") were taken out on November 11, 2026 as clutter;
+    // the stock names in the tables still open their desk pages
   }
 
   // ---- running topics (data/topics.json): a label under each story that belongs to one, a Topics list, a page
