@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Daily Newsletter (Heart)</title>
+    <title>Daily Newsletter</title>
     <link>https://daily-newsletter-eg.vercel.app/</link>
     <atom:link href="https://daily-newsletter-eg.vercel.app/podcast/heart.xml" rel="self" type="application/rss+xml"/>
     <description>The Daily Newsletter read aloud each morning: Egypt, the world, the region and the markets, about half an hour. Read by Heart.</description>
     <language>en-us</language>
     <itunes:author>Daily Newsletter</itunes:author>
     <itunes:image href="https://daily-newsletter-eg.vercel.app/podcast/cover.png?v=dark"/>
-    <image><url>https://daily-newsletter-eg.vercel.app/podcast/cover.png?v=dark</url><title>Daily Newsletter (Heart)</title><link>https://daily-newsletter-eg.vercel.app/</link></image>
+    <image><url>https://daily-newsletter-eg.vercel.app/podcast/cover.png?v=dark</url><title>Daily Newsletter</title><link>https://daily-newsletter-eg.vercel.app/</link></image>
     <itunes:category text="News"><itunes:category text="Daily News"/></itunes:category>
     <itunes:explicit>false</itunes:explicit>
     <itunes:type>episodic</itunes:type>
@@ -19,7 +19,7 @@
       <link>https://daily-newsletter-eg.vercel.app/#2026-11-11</link>
       <guid isPermaLink="false">2026-11-11-af_heart</guid>
       <pubDate>Wed, 11 Nov 2026 10:00:00 +0200</pubDate>
-      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@9ae28276cf21d086393e1b90753f3544c3b64bc3/2026-11-11-af_heart.mp3" length="10829037" type="audio/mpeg"/>
+      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@726ae6cbe6e2da09d9a3dd21b3943f5c9300531d/2026-11-11-af_heart.mp3" length="10829037" type="audio/mpeg"/>
       <itunes:duration>0:30:05</itunes:duration>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -29,7 +29,7 @@
       <link>https://daily-newsletter-eg.vercel.app/#2026-11-10</link>
       <guid isPermaLink="false">2026-11-10-af_heart</guid>
       <pubDate>Tue, 10 Nov 2026 10:00:00 +0200</pubDate>
-      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@9ae28276cf21d086393e1b90753f3544c3b64bc3/2026-11-10-af_heart.mp3" length="10763373" type="audio/mpeg"/>
+      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@726ae6cbe6e2da09d9a3dd21b3943f5c9300531d/2026-11-10-af_heart.mp3" length="10763373" type="audio/mpeg"/>
       <itunes:duration>0:29:54</itunes:duration>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -39,8 +39,8 @@
       <link>https://daily-newsletter-eg.vercel.app/#2026-11-09</link>
       <guid isPermaLink="false">2026-11-09-af_heart</guid>
       <pubDate>Mon, 09 Nov 2026 10:00:00 +0200</pubDate>
-      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@9ae28276cf21d086393e1b90753f3544c3b64bc3/2026-11-09-af_heart.mp3" length="11014797" type="audio/mpeg"/>
-      <itunes:duration>0:30:36</itunes:duration>
+      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@726ae6cbe6e2da09d9a3dd21b3943f5c9300531d/2026-11-09-af_heart.mp3" length="10776045" type="audio/mpeg"/>
+      <itunes:duration>0:29:56</itunes:duration>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
@@ -49,7 +49,7 @@
       <link>https://daily-newsletter-eg.vercel.app/#2026-11-08</link>
       <guid isPermaLink="false">2026-11-08-af_heart</guid>
       <pubDate>Sun, 08 Nov 2026 10:00:00 +0200</pubDate>
-      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@9ae28276cf21d086393e1b90753f3544c3b64bc3/2026-11-08-af_heart.mp3" length="10295373" type="audio/mpeg"/>
+      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@726ae6cbe6e2da09d9a3dd21b3943f5c9300531d/2026-11-08-af_heart.mp3" length="10295373" type="audio/mpeg"/>
       <itunes:duration>0:28:36</itunes:duration>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -59,7 +59,7 @@
       <link>https://daily-newsletter-eg.vercel.app/#2026-11-07</link>
       <guid isPermaLink="false">2026-11-07-af_heart</guid>
       <pubDate>Sat, 07 Nov 2026 10:00:00 +0200</pubDate>
-      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@9ae28276cf21d086393e1b90753f3544c3b64bc3/2026-11-07-af_heart.mp3" length="9905853" type="audio/mpeg"/>
+      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@726ae6cbe6e2da09d9a3dd21b3943f5c9300531d/2026-11-07-af_heart.mp3" length="9905853" type="audio/mpeg"/>
       <itunes:duration>0:27:31</itunes:duration>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -69,7 +69,7 @@
       <link>https://daily-newsletter-eg.vercel.app/#2026-11-07-recap</link>
       <guid isPermaLink="false">2026-11-07-recap-af_heart</guid>
       <pubDate>Sat, 07 Nov 2026 14:00:00 +0200</pubDate>
-      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@9ae28276cf21d086393e1b90753f3544c3b64bc3/2026-11-07-recap-af_heart.mp3" length="6886317" type="audio/mpeg"/>
+      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@726ae6cbe6e2da09d9a3dd21b3943f5c9300531d/2026-11-07-recap-af_heart.mp3" length="6886317" type="audio/mpeg"/>
       <itunes:duration>0:19:08</itunes:duration>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -79,7 +79,7 @@
       <link>https://daily-newsletter-eg.vercel.app/#2026-11-06</link>
       <guid isPermaLink="false">2026-11-06-af_heart</guid>
       <pubDate>Fri, 06 Nov 2026 10:00:00 +0200</pubDate>
-      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@9ae28276cf21d086393e1b90753f3544c3b64bc3/2026-11-06-af_heart.mp3" length="8737149" type="audio/mpeg"/>
+      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@726ae6cbe6e2da09d9a3dd21b3943f5c9300531d/2026-11-06-af_heart.mp3" length="8737149" type="audio/mpeg"/>
       <itunes:duration>0:24:16</itunes:duration>
       <itunes:episodeType>full</itunes:episodeType>
     </item>

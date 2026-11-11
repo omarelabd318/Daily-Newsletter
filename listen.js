@@ -232,7 +232,21 @@
 
   // ---- highlight and follow ----
   var lastEl = null;
+  // Today at a Glance and Quick Hits are hidden on a daily edition's page (its front page shows them): while one of
+  // their blocks is read, the matching item on the front page is highlighted instead
+  function onPage(el){
+    var s = el && el.closest && el.closest('.in-front');
+    if(!s) return el;
+    var front = document.getElementById('front');
+    if(s.id === 'quick-hits'){
+      var lis = [].slice.call(s.querySelectorAll('li')), i = lis.indexOf(el.closest('li'));
+      return document.querySelectorAll('#front .f-band > div')[i] || front;
+    }
+    var a = el.querySelector && el.querySelector('a[href^="#story-"]'), f = a && document.querySelector('#front a[href="' + a.getAttribute('href') + '"]');
+    return f ? (f.closest('article, li, .f-lead') || f) : (/^What to watch/i.test(el.textContent) && document.querySelector('#front .f-watch')) || front;
+  }
   function mark(el){
+    el = onPage(el);
     if(el === lastEl) return;
     var follow = lastEl ? (function(r){ return r.bottom > 0 && r.top < innerHeight; })(lastEl.getBoundingClientRect()) : true;
     if(lastEl) lastEl.classList.remove('reading');
