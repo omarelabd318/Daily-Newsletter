@@ -369,23 +369,30 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 @media (min-width:1041px){
   /* the masthead as a newspaper's: the date and the links on one line above the name, the closes under it, then the
      sections with Listen at the right */
-  .has-front .mast{padding:46px 0 0;text-align:center}
-  .has-front .top{position:absolute;top:10px;right:0;margin:0;padding:0;border:0;gap:22px;align-items:center}
-  .has-front .top .grp{gap:22px;align-items:center}
-  .has-front .top{flex-wrap:nowrap;width:max-content} .has-front .top .grp:nth-child(2){display:none}
-  .has-front .top :is(a,button,.off){position:static!important;top:auto;left:auto;right:auto;display:inline-block;min-height:0;padding:4px 0;background:none;border:0;font:600 11px/1.4 var(--sans)!important;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)!important;cursor:pointer;white-space:nowrap}
-  .has-front .top :is(a,button):hover,.has-front .top [aria-current],.has-front .top [aria-expanded="true"]{color:var(--accent)!important;background:none}
-  .has-front .top .lg,.has-front .top .lg2{display:none}
+  .nm .mast{padding:46px 0 0;text-align:center}
+  .nm .top{position:absolute;top:10px;right:0;margin:0;padding:0;border:0;gap:22px;align-items:center}
+  .nm .top .grp{gap:22px;align-items:center}
+  .nm .top{flex-wrap:nowrap;width:max-content} .nm .top .grp:nth-child(2){display:none}
+  .nm .top :is(a,button,.off){position:static!important;top:auto;left:auto;right:auto;display:inline-block;min-height:0;padding:4px 0;background:none;border:0;font:600 11px/1.4 var(--sans)!important;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)!important;cursor:pointer;white-space:nowrap}
+  .nm .top :is(a,button):hover,.nm .top [aria-current],.nm .top [aria-expanded="true"]{color:var(--accent)!important;background:none}
+  .nm .top .lg,.nm .top .lg2{display:none}
   .has-front .edition{display:block;margin:0;position:static}
   .has-front .edition .date{position:absolute;top:14px;left:0;font:500 11px var(--sans);letter-spacing:.14em;color:var(--ink2)}
   .has-front .edition .date::before{content:"Cairo \00b7  "}
   .has-front .what{margin-top:10px}
   :root.has-front .toc{justify-content:flex-start;gap:0 24px;margin:0!important;padding:11px 190px 11px 0;min-height:56px;align-items:center;border-bottom:1px solid var(--rule);font:500 11.5px var(--sans);letter-spacing:.1em;text-transform:uppercase}
-  .has-front #listenwrap{position:absolute;right:0;bottom:9px;margin:0;height:38px;padding:0 16px 0 7px;gap:0 8px;flex-wrap:nowrap;border-radius:999px;background:var(--ink)}
+  .has-front #listenwrap{position:absolute;right:0;bottom:9px;margin:0;height:38px;padding:0 16px 0 7px;gap:0 8px;flex-wrap:nowrap;border-radius:999px;background:var(--ink);cursor:pointer}
+  :root[data-theme="dark"].has-front #listenwrap{background:none;box-shadow:inset 0 0 0 1px var(--ink2)}
+  :root[data-theme="dark"].has-front #listenwrap:hover{box-shadow:inset 0 0 0 1px var(--ink)}
+  :root[data-theme="dark"].has-front .listen,:root[data-theme="dark"].has-front .listen:hover,:root[data-theme="dark"].has-front .listen-m{color:var(--ink)}
+  :root[data-theme="dark"].has-front .listen svg{background:var(--ink2);fill:var(--ground)}
   .has-front .listen,.has-front .listen:hover{height:38px;padding:0;gap:10px;border:0;background:none;color:var(--ground);font:600 11.5px var(--sans);letter-spacing:.1em;text-transform:uppercase}
   .has-front .listen svg{width:22px;height:22px;padding:4px 3px 4px 5px;border-radius:50%;background:var(--ground);fill:var(--ink)}
   .has-front .listen-m{font:600 11.5px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ground)} .has-front .listen-m::before{content:"\00b7\00a0\00a0"}
-  .has-front #prev,.has-front #next{display:none}
+  .nm #prev,.nm #next{display:none}
+  /* the archive opens over the page from under the top line, covering the closes strip, instead of pushing it down */
+  .nm #archive{position:absolute;top:44px;left:0;right:0;z-index:30;margin:0;padding:10px 22px;text-align:left;border:1px solid var(--ink);box-shadow:0 18px 40px rgba(0,0,0,.18);max-height:72vh}
+  .nm:not(.has-front) .mast{padding-bottom:26px}
   @media (max-width:1260px){:root.has-front .toc{gap:0 15px;padding-right:176px;letter-spacing:.07em}}
   .has-front .front{padding-top:0} .has-front .f-main{margin-top:20px} .has-front .f-col article:first-of-type{padding-top:0} .has-front .f-rail h4{padding-top:9px}
 }
@@ -602,7 +609,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 
   function show(){
     var date = (location.hash||'').replace('#','');
-    document.documentElement.classList.remove('has-front'); (function(){ var x = document.getElementById('f-strip'); if(x) x.remove(); })();
+    document.documentElement.classList.remove('has-front'); document.documentElement.classList.remove('nm'); (function(){ var x = document.getElementById('f-strip'); if(x) x.remove(); })();
     if(date === 'topics'){ showTopics(); return; }
     if(date.indexOf('topic/') === 0){ showTopic(date.slice(6)); return; }
     $('topicsLink').removeAttribute('aria-current');
@@ -737,7 +744,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     G.classList.add('in-front'); if(Q && band) Q.classList.add('in-front');
     var SHORT = {'Egypt News':'Egypt','Top World Headlines':'World','Regional and Gulf':'Region','Stocks Watch':'Stocks','Currency and Commodities Watch':'Currencies','In Other News':'Other news','Economic Calendar':'Calendar'};
     [].slice.call($('toc').querySelectorAll('a')).forEach(function(a){ var id = a.getAttribute('href'); if(id === '#today-at-a-glance' || (id === '#quick-hits' && band)) a.remove(); else if(SHORT[a.textContent]) a.textContent = SHORT[a.textContent]; });
-    document.documentElement.classList.add('has-front');
+    document.documentElement.classList.add('has-front'); document.documentElement.classList.add('nm');
     // even out the columns: when the lead is much shorter than the stories beside it, the last of those (then the
     // what-to-watch line) moves under the lead, as long as that narrows the gap. Three columns only.
     function balance(){
@@ -766,6 +773,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
       var el = document.getElementById('f-strip'); if(el){ if(cells) el.innerHTML = cells; else el.remove(); }
     });
   }
+  document.addEventListener('click', function(e){ var w = e.target.closest && e.target.closest('#listenwrap'); if(w && !e.target.closest('button')){ var b = document.getElementById('listenBtn'); if(b) b.click(); } });
   function watchTables(){
     [].forEach.call(document.querySelectorAll('#stocks-watch table, #currency-and-commodities-watch table'), function(table){
       table.classList.add('watch');
@@ -844,6 +852,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     window.scrollTo(0,0);
   }
   function showTopics(){
+    document.documentElement.classList.add('nm');
     document.title = 'Topics · Daily Newsletter';
     getTopics().then(function(T){
       var st = topicStats(T), today = editions.length ? editions[0].date : '';
@@ -854,6 +863,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     });
   }
   function showTopic(id){
+    document.documentElement.classList.add('nm');
     getTopics().then(function(T){
       var t = T.topics.filter(function(x){ return x.id === id; })[0];
       if(!t){ topicFrame('<p class="tp-sub">No such topic. <a href="#topics">All topics →</a></p>'); return; }
