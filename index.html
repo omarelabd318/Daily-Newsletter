@@ -544,6 +544,17 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
   :root[data-theme="paper"] .f-body{columns:1} :root[data-theme="paper"] .f-main{grid-template-columns:1fr}
   :root[data-theme="paper"] .p-dateline{grid-template-columns:auto 1fr auto;gap:10px;font-size:9.5px;letter-spacing:.08em} :root[data-theme="paper"] .p-dateline span:nth-child(2){text-align:center}
 }
+/* "Inside today": the section index at the foot of the rail, paper mode only */
+.f-inside{display:none}
+:root[data-theme="paper"] .f-inside{display:block;margin-top:14px;padding:9px 11px;border:1px solid var(--ink)}
+:root[data-theme="paper"] .f-inside[hidden]{display:none}
+:root[data-theme="paper"] .f-inside h4{margin:0 0 4px;padding:0 0 5px;border:0;border-bottom:1px solid var(--ink);text-align:center;font:700 11px var(--sans);letter-spacing:.18em;text-transform:uppercase}
+:root[data-theme="paper"] .f-inside ol{list-style:none;margin:0;padding:0}
+:root[data-theme="paper"] .f-inside li{display:flex;align-items:baseline;gap:6px;padding:5px 0;border-top:1px dotted var(--rule);font:15px/1.3 var(--serif)}
+:root[data-theme="paper"] .f-inside li:first-child{border-top:0}
+:root[data-theme="paper"] .f-inside li::after{content:"";order:1;flex:1;border-bottom:1px dotted var(--ink2);transform:translateY(-4px)}
+:root[data-theme="paper"] .f-inside li span{order:2;font:600 12px var(--sans);font-variant-numeric:lining-nums tabular-nums}
+:root[data-theme="paper"] .f-inside li[hidden]{display:none}
 </style>
 </head>
 <body>
@@ -810,6 +821,13 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     }).filter(Boolean);
     if(items.length < 4) return;
     function body(el){ var c = el.cloneNode(true), f = c.firstElementChild; if(f && f.tagName === 'STRONG') f.remove(); c.querySelectorAll('.tchips,.chg').forEach(function(x){x.remove()}); return c; }
+    // the front page's index, as printed papers carry: every section below with how many stories it has
+    function insideBox(){
+      var items = [].slice.call(document.querySelectorAll('#content section.s')).filter(function(x){ return !/^(today-at-a-glance|quick-hits|sources)$/.test(x.id) && !x.classList.contains('src'); }).map(function(x){
+        var t = (x.querySelector('h2') || {}).textContent || '', n = x.querySelectorAll('[id^="story-"]').length;
+        return '<li><a href="#'+x.id+'" data-jump="1">'+esc(t)+'</a>'+(n ? '<span>'+n+'</span>' : '')+'</li>'; });
+      return items.length ? '<div class="f-inside"><h4>Inside today</h4><ol>'+items.join('')+'</ol></div>' : '';
+    }
     function sentences(el){ return body(el).textContent.trim().split(/(?<=[A-Za-z0-9%)\]"\u201d]{2}[.!?]["\u201d]?)\s+(?=[A-Z"\u201c])/).filter(function(x){ return x.trim(); }); }
     function first(el){ var t = body(el).textContent.trim(), m = t.match(/^[\s\S]{40,260}?[.!?]["”]?(?=\s+[A-Z"“]|$)/); return m ? m[0] : t.slice(0,220); }
     function sectionOf(el){ var s = el.closest('section'), h = s && s.querySelector('h2'); return h ? h.textContent : ''; }
@@ -837,7 +855,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
       + link(lead, '<span class="f-more">Continue in '+esc(sectionOf(lead.story))+' ↓</span>') + '</div><div class="f-col">'
       + mid.map(function(it){ return '<article><span class="f-kick">'+esc(it.label)+'</span><h3>'+link(it, esc(it.text))+'</h3><p data-s="'+esc(JSON.stringify(sentences(it.story)))+'">'+esc(first(it.story))+'</p></article>'; }).join('') + '</div><div class="f-rail"><div class="f-mbox" id="f-mbox"></div>'
       + (rest.length ? '<h4>Also today</h4><ol class="f-glance">'+rest.map(function(it, i){ return '<li><span><small>'+esc(it.label)+'</small>'+link(it, esc(it.text))+'</span></li>'; }).join('')+'</ol>' : '')
-      + (watch ? '<p class="f-watch">'+watch.innerHTML+'</p>' : '') + '</div></div>';
+      + (watch ? '<p class="f-watch">'+watch.innerHTML+'</p>' : '') + insideBox() + '</div></div>';
     // Quick Hits as a band: the figure large, the rest as its caption
     var Q = document.getElementById('quick-hits'), band = '';
     if(Q){
@@ -870,8 +888,12 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
       setN(1);
       // paper mode: the what-to-watch box sits under the lead (a short story leaves room there); otherwise in the rail
       var wt = sec.querySelector('.f-watch'), paper = document.documentElement.getAttribute('data-theme') === 'paper';
-      if(wt) (paper && window.innerWidth > 1040 ? L : R).appendChild(wt);
+      var ins = R.querySelector('.f-inside'), insL = ins ? [].slice.call(ins.querySelectorAll('li')) : [];
+      insL.forEach(function(li){ li.hidden = false; }); if(ins) ins.hidden = false;
+      if(wt){ wt.remove(); if(ins) R.insertBefore(wt, ins); else R.appendChild(wt); }
       if(window.innerWidth <= 1040) return;
+      // paper mode: the what-to-watch box goes under the lead or at the foot of the rail, whichever column is shorter
+      if(wt && paper){ wt.remove(); var hl = h(L), hr = h(R); if(hl < hr) L.appendChild(wt); else if(ins) R.insertBefore(wt, ins); else R.appendChild(wt); }
       var target = Math.max(h(L), h(R)), best = null;
       [1,2,3,4].forEach(function(n){ setN(n); var d = Math.abs(h(C) - target) + (h(C) > target + 24 ? 60 : 0); if(!best || d < best.d) best = {d:d, n:n}; });
       setN(best.n);
