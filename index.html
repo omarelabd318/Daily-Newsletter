@@ -937,7 +937,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
         var d = 'M' + pts.map(function(q){ return q[0].toFixed(1) + ' ' + q[1].toFixed(1); }).join('L');
         var row = function(lab, k, fmt){ var f = fig(k); return f ? '<tr><td>'+lab+'</td><td>'+fmt(f.now)+'</td><td>'+(f.chg == null ? '' : (f.chg >= 0 ? '+' : '\u2212') + Math.abs(f.chg).toFixed(2) + '%')+'</td></tr>' : ''; };
         mb.innerHTML = '<h4>The markets</h4><svg viewBox="0 0 250 72" preserveAspectRatio="none" aria-hidden="true"><path d="'+d+'L247 72L3 72Z" fill="currentColor" opacity=".09"/><path d="'+d+'" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>'
-          + '<table>'+row('EGX30, past month','egx30',n0)+row('EGX70 EWI','egx70',n0)+row('Dollar index','dxy',n2)+row('Gold, $ an ounce','gold_usd',n0)+'</table><a href="/desk/">Markets Desk \u2192</a>';
+          + '<table>'+row('EGX30, past month','egx30',n0)+row('EGX70 EWI','egx70',n0)+row('Dollar index','dxy',n2)+row('Gold, $ an ounce','gold_usd',n0)+'</table>';
       }
     });
   }
