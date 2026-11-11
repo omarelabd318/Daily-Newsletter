@@ -363,7 +363,26 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 .in-front{display:none}
 .has-front .edition .sum{display:none}
 .has-front .mast{border-bottom:0;padding-bottom:18px}
-.f-strip{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border-top:3px double var(--ink);border-bottom:1px solid var(--ink)}
+.f-strip{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));margin-top:18px;text-align:left;border-top:3px double var(--ink);border-bottom:1px solid var(--ink)}
+.f-strip:empty{display:none}
+.f-dek{margin:0 0 14px;font-size:21px;line-height:1.42}
+@media (min-width:1041px){
+  /* the masthead as a newspaper's: the date and the links on one line above the name, the closes under it, then the
+     sections with Listen at the right */
+  .has-front .mast{padding:46px 0 0;text-align:center}
+  .has-front .top{position:absolute;top:8px;right:104px;margin:0;padding:0;border:0;gap:4px}
+  .has-front .top .grp{gap:0} .has-front .top a,.has-front .top .off{padding:6px 9px;font-size:11px;color:var(--ink2)} .has-front #archiveBtn{min-height:0;padding:6px 9px;font-size:11px;color:var(--ink2)}
+  .has-front .top .lg,.has-front .top .lg2{display:none}
+  .has-front #widthBtn{left:auto;right:50px;top:6px} .has-front #themeBtn{top:6px}
+  .has-front .edition{display:block;margin:0;position:static}
+  .has-front .edition .date{position:absolute;top:14px;left:0;font:500 11px var(--sans);letter-spacing:.14em;color:var(--ink2)}
+  .has-front .edition .date::before{content:"Cairo \00b7  "}
+  .has-front .what{margin-top:10px}
+  .has-front .toc{justify-content:flex-start;gap:0 24px;margin:0;padding:11px 190px 11px 0;min-height:56px;align-items:center;border-bottom:1px solid var(--rule);font:500 11.5px var(--sans);letter-spacing:.1em;text-transform:uppercase}
+  .has-front #listenwrap{position:absolute;right:0;bottom:9px}
+  .has-front #prev,.has-front #next{display:none}
+  .has-front .front{padding-top:22px}
+}
 .f-strip a,.f-strip div{display:block;padding:10px 14px;border-left:1px solid var(--rule);color:var(--ink);text-decoration:none;font:13px/1.35 var(--sans)}
 .f-strip > :first-child{border-left:0;padding-left:0}
 .f-strip span{display:block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2)}
@@ -384,6 +403,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 .f-col article{padding:15px 0;border-top:1px solid var(--rule)} .f-col article:first-of-type{border-top:0;padding-top:6px}
 .f-col h3{margin:5px 0 6px;font:700 21px/1.2 var(--serif)}
 .f-col p{margin:0;font-size:15px;line-height:1.5;color:var(--ink2)}
+.f-col article p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:var(--f-lines,4);overflow:hidden}
 .f-under{margin-top:20px;border-top:1px solid var(--ink)} .f-under article{padding:14px 0 0} .f-under article + .f-watch,.f-under .f-watch{margin-top:14px}
 .f-under h3{margin:5px 0 6px;font:700 21px/1.2 var(--serif)} .f-under article p{margin:0;font-size:15px;line-height:1.5;color:var(--ink2)}
 .f-rail h4{margin:0;padding-top:9px;border-top:1px solid var(--ink);font:600 12px var(--sans);letter-spacing:.16em;text-transform:uppercase}
@@ -577,7 +597,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 
   function show(){
     var date = (location.hash||'').replace('#','');
-    document.documentElement.classList.remove('has-front');
+    document.documentElement.classList.remove('has-front'); (function(){ var x = document.getElementById('f-strip'); if(x) x.remove(); })();
     if(date === 'topics'){ showTopics(); return; }
     if(date.indexOf('topic/') === 0){ showTopic(date.slice(6)); return; }
     $('topicsLink').removeAttribute('aria-current');
@@ -667,6 +687,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
   function buildFront(ed){
     document.documentElement.classList.remove('has-front');
     var old = document.getElementById('front'); if(old) old.remove();
+    var os = document.getElementById('f-strip'); if(os) os.remove();
     if(/-recap$/.test(key(ed))) return;
     var G = document.getElementById('today-at-a-glance'); if(!G) return;
     var items = [].slice.call(G.querySelectorAll('ol li')).map(function(li){
@@ -681,10 +702,16 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     function link(it, inner){ return '<a href="'+it.href+'" data-jump="1">'+inner+'</a>'; }
     var lead = items[0], mid = items.slice(1,4), rest = items.slice(4);
     var watch = [].slice.call(G.querySelectorAll('p')).filter(function(p){ return /^What to watch/i.test(p.textContent); })[0];
-    var h = '<div class="f-strip" id="f-strip"></div><div class="f-main"><div class="f-lead"><span class="f-kick">'+esc(lead.label || 'The big story')+'</span><h2>'+link(lead, esc(lead.text))+'</h2><p class="f-body">'+body(lead.story).innerHTML.trim()+'</p>'
+    var oldStrip = document.getElementById('f-strip'); if(oldStrip) oldStrip.remove();
+    var strip = document.createElement('div'); strip.className = 'f-strip'; strip.id = 'f-strip';
+    var what = document.querySelector('.mast .what'); what.parentNode.insertBefore(strip, what.nextSibling);
+    // the lead: its first sentence is the standfirst, the rest runs in two columns
+    var lb = body(lead.story), dek = first(lead.story), lhtml = lb.innerHTML.trim(), ltxt = lb.textContent.trim();
+    var restTxt = ltxt.indexOf(dek) === 0 ? ltxt.slice(dek.length).trim() : '';
+    var h = '<div class="f-main"><div class="f-lead"><span class="f-kick">'+esc(lead.label || 'The big story')+'</span><h2>'+link(lead, esc(lead.text))+'</h2>'+(restTxt.length > 120 ? '<p class="f-dek">'+esc(dek)+'</p><p class="f-body">'+esc(restTxt)+'</p>' : '<p class="f-body">'+lhtml+'</p>')
       + link(lead, '<span class="f-more">Continue in '+esc(sectionOf(lead.story))+' ↓</span>') + '</div><div class="f-col">'
       + mid.map(function(it){ return '<article><span class="f-kick">'+esc(it.label)+'</span><h3>'+link(it, esc(it.text))+'</h3><p>'+esc(first(it.story))+'</p></article>'; }).join('') + '</div><div class="f-rail">'
-      + (rest.length ? '<h4>Also today</h4><ol class="f-glance">'+rest.map(function(it, i){ return '<li><b>'+(i+5)+'</b><span><small>'+esc(it.label)+'</small>'+link(it, esc(it.text))+'</span></li>'; }).join('')+'</ol>' : '')
+      + (rest.length ? '<h4>Today at a glance</h4><ol class="f-glance">'+rest.map(function(it, i){ return '<li><b>'+(i+1)+'</b><span><small>'+esc(it.label)+'</small>'+link(it, esc(it.text))+'</span></li>'; }).join('')+'</ol>' : '')
       + (watch ? '<p class="f-watch">'+watch.innerHTML+'</p>' : '') + '</div></div>';
     // Quick Hits as a band: the figure large, the rest as its caption
     var Q = document.getElementById('quick-hits'), band = '';
@@ -702,26 +729,23 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     var sec = document.createElement('section'); sec.className = 'front'; sec.id = 'front'; sec.innerHTML = '<div class="frame">'+h+'</div>';
     $('content').insertBefore(sec, $('content').firstChild);
     G.classList.add('in-front'); if(Q && band) Q.classList.add('in-front');
-    [].slice.call($('toc').querySelectorAll('a')).forEach(function(a){ var id = a.getAttribute('href'); if(id === '#today-at-a-glance' || (id === '#quick-hits' && band)) a.remove(); });
+    var SHORT = {'Egypt News':'Egypt','Top World Headlines':'World','Regional and Gulf':'Region','Stocks Watch':'Stocks','Currency and Commodities Watch':'Currencies','In Other News':'Other news','Economic Calendar':'Calendar'};
+    [].slice.call($('toc').querySelectorAll('a')).forEach(function(a){ var id = a.getAttribute('href'); if(id === '#today-at-a-glance' || (id === '#quick-hits' && band)) a.remove(); else if(SHORT[a.textContent]) a.textContent = SHORT[a.textContent]; });
     document.documentElement.classList.add('has-front');
     // even out the columns: when the lead is much shorter than the stories beside it, the last of those (then the
     // what-to-watch line) moves under the lead, as long as that narrows the gap. Three columns only.
     function balance(){
-      var L = sec.querySelector('.f-lead'), C = sec.querySelector('.f-col'), R = sec.querySelector('.f-rail'); if(!L || !C) return;
-      var under = L.querySelector('.f-under'); if(under){ [].slice.call(under.children).forEach(function(x){ (x.tagName === 'ARTICLE' ? C : R).appendChild(x); }); under.remove(); }
+      var L = sec.querySelector('.f-lead'), C = sec.querySelector('.f-col'), R = sec.querySelector('.f-rail'); if(!L || !C || !R) return;
+      var h = function(el){ var k = [].slice.call(el.children).filter(function(x){ return x.offsetHeight; }); return k.length ? k[k.length-1].offsetTop + k[k.length-1].offsetHeight - k[0].offsetTop : 0; };
+      // the side stories' summaries are cut to the number of lines (2 to 6) that brings their column closest to the
+      // taller of the lead and the rail, so no column ends far above the others
+      C.style.removeProperty('--f-lines');
       if(window.innerWidth <= 1040) return;
-      var h = function(el){ return [].slice.call(el.children).reduce(function(m, x){ return Math.max(m, x.offsetTop + x.offsetHeight); }, 0) - el.children[0].offsetTop; };
-      var moves = [function(){ var a = C.querySelectorAll('article'); return a.length > 1 ? a[a.length-1] : null; }, function(){ return R.querySelector('.f-watch'); }];
-      moves.forEach(function(pick){
-        var el = pick(); if(!el) return;
-        var before = Math.max(h(C), h(R)) - h(L); if(before < 140) return;
-        var home = el.parentNode; under = L.querySelector('.f-under'); if(!under){ under = document.createElement('div'); under.className = 'f-under'; L.appendChild(under); }
-        under.appendChild(el);
-        var after = Math.max(h(C), h(R)) - h(L);
-        if(Math.abs(after) > before){ home.appendChild(el); if(!under.children.length) under.remove(); }
-      });
+      var target = Math.max(h(L), h(R)), best = null;
+      [6,5,4,3,2].forEach(function(n){ C.style.setProperty('--f-lines', n); var d = Math.abs(h(C) - target) + (h(C) > target + 24 ? 60 : 0); if(!best || d < best.d) best = {d:d, n:n}; });
+      C.style.setProperty('--f-lines', best.n);
     }
-    balance(); if(document.fonts && document.fonts.ready) document.fonts.ready.then(balance);
+    balance(); if(document.fonts && document.fonts.ready) document.fonts.ready.then(balance); setTimeout(balance, 1200);
     clearTimeout(window.__fbal); window.onresize = function(){ clearTimeout(window.__fbal); window.__fbal = setTimeout(function(){ if(document.getElementById('front') === sec) balance(); }, 150); };
     // the strip: the session's closes from the data log, each against the last different close, and Cairo's weather
     var W = document.getElementById('weather'), wp = W && W.querySelector('.s-body p'), wx = '';

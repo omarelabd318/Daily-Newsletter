@@ -672,7 +672,9 @@ The site builds a front page for each daily edition from the edition itself (ind
 with it in mind; nothing extra goes in the file:
 - **Today at a Glance item 1** is the lead: its sentence becomes the headline and its story's paragraph the text.
   Items 2 to 4 sit beside it with their story's first sentence; items 5 on are listed as "Also today".
-  So keep each glance sentence under about 16 words, and make every story's first sentence carry the news alone.
+  So write each glance line as a headline, not a sentence: 12 words or fewer, who did what with the number
+  ("Remittances hit a record $38.2 billion in nine months"), and make every story's first sentence carry the news
+  alone: the lead's first sentence is printed as its standfirst, under the headline.
 - **Quick Hits** become four large figures. Open Number of the day and Stat to know with the figure and a period
   ("$13 billion. What Egyptians abroad..."), and Quote of the day with the quote in quotation marks, then the speaker.
 - **The markets strip** (EGX30, USD/EGP, gold 21K, Brent, S&P 500) reads the data log, so log the figures before
