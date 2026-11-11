@@ -2,6 +2,55 @@
  "note": "Every view and projection the Markets Desk has made, newest first, with the news that bears on each, until it is right, wrong or closed. Never delete an entry: a wrong call stays on the record, marked wrong.",
  "views": [
   {
+   "id": "2026-11-11-value-basket",
+   "opened": "2026-11-11",
+   "market": "egx",
+   "kind": "view",
+   "title": "The desk's five cheapest Egyptian stocks beat its five dearest over three months",
+   "confidence": "low",
+   "detail": "A test of the desk's fair values (Views, Fair value). The five desk stocks furthest below their fair value with medium or high confidence (MOPCO, Palm Hills, Egypt Aluminium, Abu Qir, CIB: 22% to 42% below) should outrun the five furthest above (Elsewedy, Juhayna, Alexandria Containers, AMOC, Telecom Egypt: 9% to 27% above). Value gaps close slowly and the cheap side carries the gas risk on two fertilizer makers, so confidence is low. It cuts against two shorter calls on the record (fertilizers under pressure through November, Juhayna to EGP 27–28): those rest on news over weeks, this on price over months.",
+   "wrong": "The dearest five do better on average than the cheapest five from November 11 to February 11.",
+   "due": "2027-02-11",
+   "track": {
+    "key": "egx.MFPC",
+    "label": "The cheapest five",
+    "start": 38.1,
+    "vs": "egx.SWDY",
+    "vsStart": 121.94,
+    "vsLabel": "the dearest five",
+    "good": "lead",
+    "basket": [
+     "egx.MFPC",
+     "egx.PHDC",
+     "egx.EGAL",
+     "egx.ABUK",
+     "egx.COMI"
+    ],
+    "vsBasket": [
+     "egx.SWDY",
+     "egx.JUFO",
+     "egx.ALCN",
+     "egx.AMOC",
+     "egx.ETEL"
+    ]
+   },
+   "tickers": [
+    "MFPC",
+    "PHDC",
+    "EGAL",
+    "ABUK",
+    "COMI",
+    "SWDY",
+    "JUFO",
+    "ALCN",
+    "AMOC",
+    "ETEL"
+   ],
+   "status": "open",
+   "updates": [],
+   "driver": "valuation"
+  },
+  {
    "id": "2026-11-11-jufo-results",
    "opened": "2026-11-11",
    "market": "egx",

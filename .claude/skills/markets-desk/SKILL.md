@@ -54,6 +54,8 @@ closes are the last session's; the news, stock research and analysis are still u
    losers of the last session (`desk/movers.json`): all EGX stocks that traded at least EGP 1m, and US
    companies worth $10bn or more. The EGX and Wall Street pages show them under "Whole market"; mention a
    standout mover from outside the desk's stocks in the stories or News when there is a reason behind it.
+   Then run `python3 .claude/skills/markets-desk/fetch_fairvalue.py` (`desk/fairvalue.json`, the Views page's Fair value
+   tab; see Fair value below).
    Run it with `--leads` to list news for the top five each way, find why each moved (a disclosure,
    results, a deal, a rating, a sector move), check it at the outlet, and add `why`, `source` and `url` to
    that stock's row in `desk/movers.json`. One short line; leave it out when no reason is found, and write
@@ -99,6 +101,8 @@ logged daily (fetch_figures.py lists them as "Desk only") but are not rows in th
   the chosen period, trend line, YTD, 52-week range, market value, latest news, open views), sortable by
   list order, market value (largest first), or best and worst; each opens its stock's page. fetch_movers.py
   refreshes the market values (`cap` in desk/stocks.json) each morning.
+- **Views** `/desk/views/`: The record (every view and projection) and Fair value (EGX stocks against the desk's fair
+  value; see Fair value below).
 - **Stock page** `/desk/stock/?t=TICKER`: one page per stock: chart against its index, performance,
   valuation, trading, dates coming up, the desk's projections and views on it, and its news.
 
@@ -398,6 +402,43 @@ Every day:
   never shorten due dates to collect quick wins.
 
 The dashboard's views card shows the day's views, including any judged that day, and links to the full record.
+## Fair value
+
+`/desk/views/?v=fair` ranks EGX stocks by how far they trade below or above the desk's own fair value, with four
+grades each. `desk/fairvalue.json` holds it; `fetch_fairvalue.py` rebuilds the figures every morning and keeps the
+`judgement` block, which only the run writes. The script's docstring is the exact method; the reasoning:
+
+- **It is a ranking inside the EGX, not a verdict on the market.** At Egyptian rates an absolute model (discounting at
+  the T-bill yield plus a premium) calls nearly every stock dear, because the market prices rates to fall. So the
+  discount rate is solved for, not assumed: the rate at which the median stock is fairly priced on its assets. The
+  page states the market-level reading separately (the median earnings yield against the after-tax T-bill yield).
+- **Three estimates, because each fails differently.** Earnings (EPS times a peer P/E, tilted up to 25% for return on
+  equity and profit growth) fails on one-off profits; assets (book value times the P/B its ROE justifies) fails on
+  asset-light companies, so it is skipped above 6 times book; analysts fail when targets are stale, so an undated
+  consensus far from everything else is dropped. Fair value is their weighted average (40, 30, 30) and needs two.
+- **Banks are measured against banks** (their own discount rate and P/E): they always look cheap against industry.
+- **Confidence is the spread between the estimates**, not a feeling. The two lists show medium and high only.
+
+What the run adds, in `judgement[TICKER]` (the script never touches it):
+- `brokers`: a fair value or target found in the day's stock research and checked at the outlet:
+  `{"firm", "value", "kind": "fair" or "target", "date", "url"}`. A target is brought back one year; entries count
+  for 180 days. Add every one the research finds: this is the estimate that most needs the desk's own work.
+- `eps_norm` with `eps_reason`: replace 12-month EPS when it misleads (a one-off gain or loss, a currency windfall, a
+  commodity peak, new shares on the way). Use a figure from the filing or a broker, never a guess, and say which.
+- `exclude`: a reason a stock cannot be rated on these terms at all (profit that is mostly revaluation, a merger that
+  will change every per-share figure). It is then listed under Not rated with that reason.
+- `note` and `noted`: the desk's line on the stock: the catch behind a cheap price or what a dear one is paying for.
+  One or two sentences in figures. Write or refresh it for the ten cheapest and ten dearest and for every desk stock;
+  review it when the company reports, when its confidence changes, or when it is more than a month old.
+
+Each week (Sunday) read the whole table for figures that cannot be right (a P/E under 3, upside above 80%): the
+cause is usually a bonus issue the source has not caught up with, parent-only earnings, or a stale target; fix it with
+`eps_norm` or `exclude` and say why. When results come out for a desk stock, rerun the script after set_results.py.
+The open view `2026-11-11-value-basket` scores the model (cheapest five desk stocks against the dearest five, to
+February 11, 2027); when it is judged, open the next one from the table as it then stands, and if the model loses
+twice running, rework the weights before opening a third. Never present a fair value as a forecast or advice: write
+"the desk's fair value", and keep the page's line that a model and a judgement can both be wrong.
+
 ## Figures
 
 The same sources and checks as the newsletter: `fetch_figures.py` first, a second source for every figure,
