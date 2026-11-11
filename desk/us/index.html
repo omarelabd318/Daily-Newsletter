@@ -21,13 +21,13 @@
 
   <div class="pages">
     <h2 class="sec-h">Today</h2>
-    <section class="card c8">
+    <section data-tab="today" class="card c8">
       <div class="card-h"><div class="ctabs" id="itabs"></div><div class="seg" id="seg"></div></div>
       <div class="hero"><span class="lvl num" id="lvl"></span><span class="d num" id="dchg"></span></div>
       <div class="bigchart" id="chart"></div>
       <p class="chart-cap" id="cap" data-src="Yahoo Finance, Nasdaq"></p>
     </section>
-    <section class="card c4 ledger">
+    <section data-tab="today" class="card c4 ledger">
       <div class="card-h"><h2>Indices</h2><span class="meta">Day change</span></div>
       <div id="idx"></div>
       <h3>Rates and data</h3>
@@ -35,37 +35,37 @@
     </section>
 
     <h2 class="sec-h">Why it moved</h2>
-    <section class="card c6">
+    <section data-tab="movers" class="card c6">
       <div class="card-h"><div class="hgroup"><h2>Biggest movers</h2><div class="ctabs" id="mscope" aria-label="Which stocks"></div></div><div class="seg" id="mseg"></div></div>
       <div id="movers"></div>
       <p class="sub" id="mnote" style="margin-top:10px"></p>
     </section>
-    <section class="card c6" id="c-bell" hidden>
+    <section data-tab="movers" class="card c6" id="c-bell" hidden>
       <div class="card-h"><h2>After the bell</h2><span class="meta" id="bell-date"></span></div>
       <div id="bell"></div>
     </section>
 
-    <section class="card c12">
+    <section data-tab="today" class="card c12">
       <div class="card-h"><h2>News</h2><span class="meta">Checked against the day's research</span></div>
       <div id="news"></div>
     </section>
 
     <h2 class="sec-h">The stocks</h2>
-    <section class="card c12">
+    <section data-tab="stocks" class="card c12">
       <div class="card-h"><div class="hgroup"><h2>US stocks</h2><div class="ctabs" id="sview" aria-label="Group"></div></div><div class="seg" id="sseg"></div></div>
       <table><thead><tr><th>Stock</th><th class="trend" id="trend-h">Last 7 days</th><th class="num">Close</th><th class="num" id="chg-h">Change (1D)</th><th class="num">YTD</th></tr></thead><tbody id="body"></tbody></table>
       <p class="stock-note">Tap a stock for its own page.</p>
     </section>
 
 
-    <section class="card c12">
+    <section data-tab="stocks" class="card c12">
       <div class="card-h"><h2>Coming up for the desk's stocks</h2><span class="meta">Results and dividends</span></div>
       <div id="calendar"></div>
     </section>
 
 
 
-    <section class="card c12">
+    <section data-tab="stocks" class="card c12">
       <div class="card-h"><h2>Bullish and bearish</h2><span class="meta">Next 1–3 months <span class="samp" data-sample hidden>Sample</span></span></div>
       <div id="outlook"></div>
     </section>
@@ -138,6 +138,7 @@
   M.calendar(M.$('calendar'), 'us', await M.get('/desk/calendar.json'), ((await M.get('/desk/stocks.json')) || {}).stocks);
   M.outlook(M.$('outlook'), P.outlook, '$');
   M.news(M.$('news'), P.news, true);
+  M.pageTabs([['today', 'Today'], ['movers', 'Movers and results'], ['stocks', 'Stocks and views']]);
 })();
 </script>
 </body>

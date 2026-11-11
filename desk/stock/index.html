@@ -206,7 +206,7 @@ try {
     const x = F && [...(F.stocks || []), ...((F.us || {}).stocks || [])].find((y) => y.t === t && y.desk);
     if (!x || x.fair == null) return;
     const cur = (F.us && F.us.stocks.includes(x)) ? '$' : 'EGP ';
-    M.$('val').insertAdjacentHTML('beforeend', `<p class="fv-line"><a href="/desk/views/?v=fair">The desk's fair value</a> <b class="num">${cur}${x.fair.toFixed(2)}</b> <span class="num ${M.cls(x.upside)}">${M.pct(x.upside)}</span> <span class="meta">${x.confidence} confidence</span></p>`);
+    M.$('val').insertAdjacentHTML('beforeend', `<p class="fv-line"><a href="/desk/fairvalue/${cur === '$' ? '?m=us' : ''}">The desk's fair value</a> <b class="num">${cur}${x.fair.toFixed(2)}</b> <span class="num ${M.cls(x.upside)}">${M.pct(x.upside)}</span> <span class="meta">${x.confidence} confidence</span></p>`);
   });
   if (p.brief) {
     const b = p.brief; M.$('briefcard').hidden = false; M.$('briefmeta').textContent = 'Written ' + M.short(b.written);

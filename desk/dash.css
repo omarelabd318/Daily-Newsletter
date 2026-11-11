@@ -471,3 +471,8 @@ a.tag:hover{color:var(--text);text-decoration:underline;text-underline-offset:2p
 .movers:has(.act-h2){row-gap:0}   /* most active: one continuous list when the halves stack */
 /* the figures run the full width: four equal columns on a laptop (rows of three keep the same columns) */
 @media (min-width:861px){.strip-row{grid-template-columns:repeat(4,minmax(0,1fr));column-gap:48px}}
+
+/* the dashboard is the day (the close, what changed, the stories, winners and losers, the week, views); the index
+   chart and the movers live on the market's own page, a tap away from the figures and the menu */
+body[data-day] #c-chart,body[data-day] #c-movers{display:none!important}
+body[data-day] .toprow{display:block}

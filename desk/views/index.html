@@ -16,10 +16,9 @@
 <main class="canvas">
   <div class="titlerow"><div>
     <h1>Views</h1>
-    <p class="finding">Every view and projection the desk has made, kept until it proves right or wrong, and the desk's fair values for EGX stocks.</p>
+    <p class="finding">Every view and projection the desk has made, with the news that bears on it, kept until it proves right or wrong. Wrong calls stay on the record.</p>
   </div></div>
 
-  <div class="vmode"><div class="ctabs" id="vmode" aria-label="Section"></div></div>
   <div class="pages" id="p-calls">
     <section class="card c12">
       <div class="score" id="score"></div>
@@ -31,26 +30,12 @@
     </section>
     <div class="c12 vgrid" id="views"></div>
   </div>
-  <div class="pages" id="p-fair" hidden>
-    <section class="card c12">
-      <div class="card-h"><h2>Undervalued and overvalued on the EGX</h2><span class="meta" id="fvmeta"></span></div>
-      <p class="fv-lede" id="fvlede"></p>
-      <div class="vfilters" style="margin:14px 0 4px">
-        <div class="ctabs" id="fvmkt" aria-label="Market"></div>
-        <div class="ctabs" id="fvside" aria-label="List"></div>
-        <div class="ctabs" id="fvset" aria-label="Stocks"></div>
-      </div>
-      <div class="fv-wrap"><table class="fv" id="fvtable"></table></div>
-      <p class="sub" id="fvkey"></p>
-    </section>
-    <section class="card c6" id="fvnot"></section>
-    <section class="card c6" id="fvhow"></section>
-  </div>
 </main>
 <script src="/desk/charts.js"></script>
 <script src="/desk/tags.js"></script>
 <script src="/desk/desk.js"></script>
 <script>
+if (/[?&]v=fair/.test(location.search)) location.replace('/desk/fairvalue/');
 (async () => {
   const M = Desk, D = await M.init('/desk/views/'); if (!D) return;
   const L = await M.get('/desk/views.json'), all = ((L && L.views) || []).slice().sort((a, b) => (a.opened < b.opened ? 1 : a.opened > b.opened ? -1 : 0));
@@ -112,65 +97,6 @@
   M.toggle(M.$('fkind'), ['Views and projections', 'Views', 'Projections'], (i) => { fk = i; draw(); });
   draw();
 
-  // ---- Fair value: the desk's own estimate for EGX stocks, against the rest of the EGX (desk/fairvalue.json) ----
-  const FV = await M.get('/desk/fairvalue.json');
-  const fair = (F, us) => {
-    if (!F || !F.stocks) { M.$('fvtable').innerHTML = '<tr><td class="sub">No fair values yet.</td></tr>'; return; }
-    ['fvside', 'fvset'].forEach((id) => { M.$(id).innerHTML = ''; });
-    const CUR = us ? '$' : 'EGP ', S = F.stocks, money = (v) => CUR + (v >= 1000 ? Math.round(v).toLocaleString('en-US') : v.toFixed(2));
-    const GR = { Excellent: 5, Great: 4, Good: 3, Fair: 2, Weak: 1 };
-    const grade = (g) => g ? `<span class="fv-g g${GR[g]}" title="${g}"><i></i><i></i><i></i><i></i><i></i></span><span class="fv-gw">${g}</span>` : '<span class="fv-na">–</span>';
-    const EST = { earnings: 'Earnings', assets: 'Assets', analysts: 'Analysts' };
-    // the three estimates against the price, on one line: the price is the tick in the middle
-    const bar = (x) => {
-      const vals = Object.values(x.est).map((v) => v / x.price - 1), span = Math.max(0.6, ...vals.map(Math.abs)) * 1.08;
-      const pos = (r) => (50 + r / span * 50).toFixed(1);
-      const lo = Math.min(...vals), hi = Math.max(...vals), f = x.fair / x.price - 1;
-      return `<span class="fv-bar" aria-hidden="true"><i class="rng" style="left:${pos(lo)}%;width:${(pos(hi) - pos(lo)).toFixed(1)}%"></i><i class="px"></i>${Object.entries(x.est).map(([k, v]) => `<i class="dot" title="${EST[k]}: ${money(v)}" style="left:${pos(v / x.price - 1)}%"></i>`).join('')}<i class="fairm ${f >= 0 ? 'up' : 'down'}" style="left:${pos(f)}%"></i></span>`;
-    };
-    const more = (x) => {
-      const est = Object.entries(x.est).map(([k, v]) => `<div><span class="meta">${EST[k]}</span><b class="num">${money(v)}</b><span class="num ${M.cls(v / x.price - 1)}">${M.pct((v / x.price - 1) * 100)}</span></div>`).join('');
-      const facts = [['P/E', x.pe + ' against ' + x.peFair + ' fair'], x.pb ? ['P/B', x.pb] : null, x.roe ? ['Return on equity', x.roe + '%'] : null, x.dy ? ['Dividend yield', x.dy + '%'] : null,
-        ['Earnings per share', CUR + x.epsNorm + (x.epsBasis === 'last full year' ? ' (last full year)' : '')], ['Results to', M.short(x.period)]].filter(Boolean)
-        .map(([k, v]) => `<span><span class="meta">${k}</span> <b class="num">${v}</b></span>`).join('');
-      const flags = [x.targetOut ? 'Analysts\u2019 consensus left out: it looks out of date.' : '', x.epsSwapped ? `Earnings from TradingView\u2019s last full year; Mubasher gives EGP ${x.epsSwapped}.` : '', x.below200 && x.upside > 15 ? 'Trading below its 200-day average: cheap stocks that keep falling can stay cheap.' : '', x.rsi >= 70 ? `RSI ${x.rsi}: stretched after a run.` : x.rsi && x.rsi <= 30 ? `RSI ${x.rsi}: washed out after a fall.` : ''].filter(Boolean).join(' ');
-      return `<tr class="fv-more"><td colspan="9"><div class="fv-est">${est}</div><div class="fv-facts">${facts}</div>${x.note ? `<p class="fv-note"><b>The desk\u2019s note.</b> ${M.esc(x.note)}</p>` : ''}${flags ? `<p class="sub" style="margin:8px 0 0">${flags}</p>` : ''}</td></tr>`;
-    };
-    let side = 0, set = 0; const open = new Set();
-    const drawF = () => {
-      let list = S.filter((x) => set === 0 || (set === 1 ? x.desk : x.egx30));
-      const firm = (x) => x.confidence !== 'low';   // the two lists leave out stocks whose estimates disagree badly; All shows them
-      list = side === 0 ? list.filter((x) => x.upside > 0 && firm(x)).slice(0, 10) : side === 1 ? list.filter((x) => x.upside < 0 && firm(x)).slice().reverse().slice(0, 10) : list;
-      M.$('fvtable').innerHTML = `<thead><tr><th>Stock</th><th class="num">Price</th><th class="num">Fair value</th><th class="num">${side === 1 ? 'Downside' : 'Upside'}</th><th class="fv-bh">Estimates against the price</th><th>Confidence</th><th>Profitability</th><th>Growth</th><th>Health</th><th>Cash flow</th></tr></thead><tbody>`
-        + (list.map((x) => `<tr class="fv-row${open.has(x.t) ? ' on' : ''}" data-t="${x.t}" tabindex="0"><td><b>${x.t}</b>${x.desk ? '<span class="fv-desk" title="One of the desk\u2019s stocks">●</span>' : ''}<span class="fv-name">${M.esc(x.name.replace(/ (S\.A\.E\.?|SAE|Plc|Company|Co\.?)$/i, '').replace(/ - Egypt.*$/, ''))}</span></td>
-          <td class="num">${x.price.toFixed(2)}</td><td class="num"><b>${x.fair.toFixed(2)}</b></td><td class="num ${M.cls(x.upside)}"><b>${M.pct(x.upside)}</b></td><td class="fv-bc">${bar(x)}</td><td>${M.conf(x.confidence)}</td>
-          <td>${grade(x.grades.profitability)}</td><td>${grade(x.grades.growth)}</td><td>${grade(x.grades.health)}</td><td>${grade(x.grades.cash)}</td></tr>${open.has(x.t) ? more(x).replace('colspan="9"', 'colspan="10"') : ''}`).join('') || '<tr><td colspan="10" class="sub">Nothing on this side.</td></tr>') + '</tbody>';
-      M.$('fvtable').querySelectorAll('.fv-row').forEach((tr) => { const go = () => { const t = tr.dataset.t; open.has(t) ? open.delete(t) : open.add(t); drawF(); }; tr.addEventListener('click', go); tr.addEventListener('keydown', (e) => { if (e.key === 'Enter') go(); }); });
-    };
-    const mk = F.market || {};
-    M.$('fvmeta').textContent = `${F.count} stocks · ${M.short(F.asOf)}`;
-    M.$('fvlede').innerHTML = us ? `Which large US stocks (worth $50bn or more) are cheap or dear <b>against the rest of them</b>, by the same three estimates, with analysts' targets weighted more and reported earnings less. A ranking, not a verdict on the market: the median stock here earns <b class="num">${mk.earningsYield}%</b> on its price. Tap a row for the three estimates.`
-      : `Which EGX stocks are cheap or dear <b>against the rest of the EGX</b>, from what they earn, what they own and what analysts forecast. It is a ranking, not a verdict on the market: ${mk.tbillAfterTax ? `the median stock here earns <b class="num">${mk.earningsYield}%</b> on its price, while a T-bill pays about <b class="num">${mk.tbillAfterTax}%</b> after tax, so shares as a group are priced for rates to fall.` : ''} Tap a row for the three estimates and the desk's note.`;
-    document.querySelector('#p-fair .card-h h2').textContent = us ? 'Undervalued and overvalued on Wall Street' : 'Undervalued and overvalued on the EGX';
-    M.$('fvkey').innerHTML = `<span class="fv-bar key" aria-hidden="true"><i class="rng" style="left:30%;width:45%"></i><i class="px"></i><i class="dot" style="left:30%"></i><i class="dot" style="left:62%"></i><i class="dot" style="left:75%"></i><i class="fairm up" style="left:58%"></i></span> The tick is today's price; each dot is one estimate; the diamond is the fair value. Dots close together mean the estimates agree. ● marks the desk's stocks. The two lists leave out low-confidence figures; All shows every stock. Not advice: a model and a judgement, both of which can be wrong.`;
-    M.toggle(M.$('fvside'), ['Most undervalued', 'Most overvalued', `All ${F.count}`], (i) => { side = i; drawF(); });
-    M.toggle(M.$('fvset'), ['All stocks', 'Desk stocks', us ? 'S&P 100' : 'EGX30'], (i) => { set = i; drawF(); });
-    drawF();
-    M.$('fvnot').innerHTML = `<div class="card-h"><h2>Not rated</h2></div>` + ((F.notRated || []).map((x) => `<p class="fv-nr"><b>${x.t}</b> ${M.esc(x.name.replace(/ (S\.A\.E\.?|SAE|Plc)$/i, ''))}: ${M.esc(x.why)}.</p>`).join('') || '<p class="sub">Every stock that passed the screen is rated.</p>')
-      + `<p class="sub" style="margin-top:10px">${us ? 'Also left out: companies worth under $50bn and loss-makers.' : 'Also left out: stocks worth under EGP 3bn or trading under EGP 5m a day, loss-makers, and shares priced in dollars.'}</p>`;
-    M.$('fvhow').innerHTML = `<div class="card-h"><h2>How the figures are worked out</h2></div>
-      <ol class="fv-how"><li><b>Earnings.</b> Twelve-month earnings per share times a fair P/E: mostly the median of the stock's peers (${Object.entries(F.groupPE || {}).map(([g, v]) => `${g.toLowerCase()} ${v}`).join(', ')}), moved up to 25% either way for its return on equity and profit growth.</li>
-      <li><b>Assets.</b> Book value per share times the P/B its return on equity justifies, at the discount rate that makes the median stock fairly priced (${F.k}%; banks ${F.kBanks}%, measured against banks only). Skipped above 6 times book.</li>
-      <li><b>Analysts.</b> Brokers' fair values the desk has checked, and TradingView's consensus target brought back a year. A consensus far from everything else is treated as out of date.</li>
-      <li><b>Fair value</b> is the weighted average (${us ? 'earnings 30, assets 20, analysts 50, because US reported earnings carry more one-offs and targets come from many analysts' : '40, 30, 30'}); it needs two of the three. Confidence is how closely they agree.</li>
-      <li><b>Grades</b> rank each stock against the others: profitability (return on equity, margin), growth (revenue and profit, 12 months), health (debt; for banks, equity to assets) and cash flow (free cash flow; not graded for banks).</li></ol>
-      <p class="sub">Figures from TradingView${us ? '' : ', company filings and Mubasher'}; refreshed each morning. The desk's notes are reviewed when a company reports.</p>`;
-  };
-  fair(FV, false);
-  M.toggle(M.$('fvmkt'), ['EGX', 'Wall Street'], (i) => fair(i ? FV && FV.us : FV, !!i));
-  const mode = (i) => { M.$('p-calls').hidden = i !== 0; M.$('p-fair').hidden = i !== 1; try { history.replaceState(null, '', i ? '?v=fair' : location.pathname); } catch (e) {} };
-  M.toggle(M.$('vmode'), ['The record', 'Fair value'], mode);
-  if (/[?&]v=fair/.test(location.search)) M.$('vmode').querySelectorAll('button')[1].click();
 })();
 </script>
 </body>

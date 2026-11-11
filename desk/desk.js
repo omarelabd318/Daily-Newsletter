@@ -54,6 +54,32 @@ window.Desk = (function () {
       el.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); onPick(i);
     }));
   }
+  // tabs for a long page: each <section data-tab="key"> shows under its tab; a tab whose sections are all hidden
+  // (no data that day) is left out. The tab is kept in the address (#movers), and a link to a section inside
+  // another tab (#c-heat) opens that tab first. Called last, so every chart is drawn at full width before hiding.
+  function pageTabs(defs) {
+    const pages = document.querySelector('.pages'); if (!pages) return;
+    const secs = [...pages.querySelectorAll('[data-tab]')], bar = document.createElement('div');
+    bar.className = 'c12 ptabs'; bar.setAttribute('role', 'tablist'); pages.prepend(bar);
+    const live = defs.filter(([k]) => secs.some((x) => x.dataset.tab === k && !x.hasAttribute('hidden')));
+    bar.innerHTML = live.map(([k, n]) => `<button type="button" role="tab" data-k="${k}">${esc(n)}</button>`).join('');
+    const show = (k, keepHash) => {
+      pages.dataset.tab = k; secs.forEach((x) => x.classList.toggle('tab-off', x.dataset.tab !== k));
+      bar.querySelectorAll('button').forEach((b) => b.setAttribute('aria-selected', b.dataset.k === k));
+      if (!keepHash) { try { history.replaceState(null, '', location.pathname + location.search + '#' + k); } catch (e) {} }
+      window.dispatchEvent(new Event('resize'));
+    };
+    bar.querySelectorAll('button').forEach((b) => b.addEventListener('click', () => show(b.dataset.k)));
+    const fromHash = () => {
+      const h = decodeURIComponent(location.hash.slice(1)); if (!h) return false;
+      if (live.some(([k]) => k === h)) { show(h, true); return true; }
+      const el = document.getElementById(h), sec = el && el.closest('[data-tab]');
+      if (sec) { show(sec.dataset.tab, true); requestAnimationFrame(() => el.scrollIntoView({ block: 'start' })); return true; }
+      return false;
+    };
+    if (!fromHash() && live.length) show(live[0][0], true);
+    window.addEventListener('hashchange', fromHash);
+  }
   // a pound series in dollars: each value divided by that day's dollar rate (strips out the pound's moves)
   function usd(s) {
     const fx = series((e) => e.usd_egp, 'fx');
@@ -501,5 +527,5 @@ window.Desk = (function () {
       location.reload();
     });
   }
-  return { get ASOF() { return ASOF; }, SECTORS, lede, sortable, headText, showAllRows, calendar, asOfFor, lastDate, $, esc, pct, cls, num, get, dateLine, conf, confNow, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, marketActive, traded, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, weekChart, deskNotes, weekOf, monthOf, intraPeriod, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
+  return { get ASOF() { return ASOF; }, SECTORS, lede, sortable, headText, showAllRows, calendar, asOfFor, lastDate, $, esc, pct, cls, num, get, dateLine, conf, confNow, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, marketActive, traded, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, pageTabs, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, weekChart, deskNotes, weekOf, monthOf, intraPeriod, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
 })();

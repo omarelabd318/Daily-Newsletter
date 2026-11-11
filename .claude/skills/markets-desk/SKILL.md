@@ -32,7 +32,16 @@ closes are the last session's; the news, stock research and analysis are still u
 4. Write `pages`: EGX (finding, session, news, outlook), EGP (finding, rates, drivers, news, view), US
    (finding, rates: the day's extra items only, see step 5; afterBell, news, outlook), Global (finding, notes, news). Carry each projection
    forward until its date, and score it when the date passes.
-5. Run `python3 .claude/skills/markets-desk/fetch_intraday.py` to save the last finished session's prices
+5. **Run `python3 .claude/skills/markets-desk/run_data.py` once, then read `desk/brief.md`.** It runs every fetch and
+   calculation below in order (intraday, rates, valuation, movers, calendar, indicators, fair value, judging the
+   views, the stock news leads and the movers' leads), each with a time limit, over one shared fetch layer
+   (`sources.py`: retries, pacing between requests, a short shared memory so the same table is not fetched twice). A
+   step that fails is reported and the rest carry on; rerun one with `run_data.py NAME`. Do not run the scripts one by
+   one or read their output: the brief has what each did, which sources were flaky, what moved, the movers that still
+   need a reason with their leads, every stock's news leads, results and events in the next seven days (and which
+   need a preview), views due or judged without a lesson, what changed in the fair values, and the standing jobs due
+   today. Work from it. It is a worksheet, not a page: nothing links to it and it is not committed (.gitignore). The scripts, for reference:
+   `fetch_intraday.py` saves the last finished session's prices
    through the day (`desk/intraday.json`, for the 1D charts: the EGX30, the EGX70 EWI (from TradingView's chart feed,
    tradingview.py; it also fills the EGX month while it is short), the Nasdaq and the desk's stocks, and
    the last 24 hours of Bitcoin; the S&P 500 and Dow from Yahoo or else traced from the SPY and DIA funds;
@@ -58,8 +67,7 @@ closes are the last session's; the news, stock research and analysis are still u
    every logged series, shown on stock pages as Trend and momentum; no network; its docstring has each formula, and
    `--test` checks them against worked examples). Quote them as description ("below its 200-day average"), never as a
    forecast, and never as the only reason for a view.
-   Then run `python3 .claude/skills/markets-desk/fetch_fairvalue.py` (`desk/fairvalue.json`, the Views page's Fair value
-   tab; see Fair value below).
+   Then run `python3 .claude/skills/markets-desk/fetch_fairvalue.py` (`desk/fairvalue.json`, the Fair value pages; see Fair value below).
    Run it with `--leads` to list news for the top five each way, find why each moved (a disclosure,
    results, a deal, a rating, a sector move), check it at the outlet, and add `why`, `source` and `url` to
    that stock's row in `desk/movers.json`. One short line; leave it out when no reason is found, and write
@@ -93,6 +101,10 @@ logged daily (fetch_figures.py lists them as "Desk only") but are not rows in th
   losers, the week ahead and open views. The dollar, flows and the stock tables live on the EGP, EGX and stock-list
   pages. The EGX, EGP and Wall Street pages group their cards under small headings (Today, Why it moved, The stocks;
   the EGP page: The pound today, Why it's moving, The bigger picture, Reference).
+- **How the pages divide the work:** a dashboard is the day (the close, what changed since yesterday, the stories,
+  winners and losers, the week ahead, views) and carries no index chart or movers; those are on the market's own
+  page (EGX, Wall Street), which is split into tabs (Today; Movers and heatmap; Flows; Stocks and views), kept in the
+  address (`/desk/egx/#movers`). Valuation has its own pages: Sectors and Fair value.
 - **EGX** `/desk/egx/`: EGX30 chart and the session, biggest movers (the whole market, or the desk's stocks), who
   bought and who sold with the foreign-flow history, the desk's Egyptian stocks, then Bullish and bearish.
 - **EGP** `/desk/egp/`: the dollar in pounds, the central bank's and banks' rates (with net international
@@ -105,8 +117,8 @@ logged daily (fetch_figures.py lists them as "Desk only") but are not rows in th
   the chosen period, trend line, YTD, 52-week range, market value, latest news, open views), sortable by
   list order, market value (largest first), or best and worst; each opens its stock's page. fetch_movers.py
   refreshes the market values (`cap` in desk/stocks.json) each morning.
-- **Views** `/desk/views/`: The record (every view and projection) and Fair value (EGX stocks against the desk's fair
-  value; see Fair value below).
+- **Views** `/desk/views/`: the record of every view and projection. **Fair value** `/desk/fairvalue/` is its own page
+  under each market (see Fair value below).
 - **Sectors** `/desk/sectors/` (Egypt's menu): the EGX by sector, built from desk/fairvalue.json and the heatmap: each
   sector's P/E, return on equity, distance to fair value and moves, then its stocks ranked. The two lines of text per
   sector (`drivers`, `watch`) are in `desk/sectors.json`: review them on the first Sunday of the month and whenever a
@@ -447,7 +459,7 @@ Every day:
 The dashboard's views card shows the day's views, including any judged that day, and links to the full record.
 ## Fair value
 
-`/desk/views/?v=fair` ranks EGX stocks by how far they trade below or above the desk's own fair value, with four
+`/desk/fairvalue/` (in Egypt's menu; `?m=us` in the United States menu) ranks stocks by how far they trade below or above the desk's own fair value, with four
 grades each. `desk/fairvalue.json` holds it; `fetch_fairvalue.py` rebuilds the figures every morning and keeps the
 `judgement` block, which only the run writes. The script's docstring is the exact method; the reasoning:
 
