@@ -414,7 +414,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 .f-under h3{margin:5px 0 6px;font:700 21px/1.2 var(--serif)} .f-under article p{margin:0;font-size:15px;line-height:1.5;color:var(--ink2)}
 .f-rail h4{margin:0;padding-top:9px;border-top:1px solid var(--ink);font:600 12px var(--sans);letter-spacing:.16em;text-transform:uppercase}
 .f-glance{list-style:none;margin:8px 0 0;padding:0}
-.f-glance li{display:grid;grid-template-columns:26px 1fr;padding:9px 0;border-top:1px solid var(--rule);font-size:15px;line-height:1.4}
+.f-glance li{display:block;padding:9px 0;border-top:1px solid var(--rule);font-size:15px;line-height:1.4}
 .f-glance li > b{font:700 20px/1.1 var(--serif);color:var(--accent)}
 .f-glance small{display:block;margin-bottom:2px;font:600 10.5px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
 .f-watch{margin:12px 0 0;padding-top:12px;border-top:1px solid var(--rule);font:13.5px/1.5 var(--sans);color:var(--ink2)} .f-watch b{color:var(--ink)}
@@ -716,7 +716,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     var h = '<div class="f-main"><div class="f-lead"><span class="f-kick">'+esc(lead.label || 'The big story')+'</span><h2>'+link(lead, esc(lead.text))+'</h2>'+(restTxt.length > 120 ? '<p class="f-dek">'+esc(dek)+'</p><p class="f-body">'+esc(restTxt)+'</p>' : '<p class="f-body">'+lhtml+'</p>')
       + link(lead, '<span class="f-more">Continue in '+esc(sectionOf(lead.story))+' ↓</span>') + '</div><div class="f-col">'
       + mid.map(function(it){ return '<article><span class="f-kick">'+esc(it.label)+'</span><h3>'+link(it, esc(it.text))+'</h3><p>'+esc(first(it.story))+'</p></article>'; }).join('') + '</div><div class="f-rail">'
-      + (rest.length ? '<h4>Today at a glance</h4><ol class="f-glance">'+rest.map(function(it, i){ return '<li><b>'+(i+1)+'</b><span><small>'+esc(it.label)+'</small>'+link(it, esc(it.text))+'</span></li>'; }).join('')+'</ol>' : '')
+      + (rest.length ? '<h4>Also today</h4><ol class="f-glance">'+rest.map(function(it, i){ return '<li><span><small>'+esc(it.label)+'</small>'+link(it, esc(it.text))+'</span></li>'; }).join('')+'</ol>' : '')
       + (watch ? '<p class="f-watch">'+watch.innerHTML+'</p>' : '') + '</div></div>';
     // Quick Hits as a band: the figure large, the rest as its caption
     var Q = document.getElementById('quick-hits'), band = '';
