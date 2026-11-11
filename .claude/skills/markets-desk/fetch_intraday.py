@@ -192,15 +192,50 @@ def coingecko_btc():
     return last24([(datetime.datetime.fromtimestamp(t / 1000, datetime.timezone.utc), float(v)) for t, v in d["prices"]])
 
 
-def global_market():
-    series, ends = {}, []
-    for key, fn in (("btc", coingecko_btc), *[(k, lambda k=k: last24(yahoo_points(k))) for k in ("brent", "gold_usd", "dxy")]):
+# round-the-clock markets on TradingView's chart feed: Brent's front-month future (the contract the log follows), spot
+# gold, the dollar index and Bitcoin
+TV_GLOBAL = {"brent": "ICEEUR:BRN1!", "gold_usd": "TVC:GOLD", "dxy": "TVC:DXY", "btc": "BITSTAMP:BTCUSD"}
+
+
+def tv_last24(key):
+    import tradingview
+    return last24(tradingview.bars(TV_GLOBAL[key], "5", 330))
+
+
+def global_history(out):
+    """Hourly lines for the Global page's 1W and 1M charts: the last seven days every hour and the last 30 every two
+    hours, by Cairo date, saved beside the markets' own weeks and months as `g_KEY` (a day a market was shut is
+    simply absent). From TradingView's chart feed; a key that fails keeps what was saved."""
+    import tradingview
+    done = []
+    for key, sym in TV_GLOBAL.items():
         try:
-            end, pts = fn()
-            if len(pts) >= 12:
-                series[key], ends = pts, ends + [end]
+            days = {}
+            for t, v in tradingview.bars(sym, "60", 760):
+                c = t.astimezone(CAIRO)
+                days.setdefault(c.strftime("%Y-%m-%d"), []).append((c.strftime("%H:%M"), round(v, 4), c.hour))
+            dates = sorted(d for d in days if len(days[d]) > 1)
+            if len(dates) < 5:
+                continue
+            out.setdefault("week", {})["g_" + key] = [{"session": d, "series": {key: [[t, v] for t, v, _ in days[d]]}} for d in dates[-7:]]
+            out.setdefault("month", {})["g_" + key] = [{"session": d, "series": {key: [[t, v] for t, v, h in days[d] if h % 2 == 0] or [[t, v] for t, v, _ in days[d]][:2]}} for d in dates[-30:]]
+            done.append(key)
         except Exception:
             pass
+    return "GLOBAL week and month: hourly from TradingView, " + (", ".join(done) or "nothing fetched (kept what was saved)")
+
+
+def global_market():
+    series, ends = {}, []
+    for key, fallback in (("btc", coingecko_btc), *[(k, lambda k=k: last24(yahoo_points(k))) for k in ("brent", "gold_usd", "dxy")]):
+        for fn in (lambda key=key: tv_last24(key), fallback):
+            try:
+                end, pts = fn()
+                if len(pts) >= 12:
+                    series[key], ends = pts, ends + [end]
+                    break
+            except Exception:
+                pass
     if not series:
         return None, "GLOBAL: nothing fetched"
     to = max(ends)
@@ -396,6 +431,7 @@ def main():
     if data:
         out["global"] = data
     print(line)
+    print(global_history(out))
     out["note"] = "Last finished session, every 5 minutes: EGX in Cairo time (Mubasher), US in New York time (Nasdaq; S&P 500 and Dow from Yahoo when it answers, otherwise from the funds named under proxy, scaled to the index's close); global: the last 24 hours in Cairo time (Bitcoin from CoinGecko; Brent, gold and the dollar index from Yahoo when it answers). Written by fetch_intraday.py."
     with open(OUT, "w") as f:
         json.dump(out, f, separators=(",", ":"))

@@ -58,8 +58,12 @@
     const has1D = !!(M.INTRA && M.INTRA.global && M.INTRA.global.series[k]);
     let sAll = s;
     const draw = async (p) => {
+      { const c = M.$('cap' + i); if (c.dataset.src0 == null) c.dataset.src0 = c.dataset.src || ''; c.dataset.src = c.dataset.src0; }
       M.$('d' + i).innerHTML = M.heroChg(p[1] > 400 ? sAll : s, p);
       if (!p[1]) { const c1 = M.dayChart(M.$('ch' + i), 'global', k, n, dp ? Charts.fmt.dec(dp) : Charts.fmt.int); M.$('cap' + i).innerHTML = c1 || ''; return; }
+      // a week or a month: the hourly line where it is saved (desk/intraday.json), else the daily closes below
+      if (p[1] === 7 || p[1] === 30) { const w = M.weekChart(M.$('ch' + i), 'g_' + k, k, n, dp ? Charts.fmt.dec(dp) : Charts.fmt.int, false, p[1]);
+        if (w) { M.$('cap' + i).innerHTML = `${p[1] === 7 ? 'Every hour over seven days' : 'Every two hours over 30 days'}, Cairo time`; M.$('cap' + i).dataset.src = 'TradingView'; return; } }
       if (p[1] > 400) { if (!M.full.done) { await M.full(); M.full.done = true; } sAll = M.series((e) => e[k], k === 'btc' ? 'all' : 'us'); }
       M.$('cap' + i).innerHTML = ''; M.$('d' + i).innerHTML = M.heroChg(sAll, p);
       // Brent: a futures contract switch in view is marked on the chart

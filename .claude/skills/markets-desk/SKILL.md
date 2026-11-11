@@ -45,7 +45,8 @@ closes are the last session's; the news, stock research and analysis are still u
    through the day (`desk/intraday.json`, for the 1D charts: the EGX30, the EGX70 EWI (from TradingView's chart feed,
    tradingview.py; it also fills the EGX month while it is short), the Nasdaq and the desk's stocks, and
    the last 24 hours of Bitcoin; the S&P 500 and Dow from Yahoo or else traced from the SPY and DIA funds;
-   Brent, gold and the dollar index only when Yahoo answers). It also keeps the last five sessions every 15
+   Brent, gold, the dollar index and Bitcoin from TradingView's chart feed, which also saves their last seven days
+   hourly and 30 days two-hourly for the Global page's 1W and 1M charts). It also keeps the last five sessions every 15
    minutes (1W) and the last 23 every 30 minutes (1M). A US series Nasdaq refuses comes from Polygon, then Yahoo;
    Polygon also fills gaps in the saved US sessions (its key is a network secret on the environment, added by the
    proxy; five requests a minute, so a few gaps add a minute or two to the run).

@@ -179,10 +179,12 @@ window.Desk = (function () {
   // period must run to the market's latest session, and a month must reach back to its start with no session missing
   function intraPeriod(market, keys, back, inUSD = false) {
     const W = INTRA && INTRA[back > 7 ? 'month' : 'week'] && INTRA[back > 7 ? 'month' : 'week'][market];
-    const all = (W || []).filter((x) => x.session <= asOfFor(market) && (back <= 7 || x.session > cut(asOfFor(market), back)));
+    // round-the-clock markets (g_brent, g_btc...) run to the last hour fetched, not to the desk's last close
+    const top = /^g_/.test(market) && W && W.length ? W.at(-1).session : asOfFor(market);
+    const all = (W || []).filter((x) => x.session <= top && (back <= 7 || x.session > cut(top, back)));
     const ss = all.filter((x) => [].concat(keys).every((k) => x.series[k] && x.series[k].length > 1) && (!inUSD || rateOn(x.session)));
     if (ss.length < 2 || ss.at(-1) !== all.at(-1)) return null;
-    if (back > 7 && (ss.length < all.length || ss.length < 15 || ss[0].session > cut(asOfFor(market), back - 5))) return null;
+    if (back > 7 && (ss.length < all.length || ss.length < 15 || ss[0].session > cut(top, back - 5))) return null;
     return ss;
   }
   // a table's trend line over a month: the saved sessions, hourly (enough for a line 72 pixels wide)
