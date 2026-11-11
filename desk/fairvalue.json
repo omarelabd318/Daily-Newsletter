@@ -33,7 +33,7 @@
    "sector": "Finance",
    "price": 6.94,
    "cap": 15051750407,
-   "traded": 44205605,
+   "traded": 44210532,
    "eps": 1.44,
    "epsNorm": 1.44,
    "epsBasis": "12 months",
@@ -58,6 +58,7 @@
    "target": 11.1,
    "below200": false,
    "perf6m": -5.8,
+   "rsi": 50,
    "grades": {
     "profitability": "Good",
     "growth": "Good",
@@ -76,7 +77,7 @@
    "sector": "Health Technology",
    "price": 112.48,
    "cap": 18647510658,
-   "traded": 68748676,
+   "traded": 68766939,
    "eps": 8.9,
    "epsNorm": 8.9,
    "epsBasis": "last full year",
@@ -100,6 +101,7 @@
    "target": 108.2,
    "below200": false,
    "perf6m": 22.4,
+   "rsi": 60,
    "grades": {
     "profitability": null,
     "growth": "Good",
@@ -116,7 +118,7 @@
    "sector": "Finance",
    "price": 14.98,
    "cap": 26496000481,
-   "traded": 29215678,
+   "traded": 29217126,
    "eps": 4.05,
    "epsNorm": 4.05,
    "epsBasis": "12 months",
@@ -141,6 +143,7 @@
    "target": 17.8,
    "below200": false,
    "perf6m": 6.0,
+   "rsi": 56,
    "grades": {
     "profitability": "Great",
     "growth": "Fair",
@@ -159,7 +162,7 @@
    "sector": "Fertilizers",
    "price": 38.1,
    "cap": 109276134833,
-   "traded": 62296300,
+   "traded": 62303149,
    "eps": 5.36,
    "epsNorm": 5.36,
    "epsBasis": "12 months",
@@ -184,6 +187,7 @@
    "target": 51.1,
    "below200": true,
    "perf6m": -12.5,
+   "rsi": 39,
    "grades": {
     "profitability": "Great",
     "growth": "Excellent",
@@ -202,7 +206,7 @@
    "sector": "Consumer Durables",
    "price": 10.45,
    "cap": 38362873602,
-   "traded": 115401154,
+   "traded": 115406135,
    "eps": 1.47,
    "epsNorm": 1.47,
    "epsBasis": "12 months",
@@ -227,6 +231,7 @@
    "target": 17.4,
    "below200": false,
    "perf6m": 1.6,
+   "rsi": 48,
    "grades": {
     "profitability": "Good",
     "growth": "Fair",
@@ -269,6 +274,7 @@
    "target": null,
    "below200": false,
    "perf6m": 11.2,
+   "rsi": 52,
    "grades": {
     "profitability": "Excellent",
     "growth": "Excellent",
@@ -285,7 +291,7 @@
    "sector": "Real estate",
    "price": 12.14,
    "cap": 34719360664,
-   "traded": 115481758,
+   "traded": 115534230,
    "eps": 1.69,
    "epsNorm": 1.69,
    "epsBasis": "12 months",
@@ -310,6 +316,7 @@
    "target": 17.8,
    "below200": true,
    "perf6m": -13.3,
+   "rsi": 53,
    "grades": {
     "profitability": "Fair",
     "growth": "Good",
@@ -328,7 +335,7 @@
    "sector": "Metals",
    "price": 321.01,
    "cap": 132416629028,
-   "traded": 98752092,
+   "traded": 98761551,
    "eps": 43.65,
    "epsNorm": 43.65,
    "epsBasis": "12 months",
@@ -353,6 +360,7 @@
    "target": 399,
    "below200": false,
    "perf6m": -5.0,
+   "rsi": 53,
    "grades": {
     "profitability": "Great",
     "growth": "Good",
@@ -395,6 +403,7 @@
    "target": 54.2,
    "below200": false,
    "perf6m": -1.7,
+   "rsi": 60,
    "grades": {
     "profitability": null,
     "growth": "Weak",
@@ -411,7 +420,7 @@
    "sector": "Non-Energy Minerals",
    "price": 187,
    "cap": 17664000000,
-   "traded": 66730900,
+   "traded": 66733948,
    "eps": 27.09,
    "epsNorm": 27.09,
    "epsBasis": "12 months",
@@ -436,6 +445,7 @@
    "target": 213.4,
    "below200": true,
    "perf6m": -3.4,
+   "rsi": 57,
    "grades": {
     "profitability": "Great",
     "growth": "Excellent",
@@ -452,7 +462,7 @@
    "sector": "Distribution Services",
    "price": 23.11,
    "cap": 25498394752,
-   "traded": 109015974,
+   "traded": 109093316,
    "eps": 2.64,
    "epsNorm": 2.64,
    "epsBasis": "last full year",
@@ -476,6 +486,7 @@
    "target": 22.6,
    "below200": true,
    "perf6m": -19.8,
+   "rsi": 37,
    "grades": {
     "profitability": null,
     "growth": "Great",
@@ -492,7 +503,7 @@
    "sector": "Non-Energy Minerals",
    "price": 98.07,
    "cap": 25781312210,
-   "traded": 62269393,
+   "traded": 62273002,
    "eps": 11.84,
    "epsNorm": 11.84,
    "epsBasis": "12 months",
@@ -517,6 +528,7 @@
    "target": 120,
    "below200": false,
    "perf6m": 41.3,
+   "rsi": 66,
    "grades": {
     "profitability": "Great",
     "growth": "Fair",
@@ -533,7 +545,7 @@
    "sector": "Fertilizers",
    "price": 74.26,
    "cap": 93706894585,
-   "traded": 99408149,
+   "traded": 99448744,
    "eps": 9.6,
    "epsNorm": 9.6,
    "epsBasis": "12 months",
@@ -558,6 +570,7 @@
    "target": 84.5,
    "below200": true,
    "perf6m": -8.9,
+   "rsi": 41,
    "grades": {
     "profitability": "Great",
     "growth": "Excellent",
@@ -576,7 +589,7 @@
    "sector": "Banks",
    "price": 131.0,
    "cap": 446073134033,
-   "traded": 517619807,
+   "traded": 517633086,
    "eps": 26.79,
    "epsNorm": 26.79,
    "epsBasis": "12 months",
@@ -601,6 +614,7 @@
    "target": 196.2,
    "below200": true,
    "perf6m": -4.5,
+   "rsi": 59,
    "grades": {
     "profitability": "Great",
     "growth": "Fair",
@@ -619,7 +633,7 @@
    "sector": "Finance",
    "price": 49.99,
    "cap": 75659997940,
-   "traded": 84220997,
+   "traded": 84222327,
    "eps": 10.59,
    "epsNorm": 10.59,
    "epsBasis": "12 months",
@@ -644,6 +658,7 @@
    "target": 62.7,
    "below200": false,
    "perf6m": 0.8,
+   "rsi": 57,
    "grades": {
     "profitability": "Great",
     "growth": "Good",
@@ -660,7 +675,7 @@
    "sector": "Finance",
    "price": 23.28,
    "cap": 28949999809,
-   "traded": 8616897,
+   "traded": 8617130,
    "eps": 5.11,
    "epsNorm": 5.11,
    "epsBasis": "12 months",
@@ -685,6 +700,7 @@
    "target": 31.9,
    "below200": true,
    "perf6m": -2.5,
+   "rsi": 54,
    "grades": {
     "profitability": "Great",
     "growth": "Weak",
@@ -725,6 +741,7 @@
    "target": 36.4,
    "below200": false,
    "perf6m": 10.8,
+   "rsi": 54,
    "grades": {
     "profitability": null,
     "growth": "Weak",
@@ -741,7 +758,7 @@
    "sector": "Non-Energy Minerals",
    "price": 70.13,
    "cap": 26240720215,
-   "traded": 39598762,
+   "traded": 39600515,
    "eps": 9.49,
    "epsNorm": 9.49,
    "epsBasis": "last full year",
@@ -765,6 +782,7 @@
    "target": 78,
    "below200": false,
    "perf6m": 21.5,
+   "rsi": 59,
    "grades": {
     "profitability": null,
     "growth": "Great",
@@ -805,6 +823,7 @@
    "target": 43.2,
    "below200": true,
    "perf6m": -12.7,
+   "rsi": 67,
    "grades": {
     "profitability": "Great",
     "growth": "Fair",
@@ -845,6 +864,7 @@
    "target": null,
    "below200": false,
    "perf6m": 13.2,
+   "rsi": 54,
    "grades": {
     "profitability": "Fair",
     "growth": "Excellent",
@@ -861,7 +881,7 @@
    "sector": "Investment banking",
    "price": 25.61,
    "cap": 36773219181,
-   "traded": 101886174,
+   "traded": 101894242,
    "eps": 2.88,
    "epsNorm": 2.88,
    "epsBasis": "12 months",
@@ -886,6 +906,7 @@
    "target": 33.3,
    "below200": true,
    "perf6m": -11.6,
+   "rsi": 57,
    "grades": {
     "profitability": "Weak",
     "growth": "Fair",
@@ -904,7 +925,7 @@
    "sector": "Process Industries",
    "price": 45.52,
    "cap": 4949099883,
-   "traded": 7685888,
+   "traded": 7688557,
    "eps": 4.91,
    "epsNorm": 4.91,
    "epsBasis": "12 months",
@@ -928,6 +949,7 @@
    "target": null,
    "below200": false,
    "perf6m": 28.2,
+   "rsi": 60,
    "grades": {
     "profitability": "Great",
     "growth": "Excellent",
@@ -944,7 +966,7 @@
    "sector": "Distribution Services",
    "price": 10.37,
    "cap": 11872000427,
-   "traded": 58854394,
+   "traded": 58868096,
    "eps": 0.86,
    "epsNorm": 0.86,
    "epsBasis": "12 months",
@@ -969,6 +991,7 @@
    "target": 16.2,
    "below200": true,
    "perf6m": -13.2,
+   "rsi": 48,
    "grades": {
     "profitability": "Fair",
     "growth": "Good",
@@ -1010,6 +1033,7 @@
    "target": 11.6,
    "below200": false,
    "perf6m": -6.0,
+   "rsi": 57,
    "grades": {
     "profitability": "Good",
     "growth": "Weak",
@@ -1026,7 +1050,7 @@
    "sector": "Food",
    "price": 20.15,
    "cap": 42204936713,
-   "traded": 41805976,
+   "traded": 41807554,
    "eps": 1.5,
    "epsNorm": 1.5,
    "epsBasis": "12 months",
@@ -1050,6 +1074,7 @@
    "target": 25.3,
    "below200": false,
    "perf6m": 5.7,
+   "rsi": 58,
    "grades": {
     "profitability": "Good",
     "growth": "Great",
@@ -1091,6 +1116,7 @@
    "target": 67.1,
    "below200": false,
    "perf6m": 41.6,
+   "rsi": 54,
    "grades": {
     "profitability": "Excellent",
     "growth": "Fair",
@@ -1107,7 +1133,7 @@
    "sector": "Process Industries",
    "price": 10.96,
    "cap": 21872235019,
-   "traded": 49773184,
+   "traded": 49777641,
    "eps": 0.9,
    "epsNorm": 0.9,
    "epsBasis": "last full year",
@@ -1132,6 +1158,7 @@
    "target": 15.5,
    "below200": true,
    "perf6m": -17.8,
+   "rsi": 45,
    "grades": {
     "profitability": "Weak",
     "growth": "Good",
@@ -1148,7 +1175,7 @@
    "sector": "Technology Services",
    "price": 6.26,
    "cap": 26458419988,
-   "traded": 26970218,
+   "traded": 26975266,
    "eps": 0.57,
    "epsNorm": 0.57,
    "epsBasis": "12 months",
@@ -1172,6 +1199,7 @@
    "target": null,
    "below200": true,
    "perf6m": -13.3,
+   "rsi": 59,
    "grades": {
     "profitability": "Good",
     "growth": "Good",
@@ -1188,7 +1216,7 @@
    "sector": "Consumer Services",
    "price": 39.99,
    "cap": 7386088835,
-   "traded": 20567418,
+   "traded": 20646345,
    "eps": 3.68,
    "epsNorm": 3.68,
    "epsBasis": "last full year",
@@ -1212,6 +1240,7 @@
    "target": null,
    "below200": false,
    "perf6m": 25.0,
+   "rsi": 62,
    "grades": {
     "profitability": "Fair",
     "growth": "Fair",
@@ -1228,7 +1257,7 @@
    "sector": "Finance",
    "price": 7.06,
    "cap": 7150000095,
-   "traded": 78499919,
+   "traded": 78531862,
    "eps": 0.69,
    "epsNorm": 0.69,
    "epsBasis": "12 months",
@@ -1252,6 +1281,7 @@
    "target": null,
    "below200": false,
    "perf6m": 14.1,
+   "rsi": 51,
    "grades": {
     "profitability": "Great",
     "growth": "Excellent",
@@ -1268,7 +1298,7 @@
    "sector": "Payments",
    "price": 18.28,
    "cap": 62271246314,
-   "traded": 124633090,
+   "traded": 124635244,
    "eps": 0.95,
    "epsNorm": 0.95,
    "epsBasis": "12 months",
@@ -1292,6 +1322,7 @@
    "target": 26.2,
    "below200": true,
    "perf6m": -12.4,
+   "rsi": 53,
    "grades": {
     "profitability": "Great",
     "growth": "Great",
@@ -1310,7 +1341,7 @@
    "sector": "Finance",
    "price": 6.85,
    "cap": 7151203818,
-   "traded": 30032932,
+   "traded": 30036448,
    "eps": 0.64,
    "epsNorm": 0.64,
    "epsBasis": "12 months",
@@ -1334,6 +1365,7 @@
    "target": null,
    "below200": false,
    "perf6m": 16.5,
+   "rsi": 55,
    "grades": {
     "profitability": "Weak",
     "growth": "Great",
@@ -1350,7 +1382,7 @@
    "sector": "Real estate",
    "price": 86.0,
    "cap": 177216227539,
-   "traded": 255321086,
+   "traded": 255330116,
    "eps": 7.49,
    "epsNorm": 7.49,
    "epsBasis": "12 months",
@@ -1375,6 +1407,7 @@
    "target": 130,
    "below200": true,
    "perf6m": -11.7,
+   "rsi": 53,
    "grades": {
     "profitability": "Fair",
     "growth": "Good",
@@ -1393,7 +1426,7 @@
    "sector": "Ports",
    "price": 33.0,
    "cap": 98323725586,
-   "traded": 17015181,
+   "traded": 17015709,
    "eps": 2.16,
    "epsNorm": 2.16,
    "epsBasis": "12 months",
@@ -1417,6 +1450,7 @@
    "target": 28.5,
    "below200": false,
    "perf6m": 9.8,
+   "rsi": 52,
    "grades": {
     "profitability": "Excellent",
     "growth": "Weak",
@@ -1435,7 +1469,7 @@
    "sector": "Telecoms",
    "price": 135.0,
    "cap": 230454673462,
-   "traded": 235400350,
+   "traded": 235503603,
    "eps": 11.93,
    "epsNorm": 11.93,
    "epsBasis": "last full year",
@@ -1460,6 +1494,7 @@
    "target": 136.9,
    "below200": false,
    "perf6m": 39.8,
+   "rsi": 55,
    "grades": {
     "profitability": "Good",
     "growth": "Good",
@@ -1502,6 +1537,7 @@
    "target": 16.2,
    "below200": false,
    "perf6m": -5.2,
+   "rsi": 56,
    "grades": {
     "profitability": null,
     "growth": "Great",
@@ -1544,6 +1580,7 @@
    "target": null,
    "below200": true,
    "perf6m": -4.7,
+   "rsi": 50,
    "grades": {
     "profitability": "Fair",
     "growth": "Great",
@@ -1560,7 +1597,7 @@
    "sector": "Oil refining",
    "price": 13.01,
    "cap": 16802415296,
-   "traded": 138214268,
+   "traded": 138257870,
    "eps": 1.03,
    "epsNorm": 1.03,
    "epsBasis": "last full year",
@@ -1585,6 +1622,7 @@
    "target": 13.2,
    "below200": false,
    "perf6m": 54.2,
+   "rsi": 47,
    "grades": {
     "profitability": "Good",
     "growth": "Weak",
@@ -1601,7 +1639,7 @@
    "sector": "Food",
    "price": 24.95,
    "cap": 36700092760,
-   "traded": 21975469,
+   "traded": 22050319,
    "eps": 1.52,
    "epsNorm": 1.52,
    "epsBasis": "12 months",
@@ -1626,6 +1664,7 @@
    "target": 29.6,
    "below200": false,
    "perf6m": 4.0,
+   "rsi": 55,
    "grades": {
     "profitability": "Fair",
     "growth": "Fair",
@@ -1644,7 +1683,7 @@
    "sector": "Cables and electrical",
    "price": 121.94,
    "cap": 260873040853,
-   "traded": 65802990,
+   "traded": 65812189,
    "eps": 7.62,
    "epsNorm": 7.62,
    "epsBasis": "12 months",
@@ -1669,6 +1708,7 @@
    "target": 116.4,
    "below200": false,
    "perf6m": 35.9,
+   "rsi": 61,
    "grades": {
     "profitability": "Fair",
     "growth": "Fair",
@@ -1687,7 +1727,7 @@
    "sector": "Petrochemicals",
    "price": 15.21,
    "cap": 17248140043,
-   "traded": 50982838,
+   "traded": 50988430,
    "eps": 0.88,
    "epsNorm": 0.88,
    "epsBasis": "last full year",
@@ -1712,6 +1752,7 @@
    "target": 17.3,
    "below200": true,
    "perf6m": -14.9,
+   "rsi": 47,
    "grades": {
     "profitability": "Fair",
     "growth": "Weak",
@@ -1728,7 +1769,7 @@
    "sector": "Finance",
    "price": 51.02,
    "cap": 48750000000,
-   "traded": 22383930,
+   "traded": 22385532,
    "eps": 6.13,
    "epsNorm": 6.13,
    "epsBasis": "12 months",
@@ -1752,6 +1793,7 @@
    "target": null,
    "below200": false,
    "perf6m": 36.9,
+   "rsi": 67,
    "grades": {
     "profitability": "Great",
     "growth": "Good",
@@ -1770,7 +1812,7 @@
    "sector": "Health Technology",
    "price": 5.63,
    "cap": 11485418407,
-   "traded": 30707196,
+   "traded": 30709945,
    "eps": 0.17,
    "epsNorm": 0.17,
    "epsBasis": "12 months",
@@ -1795,6 +1837,7 @@
    "target": 5.2,
    "below200": false,
    "perf6m": 10.6,
+   "rsi": 59,
    "grades": {
     "profitability": "Weak",
     "growth": "Great",
@@ -1813,7 +1856,7 @@
    "sector": "Payments",
    "price": 24.72,
    "cap": 85695999631,
-   "traded": 70340149,
+   "traded": 70408873,
    "eps": 0.56,
    "epsNorm": 0.56,
    "epsBasis": "last full year",
@@ -1837,6 +1880,7 @@
    "target": 28.2,
    "below200": false,
    "perf6m": 15.0,
+   "rsi": 61,
    "grades": {
     "profitability": null,
     "growth": "Good",
@@ -1855,7 +1899,7 @@
    "sector": "Producer Manufacturing",
    "price": 40.7,
    "cap": 3283333561,
-   "traded": 27876454,
+   "traded": 27944726,
    "eps": 1.83,
    "epsNorm": 1.83,
    "epsBasis": "12 months",
@@ -1879,6 +1923,7 @@
    "target": null,
    "below200": false,
    "perf6m": 43.1,
+   "rsi": 70,
    "grades": {
     "profitability": "Weak",
     "growth": "Weak",
@@ -1895,7 +1940,7 @@
    "sector": "Finance",
    "price": 17.51,
    "cap": 9185164197,
-   "traded": 15470064,
+   "traded": 15487800,
    "eps": 0.82,
    "epsNorm": 0.82,
    "epsBasis": "12 months",
@@ -1919,6 +1964,7 @@
    "target": null,
    "below200": false,
    "perf6m": 84.9,
+   "rsi": 47,
    "grades": {
     "profitability": "Good",
     "growth": "Good",
@@ -1959,6 +2005,7 @@
    "target": null,
    "below200": false,
    "perf6m": 32.0,
+   "rsi": 53,
    "grades": {
     "profitability": "Weak",
     "growth": "Weak",
@@ -1999,6 +2046,7 @@
    "target": null,
    "below200": false,
    "perf6m": 36.8,
+   "rsi": 61,
    "grades": {
     "profitability": "Weak",
     "growth": "Excellent",
@@ -2017,7 +2065,7 @@
    "sector": "Finance",
    "price": 2.5,
    "cap": 26259363695,
-   "traded": 116489735,
+   "traded": 116498340,
    "eps": 0.06,
    "epsNorm": 0.06,
    "epsBasis": "12 months",
@@ -2041,6 +2089,7 @@
    "target": null,
    "below200": true,
    "perf6m": -20.6,
+   "rsi": 50,
    "grades": {
     "profitability": "Weak",
     "growth": "Good",
@@ -2259,6 +2308,7 @@
     "target": 621.8,
     "below200": true,
     "perf6m": -40.3,
+    "rsi": 35,
     "grades": {
      "profitability": "Excellent",
      "growth": "Excellent",
@@ -2300,6 +2350,7 @@
     "target": 1631.6,
     "below200": true,
     "perf6m": -7.9,
+    "rsi": 36,
     "grades": {
      "profitability": "Excellent",
      "growth": "Excellent",
@@ -2341,6 +2392,7 @@
     "target": 278.8,
     "below200": false,
     "perf6m": 20.9,
+    "rsi": 58,
     "grades": {
      "profitability": "Great",
      "growth": "Good",
@@ -2382,6 +2434,7 @@
     "target": 258.2,
     "below200": true,
     "perf6m": 0.1,
+    "rsi": 61,
     "grades": {
      "profitability": "Great",
      "growth": "Fair",
@@ -2423,6 +2476,7 @@
     "target": 109.7,
     "below200": false,
     "perf6m": -9.5,
+    "rsi": 50,
     "grades": {
      "profitability": "Weak",
      "growth": "Great",
@@ -2464,6 +2518,7 @@
     "target": 28.0,
     "below200": true,
     "perf6m": -1.1,
+    "rsi": 65,
     "grades": {
      "profitability": "Weak",
      "growth": "Weak",
@@ -2505,6 +2560,7 @@
     "target": 436.1,
     "below200": false,
     "perf6m": 43.9,
+    "rsi": 35,
     "grades": {
      "profitability": "Good",
      "growth": "Excellent",
@@ -2545,6 +2601,7 @@
     "target": 331.4,
     "below200": true,
     "perf6m": -26.5,
+    "rsi": 24,
     "grades": {
      "profitability": "Excellent",
      "growth": "Excellent",
@@ -2586,6 +2643,7 @@
     "target": 481.4,
     "below200": false,
     "perf6m": 57.0,
+    "rsi": 38,
     "grades": {
      "profitability": "Good",
      "growth": "Excellent",
@@ -2627,6 +2685,7 @@
     "target": 298.2,
     "below200": false,
     "perf6m": 45.6,
+    "rsi": 38,
     "grades": {
      "profitability": "Good",
      "growth": "Excellent",
@@ -2667,6 +2726,7 @@
     "target": 594.9,
     "below200": true,
     "perf6m": 34.4,
+    "rsi": 31,
     "grades": {
      "profitability": "Weak",
      "growth": "Excellent",
@@ -2707,6 +2767,7 @@
     "target": 117.8,
     "below200": false,
     "perf6m": 13.4,
+    "rsi": 59,
     "grades": {
      "profitability": "Great",
      "growth": "Good",
@@ -2748,6 +2809,7 @@
     "target": 65.0,
     "below200": false,
     "perf6m": 10.8,
+    "rsi": 54,
     "grades": {
      "profitability": "Great",
      "growth": "Good",
@@ -2788,6 +2850,7 @@
     "target": 1154.4,
     "below200": true,
     "perf6m": -24.9,
+    "rsi": 40,
     "grades": {
      "profitability": "Excellent",
      "growth": "Excellent",
@@ -2828,6 +2891,7 @@
     "target": 187.2,
     "below200": false,
     "perf6m": -16.8,
+    "rsi": 50,
     "grades": {
      "profitability": "Excellent",
      "growth": "Good",
@@ -2869,6 +2933,7 @@
     "target": 27.5,
     "below200": true,
     "perf6m": -11.7,
+    "rsi": 45,
     "grades": {
      "profitability": "Fair",
      "growth": "Weak",
@@ -2910,6 +2975,7 @@
     "target": 393.2,
     "below200": true,
     "perf6m": -27.7,
+    "rsi": 33,
     "grades": {
      "profitability": "Excellent",
      "growth": "Excellent",
@@ -2951,6 +3017,7 @@
     "target": 382.3,
     "below200": false,
     "perf6m": 35.0,
+    "rsi": 59,
     "grades": {
      "profitability": "Good",
      "growth": "Good",
@@ -2992,6 +3059,7 @@
     "target": 24.7,
     "below200": true,
     "perf6m": -3.3,
+    "rsi": 41,
     "grades": {
      "profitability": "Fair",
      "growth": "Great",
@@ -3033,6 +3101,7 @@
     "target": 170.0,
     "below200": false,
     "perf6m": 12.6,
+    "rsi": 48,
     "grades": {
      "profitability": "Great",
      "growth": "Excellent",
@@ -3074,6 +3143,7 @@
     "target": 41.8,
     "below200": true,
     "perf6m": -3.4,
+    "rsi": 50,
     "grades": {
      "profitability": "Fair",
      "growth": "Great",
@@ -3114,6 +3184,7 @@
     "target": 827.5,
     "below200": true,
     "perf6m": -35.8,
+    "rsi": 31,
     "grades": {
      "profitability": "Great",
      "growth": "Great",
@@ -3155,6 +3226,7 @@
     "target": 50.7,
     "below200": true,
     "perf6m": -2.4,
+    "rsi": 56,
     "grades": {
      "profitability": "Fair",
      "growth": "Weak",
@@ -3196,6 +3268,7 @@
     "target": 644.2,
     "below200": true,
     "perf6m": -36.0,
+    "rsi": 30,
     "grades": {
      "profitability": "Fair",
      "growth": "Good",
@@ -3236,6 +3309,7 @@
     "target": 228.4,
     "below200": true,
     "perf6m": -28.8,
+    "rsi": 39,
     "grades": {
      "profitability": "Good",
      "growth": "Great",
@@ -3277,6 +3351,7 @@
     "target": 102.5,
     "below200": true,
     "perf6m": -1.6,
+    "rsi": 40,
     "grades": {
      "profitability": "Fair",
      "growth": "Great",
@@ -3317,6 +3392,7 @@
     "target": 215.9,
     "below200": true,
     "perf6m": 2.8,
+    "rsi": 48,
     "grades": {
      "profitability": "Great",
      "growth": "Good",
@@ -3358,6 +3434,7 @@
     "target": 1057.6,
     "below200": true,
     "perf6m": -5.9,
+    "rsi": 51,
     "grades": {
      "profitability": "Great",
      "growth": "Great",
@@ -3399,6 +3476,7 @@
     "target": 235.1,
     "below200": false,
     "perf6m": 17.8,
+    "rsi": 59,
     "grades": {
      "profitability": "Good",
      "growth": "Fair",
@@ -3439,6 +3517,7 @@
     "target": 84.7,
     "below200": true,
     "perf6m": -27.8,
+    "rsi": 40,
     "grades": {
      "profitability": "Excellent",
      "growth": "Great",
@@ -3479,6 +3558,7 @@
     "target": 383.9,
     "below200": false,
     "perf6m": 36.9,
+    "rsi": 61,
     "grades": {
      "profitability": "Good",
      "growth": "Good",
@@ -3520,6 +3600,7 @@
     "target": 244.1,
     "below200": true,
     "perf6m": -37.3,
+    "rsi": 41,
     "grades": {
      "profitability": "Great",
      "growth": "Excellent",
@@ -3560,6 +3641,7 @@
     "target": 262.7,
     "below200": true,
     "perf6m": 0.2,
+    "rsi": 41,
     "grades": {
      "profitability": "Excellent",
      "growth": "Good",
@@ -3601,6 +3683,7 @@
     "target": 71.6,
     "below200": false,
     "perf6m": 1.6,
+    "rsi": 38,
     "grades": {
      "profitability": "Good",
      "growth": "Good",
@@ -3642,6 +3725,7 @@
     "target": 62.2,
     "below200": true,
     "perf6m": 3.8,
+    "rsi": 44,
     "grades": {
      "profitability": "Great",
      "growth": "Fair",
@@ -3683,6 +3767,7 @@
     "target": 137.6,
     "below200": false,
     "perf6m": 0.8,
+    "rsi": 55,
     "grades": {
      "profitability": "Great",
      "growth": "Great",
@@ -3724,6 +3809,7 @@
     "target": 97.6,
     "below200": true,
     "perf6m": -15.0,
+    "rsi": 35,
     "grades": {
      "profitability": "Good",
      "growth": "Good",
@@ -3765,6 +3851,7 @@
     "target": 112.4,
     "below200": false,
     "perf6m": 30.3,
+    "rsi": 57,
     "grades": {
      "profitability": "Fair",
      "growth": "Great",
@@ -3806,6 +3893,7 @@
     "target": 255.8,
     "below200": true,
     "perf6m": 6.9,
+    "rsi": 40,
     "grades": {
      "profitability": "Fair",
      "growth": "Excellent",
@@ -3847,6 +3935,7 @@
     "target": 72.8,
     "below200": false,
     "perf6m": 42.2,
+    "rsi": 37,
     "grades": {
      "profitability": "Weak",
      "growth": "Excellent",
@@ -3888,6 +3977,7 @@
     "target": 94.6,
     "below200": true,
     "perf6m": -9.0,
+    "rsi": 64,
     "grades": {
      "profitability": "Great",
      "growth": "Great",
@@ -3929,6 +4019,7 @@
     "target": 376.5,
     "below200": false,
     "perf6m": 16.1,
+    "rsi": 62,
     "grades": {
      "profitability": "Good",
      "growth": "Fair",
@@ -3970,6 +4061,7 @@
     "target": 223.4,
     "below200": true,
     "perf6m": -11.5,
+    "rsi": 60,
     "grades": {
      "profitability": "Fair",
      "growth": "Fair",
@@ -4011,6 +4103,7 @@
     "target": 342.7,
     "below200": false,
     "perf6m": 0.7,
+    "rsi": 57,
     "grades": {
      "profitability": "Weak",
      "growth": "Fair",
@@ -4052,6 +4145,7 @@
     "target": 640.6,
     "below200": true,
     "perf6m": -0.9,
+    "rsi": 58,
     "grades": {
      "profitability": "Good",
      "growth": "Fair",
@@ -4093,6 +4187,7 @@
     "target": 216.7,
     "below200": true,
     "perf6m": -4.1,
+    "rsi": 49,
     "grades": {
      "profitability": "Good",
      "growth": "Great",
@@ -4134,6 +4229,7 @@
     "target": 304.8,
     "below200": false,
     "perf6m": 9.9,
+    "rsi": 48,
     "grades": {
      "profitability": "Fair",
      "growth": "Excellent",
@@ -4175,6 +4271,7 @@
     "target": 116,
     "below200": true,
     "perf6m": 1.5,
+    "rsi": 49,
     "grades": {
      "profitability": "Great",
      "growth": "Great",
@@ -4216,6 +4313,7 @@
     "target": 49.9,
     "below200": true,
     "perf6m": -16.1,
+    "rsi": 52,
     "grades": {
      "profitability": "Good",
      "growth": "Good",
@@ -4257,6 +4355,7 @@
     "target": 263.9,
     "below200": false,
     "perf6m": 4.7,
+    "rsi": 53,
     "grades": {
      "profitability": "Good",
      "growth": "Great",
@@ -4297,6 +4396,7 @@
     "target": 289.2,
     "below200": false,
     "perf6m": 10.3,
+    "rsi": 70,
     "grades": {
      "profitability": "Good",
      "growth": "Great",
@@ -4337,6 +4437,7 @@
     "target": 660.0,
     "below200": false,
     "perf6m": 15.8,
+    "rsi": 57,
     "grades": {
      "profitability": "Good",
      "growth": "Great",
@@ -4377,6 +4478,7 @@
     "target": 850.5,
     "below200": false,
     "perf6m": 4.1,
+    "rsi": 46,
     "grades": {
      "profitability": "Great",
      "growth": "Great",
@@ -4418,6 +4520,7 @@
     "target": 151.5,
     "below200": true,
     "perf6m": -2.2,
+    "rsi": 46,
     "grades": {
      "profitability": "Fair",
      "growth": "Great",
@@ -4458,6 +4561,7 @@
     "target": 136.9,
     "below200": true,
     "perf6m": -16.5,
+    "rsi": 38,
     "grades": {
      "profitability": "Great",
      "growth": "Good",
@@ -4499,6 +4603,7 @@
     "target": 342.1,
     "below200": true,
     "perf6m": -2.5,
+    "rsi": 52,
     "grades": {
      "profitability": "Good",
      "growth": "Excellent",
@@ -4540,6 +4645,7 @@
     "target": 165.4,
     "below200": false,
     "perf6m": 33.0,
+    "rsi": 56,
     "grades": {
      "profitability": "Fair",
      "growth": "Fair",
@@ -4581,6 +4687,7 @@
     "target": 327.8,
     "below200": false,
     "perf6m": 0.6,
+    "rsi": 62,
     "grades": {
      "profitability": "Good",
      "growth": "Great",
@@ -4622,6 +4729,7 @@
     "target": 18.1,
     "below200": true,
     "perf6m": -6.0,
+    "rsi": 39,
     "grades": {
      "profitability": "Great",
      "growth": "Excellent",
@@ -4662,6 +4770,7 @@
     "target": 225,
     "below200": true,
     "perf6m": -17.1,
+    "rsi": 45,
     "grades": {
      "profitability": "Excellent",
      "growth": "Great",
@@ -4703,6 +4812,7 @@
     "target": 361,
     "below200": false,
     "perf6m": 6.9,
+    "rsi": 60,
     "grades": {
      "profitability": "Fair",
      "growth": "Fair",
@@ -4744,6 +4854,7 @@
     "target": 301.0,
     "below200": false,
     "perf6m": -12.2,
+    "rsi": 59,
     "grades": {
      "profitability": "Great",
      "growth": "Great",
@@ -4784,6 +4895,7 @@
     "target": 139.5,
     "below200": true,
     "perf6m": -3.9,
+    "rsi": 66,
     "grades": {
      "profitability": "Good",
      "growth": "Good",
@@ -4825,6 +4937,7 @@
     "target": 288.1,
     "below200": false,
     "perf6m": 28.6,
+    "rsi": 34,
     "grades": {
      "profitability": "Good",
      "growth": "Great",
@@ -4865,6 +4978,7 @@
     "target": 169.4,
     "below200": true,
     "perf6m": -6.7,
+    "rsi": 46,
     "grades": {
      "profitability": "Good",
      "growth": "Good",
@@ -4906,6 +5020,7 @@
     "target": 124.7,
     "below200": true,
     "perf6m": -6.1,
+    "rsi": 46,
     "grades": {
      "profitability": "Fair",
      "growth": "Weak",
@@ -4946,6 +5061,7 @@
     "target": 109.1,
     "below200": false,
     "perf6m": 28.0,
+    "rsi": 50,
     "grades": {
      "profitability": "Great",
      "growth": "Excellent",
@@ -4987,6 +5103,7 @@
     "target": 62.3,
     "below200": true,
     "perf6m": 1.2,
+    "rsi": 43,
     "grades": {
      "profitability": "Good",
      "growth": "Weak",
@@ -5028,6 +5145,7 @@
     "target": 37.8,
     "below200": true,
     "perf6m": -5.0,
+    "rsi": 42,
     "grades": {
      "profitability": "Fair",
      "growth": "Great",
@@ -5069,6 +5187,7 @@
     "target": 102.9,
     "below200": false,
     "perf6m": 16.9,
+    "rsi": 57,
     "grades": {
      "profitability": "Weak",
      "growth": "Fair",
@@ -5110,6 +5229,7 @@
     "target": 90.6,
     "below200": false,
     "perf6m": 0.5,
+    "rsi": 64,
     "grades": {
      "profitability": "Fair",
      "growth": "Good",
@@ -5151,6 +5271,7 @@
     "target": 153.3,
     "below200": false,
     "perf6m": 15.8,
+    "rsi": 42,
     "grades": {
      "profitability": "Good",
      "growth": "Great",
@@ -5192,6 +5313,7 @@
     "target": 246.9,
     "below200": false,
     "perf6m": 13.4,
+    "rsi": 39,
     "grades": {
      "profitability": "Fair",
      "growth": "Excellent",
@@ -5233,6 +5355,7 @@
     "target": 122.4,
     "below200": true,
     "perf6m": -11.7,
+    "rsi": 64,
     "grades": {
      "profitability": "Fair",
      "growth": "Fair",
@@ -5274,6 +5397,7 @@
     "target": 981.7,
     "below200": false,
     "perf6m": 27.4,
+    "rsi": 64,
     "grades": {
      "profitability": "Good",
      "growth": "Good",
@@ -5314,6 +5438,7 @@
     "target": 56.1,
     "below200": false,
     "perf6m": 11.3,
+    "rsi": 68,
     "grades": {
      "profitability": "Excellent",
      "growth": "Excellent",
@@ -5354,6 +5479,7 @@
     "target": 215.7,
     "below200": false,
     "perf6m": 9.0,
+    "rsi": 60,
     "grades": {
      "profitability": "Excellent",
      "growth": "Fair",
@@ -5394,6 +5520,7 @@
     "target": 525.7,
     "below200": true,
     "perf6m": -11.1,
+    "rsi": 43,
     "grades": {
      "profitability": "Good",
      "growth": "Good",
@@ -5434,6 +5561,7 @@
     "target": 365.4,
     "below200": false,
     "perf6m": 7.9,
+    "rsi": 67,
     "grades": {
      "profitability": "Great",
      "growth": "Good",
@@ -5474,6 +5602,7 @@
     "target": 73.7,
     "below200": false,
     "perf6m": 6.6,
+    "rsi": 58,
     "grades": {
      "profitability": "Excellent",
      "growth": "Weak",
@@ -5515,6 +5644,7 @@
     "target": 165.6,
     "below200": false,
     "perf6m": 11.3,
+    "rsi": 57,
     "grades": {
      "profitability": "Good",
      "growth": "Fair",
@@ -5555,6 +5685,7 @@
     "target": 366.4,
     "below200": true,
     "perf6m": 3.3,
+    "rsi": 54,
     "grades": {
      "profitability": "Good",
      "growth": "Good",
@@ -5596,6 +5727,7 @@
     "target": 68.7,
     "below200": false,
     "perf6m": 13.9,
+    "rsi": 56,
     "grades": {
      "profitability": "Good",
      "growth": "Fair",
@@ -5636,6 +5768,7 @@
     "target": 3654.7,
     "below200": true,
     "perf6m": -5.5,
+    "rsi": 57,
     "grades": {
      "profitability": "Fair",
      "growth": "Fair",
@@ -5676,6 +5809,7 @@
     "target": 251.2,
     "below200": false,
     "perf6m": 4.1,
+    "rsi": 72,
     "grades": {
      "profitability": "Weak",
      "growth": "Fair",
@@ -5717,6 +5851,7 @@
     "target": 263.9,
     "below200": false,
     "perf6m": 9.1,
+    "rsi": 56,
     "grades": {
      "profitability": "Good",
      "growth": "Good",
@@ -5757,6 +5892,7 @@
     "target": 331,
     "below200": false,
     "perf6m": 6.6,
+    "rsi": 46,
     "grades": {
      "profitability": "Great",
      "growth": "Good",
@@ -5797,6 +5933,7 @@
     "target": 478.6,
     "below200": true,
     "perf6m": -13.6,
+    "rsi": 42,
     "grades": {
      "profitability": "Good",
      "growth": "Good",
@@ -5838,6 +5975,7 @@
     "target": 103.1,
     "below200": false,
     "perf6m": 28.1,
+    "rsi": 67,
     "grades": {
      "profitability": "Fair",
      "growth": "Fair",
@@ -5878,6 +6016,7 @@
     "target": 179.1,
     "below200": true,
     "perf6m": -2.2,
+    "rsi": 45,
     "grades": {
      "profitability": "Good",
      "growth": "Fair",
@@ -5918,6 +6057,7 @@
     "target": 2176.1,
     "below200": true,
     "perf6m": -3.7,
+    "rsi": 31,
     "grades": {
      "profitability": "Fair",
      "growth": "Good",
@@ -5959,6 +6099,7 @@
     "target": 97.3,
     "below200": false,
     "perf6m": 15.9,
+    "rsi": 56,
     "grades": {
      "profitability": "Good",
      "growth": "Fair",
@@ -5999,6 +6140,7 @@
     "target": 258.7,
     "below200": true,
     "perf6m": 13.4,
+    "rsi": 51,
     "grades": {
      "profitability": "Good",
      "growth": "Good",
@@ -6039,6 +6181,7 @@
     "target": 339.4,
     "below200": false,
     "perf6m": 22.8,
+    "rsi": 52,
     "grades": {
      "profitability": "Good",
      "growth": "Good",
@@ -6080,6 +6223,7 @@
     "target": 415.2,
     "below200": false,
     "perf6m": 7.8,
+    "rsi": 61,
     "grades": {
      "profitability": "Fair",
      "growth": "Good",
@@ -6120,6 +6264,7 @@
     "target": 297.9,
     "below200": false,
     "perf6m": 14.1,
+    "rsi": 60,
     "grades": {
      "profitability": "Great",
      "growth": "Fair",
@@ -6160,6 +6305,7 @@
     "target": 461,
     "below200": true,
     "perf6m": -12.6,
+    "rsi": 73,
     "grades": {
      "profitability": "Excellent",
      "growth": "Excellent",
@@ -6201,6 +6347,7 @@
     "target": 833210.9,
     "below200": false,
     "perf6m": 20.1,
+    "rsi": 77,
     "grades": {
      "profitability": "Fair",
      "growth": "Fair",
@@ -6241,6 +6388,7 @@
     "target": 357,
     "below200": false,
     "perf6m": 24.6,
+    "rsi": 71,
     "grades": {
      "profitability": "Great",
      "growth": "Good",
@@ -6281,6 +6429,7 @@
     "target": 297.1,
     "below200": true,
     "perf6m": -20.2,
+    "rsi": 53,
     "grades": {
      "profitability": "Great",
      "growth": "Excellent",
@@ -6322,6 +6471,7 @@
     "target": 395,
     "below200": true,
     "perf6m": -8.4,
+    "rsi": 55,
     "grades": {
      "profitability": "Good",
      "growth": "Good",
@@ -6362,6 +6512,7 @@
     "target": 276.3,
     "below200": false,
     "perf6m": 12.1,
+    "rsi": 55,
     "grades": {
      "profitability": "Good",
      "growth": "Great",
@@ -6402,6 +6553,7 @@
     "target": 377.4,
     "below200": false,
     "perf6m": 15.1,
+    "rsi": 66,
     "grades": {
      "profitability": "Good",
      "growth": "Weak",
@@ -6443,6 +6595,7 @@
     "target": 80.4,
     "below200": true,
     "perf6m": -9.9,
+    "rsi": 37,
     "grades": {
      "profitability": "Fair",
      "growth": "Good",
@@ -6484,6 +6637,7 @@
     "target": 184.8,
     "below200": false,
     "perf6m": 8.3,
+    "rsi": 38,
     "grades": {
      "profitability": "Fair",
      "growth": "Great",
@@ -6524,6 +6678,7 @@
     "target": 437.3,
     "below200": false,
     "perf6m": 38.4,
+    "rsi": 63,
     "grades": {
      "profitability": "Excellent",
      "growth": "Good",
@@ -6564,6 +6719,7 @@
     "target": 333.2,
     "below200": false,
     "perf6m": 13.3,
+    "rsi": 56,
     "grades": {
      "profitability": "Great",
      "growth": "Fair",
@@ -6605,6 +6761,7 @@
     "target": 132.3,
     "below200": false,
     "perf6m": 4.1,
+    "rsi": 65,
     "grades": {
      "profitability": "Fair",
      "growth": "Fair",
@@ -6645,6 +6802,7 @@
     "target": 107.1,
     "below200": true,
     "perf6m": -0.6,
+    "rsi": 51,
     "grades": {
      "profitability": "Good",
      "growth": "Fair",
@@ -6685,6 +6843,7 @@
     "target": 640.1,
     "below200": false,
     "perf6m": 31.8,
+    "rsi": 52,
     "grades": {
      "profitability": "Excellent",
      "growth": "Great",
@@ -6725,6 +6884,7 @@
     "target": 199.5,
     "below200": false,
     "perf6m": 27.9,
+    "rsi": 65,
     "grades": {
      "profitability": "Great",
      "growth": "Weak",
@@ -6766,6 +6926,7 @@
     "target": 479.6,
     "below200": false,
     "perf6m": 8.2,
+    "rsi": 55,
     "grades": {
      "profitability": "Weak",
      "growth": "Weak",
@@ -6807,6 +6968,7 @@
     "target": 335.5,
     "below200": true,
     "perf6m": -9.8,
+    "rsi": 64,
     "grades": {
      "profitability": "Weak",
      "growth": "Fair",
@@ -6847,6 +7009,7 @@
     "target": 115.7,
     "below200": false,
     "perf6m": 12.1,
+    "rsi": 65,
     "grades": {
      "profitability": "Fair",
      "growth": "Weak",
@@ -6888,6 +7051,7 @@
     "target": 86.2,
     "below200": true,
     "perf6m": -10.9,
+    "rsi": 43,
     "grades": {
      "profitability": "Great",
      "growth": "Good",
@@ -6928,6 +7092,7 @@
     "target": 1154.9,
     "below200": false,
     "perf6m": 8.6,
+    "rsi": 56,
     "grades": {
      "profitability": "Good",
      "growth": "Good",
@@ -6968,6 +7133,7 @@
     "target": 81.1,
     "below200": false,
     "perf6m": 4.8,
+    "rsi": 60,
     "grades": {
      "profitability": "Good",
      "growth": "Excellent",
@@ -7009,6 +7175,7 @@
     "target": 70.4,
     "below200": false,
     "perf6m": 7.7,
+    "rsi": 61,
     "grades": {
      "profitability": "Fair",
      "growth": "Fair",
@@ -7050,6 +7217,7 @@
     "target": 35.5,
     "below200": true,
     "perf6m": -9.1,
+    "rsi": 54,
     "grades": {
      "profitability": "Fair",
      "growth": "Weak",
@@ -7090,6 +7258,7 @@
     "target": 1311.2,
     "below200": false,
     "perf6m": 17.1,
+    "rsi": 51,
     "grades": {
      "profitability": "Good",
      "growth": "Good",
@@ -7131,6 +7300,7 @@
     "target": 52.9,
     "below200": false,
     "perf6m": 7.0,
+    "rsi": 59,
     "grades": {
      "profitability": "Good",
      "growth": "Weak",
@@ -7171,6 +7341,7 @@
     "target": 250.2,
     "below200": false,
     "perf6m": 29.8,
+    "rsi": 51,
     "grades": {
      "profitability": "Excellent",
      "growth": "Excellent",
@@ -7212,6 +7383,7 @@
     "target": 141.7,
     "below200": true,
     "perf6m": 0.2,
+    "rsi": 53,
     "grades": {
      "profitability": "Fair",
      "growth": "Fair",
@@ -7253,6 +7425,7 @@
     "target": 152,
     "below200": true,
     "perf6m": -8.7,
+    "rsi": 52,
     "grades": {
      "profitability": "Good",
      "growth": "Good",
@@ -7294,6 +7467,7 @@
     "target": 62.5,
     "below200": true,
     "perf6m": -9.9,
+    "rsi": 43,
     "grades": {
      "profitability": "Weak",
      "growth": "Weak",
@@ -7334,6 +7508,7 @@
     "target": 175.9,
     "below200": true,
     "perf6m": -8.3,
+    "rsi": 38,
     "grades": {
      "profitability": "Excellent",
      "growth": "Excellent",
@@ -7374,6 +7549,7 @@
     "target": 1156.4,
     "below200": false,
     "perf6m": 47.0,
+    "rsi": 73,
     "grades": {
      "profitability": "Weak",
      "growth": "Good",
@@ -7414,6 +7590,7 @@
     "target": 224.1,
     "below200": true,
     "perf6m": -6.6,
+    "rsi": 53,
     "grades": {
      "profitability": "Weak",
      "growth": "Good",
@@ -7454,6 +7631,7 @@
     "target": 594.9,
     "below200": false,
     "perf6m": -9.6,
+    "rsi": 51,
     "grades": {
      "profitability": "Weak",
      "growth": "Good",
@@ -7494,6 +7672,7 @@
     "target": 53.0,
     "below200": true,
     "perf6m": -7.6,
+    "rsi": 64,
     "grades": {
      "profitability": "Weak",
      "growth": "Good",
@@ -7534,6 +7713,7 @@
     "target": 298.4,
     "below200": false,
     "perf6m": 1.6,
+    "rsi": 76,
     "grades": {
      "profitability": "Excellent",
      "growth": "Fair",
@@ -7574,6 +7754,7 @@
     "target": 311.9,
     "below200": false,
     "perf6m": 13.2,
+    "rsi": 60,
     "grades": {
      "profitability": "Great",
      "growth": "Excellent",
@@ -7615,6 +7796,7 @@
     "target": 105.6,
     "below200": true,
     "perf6m": -9.1,
+    "rsi": 43,
     "grades": {
      "profitability": "Fair",
      "growth": "Great",
@@ -7656,6 +7838,7 @@
     "target": 104.3,
     "below200": false,
     "perf6m": 33.0,
+    "rsi": 62,
     "grades": {
      "profitability": "Fair",
      "growth": "Good",
@@ -7696,6 +7879,7 @@
     "target": 215.2,
     "below200": false,
     "perf6m": 3.2,
+    "rsi": 42,
     "grades": {
      "profitability": "Great",
      "growth": "Good",
@@ -7736,6 +7920,7 @@
     "target": 136.3,
     "below200": true,
     "perf6m": 1.3,
+    "rsi": 56,
     "grades": {
      "profitability": "Great",
      "growth": "Great",
@@ -7777,6 +7962,7 @@
     "target": 96.8,
     "below200": false,
     "perf6m": 0.6,
+    "rsi": 61,
     "grades": {
      "profitability": "Fair",
      "growth": "Fair",
@@ -7818,6 +8004,7 @@
     "target": 375.0,
     "below200": false,
     "perf6m": 13.2,
+    "rsi": 53,
     "grades": {
      "profitability": "Great",
      "growth": "Good",
@@ -7858,6 +8045,7 @@
     "target": 480.3,
     "below200": false,
     "perf6m": 17.6,
+    "rsi": 65,
     "grades": {
      "profitability": "Weak",
      "growth": "Fair",
@@ -7898,6 +8086,7 @@
     "target": 188.4,
     "below200": false,
     "perf6m": -16.8,
+    "rsi": 55,
     "grades": {
      "profitability": "Fair",
      "growth": "Fair",
@@ -7938,6 +8127,7 @@
     "target": 54.4,
     "below200": false,
     "perf6m": 14.8,
+    "rsi": 55,
     "grades": {
      "profitability": "Great",
      "growth": "Fair",
@@ -7979,6 +8169,7 @@
     "target": 235.1,
     "below200": false,
     "perf6m": 59.6,
+    "rsi": 63,
     "grades": {
      "profitability": "Good",
      "growth": "Fair",
@@ -8019,6 +8210,7 @@
     "target": 796.0,
     "below200": true,
     "perf6m": -24.8,
+    "rsi": 46,
     "grades": {
      "profitability": "Fair",
      "growth": "Excellent",
@@ -8059,6 +8251,7 @@
     "target": 127.6,
     "below200": false,
     "perf6m": 9.4,
+    "rsi": 61,
     "grades": {
      "profitability": "Great",
      "growth": "Good",
@@ -8099,6 +8292,7 @@
     "target": 174.3,
     "below200": false,
     "perf6m": 17.8,
+    "rsi": 68,
     "grades": {
      "profitability": "Great",
      "growth": "Weak",
@@ -8140,6 +8334,7 @@
     "target": 475.7,
     "below200": false,
     "perf6m": 1.0,
+    "rsi": 54,
     "grades": {
      "profitability": "Fair",
      "growth": "Weak",
@@ -8180,6 +8375,7 @@
     "target": 527.9,
     "below200": false,
     "perf6m": 22.4,
+    "rsi": 67,
     "grades": {
      "profitability": "Great",
      "growth": "Fair",
@@ -8221,6 +8417,7 @@
     "target": 118.7,
     "below200": false,
     "perf6m": 9.2,
+    "rsi": 67,
     "grades": {
      "profitability": "Good",
      "growth": "Weak",
@@ -8261,6 +8458,7 @@
     "target": 1422.7,
     "below200": false,
     "perf6m": 1.7,
+    "rsi": 65,
     "grades": {
      "profitability": "Great",
      "growth": "Good",
@@ -8301,6 +8499,7 @@
     "target": 336.6,
     "below200": false,
     "perf6m": -2.0,
+    "rsi": 55,
     "grades": {
      "profitability": "Excellent",
      "growth": "Great",
@@ -8341,6 +8540,7 @@
     "target": 553.4,
     "below200": false,
     "perf6m": 15.9,
+    "rsi": 60,
     "grades": {
      "profitability": "Excellent",
      "growth": "Good",
@@ -8382,6 +8582,7 @@
     "target": 112.1,
     "below200": false,
     "perf6m": 28.3,
+    "rsi": 64,
     "grades": {
      "profitability": "Fair",
      "growth": "Great",
@@ -8422,6 +8623,7 @@
     "target": 598.5,
     "below200": false,
     "perf6m": 20.8,
+    "rsi": 58,
     "grades": {
      "profitability": "Great",
      "growth": "Good",
@@ -8463,6 +8665,7 @@
     "target": 69.9,
     "below200": false,
     "perf6m": 9.4,
+    "rsi": 63,
     "grades": {
      "profitability": "Fair",
      "growth": "Good",
@@ -8504,6 +8707,7 @@
     "target": 292.3,
     "below200": false,
     "perf6m": 2.2,
+    "rsi": 47,
     "grades": {
      "profitability": "Good",
      "growth": "Good",
@@ -8545,6 +8749,7 @@
     "target": 192.1,
     "below200": false,
     "perf6m": 13.2,
+    "rsi": 69,
     "grades": {
      "profitability": "Good",
      "growth": "Great",
@@ -8586,6 +8791,7 @@
     "target": 122.0,
     "below200": false,
     "perf6m": 2.2,
+    "rsi": 61,
     "grades": {
      "profitability": "Fair",
      "growth": "Excellent",
@@ -8626,6 +8832,7 @@
     "target": 99.0,
     "below200": false,
     "perf6m": 20.0,
+    "rsi": 68,
     "grades": {
      "profitability": "Great",
      "growth": "Fair",
@@ -8666,6 +8873,7 @@
     "target": 146.8,
     "below200": true,
     "perf6m": 4.7,
+    "rsi": 28,
     "grades": {
      "profitability": "Excellent",
      "growth": "Great",
@@ -8707,6 +8915,7 @@
     "target": 121.5,
     "below200": false,
     "perf6m": -0.7,
+    "rsi": 66,
     "grades": {
      "profitability": "Fair",
      "growth": "Good",
@@ -8748,6 +8957,7 @@
     "target": 306.7,
     "below200": false,
     "perf6m": 23.7,
+    "rsi": 54,
     "grades": {
      "profitability": "Great",
      "growth": "Great",
@@ -8788,6 +8998,7 @@
     "target": 102.3,
     "below200": false,
     "perf6m": 21.8,
+    "rsi": 61,
     "grades": {
      "profitability": "Weak",
      "growth": "Weak",
@@ -8829,6 +9040,7 @@
     "target": 71.2,
     "below200": false,
     "perf6m": -0.7,
+    "rsi": 66,
     "grades": {
      "profitability": "Good",
      "growth": "Weak",
@@ -8869,6 +9081,7 @@
     "target": 184.1,
     "below200": false,
     "perf6m": 57.6,
+    "rsi": 56,
     "grades": {
      "profitability": "Good",
      "growth": "Good",
@@ -8909,6 +9122,7 @@
     "target": 1427.8,
     "below200": false,
     "perf6m": 16.8,
+    "rsi": 70,
     "grades": {
      "profitability": "Good",
      "growth": "Good",
@@ -8950,6 +9164,7 @@
     "target": 127.6,
     "below200": false,
     "perf6m": 13.0,
+    "rsi": 71,
     "grades": {
      "profitability": "Weak",
      "growth": "Weak",
@@ -8990,6 +9205,7 @@
     "target": 257.9,
     "below200": false,
     "perf6m": 9.0,
+    "rsi": 60,
     "grades": {
      "profitability": "Good",
      "growth": "Fair",
@@ -9030,6 +9246,7 @@
     "target": 296.5,
     "below200": false,
     "perf6m": 48.5,
+    "rsi": 77,
     "grades": {
      "profitability": "Weak",
      "growth": "Good",
@@ -9070,6 +9287,7 @@
     "target": 373.7,
     "below200": false,
     "perf6m": 14.5,
+    "rsi": 63,
     "grades": {
      "profitability": "Great",
      "growth": "Good",
@@ -9110,6 +9328,7 @@
     "target": 301.2,
     "below200": false,
     "perf6m": 46.4,
+    "rsi": 63,
     "grades": {
      "profitability": "Great",
      "growth": "Fair",
@@ -9151,6 +9370,7 @@
     "target": 228.7,
     "below200": false,
     "perf6m": 12.4,
+    "rsi": 57,
     "grades": {
      "profitability": "Fair",
      "growth": "Good",
@@ -9192,6 +9412,7 @@
     "target": 99.7,
     "below200": true,
     "perf6m": -6.2,
+    "rsi": 54,
     "grades": {
      "profitability": "Weak",
      "growth": "Fair",
@@ -9232,6 +9453,7 @@
     "target": 729.7,
     "below200": false,
     "perf6m": 34.1,
+    "rsi": 66,
     "grades": {
      "profitability": "Excellent",
      "growth": "Great",
@@ -9272,6 +9494,7 @@
     "target": 205.5,
     "below200": false,
     "perf6m": 40.5,
+    "rsi": 63,
     "grades": {
      "profitability": "Great",
      "growth": "Great",
@@ -9312,6 +9535,7 @@
     "target": 234.1,
     "below200": false,
     "perf6m": 16.9,
+    "rsi": 79,
     "grades": {
      "profitability": "Excellent",
      "growth": "Excellent",
@@ -9352,6 +9576,7 @@
     "target": 1501.1,
     "below200": false,
     "perf6m": 40.8,
+    "rsi": 70,
     "grades": {
      "profitability": "Excellent",
      "growth": "Excellent",
@@ -9392,6 +9617,7 @@
     "target": 375.7,
     "below200": false,
     "perf6m": 14.9,
+    "rsi": 58,
     "grades": {
      "profitability": "Good",
      "growth": "Fair",
@@ -9433,6 +9659,7 @@
     "target": 358.6,
     "below200": false,
     "perf6m": 5.1,
+    "rsi": 48,
     "grades": {
      "profitability": "Good",
      "growth": "Weak",
@@ -9473,6 +9700,7 @@
     "target": 314.8,
     "below200": false,
     "perf6m": 40.3,
+    "rsi": 62,
     "grades": {
      "profitability": "Good",
      "growth": "Great",
@@ -9513,6 +9741,7 @@
     "target": 645.3,
     "below200": false,
     "perf6m": 40.0,
+    "rsi": 63,
     "grades": {
      "profitability": "Good",
      "growth": "Excellent",
@@ -9554,6 +9783,7 @@
     "target": 1378,
     "below200": false,
     "perf6m": 11.1,
+    "rsi": 64,
     "grades": {
      "profitability": "Good",
      "growth": "Great",
@@ -9594,6 +9824,7 @@
     "target": 206.2,
     "below200": false,
     "perf6m": 29.8,
+    "rsi": 67,
     "grades": {
      "profitability": "Good",
      "growth": "Fair",
@@ -9634,6 +9865,7 @@
     "target": 744.7,
     "below200": false,
     "perf6m": 31.8,
+    "rsi": 71,
     "grades": {
      "profitability": "Excellent",
      "growth": "Good",
@@ -9674,6 +9906,7 @@
     "target": 50.9,
     "below200": false,
     "perf6m": 5.7,
+    "rsi": 47,
     "grades": {
      "profitability": "Great",
      "growth": "Great",
@@ -9715,6 +9948,7 @@
     "target": 63.0,
     "below200": true,
     "perf6m": -3.5,
+    "rsi": 65,
     "grades": {
      "profitability": "Fair",
      "growth": "Great",
@@ -9756,6 +9990,7 @@
     "target": 318.1,
     "below200": false,
     "perf6m": 4.0,
+    "rsi": 66,
     "grades": {
      "profitability": "Great",
      "growth": "Good",
@@ -9796,6 +10031,7 @@
     "target": 457.9,
     "below200": false,
     "perf6m": 31.6,
+    "rsi": 63,
     "grades": {
      "profitability": "Excellent",
      "growth": "Good",
@@ -9836,6 +10072,7 @@
     "target": 338.8,
     "below200": false,
     "perf6m": 9.9,
+    "rsi": 70,
     "grades": {
      "profitability": "Great",
      "growth": "Weak",
@@ -9877,6 +10114,7 @@
     "target": 340.7,
     "below200": false,
     "perf6m": 7.7,
+    "rsi": 60,
     "grades": {
      "profitability": "Fair",
      "growth": "Good",
@@ -9917,6 +10155,7 @@
     "target": 45.3,
     "below200": false,
     "perf6m": 5.4,
+    "rsi": 72,
     "grades": {
      "profitability": "Weak",
      "growth": "Fair",
@@ -9957,6 +10196,7 @@
     "target": 701.0,
     "below200": false,
     "perf6m": 18.5,
+    "rsi": 61,
     "grades": {
      "profitability": "Fair",
      "growth": "Fair",
@@ -9997,6 +10237,7 @@
     "target": 102.4,
     "below200": false,
     "perf6m": 11.3,
+    "rsi": 62,
     "grades": {
      "profitability": "Great",
      "growth": "Weak",
@@ -10037,6 +10278,7 @@
     "target": 343.0,
     "below200": false,
     "perf6m": 16.2,
+    "rsi": 56,
     "grades": {
      "profitability": "Excellent",
      "growth": "Good",
@@ -10078,6 +10320,7 @@
     "target": 260.4,
     "below200": false,
     "perf6m": 41.8,
+    "rsi": 59,
     "grades": {
      "profitability": "Fair",
      "growth": "Fair",
@@ -10119,6 +10362,7 @@
     "target": 187.1,
     "below200": false,
     "perf6m": 21.6,
+    "rsi": 56,
     "grades": {
      "profitability": "Fair",
      "growth": "Fair",
@@ -10159,6 +10403,7 @@
     "target": 551.9,
     "below200": false,
     "perf6m": 31.2,
+    "rsi": 80,
     "grades": {
      "profitability": "Great",
      "growth": "Fair",
@@ -10199,6 +10444,7 @@
     "target": 114.8,
     "below200": false,
     "perf6m": 27.7,
+    "rsi": 77,
     "grades": {
      "profitability": "Fair",
      "growth": "Fair",
@@ -10239,6 +10485,7 @@
     "target": 550.2,
     "below200": false,
     "perf6m": 1.5,
+    "rsi": 64,
     "grades": {
      "profitability": "Good",
      "growth": "Fair",
@@ -10279,6 +10526,7 @@
     "target": 260.8,
     "below200": false,
     "perf6m": 20.7,
+    "rsi": 67,
     "grades": {
      "profitability": "Good",
      "growth": "Fair",
@@ -10320,6 +10568,7 @@
     "target": 332.8,
     "below200": false,
     "perf6m": 14.0,
+    "rsi": 62,
     "grades": {
      "profitability": "Fair",
      "growth": "Good",
@@ -10361,6 +10610,7 @@
     "target": 478.9,
     "below200": false,
     "perf6m": -8.7,
+    "rsi": 48,
     "grades": {
      "profitability": "Good",
      "growth": "Excellent",
@@ -10401,6 +10651,7 @@
     "target": 283.7,
     "below200": false,
     "perf6m": 21.5,
+    "rsi": 62,
     "grades": {
      "profitability": "Good",
      "growth": "Fair",
@@ -10441,6 +10692,7 @@
     "target": 492.9,
     "below200": false,
     "perf6m": 4.2,
+    "rsi": 55,
     "grades": {
      "profitability": "Good",
      "growth": "Good",
@@ -10482,6 +10734,7 @@
     "target": 116.9,
     "below200": false,
     "perf6m": 22.0,
+    "rsi": 71,
     "grades": {
      "profitability": "Good",
      "growth": "Great",
@@ -10522,6 +10775,7 @@
     "target": 330.6,
     "below200": false,
     "perf6m": 22.4,
+    "rsi": 61,
     "grades": {
      "profitability": "Good",
      "growth": "Fair",
@@ -10563,6 +10817,7 @@
     "target": 38.8,
     "below200": false,
     "perf6m": 27.6,
+    "rsi": 68,
     "grades": {
      "profitability": "Weak",
      "growth": "Good",
@@ -10604,6 +10859,7 @@
     "target": 766.1,
     "below200": false,
     "perf6m": 60.2,
+    "rsi": 60,
     "grades": {
      "profitability": "Fair",
      "growth": "Fair",
@@ -10645,6 +10901,7 @@
     "target": 30.1,
     "below200": false,
     "perf6m": 12.6,
+    "rsi": 49,
     "grades": {
      "profitability": "Weak",
      "growth": "Weak",
@@ -10685,6 +10942,7 @@
     "target": 131.1,
     "below200": false,
     "perf6m": -4.4,
+    "rsi": 63,
     "grades": {
      "profitability": "Fair",
      "growth": "Fair",
@@ -10725,6 +10983,7 @@
     "target": 52.1,
     "below200": false,
     "perf6m": 24.9,
+    "rsi": 68,
     "grades": {
      "profitability": "Good",
      "growth": "Good",
@@ -10765,6 +11024,7 @@
     "target": 226.2,
     "below200": false,
     "perf6m": 46.4,
+    "rsi": 71,
     "grades": {
      "profitability": "Weak",
      "growth": "Weak",
@@ -10806,6 +11066,7 @@
     "target": 119.5,
     "below200": false,
     "perf6m": 31.2,
+    "rsi": 59,
     "grades": {
      "profitability": "Weak",
      "growth": "Fair",
@@ -10846,6 +11107,7 @@
     "target": 1085.8,
     "below200": false,
     "perf6m": 3.0,
+    "rsi": 70,
     "grades": {
      "profitability": "Fair",
      "growth": "Good",
@@ -10886,6 +11148,7 @@
     "target": 111.7,
     "below200": false,
     "perf6m": 1.7,
+    "rsi": 68,
     "grades": {
      "profitability": "Weak",
      "growth": "Good",
@@ -10926,6 +11189,7 @@
     "target": 219.7,
     "below200": false,
     "perf6m": 37.6,
+    "rsi": 62,
     "grades": {
      "profitability": "Great",
      "growth": "Good",
@@ -10967,6 +11231,7 @@
     "target": 494.3,
     "below200": false,
     "perf6m": 44.7,
+    "rsi": 61,
     "grades": {
      "profitability": "Weak",
      "growth": "Good",
@@ -11007,6 +11272,7 @@
     "target": 423.0,
     "below200": false,
     "perf6m": 21.6,
+    "rsi": 74,
     "grades": {
      "profitability": "Fair",
      "growth": "Fair",
@@ -11048,6 +11314,7 @@
     "target": 302.4,
     "below200": false,
     "perf6m": 44.8,
+    "rsi": 65,
     "grades": {
      "profitability": "Weak",
      "growth": "Good",
@@ -11088,6 +11355,7 @@
     "target": 374.4,
     "below200": false,
     "perf6m": 20.8,
+    "rsi": 72,
     "grades": {
      "profitability": "Good",
      "growth": "Fair",

@@ -54,6 +54,10 @@ closes are the last session's; the news, stock research and analysis are still u
    losers of the last session (`desk/movers.json`): all EGX stocks that traded at least EGP 1m, and US
    companies worth $10bn or more. The EGX and Wall Street pages show them under "Whole market"; mention a
    standout mover from outside the desk's stocks in the stories or News when there is a reason behind it.
+   Then run `python3 .claude/skills/markets-desk/indicators.py` (`desk/indicators.json`: moving averages, RSI and MACD for
+   every logged series, shown on stock pages as Trend and momentum; no network; its docstring has each formula, and
+   `--test` checks them against worked examples). Quote them as description ("below its 200-day average"), never as a
+   forecast, and never as the only reason for a view.
    Then run `python3 .claude/skills/markets-desk/fetch_fairvalue.py` (`desk/fairvalue.json`, the Views page's Fair value
    tab; see Fair value below).
    Run it with `--leads` to list news for the top five each way, find why each moved (a disclosure,

@@ -133,7 +133,7 @@
       const facts = [['P/E', x.pe + ' against ' + x.peFair + ' fair'], x.pb ? ['P/B', x.pb] : null, x.roe ? ['Return on equity', x.roe + '%'] : null, x.dy ? ['Dividend yield', x.dy + '%'] : null,
         ['Earnings per share', CUR + x.epsNorm + (x.epsBasis === 'last full year' ? ' (last full year)' : '')], ['Results to', M.short(x.period)]].filter(Boolean)
         .map(([k, v]) => `<span><span class="meta">${k}</span> <b class="num">${v}</b></span>`).join('');
-      const flags = [x.targetOut ? 'Analysts\u2019 consensus left out: it looks out of date.' : '', x.epsSwapped ? `Earnings from TradingView\u2019s last full year; Mubasher gives EGP ${x.epsSwapped}.` : '', x.below200 && x.upside > 15 ? 'Trading below its 200-day average: cheap stocks that keep falling can stay cheap.' : ''].filter(Boolean).join(' ');
+      const flags = [x.targetOut ? 'Analysts\u2019 consensus left out: it looks out of date.' : '', x.epsSwapped ? `Earnings from TradingView\u2019s last full year; Mubasher gives EGP ${x.epsSwapped}.` : '', x.below200 && x.upside > 15 ? 'Trading below its 200-day average: cheap stocks that keep falling can stay cheap.' : '', x.rsi >= 70 ? `RSI ${x.rsi}: stretched after a run.` : x.rsi && x.rsi <= 30 ? `RSI ${x.rsi}: washed out after a fall.` : ''].filter(Boolean).join(' ');
       return `<tr class="fv-more"><td colspan="9"><div class="fv-est">${est}</div><div class="fv-facts">${facts}</div>${x.note ? `<p class="fv-note"><b>The desk\u2019s note.</b> ${M.esc(x.note)}</p>` : ''}${flags ? `<p class="sub" style="margin:8px 0 0">${flags}</p>` : ''}</td></tr>`;
     };
     let side = 0, set = 0; const open = new Set();

@@ -32,6 +32,7 @@
       <div id="perf"></div>
       <div id="range"></div>
       <p class="sub" id="vsidx" style="margin-top:12px"></p>
+      <div id="tech" hidden></div>
     </section>
 
     <section class="card c4">
@@ -189,6 +190,17 @@ try {
   };
   perfCard(false);
 
+  // trend and momentum, worked out from the data log by indicators.py
+  M.get('/desk/indicators.json').then((I) => {
+    const x = I && I.series && (I.series['egx.' + t] || I.series['us.' + t]); if (!x) return;
+    const TR = { up: ['ok', 'Uptrend'], down: ['bad', 'Downtrend'], mixed: ['open', 'No clear trend'], 'turning down': ['bad', 'Turning down'], 'turning up': ['ok', 'Turning up'] }[x.trend] || null;
+    const vs = (v) => v == null ? dash : `<span class="num ${M.cls(v)}">${M.pct(v)}</span>`;
+    M.$('tech').hidden = false;
+    M.$('tech').innerHTML = `<h3 class="tech-h">Trend and momentum${TR ? ` <span class="pill ${TR[0]}">${TR[1]}</span>` : ''}</h3>` + M.kv([
+      ['50-day average', x.sma50 == null ? dash : `${M.num(x.sma50)} · price ${vs(x.vs50)}`], ['200-day average', x.sma200 == null ? dash : `${M.num(x.sma200)} · price ${vs(x.vs200)}`],
+      ['RSI (14)', x.rsi == null ? dash : `${x.rsi}${x.rsi >= 70 ? ' · stretched' : x.rsi <= 30 ? ' · washed out' : ''}`], ['MACD', x.macd == null ? dash : `${x.hist >= 0 ? 'Above' : 'Below'} its signal line`]])
+      + (x.read ? `<p class="sub" style="margin-top:10px">${M.esc(x.read)} These describe the price so far; they forecast nothing.</p>` : '');
+  });
   // the desk's fair value under the valuation rows, and the standing note
   M.get('/desk/fairvalue.json').then((F) => {
     const x = F && [...(F.stocks || []), ...((F.us || {}).stocks || [])].find((y) => y.t === t && y.desk);
