@@ -370,24 +370,30 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
   /* the masthead as a newspaper's: the date and the links on one line above the name, the closes under it, then the
      sections with Listen at the right */
   .has-front .mast{padding:46px 0 0;text-align:center}
-  .has-front .top{position:absolute;top:8px;right:104px;margin:0;padding:0;border:0;gap:4px}
-  .has-front .top .grp{gap:0} .has-front .top a,.has-front .top .off{padding:6px 9px;font-size:11px;color:var(--ink2)} .has-front #archiveBtn{min-height:0;padding:6px 9px;font-size:11px;color:var(--ink2)}
+  .has-front .top{position:absolute;top:10px;right:0;margin:0;padding:0;border:0;gap:22px;align-items:center}
+  .has-front .top .grp{gap:22px;align-items:center}
+  .has-front .top{flex-wrap:nowrap;width:max-content} .has-front .top .grp:nth-child(2){display:none}
+  .has-front .top :is(a,button,.off){position:static!important;top:auto;left:auto;right:auto;display:inline-block;min-height:0;padding:4px 0;background:none;border:0;font:600 11px/1.4 var(--sans)!important;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)!important;cursor:pointer;white-space:nowrap}
+  .has-front .top :is(a,button):hover,.has-front .top [aria-current],.has-front .top [aria-expanded="true"]{color:var(--accent)!important;background:none}
   .has-front .top .lg,.has-front .top .lg2{display:none}
-  .has-front #widthBtn{left:auto;right:50px;top:6px} .has-front #themeBtn{top:6px}
   .has-front .edition{display:block;margin:0;position:static}
   .has-front .edition .date{position:absolute;top:14px;left:0;font:500 11px var(--sans);letter-spacing:.14em;color:var(--ink2)}
   .has-front .edition .date::before{content:"Cairo \00b7  "}
   .has-front .what{margin-top:10px}
-  .has-front .toc{justify-content:flex-start;gap:0 24px;margin:0;padding:11px 190px 11px 0;min-height:56px;align-items:center;border-bottom:1px solid var(--rule);font:500 11.5px var(--sans);letter-spacing:.1em;text-transform:uppercase}
-  .has-front #listenwrap{position:absolute;right:0;bottom:9px}
+  :root.has-front .toc{justify-content:flex-start;gap:0 24px;margin:0!important;padding:11px 190px 11px 0;min-height:56px;align-items:center;border-bottom:1px solid var(--rule);font:500 11.5px var(--sans);letter-spacing:.1em;text-transform:uppercase}
+  .has-front #listenwrap{position:absolute;right:0;bottom:9px;margin:0;height:38px;padding:0 16px 0 7px;gap:0 8px;flex-wrap:nowrap;border-radius:999px;background:var(--ink)}
+  .has-front .listen,.has-front .listen:hover{height:38px;padding:0;gap:10px;border:0;background:none;color:var(--ground);font:600 11.5px var(--sans);letter-spacing:.1em;text-transform:uppercase}
+  .has-front .listen svg{width:22px;height:22px;padding:4px 3px 4px 5px;border-radius:50%;background:var(--ground);fill:var(--ink)}
+  .has-front .listen-m{font:600 11.5px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ground)} .has-front .listen-m::before{content:"\00b7\00a0\00a0"}
   .has-front #prev,.has-front #next{display:none}
-  .has-front .front{padding-top:22px}
+  @media (max-width:1260px){:root.has-front .toc{gap:0 15px;padding-right:176px;letter-spacing:.07em}}
+  .has-front .front{padding-top:0} .has-front .f-main{margin-top:20px} .has-front .f-col article:first-of-type{padding-top:0} .has-front .f-rail h4{padding-top:9px}
 }
-.f-strip a,.f-strip div{display:block;padding:10px 14px;border-left:1px solid var(--rule);color:var(--ink);text-decoration:none;font:13px/1.35 var(--sans)}
+.f-strip a,.f-strip div{display:block;padding:13px 18px 14px;border-left:1px solid var(--rule);color:var(--ink);text-decoration:none;font:13px/1.35 var(--sans)}
 .f-strip > :first-child{border-left:0;padding-left:0}
-.f-strip span{display:block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2)}
-.f-strip b{font:600 18px var(--serif);margin-right:6px;font-variant-numeric:tabular-nums}
-.f-strip em{font-style:normal;font-size:12.5px;white-space:nowrap}
+.f-strip span{display:block;margin-bottom:5px;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2)}
+.f-strip b{font:600 19px var(--serif);margin-right:8px;font-variant-numeric:tabular-nums}
+.f-strip em{font-style:italic;font-size:14px;white-space:nowrap}
 .f-up{color:#1d6f3b}.f-dn{color:#a8261d}.f-mu{color:var(--ink2)}
 :root[data-theme="dark"] .f-up{color:#5fd08a} :root[data-theme="dark"] .f-dn{color:#e8605a}
 .f-main{display:grid;grid-template-columns:1.55fr 1fr .9fr;margin-top:24px}
@@ -436,13 +442,12 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 <body>
 <div class="frame mast-frame">
   <header class="mast">
-    <button id="widthBtn" type="button" aria-pressed="false">Wide</button>
-    <button id="themeBtn" type="button" aria-label="Switch to dark mode">Dark</button>
     <h1>Daily Newsletter</h1>
     <p class="what">A daily briefing on Egypt, World News, Markets, Sports and Culture.</p>
     <div class="top" id="top" hidden>
       <div class="grp grp-l"><button id="archiveBtn" type="button" aria-expanded="false" aria-controls="archive"><span class="lg">Browse the </span>archive</button><a id="topicsLink" href="#topics">Topics</a><a id="deskLink" href="/desk/" aria-label="Markets Desk"><span class="lg2">Markets </span>Desk</a></div>
       <div class="grp"><span id="prev"></span><span id="next"></span></div>
+      <div class="grp grp-r"><button id="widthBtn" type="button" aria-pressed="false">Wide</button><button id="themeBtn" type="button" aria-label="Switch to dark mode">Dark</button></div>
     </div>
     <div id="archive"><input id="q" type="search" placeholder="Search all editions" aria-label="Search all editions" autocomplete="off"><div id="archList" role="list"></div><div id="results" role="list" hidden></div></div>
     <div class="edition" id="edition" hidden>
@@ -908,6 +913,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
   function balanceToc(){
     var t = $('toc'); if(!t || t.hidden) return;
     t.style.maxWidth = ''; t.style.marginLeft = t.style.marginRight = '';
+    if(document.documentElement.classList.contains('has-front') && window.innerWidth > 1040) return;   // the front page's sections row is left-aligned
     var rows = function(){ return new Set([].map.call(t.querySelectorAll('a'), function(a){ return a.offsetTop; })).size; };
     var n = rows(); if(n < 2) return;
     var lo = 120, hi = t.clientWidth;
