@@ -29,7 +29,7 @@ reach its number on a quiet day.
 | Section | Words | Share |
 |---|---|---|
 | Today at a Glance | 150-190 | 6% |
-| Quick Hits | 70-100 | 3% |
+| Quick Hits | 90-130 | 3% |
 | Weather | 50-80 | 2% |
 | Egypt News | 450-550 | 17% |
 | Top World Headlines | 300-380 | 11% |
@@ -108,7 +108,14 @@ row", and consider one for the Number of the day. Only use facts that fit the st
 the day's change from the source, not from this report, since a log entry can mix closing and intraday
 values.
 
-## Number of the day
+## Quick Hits: the same four every day
+
+Quick Hits has exactly these four items, in this order, every day (the front page shows them as a band of four; a
+missing one leaves a hole, and before November 12, 2026 only the first was required, so Stat to know came and went):
+`**Number of the day:**`, `**Quote of the day:**`, `**This day in history:**` and `**Stat to know:**`. Stat to know
+is a second figure from a different story than Number of the day, one that explains something rather than
+surprises: a rate, a share, a count, a comparison ("825 million. The number of shares..."). A correction, when
+there is one, is a fifth item after them. The checker fails an edition missing any of the four.
 
 Quick Hits always includes one item `**Number of the day:** ...`: a single striking figure from the day's
 news, with one line on why it matters. Pick a number covered elsewhere in the edition or one that adds

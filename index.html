@@ -418,7 +418,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 .f-glance li > b{font:700 20px/1.1 var(--serif);color:var(--accent)}
 .f-glance small{display:block;margin-bottom:2px;font:600 10.5px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
 .f-watch{margin:12px 0 0;padding-top:12px;border-top:1px solid var(--rule);font:13.5px/1.5 var(--sans);color:var(--ink2)} .f-watch b{color:var(--ink)}
-.f-band{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:26px;border-top:1px solid var(--ink)}
+.f-band{display:grid;grid-template-columns:repeat(var(--f-n,4),minmax(0,1fr));margin-top:26px;border-top:1px solid var(--ink)}
 .f-band > div{padding:16px 22px 18px;border-left:1px solid var(--rule);min-width:0} .f-band > :first-child{border-left:0;padding-left:0}
 .f-big{margin:8px 0;font:700 34px/1.05 var(--serif);letter-spacing:-.01em}
 .f-big.q{font-size:21px;line-height:1.25;font-style:italic;font-weight:600}
@@ -729,7 +729,8 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
         else if((m = t.match(/^([^.]{1,22}?(?:\.\d+[^.]{0,12})?)\.\s+([\s\S]+)$/))){ big = '<div class="f-big">'+esc(short(m[1]))+'</div>'; cap = m[2]; }
         return '<div><span class="f-kick">'+esc(lab)+'</span>'+big+'<p>'+esc(cap)+'</p></div>';
       }).join('');
-      if(band) h += '<div class="f-band">'+band+'</div>';
+      // an edition with three items (before Stat to know was fixed) fills the row with three, not a hole
+      if(band){ var nb = (band.match(/<span class="f-kick">/g) || []).length; h += '<div class="f-band"'+(nb !== 4 ? ' style="--f-n:'+nb+'"' : '')+'>'+band+'</div>'; }
     }
     var sec = document.createElement('section'); sec.className = 'front'; sec.id = 'front'; sec.innerHTML = '<div class="frame">'+h+'</div>';
     $('content').insertBefore(sec, $('content').firstChild);

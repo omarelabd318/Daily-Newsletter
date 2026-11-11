@@ -36,7 +36,7 @@ PARTS = {
     "In Other News": ["Tech and AI", "Sports", "Health and Science", "Entertainment and Culture"],
 }
 BUDGET = {
-    "Today at a Glance": (150, 190), "Quick Hits": (70, 100), "Weather": (50, 80),
+    "Today at a Glance": (150, 190), "Quick Hits": (90, 130), "Weather": (50, 80),
     "Egypt News": (450, 550), "Top World Headlines": (300, 380), "Regional and Gulf": (180, 230),
     "Egypt Markets": (280, 340), "Global Markets": (210, 260), "Stocks Watch": (140, 240),
     "Currency and Commodities Watch": (180, 260), "Tech and AI": (130, 170), "Sports": (150, 200),
@@ -473,6 +473,11 @@ def main(path):
     if not recap and not any(re.match(r"^\s*(?:[-*]\s+)?\*\*Number of the day:\*\*", l)
                              for l in sections.get("Quick Hits", {}).get("body", [])):
         errors.append("Quick Hits should include a '**Number of the day:**' item.")
+    # ...and, from 12 November 2026, the other three the front page's band shows beside it
+    if not recap and os.path.basename(path)[:10] >= "2026-11-12":
+        for lab in ("Quote of the day", "This day in history", "Stat to know"):
+            if not any(re.match(r"^\s*(?:[-*]\s+)?\*\*" + lab + r":\*\*", l) for l in sections.get("Quick Hits", {}).get("body", [])):
+                errors.append(f"Quick Hits should include a '**{lab}:**' item (the four are fixed: see the skill).")
 
     # The day's figures are logged for the site's trend lines (daily editions only).
     date = os.path.basename(path)[:10]
