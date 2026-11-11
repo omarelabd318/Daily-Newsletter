@@ -666,6 +666,20 @@ When the edition is written, read it once from the top as its editor, not its wr
 
 Then run the checker. End the final reply with one line, `Edit pass: N changes`, naming the biggest.
 
+## The front page
+
+The site builds a front page for each daily edition from the edition itself (index.html, `buildFront`), so write
+with it in mind; nothing extra goes in the file:
+- **Today at a Glance item 1** is the lead: its sentence becomes the headline and its story's paragraph the text.
+  Items 2 to 4 sit beside it with their story's first sentence; items 5 on are listed as "Also today".
+  So keep each glance sentence under about 16 words, and make every story's first sentence carry the news alone.
+- **Quick Hits** become four large figures. Open Number of the day and Stat to know with the figure and a period
+  ("$13 billion. What Egyptians abroad..."), and Quote of the day with the quote in quotation marks, then the speaker.
+- **The markets strip** (EGX30, USD/EGP, gold 21K, Brent, S&P 500) reads the data log, so log the figures before
+  publishing; Cairo's temperature comes from the first Weather paragraph ("a high of 24-25°C").
+The Today at a Glance and Quick Hits sections are hidden on the page (the front page shows them) but stay in the
+file for the archive, search and audio. The Saturday recap has no front page.
+
 ## Check before committing
 
 Run the checker on the new edition from the repo root:
