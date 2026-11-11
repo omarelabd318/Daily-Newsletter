@@ -187,7 +187,7 @@
       const R = ((await get('/desk/reserves.json')) || {}).months || [], RL = R[R.length - 1], RP = R[R.length - 2];
       if (RL) { const rc = RP ? (RL.total / RP.total - 1) * 100 : null; figs.push(fig('Foreign reserves', '$' + RL.total.toFixed(2) + 'bn', rc == null ? '' : `<span class="${cls(rc)}">${pct(rc, 2)}</span>`)); }
       if (figs.length) document.querySelector('#c-close .card-h .meta').textContent = 'Day change; the pound\'s on the month';
-      if (figs.length) $('close-rows').insertAdjacentHTML('beforeend', `<div class="strip-g"><h3>The pound<a class="strip-more" href="/desk/egp/">EGP page →</a></h3><div class="strip-row">${figs.join('')}</div></div>`);
+      if (figs.length) $('close-rows').insertAdjacentHTML('beforeend', `<div class="strip-g"><h3>The pound</h3><div class="strip-row">${figs.join('')}</div></div>`);
     }
 
     // USA: the VIX beside the indices and a row for the 2-, 10- and 30-year Treasury yields (desk/rates.json, from Cboe and the US
