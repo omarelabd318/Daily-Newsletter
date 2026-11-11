@@ -4,3 +4,4 @@ data/audio/*.mp3
 data/audio/*.wav
 voice-samples/
 desk/brief.md
+editions/brief.md

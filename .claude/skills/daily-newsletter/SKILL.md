@@ -317,6 +317,20 @@ was not made. End the final reply with the line `research_log.py DATE newsletter
   from them and the credit fits; they are trusted, daily sources. The aim is that other outlets are
   named just as readily when a point comes from them, not that these two are named less.
 
+## Start from the brief
+
+Before any search, run `python3 .claude/skills/daily-newsletter/run_research.py` (about 20 seconds) and read
+`editions/brief.md`. It gathers, and never judges: the day's headlines from every Egyptian outlet below, with the
+stories two or more of them carry listed first; for each running topic, where it stood, what the last edition said
+with its figures, and today's headlines on it; yesterday's What to watch today, to follow up; the dates already
+known for the next three days and the desk stocks reporting now, with where their filing is; regional outlets and
+wires on Egypt, the Gulf, the economy, sports, culture, and the world, business and technology top headlines; and
+which outlets it could not reach. Use it to choose what to research, not as research: every line is a headline
+with no link, so open the story at its outlet, check it against a second one, and log it with research_log.py as
+usual. A story the brief shows in several outlets still needs reading; a story it does not show may still matter
+(it sees headlines, not front-page placement). An outlet listed as unreachable is read by hand. The file is a
+worksheet and is not committed.
+
 ## Egyptian news outlets: read every day
 
 On **every** run, weekdays and weekends alike, read the front pages of at least three of these outlets,
