@@ -107,7 +107,7 @@ def clusters(items):
 
 
 CIK = {"AAPL": 320193, "MSFT": 789019, "NVDA": 1045810, "AMZN": 1018724, "GOOGL": 1652044, "META": 1326801, "TSLA": 1318605, "JPM": 19617,
-       "XOM": 34088, "AVGO": 1730168, "BRK.B": 1067983, "WMT": 104169, "V": 1403161, "ORCL": 1341439, "COST": 909832}
+       "XOM": 34088, "AVGO": 1730168, "BRK.B": 1067983, "WMT": 104169, "V": 1403161, "ORCL": 1341439, "COST": 909832, "NFLX": 1065280, "INTC": 50863, "LLY": 59478}
 LOGGED = [("cbe_usd_sell", "Central bank dollar rate (sell)", 4), ("tbill_91", "91-day T-bill", 8), ("tbill_182", "182-day T-bill", 8), ("tbill_273", "273-day T-bill", 8),
           ("tbill_364", "364-day T-bill", 8), ("cbe_deposit", "Overnight deposit rate", 60), ("infl_headline", "Headline inflation", 35), ("infl_core", "Core inflation", 35),
           ("reserves_usd", "Net international reserves, $bn", 35)]

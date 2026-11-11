@@ -74,11 +74,11 @@ INDUSTRY = {"Regional Banks": "Banks", "Major Banks": "Banks", "Real Estate Deve
 GRADES = ["Weak", "Fair", "Good", "Great", "Excellent"]
 
 
-US = ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA", "JPM", "XOM", "AVGO", "BRK.B", "WMT", "V", "ORCL", "COST"]
+US = ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA", "JPM", "XOM", "AVGO", "BRK.B", "WMT", "V", "ORCL", "COST", "NFLX", "INTC", "LLY"]
 # Wall Street: US-listed common stocks worth $50bn or more, the same three estimates; g is 6% (2% inflation, about 2%
 # real growth and buybacks), and peer groups are TradingView's sectors
 CFG = {"egx": {"market": "egypt", "cur": "EGP", "g": 10.0, "min_cap": 3e9, "min_traded": 5e6, "index": "EGX 30"},
-       "us": {"market": "america", "cur": "USD", "g": 6.0, "min_cap": 50e9, "min_traded": 0, "index": "S&P 100",
+       "us": {"market": "america", "cur": "USD", "g": 6.0, "min_cap": 50e9, "min_traded": 0, "index": "Dow Jones Industrial Average",
               # US reported earnings carry more one-offs and US targets come from many analysts, so the weights lean to
               # analysts, and a P/E outside 4 to 60 gives no earnings estimate at all
               "w": {"earnings": 0.3, "assets": 0.2, "analysts": 0.5}, "pe_ok": (4, 60)}}

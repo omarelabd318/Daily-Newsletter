@@ -3,15 +3,6 @@
  "fetched": "2026-11-11",
  "items": [
   {
-   "t": "COMI",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-11-11",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
-  {
    "t": "EFID",
    "market": "egx",
    "kind": "results",
@@ -48,6 +39,15 @@
    "period": "2026-09-30",
    "time": "before the open",
    "expected": true
+  },
+  {
+   "t": "LLY",
+   "market": "us",
+   "kind": "dividend",
+   "date": "2026-11-13",
+   "pay": "2026-12-10",
+   "amount": 1.73,
+   "cur": "$"
   },
   {
    "t": "CLHO",
@@ -142,6 +142,15 @@
    "cur": "$",
    "declared": "2026-09-14",
    "src": "Polygon"
+  },
+  {
+   "t": "COST",
+   "market": "us",
+   "kind": "dividend",
+   "date": "2026-11-24",
+   "pay": "2026-12-04",
+   "amount": 30,
+   "cur": "$"
   },
   {
    "t": "ALCN",

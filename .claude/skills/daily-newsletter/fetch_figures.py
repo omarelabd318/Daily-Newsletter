@@ -36,7 +36,7 @@ EGX = ["COMI", "TMGH", "ETEL", "PHDC", "SWDY", "ORAS", "FWRY", "ABUK", "HRHO", "
 US = ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA", "JPM", "XOM", "AVGO", "BRK.B", "WMT"]
 # The Markets Desk follows these too; they are logged every day but are not Stocks Watch rows.
 DESK_EGX = ["MFPC", "EAST", "EFIH", "EMFD", "BQDC", "EGAL", "AMOC", "SKPC", "EFID"]
-DESK_US = ["V", "ORCL", "COST"]
+DESK_US = ["V", "ORCL", "COST", "NFLX", "INTC", "LLY"]
 
 
 def get(url, tries=2, ua=UA):

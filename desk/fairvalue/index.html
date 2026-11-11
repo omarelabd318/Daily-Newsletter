@@ -81,7 +81,7 @@
     M.$('fvh').textContent = us ? 'Undervalued and overvalued on Wall Street' : 'Undervalued and overvalued on the EGX';
     M.$('fvkey').innerHTML = `<span class="fv-bar key" aria-hidden="true"><i class="rng" style="left:30%;width:45%"></i><i class="px"></i><i class="dot" style="left:30%"></i><i class="dot" style="left:62%"></i><i class="dot" style="left:75%"></i><i class="fairm up" style="left:58%"></i></span> The tick is today's price; each dot is one estimate; the diamond is the fair value. Dots close together mean the estimates agree. ● marks the desk's stocks. The two lists leave out low-confidence figures; All shows every stock. Not advice: a model and a judgement, both of which can be wrong.`;
     M.toggle(M.$('fvside'), ['Most undervalued', 'Most overvalued', `All ${F.count}`], (i) => { side = i; drawF(); });
-    M.toggle(M.$('fvset'), ['All stocks', 'Desk stocks', us ? 'S&P 100' : 'EGX30'], (i) => { set = i; drawF(); });
+    M.toggle(M.$('fvset'), ['All stocks', 'Desk stocks', us ? 'Dow 30' : 'EGX30'], (i) => { set = i; drawF(); });
     drawF();
     M.$('fvnot').innerHTML = `<div class="card-h"><h2>Not rated</h2></div>` + ((F.notRated || []).map((x) => `<p class="fv-nr"><b>${x.t}</b> ${M.esc(x.name.replace(/ (S\.A\.E\.?|SAE|Plc)$/i, ''))}: ${M.esc(x.why)}.</p>`).join('') || '<p class="sub">Every stock that passed the screen is rated.</p>')
       + `<p class="sub" style="margin-top:10px">${us ? 'Also left out: companies worth under $50bn and loss-makers.' : 'Also left out: stocks worth under EGP 3bn or trading under EGP 5m a day, loss-makers, and shares priced in dollars.'}</p>`;

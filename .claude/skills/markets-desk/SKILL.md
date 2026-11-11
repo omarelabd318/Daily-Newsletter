@@ -1,6 +1,6 @@
 ---
 name: markets-desk
-description: House rules for the Markets Desk, the daily markets analysis page planned next to the Daily Newsletter (what moved and why, which EGX sectors it helps or hurts, the desk's 36 stocks, the week ahead, open views). Use whenever writing, designing or reviewing the desk.
+description: House rules for the Markets Desk, the daily markets analysis page planned next to the Daily Newsletter (what moved and why, which EGX sectors it helps or hurts, the desk's 39 stocks, the week ahead, open views). Use whenever writing, designing or reviewing the desk.
 ---
 
 # Markets Desk
@@ -91,7 +91,8 @@ closes are the last session's; the news, stock research and analysis are still u
 Elsewedy, Orascom Construction, Fawry, Abu Qir, EFG Holding, Cleopatra, Juhayna, Alexandria Containers)
 plus MOPCO, Eastern Company, e-finance, Emaar Misr, Banque du Caire (trading from 2 November 2026), Egypt
 Aluminium, Alexandria Mineral Oils, Sidi Kerir Petrochemicals and Edita Food Industries.
-15 US: the 12 Stocks Watch names plus Visa, Oracle and Costco. The extra 12 are desk-only: they are
+18 US: the 12 Stocks Watch names plus Visa, Oracle, Costco, Netflix, Intel and Eli Lilly (the last three added
+November 11, 2026, with their history back to 2021). The extra 15 are desk-only: they are
 logged daily (fetch_figures.py lists them as "Desk only") but are not rows in the newsletter's tables.
 
 ## Pages
@@ -110,6 +111,8 @@ logged daily (fetch_figures.py lists them as "Desk only") but are not rows in th
   bought and who sold with the foreign-flow history, the desk's Egyptian stocks, then Bullish and bearish.
 - **EGP** `/desk/egp/`: the dollar in pounds, the central bank's and banks' rates (with net international
   reserves), Pound or dollar?, what is moving the pound, inflation with a switch to the real one-year yield, the other currencies and the desk's view on the pound.
+- The Wall Street page's Movers tab also carries a heatmap of the 100 largest S&P 500 companies by sector (`us.heat` in
+  desk/movers.json, one screener request in fetch_movers.py; shown when its session is the desk's US session).
 - **Wall Street** `/desk/us/`: S&P 500, Nasdaq and Dow, rates and data, biggest movers (US companies worth $10bn or more, or the desk's stocks),
   results after the bell, the desk's US stocks, then Bullish and bearish.
 - **Global** `/desk/global/`: Brent, gold, the dollar index and Bitcoin, each with one line on why it
@@ -478,7 +481,7 @@ grades each. `desk/fairvalue.json` holds it; `fetch_fairvalue.py` rebuilds the f
 **Wall Street** (the tab's second market, `us` in the file): US common stocks worth $50bn or more, the same method
 with three changes: long-run growth 6%, weights of earnings 30, assets 20 and analysts 50 (reported US earnings carry
 more one-offs, and targets come from many analysts), and no earnings estimate when the P/E is outside 4 to 60. Its
-judgement block is `judgementUS`, same fields. Notes are only needed for the desk's 15 US stocks.
+judgement block is `judgementUS`, same fields. Notes are only needed for the desk's 18 US stocks.
 
 What the run adds, in `judgement[TICKER]` (the script never touches it):
 - `brokers`: a fair value or target found in the day's stock research and checked at the outlet:

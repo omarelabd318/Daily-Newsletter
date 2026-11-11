@@ -2431,6 +2431,21 @@
     "url": "https://enterpriseam.com/egypt/2026/11/08/why-some-egx-companies-spent-the-recovery-week-buying-their-own-stock/",
     "written": "2026-11-10"
    }
+  },
+  "NFLX": {
+   "sector": "Streaming",
+   "news": [],
+   "next": []
+  },
+  "INTC": {
+   "sector": "Semiconductors",
+   "news": [],
+   "next": []
+  },
+  "LLY": {
+   "sector": "Pharmaceuticals",
+   "news": [],
+   "next": []
   }
  }
 }

@@ -3,6 +3,8 @@
 // Used by the EGX page (opening on the day) and The week (opening on the week). The page supplies the elements
 // #c-heat, #hseg, #heat, #heat-key and #heat-cap.
 window.DeskHeat = function (M, HT, k0) {
+  // the EGX30 in pounds unless the file says otherwise (the S&P 100 carries its own index name and currency)
+  const CUR = HT.cur || 'EGP ', INDEX = HT.index || 'EGX30';
     M.$('c-heat').hidden = false;
     // squarified treemap: rows of boxes laid along the shorter side, each row as close to square as it can be
     const squarify = (items, x, y, w, h) => {
@@ -50,8 +52,8 @@ window.DeskHeat = function (M, HT, k0) {
     const big = (v) => (v >= 1e9 ? (v / 1e9).toFixed(1) + 'bn' : v >= 1e6 ? (v / 1e6).toFixed(2) + 'm' : Math.round(v).toLocaleString('en-US'));
     const tipHtml = (r) => { const own = M.NAMES[r.t];
       return `<div class="ht-h"><b>${M.esc(r.t)}</b><span>${M.esc(r.sector)}</span></div><div class="ht-n">${M.esc(own || r.name)}</div>`
-        + M.kv([['Last', r.price != null ? 'EGP ' + M.num(r.price, 2) : '—'], [`Change ${PER[hk]}`, `<span class="${M.cls(r[hk])}">${M.pct(r[hk], 2)}</span>`],
-          ['Volume', r.vol != null ? big(r.vol) + ' shares' : '—'], ['Market value', 'EGP ' + big(r.cap)], ['Share of the EGX30 members\' value', (r.cap / total * 100).toFixed(2) + '%']])
+        + M.kv([['Last', r.price != null ? CUR + M.num(r.price, 2) : '—'], [`Change ${PER[hk]}`, `<span class="${M.cls(r[hk])}">${M.pct(r[hk], 2)}</span>`],
+          ['Volume', r.vol != null ? big(r.vol) + ' shares' : '—'], ['Market value', CUR + big(r.cap)], [`Share of the ${INDEX}${/^\d/.test(INDEX) ? '' : ' members'}' value`, (r.cap / total * 100).toFixed(2) + '%']])
         + (own ? '<div class="ht-f">Click to open its page</div>' : ''); };
     const heatEl = M.$('heat');
     const showTip = (box, ev) => {

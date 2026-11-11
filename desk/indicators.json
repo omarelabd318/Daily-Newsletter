@@ -733,6 +733,25 @@
    "range": 11.0,
    "read": "In a downtrend: below its 50-day average, which is below the 200-day; RSI 33, neither stretched nor washed out; the 50-day average crossed below the 200-day 8 sessions ago."
   },
+  "us.INTC": {
+   "asOf": "2026-11-11",
+   "sessions": 1462,
+   "close": 58.13,
+   "sma20": 78.74,
+   "sma50": 96.72,
+   "sma200": 87.06,
+   "vs50": -39.9,
+   "vs200": -33.2,
+   "rsi": 28.9,
+   "macd": -12.577,
+   "signal": -10.286,
+   "hist": -2.291,
+   "trend": "turning down",
+   "goldenCross": null,
+   "macdCross": null,
+   "range": 23.0,
+   "read": "Turning down: below both its 50-day average (39.9% under) and its 200-day (33.2% under), though the 50-day is still above the 200-day; RSI 29, washed out: below 30."
+  },
   "us.JPM": {
    "asOf": "2026-11-11",
    "sessions": 1469,
@@ -751,6 +770,25 @@
    "macdCross": null,
    "range": 72.0,
    "read": "In an uptrend: above its 50-day average, which is above the 200-day; RSI 53, neither stretched nor washed out."
+  },
+  "us.LLY": {
+   "asOf": "2026-11-11",
+   "sessions": 1471,
+   "close": 1432.29,
+   "sma20": 1326.71,
+   "sma50": 1224.51,
+   "sma200": 1103.22,
+   "vs50": 17.0,
+   "vs200": 29.8,
+   "rsi": 69.8,
+   "macd": 56.042,
+   "signal": 50.474,
+   "hist": 5.568,
+   "trend": "up",
+   "goldenCross": null,
+   "macdCross": null,
+   "range": 100.0,
+   "read": "In an uptrend: above its 50-day average, which is above the 200-day; RSI 70, neither stretched nor washed out."
   },
   "us.META": {
    "asOf": "2026-11-11",
@@ -792,6 +830,28 @@
    },
    "range": 89.0,
    "read": "In an uptrend: above its 50-day average, which is above the 200-day; RSI 52, neither stretched nor washed out; momentum turned down today (MACD crossed its signal line)."
+  },
+  "us.NFLX": {
+   "asOf": "2026-11-11",
+   "sessions": 1468,
+   "close": 63.26,
+   "sma20": 65.55,
+   "sma50": 70.32,
+   "sma200": 80.82,
+   "vs50": -10.0,
+   "vs200": -21.7,
+   "rsi": 39.9,
+   "macd": -1.896,
+   "signal": -2.126,
+   "hist": 0.23,
+   "trend": "down",
+   "goldenCross": null,
+   "macdCross": {
+    "dir": "up",
+    "ago": 4
+   },
+   "range": 2.0,
+   "read": "In a downtrend: below its 50-day average, which is below the 200-day; RSI 40, neither stretched nor washed out; momentum turned up 4 sessions ago (MACD crossed its signal line)."
   },
   "us.NVDA": {
    "asOf": "2026-11-11",

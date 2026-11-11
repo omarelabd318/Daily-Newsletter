@@ -40,6 +40,12 @@
       <div id="movers"></div>
       <p class="sub" id="mnote" style="margin-top:10px"></p>
     </section>
+    <section data-tab="movers" class="card c12" id="c-heat" hidden>
+      <div class="card-h"><h2>The 100 largest US companies by sector</h2><div class="seg" id="hseg"></div></div>
+      <div class="heat" id="heat"></div>
+      <div class="heat-key" id="heat-key"></div>
+      <p class="chart-cap" id="heat-cap" data-src="TradingView"></p>
+    </section>
     <section data-tab="movers" class="card c6" id="c-bell" hidden>
       <div class="card-h"><h2>After the bell</h2><span class="meta" id="bell-date"></span></div>
       <div id="bell"></div>
@@ -74,6 +80,7 @@
 <script src="/desk/charts.js"></script>
 <script src="/desk/tags.js"></script>
 <script src="/desk/desk.js"></script>
+<script src="/desk/heat.js"></script>
 <script>
 (async () => {
   const M = Desk, D = await M.init('/desk/us/'); if (!D) return;
@@ -138,6 +145,10 @@
   M.calendar(M.$('calendar'), 'us', await M.get('/desk/calendar.json'), ((await M.get('/desk/stocks.json')) || {}).stocks);
   M.outlook(M.$('outlook'), P.outlook, '$');
   M.news(M.$('news'), P.news, true);
+  // the 100 largest S&P 500 companies by sector, sized by market value (desk/movers.json)
+  { const HT = M.MOVERS && M.MOVERS.us && M.MOVERS.us.heat; if (HT && HT.rows && HT.rows.length && HT.session === M.asOfFor('us') && window.DeskHeat) window.DeskHeat(M, HT, 'd1'); }
+  // with nothing after the bell, the movers take the full width (gainers and losers side by side)
+  { const mv = M.$('movers').closest('section'); if (M.$('c-bell').hidden && mv) mv.className = mv.className.replace('c6', 'c12'); }
   M.pageTabs([['today', 'Today'], ['movers', 'Movers and results'], ['stocks', 'Stocks and views']]);
 })();
 </script>

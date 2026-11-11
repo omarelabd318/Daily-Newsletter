@@ -74,7 +74,7 @@ try {
   const nav = performance.getEntriesByType('navigation')[0];
   if (nav && nav.type === 'reload') {
     const t = new URLSearchParams(location.search).get('t') || '';
-    location.replace(['AAPL', 'MSFT', 'NVDA', 'AMZN', 'GOOGL', 'META', 'TSLA', 'JPM', 'XOM', 'AVGO', 'BRK.B', 'WMT', 'V', 'ORCL', 'COST'].includes(t) ? '/desk/stocks/us/' : '/desk/stocks/egypt/');
+    location.replace(['AAPL', 'MSFT', 'NVDA', 'AMZN', 'GOOGL', 'META', 'TSLA', 'JPM', 'XOM', 'AVGO', 'BRK.B', 'WMT', 'V', 'ORCL', 'COST', 'NFLX', 'INTC', 'LLY'].includes(t) ? '/desk/stocks/us/' : '/desk/stocks/egypt/');
   }
 } catch (e) {}
 </script>

@@ -30,7 +30,7 @@ OUT = os.path.join(ROOT, "desk", "calendar.json")
 UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36"
 EGX = ["COMI", "TMGH", "ETEL", "PHDC", "SWDY", "ORAS", "FWRY", "ABUK", "HRHO", "CLHO", "JUFO", "ALCN", "MFPC", "EAST", "EFIH", "EMFD", "BQDC", "EGAL", "AMOC", "SKPC", "EFID"]
 US = {"AAPL": "NASDAQ", "MSFT": "NASDAQ", "NVDA": "NASDAQ", "AMZN": "NASDAQ", "GOOGL": "NASDAQ", "META": "NASDAQ", "TSLA": "NASDAQ", "JPM": "NYSE", "XOM": "NYSE",
-      "AVGO": "NASDAQ", "BRK.B": "NYSE", "WMT": "NYSE", "V": "NYSE", "ORCL": "NYSE", "COST": "NASDAQ"}
+      "AVGO": "NASDAQ", "BRK.B": "NYSE", "WMT": "NYSE", "V": "NYSE", "ORCL": "NYSE", "COST": "NASDAQ", "NFLX": "NASDAQ", "INTC": "NASDAQ", "LLY": "NYSE"}
 COLS = ["earnings_release_next_date", "earnings_release_next_calendar_date", "earnings_release_next_time",
         "ex_dividend_date_upcoming", "dividend_payment_date_upcoming", "dividend_amount_upcoming"]
 TODAY = datetime.date.today()

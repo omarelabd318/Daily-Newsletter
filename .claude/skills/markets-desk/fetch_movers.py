@@ -195,7 +195,7 @@ def egx():
 
 
 DESK = {"egx": ["COMI", "TMGH", "ETEL", "PHDC", "SWDY", "ORAS", "FWRY", "ABUK", "HRHO", "CLHO", "JUFO", "ALCN", "MFPC", "EAST", "EFIH", "EMFD", "BQDC", "EGAL", "AMOC", "SKPC", "EFID"],
-        "us": ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA", "JPM", "XOM", "AVGO", "BRK.B", "WMT", "V", "ORCL", "COST"]}
+        "us": ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA", "JPM", "XOM", "AVGO", "BRK.B", "WMT", "V", "ORCL", "COST", "NFLX", "INTC", "LLY"]}
 SCREENER = []
 # listed but not yet trading: Mubasher's market value for them predates the offering
 NOT_TRADING = {"BQDC"} if datetime.date.today() < datetime.date(2026, 11, 2) else set()
@@ -291,6 +291,40 @@ SECTOR_OF = {"Finance": "Financial services", "Technology Services": "Technology
              "Distribution Services": "Consumer", "Retail Trade": "Consumer", "Health Technology": "Healthcare",
              "Health Services": "Healthcare", "Communications": "Telecom", "Industrial Services": "Industrials",
              "Transportation": "Industrials", "Producer Manufacturing": "Industrials", "Utilities": "Utilities"}
+
+
+US_SECTOR = {"Technology Services": "Technology", "Electronic Technology": "Technology", "Finance": "Financials", "Health Technology": "Healthcare",
+             "Health Services": "Healthcare", "Retail Trade": "Retail", "Consumer Non-Durables": "Consumer", "Consumer Durables": "Consumer",
+             "Consumer Services": "Consumer", "Energy Minerals": "Energy", "Industrial Services": "Energy", "Producer Manufacturing": "Industrials",
+             "Transportation": "Industrials", "Communications": "Telecoms", "Utilities": "Utilities", "Process Industries": "Materials",
+             "Non-Energy Minerals": "Materials", "Commercial Services": "Services", "Distribution Services": "Services"}
+
+
+def us_heatmap(session):
+    """The 100 largest members of the S&P 500 by market value (TradingView's index membership; it has no S&P 100
+    tag), each with its sector, market value, last close and
+    shares traded, and change over the last session, week and month, from one request to TradingView's screener.
+    Run after the US close, so the day's change is the finished session's. Two share classes of one company (Alphabet)
+    are kept as the larger one only."""
+    body = json.dumps({"filter": [{"left": "type", "operation": "equal", "right": "stock"}, {"left": "market_cap_basic", "operation": "greater", "right": 3e10},
+                                  {"left": "is_primary", "operation": "equal", "right": True}],
+                       "columns": ["name", "description", "sector", "market_cap_basic", "indexes", "close", "change", "Perf.W", "Perf.1M", "volume"],
+                       "range": [0, 600], "sort": {"sortBy": "market_cap_basic", "sortOrder": "desc"}}).encode()
+    req = urllib.request.Request("https://scanner.tradingview.com/america/scan", data=body, headers={"User-Agent": UA, "Content-Type": "application/json"})
+    rows, seen = [], set()
+    for r in json.loads(urllib.request.urlopen(req, timeout=40).read())["data"]:
+        code, desc, sector, cap, idx, close, d1, w1, m1, vol = r["d"]
+        if not any(i.get("name") == "S&P 500" for i in (idx or [])) or None in (cap, close, d1, w1, m1) or len(rows) >= 100:
+            continue
+        company = re.sub(r"\s+(Class [A-C]|Inc\.?|Corporation|Corp\.?|Company|Co\.?|plc|Incorporated|Holdings?|Group|& Co\.?|,).*$", "", desc).strip()
+        if company in seen:
+            continue
+        seen.add(company)
+        rows.append({"t": code, "name": company, "sector": US_SECTOR.get(sector, sector or "Other"), "cap": round(cap), "price": close, "vol": vol,
+                     "d1": round(d1, 2), "w1": round(w1, 2), "m1": round(m1, 2)})
+    if len(rows) < 60:
+        raise ValueError(f"only {len(rows)} S&P 500 members found")
+    return {"session": session, "index": "100 largest", "cur": "$", "rows": rows}
 
 
 def heatmap(upto=None):
@@ -408,6 +442,11 @@ def main():
             print(f"EGX30 heatmap: {h['session']}, {len(h['rows'])} members")
         except Exception as e:
             print(f"EGX30 heatmap: failed ({e}); kept the saved one")
+        try:
+            saved["us"]["heat"] = us_heatmap(saved["us"].get("session"))
+            print(f"US heatmap: {saved['us']['heat']['session']}, {len(saved['us']['heat']['rows'])} members")
+        except Exception as e:
+            print(f"US heatmap: failed ({e}); kept the saved one")
     print(caps())
     saved["note"] = "Biggest gainers and losers of the last finished session across the whole market. Written by fetch_movers.py."
     with open(OUT, "w") as f:

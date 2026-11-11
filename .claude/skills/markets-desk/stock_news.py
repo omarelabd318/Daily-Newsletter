@@ -61,6 +61,9 @@ STOCKS = {
     "V": ('Visa stock OR "Visa Inc"', None),
     "ORCL": ('Oracle stock', None),
     "COST": ('Costco stock', None),
+    "NFLX": ('Netflix stock', None),
+    "INTC": ('Intel stock', None),
+    "LLY": ('"Eli Lilly"', None),
 }
 # A headline must name the company (one of these words) to count.
 MUST = {
@@ -78,6 +81,7 @@ MUST = {
     "AAPL": ["Apple"], "MSFT": ["Microsoft"], "NVDA": ["Nvidia"], "AMZN": ["Amazon"], "GOOGL": ["Alphabet", "Google"],
     "META": ["Meta"], "TSLA": ["Tesla"], "JPM": ["JPMorgan", "JP Morgan", "Dimon"], "XOM": ["Exxon"],
     "AVGO": ["Broadcom"], "BRK.B": ["Berkshire", "Buffett"], "WMT": ["Walmart"], "V": ["Visa"], "ORCL": ["Oracle"], "COST": ["Costco"],
+    "NFLX": ["Netflix"], "INTC": ["Intel"], "LLY": ["Lilly", "Zepbound", "Mounjaro"],
 }
 # Sports clubs share some company names, and daily price lists mention banks: skip both.
 NOISE = re.compile(r"(league|coach|match|fixtures|vs\.? |\bfc\b|football|olympic|دوري|مباراة|تشكيل|المدرب|لاعب|كورة|"
