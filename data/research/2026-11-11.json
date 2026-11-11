@@ -91,7 +91,7 @@
   ],
   "stocks": {},
   "check": {
-   "at": "2026-11-11 10:00",
+   "at": "2026-11-11 10:25",
    "errors": [],
    "warnings": [
     "Egypt Markets: 459 words (guide 280-340; fine if the stories justify it, never cut a story to fit).",
@@ -101,8 +101,6 @@
     "Economic Calendar: 240 words (guide 130-170; fine if the stories justify it, never cut a story to fit).",
     "Total 4131 words without Sources (guide about 3,050-3,150; never cut a worthwhile story to fit).",
     "Line 22: 'I' may break the voice rules: - **This day in history:** On November 11, 1918, the armistice signed in a railway carriag",
-    "Sources: 8 of 53 links could not be checked (the site refused or timed out); open them by hand if in doubt.",
-    "Listen: no data/audio/2026-11-11.json: once the edition is final, run make_audio.py 2026-11-11 (the site uses the device's voice until then).",
     "Possible repeat: 'Troops in Saudi Arabia' (Egypt News) and 'Saudi AI financing' (Tech and AI).",
     "Possible repeat: 'Hamilton at the Gaza border' (Regional and Gulf) and 'Gaza survivors' Oscar bid' (Entertainment and Culture)."
    ],
