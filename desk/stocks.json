@@ -303,6 +303,31 @@
       "value": "EGP 18.93"
      }
     ]
+   },
+   "brief": {
+    "written": "2026-11-11",
+    "business": "Abu Qir Fertilizers makes urea and nitrates at three plants in Alexandria for the local market and for export. Nine-month profit doubled to EGP 12.97bn on revenue of EGP 31.49bn.",
+    "drivers": [
+     {
+      "name": "Gas supply",
+      "text": "Its cut rose to 33% from 20% on November 8; two of three plants are running at full capacity and maintenance has been rescheduled."
+     },
+     {
+      "name": "Urea prices",
+      "text": "Granular urea is about $535 a ton, up 17% since September, which softens the lost volume."
+     },
+     {
+      "name": "The dividend",
+      "text": "A yield above 11%, paid from those earnings."
+     }
+    ],
+    "value": "7.7 times earnings with the three estimates close together, near EGP 93. CI Capital expects lower gas allocations to weigh on the fourth quarter and possibly through 2027.",
+    "risks": [
+     "The gas cut deepening or lasting through 2027.",
+     "A fall in urea prices.",
+     "A firmer pound lowering export income in pounds."
+    ],
+    "change": "Gas allocations restored, or fourth-quarter volumes showing how much the cut costs."
    }
   },
   "PHDC": {
@@ -712,6 +737,31 @@
     "source": "Telecompaper",
     "url": "https://www.telecompaper.com/news/telecom-egypt-approves-2027-budget-with-low-double-digit-revenue-growth-guidance--1587958",
     "written": "2026-11-10"
+   },
+   "brief": {
+    "written": "2026-11-11",
+    "business": "Telecom Egypt owns the country's fixed-line network and sells broadband, wholesale capacity to the mobile operators and transit on the subsea cables that land in Egypt; it also holds a large stake in Vodafone Egypt. Subsea cable revenue grew 31% last fiscal year.",
+    "drivers": [
+     {
+      "name": "Data demand",
+      "text": "Broadband and wholesale data grow with usage and with each price rise the regulator allows."
+     },
+     {
+      "name": "Subsea cables",
+      "text": "Dollar income from carriers that cross Egypt between Europe and Asia, the line growing fastest."
+     },
+     {
+      "name": "Investment and debt",
+      "text": "It plans about $500m of network spending over five years; its 2027 budget guides low double-digit revenue growth and an EBITDA margin in the low-to-mid 40s."
+     }
+    ],
+    "value": "11.3 times last year's consolidated earnings and 3.1 times book. The three estimates agree, and put fair value near EGP 123, about 9% below the price after a year in which the stock roughly doubled.",
+    "risks": [
+     "A run of 105% this year leaves little room for a miss.",
+     "Dollar debt and capital spending if the pound weakens.",
+     "Regulated prices and spectrum fees."
+    ],
+    "change": "Results on November 12: margin against the budget's low-to-mid 40s range."
    }
   },
   "SWDY": {
@@ -862,7 +912,32 @@
      "why": "97.2 million new shares; crediting to OCI holders from about December 8.",
      "impact": "medium"
     }
-   ]
+   ],
+   "brief": {
+    "written": "2026-11-11",
+    "business": "Orascom Construction builds infrastructure, industrial and commercial projects in Egypt, the Gulf and the United States, and is merging with OCI N.V. The board has allotted 97.2 million new shares to OCI, raising capital to $207.4m from $110.2m.",
+    "drivers": [
+     {
+      "name": "The merger",
+      "text": "OCI brings assets valued at $1.35bn against Orascom's $1.52bn; existing holders keep about 53% of the combined company. Completion is expected in December."
+     },
+     {
+      "name": "The backlog",
+      "text": "New awards in Egypt and the Gulf decide revenue two to three years out."
+     },
+     {
+      "name": "The pound",
+      "text": "Much of its work is paid in dollars, so a weaker pound flatters results in pounds."
+     }
+    ],
+    "value": "Not rated by the desk for now: every per-share figure predates the new shares, so a P/E of 7.9 on old earnings says little about the merged company.",
+    "risks": [
+     "What OCI's assets earn once inside the group.",
+     "Execution on large state projects and their payment terms.",
+     "New shares arriving on the market from November 24."
+    ],
+    "change": "The first accounts of the merged company, and how the new shares trade after they list on November 24."
+   }
   },
   "FWRY": {
    "sector": "Payments",
@@ -1003,7 +1078,32 @@
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/2026/10/29/banque-du-caires-retail-book-closed-27x-covered-days-before-trading/"
     }
-   ]
+   ],
+   "brief": {
+    "written": "2026-11-11",
+    "business": "EFG Holding is the region's largest investment bank (EFG Hermes: brokerage, advisory, asset management) with a commercial bank and non-bank finance arms. It was joint offering manager of DIB Holding's AED 1.94bn IPO in Dubai and advised on Banque du Caire's.",
+    "drivers": [
+     {
+      "name": "Market turnover",
+      "text": "Brokerage fees follow trading: the EGX's turnover on November 10 was the highest in a year."
+     },
+     {
+      "name": "Deal flow",
+      "text": "Listings in Egypt and the Gulf; the group says more are lined up before year-end and early 2027."
+     },
+     {
+      "name": "The lending businesses",
+      "text": "Steadier income, sensitive to rates and bad debts."
+     }
+    ],
+    "value": "8.9 times earnings and priced at its book value, with a return on equity of 11%. The three estimates agree near EGP 29.50.",
+    "risks": [
+     "A quiet market after the IPO wave.",
+     "Credit losses in consumer and small-business lending.",
+     "Earnings spread across currencies, so results swing with the pound."
+    ],
+    "change": "Results on November 18: whether the busiest turnover in a year shows up in brokerage income."
+   }
   },
   "CLHO": {
    "sector": "Healthcare",
@@ -1041,6 +1141,31 @@
       "value": "EGP 2.59"
      }
     ]
+   },
+   "brief": {
+    "written": "2026-11-11",
+    "business": "Cleopatra Hospitals runs a group of private hospitals in Cairo. It earns from occupancy and from the prices insurers and patients pay.",
+    "drivers": [
+     {
+      "name": "Volumes",
+      "text": "Beds filled and operations performed."
+     },
+     {
+      "name": "Price increases",
+      "text": "Private healthcare prices have risen with inflation, 12.7% in October."
+     },
+     {
+      "name": "New capacity",
+      "text": "Each hospital added lifts revenue before it lifts profit."
+     }
+    ],
+    "value": "32 times last year's earnings, a growth multiple. The desk's model allows growth only 25%, so it puts fair value near EGP 12.70, below the price, while analysts' targets sit close to it.",
+    "risks": [
+     "Paying a full multiple for growth that slows.",
+     "Staff and drug costs rising faster than prices.",
+     "Few recent figures on the desk: the note rests mainly on valuation."
+    ],
+    "change": "Results on November 16: profit growth well above 30% would support the multiple."
    }
   },
   "JUFO": {
@@ -1126,6 +1251,31 @@
     "thesis": "Price rises of 4–11% held volumes and margins better than feared; at EGP 24.95 the stock trades near its 50-day average of EGP 24.84, so the results argue for upside the desk has not yet projected.",
     "source": "Mubasher",
     "url": "https://www.mubasher.info/news/4700418/%D8%A3%D8%B1%D8%A8%D8%A7%D8%AD-%D8%AC%D9%87%D9%8A%D9%86%D8%A9-%D8%AA%D9%82%D9%81%D8%B2-60-%D8%A5%D9%84%D9%89-%D9%85%D9%84%D9%8A%D8%A7%D8%B1%D9%8A-%D8%AC%D9%86%D9%8A%D9%87-%D8%AE%D9%84%D8%A7%D9%84-9-%D8%A3%D8%B4%D9%87%D8%B1/"
+   },
+   "brief": {
+    "written": "2026-11-11",
+    "business": "Juhayna is Egypt's largest dairy and juice maker. Nine-month profit rose 60% to EGP 2.04bn on sales up 25% to EGP 27.66bn.",
+    "drivers": [
+     {
+      "name": "Prices against costs",
+      "text": "It raised prices again on November 8 (Bekhayro milk to EGP 44 a kilogram from 42.5), citing production costs."
+     },
+     {
+      "name": "Volumes",
+      "text": "Whether shoppers keep buying after repeated increases."
+     },
+     {
+      "name": "Expansion",
+      "text": "A $36m CIB facility for a citrus line for concentrate exports, and an EGP 1.73bn loan for its livestock arm."
+     }
+    ],
+    "value": "16.4 times earnings against about 12 for consumer stocks. The desk's projection (EGP 27–28 by end of January) rests on results momentum; its fair value, near EGP 19.40, says the price already holds a lot of it.",
+    "risks": [
+     "Price rises meeting resistance as inflation slows.",
+     "Raw milk and feed costs.",
+     "New borrowing at today's rates."
+    ],
+    "change": "Fourth-quarter sales volumes after the November price rise."
    }
   },
   "ALCN": {
@@ -1178,7 +1328,32 @@
      "source": "Arab Finance",
      "url": "https://www.arabfinance.com/en/news/newdetails/alexandria-container-sees-higher-profits-in-9-months"
     }
-   ]
+   ],
+   "brief": {
+    "written": "2026-11-11",
+    "business": "Alexandria Containers runs container terminals at Alexandria and Dekheila ports and is paid mostly in dollars. Nine-month profit rose 16% to EGP 5.73bn on revenue up 7% to EGP 6.77bn.",
+    "drivers": [
+     {
+      "name": "Container volumes",
+      "text": "Follow Egypt's trade; Suez traffic is running 36% above last year."
+     },
+     {
+      "name": "The pound",
+      "text": "Dollar tariffs translate into more pounds when the pound is weak, and fewer now it is firmer."
+     },
+     {
+      "name": "The dividend",
+      "text": "A yield near 9% from a business that needs little reinvestment."
+     }
+    ],
+    "value": "15 times earnings and 12 times book: a fine business at a full price. Naeem's EGP 33.60 target is where it trades; the desk's fair value is about EGP 30.",
+    "risks": [
+     "A firmer pound cutting profit in pounds.",
+     "New terminals at Egyptian ports taking volume.",
+     "Concession terms set by the state."
+    ],
+    "change": "Volumes and the average dollar tariff in the full-year figures."
+   }
   },
   "AAPL": {
    "sector": "Hardware",
@@ -1798,7 +1973,32 @@
      "source": "Al Manassa",
      "url": "https://manassa.news/news/34837"
     }
-   ]
+   ],
+   "brief": {
+    "written": "2026-11-11",
+    "business": "Eastern Company makes most of the cigarettes sold in Egypt (Cleopatra) and manufactures for the international brands. One outlet reports nine-month profit of EGP 8.99bn against 6.48bn; it is not yet confirmed.",
+    "drivers": [
+     {
+      "name": "Cigarette prices",
+      "text": "Set with the state; shops are reported selling Cleopatra at about EGP 55 against an official EGP 48."
+     },
+     {
+      "name": "Tobacco costs and the pound",
+      "text": "Leaf is imported, so a firmer pound helps margins."
+     },
+     {
+      "name": "The dividend",
+      "text": "A yield near 13%, the highest on the desk."
+     }
+    ],
+    "value": "11.4 times earnings; the desk's fair value is about EGP 38, 13% above the price. The latest results on record are to March, so the figure moves when confirmed numbers arrive.",
+    "risks": [
+     "A tax rise without a matching price rise.",
+     "The unconfirmed results turning out lower.",
+     "Smuggling and a slow shift away from smoking."
+    ],
+    "change": "Confirmed nine-month results (expected November 18) and any official price change."
+   }
   },
   "EFIH": {
    "sector": "Payments",
@@ -1862,7 +2062,32 @@
      "source": "Hapi Journal",
      "url": "https://hapijournal.com/2026/10/29/%D8%A5%D9%8A-%D9%81%D8%A7%D9%8A%D9%86%D8%A7%D9%86%D8%B3-%D8%AA%D9%88%D8%A7%D9%81%D9%82-%D8%B9%D9%84%D9%89-%D8%B4%D8%B1%D8%A7%D8%A1-34-6-%D9%85%D9%84%D9%8A%D9%88%D9%86-%D8%B3%D9%87%D9%85-%D8%AE%D8%B2/"
     }
-   ]
+   ],
+   "brief": {
+    "written": "2026-11-11",
+    "business": "e-finance runs the government's payment and collection systems (taxes, customs, salaries) and is building data centers, cards and non-bank finance around them.",
+    "drivers": [
+     {
+      "name": "Government transaction volumes",
+      "text": "Its core fees grow with the budget and with inflation."
+     },
+     {
+      "name": "New businesses",
+      "text": "It plans up to $100m of investment in 2027 and 2028, 70% in digital infrastructure, and about $80m on cybersecurity."
+     },
+     {
+      "name": "Contracts",
+      "text": "Each is awarded by a state body; the health-insurance systems deal is the newest."
+     }
+    ],
+    "value": "44 times last year's consolidated earnings on today's share count, 9.7 times book. The estimates are far apart (analysts near the price, earnings far below), so the desk's fair value, about EGP 14, is low confidence.",
+    "risks": [
+     "A multiple that needs years of fast growth.",
+     "Dependence on one customer, the state.",
+     "Heavy investment before the new lines earn."
+    ],
+    "change": "Results on November 18: profit growth, and whether newer per-share figures narrow the gap between the estimates."
+   }
   },
   "EMFD": {
    "sector": "Real estate",
@@ -1920,7 +2145,32 @@
      "source": "Eleqtisadenews",
      "url": "https://eleqtisadenews.com/en/innovo-construction-signs-egp-7-1-billion-contract-with-emaar-misr/"
     }
-   ]
+   ],
+   "brief": {
+    "written": "2026-11-11",
+    "business": "Emaar Misr, the Egyptian arm of Dubai's Emaar, develops Marassi on the North Coast, Mivida and Uptown Cairo, and is building Marassi Red Sea. It awarded about EGP 7.1bn of construction there this month, and its largest package to date (667 homes).",
+    "drivers": [
+     {
+      "name": "Sales to wealthy and Gulf buyers",
+      "text": "Less sensitive to local rates than mass-market developers."
+     },
+     {
+      "name": "Deliveries",
+      "text": "Profit is booked on handover, so it arrives in lumps."
+     },
+     {
+      "name": "Cash",
+      "text": "It carries little debt and earns interest on customer deposits."
+     }
+    ],
+    "value": "Not rated by the desk: the latest results in its sources are from June 2025, too old to judge. It trades at about 1.1 times book.",
+    "risks": [
+     "Luxury demand cooling.",
+     "Construction costs on a large new site.",
+     "Thin recent disclosure in the sources the desk uses."
+    ],
+    "change": "Fresh results the desk can check; then it joins the fair-value table."
+   }
   },
   "BQDC": {
    "sector": "Banks",
@@ -2005,6 +2255,31 @@
     "thesis": "Slower growth than CIB's 18% underlying rate, but the stock rose 4.8% to EGP 5.86, its highest since listing and above the EGP 5.30 top of the offer range.",
     "source": "Arab Finance",
     "url": "http://arabfinance.com/en/news/newdetails/49615"
+   },
+   "brief": {
+    "written": "2026-11-11",
+    "business": "Banque du Caire is a state bank listed on November 2 after the EGX's largest offering by value (45% for EGP 36bn; the IFC invested about $100m). Nine-month profit rose 4.7% to EGP 13.11bn.",
+    "drivers": [
+     {
+      "name": "Interest rates",
+      "text": "Net interest income rose 10.4% to EGP 28.45bn, slower than 2025's 22%, as earlier rate cuts fed through."
+     },
+     {
+      "name": "Retail and small-business lending",
+      "text": "Its strength, and where growth and bad debts both come from."
+     },
+     {
+      "name": "Being newly listed",
+      "text": "No trading history, and index inclusion still ahead."
+     }
+    ],
+    "value": "Not yet in the fair-value table: its per-share figures are not in the sources the desk uses. It earned EGP 16.07bn in 2025 and is on course for roughly EGP 17bn, against a market value of about EGP 124bn, or about 7 times earnings where other banks trade near 5.",
+    "risks": [
+     "Profit growing more slowly than peers'.",
+     "The state still holds the majority.",
+     "Trading has thinned to about EGP 250m a session since the first days."
+    ],
+    "change": "Full-year results and its first dividend as a listed bank."
    }
   },
   "V": {
@@ -2281,6 +2556,31 @@
     "source": "Arab Finance; Power News",
     "url": "https://www.arabfinance.com/ar/news/newdetails/أرباح-مصر-للألومنيوم-في-ثلاثة-أشهر",
     "recorded": "2026-11-09"
+   },
+   "brief": {
+    "written": "2026-11-11",
+    "business": "Egypt Aluminium runs the country's only smelter, at Nag Hammadi, turning imported alumina and a great deal of electricity into metal, about half of it exported. First-quarter profit more than doubled to EGP 4.93bn; last fiscal year it earned about EGP 15.4bn on EGP 53bn of revenue.",
+    "drivers": [
+     {
+      "name": "The aluminium price",
+      "text": "Sets revenue; today's earnings were made at a high one."
+     },
+     {
+      "name": "Electricity",
+      "text": "Its largest cost, priced by the state."
+     },
+     {
+      "name": "The state's stake",
+      "text": "The government holds about 90% and is weighing a large sale before year-end; the real free float is near 3%."
+     }
+    ],
+    "value": "7.4 times earnings and 3.9 times book. The desk's fair value is about EGP 430, a third above the price; its own projection is EGP 335–345 by end of December.",
+    "risks": [
+     "A fall in aluminium prices.",
+     "A power tariff rise.",
+     "A stake sale priced below the market."
+    ],
+    "change": "The terms of the stake sale, and the EGP 16 dividend going ex on November 17."
    }
   },
   "AMOC": {
@@ -2327,7 +2627,32 @@
      "source": "Egypt Oil & Gas",
      "url": "https://egyptoil-gas.com/news/amoc-delivers-over-twofold-profit-growth-in-9m-2026/"
     }
-   ]
+   ],
+   "brief": {
+    "written": "2026-11-11",
+    "business": "Alexandria Mineral Oils refines base oils, waxes and fuels from feedstock supplied by the state oil company. One outlet reports nine-month profit up 154% to EGP 3.47bn on sales of EGP 43.17bn.",
+    "drivers": [
+     {
+      "name": "Refining margins",
+      "text": "The gap between product prices and the feedstock price the state sets."
+     },
+     {
+      "name": "The pound",
+      "text": "Exports are priced in dollars."
+     },
+     {
+      "name": "The dividend",
+      "text": "A yield near 9%."
+     }
+    ],
+    "value": "12.6 times earnings on the last full year, with fair value near EGP 10.70, below the price. If the reported nine-month profit is confirmed, earnings are far higher than the figure the desk is using and the stock is cheaper than it looks here.",
+    "risks": [
+     "Feedstock terms changing.",
+     "The reported profit jump not being confirmed.",
+     "Margins falling with oil prices."
+    ],
+    "change": "Audited results confirming or correcting the nine-month figure."
+   }
   },
   "SKPC": {
    "sector": "Petrochemicals",
@@ -2365,6 +2690,31 @@
       "value": "EGP 5.70"
      }
     ]
+   },
+   "brief": {
+    "written": "2026-11-11",
+    "business": "Sidi Kerir Petrochemicals makes polyethylene and ethylene in Alexandria from gas-based feedstock supplied by the state, selling at home and abroad.",
+    "drivers": [
+     {
+      "name": "Polyethylene prices",
+      "text": "Follow world petrochemical prices and oil."
+     },
+     {
+      "name": "Feedstock supply and price",
+      "text": "Gas rationing for industry reached 33% this month."
+     },
+     {
+      "name": "The pound",
+      "text": "Export income falls in pounds when it firms."
+     }
+    ],
+    "value": "17 times last year's earnings, which fell sharply, and 2.7 times book. The estimates disagree (analysts near the price, earnings and assets well below), so the desk's fair value, about EGP 10.60, is low confidence.",
+    "risks": [
+     "Feedstock cuts.",
+     "Weak polyethylene prices.",
+     "Earnings already at a low base can fall further."
+    ],
+    "change": "A recovery in quarterly profit, or word on its gas allocation."
    }
   },
   "EFID": {
@@ -2430,6 +2780,31 @@
     "source": "EnterpriseAM",
     "url": "https://enterpriseam.com/egypt/2026/11/08/why-some-egx-companies-spent-the-recovery-week-buying-their-own-stock/",
     "written": "2026-11-10"
+   },
+   "brief": {
+    "written": "2026-11-11",
+    "business": "Edita makes packaged snacks (cakes, croissants, wafers) sold across Egypt and exported to the region. It earns a return on equity above 60%.",
+    "drivers": [
+     {
+      "name": "Prices against input costs",
+      "text": "Flour, sugar, cocoa and packaging, much of it imported."
+     },
+     {
+      "name": "Volumes",
+      "text": "Small-ticket snacks hold up when budgets are tight."
+     },
+     {
+      "name": "Buybacks",
+      "text": "It has bought about 3.42 million shares under a 30 million-share program approved October 26."
+     }
+    ],
+    "value": "13.4 times earnings and 7.1 times book, close to the desk's fair value of about EGP 21.",
+    "risks": [
+     "Commodity costs, cocoa and sugar above all.",
+     "Price rises costing volume.",
+     "A valuation that already reflects its high returns."
+    ],
+    "change": "Third-quarter results: margins after this year's input costs."
    }
   },
   "NFLX": {

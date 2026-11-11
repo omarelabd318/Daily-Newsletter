@@ -373,8 +373,8 @@ opposed to the day's news. `{"written", "business", "drivers": [{"name", "text"}
 - `risks`: three, specific to the company.
 - `change`: what would change the desk's view, something that can be observed (a results date, a figure, a decision).
 Only facts already checked for the desk (its news, results, valuation card and fair-value table) or checked now at
-the source; no figure from memory. Six were written on November 11, 2026 (CIB, MOPCO, Palm Hills, Elsewedy, Fawry,
-Talaat Moustafa). Write two more each Sunday until every desk stock has one, Egyptian stocks first, then rewrite a
+the source; no figure from memory. All 21 Egyptian stocks had one by November 11, 2026; the 18 US stocks do not yet. Write two US notes each Sunday
+until every desk stock has one, then rewrite a
 stock's note on the day it reports and whenever it is three months old.
 
 ## The week ahead
