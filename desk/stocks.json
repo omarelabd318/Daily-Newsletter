@@ -5,22 +5,22 @@
    "sector": "Banks",
    "valuation": {
     "source": "Company filing (Mubasher Banks (EGX disclosure))",
-    "asOf": "2026-11-10",
+    "asOf": "2026-11-11",
     "period": "2026-09-30",
     "basis": "results for the 12 months to September 2026",
-    "price": 128.05,
+    "price": 131.0,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 397.7bn"
+      "value": "EGP 436.0bn"
      },
      {
       "label": "P/E",
-      "value": "4.8"
+      "value": "4.9"
      },
      {
       "label": "P/B",
-      "value": "1.5"
+      "value": "1.6"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -97,9 +97,9 @@
     }
    ],
    "cap": {
-    "value": 397.7,
+    "value": 400.4,
     "currency": "EGP",
-    "date": "2026-11-10",
+    "date": "2026-11-11",
     "source": "Mubasher"
    },
    "filed": {
@@ -140,25 +140,25 @@
     }
    ],
    "cap": {
-    "value": 174.5,
+    "value": 175.6,
     "currency": "EGP",
-    "date": "2026-11-10",
+    "date": "2026-11-11",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-10",
+    "asOf": "2026-11-11",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
-    "price": 83.5,
+    "price": 86.0,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 173.6bn"
+      "value": "EGP 172.1bn"
      },
      {
       "label": "P/E",
-      "value": "11.1"
+      "value": "11.5"
      },
      {
       "label": "P/B",
@@ -216,21 +216,21 @@
     }
    ],
    "cap": {
-    "value": 94.2,
+    "value": 94.3,
     "currency": "EGP",
-    "date": "2026-11-10",
+    "date": "2026-11-11",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-10",
+    "asOf": "2026-11-11",
     "period": "2026-09-30",
     "basis": "results for the 12 months to September 2026; book value from Mubasher, to March 2026",
-    "price": 74.25,
+    "price": 74.26,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 94.2bn"
+      "value": "EGP 93.7bn"
      },
      {
       "label": "P/E",
@@ -268,25 +268,25 @@
     }
    ],
    "cap": {
-    "value": 34.3,
+    "value": 34.6,
     "currency": "EGP",
-    "date": "2026-11-10",
+    "date": "2026-11-11",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "Mubasher",
-    "asOf": "2026-11-10",
+    "asOf": "2026-11-11",
     "period": "2026-03-31",
     "basis": "results for the 12 months to March 2026",
-    "price": 11.88,
+    "price": 12.14,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 34.3bn"
+      "value": "EGP 34.0bn"
      },
      {
       "label": "P/E",
-      "value": "7.0"
+      "value": "7.2"
      },
      {
       "label": "P/B",
@@ -306,6 +306,12 @@
   "XOM": {
    "sector": "Energy",
    "news": [
+    {
+     "date": "2026-11-11",
+     "text": "Chief executive Darren Woods pulled out of COP31 in Antalya, citing security logistics; he was the only major oil chief due to speak.",
+     "source": "Seeking Alpha (via TradingView)",
+     "url": "https://www.tradingview.com/news/seekingalpha:078e0f69d094b:0-exxonmobil-ceo-skips-un-climate-talks-breaking-three-year-attendance-streak/"
+    },
     {
      "date": "2026-11-09",
      "text": "Signed a preliminary agreement with PDVSA to assess producing and new fields in Venezuela, with reserves in the billions of barrels; no investment figure (Reuters, teleSUR).",
@@ -362,6 +368,18 @@
   "MSFT": {
    "sector": "Software",
    "news": [
+    {
+     "date": "2026-11-11",
+     "text": "Lobbied the administration to drop proposed curbs on Chinese optical transceivers, warning they could leave AI chips idle in data centers.",
+     "source": "Reuters (via Investing.com/Yahoo Finance)",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/china-optical-stocks-rally-microsoft-063031256.html"
+    },
+    {
+     "date": "2026-11-11",
+     "text": "Fell 2.2% to $533.16 after Anthropic unveiled workplace tools including Claude Sheets, a spreadsheet rival to Excel.",
+     "source": "FXLeaders",
+     "url": "https://www.fxleaders.com/news/2026/11/10/microsoft-msft-stock-drops-from-the-highs-on-excel-challenge-following-anthropic-workplace-software-announcement/"
+    },
     {
      "date": "2026-11-06",
      "text": "Is ending a 2023 deal to rent AI computing capacity from Oracle, which runs on older Nvidia chips, Bloomberg reported; Microsoft fell 1.0% to $530.61.",
@@ -487,6 +505,12 @@
    "sector": "Semiconductors",
    "news": [
     {
+     "date": "2026-11-11",
+     "text": "Rose 3.9% to $331.98 after Anthropic's amended filing named it a roughly $1.0bn buyer in a $26bn private placement at the IPO price.",
+     "source": "GuruFocus (via Yahoo Finance)",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/broadcom-stocks-rise-2-69-173950413.html"
+    },
+    {
      "date": "2026-10-30",
      "text": "A $63bn financing deal tied to Anthropic gives Broadcom a funded customer for its AI chip forecast, according to 24/7 Wall St.; reported by one outlet so far.",
      "source": "24/7 Wall St.",
@@ -536,29 +560,29 @@
   "ETEL": {
    "sector": "Telecoms",
    "cap": {
-    "value": 233.2,
+    "value": 231.3,
     "currency": "EGP",
-    "date": "2026-11-10",
+    "date": "2026-11-11",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "Mubasher",
-    "asOf": "2026-11-10",
+    "asOf": "2026-11-11",
     "period": "2026-03-31",
     "basis": "results for the 12 months to March 2026",
-    "price": 134.0,
+    "price": 135.0,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 233.7bn"
+      "value": "EGP 228.7bn"
      },
      {
       "label": "P/E",
-      "value": "16.0"
+      "value": "16.1"
      },
      {
       "label": "P/B",
-      "value": "3.6"
+      "value": "3.7"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -614,25 +638,25 @@
   "SWDY": {
    "sector": "Cables and electrical",
    "cap": {
-    "value": 259.0,
+    "value": 261.2,
     "currency": "EGP",
-    "date": "2026-11-10",
+    "date": "2026-11-11",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-10",
+    "asOf": "2026-11-11",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
-    "price": 120.36,
+    "price": 121.94,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 258.9bn"
+      "value": "EGP 257.5bn"
      },
      {
       "label": "P/E",
-      "value": "15.8"
+      "value": "16.0"
      },
      {
       "label": "P/B",
@@ -660,25 +684,25 @@
   "ORAS": {
    "sector": "Construction",
    "cap": {
-    "value": 88.4,
+    "value": 90.3,
     "currency": "EGP",
-    "date": "2026-11-10",
+    "date": "2026-11-11",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-10",
+    "asOf": "2026-11-11",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
-    "price": 795.94,
+    "price": 815.15,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 88.2bn"
+      "value": "EGP 94.8bn"
      },
      {
       "label": "P/E",
-      "value": "7.7"
+      "value": "7.9"
      },
      {
       "label": "P/B",
@@ -739,29 +763,29 @@
   "FWRY": {
    "sector": "Payments",
    "cap": {
-    "value": 61.0,
+    "value": 61.6,
     "currency": "EGP",
-    "date": "2026-11-10",
+    "date": "2026-11-11",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-10",
+    "asOf": "2026-11-11",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
-    "price": 17.5,
+    "price": 18.28,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 61.1bn"
+      "value": "EGP 59.6bn"
      },
      {
       "label": "P/E",
-      "value": "18.3"
+      "value": "19.1"
      },
      {
       "label": "P/B",
-      "value": "6.6"
+      "value": "6.9"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -785,29 +809,29 @@
   "HRHO": {
    "sector": "Investment banking",
    "cap": {
-    "value": 35.5,
+    "value": 37.4,
     "currency": "EGP",
-    "date": "2026-11-10",
+    "date": "2026-11-11",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "Mubasher",
-    "asOf": "2026-11-10",
+    "asOf": "2026-11-11",
     "period": "2026-03-31",
     "basis": "results for the 12 months to March 2026",
-    "price": 23.99,
+    "price": 25.61,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 35.6bn"
+      "value": "EGP 34.4bn"
      },
      {
       "label": "P/E",
-      "value": "8.3"
+      "value": "8.9"
      },
      {
       "label": "P/B",
-      "value": "0.9"
+      "value": "1.0"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -820,6 +844,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-11",
+     "text": "EFG Hermes was joint offering manager of DIB Holding's AED 1.94bn ($529m) IPO on the Dubai Financial Market, priced at AED 1.12 a share.",
+     "source": "Al Mal",
+     "url": "https://almalnews.com/2146513/"
+    },
     {
      "date": "2026-11-02",
      "text": "EFG Hermes ended its advisory role in the Banque du Caire offering, saying orders topped $4.6bn; the stock fell 3.4% to EGP 22.36, a 52-week low, and the group says more IPOs are lined up before year-end and early 2027.",
@@ -849,29 +879,29 @@
   "CLHO": {
    "sector": "Healthcare",
    "cap": {
-    "value": 21.1,
+    "value": 21.3,
     "currency": "EGP",
-    "date": "2026-11-10",
+    "date": "2026-11-11",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "Mubasher",
-    "asOf": "2026-11-10",
+    "asOf": "2026-11-11",
     "period": "2026-03-31",
     "basis": "results for the 12 months to March 2026",
-    "price": 14.4,
+    "price": 14.87,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 21.2bn"
+      "value": "EGP 21.1bn"
      },
      {
       "label": "P/E",
-      "value": "43.6"
+      "value": "45.1"
      },
      {
       "label": "P/B",
-      "value": "5.6"
+      "value": "5.7"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -887,21 +917,21 @@
   "JUFO": {
    "sector": "Food",
    "cap": {
-    "value": 23.3,
+    "value": 23.5,
     "currency": "EGP",
-    "date": "2026-11-10",
+    "date": "2026-11-11",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-10",
+    "asOf": "2026-11-11",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
-    "price": 24.89,
+    "price": 24.95,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 23.4bn"
+      "value": "EGP 36.6bn"
      },
      {
       "label": "P/E",
@@ -922,6 +952,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-11",
+     "text": "Nine-month consolidated profit rose 60% to EGP 2.04bn from EGP 1.27bn on sales up 25% to EGP 27.66bn; standalone profit rose 47% to EGP 1.41bn.",
+     "source": "Mubasher",
+     "url": "https://www.mubasher.info/news/4700418/%D8%A3%D8%B1%D8%A8%D8%A7%D8%AD-%D8%AC%D9%87%D9%8A%D9%86%D8%A9-%D8%AA%D9%82%D9%81%D8%B2-60-%D8%A5%D9%84%D9%89-%D9%85%D9%84%D9%8A%D8%A7%D8%B1%D9%8A-%D8%AC%D9%86%D9%8A%D9%87-%D8%AE%D9%84%D8%A7%D9%84-9-%D8%A3%D8%B4%D9%87%D8%B1/"
+    },
     {
      "date": "2026-11-09",
      "text": "Took a six-year, $36m facility from CIB ($31.6m and EGP 255m) to build a citrus production line for its concentrate exports, disclosed to the exchange.",
@@ -947,6 +983,20 @@
     "source": "Billionaires.Africa",
     "url": "https://www.billionaires.africa/2026/11/09/egyptian-tycoon-safwan-thabets-juhayna-builds-citrus-line-with-36-million-loan/",
     "written": "2026-11-10"
+   },
+   "lastResults": {
+    "date": "2026-11-11",
+    "period": "Third quarter 2026 (nine months to September)",
+    "verdict": "beat",
+    "headline": "Against last year (no published estimate): nine-month profit up 60% to EGP 2.04bn on sales up 25%",
+    "points": [
+     "Consolidated net profit EGP 2.04bn against EGP 1.27bn a year earlier; first-half profit attributable was EGP 1.38bn, so the third quarter added about EGP 0.65bn.",
+     "Net sales rose 25% to EGP 27.66bn from EGP 22.13bn, ahead of 2025's full-year growth of about 23%.",
+     "Standalone profit rose 47% to EGP 1.41bn; the subsidiary Inmaa took an EGP 1.73bn CIB loan for livestock."
+    ],
+    "thesis": "Price rises of 4–11% held volumes and margins better than feared; at EGP 24.95 the stock trades near its 50-day average of EGP 24.84, so the results argue for upside the desk has not yet projected.",
+    "source": "Mubasher",
+    "url": "https://www.mubasher.info/news/4700418/%D8%A3%D8%B1%D8%A8%D8%A7%D8%AD-%D8%AC%D9%87%D9%8A%D9%86%D8%A9-%D8%AA%D9%82%D9%81%D8%B2-60-%D8%A5%D9%84%D9%89-%D9%85%D9%84%D9%8A%D8%A7%D8%B1%D9%8A-%D8%AC%D9%86%D9%8A%D9%87-%D8%AE%D9%84%D8%A7%D9%84-9-%D8%A3%D8%B4%D9%87%D8%B1/"
    }
   },
   "ALCN": {
@@ -954,19 +1004,19 @@
    "cap": {
     "value": 98.3,
     "currency": "EGP",
-    "date": "2026-11-10",
+    "date": "2026-11-11",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-10",
+    "asOf": "2026-11-11",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
-    "price": 33.13,
+    "price": 33.0,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 98.3bn"
+      "value": "EGP 98.7bn"
      },
      {
       "label": "P/E",
@@ -974,7 +1024,7 @@
      },
      {
       "label": "P/B",
-      "value": "12.2"
+      "value": "12.1"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -987,6 +1037,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-11",
+     "text": "Naeem kept its EGP 33.6 target after nine-month results, citing container volumes and wider margins; the stock closed at EGP 33.00.",
+     "source": "Al Mal",
+     "url": "https://almalnews.com/2146523/"
+    },
     {
      "date": "2026-11-01",
      "text": "Nine-month net profit rose 16% to EGP 5.725bn from EGP 4.951bn, on revenue up 7% to EGP 6.772bn; the figures are unaudited.",
@@ -1118,6 +1174,12 @@
    },
    "news": [
     {
+     "date": "2026-11-11",
+     "text": "Fell 5.5% to $168.89, its lowest close since March, as the board's inquiry into Jensen Huang continued; results are due November 17.",
+     "source": "CBS News",
+     "url": "https://www.cbsnews.com/video/nvidia-shares-plummet-again-amid-ceo-jensen-huangs-affair-with-alleged-chinese-spy/"
+    },
+    {
      "date": "2026-11-09",
      "text": "Fell 4.3% to $178.67, its lowest close since April, after the board opened an inquiry into whether Jensen Huang was targeted by Chinese intelligence; Huang says he will cooperate fully (Al Jazeera). A class action was filed in California (TechCrunch).",
      "source": "Al Jazeera",
@@ -1241,6 +1303,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-11",
+     "text": "JPMorgan named Meta its preferred internet stock, citing AI-driven ad performance.",
+     "source": "Yahoo Finance",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/meta-platforms-meta-wins-jpmorgan-061321646.html"
+    },
     {
      "date": "2026-11-07",
      "text": "Meta sold $25bn of bonds on Election Day, a sign of how AI spending is now funded with debt.",
@@ -1477,25 +1545,25 @@
   "MFPC": {
    "sector": "Fertilizers",
    "cap": {
-    "value": 108.8,
+    "value": 110.1,
     "currency": "EGP",
-    "date": "2026-11-10",
+    "date": "2026-11-11",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-10",
+    "asOf": "2026-11-11",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
-    "price": 37.6,
+    "price": 38.1,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 108.8bn"
+      "value": "EGP 107.8bn"
      },
      {
       "label": "P/E",
-      "value": "7.0"
+      "value": "7.1"
      },
      {
       "label": "P/B",
@@ -1529,29 +1597,29 @@
   "EAST": {
    "sector": "Tobacco",
    "cap": {
-    "value": 100.3,
+    "value": 102.0,
     "currency": "EGP",
-    "date": "2026-11-10",
+    "date": "2026-11-11",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-10",
+    "asOf": "2026-11-11",
     "period": "2026-03-31",
     "basis": "results for the 12 months to March 2026",
-    "price": 33.38,
+    "price": 33.6,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 100.3bn"
+      "value": "EGP 100.1bn"
      },
      {
       "label": "P/E",
-      "value": "11.3"
+      "value": "11.4"
      },
      {
       "label": "P/B",
-      "value": "6.9"
+      "value": "7.0"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -1565,6 +1633,12 @@
    },
    "news": [
     {
+     "date": "2026-11-11",
+     "text": "Nine-month profit reached EGP 8.99bn against EGP 6.48bn and third-quarter profit EGP 4.83bn against EGP 2.15bn, on net revenue up 15% in the quarter (reported by one outlet, Youlyou; not yet confirmed).",
+     "source": "Youlyou",
+     "url": "https://www.youlyou.com/91780"
+    },
+    {
      "date": "2026-11-07",
      "text": "Shops in Cairo are selling Cleopatra at about EGP 55 a pack against an official EGP 48, with no announcement from Eastern Company, after Philip Morris raised its prices (reported by one outlet, not confirmed).",
      "source": "Al Manassa",
@@ -1575,25 +1649,25 @@
   "EFIH": {
    "sector": "Payments",
    "cap": {
-    "value": 86.3,
+    "value": 86.0,
     "currency": "EGP",
-    "date": "2026-11-10",
+    "date": "2026-11-11",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "Mubasher",
-    "asOf": "2026-11-10",
+    "asOf": "2026-11-11",
     "period": "2026-03-31",
     "basis": "results for the 12 months to March 2026",
-    "price": 24.7,
+    "price": 24.72,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 86.3bn"
+      "value": "EGP 85.6bn"
      },
      {
       "label": "P/E",
-      "value": "24.9"
+      "value": "25.0"
      },
      {
       "label": "P/B",
@@ -1639,29 +1713,29 @@
   "EMFD": {
    "sector": "Real estate",
    "cap": {
-    "value": 67.1,
+    "value": 68.6,
     "currency": "EGP",
-    "date": "2026-11-10",
+    "date": "2026-11-11",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "Mubasher",
-    "asOf": "2026-11-10",
+    "asOf": "2026-11-11",
     "period": "2025-06-30",
     "basis": "results for the 12 months to June 2025",
-    "price": 12.23,
+    "price": 12.6,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 67.1bn"
+      "value": "EGP 66.6bn"
      },
      {
       "label": "P/E",
-      "value": "28.4"
+      "value": "29.3"
      },
      {
       "label": "P/B",
-      "value": "1.0"
+      "value": "1.1"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -1674,6 +1748,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-11",
+     "text": "Awarded its largest construction package to date to Rowad Modern Engineering: about 667 finished villas and townhouses at Marassi Red Sea; no value given.",
+     "source": "Sora Live",
+     "url": "https://www.soralive.com/94891"
+    },
     {
      "date": "2026-11-08",
      "text": "Awarded Rowad Modern Engineering its largest construction package in Egypt so far: about 667 villas and townhouses at Marassi Red Sea, 156,325 square meters built; no value was given (Aswaq Information).",
@@ -1692,6 +1772,12 @@
    "sector": "Banks",
    "next": [],
    "news": [
+    {
+     "date": "2026-11-11",
+     "text": "Nine-month consolidated profit attributable to shareholders rose 4.7% to EGP 13.11bn; net interest income rose to EGP 28.45bn from EGP 25.76bn.",
+     "source": "Arab Finance",
+     "url": "http://arabfinance.com/en/news/newdetails/49615"
+    },
     {
      "date": "2026-11-09",
      "text": "The IFC made an equity investment of about $100m in Banque du Caire's offering, its lawyers Hunton Andrews Kurth said; the stake size was not given.",
@@ -1731,14 +1817,14 @@
    ],
    "valuation": {
     "source": "TradingView and Mubasher",
-    "asOf": "2026-11-10",
+    "asOf": "2026-11-11",
     "period": null,
     "basis": "no recent results",
-    "price": 5.59,
+    "price": 5.86,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 20.5bn"
+      "value": "EGP 123.6bn"
      },
      {
       "label": "Ratios",
@@ -1749,8 +1835,22 @@
    "cap": {
     "value": 20.5,
     "currency": "EGP",
-    "date": "2026-11-10",
+    "date": "2026-11-11",
     "source": "Mubasher"
+   },
+   "lastResults": {
+    "date": "2026-11-11",
+    "period": "Third quarter 2026 (nine months to September)",
+    "verdict": "in line",
+    "headline": "Against last year (no published estimate): nine-month profit up 4.7% to EGP 13.11bn, its first results as a listed bank",
+    "points": [
+     "Consolidated profit attributable EGP 13.11bn against EGP 12.52bn; standalone profit EGP 12.67bn against EGP 12.57bn.",
+     "Consolidated net interest income rose 10.4% to EGP 28.45bn, slower than 2025's 22%.",
+     "2025 full-year consolidated profit was EGP 16.07bn, so the bank is on course for roughly EGP 17bn this year."
+    ],
+    "thesis": "Slower growth than CIB's 18% underlying rate, but the stock rose 4.8% to EGP 5.86, its highest since listing and above the EGP 5.30 top of the offer range.",
+    "source": "Arab Finance",
+    "url": "http://arabfinance.com/en/news/newdetails/49615"
    }
   },
   "V": {
@@ -1852,6 +1952,12 @@
    },
    "news": [
     {
+     "date": "2026-11-11",
+     "text": "Bernstein reiterated outperform with a $325 target, saying Oracle needs no more funding and is about 18 months from positive free cash flow.",
+     "source": "Investing.com",
+     "url": "https://www.investing.com/news/stock-market-news/heres-why-bernstein-says-oracles-ai-opportunity-is-more-valuable-than-previously-5015364"
+    },
+    {
      "date": "2026-11-08",
      "text": "Walked away from a five-year deal, valued at about $7bn, to give Tencent access to about 100,000 AI chips in Southeast Asia after US concerns (Barchart); the stock hit a 52-week low of $111.60 on Thursday.",
      "source": "Barchart (via Yahoo Finance)",
@@ -1914,39 +2020,54 @@
    },
    "news": [
     {
+     "date": "2026-11-11",
+     "text": "Declared a $30 special dividend (about $13.3bn), payable December 4 to holders of record November 24, and a new $4bn buyback to November 2030.",
+     "source": "Costco (SEC filing)",
+     "url": "https://www.sec.gov/Archives/edgar/data/0000909832/000090983226000134/costex9918-k111026.htm"
+    },
+    {
      "date": "2026-11-05",
      "text": "October net sales rose 12.6% to $24.50bn; comparable sales rose 11.1%, or 7.3% excluding gasoline and currency, and digital sales 22.5%.",
      "source": "Zacks (via TradingView)",
      "url": "https://www.tradingview.com/news/zacks:593161f8a094b:0-costco-s-october-net-sales-jump-1"
+    }
+   ],
+   "next": [
+    {
+     "event": "$30 special dividend: record date",
+     "when": "Tue, Nov 24",
+     "date": "2026-11-24",
+     "why": "About $13.3bn paid December 4; the stock trades without it from about the record date.",
+     "impact": "low"
     }
    ]
   },
   "EGAL": {
    "sector": "Metals",
    "cap": {
-    "value": 130.3,
+    "value": 131.7,
     "currency": "EGP",
-    "date": "2026-11-10",
+    "date": "2026-11-11",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "Company filing (Arab Finance; Power News)",
-    "asOf": "2026-11-10",
+    "asOf": "2026-11-11",
     "period": "2026-09-30",
     "basis": "results for the 12 months to September 2026; book value from TradingView, to June 2026",
-    "price": 314.5,
+    "price": 321.01,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 130.3bn"
+      "value": "EGP 129.7bn"
      },
      {
       "label": "P/E",
-      "value": "7.2"
+      "value": "7.4"
      },
      {
       "label": "P/B",
-      "value": "3.8"
+      "value": "3.9"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -2011,29 +2132,29 @@
   "AMOC": {
    "sector": "Oil refining",
    "cap": {
-    "value": 17.2,
+    "value": 16.9,
     "currency": "EGP",
-    "date": "2026-11-10",
+    "date": "2026-11-11",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "Mubasher",
-    "asOf": "2026-11-10",
+    "asOf": "2026-11-11",
     "period": "2025-06-30",
     "basis": "results for the 12 months to June 2025",
-    "price": 13.22,
+    "price": 13.01,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 17.2bn"
+      "value": "EGP 17.1bn"
      },
      {
       "label": "P/E",
-      "value": "28.7"
+      "value": "28.3"
      },
      {
       "label": "P/B",
-      "value": "3.9"
+      "value": "3.8"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -2057,25 +2178,25 @@
   "SKPC": {
    "sector": "Petrochemicals",
    "cap": {
-    "value": 13.7,
+    "value": 13.8,
     "currency": "EGP",
-    "date": "2026-11-10",
+    "date": "2026-11-11",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "Mubasher",
-    "asOf": "2026-11-10",
+    "asOf": "2026-11-11",
     "period": "2025-09-30",
     "basis": "results for the 12 months to September 2025",
-    "price": 15.0,
+    "price": 15.21,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 13.7bn"
+      "value": "EGP 17.0bn"
      },
      {
       "label": "P/E",
-      "value": "7.1"
+      "value": "7.2"
      },
      {
       "label": "P/B",
@@ -2095,29 +2216,29 @@
   "EFID": {
    "sector": "Food",
    "cap": {
-    "value": 27.7,
+    "value": 27.9,
     "currency": "EGP",
-    "date": "2026-11-10",
+    "date": "2026-11-11",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-10",
+    "asOf": "2026-11-11",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
-    "price": 19.69,
+    "price": 20.15,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 27.7bn"
+      "value": "EGP 41.2bn"
      },
      {
       "label": "P/E",
-      "value": "13.2"
+      "value": "13.5"
      },
      {
       "label": "P/B",
-      "value": "6.9"
+      "value": "7.1"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -2144,7 +2265,7 @@
     }
    ],
    "preview": {
-    "date": "2026-11-10",
+    "date": "2026-11-11",
     "period": "Third quarter 2026",
     "watch": [
      "Volumes after price increases, as snack demand is the first to fall when household budgets tighten.",

@@ -2,6 +2,40 @@
  "note": "Every view and projection the Markets Desk has made, newest first, with the news that bears on each, until it is right, wrong or closed. Never delete an entry: a wrong call stays on the record, marked wrong.",
  "views": [
   {
+   "id": "2026-11-11-jufo-results",
+   "opened": "2026-11-11",
+   "market": "egx",
+   "kind": "projection",
+   "title": "Juhayna returns to EGP 27–28 by end of January",
+   "confidence": "low",
+   "detail": "Nine-month profit rose 60% to EGP 2.04bn on sales up 25% to EGP 27.66bn (Mubasher), showing price rises held volumes; at EGP 24.95 the stock sits at its 50-day average of about EGP 24.84, below its 52-week high of about EGP 27.63. Consumer demand cracking under price rises is the risk.",
+   "wrong": "It closes below EGP 22.",
+   "due": "2027-01-31",
+   "track": {
+    "key": "egx.JUFO",
+    "label": "Juhayna",
+    "start": 24.95,
+    "target": [
+     27,
+     28
+    ],
+    "side": "bull"
+   },
+   "tickers": [
+    "JUFO"
+   ],
+   "status": "open",
+   "updates": [],
+   "wrongIf": [
+    {
+     "key": "egx.JUFO",
+     "op": "<",
+     "level": 22
+    }
+   ],
+   "driver": "food-earnings"
+  },
+  {
    "id": "2026-10-31-chips",
    "opened": "2026-10-31",
    "market": "us",
@@ -84,6 +118,13 @@
      "text": "Nvidia fell 4.3% to $178.67, its lowest since April, on its board's inquiry into Jensen Huang, while other chip stocks rose 6.9%; the call tracks Nvidia, so it stands.",
      "source": "Al Jazeera",
      "url": "https://www.aljazeera.com/economy/2026/11/9/nvidia-shares-slump-amid-investigation-into-ceo-jensen-huang",
+     "effect": "supports"
+    },
+    {
+     "date": "2026-11-11",
+     "text": "Nvidia fell 5.5% to $168.89, its lowest close since March, as the board's inquiry into Jensen Huang continued; Broadcom rose 3.9%.",
+     "source": "CBS News",
+     "url": "https://www.cbsnews.com/video/nvidia-shares-plummet-again-amid-ceo-jensen-huangs-affair-with-alleged-chinese-spy/",
      "effect": "supports"
     }
    ],
@@ -284,6 +325,13 @@
      "source": "Zacks (via TradingView)",
      "url": "https://www.tradingview.com/news/zacks:593161f8a094b:0-costco-s-october-net-sales-jump-1",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-11",
+     "text": "Costco declared a $30 special dividend and a $4bn buyback (company filing) and Berkshire's B shares closed at a record, while Alphabet slipped 0.3% to $287.38 after a hot CPI.",
+     "source": "Costco (SEC filing)",
+     "url": "https://www.sec.gov/Archives/edgar/data/0000909832/000090983226000134/costex9918-k111026.htm",
+     "effect": "supports"
     }
    ],
    "driver": "ai-spending"
@@ -366,6 +414,13 @@
      "source": "Mubasher Banks",
      "url": "https://egyptbanks.info/13127/article/%D8%A3%D8%B1%D8%A8%D8%A7%D8%AD-cib-%D8%AA%D8%B1%D8%AA%D9%81%D8%B9-1-6-%D8%A5%D9%84%D9%89-63-1-%D9%85%D9%84%D9%8A%D8%A7%D8%B1-%D8%AC%D9%86%D9%8A%D9%87-%D8%AE%D9%84%D8%A7%D9%84-%D8%AA%D8%B3%D8%B9%D8%A9-%D8%A3%D8%B4%D9%87%D8%B1-%D9%85%D9%86-2026",
      "effect": "neutral"
+    },
+    {
+     "date": "2026-11-11",
+     "text": "CIB rose 2.3% to EGP 131.00, 8.7% above the view's start against the EGX30's 5.8%; management said it expects rate cuts to be delayed, which keeps margins wide.",
+     "source": "Daily News Egypt",
+     "url": "https://dailynewsegypt.com/2026/11/10/cib-reports-egp-103bn-in-revenue-egp-63-1bn-in-net-income-in-9m-2026/",
+     "effect": "supports"
     }
    ],
    "driver": "egp-rates"
@@ -472,6 +527,13 @@
      "source": "Masrawy",
      "url": "https://www.masrawy.com/news/news_economy/details/2026/11/9/3076151/%D8%A7%D9%84%D9%85%D8%A4%D8%B4%D8%B1-%D8%A7%D9%84%D8%B1%D8%A6%D9%8A%D8%B3%D9%8A-%D9%84%D9%84%D8%A8%D9%88%D8%B1%D8%B5%D8%A9-%D9%8A%D8%B5%D8%B9%D8%AF-1-19-%D9%85%D8%B9-%D8%AE%D8%AA%D8%A7%D9%85-%D8%AA%D8%B9%D8%A7%D9%85%D9%84%D8%A7%D8%AA-%D8%AC%D9%84%D8%B3%D8%A9-%D8%A7%D9%84%D9%8A%D9%88%D9%85",
      "effect": "against"
+    },
+    {
+     "date": "2026-11-11",
+     "text": "Foreigners turned net buyers of EGP 42.1m as the EGX30 rose 2.08% to 52,483.46 on EGP 12.8bn of turnover (Masrawy, Al Mal).",
+     "source": "Al Mal",
+     "url": "https://almalnews.com/2146372/",
+     "effect": "supports"
     }
    ],
    "wrongIf": [
@@ -543,6 +605,14 @@
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/2026/11/10/egypts-urban-inflation-slowed-to-12-7-in-october-despite-non-food-momentum/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-11",
+     "text": "The central bank's dollar rate fell to EGP 53.39, the pound's strongest in a year, after foreigners bought about $567m of local debt on Monday (exchange data via Al-Ain) and remittances hit a record $38.2bn for nine months (EnterpriseAM). Two independent dollar sources now back the call.",
+     "source": "Al-Ain",
+     "url": "https://al-ain.com/article/egypt-foreign-debt-inflows-567-million-dollar",
+     "effect": "supports",
+     "confidence": "high"
     }
    ],
    "wrongIf": [
@@ -609,6 +679,13 @@
      "source": "Al Jazeera",
      "url": "https://www.aljazeera.com/news/2026/11/9/trump-calls-iran-war-effectively-over-after-talks-with-qatar-pm",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-11",
+     "text": "Brent settled 1.2% lower at $91.49 after briefly dipping below $90, then rose toward $92 after a tanker was attacked near Hormuz (CNBC, The National).",
+     "source": "CNBC",
+     "url": "https://www.cnbc.com/2026/11/10/oil-prices-trump-iran.html",
+     "effect": "neutral"
     }
    ],
    "wrongIf": [
