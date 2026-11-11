@@ -821,9 +821,10 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     }).filter(Boolean);
     if(items.length < 4) return;
     function body(el){ var c = el.cloneNode(true), f = c.firstElementChild; if(f && f.tagName === 'STRONG') f.remove(); c.querySelectorAll('.tchips,.chg').forEach(function(x){x.remove()}); return c; }
-    // the front page's index, as printed papers carry: every section below with how many stories it has
+    // the front page's index, as printed papers carry: the news sections below with how many stories each has (the
+    // weather, the two market tables and Worth Knowing are left out: they are reference, not news)
     function insideBox(){
-      var items = [].slice.call(document.querySelectorAll('#content section.s')).filter(function(x){ return !/^(today-at-a-glance|quick-hits|sources)$/.test(x.id) && !x.classList.contains('src'); }).map(function(x){
+      var items = [].slice.call(document.querySelectorAll('#content section.s')).filter(function(x){ return !/^(today-at-a-glance|quick-hits|sources|weather|stocks-watch|currency-and-commodities-watch|worth-knowing)$/.test(x.id) && !x.classList.contains('src'); }).map(function(x){
         var t = (x.querySelector('h2') || {}).textContent || '', n = x.querySelectorAll('[id^="story-"]').length;
         return '<li><a href="#'+x.id+'" data-jump="1">'+esc(t)+'</a>'+(n ? '<span>'+n+'</span>' : '')+'</li>'; });
       return items.length ? '<div class="f-inside"><h4>Inside today</h4><ol>'+items.join('')+'</ol></div>' : '';
