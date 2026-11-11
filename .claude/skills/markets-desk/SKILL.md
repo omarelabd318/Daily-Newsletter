@@ -283,6 +283,14 @@ From mid-October to late November, and again each quarter, the desk's stocks rep
   growth, provisions; for a fertilizer maker: volumes after the gas cuts, urea prices). Skip the skill's
   scenario table and options-implied move unless a source publishes them. check_desk.py warns when a stock reports
   within three days without one.
+- **Read the filing, not only the report of it.** For an Egyptian company: the earnings release or financial
+  statements on its investor-relations page, or the disclosure the EGX publishes (Mubasher's news page for the stock
+  links it). For a US company: the earnings release (8-K) and the 10-Q, through FactIQ's search_company_filings when
+  the run has it, else the company's investor page. Take from it what outlets leave out: profit attributable to
+  shareholders, one-off items (currency gains, provision releases, revaluations, asset sales), the share count, the
+  segment figures and the guidance in the company's words. A one-off that moved profit by 10% or more goes in the
+  headline and, for an Egyptian stock, into `eps_norm` in desk/fairvalue.json with the reason. If the filing cannot
+  be opened, add `"basis": "outlet reports; the filing was not read"` to `lastResults`.
 - **After (the day they come out):** follow the earnings-analysis skill's method, not its format (no 8-12 page
   report, no charts): lead with the verdict, quantify the gap, say why, and say what it means for the desk's view.
   Write `"lastResults"`: `{"date", "period", "verdict" (beat, miss, in line or mixed), "headline" (one line in
@@ -383,6 +391,19 @@ Every day:
    cannot decide (a wrong-if that is not a price, such as "the gas allocations are restored"). Never delete or
    rewrite a judged entry: wrong calls stay on the record.
 
+4. **Write the lesson** for every entry judged that day (right, wrong or closed), in its `lesson`:
+   `{"date", "text", "tag"}`. `text` is two sentences: what decided it, in figures (the driver that moved, by how
+   much, against what the view assumed), and what the desk does differently because of it, or "nothing: the reasoning
+   held" when a right call was right for its stated reason. A call that came right for a different reason than the one
+   given says so. `tag` is a short slug for the kind of lesson (`one-driver`, `level-too-close`, `news-priced-in`,
+   `horizon-too-short`, `reasoning-held`...). The Views page shows it under the verdict. When the same tag appears
+   on two wrong calls, turn it into a rule under "Lessons from judged views" below, and apply it from then on.
+
+**Lessons from judged views** (add to this list; never remove):
+- `one-driver`: three calls that all needed oil to stay high broke on one 18% fall in Brent. At most two open
+  entries on one driver.
+- `level-too-close`: a wrong-if within 1.5 times the usual daily move is decided by noise, not by the view.
+
 **Every new entry needs:**
 - `wrongIf`: the price test behind its "wrong if", e.g. `[{"key": "brent", "op": "<", "level": 100}]`, keys as in
   the data log. A comparison view instead has a `track` with `vs` (one series) or `basket` and `vsBasket` (lists of
@@ -418,6 +439,11 @@ grades each. `desk/fairvalue.json` holds it; `fetch_fairvalue.py` rebuilds the f
   consensus far from everything else is dropped. Fair value is their weighted average (40, 30, 30) and needs two.
 - **Banks are measured against banks** (their own discount rate and P/E): they always look cheap against industry.
 - **Confidence is the spread between the estimates**, not a feeling. The two lists show medium and high only.
+
+**Wall Street** (the tab's second market, `us` in the file): US common stocks worth $50bn or more, the same method
+with three changes: long-run growth 6%, weights of earnings 30, assets 20 and analysts 50 (reported US earnings carry
+more one-offs, and targets come from many analysts), and no earnings estimate when the P/E is outside 4 to 60. Its
+judgement block is `judgementUS`, same fields. Notes are only needed for the desk's 15 US stocks.
 
 What the run adds, in `judgement[TICKER]` (the script never touches it):
 - `brokers`: a fair value or target found in the day's stock research and checked at the outlet:

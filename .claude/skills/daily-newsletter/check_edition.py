@@ -24,7 +24,7 @@ RECAP_SECTIONS = [
     "The Week in Brief", "Egypt This Week", "Region and World", "Markets This Week",
     "Sports This Week", "Culture and Tech", "How It Played Out", "The Week Ahead", "Sources",
 ]
-RECAP_TOTAL = (1600, 2500)
+RECAP_TOTAL = (1800, 2800)
 # The fixed Stocks Watch rows, in order (see the skill).
 FIXED = {
     "Egypt": ["COMI", "TMGH", "ETEL", "PHDC", "SWDY", "ORAS", "FWRY", "ABUK", "HRHO", "CLHO", "JUFO", "ALCN"],
@@ -302,6 +302,11 @@ def main(path):
         # Optional sections that go right after Markets This Week.
         extra_secs = [s for s in ("Month in Numbers", "Year in Numbers") if s in order]
         expected = expected[:4] + extra_secs + expected[4:]
+        # the week's essay, right after The Week in Brief (from 14 November 2026; older recaps have none)
+        if "What Tied the Week Together" in order:
+            expected = expected[:1] + ["What Tied the Week Together"] + expected[1:]
+        else:
+            warnings.append('No "What Tied the Week Together" section after The Week in Brief (see the skill, Weekly Recap).')
     if order != expected:
         missing = [s for s in expected if s not in order]
         extra = [s for s in order if s not in expected]

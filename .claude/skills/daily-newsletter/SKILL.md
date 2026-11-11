@@ -496,20 +496,27 @@ Stocks Watch do not.
 - **Research:** start from that week's editions in `editions/` (Sunday to Saturday, including any second
   edition of a day), then search for how each big story developed and ended up. Report where things stand
   now, not what was said on each day. Check every figure as usual.
-- **Length:** about 1,850 to 2,150 words, an 8 to 9 minute read. A guide, not a limit.
+- **Length:** about 2,050 to 2,400 words, a 9 to 10 minute read. A guide, not a limit.
 - **First line:** an italic sentence with the week's dates and what it was about, for example
   `*Week of 25 to 31 October 2026: a rate hold, a weaker pound and Egypt's Saudi deployment vote.*`
 - **Sections,** in this order, each as `##` with exactly these titles:
   1. **The Week in Brief:** a numbered list of 7 to 10 of the week's biggest stories, Egypt first, each
      `**Label:** one sentence`. No links.
-  2. **Egypt This Week:** 4 to 6 items on the main Egyptian stories, each with where it stands now.
-  3. **Region and World:** 4 to 6 items, regional first, then the rest of the world.
-  4. **Markets This Week:** a short paragraph on the week, then a table
+  2. **What Tied the Week Together:** the week's essay, 200 to 260 words in two or three paragraphs with no bold
+     lead-ins: the thread that connects the week's biggest stories, told as cause and effect (a rate decision, the
+     pound, who bought the bills, what that did to the EGX; a war headline, oil, the import bill). Say what changed
+     for a reader in Egypt between last Saturday and this one, and what is still unresolved going into next week.
+     It is analysis, not opinion or forecast: every link in the chain rests on a fact and figure already in the
+     recap, and where the connection is the outlets' or analysts' reading, say whose. If the week had no single
+     thread, say so and take the two that mattered. Write it last, after the other sections.
+  3. **Egypt This Week:** 4 to 6 items on the main Egyptian stories, each with where it stands now.
+  4. **Region and World:** 4 to 6 items, regional first, then the rest of the world.
+  5. **Markets This Week:** a short paragraph on the week, then a table
      `| Item | Week close | Weekly change |` covering EGX30, USD/EGP, gold 21K per gram in Egypt, Brent,
      S&P 500, Nasdaq, Dow Jones and Bitcoin, then one line each on the week's best and worst EGX30 stocks if known.
-  5. **Sports This Week:** the week's main results and stories as separate items, Egyptian football first,
+  6. **Sports This Week:** the week's main results and stories as separate items, Egyptian football first,
      with no sport headings.
-  6. **Culture and Tech:** 3 to 5 short items from tech, AI, entertainment and culture.
+  7. **Culture and Tech:** 3 to 5 short items from tech, AI, entertainment and culture.
   On the first Saturday of a month, add **Month in Numbers** right after Markets This Week: one line on
      the month, then a table `| Item | Start of month | End of month | Change |` for EGX30, USD/EGP, gold
      21K, Brent, S&P 500, Dow Jones and Bitcoin, taken from the first and last entries of the previous month in
@@ -518,15 +525,15 @@ Stocks Watch do not.
      after Month in Numbers if both appear): one line on the year, then the table that
      `python3 .claude/skills/daily-newsletter/market_facts.py DATE --year` prints, then one line each on
      the year's best and worst stocks from that table.
-  7. **How It Played Out:** go through the What to watch today lines in this week's daily editions and
+  8. **How It Played Out:** go through the What to watch today lines in this week's daily editions and
      pick the 4 to 6 events that mattered most (a rate decision, a vote, a data release, a big match).
      For each, one item: what was expected and what actually happened, for example
      `**Central bank meeting:** Expected to hold; it held rates at 22% and signalled cuts in December.`
      Skip anything already covered in full above; say "postponed" or "no decision yet" where that is the
      case. Do not mention the daily editions themselves.
-  8. **The Week Ahead:** the key scheduled events for the coming week (central bank meetings, data,
+  9. **The Week Ahead:** the key scheduled events for the coming week (central bank meetings, data,
      holidays and closures, big matches).
-  9. **Sources:** the links used.
+  10. **Sources:** the links used.
 - On the recap page, the site draws year-long trend lines next to the Markets This Week rows by itself;
   nothing to add for that.
 - **Data log check:** before committing, run
@@ -639,6 +646,25 @@ In this repo, for the Markets Desk page (copied from Anthropic's equity-research
 falsifiable and checking whether it played out).
 
 Daily and recap runs do not need dataviz, xlsx or code-review.
+
+## Edit pass, before the checker
+
+When the edition is written, read it once from the top as its editor, not its writer, and fix what you find:
+
+- **Leads:** each item's first sentence states the news with its figure. Rewrite one that opens on background, a
+  date or a quote.
+- **Why it matters:** an Egypt, economy or markets item whose point for a reader in Egypt is not plain gets one
+  closing clause that says it (what it does to prices, the pound, jobs, a stock). Never a moral, never filler.
+- **Against earlier editions:** for each continuing story, open the last edition that carried it (`grep -l` the
+  name in `editions/`) and check that names, titles, counts and figures agree; where they differ, check the source
+  and say what changed ("revised from 125").
+- **Arithmetic:** recompute every percentage change, total and "highest since" from the figures in the text and the
+  data log.
+- **Glance and text agree:** each Today at a Glance line says what its story says, with the same figure.
+- **Once only:** no story, figure or explanation appears in two sections; no "today" or "yesterday" that is wrong
+  for the edition's date; no term left unexplained on first use.
+
+Then run the checker. End the final reply with one line, `Edit pass: N changes`, naming the biggest.
 
 ## Check before committing
 

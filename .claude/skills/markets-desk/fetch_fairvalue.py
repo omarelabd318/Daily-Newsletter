@@ -48,11 +48,11 @@ STOCKS = os.path.join(ROOT, "desk", "stocks.json")
 LOG = os.path.join(ROOT, "data", "markets-recent.json")
 UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36"
 TODAY = datetime.date.today()
-G = 10.0             # long-run nominal growth, %: the central bank's 7% inflation target plus about 3% real growth
+# long-run nominal growth for Egypt is 10%: the central bank's 7% inflation target plus about 3% real growth (CFG)
 ROE_CAP, SHRINK = 45.0, 0.4
 TILT = 0.25
 W = {"earnings": 0.4, "assets": 0.3, "analysts": 0.3}
-MIN_CAP, MIN_TRADED, MAX_AGE = 3e9, 5e6, 275
+MAX_AGE = 275
 COLS = ["name", "description", "sector", "industry", "currency", "close", "market_cap_basic", "average_volume_30d_calc", "indexes",
         "earnings_per_share_basic_ttm", "last_annual_eps", "book_value_per_share_fq", "fiscal_period_end_fq",
         "return_on_equity", "return_on_assets", "net_margin_ttm", "total_revenue_yoy_growth_ttm", "net_income_yoy_growth_ttm",
@@ -74,10 +74,25 @@ INDUSTRY = {"Regional Banks": "Banks", "Major Banks": "Banks", "Real Estate Deve
 GRADES = ["Weak", "Fair", "Good", "Great", "Excellent"]
 
 
-def scan():
-    body = json.dumps({"filter": [{"left": "is_primary", "operation": "equal", "right": True}], "markets": ["egypt"],
+US = ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA", "JPM", "XOM", "AVGO", "BRK.B", "WMT", "V", "ORCL", "COST"]
+# Wall Street: US-listed common stocks worth $50bn or more, the same three estimates; g is 6% (2% inflation, about 2%
+# real growth and buybacks), and peer groups are TradingView's sectors
+CFG = {"egx": {"market": "egypt", "cur": "EGP", "g": 10.0, "min_cap": 3e9, "min_traded": 5e6, "index": "EGX 30"},
+       "us": {"market": "america", "cur": "USD", "g": 6.0, "min_cap": 50e9, "min_traded": 0, "index": "S&P 100",
+              # US reported earnings carry more one-offs and US targets come from many analysts, so the weights lean to
+              # analysts, and a P/E outside 4 to 60 gives no earnings estimate at all
+              "w": {"earnings": 0.3, "assets": 0.2, "analysts": 0.5}, "pe_ok": (4, 60)}}
+
+
+def scan(mkt="egx"):
+    c = CFG[mkt]
+    flt = [{"left": "is_primary", "operation": "equal", "right": True}]
+    if mkt == "us":
+        flt += [{"left": "market_cap_basic", "operation": "greater", "right": c["min_cap"]}, {"left": "type", "operation": "equal", "right": "stock"},
+                {"left": "typespecs", "operation": "has", "right": ["common"]}]
+    body = json.dumps({"filter": flt, "markets": [c["market"]],
                        "columns": COLS, "range": [0, 500], "sort": {"sortBy": "market_cap_basic", "sortOrder": "desc"}}).encode()
-    req = urllib.request.Request("https://scanner.tradingview.com/egypt/scan", data=body, headers={"User-Agent": UA, "Content-Type": "application/json"})
+    req = urllib.request.Request(f"https://scanner.tradingview.com/{c['market']}/scan", data=body, headers={"User-Agent": UA, "Content-Type": "application/json"})
     return [dict(zip(COLS, r["d"])) for r in json.loads(urllib.request.urlopen(req, timeout=40).read())["data"]]
 
 
@@ -131,16 +146,25 @@ def clip(v, lo, hi):
     return None if v is None else max(lo, min(hi, v))
 
 
-def build(saved):
-    J = saved.get("judgement", {})
-    desk, tv = desk_figures(), scan()
+def us_closes():
+    days = json.load(open(LOG))["days"]
+    return {t: next((e["us"][t] for e in reversed(days) if isinstance((e.get("us") or {}).get(t), (int, float))), None) for t in US}
+
+
+def build(saved, mkt="egx"):
+    C, G = CFG[mkt], CFG[mkt]["g"]
+    MIN_CAP, MIN_TRADED = C["min_cap"], C["min_traded"]
+    W = C.get("w", globals()["W"])
+    J = saved.get("judgement" if mkt == "egx" else "judgementUS", {})
+    desk, tv = (desk_figures() if mkt == "egx" else {}), scan(mkt)
+    usc = us_closes() if mkt == "us" else {}
     rows, excluded = [], []
     for r in tv:
         t = r["name"]
-        if r["currency"] != "EGP" or not r["close"]:
+        if r["currency"] != C["cur"] or not r["close"]:
             continue
         d = desk.get(t)
-        price = (d and d["price"]) or r["close"]
+        price = (d and d["price"]) or usc.get(t) or r["close"]
         end = datetime.datetime.fromtimestamp(r["fiscal_period_end_fq"], datetime.timezone.utc).date().isoformat() if r["fiscal_period_end_fq"] else None
         eps, bvps, period, basis = r["earnings_per_share_basic_ttm"], r["book_value_per_share_fq"], end, "12 months"
         swapped = None
@@ -169,8 +193,8 @@ def build(saved):
             continue
         j = J.get(t, {})
         roe = r["return_on_equity"] if r["return_on_equity"] is not None else (eps / bvps * 100 if bvps and bvps > 0 else None)
-        rows.append({"t": t, "name": r["description"], "desk": bool(d), "egx30": any(i["name"] == "EGX 30" for i in (r["indexes"] or [])),
-                     "group": (d and DESK_GROUP.get(d["sector"])) or INDUSTRY.get(r["industry"]) or GROUP.get(r["sector"], "Other"),
+        rows.append({"t": t, "name": r["description"], "desk": bool(d) or t in usc, "egx30": any(i["name"] == C["index"] for i in (r["indexes"] or [])),
+                     "group": (d and DESK_GROUP.get(d["sector"])) or INDUSTRY.get(r["industry"]) or (GROUP.get(r["sector"], "Other") if mkt == "egx" else (r["sector"] or "Other")),
                      "sector": (d and d["sector"]) or r["sector"], "price": price, "cap": r["market_cap_basic"], "traded": round(traded),
                      "eps": eps, "epsNorm": j.get("eps_norm") or eps, "epsBasis": basis, "bvps": bvps, "period": period, "stale": age > MAX_AGE, "epsSwapped": swapped,
                      "roe": roe, "dy": r["dividends_yield_current"] or 0, "_": r})
@@ -219,7 +243,8 @@ def build(saved):
             stale.append(x)
             continue
         pe_fair = (0.75 * gmed.get(x["group"], all_med) + 0.25 * all_med) * x["tilt"]
-        est["earnings"] = x["epsNorm"] * pe_fair
+        if not C.get("pe_ok") or C["pe_ok"][0] <= pes[x["t"]] <= C["pe_ok"][1]:
+            est["earnings"] = x["epsNorm"] * pe_fair
         if pb_ok(x):
             est["assets"] = assets(x, k)
         back = 1 + max(0.0, (k - x["dy"])) / 100
@@ -283,15 +308,17 @@ def build(saved):
         x.pop("_", None)
     rf, rf_key, rf_date = rate()
     med_pe = statistics.median(x["pe"] for x in out)
-    return {"asOf": TODAY.isoformat(), "count": len(out), "k": round(k_all, 1), "kBanks": round(k_bank, 1), "g": G, "roeMedian": round(roe_med, 1), "peMedian": round(all_med, 1),
+    return {"asOf": TODAY.isoformat(), "count": len(out), "cur": C["cur"], "k": round(k_all, 1), "kBanks": round(k_bank, 1), "g": G, "roeMedian": round(roe_med, 1), "peMedian": round(all_med, 1),
             "groupPE": {g: round(v, 1) for g, v in sorted(gmed.items())},
-            "market": {"medianPE": round(med_pe, 1), "earningsYield": round(100 / med_pe, 1), "tbillAfterTax": rf, "tbillKey": rf_key, "tbillDate": rf_date},
+            "market": {"medianPE": round(med_pe, 1), "earningsYield": round(100 / med_pe, 1), **({"tbillAfterTax": rf, "tbillKey": rf_key, "tbillDate": rf_date} if mkt == "egx" else {})},
             "stocks": out, "notRated": [{k2: x[k2] for k2 in ("t", "name", "price", "period", "why")} for x in stale] + excluded}
 
 
 def main():
     saved = json.load(open(OUT)) if os.path.exists(OUT) else {}
     new = build(saved)
+    if "--us" in sys.argv:
+        new = build(saved, "us")
     if "--show" in sys.argv:
         for x in new["stocks"]:
             g = x["grades"]
@@ -301,7 +328,13 @@ def main():
         return
     note = ("The desk's fair values for EGX stocks, against the rest of the EGX. Figures are rebuilt by fetch_fairvalue.py; "
             "`judgement` (normalised earnings, brokers' fair values and the desk's note per stock) is written by the run and kept.")
-    json.dump({"note": note, **new, "judgement": saved.get("judgement", {})}, open(OUT, "w"), ensure_ascii=False, indent=1)
+    try:
+        us = build(saved, "us")
+        print(f"fair value, US: {us['count']} stocks, k {us['k']}%, median P/E {us['peMedian']}")
+    except Exception as e:   # the Egyptian table never waits on the US one
+        us = saved.get("us")
+        print(f"fair value, US: failed ({e}); kept the saved table")
+    json.dump({"note": note, **new, "judgement": saved.get("judgement", {}), "us": us, "judgementUS": saved.get("judgementUS", {})}, open(OUT, "w"), ensure_ascii=False, indent=1)
     open(OUT, "a").write("\n")
     top, bot = new["stocks"][:3], new["stocks"][-3:]
     print(f"fair value: {new['count']} stocks, k {new['k']}%, median P/E {new['peMedian']}; cheapest " + ", ".join(f"{x['t']} {x['upside']:+.0f}%" for x in top)
