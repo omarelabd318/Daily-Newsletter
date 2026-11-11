@@ -146,6 +146,8 @@ def build(saved):
         swapped = None
         if d and d["eps"]:
             eps, period = d["eps"], d["period"]
+            if "last full year" in (d["source"] or ""):
+                basis = "last full year"
             bvps = d["bvps"] or bvps
             # Mubasher's per-share figures can rest on the parent company alone or on a share count from before a
             # bonus issue: when TradingView's last full-year EPS (consolidated profit over today's shares) is more

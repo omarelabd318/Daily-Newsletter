@@ -38,6 +38,8 @@
 .dm-n1 a:hover,.dm-n2 a:hover{color:var(--text)}
 .dm-n2{align-items:center} .dm-stamp{margin-left:auto;padding-left:24px;font-size:11px;line-height:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
 .dm-n1 .dm-runs{margin-left:auto}
+.dm-fig{margin-left:7px;font-size:11.5px;font-weight:500;letter-spacing:0;font-variant-numeric:tabular-nums;color:var(--muted)}
+.dm-fig.up{color:var(--positive)} .dm-fig.down{color:var(--negative)}
 .dm-phone{display:none}
 @media (max-width:860px){
   .dmast{padding:0 16px}
@@ -49,7 +51,7 @@
   .dm-label{display:block;margin-top:3px;font-size:10px}
   .dm-tools{display:none}
   .dm-n1{gap:18px} .dm-n1 a{font-size:11px;padding:11px 0 8px}
-  .dm-n2{gap:20px} .dm-stamp{display:none}
+  .dm-n2{gap:20px} .dm-stamp{display:none} .dm-fig{display:none}
 }`;
   function mount(path, NAMES, GROUP) {
     if (document.querySelector('.dmast')) return;
@@ -75,8 +77,26 @@
     const go = (f) => hd.querySelectorAll('.dsearch').forEach((x) => f(x, NAMES, GROUP));
     if (window.DeskSearch) go(window.DeskSearch);
     else { const sc = document.createElement('script'); sc.src = '/desk/search.js'; sc.onload = () => go(window.DeskSearch); document.head.appendChild(sc); }
+    figures(hd);
     // the current tab stays in view on a phone
     hd.querySelectorAll('[aria-current]').forEach((a) => { const n = a.parentElement; n.scrollLeft = Math.max(0, a.offsetLeft - 16); });
+  }
+  // the day's headline figure beside a market's name and pages (laptop only): the EGX30's and S&P 500's day change and
+  // the central bank's dollar rate, from the data log; a day the market was shut repeats the last close, so the change
+  // is measured from the last different one
+  function figures(hd) {
+    fetch('/data/markets-recent.json').then((r) => r.json()).then((L) => {
+      const days = L.days || [];
+      const chg = (k) => { const v = days.map((e) => e[k]).filter((x) => typeof x === 'number'); if (v.length < 2) return null; const now = v[v.length - 1]; let i = v.length - 2; while (i > 0 && v[i] === now) i--; return v[i] === now ? null : (now / v[i] - 1) * 100; };
+      const pct = (c) => c == null ? null : [(c >= 0 ? '+' : '\u2212') + Math.abs(c).toFixed(2) + '%', c >= 0 ? 'up' : 'down'];
+      const usd = days.map((e) => e.usd_egp).filter((x) => typeof x === 'number').pop();
+      const F = { '/desk/egypt/': pct(chg('egx30')), '/desk/egx/': pct(chg('egx30')), '/desk/usa/': pct(chg('sp500')), '/desk/us/': pct(chg('sp500')), '/desk/egp/': usd ? [usd.toFixed(2), ''] : null };
+      hd.querySelectorAll('.dm-n1 a, .dm-n2 a').forEach((a) => {
+        const f = F[a.getAttribute('href')]; if (!f || a.querySelector('.dm-fig')) return;
+        if (a.closest('.dm-n2') && /^\/desk\/(egypt|usa)\/$/.test(a.getAttribute('href'))) return;   // the Dashboard tab carries no figure: its market's name above does
+        const sp = document.createElement('span'); sp.className = 'dm-fig ' + f[1]; sp.textContent = f[0]; a.appendChild(sp);
+      });
+    }).catch(() => {});
   }
   // the desk's date beside the name (a dateline), once the day's desk is known; the page's own name is its title
   function label(text) { const el = document.getElementById('dm-label'); if (el) el.textContent = text; }

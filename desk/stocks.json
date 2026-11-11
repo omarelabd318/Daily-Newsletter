@@ -12,7 +12,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 436.0bn"
+      "value": "EGP 446.1bn"
      },
      {
       "label": "P/E",
@@ -282,7 +282,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 34.0bn"
+      "value": "EGP 34.7bn"
      },
      {
       "label": "P/E",
@@ -566,31 +566,31 @@
     "source": "Mubasher"
    },
    "valuation": {
-    "source": "Mubasher",
+    "source": "TradingView (last full year)",
     "asOf": "2026-11-11",
-    "period": "2026-03-31",
-    "basis": "results for the 12 months to March 2026",
+    "period": "2025-12-31",
+    "basis": "results for the year to December 2025, consolidated, over today's share count (TradingView); Mubasher gives EGP 8.37 a share to March 2026, which looks to cover the parent company only or an older share count",
     "price": 135.0,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 228.7bn"
+      "value": "EGP 230.5bn"
      },
      {
       "label": "P/E",
-      "value": "16.1"
+      "value": "11.3"
      },
      {
       "label": "P/B",
-      "value": "3.7"
+      "value": "3.1"
      },
      {
-      "label": "Earnings per share (12 months)",
-      "value": "EGP 8.37"
+      "label": "Earnings per share (last full year)",
+      "value": "EGP 11.93"
      },
      {
       "label": "Book value per share",
-      "value": "EGP 36.77"
+      "value": "EGP 43.13"
      }
     ]
    },
@@ -823,7 +823,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 34.4bn"
+      "value": "EGP 36.8bn"
      },
      {
       "label": "P/E",
@@ -885,27 +885,27 @@
     "source": "Mubasher"
    },
    "valuation": {
-    "source": "Mubasher",
+    "source": "TradingView (last full year)",
     "asOf": "2026-11-11",
-    "period": "2026-03-31",
-    "basis": "results for the 12 months to March 2026",
+    "period": "2025-12-31",
+    "basis": "results for the year to December 2025, consolidated, over today's share count (TradingView); Mubasher gives EGP 0.33 a share to March 2026, which looks to cover the parent company only or an older share count",
     "price": 14.87,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 21.1bn"
+      "value": "EGP 21.8bn"
      },
      {
       "label": "P/E",
-      "value": "45.1"
+      "value": "32.1"
      },
      {
       "label": "P/B",
       "value": "5.7"
      },
      {
-      "label": "Earnings per share (12 months)",
-      "value": "EGP 0.33"
+      "label": "Earnings per share (last full year)",
+      "value": "EGP 0.46"
      },
      {
       "label": "Book value per share",
@@ -1655,27 +1655,27 @@
     "source": "Mubasher"
    },
    "valuation": {
-    "source": "Mubasher",
+    "source": "TradingView (last full year)",
     "asOf": "2026-11-11",
-    "period": "2026-03-31",
-    "basis": "results for the 12 months to March 2026",
+    "period": "2025-12-31",
+    "basis": "results for the year to December 2025, consolidated, over today's share count (TradingView); Mubasher gives EGP 0.99 a share to March 2026, which looks to cover the parent company only or an older share count",
     "price": 24.72,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 85.6bn"
+      "value": "EGP 85.7bn"
      },
      {
       "label": "P/E",
-      "value": "25.0"
+      "value": "44.1"
      },
      {
       "label": "P/B",
       "value": "9.7"
      },
      {
-      "label": "Earnings per share (12 months)",
-      "value": "EGP 0.99"
+      "label": "Earnings per share (last full year)",
+      "value": "EGP 0.56"
      },
      {
       "label": "Book value per share",
@@ -1727,7 +1727,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 66.6bn"
+      "value": "EGP 68.6bn"
      },
      {
       "label": "P/E",
@@ -2138,31 +2138,31 @@
     "source": "Mubasher"
    },
    "valuation": {
-    "source": "Mubasher",
+    "source": "TradingView (last full year)",
     "asOf": "2026-11-11",
     "period": "2025-06-30",
-    "basis": "results for the 12 months to June 2025",
+    "basis": "results for the year to June 2025, consolidated, over today's share count (TradingView); Mubasher gives EGP 0.46 a share to June 2025, which looks to cover the parent company only or an older share count",
     "price": 13.01,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 17.1bn"
+      "value": "EGP 16.8bn"
      },
      {
       "label": "P/E",
-      "value": "28.3"
+      "value": "12.6"
      },
      {
       "label": "P/B",
-      "value": "3.8"
+      "value": "3.5"
      },
      {
-      "label": "Earnings per share (12 months)",
-      "value": "EGP 0.46"
+      "label": "Earnings per share (last full year)",
+      "value": "EGP 1.03"
      },
      {
       "label": "Book value per share",
-      "value": "EGP 3.43"
+      "value": "EGP 3.72"
      }
     ]
    },
@@ -2184,31 +2184,31 @@
     "source": "Mubasher"
    },
    "valuation": {
-    "source": "Mubasher",
+    "source": "TradingView (last full year)",
     "asOf": "2026-11-11",
-    "period": "2025-09-30",
-    "basis": "results for the 12 months to September 2025",
+    "period": "2025-12-31",
+    "basis": "results for the year to December 2025, consolidated, over today's share count (TradingView); Mubasher gives EGP 2.10 a share to September 2025, which looks to cover the parent company only or an older share count",
     "price": 15.21,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 17.0bn"
+      "value": "EGP 17.2bn"
      },
      {
       "label": "P/E",
-      "value": "7.2"
+      "value": "17.3"
      },
      {
       "label": "P/B",
-      "value": "1.8"
+      "value": "2.7"
      },
      {
-      "label": "Earnings per share (12 months)",
-      "value": "EGP 2.10"
+      "label": "Earnings per share (last full year)",
+      "value": "EGP 0.88"
      },
      {
       "label": "Book value per share",
-      "value": "EGP 8.42"
+      "value": "EGP 5.70"
      }
     ]
    }

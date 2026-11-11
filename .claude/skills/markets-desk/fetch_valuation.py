@@ -37,6 +37,7 @@ NOT_TRADING = {"BQDC"} if datetime.date.today() < datetime.date(2026, 11, 2) els
 QUARTER_END = {"First": "03-31", "Second": "06-30", "Third": "09-30", "Fourth": "12-31"}
 MONTHS = {m: i for i, m in enumerate(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], 1)}
 TODAY = datetime.date.today()
+TV, ANNUAL = {}, {}
 
 
 def get(url):
@@ -80,10 +81,12 @@ def tradingview():
     run to: usually a quarter newer than Mubasher's. One request for all of them; an unofficial endpoint, so a
     failure leaves Mubasher to carry the cards."""
     body = json.dumps({"symbols": {"tickers": [f"EGX:{t}" for t in EGX]},
-                       "columns": ["market_cap_basic", "earnings_per_share_basic_ttm", "book_value_per_share_fq", "fiscal_period_end_fq"]}).encode()
+                       "columns": ["market_cap_basic", "earnings_per_share_basic_ttm", "book_value_per_share_fq", "fiscal_period_end_fq", "last_annual_eps", "fiscal_period_end_fy"]}).encode()
     req = urllib.request.Request("https://scanner.tradingview.com/egypt/scan", data=body, headers={"User-Agent": UA, "Content-Type": "application/json"})
     for r in json.loads(urllib.request.urlopen(req, timeout=40).read())["data"]:
-        cap, eps, bvps, end = r["d"]
+        cap, eps, bvps, end, la, fy = r["d"]
+        day = lambda ts: datetime.datetime.fromtimestamp(ts, datetime.timezone.utc).date().isoformat() if ts else None
+        ANNUAL[r["s"].split(":")[1]] = (la, day(fy), bvps)
         TV[r["s"].split(":")[1]] = (cap, eps, bvps, datetime.datetime.fromtimestamp(end, datetime.timezone.utc).date().isoformat() if end else None)
 
 
@@ -131,6 +134,20 @@ def egx(t):
         return {"source": " and ".join(c[0] for c in cands), "asOf": TODAY.isoformat(), "period": None, "basis": why, "price": price, "rows": rows}
     src, _, eps, bvps, period = usable[0]
     basis = f"results for the 12 months to {datetime.date.fromisoformat(period):%B %Y}"
+    # Mubasher's per-share figures can rest on the parent company alone or on a share count from before a bonus issue
+    # (e-finance: EGP 0.99 a share against 0.56 on consolidated profit over today's shares). When TradingView's last
+    # full-year EPS is more than 25% away, the card takes TradingView's and says so.
+    la, fy, la_bv = ANNUAL.get(t, (None, None, None))
+    if src == "Mubasher" and la and la > 0 and fy and fresh(fy) and abs(la / eps - 1) > 0.25 and price / la < 300:
+        basis = (f"results for the year to {datetime.date.fromisoformat(fy):%B %Y}, consolidated, over today's share count (TradingView); "
+                 f"Mubasher gives EGP {eps:,.2f} a share to {datetime.date.fromisoformat(period):%B %Y}, which looks to cover the parent company only or an older share count")
+        src, eps, period, bvps = "TradingView (last full year)", la, fy, la_bv or bvps
+        usable = [c for c in usable if c[0] != "Mubasher"] and usable
+        other = None
+        rows += [{"label": "P/E", "value": ratio(price, eps)}, {"label": "P/B", "value": ratio(price, bvps)},
+                 {"label": "Earnings per share (last full year)", "value": f"EGP {eps:,.2f}"},
+                 {"label": "Book value per share", "value": f"EGP {bvps:,.2f}" if bvps is not None else None}]
+        return {"source": src, "asOf": TODAY.isoformat(), "period": period, "basis": basis, "price": price, "rows": rows}
     other = next((c for c in usable[1:] if c[4] == period), None)
     if other:
         basis += f"; {other[0]} agrees" if abs(other[2] - eps) <= 0.1 * abs(eps) else f"; {other[0]} gives EGP {other[2]:,.2f} a share for the same period"
