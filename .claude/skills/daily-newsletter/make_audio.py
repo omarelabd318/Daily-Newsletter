@@ -126,6 +126,9 @@ class Voice:
         self.lang = "en-gb" if voice.startswith("b") else "en-us"
 
     def phon(self, t):
+        # clock times run together: "3:30" as "three thirty" (the colon made the voice stop after "three"), "10:00" as
+        # "ten", "10:05" as "ten oh five"
+        t = re.sub(r"\b(\d{1,2}):(\d\d)\b", lambda m: m.group(1) if m.group(2) == "00" else m.group(1) + (" oh " + m.group(2)[1] if m.group(2)[0] == "0" else " " + m.group(2)), t)
         # dates are said as ordinals ("November 1" -> "November first", as American broadcasters say them)
         t = DATE_RE.sub(lambda m: m.group(1) + " " + ORD[int(m.group(2))] if 0 < int(m.group(2)) < 32 else m.group(0), t)
         # spelled-out letters (A-I, I-P-O, U-A-E) get each letter's name: left to the phonemizer, a lone "A" reads as

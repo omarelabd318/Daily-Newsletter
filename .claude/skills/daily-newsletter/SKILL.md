@@ -653,7 +653,7 @@ every edition from then on, never to one edition alone:
   stress usually falls on the long vowel (ma-DOU-ly, ju-HAY-na, sa-WEE-ris).
 - **A figure, unit or abbreviation read badly:** fix the rule in `read_aloud.py`'s `speakable` (and the same rule in
   `listen.js`), never the edition's text. Already handled: times (10pm as "ten P M", with no stops that made it pause),
-  other currencies (EUR 4.10 as "4.1 euros"), "a share" after a price, a unit said once ("207.4 million dollars from
+  clock times run together (3:30 as "three thirty", with no stop at the colon), other currencies (EUR 4.10 as "4.1 euros"), "a share" after a price, a unit said once ("207.4 million dollars from
   110.2 million"), dates as ordinals ("November first", as American broadcasters say it), "re-" said "ree" in
   refinance and rebound (`pronounce.json`'s "prefix_re"), and long sentences never split inside a number.
 - **A pause in the middle of a phrase:** the voice model sometimes stops for breath mid-phrase ("a fifth session ...
