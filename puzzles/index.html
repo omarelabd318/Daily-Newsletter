@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Puzzles · Daily Newsletter</title>
+<meta name="description" content="The Daily Newsletter's crossword and killer sudoku.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@700;900&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#e8e3d6;--ink:#14110d;--ink2:#4f4a40;--rule:#b9b19d;--sel:#f3d77a;--word:#d9e3ea;--bad:#a8261d;--good:#1d6f3b;--cell:#f6f2e7;
+  --sans:"Inter",system-ui,sans-serif;--serif:"Old Standard TT",Georgia,serif;--head:"Playfair Display",Georgia,serif}
+*{box-sizing:border-box}
+html{background:#cfc9ba}
+body{margin:0;color:var(--ink);font:17px/1.5 var(--serif);font-variant-numeric:lining-nums}
+.sheet{max-width:1180px;margin:18px auto;padding:22px 40px 40px;background:var(--paper);background-image:radial-gradient(rgba(60,50,30,.05) 1px,transparent 1px);background-size:3px 3px}
+header{text-align:center;border-bottom:3px double var(--ink);padding-bottom:10px}
+header .top{display:flex;justify-content:space-between;font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase}
+header a{color:var(--ink);text-decoration:none}
+header h1{margin:8px 0 2px;font:700 clamp(40px,6vw,72px)/1 "UnifrakturCook",serif}
+header p{margin:0;font:italic 15px var(--serif);color:var(--ink2)}
+.tabs{display:flex;justify-content:center;gap:28px;padding:8px 0;border-bottom:1px solid var(--ink);font:600 12px var(--sans);letter-spacing:.14em;text-transform:uppercase}
+.tabs button{background:none;border:0;padding:4px 0;font:inherit;letter-spacing:inherit;text-transform:inherit;color:var(--ink2);cursor:pointer;border-bottom:2px solid transparent}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+section{margin-top:22px}
+section[hidden]{display:none}
+h2{margin:0;font:900 30px/1.1 var(--head)}
+.meta{margin:4px 0 14px;font:600 11px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin:0 0 14px;font:600 12px var(--sans)}
+.bar button{padding:6px 12px;border:1px solid var(--ink);background:none;color:var(--ink);font:600 11px var(--sans);letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.bar button:hover,.bar button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.bar .timer{margin-left:auto;font:600 15px var(--sans);font-variant-numeric:tabular-nums}
+.msg{min-height:24px;margin:10px 0 0;font:italic 16px var(--serif)}
+/* crossword */
+.cw{display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:start}
+.cw-grid{display:grid;border:2px solid var(--ink);background:var(--ink);gap:1px;user-select:none;touch-action:manipulation}
+.cw-c{position:relative;width:var(--cs);height:var(--cs);background:var(--cell);display:flex;align-items:center;justify-content:center;font:700 calc(var(--cs) * .52) var(--sans);text-transform:uppercase;cursor:pointer}
+.cw-c.blk{background:var(--ink);cursor:default}
+.cw-c .n{position:absolute;top:2px;left:3px;font:600 calc(var(--cs) * .24) var(--sans)}
+.cw-c.word{background:var(--word)}
+.cw-c.sel{background:var(--sel)}
+.cw-c.bad{color:var(--bad)} .cw-c.bad::after{content:"";position:absolute;inset:auto 0 0 auto;width:0;height:0;border-left:8px solid transparent;border-bottom:8px solid var(--bad)}
+.cw-c.shown{color:#2f5d9e}
+.cw-clue{margin:0 0 14px;padding:8px 12px;background:var(--word);font:16px/1.4 var(--serif);min-height:44px}
+.cw-clue b{font-family:var(--sans);font-size:13px;margin-right:6px}
+.cw-lists{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.cw-lists h3{margin:0 0 6px;padding-bottom:4px;border-bottom:1px solid var(--ink);font:700 12px var(--sans);letter-spacing:.16em;text-transform:uppercase}
+.cw-lists ol{list-style:none;margin:0;padding:0;max-height:var(--lh);overflow:auto}
+.cw-lists li{display:grid;grid-template-columns:26px 1fr;padding:4px 6px;font-size:15.5px;line-height:1.35;cursor:pointer}
+.cw-lists li b{font:700 12.5px var(--sans);padding-top:2px}
+.cw-lists li.on{background:var(--word)} .cw-lists li.done{color:var(--ink2);text-decoration:line-through;text-decoration-color:var(--rule)}
+/* killer sudoku */
+.ks{display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:start}
+.ks-grid{display:grid;grid-template-columns:repeat(9,var(--ks));border:2.5px solid var(--ink);user-select:none;touch-action:manipulation;background:var(--cell)}
+.ks-c{position:relative;width:var(--ks);height:var(--ks);border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:center;font:600 calc(var(--ks) * .5) var(--sans);cursor:pointer}
+.ks-c.br{border-right:2.5px solid var(--ink)} .ks-c.bb{border-bottom:2.5px solid var(--ink)}
+.ks-c .cage{position:absolute;inset:3px;pointer-events:none;border:0 dashed var(--ink2)}
+.ks-c .sum{position:absolute;top:1px;left:3px;font:700 calc(var(--ks) * .2) var(--sans);background:var(--cell);padding:0 1px;line-height:1.1;z-index:1}
+.ks-c.sel{background:var(--sel)} .ks-c.peer{background:#ede6d3} .ks-c.same{background:#e4dcc3}
+.ks-c.bad{color:var(--bad)} .ks-c.shown{color:#2f5d9e}
+.ks-c .notes{position:absolute;inset:calc(var(--ks) * .2) 3px 3px;display:grid;grid-template-columns:repeat(3,1fr);font:500 calc(var(--ks) * .17) var(--sans);color:var(--ink2);text-align:center;line-height:1.1}
+.pad{display:grid;grid-template-columns:repeat(5,52px);gap:6px;margin:0 0 14px}
+.pad button{height:46px;border:1px solid var(--ink);background:none;font:600 18px var(--sans);color:var(--ink);cursor:pointer}
+.pad button:hover{background:var(--ink);color:var(--paper)}
+.rules{font-size:15.5px;line-height:1.5;max-width:460px}
+.rules p{margin:0 0 10px}
+@media (max-width:860px){
+  .sheet{margin:0;padding:14px 12px 30px}
+  .cw,.ks{grid-template-columns:1fr;gap:16px}
+  .cw-lists{grid-template-columns:1fr} .cw-lists ol{max-height:none}
+  .pad{grid-template-columns:repeat(5,1fr)}
+}
+</style>
+</head>
+<body>
+<div class="sheet">
+  <header>
+    <div class="top"><a href="/">← Newsletter</a><span id="dl"></span></div>
+    <h1>Daily Newsletter</h1>
+    <p>The day's puzzles</p>
+  </header>
+  <nav class="tabs" role="tablist"><button type="button" role="tab" data-t="cw" aria-selected="true">Crossword</button><button type="button" role="tab" data-t="ks" aria-selected="false">Killer sudoku</button></nav>
+
+  <section id="cw">
+    <h2>The Crossword</h2><p class="meta" id="cw-meta"></p>
+    <div class="bar"><button type="button" id="cw-check">Check</button><button type="button" id="cw-word">Reveal word</button><button type="button" id="cw-all">Reveal all</button><button type="button" id="cw-clear">Clear</button><span class="timer" id="cw-time">0:00</span></div>
+    <div class="cw"><div><div class="cw-grid" id="cw-grid"></div><p class="msg" id="cw-msg"></p></div>
+      <div><p class="cw-clue" id="cw-clue"></p><div class="cw-lists"><div><h3>Across</h3><ol id="cw-a"></ol></div><div><h3>Down</h3><ol id="cw-d"></ol></div></div></div></div>
+  </section>
+
+  <section id="ks" hidden>
+    <h2>Killer Sudoku</h2><p class="meta" id="ks-meta"></p>
+    <div class="bar"><button type="button" id="ks-notes" aria-pressed="false">Notes</button><button type="button" id="ks-check">Check</button><button type="button" id="ks-cell">Reveal cell</button><button type="button" id="ks-clear">Clear</button><span class="timer" id="ks-time">0:00</span></div>
+    <div class="ks"><div><div class="ks-grid" id="ks-grid"></div><p class="msg" id="ks-msg"></p></div>
+      <div><div class="pad" id="ks-pad"></div>
+        <div class="rules"><p><b>How to play.</b> Fill the grid so every row, column and 3 by 3 box holds the digits 1 to 9 once each.</p>
+        <p>The dashed shapes are cages: the digits in a cage add up to the number in its corner, and no digit appears twice in a cage. There are no starting digits; the cages are all you need, and there is only one solution.</p>
+        <p>Tap a square and type a digit (or use the buttons). Notes lets you pencil in candidates. Arrow keys move.</p></div></div></div>
+  </section>
+</div>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var store = { get: function(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e){ return null; } }, set: function(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+  var LEVEL = ['Easy', 'Easy', 'Medium', 'Medium', 'Hard', 'Hard', 'Hardest'];
+  function day(d){ var x = new Date(d + 'T12:00:00'); return x.toLocaleDateString('en-US', {weekday:'long', month:'long', day:'numeric', year:'numeric'}); }
+  function timer(el, key, done){
+    var t = (store.get(key) || 0), on = !done, iv;
+    function show(){ el.textContent = Math.floor(t / 60) + ':' + ('0' + t % 60).slice(-2); }
+    show();
+    iv = setInterval(function(){ if(on && !document.hidden){ t++; show(); if(t % 5 === 0) store.set(key, t); } }, 1000);
+    return { stop: function(){ on = false; store.set(key, t); }, get: function(){ return t; } };
+  }
+  // tabs
+  [].forEach.call(document.querySelectorAll('.tabs button'), function(b){ b.addEventListener('click', function(){
+    [].forEach.call(document.querySelectorAll('.tabs button'), function(x){ x.setAttribute('aria-selected', x === b); });
+    $('cw').hidden = b.dataset.t !== 'cw'; $('ks').hidden = b.dataset.t !== 'ks'; try { history.replaceState(null, '', location.pathname + location.search + '#' + b.dataset.t); } catch(e){}
+  }); });
+  if(location.hash === '#ks') document.querySelector('.tabs [data-t="ks"]').click();
+
+  // which day: ?d=DATE, else the newest edition with puzzles
+  var want = (location.search.match(/[?&]d=(\d{4}-\d{2}-\d{2})/) || [])[1];
+  fetch('/editions/index.json', {cache:'no-cache'}).then(function(r){ return r.json(); }).then(function(ix){
+    var dates = (ix.editions || []).filter(function(e){ return !e.id; }).map(function(e){ return e.date; }).sort().reverse();
+    if(want) dates.unshift(want);
+    (function tryNext(i){
+      if(i >= Math.min(dates.length, 8)){ $('cw-meta').textContent = 'No puzzles yet.'; return; }
+      fetch('/data/puzzles/' + dates[i] + '.json', {cache:'no-cache'}).then(function(r){ if(!r.ok) throw 0; return r.json(); }).then(start, function(){ tryNext(i + 1); });
+    })(0);
+  });
+
+  function start(P){
+    $('dl').textContent = day(P.date);
+    document.title = 'Puzzles, ' + day(P.date) + ' · Daily Newsletter';
+    crossword(P);
+    killer(P);
+  }
+
+  // ---------------- crossword ----------------
+  function crossword(P){
+    var C = P.crossword, n = C.size, key = 'puz:cw:' + P.date, saved = store.get(key) || {};
+    var cs = Math.min(52, Math.floor((Math.min(innerWidth, 1180) - (innerWidth < 860 ? 30 : 560)) / n));
+    $('cw-grid').style.setProperty('--cs', Math.max(28, cs) + 'px');
+    $('cw-grid').style.gridTemplateColumns = 'repeat(' + n + ',var(--cs))';
+    var clues = C.clues.across.map(function(a){ return Object.assign({d:'A'}, a); }).concat(C.clues.down.map(function(a){ return Object.assign({d:'D'}, a); }));
+    var letters = saved.l || {}, shown = saved.s || {}, cells = {}, dir = 'A', cur = null;
+    $('cw-meta').textContent = n + ' by ' + n + ' · ' + clues.length + ' clues · solve with your own words, then Check';
+    var numAt = {}; clues.forEach(function(c){ numAt[c.row + ',' + c.col] = c.n; });
+    var g = $('cw-grid');
+    for(var r = 0; r < n; r++) for(var c = 0; c < n; c++){
+      var d = document.createElement('div'), k = r + ',' + c;
+      d.className = 'cw-c' + (C.grid[r][c] === '#' ? ' blk' : '');
+      if(C.grid[r][c] !== '#'){ d.dataset.k = k; if(numAt[k]) d.innerHTML = '<span class="n">' + numAt[k] + '</span>'; d.appendChild(document.createTextNode(letters[k] || '')); cells[k] = d; }
+      g.appendChild(d);
+    }
+    function cellsOf(cl){ var out = []; for(var i = 0; i < cl.len; i++) out.push(cl.d === 'A' ? cl.row + ',' + (cl.col + i) : (cl.row + i) + ',' + cl.col); return out; }
+    function clueAt(k, d){ return clues.filter(function(cl){ return cl.d === d && cellsOf(cl).indexOf(k) >= 0; })[0]; }
+    function setL(k, ch){ letters[k] = ch; var el = cells[k]; el.lastChild.nodeValue = ch; el.classList.remove('bad'); }
+    function save(){ store.set(key, {l: letters, s: shown}); }
+    function lists(){
+      ['A', 'D'].forEach(function(dd){ var ol = $(dd === 'A' ? 'cw-a' : 'cw-d'); ol.innerHTML = '';
+        clues.filter(function(cl){ return cl.d === dd; }).forEach(function(cl){ var li = document.createElement('li'); li.innerHTML = '<b>' + cl.n + '</b><span></span>'; li.lastChild.textContent = cl.clue || '(clue to come)'; li.dataset.id = dd + cl.n;
+          li.addEventListener('click', function(){ dir = dd; select(cl.row + ',' + cl.col); }); ol.appendChild(li); }); });
+    }
+    function paint(){
+      Object.keys(cells).forEach(function(k){ cells[k].classList.remove('sel', 'word'); });
+      [].forEach.call(document.querySelectorAll('.cw-lists li'), function(li){ li.classList.remove('on'); });
+      clues.forEach(function(cl){ var full = cellsOf(cl).every(function(k){ return letters[k]; }); var li = document.querySelector('.cw-lists li[data-id="' + cl.d + cl.n + '"]'); if(li) li.classList.toggle('done', full); });
+      if(!cur) return;
+      var cl = clueAt(cur, dir) || clueAt(cur, dir === 'A' ? 'D' : 'A'); if(!cl) return; dir = cl.d;
+      cellsOf(cl).forEach(function(k){ cells[k].classList.add('word'); }); cells[cur].classList.add('sel');
+      var li = document.querySelector('.cw-lists li[data-id="' + cl.d + cl.n + '"]'); if(li){ li.classList.add('on'); var ol = li.parentNode; if(li.offsetTop < ol.scrollTop || li.offsetTop > ol.scrollTop + ol.clientHeight - 30) ol.scrollTop = li.offsetTop - 40; }
+      $('cw-clue').innerHTML = '<b>' + cl.n + (cl.d === 'A' ? ' Across' : ' Down') + '</b>'; $('cw-clue').appendChild(document.createTextNode(cl.clue || ''));
+    }
+    function select(k){ cur = k; paint(); }
+    function move(step){ var cl = clueAt(cur, dir); if(!cl) return; var ks = cellsOf(cl), i = ks.indexOf(cur) + step; if(i >= 0 && i < ks.length) select(ks[i]); else if(step > 0) nextClue(1); }
+    function nextClue(step){ var cl = clueAt(cur, dir), list = clues.filter(function(x){ return x.d === dir; }), i = list.indexOf(cl) + step;
+      if(i >= list.length || i < 0){ dir = dir === 'A' ? 'D' : 'A'; list = clues.filter(function(x){ return x.d === dir; }); i = step > 0 ? 0 : list.length - 1; }
+      var nx = list[i], empty = cellsOf(nx).filter(function(k){ return !letters[k]; })[0]; select(empty || nx.row + ',' + nx.col); }
+    g.addEventListener('click', function(e){ var el = e.target.closest('.cw-c'); if(!el || !el.dataset.k) return; if(el.dataset.k === cur) dir = dir === 'A' ? 'D' : 'A'; select(el.dataset.k); hidden.focus(); });
+    // a hidden input brings up the phone's keyboard
+    var hidden = document.createElement('input'); hidden.setAttribute('autocapitalize', 'characters'); hidden.setAttribute('autocomplete', 'off'); hidden.style.cssText = 'position:fixed;opacity:0;left:-100px;top:0;width:1px;height:1px'; document.body.appendChild(hidden);
+    function done(){ return Object.keys(cells).every(function(k){ return letters[k] === answerAt(k); }); }
+    function answerAt(k){ var p = k.split(','); return C.grid[+p[0]][+p[1]]; }
+    var clock = timer($('cw-time'), key + ':t', saved.won);
+    function finished(){ if(done() && !saved.won){ saved.won = true; clock.stop(); store.set(key + ':won', 1); $('cw-msg').textContent = 'Solved in ' + $('cw-time').textContent + '. Well done.'; } }
+    function key_(e){
+      if(!cur || $('cw').hidden) return;
+      var k = e.key;
+      if(/^[a-zA-Z]$/.test(k)){ setL(cur, k.toUpperCase()); save(); move(1); paint(); finished(); e.preventDefault(); }
+      else if(k === 'Backspace'){ if(letters[cur]) setL(cur, ''); else { move(-1); setL(cur, ''); } save(); paint(); e.preventDefault(); }
+      else if(k === 'Tab' || k === 'Enter'){ nextClue(e.shiftKey ? -1 : 1); e.preventDefault(); }
+      else if(/^Arrow/.test(k)){ var d2 = /Left|Right/.test(k) ? 'A' : 'D'; if(dir !== d2){ dir = d2; paint(); } else { var p = cur.split(',').map(Number), dr = k === 'ArrowDown' ? 1 : k === 'ArrowUp' ? -1 : 0, dc = k === 'ArrowRight' ? 1 : k === 'ArrowLeft' ? -1 : 0, r2 = p[0] + dr, c2 = p[1] + dc;
+        while(r2 >= 0 && r2 < n && c2 >= 0 && c2 < n && !cells[r2 + ',' + c2]){ r2 += dr; c2 += dc; } if(cells[r2 + ',' + c2]) select(r2 + ',' + c2); } e.preventDefault(); }
+    }
+    document.addEventListener('keydown', key_);
+    hidden.addEventListener('input', function(){ var v = hidden.value.slice(-1); hidden.value = ''; if(/[a-zA-Z]/.test(v)) key_({key: v, preventDefault: function(){}}); });
+    $('cw-check').addEventListener('click', function(){ var wrong = 0; Object.keys(cells).forEach(function(k){ if(letters[k] && letters[k] !== answerAt(k)){ cells[k].classList.add('bad'); wrong++; } });
+      $('cw-msg').textContent = wrong ? wrong + ' square' + (wrong > 1 ? 's are' : ' is') + ' wrong.' : 'Everything filled so far is right.'; });
+    $('cw-word').addEventListener('click', function(){ var cl = cur && clueAt(cur, dir); if(!cl) return; cellsOf(cl).forEach(function(k){ setL(k, answerAt(k)); shown[k] = 1; cells[k].classList.add('shown'); }); save(); paint(); finished(); });
+    $('cw-all').addEventListener('click', function(){ if(!confirm('Reveal the whole crossword?')) return; Object.keys(cells).forEach(function(k){ if(letters[k] !== answerAt(k)){ setL(k, answerAt(k)); shown[k] = 1; cells[k].classList.add('shown'); } }); save(); paint(); clock.stop(); });
+    $('cw-clear').addEventListener('click', function(){ if(!confirm('Clear the crossword?')) return; Object.keys(cells).forEach(function(k){ setL(k, ''); cells[k].classList.remove('shown'); }); shown = {}; save(); paint(); });
+    Object.keys(shown).forEach(function(k){ if(cells[k]) cells[k].classList.add('shown'); });
+    lists(); $('cw-grid').parentNode.parentNode.style.setProperty('--lh', (g.offsetHeight - 60) + 'px');
+    var first = clues.filter(function(x){ return x.d === 'A'; })[0]; select(first.row + ',' + first.col);
+    if(saved.won) $('cw-msg').textContent = 'Solved. Come back tomorrow for the next one.';
+  }
+
+  // ---------------- killer sudoku ----------------
+  function killer(P){
+    var K = P.killer, key = 'puz:ks:' + P.date, saved = store.get(key) || {}, val = saved.v || {}, notes = saved.n || {}, shown = saved.s || {}, cur = null, noting = false;
+    $('ks-meta').textContent = LEVEL[K.level] + ' · ' + K.cages.length + ' cages · one solution';
+    var cs = Math.min(56, Math.floor((Math.min(innerWidth, 1180) - (innerWidth < 860 ? 30 : 560)) / 9));
+    var grid = $('ks-grid'); grid.style.setProperty('--ks', Math.max(32, cs) + 'px');
+    var cageOf = {}, cells = [];
+    K.cages.forEach(function(cg, i){ cg.cells.forEach(function(x){ cageOf[x] = i; }); });
+    for(var i = 0; i < 81; i++){
+      var r = Math.floor(i / 9), c = i % 9, d = document.createElement('div');
+      d.className = 'ks-c' + (c % 3 === 2 && c < 8 ? ' br' : '') + (r % 3 === 2 && r < 8 ? ' bb' : '');
+      d.dataset.i = i;
+      // the cage's dashed outline: a side is drawn where the neighbour is in another cage
+      var cage = document.createElement('span'); cage.className = 'cage'; var me = cageOf[i];
+      cage.style.borderTopWidth = r === 0 || cageOf[i - 9] !== me ? '1.5px' : '0'; cage.style.borderBottomWidth = r === 8 || cageOf[i + 9] !== me ? '1.5px' : '0';
+      cage.style.borderLeftWidth = c === 0 || cageOf[i - 1] !== me ? '1.5px' : '0'; cage.style.borderRightWidth = c === 8 || cageOf[i + 1] !== me ? '1.5px' : '0';
+      if(cage.style.borderTopWidth === '0px' || cage.style.borderTopWidth === '0') cage.style.top = '-1px';
+      if(cage.style.borderBottomWidth === '0') cage.style.bottom = '-1px';
+      if(cage.style.borderLeftWidth === '0') cage.style.left = '-1px';
+      if(cage.style.borderRightWidth === '0') cage.style.right = '-1px';
+      d.appendChild(cage);
+      if(K.cages[me].cells[0] === i){ var s = document.createElement('span'); s.className = 'sum'; s.textContent = K.cages[me].sum; d.appendChild(s); }
+      var v = document.createElement('span'); v.className = 'val'; d.appendChild(v);
+      var nt = document.createElement('span'); nt.className = 'notes'; d.appendChild(nt);
+      grid.appendChild(d); cells.push(d);
+    }
+    function draw(i){ var el = cells[i]; el.querySelector('.val').textContent = val[i] || ''; var ns = notes[i] || [];
+      el.querySelector('.notes').innerHTML = val[i] ? '' : [1,2,3,4,5,6,7,8,9].map(function(x){ return '<span>' + (ns.indexOf(x) >= 0 ? x : '') + '</span>'; }).join(''); el.classList.toggle('shown', !!shown[i]); }
+    for(var j = 0; j < 81; j++) draw(j);
+    function save(){ store.set(key, {v: val, n: notes, s: shown}); }
+    function peers(i){ var r = Math.floor(i / 9), c = i % 9, out = []; for(var x = 0; x < 81; x++){ var r2 = Math.floor(x / 9), c2 = x % 9;
+      if(x !== i && (r2 === r || c2 === c || (Math.floor(r2 / 3) === Math.floor(r / 3) && Math.floor(c2 / 3) === Math.floor(c / 3)) || cageOf[x] === cageOf[i])) out.push(x); } return out; }
+    function paint(){ cells.forEach(function(el, i){ el.classList.remove('sel', 'peer', 'same'); });
+      if(cur == null) return; peers(cur).forEach(function(x){ cells[x].classList.add('peer'); });
+      if(val[cur]) cells.forEach(function(el, x){ if(val[x] === val[cur] && x !== cur) el.classList.add('same'); });
+      cells[cur].classList.add('sel'); }
+    // a digit that clashes with one in its row, column, box or cage shows red at once
+    function clashes(){ cells.forEach(function(el, i){ el.classList.toggle('bad', !!val[i] && peers(i).some(function(x){ return val[x] === val[i]; })); }); }
+    var clock = timer($('ks-time'), key + ':t', saved.won);
+    function finished(){ for(var i = 0; i < 81; i++) if(val[i] !== +K.solution[i]) return; if(!saved.won){ saved.won = true; clock.stop(); store.set(key, {v: val, n: notes, s: shown, won: 1}); $('ks-msg').textContent = 'Solved in ' + $('ks-time').textContent + '. Well done.'; } }
+    function put(d){ if(cur == null || shown[cur]) return;
+      if(noting && d){ var ns = notes[cur] || []; var at = ns.indexOf(d); if(at >= 0) ns.splice(at, 1); else ns.push(d); notes[cur] = ns; }
+      else { val[cur] = d || 0; if(d){ peers(cur).forEach(function(x){ if(notes[x]){ var a = notes[x].indexOf(d); if(a >= 0){ notes[x].splice(a, 1); draw(x); } } }); } }
+      draw(cur); clashes(); paint(); save(); finished(); }
+    grid.addEventListener('click', function(e){ var el = e.target.closest('.ks-c'); if(!el) return; cur = +el.dataset.i; paint(); });
+    $('ks-pad').innerHTML = [1,2,3,4,5,6,7,8,9].map(function(x){ return '<button type="button" data-d="' + x + '">' + x + '</button>'; }).join('') + '<button type="button" data-d="0" aria-label="Erase">⌫</button>';
+    $('ks-pad').addEventListener('click', function(e){ var b = e.target.closest('button'); if(b) put(+b.dataset.d); });
+    document.addEventListener('keydown', function(e){
+      if($('ks').hidden || cur == null) return;
+      if(/^[1-9]$/.test(e.key)){ put(+e.key); e.preventDefault(); }
+      else if(e.key === 'Backspace' || e.key === 'Delete' || e.key === '0'){ put(0); e.preventDefault(); }
+      else if(e.key === 'n' || e.key === 'N'){ $('ks-notes').click(); }
+      else if(/^Arrow/.test(e.key)){ var r = Math.floor(cur / 9), c = cur % 9; if(e.key === 'ArrowUp') r = (r + 8) % 9; if(e.key === 'ArrowDown') r = (r + 1) % 9; if(e.key === 'ArrowLeft') c = (c + 8) % 9; if(e.key === 'ArrowRight') c = (c + 1) % 9; cur = r * 9 + c; paint(); e.preventDefault(); }
+    });
+    $('ks-notes').addEventListener('click', function(){ noting = !noting; this.setAttribute('aria-pressed', noting); });
+    $('ks-check').addEventListener('click', function(){ var wrong = 0; for(var i = 0; i < 81; i++) if(val[i] && val[i] !== +K.solution[i]){ cells[i].classList.add('bad'); wrong++; }
+      $('ks-msg').textContent = wrong ? wrong + ' digit' + (wrong > 1 ? 's are' : ' is') + ' wrong.' : 'Everything entered so far is right.'; });
+    $('ks-cell').addEventListener('click', function(){ if(cur == null) return; val[cur] = +K.solution[cur]; shown[cur] = 1; draw(cur); clashes(); paint(); save(); finished(); });
+    $('ks-clear').addEventListener('click', function(){ if(!confirm('Clear the sudoku?')) return; val = {}; notes = {}; shown = {}; for(var i = 0; i < 81; i++) draw(i); clashes(); paint(); save(); });
+    clashes();
+    if(saved.won) $('ks-msg').textContent = 'Solved. Come back tomorrow for the next one.';
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,476 @@
+{
+ "date": "2026-11-12",
+ "crossword": {
+  "size": 9,
+  "grid": [
+   "SAME##SEC",
+   "AGED##PRO",
+   "MENU#COAL",
+   "###COURSE",
+   "#GRANITE#",
+   "WRITES###",
+   "HAVE#ITEM",
+   "ICE##NOVA",
+   "PER##EYED"
+  ],
+  "clues": {
+   "across": [
+    {
+     "n": 1,
+     "row": 0,
+     "col": 0,
+     "len": 4,
+     "answer": "SAME",
+     "clue": ""
+    },
+    {
+     "n": 5,
+     "row": 0,
+     "col": 6,
+     "len": 3,
+     "answer": "SEC",
+     "clue": ""
+    },
+    {
+     "n": 8,
+     "row": 1,
+     "col": 0,
+     "len": 4,
+     "answer": "AGED",
+     "clue": ""
+    },
+    {
+     "n": 9,
+     "row": 1,
+     "col": 6,
+     "len": 3,
+     "answer": "PRO",
+     "clue": ""
+    },
+    {
+     "n": 10,
+     "row": 2,
+     "col": 0,
+     "len": 4,
+     "answer": "MENU",
+     "clue": ""
+    },
+    {
+     "n": 11,
+     "row": 2,
+     "col": 5,
+     "len": 4,
+     "answer": "COAL",
+     "clue": ""
+    },
+    {
+     "n": 12,
+     "row": 3,
+     "col": 3,
+     "len": 6,
+     "answer": "COURSE",
+     "clue": ""
+    },
+    {
+     "n": 14,
+     "row": 4,
+     "col": 1,
+     "len": 7,
+     "answer": "GRANITE",
+     "clue": ""
+    },
+    {
+     "n": 16,
+     "row": 5,
+     "col": 0,
+     "len": 6,
+     "answer": "WRITES",
+     "clue": ""
+    },
+    {
+     "n": 17,
+     "row": 6,
+     "col": 0,
+     "len": 4,
+     "answer": "HAVE",
+     "clue": ""
+    },
+    {
+     "n": 18,
+     "row": 6,
+     "col": 5,
+     "len": 4,
+     "answer": "ITEM",
+     "clue": ""
+    },
+    {
+     "n": 22,
+     "row": 7,
+     "col": 0,
+     "len": 3,
+     "answer": "ICE",
+     "clue": ""
+    },
+    {
+     "n": 23,
+     "row": 7,
+     "col": 5,
+     "len": 4,
+     "answer": "NOVA",
+     "clue": ""
+    },
+    {
+     "n": 24,
+     "row": 8,
+     "col": 0,
+     "len": 3,
+     "answer": "PER",
+     "clue": ""
+    },
+    {
+     "n": 25,
+     "row": 8,
+     "col": 5,
+     "len": 4,
+     "answer": "EYED",
+     "clue": ""
+    }
+   ],
+   "down": [
+    {
+     "n": 1,
+     "row": 0,
+     "col": 0,
+     "len": 3,
+     "answer": "SAM",
+     "clue": ""
+    },
+    {
+     "n": 2,
+     "row": 0,
+     "col": 1,
+     "len": 3,
+     "answer": "AGE",
+     "clue": ""
+    },
+    {
+     "n": 3,
+     "row": 0,
+     "col": 2,
+     "len": 3,
+     "answer": "MEN",
+     "clue": ""
+    },
+    {
+     "n": 4,
+     "row": 0,
+     "col": 3,
+     "len": 7,
+     "answer": "EDUCATE",
+     "clue": ""
+    },
+    {
+     "n": 5,
+     "row": 0,
+     "col": 6,
+     "len": 5,
+     "answer": "SPORT",
+     "clue": ""
+    },
+    {
+     "n": 6,
+     "row": 0,
+     "col": 7,
+     "len": 5,
+     "answer": "ERASE",
+     "clue": ""
+    },
+    {
+     "n": 7,
+     "row": 0,
+     "col": 8,
+     "len": 4,
+     "answer": "COLE",
+     "clue": ""
+    },
+    {
+     "n": 11,
+     "row": 2,
+     "col": 5,
+     "len": 7,
+     "answer": "CUISINE",
+     "clue": ""
+    },
+    {
+     "n": 13,
+     "row": 3,
+     "col": 4,
+     "len": 3,
+     "answer": "ONE",
+     "clue": ""
+    },
+    {
+     "n": 14,
+     "row": 4,
+     "col": 1,
+     "len": 5,
+     "answer": "GRACE",
+     "clue": ""
+    },
+    {
+     "n": 15,
+     "row": 4,
+     "col": 2,
+     "len": 5,
+     "answer": "RIVER",
+     "clue": ""
+    },
+    {
+     "n": 16,
+     "row": 5,
+     "col": 0,
+     "len": 4,
+     "answer": "WHIP",
+     "clue": ""
+    },
+    {
+     "n": 19,
+     "row": 6,
+     "col": 6,
+     "len": 3,
+     "answer": "TOY",
+     "clue": ""
+    },
+    {
+     "n": 20,
+     "row": 6,
+     "col": 7,
+     "len": 3,
+     "answer": "EVE",
+     "clue": ""
+    },
+    {
+     "n": 21,
+     "row": 6,
+     "col": 8,
+     "len": 3,
+     "answer": "MAD",
+     "clue": ""
+    }
+   ]
+  },
+  "news": []
+ },
+ "killer": {
+  "level": 4,
+  "solution": "581279463932146578746385921415937682873562149629418735297653814364891257158724396",
+  "cages": [
+   {
+    "sum": 21,
+    "cells": [
+     23,
+     24,
+     32
+    ]
+   },
+   {
+    "sum": 16,
+    "cells": [
+     28,
+     29,
+     37,
+     38
+    ]
+   },
+   {
+    "sum": 19,
+    "cells": [
+     18,
+     27,
+     36
+    ]
+   },
+   {
+    "sum": 12,
+    "cells": [
+     73,
+     75
+    ]
+   },
+   {
+    "sum": 24,
+    "cells": [
+     76,
+     77,
+     78,
+     79,
+     80
+    ]
+   },
+   {
+    "sum": 9,
+    "cells": [
+     58,
+     59,
+     68
+    ]
+   },
+   {
+    "sum": 14,
+    "cells": [
+     8,
+     17,
+     25,
+     26
+    ]
+   },
+   {
+    "sum": 9,
+    "cells": [
+     39,
+     48
+    ]
+   },
+   {
+    "sum": 23,
+    "cells": [
+     0,
+     1,
+     2,
+     9
+    ]
+   },
+   {
+    "sum": 26,
+    "cells": [
+     20,
+     21,
+     22,
+     30
+    ]
+   },
+   {
+    "sum": 16,
+    "cells": [
+     41,
+     42,
+     43,
+     44
+    ]
+   },
+   {
+    "sum": 22,
+    "cells": [
+     47,
+     56,
+     57
+    ]
+   },
+   {
+    "sum": 19,
+    "cells": [
+     50,
+     51,
+     52,
+     61
+    ]
+   },
+   {
+    "sum": 21,
+    "cells": [
+     65,
+     66,
+     67
+    ]
+   },
+   {
+    "sum": 12,
+    "cells": [
+     45,
+     54,
+     63,
+     72
+    ]
+   },
+   {
+    "sum": 16,
+    "cells": [
+     33,
+     34,
+     35
+    ]
+   },
+   {
+    "sum": 7,
+    "cells": [
+     3,
+     12,
+     13
+    ]
+   },
+   {
+    "sum": 16,
+    "cells": [
+     53,
+     62,
+     71
+    ]
+   },
+   {
+    "sum": 9,
+    "cells": [
+     10,
+     11,
+     19
+    ]
+   },
+   {
+    "sum": 10,
+    "cells": [
+     31,
+     40,
+     49
+    ]
+   },
+   {
+    "sum": 22,
+    "cells": [
+     6,
+     7,
+     15,
+     16
+    ]
+   },
+   {
+    "sum": 22,
+    "cells": [
+     4,
+     5,
+     14
+    ]
+   },
+   {
+    "sum": 17,
+    "cells": [
+     46,
+     55,
+     64
+    ]
+   },
+   {
+    "sum": 15,
+    "cells": [
+     60,
+     69,
+     70
+    ]
+   },
+   {
+    "sum": 8,
+    "cells": [
+     74
+    ]
+   }
+  ]
+ }
+}
