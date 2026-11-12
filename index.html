@@ -283,6 +283,9 @@ td.trend{vertical-align:middle}
 /* the block being read: a tint behind the text reaching 6px past it, drawn as its own layer so it stops at the last
    line (the space after a story in columns is padding or a transparent border, which the tint must not cover) */
 .reading::before{content:"";position:absolute;z-index:-1;top:-6px;left:-6px;right:-6px;bottom:calc(var(--rd-gap,0px) - 6px);background:color-mix(in srgb,var(--accent) 12%,transparent);border-radius:2px;pointer-events:none}
+/* in columns a block can open a new column: the tint starts at its first line, or its top 6px would show at the foot
+   of the column before */
+.s-body .run > .reading::before,.s-body .run li.reading::before{top:0}
 #player{position:fixed;left:0;right:0;bottom:0;z-index:50;padding:10px var(--pad) calc(10px + env(safe-area-inset-bottom));background:var(--ground);border-top:1px solid var(--ink);box-shadow:0 -8px 24px rgba(0,0,0,.08)}
 #player[hidden]{display:none}
 .pl-in{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,1.3fr) minmax(0,1fr);grid-template-areas:"now prog right" "now ctl right";align-items:center;gap:2px 24px}
