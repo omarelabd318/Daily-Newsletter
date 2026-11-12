@@ -499,7 +499,11 @@ def make(date, news, avoid=(), new_killer=False):
     for k in ("across", "down"):
         for a in cw["clues"][k]:
             a["clue"] = have.get(a["answer"], "")
-    data = {"date": date, "crossword": cw, "killer": (not new_killer and old.get("killer")) or killer(date)}
+    # the day's number, shared by both puzzles: one more than the days with puzzles before this one (No. 1 was
+    # November 12, 2026); kept when the day's puzzles are made again
+    earlier = [f for f in os.listdir(OUT) if f.endswith(".json") and f[:-5] < date]
+    no = old.get("no") or len(earlier) + 1
+    data = {"date": date, "no": no, "crossword": cw, "killer": (not new_killer and old.get("killer")) or killer(date)}
     json.dump(data, open(path(date), "w"), ensure_ascii=False, indent=1)
     open(path(date), "a").write("\n")
     show(date)

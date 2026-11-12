@@ -82,7 +82,7 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
   <header>
     <div class="top"><a href="/">← Newsletter</a><span id="dl"></span></div>
     <h1>Daily Newsletter</h1>
-    <p>The day's puzzles</p>
+    <p id="pno">The day's puzzles</p>
   </header>
   <nav class="tabs" role="tablist"><button type="button" role="tab" data-t="cw" aria-selected="true">Crossword</button><button type="button" role="tab" data-t="ks" aria-selected="false">Killer sudoku</button></nav>
 
@@ -138,6 +138,8 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
 
   function start(P){
     $('dl').textContent = day(P.date);
+    var no = P.no ? 'No. ' + P.no : ''; if(no){ $('pno').textContent = 'The day\'s puzzles · ' + no; }
+    window.PNO = no;
     document.title = 'Puzzles, ' + day(P.date) + ' · Daily Newsletter';
     crossword(P);
     killer(P);
@@ -151,7 +153,7 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
     $('cw-grid').style.gridTemplateColumns = 'repeat(' + n + ',var(--cs))';
     var clues = C.clues.across.map(function(a){ return Object.assign({d:'A'}, a); }).concat(C.clues.down.map(function(a){ return Object.assign({d:'D'}, a); }));
     var letters = saved.l || {}, shown = saved.s || {}, cells = {}, dir = 'A', cur = null;
-    $('cw-meta').textContent = n + ' by ' + n + ' · ' + clues.length + ' clues · solve with your own words, then Check';
+    $('cw-meta').textContent = (window.PNO ? window.PNO + ' · ' : '') + n + ' by ' + n + ' · ' + clues.length + ' clues · solve with your own words, then Check';
     var numAt = {}; clues.forEach(function(c){ numAt[c.row + ',' + c.col] = c.n; });
     var g = $('cw-grid');
     for(var r = 0; r < n; r++) for(var c = 0; c < n; c++){
@@ -216,7 +218,7 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
   // ---------------- killer sudoku ----------------
   function killer(P){
     var K = P.killer, key = 'puz:ks:' + P.date, saved = store.get(key) || {}, val = saved.v || {}, notes = saved.n || {}, shown = saved.s || {}, cur = null, noting = false;
-    $('ks-meta').textContent = LEVEL[K.level] + ' · ' + K.cages.length + ' cages · one solution';
+    $('ks-meta').textContent = (window.PNO ? window.PNO + ' · ' : '') + LEVEL[K.level] + ' · ' + K.cages.length + ' cages · one solution';
     var cs = Math.min(56, Math.floor((Math.min(innerWidth, 1180) - (innerWidth < 860 ? 30 : 560)) / 9));
     var grid = $('ks-grid'); grid.style.setProperty('--ks', Math.max(32, cs) + 'px');
     var cageOf = {}, cells = [];

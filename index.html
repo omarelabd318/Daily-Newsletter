@@ -913,7 +913,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
         for(var j = 1; j < 9; j++){ var w = j % 3 ? '' : ' class="b"'; ks += '<line'+w+' x1="'+(j*100/9)+'" y1="0" x2="'+(j*100/9)+'" y2="100"/><line'+w+' x1="0" y1="'+(j*100/9)+'" x2="100" y2="'+(j*100/9)+'"/>'; }
         K.cages.forEach(function(cg){ var m = Math.min.apply(null, cg.cells); ks += '<text x="'+((m%9)*100/9+1.2)+'" y="'+(Math.floor(m/9)*100/9+4.6)+'">'+cg.sum+'</text>'; });
         var q = '/puzzles/?d=' + d;
-        box.innerHTML = '<h4>Puzzles</h4><div class="f-puz-in">'
+        box.innerHTML = '<h4>Puzzles'+(P.no ? ' · No. '+P.no : '')+'</h4><div class="f-puz-in">'
           + '<a href="'+q+'#cw"><svg viewBox="0 0 100 100" class="cw" aria-hidden="true">'+cw+'</svg><b>The Crossword</b><span>'+n+' by '+n+' · '+(C.clues.across.length + C.clues.down.length)+' clues</span></a>'
           + '<a href="'+q+'#ks"><svg viewBox="0 0 100 100" class="ks" aria-hidden="true">'+ks+'</svg><b>Killer Sudoku</b><span>'+LV[K.level]+' · '+K.cages.length+' cages</span></a></div>';
         box.hidden = false;
