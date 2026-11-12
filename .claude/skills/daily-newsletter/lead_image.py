@@ -70,7 +70,12 @@ def use(date, url, opt):
         sys.exit("Missing: " + ", ".join("--" + k for k in need) + ". Every image carries a caption, a description, a credit, its source page and its license.")
     if not any(x in opt["license"].lower() for x in ("cc by", "cc0", "public domain")) or any(x in opt["license"].lower() for x in ("nc", "nd")):
         sys.exit("License must be CC BY, CC BY-SA, CC0 or public domain (not NC or ND).")
-    from PIL import Image
+    try:   # the image library is not in every run's container: install it on first use
+        from PIL import Image
+    except Exception:
+        import subprocess
+        subprocess.run([sys.executable, "-m", "pip", "install", "-q", "--force-reinstall", "pillow"], capture_output=True)
+        from PIL import Image
     im = Image.open(io.BytesIO(get(url))).convert("RGB")
     if im.width < 700:
         sys.exit(f"Only {im.width} pixels wide: too small to print across the lead column.")
