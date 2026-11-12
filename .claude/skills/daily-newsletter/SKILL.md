@@ -626,7 +626,7 @@ image above it. Give each daily edition one when a suitable image exists; go wit
 
 ## Puzzles (every edition)
 
-Each edition has a crossword and a killer sudoku, played at `/puzzles/` and shown as a Puzzles row on the paper-mode
+Each edition (on Saturdays, the recap) has a crossword and a killer sudoku, played at `/puzzles/` and shown as a Puzzles row on the paper-mode
 front page. `puzzles.py` builds both; the run only writes the clues. Keep it cheap: one `make`, one clues file.
 
 1. `python3 .claude/skills/daily-newsletter/puzzles.py make YYYY-MM-DD --news WORD,WORD` with the edition's date and

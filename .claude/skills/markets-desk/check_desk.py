@@ -240,7 +240,9 @@ def main(args):
     if not RL:
         errors.append("Research: no desk log in data/research/DATE.json. Log searches, pages and each stock checked with research_log.py.")
     else:
-        T = research_log.TARGETS["desk"]
+        T = dict(research_log.TARGETS["desk"])
+        if datetime.date.fromisoformat(date[:10]).weekday() == 5 and date[:10] >= "2026-11-14":
+            T = {"searches": 10, "pages": 10}   # Saturday's lighter run (the skill's Daily run)
         for k in ("searches", "pages"):
             n = len(set(RL.get(k, [])))
             if n < T[k] / 2:

@@ -835,12 +835,37 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
   var FOLD = /^(SAR|AED|QAR|KWD|BHD|OMR)\/EGP|^Gold (21|18)K|^Gold pound/i;
   // ---- the front page: built from the edition's own Today at a Glance, stories, Quick Hits and Weather, with the
   // day's closes from the data log. Daily editions only; if anything it needs is missing, the page stays as it was.
+  // paper mode's puzzle corner: the day's crossword and killer sudoku, drawn small, each a link to play it
+  function fillPuz(box, d){
+    if(!box) return;
+      var now = new Date(), today = now.getFullYear() + '-' + ('0' + (now.getMonth() + 1)).slice(-2) + '-' + ('0' + now.getDate()).slice(-2);
+      function get(x){ return fetch('data/puzzles/' + x + '.json', {cache:'no-cache'}).then(function(r){ if(!r.ok) throw 0; return r.json(); }); }
+      // the newest edition also shows today's puzzles when they went up before the edition did
+      get(d).catch(function(){ if(editions.length && editions[0].date === d && today > d) return get(today); throw 0; }).then(function(P){ d = P.date;
+        var C = P.crossword, n = C.size, cs = 100 / n, cw = '', K = P.killer, ks = '', LV = ['Easy','Easy','Medium','Medium','Hard','Hard','Hardest'];
+        C.grid.forEach(function(row, r){ row.split('').forEach(function(ch, c){ if(ch === '#') cw += '<rect x="'+(c*cs)+'" y="'+(r*cs)+'" width="'+cs+'" height="'+cs+'"/>'; }); });
+        for(var i = 1; i < n; i++) cw += '<line x1="'+(i*cs)+'" y1="0" x2="'+(i*cs)+'" y2="100"/><line x1="0" y1="'+(i*cs)+'" x2="100" y2="'+(i*cs)+'"/>';
+        for(var j = 1; j < 9; j++){ var w = j % 3 ? '' : ' class="b"'; ks += '<line'+w+' x1="'+(j*100/9)+'" y1="0" x2="'+(j*100/9)+'" y2="100"/><line'+w+' x1="0" y1="'+(j*100/9)+'" x2="100" y2="'+(j*100/9)+'"/>'; }
+        K.cages.forEach(function(cg){ var m = Math.min.apply(null, cg.cells); ks += '<text x="'+((m%9)*100/9+1.2)+'" y="'+(Math.floor(m/9)*100/9+4.6)+'">'+cg.sum+'</text>'; });
+        var q = '/puzzles/?d=' + d;
+        box.innerHTML = '<h4>Puzzles'+(P.no ? ' · No. '+P.no : '')+'</h4><div class="f-puz-in">'
+          + '<a href="'+q+'#cw"><svg viewBox="0 0 100 100" class="cw" aria-hidden="true">'+cw+'</svg><b>The Crossword</b><span>'+n+' by '+n+' · '+(C.clues.across.length + C.clues.down.length)+' clues</span></a>'
+          + '<a href="'+q+'#ks"><svg viewBox="0 0 100 100" class="ks" aria-hidden="true">'+ks+'</svg><b>Killer Sudoku</b><span>'+LV[K.level]+' · '+K.cages.length+' cages</span></a></div>';
+        box.hidden = false;
+      }).catch(function(){});
+  }
   function buildFront(ed){
     document.documentElement.classList.remove('has-front');
     var old = document.getElementById('front'); if(old) old.remove();
     var os = document.getElementById('f-strip'); if(os) os.remove();
     [].slice.call(document.querySelectorAll('.p-ear,.p-dateline')).forEach(function(x){ x.remove(); });
-    if(/-recap$/.test(key(ed))) return;
+    if(/-recap$/.test(key(ed))){
+      // Saturday has no daily edition, only the recap: it still gets the day's puzzles (paper mode)
+      var ps = document.createElement('section'); ps.className = 'front'; ps.id = 'front'; ps.innerHTML = '<div class="frame"><div class="f-puz" hidden></div></div>';
+      $('content').insertBefore(ps, $('content').firstChild);
+      fillPuz(ps.querySelector('.f-puz'), ed.date);
+      return;
+    }
     var G = document.getElementById('today-at-a-glance'); if(!G) return;
     var items = [].slice.call(G.querySelectorAll('ol li')).map(function(li){
       var a = li.querySelector('a[href^="#story-"]'), st = li.querySelector('strong');
@@ -901,24 +926,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     }
     h += '<div class="f-puz" hidden></div>';
     var sec = document.createElement('section'); sec.className = 'front'; sec.id = 'front'; sec.innerHTML = '<div class="frame">'+h+'</div>';
-    // paper mode's puzzle corner: the day's crossword and killer sudoku, drawn small, each a link to play it
-    (function(box, d){
-      var now = new Date(), today = now.getFullYear() + '-' + ('0' + (now.getMonth() + 1)).slice(-2) + '-' + ('0' + now.getDate()).slice(-2);
-      function get(x){ return fetch('data/puzzles/' + x + '.json', {cache:'no-cache'}).then(function(r){ if(!r.ok) throw 0; return r.json(); }); }
-      // the newest edition also shows today's puzzles when they went up before the edition did
-      get(d).catch(function(){ if(editions.length && editions[0].date === d && today > d) return get(today); throw 0; }).then(function(P){ d = P.date;
-        var C = P.crossword, n = C.size, cs = 100 / n, cw = '', K = P.killer, ks = '', LV = ['Easy','Easy','Medium','Medium','Hard','Hard','Hardest'];
-        C.grid.forEach(function(row, r){ row.split('').forEach(function(ch, c){ if(ch === '#') cw += '<rect x="'+(c*cs)+'" y="'+(r*cs)+'" width="'+cs+'" height="'+cs+'"/>'; }); });
-        for(var i = 1; i < n; i++) cw += '<line x1="'+(i*cs)+'" y1="0" x2="'+(i*cs)+'" y2="100"/><line x1="0" y1="'+(i*cs)+'" x2="100" y2="'+(i*cs)+'"/>';
-        for(var j = 1; j < 9; j++){ var w = j % 3 ? '' : ' class="b"'; ks += '<line'+w+' x1="'+(j*100/9)+'" y1="0" x2="'+(j*100/9)+'" y2="100"/><line'+w+' x1="0" y1="'+(j*100/9)+'" x2="100" y2="'+(j*100/9)+'"/>'; }
-        K.cages.forEach(function(cg){ var m = Math.min.apply(null, cg.cells); ks += '<text x="'+((m%9)*100/9+1.2)+'" y="'+(Math.floor(m/9)*100/9+4.6)+'">'+cg.sum+'</text>'; });
-        var q = '/puzzles/?d=' + d;
-        box.innerHTML = '<h4>Puzzles'+(P.no ? ' · No. '+P.no : '')+'</h4><div class="f-puz-in">'
-          + '<a href="'+q+'#cw"><svg viewBox="0 0 100 100" class="cw" aria-hidden="true">'+cw+'</svg><b>The Crossword</b><span>'+n+' by '+n+' · '+(C.clues.across.length + C.clues.down.length)+' clues</span></a>'
-          + '<a href="'+q+'#ks"><svg viewBox="0 0 100 100" class="ks" aria-hidden="true">'+ks+'</svg><b>Killer Sudoku</b><span>'+LV[K.level]+' · '+K.cages.length+' cages</span></a></div>';
-        box.hidden = false;
-      }).catch(function(){});
-    })(sec.querySelector('.f-puz'), ed.date);
+    fillPuz(sec.querySelector('.f-puz'), ed.date);
     $('content').insertBefore(sec, $('content').firstChild);
     G.classList.add('in-front'); if(Q && band) Q.classList.add('in-front');
     var SHORT = {'Egypt News':'Egypt','Top World Headlines':'World','Regional and Gulf':'Region','Stocks Watch':'Stocks','Currency and Commodities Watch':'Currencies','In Other News':'Other news','Economic Calendar':'Calendar'};

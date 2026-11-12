@@ -1,13 +1,15 @@
 # Weekly Recap (Saturdays)
 
-Every Saturday a separate run publishes a weekly recap alongside that day's regular edition. It sums up
-the week from Sunday to Saturday. The daily rules on voice, sources, figure checks, linking visuals,
+From November 14, 2026 the recap is Saturday's only edition: there is no regular Saturday edition (the EGX and
+Wall Street are closed and EnterpriseAM does not publish). It sums up the week from Sunday to Saturday and opens with
+the news since Friday's edition. So the recap run also does the daily jobs a Saturday still needs, listed under
+"Saturday's daily jobs" below. The daily rules on voice, sources, figure checks, linking visuals,
 placement and standing alone all apply; the daily section list, word budgets, Today at a Glance links and
 Stocks Watch do not.
 
 - **File:** `editions/DATE-recap.md`, where DATE is the Saturday. In `editions/index.json` add
   `{"date": "DATE", "id": "DATE-recap", "label": "Weekly Recap", "summary": "..."}` and keep every other
-  entry, including that day's regular edition.
+  entry. There is no regular edition for a Saturday from November 14, 2026.
 - **Research:** start from that week's editions in `editions/` (Sunday to Saturday, including any second
   edition of a day), then search for how each big story developed and ended up. Report where things stand
   now, not what was said on each day. Check every figure as usual.
@@ -15,6 +17,12 @@ Stocks Watch do not.
 - **First line:** an italic sentence with the week's dates and what it was about, for example
   `*Week of 25 to 31 October 2026: a rate hold, a weaker pound and Egypt's Saudi deployment vote.*`
 - **Sections,** in this order, each as `##` with exactly these titles:
+  0. **Since Friday:** what is new since Friday's edition went out: two to four items, only stories that matter
+     (a decision, an attack, a big result), each `**Label:** two or three sentences` with its source, the same as a
+     daily story. Never pad: on a quiet day write one item saying the main stories of the week stand as below. A
+     story that changed since Friday is told here as it now stands and not repeated in full further down. Then two
+     lines: `**Weather:** Cairo today and tomorrow in one sentence` and `**What to watch today:** ...` as in a daily
+     edition. About 150 to 300 words in all, on top of the recap's length.
   1. **The Week in Brief:** a numbered list of 7 to 10 of the week's biggest stories, Egypt first, each
      `**Label:** one sentence`. No links.
   2. **What Tied the Week Together:** the week's essay, 200 to 260 words in two or three paragraphs with no bold
@@ -49,6 +57,14 @@ Stocks Watch do not.
   9. **The Week Ahead:** the key scheduled events for the coming week (central bank meetings, data,
      holidays and closures, big matches).
   10. **Sources:** the links used.
+- **Saturday's daily jobs** (the run does these as a daily run would, following the main skill):
+  - **Figures:** `fetch_figures.py DATE`, check them, and log them with `log_figures.py DATE ...` as the main skill's
+    "Fetch the figures first" and "Log the day's figures" describe. The EGX is closed, so its figures are Thursday's
+    and are not logged again; Wall Street's are Friday's closes; gold, Brent, Bitcoin and the pound are the latest.
+    The desk's Saturday run relies on this entry.
+  - **Puzzles:** the Saturday crossword (11 by 11) and the week's hardest killer sudoku, made, clued and checked as
+    the main skill's "Puzzles" section describes; commit `data/puzzles/DATE.json`. The recap page shows them.
+  - **Research log:** log every search and page under `newsletter` (the recap is Saturday's newsletter).
 - On the recap page, the site draws year-long trend lines next to the Markets This Week rows by itself;
   nothing to add for that.
 - **Data log check:** before committing, run

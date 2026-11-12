@@ -19,6 +19,13 @@ for anything the desk needs beyond the edition (the stock research below, flows,
 or change the newsletter, and do not log figures the edition already logged. On days with no session (Friday and Saturday for the EGX, Saturday and Sunday for the US) the
 closes are the last session's; the news, stock research and analysis are still updated.
 
+**Saturdays (from November 14, 2026) are a lighter run.** There is no Saturday edition: start from the Weekly Recap
+(`editions/DATE-recap.md`, which also logs Saturday's figures) and Friday's edition. The job is Friday's Wall Street
+session (the USA section, its stories, movers and the US stocks that moved) and the week's figures. The EGX last
+traded on Thursday and Friday's run already covered it: carry the Egypt section over from Friday, updating only what
+changed (news since Friday, a view due, results published on Friday or Saturday), and skip the per-stock research for
+Egyptian stocks unless one has news. The research floor is 10 searches and 10 pages on a Saturday.
+
 1. Copy the newest `desk/days/*.json` as a template to `desk/days/DATE.json` (DATE is the edition date) and
    rewrite every part for today: set `date`, `asOf` (the latest close, the day before DATE on a trading
    day), `fetched`, and remove `"sample": true`. The close card figures come from today's logged figures. Egypt's group lists the EGX30, the EGX70 EWI, USD/EGP and gold 24K

@@ -307,6 +307,11 @@ def main(path):
             expected = expected[:1] + ["What Tied the Week Together"] + expected[1:]
         else:
             warnings.append('No "What Tied the Week Together" section after The Week in Brief (see the skill, Weekly Recap).')
+        # from 14 November 2026 the recap is Saturday's only edition and opens with the news since Friday
+        if "Since Friday" in order:
+            expected = ["Since Friday"] + expected
+        elif os.path.basename(path)[:10] >= "2026-11-14":
+            errors.append('No "Since Friday" section at the top: the recap is Saturday\'s only edition (refs/saturday.md).')
     if order != expected:
         missing = [s for s in expected if s not in order]
         extra = [s for s in order if s not in expected]
