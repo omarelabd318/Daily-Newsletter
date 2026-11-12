@@ -4,15 +4,15 @@
  "crossword": {
   "size": 9,
   "grid": [
-   "YES###MAP",
-   "ERASE#AGE",
-   "PANEL#SIR",
-   "###LEMON#",
-   "#CALMING#",
-   "#RISEN###",
-   "BAD#NOBLE",
-   "ONE#TRAIN",
-   "BED###RED"
+   "HOW###TWO",
+   "EVER#CHIN",
+   "RARE#LANE",
+   "#LEANING#",
+   "###DON###",
+   "#SPIRITS#",
+   "UPON#CROP",
+   "SING#SOLO",
+   "END###YEP"
   ],
   "clues": {
    "across": [
@@ -21,120 +21,120 @@
      "row": 0,
      "col": 0,
      "len": 3,
-     "answer": "YES",
-     "clue": "Vote that carries a motion"
+     "answer": "HOW",
+     "clue": "Question word that wants a method, not a reason"
     },
     {
      "n": 4,
      "row": 0,
      "col": 6,
      "len": 3,
-     "answer": "MAP",
-     "clue": "It shows the lie of the land"
+     "answer": "TWO",
+     "clue": "Number of boutiques Karen Wazen has just opened in Egypt"
     },
     {
      "n": 7,
      "row": 1,
      "col": 0,
-     "len": 5,
-     "answer": "ERASE",
-     "clue": "Wipe from the board"
+     "len": 4,
+     "answer": "EVER",
+     "clue": "At any time, as in a fairy tale's happily ___ after"
+    },
+    {
+     "n": 9,
+     "row": 1,
+     "col": 5,
+     "len": 4,
+     "answer": "CHIN",
+     "clue": "It may be kept up in hard times"
     },
     {
      "n": 10,
-     "row": 1,
-     "col": 6,
-     "len": 3,
-     "answer": "AGE",
-     "clue": "Bronze or Iron, for one"
+     "row": 2,
+     "col": 0,
+     "len": 4,
+     "answer": "RARE",
+     "clue": "Like a steak served barely cooked, or a blue moon"
     },
     {
      "n": 11,
      "row": 2,
-     "col": 0,
-     "len": 5,
-     "answer": "PANEL",
-     "clue": "Group of judges, or a solar collector"
+     "col": 5,
+     "len": 4,
+     "answer": "LANE",
+     "clue": "Swimmer's strip, or a bowler's"
     },
     {
      "n": 12,
-     "row": 2,
-     "col": 6,
-     "len": 3,
-     "answer": "SIR",
-     "clue": "Title for a knight"
+     "row": 3,
+     "col": 1,
+     "len": 7,
+     "answer": "LEANING",
+     "clue": "Like Pisa's famous tower"
     },
     {
-     "n": 13,
-     "row": 3,
+     "n": 14,
+     "row": 4,
      "col": 3,
-     "len": 5,
-     "answer": "LEMON",
-     "clue": "Car that keeps breaking down"
+     "len": 3,
+     "answer": "DON",
+     "clue": "Put on, as a coat"
     },
     {
      "n": 15,
-     "row": 4,
-     "col": 1,
-     "len": 7,
-     "answer": "CALMING",
-     "clue": "Soothing, like the Nile at dusk"
-    },
-    {
-     "n": 17,
      "row": 5,
      "col": 1,
-     "len": 5,
-     "answer": "RISEN",
-     "clue": "Up, as dough or the EGX30 on Tuesday"
-    },
-    {
-     "n": 18,
-     "row": 6,
-     "col": 0,
-     "len": 3,
-     "answer": "BAD",
-     "clue": "Rotten"
+     "len": 7,
+     "answer": "SPIRITS",
+     "clue": "They may be lifted, or poured at a bar"
     },
     {
      "n": 19,
      "row": 6,
-     "col": 4,
-     "len": 5,
-     "answer": "NOBLE",
-     "clue": "Like argon, among gases"
+     "col": 0,
+     "len": 4,
+     "answer": "UPON",
+     "clue": "Once ___ a time"
+    },
+    {
+     "n": 20,
+     "row": 6,
+     "col": 5,
+     "len": 4,
+     "answer": "CROP",
+     "clue": "Harvest, or trim a photo"
+    },
+    {
+     "n": 22,
+     "row": 7,
+     "col": 0,
+     "len": 4,
+     "answer": "SING",
+     "clue": "What a canary does, in a police drama"
     },
     {
      "n": 23,
      "row": 7,
-     "col": 0,
-     "len": 3,
-     "answer": "ONE",
-     "clue": "Ace, in a deck"
+     "col": 5,
+     "len": 4,
+     "answer": "SOLO",
+     "clue": "Performance with no backing band"
     },
     {
      "n": 24,
-     "row": 7,
-     "col": 4,
-     "len": 5,
-     "answer": "TRAIN",
-     "clue": "It ran again on the Cairo-High Dam line this week"
+     "row": 8,
+     "col": 0,
+     "len": 3,
+     "answer": "END",
+     "clue": "Finish line?"
     },
     {
      "n": 25,
      "row": 8,
-     "col": 0,
-     "len": 3,
-     "answer": "BED",
-     "clue": "Place for a river, or for roses"
-    },
-    {
-     "n": 26,
-     "row": 8,
      "col": 6,
      "len": 3,
-     "answer": "RED",
-     "clue": "In debt, so to speak"
+     "answer": "YEP",
+     "clue": "Casual agreement"
     }
    ],
    "down": [
@@ -143,120 +143,120 @@
      "row": 0,
      "col": 0,
      "len": 3,
-     "answer": "YEP",
-     "clue": "Casual agreement"
+     "answer": "HER",
+     "clue": "Pronoun that can follow 'about'"
     },
     {
      "n": 2,
      "row": 0,
      "col": 1,
-     "len": 3,
-     "answer": "ERA",
-     "clue": "Period in history"
+     "len": 4,
+     "answer": "OVAL",
+     "clue": "Shape of a rugby ball or a racetrack"
     },
     {
      "n": 3,
      "row": 0,
      "col": 2,
-     "len": 3,
-     "answer": "SAN",
-     "clue": "___ Francisco"
+     "len": 4,
+     "answer": "WERE",
+     "clue": "If I ___ you..."
     },
     {
      "n": 4,
      "row": 0,
      "col": 6,
-     "len": 5,
-     "answer": "MASON",
-     "clue": "Pyramid builder, perhaps"
+     "len": 4,
+     "answer": "THAN",
+     "clue": "Comparison word in 'better ___ nothing'"
     },
     {
      "n": 5,
      "row": 0,
      "col": 7,
-     "len": 5,
-     "answer": "AGING",
-     "clue": "Growing older"
+     "len": 4,
+     "answer": "WING",
+     "clue": "Part of a plane, a bird or a hospital"
     },
     {
      "n": 6,
      "row": 0,
      "col": 8,
      "len": 3,
-     "answer": "PER",
-     "clue": "For each"
+     "answer": "ONE",
+     "clue": "Ace, in a deck"
     },
     {
      "n": 8,
      "row": 1,
      "col": 3,
-     "len": 5,
-     "answer": "SELLS",
-     "clue": "Offloads, as foreign investors did, then didn't"
+     "len": 7,
+     "answer": "READING",
+     "clue": "Glasses for this help with small print"
     },
     {
      "n": 9,
      "row": 1,
-     "col": 4,
+     "col": 5,
      "len": 7,
-     "answer": "ELEMENT",
-     "clue": "Something on the periodic table"
+     "answer": "CLINICS",
+     "clue": "Places where patients are seen without staying overnight"
     },
     {
-     "n": 14,
+     "n": 13,
      "row": 3,
-     "col": 5,
-     "len": 5,
-     "answer": "MINOR",
-     "clue": "Under 18, or a key of sadness"
+     "col": 4,
+     "len": 3,
+     "answer": "NOR",
+     "clue": "Neither's partner"
     },
     {
      "n": 15,
-     "row": 4,
+     "row": 5,
      "col": 1,
-     "len": 5,
-     "answer": "CRANE",
-     "clue": "Bird or building-site machine"
+     "len": 4,
+     "answer": "SPIN",
+     "clue": "Turn quickly, or slant a story"
     },
     {
      "n": 16,
-     "row": 4,
+     "row": 5,
      "col": 2,
-     "len": 5,
-     "answer": "AIDED",
-     "clue": "Lent a hand"
+     "len": 4,
+     "answer": "POND",
+     "clue": "Duck's home, smaller than a lake"
+    },
+    {
+     "n": 17,
+     "row": 5,
+     "col": 6,
+     "len": 4,
+     "answer": "TROY",
+     "clue": "City besieged with a wooden horse"
     },
     {
      "n": 18,
+     "row": 5,
+     "col": 7,
+     "len": 4,
+     "answer": "SOLE",
+     "clue": "Only, or the bottom of a shoe"
+    },
+    {
+     "n": 19,
      "row": 6,
      "col": 0,
      "len": 3,
-     "answer": "BOB",
-     "clue": "Haircut, or float on water"
-    },
-    {
-     "n": 20,
-     "row": 6,
-     "col": 6,
-     "len": 3,
-     "answer": "BAR",
-     "clue": "Lawyers' body, or a chocolate shape"
+     "answer": "USE",
+     "clue": "Put to work"
     },
     {
      "n": 21,
      "row": 6,
-     "col": 7,
-     "len": 3,
-     "answer": "LIE",
-     "clue": "Fib"
-    },
-    {
-     "n": 22,
-     "row": 6,
      "col": 8,
      "len": 3,
-     "answer": "END",
-     "clue": "Finish line?"
+     "answer": "POP",
+     "clue": "Fizzy drink, or a genre of chart music"
     }
    ]
   },
