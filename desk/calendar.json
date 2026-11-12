@@ -1,25 +1,7 @@
 {
  "note": "The desk's stocks' coming results and dividends, from TradingView (fetch_calendar.py); for the US stocks, declared dividends and stock splits from Polygon. Results dates for Egyptian companies are often TradingView's estimate until the company announces one.",
- "fetched": "2026-11-11",
+ "fetched": "2026-11-12",
  "items": [
-  {
-   "t": "EFID",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-11-11",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
-  {
-   "t": "JUFO",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-11-11",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
   {
    "t": "AAPL",
    "market": "us",
@@ -32,12 +14,30 @@
    "src": "Polygon"
   },
   {
+   "t": "EFID",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-12",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
    "t": "ETEL",
    "market": "egx",
    "kind": "results",
    "date": "2026-11-12",
    "period": "2026-09-30",
    "time": "before the open",
+   "expected": true
+  },
+  {
+   "t": "JUFO",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-12",
+   "period": "2026-09-30",
+   "time": null,
    "expected": true
   },
   {
@@ -280,6 +280,24 @@
    "date": "2027-01-14",
    "period": "2026-12-31",
    "time": "before the open",
+   "expected": true
+  },
+  {
+   "t": "MSFT",
+   "market": "us",
+   "kind": "results",
+   "date": "2027-01-26",
+   "period": "2026-12-31",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "NFLX",
+   "market": "us",
+   "kind": "results",
+   "date": "2027-01-26",
+   "period": "2026-12-31",
+   "time": null,
    "expected": true
   }
  ],
