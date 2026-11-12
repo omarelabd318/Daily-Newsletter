@@ -110,7 +110,17 @@
   function speculate() {
     if (document.querySelector('script[type=speculationrules]') || !(HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules'))) return;
     const sr = document.createElement('script'); sr.type = 'speculationrules';
-    sr.textContent = JSON.stringify({ prerender: [{ where: { and: [{ href_matches: '/desk/*' }, { not: { href_matches: '/desk/*.json' } }, { not: { selector_matches: '[download]' } }] }, eagerness: 'moderate' }] });
+    const rules = [{ where: { and: [{ href_matches: '/desk/*' }, { not: { href_matches: '/desk/*.json' } }, { not: { selector_matches: '[download]' } }] }, eagerness: 'moderate' }];
+    // the pages of the market being read are the likely next clicks: they load straight away (at most four, and not on
+    // a slow or data-saving connection); the rest load when the pointer rests on their link
+    const c = navigator.connection || {};
+    const top = where(location.pathname, false).top;
+    if (top && SUB[top] && !c.saveData && !/(^|-)2g|3g/.test(c.effectiveType || '')) {
+      const here = location.pathname + location.search;
+      const urls = SUB[top].map(([, h]) => h).filter((h) => h !== here && h !== location.pathname).slice(0, 4);
+      if (urls.length) rules.unshift({ source: 'list', urls, eagerness: 'immediate' });
+    }
+    sr.textContent = JSON.stringify({ prerender: rules });
     document.head.appendChild(sr);
   }
   // the desk read aloud (desk_audio.py): "Listen to the day" at the right of the top row, after Runs, on every desk page;
