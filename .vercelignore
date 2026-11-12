@@ -1,0 +1,4 @@
+# files the site never serves: kept in the repo, left out of each Vercel deployment (each one stores a full copy)
+.claude
+README.md
+.taste-skill
