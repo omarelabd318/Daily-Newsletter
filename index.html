@@ -497,6 +497,23 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 :root[data-theme="paper"] .f-more{font:italic 13px var(--serif);float:right}
 :root[data-theme="paper"] .f-col h3{font:var(--p-hw) 24px/1.1 var(--p-head),var(--serif)}
 :root[data-theme="paper"] .f-col article{border-top-color:var(--ink)}
+@media (max-width:1040px){ :root[data-theme="paper"] .f-main > .f-rail{border-left:0;padding-left:0} }
+/* paper mode without a lead photo: the lead runs across the two left columns with the next three stories in a row
+   beneath it, so the page has no empty block under a short lead; the rail keeps the right */
+@media (min-width:1041px){
+  :root[data-theme="paper"] .f-main.no-img{grid-template-columns:3.05fr .9fr;grid-template-rows:auto 1fr;grid-template-areas:"lead rail" "col rail"}
+  :root[data-theme="paper"] .f-main.no-img > .f-lead{grid-area:lead}
+  :root[data-theme="paper"] .f-main.no-img > .f-rail{grid-area:rail;align-self:stretch}
+  :root[data-theme="paper"] .f-main.no-img > .f-col{grid-area:col;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:start;margin-top:16px;padding:12px 26px 0 0;border-left:0;border-top:3px double var(--ink)}
+  :root[data-theme="paper"] .f-main.no-img > .f-col article{padding:0 18px;border-top:0;border-left:1px solid var(--ink);align-self:stretch}
+  :root[data-theme="paper"] .f-main.no-img > .f-col article:first-of-type{padding-left:0;border-left:0}
+  :root[data-theme="paper"] .f-main.no-img > .f-col article:last-of-type{padding-right:0}
+  :root[data-theme="paper"] .f-main.no-img .f-body{columns:3}
+  :root[data-theme="paper"] .f-main.no-img > .f-col > .f-inside{grid-column:1 / -1;margin-top:14px}
+  :root[data-theme="paper"] .f-main.no-img > .f-col > .f-inside ol{columns:3;column-gap:28px}
+  :root[data-theme="paper"] .f-main.no-img > .f-col > .f-inside li{break-inside:avoid}
+  :root[data-theme="paper"] .f-main.no-img > .f-col > .f-inside li:nth-child(4){border-top:0}
+}
 :root[data-theme="paper"] .f-col p,:root[data-theme="paper"] .f-band p{color:var(--ink);font-size:15px;line-height:1.42}
 :root[data-theme="paper"] .f-kick{color:var(--ink);font-size:10px}
 :root[data-theme="paper"] .f-mbox{display:block;margin:0 0 14px;padding:9px 11px;border:1px solid var(--ink)}
@@ -905,7 +922,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
       + '<figcaption>'+esc(im.caption || '')+' <span>'+(im.url ? '<a href="'+esc(im.url)+'" target="_blank" rel="noopener">' : '')+esc(im.credit || '')+(im.url ? '</a>' : '')+'</span></figcaption></figure>' : '';
     // paper mode sets the lead's headline as a banner across the page, with the next stories named under it
     var h = '<div class="f-banner"><h2>'+link(lead, esc(lead.text))+'</h2>'+(restTxt.length > 120 ? '<p class="f-deck">'+esc(dek)+'</p>' : '')+'<p class="f-others">'+mid.map(function(it){ return esc(it.text); }).join(' \u00b7 ')+'</p></div>'
-      + '<div class="f-main"><div class="f-lead"><span class="f-kick">'+esc(lead.label || 'The big story')+'</span><h2>'+link(lead, esc(lead.text))+'</h2>'+fig+'<div class="f-by">'+esc(lead.label || 'The big story')+' \u00b7 '+esc(sectionOf(lead.story))+'</div>'+(restTxt.length > 120 ? '<p class="f-dek">'+esc(dek)+'</p><p class="f-body">'+esc(restTxt)+'</p>' : '<p class="f-body cap">'+lhtml+'</p>')
+      + '<div class="f-main'+(fig ? '' : ' no-img')+'"><div class="f-lead"><span class="f-kick">'+esc(lead.label || 'The big story')+'</span><h2>'+link(lead, esc(lead.text))+'</h2>'+fig+'<div class="f-by">'+esc(lead.label || 'The big story')+' \u00b7 '+esc(sectionOf(lead.story))+'</div>'+(restTxt.length > 120 ? '<p class="f-dek">'+esc(dek)+'</p><p class="f-body">'+esc(restTxt)+'</p>' : '<p class="f-body cap">'+lhtml+'</p>')
       + link(lead, '<span class="f-more">Continue in '+esc(sectionOf(lead.story))+' ↓</span>') + '</div><div class="f-col">'
       + mid.map(function(it){ return '<article><span class="f-kick">'+esc(it.label)+'</span><h3>'+link(it, esc(it.text))+'</h3><p data-s="'+esc(JSON.stringify(sentences(it.story)))+'">'+esc(first(it.story))+'</p></article>'; }).join('') + '</div><div class="f-rail"><div class="f-mbox" id="f-mbox"></div>'
       + (rest.length ? '<h4>Also today</h4><ol class="f-glance">'+rest.map(function(it, i){ return '<li><span><small>'+esc(it.label)+'</small>'+link(it, esc(it.text))+'</span></li>'; }).join('')+'</ol>' : '')
@@ -962,18 +979,24 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
       if(window.innerWidth <= 1040) return;
       // paper mode: the what-to-watch box goes under the lead or at the foot of the rail, whichever column is shorter
       if(wt && paper){ wt.remove(); var hl = h(L), hr = h(R); if(hl < hr) L.appendChild(wt); else if(ins) R.insertBefore(wt, ins); else R.appendChild(wt); }
-      var target = Math.max(h(L), h(R)), best = null;
-      [1,2,3,4].forEach(function(n){ setN(n); var d = Math.abs(h(C) - target) + (h(C) > target + 24 ? 60 : 0); if(!best || d < best.d) best = {d:d, n:n}; });
+      var below = paper && sec.querySelector('.f-main.no-img');
+      if(below && wt && wt.parentNode !== L){ wt.remove(); L.appendChild(wt); }   // under the lead, above the row of stories
+      // without a photo, Inside today runs across the foot of the stories (the rail would otherwise be far the longest)
+      if(ins){ if(below){ if(ins.parentNode !== C) C.appendChild(ins); } else if(ins.parentNode !== R) R.appendChild(ins); }
+      var hc = below ? function(){ return C.offsetHeight; } : function(){ return h(C); };
+      var target = below ? Math.max(h(R) - L.offsetHeight - 16 - (ins ? ins.offsetHeight + 14 : 0), 120) : Math.max(h(L), h(R)), best = null;
+      var hc0 = hc; if(below && ins) hc = function(){ return hc0() - ins.offsetHeight - 14; };
+      [1,2,3,4].forEach(function(n){ setN(n); var d = Math.abs(hc() - target) + (hc() > target + 24 ? 60 : 0); if(!best || d < best.d) best = {d:d, n:n}; });
       setN(best.n);
       // when even one sentence each leaves the column far longer than its neighbours, the longest summary is shortened
       // at a word, never inside or right after a figure and never on a small word, and ends with an ellipsis
       var SMALL = /^(the|a|an|of|to|and|or|in|on|at|by|for|from|with|about|against|as|than|its|their|his|her|up|down)$/i, FIG = /[\d$\u00a3\u20ac%]|^(EGP|USD|billion|million|trillion|bn|percent)$/i;
-      for(var guard = 0; h(C) > target + 40 && guard < 6; guard++){
+      for(var guard = 0; !below && hc() > target + 40 && guard < 6; guard++){   // (in a row under the lead, whole sentences only)
         var p = ps.slice().sort(function(a, b){ return b.offsetHeight - a.offsetHeight; })[0]; if(!p) break;
         var w = p.textContent.replace(/\u2026$/, '').split(/\s+/);
         // a clean end: drop small words and figures (and the word a figure leads into) from the tail
         var tidy = function(){ while(w.length > 6 && (SMALL.test(w[w.length-1].replace(/[,;:]$/, '')) || FIG.test(w[w.length-1]) || FIG.test(w[w.length-2] || ''))) w.pop(); p.textContent = w.join(' ').replace(/[,;:\u2013\u2014-]+$/, '') + '\u2026'; };
-        while(w.length > 10 && h(C) > target + 24){ w.pop(); tidy(); }
+        while(w.length > 10 && hc() > target + 24){ w.pop(); tidy(); }
         if(w.length <= 10) break;
       }
     }
