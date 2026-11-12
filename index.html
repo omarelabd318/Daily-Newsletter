@@ -520,6 +520,10 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 :root[data-theme="paper"] .s-body h3{font-family:var(--p-head),var(--serif);font-weight:var(--p-hw)}
 :root[data-theme="paper"] .tchips,:root[data-theme="paper"] .topics{display:none}
 :root[data-theme="paper"] .run .keep{break-inside:avoid}
+:root[data-theme="paper"] .s h2{margin-bottom:14px}
+:root[data-theme="paper"] .s-body h3{margin:26px 0 8px;line-height:1.15} :root[data-theme="paper"] .s-body h3:first-child{margin-top:0}
+/* a bold story title in a slightly larger size must not make its first line taller than the column beside it */
+:root[data-theme="paper"] .s-body p > strong:first-child,:root[data-theme="paper"] .s-body li > strong:first-child{line-height:1}
 /* paper mode has no fade-in: a story still sliding up into place sits 22px low, and in newspaper columns that left
    a whole column starting a line below its neighbours */
 .js:root[data-theme="paper"] .rv{opacity:1;transform:none;transition:none}
