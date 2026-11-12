@@ -279,7 +279,10 @@ td.trend{vertical-align:middle}
 .listen svg{width:16px;height:16px;fill:currentColor}
 .listen:hover{background:var(--ink);color:var(--ground)}
 .listen-m{font:14px var(--sans);color:var(--ink2)}
-.reading{background:color-mix(in srgb,var(--accent) 12%,transparent);box-shadow:0 0 0 6px color-mix(in srgb,var(--accent) 12%,transparent);border-radius:2px;transition:background .3s var(--ease)}
+.reading{position:relative;isolation:isolate}
+/* the block being read: a tint behind the text reaching 6px past it, drawn as its own layer so it stops at the last
+   line (the space after a story in columns is padding or a transparent border, which the tint must not cover) */
+.reading::before{content:"";position:absolute;z-index:-1;top:-6px;left:-6px;right:-6px;bottom:calc(var(--rd-gap,0px) - 6px);background:color-mix(in srgb,var(--accent) 12%,transparent);border-radius:2px;pointer-events:none}
 #player{position:fixed;left:0;right:0;bottom:0;z-index:50;padding:10px var(--pad) calc(10px + env(safe-area-inset-bottom));background:var(--ground);border-top:1px solid var(--ink);box-shadow:0 -8px 24px rgba(0,0,0,.08)}
 #player[hidden]{display:none}
 .pl-in{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,1.3fr) minmax(0,1fr);grid-template-areas:"now prog right" "now ctl right";align-items:center;gap:2px 24px}
@@ -567,7 +570,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
   :root[data-theme="paper"] .run > p,:root[data-theme="paper"] .run li{break-inside:auto;orphans:3;widows:3}
   /* the gap between stories is padding, not margin: some browsers (Safari) carry a margin over into the next
      column, which pushed that column's first story down a line */
-  :root[data-theme="paper"] .s-body .run > p{margin:0;padding-bottom:18px}
+  :root[data-theme="paper"] .s-body .run > p{margin:0;padding-bottom:18px;--rd-gap:18px}
   :root[data-theme="paper"] .run > blockquote,:root[data-theme="paper"] .run .tchips{break-inside:avoid}
   :root[data-theme="paper"] .run > p + p{margin-top:0}
   /* a part with only two stories (Weather) runs in two columns, not three with one left empty */

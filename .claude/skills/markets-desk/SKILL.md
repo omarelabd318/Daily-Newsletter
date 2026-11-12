@@ -91,6 +91,11 @@ Egyptian stocks unless one has news. The research floor is 10 searches and 10 pa
    of it that gives all three (Daily News Egypt, Arab Finance, Egypt Today), with `source` and `url`.
 7. Run `python3 .claude/skills/markets-desk/check_desk.py`, fix every ERROR, then commit and push as for
    the edition (message `Desk DATE`).
+8. After the desk is pushed, record its spoken summary: `python3 .claude/skills/markets-desk/desk_audio.py DATE`
+   (about two to four minutes; no writing: it builds a 8 to 9 minute script from desk/days/DATE.json, records it in the
+   Heart voice and publishes it, for the Listen button under each dashboard's finding). Then commit
+   `desk/listen/DATE.md` and `data/audio/` as `Desk DATE: audio` and push. If it prints "Audio not made", leave it:
+   the dashboards then show no button. Never commit an MP3.
 
 ## The desk's stocks
 

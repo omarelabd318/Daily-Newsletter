@@ -234,8 +234,9 @@ def record(key, voice, out_mp3):
     import numpy as np
     import soundfile as sf
     V = Voice(voice)
-    d = datetime.date.fromisoformat(key[:10])
-    bl = [{"sec": "", "n": 0, "kind": "title", "text": f"Daily Newsletter. {d:%A, %B} {d.day}, {d.year}."}] + R.load(key)
+    d = datetime.date.fromisoformat(key[5:15] if key.startswith("desk-") else key[:10])
+    name = "Markets Desk" if key.startswith("desk-") else "Daily Newsletter"
+    bl = [{"sec": "", "n": 0, "kind": "title", "text": f"{name}. {d:%A, %B} {d.day}, {d.year}."}] + R.load(key)
     sr, parts, segs, t = 24000, [], [], 0.0
     pause = lambda s: (parts.append(np.zeros(int(sr * s), dtype=np.float32)), s)[1]
     for i, b in enumerate(bl):
@@ -329,7 +330,7 @@ def main(a):
         sys.exit(__doc__)
     key = args[0]
     local = "--local" in a
-    src = os.path.join(ROOT, "editions", key + ".md")
+    src = R.source(key)
     if not os.path.exists(src):
         sys.exit(f"No edition {key}")
     import hashlib
@@ -365,8 +366,10 @@ def main(a):
             print(f"Recorded {key} locally: " + "; ".join(report) + ".")
             return
         # keep the newest KEEP editions' audio; the older manifests go (the site then uses the device's voice)
-        mans = sorted(f[:-5] for f in os.listdir(AUDIO) if f.endswith(".json"))
-        keep = sorted(set(mans + [key]))[-KEEP:]
+        # the newsletter keeps its last KEEP editions and the desk its last seven, each counted on its own
+        mans = sorted(f[:-5] for f in os.listdir(AUDIO) if f.endswith(".json") and not f.startswith("feed"))
+        allk = sorted(set(mans + [key]))
+        keep = [k for k in allk if not k.startswith("desk-")][-KEEP:] + [k for k in allk if k.startswith("desk-")][-7:]
         files, kept = {}, {}
         for k2 in keep:
             m = {"edition": key, "source": digest, "voices": entries} if k2 == key else json.load(open(os.path.join(AUDIO, k2 + ".json")))

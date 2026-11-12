@@ -115,8 +115,15 @@ def blocks(md):
     return out
 
 
+def source(key):
+    """The text a key is read from: an edition, or the desk's spoken summary (desk-DATE, from desk_audio.py)."""
+    if key.startswith("desk-"):
+        return os.path.join(ROOT, "desk", "listen", key[5:] + ".md")
+    return os.path.join(ROOT, "editions", key + ".md")
+
+
 def load(key):
-    return blocks(open(os.path.join(ROOT, "editions", key + ".md")).read())
+    return blocks(open(source(key)).read())
 
 
 if __name__ == "__main__":

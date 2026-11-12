@@ -478,3 +478,14 @@ a.tag:hover{color:var(--text);text-decoration:underline;text-underline-offset:2p
    chart and the movers live on the market's own page, a tap away from the figures and the menu */
 body[data-day] #c-chart,body[data-day] #c-movers{display:none!important}
 body[data-day] .toprow{display:block}
+
+/* the desk read aloud */
+.d-listen{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:12px 0 0;max-width:82ch}
+.d-play{display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border:1px solid var(--text);border-radius:999px;background:var(--text);color:var(--ground);font:600 12px/1 var(--font);letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+.d-play:hover{opacity:.85} .d-ico{font-size:10px}
+.d-len{font:500 12px var(--font);color:var(--muted);font-variant-numeric:tabular-nums}
+.d-rate{padding:3px 8px;border:1px solid var(--muted);border-radius:999px;background:none;color:var(--muted);font:600 11px var(--font);cursor:pointer;display:none}
+.d-listen.on .d-rate{display:inline-block}
+.d-bar{display:none;flex:1 1 160px;height:4px;border-radius:2px;background:color-mix(in srgb,var(--muted) 30%,transparent);cursor:pointer;position:relative}
+.d-listen.on .d-bar{display:block}
+.d-bar i{position:absolute;inset:0 auto 0 0;width:0;border-radius:2px;background:var(--text)}

@@ -46,7 +46,7 @@ def main():
         index = {}
     mans = []
     for f in sorted(os.listdir(AUDIO), reverse=True):
-        if f.endswith(".json"):
+        if f.endswith(".json") and not f.startswith("desk-"):   # the desk's summaries are not podcast episodes
             try:
                 mans.append(json.load(open(os.path.join(AUDIO, f))))
             except Exception:
