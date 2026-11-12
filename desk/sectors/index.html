@@ -20,7 +20,7 @@
   </div></div>
   <div class="pages">
     <section class="card c12"><div class="card-h"><h2>The sectors side by side</h2><span class="meta" id="sx-meta"></span></div><div class="fv-wrap"><table class="fv sx" id="sx-all"></table></div>
-      <p class="sub">P/E and upside are the middle stock's in each sector; the month's move is the average of its EGX30 members. Sorted by upside to fair value.</p></section>
+      <p class="sub">P/E, upside and the moves are the middle stock's in each sector. Sorted by upside to fair value.</p></section>
     <div class="c12 sx-grid" id="sx"></div>
   </div>
 </main>
@@ -32,12 +32,14 @@
   const M = Desk, D = await M.init('/desk/sectors/'); if (!D) return;
   const [F, N, MV] = await Promise.all([M.get('/desk/fairvalue.json'), M.get('/desk/sectors.json'), M.get('/desk/movers.json')]);
   if (!F || !F.stocks) { M.$('sx').innerHTML = '<p class="sub">No sector figures yet.</p>'; return; }
-  const heat = {}; (((MV || {}).egx || {}).heat || {}).rows?.forEach((r) => { heat[r.t] = r; });
+  // each stock's last session and past month, all from one source and one date: the fair-value file's (TradingView's,
+  // fetched with the prices); the EGX30 heatmap only covers the index members
+  const heat = {}; F.stocks.forEach((x) => { heat[x.t] = { d1: x.d1, m1: x.m1 }; });
   const med = (a) => { const s = a.filter((v) => v != null).sort((x, y) => x - y); return s.length ? (s.length % 2 ? s[(s.length - 1) / 2] : (s[s.length / 2 - 1] + s[s.length / 2]) / 2) : null; };
   const avg = (a) => { const s = a.filter((v) => v != null); return s.length ? s.reduce((x, y) => x + y, 0) / s.length : null; };
   const G = {}; F.stocks.forEach((x) => { (G[x.group] = G[x.group] || []).push(x); });
   const rows = Object.entries(G).filter(([g, l]) => l.length >= 2 && g !== 'Other').map(([g, l]) => ({ g, l: l.slice().sort((a, b) => b.upside - a.upside), pe: med(l.map((x) => x.pe)), up: med(l.map((x) => x.upside)), roe: med(l.map((x) => x.roe)),
-    d1: avg(l.map((x) => heat[x.t] && heat[x.t].d1)), m1: avg(l.map((x) => heat[x.t] && heat[x.t].m1)), cap: l.reduce((s, x) => s + (x.cap || 0), 0) })).sort((a, b) => b.up - a.up);
+    d1: med(l.map((x) => heat[x.t] && heat[x.t].d1)), m1: med(l.map((x) => heat[x.t] && heat[x.t].m1)), cap: l.reduce((s, x) => s + (x.cap || 0), 0) })).sort((a, b) => b.up - a.up);
   const id = (g) => 's-' + g.toLowerCase().replace(/\W+/g, '-'), n1 = (v, d = 1) => v == null ? '<span class="fv-na">–</span>' : v.toFixed(d);
   const chg = (v) => v == null ? '<span class="fv-na">–</span>' : `<span class="${M.cls(v)}">${M.pct(v)}</span>`;
   M.$('sx-meta').textContent = `${F.count} stocks · ${M.short(F.asOf)}`;

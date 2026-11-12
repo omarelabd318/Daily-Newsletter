@@ -57,7 +57,8 @@ COLS = ["name", "description", "sector", "industry", "currency", "close", "marke
         "earnings_per_share_basic_ttm", "last_annual_eps", "book_value_per_share_fq", "fiscal_period_end_fq",
         "return_on_equity", "return_on_assets", "net_margin_ttm", "total_revenue_yoy_growth_ttm", "net_income_yoy_growth_ttm",
         "total_revenue_yoy_growth_fy", "debt_to_equity", "net_debt", "free_cash_flow_margin_ttm", "free_cash_flow",
-        "dividends_yield_current", "price_target_average", "price_target_low", "price_target_high", "Perf.6M", "SMA200", "RSI"]
+        "dividends_yield_current", "price_target_average", "price_target_low", "price_target_high", "Perf.6M", "SMA200", "RSI",
+        "change", "Perf.1M"]   # the last session's and the past month's move, for every stock (the Sectors page)
 # peer groups, from TradingView's sectors and the desk's own
 GROUP = {"Finance": "Financials", "Banks": "Banks", "Real estate": "Real estate", "Process Industries": "Materials",
          "Non-Energy Minerals": "Materials", "Energy Minerals": "Materials", "Consumer Non-Durables": "Consumer",
@@ -275,6 +276,7 @@ def build(saved, mkt="egx"):
                   "pb": round(x["price"] / x["bvps"], 1) if x["bvps"] and x["bvps"] > 0 else None,
                   "confidence": "high" if len(est) == 3 and spread <= 0.35 else "low" if spread > 0.8 or len(est) == 2 and spread > 0.5 else "medium",
                   "target": r["price_target_average"], "below200": bool(r["SMA200"] and x["price"] < r["SMA200"]), "perf6m": r["Perf.6M"], "rsi": round(r["RSI"]) if r["RSI"] else None,
+                  "d1": round(r["change"], 2) if r["change"] is not None else None, "m1": round(r["Perf.1M"], 2) if r["Perf.1M"] is not None else None,
                   "raw": {"margin": r["net_margin_ttm"], "rev": r["total_revenue_yoy_growth_ttm"] if r["total_revenue_yoy_growth_ttm"] is not None else r["total_revenue_yoy_growth_fy"],
                           "profit": r["net_income_yoy_growth_ttm"], "de": r["debt_to_equity"],
                           "ndcap": r["net_debt"] / r["market_cap_basic"] if r["net_debt"] is not None and r["market_cap_basic"] else None,
