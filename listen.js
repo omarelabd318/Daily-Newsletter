@@ -242,8 +242,11 @@
       var lis = [].slice.call(s.querySelectorAll('li')), i = lis.indexOf(el.closest('li'));
       return document.querySelectorAll('#front .f-band > div')[i] || front;
     }
-    var a = el.querySelector && el.querySelector('a[href^="#story-"]'), f = a && document.querySelector('#front a[href="' + a.getAttribute('href') + '"]');
-    return f ? (f.closest('article, li, .f-lead') || f) : (/^What to watch/i.test(el.textContent) && document.querySelector('#front .f-watch')) || front;
+    // the first copy of the story's link that is on screen (paper mode's banner repeats the lead's headline, and is
+    // hidden in the other modes)
+    var a = el.querySelector && el.querySelector('a[href^="#story-"]'), f = null;
+    if(a) [].some.call(document.querySelectorAll('#front a[href="' + a.getAttribute('href') + '"]'), function(x){ if(x.offsetParent !== null){ f = x; return true; } return false; });
+    return f ? (f.closest('article, li, .f-lead, .f-banner') || f) : (/^What to watch/i.test(el.textContent) && document.querySelector('#front .f-watch')) || front;
   }
   function mark(el){
     el = onPage(el);
