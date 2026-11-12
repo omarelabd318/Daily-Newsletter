@@ -520,6 +520,9 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 :root[data-theme="paper"] .s-body h3{font-family:var(--p-head),var(--serif);font-weight:var(--p-hw)}
 :root[data-theme="paper"] .tchips,:root[data-theme="paper"] .topics{display:none}
 :root[data-theme="paper"] .run .keep{break-inside:avoid}
+/* paper mode has no fade-in: a story still sliding up into place sits 22px low, and in newspaper columns that left
+   a whole column starting a line below its neighbours */
+.js:root[data-theme="paper"] .rv{opacity:1;transform:none;transition:none}
 :root[data-theme="paper"] .s-body p,:root[data-theme="paper"] .s-body li,:root[data-theme="paper"] .f-col p,:root[data-theme="paper"] .f-body{hyphenate-limit-chars:6 2 2}
 :root[data-theme="paper"] .s-body p > strong:first-child,:root[data-theme="paper"] .s-body li > strong:first-child{font-family:var(--p-head),var(--serif);font-weight:var(--p-hw);font-size:1.06em}
 :root[data-theme="paper"] .s-body{font-size:16.5px;line-height:1.5}
