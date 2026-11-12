@@ -535,6 +535,9 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
   /* the sections below run in three columns with rules between, as on a printed page */
   :root[data-theme="paper"] .s-body .run{column-count:3;column-gap:32px;column-rule:1px solid var(--rule)}
   :root[data-theme="paper"] .run > p,:root[data-theme="paper"] .run li{break-inside:auto;orphans:3;widows:3}
+  /* the gap between stories is padding, not margin: some browsers (Safari) carry a margin over into the next
+     column, which pushed that column's first story down a line */
+  :root[data-theme="paper"] .s-body .run > p{margin:0;padding-bottom:18px}
   :root[data-theme="paper"] .run > blockquote,:root[data-theme="paper"] .run .tchips{break-inside:avoid}
   :root[data-theme="paper"] .run > p + p{margin-top:0}
   /* a part with only two stories (Weather) runs in two columns, not three with one left empty */
