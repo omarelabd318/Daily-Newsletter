@@ -32,7 +32,8 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
 .bar .timer{margin-left:18px;font:600 15px var(--sans);font-variant-numeric:tabular-nums}
 .msg{min-height:24px;margin:10px 0 0;font:italic 16px var(--serif)}
 /* crossword */
-.cw{display:grid;grid-template-columns:auto minmax(0,560px);justify-content:center;gap:36px;align-items:start}
+.cw,.ks{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:32px;align-items:start}
+.mid{grid-column:2;grid-row:1;display:flex;flex-direction:column;align-items:center} .cw-across,.ks .rules{grid-column:1;grid-row:1} .cw-down,.ks .side{grid-column:3;grid-row:1}
 .cw-grid{display:grid;border:2px solid var(--ink);background:var(--ink);gap:1px;user-select:none;touch-action:manipulation}
 .cw-c{position:relative;width:var(--cs);height:var(--cs);background:var(--cell);display:flex;align-items:center;justify-content:center;font:700 calc(var(--cs) * .52) var(--sans);text-transform:uppercase;cursor:pointer}
 .cw-c.blk{background:var(--ink);cursor:default}
@@ -41,16 +42,14 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
 .cw-c.sel{background:var(--sel)}
 .cw-c.bad{color:var(--bad)} .cw-c .n{color:var(--ink)} .cw-c.bad::after{content:"";position:absolute;inset:auto 0 0 auto;width:0;height:0;border-left:8px solid transparent;border-bottom:8px solid var(--bad)}
 .cw-c.shown{color:#2f5d9e}
-.cw-clue{margin:0 0 14px;padding:8px 12px;background:var(--word);font:16px/1.4 var(--serif);min-height:44px}
+.cw-clue{align-self:stretch;margin:0 0 12px;padding:8px 12px;background:var(--word);font:16px/1.4 var(--serif);min-height:44px}
 .cw-clue b{font-family:var(--sans);font-size:13px;margin-right:6px}
-.cw-lists{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-.cw-lists h3{margin:0 0 6px;padding-bottom:4px;border-bottom:1px solid var(--ink);font:700 12px var(--sans);letter-spacing:.16em;text-transform:uppercase}
-.cw-lists ol{list-style:none;margin:0;padding:0;max-height:var(--lh);overflow:auto}
-.cw-lists li{display:grid;grid-template-columns:26px 1fr;padding:4px 6px;font-size:15.5px;line-height:1.35;cursor:pointer}
-.cw-lists li b{font:700 12.5px var(--sans);padding-top:2px}
-.cw-lists li.on{background:var(--word)} .cw-lists li.done{color:var(--ink2);text-decoration:line-through;text-decoration-color:var(--rule)}
+.cw-l h3{margin:0 0 6px;padding-bottom:4px;border-bottom:1px solid var(--ink);font:700 12px var(--sans);letter-spacing:.16em;text-transform:uppercase}
+.cw-l ol{list-style:none;margin:0;padding:0;max-height:var(--lh);overflow:auto}
+.cw-l li{display:grid;grid-template-columns:26px 1fr;padding:4px 6px;font-size:15.5px;line-height:1.35;cursor:pointer}
+.cw-l li b{font:700 12.5px var(--sans);padding-top:2px}
+.cw-l li.on{background:var(--word)} .cw-l li.done{color:var(--ink2);text-decoration:line-through;text-decoration-color:var(--rule)}
 /* killer sudoku */
-.ks{display:grid;grid-template-columns:auto minmax(0,460px);justify-content:center;gap:36px;align-items:start}
 .ks-grid{display:grid;grid-template-columns:repeat(9,var(--ks));border:2.5px solid var(--ink);user-select:none;touch-action:manipulation;background:var(--cell)}
 .ks-c{position:relative;width:var(--ks);height:var(--ks);border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:center;font:600 calc(var(--ks) * .5) var(--sans);cursor:pointer}
 .ks-c.br{border-right:2.5px solid var(--ink)} .ks-c.bb{border-bottom:2.5px solid var(--ink)}
@@ -61,15 +60,17 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
 .ks-c.sel{background:var(--sel)} .ks-c.peer{background:#ede6d3} .ks-c.same{background:#e4dcc3}
 .ks-c.bad{color:var(--bad)} .ks-c.shown{color:#2f5d9e}
 .ks-c .notes{position:absolute;inset:calc(var(--ks) * .2) 3px 3px;display:grid;grid-template-columns:repeat(3,1fr);font:500 calc(var(--ks) * .17) var(--sans);color:var(--ink2);text-align:center;line-height:1.1}
-.pad{display:grid;grid-template-columns:repeat(5,52px);gap:6px;margin:0 0 14px}
+.pad{display:grid;grid-template-columns:repeat(3,56px);gap:6px;margin:0}
 .pad button{height:46px;border:1px solid var(--ink);background:none;font:600 18px var(--sans);color:var(--ink);cursor:pointer}
 .pad button:hover{background:var(--ink);color:var(--paper)}
-.rules{font-size:15.5px;line-height:1.5;max-width:460px}
+.pad button[data-d="0"]{grid-column:span 3} @media (max-width:860px){ .pad button[data-d="0"]{grid-column:auto} }
+.rules{font-size:15.5px;line-height:1.5}
 .rules p{margin:0 0 10px}
 @media (max-width:860px){
   .sheet{margin:0;padding:14px 12px 30px}
-  .cw,.ks{grid-template-columns:1fr;gap:16px;justify-items:center} .cw > div,.ks > div{width:100%;max-width:520px}
-  .cw-lists{grid-template-columns:1fr} .cw-lists ol{max-height:none}
+  /* on a phone: the grid, then the pad or the clues, then the rest */
+  .cw,.ks{grid-template-columns:1fr;gap:16px} .cw > *,.ks > *{grid-column:1!important;grid-row:auto!important}
+  .cw-l ol{max-height:none}
   .pad{grid-template-columns:repeat(5,1fr)}
   /* the clue being solved stays in view above the phone's keyboard */
   .cw-clue{position:fixed;left:0;right:0;bottom:0;z-index:5;margin:0;padding:10px 14px;border-top:1px solid var(--ink)}
@@ -89,18 +90,19 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
   <section id="cw">
     <h2>The Crossword</h2><p class="meta" id="cw-meta"></p>
     <div class="bar"><button type="button" id="cw-check">Check</button><button type="button" id="cw-word">Reveal word</button><button type="button" id="cw-all">Reveal all</button><button type="button" id="cw-clear">Clear</button><span class="timer" id="cw-time">0:00</span></div>
-    <div class="cw"><div><div class="cw-grid" id="cw-grid"></div><p class="msg" id="cw-msg"></p></div>
-      <div><p class="cw-clue" id="cw-clue"></p><div class="cw-lists"><div><h3>Across</h3><ol id="cw-a"></ol></div><div><h3>Down</h3><ol id="cw-d"></ol></div></div></div></div>
+    <div class="cw"><div class="mid"><p class="cw-clue" id="cw-clue"></p><div class="cw-grid" id="cw-grid"></div><p class="msg" id="cw-msg"></p></div>
+      <div class="cw-l cw-across"><h3>Across</h3><ol id="cw-a"></ol></div>
+      <div class="cw-l cw-down"><h3>Down</h3><ol id="cw-d"></ol></div></div>
   </section>
 
   <section id="ks" hidden>
     <h2>Killer Sudoku</h2><p class="meta" id="ks-meta"></p>
     <div class="bar"><button type="button" id="ks-notes" aria-pressed="false">Notes</button><button type="button" id="ks-check">Check</button><button type="button" id="ks-cell">Reveal cell</button><button type="button" id="ks-clear">Clear</button><span class="timer" id="ks-time">0:00</span></div>
-    <div class="ks"><div><div class="ks-grid" id="ks-grid"></div><p class="msg" id="ks-msg"></p></div>
-      <div><div class="pad" id="ks-pad"></div>
+    <div class="ks"><div class="mid"><div class="ks-grid" id="ks-grid"></div><p class="msg" id="ks-msg"></p></div>
+      <div class="side"><div class="pad" id="ks-pad"></div></div>
         <div class="rules"><p><b>How to play.</b> Fill the grid so every row, column and 3 by 3 box holds the digits 1 to 9 once each.</p>
         <p>The dashed shapes are cages: the digits in a cage add up to the number in its corner, and no digit appears twice in a cage. There are no starting digits; the cages are all you need, and there is only one solution.</p>
-        <p>Tap a square and type a digit (or use the buttons). Notes lets you pencil in candidates. Arrow keys move.</p></div></div></div>
+        <p>Tap a square and type a digit (or use the buttons). Notes lets you pencil in candidates. Arrow keys move.</p></div></div>
   </section>
 </div>
 <script>
@@ -148,7 +150,7 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
   // ---------------- crossword ----------------
   function crossword(P){
     var C = P.crossword, n = C.size, key = 'puz:cw:' + P.date, saved = store.get(key) || {};
-    var cs = Math.min(52, Math.floor((Math.min(innerWidth, 1180) - (innerWidth < 860 ? 30 : 560)) / n));
+    var cs = Math.min(52, Math.floor((Math.min(innerWidth, 1180) - (innerWidth < 860 ? 30 : 680)) / n));
     $('cw-grid').style.setProperty('--cs', Math.max(28, cs) + 'px');
     $('cw-grid').style.gridTemplateColumns = 'repeat(' + n + ',var(--cs))';
     var clues = C.clues.across.map(function(a){ return Object.assign({d:'A'}, a); }).concat(C.clues.down.map(function(a){ return Object.assign({d:'D'}, a); }));
@@ -173,12 +175,12 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
     }
     function paint(){
       Object.keys(cells).forEach(function(k){ cells[k].classList.remove('sel', 'word'); });
-      [].forEach.call(document.querySelectorAll('.cw-lists li'), function(li){ li.classList.remove('on'); });
-      clues.forEach(function(cl){ var full = cellsOf(cl).every(function(k){ return letters[k]; }); var li = document.querySelector('.cw-lists li[data-id="' + cl.d + cl.n + '"]'); if(li) li.classList.toggle('done', full); });
+      [].forEach.call(document.querySelectorAll('.cw-l li'), function(li){ li.classList.remove('on'); });
+      clues.forEach(function(cl){ var full = cellsOf(cl).every(function(k){ return letters[k]; }); var li = document.querySelector('.cw-l li[data-id="' + cl.d + cl.n + '"]'); if(li) li.classList.toggle('done', full); });
       if(!cur) return;
       var cl = clueAt(cur, dir) || clueAt(cur, dir === 'A' ? 'D' : 'A'); if(!cl) return; dir = cl.d;
       cellsOf(cl).forEach(function(k){ cells[k].classList.add('word'); }); cells[cur].classList.add('sel');
-      var li = document.querySelector('.cw-lists li[data-id="' + cl.d + cl.n + '"]'); if(li){ li.classList.add('on'); var ol = li.parentNode, top = li.getBoundingClientRect().top - ol.getBoundingClientRect().top + ol.scrollTop; if(top < ol.scrollTop || top > ol.scrollTop + ol.clientHeight - li.offsetHeight) ol.scrollTop = top - 30; }
+      var li = document.querySelector('.cw-l li[data-id="' + cl.d + cl.n + '"]'); if(li){ li.classList.add('on'); var ol = li.parentNode, top = li.getBoundingClientRect().top - ol.getBoundingClientRect().top + ol.scrollTop; if(top < ol.scrollTop || top > ol.scrollTop + ol.clientHeight - li.offsetHeight) ol.scrollTop = top - 30; }
       $('cw-clue').innerHTML = '<b>' + cl.n + (cl.d === 'A' ? ' Across' : ' Down') + '</b>'; $('cw-clue').appendChild(document.createTextNode(cl.clue || ''));
     }
     function select(k){ cur = k; paint(); }
@@ -210,7 +212,7 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
     $('cw-all').addEventListener('click', function(){ if(!confirm('Reveal the whole crossword?')) return; Object.keys(cells).forEach(function(k){ if(letters[k] !== answerAt(k)){ setL(k, answerAt(k)); shown[k] = 1; cells[k].classList.add('shown'); } }); save(); paint(); clock.stop(); });
     $('cw-clear').addEventListener('click', function(){ if(!confirm('Clear the crossword?')) return; Object.keys(cells).forEach(function(k){ setL(k, ''); cells[k].classList.remove('shown'); }); shown = {}; save(); paint(); });
     Object.keys(shown).forEach(function(k){ if(cells[k]) cells[k].classList.add('shown'); });
-    lists(); $('cw-grid').parentNode.parentNode.style.setProperty('--lh', (g.offsetHeight - 60) + 'px');
+    lists(); document.querySelector('.cw').style.setProperty('--lh', (g.parentNode.offsetHeight - 30) + 'px');
     var first = clues.filter(function(x){ return x.d === 'A'; })[0]; select(first.row + ',' + first.col);
     if(saved.won) $('cw-msg').textContent = 'Solved. Come back tomorrow for the next one.';
   }
@@ -219,7 +221,7 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
   function killer(P){
     var K = P.killer, key = 'puz:ks:' + P.date, saved = store.get(key) || {}, val = saved.v || {}, notes = saved.n || {}, shown = saved.s || {}, cur = null, noting = false;
     $('ks-meta').textContent = (window.PNO ? window.PNO + ' · ' : '') + LEVEL[K.level] + ' · ' + K.cages.length + ' cages · one solution';
-    var cs = Math.min(56, Math.floor((Math.min(innerWidth, 1180) - (innerWidth < 860 ? 30 : 560)) / 9));
+    var cs = Math.min(56, Math.floor((Math.min(innerWidth, 1180) - (innerWidth < 860 ? 30 : 640)) / 9));
     var grid = $('ks-grid'); grid.style.setProperty('--ks', Math.max(32, cs) + 'px');
     var cageOf = {}, cells = [];
     K.cages.forEach(function(cg, i){ cg.cells.forEach(function(x){ cageOf[x] = i; }); });
