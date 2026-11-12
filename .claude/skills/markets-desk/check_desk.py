@@ -396,6 +396,14 @@ if __name__ == "__main__":
     main(sys.argv[1:])
     for e in errors:
         print("ERROR:", e)
+    # a fair-value stock that moved beyond the EGX's 20% daily limit: a bonus issue or split the screener has not
+    # adjusted for (fetch_fairvalue.py marks it); its per-share figures need checking before its fair value is trusted
+    try:
+        for x in json.load(open(os.path.join(ROOT, "desk", "fairvalue.json"))).get("stocks", []):
+            if x.get("action"):
+                warnings.append(f"Fair value {x['t']}: {x['action']} Check the company's disclosure; if the per-share figures are pre-issue, put adjusted ones in the judgement block or leave it marked low confidence.")
+    except Exception:
+        pass
     for w in warnings:
         print("WARNING:", w)
     if not errors and not warnings:

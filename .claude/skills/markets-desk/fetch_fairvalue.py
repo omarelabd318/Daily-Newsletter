@@ -276,7 +276,12 @@ def build(saved, mkt="egx"):
                   "pb": round(x["price"] / x["bvps"], 1) if x["bvps"] and x["bvps"] > 0 else None,
                   "confidence": "high" if len(est) == 3 and spread <= 0.35 else "low" if spread > 0.8 or len(est) == 2 and spread > 0.5 else "medium",
                   "target": r["price_target_average"], "below200": bool(r["SMA200"] and x["price"] < r["SMA200"]), "perf6m": r["Perf.6M"], "rsi": round(r["RSI"]) if r["RSI"] else None,
-                  "d1": round(r["change"], 2) if r["change"] is not None else None, "m1": round(r["Perf.1M"], 2) if r["Perf.1M"] is not None else None,
+                  # the EGX caps a session's move at 20%: a bigger one is a bonus issue or split the screener has not
+                  # adjusted for, so the moves are left out and the per-share figures may not be adjusted yet either
+                  "d1": round(r["change"], 2) if r["change"] is not None and abs(r["change"]) <= 20 else None,
+                  "m1": round(r["Perf.1M"], 2) if r["Perf.1M"] is not None and (r["change"] is None or abs(r["change"]) <= 20) else None,
+                  **({"action": f"Moved {r['change']:+.1f}% in one session, beyond the EGX's 20% limit: most likely a bonus issue or split. Check that the earnings and book value per share are on the new share count before trusting the fair value.",
+                      "confidence": "low"} if r["change"] is not None and abs(r["change"]) > 20 else {}),
                   "raw": {"margin": r["net_margin_ttm"], "rev": r["total_revenue_yoy_growth_ttm"] if r["total_revenue_yoy_growth_ttm"] is not None else r["total_revenue_yoy_growth_fy"],
                           "profit": r["net_income_yoy_growth_ttm"], "de": r["debt_to_equity"],
                           "ndcap": r["net_debt"] / r["market_cap_basic"] if r["net_debt"] is not None and r["market_cap_basic"] else None,

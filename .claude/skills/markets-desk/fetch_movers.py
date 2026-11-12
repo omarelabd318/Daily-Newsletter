@@ -327,6 +327,9 @@ def us_heatmap(session):
     return {"session": session, "index": "100 largest", "cur": "$", "rows": rows}
 
 
+ALWAYS_EGX30 = {"SWDY"}
+
+
 def heatmap(upto=None):
     """The EGX30's members (TradingView's index membership, so a reshuffle is followed), each with its sector, market
     value, last close and shares traded, and change over the last finished session, five sessions and 21 sessions,
@@ -335,8 +338,9 @@ def heatmap(upto=None):
     body = json.dumps({"filter": [{"left": "type", "operation": "equal", "right": "stock"}],
                        "columns": ["name", "description", "sector", "market_cap_basic", "indexes"], "range": [0, 1000]}).encode()
     req = urllib.request.Request("https://scanner.tradingview.com/egypt/scan", data=body, headers={"User-Agent": UA, "Content-Type": "application/json"})
+    # TradingView's membership misses Elsewedy (as of November 2026), so it is always included
     members = [r["d"] for r in json.loads(urllib.request.urlopen(req, timeout=30).read())["data"]
-               if any(i.get("proname") == "EGX:EGX30" for i in (r["d"][4] or []))]
+               if any(i.get("proname") == "EGX:EGX30" for i in (r["d"][4] or [])) or r["d"][0] in ALWAYS_EGX30]
     now = datetime.datetime.now(CAIRO)
     trading = now.weekday() not in (4, 5) and now.strftime("%H:%M") < "14:45"
 
@@ -361,6 +365,13 @@ def heatmap(upto=None):
         sessions.append(bars[-1][0])
         rows.append({"t": code, "name": desc, "sector": HEAT_SECTOR.get(code) or SECTOR_OF.get(sector, sector), "cap": round(cap), "price": c[-1], "vol": bars[-1][2],
                      "d1": round((c[-1] / c[-2] - 1) * 100, 2), "w1": round((c[-1] / c[-6] - 1) * 100, 2), "m1": round((c[-1] / c[-22] - 1) * 100, 2)})
+    # one box per company: a second share line of the same company (Valmore's dollar-priced VLMR beside its pound
+    # shares, VLMRA) gives way to the more traded one
+    best = {}
+    for r in rows:
+        if r["name"] not in best or (r["vol"] or 0) > (best[r["name"]]["vol"] or 0):
+            best[r["name"]] = r
+    rows = [r for r in rows if best[r["name"]] is r]
     if len(rows) < 20:
         raise RuntimeError(f"only {len(rows)} members read")
     return {"session": max(set(sessions), key=sessions.count), "rows": rows,
