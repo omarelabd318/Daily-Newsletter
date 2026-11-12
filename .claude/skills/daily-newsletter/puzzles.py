@@ -48,13 +48,20 @@ def deps():
 XWORD = "https://raw.githubusercontent.com/Crossword-Nexus/collaborative-word-list/main/xwordlist.dict"
 
 
-def words():
+STRICT = {3: 4.3, 4: 3.9, 5: 3.6}       # how common an answer must be (wordfreq's zipf scale; 3.3 for longer ones)
+LOOSE = {3: 3.7, 4: 3.4, 5: 3.1}        # the 11 by 11 grid needs a wider choice of words or it rarely fills
+
+
+def words(loose=False):
     """{length: [word, ...]} most familiar first. A word must pass two lists: the Crossword Nexus collaborative word
     list (constructors' scores of how good an answer is; 50 and up kept), and a large English frequency list (so the
     answer is one a solver knows: short answers must be commoner still, which keeps out crossword filler such as ESNE
     or ALOE-type obscurities). Cached after the first run (about 8 MB, a few seconds)."""
     if os.path.exists(CACHE):
-        return {int(k): v for k, v in json.load(open(CACHE)).items()}
+        cached = json.load(open(CACHE))
+        if cached.get("v") == 2:
+            lim = LOOSE if loose else STRICT
+            return {int(L): [w for w, z in v if z >= lim.get(int(L), 2.9 if loose else 3.3)] for L, v in cached["w"].items()}
     deps()
     import urllib.request
     from wordfreq import zipf_frequency
@@ -82,13 +89,13 @@ def words():
         if not common(w.lower()):
             continue
         z = zipf_frequency(w.lower(), "en")
-        if z < {3: 4.3, 4: 3.9, 5: 3.6}.get(len(w), 3.3):
+        if z < LOOSE.get(len(w), 2.9):
             continue
         out.setdefault(len(w), []).append((z, w))
-    out = {L: [w for z, w in sorted(v, reverse=True)] for L, v in out.items()}
+    out = {L: [(w, round(z, 2)) for z, w in sorted(v, reverse=True)] for L, v in out.items()}
     os.makedirs(os.path.dirname(CACHE), exist_ok=True)
-    json.dump(out, open(CACHE, "w"))
-    return out
+    json.dump({"v": 2, "w": out}, open(CACHE, "w"))
+    return words(loose)
 
 
 # ---------------- crossword ----------------
@@ -260,7 +267,7 @@ def crossword(date, news):
     d = datetime.date.fromisoformat(date)
     n = 11 if d.weekday() == 5 else 9
     rng = random.Random("crossword" + date)
-    W = words()
+    W = words(loose=n > 9)
     news = [re.sub(r"[^A-Z]", "", x.upper()) for x in news][:3]
     news = [x for x in news if 3 <= len(x) <= n]
     tries = 0
