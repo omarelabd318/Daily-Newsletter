@@ -481,7 +481,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 :root[data-theme="paper"] .edition .date,:root[data-theme="paper"].has-front #listenwrap{display:none}
 :root[data-theme="paper"].has-front .toc{justify-content:center;padding:7px 0;min-height:0;border-bottom:0;font-size:10.5px;gap:0 20px}
 :root[data-theme="paper"] .f-banner{display:block;margin:6px 0 0;padding-bottom:14px;text-align:center}
-:root[data-theme="paper"] .f-banner h2{margin:0;font:var(--p-hw) clamp(30px,4.5vw,62px)/1.04 var(--p-head),var(--serif);letter-spacing:-.005em;text-transform:var(--p-caps)}
+:root[data-theme="paper"] .f-banner h2{margin:0;font:var(--p-hw) clamp(30px,4.5vw,62px)/1.04 var(--p-head),var(--serif);letter-spacing:-.005em;text-transform:var(--p-caps);text-wrap:balance}
 :root[data-theme="paper"] .f-banner h2 a{color:inherit}
 :root[data-theme="paper"] .f-deck{margin:10px auto 0;max-width:980px;font:italic 700 clamp(18px,1.8vw,24px)/1.27 "Playfair Display",var(--serif)}
 :root[data-theme="paper"] .f-others{margin:9px auto 0;max-width:1080px;font:600 11px/1.6 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
@@ -926,7 +926,19 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     document.documentElement.classList.add('has-front'); document.documentElement.classList.add('nm');
     // even out the columns: when the lead is much shorter than the stories beside it, the last of those (then the
     // what-to-watch line) moves under the lead, as long as that narrows the gap. Three columns only.
+    // paper mode's banner headline: set at full size, then made smaller step by step until it takes no more than
+    // two lines (a word left alone on a third line looks like it ran out of room); never below 70% of full size
+    function fitBanner(){
+      var h2 = sec.querySelector('.f-banner h2'); if(!h2) return;
+      h2.style.fontSize = '';
+      if(document.documentElement.getAttribute('data-theme') !== 'paper' || !h2.offsetHeight) return;
+      var full = parseFloat(getComputedStyle(h2).fontSize), size = full;
+      var lines = function(){ return Math.round(h2.offsetHeight / (parseFloat(getComputedStyle(h2).lineHeight) || size * 1.04)); };
+      var most = innerWidth < 640 ? 3 : 2;   // a phone's narrow page fits three lines of a banner at most
+      while(lines() > most && size > full * 0.7){ size -= 1; h2.style.fontSize = size + 'px'; }
+    }
     function balance(){
+      fitBanner();
       var L = sec.querySelector('.f-lead'), C = sec.querySelector('.f-col'), R = sec.querySelector('.f-rail'); if(!L || !C || !R) return;
       var h = function(el){ var k = [].slice.call(el.children).filter(function(x){ return x.offsetHeight; }); return k.length ? k[k.length-1].offsetTop + k[k.length-1].offsetHeight - k[0].offsetTop : 0; };
       // the side stories' summaries are whole sentences: one each, or as many more (up to four) as bring their column
