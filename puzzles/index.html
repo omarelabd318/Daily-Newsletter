@@ -24,22 +24,22 @@ header p{margin:0;font:italic 15px var(--serif);color:var(--ink2)}
 .tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink)}
 section{margin-top:22px}
 section[hidden]{display:none}
-h2{margin:0;font:900 30px/1.1 var(--head)}
-.meta{margin:4px 0 14px;font:600 11px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
-.bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin:0 0 14px;font:600 12px var(--sans)}
+h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
+.meta{text-align:center;margin:4px 0 14px;font:600 11px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+.bar{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 14px;margin:0 0 14px;font:600 12px var(--sans)}
 .bar button{padding:6px 12px;border:1px solid var(--ink);background:none;color:var(--ink);font:600 11px var(--sans);letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
 .bar button:hover,.bar button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
-.bar .timer{margin-left:auto;font:600 15px var(--sans);font-variant-numeric:tabular-nums}
+.bar .timer{margin-left:18px;font:600 15px var(--sans);font-variant-numeric:tabular-nums}
 .msg{min-height:24px;margin:10px 0 0;font:italic 16px var(--serif)}
 /* crossword */
-.cw{display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:start}
+.cw{display:grid;grid-template-columns:auto minmax(0,560px);justify-content:center;gap:36px;align-items:start}
 .cw-grid{display:grid;border:2px solid var(--ink);background:var(--ink);gap:1px;user-select:none;touch-action:manipulation}
 .cw-c{position:relative;width:var(--cs);height:var(--cs);background:var(--cell);display:flex;align-items:center;justify-content:center;font:700 calc(var(--cs) * .52) var(--sans);text-transform:uppercase;cursor:pointer}
 .cw-c.blk{background:var(--ink);cursor:default}
 .cw-c .n{position:absolute;top:2px;left:3px;font:600 calc(var(--cs) * .24) var(--sans)}
 .cw-c.word{background:var(--word)}
 .cw-c.sel{background:var(--sel)}
-.cw-c.bad{color:var(--bad)} .cw-c.bad::after{content:"";position:absolute;inset:auto 0 0 auto;width:0;height:0;border-left:8px solid transparent;border-bottom:8px solid var(--bad)}
+.cw-c.bad{color:var(--bad)} .cw-c .n{color:var(--ink)} .cw-c.bad::after{content:"";position:absolute;inset:auto 0 0 auto;width:0;height:0;border-left:8px solid transparent;border-bottom:8px solid var(--bad)}
 .cw-c.shown{color:#2f5d9e}
 .cw-clue{margin:0 0 14px;padding:8px 12px;background:var(--word);font:16px/1.4 var(--serif);min-height:44px}
 .cw-clue b{font-family:var(--sans);font-size:13px;margin-right:6px}
@@ -50,12 +50,14 @@ h2{margin:0;font:900 30px/1.1 var(--head)}
 .cw-lists li b{font:700 12.5px var(--sans);padding-top:2px}
 .cw-lists li.on{background:var(--word)} .cw-lists li.done{color:var(--ink2);text-decoration:line-through;text-decoration-color:var(--rule)}
 /* killer sudoku */
-.ks{display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:start}
+.ks{display:grid;grid-template-columns:auto minmax(0,460px);justify-content:center;gap:36px;align-items:start}
 .ks-grid{display:grid;grid-template-columns:repeat(9,var(--ks));border:2.5px solid var(--ink);user-select:none;touch-action:manipulation;background:var(--cell)}
 .ks-c{position:relative;width:var(--ks);height:var(--ks);border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:center;font:600 calc(var(--ks) * .5) var(--sans);cursor:pointer}
 .ks-c.br{border-right:2.5px solid var(--ink)} .ks-c.bb{border-bottom:2.5px solid var(--ink)}
-.ks-c .cage{position:absolute;inset:3px;pointer-events:none;border:0 dashed var(--ink2)}
-.ks-c .sum{position:absolute;top:1px;left:3px;font:700 calc(var(--ks) * .2) var(--sans);background:var(--cell);padding:0 1px;line-height:1.1;z-index:1}
+.ks-grid{position:relative}
+.ks-cages{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.ks-cages line{stroke:var(--ink);stroke-width:1.3;stroke-dasharray:3 3;vector-effect:non-scaling-stroke;opacity:.75}
+.ks-c .sum{position:absolute;top:1px;left:2px;font:700 calc(var(--ks) * .2) var(--sans);background:var(--cell);padding:0 1px;line-height:1.1;z-index:1}
 .ks-c.sel{background:var(--sel)} .ks-c.peer{background:#ede6d3} .ks-c.same{background:#e4dcc3}
 .ks-c.bad{color:var(--bad)} .ks-c.shown{color:#2f5d9e}
 .ks-c .notes{position:absolute;inset:calc(var(--ks) * .2) 3px 3px;display:grid;grid-template-columns:repeat(3,1fr);font:500 calc(var(--ks) * .17) var(--sans);color:var(--ink2);text-align:center;line-height:1.1}
@@ -66,9 +68,12 @@ h2{margin:0;font:900 30px/1.1 var(--head)}
 .rules p{margin:0 0 10px}
 @media (max-width:860px){
   .sheet{margin:0;padding:14px 12px 30px}
-  .cw,.ks{grid-template-columns:1fr;gap:16px}
+  .cw,.ks{grid-template-columns:1fr;gap:16px;justify-items:center} .cw > div,.ks > div{width:100%;max-width:520px}
   .cw-lists{grid-template-columns:1fr} .cw-lists ol{max-height:none}
   .pad{grid-template-columns:repeat(5,1fr)}
+  /* the clue being solved stays in view above the phone's keyboard */
+  .cw-clue{position:fixed;left:0;right:0;bottom:0;z-index:5;margin:0;padding:10px 14px;border-top:1px solid var(--ink)}
+  .sheet{padding-bottom:80px}
 }
 </style>
 </head>
@@ -122,6 +127,8 @@ h2{margin:0;font:900 30px/1.1 var(--head)}
   var want = (location.search.match(/[?&]d=(\d{4}-\d{2}-\d{2})/) || [])[1];
   fetch('/editions/index.json', {cache:'no-cache'}).then(function(r){ return r.json(); }).then(function(ix){
     var dates = (ix.editions || []).filter(function(e){ return !e.id; }).map(function(e){ return e.date; }).sort().reverse();
+    var now = new Date(), today = now.getFullYear() + '-' + ('0' + (now.getMonth() + 1)).slice(-2) + '-' + ('0' + now.getDate()).slice(-2);
+    if(dates.indexOf(today) < 0) dates.unshift(today);   // the puzzles go up with the morning's run, before the edition is listed
     if(want) dates.unshift(want);
     (function tryNext(i){
       if(i >= Math.min(dates.length, 8)){ $('cw-meta').textContent = 'No puzzles yet.'; return; }
@@ -169,7 +176,7 @@ h2{margin:0;font:900 30px/1.1 var(--head)}
       if(!cur) return;
       var cl = clueAt(cur, dir) || clueAt(cur, dir === 'A' ? 'D' : 'A'); if(!cl) return; dir = cl.d;
       cellsOf(cl).forEach(function(k){ cells[k].classList.add('word'); }); cells[cur].classList.add('sel');
-      var li = document.querySelector('.cw-lists li[data-id="' + cl.d + cl.n + '"]'); if(li){ li.classList.add('on'); var ol = li.parentNode; if(li.offsetTop < ol.scrollTop || li.offsetTop > ol.scrollTop + ol.clientHeight - 30) ol.scrollTop = li.offsetTop - 40; }
+      var li = document.querySelector('.cw-lists li[data-id="' + cl.d + cl.n + '"]'); if(li){ li.classList.add('on'); var ol = li.parentNode, top = li.getBoundingClientRect().top - ol.getBoundingClientRect().top + ol.scrollTop; if(top < ol.scrollTop || top > ol.scrollTop + ol.clientHeight - li.offsetHeight) ol.scrollTop = top - 30; }
       $('cw-clue').innerHTML = '<b>' + cl.n + (cl.d === 'A' ? ' Across' : ' Down') + '</b>'; $('cw-clue').appendChild(document.createTextNode(cl.clue || ''));
     }
     function select(k){ cur = k; paint(); }
@@ -219,19 +226,35 @@ h2{margin:0;font:900 30px/1.1 var(--head)}
       d.className = 'ks-c' + (c % 3 === 2 && c < 8 ? ' br' : '') + (r % 3 === 2 && r < 8 ? ' bb' : '');
       d.dataset.i = i;
       // the cage's dashed outline: a side is drawn where the neighbour is in another cage
-      var cage = document.createElement('span'); cage.className = 'cage'; var me = cageOf[i];
-      cage.style.borderTopWidth = r === 0 || cageOf[i - 9] !== me ? '1.5px' : '0'; cage.style.borderBottomWidth = r === 8 || cageOf[i + 9] !== me ? '1.5px' : '0';
-      cage.style.borderLeftWidth = c === 0 || cageOf[i - 1] !== me ? '1.5px' : '0'; cage.style.borderRightWidth = c === 8 || cageOf[i + 1] !== me ? '1.5px' : '0';
-      if(cage.style.borderTopWidth === '0px' || cage.style.borderTopWidth === '0') cage.style.top = '-1px';
-      if(cage.style.borderBottomWidth === '0') cage.style.bottom = '-1px';
-      if(cage.style.borderLeftWidth === '0') cage.style.left = '-1px';
-      if(cage.style.borderRightWidth === '0') cage.style.right = '-1px';
-      d.appendChild(cage);
-      if(K.cages[me].cells[0] === i){ var s = document.createElement('span'); s.className = 'sum'; s.textContent = K.cages[me].sum; d.appendChild(s); }
+      if(Math.min.apply(null, K.cages[cageOf[i]].cells) === i){ var s = document.createElement('span'); s.className = 'sum'; s.textContent = K.cages[cageOf[i]].sum; d.appendChild(s); }
       var v = document.createElement('span'); v.className = 'val'; d.appendChild(v);
       var nt = document.createElement('span'); nt.className = 'notes'; d.appendChild(nt);
       grid.appendChild(d); cells.push(d);
     }
+    // the cages' dashed outlines, in one drawing over the grid: each side of a cell that borders another cage gets a
+    // line set in from the grid line; at each end the line stops short (an outer corner), runs to the cell's edge
+    // (the outline carries on along the next cell) or runs on past it (an inner corner), so every cage is one shape
+    (function(){
+      var D = 0.09, same = function(r, c, me){ return r >= 0 && r < 9 && c >= 0 && c < 9 && cageOf[r * 9 + c] === me; }, segs = [];
+      for(var r = 0; r < 9; r++) for(var c = 0; c < 9; c++){
+        var me = cageOf[r * 9 + c];
+        [[-1, 0], [1, 0], [0, -1], [0, 1]].forEach(function(o){
+          if(same(r + o[0], c + o[1], me)) return;            // not a boundary on this side
+          var horiz = o[0] !== 0, y, x0, x1;
+          // along the side: the two neighbours at its ends (left/right for a top or bottom side, up/down otherwise)
+          var a = horiz ? [0, -1] : [-1, 0], b = horiz ? [0, 1] : [1, 0];
+          function end(e, sign){
+            if(!same(r + e[0], c + e[1], me)) return sign * D;                                  // outer corner: stop short
+            return same(r + e[0] + o[0], c + e[1] + o[1], me) ? -sign * D : 0;                 // inner corner: run past
+          }
+          if(horiz){ y = o[0] < 0 ? r + D : r + 1 - D; x0 = c + end(a, 1); x1 = c + 1 + end(b, -1); segs.push([x0, y, x1, y]); }
+          else { var x = o[1] < 0 ? c + D : c + 1 - D; x0 = r + end(a, 1); x1 = r + 1 + end(b, -1); segs.push([x, x0, x, x1]); }
+        });
+      }
+      var svg = '<svg class="ks-cages" viewBox="0 0 9 9" preserveAspectRatio="none" aria-hidden="true">' + segs.map(function(q){
+        return '<line x1="' + q[0].toFixed(3) + '" y1="' + q[1].toFixed(3) + '" x2="' + q[2].toFixed(3) + '" y2="' + q[3].toFixed(3) + '"/>'; }).join('') + '</svg>';
+      grid.insertAdjacentHTML('beforeend', svg);
+    })();
     function draw(i){ var el = cells[i]; el.querySelector('.val').textContent = val[i] || ''; var ns = notes[i] || [];
       el.querySelector('.notes').innerHTML = val[i] ? '' : [1,2,3,4,5,6,7,8,9].map(function(x){ return '<span>' + (ns.indexOf(x) >= 0 ? x : '') + '</span>'; }).join(''); el.classList.toggle('shown', !!shown[i]); }
     for(var j = 0; j < 81; j++) draw(j);

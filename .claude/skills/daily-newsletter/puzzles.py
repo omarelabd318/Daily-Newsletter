@@ -2,7 +2,9 @@
 """The daily puzzles for paper mode: a crossword and a killer sudoku, in data/puzzles/DATE.json.
 
 Usage (from the repo root):
-  puzzles.py make DATE [--news WORD,WORD]   build both puzzles for the edition (a few seconds); prints the crossword's
+  puzzles.py make DATE [--news WORD,WORD] [--avoid WORD,WORD]
+                                            build both puzzles (--avoid: answers not to use, to remake a grid
+                                            with a weak answer; add lasting ones to AVOID below) for the edition (a few seconds); prints the crossword's
                                             answers, which still need clues
   puzzles.py clues DATE FILE                add the clues: FILE is JSON {"ANSWER": "clue", ...}, one per answer
   puzzles.py check DATE                     fail if an answer has no clue or a puzzle is missing
@@ -32,7 +34,8 @@ OUT = os.path.join(ROOT, "data", "puzzles")
 CACHE = os.path.expanduser("~/.cache/daily-newsletter/words.json")
 AVOID = set("""abort anal anus arse bitch boob butt cock crap cunt damn dick dildo dyke fag fuck gay gook hell homo jap kike
 lesbo nazi nigga nigger penis piss porn prick pussy rape rapist semen sex sexy shit slut spic tit tits twat vagina whore wank
-kill killer killed murder suicide terror bomb bombs isis jihad nst leni tara marc dyn est cal cay stoye rio""".split())
+kill killer killed murder suicide terror bomb bombs isis jihad nst leni tara marc dyn est cal cay stoye rio
+ana pete ted las mil yale lama dis ave para sal els ral tad ams ens""".split())
 
 
 def deps():
@@ -61,7 +64,8 @@ def words(loose=False):
         cached = json.load(open(CACHE))
         if cached.get("v") == 2:
             lim = LOOSE if loose else STRICT
-            return {int(L): [w for w, z in v if z >= lim.get(int(L), 2.9 if loose else 3.3)] for L, v in cached["w"].items()}
+            return {int(L): [w for w, z in v if z >= lim.get(int(L), 2.9 if loose else 3.3) and w.lower() not in AVOID]
+                    for L, v in cached["w"].items()}
     deps()
     import urllib.request
     from wordfreq import zipf_frequency
@@ -263,11 +267,14 @@ def fill(g, n, W, rng, news, limit=6.0):
     return dict(grid) if solve() else None
 
 
-def crossword(date, news):
+def crossword(date, news, avoid=()):
     d = datetime.date.fromisoformat(date)
     n = 11 if d.weekday() == 5 else 9
     rng = random.Random("crossword" + date)
     W = words(loose=n > 9)
+    if avoid:
+        bad = {x.upper() for x in avoid}
+        W = {L: [w for w in v if w not in bad] for L, v in W.items()}
     news = [re.sub(r"[^A-Z]", "", x.upper()) for x in news][:3]
     news = [x for x in news if 3 <= len(x) <= n]
     tries = 0
@@ -381,6 +388,23 @@ def full_grid(rng):
     return g
 
 
+def pieces(cells):
+    """The joined-up groups a set of cells falls into."""
+    left, out = set(cells), []
+    while left:
+        start = left.pop()
+        grp, todo = [start], [start]
+        while todo:
+            r, c = todo.pop()
+            for q in ((r + 1, c), (r - 1, c), (r, c + 1), (r, c - 1)):
+                if q in left:
+                    left.discard(q)
+                    grp.append(q)
+                    todo.append(q)
+        out.append(grp)
+    return out
+
+
 def killer(date):
     d = datetime.date.fromisoformat(date)
     level = (d.weekday() + 1) % 7          # Sunday 0 (easiest) to Saturday 6 (hardest)
@@ -436,6 +460,12 @@ def killer(date):
             home["sum"] -= sol[r][c]
             other["cells"].append(cell)
             other["sum"] += sol[r][c]
+            # taking a cell out can cut its old cage in two; each piece becomes a cage of its own (a cage is always
+            # one joined shape)
+            parts = pieces(home["cells"])
+            if len(parts) > 1:
+                cages.remove(home)
+                cages.extend({"cells": q, "sum": sum(sol[a][b] for a, b in q)} for q in parts)
             cages[:] = [x for x in cages if x["cells"]]
         found = None
         for step in range(60):
@@ -459,17 +489,17 @@ def path(date):
     return os.path.join(OUT, date + ".json")
 
 
-def make(date, news):
+def make(date, news, avoid=(), new_killer=False):
     os.makedirs(OUT, exist_ok=True)
     t = time.time()
     old = json.load(open(path(date))) if os.path.exists(path(date)) else {}
-    cw = crossword(date, news)
+    cw = crossword(date, news, avoid)
     # clues already written for the same answers are kept
     have = {a["answer"]: a["clue"] for k in ("across", "down") for a in (old.get("crossword") or {}).get("clues", {}).get(k, []) if a.get("clue")}
     for k in ("across", "down"):
         for a in cw["clues"][k]:
             a["clue"] = have.get(a["answer"], "")
-    data = {"date": date, "crossword": cw, "killer": old.get("killer") or killer(date)}
+    data = {"date": date, "crossword": cw, "killer": (not new_killer and old.get("killer")) or killer(date)}
     json.dump(data, open(path(date), "w"), ensure_ascii=False, indent=1)
     open(path(date), "a").write("\n")
     show(date)
@@ -501,10 +531,23 @@ def check(date):
         print(f"ERROR: crossword answer {m} has no clue")
     for b in bad:
         print(f"ERROR: the clue for {b} contains the answer")
+    split = []
     if not data.get("killer"):
         print("ERROR: no killer sudoku")
-    print(f"Puzzles {date}: {'ok' if not (miss or bad) else 'fix the errors above'}.")
-    return 1 if miss or bad or not data.get("killer") else 0
+    else:
+        sol = data["killer"]["solution"]
+        for cg in data["killer"]["cages"]:
+            cells = [(i // 9, i % 9) for i in cg["cells"]]
+            if len(pieces(cells)) > 1 or cg["sum"] != sum(int(sol[i]) for i in cg["cells"]):
+                split.append(cg)
+                print(f"ERROR: killer cage {cg} is not one joined shape or its sum is wrong: run make "
+                      f"again with --new-killer")
+        if sorted(i for cg in data["killer"]["cages"] for i in cg["cells"]) != list(range(81)):
+            split.append(None)
+            print("ERROR: the killer cages do not cover the grid once")
+    fail = miss or bad or split or not data.get("killer")
+    print(f"Puzzles {date}: {'ok' if not fail else 'fix the errors above'}.")
+    return 1 if fail else 0
 
 
 def show(date):
@@ -522,7 +565,8 @@ def show(date):
 def main(a):
     if len(a) >= 2 and a[0] == "make":
         news = a[a.index("--news") + 1].split(",") if "--news" in a else []
-        return make(a[1], news)
+        avoid = a[a.index("--avoid") + 1].split(",") if "--avoid" in a else []
+        return make(a[1], news, avoid, "--new-killer" in a)
     if len(a) == 3 and a[0] == "clues":
         sys.exit(clues(a[1], a[2]))
     if len(a) == 2 and a[0] == "check":

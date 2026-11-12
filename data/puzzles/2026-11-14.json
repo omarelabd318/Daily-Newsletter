@@ -1,0 +1,622 @@
+{
+ "date": "2026-11-14",
+ "crossword": {
+  "size": 11,
+  "grid": [
+   "LAPSE##FOIL",
+   "ARRAY##INTO",
+   "SCALES#REST",
+   "#HIT#HAM###",
+   "HIS#MIL#OLD",
+   "AVE#ANA#CAR",
+   "TED#DIS#TRY",
+   "###YEN#LOG#",
+   "PARA#GRAPES",
+   "ORAL##AMUSE",
+   "PETE##PASTA"
+  ],
+  "clues": {
+   "across": [
+    {
+     "n": 1,
+     "row": 0,
+     "col": 0,
+     "len": 5,
+     "answer": "LAPSE",
+     "clue": ""
+    },
+    {
+     "n": 6,
+     "row": 0,
+     "col": 7,
+     "len": 4,
+     "answer": "FOIL",
+     "clue": ""
+    },
+    {
+     "n": 10,
+     "row": 1,
+     "col": 0,
+     "len": 5,
+     "answer": "ARRAY",
+     "clue": ""
+    },
+    {
+     "n": 11,
+     "row": 1,
+     "col": 7,
+     "len": 4,
+     "answer": "INTO",
+     "clue": ""
+    },
+    {
+     "n": 12,
+     "row": 2,
+     "col": 0,
+     "len": 6,
+     "answer": "SCALES",
+     "clue": ""
+    },
+    {
+     "n": 14,
+     "row": 2,
+     "col": 7,
+     "len": 4,
+     "answer": "REST",
+     "clue": ""
+    },
+    {
+     "n": 15,
+     "row": 3,
+     "col": 1,
+     "len": 3,
+     "answer": "HIT",
+     "clue": ""
+    },
+    {
+     "n": 16,
+     "row": 3,
+     "col": 5,
+     "len": 3,
+     "answer": "HAM",
+     "clue": ""
+    },
+    {
+     "n": 18,
+     "row": 4,
+     "col": 0,
+     "len": 3,
+     "answer": "HIS",
+     "clue": ""
+    },
+    {
+     "n": 19,
+     "row": 4,
+     "col": 4,
+     "len": 3,
+     "answer": "MIL",
+     "clue": ""
+    },
+    {
+     "n": 20,
+     "row": 4,
+     "col": 8,
+     "len": 3,
+     "answer": "OLD",
+     "clue": ""
+    },
+    {
+     "n": 23,
+     "row": 5,
+     "col": 0,
+     "len": 3,
+     "answer": "AVE",
+     "clue": ""
+    },
+    {
+     "n": 24,
+     "row": 5,
+     "col": 4,
+     "len": 3,
+     "answer": "ANA",
+     "clue": ""
+    },
+    {
+     "n": 25,
+     "row": 5,
+     "col": 8,
+     "len": 3,
+     "answer": "CAR",
+     "clue": ""
+    },
+    {
+     "n": 26,
+     "row": 6,
+     "col": 0,
+     "len": 3,
+     "answer": "TED",
+     "clue": ""
+    },
+    {
+     "n": 27,
+     "row": 6,
+     "col": 4,
+     "len": 3,
+     "answer": "DIS",
+     "clue": ""
+    },
+    {
+     "n": 28,
+     "row": 6,
+     "col": 8,
+     "len": 3,
+     "answer": "TRY",
+     "clue": ""
+    },
+    {
+     "n": 29,
+     "row": 7,
+     "col": 3,
+     "len": 3,
+     "answer": "YEN",
+     "clue": ""
+    },
+    {
+     "n": 30,
+     "row": 7,
+     "col": 7,
+     "len": 3,
+     "answer": "LOG",
+     "clue": ""
+    },
+    {
+     "n": 31,
+     "row": 8,
+     "col": 0,
+     "len": 4,
+     "answer": "PARA",
+     "clue": ""
+    },
+    {
+     "n": 34,
+     "row": 8,
+     "col": 5,
+     "len": 6,
+     "answer": "GRAPES",
+     "clue": ""
+    },
+    {
+     "n": 37,
+     "row": 9,
+     "col": 0,
+     "len": 4,
+     "answer": "ORAL",
+     "clue": ""
+    },
+    {
+     "n": 38,
+     "row": 9,
+     "col": 6,
+     "len": 5,
+     "answer": "AMUSE",
+     "clue": ""
+    },
+    {
+     "n": 39,
+     "row": 10,
+     "col": 0,
+     "len": 4,
+     "answer": "PETE",
+     "clue": ""
+    },
+    {
+     "n": 40,
+     "row": 10,
+     "col": 6,
+     "len": 5,
+     "answer": "PASTA",
+     "clue": ""
+    }
+   ],
+   "down": [
+    {
+     "n": 1,
+     "row": 0,
+     "col": 0,
+     "len": 3,
+     "answer": "LAS",
+     "clue": ""
+    },
+    {
+     "n": 2,
+     "row": 0,
+     "col": 1,
+     "len": 7,
+     "answer": "ARCHIVE",
+     "clue": ""
+    },
+    {
+     "n": 3,
+     "row": 0,
+     "col": 2,
+     "len": 7,
+     "answer": "PRAISED",
+     "clue": ""
+    },
+    {
+     "n": 4,
+     "row": 0,
+     "col": 3,
+     "len": 4,
+     "answer": "SALT",
+     "clue": ""
+    },
+    {
+     "n": 5,
+     "row": 0,
+     "col": 4,
+     "len": 3,
+     "answer": "EYE",
+     "clue": ""
+    },
+    {
+     "n": 6,
+     "row": 0,
+     "col": 7,
+     "len": 4,
+     "answer": "FIRM",
+     "clue": ""
+    },
+    {
+     "n": 7,
+     "row": 0,
+     "col": 8,
+     "len": 3,
+     "answer": "ONE",
+     "clue": ""
+    },
+    {
+     "n": 8,
+     "row": 0,
+     "col": 9,
+     "len": 3,
+     "answer": "ITS",
+     "clue": ""
+    },
+    {
+     "n": 9,
+     "row": 0,
+     "col": 10,
+     "len": 3,
+     "answer": "LOT",
+     "clue": ""
+    },
+    {
+     "n": 13,
+     "row": 2,
+     "col": 5,
+     "len": 7,
+     "answer": "SHINING",
+     "clue": ""
+    },
+    {
+     "n": 17,
+     "row": 3,
+     "col": 6,
+     "len": 4,
+     "answer": "ALAS",
+     "clue": ""
+    },
+    {
+     "n": 18,
+     "row": 4,
+     "col": 0,
+     "len": 3,
+     "answer": "HAT",
+     "clue": ""
+    },
+    {
+     "n": 19,
+     "row": 4,
+     "col": 4,
+     "len": 4,
+     "answer": "MADE",
+     "clue": ""
+    },
+    {
+     "n": 20,
+     "row": 4,
+     "col": 8,
+     "len": 7,
+     "answer": "OCTOPUS",
+     "clue": ""
+    },
+    {
+     "n": 21,
+     "row": 4,
+     "col": 9,
+     "len": 7,
+     "answer": "LARGEST",
+     "clue": ""
+    },
+    {
+     "n": 22,
+     "row": 4,
+     "col": 10,
+     "len": 3,
+     "answer": "DRY",
+     "clue": ""
+    },
+    {
+     "n": 29,
+     "row": 7,
+     "col": 3,
+     "len": 4,
+     "answer": "YALE",
+     "clue": ""
+    },
+    {
+     "n": 30,
+     "row": 7,
+     "col": 7,
+     "len": 4,
+     "answer": "LAMA",
+     "clue": ""
+    },
+    {
+     "n": 31,
+     "row": 8,
+     "col": 0,
+     "len": 3,
+     "answer": "POP",
+     "clue": ""
+    },
+    {
+     "n": 32,
+     "row": 8,
+     "col": 1,
+     "len": 3,
+     "answer": "ARE",
+     "clue": ""
+    },
+    {
+     "n": 33,
+     "row": 8,
+     "col": 2,
+     "len": 3,
+     "answer": "RAT",
+     "clue": ""
+    },
+    {
+     "n": 35,
+     "row": 8,
+     "col": 6,
+     "len": 3,
+     "answer": "RAP",
+     "clue": ""
+    },
+    {
+     "n": 36,
+     "row": 8,
+     "col": 10,
+     "len": 3,
+     "answer": "SEA",
+     "clue": ""
+    }
+   ]
+  },
+  "news": []
+ },
+ "killer": {
+  "level": 6,
+  "solution": "517249638396581247842736915973425186254168379681397452425673891739812564168954723",
+  "cages": [
+   {
+    "sum": 27,
+    "cells": [
+     51,
+     52,
+     58,
+     59,
+     60
+    ]
+   },
+   {
+    "sum": 9,
+    "cells": [
+     2,
+     20
+    ]
+   },
+   {
+    "sum": 29,
+    "cells": [
+     12,
+     13,
+     21,
+     22,
+     23
+    ]
+   },
+   {
+    "sum": 27,
+    "cells": [
+     10,
+     11,
+     18,
+     19
+    ]
+   },
+   {
+    "sum": 15,
+    "cells": [
+     37,
+     46,
+     55
+    ]
+   },
+   {
+    "sum": 22,
+    "cells": [
+     6,
+     14,
+     15,
+     16,
+     24
+    ]
+   },
+   {
+    "sum": 15,
+    "cells": [
+     35,
+     43,
+     53
+    ]
+   },
+   {
+    "sum": 17,
+    "cells": [
+     7,
+     8,
+     25,
+     26
+    ]
+   },
+   {
+    "sum": 23,
+    "cells": [
+     48,
+     56,
+     57,
+     66,
+     67
+    ]
+   },
+   {
+    "sum": 17,
+    "cells": [
+     27,
+     36,
+     45
+    ]
+   },
+   {
+    "sum": 15,
+    "cells": [
+     31,
+     32,
+     34
+    ]
+   },
+   {
+    "sum": 9,
+    "cells": [
+     0,
+     1,
+     9
+    ]
+   },
+   {
+    "sum": 24,
+    "cells": [
+     69,
+     70,
+     71,
+     78,
+     79
+    ]
+   },
+   {
+    "sum": 14,
+    "cells": [
+     30,
+     39,
+     40,
+     42
+    ]
+   },
+   {
+    "sum": 24,
+    "cells": [
+     54,
+     63,
+     64,
+     65,
+     72
+    ]
+   },
+   {
+    "sum": 28,
+    "cells": [
+     73,
+     74,
+     75,
+     76
+    ]
+   },
+   {
+    "sum": 10,
+    "cells": [
+     61,
+     62
+    ]
+   },
+   {
+    "sum": 15,
+    "cells": [
+     3,
+     4,
+     5
+    ]
+   },
+   {
+    "sum": 6,
+    "cells": [
+     68,
+     77
+    ]
+   },
+   {
+    "sum": 3,
+    "cells": [
+     80
+    ]
+   },
+   {
+    "sum": 15,
+    "cells": [
+     28,
+     29,
+     38,
+     47
+    ]
+   },
+   {
+    "sum": 24,
+    "cells": [
+     41,
+     49,
+     50
+    ]
+   },
+   {
+    "sum": 1,
+    "cells": [
+     33
+    ]
+   },
+   {
+    "sum": 7,
+    "cells": [
+     17
+    ]
+   },
+   {
+    "sum": 9,
+    "cells": [
+     44
+    ]
+   }
+  ]
+ }
+}
