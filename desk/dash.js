@@ -150,33 +150,6 @@
     if (window.DeskNav && window.DeskNav.stamp(window.__deskStamp)) document.body.classList.add('stamp-up');
     // the finding: its first sentence in bold, the day's point; the coming dates live in the Week ahead card
     $('finding').innerHTML = lede(X.finding);
-    // the desk read aloud: an 8 to 9 minute summary in the Heart voice (desk_audio.py), one button under the finding
-    get('/data/audio/desk-' + D.date + '.json').then((m) => {
-      const v = m && m.voices && m.voices[0];
-      if (!v || !v.url || document.getElementById('desk-listen')) return;
-      const url = /^https?:/.test(v.url) ? v.url : '/' + v.url.replace(/^\//, '');
-      const mins = Math.max(1, Math.round((v.duration || 0) / 60));
-      const box = document.createElement('div'); box.className = 'd-listen'; box.id = 'desk-listen';
-      box.innerHTML = '<button type="button" class="d-play" aria-label="Listen to the day\'s desk"><span class="d-ico">▶</span> Listen to the day</button>'
-        + '<span class="d-len">' + mins + ' min · Heart</span><button type="button" class="d-rate" aria-label="Playback speed">1×</button>'
-        + '<span class="d-bar" aria-hidden="true"><i></i></span>';
-      $('finding').insertAdjacentElement('afterend', box);
-      const au = new Audio(); au.preload = 'none';
-      const play = box.querySelector('.d-play'), rate = box.querySelector('.d-rate'), bar = box.querySelector('.d-bar i'), len = box.querySelector('.d-len');
-      const RATES = [1, 1.25, 1.5, 0.85];
-      const fmt = (t) => Math.floor(t / 60) + ':' + ('0' + Math.floor(t % 60)).slice(-2);
-      play.addEventListener('click', () => {
-        if (!au.src) au.src = url;
-        if (au.paused) au.play().catch(() => {}); else au.pause();
-      });
-      au.addEventListener('play', () => { play.innerHTML = '<span class="d-ico">❚❚</span> Pause'; box.classList.add('on'); });
-      au.addEventListener('pause', () => { play.innerHTML = '<span class="d-ico">▶</span> ' + (au.currentTime > 1 && !au.ended ? 'Resume' : 'Listen to the day'); });
-      au.addEventListener('timeupdate', () => { if (au.duration) { bar.style.width = (au.currentTime / au.duration * 100) + '%'; len.textContent = fmt(au.currentTime) + ' / ' + fmt(au.duration); } });
-      au.addEventListener('ended', () => { bar.style.width = '0'; box.classList.remove('on'); len.textContent = mins + ' min · Heart'; });
-      rate.addEventListener('click', () => { const r = RATES[(RATES.indexOf(au.playbackRate) + 1) % RATES.length]; au.playbackRate = r; rate.textContent = (r === 0.85 ? '0.85' : r) + '×'; });
-      // a click on the bar jumps there
-      box.querySelector('.d-bar').addEventListener('click', (e) => { if (!au.duration) return; const b = e.currentTarget.getBoundingClientRect(); au.currentTime = (e.clientX - b.left) / b.width * au.duration; });
-    });
 
     $('h-close').textContent = X.close.title || 'Close';
     $('close-rows').innerHTML = X.close.groups.map((g) => `<div class="strip-g"><h3>${esc(g.name)}</h3><div class="strip-row">` + g.rows.map((r) =>

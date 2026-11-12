@@ -39,6 +39,14 @@
 .dm-n1 a:hover,.dm-n2 a:hover{color:var(--text)}
 .dm-n2{align-items:center} .dm-stamp{margin-left:auto;padding-left:24px;font-size:11px;line-height:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
 .dm-n1 .dm-runs{margin-left:auto}
+.dm-n1{position:relative}
+.dm-n1 .dm-listen{padding:12px 0 9px;border:0;border-bottom:2px solid transparent;background:none;font:inherit;font-size:12px;line-height:16px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);white-space:nowrap;cursor:pointer}
+.dm-n1 .dm-listen:hover,.dm-n1 .dm-listen.on{color:var(--text)}
+.dm-n1 .dm-rate{display:none;padding:12px 0 9px;border:0;background:none;font:inherit;font-size:12px;line-height:16px;letter-spacing:.06em;color:var(--muted);cursor:pointer}
+.dm-n1.playing .dm-rate{display:inline}
+.dm-pbar{position:absolute;left:0;right:0;bottom:-1px;height:3px;display:none;cursor:pointer}
+.dm-n1.playing .dm-pbar{display:block}
+.dm-pbar i{display:block;height:100%;width:0;background:var(--text)}
 .dm-fig{margin-left:7px;font-size:11.5px;font-weight:500;letter-spacing:0;font-variant-numeric:tabular-nums;color:var(--muted)}
 .dm-fig.up{color:var(--positive)} .dm-fig.down{color:var(--negative)}
 .dm-phone{display:none}
@@ -79,8 +87,35 @@
     if (window.DeskSearch) go(window.DeskSearch);
     else { const sc = document.createElement('script'); sc.src = '/desk/search.js'; sc.onload = () => go(window.DeskSearch); document.head.appendChild(sc); }
     figures(hd);
+    listen(hd);
     // the current tab stays in view on a phone
     hd.querySelectorAll('[aria-current]').forEach((a) => { const n = a.parentElement; n.scrollLeft = Math.max(0, a.offsetLeft - 16); });
+  }
+  // the desk read aloud (desk_audio.py): "Listen to the day" at the right of the top row, after Runs, on every desk page;
+  // while it plays a thin bar along the row shows how far it has got (a click on the bar jumps there)
+  function listen(hd) {
+    const n1 = hd.querySelector('.dm-n1'); if (!n1) return;
+    fetch('/desk/index.json', { cache: 'no-cache' }).then((r) => r.json()).then((ix) => {
+      const ds = (ix.desks || []).map((d) => d.date).sort(); const date = ds[ds.length - 1];
+      return date ? fetch('/data/audio/desk-' + date + '.json', { cache: 'no-cache' }).then((r) => r.ok ? r.json() : null) : null;
+    }).then((m) => {
+      const v = m && m.voices && m.voices[0]; if (!v || !v.url) return;
+      const url = /^https?:/.test(v.url) ? v.url : '/' + v.url.replace(/^\//, '');
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'dm-listen'; b.textContent = 'Listen to the day';
+      const rt = document.createElement('button'); rt.type = 'button'; rt.className = 'dm-rate'; rt.textContent = '1×'; rt.setAttribute('aria-label', 'Playback speed');
+      const bar = document.createElement('span'); bar.className = 'dm-pbar'; bar.innerHTML = '<i></i>';
+      n1.append(b, rt, bar);
+      const au = new Audio(); au.preload = 'none';
+      const fmt = (t) => Math.floor(t / 60) + ':' + ('0' + Math.floor(t % 60)).slice(-2);
+      const RATES = [1, 1.25, 1.5, 0.85];
+      b.addEventListener('click', () => { if (!au.src) au.src = url; if (au.paused) au.play().catch(() => {}); else au.pause(); });
+      au.addEventListener('play', () => { n1.classList.add('playing'); b.classList.add('on'); });
+      au.addEventListener('pause', () => { b.classList.remove('on'); if (!au.ended) b.textContent = 'Resume · ' + fmt(au.currentTime) + ' / ' + fmt(au.duration || v.duration || 0); });
+      au.addEventListener('timeupdate', () => { if (!au.duration) return; bar.firstChild.style.width = (au.currentTime / au.duration * 100) + '%'; if (!au.paused) b.textContent = 'Pause · ' + fmt(au.currentTime) + ' / ' + fmt(au.duration); });
+      au.addEventListener('ended', () => { n1.classList.remove('playing'); b.classList.remove('on'); b.textContent = 'Listen to the day'; bar.firstChild.style.width = '0'; });
+      rt.addEventListener('click', () => { const r = RATES[(RATES.indexOf(au.playbackRate) + 1) % RATES.length]; au.playbackRate = r; rt.textContent = r + '×'; });
+      bar.addEventListener('click', (e) => { if (!au.duration) return; const r = bar.getBoundingClientRect(); au.currentTime = (e.clientX - r.left) / r.width * au.duration; });
+    }).catch(() => {});
   }
   // the day's headline figure beside a market's name and pages (laptop only): the EGX30's and S&P 500's day change and
   // the central bank's dollar rate, from the data log; a day the market was shut repeats the last close, so the change

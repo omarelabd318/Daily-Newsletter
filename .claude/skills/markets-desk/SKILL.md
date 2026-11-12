@@ -93,7 +93,7 @@ Egyptian stocks unless one has news. The research floor is 10 searches and 10 pa
    the edition (message `Desk DATE`).
 8. After the desk is pushed, record its spoken summary: `python3 .claude/skills/markets-desk/desk_audio.py DATE`
    (about two to four minutes; no writing: it builds a 8 to 9 minute script from desk/days/DATE.json, records it in the
-   Heart voice and publishes it, for the Listen button under each dashboard's finding). Then commit
+   Heart voice and publishes it, for "Listen to the day" in the desk's top menu). Then commit
    `desk/listen/DATE.md` and `data/audio/` as `Desk DATE: audio` and push. If it prints "Audio not made", leave it:
    the dashboards then show no button. Never commit an MP3.
 
