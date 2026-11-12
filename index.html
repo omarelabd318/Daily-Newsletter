@@ -260,6 +260,12 @@ td.trend{vertical-align:middle}
   :root[data-width="wide"] .run > p,:root[data-width="wide"] .run > blockquote,:root[data-width="wide"] .run li{break-inside:avoid}
   :root[data-width="wide"] .run > blockquote.explain{margin-top:0}
   :root[data-width="wide"] .run > ol,:root[data-width="wide"] .run > ul{margin-top:0}
+  /* the space after each story is a transparent border, not a margin: Safari carries a margin over into the next
+     column, which started that column a line low; and no fade-in inside the columns, where a story still sliding into
+     place sat 22px low */
+  :root[data-width="wide"] .s-body .run > *{margin-bottom:0;border-bottom:18px solid transparent;background-clip:padding-box}
+  :root[data-width="wide"] .s-body .run > blockquote.explain{border-left:0;box-shadow:inset 3px 0 0 var(--accent);padding-left:19px}
+  .js:root[data-width="wide"] .run .rv,.js:root[data-width="wide"] .run.rv{opacity:1;transform:none;transition:none}
   :root[data-width="wide"] .s-body > h3{margin-top:36px}
   :root[data-width="wide"] .s.src .s-body ul{columns:3;column-gap:40px}
   :root[data-width="wide"] .edition .sum{max-width:60ch}
