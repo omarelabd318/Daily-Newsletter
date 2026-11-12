@@ -518,7 +518,9 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 :root[data-theme="paper"] .s h2{color:var(--ink);text-align:center;border-top:3px double var(--ink);border-bottom:1px solid var(--ink);padding:8px 0;font:700 13px var(--sans);letter-spacing:.2em}
 :root[data-theme="paper"] .s+.s{border-top:0}
 :root[data-theme="paper"] .s-body h3{font-family:var(--p-head),var(--serif);font-weight:var(--p-hw)}
-:root[data-theme="paper"] .tchips{display:none}
+:root[data-theme="paper"] .tchips,:root[data-theme="paper"] .topics{display:none}
+:root[data-theme="paper"] .run .keep{break-inside:avoid}
+:root[data-theme="paper"] .s-body p,:root[data-theme="paper"] .s-body li,:root[data-theme="paper"] .f-col p,:root[data-theme="paper"] .f-body{hyphenate-limit-chars:6 2 2}
 :root[data-theme="paper"] .s-body p > strong:first-child,:root[data-theme="paper"] .s-body li > strong:first-child{font-family:var(--p-head),var(--serif);font-weight:var(--p-hw);font-size:1.06em}
 :root[data-theme="paper"] .s-body{font-size:16.5px;line-height:1.5}
 :root[data-theme="paper"] a{color:var(--ink);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
@@ -791,6 +793,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
       watchTables();
       topicChips(key(ed));
       markChanges();
+      fixBreaks(); if(document.fonts && document.fonts.ready) document.fonts.ready.then(fixBreaks);
       if(window.Listen) Listen.setup(key(ed), 'Daily Newsletter. ' + title(ed) + '.');
       if(pendingStory && document.getElementById(pendingStory)) jumpTo(pendingStory); else window.scrollTo(0,0);
       pendingStory = null;
@@ -1079,6 +1082,27 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
   });
   syncWidthBtn();
   // the section menu: when it has to wrap, the rows are evened out so no one link sits alone on the last line
+  // paper mode sets stories in newspaper columns; a story may run from one column into the next, but never leaves a
+  // line or two stranded at the foot or head of a column (CSS widows/orphans are not honoured everywhere), so any
+  // story whose piece in a column is shorter than three lines is kept whole instead
+  function fixBreaks(){
+    document.querySelectorAll('.run .keep').forEach(function(x){ x.classList.remove('keep'); });
+    if(document.documentElement.getAttribute('data-theme') !== 'paper') return;
+    document.querySelectorAll('.s-body .run').forEach(function(run){
+      if(!(+getComputedStyle(run).columnCount > 1)) return;
+      for(var pass = 0; pass < 6; pass++){
+        var bad = [].filter.call(run.querySelectorAll(':scope > p, li'), function(p){
+          var rs = p.getClientRects(), lh = parseFloat(getComputedStyle(p).lineHeight) || 25;
+          if(rs.length < 2) return false;
+          for(var i = 0; i < rs.length; i++) if(rs[i].height < lh * 2.5) return true;
+          return false;
+        });
+        if(!bad.length) break;
+        bad[0].classList.add('keep');   // one at a time: keeping one story whole moves everything after it
+      }
+    });
+  }
+  var brkTimer; window.addEventListener('resize', function(){ clearTimeout(brkTimer); brkTimer = setTimeout(fixBreaks, 200); });
   function balanceToc(){
     var t = $('toc'); if(!t || t.hidden) return;
     t.style.maxWidth = ''; t.style.marginLeft = t.style.marginRight = '';
