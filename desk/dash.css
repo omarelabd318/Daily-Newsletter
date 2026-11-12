@@ -479,3 +479,8 @@ a.tag:hover{color:var(--text);text-decoration:underline;text-underline-offset:2p
 body[data-day] #c-chart,body[data-day] #c-movers{display:none!important}
 body[data-day] .toprow{display:block}
 
+
+/* one desk page cross-fades into the next instead of flashing blank (Chrome, Edge, Safari 18.2+) */
+@view-transition{navigation:auto}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.16s}
+@media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}

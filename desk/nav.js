@@ -77,12 +77,26 @@
       <div class="dm-tools">${SEARCH}<button type="button" class="dm-theme">${dark ? 'Light' : 'Dark'}</button><a href="/">Newsletter →</a></div></div>
       <nav class="dm-n1" aria-label="Markets Desk">${top}</nav>${sub}`;
     document.body.prepend(hd);
-    hd.querySelector('.dm-theme').addEventListener('click', () => {
+    // light and dark switch in place: the colours are the stylesheet's, and the charts redraw themselves on the
+    // 'deskthemechange' event (charts.js), so the page does not reload
+    const tbtn = hd.querySelector('.dm-theme');
+    const setTheme = (d) => {
+      document.documentElement.setAttribute('data-theme', d ? 'dark' : 'light');
+      tbtn.textContent = d ? 'Light' : 'Dark';
+      window.dispatchEvent(new Event('deskthemechange'));
+    };
+    tbtn.addEventListener('click', () => {
       const d = document.documentElement.getAttribute('data-theme') !== 'dark';
-      if (d) document.documentElement.setAttribute('data-theme', 'dark'); else document.documentElement.setAttribute('data-theme', 'light');
       try { localStorage.setItem('theme', d ? 'dark' : 'light'); } catch (e) {}
-      location.reload();
+      const go = () => setTheme(d);
+      if (document.startViewTransition) document.startViewTransition(go); else go();
     });
+    // a page loaded ahead in the background (see speculate below), or one brought back from the browser's cache, takes
+    // the theme chosen since
+    const resync = () => { let t = null; try { t = localStorage.getItem('theme'); } catch (e) {} const d = t ? t === 'dark' : document.documentElement.getAttribute('data-theme') === 'dark'; if (d !== (document.documentElement.getAttribute('data-theme') === 'dark')) setTheme(d); };
+    document.addEventListener('prerenderingchange', resync);
+    addEventListener('pageshow', (e) => { if (e.persisted) resync(); });
+    speculate();
     const go = (f) => hd.querySelectorAll('.dsearch').forEach((x) => f(x, NAMES, GROUP));
     if (window.DeskSearch) go(window.DeskSearch);
     else { const sc = document.createElement('script'); sc.src = '/desk/search.js'; sc.onload = () => go(window.DeskSearch); document.head.appendChild(sc); }
@@ -90,6 +104,14 @@
     listen(hd);
     // the current tab stays in view on a phone
     hd.querySelectorAll('[aria-current]').forEach((a) => { const n = a.parentElement; n.scrollLeft = Math.max(0, a.offsetLeft - 16); });
+  }
+  // pages change without a blank reload: the browser loads a desk page in the background as soon as the pointer rests on
+  // its link (Chrome and Edge, through speculation rules), and desk.css and dash.css cross-fade one page into the next
+  function speculate() {
+    if (document.querySelector('script[type=speculationrules]') || !(HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules'))) return;
+    const sr = document.createElement('script'); sr.type = 'speculationrules';
+    sr.textContent = JSON.stringify({ prerender: [{ where: { and: [{ href_matches: '/desk/*' }, { not: { href_matches: '/desk/*.json' } }, { not: { selector_matches: '[download]' } }] }, eagerness: 'moderate' }] });
+    document.head.appendChild(sr);
   }
   // the desk read aloud (desk_audio.py): "Listen to the day" at the right of the top row, after Runs, on every desk page;
   // while it plays a thin bar along the row shows how far it has got (a click on the bar jumps there)

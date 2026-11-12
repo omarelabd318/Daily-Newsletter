@@ -236,10 +236,13 @@
   function legendEl(items, target) {
     if (!document.getElementById('charts-legend-css')) { const st = document.createElement('style'); st.id = 'charts-legend-css'; st.textContent = legendCss; document.head.appendChild(st); }
     const ul = document.createElement('ul'); ul.className = 'chart-legend';
+    const swatches = [];
     for (const it of items) {
       const li = document.createElement('li'), sw = svg('svg', { width: it.w || 14, height: 12, 'aria-hidden': 'true' });
-      it.draw(sw); li.append(sw, document.createTextNode(it.label)); ul.appendChild(li);
+      it.draw(sw); swatches.push([sw, it]); li.append(sw, document.createTextNode(it.label)); ul.appendChild(li);
     }
+    // a theme switch repaints the key's swatches in the new colours
+    addEventListener('deskthemechange', () => { if (ul.isConnected) for (const [sw, it] of swatches) { sw.replaceChildren(); it.draw(sw); } });
     const t = typeof target === 'string' ? document.querySelector(target) : target;
     if (t) t.replaceChildren(ul);
     return ul;
@@ -351,7 +354,8 @@
   function diverging(el, { labels, up, down, values, above = 'Above', below = 'Below', mark = [], markLabel = null, markSide = 'below', partial = null, format = fmt.int, tickFormat = null, height = 200, annotations, reference, xAt = null, legend = null }) {
     if (values) { up = values.map((v) => Math.max(0, v || 0)); down = values.map((v) => Math.max(0, -(v || 0))); }
     up = up || labels.map(() => 0); down = down || labels.map(() => 0);
-    const st = { above: { fill: css(el, '--chart-1', '#2f6fdf') }, below: { fill: css(el, '--chart-muted', '#c9c9c9') }, mark: { fill: css(el, '--chart-mark', css(el, '--ink', '#111')) } };
+    // colours are read when drawn, so a redraw after a theme switch takes the new ones
+    const st = { get above() { return { fill: css(el, '--chart-1', '#2f6fdf') }; }, get below() { return { fill: css(el, '--chart-muted', '#c9c9c9') }; }, get mark() { return { fill: css(el, '--chart-mark', css(el, '--ink', '#111')) }; } };
     const marked = (i, side) => mark.includes(i) && (markSide === 'both' || markSide === side);
     const tick = (v) => (v > 0 ? '+' : v < 0 ? MINUS : '') + (tickFormat || format)(Math.abs(v));
     const draw = () => {
@@ -382,9 +386,9 @@
     };
     draw(); watch(el, draw); settle(draw);
     const items = [];
-    if (up.some((v) => v > 0)) items.push({ label: above, draw: rectSwatch(st.above) });
-    if (down.some((v) => v > 0)) items.push({ label: below, draw: rectSwatch(st.below) });
-    if (mark.length && markLabel) items.push({ label: markLabel, draw: rectSwatch(st.mark) });
+    if (up.some((v) => v > 0)) items.push({ label: above, draw: (sw) => rectSwatch(st.above)(sw) });
+    if (down.some((v) => v > 0)) items.push({ label: below, draw: (sw) => rectSwatch(st.below)(sw) });
+    if (mark.length && markLabel) items.push({ label: markLabel, draw: (sw) => rectSwatch(st.mark)(sw) });
     return { get svg() { return el.querySelector(':scope > svg'); }, legend: legendEl(items, legend) };
   }
   function ring(el, { value, label, sub, size = 132, stroke = 8, colour }) {
@@ -626,6 +630,6 @@
     if (compareLabel && rows.some((r) => minutes(r.compare) != null)) items.push({ label: compareLabel, w: 8, draw: (sw) => tick(sw, 4, 6) });
     return { get svg() { return el.querySelector(':scope > svg'); }, legend: legendEl(items, legend) };
   }
-  function watch(el, draw) { if (!('ResizeObserver' in window)) return; let w = el.clientWidth; new ResizeObserver(() => { if (Math.abs(el.clientWidth - w) > 4) { w = el.clientWidth; draw(); } }).observe(el); }
+  function watch(el, draw) { addEventListener('deskthemechange', () => { if (el.isConnected) draw(); }); if (!('ResizeObserver' in window)) return; let w = el.clientWidth; new ResizeObserver(() => { if (Math.abs(el.clientWidth - w) > 4) { w = el.clientWidth; draw(); } }).observe(el); }
   window.Charts = { line, bars, diverging, ring, barList, plan, bullet, timeline, matrix, timeStrip, ticks, fmt };
 })();
