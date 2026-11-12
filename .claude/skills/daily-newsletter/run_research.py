@@ -230,20 +230,28 @@ def main():
     add = L.append
     # no links: Google's feed gives only its own long redirect addresses, so find the story on the outlet's site
     fmt = lambda i: f"- {i['title'][:190]} | {i.get('outlet') or i['source']}{(' | ' + i['when'].strftime('%a %H:%M')) if i['when'] else ''}"
+    short = lambda i: f"- {i['title'][:160]}{(' | ' + i['when'].strftime('%a %H:%M')) if i['when'] else ''}"   # under its outlet's heading
+    # the brief stays in the run's memory for the whole run, so it carries no junk and nothing twice: tag and archive
+    # pages go, a headline already in the shared-stories list is not listed again under its outlet, lists are capped
+    junk = re.compile(r"^(Tag:|Category:|Blog\b|#)|\bPage \d{2,}\b", re.I)
+    clean = lambda xs: [x for x in xs if not junk.search(x["title"])]
     # Egyptian outlets
     per, allitems = {}, []
     for name, q, ar in EGYPT:
         got = search("site:" + q.split()[0] + (" " + " ".join(q.split()[1:]) if " " in q else ""), name, bool(ar))
         for g in got:
             g["outlet"], g["ar"] = name, ar
+        got = clean(got)
         per[name] = got[:14]
         allitems += got[:25]
+    shown = set()
     for ar, label in ((0, "English"), (1, "Arabic")):
         cl = clusters([i for i in allitems if i["ar"] == ar])
         add(f"## Stories several Egyptian outlets carry ({label})")
         if not cl:
             add("- None found by headline; scan the lists below.")
         for g in cl[:18]:
+            shown.update(id(i) for i in g)
             outlets = sorted({i["outlet"] for i in g})
             add(f"- **{len(outlets)} outlets** ({', '.join(outlets)}): {g[0]['title'][:170]}")
             for o in outlets[1:]:
@@ -251,29 +259,31 @@ def main():
                 if other["title"][:60] != g[0]["title"][:60]:
                     add(f"    {o}: {other['title'][:170]}")
         add("")
-    add("## Each outlet's headlines, last 24 hours")
+    add("## Each outlet's other headlines, last 24 hours (those not in the lists above)")
     for name, _, _ in EGYPT:
-        add(f"### {name} ({len(per[name])})")
-        L.extend(fmt(i) for i in per[name])
+        rest = [i for i in per[name] if id(i) not in shown][:10]
+        if rest:
+            add(f"### {name}")
+            L.extend(short(i) for i in rest)
     add("")
     # regional, world, leads
     wires = []
     add("## Regional outlets and wires on Egypt (two days)")
     for name, q in REGION:
-        got = search("site:" + q, name, days=2)[:8]
+        got = clean(search("site:" + q, name, days=2))[:6]
         for g in got:
             g["outlet"] = name
         wires += got
         L.extend(fmt(i) for i in got)
     add("")
     for name, q, ar in LEADS:
-        got = search(q, name, bool(ar))[:12]
+        got = clean(search(q, name, bool(ar)))[:10]
         wires += got
         add(f"## {name}")
         L.extend(fmt(i) for i in got)
         add("")
     for name, code in TOPICS:
-        got = feed(f"https://news.google.com/rss/headlines/section/topic/{code}?hl=en-US&gl=US&ceid=US:en", "Google News " + name)[:18]
+        got = feed(f"https://news.google.com/rss/headlines/section/topic/{code}?hl=en-US&gl=US&ceid=US:en", "Google News " + name)[:12]
         wires += got
         add(f"## Top headlines: {name}")
         L.extend(fmt(i) for i in got)
@@ -290,6 +300,10 @@ def main():
             rx = re.compile(tp["match"], re.I)
         except re.error:
             continue
+        hits = [i for i in allitems + wires if rx.search(i["title"])]
+        if not hits:   # nothing on it today: one line, not the whole block (the brief stays in the run's memory)
+            block.append(f"### {tp['name']}: no headline on it today in what was gathered")
+            continue
         block.append(f"### {tp['name']}")
         if tp.get("now"):
             block.append(f"- Where it stood ({tp.get('now_date')}): {tp['now'][:420]}")
@@ -301,21 +315,18 @@ def main():
                 full = stories_of(open(os.path.join(ROOT, "editions", ed + ".md")).read())
             except OSError:
                 full = {}
-            for x in [x for x in mine if x["ed"] == ed][:4]:
+            for x in [x for x in mine if x["ed"] == ed][:2]:
                 text = full.get(x["lead"], x.get("text", ""))
                 figs = re.findall(r"(?:EGP|\$|€)\s?[\d.,]+(?:\s?(?:bn|billion|million|trillion|m))?|\b\d[\d.,]*\s?(?:%|percent|people|killed|injured|dead)", text)
-                block.append(f"- Last carried {ed}, \"{x['lead']}\": {text[:420]}" + (f"  [figures then: {', '.join(dict.fromkeys(figs))[:220]}]" if figs else ""))
+                block.append(f"- Last carried {ed}, \"{x['lead']}\": {text[:320]}" + (f"  [figures then: {', '.join(dict.fromkeys(figs))[:220]}]" if figs else ""))
         else:
             block.append("- No earlier edition carried it.")
-        hits = [i for i in allitems + wires if rx.search(i["title"])]
         seen = set()
         for i in hits[:40]:
             k = i["title"][:60]
-            if k not in seen and len(seen) < 8:
+            if k not in seen and len(seen) < 5:
                 seen.add(k)
                 block.append(fmt(i))
-        if not hits:
-            block.append("- No headline on it today in what was gathered.")
     block.append("")
     L[head:head] = block
     # yesterday's watch line, and the dates already known

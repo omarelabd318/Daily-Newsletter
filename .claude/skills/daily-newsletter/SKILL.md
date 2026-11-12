@@ -96,6 +96,11 @@ figure. Where they disagree, use the more authoritative or more recent one and m
 for example `56.10 (unconfirmed)`. Never present a figure as confirmed when only one source had it and it
 looks out of line with recent days. Never guess a figure; write `n/a` instead.
 
+**Company results:** the percentage change must match the two figures it compares, and the year-earlier figure
+must come from the company's filing or a second outlet, not one report. Outlets sometimes take the wrong base (on
+November 12, 2026 Mubasher compared Telecom Egypt's profit with EGP 12.98bn instead of 16.97bn and reported +88%
+for a 43.7% rise). Use profit attributable to shareholders, and say so.
+
 ## Context from the data log
 
 `data/markets.json` holds daily figures back to 2021. After logging the day's figures, run
@@ -368,33 +373,7 @@ Rules:
 
 ## Go-to sources for figures
 
-Check these pages first for the figures below, then search as usual for anything they do not cover.
-Every page here loaded with real content when tested from the cloud environment on 28 October 2026.
-Sites change, so if a page fails or looks stale, use the backup or search, and say in the edition when
-a figure could not be confirmed. These pages are for figures; news still comes from many outlets.
-
-| Figure | First choice | Backup |
-|---|---|---|
-| US dollar index (DXY) | https://query1.finance.yahoo.com/v8/finance/chart/DX-Y.NYB?range=5d&interval=1d (fetch_figures.py gets it) | Search "dollar index" news for the day's level |
-| Brent, gold in dollars, dollar index, S&P 500, Dow (backup and check) | Yahoo first; when Yahoo refuses (it often does from the cloud), fetch_figures.py takes them from TradingView's screener (Brent front-month and COMEX gold futures, the DXY, the S&P 500 and Dow), and when Yahoo answers it lists TradingView's Brent, gold and DXY as a "check" row to confirm against. Around a futures contract's expiry (Brent's front month rolls at the end of each month), sources can disagree on the day's change because they compare different contracts: compare like with like, and mark the change unconfirmed if they still differ. fetch_figures.py prints "CONTRACT SWITCH?" when it sees one; record it in desk/rolls.json as the markets-desk skill describes | FRED for the S&P 500 and Dow (a day behind); news reports of the day's settlement |
-| EGP against USD, EUR, SAR, AED, KWD, QAR, GBP | The central bank's official buy and sell rates, https://www.cbe.org.eg/en/economic-research/statistics/cbe-exchange-rates (fetch_figures.py prints them and logs the dollar's); use the dollar's selling rate in the USD/EGP row. The logged pound rates and trend lines stay market mid-rates from https://open.er-api.com/v6/latest/EGP | EnterpriseAM's edition, or Egyptian news reports of the day's central bank rate |
-| Gold in Egypt (21K, 24K, 18K per gram) | https://egypt.gold-price-today.com/ (Arabic: عيار 21 is 21K) | https://www.goldpricez.com/eg/gram |
-| EGX30 close and daily change | https://english.mubasher.info/markets/EGX/indices/EGX30 (close, change, open, high, low) | https://tradingeconomics.com/egypt/stock-market |
-| Egyptian stock prices (Stocks Watch) | https://english.mubasher.info/markets/EGX/stocks/TICKER, for example .../stocks/COMI (price, change, % change, previous close, time of last update) | Search |
-| US stock prices (Stocks Watch) | https://query1.finance.yahoo.com/v8/finance/chart/TICKER?range=5d&interval=1d (JSON: the last two values in indicators.quote[0].close give the latest close and the change; timestamp gives the date). Do not use Yahoo for Egyptian stocks; its EGX data is years out of date | Nasdaq, then Polygon: fetch_figures.py tries both in turn, and check_edition.py confirms a US close against them (Polygon's key is a network secret on the environment, added by the proxy; five requests a minute) |
-| Central bank interest rates | https://www.cbe.org.eg/en/economic-research/statistics/overnight-deposit-and-lending-rate (deposit and lending rates with the date they take effect; fetch_figures.py logs them) | https://tradingeconomics.com/egypt/interest-rate |
-| Inflation (headline and core, annual) | https://www.cbe.org.eg/en/economic-research/statistics/inflation-rates (latest month; fetch_figures.py logs `infl_headline` and `infl_core`). The one-year T-bill yield minus headline inflation is the real return investors weigh | https://tradingeconomics.com/egypt/inflation-cpi |
-| Net international reserves (monthly, $bn) | https://tradingeconomics.com/egypt/foreign-exchange-reserves (the central bank's figure, published about the 7th; its own reserves page has not been updated since 2023). fetch_figures.py logs `reserves_usd` | News reports of the central bank's announcement (Daily News Egypt, Ahram Online) |
-| Treasury bill yields | The central bank's auction page, https://www.cbe.org.eg/en/auctions/egp-t-bills (latest results: weighted average accepted yield by tenor, with the auction date). fetch_figures.py reads it and logs each tenor once, on the first edition after its auction. 91- and 273-day bills are auctioned on Sundays, 182- and 364-day bills on Thursdays | News reports of the auction (Amwal Al Ghad, Al-Borsa, EnterpriseAM) |
-| Public holidays and bank closures | https://www.officeholidays.com/countries/egypt/2026 (verify any holiday shift against a news report of the official announcement) | Search |
-| Cairo weather, today and next two days | `python3 .claude/skills/daily-newsletter/weather.py` (two services side by side: Open-Meteo or MET Norway, and wttr.in) | Egyptian Meteorological Authority |
-| Egyptian football | https://www.kingfut.com/ (English) | https://www.kooora.com/ (Arabic) |
-| European football results | https://www.bbc.com/sport/football/scores-fixtures/YYYY-MM-DD (use the date of the matches) | https://www.espn.com/soccer/scoreboard |
-| Tennis | https://www.bbc.com/sport/tennis | https://www.wtatennis.com/scores |
-
-These block automated access from the cloud environment, so do not spend time on them: the Egyptian Exchange site (egx.com.eg), Ahram Online, Egypt Today,
-Reuters, investing.com, timeanddate.com, the ATP Tour site and the Egyptian Meteorological Authority.
-News reports that quote them are fine.
+`fetch_figures.py` and the brief cover most figures. For one they do not give, or to confirm one, the list of tested pages for each figure (with backups) is in `refs/sources.md`: open it then, not before.
 
 ## Link every visual
 
@@ -509,63 +488,7 @@ it as a small * that says "Unconfirmed" on hover, so it takes no extra space.
 
 ## Weekly Recap (Saturdays)
 
-Every Saturday a separate run publishes a weekly recap alongside that day's regular edition. It sums up
-the week from Sunday to Saturday. The daily rules on voice, sources, figure checks, linking visuals,
-placement and standing alone all apply; the daily section list, word budgets, Today at a Glance links and
-Stocks Watch do not.
-
-- **File:** `editions/DATE-recap.md`, where DATE is the Saturday. In `editions/index.json` add
-  `{"date": "DATE", "id": "DATE-recap", "label": "Weekly Recap", "summary": "..."}` and keep every other
-  entry, including that day's regular edition.
-- **Research:** start from that week's editions in `editions/` (Sunday to Saturday, including any second
-  edition of a day), then search for how each big story developed and ended up. Report where things stand
-  now, not what was said on each day. Check every figure as usual.
-- **Length:** about 2,050 to 2,400 words, a 9 to 10 minute read. A guide, not a limit.
-- **First line:** an italic sentence with the week's dates and what it was about, for example
-  `*Week of 25 to 31 October 2026: a rate hold, a weaker pound and Egypt's Saudi deployment vote.*`
-- **Sections,** in this order, each as `##` with exactly these titles:
-  1. **The Week in Brief:** a numbered list of 7 to 10 of the week's biggest stories, Egypt first, each
-     `**Label:** one sentence`. No links.
-  2. **What Tied the Week Together:** the week's essay, 200 to 260 words in two or three paragraphs with no bold
-     lead-ins: the thread that connects the week's biggest stories, told as cause and effect (a rate decision, the
-     pound, who bought the bills, what that did to the EGX; a war headline, oil, the import bill). Say what changed
-     for a reader in Egypt between last Saturday and this one, and what is still unresolved going into next week.
-     It is analysis, not opinion or forecast: every link in the chain rests on a fact and figure already in the
-     recap, and where the connection is the outlets' or analysts' reading, say whose. If the week had no single
-     thread, say so and take the two that mattered. Write it last, after the other sections.
-  3. **Egypt This Week:** 4 to 6 items on the main Egyptian stories, each with where it stands now.
-  4. **Region and World:** 4 to 6 items, regional first, then the rest of the world.
-  5. **Markets This Week:** a short paragraph on the week, then a table
-     `| Item | Week close | Weekly change |` covering EGX30, USD/EGP, gold 21K per gram in Egypt, Brent,
-     S&P 500, Nasdaq, Dow Jones and Bitcoin, then one line each on the week's best and worst EGX30 stocks if known.
-  6. **Sports This Week:** the week's main results and stories as separate items, Egyptian football first,
-     with no sport headings.
-  7. **Culture and Tech:** 3 to 5 short items from tech, AI, entertainment and culture.
-  On the first Saturday of a month, add **Month in Numbers** right after Markets This Week: one line on
-     the month, then a table `| Item | Start of month | End of month | Change |` for EGX30, USD/EGP, gold
-     21K, Brent, S&P 500, Dow Jones and Bitcoin, taken from the first and last entries of the previous month in
-     `data/markets.json` (say "not logged" where a figure is missing).
-  In the last Saturday recap of December, also add **Year in Numbers** right after Markets This Week (and
-     after Month in Numbers if both appear): one line on the year, then the table that
-     `python3 .claude/skills/daily-newsletter/market_facts.py DATE --year` prints, then one line each on
-     the year's best and worst stocks from that table.
-  8. **How It Played Out:** go through the What to watch today lines in this week's daily editions and
-     pick the 4 to 6 events that mattered most (a rate decision, a vote, a data release, a big match).
-     For each, one item: what was expected and what actually happened, for example
-     `**Central bank meeting:** Expected to hold; it held rates at 22% and signalled cuts in December.`
-     Skip anything already covered in full above; say "postponed" or "no decision yet" where that is the
-     case. Do not mention the daily editions themselves.
-  9. **The Week Ahead:** the key scheduled events for the coming week (central bank meetings, data,
-     holidays and closures, big matches).
-  10. **Sources:** the links used.
-- On the recap page, the site draws year-long trend lines next to the Markets This Week rows by itself;
-  nothing to add for that.
-- **Data log check:** before committing, run
-  `python3 .claude/skills/daily-newsletter/check_log.py DATE`. Fix any real problem it finds in
-  `data/markets.json` with log_figures.py (checking the figure at the source first), commit the fix, and
-  list anything left unfixed in the final reply's Publishing note. It does not go in the recap itself.
-- Every item opens with a bold lead-in, as in the daily edition. Never refer to the daily editions
-  themselves ("as reported on Tuesday"): write about the events and their dates.
+Saturday's separate recap run only: read `refs/saturday.md` in this folder first and follow it. Daily runs skip it.
 
 ## Log the day's figures
 
@@ -627,41 +550,7 @@ stays in the log for good and skews every change, streak and YTD figure worked o
 
 ## Listen (the edition read aloud)
 
-The site's Listen button reads every edition aloud with the device's own voice; each daily edition and the recap
-also get a recorded natural voice. Once the edition is final and checked, run
-`python3 .claude/skills/daily-newsletter/make_audio.py EDITION` (EDITION is the file key, e.g. 2026-11-06). It
-records the edition in the site's two natural voices, Heart and Michael (around 10 minutes, plus a few minutes the
-first time to install the voice model; a voice already recorded from the same text is kept), publishes the
-MP3 on the repo's `audio` branch (which holds only the last 8 editions' audio, a week plus the recap, and is rewritten each time: never
-commit an MP3 to main) and writes `data/audio/EDITION.json`; commit `data/audio/` with the edition. If it prints
-"Audio not made", go on: the site falls back to the device's voice, and say so in the final reply.
-It also rewrites the two podcast feeds (`data/audio/feed-heart.xml` and `feed-michael.xml`, served at
-/podcast/heart.xml and /podcast/michael.xml, with `data/audio/cover.png` as their artwork), which list the editions
-the audio branch holds; they go in with `data/audio/`.
-
-What it reads is `read_aloud.py`'s list: every section but Sources and the two watch tables, headings, paragraphs,
-list items and Explained boxes, with figures written as they are said (EGP 54.01 as "54.01 pounds", 3.9% as "3.9
-percent"). `listen.js` on the site builds the same list from the page to highlight the block being read; change
-both together.
-
-**Making it sound natural.** Most mistakes the voice makes fall into a few kinds, and each has a fix that applies to
-every edition from then on, never to one edition alone:
-- **A name said wrong** (Houthis, Abu Qir, Edita, Orascom): before recording, run `make_audio.py --names EDITION`. It
-  lists the names in the edition the voice has not been checked on, with the sounds it will use. Read them: a wrong one
-  goes into `pronounce.json`'s "words" with its sounds (copy the style of the entries there: IPA, a stress mark before
-  the stressed vowel), a right one into "checked", so it is not listed again. Arabic names are the usual trouble:
-  stress usually falls on the long vowel (ma-DOU-ly, ju-HAY-na, sa-WEE-ris).
-- **A figure, unit or abbreviation read badly:** fix the rule in `read_aloud.py`'s `speakable` (and the same rule in
-  `listen.js`), never the edition's text. Already handled: times (10pm as "ten P M", with no stops that made it pause),
-  clock times run together (3:30 as "three thirty", with no stop at the colon), other currencies (EUR 4.10 as "4.1 euros"), "a share" after a price, a unit said once ("207.4 million dollars from
-  110.2 million"), dates as ordinals ("November first", as American broadcasters say it), "re-" said "ree" in
-  refinance and rebound (`pronounce.json`'s "prefix_re"), and long sentences never split inside a number.
-- **A pause in the middle of a phrase:** the voice model sometimes stops for breath mid-phrase ("a fifth session ...
-  in a row"). make_audio.py shortens any silence of more than a quarter of a second that does not follow punctuation,
-  and says how many it shortened. If a listener still reports one, the sentence is usually too long: write shorter
-  sentences in the edition.
-When a listener reports a mistake, find which kind it is, fix the rule or the lexicon, and rerecord only the edition
-they are listening to (`make_audio.py EDITION --force`); earlier editions are not rerecorded.
+Once the edition is final and checked, run `python3 .claude/skills/daily-newsletter/make_audio.py EDITION` (EDITION is the file key, e.g. 2026-11-06). Read `refs/listen.md` before running it the first time in a run, or when a name may be mispronounced, the audio fails, or you change how something is read.
 
 ## Corrections
 
@@ -675,20 +564,7 @@ to an earlier one.
 
 ## Other skills for work on this repo
 
-These are general Claude skills, not part of this repo; use them when the task calls for it:
-
-- **dataviz:** read it before adding or changing any chart on the site, such as the trend lines drawn
-  from `data/markets.json`, so charts stay consistent in light and dark mode.
-- **xlsx:** for anything beyond the automatic `data/markets.xlsx` export, such as a custom analysis
-  workbook or charts in Excel.
-- **code-review:** run it on changes to `index.html` or the scripts before pushing them.
-
-In this repo, for the Markets Desk page (copied from Anthropic's equity-research plugin, Apache 2.0):
-**morning-note** (what moved and why, with a view), **sector-overview** (what drives a sector),
-**catalyst-calendar** (upcoming events that move stocks) and **thesis-tracker** (keeping each view
-falsifiable and checking whether it played out).
-
-Daily and recap runs do not need dataviz, xlsx or code-review.
+For work on the site itself rather than an edition, `refs/other-skills.md` lists the general skills to use.
 
 ## Edit pass, before the checker
 

@@ -19,6 +19,7 @@ work for the run; it is not published and nothing links to it.
 import datetime
 import json
 import os
+import re
 import subprocess
 import sys
 import time
@@ -98,12 +99,14 @@ def brief(results, started):
         if x:
             row.append(f"{n} {x[0]:,.2f} ({x[1]:+.2f}%)")
     add("- " + "; ".join(row))
-    big = []
+    big, busy = [], set()
     for g in ("egx", "us"):
         for t in sorted({t for e in days[-3:] for t in (e.get(g) or {})}):
             x = last_two(lambda e, g=g, t=t: (e.get(g) or {}).get(t))
             if x and abs(x[1]) >= 3:
                 big.append((abs(x[1]), f"{t} {x[1]:+.1f}%"))
+            if x and abs(x[1]) >= 2:
+                busy.add(t)
     add("- Desk stocks that moved 3% or more (each needs its leads opened and a stock line in the research log): " + (", ".join(s for _, s in sorted(big, reverse=True)) or "none") + ".")
     ind = (load(D("indicators.json")) or {}).get("series", {})
     ev = [f"{k.split('.')[-1]}: {v['read']}" for k, v in ind.items() if "." in k and (v.get("goldenCross") and v["goldenCross"]["ago"] == 0 or v.get("macdCross") and v["macdCross"]["ago"] == 0 or (v.get("rsi") or 50) >= 70 or (v.get("rsi") or 50) <= 30)]
@@ -195,8 +198,33 @@ def brief(results, started):
     # 8. news leads
     news = next((r["out"] for r in results if r["name"] == "news"), "")
     if news.strip():
-        add("## News leads by stock (stock_news.py)")
-        L.extend(x[:230] for x in news.splitlines())
+        # the brief stays in the run's memory for the whole run: a stock that moved 2% or more keeps all its leads,
+        # a quiet one its first three, and stocks with none are named on one line
+        add("## News leads by stock (stock_news.py; all leads for stocks that moved 2% or more, three for the rest)")
+        none, cur, n = [], None, 0
+        for x in news.splitlines():
+            m = re.match(r"## (\S+)\s+\((\d+) leads?\)", x)
+            if m:
+                cur, n = m.group(1), 0
+                if m.group(2) == "0":
+                    none.append(cur)
+                    cur = None
+                    continue
+                L.append(x[:230])
+                continue
+            if cur is None:
+                if not x.startswith("## ") and x.strip() and not none:
+                    L.append(x[:230])   # anything before the first stock
+                continue
+            if x.startswith("- ") or x.startswith("  "):
+                if x.startswith("- "):
+                    n += 1
+                if n <= (8 if cur in busy else 3):
+                    L.append(x[:230])
+            elif x.strip():
+                L.append(x[:230])
+        if none:
+            add("- No leads: " + ", ".join(none) + ".")
     open(D("brief.md"), "w").write("\n".join(L) + "\n")
     return len(L)
 
