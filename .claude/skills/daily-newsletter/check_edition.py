@@ -428,8 +428,12 @@ def main(path):
                           "with research_log.py as you go.")
         else:
             T = research_log.TARGETS["newsletter"]
-            for k in ("searches", "pages"):
+            for k in ("searches", "pages", "read"):
                 n = len(set(log.get(k, [])))
+                if k == "read":   # the scripts' reading: a warning only (a feed down is not the run's fault)
+                    if n < T[k]:
+                        warnings.append(f"Research: the scripts read only {n} pages (usually {T[k]}+): check editions/articles.md was built, and read more by hand.")
+                    continue
                 if n < T[k] / 2:
                     errors.append(f"Research: only {n} {k} logged (aim for {T[k]}+): research more widely before publishing.")
                 elif n < T[k]:

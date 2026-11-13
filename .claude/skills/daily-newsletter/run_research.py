@@ -245,12 +245,15 @@ def read_articles(date, want):
          "figures. The outlet's words, not checked: confirm what moves a story against a second outlet. Open a page only "
          "where this is not enough, or run articles.py with several URLs at once.", ""]
     ok, bad = [], []
-    for (label, it), pg in zip(picks, pages):
+    same = articles.copies([pg["text"] for pg in pages])
+    for idx, ((label, it), pg) in enumerate(zip(picks, pages)):
         if pg["error"]:
             bad.append(f"- {it['title'][:120]} | {it.get('outlet') or it['source']}: {pg['error']}" + (f" ({pg['url']})" if "news.google" not in pg["url"] else ""))
             continue
         ok.append(pg["url"])
-        A += [f"## {it['title'][:160]}", f"{label} | {it.get('outlet') or it['source']} | {articles.short(pg['url'])}",
+        j = same[idx]
+        dup = f" | SAME WORDING as {picks[j][1].get('outlet') or picks[j][1]['source']}: one source, not two" if j is not None else ""
+        A += [f"## {it['title'][:160]}", f"{label} | {it.get('outlet') or it['source']} | {articles.short(pg['url'])}{dup}",
               articles.excerpt(pg["text"], 110), ""]
     if bad:
         A += ["## Not read (open by hand if the story matters)"] + bad + [""]

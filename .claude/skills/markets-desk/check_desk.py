@@ -242,9 +242,13 @@ def main(args):
     else:
         T = dict(research_log.TARGETS["desk"])
         if datetime.date.fromisoformat(date[:10]).weekday() == 5 and date[:10] >= "2026-11-14":
-            T = {"searches": 10, "pages": 10}   # Saturday's lighter run (the skill's Daily run)
-        for k in ("searches", "pages"):
+            T = {"searches": 10, "pages": 5, "read": 10}   # Saturday's lighter run (the skill's Daily run)
+        for k in ("searches", "pages", "read"):
             n = len(set(RL.get(k, [])))
+            if k == "read":   # pages the scripts read (stock_news.py --read, results_due.py): a warning only
+                if n < T[k]:
+                    warnings.append(f"Research: the scripts read only {n} pages (usually {T[k]}+): check the news step in desk/brief.md.")
+                continue
             if n < T[k] / 2:
                 errors.append(f"Research: only {n} desk {k} logged (aim for {T[k]}+).")
             elif n < T[k]:

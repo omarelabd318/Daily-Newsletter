@@ -250,8 +250,17 @@ After writing the edition (and the recap, as `DATE-recap`):
 
 Log the research as you do it, with `python3 .claude/skills/daily-newsletter/research_log.py DATE newsletter search "query"`
 for every web search and `... DATE newsletter page URL` for every page opened (read_enterprise.py counts as the pages it
-prints, and run_research.py and articles.py log the pages they read themselves). A full edition takes at least 25 searches across many outlets and 30 pages opened; the checker warns below
-that and blocks publishing below half. The log is the honest record of the work: never log a search or a page that
+prints). Pages the scripts read for you (run_research.py's editions/articles.md, articles.py) are logged by them
+separately, as "read by scripts", and do not count as pages you opened. A full edition takes at least 25 searches
+across many outlets and 12 pages you opened yourself (to confirm a figure at a second outlet, or to read past an
+excerpt), on top of the scripts' reading (usually 20 or more); the checker warns below that and blocks publishing
+below half of the searches and pages.
+
+**Reading excerpts.** Two pages the reader marks as having the same wording are one release copied by two outlets:
+they count as one source, never as the second outlet that confirms a figure. When an excerpt ends with "Figures on
+the page: standalone; consolidated ..." (or nine months and the quarter), the page gives more than one basis: say
+which one each figure is, and for results use the consolidated profit attributable to shareholders unless the
+story is about the other. The log is the honest record of the work: never log a search or a page that
 was not made. End the final reply with the line `research_log.py DATE newsletter summary` prints.
 
 ## Attribution in the text

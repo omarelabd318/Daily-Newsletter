@@ -12,7 +12,9 @@ is named so it can be opened by hand. --log records the pages that were read in 
 
 Use it in place of opening pages one at a time: five URLs in one command are one step of the run, not five.
 run_research.py (editions/articles.md) and the desk's stock_news.py use the same reader. The text is the outlet's
-own words; check a figure that moves a story against a second outlet, as always.
+own words; check a figure that moves a story against a second outlet, as always. Two pages with the same wording are
+one release copied, not two sources: the reader marks them. A page that gives figures on more than one basis
+(standalone and consolidated, nine months and the quarter) says so after its excerpt.
 """
 import concurrent.futures
 import html
@@ -113,16 +115,34 @@ def sentences(text):
     return [s.strip() for s in re.split(r"(?<=[.!?؟؛])\s+|\n+", text) if len(s.strip().split()) >= 4]
 
 
+# what a figure is measured on: kept in the excerpt and named after it, so "profit falls" (standalone) is never read
+# as the group's result (consolidated), nor nine months as a quarter
+BASIS = [("standalone", r"\bstand-?alone\b|غير المجمعة|غير مجمعة|المستقلة"),
+         ("consolidated", r"\bconsolidated\b|(?<!غير )المجمعة|(?<!غير )مجمعة"),
+         ("unaudited or preliminary", r"\bunaudited\b|\bpreliminary\b|indicators|غير مدققة|غير مراجعة|مؤشرات"),
+         ("nine months", r"\bnine months\b|\b9 ?months\b|\b9M\b|التسعة أشهر|تسعة أشهر|9 أشهر"),
+         ("first half", r"\bfirst half\b|\bsix months\b|\bH1\b|النصف الأول|ستة أشهر|6 أشهر"),
+         ("one quarter", r"\b(?:first|second|third|fourth) quarter\b|\bQ[1-4]\b|الربع"),
+         ("attributable to shareholders", r"attributable|non-controlling|minority|حقوق الأقلية|غير المسيطرة|مساهمي الشركة الأم|العائد على مساهمي")]
+
+
+def basis(text):
+    """The bases the page's figures are given on (standalone, consolidated, unaudited, nine months, ...)."""
+    return [name for name, rx in BASIS if re.search(rx, text, re.I)]
+
+
 def excerpt(text, words=120, about=()):
-    """The opening sentence or two, then every sentence with a figure or naming one of `about`, in the page's order,
-    up to `words`. Whole sentences only."""
+    """The opening sentence or two, then every sentence with a figure, naming one of `about`, or saying what the figures
+    are measured on (standalone, consolidated, unaudited, nine months, the quarter), in the page's order, up to
+    `words`. Whole sentences only. When the page gives figures on more than one basis it says so after the excerpt."""
     ss = sentences(text)
     if not ss:
         return ""
     lower = [w.lower() for w in about if w]
+    rx = "|".join(r for _, r in BASIS)
     keep, seen, n = [], set(), 0
     for i, s in enumerate(ss):
-        hit = i < 2 or re.search(r"\d", s) or any(w in s.lower() for w in lower)
+        hit = i < 2 or re.search(r"\d", s) or any(w in s.lower() for w in lower) or re.search(rx, s, re.I)
         key = re.sub(r"\W+", "", s)[:80]
         if not hit or key in seen:
             continue
@@ -132,7 +152,30 @@ def excerpt(text, words=120, about=()):
             break
         keep.append(s if w <= words else " ".join(s.split()[:words]) + " ...")
         n += w
-    return " ".join(keep)
+    out = " ".join(keep)
+    b = basis(text)
+    if re.search(r"\d", text) and len(b) >= 2:
+        out += f" [Figures on the page: {'; '.join(b)}. Check which one each figure is.]"
+    return out
+
+
+def copies(texts):
+    """For each text, the index of an earlier one carrying the same wording (one release copied by two outlets), or
+    None. Same wording: 40% or more of the shorter one's eight-word runs appear in the other."""
+    def runs(t):
+        w = re.sub(r"[^\w\s]", " ", t.lower()).split()[:400]
+        return {" ".join(w[i:i + 8]) for i in range(max(0, len(w) - 7))}
+    R = [runs(t or "") for t in texts]
+    out = []
+    for i, a in enumerate(R):
+        hit = None
+        for j in range(i):
+            b = R[j]
+            if a and b and len(a & b) / min(len(a), len(b)) >= 0.4:
+                hit = j
+                break
+        out.append(hit)
+    return out
 
 
 def names(text, about):
@@ -145,7 +188,7 @@ def log_pages(date, part, urls):
     if not urls:
         return
     try:
-        subprocess.run([sys.executable, os.path.join(HERE, "research_log.py"), date, part, "page", *urls],
+        subprocess.run([sys.executable, os.path.join(HERE, "research_log.py"), date, part, "read", *urls],
                        cwd=ROOT, capture_output=True, timeout=30)
     except Exception:
         pass
@@ -170,13 +213,15 @@ def main(a):
     if not urls:
         sys.exit(__doc__)
     got = read_many(urls)
-    for g in got:
+    same = copies([g["text"] for g in got])
+    for i, g in enumerate(got):
         print(f"## {short(g['url'])}")
         if g["error"]:
             print(f"- {g['error']}\n")
             continue
         body = " ".join(g["text"].split()[:700]) if full else excerpt(g["text"], words, about)
-        print(f"({g['words']} words on the page)\n{body}\n")
+        dup = f" Same wording as {short(got[same[i]]['url'])}: one source, not two." if same[i] is not None else ""
+        print(f"({g['words']} words on the page){dup}\n{body}\n")
     if log:
         log_pages(log[0], log[1], [g["url"] for g in got if not g["error"]])
 

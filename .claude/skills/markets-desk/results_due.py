@@ -106,9 +106,13 @@ def main(a):
             continue
         pages = articles.read_many([sn.resolve(r[3]) for r in hits[:3]])
         lines = []
-        for (w, o, ti, l), pg in zip(hits[:4], pages + [None] * 4):
+        same = articles.copies([(pg or {}).get("text", "") for pg in pages])
+        for k, ((w, o, ti, l), pg) in enumerate(zip(hits[:4], pages + [None] * 4)):
             lines.append(f"- {w:%a %d %b} | {o} | {ti[:150]}" + (f"\n  {articles.short(pg['url'])}" if pg else ""))
-            if pg and not pg["error"]:
+            if pg and not pg["error"] and k < len(same) and same[k] is not None:
+                lines.append(f"  (same wording as the {hits[same[k]][1]} page above: one source, not two)")
+                read.append(pg["url"])
+            elif pg and not pg["error"]:
                 lines.append(f"  > {articles.excerpt(pg['text'], 70, sn.MUST[t])}")
                 read.append(pg["url"])
         todo.append((t, lines))

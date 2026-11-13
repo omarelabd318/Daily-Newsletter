@@ -42,7 +42,7 @@
   const ok = (b, yes, no) => `<span class="pill ${b ? 'ok' : 'bad'}">${b ? yes : no}</span>`;
   let pub = 0, due = 0, warnLeft = 0;
   const row = (label, published, P, part, key, isDesk) => {
-    const c = P && P.check, s = P ? (P.searches || []).length : 0, pg = P ? new Set(P.pages || []).size : 0, st = P ? Object.keys(P.stocks || {}).length : 0;
+    const c = P && P.check, s = P ? (P.searches || []).length : 0, pg = P ? new Set(P.pages || []).size : 0, rd = P ? [...new Set(P.read || [])].filter((u) => !(P.pages || []).includes(u)).length : 0, st = P ? Object.keys(P.stocks || {}).length : 0;
     const A = key && audio[key], voices = A ? A.voices.map((v) => v.name).join(', ') : '';
     const fq = P ? [...(P.searches || []), ...(P.pages || [])].filter((x) => /factiq/i.test(x)).length : 0;
     due++; if (published) pub++; if (c) warnLeft += (c.warnings || []).length;
@@ -51,7 +51,7 @@
       : c ? '<span class="sub">Checker clean</span>' : '';
     return `<div class="rrow"><b>${label}</b>${ok(published, 'Published', 'Missing')}
       <span class="rcell"><span class="meta">Checked</span>${c ? M.esc(c.at.slice(11)) + ' Cairo' : '—'}</span>
-      <span class="rcell"><span class="meta">Research</span>${P ? `${s} searches, ${pg} pages${isDesk ? `, ${st} stocks` : ''}${fq ? `, ${fq} FactIQ` : ''}` : '—'}</span>
+      <span class="rcell"><span class="meta">Research</span>${P ? `${s} searches, ${pg} pages${rd ? ` (+${rd} read by scripts)` : ''}${isDesk ? `, ${st} stocks` : ''}${fq ? `, ${fq} FactIQ` : ''}` : '—'}</span>
       <span class="rcell">${isDesk ? '' : `<span class="meta">Length and audio</span>${c && c.words ? M.num(c.words, 0) + ' words · ' : ''}${A ? 'recorded (' + M.esc(voices) + ')' : published ? 'device voice only' : '—'}`}</span>
       <div class="rcheck">${det}</div></div>`;
   };

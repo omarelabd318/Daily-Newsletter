@@ -24,7 +24,7 @@ closes are the last session's; the news, stock research and analysis are still u
 session (the USA section, its stories, movers and the US stocks that moved) and the week's figures. The EGX last
 traded on Thursday and Friday's run already covered it: carry the Egypt section over from Friday, updating only what
 changed (news since Friday, a view due, results published on Friday or Saturday), and skip the per-stock research for
-Egyptian stocks unless one has news. The research floor is 10 searches and 10 pages on a Saturday.
+Egyptian stocks unless one has news. The research floor is 10 searches and 5 pages opened on a Saturday.
 
 1. Copy the newest `desk/days/*.json` as a template to `desk/days/DATE.json` (DATE is the edition date) and
    rewrite every part for today: set `date`, `asOf` (the latest close, the day before DATE on a trading
@@ -311,7 +311,10 @@ From mid-October to late November, and again each quarter, the desk's stocks rep
 
 Log the desk's research as you go with `research_log.py DATE desk search|page ...`, and one line per stock with
 `research_log.py DATE desk stock TICKER "what was found"` (or "no news"). A full desk takes at least 15 searches and
-15 pages beyond the edition; every desk stock that moved 3% or more on the session, or has a lead in stock_news.py,
+8 pages you opened yourself beyond the edition, on top of the pages the scripts read for you (stock_news.py --read,
+results_due.py, logged by them as "read by scripts"; usually 15 or more). Two leads marked "same wording" are one
+release, one source; an excerpt ending "Figures on the page: standalone; consolidated ..." gives more than one
+basis, so say which one each figure is; every desk stock that moved 3% or more on the session, or has a lead in stock_news.py,
 needs its leads read (the brief's excerpts count) and a stock line logged (the checker names any mover without one). Never log work not done.
 End the final reply with the line `research_log.py DATE desk summary` prints.
 

@@ -186,7 +186,8 @@ def main(args):
         print(f"## {t}  ({len(keep)} leads)")
         for e in errors:
             print(f"- {e}")
-        for (when, outlet, title, link), pg in zip(keep, pages):
+        same = articles.copies([(pg or {}).get("text", "") for pg in pages]) if read else [None] * len(keep)
+        for idx, ((when, outlet, title, link), pg) in enumerate(zip(keep, pages)):
             print(f"- {when:%a %d %b} | {outlet} | {title}\n  {articles.short(link) if read else link}")
             if not pg:
                 continue
@@ -196,7 +197,11 @@ def main(args):
                 print("  (page read: it never names the company, so probably not about it: skip)")
                 logged.append(pg["url"])
             else:
-                print(f"  > {articles.excerpt(pg['text'], 55, MUST[t])}")
+                j = same[idx]
+                if j is not None:
+                    print(f"  (same wording as the {keep[j][1]} story above: one source, not two)")
+                else:
+                    print(f"  > {articles.excerpt(pg['text'], 55, MUST[t])}")
                 logged.append(pg["url"])
         if not keep and not errors:
             print("- nothing found")
