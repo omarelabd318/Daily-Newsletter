@@ -7,8 +7,9 @@ Usage:
   python3 .claude/skills/markets-desk/run_data.py movers fairvalue   # only the named steps, then the brief
 
 It runs, each as its own process with a time limit and the shared fetch layer (sources.py) underneath:
-intraday, rates, valuation, movers, calendar, indicators, fairvalue, views (judge_views.py --write), news
-(stock_news.py, 3 days on a Sunday) and leads (fetch_movers.py --leads). A step that fails or runs out of time
+intraday, rates, valuation, movers, calendar, indicators, fairvalue, views (judge_views.py --write), results
+(results_due.py: new results not yet recorded, with their figures already read), news
+(stock_news.py --read, 3 days on a Sunday: each lead's page is read and its key lines put under it) and leads (fetch_movers.py --leads). A step that fails or runs out of time
 is reported and the rest carry on: every script keeps its last saved output when its source fails.
 
 desk/brief.md is what the run reads instead of each script's output: what every step did, which sources were
@@ -32,7 +33,7 @@ SUNDAY = TODAY.weekday() == 6
 STEPS = [("intraday", ["fetch_intraday.py"], 420), ("rates", ["fetch_rates.py"], 120), ("valuation", ["fetch_valuation.py"], 240),
          ("movers", ["fetch_movers.py"], 300), ("calendar", ["fetch_calendar.py"], 420), ("indicators", ["indicators.py"], 60),
          ("fairvalue", ["fetch_fairvalue.py"], 120), ("views", ["judge_views.py", "--write"], 60),
-         ("news", ["stock_news.py", "3" if SUNDAY else "2"], 420), ("leads", ["fetch_movers.py", "--leads"], 300)]
+         ("results", ["results_due.py"], 240), ("news", ["stock_news.py", "3" if SUNDAY else "2", "--read"], 540), ("leads", ["fetch_movers.py", "--leads"], 360)]
 
 
 def load(path, default=None):
@@ -71,7 +72,7 @@ def brief(results, started):
         add("## Steps")
         for r in results:
             tail = [x for x in r["out"].splitlines() if x.strip()]
-            add(f"- **{r['name']}**: {'ok' if r['ok'] else 'FAILED'} in {r['secs']}s. " + (tail[-1][:260] if tail and r["name"] not in ("news", "leads") else ""))
+            add(f"- **{r['name']}**: {'ok' if r['ok'] else 'FAILED'} in {r['secs']}s. " + (tail[-1][:260] if tail and r["name"] not in ("news", "leads", "results") else ""))
             if not r["ok"]:
                 for x in tail[-6:]:
                     add(f"    {x[:200]}")
@@ -129,9 +130,15 @@ def brief(results, started):
         add("")
         add("Leads for them (open before using; never guess a reason):")
         add("```")
-        L.extend(x[:230] for x in leads.splitlines()[:90])
+        L.extend(x[:700] if x.startswith("  >") else x[:230] for x in leads.splitlines()[:130])
         add("```")
     add("")
+    # 3b. results out but not recorded (results_due.py): the figures are already read, so no search is needed for them
+    rd = next((r["out"] for r in results if r["name"] == "results"), "")
+    if rd.strip():
+        add("## Results to record (results_due.py)")
+        L.extend(x[:700] for x in rd.splitlines()[1:] if x.strip())
+        add("")
     # 4. results and events
     cal = (load(D("calendar.json")) or {}).get("items", [])
     soon = [c for c in cal if c.get("date") and 0 <= (datetime.date.fromisoformat(c["date"]) - TODAY).days <= 7]
@@ -220,7 +227,7 @@ def brief(results, started):
                 if x.startswith("- "):
                     n += 1
                 if n <= (8 if cur in busy else 3):
-                    L.append(x[:230])
+                    L.append(x[:700] if x.startswith("  >") else x[:230])   # "  >": the page's own lines (stock_news.py --read)
             elif x.strip():
                 L.append(x[:230])
         if none:

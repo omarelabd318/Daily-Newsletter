@@ -2,7 +2,7 @@
 """List recent news for each of the desk's stocks, as leads for the stock pages.
 
 Usage:
-  python3 .claude/skills/markets-desk/stock_news.py [DAYS] [TICKER ...]
+  python3 .claude/skills/markets-desk/stock_news.py [DAYS] [TICKER ...] [--read]
 
 DAYS defaults to 2 (use 3 on Sundays, to cover the weekend). With no tickers it covers all of them.
 For each stock it prints headlines from Google News (English, plus Arabic for the Egyptian stocks), newest
@@ -11,12 +11,19 @@ if that fails the Google link is shown). Headlines are leads, not facts: open th
 before using it, check it against a second outlet where it matters, and keep only news about the company,
 its stock, or something that clearly affects it (results, disclosures, deals, ratings, management,
 regulation, prices of what it sells). Market wraps that only list the stock's move are skipped.
+
+--read (run_data.py passes it) also reads the four newest leads' pages with daily-newsletter/articles.py and prints, under the
+lead, its opening and the sentences with figures or the company's name (about 70 words): most leads can then be
+judged and written up without opening the page. A page that never names the company is marked as probably not
+about it; one that will not load (a paywall) is marked to open by hand. Pages read are logged in the day's
+research log (desk part), as read_enterprise.py's are.
 """
 import datetime
 import concurrent.futures
 import email.utils
 import html
 import json
+import os
 import re
 import sys
 import urllib.parse
@@ -85,7 +92,7 @@ MUST = {
 }
 # Sports clubs share some company names, and daily price lists mention banks: skip both.
 NOISE = re.compile(r"(league|coach|match|fixtures|vs\.? |\bfc\b|football|olympic|دوري|مباراة|تشكيل|المدرب|لاعب|كورة|"
-                   r"نادي|الرياضي|أولمبياد|مستشفى جهينة|shares (acquired|sold|bought) by|sells [\d,]+ shares|buys [\d,]+ shares|"
+                   r"نادي|الرياضي|أمانة جهينة|أولمبياد|مستشفى جهينة|shares (acquired|sold|bought) by|sells [\d,]+ shares|buys [\d,]+ shares|"
                    r"etfs? (are )?(buying|bought)|net etf|acquires [\d,]+ shares|holdings (lifted|cut|raised|trimmed|lowered) by|"
                    r"stock (bought|sold) by|position in|بمركز جهينة|محمد جهينة|سوهاج|"
                    r"سعر (الدولار|الريال|اليورو|الجنيه|الدرهم|الدينار)|أسعار العملات|exchange rate today)", re.I)
@@ -134,6 +141,16 @@ def resolve(link):
 
 
 def main(args):
+    read = "--read" in args
+    args = [a for a in args if a != "--read"]
+    if read:
+        try:
+            sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "daily-newsletter"))
+            import articles
+        except Exception as e:   # the leads still come, without the pages
+            print(f"(pages not read: {type(e).__name__}: {e})")
+            read = False
+    logged = []
     days = int(args.pop(0)) if args and args[0].isdigit() else 2
     tickers = [a.upper() for a in args] or list(STOCKS)
     bad = [t for t in tickers if t not in STOCKS]
@@ -161,14 +178,33 @@ def main(args):
         with concurrent.futures.ThreadPoolExecutor(8) as pool:
             urls = list(pool.map(resolve, [r[3] for r in keep]))
         keep = [(w, o, ti, u) for (w, o, ti, _), u in zip(keep, urls)]
+        try:
+            # the four newest leads are read; older ones stay headlines (the brief is held for the whole run)
+            pages = (articles.read_many([r[3] for r in keep[:4]]) + [None] * 8)[:len(keep)] if read and keep else [None] * len(keep)
+        except Exception:
+            pages = [None] * len(keep)
         print(f"## {t}  ({len(keep)} leads)")
         for e in errors:
             print(f"- {e}")
-        for when, outlet, title, link in keep:
-            print(f"- {when:%a %d %b} | {outlet} | {title}\n  {link}")
+        for (when, outlet, title, link), pg in zip(keep, pages):
+            print(f"- {when:%a %d %b} | {outlet} | {title}\n  {articles.short(link) if read else link}")
+            if not pg:
+                continue
+            if pg["error"]:
+                print(f"  (page: {pg['error']})")
+            elif not articles.names(pg["text"], MUST[t]):
+                print("  (page read: it never names the company, so probably not about it: skip)")
+                logged.append(pg["url"])
+            else:
+                print(f"  > {articles.excerpt(pg['text'], 55, MUST[t])}")
+                logged.append(pg["url"])
         if not keep and not errors:
             print("- nothing found")
         print()
+    if read and logged:
+        cairo = (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=2)).date().isoformat()
+        articles.log_pages(cairo, "desk", logged)
+        print(f"Read {len(logged)} lead pages for you (logged in the research log); open a page only where the excerpt is not enough.")
 
 
 if __name__ == "__main__":

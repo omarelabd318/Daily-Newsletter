@@ -250,7 +250,7 @@ After writing the edition (and the recap, as `DATE-recap`):
 
 Log the research as you do it, with `python3 .claude/skills/daily-newsletter/research_log.py DATE newsletter search "query"`
 for every web search and `... DATE newsletter page URL` for every page opened (read_enterprise.py counts as the pages it
-prints). A full edition takes at least 25 searches across many outlets and 30 pages opened; the checker warns below
+prints, and run_research.py and articles.py log the pages they read themselves). A full edition takes at least 25 searches across many outlets and 30 pages opened; the checker warns below
 that and blocks publishing below half. The log is the honest record of the work: never log a search or a page that
 was not made. End the final reply with the line `research_log.py DATE newsletter summary` prints.
 
@@ -343,7 +343,15 @@ wires on Egypt, the Gulf, the economy, sports, culture, and the world, business 
 which outlets it could not reach. Use it to choose what to research, not as research: every line is a headline
 with no link, so open the story at its outlet, check it against a second one, and log it with research_log.py as
 usual. A story the brief shows in several outlets still needs reading; a story it does not show may still matter
-(it sees headlines, not front-page placement). An outlet listed as unreachable is read by hand. The file is a
+(it sees headlines, not front-page placement). An outlet listed as unreachable is read by hand.
+
+**Then read `editions/articles.md`** (written by the same command): the likeliest stories already read at their outlets
+(about 30: those several outlets carry, with a second outlet for the top ones, the running topics, and the first
+economy, region, wire, sports and world headlines), each with its link at the outlet and its opening and figures.
+Write from these where they are enough, and open a page only for what an excerpt leaves out, a figure to confirm at a
+second outlet, or a story it lists under "Not read". To read pages, pass several at once to
+`python3 .claude/skills/daily-newsletter/articles.py --log DATE newsletter URL URL ...` (one step of the run instead
+of one per page; `--full` for a whole article) rather than opening them one by one. The file is a
 worksheet and is not committed.
 
 ## Egyptian news outlets: read every day

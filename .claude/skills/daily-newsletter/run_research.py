@@ -17,6 +17,10 @@ It collects, and never judges:
    now: the SEC's filings and filed figures (US), or Mubasher's results headlines and their figures (Egypt).
 6. Regional and world headlines, business and sports leads.
 7. What it could not reach, so the run fetches those by hand.
+8. editions/articles.md: the stories themselves for the leads most likely to run (stories several outlets carry, with
+   a second outlet for the top ones, the running topics, and the first economy, region, wire, sports and world
+   headlines): each page read with articles.py, its link at the outlet and its opening and figures (about 110
+   words). Read it after the brief; open a page only where the excerpt is not enough. The pages read are logged.
 Headlines come through Google News's feeds (one request per outlet), so each line is a lead with no link: find the
 story on the outlet's own site and read it there before using it, as always. The file is a worksheet: not committed (.gitignore), never linked.
 """
@@ -224,6 +228,37 @@ def stories_of(md):
     return out
 
 
+def read_articles(date, want):
+    """editions/articles.md: the likeliest stories read in one go (articles.py), so the run opens pages only where an
+    excerpt is not enough. Returns how many pages were read."""
+    import articles
+    seen, picks = set(), []
+    for label, it in want:
+        k = re.sub(r"\W+", "", it["title"].lower())[:50]
+        if it.get("url") and k not in seen:
+            seen.add(k)
+            picks.append((label, it))
+    picks = picks[:45]
+    pages = articles.read_many([it["url"] for _, it in picks])
+    A = [f"# Stories read for {date}", "",
+         "Read by run_research.py with articles.py: each page's link at the outlet, then its opening and the sentences with "
+         "figures. The outlet's words, not checked: confirm what moves a story against a second outlet. Open a page only "
+         "where this is not enough, or run articles.py with several URLs at once.", ""]
+    ok, bad = [], []
+    for (label, it), pg in zip(picks, pages):
+        if pg["error"]:
+            bad.append(f"- {it['title'][:120]} | {it.get('outlet') or it['source']}: {pg['error']}" + (f" ({pg['url']})" if "news.google" not in pg["url"] else ""))
+            continue
+        ok.append(pg["url"])
+        A += [f"## {it['title'][:160]}", f"{label} | {it.get('outlet') or it['source']} | {articles.short(pg['url'])}",
+              articles.excerpt(pg["text"], 110), ""]
+    if bad:
+        A += ["## Not read (open by hand if the story matters)"] + bad + [""]
+    open(os.path.join(ROOT, "editions", "articles.md"), "w").write("\n".join(A) + "\n")
+    articles.log_pages(date, "newsletter", ok)
+    return len(ok)
+
+
 def main():
     date = next((a for a in sys.argv[1:] if re.match(r"\d{4}-\d{2}-\d{2}$", a)), datetime.date.today().isoformat())
     L = [f"# Newsletter brief for {date}", "", "Built by run_research.py. Leads to open and check, not facts; not for publication.", ""]
@@ -244,13 +279,17 @@ def main():
         got = clean(got)
         per[name] = got[:14]
         allitems += got[:25]
-    shown = set()
+    shown, want = set(), []
     for ar, label in ((0, "English"), (1, "Arabic")):
         cl = clusters([i for i in allitems if i["ar"] == ar])
         add(f"## Stories several Egyptian outlets carry ({label})")
         if not cl:
             add("- None found by headline; scan the lists below.")
-        for g in cl[:18]:
+        for gi, g in enumerate(cl[:18]):
+            if gi < (12 if ar == 0 else 5):
+                want.append(("Several outlets", g[0]))
+                if gi < 6 and len(g) > 1:
+                    want.append(("Several outlets (second outlet)", next(i for i in g if i["outlet"] != g[0]["outlet"])))
             shown.update(id(i) for i in g)
             outlets = sorted({i["outlet"] for i in g})
             add(f"- **{len(outlets)} outlets** ({', '.join(outlets)}): {g[0]['title'][:170]}")
@@ -274,16 +313,19 @@ def main():
         for g in got:
             g["outlet"] = name
         wires += got
+        want += [("Regional and wires", i) for i in got[:1]]
         L.extend(fmt(i) for i in got)
     add("")
     for name, q, ar in LEADS:
         got = clean(search(q, name, bool(ar)))[:10]
+        want += [(name, i) for i in got[:(4 if name == "Egypt economy" else 2)]]
         wires += got
         add(f"## {name}")
         L.extend(fmt(i) for i in got)
         add("")
     for name, code in TOPICS:
         got = feed(f"https://news.google.com/rss/headlines/section/topic/{code}?hl=en-US&gl=US&ceid=US:en", "Google News " + name)[:12]
+        want += [("Top: " + name, i) for i in got[:3]]
         wires += got
         add(f"## Top headlines: {name}")
         L.extend(fmt(i) for i in got)
@@ -305,6 +347,7 @@ def main():
             block.append(f"### {tp['name']}: no headline on it today in what was gathered")
             continue
         block.append(f"### {tp['name']}")
+        want.append(("Topic: " + tp["name"], hits[0]))
         if tp.get("now"):
             block.append(f"- Where it stood ({tp.get('now_date')}): {tp['now'][:420]}")
         # the last edition that carried the topic (data/topics.json tags every story), with its full text and figures
@@ -356,7 +399,8 @@ def main():
         tail.append("- No headlines came back for: " + ", ".join(empty) + " (open their front pages directly).")
     L[head + len(block):head + len(block)] = tail + [""]
     open(os.path.join(ROOT, "editions", "brief.md"), "w").write("\n".join(L) + "\n")
-    print(f"run_research: {sum(len(v) for v in per.values())} Egyptian headlines from {sum(1 for v in per.values() if v)} of {len(EGYPT)} outlets, "
+    nread = read_articles(date, want)
+    print(f"run_research: read {nread} story pages into editions/articles.md;  {sum(len(v) for v in per.values())} Egyptian headlines from {sum(1 for v in per.values() if v)} of {len(EGYPT)} outlets, "
           f"{len(wires)} regional and world leads; {len(FAILED)} feeds failed; read editions/brief.md ({len(L)} lines)")
 
 

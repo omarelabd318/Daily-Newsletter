@@ -389,6 +389,12 @@ def leads(saved):
     """News leads for the top five gainers and losers in each market, from the last two days."""
     sys.path.insert(0, os.path.dirname(__file__))
     import stock_news as sn
+    try:
+        sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "daily-newsletter"))
+        import articles as art
+    except Exception:
+        art = None
+    read = []
     for m in ("egx", "us"):
         X = saved.get(m)
         if not X:
@@ -404,10 +410,21 @@ def leads(saved):
                     rows = []
                 rows = [x for x in sorted(rows, key=lambda x: x[0], reverse=True) if core in x[2]][:4]
                 print(f"## {r['t']} {r['pct']:+.1f}%  {r['name']}")
-                for w, o, t, l in rows:
-                    print(f"- {w:%a %d %b} | {o} | {t}\n  {sn.resolve(l)}")
+                urls = [sn.resolve(l) for w, o, t, l in rows]
+                # the pages themselves, so the reason can usually be written without opening them (articles.py)
+                pages = art.read_many(urls) if art and abs(r.get("pct") or 0) >= 5 and not r.get("why") else [None] * len(rows)
+                for (w, o, t, l), u, pg in zip(rows, urls, pages):
+                    print(f"- {w:%a %d %b} | {o} | {t}\n  {art.short(u) if art else u}")
+                    if pg and not pg["error"] and art.names(pg["text"], [core]):
+                        print(f"  > {art.excerpt(pg['text'], 50, [core])}")
+                        read.append(pg["url"])
+                    elif pg and pg["error"]:
+                        print(f"  (page: {pg['error']})")
                 if not rows:
                     print("- no headlines found")
+    if art and read:
+        cairo = (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=2)).date().isoformat()
+        art.log_pages(cairo, "desk", read)
 
 
 def main():

@@ -30,8 +30,8 @@ Egyptian stocks unless one has news. The research floor is 10 searches and 10 pa
    rewrite every part for today: set `date`, `asOf` (the latest close, the day before DATE on a trading
    day), `fetched`, and remove `"sample": true`. The close card figures come from today's logged figures. Egypt's group lists the EGX30, the EGX70 EWI, USD/EGP and gold 24K
    per gram (24K, not 21K: the dashboard's Gold in Egypt card has 21K, 18K and the gold pound).
-2. Run `python3 .claude/skills/markets-desk/stock_news.py` (`3` on Sundays) and do the stock research
-   below; update `desk/stocks.json`.
+2. Do the stock research below from the news leads in `desk/brief.md` (step 5 runs stock_news.py; do not run it
+   again); update `desk/stocks.json`.
 3. Write each section: finding (the page shows its first sentence in bold, so make that sentence the day's
    point; at most two more, about 50 words in all; the coming dates go in the week ahead, not here; `next` is no
    longer shown), three to five stories (`calls`), winners and losers (`board`), the Stocks note,
@@ -297,8 +297,11 @@ From mid-October to late November, and again each quarter, the desk's stocks rep
   published estimate, judge against last year's quarter and the preview's watch list, and say so in the headline.
   For an Egyptian stock, also record the figures with set_results.py (step 7). Then add the news to any open view on
   the stock, and change its confidence if the results move the case (Views: the record).
-- **Every desk stock that reported, not only the day's lead.** Check the day's disclosures and the calendar for all
-  39 stocks, and for each one whose latest results are not yet in `lastResults` (reported since the last run,
+- **Every desk stock that reported, not only the day's lead.** The brief's "Results to record" (results_due.py)
+  lists every desk stock with results out in the last ten days and not yet recorded, with the SEC's figures (US) or
+  the first outlets' pages already read (Egypt), and the Egyptian stocks whose `lastResults` is written but whose
+  set_results.py is not run. Work from that list rather than checking all 39 by hand; for each one whose latest
+  results are not yet in `lastResults` (reported since the last run,
   or left undone by an earlier one, such as Elsewedy, e-finance, Emaar Misr and Eastern on November 12, 2026): write `lastResults`, run set_results.py (Egyptian
   stocks) so its fair value uses the new figures, and remove or correct its entry in desk/calendar.json. A results
   season can bring five in a day; give each two lines if time is short, but leave none on old figures. The run's
@@ -309,14 +312,18 @@ From mid-October to late November, and again each quarter, the desk's stocks rep
 Log the desk's research as you go with `research_log.py DATE desk search|page ...`, and one line per stock with
 `research_log.py DATE desk stock TICKER "what was found"` (or "no news"). A full desk takes at least 15 searches and
 15 pages beyond the edition; every desk stock that moved 3% or more on the session, or has a lead in stock_news.py,
-needs its leads opened and a stock line logged (the checker names any mover without one). Never log work not done.
+needs its leads read (the brief's excerpts count) and a stock line logged (the checker names any mover without one). Never log work not done.
 End the final reply with the line `research_log.py DATE desk summary` prints.
 
 Each of the desk's stocks gets its own search every morning, on top of the newsletter's research:
 
-1. Run `python3 .claude/skills/markets-desk/stock_news.py` (add `3` on Sundays to cover the weekend). It
-   lists each stock's headlines from the last two days, in English and, for the Egyptian stocks, Arabic.
-2. Open every lead that is about the company, its stock or something that clearly affects it: results,
+1. Read the news leads in `desk/brief.md` (run_data.py runs `stock_news.py --read`, three days on Sundays): each
+   stock's headlines from the last two days, in English and, for the Egyptian stocks, Arabic, and under the four
+   newest the page's own opening and figures (`>` lines), already read and logged. A lead marked "never names the
+   company" is skipped; one marked "did not load" is opened by hand if it matters. Write from the excerpt where it
+   is enough, and open the page only for what it leaves out or a figure to confirm at a second outlet; to read
+   several, pass them at once to `python3 .claude/skills/daily-newsletter/articles.py --log DATE desk URL ...`.
+2. Judge every lead that is about the company, its stock or something that clearly affects it: results,
    disclosures to the exchange, deals and contracts, financing, dividends and capital changes, analysts'
    ratings and fair values, management changes, regulation, and prices of what it sells or buys. Skip
    market wraps, sponsorships, sports clubs that share a name, and fund-holding filings.
