@@ -42,7 +42,8 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
 .cw-c.sel{background:var(--sel)}
 .cw-c.bad{color:var(--bad)} .cw-c .n{color:var(--ink)} .cw-c.bad::after{content:"";position:absolute;inset:auto 0 0 auto;width:0;height:0;border-left:8px solid transparent;border-bottom:8px solid var(--bad)}
 .cw-c.shown{color:#2f5d9e}
-.cw-clue{align-self:stretch;margin:0 0 12px;padding:8px 12px;background:var(--word);font:16px/1.4 var(--serif);min-height:44px}
+.cw .mid{width:min-content}   /* the column is as wide as the grid: a long clue wraps instead of widening it */
+.cw-clue{align-self:stretch;box-sizing:border-box;width:100%;margin:0 0 12px;padding:8px 12px;background:var(--word);font:16px/1.4 var(--serif);min-height:calc(2.8em + 16px)}
 .cw-clue b{font-family:var(--sans);font-size:13px;margin-right:6px}
 .cw-l h3{margin:0 0 6px;padding-bottom:4px;border-bottom:1px solid var(--ink);font:700 12px var(--sans);letter-spacing:.16em;text-transform:uppercase}
 .cw-l ol{list-style:none;margin:0;padding:0;max-height:var(--lh);overflow:auto}
