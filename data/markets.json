@@ -136882,7 +136882,18 @@
    "egx": {
     "COMI": 128.75,
     "JUFO": 24.13,
-    "EMFD": 12.69
+    "EMFD": 12.69,
+    "TMGH": 83.95,
+    "ETEL": 133.0,
+    "PHDC": 12.4,
+    "SWDY": 120.7,
+    "ORAS": 799.9,
+    "FWRY": 17.87,
+    "ABUK": 77.5,
+    "HRHO": 25.36,
+    "CLHO": 14.4,
+    "ALCN": 33.39,
+    "BQDC": 5.63
    },
    "us": {
     "AAPL": 354.88,
@@ -136909,19 +136920,30 @@
    "cbe_usd_buy": 53.3653,
    "cbe_usd_sell": 53.5047,
    "usd_egp": 53.5047,
-   "tbill_182": 26.073,
-   "tbill_364": 25.024,
+   "tbill_182": 25.024,
+   "tbill_364": 26.073,
    "sp500": 7592.4,
    "nasdaq": 25366.09,
    "dow": 52297.09,
-   "brent": 95.82,
+   "brent": 95.9,
    "gold_usd": 3885.3,
    "dxy": 103.17,
    "cbe_deposit": 20.0,
    "cbe_lending": 21.0,
    "infl_headline": 12.7,
    "infl_core": 13.1,
-   "reserves_usd": 57.5
+   "reserves_usd": 57.5,
+   "btc": 69007.0,
+   "gold24_egp": 6800.0,
+   "gold21_egp": 5950.0,
+   "gold18_egp": 5100.0,
+   "goldpound_egp": 47600.0,
+   "eur_egp": 59.158,
+   "sar_egp": 14.253,
+   "aed_egp": 14.5538,
+   "kwd_egp": 171.872,
+   "qar_egp": 14.6837,
+   "gbp_egp": 70.7791
   }
  ]
 }

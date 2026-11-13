@@ -1,101 +1,105 @@
 {
- "editions": [
-  {
-   "date": "2026-10-25",
-   "summary": "Houthi strikes on Saudi Arabia lift Brent; Egypt's parliament weighs a defensive deployment; EGX30 slides before Thursday's rate decision."
-  },
-  {
-   "date": "2026-10-26",
-   "summary": "Parliament votes on a Saudi deployment, the pound hits a record low, the IMF's final review begins and the EGX30 slides."
-  },
-  {
-   "date": "2026-10-27",
-   "summary": "Parliament backs Saudi defence mandate, Banque du Caire IPO prices at EGP 5.30, pound nears 56.3 and Israel votes."
-  },
-  {
-   "date": "2026-10-28",
-   "id": "2026-10-28-v2",
-   "summary": "Rate decision looms, importers squeezed by EGP 56 dollar, Israel vote deadlock, Houthi strikes, Fed decision tonight."
-  },
-  {
-   "date": "2026-10-29",
-   "summary": "Rate decision day with the pound above EGP 56, Banque du Caire IPO 27x covered, Fed holds 10-2, Israel count nears end."
-  },
-  {
-   "date": "2026-10-30",
-   "summary": "Egypt's central bank hikes rates 100 bps in a surprise; Alphabet's worst day; Hormuz mine claims; Banque du Caire lists Monday."
-  },
-  {
-   "date": "2026-10-31",
-   "summary": "Tech rout gives the Nasdaq its worst month since March 2025, gold hits a one-year low and the EGX reopens after the rate hike."
-  },
-  {
-   "date": "2026-10-31",
-   "id": "2026-10-31-recap",
-   "label": "Weekly Recap",
-   "summary": "A surprise rate hike, a record-low pound, Egypt's Saudi authorisation, Israel's hung vote and a tech rout on Wall Street."
-  },
-  {
-   "date": "2026-11-01",
-   "summary": "Banks reprice after the rate hike, Wall Street's tech rout shadows the EGX reopening, Iran floats a Hormuz plan."
-  },
-  {
-   "date": "2026-11-02",
-   "summary": "Egypt borrows EGP 4.3tn at home in four months, Banque du Caire debuts on the EGX and tankers burn in Hormuz."
-  },
-  {
-   "date": "2026-11-03",
-   "summary": "Banque du Caire's quiet debut, a tax-backed sukuk pilot, JPMorgan lifts Egypt inflation call, US midterms and an oil slide on Iran talks."
-  },
-  {
-   "date": "2026-11-04",
-   "summary": "EgyptAlum stake sale weighed, gas cut at fertiliser plants, EGX30 up 1.8%, Democrats take the US Senate."
-  },
-  {
-   "date": "2026-11-05",
-   "summary": "EGX30 jumps 2.8% as the pound firms, Egypt trims spending, Democrats take Congress and Hormuz fires."
-  },
-  {
-   "date": "2026-11-06",
-   "summary": "Pound hits a one-year high, $125m US-Egypt framework deal, Nasdaq falls into a correction and the BoE hikes."
-  },
-  {
-   "date": "2026-11-07",
-   "summary": "Inflation eases to 12%, a deadly gold-mining crackdown, certificate rates rise and US strikes on Iran's Qeshm island."
-  },
-  {
-   "date": "2026-11-07",
-   "id": "2026-11-07-recap",
-   "label": "Weekly Recap",
-   "summary": "Inflation slows to 12%, the pound recovers, gas is rationed for industry, Democrats take Congress and an AI rout hits Wall Street."
-  },
-  {
-   "date": "2026-11-08",
-   "summary": "Egypt orders a three-month spending squeeze, Goldman calls the pound 30% undervalued and Ali Maher replaces Hossam Hassan."
-  },
-  {
-   "date": "2026-11-09",
-   "summary": "Al-Ayyat train crash kills seven, gas cuts to industry deepen to 33%, Houthis hit Aramco Tower, Nvidia probes Jensen Huang."
-  },
-  {
-   "date": "2026-11-10",
-   "summary": "Egypt's inflation falls to 12.7%, Al-Ayyat crash officials detained, EGX30 rebounds and Wall Street jumps before US CPI."
-  },
-  {
-   "date": "2026-11-11",
-   "summary": "Egypt confirms troops in Saudi Arabia, remittances hit a record $38.2bn, the pound firms and hot US inflation hits stocks.",
-   "image": {
-    "src": "editions/img/2026-11-11.jpg",
-    "alt": "Two ministers seated in armchairs in front of the British and Egyptian flags",
-    "caption": "Foreign Minister Badr Abdelatty, right, meeting Britain's foreign secretary in Cairo on an earlier visit.",
-    "credit": "File photo: Foreign, Commonwealth & Development Office · CC BY 2.0",
-    "license": "CC BY 2.0",
-    "url": "https://www.flickr.com/photos/10246637@N04/54282833341"
-   }
-  },
-  {
-   "date": "2026-11-12",
-   "summary": "Red Sea land turned to debt reduction, a university pay rise, Telecom Egypt's profit jump and Nvidia's board weighing Huang's future"
-  }
- ]
+  "editions": [
+    {
+      "date": "2026-11-13",
+      "summary": "Gulf of Suez wind farms clinch financing; Egypt sets a dollar power price for AI data centers; Nvidia's Jensen Huang resigns."
+    },
+    {
+      "date": "2026-11-12",
+      "summary": "Red Sea land turned to debt reduction, a university pay rise, Telecom Egypt's profit jump and Nvidia's board weighing Huang's future"
+    },
+    {
+      "date": "2026-11-11",
+      "summary": "Egypt confirms troops in Saudi Arabia, remittances hit a record $38.2bn, the pound firms and hot US inflation hits stocks.",
+      "image": {
+        "src": "editions/img/2026-11-11.jpg",
+        "alt": "Two ministers seated in armchairs in front of the British and Egyptian flags",
+        "caption": "Foreign Minister Badr Abdelatty, right, meeting Britain's foreign secretary in Cairo on an earlier visit.",
+        "credit": "File photo: Foreign, Commonwealth & Development Office · CC BY 2.0",
+        "license": "CC BY 2.0",
+        "url": "https://www.flickr.com/photos/10246637@N04/54282833341"
+      }
+    },
+    {
+      "date": "2026-11-10",
+      "summary": "Egypt's inflation falls to 12.7%, Al-Ayyat crash officials detained, EGX30 rebounds and Wall Street jumps before US CPI."
+    },
+    {
+      "date": "2026-11-09",
+      "summary": "Al-Ayyat train crash kills seven, gas cuts to industry deepen to 33%, Houthis hit Aramco Tower, Nvidia probes Jensen Huang."
+    },
+    {
+      "date": "2026-11-08",
+      "summary": "Egypt orders a three-month spending squeeze, Goldman calls the pound 30% undervalued and Ali Maher replaces Hossam Hassan."
+    },
+    {
+      "date": "2026-11-07",
+      "summary": "Inflation eases to 12%, a deadly gold-mining crackdown, certificate rates rise and US strikes on Iran's Qeshm island."
+    },
+    {
+      "date": "2026-11-07",
+      "id": "2026-11-07-recap",
+      "label": "Weekly Recap",
+      "summary": "Inflation slows to 12%, the pound recovers, gas is rationed for industry, Democrats take Congress and an AI rout hits Wall Street."
+    },
+    {
+      "date": "2026-11-06",
+      "summary": "Pound hits a one-year high, $125m US-Egypt framework deal, Nasdaq falls into a correction and the BoE hikes."
+    },
+    {
+      "date": "2026-11-05",
+      "summary": "EGX30 jumps 2.8% as the pound firms, Egypt trims spending, Democrats take Congress and Hormuz fires."
+    },
+    {
+      "date": "2026-11-04",
+      "summary": "EgyptAlum stake sale weighed, gas cut at fertiliser plants, EGX30 up 1.8%, Democrats take the US Senate."
+    },
+    {
+      "date": "2026-11-03",
+      "summary": "Banque du Caire's quiet debut, a tax-backed sukuk pilot, JPMorgan lifts Egypt inflation call, US midterms and an oil slide on Iran talks."
+    },
+    {
+      "date": "2026-11-02",
+      "summary": "Egypt borrows EGP 4.3tn at home in four months, Banque du Caire debuts on the EGX and tankers burn in Hormuz."
+    },
+    {
+      "date": "2026-11-01",
+      "summary": "Banks reprice after the rate hike, Wall Street's tech rout shadows the EGX reopening, Iran floats a Hormuz plan."
+    },
+    {
+      "date": "2026-10-31",
+      "summary": "Tech rout gives the Nasdaq its worst month since March 2025, gold hits a one-year low and the EGX reopens after the rate hike."
+    },
+    {
+      "date": "2026-10-31",
+      "id": "2026-10-31-recap",
+      "label": "Weekly Recap",
+      "summary": "A surprise rate hike, a record-low pound, Egypt's Saudi authorisation, Israel's hung vote and a tech rout on Wall Street."
+    },
+    {
+      "date": "2026-10-30",
+      "summary": "Egypt's central bank hikes rates 100 bps in a surprise; Alphabet's worst day; Hormuz mine claims; Banque du Caire lists Monday."
+    },
+    {
+      "date": "2026-10-29",
+      "summary": "Rate decision day with the pound above EGP 56, Banque du Caire IPO 27x covered, Fed holds 10-2, Israel count nears end."
+    },
+    {
+      "date": "2026-10-28",
+      "id": "2026-10-28-v2",
+      "summary": "Rate decision looms, importers squeezed by EGP 56 dollar, Israel vote deadlock, Houthi strikes, Fed decision tonight."
+    },
+    {
+      "date": "2026-10-27",
+      "summary": "Parliament backs Saudi defence mandate, Banque du Caire IPO prices at EGP 5.30, pound nears 56.3 and Israel votes."
+    },
+    {
+      "date": "2026-10-26",
+      "summary": "Parliament votes on a Saudi deployment, the pound hits a record low, the IMF's final review begins and the EGX30 slides."
+    },
+    {
+      "date": "2026-10-25",
+      "summary": "Houthi strikes on Saudi Arabia lift Brent; Egypt's parliament weighs a defensive deployment; EGX30 slides before Thursday's rate decision."
+    }
+  ]
 }
