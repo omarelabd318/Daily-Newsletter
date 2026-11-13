@@ -22,7 +22,15 @@
     "EAST"
    ],
    "status": "open",
-   "updates": [],
+   "updates": [
+    {
+     "date": "2026-11-13",
+     "text": "MSCI confirmed the change takes effect after the close on November 30; Eastern moves to the small cap index and Housing and Development Bank joins it.",
+     "source": "Sada Elbalad",
+     "url": "https://see.news/telecom-egypt-joins-msci-global-standard-index-for-emerging-markets",
+     "effect": "supports"
+    }
+   ],
    "wrongIf": [
     {
      "key": "egx.ETEL",
@@ -113,7 +121,15 @@
     "JUFO"
    ],
    "status": "open",
-   "updates": [],
+   "updates": [
+    {
+     "date": "2026-11-13",
+     "text": "On its call Juhayna put third-quarter revenue up 25% to EGP 10bn and profit up 33% to EGP 654m, and guided the fourth quarter at the same pace; the stock fell 2.3% to EGP 24.13.",
+     "source": "Investing.com",
+     "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-juhayna-posts-record-q3-2026-sales-as-stock-slips-93CH-5021816",
+     "effect": "supports"
+    }
+   ],
    "wrongIf": [
     {
      "key": "egx.JUFO",
@@ -221,6 +237,13 @@
      "source": "TechCrunch",
      "url": "https://techcrunch.com/2026/11/11/nvidias-stock-drops-as-board-reportedly-preps-to-oust-ceo-jensen-huang/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-13",
+     "text": "Jensen Huang resigned as Nvidia's chief executive; the stock closed 4.3% lower at $166.19 after falling as much as 14.3%.",
+     "source": "Al Jazeera",
+     "url": "https://www.aljazeera.com/news/2026/11/12/why-did-nvidia-ceo-jensen-huang-resign-and-who-is-colette-kress",
+     "effect": "supports"
     }
    ],
    "wrongIf": [
@@ -325,6 +348,13 @@
      "text": "An insider sold 443,600 Palm Hills shares on Sunday; both developers remain below their 50-day averages.",
      "source": "Youm7",
      "url": "https://www.youm7.com/story/2026/11/9/بوصلة-الكبار-تتجه-للشراء-اقتناص-أسهم-فوري-والقلعة-والتخلي-عن/7611328",
+     "effect": "supports"
+    },
+    {
+     "date": "2026-11-13",
+     "text": "US 10-year yields rose to 5.10% and Talaat Moustafa fell 2.0% to EGP 83.95, below its 50-day average.",
+     "source": "CNBC",
+     "url": "https://www.cnbc.com/2026/11/12/us-treasurys-bonds-yields.html",
      "effect": "supports"
     }
    ],
@@ -434,6 +464,13 @@
      "source": "Investing.com",
      "url": "https://investing.com/news/stock-market-news/why-is-oracle-stock-surging-today-93CH-5019496",
      "effect": "against"
+    },
+    {
+     "date": "2026-11-13",
+     "text": "Nvidia's chief resigned and the stock fell 4.3%, while Walmart and Costco edged up; Alphabet rose 1.8%, which works against the call.",
+     "source": "Reuters (via AsiaOne)",
+     "url": "https://www.asiaone.com/money/wall-street-ends-lower-nvidia-ceo-resigns-us-yields",
+     "effect": "neutral"
     }
    ],
    "driver": "ai-spending"
@@ -591,6 +628,13 @@
      "source": "Al Mal",
      "url": "https://almalnews.com/2145123/",
      "effect": "against"
+    },
+    {
+     "date": "2026-11-13",
+     "text": "Abu Qir signed a EGP 76.17m contract for 3 MW of solar plants, due within 12 months; it does not replace the 33% cut in gas supply.",
+     "source": "Arab Finance",
+     "url": "https://www.arabfinance.com/en/news/newdetails/aoi-to-install-mmw-solar-power-plants-at-abu-qir-fertilizers",
+     "effect": "neutral"
     }
    ],
    "wrongIf": [
@@ -621,7 +665,7 @@
    "tickers": [
     "COMI"
    ],
-   "status": "on track",
+   "status": "right",
    "updates": [
     {
      "date": "2026-11-07",
@@ -666,7 +710,16 @@
      "level": 49255.66
     }
    ],
-   "driver": "foreign-flows"
+   "driver": "foreign-flows",
+   "result": {
+    "date": "2026-11-13",
+    "text": "Judged on its date: EGX30 at 52,023.37 from 50,650.18 (+2.7%)."
+   },
+   "lesson": {
+    "date": "2026-11-13",
+    "text": "Foreigners were net buyers on November 10 and 11 and the EGX30 closed at 52,023.37, 2.7% above the 50,650.18 start and 5.6% above the 49,255.66 line, even after foreigners sold EGP 107.8m on the last day. Nothing to change: the reasoning held, with the line set well beyond an ordinary week's move.",
+    "tag": "reasoning-held"
+   }
   },
   {
    "id": "2026-11-05-pound-firm",
@@ -743,6 +796,13 @@
      "source": "Central Bank of Egypt",
      "url": "https://www.cbe.org.eg/en/economic-research/statistics/cbe-exchange-rates",
      "effect": "neutral"
+    },
+    {
+     "date": "2026-11-13",
+     "text": "Thursday's 182- and 364-day bills drew EGP 282.2bn of bids for EGP 114bn sold at 26.07% and 25.02%, and the pound firmed to EGP 53.50 even as the US 10-year yield hit 5.10%.",
+     "source": "Egypt Telegraph",
+     "url": "https://www.egypttelegraph.com/article/295507",
+     "effect": "supports"
     }
    ],
    "wrongIf": [
@@ -773,7 +833,7 @@
    "tickers": [
     "XOM"
    ],
-   "status": "on track",
+   "status": "open",
    "updates": [
     {
      "date": "2026-11-06",
@@ -822,6 +882,13 @@
      "text": "Brent settled 1.4% higher at $92.76 as Iran hardened its terms and Israel's cabinet ordered the military to prepare for a possible strike on Iran (KAN via Al Jazeera).",
      "source": "Al Jazeera",
      "url": "https://www.aljazeera.com/news/2026/11/12/iran-warns-of-expanded-retaliation-as-israel-reportedly-readies-to-attack",
+     "effect": "against"
+    },
+    {
+     "date": "2026-11-13",
+     "text": "Brent jumped 3.3% to $95.82 after Trump said the US does not need a deal with Iran; Iran reported two supertankers halted by explosions on a Hormuz route.",
+     "source": "Rigzone",
+     "url": "https://www.rigzone.com/news/wire/oil_rises_as_trump_dims_iran_deal_hopes-12-nov-2026-185073-article/",
      "effect": "against"
     }
    ],

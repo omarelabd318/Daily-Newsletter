@@ -136876,6 +136876,52 @@
    "infl_headline": 12.7,
    "infl_core": 13.1,
    "reserves_usd": 57.5
+  },
+  {
+   "date": "2026-11-13",
+   "egx": {
+    "COMI": 128.75,
+    "JUFO": 24.13,
+    "EMFD": 12.69
+   },
+   "us": {
+    "AAPL": 354.88,
+    "MSFT": 523.0,
+    "NVDA": 166.19,
+    "AMZN": 267.44,
+    "GOOGL": 298.7,
+    "META": 623.61,
+    "TSLA": 397.45,
+    "JPM": 342.82,
+    "XOM": 169.78,
+    "AVGO": 364.36,
+    "BRK.B": 589.83,
+    "WMT": 126.19,
+    "V": 420.31,
+    "ORCL": 127.11,
+    "COST": 1092.21,
+    "NFLX": 62.69,
+    "INTC": 61.2,
+    "LLY": 1427.28
+   },
+   "egx30": 52023.37,
+   "egx70": 18527.43,
+   "cbe_usd_buy": 53.3653,
+   "cbe_usd_sell": 53.5047,
+   "usd_egp": 53.5047,
+   "tbill_182": 26.073,
+   "tbill_364": 25.024,
+   "sp500": 7592.4,
+   "nasdaq": 25366.09,
+   "dow": 52297.09,
+   "brent": 95.82,
+   "gold_usd": 3885.3,
+   "dxy": 103.17,
+   "cbe_deposit": 20.0,
+   "cbe_lending": 21.0,
+   "infl_headline": 12.7,
+   "infl_core": 13.1,
+   "reserves_usd": 57.5
   }
  ]
 }

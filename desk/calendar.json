@@ -1,53 +1,15 @@
 {
  "note": "The desk's stocks' coming results and dividends, from TradingView (fetch_calendar.py); for the US stocks, declared dividends and stock splits from Polygon. Results dates for Egyptian companies are often TradingView's estimate until the company announces one.",
- "fetched": "2026-11-12",
+ "fetched": "2026-11-13",
  "items": [
-  {
-   "t": "AAPL",
-   "market": "us",
-   "kind": "dividend",
-   "date": "2026-11-12",
-   "pay": "2026-11-16",
-   "amount": 0.27,
-   "cur": "$",
-   "declared": "2026-11-02",
-   "src": "Polygon"
-  },
   {
    "t": "EFID",
    "market": "egx",
    "kind": "results",
-   "date": "2026-11-12",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
-  {
-   "t": "ETEL",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-11-12",
-   "period": "2026-09-30",
-   "time": "before the open",
-   "expected": true
-  },
-  {
-   "t": "JUFO",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-11-12",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
-  {
-   "t": "LLY",
-   "market": "us",
-   "kind": "dividend",
    "date": "2026-11-13",
-   "pay": "2026-12-10",
-   "amount": 1.73,
-   "cur": "$"
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
   },
   {
    "t": "CLHO",
@@ -60,15 +22,6 @@
   },
   {
    "t": "PHDC",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-11-16",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
-  {
-   "t": "SWDY",
    "market": "egx",
    "kind": "results",
    "date": "2026-11-16",
@@ -103,24 +56,6 @@
    "date": "2026-11-17",
    "period": "2026-10-31",
    "time": "after the close",
-   "expected": true
-  },
-  {
-   "t": "EAST",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-11-18",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
-  {
-   "t": "EFIH",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-11-18",
-   "period": "2026-09-30",
-   "time": null,
    "expected": true
   },
   {

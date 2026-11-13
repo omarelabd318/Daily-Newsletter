@@ -5,14 +5,14 @@
    "sector": "Banks",
    "valuation": {
     "source": "Company filing (Mubasher Banks (EGX disclosure))",
-    "asOf": "2026-11-12",
+    "asOf": "2026-11-13",
     "period": "2026-09-30",
     "basis": "results for the 12 months to September 2026",
     "price": 130.34,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 446.1bn"
+      "value": "EGP 438.4bn"
      },
      {
       "label": "P/E",
@@ -103,9 +103,9 @@
     }
    ],
    "cap": {
-    "value": 400.2,
+    "value": 395.4,
     "currency": "EGP",
-    "date": "2026-11-12",
+    "date": "2026-11-13",
     "source": "Mubasher"
    },
    "filed": {
@@ -175,21 +175,21 @@
     }
    ],
    "cap": {
-    "value": 174.9,
+    "value": 173.0,
     "currency": "EGP",
-    "date": "2026-11-12",
+    "date": "2026-11-13",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-12",
+    "asOf": "2026-11-13",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
     "price": 85.7,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 177.2bn"
+      "value": "EGP 173.0bn"
      },
      {
       "label": "P/E",
@@ -239,6 +239,12 @@
    "sector": "Fertilizers",
    "news": [
     {
+     "date": "2026-11-12",
+     "text": "Signed a EGP 76.17m contract with the Arab Organization for Industrialization for 3 MW of solar plants at its Alexandria site, due within 12 months.",
+     "source": "Arab Finance",
+     "url": "https://www.arabfinance.com/en/news/newdetails/aoi-to-install-mmw-solar-power-plants-at-abu-qir-fertilizers"
+    },
+    {
      "date": "2026-11-08",
      "text": "Notified that its gas supply cut rises to 33% from 20% from November 8; two of its three plants run at full capacity and maintenance has been rescheduled (Mubasher, Reuters). The stock fell 5.8% to EGP 76.30.",
      "source": "Mubasher",
@@ -276,21 +282,21 @@
     }
    ],
    "cap": {
-    "value": 98.6,
+    "value": 97.8,
     "currency": "EGP",
-    "date": "2026-11-12",
+    "date": "2026-11-13",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-12",
+    "asOf": "2026-11-13",
     "period": "2026-09-30",
     "basis": "results for the 12 months to September 2026; book value from Mubasher, to March 2026",
     "price": 78.0,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 93.7bn"
+      "value": "EGP 97.8bn"
      },
      {
       "label": "P/E",
@@ -353,21 +359,21 @@
     }
    ],
    "cap": {
-    "value": 35.1,
+    "value": 35.5,
     "currency": "EGP",
-    "date": "2026-11-12",
+    "date": "2026-11-13",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "Mubasher",
-    "asOf": "2026-11-12",
+    "asOf": "2026-11-13",
     "period": "2026-03-31",
     "basis": "results for the 12 months to March 2026",
     "price": 12.4,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 34.7bn"
+      "value": "EGP 35.5bn"
      },
      {
       "label": "P/E",
@@ -411,6 +417,19 @@
      "Construction costs rising faster than contracted prices."
     ],
     "change": "Results on November 16: sales holding up at these rates would favor the cheap valuation over the desk's shorter-term caution."
+   },
+   "preview": {
+    "date": "2026-11-16",
+    "period": "Third quarter 2026",
+    "watch": [
+     "New sales: the EGP 75bn booked at Hacienda Ras El-Hekma in its first two weeks counts in the third quarter, the test of demand at 25% bill yields.",
+     "Gross margin, after first-half EBITDA margin fell to 21% from 29%.",
+     "Profit attributable, after the first half fell 7% to EGP 2.26bn on revenue up 25.4%.",
+     "Backlog against the record EGP 284bn at the end of June, and cancellations."
+    ],
+    "source": "Arab Finance",
+    "url": "https://arabfinance.com/en/news/newdetails/palm-hills-delivers-higher-consolidated-revenues-in-h1-2026",
+    "written": "2026-11-13"
    }
   },
   "XOM": {
@@ -484,6 +503,12 @@
   "MSFT": {
    "sector": "Software",
    "news": [
+    {
+     "date": "2026-11-13",
+     "text": "Outlook, Teams and other Microsoft 365 services were disrupted from Thursday into Friday; Microsoft ruled out a cyberattack.",
+     "source": "Forbes",
+     "url": "https://www.forbes.com/sites/antoniopequenoiv/2026/11/13/microsoft-outlook-teams-outage-enters-second-day-company-reports-progress-on-fix/"
+    },
     {
      "date": "2026-11-12",
      "text": "Fell 2.3% to $521.13 after Anthropic launched Claude Sheets and other office tools; a filing showed the chief financial officer sold about 7,305 shares.",
@@ -627,6 +652,12 @@
    "sector": "Semiconductors",
    "news": [
     {
+     "date": "2026-11-13",
+     "text": "Rothschild Redburn cut it to neutral from buy with a $398 target, from $595, citing the durability of AI earnings; the stock rose 5.5% to $364.36 on Thursday.",
+     "source": "Investing.com",
+     "url": "https://www.investing.com/news/analyst-ratings/rothschild-downgrades-broadcom-stock-rating-on-ai-financing-concerns-93CH-5024402"
+    },
+    {
      "date": "2026-11-11",
      "text": "Rose 3.9% to $331.98 after Anthropic's amended filing named it a roughly $1.0bn buyer in a $26bn private placement at the IPO price.",
      "source": "GuruFocus (via Yahoo Finance)",
@@ -682,21 +713,21 @@
   "ETEL": {
    "sector": "Telecoms",
    "cap": {
-    "value": 237.3,
+    "value": 227.0,
     "currency": "EGP",
-    "date": "2026-11-12",
+    "date": "2026-11-13",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "Company filing (Telecom Egypt 9M 2026 release; Arab Finance for 2025 and 9M 2025)",
-    "asOf": "2026-11-12",
+    "asOf": "2026-11-13",
     "period": "2026-09-30",
     "basis": "results for the 12 months to September 2026; book value from Mubasher, to March 2026",
     "price": 135.01,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 230.5bn"
+      "value": "EGP 227.0bn"
      },
      {
       "label": "P/E",
@@ -823,21 +854,21 @@
   "SWDY": {
    "sector": "Cables and electrical",
    "cap": {
-    "value": 259.0,
+    "value": 258.4,
     "currency": "EGP",
-    "date": "2026-11-12",
+    "date": "2026-11-13",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-12",
+    "asOf": "2026-11-13",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
     "price": 121.46,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 260.9bn"
+      "value": "EGP 258.2bn"
      },
      {
       "label": "P/E",
@@ -916,21 +947,21 @@
   "ORAS": {
    "sector": "Construction",
    "cap": {
-    "value": 88.7,
+    "value": 88.2,
     "currency": "EGP",
-    "date": "2026-11-12",
+    "date": "2026-11-13",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-12",
+    "asOf": "2026-11-13",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
     "price": 805.1,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 97.2bn"
+      "value": "EGP 95.3bn"
      },
      {
       "label": "P/E",
@@ -1020,21 +1051,21 @@
   "FWRY": {
    "sector": "Payments",
    "cap": {
-    "value": 60.6,
+    "value": 60.9,
     "currency": "EGP",
-    "date": "2026-11-12",
+    "date": "2026-11-13",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-12",
+    "asOf": "2026-11-13",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
     "price": 17.99,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 62.3bn"
+      "value": "EGP 60.9bn"
      },
      {
       "label": "P/E",
@@ -1091,21 +1122,21 @@
   "HRHO": {
    "sector": "Investment banking",
    "cap": {
-    "value": 36.8,
+    "value": 37.0,
     "currency": "EGP",
-    "date": "2026-11-12",
+    "date": "2026-11-13",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "Mubasher",
-    "asOf": "2026-11-12",
+    "asOf": "2026-11-13",
     "period": "2026-03-31",
     "basis": "results for the 12 months to March 2026",
     "price": 25.25,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 36.8bn"
+      "value": "EGP 36.4bn"
      },
      {
       "label": "P/E",
@@ -1186,21 +1217,21 @@
   "CLHO": {
    "sector": "Healthcare",
    "cap": {
-    "value": 21.1,
+    "value": 20.8,
     "currency": "EGP",
-    "date": "2026-11-12",
+    "date": "2026-11-13",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView (last full year)",
-    "asOf": "2026-11-12",
+    "asOf": "2026-11-13",
     "period": "2025-12-31",
     "basis": "results for the year to December 2025, consolidated, over today's share count (TradingView); Mubasher gives EGP 0.33 a share to March 2026, which looks to cover the parent company only or an older share count",
     "price": 14.63,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 21.8bn"
+      "value": "EGP 21.1bn"
      },
      {
       "label": "P/E",
@@ -1244,26 +1275,39 @@
      "Few recent figures on the desk: the note rests mainly on valuation."
     ],
     "change": "Results on November 16: profit growth well above 30% would support the multiple."
+   },
+   "preview": {
+    "date": "2026-11-16",
+    "period": "Third quarter 2026",
+    "watch": [
+     "Profit attributable after a 40% fall in the first half to EGP 270.7m while revenue rose 27.4% to EGP 4.31bn: whether the third quarter stops the slide.",
+     "Margins: costs at new hospitals and staff pay against price rises, with October inflation at 12.7%.",
+     "Revenue growth against the first half's 27.4%, as the base for a stock at about 32 times last year's earnings.",
+     "Finance costs at 20%-plus rates on any borrowing for expansion."
+    ],
+    "source": "Arab Finance",
+    "url": "https://arabfinance.com/en/news/newdetails/cleopatra-hospital-consolidated-revenues-leap-in-h1-2026",
+    "written": "2026-11-13"
    }
   },
   "JUFO": {
    "sector": "Food",
    "cap": {
-    "value": 23.2,
+    "value": 22.7,
     "currency": "EGP",
-    "date": "2026-11-12",
+    "date": "2026-11-13",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-12",
+    "asOf": "2026-11-13",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
     "price": 24.7,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 36.7bn"
+      "value": "EGP 35.5bn"
      },
      {
       "label": "P/E",
@@ -1284,6 +1328,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-12",
+     "text": "On its call: third-quarter revenue up 25% to EGP 10bn, net profit up 33% to EGP 654m after a EGP 107m currency loss; the fourth quarter is guided at the same pace. The stock fell 2.3% to EGP 24.13.",
+     "source": "Investing.com",
+     "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-juhayna-posts-record-q3-2026-sales-as-stock-slips-93CH-5021816"
+    },
     {
      "date": "2026-11-11",
      "text": "Nine-month consolidated profit rose 60% to EGP 2.04bn from EGP 1.27bn on sales up 25% to EGP 27.66bn; standalone profit rose 47% to EGP 1.41bn.",
@@ -1359,21 +1409,21 @@
   "ALCN": {
    "sector": "Ports",
    "cap": {
-    "value": 97.7,
+    "value": 99.5,
     "currency": "EGP",
-    "date": "2026-11-12",
+    "date": "2026-11-13",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-12",
+    "asOf": "2026-11-13",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
     "price": 32.82,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 98.3bn"
+      "value": "EGP 99.5bn"
      },
      {
       "label": "P/E",
@@ -1563,6 +1613,12 @@
    "news": [
     {
      "date": "2026-11-12",
+     "text": "Jensen Huang resigned as president, chief executive and director with immediate effect; finance chief Colette Kress is interim chief. The stock fell as much as 14.3% and closed 4.3% lower at $166.19.",
+     "source": "Al Jazeera",
+     "url": "https://www.aljazeera.com/news/2026/11/12/why-did-nvidia-ceo-jensen-huang-resign-and-who-is-colette-kress"
+    },
+    {
+     "date": "2026-11-12",
      "text": "Fell 8.6% after hours on Wednesday after the Wall Street Journal reported the board would decide whether to remove Jensen Huang, and the New York Times reported a second affair; the board met on Thursday.",
      "source": "TechCrunch",
      "url": "https://techcrunch.com/2026/11/11/nvidias-stock-drops-as-board-reportedly-preps-to-oust-ceo-jensen-huang/"
@@ -1603,7 +1659,20 @@
      "source": "Yahoo Finance (Investing.com)",
      "url": "https://finance.yahoo.com/markets/stocks/articles/apple-overtakes-nvidia-become-world-214753575.html"
     }
-   ]
+   ],
+   "preview": {
+    "date": "2026-11-17",
+    "period": "Third quarter of fiscal 2027",
+    "watch": [
+     "Who runs it: any word on a permanent chief and whether Colette Kress keeps both jobs.",
+     "Revenue against the company's guidance of about $108bn, plus or minus 2% ($105.8bn to $110.2bn).",
+     "Fourth-quarter guidance, the first set without Huang.",
+     "Data center demand from the largest buyers after CoreWeave raised its outlook."
+    ],
+    "source": "Nvidia 8-K, August 26, 2026",
+    "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000073/nvda-20260826.htm",
+    "written": "2026-11-13"
+   }
   },
   "AMZN": {
    "sector": "Retail and cloud",
@@ -1953,19 +2022,19 @@
    "cap": {
     "value": 112.6,
     "currency": "EGP",
-    "date": "2026-11-12",
+    "date": "2026-11-13",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-12",
+    "asOf": "2026-11-13",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
     "price": 39.16,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 109.3bn"
+      "value": "EGP 112.6bn"
      },
      {
       "label": "P/E",
@@ -2028,21 +2097,21 @@
   "EAST": {
    "sector": "Tobacco",
    "cap": {
-    "value": 103.5,
+    "value": 103.7,
     "currency": "EGP",
-    "date": "2026-11-12",
+    "date": "2026-11-13",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-12",
+    "asOf": "2026-11-13",
     "period": "2026-03-31",
     "basis": "results for the 12 months to March 2026",
     "price": 35.0,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 100.8bn"
+      "value": "EGP 103.6bn"
      },
      {
       "label": "P/E",
@@ -2063,6 +2132,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-12",
+     "text": "MSCI moves it to its Egypt small cap index at the November 30 close; Housing and Development Bank joins the small cap index.",
+     "source": "Sada Elbalad",
+     "url": "https://see.news/telecom-egypt-joins-msci-global-standard-index-for-emerging-markets"
+    },
     {
      "date": "2026-11-12",
      "text": "MSCI removes it from the MSCI Egypt standard index at the close on November 30, replacing it with Telecom Egypt.",
@@ -2132,21 +2207,21 @@
   "EFIH": {
    "sector": "Payments",
    "cap": {
-    "value": 86.7,
+    "value": 86.6,
     "currency": "EGP",
-    "date": "2026-11-12",
+    "date": "2026-11-13",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView (last full year)",
-    "asOf": "2026-11-12",
+    "asOf": "2026-11-13",
     "period": "2025-12-31",
     "basis": "results for the year to December 2025, consolidated, over today's share count (TradingView); Mubasher gives EGP 0.99 a share to March 2026, which looks to cover the parent company only or an older share count",
     "price": 24.8,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 85.7bn"
+      "value": "EGP 86.6bn"
      },
      {
       "label": "P/E",
@@ -2167,6 +2242,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-13",
+     "text": "Its chairman told Asharq Bloomberg it aims to enter Lebanon in 2027 with government-payment systems; no contract value was given.",
+     "source": "Elsiyasa",
+     "url": "https://elsiyasa.com/article/436408"
+    },
     {
      "date": "2026-11-12",
      "text": "Nine-month consolidated profit rose 40% to EGP 2.62bn on revenue up 27% to EGP 6.28bn.",
@@ -2250,19 +2331,19 @@
    "cap": {
     "value": 69.1,
     "currency": "EGP",
-    "date": "2026-11-12",
+    "date": "2026-11-13",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "Mubasher",
-    "asOf": "2026-11-12",
+    "asOf": "2026-11-13",
     "period": "2025-06-30",
     "basis": "results for the 12 months to June 2025",
     "price": 12.52,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 68.6bn"
+      "value": "EGP 69.1bn"
      },
      {
       "label": "P/E",
@@ -2366,6 +2447,12 @@
      "url": "http://arabfinance.com/en/news/newdetails/49615"
     },
     {
+     "date": "2026-11-10",
+     "text": "Lead arranger of a EGP 3.2bn syndicated loan for Al-Tamir's UBL project in New Cairo, with a EGP 1.33bn share.",
+     "source": "Arab Finance",
+     "url": "https://arabfinance.com/ar/news/newdetails/49564"
+    },
+    {
      "date": "2026-11-09",
      "text": "The IFC made an equity investment of about $100m in Banque du Caire's offering, its lawyers Hunton Andrews Kurth said; the stake size was not given.",
      "source": "Hunton Andrews Kurth",
@@ -2404,14 +2491,14 @@
    ],
    "valuation": {
     "source": "TradingView and Mubasher",
-    "asOf": "2026-11-12",
+    "asOf": "2026-11-13",
     "period": null,
     "basis": "no recent results",
     "price": 5.7,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 89.4bn"
+      "value": "EGP 85.9bn"
      },
      {
       "label": "Ratios",
@@ -2422,7 +2509,7 @@
    "cap": {
     "value": 20.5,
     "currency": "EGP",
-    "date": "2026-11-12",
+    "date": "2026-11-13",
     "source": "Mubasher"
    },
    "lastResults": {
@@ -2663,21 +2750,21 @@
   "EGAL": {
    "sector": "Metals",
    "cap": {
-    "value": 132.5,
+    "value": 134.1,
     "currency": "EGP",
-    "date": "2026-11-12",
+    "date": "2026-11-13",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "Company filing (Arab Finance; Power News)",
-    "asOf": "2026-11-12",
+    "asOf": "2026-11-13",
     "period": "2026-09-30",
     "basis": "results for the 12 months to September 2026; book value from TradingView, to June 2026",
     "price": 321.0,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 132.4bn"
+      "value": "EGP 134.1bn"
      },
      {
       "label": "P/E",
@@ -2775,14 +2862,14 @@
   "AMOC": {
    "sector": "Oil refining",
    "cap": {
-    "value": 17.0,
+    "value": 16.8,
     "currency": "EGP",
-    "date": "2026-11-12",
+    "date": "2026-11-13",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView (last full year)",
-    "asOf": "2026-11-12",
+    "asOf": "2026-11-13",
     "period": "2025-06-30",
     "basis": "results for the year to June 2025, consolidated, over today's share count (TradingView); Mubasher gives EGP 0.46 a share to June 2025, which looks to cover the parent company only or an older share count",
     "price": 13.15,
@@ -2846,21 +2933,21 @@
   "SKPC": {
    "sector": "Petrochemicals",
    "cap": {
-    "value": 13.8,
+    "value": 13.6,
     "currency": "EGP",
-    "date": "2026-11-12",
+    "date": "2026-11-13",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView (last full year)",
-    "asOf": "2026-11-12",
+    "asOf": "2026-11-13",
     "period": "2025-12-31",
     "basis": "results for the year to December 2025, consolidated, over today's share count (TradingView); Mubasher gives EGP 2.10 a share to September 2025, which looks to cover the parent company only or an older share count",
     "price": 15.07,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 17.2bn"
+      "value": "EGP 17.0bn"
      },
      {
       "label": "P/E",
@@ -2909,21 +2996,21 @@
   "EFID": {
    "sector": "Food",
    "cap": {
-    "value": 27.7,
+    "value": 27.4,
     "currency": "EGP",
-    "date": "2026-11-12",
+    "date": "2026-11-13",
     "source": "Mubasher"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-12",
+    "asOf": "2026-11-13",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
     "price": 19.85,
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 42.2bn"
+      "value": "EGP 41.0bn"
      },
      {
       "label": "P/E",
@@ -2958,7 +3045,7 @@
     }
    ],
    "preview": {
-    "date": "2026-11-12",
+    "date": "2026-11-13",
     "period": "Third quarter 2026",
     "watch": [
      "Volumes after price increases, as snack demand is the first to fall when household budgets tighten.",
@@ -3004,6 +3091,12 @@
   "INTC": {
    "sector": "Semiconductors",
    "news": [
+    {
+     "date": "2026-11-12",
+     "text": "Bank of America cut its target to $80 from $100 and kept neutral; the stock fell 2.1% to $61.20.",
+     "source": "MarketBeat",
+     "url": "https://www.marketbeat.com/instant-alerts/price-intel-nasdaq-intc-stock-falls-21-on-analyst-downgrade-2026-11-12/"
+    },
     {
      "date": "2026-11-12",
      "text": "Rose 7.5% to $62.50 with chipmakers after CoreWeave's results, about 25% above last week's low.",
