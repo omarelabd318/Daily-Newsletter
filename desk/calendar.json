@@ -12,6 +12,24 @@
    "expected": true
   },
   {
+   "t": "EFID",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-16",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "JUFO",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-16",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
    "t": "PHDC",
    "market": "egx",
    "kind": "results",

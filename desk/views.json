@@ -159,7 +159,7 @@
     "NVDA",
     "AVGO"
    ],
-   "status": "on track",
+   "status": "right",
    "updates": [
     {
      "date": "2026-10-30",
@@ -253,7 +253,11 @@
      "level": 220
     }
    ],
-   "driver": "ai-spending"
+   "driver": "ai-spending",
+   "result": {
+    "date": "2026-11-14",
+    "text": "Judged on its date: Nvidia at 162.85 from 204.64 (-20.4%)."
+   }
   },
   {
    "id": "2026-10-30-developers",
