@@ -19,7 +19,12 @@ read the pages, confirm the figures at a second outlet and return short notes, a
 `refs/research-agents.md` has the blocks, the prompt to give each one and the notes format: read it before
 researching. The research itself is unchanged: the same searches, outlets and checks, and the main run still chooses
 the stories, writes every word and opens any page a note leaves unclear. The task prompt's instructions to read
-EnterpriseAM and CairoScene are met by the Egypt side session, which reads them in full.
+EnterpriseAM and CairoScene are met by the Egypt side session, which reads them in full. (3) Research has a ceiling
+as well as a floor: about 60 searches and 30 pages opened in all (research_log.py says when a run is past it). Each
+figure needs its outlet and one independent confirmation; once it has them, stop. (4) **Finish in a fresh side
+session:** once the edition is written and edited, the checks, mechanical fixes, commit and push are done by one
+Sonnet side session through `publish.py`, as `refs/finish.md` describes; read it at that step. (5) Nothing runs in
+the background after the final reply.
 
 These rules add to the task prompt that asks for the edition. Where the prompt sets voice, sources,
 section order or publishing steps, follow the prompt. This file sets how much space each section gets,
@@ -277,7 +282,9 @@ scripts read for you (run_research.py's editions/articles.md, articles.py, searc
 separately, as "read by scripts", and do not count as pages you opened. A full edition takes at least 25 searches
 across many outlets and 12 pages you opened yourself (to confirm a figure at a second outlet, or to read past an
 excerpt), on top of the scripts' reading (usually 20 or more); the checker warns below that and blocks publishing
-below half of the searches and pages.
+below half of the searches and pages. The guide's upper end is about 60 searches and 30 pages opened, side sessions
+included: past it, research_log.py and search.py say so, and a run searches or opens a page only for a figure or
+story that still has no second source. More pages past that point add cost at every later step, not accuracy.
 
 **Reading excerpts.** Two pages the reader marks as having the same wording are one release copied by two outlets:
 they count as one source, never as the second outlet that confirms a figure. When an excerpt ends with "Figures on
@@ -309,13 +316,17 @@ with no link, so open the story at its outlet, check it against a second one, an
 usual. A story the brief shows in several outlets still needs reading; a story it does not show may still matter
 (it sees headlines, not front-page placement). An outlet listed as unreachable is read by hand.
 
-**Then read `editions/articles.md`** (written by the same command): the likeliest stories already read at their outlets
+**Then skim `editions/articles.md`'s index** with `grep -A1 '^## ' editions/articles.md` (each story's headline,
+section, outlet and link): the side sessions read the excerpts in full for their blocks, so the main run reads one only
+for a story it needs before choosing (`grep -A3 'words of the headline' editions/articles.md`). The file (written by
+the same command) holds: the likeliest stories already read at their outlets
 (about 30: those several outlets carry, with a second outlet for the top ones, the running topics, and the first
 economy, region, wire, sports and world headlines), each with its link at the outlet and its opening and figures.
 Write from these where they are enough, and open a page only for what an excerpt leaves out, a figure to confirm at a
 second outlet, or a story it lists under "Not read". To find more on a story, or a second outlet, run several
-queries at once with `python3 .claude/skills/daily-newsletter/search.py --log DATE newsletter "q1" "q2" ...` before
-any web search. To read pages, pass several at once to
+queries at once with `python3 .claude/skills/daily-newsletter/search.py --short --log DATE newsletter "q1" "q2" ...`
+before any web search (`--short` in the main run: one line and a figures fragment a page, the full excerpts kept in
+editions/search.md to grep; side sessions use the full form). To read pages, pass several at once to
 `python3 .claude/skills/daily-newsletter/articles.py --log DATE newsletter URL URL ...` (one step of the run instead
 of one per page; `--full` for a whole article) rather than opening them one by one. The file is a
 worksheet and is not committed.
@@ -486,7 +497,7 @@ When the edition is written, read it once from the top as its editor, not its wr
 - **Once only:** no story, figure or explanation appears in two sections; no "today" or "yesterday" that is wrong
   for the edition's date; no term left unexplained on first use.
 
-Then run the checker. End the final reply with one line, `Edit pass: N changes`, naming the biggest.
+Then hand over to the finishing session (refs/finish.md). End the final reply with one line, `Edit pass: N changes`, naming the biggest.
 
 ## The front page
 
@@ -516,4 +527,6 @@ Read `refs/puzzles.md` at the puzzles step (`puzzles.py make`, clues, check), ev
 
 ## Check before committing
 
-Read `refs/check.md` before running check_edition.py (what it checks, which warnings to fix, which are information).
+The checks, fixes, commit and push are done in one call, `publish.py newsletter|recap DATE [--push]`, by the
+finishing side session in `refs/finish.md` (read it at that step). `refs/check.md` says what check_edition.py checks;
+the finishing session reads it, not the main run.

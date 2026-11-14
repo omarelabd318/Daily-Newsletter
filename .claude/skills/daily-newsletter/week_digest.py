@@ -10,6 +10,9 @@ Glance in full, and each story's bold lead-in and first sentence, section by sec
 tables or Sources). Then where each running topic moved this week stands now (data/topics.json), and the research
 notes the week's side sessions saved (editions/notes/). The recap's side sessions read the editions in full for
 their own blocks; the main run works from this digest and opens an edition only for a story it needs in full.
+--glance (the recap's main run): each edition's intro line and Today at a Glance with its What to watch today line
+only, then the running topics and the notes list: about a fifth of the full digest. The side sessions research the
+sections from the full digest and the notes; the main run writes from their notes and greps an edition for a story.
 --edition prints one edition's digest: the daily run reads the last edition this way to tell new stories from
 continuing ones (about half the words), and greps the edition for a story it needs to check in full.
 """
@@ -28,17 +31,17 @@ def first_sentence(t):
     return m.group(1) if m else t.strip()
 
 
-def digest(path):
+def digest(path, glance=False):
     lines = open(path).read().splitlines()
     out, sec = [], None
     for i, ln in enumerate(lines):
         h2, h3 = re.match(r"^## (.+)", ln), re.match(r"^### (.+)", ln)
         if h2:
             sec = h2.group(1).strip()
-            if sec not in SKIP:
+            if sec not in SKIP and not (glance and sec != "Today at a Glance"):
                 out += ["", ln]
             continue
-        if sec in SKIP:
+        if sec in SKIP or (glance and sec not in (None, "Today at a Glance")):
             continue
         if h3:
             out.append(ln)
@@ -64,6 +67,8 @@ def main(a):
         text, n = digest(a[1])
         print(f"===== {a[1]} =====\n{text}\n\n({len(text.split())} of {n} words; grep the file for a story in full.)")
         return
+    glance = "--glance" in a
+    a = [x for x in a if x != "--glance"]
     date = a[0][:10]
     sat = datetime.date.fromisoformat(date)
     sun = sat - datetime.timedelta(days=6)
@@ -72,7 +77,7 @@ def main(a):
                  if re.match(r"\d{4}-\d{2}-\d{2}(-v\d+)?\.md$", f) and f[:10] in days)
     total_in = total_out = 0
     for f in eds:
-        text, n = digest(os.path.join(ROOT, "editions", f))
+        text, n = digest(os.path.join(ROOT, "editions", f), glance)
         total_in += n
         total_out += len(text.split())
         print(f"\n===== editions/{f} =====\n{text}")

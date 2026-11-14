@@ -10,11 +10,11 @@ Stocks Watch do not.
 - **File:** `editions/DATE-recap.md`, where DATE is the Saturday. In `editions/index.json` add
   `{"date": "DATE", "id": "DATE-recap", "label": "Weekly Recap", "summary": "..."}` and keep every other
   entry. There is no regular edition for a Saturday from November 14, 2026.
-- **Research:** start from that week's editions, read in one short digest:
-  `python3 .claude/skills/daily-newsletter/week_digest.py DATE` (Sunday to Friday, second editions included: each
-  edition's Today at a Glance and every story's lead-in and first sentence, where each running topic stands now,
-  and the side-session notes saved this week). Open an edition in full only for a story you need in full or its
-  links; the side sessions read the editions and the saved notes (`editions/notes/`) in full for their own blocks.
+- **Research:** the main run starts from `python3 .claude/skills/daily-newsletter/week_digest.py DATE --glance`
+  (each edition's intro, Today at a Glance and What to watch today, where each running topic stands now, and the
+  list of notes saved this week: about 2,000 words). The side sessions read the full digest (without --glance: every
+  story's lead-in and first sentence), the editions and the saved notes (`editions/notes/`) for their own blocks.
+  The main run greps an edition for a story it needs in full or its links.
   Then search for how each big story developed and ended up (search.py first, several queries per call, as
   `refs/research-agents.md` describes; web search and full pages for what its excerpts do not settle). Report where things stand
   now, not what was said on each day. Check every figure as usual.
@@ -72,12 +72,22 @@ Stocks Watch do not.
   - **Research log:** log every search and page under `newsletter` (the recap is Saturday's newsletter).
 - On the recap page, the site draws year-long trend lines next to the Markets This Week rows by itself;
   nothing to add for that.
-- **Data log check:** before committing, run
-  `python3 .claude/skills/daily-newsletter/check_log.py DATE`. Fix any real problem it finds in
+- **Data log check:** `publish.py recap DATE` runs
+  `python3 .claude/skills/daily-newsletter/check_log.py DATE` with the edition's checks (refs/finish.md). Fix any real problem it finds in
   `data/markets.json` with log_figures.py (checking the figure at the source first), commit the fix, and
   list anything left unfixed in the final reply's Publishing note. It does not go in the recap itself.
 - Every item opens with a bold lead-in, as in the daily edition. Never refer to the daily editions
   themselves ("as reported on Tuesday"): write about the events and their dates.
+
+## Searches on Saturday: about 60 in all
+
+The week's stories were researched and checked on the day they ran, and their notes are saved, so the recap
+searches only for what is new or has moved: about 60 searches in all (Thursday's and Friday's runs used 140, most
+of them re-finding stories already checked). As a guide: Since Friday up to 20; the week in Egypt up to 15; the region
+and world up to 12; markets, the calendar and In Other News up to 12; the main run a handful for its own gaps. A
+story that has not moved since its edition needs no new search: its saved note is the source. A side session that
+reaches its number searches further only for a story that changed and has no second source yet. Write the number
+into each side session's prompt with its block.
 
 ## Side sessions on Saturday
 

@@ -10,7 +10,8 @@ chooses the stories, writes every word, and opens any page itself when a note is
 
 Most of a run's cost is raw text sitting open and re-sent at every step: a web search's result list and summary
 (about 600 words) and each full page it leads to (700 to 3,000 words). For news, search with
-`python3 .claude/skills/daily-newsletter/search.py --log DATE newsletter|desk "query 1" "query 2" ...` first,
+`python3 .claude/skills/daily-newsletter/search.py --log DATE newsletter|desk "query 1" "query 2" ...` first (the
+main run adds `--short`: one line and a figures fragment a page, the full excerpts appended to editions/search.md),
 several queries per call (English and Arabic queries can share a call; `--days N` for older stories). For each query
 it searches Google News, reads the top four pages at their outlets at once and prints outlet, date, link and an
 excerpt of about 80 words with the figures and their basis, marks pages with the same wording as one source and lists
@@ -79,7 +80,9 @@ Quick Hits, Weather (weather.py), Worth Knowing and the puzzles stay in the main
 > several queries per call (Arabic queries too): it reads the top pages and prints short excerpts, and logs itself.
 > Use web search and full page reads only for what it cannot reach (data and official pages, a page it could not
 > read, an excerpt that is not enough, a figure that needs its context), and log those with
-> `python3 .claude/skills/daily-newsletter/research_log.py DATE newsletter search|page ...` (several per call). Do not write or edit any file in the repo except through research_log.py, and one notes
+> `python3 .claude/skills/daily-newsletter/research_log.py DATE newsletter search|page ...` (several per call).
+> Stop researching a story once each figure has its outlet and one independent confirmation: about two pages
+> opened per story beyond search.py's excerpts, more only where sources conflict. Do not write or edit any file in the repo except through research_log.py, and one notes
 > file: when done, write the notes you return, exactly, to editions/notes/DATE-NAME.md.
 > Return notes only, about 60 to 80 words a story (more only for a story with many figures), in this format:
 > `### Headline in plain words` then terse bullets, no prose and no full sentences where a fragment does: each fact
@@ -89,7 +92,8 @@ Quick Hits, Weather (weather.py), Worth Knowing and the puzzles stay in the main
 > if something is unclear or conflicting. Keep every figure, basis and source; cut background the main run does not
 > need to write the story. Then one line listing stories you dropped and why (old, unconfirmed, not news).
 
-Write the sections from the notes, each section in one Write or Edit. Open a page yourself only where a note says
+Wait for all five before writing (never leave one running in the background past the final reply). Write the
+sections from the notes, each section in one Write or Edit. Open a page yourself only where a note says
 "Open:" something that matters, or a figure is single-source and the story needs it (search.py or articles.py,
 logged). The checker counts the side sessions' searches and pages, which they log themselves. Do not read the saved
 notes files again: they are the notes already returned to you.

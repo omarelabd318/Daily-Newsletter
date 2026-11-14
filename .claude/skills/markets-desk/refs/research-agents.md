@@ -53,6 +53,8 @@ meanwhile copies the template to desk/days/DATE.json and starts on the close car
 > use web search and full page reads only for data pages, filings and what the excerpts do not settle, several
 > pages per `articles.py --log DATE desk URL ...` call. Log those searches and pages, and every stock line, with
 > `python3 .claude/skills/daily-newsletter/research_log.py DATE desk search|page|stock ...` (several per call).
+> Stop on a story once each figure has its outlet and one independent confirmation: about two pages opened per
+> story beyond search.py's excerpts, more only where sources conflict.
 > FILES-YOU-MAY-WRITE. Return notes only, about 60 to 80 words per item (a stock with no news: one line), no prose:
 > `### TICKER or topic: headline` then terse bullets, each fact with every figure, its basis (consolidated or
 > standalone, quarter or nine months, year on year) and date; `Src:` outlet and URL; `Chk:` second outlet and URL,
@@ -64,6 +66,6 @@ For the stocks session FILES-YOU-MAY-WRITE is "You may run set_results.py and fe
 correct dates in desk/calendar.json; write nothing else: return news items and results as notes". For the macro session it
 is "Do not write any repo file except through research_log.py".
 
-Write the desk from the notes and the brief, each section and file in one Write or Edit. Open a page yourself only for an "Open:" point that matters to a story.
+Wait for both before writing (never leave one running in the background). Write the desk from the notes and the brief, each section and file in one Write or Edit. Open a page yourself only for an "Open:" point that matters to a story.
 On a Saturday the stocks session covers the US stocks and any Egyptian stock with news, and there may be no results
 to record.

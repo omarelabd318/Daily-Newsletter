@@ -12,6 +12,10 @@ same wording are marked as one source; pages that would not load are listed, to 
 more headlines are listed under "Also". About 500 words a query, against 2,000 to 5,000 for a web search and the
 pages it leads to. All queries run at once: send several per call.
 
+--short (for the main run): prints each page as one line with a figures fragment of about 25 words (about 150 words
+a query) and appends the full blocks to editions/search.md (a worksheet, not committed), to grep for one story's
+excerpt when the short line is not enough. Side sessions use the full form.
+
 --days N limits the search to the last N days (default 2). --log records each query as a search and each page whose
 excerpt was printed as read (research_log.py, one call for the batch), so the research floors count them. The
 excerpt is the outlet's own words: confirm a figure that moves a story at a second, independent outlet as always,
@@ -80,7 +84,7 @@ def research(query, days, arabic, pages):
     return out
 
 
-def show(res, pages):
+def show(res, pages, excerpt=EXCERPT, budget=BUDGET):
     """The query's printed block, about BUDGET words, and the URLs whose excerpts it printed."""
     lines, logged = [f"## {res['query']}"], []
     if res["error"]:
@@ -99,7 +103,7 @@ def show(res, pages):
         if same[k] is not None:
             body = f"   (same wording as {same[k] + 1}: one source, not two)"
         else:
-            room = max(25, min(EXCERPT, BUDGET - used - words(head) - 40))
+            room = max(min(25, excerpt), min(excerpt, budget - used - words(head) - 40))
             body = "   > " + articles.excerpt(g["text"], room)
         lines += [head, body]
         used += words(head) + words(body)
@@ -117,17 +121,23 @@ def show(res, pages):
 
 
 def log(date, part, queries, urls):
+    """Log the batch; return research_log.py's line after the searches (with its note once past the guide)."""
     tool = os.path.join(HERE, "research_log.py")
+    note = ""
     for cmd, items in (("search", queries), ("read", urls)):
         if items:
             try:
-                subprocess.run([sys.executable, tool, date, part, cmd, *items], cwd=ROOT, capture_output=True, timeout=30)
+                r = subprocess.run([sys.executable, tool, date, part, cmd, *items], cwd=ROOT, capture_output=True,
+                                   text=True, timeout=30)
+                if cmd == "search" and "Past the guide" in r.stdout:
+                    note = r.stdout.strip()
             except Exception:
                 pass
+    return note
 
 
 def main(a):
-    days, ar, pages, logto, queries = 2, False, 4, None, []
+    days, ar, pages, logto, queries, short = 2, False, 4, None, [], False
     i = 0
     while i < len(a):
         x = a[i]
@@ -137,6 +147,8 @@ def main(a):
             pages, i = max(1, min(6, int(a[i + 1]))), i + 1
         elif x == "--ar":
             ar = True
+        elif x == "--short":
+            short = True
         elif x == "--log":
             logto, i = (a[i + 1], a[i + 2]), i + 2
             datetime.date.fromisoformat(logto[0])
@@ -151,14 +163,23 @@ def main(a):
         sys.exit(__doc__)
     with concurrent.futures.ThreadPoolExecutor(min(6, len(queries))) as pool:
         results = list(pool.map(lambda q: research(q, days, ar or bool(ARABIC.search(q)), pages), queries))
-    logged = []
+    logged, full = [], []
     for r in results:
         lines, urls = show(r, pages)
+        if short:
+            full += lines
+            lines, _ = show(r, pages, excerpt=25, budget=170)
         print("\n".join(lines))
         logged += urls
+    if short and full:
+        with open(os.path.join(ROOT, "editions", "search.md"), "a") as f:
+            f.write("\n".join(full) + "\n")
+        print("(Full excerpts appended to editions/search.md: grep -A12 'query words' editions/search.md for one story.)")
     if logto:
-        log(logto[0], logto[1], queries, logged)
+        note = log(logto[0], logto[1], queries, logged)
         print(f"Logged {len(queries)} searches and {len(logged)} pages read ({logto[1]}, {logto[0]}).")
+        if note:
+            print(note)
 
 
 if __name__ == "__main__":

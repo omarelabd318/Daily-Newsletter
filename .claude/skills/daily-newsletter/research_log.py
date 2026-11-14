@@ -26,6 +26,9 @@ DIR = os.path.join(ROOT, "data", "research")
 # what a full day's research looks like; the checkers warn below these and error below half
 # "pages": opened by the run itself (to confirm, to read past an excerpt); "read": read for it by the scripts
 TARGETS = {"newsletter": {"searches": 25, "pages": 12, "read": 20}, "desk": {"searches": 15, "pages": 8, "read": 15}}
+# The guide's upper end (a ceiling, not a target): past it, every page re-sent at every later step costs more than it
+# adds. Each figure needs its outlet and one independent confirmation; once it has them, stop.
+CEILINGS = {"newsletter": {"searches": 60, "pages": 30}, "desk": {"searches": 35, "pages": 20}}
 
 
 def path(date):
@@ -106,7 +109,14 @@ def main(a):
         with open(path(date), "w") as f:
             json.dump(log, f, indent=1, ensure_ascii=False)
             f.write("\n")
-    print(summary(log, name))
+    line = summary(log, name)
+    if cmd in ("search", "page"):
+        k = "searches" if cmd == "search" else "pages"
+        n = len(p[k]) if k == "searches" else len(set(p[k]))
+        if n >= CEILINGS[name][k]:
+            line += (f" Past the guide of {CEILINGS[name][k]} {'searches' if k == 'searches' else 'pages opened'}: "
+                     "search or open a page now only for a figure or story that still has no second source.")
+    print(line)
 
 
 if __name__ == "__main__":

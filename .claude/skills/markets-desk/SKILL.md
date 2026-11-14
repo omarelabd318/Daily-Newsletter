@@ -38,6 +38,10 @@ traded on Thursday and Friday's run already covered it: carry the Egypt section 
 changed (news since Friday, a view due, results published on Friday or Saturday), and skip the per-stock research for
 Egyptian stocks unless one has news. The research floor is 10 searches and 5 pages opened on a Saturday.
 
+**A ceiling as well as a floor:** about 35 searches and 20 pages opened in all, side sessions included
+(research_log.py and search.py say when the run is past it). Each figure needs its outlet and one confirmation;
+once it has them, stop. In the main run use `search.py --short` (one line and a figures fragment a page).
+
 1. Copy the newest `desk/days/*.json` as a template to `desk/days/DATE.json` (DATE is the edition date) and
    rewrite every part for today: set `date`, `asOf` (the latest close, the day before DATE on a trading
    day), `fetched`, and remove `"sample": true`. The close card figures come from today's logged figures. Egypt's group lists the EGX30, the EGX70 EWI, USD/EGP and gold 24K
@@ -80,8 +84,11 @@ Egyptian stocks unless one has news. The research floor is 10 searches and 5 pag
    `fetch_figures.py` shows a new `reserves_usd`), add that month to `desk/reserves.json`: total, foreign
    currencies, gold and `sdr` (the rest: total minus the other two), from the bank's release or a news report
    of it that gives all three (Daily News Egypt, Arab Finance, Egypt Today), with `source` and `url`.
-7. Run `python3 .claude/skills/markets-desk/check_desk.py`, fix every ERROR, then commit and push as for
-   the edition (message `Desk DATE`).
+7. Before handing over, judge every view whose date has passed, add the flows and the movers' reasons (the
+   content warnings check_desk.py gives). Then the checks, mechanical fixes, commit and push are done by one Sonnet
+   side session through `python3 .claude/skills/daily-newsletter/publish.py desk DATE [--push]` (check_desk.py,
+   then commit `Desk DATE` and push), as `.claude/skills/daily-newsletter/refs/finish.md` describes; read it at
+   that step. It hands back anything that needs judgment. Nothing runs in the background after the final reply.
 8. The spoken summary is recorded by GitHub Actions once the desk is pushed (`.github/workflows/publish.yml` runs
    desk_audio.py DATE and commits `Desk DATE: audio`): do not run it in the run.
 
