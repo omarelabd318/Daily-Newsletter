@@ -288,10 +288,10 @@
     "source": "Mubasher"
    },
    "valuation": {
-    "source": "TradingView and Mubasher",
+    "source": "Company filing (Arab Finance (unaudited statement filed to the EGX 29 Oct); Al Borsa)",
     "asOf": "2026-11-14",
-    "period": null,
-    "basis": "per-share figures that do not match the price",
+    "period": "2026-09-30",
+    "basis": "results for the 12 months to September 2026",
     "price": 77.5,
     "rows": [
      {
@@ -299,8 +299,20 @@
       "value": "EGP 97.8bn"
      },
      {
-      "label": "Ratios",
-      "value": "Not shown: per-share figures that do not match the price"
+      "label": "P/E",
+      "value": "5.8"
+     },
+     {
+      "label": "P/B",
+      "value": null
+     },
+     {
+      "label": "Earnings per share (12 months)",
+      "value": "EGP 13.32"
+     },
+     {
+      "label": "Book value per share",
+      "value": null
      }
     ]
    },
@@ -328,6 +340,31 @@
      "A firmer pound lowering export income in pounds."
     ],
     "change": "Gas allocations restored, or fourth-quarter volumes showing how much the cut costs."
+   },
+   "filed": {
+    "period": "2026-09-30",
+    "eps_ttm": 13.3233,
+    "bvps": null,
+    "profit_ttm": 16814000000.0,
+    "shares": 1262000000.0,
+    "how": "12,969,000,000 this year to date + 10,240,000,000 last year - 6,395,000,000 a year earlier",
+    "source": "Arab Finance (unaudited statement filed to the EGX 29 Oct); Al Borsa",
+    "url": "https://www.arabfinance.com/en/news/newdetails/abu-qir-fertilizers-profits-in-first-9-months-of-2026",
+    "recorded": "2026-11-14"
+   },
+   "lastResults": {
+    "date": "2026-10-29",
+    "period": "Nine months to September 2026",
+    "verdict": "beat",
+    "headline": "Nine-month profit up 103% to EGP 12.97bn on revenue up 90% to EGP 31.49bn",
+    "points": [
+     "No published consensus: net profit after tax rose to EGP 12.97bn from EGP 6.40bn, standalone and unaudited; revenue EGP 31.49bn against EGP 16.58bn.",
+     "The company credits steady gas supply, volumes up 22% and export volumes up 55%, all before the November gas cuts."
+    ],
+    "thesis": "Strong, but backward-looking: the gas cut to 33% since November 8 will show in the fourth quarter, so the desk's bearish gas view stands.",
+    "source": "Arab Finance",
+    "url": "https://www.arabfinance.com/en/news/newdetails/abu-qir-fertilizers-profits-in-first-9-months-of-2026",
+    "basis": "outlet reports; the filing was not read"
    }
   },
   "PHDC": {
@@ -627,6 +664,12 @@
   "AVGO": {
    "sector": "Semiconductors",
    "news": [
+    {
+     "date": "2026-11-14",
+     "text": "Fell 4.8% to $347.01 on Friday, giving back Thursday's gain as the Philadelphia semiconductor index lost 3.4%.",
+     "source": "Reuters (via Yahoo Finance)",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/nasdaq-futures-dip-nvidia-tumult-103901600.html"
+    },
     {
      "date": "2026-11-13",
      "text": "Rothschild Redburn cut it to neutral from buy with a $398 target, from $595, citing the durability of AI earnings; the stock rose 5.5% to $364.36 on Thursday.",
@@ -958,6 +1001,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-14",
+     "text": "The 900 MW Gulf of Suez III wind farm, 25% owned by Orascom with ENGIE and Aeolus, reached financial close; Orascom does the civil and electrical works, and full operation is due in September 2028.",
+     "source": "Energy Global",
+     "url": "https://www.energyglobal.com/wind/12112026/aeolus-achieves-financial-close-for-gulf-of-suez-wind-farm-iii/"
+    },
     {
      "date": "2026-11-08",
      "text": "The board allotted 97.2 million new $1 shares to OCI N.V., raising capital to $207.4m from $110.2m; the shares are due to list on the EGX and ADX on November 24, with completion in December (Arab Finance).",
@@ -1564,6 +1613,12 @@
    },
    "news": [
     {
+     "date": "2026-11-14",
+     "text": "Fell 2.0% to $162.85, a sixth straight weekly fall and the longest since October 2012, below $4tn in market value; results are due November 17.",
+     "source": "Reuters (via Yahoo Finance)",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/nasdaq-futures-dip-nvidia-tumult-103901600.html"
+    },
+    {
      "date": "2026-11-12",
      "text": "Jensen Huang resigned as president, chief executive and director with immediate effect; finance chief Colette Kress is interim chief. The stock fell as much as 14.3% and closed 4.3% lower at $166.19.",
      "source": "Al Jazeera",
@@ -1903,12 +1958,32 @@
    },
    "news": [
     {
+     "date": "2026-11-14",
+     "text": "Third-quarter profit fell 28% to $22.1bn on smaller investment gains; operating earnings fell 6% to $12.7bn and buybacks reached $9.6bn.",
+     "source": "Reuters (via Business Insurance)",
+     "url": "https://www.businessinsurance.com/berkshire-hathaway-speeds-up-stock-buybacks-though-profit-falls/"
+    },
+    {
      "date": "2026-11-07",
      "text": "Third-quarter operating earnings fell 5.8% to $12.7bn as insurance underwriting weakened; Berkshire bought back a record $9.6bn of stock (FT), and net income fell 28% (WSJ).",
      "source": "Bloomberg",
      "url": "https://www.bloomberg.com/news/articles/2026-11-07/berkshire-hathaway-s-operating-earnings-fall-buybacks-rise"
     }
-   ]
+   ],
+   "lastResults": {
+    "date": "2026-11-07",
+    "period": "Third quarter 2026",
+    "verdict": "mixed",
+    "headline": "Profit down 28% to $22.1bn on smaller investment gains; operating earnings down 6% to $12.7bn",
+    "points": [
+     "No consensus used: against last year, net earnings attributable to shareholders fell to $22.11bn from $30.80bn, as investment gains shrank to $9.4bn from $17.3bn.",
+     "Operating earnings fell 5.8% to $12.71bn from $13.49bn as insurance underwriting weakened; nine-month operating earnings rose to $37.03bn from $34.29bn.",
+     "It bought back $9.6bn of stock in the quarter and about $2bn more in October; cash reached $356.9bn."
+    ],
+    "thesis": "The buybacks matter more than the headline fall: Berkshire is buying its own shares, which puts a floor under the stock.",
+    "source": "Berkshire Hathaway (Business Wire via Morningstar)",
+    "url": "https://www.morningstar.com/news/business-wire/20261107409212/berkshire-hathaway-inc-news-release"
+   }
   },
   "WMT": {
    "sector": "Retail",
@@ -2684,7 +2759,7 @@
     "source": "Mubasher"
    },
    "valuation": {
-    "source": "Company filing (Arab Finance; Power News)",
+    "source": "Company filing (Arab Finance (EGX filing); ekhbary24)",
     "asOf": "2026-11-14",
     "period": "2026-09-30",
     "basis": "results for the 12 months to September 2026; book value from TradingView, to June 2026",
@@ -2757,9 +2832,9 @@
     "profit_ttm": 18004000000.0,
     "shares": 412500000.0,
     "how": "4,928,000,000 this year to date + 15,491,000,000 last year - 2,415,000,000 a year earlier",
-    "source": "Arab Finance; Power News",
-    "url": "https://www.arabfinance.com/ar/news/newdetails/أرباح-مصر-للألومنيوم-في-ثلاثة-أشهر",
-    "recorded": "2026-11-09"
+    "source": "Arab Finance (EGX filing); ekhbary24",
+    "url": "https://www.arabfinance.com/en/news/newdetails/egypt-aluminum-sees-higher-net-profits-in-q1-fy2026-27",
+    "recorded": "2026-11-14"
    },
    "brief": {
     "written": "2026-11-11",
@@ -2785,6 +2860,20 @@
      "A stake sale priced below the market."
     ],
     "change": "The terms of the stake sale, and the EGP 16 dividend going ex on November 17."
+   },
+   "lastResults": {
+    "date": "2026-11-08",
+    "period": "First quarter of fiscal 2026/27 (July to September 2026)",
+    "verdict": "beat",
+    "headline": "Quarterly profit up 104% to EGP 4.93bn on sales up 6.4% to EGP 12.05bn",
+    "points": [
+     "No published consensus: net profit after tax rose to EGP 4.928bn from EGP 2.415bn a year earlier; earnings per share EGP 11.95 against EGP 5.86.",
+     "The quarter is 44% of the EGP 11.16bn the company targets for the full fiscal year, which ended June 2026 at EGP 15.49bn."
+    ],
+    "thesis": "Supports the desk's EGP 335–345 projection: at about 7.4 times earnings the stock is cheap; the EGP 16 dividend goes ex on November 17.",
+    "source": "Arab Finance",
+    "url": "https://www.arabfinance.com/en/news/newdetails/egypt-aluminum-sees-higher-net-profits-in-q1-fy2026-27",
+    "basis": "outlet reports; the filing was not read"
    }
   },
   "AMOC": {
@@ -2961,7 +3050,7 @@
     }
    ],
    "preview": {
-    "date": "2026-11-13",
+    "date": "2026-11-16",
     "period": "Third quarter 2026",
     "watch": [
      "Volumes after price increases, as snack demand is the first to fall when household budgets tighten.",

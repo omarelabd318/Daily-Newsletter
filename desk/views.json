@@ -257,6 +257,11 @@
    "result": {
     "date": "2026-11-14",
     "text": "Judged on its date: Nvidia at 162.85 from 204.64 (-20.4%)."
+   },
+   "lesson": {
+    "date": "2026-11-14",
+    "text": "Nvidia fell 20.4% to $162.85 against a $220 wrong-if, but most of the fall came from the board's inquiry into Jensen Huang and his resignation on November 12, not the AI-spending doubts the view was opened on; Broadcom, also named, rose over the same weeks. Right largely for a different reason: the desk now tracks a sector call on a basket, not one stock, and names company-specific risk separately.",
+    "tag": "right-different-reason"
    }
   },
   {
@@ -475,6 +480,13 @@
      "source": "Reuters (via AsiaOne)",
      "url": "https://www.asiaone.com/money/wall-street-ends-lower-nvidia-ceo-resigns-us-yields",
      "effect": "neutral"
+    },
+    {
+     "date": "2026-11-14",
+     "text": "Consumer staples led the S&P 500 on Friday, up 1.4%, as tech fell 2.0%; Walmart rose 1.5% to $128.09 and JPMorgan 1.0%, while Alphabet slipped 1.0%.",
+     "source": "CappNotes",
+     "url": "https://cappnotes.substack.com/p/closing-look-friday-november-13-2026",
+     "effect": "supports"
     }
    ],
    "driver": "ai-spending"
@@ -807,6 +819,13 @@
      "source": "Egypt Telegraph",
      "url": "https://www.egypttelegraph.com/article/295507",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-14",
+     "text": "Foreigners bought a net EGP 101.5bn of Egyptian bonds and bills in the week to Thursday, the EGX's weekly report shows, as the dollar rate eased 0.9% to EGP 53.50.",
+     "source": "Maspero",
+     "url": "https://www.maspero.eg/reports-economy/2026/11/13/1005222/",
+     "effect": "supports"
     }
    ],
    "wrongIf": [
@@ -894,6 +913,13 @@
      "source": "Rigzone",
      "url": "https://www.rigzone.com/news/wire/oil_rises_as_trump_dims_iran_deal_hopes-12-nov-2026-185073-article/",
      "effect": "against"
+    },
+    {
+     "date": "2026-11-14",
+     "text": "Brent settled at $95.84 on Friday, down about 2.5% on the week, after the IEA forecast supply 1.7m barrels a day above demand this quarter, the first surplus since the war; Iran's claim of three tankers hit by mines is unconfirmed.",
+     "source": "Reuters (via RTÉ)",
+     "url": "https://www.rte.ie/news/business/2026/1113/1599081-world-oil-prices/",
+     "effect": "supports"
     }
    ],
    "wrongIf": [
@@ -929,7 +955,15 @@
     "EGAL"
    ],
    "status": "open",
-   "updates": [],
+   "updates": [
+    {
+     "date": "2026-11-14",
+     "text": "First-quarter profit of EGP 4.93bn (+104%) is recorded, putting the stock at about 7.4 times earnings; the EGP 16 dividend goes ex on November 17, which lowers the price that day.",
+     "source": "Arab Finance",
+     "url": "https://www.arabfinance.com/en/news/newdetails/egypt-aluminum-sees-higher-net-profits-in-q1-fy2026-27",
+     "effect": "neutral"
+    }
+   ],
    "wrongIf": [
     {
      "key": "egx.EGAL",
