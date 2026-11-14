@@ -15,7 +15,8 @@ Stocks Watch do not.
   edition's Today at a Glance and every story's lead-in and first sentence, where each running topic stands now,
   and the side-session notes saved this week). Open an edition in full only for a story you need in full or its
   links; the side sessions read the editions and the saved notes (`editions/notes/`) in full for their own blocks.
-  Then search for how each big story developed and ended up. Report where things stand
+  Then search for how each big story developed and ended up (search.py first, several queries per call, as
+  `refs/research-agents.md` describes; web search and full pages for what its excerpts do not settle). Report where things stand
   now, not what was said on each day. Check every figure as usual.
 - **Length:** about 2,050 to 2,400 words, a 9 to 10 minute read. A guide, not a limit.
 - **First line:** an italic sentence with the week's dates and what it was about, for example

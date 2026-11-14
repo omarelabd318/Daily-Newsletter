@@ -21,7 +21,9 @@ Each of the desk's stocks gets its own search every morning, on top of the newsl
    disclosures to the exchange, deals and contracts, financing, dividends and capital changes, analysts'
    ratings and fair values, management changes, regulation, and prices of what it sells or buys. Skip
    market wraps, sponsorships, sports clubs that share a name, and fund-holding filings.
-3. Check the facts at the outlet, and against a second outlet for anything that moves the stock.
+3. Check the facts at the outlet, and against a second outlet for anything that moves the stock: find it with
+   `python3 .claude/skills/daily-newsletter/search.py --log DATE desk "Company subject" "الشركة الموضوع" ...`,
+   several stocks' queries in one call, before any web search.
 4. Add each item to that stock in `desk/stocks.json` (`news`, newest first: date, text, source, url) and,
    when it matters to the market, to the page's News card with its ticker.
 5. Let it change the analysis: news can move a stock onto or off the Bullish and bearish lists, change a

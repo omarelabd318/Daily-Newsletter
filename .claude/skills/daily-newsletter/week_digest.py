@@ -3,12 +3,15 @@
 
 Usage (from the repo root, DATE is the Saturday):
   python3 .claude/skills/daily-newsletter/week_digest.py DATE
+  python3 .claude/skills/daily-newsletter/week_digest.py --edition editions/YYYY-MM-DD.md   (one edition, the same way)
 
 Prints, for each edition from Sunday to Friday (second editions of a day included): its intro line, Today at a
 Glance in full, and each story's bold lead-in and first sentence, section by section (no Weather, Quick Hits,
 tables or Sources). Then where each running topic moved this week stands now (data/topics.json), and the research
 notes the week's side sessions saved (editions/notes/). The recap's side sessions read the editions in full for
 their own blocks; the main run works from this digest and opens an edition only for a story it needs in full.
+--edition prints one edition's digest: the daily run reads the last edition this way to tell new stories from
+continuing ones (about half the words), and greps the edition for a story it needs to check in full.
 """
 import datetime
 import json
@@ -57,6 +60,10 @@ def digest(path):
 def main(a):
     if not a:
         sys.exit(__doc__)
+    if a[0] == "--edition" and len(a) > 1:
+        text, n = digest(a[1])
+        print(f"===== {a[1]} =====\n{text}\n\n({len(text.split())} of {n} words; grep the file for a story in full.)")
+        return
     date = a[0][:10]
     sat = datetime.date.fromisoformat(date)
     sun = sat - datetime.timedelta(days=6)

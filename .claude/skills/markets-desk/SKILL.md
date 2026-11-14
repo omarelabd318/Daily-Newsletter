@@ -11,8 +11,11 @@ These are the rules agreed so far; add to them as the desk is finished.
 
 ## Daily run
 
-**Batch, and research in side sessions.** As in the newsletter: several searches, page reads, log lines and file
-reads per step, and a whole section per Write or Edit. Once the brief is read, start the two side sessions in
+**Batch, bring in less raw text, and research in side sessions.** As in the newsletter: news research through
+`daily-newsletter/search.py --log DATE desk` first, several queries per call (web search and full pages for data
+pages, filings and what its excerpts do not settle); several page reads, log lines and file reads per step, no file
+read twice, a whole section per Write or Edit, each checker once per pass. Read the brief without its per-stock
+news leads (`sed '/^## News leads by stock/,$d' desk/brief.md`; the stocks session reads them). Once the brief is read, start the two side sessions in
 `refs/research-agents.md` together in one step (Stocks: results to record and the per-stock research, writing
 desk/stocks.json; Markets and macro: notes only), and write the desk from their notes. Read that file before the
 research starts.
@@ -24,7 +27,7 @@ full: Today at a Glance, both Markets parts, Stocks Watch, the currency table an
 each Egypt, region, world and tech story; on a Saturday the whole recap), its figures already checked and logged.
 Open `editions/DATE.md` itself only for a story you need in full or its links; if it is not there yet,
 check again every few minutes for up to half an hour, then research the markets yourself. Add your own searches
-for anything the desk needs beyond the edition (the stock research below, flows, movers' reasons). Do not write
+for anything the desk needs beyond the edition (the stock research below, flows, movers' reasons), with search.py first. Do not write
 or change the newsletter, and do not log figures the edition already logged. On days with no session (Friday and Saturday for the EGX, Saturday and Sunday for the US) the
 closes are the last session's; the news, stock research and analysis are still updated.
 
@@ -50,7 +53,8 @@ Egyptian stocks unless one has news. The research floor is 10 searches and 5 pag
    forward until its date, and score it when the date passes.
 5. **Start with `python3 .claude/skills/markets-desk/wait_desk_data.py DATE`** (it waits up to 9 minutes in one
    step for the edition and for GitHub Actions' desk data, then pulls): GitHub Actions runs run_data.py as soon as the
-   edition is pushed and commits desk/brief.md. On READY read `desk/brief.md` and rerun only the steps it lists as
+   edition is pushed and commits desk/brief.md. On READY read `desk/brief.md` up to its per-stock news leads (the
+   `sed` line above; the stocks session reads those) and rerun only the steps it lists as
    FAILED (`run_data.py NAME`; the brief keeps the others). On WAITING run it again (30 minutes in all for the
    edition). On NO DESK DATA **run `python3 .claude/skills/markets-desk/run_data.py` once, then read
    `desk/brief.md`**. It runs every fetch and
@@ -61,43 +65,16 @@ Egyptian stocks unless one has news. The research floor is 10 searches and 5 pag
    one or read their output: the brief has what each did, which sources were flaky, what moved, the movers that still
    need a reason with their leads, every stock's news leads, results and events in the next seven days (and which
    need a preview), views due or judged without a lesson, what changed in the fair values, and the standing jobs due
-   today. Work from it. It is a worksheet, not a page: nothing links to it and it is not committed (.gitignore). The scripts, for reference:
-   `fetch_intraday.py` saves the last finished session's prices
-   through the day (`desk/intraday.json`, for the 1D charts: the EGX30, the EGX70 EWI (from TradingView's chart feed,
-   tradingview.py; it also fills the EGX month while it is short), the Nasdaq and the desk's stocks, and
-   the last 24 hours of Bitcoin; the S&P 500 and Dow from Yahoo or else traced from the SPY and DIA funds;
-   Brent, gold, the dollar index and Bitcoin from TradingView's chart feed, which also saves their last seven days
-   hourly and 30 days two-hourly for the Global page's 1W and 1M charts). It also keeps the last five sessions every 15
-   minutes (1W) and the last 23 every 30 minutes (1M). A US series Nasdaq refuses comes from Polygon, then Yahoo;
-   Polygon also fills gaps in the saved US sessions (its key is a network secret on the environment, added by the
-   proxy; five requests a minute, so a few gaps add a minute or two to the run).
-   It keeps the saved session if a market is still trading, and takes under a minute. It also keeps the last
-   five sessions (`week`, every 15 minutes), which the 1W charts draw once two or more are saved. The dollar in pounds
-   has no 1D chart: the official rate barely moves within a day. Then run
-   `python3 .claude/skills/markets-desk/fetch_rates.py` (`desk/rates.json`: the VIX from Cboe and the 3-month, 2-, 10- and
-   30-year Treasury yields from the US Treasury, a year of daily closes): the Wall Street page's "Rates and data" shows
-   them every day, with the dollar index from the log, each with its change on the day. So `pages.us.rates` holds only
-   the day's extra items (a data release, Fed odds, a central bank decision), never the VIX or yields. Then run
-   `python3 .claude/skills/markets-desk/fetch_valuation.py` to refresh each stock's Valuation card in
-   `desk/stocks.json` (TradingView's screener and Mubasher for Egyptian stocks, taking whichever runs to the newer quarter; Nasdaq
-   for US ones; P/E and P/B are worked out at the latest close, with the results period they rest on). It keeps a stock's card if its fetch fails.
-   Then run `python3 .claude/skills/markets-desk/fetch_movers.py` for the whole market's biggest gainers and
-   losers of the last session (`desk/movers.json`): all EGX stocks that traded at least EGP 1m, and US
-   companies worth $10bn or more. The EGX and Wall Street pages show them under "Whole market"; mention a
-   standout mover from outside the desk's stocks in the stories or News when there is a reason behind it.
-   Then run `python3 .claude/skills/markets-desk/indicators.py` (`desk/indicators.json`: moving averages, RSI and MACD for
-   every logged series, shown on stock pages as Trend and momentum; no network; its docstring has each formula, and
-   `--test` checks them against worked examples). Quote them as description ("below its 200-day average"), never as a
-   forecast, and never as the only reason for a view.
-   Then run `python3 .claude/skills/markets-desk/fetch_fairvalue.py` (`desk/fairvalue.json`, the Fair value pages; see Fair value below).
-   Run it with `--leads` to list news for the top five each way, find why each moved (a disclosure,
-   results, a deal, a rating, a sector move), check it at the outlet, and add `why`, `source` and `url` to
-   that stock's row in `desk/movers.json`. One short line; leave it out when no reason is found, and write
-   "No company news found." only for moves of 5% or more. Never guess a reason. Do it for both markets, the EGX
-   and the US: check_desk.py warns about any top-five mover of 5% or more left without a reason.
-   The same script saves the past week's and month's biggest movers across each market (TradingView's changes, shown
-   on the EGX and Wall Street pages under a 1D | 1W | 1M switch, labelled "Past week, TradingView" and "Past month,
-   TradingView"); they reuse any reason written for that stock in the last 31 days, so no separate research is needed.
+   today. Work from it. It is a worksheet, not a page: nothing links to it and it is not committed (.gitignore). What each script does, for when one fails or its output needs judging, is in `refs/data-scripts.md` (read it
+   then, not every run). The rules from it the writing needs: `pages.us.rates` holds only the day's extra items (a
+   data release, Fed odds, a central bank decision), never the VIX or yields, which the page shows from
+   desk/rates.json; mention a standout mover from outside the desk's stocks in the stories or News when there is a
+   reason behind it; quote moving averages, RSI and MACD as description ("below its 200-day average"), never as a
+   forecast or the only reason for a view. **Movers' reasons:** for the top five each way in both markets (the
+   brief's "Movers that still need a reason", with their leads), find why each moved (a disclosure, results, a deal,
+   a rating, a sector move), check it at the outlet, and add `why`, `source` and `url` to that stock's row in
+   `desk/movers.json`: one short line, left out when no reason is found, and "No company news found." only for moves
+   of 5% or more. Never guess a reason. check_desk.py warns about any top-five mover of 5% or more left without one.
 6. Add the session's flows to `desk/flows.json` when the EGX traded, and the date to `desk/index.json`
    with a one-line summary. When the central bank has published a new month of reserves (about the 7th;
    `fetch_figures.py` shows a new `reserves_usd`), add that month to `desk/reserves.json`: total, foreign

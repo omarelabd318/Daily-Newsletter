@@ -8,9 +8,12 @@ description: >-
 
 # Daily Newsletter house rules
 
-**How the run works (read first): batch, and research in side sessions.** Every step of a run pays again for
-everything already open, so (1) put independent actions in one step: four to six searches at once, several pages per
-`articles.py` call, several queries or URLs per research_log.py call, a whole section per Write or Edit; and (2) after
+**How the run works (read first): batch, bring in less raw text, and research in side sessions.** Every step of a
+run pays again for everything already open, so (1) put independent actions in one step: several queries per
+`search.py` call (news research goes through it first: four pages' excerpts a query, about 400 words, logged by
+itself; web search and full page reads for data pages and what its excerpts do not settle), several pages per
+`articles.py` call, several queries or URLs per research_log.py call, a whole section per Write or Edit, each checker
+once per pass, and no file read twice; and (2) after
 choosing the day's stories, do the research in five side sessions (sub-agents, started together in one step) that
 read the pages, confirm the figures at a second outlet and return short notes, and write the edition from the notes.
 `refs/research-agents.md` has the blocks, the prompt to give each one and the notes format: read it before
@@ -152,8 +155,10 @@ shows these as small boxes.
 ## Continuing stories
 
 Before writing, read the most recent earlier edition in `editions/` (the newest file before today's date;
-after a gap, such as a failed run, that may be two or more days old). Use it only to tell which stories
-are new and which are continuing. Then:
+after a gap, such as a failed run, that may be two or more days old) as a digest:
+`python3 .claude/skills/daily-newsletter/week_digest.py --edition editions/YYYY-MM-DD.md` (its glance, and each
+story's lead-in and first sentence: about half the words). Use it only to tell which stories are new and which are
+continuing; the brief's running topics already carry what the last edition said with its figures. Then:
 
 - **Continuing story with a new development:** open with what is new, then give one sentence of
   background so a reader who missed earlier editions can follow it. Do not retell the whole backstory.
@@ -260,7 +265,8 @@ After writing the edition (and the recap, as `DATE-recap`):
 
 Log the research as you do it, with `python3 .claude/skills/daily-newsletter/research_log.py DATE newsletter search "query"`
 for every web search and `... DATE newsletter page URL` for every page opened (read_enterprise.py counts as the pages it
-prints). Pages the scripts read for you (run_research.py's editions/articles.md, articles.py) are logged by them
+prints). `search.py --log DATE newsletter` logs its queries as searches and its pages as read, by itself. Pages the
+scripts read for you (run_research.py's editions/articles.md, articles.py, search.py) are logged by them
 separately, as "read by scripts", and do not count as pages you opened. A full edition takes at least 25 searches
 across many outlets and 12 pages you opened yourself (to confirm a figure at a second outlet, or to read past an
 excerpt), on top of the scripts' reading (usually 20 or more); the checker warns below that and blocks publishing
@@ -300,7 +306,9 @@ usual. A story the brief shows in several outlets still needs reading; a story i
 (about 30: those several outlets carry, with a second outlet for the top ones, the running topics, and the first
 economy, region, wire, sports and world headlines), each with its link at the outlet and its opening and figures.
 Write from these where they are enough, and open a page only for what an excerpt leaves out, a figure to confirm at a
-second outlet, or a story it lists under "Not read". To read pages, pass several at once to
+second outlet, or a story it lists under "Not read". To find more on a story, or a second outlet, run several
+queries at once with `python3 .claude/skills/daily-newsletter/search.py --log DATE newsletter "q1" "q2" ...` before
+any web search. To read pages, pass several at once to
 `python3 .claude/skills/daily-newsletter/articles.py --log DATE newsletter URL URL ...` (one step of the run instead
 of one per page; `--full` for a whole article) rather than opening them one by one. The file is a
 worksheet and is not committed.
@@ -454,8 +462,8 @@ When the edition is written, read it once from the top as its editor, not its wr
   date or a quote.
 - **Why it matters:** an Egypt, economy or markets item whose point for a reader in Egypt is not plain gets one
   closing clause that says it (what it does to prices, the pound, jobs, a stock). Never a moral, never filler.
-- **Against earlier editions:** for each continuing story, open the last edition that carried it (`grep -l` the
-  name in `editions/`) and check that names, titles, counts and figures agree; where they differ, check the source
+- **Against earlier editions:** for each continuing story, find the last edition that carried it and read only
+  that story (`grep -n -A3 "Name" editions/*.md | tail`, not the whole file) and check that names, titles, counts and figures agree; where they differ, check the source
   and say what changed ("revised from 125").
 - **Arithmetic:** recompute every percentage change, total and "highest since" from the figures in the text and the
   data log.
