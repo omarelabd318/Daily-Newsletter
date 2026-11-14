@@ -1,16 +1,7 @@
 {
  "note": "The desk's stocks' coming results and dividends, from TradingView (fetch_calendar.py); for the US stocks, declared dividends and stock splits from Polygon. Results dates for Egyptian companies are often TradingView's estimate until the company announces one.",
- "fetched": "2026-11-13",
+ "fetched": "2026-11-14",
  "items": [
-  {
-   "t": "EFID",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-11-13",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
   {
    "t": "CLHO",
    "market": "egx",
@@ -56,6 +47,24 @@
    "date": "2026-11-17",
    "period": "2026-10-31",
    "time": "after the close",
+   "expected": true
+  },
+  {
+   "t": "EAST",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-18",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "EFIH",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-18",
+   "period": "2026-09-30",
+   "time": null,
    "expected": true
   },
   {
@@ -231,6 +240,24 @@
    "market": "us",
    "kind": "results",
    "date": "2027-01-26",
+   "period": "2026-12-31",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "INTC",
+   "market": "us",
+   "kind": "results",
+   "date": "2027-01-28",
+   "period": "2026-12-31",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "V",
+   "market": "us",
+   "kind": "results",
+   "date": "2027-01-28",
    "period": "2026-12-31",
    "time": null,
    "expected": true
