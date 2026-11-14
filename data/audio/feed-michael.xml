@@ -14,12 +14,22 @@
     <itunes:type>episodic</itunes:type>
     <itunes:block>Yes</itunes:block>
     <item>
+      <title>Weekly Recap, week to November 14</title>
+      <description>Salah's record, a deadly train crash, deeper gas cuts, a firmer pound and Nvidia's founder forced out: the week of November 8 to 14. Read the edition: https://daily-newsletter-eg.vercel.app/#2026-11-14-recap</description>
+      <link>https://daily-newsletter-eg.vercel.app/#2026-11-14-recap</link>
+      <guid isPermaLink="false">2026-11-14-recap-am_michael</guid>
+      <pubDate>Sat, 14 Nov 2026 14:00:00 +0200</pubDate>
+      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@1747de30da6cfa18b3186359dfe2710feb3cf835/2026-11-14-recap-am_michael.mp3" length="9741548" type="audio/mpeg"/>
+      <itunes:duration>0:27:04</itunes:duration>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Friday, November 13</title>
       <description>Gulf of Suez wind farms clinch financing; Egypt sets a dollar power price for AI data centers; Nvidia's Jensen Huang resigns. Read the edition: https://daily-newsletter-eg.vercel.app/#2026-11-13</description>
       <link>https://daily-newsletter-eg.vercel.app/#2026-11-13</link>
       <guid isPermaLink="false">2026-11-13-am_michael</guid>
       <pubDate>Fri, 13 Nov 2026 10:00:00 +0200</pubDate>
-      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@4473d84e03e1636db021720bc4b4817c3664f5e0/2026-11-13-am_michael.mp3" length="10048124" type="audio/mpeg"/>
+      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@1747de30da6cfa18b3186359dfe2710feb3cf835/2026-11-13-am_michael.mp3" length="10048124" type="audio/mpeg"/>
       <itunes:duration>0:27:55</itunes:duration>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -29,7 +39,7 @@
       <link>https://daily-newsletter-eg.vercel.app/#2026-11-12</link>
       <guid isPermaLink="false">2026-11-12-am_michael</guid>
       <pubDate>Thu, 12 Nov 2026 10:00:00 +0200</pubDate>
-      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@4473d84e03e1636db021720bc4b4817c3664f5e0/2026-11-12-am_michael.mp3" length="10216029" type="audio/mpeg"/>
+      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@1747de30da6cfa18b3186359dfe2710feb3cf835/2026-11-12-am_michael.mp3" length="10216029" type="audio/mpeg"/>
       <itunes:duration>0:28:23</itunes:duration>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -39,7 +49,7 @@
       <link>https://daily-newsletter-eg.vercel.app/#2026-11-11</link>
       <guid isPermaLink="false">2026-11-11-am_michael</guid>
       <pubDate>Wed, 11 Nov 2026 10:00:00 +0200</pubDate>
-      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@4473d84e03e1636db021720bc4b4817c3664f5e0/2026-11-11-am_michael.mp3" length="11876925" type="audio/mpeg"/>
+      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@1747de30da6cfa18b3186359dfe2710feb3cf835/2026-11-11-am_michael.mp3" length="11876925" type="audio/mpeg"/>
       <itunes:duration>0:32:59</itunes:duration>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -49,7 +59,7 @@
       <link>https://daily-newsletter-eg.vercel.app/#2026-11-10</link>
       <guid isPermaLink="false">2026-11-10-am_michael</guid>
       <pubDate>Tue, 10 Nov 2026 10:00:00 +0200</pubDate>
-      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@4473d84e03e1636db021720bc4b4817c3664f5e0/2026-11-10-am_michael.mp3" length="11821917" type="audio/mpeg"/>
+      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@1747de30da6cfa18b3186359dfe2710feb3cf835/2026-11-10-am_michael.mp3" length="11821917" type="audio/mpeg"/>
       <itunes:duration>0:32:50</itunes:duration>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -59,7 +69,7 @@
       <link>https://daily-newsletter-eg.vercel.app/#2026-11-09</link>
       <guid isPermaLink="false">2026-11-09-am_michael</guid>
       <pubDate>Mon, 09 Nov 2026 10:00:00 +0200</pubDate>
-      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@4473d84e03e1636db021720bc4b4817c3664f5e0/2026-11-09-am_michael.mp3" length="11842797" type="audio/mpeg"/>
+      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@1747de30da6cfa18b3186359dfe2710feb3cf835/2026-11-09-am_michael.mp3" length="11842797" type="audio/mpeg"/>
       <itunes:duration>0:32:54</itunes:duration>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -69,18 +79,8 @@
       <link>https://daily-newsletter-eg.vercel.app/#2026-11-08</link>
       <guid isPermaLink="false">2026-11-08-am_michael</guid>
       <pubDate>Sun, 08 Nov 2026 10:00:00 +0200</pubDate>
-      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@4473d84e03e1636db021720bc4b4817c3664f5e0/2026-11-08-am_michael.mp3" length="11319357" type="audio/mpeg"/>
+      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@1747de30da6cfa18b3186359dfe2710feb3cf835/2026-11-08-am_michael.mp3" length="11319357" type="audio/mpeg"/>
       <itunes:duration>0:31:26</itunes:duration>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Saturday, November 7</title>
-      <description>Inflation eases to 12%, a deadly gold-mining crackdown, certificate rates rise and US strikes on Iran's Qeshm island. Read the edition: https://daily-newsletter-eg.vercel.app/#2026-11-07</description>
-      <link>https://daily-newsletter-eg.vercel.app/#2026-11-07</link>
-      <guid isPermaLink="false">2026-11-07-am_michael</guid>
-      <pubDate>Sat, 07 Nov 2026 10:00:00 +0200</pubDate>
-      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@4473d84e03e1636db021720bc4b4817c3664f5e0/2026-11-07-am_michael.mp3" length="10914861" type="audio/mpeg"/>
-      <itunes:duration>0:30:19</itunes:duration>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     <item>
@@ -89,7 +89,7 @@
       <link>https://daily-newsletter-eg.vercel.app/#2026-11-07-recap</link>
       <guid isPermaLink="false">2026-11-07-recap-am_michael</guid>
       <pubDate>Sat, 07 Nov 2026 14:00:00 +0200</pubDate>
-      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@4473d84e03e1636db021720bc4b4817c3664f5e0/2026-11-07-recap-am_michael.mp3" length="7540653" type="audio/mpeg"/>
+      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@1747de30da6cfa18b3186359dfe2710feb3cf835/2026-11-07-recap-am_michael.mp3" length="7540653" type="audio/mpeg"/>
       <itunes:duration>0:20:57</itunes:duration>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
