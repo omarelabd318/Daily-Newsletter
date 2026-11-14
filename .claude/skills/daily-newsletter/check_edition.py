@@ -452,11 +452,13 @@ def main(path):
         warnings.append(f"Trend lines: no data/weeks/{m.group(1)}.json: run fetch_intraday.py, then week_snapshot.py {m.group(1)}, "
                         "so Stocks Watch shows the week hour by hour.")
 
-    # Listen: the recorded voice (make_audio.py), made once the edition is final
+    # Listen: the recorded voice, made by GitHub Actions after the push (publish.yml); only an older edition without
+    # it is worth a warning (today's is recorded after this check)
     ekey = os.path.basename(path)[:-3]
-    if m and not os.path.exists(os.path.join(ROOT, "data", "audio", ekey + ".json")):
-        warnings.append(f"Listen: no data/audio/{ekey}.json: once the edition is final, run make_audio.py {ekey} "
-                        "(the site uses the device's voice until then).")
+    cairo_today = (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=2)).date().isoformat()
+    if m and ekey[:10] < cairo_today and not os.path.exists(os.path.join(ROOT, "data", "audio", ekey + ".json")):
+        warnings.append(f"Listen: no data/audio/{ekey}.json: GitHub Actions did not record it. Run the \"Audio and "
+                        f"chores\" workflow by hand with key {ekey} (the site uses the device's voice until then).")
 
     # Running topics: the edition's stories tagged (topics.py tag), and each topic it moved given a fresh
     # "where it stands"

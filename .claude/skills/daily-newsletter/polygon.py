@@ -8,6 +8,7 @@ from the funds that track them (FUNDS), scaled by the caller to the index's clos
 """
 import datetime
 import json
+import os
 import time
 import urllib.parse
 import urllib.request
@@ -23,7 +24,10 @@ def _get(url):
     if wait > 0:
         time.sleep(wait)
     _last[0] = time.time()
-    return json.loads(urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": UA}), timeout=30).read())
+    h = {"User-Agent": UA}
+    if os.environ.get("POLYGON_API_KEY"):   # GitHub Actions: the repository secret (in a session the proxy adds it)
+        h["Authorization"] = "Bearer " + os.environ["POLYGON_API_KEY"]
+    return json.loads(urllib.request.urlopen(urllib.request.Request(url, headers=h), timeout=30).read())
 
 
 def call(path, pages=1):

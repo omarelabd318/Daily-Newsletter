@@ -551,11 +551,8 @@ intraday prices up to the last session, about a minute) and `python3 .claude/ski
 It saves `data/weeks/DATE.json`, the last five sessions hour by hour for the desk's stocks and the indexes, which the
 site draws as this edition's "Last 7 days" lines; commit it, and `desk/intraday.json`, with the edition.
 
-Then refresh the spreadsheet copy, `data/markets.xlsx`, and commit it too:
-
-```
-python3 .claude/skills/daily-newsletter/export_xlsx.py
-```
+The spreadsheet copy, `data/markets.xlsx`, is rewritten by GitHub Actions after the push (the "Audio and chores"
+workflow, `export_xlsx.py`): do not run it in the run.
 
 Log the same numbers the edition shows (the central bank's selling rate for the dollar when that is what
 the table shows), one value per key, with every Stocks Watch row as `egx.TICKER` or `us.TICKER`. Leave out
@@ -567,7 +564,11 @@ stays in the log for good and skews every change, streak and YTD figure worked o
 
 ## Listen (the edition read aloud)
 
-Once the edition is final and checked, run `python3 .claude/skills/daily-newsletter/make_audio.py EDITION` (EDITION is the file key, e.g. 2026-11-06). Read `refs/listen.md` before running it the first time in a run, or when a name may be mispronounced, the audio fails, or you change how something is read.
+GitHub Actions records it after the push (`.github/workflows/publish.yml`, "Audio and chores": make_audio.py in both
+voices, the podcast feeds, then a commit "Newsletter DATE: audio", about 15 minutes): **do not run make_audio.py to
+record**. Before the push, when the edition has names the voice may say wrong, run `make_audio.py --names EDITION`
+and fix them in pronounce.json (refs/listen.md), and commit pronounce.json with the edition: Actions reads it. If
+the edition text changes after the push, push the fix: Actions records again (voices with unchanged text are kept).
 
 ## Corrections
 

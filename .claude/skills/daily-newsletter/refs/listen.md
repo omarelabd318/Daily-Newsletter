@@ -1,8 +1,9 @@
 # Listen (the edition read aloud)
 
 The site's Listen button reads every edition aloud with the device's own voice; each daily edition and the recap
-also get a recorded natural voice. Once the edition is final and checked, run
-`python3 .claude/skills/daily-newsletter/make_audio.py EDITION` (EDITION is the file key, e.g. 2026-11-06). It
+also get a recorded natural voice. GitHub Actions runs
+`python3 .claude/skills/daily-newsletter/make_audio.py EDITION` after each push (`.github/workflows/publish.yml`;
+the run itself only checks names with `--names` before the push, and never records). It
 records the edition in the site's two natural voices, Heart and Michael (around 10 minutes, plus a few minutes the
 first time to install the voice model; a voice already recorded from the same text is kept), publishes the
 MP3 on the repo's `audio` branch (which holds only the last 8 editions' audio, a week plus the recap, and is rewritten each time: never

@@ -39,7 +39,12 @@ Egyptian stocks unless one has news. The research floor is 10 searches and 5 pag
 4. Write `pages`: EGX (finding, session, news, outlook), EGP (finding, rates, drivers, news, view), US
    (finding, rates: the day's extra items only, see step 5; afterBell, news, outlook), Global (finding, notes, news). Carry each projection
    forward until its date, and score it when the date passes.
-5. **Run `python3 .claude/skills/markets-desk/run_data.py` once, then read `desk/brief.md`.** It runs every fetch and
+5. **Start with `python3 .claude/skills/markets-desk/wait_desk_data.py DATE`** (it waits up to 9 minutes in one
+   step for the edition and for GitHub Actions' desk data, then pulls): GitHub Actions runs run_data.py as soon as the
+   edition is pushed and commits desk/brief.md. On READY read `desk/brief.md` and rerun only the steps it lists as
+   FAILED (`run_data.py NAME`; the brief keeps the others). On WAITING run it again (30 minutes in all for the
+   edition). On NO DESK DATA **run `python3 .claude/skills/markets-desk/run_data.py` once, then read
+   `desk/brief.md`**. It runs every fetch and
    calculation below in order (intraday, rates, valuation, movers, calendar, indicators, fair value, judging the
    views, the stock news leads and the movers' leads), each with a time limit, over one shared fetch layer
    (`sources.py`: retries, pacing between requests, a short shared memory so the same table is not fetched twice). A
@@ -91,11 +96,8 @@ Egyptian stocks unless one has news. The research floor is 10 searches and 5 pag
    of it that gives all three (Daily News Egypt, Arab Finance, Egypt Today), with `source` and `url`.
 7. Run `python3 .claude/skills/markets-desk/check_desk.py`, fix every ERROR, then commit and push as for
    the edition (message `Desk DATE`).
-8. After the desk is pushed, record its spoken summary: `python3 .claude/skills/markets-desk/desk_audio.py DATE`
-   (about two to four minutes; no writing: it builds a 8 to 9 minute script from desk/days/DATE.json, records it in the
-   Heart voice and publishes it, for "Listen to the day" in the desk's top menu). Then commit
-   `desk/listen/DATE.md` and `data/audio/` as `Desk DATE: audio` and push. If it prints "Audio not made", leave it:
-   the dashboards then show no button. Never commit an MP3.
+8. The spoken summary is recorded by GitHub Actions once the desk is pushed (`.github/workflows/publish.yml` runs
+   desk_audio.py DATE and commits `Desk DATE: audio`): do not run it in the run.
 
 ## The desk's stocks
 

@@ -1,0 +1,55 @@
+# The Markets Desk's data, fetched as soon as the day's edition is pushed (its figures are logged by then), so the
+# desk run starts with desk/brief.md ready instead of running every script itself: run_data.py runs every step
+# (prices through the day, rates, valuations, movers, calendar, indicators, fair values, judging the views, results
+# not yet recorded, the stock news with each lead's page read, the movers' leads) and commits the data files and the
+# brief. The commit says "[no deploy]" (vercel.json skips it): the site updates when the desk itself is pushed.
+# A step a source refuses from here is marked FAILED in the brief, and the desk run reruns just that one.
+name: Desk data
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "editions/20*.md"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: desk-data
+  cancel-in-progress: false
+
+jobs:
+  data:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      TZ: Africa/Cairo
+      POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Tools
+        run: |
+          pip install -q trafilatura websocket-client openpyxl
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Every desk data step, then the brief
+        run: python3 .claude/skills/markets-desk/run_data.py
+
+      - name: Commit
+        run: |
+          git add desk data/research
+          if git diff --cached --quiet; then echo "Nothing to commit"; exit 0; fi
+          git commit -q -m "Desk data $(date +%F) [no deploy]"
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase -X theirs origin main && git push -q origin HEAD:main && exit 0
+            sleep $((i * 10))
+          done
+          exit 1

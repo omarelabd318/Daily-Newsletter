@@ -1,0 +1,96 @@
+# After an edition or a desk is pushed: record its audio and do the chores, so the Claude runs do not.
+# - editions/DATE.md (or DATE-recap.md): make_audio.py records it in the site's two voices (MP3s on the "audio"
+#   branch, data/audio/DATE.json here, the podcast feeds refreshed), and export_xlsx.py rewrites data/markets.xlsx.
+# - desk/days/DATE.json: desk_audio.py writes desk/listen/DATE.md and records it in the Heart voice.
+# Then one commit, "Newsletter DATE: audio" or "Desk DATE: audio". Free: the repo is public, so Actions minutes cost
+# nothing. Rerun by hand from the Actions tab (Run workflow) with an edition key or "desk-DATE".
+name: Audio and chores
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "editions/20*.md"
+      - "desk/days/20*.json"
+  workflow_dispatch:
+    inputs:
+      key:
+        description: "Edition key (2026-11-15, 2026-11-14-recap) or desk-DATE (desk-2026-11-15)"
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: audio
+  cancel-in-progress: false
+
+jobs:
+  audio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      TZ: Africa/Cairo
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: What was pushed
+        id: what
+        run: |
+          if [ -n "${{ github.event.inputs.key }}" ]; then
+            k="${{ github.event.inputs.key }}"
+            case "$k" in desk-*) echo "desk=${k#desk-}" >> "$GITHUB_OUTPUT";; *) echo "editions=$k" >> "$GITHUB_OUTPUT";; esac
+            exit 0
+          fi
+          before="${{ github.event.before }}"
+          if [ -z "$before" ] || ! git cat-file -e "$before" 2>/dev/null; then before="HEAD~1"; fi
+          files=$(git diff --name-only "$before" HEAD)
+          eds=$(echo "$files" | grep -E '^editions/20[0-9-]+(-recap|-v[0-9]+)?\.md$' | sed 's#editions/##; s#\.md$##' | tr '\n' ' ')
+          desk=$(echo "$files" | grep -E '^desk/days/20[0-9-]+\.json$' | sed 's#desk/days/##; s#\.json$##' | tail -1)
+          echo "editions=$eds" >> "$GITHUB_OUTPUT"
+          echo "desk=$desk" >> "$GITHUB_OUTPUT"
+          echo "Editions: $eds | Desk: $desk"
+
+      - name: Voice model cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/daily-newsletter
+          key: kokoro-v1
+
+      - name: Tools
+        run: |
+          command -v ffmpeg || (sudo apt-get update -q && sudo apt-get install -y -q ffmpeg)
+          pip install -q kokoro-onnx soundfile openpyxl
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Record the edition
+        if: steps.what.outputs.editions != ''
+        run: |
+          for k in ${{ steps.what.outputs.editions }}; do
+            python3 .claude/skills/daily-newsletter/make_audio.py "$k"
+          done
+          python3 .claude/skills/daily-newsletter/export_xlsx.py || true
+
+      - name: Record the desk
+        if: steps.what.outputs.desk != ''
+        run: python3 .claude/skills/markets-desk/desk_audio.py "${{ steps.what.outputs.desk }}"
+
+      - name: Commit
+        run: |
+          git add data/audio desk/listen data/markets.xlsx 2>/dev/null || true
+          if git diff --cached --quiet; then echo "Nothing to commit"; exit 0; fi
+          eds="${{ steps.what.outputs.editions }}"; desk="${{ steps.what.outputs.desk }}"
+          if [ -n "$eds" ]; then msg="Newsletter $(echo $eds | awk '{print $1}'): audio"; else msg="Desk $desk: audio"; fi
+          git commit -q -m "$msg"
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase origin main && git push -q origin HEAD:main && exit 0
+            sleep $((i * 10))
+          done
+          exit 1

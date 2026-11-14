@@ -12,6 +12,11 @@ intraday, rates, valuation, movers, calendar, indicators, fairvalue, views (judg
 (stock_news.py --read, 3 days on a Sunday: each lead's page is read and its key lines put under it) and leads (fetch_movers.py --leads). A step that fails or runs out of time
 is reported and the rest carry on: every script keeps its last saved output when its source fails.
 
+GitHub Actions (.github/workflows/desk-data.yml) runs every step as soon as the day's edition is pushed and commits the
+results and desk/brief.md, so the run usually starts with the brief ready: `wait_desk_data.py` waits for it. Today's
+step results are kept in desk/run-steps.json, so `run_data.py NAME` (rerunning a step that failed there) keeps the
+other steps' output in the brief.
+
 desk/brief.md is what the run reads instead of each script's output: what every step did, which sources were
 flaky, what moved, which movers still need a reason, the news leads per stock, results and events coming up,
 views due or just judged, what changed in the fair values, and the standing jobs that fall due today. It lists
@@ -72,7 +77,7 @@ def brief(results, started):
         add("## Steps")
         for r in results:
             tail = [x for x in r["out"].splitlines() if x.strip()]
-            add(f"- **{r['name']}**: {'ok' if r['ok'] else 'FAILED'} in {r['secs']}s. " + (tail[-1][:260] if tail and r["name"] not in ("news", "leads", "results") else ""))
+            add(f"- **{r['name']}**: {'ok' if r['ok'] else 'FAILED'} in {r['secs']}s{' (GitHub Actions)' if r.get('where') == 'GitHub Actions' else ''}. " + (tail[-1][:260] if tail and r["name"] not in ("news", "leads", "results") else ""))
             if not r["ok"]:
                 for x in tail[-6:]:
                     add(f"    {x[:200]}")
@@ -236,16 +241,30 @@ def brief(results, started):
     return len(L)
 
 
+SAVED = D("run-steps.json")   # today's step results, so rerunning one step keeps the others' output in the brief
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("-")]
     started, results = time.time(), []
+    where = "GitHub Actions" if os.environ.get("GITHUB_ACTIONS") else "the run"
     if "--brief" not in sys.argv:
         for name, cmd, limit in STEPS:
             if args and name not in args:
                 continue
             r = run(name, cmd, limit)
+            r["where"] = where
             results.append(r)
             print(f"{name}: {'ok' if r['ok'] else 'FAILED'} ({r['secs']}s)", flush=True)
+    # merge with today's earlier results (GitHub Actions runs every step before the desk run; the run reruns only a
+    # step that failed there), in the steps' order
+    prev = load(SAVED) or {}
+    old = {r["name"]: r for r in prev.get("results", [])} if prev.get("date") == TODAY.isoformat() else {}
+    old.update({r["name"]: r for r in results})
+    results = [old[n] for n, _, _ in STEPS if n in old]
+    with open(SAVED, "w") as f:
+        json.dump({"date": TODAY.isoformat(), "results": results}, f, ensure_ascii=False)
+        f.write("\n")
     n = brief(results, started)
     bad = [r["name"] for r in results if not r["ok"]]
     print(f"run_data: {len(results) - len(bad)} of {len(results)} steps ok" + (f"; failed: {', '.join(bad)}" if bad else "") + f"; read desk/brief.md ({n} lines)")
