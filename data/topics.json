@@ -14,8 +14,8 @@
    "drivers": [
     "oil"
    ],
-   "now": "Iran's Revolutionary Guard said it struck and destroyed a US early-warning radar in Bahrain on November 13, its first claimed hit on US assets in a Gulf state since early September, after an attack on a telecom tower in southern Iran; reports of explosions near two tankers in the Strait of Hormuz pushed Brent up about 3.4% to roughly $95.90. President Trump said the US 'doesn't need a deal' with Iran and pulled Vice President Vance off the talks, though he has suggested he could still return to war if Qatar's track fails.",
-   "now_date": "2026-11-13"
+   "now": "The United States keeps its naval blockade of Iran with no talks scheduled, after President Trump said on November 12 that Washington does not need a deal. Iran claimed a strike on a US radar in Bahrain on November 13 and said tankers hit mines near Hormuz overnight into November 14, claims not independently confirmed; Brent ended the week at $95.84, down 2.5%. Trump, Xi Jinping and Vladimir Putin are due to discuss Iran in Shenzhen on November 18-19.",
+   "now_date": "2026-11-14"
   },
   {
    "id": "pound-cbe",
@@ -30,8 +30,8 @@
    "drivers": [
     "egp-rates"
    ],
-   "now": "The central bank's dollar selling rate firmed to about EGP 53.50 on November 12, near the pound's strongest in a year, as the dollar index hit 103.17, its highest since April 2025. Policy rates stand at 20% for deposits and 21% for lending after the October 29 hike, with the next meeting on December 17; the one-year treasury-bill yield held at 26.07% at the November 12 auction.",
-   "now_date": "2026-11-13"
+   "now": "The central bank's dollar selling rate eased to EGP 53.50 on November 12 from 54.01 a week earlier, about 0.9% stronger for the pound, helped by record remittances of $38.2 billion in nine months. Urban inflation slowed to 12.7% in October; the deposit rate stays at 20% and the one-year T-bill yield was 26.07% on November 12. The next rate meeting is on December 17.",
+   "now_date": "2026-11-14"
   },
   {
    "id": "ai-chips",
@@ -46,8 +46,8 @@
    "drivers": [
     "ai-spending"
    ],
-   "now": "Nvidia founder Jensen Huang resigned as chief executive on November 12, effective immediately, days after admitting an affair with a technology executive whom US investigators suspect of spying for China; CFO Colette Kress is interim chief and Harvey Jones the first chair. The shares fell nearly 12% intraday before closing down 4.3% at $166.19, their lowest since March, dragging the S&P 500 and Nasdaq lower, though Broadcom rose 5.5%. Nvidia reports quarterly results on November 17.",
-   "now_date": "2026-11-13"
+   "now": "Nvidia ended the week of November 13 at $162.85, down 12.7%, its sixth straight weekly fall, after founder Jensen Huang resigned as chief executive on November 12; CFO Colette Kress is interim chief. Nvidia reports results on November 17, and Anthropic's IPO of up to $64.4 billion is due to price on November 18.",
+   "now_date": "2026-11-14"
   },
   {
    "id": "us-midterms",
@@ -89,8 +89,8 @@
    "drivers": [
     "gas-supply"
    ],
-   "now": "The government raised gas curtailments for fertilizer and methanol plants to 33% on November 8, from 20% imposed on November 1, and notified Ezz Steel of a 30% cut, as spot LNG cargoes cost close to $120 million each. Mopco and Abu Qir Fertilizers each fell almost 6% on the EGX that day; no producer has yet put a figure on the lost output.",
-   "now_date": "2026-11-09"
+   "now": "Gas supplies to fertilizer and methanol plants remain cut by 33% and to steel mills by 30%, with no official end date, though an unnamed EGAS source said fertilizer supply could return to contract levels before the end of November. Abu Qir Fertilizers fell 4.3% in the week to November 12.",
+   "now_date": "2026-11-14"
   },
   {
    "id": "imf",
@@ -103,8 +103,8 @@
     ]
    ],
    "drivers": [],
-   "now": "The IMF mission on Egypt's eighth and final review aims to take it to the Fund's board before the program ends on December 15, with about $2.3 billion at stake. The government plans an Egypt Aluminum stake sale and has put off a freezone levy of up to 4% until after the review.",
-   "now_date": "2026-11-07"
+   "now": "The IMF still aims to complete Egypt's eighth and final review, worth about $2.3 billion, before the program ends on December 15; no board date has been set. A presidential decree now lets the Finance Ministry use 26,690 feddans of Red Sea land to cut public debt.",
+   "now_date": "2026-11-14"
   },
   {
    "id": "gaza-lebanon",
@@ -112,8 +112,8 @@
    "match": "\\b(Gaza|Hamas|Hezbollah|Lebanon|Lebanese)\\b",
    "related": [],
    "drivers": [],
-   "now": "A Palestinian baby died of cold in Gaza on November 12 as Israeli restrictions on aid and winter storms battered displacement camps, and more than 50 countries and organizations called for unimpeded humanitarian access despite the ceasefire. Egypt has agreed to train Palestinian doctors in its hospitals.",
-   "now_date": "2026-11-13"
+   "now": "Israeli strikes continue in Gaza despite the October 2025 ceasefire: a strike on Nasser Hospital in Khan Younis killed at least six people on November 12, and a baby died of cold the same day. More than 50 countries and organizations have urged unimpeded aid access, with the UN saying 150,000 tents are held at the borders.",
+   "now_date": "2026-11-14"
   },
   {
    "id": "oil",
@@ -135,13 +135,101 @@
    "id": "saudi-deployment",
    "name": "Egypt's forces in Saudi Arabia",
    "match": "Egyptian (troops|forces) in Saudi|deployment to Saudi|Saudi deployment|military presence there|troops in Saudi",
-   "now": "Foreign Minister Badr Abdelatty confirmed on November 11 that Egyptian forces are already in Saudi Arabia protecting sensitive sites, including holy sites, and that the presence is being strengthened. Sources put the troops in the hundreds, with armor and air-defense systems, on a defensive mission under the mandate parliament approved in October. Riyadh has not commented publicly.",
-   "now_date": "2026-11-11",
+   "now": "Foreign Minister Badr Abdelatty said on November 10 that Egyptian forces have been in Saudi Arabia for several months helping defend sensitive sites, including the holy cities, and will not enter Yemen. Sources put the force in the hundreds; Saudi Arabia has not commented.",
+   "now_date": "2026-11-14",
    "related": [],
    "drivers": []
   }
  ],
  "stories": [
+  {
+   "ed": "2026-11-14-recap",
+   "id": "story-troops-in-saudi-arabia",
+   "lead": "Troops in Saudi Arabia",
+   "sec": "Egypt This Week",
+   "text": "Foreign Minister Badr Abdelatty told France 24 on November 10 that Egyptian forces have been in Saudi Arabia \"for several months\" to help defend sensitive sites, including the holy cities, and will not enter Yemen. Sources put the force in…",
+   "topics": [
+    "saudi-deployment"
+   ]
+  },
+  {
+   "ed": "2026-11-14-recap",
+   "id": "story-treasury-bill-auction",
+   "lead": "Treasury bill auction",
+   "sec": "How It Played Out",
+   "text": "The central bank's Thursday sale was watched for demand after the pound's recovery; the one-year bill cleared at 26.07% and the six-month at 25.02%.",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-11-14-recap",
+   "id": "story-prices-remittances-and-the-pound",
+   "lead": "Prices, remittances and the pound",
+   "sec": "Egypt This Week",
+   "text": "Urban inflation slowed to 12.7% in October from 13.9% in September, its lowest since January, though core prices rose 1.2% on the month, faster than September's 0.8%. Egyptians abroad sent home $13 billion in July-September, up 20.4% from…",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-11-14-recap",
+   "id": "story-mines-in-hormuz",
+   "lead": "Mines in Hormuz",
+   "sec": "Since Friday",
+   "text": "Iran's Revolutionary Guard said two oil tankers caught fire overnight after hitting mines while trying to cross the Strait of Hormuz by an \"unauthorized\" route with their tracking switched off, and Iran's navy reported a third tanker…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-14-recap",
+   "id": "story-iran",
+   "lead": "Iran",
+   "sec": "Region and World",
+   "text": "After meeting Qatar's prime minister on November 9, Trump said \"Iran militarily is effectively over\" and kept the naval blockade and a new task force to cut Iran's trade by land. On Thursday he wrote that \"we don't need a deal with Iran\",…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-14-recap",
+   "id": "story-gaza-and-sudan",
+   "lead": "Gaza and Sudan",
+   "sec": "Region and World",
+   "text": "An Israeli strike on the surgery building of Nasser Hospital in Khan Younis killed at least six people on November 12, including a surgeon and a 13-year-old boy, and a baby died of cold in a tent the same day. More than 50 countries and…",
+   "topics": [
+    "gaza-lebanon"
+   ]
+  },
+  {
+   "ed": "2026-11-14-recap",
+   "id": "story-gas-rationing-and-the-spending-squeeze",
+   "lead": "Gas rationing and the spending squeeze",
+   "sec": "Egypt This Week",
+   "text": "Mopco told the bourse on November 8 that its gas supply had been cut by 33%, up from 20% at the start of the month, and Ezz Steel, Suez Steel and Beshay were notified of 30% cuts. The Petroleum Ministry budgeted about $10.1 billion for LNG…",
+   "topics": [
+    "gas-fertilizer"
+   ],
+   "added": [
+    "gas-fertilizer"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-14-recap",
+   "id": "story-debt-land-and-pay",
+   "lead": "Debt, land and pay",
+   "sec": "Egypt This Week",
+   "text": "A presidential decree lets the Finance Ministry use 26,690 feddans of Red Sea land to cut public debt rather than only to back sukuk, as the government aims to bring debt to about 69.5% of GDP by 2030. The Cabinet approved a pay rise for…",
+   "topics": [
+    "imf"
+   ],
+   "added": [
+    "imf"
+   ],
+   "removed": []
+  },
   {
    "ed": "2026-11-13",
    "id": "story-what-it-means-for-egypt",

@@ -1,6 +1,12 @@
 {
   "editions": [
     {
+      "date": "2026-11-14",
+      "id": "2026-11-14-recap",
+      "label": "Weekly Recap",
+      "summary": "Salah's record, a deadly train crash, deeper gas cuts, a firmer pound and Nvidia's founder forced out: the week of November 8 to 14."
+    },
+    {
       "date": "2026-11-13",
       "summary": "Gulf of Suez wind farms clinch financing; Egypt sets a dollar power price for AI data centers; Nvidia's Jensen Huang resigns."
     },

@@ -1,0 +1,638 @@
+{
+ "date": "2026-11-14",
+ "no": 3,
+ "crossword": {
+  "size": 11,
+  "grid": [
+   "RIP#WIT#BID",
+   "ANIMATE#ACE",
+   "INCENSE#SON",
+   "DENT###YEN#",
+   "SRI#FLEE###",
+   "##CLIENTS##",
+   "###AGED#CUT",
+   "#NOD###ZONE",
+   "RAP#ASPIRIN",
+   "ONE#CARPETS",
+   "TON#TWO#SEE"
+  ],
+  "clues": {
+   "across": [
+    {
+     "n": 1,
+     "row": 0,
+     "col": 0,
+     "len": 3,
+     "answer": "RIP",
+     "clue": "Tear, or a hasty epitaph"
+    },
+    {
+     "n": 4,
+     "row": 0,
+     "col": 4,
+     "len": 3,
+     "answer": "WIT",
+     "clue": "Quickness that makes a good one-liner"
+    },
+    {
+     "n": 7,
+     "row": 0,
+     "col": 8,
+     "len": 3,
+     "answer": "BID",
+     "clue": "Offer at an auction"
+    },
+    {
+     "n": 10,
+     "row": 1,
+     "col": 0,
+     "len": 7,
+     "answer": "ANIMATE",
+     "clue": "Bring a cartoon to life"
+    },
+    {
+     "n": 12,
+     "row": 1,
+     "col": 8,
+     "len": 3,
+     "answer": "ACE",
+     "clue": "Unreturned serve"
+    },
+    {
+     "n": 13,
+     "row": 2,
+     "col": 0,
+     "len": 7,
+     "answer": "INCENSE",
+     "clue": "Enrage, or something burned in a temple"
+    },
+    {
+     "n": 14,
+     "row": 2,
+     "col": 8,
+     "len": 3,
+     "answer": "SON",
+     "clue": "Heir, often"
+    },
+    {
+     "n": 15,
+     "row": 3,
+     "col": 0,
+     "len": 4,
+     "answer": "DENT",
+     "clue": "Mark left by a fender-bender"
+    },
+    {
+     "n": 16,
+     "row": 3,
+     "col": 7,
+     "len": 3,
+     "answer": "YEN",
+     "clue": "Craving, or currency of Tokyo"
+    },
+    {
+     "n": 17,
+     "row": 4,
+     "col": 0,
+     "len": 3,
+     "answer": "SRI",
+     "clue": "___ Lanka, island nation off India"
+    },
+    {
+     "n": 18,
+     "row": 4,
+     "col": 4,
+     "len": 4,
+     "answer": "FLEE",
+     "clue": "Run for it"
+    },
+    {
+     "n": 21,
+     "row": 5,
+     "col": 2,
+     "len": 7,
+     "answer": "CLIENTS",
+     "clue": "A lawyer's customers"
+    },
+    {
+     "n": 24,
+     "row": 6,
+     "col": 3,
+     "len": 4,
+     "answer": "AGED",
+     "clue": "Matured, like a fine cheese"
+    },
+    {
+     "n": 25,
+     "row": 6,
+     "col": 8,
+     "len": 3,
+     "answer": "CUT",
+     "clue": "What a central bank does to rates when easing"
+    },
+    {
+     "n": 28,
+     "row": 7,
+     "col": 1,
+     "len": 3,
+     "answer": "NOD",
+     "clue": "Silent yes"
+    },
+    {
+     "n": 30,
+     "row": 7,
+     "col": 7,
+     "len": 4,
+     "answer": "ZONE",
+     "clue": "Area set apart, such as a free one for factories"
+    },
+    {
+     "n": 31,
+     "row": 8,
+     "col": 0,
+     "len": 3,
+     "answer": "RAP",
+     "clue": "Knock sharply, or a musical genre"
+    },
+    {
+     "n": 32,
+     "row": 8,
+     "col": 4,
+     "len": 7,
+     "answer": "ASPIRIN",
+     "clue": "Common painkiller from willow bark"
+    },
+    {
+     "n": 35,
+     "row": 9,
+     "col": 0,
+     "len": 3,
+     "answer": "ONE",
+     "clue": "Single unit, or a solo count"
+    },
+    {
+     "n": 36,
+     "row": 9,
+     "col": 4,
+     "len": 7,
+     "answer": "CARPETS",
+     "clue": "Floor coverings sold in Khan el-Khalili"
+    },
+    {
+     "n": 37,
+     "row": 10,
+     "col": 0,
+     "len": 3,
+     "answer": "TON",
+     "clue": "Thousand kilograms"
+    },
+    {
+     "n": 38,
+     "row": 10,
+     "col": 4,
+     "len": 3,
+     "answer": "TWO",
+     "clue": "Company, in a proverb"
+    },
+    {
+     "n": 39,
+     "row": 10,
+     "col": 8,
+     "len": 3,
+     "answer": "SEE",
+     "clue": "Understand, or a bishop's seat"
+    }
+   ],
+   "down": [
+    {
+     "n": 1,
+     "row": 0,
+     "col": 0,
+     "len": 5,
+     "answer": "RAIDS",
+     "clue": "Surprise attacks"
+    },
+    {
+     "n": 2,
+     "row": 0,
+     "col": 1,
+     "len": 5,
+     "answer": "INNER",
+     "clue": "Kind of circle that keeps secrets"
+    },
+    {
+     "n": 3,
+     "row": 0,
+     "col": 2,
+     "len": 6,
+     "answer": "PICNIC",
+     "clue": "Meal on a blanket in the park"
+    },
+    {
+     "n": 4,
+     "row": 0,
+     "col": 4,
+     "len": 3,
+     "answer": "WAN",
+     "clue": "Pale and tired-looking"
+    },
+    {
+     "n": 5,
+     "row": 0,
+     "col": 5,
+     "len": 3,
+     "answer": "ITS",
+     "clue": "Belonging to it"
+    },
+    {
+     "n": 6,
+     "row": 0,
+     "col": 6,
+     "len": 3,
+     "answer": "TEE",
+     "clue": "Golfer's peg"
+    },
+    {
+     "n": 7,
+     "row": 0,
+     "col": 8,
+     "len": 4,
+     "answer": "BASE",
+     "clue": "Military site, like the US one Iran said it hit in Bahrain this week"
+    },
+    {
+     "n": 8,
+     "row": 0,
+     "col": 9,
+     "len": 4,
+     "answer": "ICON",
+     "clue": "Desktop symbol, or a revered figure"
+    },
+    {
+     "n": 9,
+     "row": 0,
+     "col": 10,
+     "len": 3,
+     "answer": "DEN",
+     "clue": "Lion's home"
+    },
+    {
+     "n": 11,
+     "row": 1,
+     "col": 3,
+     "len": 3,
+     "answer": "MET",
+     "clue": "Encountered, or New York's opera house"
+    },
+    {
+     "n": 16,
+     "row": 3,
+     "col": 7,
+     "len": 3,
+     "answer": "YET",
+     "clue": "So far"
+    },
+    {
+     "n": 18,
+     "row": 4,
+     "col": 4,
+     "len": 3,
+     "answer": "FIG",
+     "clue": "Sweet fruit dried for winter"
+    },
+    {
+     "n": 19,
+     "row": 4,
+     "col": 5,
+     "len": 3,
+     "answer": "LEE",
+     "clue": "Sheltered side of a ship"
+    },
+    {
+     "n": 20,
+     "row": 4,
+     "col": 6,
+     "len": 3,
+     "answer": "END",
+     "clue": "Finish"
+    },
+    {
+     "n": 22,
+     "row": 5,
+     "col": 3,
+     "len": 3,
+     "answer": "LAD",
+     "clue": "Young fellow"
+    },
+    {
+     "n": 23,
+     "row": 5,
+     "col": 8,
+     "len": 6,
+     "answer": "SCORES",
+     "clue": "Egypt's captain did this twice against Malawi on Friday to set a national record"
+    },
+    {
+     "n": 26,
+     "row": 6,
+     "col": 9,
+     "len": 5,
+     "answer": "UNITE",
+     "clue": "Join together"
+    },
+    {
+     "n": 27,
+     "row": 6,
+     "col": 10,
+     "len": 5,
+     "answer": "TENSE",
+     "clue": "Past, present or future, in grammar"
+    },
+    {
+     "n": 28,
+     "row": 7,
+     "col": 1,
+     "len": 4,
+     "answer": "NANO",
+     "clue": "Prefix for a billionth"
+    },
+    {
+     "n": 29,
+     "row": 7,
+     "col": 2,
+     "len": 4,
+     "answer": "OPEN",
+     "clue": "Not shut"
+    },
+    {
+     "n": 30,
+     "row": 7,
+     "col": 7,
+     "len": 3,
+     "answer": "ZIP",
+     "clue": "Fastener on a jacket"
+    },
+    {
+     "n": 31,
+     "row": 8,
+     "col": 0,
+     "len": 3,
+     "answer": "ROT",
+     "clue": "Decay"
+    },
+    {
+     "n": 32,
+     "row": 8,
+     "col": 4,
+     "len": 3,
+     "answer": "ACT",
+     "clue": "Part of a play"
+    },
+    {
+     "n": 33,
+     "row": 8,
+     "col": 5,
+     "len": 3,
+     "answer": "SAW",
+     "clue": "Old proverb, or a carpenter's tool"
+    },
+    {
+     "n": 34,
+     "row": 8,
+     "col": 6,
+     "len": 3,
+     "answer": "PRO",
+     "clue": "Paid player, not an amateur"
+    }
+   ]
+  },
+  "news": []
+ },
+ "killer": {
+  "level": 6,
+  "solution": "517249638396581247842736915973425186254168379681397452425673891739812564168954723",
+  "cages": [
+   {
+    "sum": 22,
+    "cells": [
+     51,
+     58,
+     59,
+     60
+    ]
+   },
+   {
+    "sum": 21,
+    "cells": [
+     21,
+     22,
+     23,
+     30,
+     39
+    ]
+   },
+   {
+    "sum": 30,
+    "cells": [
+     9,
+     10,
+     11,
+     18,
+     19
+    ]
+   },
+   {
+    "sum": 10,
+    "cells": [
+     46,
+     55
+    ]
+   },
+   {
+    "sum": 22,
+    "cells": [
+     6,
+     14,
+     15,
+     16,
+     24
+    ]
+   },
+   {
+    "sum": 20,
+    "cells": [
+     56,
+     57,
+     66,
+     67
+    ]
+   },
+   {
+    "sum": 22,
+    "cells": [
+     27,
+     36,
+     37,
+     45
+    ]
+   },
+   {
+    "sum": 14,
+    "cells": [
+     31,
+     32,
+     33,
+     40
+    ]
+   },
+   {
+    "sum": 6,
+    "cells": [
+     0,
+     1
+    ]
+   },
+   {
+    "sum": 24,
+    "cells": [
+     69,
+     70,
+     71,
+     78,
+     79
+    ]
+   },
+   {
+    "sum": 18,
+    "cells": [
+     41,
+     42,
+     50
+    ]
+   },
+   {
+    "sum": 24,
+    "cells": [
+     54,
+     63,
+     64,
+     65,
+     72
+    ]
+   },
+   {
+    "sum": 28,
+    "cells": [
+     73,
+     74,
+     75,
+     76
+    ]
+   },
+   {
+    "sum": 12,
+    "cells": [
+     53,
+     61,
+     62
+    ]
+   },
+   {
+    "sum": 28,
+    "cells": [
+     3,
+     4,
+     5,
+     12,
+     13
+    ]
+   },
+   {
+    "sum": 6,
+    "cells": [
+     68,
+     77
+    ]
+   },
+   {
+    "sum": 3,
+    "cells": [
+     80
+    ]
+   },
+   {
+    "sum": 15,
+    "cells": [
+     28,
+     29,
+     38,
+     47
+    ]
+   },
+   {
+    "sum": 12,
+    "cells": [
+     48,
+     49
+    ]
+   },
+   {
+    "sum": 8,
+    "cells": [
+     34
+    ]
+   },
+   {
+    "sum": 7,
+    "cells": [
+     2
+    ]
+   },
+   {
+    "sum": 2,
+    "cells": [
+     20
+    ]
+   },
+   {
+    "sum": 5,
+    "cells": [
+     26
+    ]
+   },
+   {
+    "sum": 18,
+    "cells": [
+     7,
+     8,
+     17
+    ]
+   },
+   {
+    "sum": 1,
+    "cells": [
+     25
+    ]
+   },
+   {
+    "sum": 9,
+    "cells": [
+     44
+    ]
+   },
+   {
+    "sum": 6,
+    "cells": [
+     35
+    ]
+   },
+   {
+    "sum": 12,
+    "cells": [
+     43,
+     52
+    ]
+   }
+  ]
+ }
+}
