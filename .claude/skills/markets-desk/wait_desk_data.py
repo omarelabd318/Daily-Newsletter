@@ -5,7 +5,7 @@ Usage (from the repo root, at the start of the desk run):
   python3 .claude/skills/markets-desk/wait_desk_data.py DATE [MINUTES]
 
 Checks origin/main every 30 seconds for up to MINUTES (default 9, inside one command's time limit) for:
-1. editions/DATE.md (the newsletter, whose figures the desk starts from), and
+1. editions/DATE.md or, on a Saturday, editions/DATE-recap.md (the edition whose figures the desk starts from), and
 2. desk/run-steps.json dated DATE from GitHub Actions (.github/workflows/desk-data.yml runs run_data.py as soon as
    the edition is pushed, about 10 to 15 minutes, and commits the data files and desk/brief.md).
 Then it pulls and prints one line saying which arrived:
@@ -27,7 +27,8 @@ def sh(*a):
 
 def state(date):
     sh("git", "fetch", "-q", "origin", "main")
-    ed = sh("git", "cat-file", "-e", f"origin/main:editions/{date}.md").returncode == 0
+    # the day's edition: DATE.md, or on a Saturday the Weekly Recap, DATE-recap.md
+    ed = any(sh("git", "cat-file", "-e", f"origin/main:editions/{date}{x}.md").returncode == 0 for x in ("", "-recap"))
     try:
         S = json.loads(sh("git", "show", "origin/main:desk/run-steps.json").stdout or "{}")
     except ValueError:
@@ -50,7 +51,7 @@ def main(a):
             break
         time.sleep(30)
     if ed or data:
-        r = sh("git", "pull", "-q", "--rebase", "origin", "main")
+        r = sh("git", "pull", "-q", "--rebase", "--autostash", "origin", "main")
         if r.returncode:
             print("git pull failed: " + r.stderr.strip()[:300])
     waited = round((time.time() - t0) / 60, 1)
@@ -60,7 +61,7 @@ def main(a):
               + (f"; rerun the steps that failed there: run_data.py {' '.join(bad)}" if bad else "; every step ran.") )
     elif ed:
         # the workflow starts when the edition is pushed and takes 10 to 15 minutes
-        pushed = sh("git", "log", "-1", "--format=%ct", "origin/main", "--", f"editions/{date}.md").stdout.strip()
+        pushed = sh("git", "log", "-1", "--format=%ct", "origin/main", "--", f"editions/{date}.md", f"editions/{date}-recap.md").stdout.strip()
         age = (time.time() - int(pushed)) / 60 if pushed else 99
         if age < 25:
             print(f"WAITING: the edition is in (pushed {age:.0f} min ago); GitHub Actions' desk data is not yet. Run this again.")
