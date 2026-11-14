@@ -205,7 +205,7 @@ td{font-family:var(--sans);font-size:17px} th{font-family:var(--sans)}
 .chg span{font-size:.8em}
 .spark{display:block;overflow:visible;margin:0 auto}
 th.trend,td.trend{width:1%;white-space:nowrap;text-align:center}
-th.num{text-align:center}
+th.num{text-align:right}   /* a figures heading sits over the right edge of its figures, as in a printed table */
 td.num{text-align:right;font-variant-numeric:tabular-nums}
 td.num.na{text-align:center}
 .pbar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:4px 0 12px}
@@ -1032,8 +1032,10 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
       // paper mode: the "ears" beside the name (the weather, the EGX30's close) and a boxed markets panel in the rail
       [].slice.call(document.querySelectorAll('.p-ear')).forEach(function(x){ x.remove(); });
       var mast = document.querySelector('.mast'), ex = fig('egx30');
+      // the sky in a few words for the ear: its first clause, cut at a whole word (never "mostly cle")
+      function skyShort(t){ t = String(t || '').split(/[,;.]/)[0].trim().toLowerCase(); if(t.length > 24){ var w = t.split(/\s+/), o = ''; for(var i = 0; i < w.length && (o + ' ' + w[i]).trim().length <= 24; i++) o = (o + ' ' + w[i]).trim(); t = (o || w[0]).replace(/\s+(and|with|or|of|a|the)$/, ''); } return t.charAt(0).toUpperCase() + t.slice(1); }
       function ear(side, lab, big, sub){ var d = document.createElement('div'); d.className = 'p-ear ' + side; d.innerHTML = lab + '<b>' + big + '</b>' + sub; mast.appendChild(d); }
-      if(tm) ear('l', 'Cairo weather', (tm[2] || tm[1]) + '\u00b0 \u00b7 ' + esc(ds.charAt(0).toUpperCase() + ds.slice(1).toLowerCase().slice(0, 18)), 'Today');
+      if(tm) ear('l', 'Cairo weather', (tm[2] || tm[1]) + '\u00b0 \u00b7 ' + esc(skyShort(ds)), 'Today');
       if(ex) ear('r', 'EGX30 close', n0(ex.now), ex.chg == null ? '' : (ex.chg >= 0 ? 'Up ' : 'Down ') + Math.abs(ex.chg).toFixed(2) + '%');
       var mb = document.getElementById('f-mbox');
       if(mb && ex){
