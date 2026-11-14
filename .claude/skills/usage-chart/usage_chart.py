@@ -63,9 +63,10 @@ def main():
             (dv, dlo, dhi), (nv, nlo, nhi) = proj[k]
             ax.bar(i - w/2, dv, w, color=BLUE, alpha=0.45, hatch="/", edgecolor="white", linewidth=0)
             ax.bar(i + w/2, nv, w, color=RED, alpha=0.45, hatch="/", edgecolor="white", linewidth=0)
-            for x, v, lo, hi in ((i - w/2, dv, dlo, dhi), (i + w/2, nv, nlo, nhi)):
+            ev = earlier.get(k, [0, 0])
+            for x, v, lo, hi, e in ((i - w/2, dv, dlo, dhi, ev[0]), (i + w/2, nv, nlo, nhi, ev[1])):
                 ax.errorbar(x, v, yerr=[[v - lo], [hi - v]], color="#444", capsize=8, lw=1.6)
-                ax.text(x, hi + 0.25, f"~${v:.2f}", ha="center", va="bottom", fontsize=13, color="#333")
+                ax.text(x, max(hi, e + 0.4) + 0.25, f"~${v:.2f}", ha="center", va="bottom", fontsize=13, color="#333")
             ymax = max(ymax, dhi, nhi)
             lbl = f"~{(dv + nv)/per:.1f}%"
         else:
