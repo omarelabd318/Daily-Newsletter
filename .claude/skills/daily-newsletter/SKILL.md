@@ -8,6 +8,16 @@ description: >-
 
 # Daily Newsletter house rules
 
+**How the run works (read first): batch, and research in side sessions.** Every step of a run pays again for
+everything already open, so (1) put independent actions in one step: four to six searches at once, several pages per
+`articles.py` call, several queries or URLs per research_log.py call, a whole section per Write or Edit; and (2) after
+choosing the day's stories, do the research in five side sessions (sub-agents, started together in one step) that
+read the pages, confirm the figures at a second outlet and return short notes, and write the edition from the notes.
+`refs/research-agents.md` has the blocks, the prompt to give each one and the notes format: read it before
+researching. The research itself is unchanged: the same searches, outlets and checks, and the main run still chooses
+the stories, writes every word and opens any page a note leaves unclear. The task prompt's instructions to read
+EnterpriseAM and CairoScene are met by the Egypt side session, which reads them in full.
+
 These rules add to the task prompt that asks for the edition. Where the prompt sets voice, sources,
 section order or publishing steps, follow the prompt. This file sets how much space each section gets,
 where each story goes, and the check to run before committing.

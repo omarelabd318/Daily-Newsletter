@@ -74,3 +74,10 @@ Stocks Watch do not.
 - Every item opens with a bold lead-in, as in the daily edition. Never refer to the daily editions
   themselves ("as reported on Tuesday"): write about the events and their dates.
 
+## Side sessions on Saturday
+
+The recap uses the same side sessions and batching as a daily edition (`refs/research-agents.md`), with these
+blocks: (1) Since Friday (what is new since Friday's edition, every section); (2) the week in Egypt (news and
+markets, from the week's editions and data/topics.json, and where each story stands now); (3) the week in the region
+and the world; (4) the week's markets, the coming week's calendar and In Other News. Saturday's figures, puzzles and
+check_log.py stay in the main run.

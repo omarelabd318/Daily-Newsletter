@@ -50,6 +50,9 @@ def main():
         how = "12-month profit as filed"
     eps = o.ttm / o.shares
     bvps = o.equity / o.shares if o.equity else None
+    import fcntl   # the desk's stock side session and the run may write desk/stocks.json at once
+    lock = open(STOCKS + ".lock", "w")
+    fcntl.flock(lock, fcntl.LOCK_EX)
     data = json.load(open(STOCKS))
     t = o.ticker.upper()
     if t not in data["stocks"]:

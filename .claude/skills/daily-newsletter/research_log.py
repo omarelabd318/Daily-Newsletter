@@ -69,11 +69,22 @@ def record_check(date, name, errors, warnings, **extra):
         pass
 
 
+def locked(date):
+    """An exclusive lock on the day's log while it is read and rewritten: the run's side sessions (research
+    sub-agents) log at the same time, and none may overwrite another's entries."""
+    import fcntl
+    os.makedirs(DIR, exist_ok=True)
+    f = open(path(date) + ".lock", "w")
+    fcntl.flock(f, fcntl.LOCK_EX)
+    return f
+
+
 def main(a):
     if len(a) < 3 or a[1] not in TARGETS:
         sys.exit(__doc__)
     date, name, cmd, rest = a[0], a[1], a[2], a[3:]
     datetime.date.fromisoformat(date)
+    lock = locked(date)
     log = load(date)
     p = part(log, name)
     if cmd == "search":

@@ -11,6 +11,12 @@ These are the rules agreed so far; add to them as the desk is finished.
 
 ## Daily run
 
+**Batch, and research in side sessions.** As in the newsletter: several searches, page reads, log lines and file
+reads per step, and a whole section per Write or Edit. Once the brief is read, start the two side sessions in
+`refs/research-agents.md` together in one step (Stocks: results to record and the per-stock research, writing
+desk/stocks.json; Markets and macro: notes only), and write the desk from their notes. Read that file before the
+research starts.
+
 The desk has its own scheduled run, about 45 minutes after the newsletter's, so a desk problem never holds up
 the edition and the desk gets a full session to itself. Start from the day's research: pull the repo and read
 today's edition (`editions/DATE.md`) in full, its figures already checked and logged; if it is not there yet,

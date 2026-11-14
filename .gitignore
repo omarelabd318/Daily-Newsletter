@@ -5,3 +5,4 @@ data/audio/*.wav
 voice-samples/
 editions/brief.md
 editions/articles.md
+*.lock
