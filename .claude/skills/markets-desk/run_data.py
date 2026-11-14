@@ -254,6 +254,10 @@ def main():
                 continue
             r = run(name, cmd, limit)
             r["where"] = where
+            # on GitHub Actions a source the session reaches (Polygon through its key, Yahoo) can refuse: a step that
+            # came back partial counts as failed there, so the desk run reruns it in the session
+            if where == "GitHub Actions" and r["ok"] and re.search(r"refused|filled nothing|nothing fetched from Polygon|missing (?:BRK|dow|sp500|[A-Z]{2,5}\b)", r["out"]) and name in ("intraday", "valuation", "calendar"):
+                r["ok"], r["out"] = False, r["out"] + "\nPARTIAL on GitHub Actions (a source refused it there): rerun this step in the session."
             results.append(r)
             print(f"{name}: {'ok' if r['ok'] else 'FAILED'} ({r['secs']}s)", flush=True)
     # merge with today's earlier results (GitHub Actions runs every step before the desk run; the run reruns only a
