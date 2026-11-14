@@ -24,14 +24,20 @@ meanwhile copies the template to desk/days/DATE.json and starts on the close car
 2. **Markets and macro** (on the run's own model: leave `model` out): the day's Egyptian macro and policy stories (the pound, rates, inflation, reserves,
    gas, Suez), the US session and data, central banks, and a second source for every figure the desk's stories
    will use that the edition does not already carry (FactIQ where it holds it, as the skill's FactIQ paragraph
-   describes). Returns notes only; it writes no repo file except through research_log.py.
+   describes). It starts from the newsletter's saved side-session notes, `editions/notes/DATE-*.md` (on a
+   Saturday `DATE-recap-*.md`, and Friday's for the Egypt section): their facts are already checked at two
+   outlets, with sources, so it does not search for or check them again. It researches only what the notes do not
+   hold or what has moved since they were written (the desk's own angle, flows, movers' reasons, news since the
+   edition). Where no notes exist for the day, it researches in full as before. Returns notes only; it writes no
+   repo file except through research_log.py.
 
 ## The prompt for each side session
 
 > You are researching part of today's Markets Desk (DATE, Cairo) in the repo at REPO. Read
 > .claude/skills/markets-desk/SKILL.md's sections BLOCK-SECTIONS and the newsletter skill's rules on checking
 > figures and sources before starting. Your block: BLOCK. Start from desk/brief.md and editions/DATE.md (or
-> DATE-recap.md on a Saturday). Confirm every figure at a second, independent outlet (two pages with the same
+> DATE-recap.md on a Saturday), and for the macro block from the saved notes in editions/notes/ (do not re-check
+> what they already checked). Confirm every figure at a second, independent outlet (two pages with the same
 > wording are one source). Batch your work: several searches per step, several pages per
 > `articles.py --log DATE desk URL ...` call. Log every search, page and stock line with
 > `python3 .claude/skills/daily-newsletter/research_log.py DATE desk search|page|stock ...` (several per call).

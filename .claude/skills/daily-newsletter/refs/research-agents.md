@@ -22,22 +22,30 @@ Every step re-sends everything open, so put independent actions in one step:
 
 After reading editions/brief.md, editions/articles.md and the figures (fetch_figures.py), choose the day's stories,
 then start these side sessions **all in one step** (several Task calls in one response, so they run at once). Each
-gets the prompt below with its own block filled in. They log their own searches and pages with research_log.py
+gets the prompt below with its own block and NAME filled in (NAME in brackets after each block). They log their own searches and pages with research_log.py
 (the log is locked, so they can log at the same time), so do not log their work again.
 
-1. **Egypt:** run `read_enterprise.py` and fetch https://cairoscene.com; the Egypt News stories chosen and other
+1. **Egypt** (`egypt`): run `read_enterprise.py` and fetch https://cairoscene.com; the Egypt News stories chosen and other
    Egyptian candidates; Egypt Markets (EGX movers, central bank, corporate news). Also return EnterpriseAM items
    useful to any other section, marked by section.
-2. **Region and world:** Regional and Gulf, and Top World Headlines.
-3. **Global markets and calendar:** Global Markets (what moved and why, bonds, crypto), the day's data releases
+2. **Region and world** (`world`): Regional and Gulf, and Top World Headlines.
+3. **Global markets and calendar** (`markets`): Global Markets (what moved and why, bonds, crypto), the day's data releases
    and central banks, the Economic Calendar (holidays, closures, results and IPO dates, data, fixtures). Use FactIQ
    where it holds the figure, as the skill's FactIQ paragraph describes.
-4. **In Other News:** Tech and AI, Sports (Egyptian football first; results and fixtures with dates and Cairo
+4. **In Other News** (`other`): Tech and AI, Sports (Egyptian football first; results and fixtures with dates and Cairo
    times), Health and Science, Entertainment and Culture.
-5. **Checks** (start this one with `model: "sonnet"`: it compares figures between sources and writes no prose that
+5. **Checks** (`checks`; start this one with `model: "sonnet"`: it compares figures between sources and writes no prose that
    is published): every figure in the Stocks Watch and Currency and Commodities Watch tables that fetch_figures.py
    could not confirm or flagged, plus the corrections check (yesterday's key figures against what is now known).
-   Sessions 1 to 4 run on the run's own model (leave `model` out): their notes shape the stories.
+   Start sessions 2 and 4 with `model: "sonnet"` too: their stories rarely lead the edition, and the main run
+   writes every word from their notes. Sessions 1 and 3 (Egypt, and global markets and the calendar) run on the
+   run's own model (leave `model` out): their notes shape the lead stories and the Markets section.
+
+### Saved notes, for the desk
+
+Each side session also writes the notes it returns, word for word, to `editions/notes/DATE-NAME.md` (the
+Weekly Recap's: `editions/notes/DATE-recap-NAME.md`). The edition's commit takes them with editions/. The Markets
+Desk starts from them rather than researching the same stories again, so they carry every source and check.
 
 Quick Hits, Weather (weather.py), Worth Knowing and the puzzles stay in the main run.
 
@@ -50,7 +58,8 @@ Quick Hits, Weather (weather.py), Worth Knowing and the puzzles stay in the main
 > confirm every figure at a second, independent outlet (two pages with the same wording are one source).
 > Batch your work: several searches per step, several pages per articles.py call. Log every search and every page
 > you open with `python3 .claude/skills/daily-newsletter/research_log.py DATE newsletter search|page ...`
-> (several per call). Do not write or edit any file in the repo except through research_log.py.
+> (several per call). Do not write or edit any file in the repo except through research_log.py, and one notes
+> file: when done, write the notes you return, exactly, to editions/notes/DATE-NAME.md.
 > Return notes only, in this format, about 120 words a story at most:
 > `### Headline in plain words` then bullets: each fact with its figure, the basis of the figure (consolidated
 > or standalone, quarter or nine months, nominal or real, year on year or month on month) and its date;

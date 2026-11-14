@@ -10,8 +10,12 @@ Stocks Watch do not.
 - **File:** `editions/DATE-recap.md`, where DATE is the Saturday. In `editions/index.json` add
   `{"date": "DATE", "id": "DATE-recap", "label": "Weekly Recap", "summary": "..."}` and keep every other
   entry. There is no regular edition for a Saturday from November 14, 2026.
-- **Research:** start from that week's editions in `editions/` (Sunday to Saturday, including any second
-  edition of a day), then search for how each big story developed and ended up. Report where things stand
+- **Research:** start from that week's editions, read in one short digest:
+  `python3 .claude/skills/daily-newsletter/week_digest.py DATE` (Sunday to Friday, second editions included: each
+  edition's Today at a Glance and every story's lead-in and first sentence, where each running topic stands now,
+  and the side-session notes saved this week). Open an edition in full only for a story you need in full or its
+  links; the side sessions read the editions and the saved notes (`editions/notes/`) in full for their own blocks.
+  Then search for how each big story developed and ended up. Report where things stand
   now, not what was said on each day. Check every figure as usual.
 - **Length:** about 2,050 to 2,400 words, a 9 to 10 minute read. A guide, not a limit.
 - **First line:** an italic sentence with the week's dates and what it was about, for example
@@ -80,7 +84,9 @@ The recap uses the same side sessions and batching as a daily edition (`refs/res
 blocks: (1) Since Friday (what is new since Friday's edition, every section); (2) the week in Egypt (news and
 markets, from the week's editions and data/topics.json, and where each story stands now); (3) the week in the region
 and the world; (4) the week's markets, the coming week's calendar and In Other News. Saturday's figures, puzzles and
-check_log.py stay in the main run.
+check_log.py stay in the main run. Their NAMEs for the saved notes: since-friday, egypt, world, markets. Blocks 2 to
+4 start from the week's saved notes in `editions/notes/` (the daily side sessions' checked facts and sources) and
+search for how each story developed since, rather than researching each day's stories again.
 
 Start blocks 3 and 4 with `model: "sonnet"`: they mostly follow up stories the week's editions already covered and
 confirm where each stands and its figures, and they write no published prose. Blocks 1 and 2 (what is new since
