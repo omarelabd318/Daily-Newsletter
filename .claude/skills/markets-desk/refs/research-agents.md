@@ -8,15 +8,20 @@ After wait_desk_data.py reports READY (or run_data.py has run) and you have read
 start these two side sessions **in one step** (two Task calls in one response, so they run at once). The main run
 meanwhile copies the template to desk/days/DATE.json and starts on the close cards and the figures it already has.
 
-1. **Stocks** (it owns desk/stocks.json until it returns: do not edit that file meanwhile):
-   - "Results to record" in the brief: for each stock listed, read the filing (or two outlets that agree), write
-     `lastResults` as the skill's "Results days" section describes, run set_results.py for Egyptian stocks and
-     fetch_valuation.py TICKER, and correct desk/calendar.json.
+1. **Stocks** (start it with `model: "sonnet"`: it gathers and checks, and writes no published text; the main run
+   writes every published word, the `news` items and `lastResults` included, and makes every call on a stock):
+   - "Results to record" in the brief: for each stock listed, read the filing (or two outlets that agree) and
+     return its figures (profit attributable to shareholders, the period, the year-earlier figure, shares, equity,
+     one-offs) with the source; run set_results.py for Egyptian stocks and fetch_valuation.py TICKER with those
+     figures (numbers only), and correct desk/calendar.json's dates.
    - Stock research for every stock with leads in the brief, as "Stock research, every day" describes: judge each
      lead from its excerpt, open the page where the excerpt is not enough, check what moves a stock at a second
-     outlet, add the items to the stock's `news` in desk/stocks.json, and log one stock line each with
-     `research_log.py DATE desk stock TICKER "..."`. Every desk stock that moved 3% or more gets a line.
-2. **Markets and macro:** the day's Egyptian macro and policy stories (the pound, rates, inflation, reserves,
+     outlet, and log one stock line each with `research_log.py DATE desk stock TICKER "..."`. Every desk stock that
+     moved 3% or more gets a line. Return each news item as a note (date, what happened, outlet and URL, second
+     source), not written into desk/stocks.json.
+   The main run then writes the `news` items and `lastResults` into desk/stocks.json from the notes, all in one
+   edit or one short script, not stock by stock.
+2. **Markets and macro** (on the run's own model: leave `model` out): the day's Egyptian macro and policy stories (the pound, rates, inflation, reserves,
    gas, Suez), the US session and data, central banks, and a second source for every figure the desk's stories
    will use that the edition does not already carry (FactIQ where it holds it, as the skill's FactIQ paragraph
    describes). Returns notes only; it writes no repo file except through research_log.py.
@@ -36,8 +41,8 @@ meanwhile copies the template to desk/days/DATE.json and starts on the close car
 > one line on what it means for the stock, sector or market; `Open:` anything unclear. End with one line per
 > item done to the files (results recorded, news added) and anything left undone and why.
 
-For the stocks session FILES-YOU-MAY-WRITE is "You may write desk/stocks.json (news, lastResults), desk/calendar.json
-and, through set_results.py and fetch_valuation.py, the valuation entries; nothing else". For the macro session it
+For the stocks session FILES-YOU-MAY-WRITE is "You may run set_results.py and fetch_valuation.py (numbers only) and
+correct dates in desk/calendar.json; write nothing else: return news items and results as notes". For the macro session it
 is "Do not write any repo file except through research_log.py".
 
 Write the desk from the notes and the brief. Open a page yourself only for an "Open:" point that matters to a story.

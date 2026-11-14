@@ -34,8 +34,10 @@ gets the prompt below with its own block filled in. They log their own searches 
    where it holds the figure, as the skill's FactIQ paragraph describes.
 4. **In Other News:** Tech and AI, Sports (Egyptian football first; results and fixtures with dates and Cairo
    times), Health and Science, Entertainment and Culture.
-5. **Checks:** every figure in the Stocks Watch and Currency and Commodities Watch tables that fetch_figures.py
+5. **Checks** (start this one with `model: "sonnet"`: it compares figures between sources and writes no prose that
+   is published): every figure in the Stocks Watch and Currency and Commodities Watch tables that fetch_figures.py
    could not confirm or flagged, plus the corrections check (yesterday's key figures against what is now known).
+   Sessions 1 to 4 run on the run's own model (leave `model` out): their notes shape the stories.
 
 Quick Hits, Weather (weather.py), Worth Knowing and the puzzles stay in the main run.
 

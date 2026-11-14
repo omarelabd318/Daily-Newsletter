@@ -275,78 +275,10 @@ was not made. End the final reply with the line `research_log.py DATE newsletter
 
 ## Attribution in the text
 
-- **Name the outlet** whenever a claim is attributed: "according to Reuters", "Ahram Online reported",
-  "per Bloomberg". A search result that summarises a story is not the source; credit the outlet behind it.
-- **General credits** such as "according to news bulletins" or "market reports suggest" are fine when the
-  point rests on more than one outlet. Never use them to stand in for a single source. The checker flags
-  them only as a reminder to make sure several outlets back the point.
-- **Attribute only where it adds something:** an exclusive, a disputed or unconfirmed claim, a forecast or
-  an estimate, or a figure that differs between sources. Well-established facts need no credit in the text;
-  the Sources list covers them.
-- **Usually one credit per item:** if a point rests on several outlets, credit the main one, or use a
-  general credit such as "according to news bulletins", and let the Sources list carry the rest. About
-  10 to 20 credits in an edition reads naturally. The checker blocks publishing above 25 credits, when
-  more than half the stories in a section carry a credit, or when one outlet is credited in more than half
-  of a section's stories; it warns at 3 or more credits in one item.
-- **EnterpriseAM and CairoScene are trusted, not the backbone:** treat both as very good, credible sources with
-  strong stories, and use them freely, but check their stories against other outlets where they carry them too,
-  and keep the two together under a third of the edition's sourced items (the checker warns above that). Never
-  leave out a good story from either to balance the count: add strong stories from other outlets instead. Write
-  in your own words so the edition never reads like a rewrite of either. Each story is still judged on its own
-  merit and placed in the section where it belongs.
-- **Spread the wire and world sources:** no other single outlet should carry more than about six of the
-  edition's Sources links (EnterpriseAM and CairoScene fall under the one-third rule above instead). World and regional stories come from many outlets (Reuters, AP,
-  AFP, BBC, the Financial Times, Bloomberg, The National, Asharq Al-Awsat, Al-Monitor, Al Jazeera and others):
-  keep every story that deserves its place, but take it from the outlet with the fullest report, or the one
-  closest to the news, rather than defaulting to one site, and check it against a second. Al Jazeera is a
-  credible source for the region, but its own editorial line on Gulf and regional politics is one more reason
-  to pair it with another outlet. The checker warns when one outlet passes six links.
-- **Reuters via Yahoo Finance:** Yahoo Finance (finance.yahoo.com, and yahoo.com/news) republishes Reuters wire
-  stories in full and free to read, marked "Reuters" at the top. It is Reuters' own reporting, word for word, so it
-  is as reliable as Reuters itself: one of the most dependable sources there is for markets, economies, companies
-  and world news. Use it freely, above all when reuters.com asks for a login or will not open. Credit Reuters in the
-  text ("according to Reuters") and in Sources write `Reuters (via Yahoo Finance)` with the Yahoo link. It counts as
-  Reuters, not Yahoo, for the six-links rule. The same goes for other wire stories Yahoo carries (AP, AFP): credit
-  the agency. Yahoo's own articles and its contributor or partner pieces (Motley Fool, Zacks, Investopedia and the
-  like) are not wire reporting: treat those as the outlet that wrote them. Summary services such as Finimize, which
-  rewrite Reuters or Bloomberg stories, are leads only: find and cite the original.
-- **FactIQ (connector, when the run has it, the mcp__factiq__ tools):** a read-only service of official statistics
-  and filings. Use it where it holds the figure: Suez Canal, Bab el-Mandeb and Hormuz shipping (daily transits and
-  cargo tonnage from IMF PortWatch, two to three weeks behind) for Suez, Red Sea and Iran-war stories; US data
-  (payrolls, CPI, GDP from BLS and BEA, Treasury yields) and what Fed, ECB, Bank of England and other central bankers
-  said, with quotes, for Global Markets; Brent, gold and FX as a second source for the currency table; company
-  filings and earnings calls for a big company story; the IMF's forecasts for Egypt (yearly, marked as projections).
-  It has no Egyptian news, EGX prices, monthly Egyptian figures or Central Bank of Egypt statements, and its
-  dollar-pound rate is a market rate, not the central bank's: those stay with the usual sources. Credit the
-  underlying source (IMF PortWatch, the BLS, the company's filing) with the link FactIQ returns, never FactIQ itself;
-  log each lookup as a page (`research_log.py DATE newsletter page factiq:<what>`); without the connector, carry on.
-- **Variety by adding, not dropping:** go through the whole EnterpriseAM edition (on weekdays) and
-  CairoScene, and consider every item. Variety comes from adding strong stories from other outlets
-  alongside them, never from leaving out a good EnterpriseAM or CairoScene story to balance the count.
-- **Read EnterpriseAM with its script, not a web fetch:** on weekdays run
-  `python3 .claude/skills/daily-newsletter/read_enterprise.py`. It prints the whole AM edition: every story
-  in full with its own link, the smaller items inside each story (under their own subheadings), Today at a
-  glance and the calendar. A web fetch only returns a summary, which can drop items and has no story
-  links. Use a web fetch of https://enterpriseam.com/egypt/am-edition/ only if the script fails.
-- **How research runs:** EnterpriseAM (on weekdays) and CairoScene are read in full on every run, as a
-  core part of research, alongside many searches across many other outlets: Egyptian, regional and
-  international. Neither comes first and neither is a fallback. Pick the day's stories from everything
-  together, on merit, so the wider research shapes the edition as much as those two do.
-- **Link each story's own page** in Sources, one link per story, for EnterpriseAM and CairoScene as for
-  everyone else (for example `https://enterpriseam.com/egypt/2026/10/25/...`), not the homepage or the
-  edition page. `enterpriseam.com/egypt/am-edition/` always shows the latest edition, so it points to the
-  wrong day later. For items that appear only in the edition or on the homepage, use one line for that
-  page and say how many items it was used for, for example
-  `[EnterpriseAM Egypt, AM edition, 29 October 2026 (used for 3 items)](https://enterpriseam.com/egypt/am-edition/)`.
-- **Dependence check:** the checker warns when EnterpriseAM and CairoScene make up more than a third of
-  the links in Sources. The answer is wider research for more strong stories, never cutting a good one.
-- **Merit, not origin:** the same bar applies the other way. Include an EnterpriseAM or CairoScene story
-  because it is worth a reader's time, not because of where it came from; skip their minor items as you
-  would anyone's. Each section should draw on a range of outlets, and the edition should never read like
-  a summary of those two.
-- **Credit every outlet the same way:** keep crediting EnterpriseAM and CairoScene whenever a point comes
-  from them and the credit fits; they are trusted, daily sources. The aim is that other outlets are
-  named just as readily when a point comes from them, not that these two are named less.
+When you write the sources into the text and the Sources list, read `refs/attribution.md` first (once, at that point,
+not before). In short: credit the outlet that reported a fact the first time it matters, never more than the
+checker allows; EnterpriseAM and CairoScene are trusted sources among several, not the backbone of a section;
+paraphrase, never copy; every story's links go in Sources.
 
 ## Start from the brief
 
@@ -419,62 +351,7 @@ them with Egyptian football first, then other football, then other sports.
 
 ## Stocks Watch tables
 
-`## Stocks Watch` comes right after Markets and before Currency and Commodities Watch. It has two parts,
-`### Egypt` first, then `### USA`. Each part is one table and nothing else: no paragraphs and no bullet
-points. Under each heading, put one italic line saying which close the table shows, for example
-`*EGX close, Tuesday 27 October*` or `*US close, Tuesday 27 October*`. If the run happens while the EGX is
-trading, say so and give the time, for example `*EGX intraday, 11:49 Cairo*`.
-
-The site adds a 1D / 1W / 1M / 6M / 1Y switch above each table: 1D shows the Change you write, the
-other periods are worked out from the data log, and the trend line redraws over the same period.
-
-Columns: `| Stock (ticker) | Close | Change | YTD |`, with the price in EGP or USD and the change as a
-percentage with a sign, for example `+1.2%`. The site colours signed changes green or red with an arrow,
-and bolds moves of 5% or more, so always write the sign. Take Change from the source. Take YTD (change
-since the last close of the previous year) from the data log: log the day's figures first (see "Log the
-day's figures"), then run `python3 .claude/skills/daily-newsletter/market_facts.py DATE --ytd`. Write
-`n/a` for YTD when it prints n/a, and for notable movers that are not in the log.
-
-List these every day, in this order:
-
-| Egypt (EGX) | USA |
-|---|---|
-| Commercial International Bank (COMI) | Apple (AAPL) |
-| Talaat Moustafa Group (TMGH) | Microsoft (MSFT) |
-| Telecom Egypt (ETEL) | Nvidia (NVDA) |
-| Palm Hills Developments (PHDC) | Amazon (AMZN) |
-| Elsewedy Electric (SWDY) | Alphabet (GOOGL) |
-| Orascom Construction (ORAS) | Meta (META) |
-| Fawry (FWRY) | Tesla (TSLA) |
-| Abu Qir Fertilizers (ABUK) | JPMorgan Chase (JPM) |
-| EFG Holding (HRHO) | Exxon Mobil (XOM) |
-| Cleopatra Hospital (CLHO) | Broadcom (AVGO) |
-| Juhayna Food Industries (JUFO) | Berkshire Hathaway (BRK.B) |
-| Alexandria Containers (ALCN) | Walmart (WMT) |
-
-After the fixed rows, add up to three rows for other stocks with a notable move or notable news that
-day, marked in italics, for example `| *Misr Cement Qena (MCQE), notable mover* | 167.85 | +8.5% | n/a |`.
-Leave them out when nothing stands out. Every mover row shows its close, like the fixed rows: get it by
-adding the tickers to the fetch command, for example
-`python3 .claude/skills/daily-newsletter/fetch_figures.py DATE egx.MCQE us.ORCL`, which also gives YTD for
-US stocks (write `n/a` for YTD when it has none). Movers are not logged.
-
-On weekends the EGX is closed Friday and Saturday and US markets Saturday and Sunday. Show the last
-session's close with its date. On EGX holidays, listed in `data/holidays.json`, do the same and say why in
-the italic line, for example `*EGX closed today for Sham el-Nessim; last close Sunday 2 May*`, and log
-the figures as usual (the last close again). The checker warns when a listed closure is not mentioned. If a price cannot be confirmed, write `n/a` rather than guessing.
-
-The checker compares every Stocks Watch row with the data log: the close with what was logged for the
-date, and the change with the move from the previous logged close (from the previous close to the live
-price for an intraday table). A warning there means one of the two figures is wrong: recheck both at the
-source and fix the table or re-run log_figures.py before publishing.
-
-It also compares each logged close with the stock's last trade in the desk's intraday prices for that session. A
-gap over 0.5% on the EGX or 1% in the US is an error that blocks publishing, unless the stock's own quote at its
-source (Mubasher, Nasdaq) gives the logged figure as its close, which the checker looks up itself (an EGX close can
-sit off the last trade, since the exchange sets it from the session's final trades). If it still errors, open the
-quote: fix the log if it is wrong, or, where the close is right but the source would not answer the checker, record
-it with `python3 .claude/skills/daily-newsletter/research_log.py DATE newsletter close TICKER PRICE "Mubasher"`.
+Read `refs/tables.md` when you build the Stocks Watch tables (the fixed lists, columns, formats and extra rows).
 
 ## Egyptian holidays
 
@@ -486,32 +363,7 @@ announces dates, update the file (dates, any day moved to a Thursday or Sunday, 
 
 ## Currency and Commodities Watch table
 
-Use four columns: `| Item | Level | Note | YTD |`.
-
-- **Italic line first:** under the heading, one italic line saying which rates the table shows, for example
-  `*USD/EGP is the central bank's rate; other currencies are market mid-rates.*` Then do not repeat
-  "Market mid-rate" in the Notes.
-- **Notes:** about 6 words, so rows stay on one line. Use them for one short point ("highest since
-  March", "fourth rise running", "central bank rate"), or leave a Note empty when there is nothing to add.
-  Do not repeat the day's change: the site adds a Change column to this table by itself, worked out from
-  the data log, with a 1D / 1W / 1M / 6M / 1Y switch. That is one more reason to log every figure daily.
-- **YTD:** the change since the last close of the previous year, from
-  `python3 .claude/skills/daily-newsletter/market_facts.py DATE --ytd` after logging, with a sign
-  (`+17.8%`). Write `n/a` when the figure is not in the log that day, and `—` for central bank rates,
-  certificates and T-bills, which have no YTD.
-
-Right after the USD/EGP row, add `| US dollar index (DXY) | 102.19 | ... | +4.0% |`: the dollar against six major
-currencies, with the day's change in the Note, so readers can tell whether a move in the pound is the
-dollar strengthening everywhere or something specific to Egypt. Say which in the Note when it is clear,
-for example `+0.4%; dollar firmer worldwide` or `-0.3%; pound's fall is local`.
-
-The site draws a trend line beside every row whose figure is in the data log: USD, EUR, SAR, AED, KWD,
-QAR and GBP against the pound, the dollar index, 21K, 24K and 18K gold, the gold pound, global gold and
-Brent. Log all of these every day so the lines stay up to date. Rates, certificates and T-bills change
-too rarely for a line and get none.
-
-Mark a figure the sources disagree on with `(unconfirmed)` right after it, in any table. The site shows
-it as a small * that says "Unconfirmed" on hover, so it takes no extra space.
+Read `refs/tables.md` when you build the table (rows, notes, YTD column and formats).
 
 ## Weekly Recap (Saturdays)
 
@@ -633,67 +485,12 @@ file for the archive, search and audio. The Saturday recap has no front page.
 
 ## The lead image (paper mode)
 
-The site has three looks: light, dark and paper (a printed front page). In paper mode the lead story carries an
-image above it. Give each daily edition one when a suitable image exists; go without when it does not.
-
-- **Only images the newsletter has the right to publish.** A credit is not a license: never use a photo from a news
-  outlet, an agency (Reuters, AP, AFP, Getty) or a social post. Use `lead_image.py search "name or place"`, which lists
-  openly licensed photos (CC BY, CC BY-SA, CC0, public domain) from Openverse, many of them from the photo services
-  of governments and international bodies. The search times out at times: try twice, then go without.
-- **It must show what the caption says.** Pick a photo of the person or place the lead story is about, check its
-  title and source page, and write the caption from what the source says it shows: who, where and, when it is not
-  from the event itself, that it is earlier ("on an earlier visit", "in 2025"). Open the credit with "File photo:"
-  then. Never imply a photo shows the day's event when it does not, and never use a look-alike or a generic scene
-  as if it were the place.
-- **Attach it** with `lead_image.py use DATE IMAGE_URL --caption ... --alt ... --credit ... --source PAGE_URL
-  --license "CC BY 2.0"`. It saves `editions/img/DATE.jpg` and records the caption, credit, license and source on
-  the edition in `editions/index.json`; commit both with the edition. `lead_image.py remove DATE` takes it off.
-- **No photo:** leave the edition without one. Do not substitute a chart yet.
-- Not for stories about deaths, accidents or crimes unless the photo is of the place or an official involved, and
-  never a picture of victims.
+Read `refs/lead-image.md` at the step where you choose the lead image (licenses, captions, `lead_image.py`).
 
 ## Puzzles (every edition)
 
-Each edition (on Saturdays, the recap) has a crossword and a killer sudoku, played at `/puzzles/` and shown as a Puzzles row on the paper-mode
-front page. `puzzles.py` builds both; the run only writes the clues. Keep it cheap: one `make`, one clues file.
-
-1. `python3 .claude/skills/daily-newsletter/puzzles.py make YYYY-MM-DD --news WORD,WORD` with the edition's date and
-   up to three plain words from the day's stories (NILE, GAZA, TRAIN: never a person's name). It takes a few seconds
-   (about a minute on Saturdays, the larger 11 by 11 grid) and prints the grid and the answers needing clues. The
-   killer sudoku gets harder through the week (Sunday easy, Saturday hardest) and is checked to have one solution.
-2. Read the answers. If one is a name, an abbreviation or an obscure word, run `make` again with
-   `--avoid WORD` (the same `--news`), and add lasting ones to `AVOID` in the script. Do not run `make` again after
-   writing clues unless you mean to: a changed grid needs new clues.
-3. Write the clues to a JSON file `{"ANSWER": "clue", ...}` and run `puzzles.py clues YYYY-MM-DD FILE`. Most clues
-   are general knowledge or wordplay a solver must think about (not dictionary definitions only, and never giving
-   the answer away in its own words); one to three point at the day's news (`"It ran again on the Cairo-High Dam
-   line this week"`). Every fact in a news clue must be in the edition. A clue may not contain its answer.
-4. `puzzles.py check YYYY-MM-DD` must pass (every answer clued, cages joined and summing right). Commit
-   `data/puzzles/YYYY-MM-DD.json` with the edition.
+Read `refs/puzzles.md` at the puzzles step (`puzzles.py make`, clues, check), every edition.
 
 ## Check before committing
 
-Run the checker on the new edition from the repo root:
-
-```
-python3 .claude/skills/daily-newsletter/check_edition.py editions/YYYY-MM-DD.md
-```
-
-It reports:
-
-- **Errors** (exit code 1): missing or misordered section titles, missing Markets, Stocks Watch or In Other News parts,
-  a top-level `#` title, HTML, a first line that is not an italic intro, a Today at a Glance item with no
-  link or a link to an anchor that does not exist, a missing What to watch today line, or an
-  `editions/index.json` that does not parse or has no entry for the date. Fix all of these before committing.
-- **Figures and links** (also errors or warnings): each currency-table level and each EGX30, S&P 500, Nasdaq, Dow,
-  Brent and Bitcoin level written in the text is compared with the data log for the date; a mismatch is a warning
-  to fix the text or the log. Every Sources link is opened: a dead page (not found) is an error, to be replaced with
-  a working link to the same story; links a site refuses to check are only counted. `--no-links` skips the link
-  check when offline.
-- **Warnings:** first-person words or names outside quotes, sections far outside their word budget, and
-  bold lead-ins that look like the same story in two sections. Read each one and fix the real problems;
-  some are false alarms (a quoted "we", "US" as a country). A word-count warning is information only:
-  never cut a worthwhile story to clear it.
-
-If a story is flagged as appearing twice, keep it in the section the rules above give it and remove it
-from the other.
+Read `refs/check.md` before running check_edition.py (what it checks, which warnings to fix, which are information).

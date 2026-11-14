@@ -408,8 +408,8 @@ if __name__ == "__main__":
                 warnings.append(f"Fair value {x['t']}: {x['action']} Check the company's disclosure; if the per-share figures are pre-issue, put adjusted ones in the judgement block or leave it marked low confidence.")
     except Exception:
         pass
-    for w in warnings:
-        print("WARNING:", w)
+    from us_english import report
+    report([], warnings, "--all" in sys.argv)   # errors were printed above
     if not errors and not warnings:
         print("Desk OK")
     if globals().get("CHECKED"):   # the result, for the Runs page

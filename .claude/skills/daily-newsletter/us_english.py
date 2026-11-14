@@ -39,3 +39,18 @@ def find(text):
     for m in DATE.finditer(text):
         out.append((m.group(0), f"{m.group(2)} {m.group(1)}"))
     return out
+
+
+def report(errors, warnings, full=False):
+    """Print a checker's findings compactly (shared by check_edition.py and check_desk.py): every error in full;
+    warnings grouped by their opening words, the first two of a group in full and the rest cut to their first
+    100 characters, which name the item (a ticker, a link, a section). The run keeps this output open to the end,
+    so it is kept short. --all prints everything in full."""
+    for e in errors:
+        print("ERROR:", e)
+    groups = {}
+    for w in warnings:
+        groups.setdefault(w.split(":")[0][:40], []).append(w)
+    for k, ws in groups.items():
+        for i, w in enumerate(ws):
+            print("WARNING:", w if full or i < 2 or len(w) <= 110 else w[:100] + " …")

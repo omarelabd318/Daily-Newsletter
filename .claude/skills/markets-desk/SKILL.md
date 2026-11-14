@@ -19,7 +19,10 @@ research starts.
 
 The desk has its own scheduled run, about 45 minutes after the newsletter's, so a desk problem never holds up
 the edition and the desk gets a full session to itself. Start from the day's research: pull the repo and read
-today's edition (`editions/DATE.md`) in full, its figures already checked and logged; if it is not there yet,
+the parts of today's edition the desk uses with `python3 .claude/skills/markets-desk/edition_for_desk.py DATE` (in
+full: Today at a Glance, both Markets parts, Stocks Watch, the currency table and the calendar; the first sentence of
+each Egypt, region, world and tech story; on a Saturday the whole recap), its figures already checked and logged.
+Open `editions/DATE.md` itself only for a story you need in full or its links; if it is not there yet,
 check again every few minutes for up to half an hour, then research the markets yourself. Add your own searches
 for anything the desk needs beyond the edition (the stock research below, flows, movers' reasons). Do not write
 or change the newsletter, and do not log figures the edition already logged. On days with no session (Friday and Saturday for the EGX, Saturday and Sunday for the US) the
@@ -121,40 +124,8 @@ What each page shows and where it lives is in `refs/pages.md`. A daily run write
 
 ## Files
 
-- `desk/days/DATE.json`: one day's desk in two sections, `egypt` and `global` (shown as "USA"),
-  each with its own finding, close figures, top call, board, note under Stocks, week ahead and open views.
-  `desk/days/2026-10-30.json` is the reference for its shape. `"sample": true` marks sample content.
-- `desk/days/DATE.json` also holds `pages`: `egx` (finding, session, news, outlook), `egp` (finding, rates,
-  drivers, news, view), `us` (finding, rates, afterBell, news, outlook) and `global` (finding, notes, news).
-- Each section's `calls` holds the dashboard's stories, three to five (fewer only on a day with no more), the top call
-  first. Each has `headline`, `body`, `view`, `affects` (tags, below), `wrong`, `confidence`, and from the second on a
-  `line`: one sentence on why it matters, shown on its "Also today" card.
-- `desk/index.json`: `{"desks": [{"date": "DATE", "summary": "..."}]}`; every page opens the newest.
-- `desk/stocks.json`: one entry per stock for its page: sector, valuation (written by fetch_valuation.py: source, date, results
-  period and basis), the
-  latest session's trading, dates coming up, views and news. News and views are added newest first and
-  never deleted. Valuation figures older than about a quarter are flagged on the page, not hidden.
-- `desk/flows.json`: net equity flows by investor group, one entry per session, for the flow history. Each entry
-  has `links`, `[{"source": "Youm7", "url": "https://..."}]`, the article for every report the figures came from
-  (the EGX's own site blocks scripts, so the figures come from the outlets that carry its daily report); the EGX page
-  shows them as links under the card, and check_desk.py fails an entry without them. `confirmed` is true once two
-  reports agree. When only totals by nationality are reported, use the rows Egyptian, Arab and Foreign investors. A session dominated by a one-off deal (an IPO or block sale) gets `"oneoff": "<the deal>"`, so the foreign-investors chart leaves it out and names it.
-- `desk/rolls.json`: futures contract switches (Brent's front month rolls each month). When fetch_figures.py
-  prints "CONTRACT SWITCH?", add an entry (session = the first close on the new contract, from, to); the Global
-  page's Brent chart marks the switch.
-- `desk/reserves.json`: net international reserves by what they are held in, one entry per month, oldest
-  first; the EGP page shows the latest month, split by what the reserves are held in.
-- Stock pages read each stock's volume (`vol`) from the data log and compare the last session with the
-  average of the 30 before it; the EGP page reads the central bank's dollar rate, policy rates, the one-year T-bill
-  yield and inflation from the log. The day's file only adds what the log does not hold. The EGX page's session
-  card reads turnover from the log (`egx_turnover`), advancers and decliners from desk/movers.json (which also
-  holds the session's most active stocks and the EGX30 heatmap, `egx.heat`, from TradingView), and, until
-  turnover has about 60 sessions logged, compares the EGX30 companies' shares traded (`egx30_vol`) with its 90-day
-  average. Its "Blue chips against small and mid caps" table comes from the movers file (TradingView's EGX30 and
-  EGX70 EWI); Give `session.breadth` in the day's
-  file only when the exchange's official count is reported (it takes precedence over Mubasher's count).
-- The charts, the Stocks tables and every change and YTD figure are drawn by the page from
-  `data/markets-recent.json`, so log the day's figures before publishing a desk.
+What each file under desk/ holds and who writes it: `refs/files.md` (read it when you need to change a file you have
+not changed before).
 
 ## What it is
 
@@ -278,88 +249,16 @@ link to the story's own page. Take them from the newsletter's research and from 
 
 ## Results days
 
-From mid-October to late November, and again each quarter, the desk's stocks report. Two steps, both kept in
-`desk/stocks.json` and shown on the stock's page (Coming up) and, on the day, in the dashboards' Since yesterday:
-
-- **Before (up to three days ahead):** follow the earnings-preview skill's Steps 1, 2 and 4 to write `"preview"`:
-  `{"date", "period", "consensus", "watch": [...], "source", "url", "written"}`. `consensus` is one sentence with the
-  published estimates and where they come from ("Analysts expect EPS of $1.25 on revenue of $35bn, LSEG"); leave it
-  out when none is published, as for most Egyptian companies, rather than guessing. `watch` is the three to five
-  things that will decide the reaction, ranked, one line each in figures (for a bank: net interest margin, loan
-  growth, provisions; for a fertilizer maker: volumes after the gas cuts, urea prices). Skip the skill's
-  scenario table and options-implied move unless a source publishes them. check_desk.py warns when a stock reports
-  within three days without one.
-- **Read the filing, not only the report of it.** For an Egyptian company: the earnings release or financial
-  statements on its investor-relations page, or the disclosure the EGX publishes (Mubasher's news page for the stock
-  links it). For a US company: the earnings release (8-K) and the 10-Q, through FactIQ's search_company_filings when
-  the run has it, else the company's investor page. Take from it what outlets leave out: profit attributable to
-  shareholders, one-off items (currency gains, provision releases, revaluations, asset sales), the share count, the
-  segment figures and the guidance in the company's words. A one-off that moved profit by 10% or more goes in the
-  headline and, for an Egyptian stock, into `eps_norm` in desk/fairvalue.json with the reason. If the filing cannot
-  be opened, add `"basis": "outlet reports; the filing was not read"` to `lastResults`.
-- **After (the day they come out):** follow the earnings-analysis skill's method, not its format (no 8-12 page
-  report, no charts): lead with the verdict, quantify the gap, say why, and say what it means for the desk's view.
-  Write `"lastResults"`: `{"date", "period", "verdict" (beat, miss, in line or mixed), "headline" (one line in
-  figures), "points": [two to four lines: the numbers against the estimate or last year, the guidance], "thesis"
-  (one sentence: what it changes for the desk's view or projection on the stock), "source", "url"}`. With no
-  published estimate, judge against last year's quarter and the preview's watch list, and say so in the headline.
-  For an Egyptian stock, also record the figures with set_results.py (step 7). Then add the news to any open view on
-  the stock, and change its confidence if the results move the case (Views: the record).
-- **Every desk stock that reported, not only the day's lead.** The brief's "Results to record" (results_due.py)
-  lists every desk stock with results out in the last ten days and not yet recorded, with the SEC's figures (US) or
-  the first outlets' pages already read (Egypt), and the Egyptian stocks whose `lastResults` is written but whose
-  set_results.py is not run. Work from that list rather than checking all 39 by hand; for each one whose latest
-  results are not yet in `lastResults` (reported since the last run,
-  or left undone by an earlier one, such as Elsewedy, e-finance, Emaar Misr and Eastern on November 12, 2026): write `lastResults`, run set_results.py (Egyptian
-  stocks) so its fair value uses the new figures, and remove or correct its entry in desk/calendar.json. A results
-  season can bring five in a day; give each two lines if time is short, but leave none on old figures. The run's
-  summary names any left undone and why.
+The stocks side session reads `refs/results.md` and does this work (previews, reading the filing, `lastResults`,
+set_results.py for every desk stock that reported, from the brief's "Results to record" list). Read it yourself
+only when you do that work in the main run.
 
 ## Stock research, every day
 
-Log the desk's research as you go with `research_log.py DATE desk search|page ...`, and one line per stock with
-`research_log.py DATE desk stock TICKER "what was found"` (or "no news"). A full desk takes at least 15 searches and
-8 pages you opened yourself beyond the edition, on top of the pages the scripts read for you (stock_news.py --read,
-results_due.py, logged by them as "read by scripts"; usually 15 or more). Two leads marked "same wording" are one
-release, one source; an excerpt ending "Figures on the page: standalone; consolidated ..." gives more than one
-basis, so say which one each figure is; every desk stock that moved 3% or more on the session, or has a lead in stock_news.py,
-needs its leads read (the brief's excerpts count) and a stock line logged (the checker names any mover without one). Never log work not done.
-End the final reply with the line `research_log.py DATE desk summary` prints.
-
-Each of the desk's stocks gets its own search every morning, on top of the newsletter's research:
-
-1. Read the news leads in `desk/brief.md` (run_data.py runs `stock_news.py --read`, three days on Sundays): each
-   stock's headlines from the last two days, in English and, for the Egyptian stocks, Arabic, and under the four
-   newest the page's own opening and figures (`>` lines), already read and logged. A lead marked "never names the
-   company" is skipped; one marked "did not load" is opened by hand if it matters. Write from the excerpt where it
-   is enough, and open the page only for what it leaves out or a figure to confirm at a second outlet; to read
-   several, pass them at once to `python3 .claude/skills/daily-newsletter/articles.py --log DATE desk URL ...`.
-2. Judge every lead that is about the company, its stock or something that clearly affects it: results,
-   disclosures to the exchange, deals and contracts, financing, dividends and capital changes, analysts'
-   ratings and fair values, management changes, regulation, and prices of what it sells or buys. Skip
-   market wraps, sponsorships, sports clubs that share a name, and fund-holding filings.
-3. Check the facts at the outlet, and against a second outlet for anything that moves the stock.
-4. Add each item to that stock in `desk/stocks.json` (`news`, newest first: date, text, source, url) and,
-   when it matters to the market, to the page's News card with its ticker.
-5. Let it change the analysis: news can move a stock onto or off the Bullish and bearish lists, change a
-   projection or its confidence, or add a date to Coming up (results dates, general assemblies).
-
-6. **Calendar:** run `python3 .claude/skills/markets-desk/fetch_calendar.py` (results dates and dividends for
-   every desk stock, shown on the EGX and Wall Street pages). When a company announces its own results or
-   assembly date, add it to that stock's `next` with `"date": "YYYY-MM-DD"` (an undated note carries
-   `"added": "YYYY-MM-DD"` instead, and names dates, never "Thursday's"; check_desk.py flags notes that have passed or
-   sat undated for ten days; the stock page adds the calendar's own dates beside them): the page then lists it as the desk's
-   confirmed date in place of TradingView's estimate. For the US stocks it also takes the dividends their boards
-   have declared and any stock splits from Polygon, refreshed once a week (about three minutes that day; the
-   other days reuse the saved copy). After a split, check_desk.py warns until the data log's earlier prices are
-   divided by the split's factor; do that the same day, or every chart shows a fake fall.
-7. **Results:** when an Egyptian desk stock publishes results, record them the same day with
-   `set_results.py TICKER --period QUARTER-END --ytd ... --prior-fy ... --prior-ytd ... --shares ... --equity ...
-   --source ... --url ...` (profit attributable to shareholders, from the filing or two outlets that agree), then
-   run `fetch_valuation.py TICKER`. The P/E then reflects the new quarter at once, instead of weeks later when
-   TradingView or Mubasher catch up. Add the results date to Coming up when a company announces it.
-
-No news is a valid result: never pad a stock with filler. Its page then shows its figures and older news.
+The stocks side session reads `refs/stock-research.md` and does this work (judging each lead from its excerpt, a
+second outlet for what moves a stock, `news` in desk/stocks.json, one research-log line per stock, the calendar).
+The research floor still holds for the whole run: at least 15 searches and 8 pages opened beyond the edition (10 and
+5 on a Saturday), side sessions included; every desk stock that moved 3% or more or has a lead gets a stock line.
 
 ## The desk's note on a stock
 
@@ -461,45 +360,8 @@ Every day:
 The dashboard's views card shows the day's views, including any judged that day, and links to the full record.
 ## Fair value
 
-`/desk/fairvalue/` (in Egypt's menu; `?m=us` in the United States menu) ranks stocks by how far they trade below or above the desk's own fair value, with four
-grades each. `desk/fairvalue.json` holds it; `fetch_fairvalue.py` rebuilds the figures every morning and keeps the
-`judgement` block, which only the run writes. The script's docstring is the exact method; the reasoning:
-
-- **It is a ranking inside the EGX, not a verdict on the market.** At Egyptian rates an absolute model (discounting at
-  the T-bill yield plus a premium) calls nearly every stock dear, because the market prices rates to fall. So the
-  discount rate is solved for, not assumed: the rate at which the median stock is fairly priced on its assets. The
-  page states the market-level reading separately (the median earnings yield against the after-tax T-bill yield).
-- **Three estimates, because each fails differently.** Earnings (EPS times a peer P/E, tilted up to 25% for return on
-  equity and profit growth) fails on one-off profits; assets (book value times the P/B its ROE justifies) fails on
-  asset-light companies, so it is skipped above 6 times book; analysts fail when targets are stale, so an undated
-  consensus far from everything else is dropped. Fair value is their weighted average (40, 30, 30) and needs two.
-- **Banks are measured against banks** (their own discount rate and P/E): they always look cheap against industry.
-- **Confidence is the spread between the estimates**, not a feeling. The two lists show medium and high only.
-
-**Wall Street** (the tab's second market, `us` in the file): US common stocks worth $50bn or more, the same method
-with three changes: long-run growth 6%, weights of earnings 30, assets 20 and analysts 50 (reported US earnings carry
-more one-offs, and targets come from many analysts), and no earnings estimate when the P/E is outside 4 to 60. Its
-judgement block is `judgementUS`, same fields. Notes are only needed for the desk's 18 US stocks.
-
-What the run adds, in `judgement[TICKER]` (the script never touches it):
-- `brokers`: a fair value or target found in the day's stock research and checked at the outlet:
-  `{"firm", "value", "kind": "fair" or "target", "date", "url"}`. A target is brought back one year; entries count
-  for 180 days. Add every one the research finds: this is the estimate that most needs the desk's own work.
-- `eps_norm` with `eps_reason`: replace 12-month EPS when it misleads (a one-off gain or loss, a currency windfall, a
-  commodity peak, new shares on the way). Use a figure from the filing or a broker, never a guess, and say which.
-- `exclude`: a reason a stock cannot be rated on these terms at all (profit that is mostly revaluation, a merger that
-  will change every per-share figure). It is then listed under Not rated with that reason.
-- `note` and `noted`: the desk's line on the stock: the catch behind a cheap price or what a dear one is paying for.
-  One or two sentences in figures. Write or refresh it for the ten cheapest and ten dearest and for every desk stock;
-  review it when the company reports, when its confidence changes, or when it is more than a month old.
-
-Each week (Sunday) read the whole table for figures that cannot be right (a P/E under 3, upside above 80%): the
-cause is usually a bonus issue the source has not caught up with, parent-only earnings, or a stale target; fix it with
-`eps_norm` or `exclude` and say why. When results come out for a desk stock, rerun the script after set_results.py.
-The open view `2026-11-11-value-basket` scores the model (cheapest five desk stocks against the dearest five, to
-February 11, 2027); when it is judged, open the next one from the table as it then stands, and if the model loses
-twice running, rework the weights before opening a third. Never present a fair value as a forecast or advice: write
-"the desk's fair value", and keep the page's line that a model and a judgement can both be wrong.
+Read `refs/fairvalue.md` when the fair values need judgement: the Sunday review, a stock flagged by the checker or
+fetch_fairvalue.py, or a one-off in results (`eps_norm`). fetch_fairvalue.py refreshes the figures every day by itself.
 
 ## Figures
 

@@ -455,6 +455,7 @@ def main(path):
     # Listen: the recorded voice, made by GitHub Actions after the push (publish.yml); only an older edition without
     # it is worth a warning (today's is recorded after this check)
     ekey = os.path.basename(path)[:-3]
+    import datetime
     cairo_today = (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=2)).date().isoformat()
     if m and ekey[:10] < cairo_today and not os.path.exists(os.path.join(ROOT, "data", "audio", ekey + ".json")):
         warnings.append(f"Listen: no data/audio/{ekey}.json: GitHub Actions did not record it. Run the \"Audio and "
@@ -681,10 +682,8 @@ def main(path):
     except (OSError, ValueError, KeyError, TypeError) as e:
         errors.append(f"editions/index.json is not valid: {e}")
 
-    for e in errors:
-        print("ERROR:", e)
-    for w in warnings:
-        print("WARNING:", w)
+    from us_english import report
+    report(errors, warnings, "--all" in sys.argv)
     print(f"{len(errors)} error(s), {len(warnings)} warning(s). Words without Sources: {total}.")
     try:   # the result, for the Runs page
         import research_log
