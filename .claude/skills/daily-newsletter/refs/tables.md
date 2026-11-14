@@ -1,5 +1,8 @@
 # Stocks Watch tables
 
+`tables.py DATE [movers]` (see the skill) builds both tables below from the data log, ready to paste. This file
+holds the rules it follows, for a case it does not cover or a row in doubt.
+
 `## Stocks Watch` comes right after Markets and before Currency and Commodities Watch. It has two parts,
 `### Egypt` first, then `### USA`. Each part is one table and nothing else: no paragraphs and no bullet
 points. Under each heading, put one italic line saying which close the table shows, for example

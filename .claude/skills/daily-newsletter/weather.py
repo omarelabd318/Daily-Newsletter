@@ -7,6 +7,10 @@ Usage:
 Prints today and the next DAYS-1 days (default 4): high and low in °C, the sky, the chance of rain and the wind,
 from Open-Meteo or, when it refuses (it has a shared daily limit), Norway's MET service, and from wttr.in. Write the
 section from these numbers, not from a search result; where the two differ by more than 2°C, give a range or say so.
+
+It ends with a DRAFT of the section's two paragraphs (Cairo today, Coming days) in the edition's format, with ranges
+where the services differ. Use it as written or adjust the wording; add anything else (a sandstorm or heat warning
+from the Egyptian Meteorological Authority) from research.
 """
 import datetime
 import json
@@ -63,6 +67,62 @@ def wttr(n):
              "rain": max(int(h.get("chanceofrain", 0)) for h in d["hourly"]), "wind": max(int(h["windspeedKmph"]) for h in d["hourly"])} for d in j["weather"][:n]]
 
 
+def span(vals):
+    lo, hi = min(vals), max(vals)
+    return f"{lo}°C" if lo == hi else f"{lo}-{hi}°C"
+
+
+def sky_of(xs, today=False):
+    """The day's sky in a few words; when the services disagree between sun and cloud, say it is mixed."""
+    skies = [{"sunny": "clear", "fog": "clear"}.get(x["sky"], x["sky"]) for x in xs if x.get("sky") and x["sky"] != "—"]
+    if not skies:
+        return "dry"
+    sunny = sum(s in ("clear", "mostly clear") for s in skies)
+    if 0 < sunny < len(skies) and sunny * 3 < len(skies) * 2 and not any("rain" in s or "shower" in s or "thunder" in s for s in skies):
+        return "a mix of sun and cloud" if today else "mixed sun and cloud"
+    s = max(sorted(set(skies)), key=skies.count)
+    return {"clear": "sunny", "mostly clear": "mostly sunny"}.get(s, s) if today else s
+
+
+def wind_of(xs):
+    w = max(x["wind"] for x in xs)
+    return "light winds" if w < 15 else ("moderate winds" if w < 25 else f"breezy, with winds up to {w} km/h")
+
+
+def rain_of(xs):
+    r = max((x["rain"] or 0) for x in xs)
+    return f", with a {r}% chance of rain" if r >= 30 else ""
+
+
+def draft(got, dates):
+    """The section's two paragraphs, from both services' figures."""
+    def day(d):
+        return [g[d] for _, g in got if d in g]
+    t = day(dates[0])
+    print("\nDRAFT (check the wording; add any official warning from research):\n")
+    sky = sky_of(t, today=True)
+    print(f"**Cairo today:** {sky[0].upper() + sky[1:]}, with a high of {span([x['high'] for x in t])} and an overnight low of "
+          f"{span([x['low'] for x in t])}{rain_of(t)}. {wind_of(t)[0].upper() + wind_of(t)[1:]}"
+          + (", with morning fog possible" if any(x.get("sky") == "fog" for x in t) else "") + ".\n")
+    rest = [d for d in dates[1:] if day(d)]
+    if not rest:
+        return
+    xs = [x for d in rest for x in day(d)]
+    last = datetime.date.fromisoformat(rest[-1])
+    highs = [x["high"] for x in xs]
+    trend = ""
+    t_high = max(x["high"] for x in t)
+    if min(highs) > t_high + 1:
+        trend = "Warmer, with "
+    elif max(highs) < t_high - 1:
+        trend = "Cooler, with "
+    sky = sky_of(xs) + ("" if sky_of(xs).startswith("mixed") else " skies")
+    r = max((x["rain"] or 0) for x in xs)
+    rain = f" and a {r}% chance of rain" if r >= 30 else " and no rain expected"
+    print(f"**Coming days:** {trend}{'h' if trend else 'H'}ighs of {span(highs)} through {last:%A}, with {sky}{rain}. "
+          f"Nights at {span([x['low'] for x in xs])}.")
+
+
 def main(args):
     n = int(args[0]) if args else 4
     got = []
@@ -86,6 +146,7 @@ def main(args):
         highs = [g[day]["high"] for _, g in got if day in g]
         flag = "  <- the services differ by more than 2°C: give a range" if len(highs) == 2 and abs(highs[0] - highs[1]) > 2 else ""
         print(f"{dd:%a %b} {dd.day}: " + " | ".join(parts) + flag)
+    draft(got, dates)
 
 
 if __name__ == "__main__":

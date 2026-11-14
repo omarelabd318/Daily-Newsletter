@@ -199,10 +199,17 @@ covered in full further down.
   the story behind a move belongs in Markets. Keep every row: the site shows USD/EGP, the dollar index, EUR,
   GBP, gold 24K, gold in dollars, Brent and the rates first and folds the Gulf currencies (pegged to the dollar)
   and the other gold carats behind "Show all", but they are still checked and logged every day.
+- **Weather:** run `python3 .claude/skills/daily-newsletter/weather.py`. It prints two forecast services side by
+  side and ends with a DRAFT of both paragraphs (`**Cairo today:**`, `**Coming days:**`) with ranges where they
+  differ. Use the draft, adjusting the wording, and add any official warning (heat, sandstorm, rain) from research;
+  do not research the forecast again.
 - **Economic Calendar:** upcoming events only, not news already covered above. Start from
-  `python3 .claude/skills/daily-newsletter/calendar_facts.py DATE 14`, which lists the holidays and EGX closures,
-  the desk's stocks' results dates ("expected" unless confirmed) and dividends already in the repo's data, so the
-  dates known are in and right; add the rest (central bank meetings, data releases, auctions, fixtures) from research.
+  `python3 .claude/skills/daily-newsletter/calendar_facts.py DATE 14 --draft`: it lists the holidays and EGX
+  closures, the desk's stocks' results dates ("expected" unless confirmed) and dividends in the repo's data, and
+  ends with a DRAFT of the whole section in the layout below, merging those dates with the last edition's items
+  still ahead. Work from the draft: drop what moved or passed, tidy any line that repeats an event, and add the
+  day's new events (central bank meetings, data releases, auctions, fixtures) from research. Do not rebuild the
+  section from scratch.
   Layout: the next few days each get their own item (`**Tuesday, November 10:** ...`). Events further out go
   under `**Coming up:**` as a list, one date per line, in date order, never one running paragraph:
 
@@ -357,9 +364,21 @@ do not use any heading or standalone bold line inside Sports. Each match, result
 with its own bold lead-in, for example `**Liverpool v Chelsea:** ...` or `**Paris Masters:** ...`. Order
 them with Egyptian football first, then other football, then other sports.
 
-## Stocks Watch tables
+## Stocks Watch and Currency and Commodities Watch: tables.py
 
-Read `refs/tables.md` when you build the Stocks Watch tables (the fixed lists, columns, formats and extra rows).
+After logging the day's figures, print both sections ready to paste, in one step:
+
+```
+python3 .claude/skills/daily-newsletter/tables.py DATE [egx.EAST us.ORCL egx.MCQE=167.85,+8.5 us.XYZ=12.30,+9.1,-4.2]
+```
+
+It builds every row from the data log (close, change from the previous session, YTD), the italic close lines,
+the fixed stock lists in order, up to three notable movers per market (desk stocks from the log; any other with
+the close, change and YTD fetch_figures.py printed for it), and the currency table with its notes where the log
+shows a milestone. Paste its output, then: fix anything it lists under CHECK, mark any disputed figure
+`(unconfirmed)`, and edit a Note where a short cause fits better. Do not type the tables by hand or rerun it row by
+row. Open `refs/tables.md` only for a case the script does not cover (an intraday table, an EGX holiday note, a
+row's format in doubt).
 
 ## Egyptian holidays
 
@@ -368,10 +387,6 @@ watch line and the Economic Calendar (upcoming closures and long weekends). Date
 projections, so always confirm them against current official announcements; when the Cabinet or the EGX
 announces dates, update the file (dates, any day moved to a Thursday or Sunday, and `"status":
 "confirmed"`) and commit it with the edition. When a new year's holidays are announced, add them.
-
-## Currency and Commodities Watch table
-
-Read `refs/tables.md` when you build the table (rows, notes, YTD column and formats).
 
 ## Weekly Recap (Saturdays)
 
