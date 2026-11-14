@@ -1,0 +1,50 @@
+{
+ "dollars_per_percent": 3.5,
+ "note": "List-price cost of each scheduled run (total_cost_usd of the run session's last result event). 1% of the weekly limit is about $3.50. 'newsletter' is the Weekly Recap on Saturdays.",
+ "days": {
+  "2026-11-07": {
+   "desk": 6.6,
+   "newsletter": 7.37,
+   "recap": 5.2
+  },
+  "2026-11-08": {
+   "desk": 6.27,
+   "newsletter": 5.04
+  },
+  "2026-11-09": {
+   "desk": 6.25,
+   "newsletter": 5.59
+  },
+  "2026-11-10": {
+   "desk": 7.12,
+   "newsletter": 5.62
+  },
+  "2026-11-11": {
+   "desk": 7.06,
+   "newsletter": 6.92
+  },
+  "2026-11-12": {
+   "desk": 10.04,
+   "newsletter": 10.96
+  },
+  "2026-11-13": {
+   "desk": 10.14,
+   "newsletter": 20.71,
+   "newsletter_flag": "Fell back to Opus 4.8,\nthen crashed and was resumed",
+   "flag_at": [
+    -1.6,
+    23.2
+   ],
+   "hatch": true
+  },
+  "2026-11-14": {
+   "desk": 6.93,
+   "newsletter": 14.69,
+   "newsletter_flag": "Recap: 4 side sessions\non Opus, 140 searches,\nplus Saturday's figures\nand puzzles",
+   "flag_at": [
+    -0.25,
+    18.6
+   ]
+  }
+ }
+}
