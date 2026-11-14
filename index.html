@@ -1033,7 +1033,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
       [].slice.call(document.querySelectorAll('.p-ear')).forEach(function(x){ x.remove(); });
       var mast = document.querySelector('.mast'), ex = fig('egx30');
       // the sky in a few words for the ear: its first clause, cut at a whole word (never "mostly cle")
-      function skyShort(t){ t = String(t || '').split(/[,;.]/)[0].trim().toLowerCase(); if(t.length > 24){ var w = t.split(/\s+/), o = ''; for(var i = 0; i < w.length && (o + ' ' + w[i]).trim().length <= 24; i++) o = (o + ' ' + w[i]).trim(); t = (o || w[0]).replace(/\s+(and|with|or|of|a|the)$/, ''); } return t.charAt(0).toUpperCase() + t.slice(1); }
+      function skyShort(t){ t = String(t || '').split(/[,;.]/)[0].trim().toLowerCase(); if(t.length > 24){ var w = t.split(/\s+/), o = ''; for(var i = 0; i < w.length && (o + ' ' + w[i]).trim().length <= 24; i++) o = (o + ' ' + w[i]).trim(); t = o || w[0]; while(/\s(and|with|or|of|a|an|the|in)$/.test(t)) t = t.replace(/\s+\S+$/, ''); } return t.charAt(0).toUpperCase() + t.slice(1); }
       function ear(side, lab, big, sub){ var d = document.createElement('div'); d.className = 'p-ear ' + side; d.innerHTML = lab + '<b>' + big + '</b>' + sub; mast.appendChild(d); }
       if(tm) ear('l', 'Cairo weather', (tm[2] || tm[1]) + '\u00b0 \u00b7 ' + esc(skyShort(ds)), 'Today');
       if(ex) ear('r', 'EGX30 close', n0(ex.now), ex.chg == null ? '' : (ex.chg >= 0 ? 'Up ' : 'Down ') + Math.abs(ex.chg).toFixed(2) + '%');
