@@ -192,7 +192,8 @@ def main(args):
             changes.append((v, "wrong", {"date": last_entry, "text": hit[1] + "."}))
             continue
         # 2. the due date has passed and its close is in the log: judge from the track
-        if v.get("due") and any(session_of(e["date"], tr.get("key") or "x").isoformat() >= v["due"] for e in days[-3:]):
+        # (a due date on a day its market was closed is judged on the last session before it, once the date has passed)
+        if v.get("due") and (last_entry > v["due"] or any(session_of(e["date"], tr.get("key") or "x").isoformat() >= v["due"] for e in days[-3:])):
             ok, why = going_its_way(v, days, last_entry)
             if ok is None:
                 warns.append(f"{v['id']}: due {v['due']} but its track cannot decide it: judge it by hand.")

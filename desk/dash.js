@@ -350,6 +350,7 @@
     const SPAN = { 0: 'on the day', 7: 'in a week', 30: 'in a month', 182: 'in 6 months', 365: 'in a year', 1095: 'in 3 years', 1826: 'in 5 years' };
     async function drawIdx(p) {
       per = p; $('egx-chart').style.height = '';
+      if (!$('c-chart').getClientRects().length) return;   // the card is hidden on the day's dashboard: nothing to draw
       if (p[1] > 400) {   // 3Y and 5Y need the full log, loaded once (the gold card may have loaded it already)
         if (!fullLoaded) { const f = await get('/data/markets.json'); fullLoaded = true; if (f && f.days) days = f.days; }
         idx = series((e) => e[cur.k], S.market);

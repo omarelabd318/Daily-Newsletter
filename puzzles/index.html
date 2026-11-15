@@ -130,7 +130,7 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
   // which day: ?d=DATE, else the newest edition with puzzles
   var want = (location.search.match(/[?&]d=(\d{4}-\d{2}-\d{2})/) || [])[1];
   fetch('/editions/index.json', {cache:'no-cache'}).then(function(r){ return r.json(); }).then(function(ix){
-    var dates = (ix.editions || []).filter(function(e){ return !e.id; }).map(function(e){ return e.date; }).sort().reverse();
+    var dates = (ix.editions || []).map(function(e){ return e.date; }).filter(function(d, i, a){ return a.indexOf(d) === i; }).sort().reverse();   // every edition's date, the Saturday recap's included
     var now = new Date(), today = now.getFullYear() + '-' + ('0' + (now.getMonth() + 1)).slice(-2) + '-' + ('0' + now.getDate()).slice(-2);
     if(dates.indexOf(today) < 0) dates.unshift(today);   // the puzzles go up with the morning's run, before the edition is listed
     if(want) dates.unshift(want);

@@ -81,6 +81,14 @@ def texts(o):
         yield o
 
 
+def egx_traded(day):
+    """False for a Friday, a Saturday or a holiday that closes the EGX (data/holidays.json)."""
+    if datetime.date.fromisoformat(day).weekday() in (4, 5):
+        return False
+    hol = (load("data/holidays.json") or {}).get("days") or []
+    return not any(h.get("date") == day and h.get("egx_closed") for h in hol)
+
+
 def last_close(log, t):
     group = "egx" if t in TICKERS["egx"] else "us"
     for d in reversed(log.get("days", [])):
@@ -215,7 +223,8 @@ def main(args):
         if not links or not all(isinstance(x, dict) and str(x.get("url", "")).startswith("http") and x.get("source") for x in links):
             errors.append(f"desk/flows.json {fday.get('date')}: add 'links', [{{'source': ..., 'url': ...}}], one for each report the figures came from.")
     # the EGX traded in the desk's session: its flows belong in the day's file and the flow history
-    if D.get("asOf") and not any(d.get("date") == D["asOf"] for d in FLW.get("days", [])):
+    # (not when asOf is a day the EGX was closed: a Friday, a Saturday or a holiday in data/holidays.json)
+    if D.get("asOf") and egx_traded(D["asOf"]) and not any(d.get("date") == D["asOf"] for d in FLW.get("days", [])):
         warnings.append(f"desk/flows.json has no entry for the {D['asOf']} session: add who bought and who sold (and egypt.flows in the day's file).")
     if not (D.get("egypt") or {}).get("flows"):
         warnings.append("egypt.flows is missing from the day's file: the EGX page shows the flow history's entry instead, if there is one.")

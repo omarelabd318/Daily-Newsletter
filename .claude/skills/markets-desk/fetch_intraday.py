@@ -379,6 +379,13 @@ def main():
             continue
         keep = [x for x in week.get(name, []) if x["session"] != latest["session"]]
         keep.append({"session": latest["session"], "series": {k: every15(v) for k, v in latest["series"].items()}})
+        # a whole session the week missed (the fetch failed that day and a later one succeeded) is taken from the
+        # month's copy, every 30 minutes, so the 1W charts and the editions' "Last 7 days" lines do not skip days
+        have = {x["session"] for x in keep}
+        for x in (saved.get("month") or {}).get(name, []):
+            if x["session"] not in have and x["session"] < latest["session"] and len(x.get("series") or {}) >= 6:
+                keep.append({"session": x["session"], "series": dict(x["series"])})
+                print(f"{name.upper()} week: added the missed {x['session']} session from the month's copy")
         week[name] = sorted(keep, key=lambda x: x["session"])[-5:]
     # a stock missing from a saved US session (a fetch that failed that day) is filled from Yahoo's last five sessions
     holes = sorted({k for x in week.get("us", []) for k in US if k not in x["series"]})
