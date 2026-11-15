@@ -45,6 +45,15 @@
     -0.25,
     18.6
    ]
+  },
+  "2026-11-15": {
+   "desk": 3.44,
+   "newsletter": 8.37,
+   "newsletter_flag": "178 searches,\n~3x the ceiling",
+   "flag_at": [
+    -0.15,
+    12.6
+   ]
   }
  }
 }
