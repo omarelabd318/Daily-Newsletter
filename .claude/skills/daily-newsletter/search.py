@@ -16,6 +16,9 @@ pages it leads to. All queries run at once: send several per call.
 a query) and appends the full blocks to editions/search.md (a worksheet, not committed), to grep for one story's
 excerpt when the short line is not enough. Side sessions use the full form.
 
+With --log newsletter, no query runs past the newsletter's hard cap of 60 searches a day (research_log.py's
+HARD_CAPS, side sessions and the recap included): queries past it are listed as not run.
+
 --days N limits the search to the last N days (default 2). --log records each query as a search and each page whose
 excerpt was printed as read (research_log.py, one call for the batch), so the research floors count them. The
 excerpt is the outlet's own words: confirm a figure that moves a story at a second, independent outlet as always,
@@ -129,7 +132,7 @@ def log(date, part, queries, urls):
             try:
                 r = subprocess.run([sys.executable, tool, date, part, cmd, *items], cwd=ROOT, capture_output=True,
                                    text=True, timeout=30)
-                if cmd == "search" and "Past the guide" in r.stdout:
+                if cmd == "search" and ("Past the guide" in r.stdout or "SEARCH CAP" in r.stdout):
                     note = r.stdout.strip()
             except Exception:
                 pass
@@ -161,6 +164,17 @@ def main(a):
         i += 1
     if not queries:
         sys.exit(__doc__)
+    refused = []
+    if logto:
+        # the hard cap: queries are logged before they run, so side sessions searching at once cannot overshoot it
+        import research_log
+        if logto[1] in research_log.HARD_CAPS:
+            queries, refused = research_log.reserve(logto[0], logto[1], queries)
+            if not queries:
+                n = len(research_log.part(research_log.load(logto[0]), logto[1])["searches"])
+                print(research_log.CAP_NOTE.format(n=n, cap=research_log.HARD_CAPS[logto[1]], part=logto[1]))
+                print("Not run: " + " | ".join(refused))
+                return
     with concurrent.futures.ThreadPoolExecutor(min(6, len(queries))) as pool:
         results = list(pool.map(lambda q: research(q, days, ar or bool(ARABIC.search(q)), pages), queries))
     logged, full = [], []
@@ -175,6 +189,8 @@ def main(a):
         with open(os.path.join(ROOT, "editions", "search.md"), "a") as f:
             f.write("\n".join(full) + "\n")
         print("(Full excerpts appended to editions/search.md: grep -A12 'query words' editions/search.md for one story.)")
+    if refused:
+        print(f"Not run, past the cap of {research_log.HARD_CAPS[logto[1]]} searches: " + " | ".join(refused))
     if logto:
         note = log(logto[0], logto[1], queries, logged)
         print(f"Logged {len(queries)} searches and {len(logged)} pages read ({logto[1]}, {logto[0]}).")

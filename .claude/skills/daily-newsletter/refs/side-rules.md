@@ -29,5 +29,9 @@ lookup as a page (`research_log.py DATE NAME page factiq:<what>`). Missing or si
 **Dates and spelling in notes.** US English, month-first dates ("Nov 5"); name the date rather than "yesterday" or
 "this week". Proper names keep their own spelling.
 
+**Search budget.** Your prompt gives your number of searches; stop at it. The newsletter has a hard cap of 60
+searches a day for all sessions together: search.py refuses queries past it and web search is blocked, so a session
+that overspends leaves the others none.
+
 **Stop** on a story once each figure has its outlet and one confirmation: about two pages opened beyond search.py's
 excerpts, more only where sources conflict.

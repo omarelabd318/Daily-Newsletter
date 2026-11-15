@@ -78,6 +78,8 @@ Quick Hits, Weather (weather.py), Worth Knowing and the puzzles stay in the main
 > confirm every figure at a second, independent outlet (two pages with the same wording are one source).
 > Research news with `python3 .claude/skills/daily-newsletter/search.py --log DATE newsletter "q1" "q2" ...` first,
 > several queries per call (Arabic queries too): it reads the top pages and prints short excerpts, and logs itself.
+> Your search budget is N searches (search.py queries and web searches together; the newsletter's hard cap is 60
+> a day for all sessions): stop at N, and mark anything still without a second source `Open:`.
 > Use web search and full page reads only for what it cannot reach (data and official pages, a page it could not
 > read, an excerpt that is not enough, a figure that needs its context), and log those with
 > `python3 .claude/skills/daily-newsletter/research_log.py DATE newsletter search|page ...` (several per call).
@@ -91,6 +93,12 @@ Quick Hits, Weather (weather.py), Worth Knowing and the puzzles stay in the main
 > "same wording as X"; quotes word for word in quotation marks with the speaker; `Why:` a few words; `Open:` only
 > if something is unclear or conflicting. Keep every figure, basis and source; cut background the main run does not
 > need to write the story. Then one line listing stories you dropped and why (old, unconfirmed, not news).
+
+**Search budgets (the hard cap is 60 a day in all).** The newsletter's searches stop at 60, side sessions
+included: search.py refuses queries past it and the built-in web search is blocked. A session that spends past its
+share leaves the others short, so write each session's number into its prompt with its block: Egypt 14, region and
+world 10, global markets and calendar 10, In Other News 10, checks 6, leaving the main run about 10 for its own
+gaps. A session stops at its number; a story still without a second source past it is noted `Open:` for the main run.
 
 Wait for all five before writing (never leave one running in the background past the final reply). Write the
 sections from the notes, each section in one Write or Edit. Open a page yourself only where a note says

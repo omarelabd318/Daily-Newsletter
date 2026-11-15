@@ -7,3 +7,4 @@ editions/brief.md
 editions/articles.md
 *.lock
 editions/search.md
+data/research/.sessions.json

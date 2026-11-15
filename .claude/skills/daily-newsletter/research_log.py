@@ -29,6 +29,39 @@ TARGETS = {"newsletter": {"searches": 25, "pages": 12, "read": 20}, "desk": {"se
 # The guide's upper end (a ceiling, not a target): past it, every page re-sent at every later step costs more than it
 # adds. Each figure needs its outlet and one independent confirmation; once it has them, stop.
 CEILINGS = {"newsletter": {"searches": 60, "pages": 30}, "desk": {"searches": 35, "pages": 20}}
+# Hard caps on searches, side sessions included: search.py runs no query past it, and the WebSearch hook
+# (.claude/hooks/search_cap.py) blocks the built-in web search once the log reaches it. The Weekly Recap logs as
+# newsletter, so it shares the newsletter's cap.
+HARD_CAPS = {"newsletter": 60}
+CAP_NOTE = ("SEARCH CAP REACHED: {n} of {cap} {part} searches used today. No more searches in this run: write from "
+            "the notes and pages already gathered, and mark a figure with no second source as unconfirmed.")
+
+
+def cap_left(log, name):
+    """Searches left under the hard cap (None when the part has no cap)."""
+    cap = HARD_CAPS.get(name)
+    return None if cap is None else max(0, cap - len(part(log, name)["searches"]))
+
+
+def reserve(date, name, queries):
+    """Log as many of `queries` as the hard cap allows, atomically (side sessions search at the same time), and
+    return (the ones logged, the ones refused). Queries already in the log are not counted twice."""
+    lock = locked(date)
+    try:
+        log = load(date)
+        p = part(log, name)
+        new = [q for i, q in enumerate(queries) if q not in p["searches"] and q not in queries[:i]]
+        left = cap_left(log, name)
+        ok = new if left is None else new[:left]
+        refused = new[len(ok):]
+        if ok:
+            p["searches"] += ok
+            with open(path(date), "w") as f:
+                json.dump(log, f, indent=1, ensure_ascii=False)
+                f.write("\n")
+        return [q for q in queries if q not in refused], refused
+    finally:
+        lock.close()
 
 
 def path(date):
@@ -91,7 +124,8 @@ def main(a):
     log = load(date)
     p = part(log, name)
     if cmd == "search":
-        p["searches"] += rest
+        # a query the WebSearch hook or search.py already logged is not counted again
+        p["searches"] += [q for i, q in enumerate(rest) if q not in p["searches"] and q not in rest[:i]]
     elif cmd in ("page", "read"):
         k = "pages" if cmd == "page" else "read"
         p.setdefault(k, [])
@@ -113,7 +147,10 @@ def main(a):
     if cmd in ("search", "page"):
         k = "searches" if cmd == "search" else "pages"
         n = len(p[k]) if k == "searches" else len(set(p[k]))
-        if n >= CEILINGS[name][k]:
+        cap = HARD_CAPS.get(name) if k == "searches" else None
+        if cap is not None and n >= cap:
+            line += " " + CAP_NOTE.format(n=n, cap=cap, part=name)
+        elif n >= CEILINGS[name][k]:
             line += (f" Past the guide of {CEILINGS[name][k]} {'searches' if k == 'searches' else 'pages opened'}: "
                      "search or open a page now only for a figure or story that still has no second source.")
     print(line)

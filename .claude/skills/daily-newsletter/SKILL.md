@@ -20,7 +20,8 @@ read the pages, confirm the figures at a second outlet and return short notes, a
 researching. The research itself is unchanged: the same searches, outlets and checks, and the main run still chooses
 the stories, writes every word and opens any page a note leaves unclear. The task prompt's instructions to read
 EnterpriseAM and CairoScene are met by the Egypt side session, which reads them in full. (3) Research has a ceiling
-as well as a floor: about 60 searches and 30 pages opened in all (research_log.py says when a run is past it). Each
+as well as a floor: a hard cap of 60 searches in all, side sessions included (the tools refuse searches past it;
+split as refs/research-agents.md describes), and about 30 pages opened (research_log.py says when a run is past it). Each
 figure needs its outlet and one independent confirmation; once it has them, stop. (4) **Finish in a fresh side
 session:** once the edition is written and edited, the checks, mechanical fixes, commit and push are done by one
 Sonnet side session through `publish.py`, as `refs/finish.md` describes; read it at that step. (5) Nothing runs in
@@ -289,9 +290,12 @@ scripts read for you (run_research.py's editions/articles.md, articles.py, searc
 separately, as "read by scripts", and do not count as pages you opened. A full edition takes at least 25 searches
 across many outlets and 12 pages you opened yourself (to confirm a figure at a second outlet, or to read past an
 excerpt), on top of the scripts' reading (usually 20 or more); the checker warns below that and blocks publishing
-below half of the searches and pages. The guide's upper end is about 60 searches and 30 pages opened, side sessions
-included: past it, research_log.py and search.py say so, and a run searches or opens a page only for a figure or
-story that still has no second source. More pages past that point add cost at every later step, not accuracy.
+below half of the searches and pages. **Searches are capped at 60 a day, side sessions included** (the Weekly Recap
+too): search.py runs no query past the cap, and a hook (.claude/hooks/search_cap.py) blocks the built-in web search
+once the log holds 60 newsletter searches. At the cap, stop searching: write from the notes and pages already
+gathered, and mark a figure with no second source unconfirmed. Spend the 60 as refs/research-agents.md splits them.
+The guide's upper end for pages opened is about 30: past it, research_log.py says so, and a run opens a page only
+for a figure or story that still has no second source. More pages past that point add cost at every later step, not accuracy.
 
 **Reading excerpts.** Two pages the reader marks as having the same wording are one release copied by two outlets:
 they count as one source, never as the second outlet that confirms a figure. When an excerpt ends with "Figures on

@@ -79,10 +79,11 @@ Stocks Watch do not.
 - Every item opens with a bold lead-in, as in the daily edition. Never refer to the daily editions
   themselves ("as reported on Tuesday"): write about the events and their dates.
 
-## Searches on Saturday: about 60 in all
+## Searches on Saturday: 60 at most (a hard cap)
 
 The week's stories were researched and checked on the day they ran, and their notes are saved, so the recap
-searches only for what is new or has moved: about 60 searches in all (Thursday's and Friday's runs used 140, most
+searches only for what is new or has moved: 60 searches at most, a hard cap the tools enforce (the recap logs
+as newsletter) (Thursday's and Friday's runs used 140, most
 of them re-finding stories already checked). As a guide: Since Friday up to 20; the week in Egypt up to 15; the region
 and world up to 12; markets, the calendar and In Other News up to 12; the main run a handful for its own gaps. A
 story that has not moved since its edition needs no new search: its saved note is the source. A side session that
