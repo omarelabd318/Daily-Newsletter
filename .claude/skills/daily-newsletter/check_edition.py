@@ -14,11 +14,14 @@ import sys
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
 
+# From November 16, 2026 the two tables sit after In Other News, beside the calendar, so the reading sections run on
+# without a break; earlier editions (and a task prompt that still sets the old order) keep them after Markets.
 SECTIONS = [
     "Today at a Glance", "Quick Hits", "Weather", "Egypt News", "Top World Headlines",
-    "Regional and Gulf", "Markets", "Stocks Watch", "Currency and Commodities Watch", "In Other News",
+    "Regional and Gulf", "Markets", "In Other News", "Stocks Watch", "Currency and Commodities Watch",
     "Economic Calendar", "Worth Knowing", "Sources",
 ]
+OLD_SECTIONS = SECTIONS[:7] + ["Stocks Watch", "Currency and Commodities Watch", "In Other News"] + SECTIONS[10:]
 # The Saturday weekly recap (editions/YYYY-MM-DD-recap.md) has its own sections.
 RECAP_SECTIONS = [
     "The Week in Brief", "Egypt This Week", "Region and World", "Markets This Week",
@@ -38,12 +41,12 @@ PARTS = {
 BUDGET = {
     "Today at a Glance": (150, 190), "Quick Hits": (90, 130), "Weather": (50, 80),
     "Egypt News": (450, 550), "Top World Headlines": (300, 380), "Regional and Gulf": (180, 230),
-    "Egypt Markets": (280, 340), "Global Markets": (210, 260), "Stocks Watch": (140, 240),
+    "Egypt Markets": (280, 340), "Global Markets": (210, 260), "Stocks Watch": (290, 330),
     "Currency and Commodities Watch": (180, 260), "Tech and AI": (130, 170), "Sports": (150, 200),
     "Health and Science": (70, 100), "Entertainment and Culture": (120, 150),
     "Economic Calendar": (130, 170), "Worth Knowing": (160, 200),
 }
-TOTAL = (2850, 3450)
+TOTAL = (2950, 3550)   # 3,150-3,250 plus tolerance; Stocks Watch counted at what its fixed rows take (Nov 15, 2026)
 MIN_ITEMS = {"Egypt News": 4, "Top World Headlines": 6, "Tech and AI": 3, "Sports": 5,
              "Entertainment and Culture": 3}
 # Words that break the voice rules. "US" is left out on purpose: it is usually the country.
@@ -312,6 +315,10 @@ def main(path):
             expected = ["Since Friday"] + expected
         elif os.path.basename(path)[:10] >= "2026-11-14":
             errors.append('No "Since Friday" section at the top: the recap is Saturday\'s only edition (refs/saturday.md).')
+    if not recap and order == OLD_SECTIONS:
+        expected = OLD_SECTIONS
+        if os.path.basename(path)[:10] >= "2026-11-16":
+            warnings.append("Section order: Stocks Watch and Currency and Commodities Watch now go after In Other News, before the Economic Calendar (see the skill's Section order).")
     if order != expected:
         missing = [s for s in expected if s not in order]
         extra = [s for s in order if s not in expected]
@@ -342,6 +349,13 @@ def main(path):
                     cells = [c.strip() for c in r.strip().strip("|").split("|")]
                     if "notable mover" in cells[0].lower() and len(cells) > 1 and cells[1].lower().startswith("n/a"):
                         warnings.append(f"Stocks Watch '{p}': mover row has no close; add it with fetch_figures.py: {cells[0]}")
+                    if "notable mover" in cells[0].lower() and len(cells) > 2:
+                        mv = re.search(r"[+\-]?\d+(?:\.\d+)?", cells[2].replace("*", ""))
+                        if mv and abs(float(mv.group(0))) < 3:
+                            warnings.append(f"Stocks Watch '{p}': {cells[0].strip('*')} moved {cells[2]}, under 3%: a mover row is for a move of 3% or more; drop it.")
+                movers_n = sum("notable mover" in r.lower() for r in rows)
+                if movers_n > 2:
+                    warnings.append(f"Stocks Watch '{p}': {movers_n} mover rows; at most two, the biggest moves.")
                 fixed = FIXED.get(p, [])
                 missing = [t for t in fixed if not any(f"({t})" in r for r in rows)]
                 if missing:
@@ -389,7 +403,7 @@ def main(path):
     total = sum(counts.values())
     lo, hi = RECAP_TOTAL if recap else TOTAL
     if not lo <= total <= hi:
-        guide = "1,850-2,150" if recap else "3,050-3,150"
+        guide = "1,850-2,150" if recap else "3,150-3,250"
         warnings.append(f"Total {total} words without Sources (guide about {guide}; never cut a worthwhile story to fit).")
 
     # Voice: first person, names, authorship.
@@ -517,6 +531,13 @@ def main(path):
         except (OSError, ValueError):
             warnings.append("data/holidays.json is missing or not valid JSON.")
 
+    # Sports: short items (the section ran a third over its guide in mid-November 2026): the first item up to about
+    # 50 words, the rest about 40.
+    for i, item in enumerate(x for x in "\n".join(sections.get("In Other News", {}).get("parts", {}).get("Sports", [])).split("\n\n") if x.strip().startswith("**")):
+        n, cap = words(item), (55 if i == 0 else 45)
+        if n > cap:
+            lead = re.match(r"\*\*([^*]+)\*\*", item.strip())
+            warnings.append(f"Sports item {lead.group(1).rstrip(":") if lead else i + 1}: {n} words; keep it to about {cap - 5} (one or two sentences: the result or fixture, the one fact that matters).")
     # Sports: no sport-name headings or standalone bold lines.
     for line in sections.get("In Other News", {}).get("parts", {}).get("Sports", []):
         if re.fullmatch(r"\s*(\*\*[^*]+\*\*|#{4,}\s+.+)\s*", line):

@@ -27,11 +27,11 @@ meanwhile copies the template to desk/days/DATE.json and starts on the close car
      page where the excerpt is not enough, check what moves a stock at a second outlet (search.py first), and log one stock line each with `research_log.py DATE desk stock TICKER "..."`. Every desk stock that
      moved 3% or more gets a line. Return each news item as a note (date, what happened, outlet and URL, second
      source), not written into desk/stocks.json.
-   The main run then writes the `news` items and `lastResults` into desk/stocks.json from the notes, all in one
-   edit or one short script, not stock by stock.
+   The main run then writes the `news` items into desk/stocks.json from the notes in one `desk_json.py news -` call
+   (all stocks at once) and `lastResults` in one `desk_json.py set stocks -` call, never reading the file whole.
 2. **Markets and macro** (on the run's own model: leave `model` out): the day's Egyptian macro and policy stories (the pound, rates, inflation, reserves,
    gas, Suez), the US session and data, central banks, and a second source for every figure the desk's stories
-   will use that the edition does not already carry (FactIQ where it holds it, as the skill's FactIQ paragraph
+   will use that the edition does not already carry (FactIQ where it holds it, as refs/side-rules.md
    describes). It starts from the newsletter's saved side-session notes, `editions/notes/DATE-*.md` (on a
    Saturday `DATE-recap-*.md`, and Friday's for the Egypt section): their facts are already checked at two
    outlets, with sources, so it does not search for or check them again. It researches only what the notes do not
@@ -42,8 +42,8 @@ meanwhile copies the template to desk/days/DATE.json and starts on the close car
 ## The prompt for each side session
 
 > You are researching part of today's Markets Desk (DATE, Cairo) in the repo at REPO. Read
-> .claude/skills/markets-desk/SKILL.md's sections BLOCK-SECTIONS and the newsletter skill's rules on checking
-> figures and sources before starting. Your block: BLOCK. Start from desk/brief.md (the macro block reads it
+> .claude/skills/daily-newsletter/refs/side-rules.md (the rules you need, about 400 words; do not read either
+> SKILL.md) and, for the stocks block, .claude/skills/markets-desk/refs/stock-research.md before starting. Your block: BLOCK. Start from desk/brief.md (the macro block reads it
 > without the per-stock news leads: `sed '/^## News leads by stock/,$d' desk/brief.md`) and the parts of the
 > edition the desk uses (`python3 .claude/skills/markets-desk/edition_for_desk.py DATE`; open editions/DATE.md, or
 > DATE-recap.md on a Saturday, only for a story needed in full), and for the macro block from the saved notes in editions/notes/ (do not re-check
@@ -68,4 +68,6 @@ is "Do not write any repo file except through research_log.py".
 
 Wait for both before writing (never leave one running in the background). Write the desk from the notes and the brief, each section and file in one Write or Edit. Open a page yourself only for an "Open:" point that matters to a story.
 On a Saturday the stocks session covers the US stocks and any Egyptian stock with news, and there may be no results
-to record.
+to record. On a Sunday (no session since Saturday's desk) start a side session only when there is work for it: the
+stocks session for results to record or a stock with real news, the macro session for news since Saturday that the
+edition's notes do not hold; often neither is needed.

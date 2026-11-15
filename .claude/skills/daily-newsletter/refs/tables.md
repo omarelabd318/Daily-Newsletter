@@ -3,7 +3,7 @@
 `tables.py DATE [movers]` (see the skill) builds both tables below from the data log, ready to paste. This file
 holds the rules it follows, for a case it does not cover or a row in doubt.
 
-`## Stocks Watch` comes right after Markets and before Currency and Commodities Watch. It has two parts,
+`## Stocks Watch` comes right after In Other News and before Currency and Commodities Watch. It has two parts,
 `### Egypt` first, then `### USA`. Each part is one table and nothing else: no paragraphs and no bullet
 points. Under each heading, put one italic line saying which close the table shows, for example
 `*EGX close, Tuesday 27 October*` or `*US close, Tuesday 27 October*`. If the run happens while the EGX is
@@ -36,7 +36,7 @@ List these every day, in this order:
 | Juhayna Food Industries (JUFO) | Berkshire Hathaway (BRK.B) |
 | Alexandria Containers (ALCN) | Walmart (WMT) |
 
-After the fixed rows, add up to three rows for other stocks with a notable move or notable news that
+After the fixed rows, add up to two rows for other stocks that moved 3% or more that
 day, marked in italics, for example `| *Misr Cement Qena (MCQE), notable mover* | 167.85 | +8.5% | n/a |`.
 Leave them out when nothing stands out. Every mover row shows its close, like the fixed rows: get it by
 adding the tickers to the fetch command, for example

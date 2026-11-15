@@ -4,7 +4,7 @@
 Usage (from the repo root, after log_figures.py has logged DATE):
   python3 .claude/skills/daily-newsletter/tables.py DATE [MOVER ...]
 
-MOVER adds an italic "notable mover" row (up to three per market):
+MOVER adds an italic "notable mover" row (up to two per market, each a move of 3% or more):
   egx.EAST                  a stock the log already holds (the desk's stocks): close, change and YTD from the log
   egx.MCQE=167.85,+8.5      any other stock: close and change from fetch_figures.py's mover lines (YTD n/a)
   us.ORCL=128.38,+8.8,-34.1 the same with YTD, which fetch_figures.py prints for US movers
@@ -197,8 +197,8 @@ def main(args):
             sys.exit(f"Not a mover: {a} (egx.TICKER, or egx.TICKER=CLOSE,CHANGE[,YTD])")
         movers[m.group(1)].append(m.groups()[1:])
     for g in movers:
-        if len(movers[g]) > 3:
-            sys.exit(f"At most three movers per market ({g} has {len(movers[g])}).")
+        if len(movers[g]) > 2:
+            sys.exit(f"At most two movers per market ({g} has {len(movers[g])}): keep the two biggest moves.")
 
     print("## Stocks Watch\n")
     for title, group, fixed, sess, of in (("Egypt", "egx", EGX, es, egx_of), ("USA", "us", US, us, us_session)):
@@ -225,6 +225,8 @@ def main(args):
             else:
                 close, chg = float(c.replace(",", "")), float(ch)
                 ytd = None if y in (None, "n/a") else float(y)
+            if chg is not None and abs(chg) < 3:
+                check.append(f"{t}: moved {sgn(chg)}, under 3%: drop the mover row unless the move is the story.")
             print(f"| *{name} ({t}), notable mover* | {level(close, 2)} | {sgn(chg)} | {sgn(ytd)} |")
         print()
 

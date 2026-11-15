@@ -38,20 +38,40 @@ traded on Thursday and Friday's run already covered it: carry the Egypt section 
 changed (news since Friday, a view due, results published on Friday or Saturday), and skip the per-stock research for
 Egyptian stocks unless one has news. The research floor is 10 searches and 5 pages opened on a Saturday.
 
+**Sundays (from November 15, 2026) are a light run too.** Neither market has traded since Saturday's desk (the EGX
+last traded on Thursday, Wall Street on Friday), so every close, mover and figure stays as Saturday's. Start from
+Sunday's edition and Saturday's desk: carry both sections over, updating only what changed (news since Saturday,
+the week ahead now that it starts, a view due, results published since Saturday), and do the Sunday jobs the brief
+lists under "Due today" (two US stock notes, the fair-value table read, on the first Sunday of the month the
+sectors). Skip the movers' reasons (Saturday's carry over in movers.json) and the per-stock research except for a
+stock with news; start the stocks side session only if the brief shows results to record or a stock with real news,
+and the macro session only for news since Saturday the edition's notes do not hold. Same floor as a Saturday: 10
+searches and 5 pages opened; aim to stay near it.
+
 **A ceiling as well as a floor:** about 35 searches and 20 pages opened in all, side sessions included
 (research_log.py and search.py say when the run is past it). Each figure needs its outlet and one confirmation;
 once it has them, stop. In the main run use `search.py --short` (one line and a figures fragment a page).
 
-1. Copy the newest `desk/days/*.json` as a template to `desk/days/DATE.json` (DATE is the edition date) and
-   rewrite every part for today: set `date`, `asOf` (the latest close, the day before DATE on a trading
-   day), `fetched`, and remove `"sample": true`. The close card figures come from today's logged figures. Egypt's group lists the EGX30, the EGX70 EWI, USD/EGP and gold 24K
+**Never read or rewrite the desk's big JSON files whole** (the day file, about 50 KB and three quarters the same
+from day to day; desk/stocks.json, 125 KB; desk/views.json, 40 KB). `desk_json.py` reads and writes only the parts
+that change, several in one call: `show FILE PATH ...` prints parts, `set FILE -` takes a heredoc of
+`{"path": value, ...}` (paths such as `egypt/calls`, `pages/us/news/^` to put an item first,
+`views/id=ID/updates/+` to add an update), and `news -` adds news items to desk/stocks.json for several stocks at
+once. Its `--help` has the path rules.
+
+1. Start the day file with `python3 .claude/skills/markets-desk/desk_json.py day DATE ASOF` (DATE is the edition
+   date, ASOF the latest close, the day before DATE on a trading day): it copies the newest day file, sets `date`,
+   `asOf` and `fetched`, drops `"sample"` and prints an outline of every part with its opening words. Then
+   rewrite every part that changed for today with `set` (show a part first only when its outline line is not
+   enough), leaving what still holds as it is. The close card figures come from today's logged figures. Egypt's group lists the EGX30, the EGX70 EWI, USD/EGP and gold 24K
    per gram (24K, not 21K: the dashboard's Gold in Egypt card has 21K, 18K and the gold pound).
 2. Do the stock research below from the news leads in `desk/brief.md` (step 5 runs stock_news.py; do not run it
-   again); update `desk/stocks.json`.
+   again); update `desk/stocks.json` through `desk_json.py news -` and `set stocks -`.
 3. Write each section: finding (the page shows its first sentence in bold, so make that sentence the day's
    point; at most two more, about 50 words in all; the coming dates go in the week ahead, not here; `next` is no
    longer shown), three to five stories (`calls`), winners and losers (`board`), the Stocks note,
-   the week ahead and open views, then update `desk/views.json` (see Views: the record): new entries, news, and judgements.
+   the week ahead and open views, then update `desk/views.json` (see Views: the record): new entries, news, and judgements, through
+   `desk_json.py set views -` (a new view: `views/^`; news on one: `views/id=ID/updates/+`).
 4. Write `pages`: EGX (finding, session, news, outlook), EGP (finding, rates, drivers, news, view), US
    (finding, rates: the day's extra items only, see step 5; afterBell, news, outlook), Global (finding, notes, news). Carry each projection
    forward until its date, and score it when the date passes.
@@ -242,7 +262,7 @@ only when you do that work in the main run.
 The stocks side session reads `refs/stock-research.md` and does this work (judging each lead from its excerpt, a
 second outlet for what moves a stock, `news` in desk/stocks.json, one research-log line per stock, the calendar).
 The research floor still holds for the whole run: at least 15 searches and 8 pages opened beyond the edition (10 and
-5 on a Saturday), side sessions included; every desk stock that moved 3% or more or has a lead gets a stock line.
+5 on a Saturday or Sunday), side sessions included; every desk stock that moved 3% or more or has a lead gets a stock line.
 
 ## The desk's note on a stock
 

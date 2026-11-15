@@ -199,6 +199,7 @@ def brief(results, started):
     nobrief = [t for t, x in stocks.items() if not x.get("brief")]
     old = [t for t, x in stocks.items() if x.get("brief") and (TODAY - datetime.date.fromisoformat(x["brief"]["written"])).days > 92]
     if SUNDAY:
+        add("- Light run (no session since Saturday's desk): carry both sections over, update only news, the week ahead and views due; no movers' reasons; side sessions only if there is work for them.")
         add(f"- Sunday: write the desk's note for two more stocks ({len(nobrief)} still without one; next: {', '.join(nobrief[:2]) or 'none'}), and read the whole fair-value table for figures that cannot be right.")
         if TODAY.day <= 7:
             add("- First Sunday of the month: review desk/sectors.json.")

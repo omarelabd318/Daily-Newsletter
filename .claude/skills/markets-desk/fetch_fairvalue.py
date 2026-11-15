@@ -341,6 +341,12 @@ def main():
     except Exception as e:   # the Egyptian table never waits on the US one
         us = saved.get("us")
         print(f"fair value, US: failed ({e}); kept the saved table")
+    # the day a bonus-issue warning first appeared, kept while it lasts, so check_desk.py names a stock outside the
+    # desk's list on that day only
+    since = {x["t"]: x.get("actionSince") for x in saved.get("stocks", []) if x.get("action")}
+    for x in new["stocks"]:
+        if x.get("action"):
+            x["actionSince"] = since.get(x["t"]) or TODAY.isoformat()
     json.dump({"note": note, **new, "judgement": saved.get("judgement", {}), "us": us, "judgementUS": saved.get("judgementUS", {})}, open(OUT, "w"), ensure_ascii=False, indent=1)
     open(OUT, "a").write("\n")
     top, bot = new["stocks"][:3], new["stocks"][-3:]

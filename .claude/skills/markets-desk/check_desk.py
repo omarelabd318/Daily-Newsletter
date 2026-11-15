@@ -250,8 +250,9 @@ def main(args):
         errors.append("Research: no desk log in data/research/DATE.json. Log searches, pages and each stock checked with research_log.py.")
     else:
         T = dict(research_log.TARGETS["desk"])
-        if datetime.date.fromisoformat(date[:10]).weekday() == 5 and date[:10] >= "2026-11-14":
-            T = {"searches": 10, "pages": 5, "read": 10}   # Saturday's lighter run (the skill's Daily run)
+        wd = datetime.date.fromisoformat(date[:10]).weekday()
+        if wd == 5 and date[:10] >= "2026-11-14" or wd == 6 and date[:10] >= "2026-11-15":
+            T = {"searches": 10, "pages": 5, "read": 10}   # Saturday's and Sunday's lighter runs (the skill's Daily run)
         for k in ("searches", "pages", "read"):
             n = len(set(RL.get(k, [])))
             if k == "read":   # pages the scripts read (stock_news.py --read, results_due.py): a warning only
@@ -413,7 +414,8 @@ if __name__ == "__main__":
     # adjusted for (fetch_fairvalue.py marks it); its per-share figures need checking before its fair value is trusted
     try:
         for x in json.load(open(os.path.join(ROOT, "desk", "fairvalue.json"))).get("stocks", []):
-            if x.get("action"):
+            # a stock outside the desk's list is named on the day the warning first appears, not every day after
+            if x.get("action") and (x["t"] in ALL or x.get("actionSince", globals().get("CHECKED")) >= (globals().get("CHECKED") or "")):
                 warnings.append(f"Fair value {x['t']}: {x['action']} Check the company's disclosure; if the per-share figures are pre-issue, put adjusted ones in the judgement block or leave it marked low confidence.")
     except Exception:
         pass

@@ -51,7 +51,7 @@ gets the prompt below with its own block and NAME filled in (NAME in brackets af
 2. **Region and world** (`world`): Regional and Gulf, and Top World Headlines.
 3. **Global markets and calendar** (`markets`): Global Markets (what moved and why, bonds, crypto), the day's data releases
    and central banks, the Economic Calendar (holidays, closures, results and IPO dates, data, fixtures). Use FactIQ
-   where it holds the figure, as the skill's FactIQ paragraph describes.
+   where it holds the figure, as refs/side-rules.md describes.
 4. **In Other News** (`other`): Tech and AI, Sports (Egyptian football first; results and fixtures with dates and Cairo
    times), Health and Science, Entertainment and Culture.
 5. **Checks** (`checks`; start this one with `model: "sonnet"`: it compares figures between sources and writes no prose that
@@ -72,8 +72,8 @@ Quick Hits, Weather (weather.py), Worth Knowing and the puzzles stay in the main
 ### The prompt for each side session
 
 > You are researching part of today's Daily Newsletter (DATE, Cairo) in the repo at REPO. Read
-> .claude/skills/daily-newsletter/SKILL.md's sections on checking figures, sources and US English before
-> starting. Your block: BLOCK. Candidate stories and leads: LEADS (with links from editions/brief.md and
+> .claude/skills/daily-newsletter/refs/side-rules.md before starting (the rules you need, about 400 words; do not
+> read SKILL.md). Your block: BLOCK. Candidate stories and leads: LEADS (with links from editions/brief.md and
 > editions/articles.md; read editions/articles.md for what is already read). Research each story at its outlet and
 > confirm every figure at a second, independent outlet (two pages with the same wording are one source).
 > Research news with `python3 .claude/skills/daily-newsletter/search.py --log DATE newsletter "q1" "q2" ...` first,

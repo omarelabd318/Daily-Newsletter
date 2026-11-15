@@ -39,7 +39,8 @@ speaker's words. The checker lists any British spelling or day-first date it fin
 
 ## Word budget
 
-Aim for about 3,050 to 3,150 words, not counting the Sources list. These numbers are a guide to
+Aim for about 3,150 to 3,250 words, not counting the Sources list (Stocks Watch is counted at what its 24 fixed
+rows take, about 290 words; the reading sections' share is unchanged). These numbers are a guide to
 balance, never a limit. Never leave out a story that deserves a place because a section or the edition
 is over its word count: include it, and let the section run long. Equally, do not pad a section to
 reach its number on a quiet day.
@@ -54,14 +55,20 @@ reach its number on a quiet day.
 | Regional and Gulf | 180-230 | 7% |
 | Markets: Egypt Markets | 280-340 | 10% |
 | Markets: Global Markets | 210-260 | 8% |
-| Stocks Watch (two tables) | 140-240 | 6% |
-| Currency and Commodities Watch | 180-260 | 7% |
 | In Other News: Tech and AI | 130-170 | 5% |
 | In Other News: Sports | 150-200 | 6% |
 | In Other News: Health and Science | 70-100 | 3% |
 | In Other News: Entertainment and Culture | 120-150 | 5% |
+| Stocks Watch (two tables) | 290-330 | 9% |
+| Currency and Commodities Watch | 180-260 | 7% |
 | Economic Calendar | 130-170 | 5% |
 | Worth Knowing | 160-200 | 6% |
+
+**Section order (from November 16, 2026):** Today at a Glance, Quick Hits, Weather, Egypt News, Top World
+Headlines, Regional and Gulf, Markets, In Other News, Stocks Watch, Currency and Commodities Watch, Economic
+Calendar, Worth Knowing, Sources: the reading sections run on without a break, and the two reference tables sit
+with the calendar. This replaces the older order with the tables after Markets; the checker still accepts that
+order (with a warning) in case a task prompt sets it.
 
 Sports is the deepest part of In Other News, but it no longer outweighs Markets. Global Markets got the
 extra room: use it to explain what drives the moves and what they mean for Egypt and emerging markets.
@@ -121,8 +128,8 @@ for a 43.7% rise). Use profit attributable to shareholders, and say so.
 
 ## Context from the data log
 
-`data/markets.json` holds daily figures back to 2021. After logging the day's figures, run
-`python3 .claude/skills/daily-newsletter/market_facts.py DATE`. For each item it prints the month-to-date
+`data/markets.json` holds daily figures back to 2021. After logging the day's figures, after_log.py runs
+`market_facts.py DATE` and shows its NOTABLE lines (run it on its own for the full report). For each item it works out the month-to-date
 and year-to-date change, the 52-week range, and lines marked `NOTABLE:` for an item within 3% of its
 52-week high or low, on a run of 4 or more sessions up or down, or at its highest or lowest in at least
 three months. Use the notable facts for one or two context lines in Egypt Markets and Global Markets, for
@@ -375,18 +382,24 @@ do not use any heading or standalone bold line inside Sports. Each match, result
 with its own bold lead-in, for example `**Liverpool v Chelsea:** ...` or `**Paris Masters:** ...`. Order
 them with Egyptian football first, then other football, then other sports.
 
+Keep each item short: one or two sentences, about 30 to 40 words (the first item up to about 50): the result or
+the fixture with its date and Cairo time, and the one fact that matters (the table position, the stake, the injury).
+Leave out build-up, squad lists and background a reader does not need; five or six items fill the section. The
+checker warns about an item past about 45 words (55 for the first).
+
 ## Stocks Watch and Currency and Commodities Watch: tables.py
 
-After logging the day's figures, print both sections ready to paste, in one step:
+after_log.py prints both sections ready to paste as its last step (tables.py on its own, for a rerun):
 
 ```
 python3 .claude/skills/daily-newsletter/tables.py DATE [egx.EAST us.ORCL egx.MCQE=167.85,+8.5 us.XYZ=12.30,+9.1,-4.2]
 ```
 
 It builds every row from the data log (close, change from the previous session, YTD), the italic close lines,
-the fixed stock lists in order, up to three notable movers per market (desk stocks from the log; any other with
+the fixed stock lists in order, up to two notable movers per market (desk stocks from the log; any other with
 the close, change and YTD fetch_figures.py printed for it), and the currency table with its notes where the log
-shows a milestone. Paste its output, then: fix anything it lists under CHECK, mark any disputed figure
+shows a milestone. **Mover rows:** at most two per market, and only for a move of 3% or more;
+on a quiet day leave them out. tables.py and the checker flag a smaller move. Paste its output, then: fix anything it lists under CHECK, mark any disputed figure
 `(unconfirmed)`, and edit a Note where a short cause fits better. Do not type the tables by hand or rerun it row by
 row. Open `refs/tables.md` only for a case the script does not cover (an intraday table, an EGX holiday note, a
 row's format in doubt).
@@ -427,24 +440,27 @@ Also log, every day, with the same command:
 
 The weekly log check does not expect the rates and T-bill yields every day.
 
-**Bonus shares and splits:** every run, after logging, run
-`python3 .claude/skills/daily-newsletter/corporate_actions.py --check`. When an Egyptian stock in the log
+**After logging, one command does the rest:** `python3 .claude/skills/daily-newsletter/after_log.py DATE [MOVER ...]`
+runs, in order, the bonus-share check, the gap fill, the intraday fetch, the week snapshot, market_facts.py (its
+NOTABLE lines) and tables.py (MOVER as tables.py takes it), each with a time limit, and prints only what needs
+attention, then ok or FAILED per step with the command to rerun a failed one. Do not run the six one by one. What
+each does and what to do with its output:
+
+**Bonus shares and splits** (`corporate_actions.py --check`): when an Egyptian stock in the log
 has passed its ex-date (the first session without the right to the free shares), confirm the ratio in the
 company's disclosure (Mubasher or Arab Finance, cross-checked against the reference price the script
 estimates), then run `corporate_actions.py --apply TICKER EXDATE BONUS` once (BONUS is free shares per
 share: 0.25 for one for every four) and refresh the spreadsheet. Without it, the charts show a fall that
 never happened to holders and the changes and YTD figures come out too low. Cash dividends are not adjusted.
 
-**Gaps:** every run, after logging, run `python3 .claude/skills/daily-newsletter/fill_gaps.py DATE 10 --write`.
-It finds figures missing from the last ten entries although the entries around them have them, and fills each
+**Gaps** (`fill_gaps.py DATE 10 --write`): it finds figures missing from the last ten entries although the entries around them have them, and fills each
 from a dated source (Yahoo, Nasdaq or CoinGecko history; the desk's intraday file for Egyptian stocks; the last
 weekday's pound rates for Friday and Saturday closes), printing every value beside its neighbours. Check any line
 it marks as more than 8% from a neighbour, and fill the `MANUAL` lines it lists by hand with log_figures.py when a
 source confirms the figure (or leave them, and say so in the final reply).
 
-**The week behind the trend lines:** then run `python3 .claude/skills/markets-desk/fetch_intraday.py` (brings the desk's
-intraday prices up to the last session, about a minute) and `python3 .claude/skills/daily-newsletter/week_snapshot.py DATE`.
-It saves `data/weeks/DATE.json`, the last five sessions hour by hour for the desk's stocks and the indexes, which the
+**The week behind the trend lines** (`fetch_intraday.py`, bringing the desk's intraday prices up to the last
+session, then `week_snapshot.py DATE`): it saves `data/weeks/DATE.json`, the last five sessions hour by hour for the desk's stocks and the indexes, which the
 site draws as this edition's "Last 7 days" lines; commit it, and `desk/intraday.json`, with the edition.
 
 The spreadsheet copy, `data/markets.xlsx`, is rewritten by GitHub Actions after the push (the "Audio and chores"
