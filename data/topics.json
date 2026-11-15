@@ -14,8 +14,8 @@
    "drivers": [
     "oil"
    ],
-   "now": "The United States keeps its naval blockade of Iran with no talks scheduled, after President Trump said on November 12 that Washington does not need a deal. Iran claimed a strike on a US radar in Bahrain on November 13 and said tankers hit mines near Hormuz overnight into November 14, claims not independently confirmed; Brent ended the week at $95.84, down 2.5%. Trump, Xi Jinping and Vladimir Putin are due to discuss Iran in Shenzhen on November 18-19.",
-   "now_date": "2026-11-14"
+   "now": "Iran's Revolutionary Guard claimed a six-drone strike on a US radar in Bahrain on November 15, prompting Bahrain's first nationwide alerts since September; the claim is unconfirmed. Iran says three tankers hit mines near Hormuz, the Houthis keep firing at Saudi Arabia, and the GCC has asked the UN Security Council to make Iran pay compensation. Brent ended the week of November 13 at $95.84.",
+   "now_date": "2026-11-15"
   },
   {
    "id": "pound-cbe",
@@ -30,8 +30,8 @@
    "drivers": [
     "egp-rates"
    ],
-   "now": "The central bank's dollar selling rate eased to EGP 53.50 on November 12 from 54.01 a week earlier, about 0.9% stronger for the pound, helped by record remittances of $38.2 billion in nine months. Urban inflation slowed to 12.7% in October; the deposit rate stays at 20% and the one-year T-bill yield was 26.07% on November 12. The next rate meeting is on December 17.",
-   "now_date": "2026-11-14"
+   "now": "The central bank's dollar rate stands at 53.50, within 0.2% of the pound's strongest level in a year. Policy rates are 20% for deposits and 21% for lending after the October 29 hike, the one-year treasury-bill yield was 26.07% at the November 12 auction, and the next rate meeting is December 17.",
+   "now_date": "2026-11-15"
   },
   {
    "id": "ai-chips",
@@ -46,8 +46,8 @@
    "drivers": [
     "ai-spending"
    ],
-   "now": "Nvidia ended the week of November 13 at $162.85, down 12.7%, its sixth straight weekly fall, after founder Jensen Huang resigned as chief executive on November 12; CFO Colette Kress is interim chief. Nvidia reports results on November 17, and Anthropic's IPO of up to $64.4 billion is due to price on November 18.",
-   "now_date": "2026-11-14"
+   "now": "Nvidia closed the week of November 13 at $162.85, a 52-week low, after Jensen Huang resigned as chief executive on November 12; a petition to reinstate him passed 115,000 signatures. Interim chief Colette Kress presents results on November 17, and Anthropic plans to price 825 million shares at $70-78 on November 18, with orders six times the offer.",
+   "now_date": "2026-11-15"
   },
   {
    "id": "us-midterms",
@@ -103,8 +103,8 @@
     ]
    ],
    "drivers": [],
-   "now": "The IMF still aims to complete Egypt's eighth and final review, worth about $2.3 billion, before the program ends on December 15; no board date has been set. A presidential decree now lets the Finance Ministry use 26,690 feddans of Red Sea land to cut public debt.",
-   "now_date": "2026-11-14"
+   "now": "Egypt's eighth and final IMF review moved to online talks after a mission to Cairo from October 25 to November 5 ended without a staff-level agreement. About $2.3 billion from the loan and the climate facility is at stake, and the program expires on December 15; no board date has been set.",
+   "now_date": "2026-11-15"
   },
   {
    "id": "gaza-lebanon",
@@ -112,8 +112,8 @@
    "match": "\\b(Gaza|Hamas|Hezbollah|Lebanon|Lebanese)\\b",
    "related": [],
    "drivers": [],
-   "now": "Israeli strikes continue in Gaza despite the October 2025 ceasefire: a strike on Nasser Hospital in Khan Younis killed at least six people on November 12, and a baby died of cold the same day. More than 50 countries and organizations have urged unimpeded aid access, with the UN saying 150,000 tents are held at the borders.",
-   "now_date": "2026-11-14"
+   "now": "Israeli strikes continue in Gaza despite the October 2025 ceasefire: a strike in Khan Younis killed Rafah brigade commander Samir Abu Younis, and Gaza's health authorities count at least 1,600 killed since the truce. Egypt and 17 countries condemned the November 12 strike on Nasser Hospital as winter storms flood displacement camps.",
+   "now_date": "2026-11-15"
   },
   {
    "id": "oil",
@@ -128,8 +128,8 @@
    "drivers": [
     "oil"
    ],
-   "now": "Brent crude rose about 3.4% to roughly $95.90 a barrel on November 12 as Iran-Gulf tensions flared, with Iran claiming a strike on a US radar in Bahrain, reports of tanker explosions in the Strait of Hormuz, and Houthi strikes on Saudi oil infrastructure. Brent is up about 58% so far this year.",
-   "now_date": "2026-11-13"
+   "now": "Brent settled at $95.84 a barrel on November 13, its second weekly fall, despite the US naval blockade of Iran and Iranian claims of tankers hitting mines near Hormuz. Cheaper oil eases Egypt's fuel import bill.",
+   "now_date": "2026-11-15"
   },
   {
    "id": "saudi-deployment",
@@ -142,6 +142,128 @@
   }
  ],
  "stories": [
+  {
+   "ed": "2026-11-15",
+   "id": "story-wall-street-s-winning-week",
+   "lead": "Wall Street's winning week",
+   "sec": "Markets",
+   "text": "The S&P 500 lost 0.40% to 7,561.67 on Friday, the Nasdaq 0.91% to 25,136.27, while the Dow gained 0.10% to 52,347.55. All three still rose more than 2% on the week, the Nasdaq's first weekly gain in five, AP reported. Nvidia fell 2.0% to…",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-11-15",
+   "id": "story-nvidia-and-anthropic-week",
+   "lead": "Nvidia and Anthropic week",
+   "sec": "Markets",
+   "text": "A petition urging Nvidia to reinstate Jensen Huang, who resigned as chief executive on November 12, passed 115,000 signatures, including Elon Musk's, TechCrunch reported; interim chief Colette Kress presents results on Tuesday after the US…",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-11-15",
+   "id": "story-mines-in-hormuz",
+   "lead": "Mines in Hormuz",
+   "sec": "Regional and Gulf",
+   "text": "Iran's navy said three tankers caught fire after hitting mines near the Strait of Hormuz on Saturday while using an \"unauthorized\" route with their tracking switched off; earlier reports said two, and none of the ships was named. US…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-15",
+   "id": "story-joint-condemnation-of-hospital-strike",
+   "lead": "Joint condemnation of hospital strike",
+   "sec": "Egypt News",
+   "text": "Egypt joined 17 Arab and Muslim-majority countries in condemning \"in the strongest terms\" an Israeli strike on the Nasser Medical Complex in Khan Younis, Daily News Egypt reported. Their foreign ministers said the attack broke…",
+   "topics": [
+    "gaza-lebanon"
+   ],
+   "added": [
+    "gaza-lebanon"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-15",
+   "id": "story-iran-strikes-bahrain",
+   "lead": "Iran strikes Bahrain",
+   "sec": "Regional and Gulf",
+   "text": "Iran's Revolutionary Guard said it hit a US air-defense radar at the Riffa helicopter base in Bahrain with six drones early on Sunday, and Bahrain issued its first nationwide threat alerts since September, telling residents to move to safe…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-15",
+   "id": "story-imf-review-goes-virtual",
+   "lead": "IMF review goes virtual",
+   "sec": "Egypt News",
+   "text": "Egypt's eighth and final review under its $8 billion IMF program has moved to online talks after a mission to Cairo from October 25 to November 5 ended without a staff-level agreement. About $2.3 billion from the loan and the fund's…",
+   "topics": [
+    "imf"
+   ]
+  },
+  {
+   "ed": "2026-11-15",
+   "id": "story-houthi-missiles-at-riyadh",
+   "lead": "Houthi missiles at Riyadh",
+   "sec": "Regional and Gulf",
+   "text": "The Saudi-led coalition said its air defenses intercepted two ballistic missiles fired by Yemen's Houthis toward Riyadh overnight, along with drones over the Eastern Province, Al Jazeera reported. Saudi authorities say at least 26 people…",
+   "topics": [
+    "iran-war"
+   ],
+   "added": [
+    "iran-war"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-15",
+   "id": "story-hamas-commander-killed",
+   "lead": "Hamas commander killed",
+   "sec": "Regional and Gulf",
+   "text": "An Israeli drone strike on al-Mawasi in Khan Younis killed Samir Abu Younis, commander of Hamas's armed wing in Rafah, Al Jazeera reported; Israel's army confirmed the strike and Hamas confirmed his death on Sunday. Gaza's health…",
+   "topics": [
+    "gaza-lebanon"
+   ]
+  },
+  {
+   "ed": "2026-11-15",
+   "id": "story-gulf-seeks-compensation",
+   "lead": "Gulf seeks compensation",
+   "sec": "Regional and Gulf",
+   "text": "The Gulf Cooperation Council asked the UN Security Council to make Iran pay full compensation for attacks on Gulf states since the war began on February 28, citing strikes on airports, ports, oil and gas sites, power stations and…",
+   "topics": [
+    "iran-war"
+   ],
+   "added": [
+    "iran-war"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-15",
+   "id": "story-egx30-before-the-open",
+   "lead": "EGX30 before the open",
+   "sec": "Markets",
+   "text": "The EGX resumes trading at 10am after the EGX30 closed Thursday down 0.91% at 52,023.37, still up about 24% this year. EFG Holding has risen four sessions in a row and stands within about 1% of its 52-week high ahead of its results on…",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-11-15",
+   "id": "story-dollar-gold-and-oil",
+   "lead": "Dollar, gold and oil",
+   "sec": "Markets",
+   "text": "The dollar index ended at 103.41, up for a third week and near its highest in 19 months, Reuters reported. Gold futures settled at $3,886.30 an ounce, near the year's low after a 4.5% weekly drop, and Brent crude settled at $95.84 a…",
+   "topics": [
+    "oil"
+   ]
+  },
   {
    "ed": "2026-11-14-recap",
    "id": "story-troops-in-saudi-arabia",

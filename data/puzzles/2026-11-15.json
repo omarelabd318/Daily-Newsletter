@@ -1,0 +1,522 @@
+{
+ "date": "2026-11-15",
+ "no": 4,
+ "crossword": {
+  "size": 9,
+  "grid": [
+   "EAR###TWO",
+   "AGE##GOOD",
+   "SEA#CROWD",
+   "ENCORE###",
+   "#THREATS#",
+   "###GATHER",
+   "STEAM#EVE",
+   "KHAN##SEE",
+   "YET###END"
+  ],
+  "clues": {
+   "across": [
+    {
+     "n": 1,
+     "row": 0,
+     "col": 0,
+     "len": 3,
+     "answer": "EAR",
+     "clue": "Listening organ, or a cob of corn"
+    },
+    {
+     "n": 4,
+     "row": 0,
+     "col": 6,
+     "len": 3,
+     "answer": "TWO",
+     "clue": "The number of a pair, or of a tango's dancers"
+    },
+    {
+     "n": 7,
+     "row": 1,
+     "col": 0,
+     "len": 3,
+     "answer": "AGE",
+     "clue": "Stone or Bronze, for one"
+    },
+    {
+     "n": 8,
+     "row": 1,
+     "col": 5,
+     "len": 4,
+     "answer": "GOOD",
+     "clue": "Fit to eat, or well-behaved"
+    },
+    {
+     "n": 9,
+     "row": 2,
+     "col": 0,
+     "len": 3,
+     "answer": "SEA",
+     "clue": "The Red one borders Egypt's east"
+    },
+    {
+     "n": 10,
+     "row": 2,
+     "col": 4,
+     "len": 5,
+     "answer": "CROWD",
+     "clue": "A full stadium's worth of fans"
+    },
+    {
+     "n": 11,
+     "row": 3,
+     "col": 0,
+     "len": 6,
+     "answer": "ENCORE",
+     "clue": "Shouted for one more song"
+    },
+    {
+     "n": 13,
+     "row": 4,
+     "col": 1,
+     "len": 7,
+     "answer": "THREATS",
+     "clue": "Warnings of harm to come"
+    },
+    {
+     "n": 16,
+     "row": 5,
+     "col": 3,
+     "len": 6,
+     "answer": "GATHER",
+     "clue": "Collect, as a crowd does"
+    },
+    {
+     "n": 18,
+     "row": 6,
+     "col": 0,
+     "len": 5,
+     "answer": "STEAM",
+     "clue": "Kettle output that once drove trains"
+    },
+    {
+     "n": 21,
+     "row": 6,
+     "col": 6,
+     "len": 3,
+     "answer": "EVE",
+     "clue": "The night before a holiday"
+    },
+    {
+     "n": 22,
+     "row": 7,
+     "col": 0,
+     "len": 4,
+     "answer": "KHAN",
+     "clue": "Gaza's Younis or Cairo's el-Khalili begins with it"
+    },
+    {
+     "n": 23,
+     "row": 7,
+     "col": 6,
+     "len": 3,
+     "answer": "SEE",
+     "clue": "Notice with the eyes"
+    },
+    {
+     "n": 24,
+     "row": 8,
+     "col": 0,
+     "len": 3,
+     "answer": "YET",
+     "clue": "So far, or nevertheless"
+    },
+    {
+     "n": 25,
+     "row": 8,
+     "col": 6,
+     "len": 3,
+     "answer": "END",
+     "clue": "Final whistle, in a word"
+    }
+   ],
+   "down": [
+    {
+     "n": 1,
+     "row": 0,
+     "col": 0,
+     "len": 4,
+     "answer": "EASE",
+     "clue": "Comfort; or to lessen pain"
+    },
+    {
+     "n": 2,
+     "row": 0,
+     "col": 1,
+     "len": 5,
+     "answer": "AGENT",
+     "clue": "A footballer's dealmaker"
+    },
+    {
+     "n": 3,
+     "row": 0,
+     "col": 2,
+     "len": 5,
+     "answer": "REACH",
+     "clue": "Arrive at, or stretch out to"
+    },
+    {
+     "n": 4,
+     "row": 0,
+     "col": 6,
+     "len": 3,
+     "answer": "TOO",
+     "clue": "Also, or excessively"
+    },
+    {
+     "n": 5,
+     "row": 0,
+     "col": 7,
+     "len": 3,
+     "answer": "WOW",
+     "clue": "Reads the same both ways as a cry of amazement"
+    },
+    {
+     "n": 6,
+     "row": 0,
+     "col": 8,
+     "len": 3,
+     "answer": "ODD",
+     "clue": "Strange, like the number nine"
+    },
+    {
+     "n": 8,
+     "row": 1,
+     "col": 5,
+     "len": 5,
+     "answer": "GREAT",
+     "clue": "The Pyramid of Giza's adjective"
+    },
+    {
+     "n": 10,
+     "row": 2,
+     "col": 4,
+     "len": 5,
+     "answer": "CREAM",
+     "clue": "The best, rising to the top of the milk"
+    },
+    {
+     "n": 12,
+     "row": 3,
+     "col": 3,
+     "len": 5,
+     "answer": "ORGAN",
+     "clue": "Heart or church instrument"
+    },
+    {
+     "n": 14,
+     "row": 4,
+     "col": 6,
+     "len": 5,
+     "answer": "THESE",
+     "clue": "Not those"
+    },
+    {
+     "n": 15,
+     "row": 4,
+     "col": 7,
+     "len": 5,
+     "answer": "SEVEN",
+     "clue": "Times ten, the international goals tally that made Egypt's new all-time top scorer"
+    },
+    {
+     "n": 17,
+     "row": 5,
+     "col": 8,
+     "len": 4,
+     "answer": "REED",
+     "clue": "Nile plant once made into papyrus pens"
+    },
+    {
+     "n": 18,
+     "row": 6,
+     "col": 0,
+     "len": 3,
+     "answer": "SKY",
+     "clue": "Blue overhead on a clear Cairo day"
+    },
+    {
+     "n": 19,
+     "row": 6,
+     "col": 1,
+     "len": 3,
+     "answer": "THE",
+     "clue": "Definite article"
+    },
+    {
+     "n": 20,
+     "row": 6,
+     "col": 2,
+     "len": 3,
+     "answer": "EAT",
+     "clue": "Have a meal"
+    }
+   ]
+  },
+  "news": []
+ },
+ "killer": {
+  "level": 0,
+  "solution": "879341562542976183163528974238457691917863245456219837324695718795184326681732459",
+  "cages": [
+   {
+    "sum": 15,
+    "cells": [
+     23,
+     32
+    ]
+   },
+   {
+    "sum": 8,
+    "cells": [
+     20,
+     21
+    ]
+   },
+   {
+    "sum": 18,
+    "cells": [
+     52,
+     53,
+     62
+    ]
+   },
+   {
+    "sum": 10,
+    "cells": [
+     60,
+     61,
+     70
+    ]
+   },
+   {
+    "sum": 16,
+    "cells": [
+     0,
+     9,
+     18,
+     27
+    ]
+   },
+   {
+    "sum": 20,
+    "cells": [
+     65,
+     72,
+     73,
+     74
+    ]
+   },
+   {
+    "sum": 5,
+    "cells": [
+     76,
+     77
+    ]
+   },
+   {
+    "sum": 14,
+    "cells": [
+     13,
+     14,
+     15
+    ]
+   },
+   {
+    "sum": 8,
+    "cells": [
+     66,
+     75
+    ]
+   },
+   {
+    "sum": 10,
+    "cells": [
+     36,
+     37
+    ]
+   },
+   {
+    "sum": 7,
+    "cells": [
+     46,
+     55
+    ]
+   },
+   {
+    "sum": 7,
+    "cells": [
+     22,
+     31
+    ]
+   },
+   {
+    "sum": 12,
+    "cells": [
+     3,
+     12
+    ]
+   },
+   {
+    "sum": 22,
+    "cells": [
+     1,
+     2,
+     10,
+     11
+    ]
+   },
+   {
+    "sum": 12,
+    "cells": [
+     29,
+     30
+    ]
+   },
+   {
+    "sum": 20,
+    "cells": [
+     71,
+     79,
+     80
+    ]
+   },
+   {
+    "sum": 26,
+    "cells": [
+     24,
+     25,
+     26,
+     33
+    ]
+   },
+   {
+    "sum": 9,
+    "cells": [
+     19,
+     28
+    ]
+   },
+   {
+    "sum": 7,
+    "cells": [
+     69,
+     78
+    ]
+   },
+   {
+    "sum": 8,
+    "cells": [
+     47,
+     48
+    ]
+   },
+   {
+    "sum": 10,
+    "cells": [
+     4,
+     5,
+     6
+    ]
+   },
+   {
+    "sum": 8,
+    "cells": [
+     7,
+     8
+    ]
+   },
+   {
+    "sum": 10,
+    "cells": [
+     49,
+     58
+    ]
+   },
+   {
+    "sum": 9,
+    "cells": [
+     40,
+     41
+    ]
+   },
+   {
+    "sum": 15,
+    "cells": [
+     38,
+     39
+    ]
+   },
+   {
+    "sum": 10,
+    "cells": [
+     34,
+     35
+    ]
+   },
+   {
+    "sum": 7,
+    "cells": [
+     45,
+     54
+    ]
+   },
+   {
+    "sum": 10,
+    "cells": [
+     56,
+     57
+    ]
+   },
+   {
+    "sum": 12,
+    "cells": [
+     67,
+     68
+    ]
+   },
+   {
+    "sum": 11,
+    "cells": [
+     16,
+     17
+    ]
+   },
+   {
+    "sum": 9,
+    "cells": [
+     43,
+     44
+    ]
+   },
+   {
+    "sum": 10,
+    "cells": [
+     42,
+     51
+    ]
+   },
+   {
+    "sum": 16,
+    "cells": [
+     63,
+     64
+    ]
+   },
+   {
+    "sum": 14,
+    "cells": [
+     50,
+     59
+    ]
+   }
+  ]
+ }
+}

@@ -1,6 +1,13 @@
 {
  "note": "How the recorded voice (make_audio.py) says words the phonemizer gets wrong. Each entry is a word as written in the edition (matched whole, with or without a final 's' or 's) and its sounds in the phonemizer's alphabet (IPA, US English, stress marks before the stressed vowel). Add a word the day a listener reports it; it applies to every edition recorded from then on. 'prefix_re' lists word stems after 're-' that are said 'ree' (refinance, rebound), not 'ruh'. 'checked' lists names already reviewed and found right, so `make_audio.py --names EDITION` shows only new ones.",
  "words": {
+  "Hisham": "hiʃˈɑːm",
+  "Hadouta": "hɑdˈuːtə",
+  "Ti": "tˈiː",
+  "Raphinha": "hɑfˈiːnjə",
+  "Abdalla": "ɑbdˈɑlə",
+  "Graudin": "ɡɹˈaʊdɪn",
+  "Vinicius": "vinˈiːsiəs",
   "Houthis": "hˈuːθiz",
   "Houthi": "hˈuːθi",
   "Qir": "kˈiːɹ",
