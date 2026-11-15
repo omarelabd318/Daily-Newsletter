@@ -168,6 +168,12 @@
    "sector": "Real estate",
    "news": [
     {
+     "date": "2026-11-15",
+     "text": "Nine-month consolidated net profit after tax rose 19% to EGP 15.01bn from EGP 12.63bn, on revenue up 24.1% to EGP 47.55bn; third-quarter contracted sales rose 54.6% to EGP 71bn.",
+     "source": "Almasdar",
+     "url": "https://www.almasdar.com/176055"
+    },
+    {
      "date": "2026-10-28",
      "text": "Signed an agreement with the state to develop four mixed-use projects in East Cairo, Alexandria and the North Coast, with targeted investment of about EGP 11 trillion over more than 37 million square metres. President El-Sisi also asked the government to work with the group on 200,000 homes for rent.",
      "source": "CairoScene",
@@ -233,6 +239,20 @@
      "A richer valuation than other developers leaves less margin."
     ],
     "change": "Detail on how the state deal is financed and when it starts to earn."
+   },
+   "lastResults": {
+    "date": "2026-11-15",
+    "period": "Nine months to September 2026",
+    "verdict": "in line",
+    "headline": "Nine-month profit up 19% to EGP 15.01bn on revenue up 24.1% to EGP 47.55bn",
+    "points": [
+     "No published consensus: consolidated net profit after tax rose to EGP 15.01bn from EGP 12.63bn; revenue EGP 47.55bn against EGP 38.32bn. Profit attributable to shareholders was not in the statement.",
+     "Third-quarter contracted sales rose 54.6% to EGP 71bn (nine months EGP 290.1bn); recurring income was EGP 18.9bn, 40% of revenue. Third-quarter profit alone rose about 12.5% as finance costs climbed (Asharq Business, Al Borsa)."
+    ],
+    "thesis": "Sales are strong but profit is growing more slowly than revenue as financing costs rise, which fits the desk's view that developers trail the market while rates stay high.",
+    "source": "Almasdar",
+    "url": "https://www.almasdar.com/176055",
+    "basis": "company statement as reported by two outlets; the filing was not read"
    }
   },
   "ABUK": {
@@ -511,6 +531,35 @@
       "value": "$185.50"
      }
     ]
+   },
+   "brief": {
+    "written": "2026-11-15",
+    "business": "The largest US oil company: it pumps oil and gas (Upstream) and refines and sells fuels, chemicals and lubricants. Third-quarter revenue rose 33% to $113.16bn and net income was $15.41bn, against $7.55bn a year earlier.",
+    "drivers": [
+     {
+      "name": "Oil prices",
+      "text": "Brent at $95.84 is up 57.5% this year because of the Iran war; profit doubled while production fell, so the gain came from prices."
+     },
+     {
+      "name": "Production",
+      "text": "4.5m barrels of oil equivalent a day this year, 117,000 fewer than in 2025 because of Middle East and Kazakhstan disruptions, mostly made up by the Permian and Guyana."
+     },
+     {
+      "name": "Refining margins",
+      "text": "Its US Gulf Coast refineries ran at 100% in the third quarter, when diesel reached about $6.32 a gallon in late October, up 71% on the year (AP)."
+     },
+     {
+      "name": "Chemicals",
+      "text": "The weak part: chemical earnings fell in the third quarter as margins declined."
+     }
+    ],
+    "value": "16.1 times the last 12 months' earnings of $10.62 a share and 12.8 times this year's forecast, against an average analysts' target of $185.50. The catch: those earnings rest on war-time oil and fuel prices.",
+    "risks": [
+     "An end to the Iran war, or the IEA's forecast surplus of 1.7m barrels a day, taking Brent back toward its pre-war level.",
+     "More lost output in the Middle East if the Gulf fighting spreads to the fields it works in.",
+     "Diesel and refining margins falling back from records as shipping and supply normalize."
+    ],
+    "change": "Its fourth-quarter results: net income back under about $10bn a quarter, or Brent closing below $85 for a month, would end the case for higher earnings."
    }
   },
   "MSFT": {
@@ -597,6 +646,35 @@
       "value": "$630.00"
      }
     ]
+   },
+   "brief": {
+    "written": "2026-11-15",
+    "business": "Software and cloud: it rents computing and AI capacity through Azure and sells Microsoft 365, Windows, Xbox and search ads. Revenue rose 19% to $92.28bn in the quarter to September, with net income of $36.63bn against $27.75bn a year earlier.",
+    "drivers": [
+     {
+      "name": "Azure",
+      "text": "Revenue rose 48% to $33.17bn in the quarter, above the roughly 45% analysts expected; it is now the biggest single source of growth."
+     },
+     {
+      "name": "Microsoft 365",
+      "text": "Microsoft 365 cloud revenue was $27.78bn in the quarter, the steady subscription base under the AI story."
+     },
+     {
+      "name": "AI spending",
+      "text": "It paid $39.37bn for property and equipment in the quarter, with another $26.5bn of purchases still owed: data centers built before the revenue arrives."
+     },
+     {
+      "name": "Margins",
+      "text": "Operating income rose 21% to $45.92bn; the shift toward Azure, which earns less per dollar than software, held the margin back."
+     }
+    ],
+    "value": "29 times the last 12 months' earnings of $18.04 a share and 26.3 times next year's forecast, with a 0.7% dividend yield and an average analysts' target of $630. The catch: the multiple assumes the data-center spending earns its return.",
+    "risks": [
+     "AI spending running ahead of the revenue it brings, squeezing returns if demand cools.",
+     "Higher US rates, with the 10-year at 5.15%, lowering what investors pay for long-dated growth.",
+     "Windows and devices revenue falling, as it did in the September quarter."
+    ],
+    "change": "Its next quarterly results: Azure growth below 40%, or spending rising while operating income growth slows below revenue growth, would weaken the case."
    }
   },
   "GOOGL": {
@@ -1225,6 +1303,19 @@
      "Earnings spread across currencies, so results swing with the pound."
     ],
     "change": "Results on November 18: whether the busiest turnover in a year shows up in brokerage income."
+   },
+   "preview": {
+    "date": "2026-11-18",
+    "period": "Third quarter 2026",
+    "watch": [
+     "Profit against the second quarter's EGP 776m, which fell 3% from EGP 802m despite higher revenue.",
+     "Brokerage and investment-banking fees from the busiest EGX turnover in a year and the run of share offerings since October.",
+     "Banque Next and EFG Finance, the lending arms management credits for growth.",
+     "No consensus is published; the stock stands within about 1% of its 52-week high at EGP 25.36, so a miss has further to fall."
+    ],
+    "source": "Asharq Business",
+    "url": "https://asharqbusiness.com/economics/143987/",
+    "written": "2026-11-15"
    }
   },
   "CLHO": {
@@ -2350,10 +2441,10 @@
     "source": "Mubasher"
    },
    "valuation": {
-    "source": "TradingView and Mubasher",
+    "source": "Company filing (Mubasher; Hapi Journal for 2025)",
     "asOf": "2026-11-15",
-    "period": null,
-    "basis": "per-share figures that do not match the price",
+    "period": "2026-09-30",
+    "basis": "results for the 12 months to September 2026",
     "price": 12.69,
     "rows": [
      {
@@ -2361,8 +2452,20 @@
       "value": "EGP 69.1bn"
      },
      {
-      "label": "Ratios",
-      "value": "Not shown: per-share figures that do not match the price"
+      "label": "P/E",
+      "value": "6.2"
+     },
+     {
+      "label": "P/B",
+      "value": null
+     },
+     {
+      "label": "Earnings per share (12 months)",
+      "value": "EGP 2.04"
+     },
+     {
+      "label": "Book value per share",
+      "value": null
      }
     ]
    },
@@ -2431,6 +2534,17 @@
     "source": "Mubasher",
     "url": "https://www.mubasher.info/news/4701290/",
     "basis": "outlet reports; the filing was not read"
+   },
+   "filed": {
+    "period": "2026-09-30",
+    "eps_ttm": 2.0356,
+    "bvps": null,
+    "profit_ttm": 11084000000.0,
+    "shares": 5445000000.0,
+    "how": "9,830,000,000 this year to date + 5,544,000,000 last year - 4,290,000,000 a year earlier",
+    "source": "Mubasher; Hapi Journal for 2025",
+    "url": "https://www.mubasher.info/news/4701290/",
+    "recorded": "2026-11-15"
    }
   },
   "BQDC": {
@@ -2493,10 +2607,10 @@
     }
    ],
    "valuation": {
-    "source": "TradingView and Mubasher",
+    "source": "Company filing (Arab Finance)",
     "asOf": "2026-11-15",
-    "period": null,
-    "basis": "no recent results",
+    "period": "2026-09-30",
+    "basis": "results for the 12 months to September 2026",
     "price": 5.63,
     "rows": [
      {
@@ -2504,8 +2618,20 @@
       "value": "EGP 85.9bn"
      },
      {
-      "label": "Ratios",
-      "value": "Not shown: no recent results"
+      "label": "P/E",
+      "value": "5.2"
+     },
+     {
+      "label": "P/B",
+      "value": null
+     },
+     {
+      "label": "Earnings per share (12 months)",
+      "value": "EGP 1.09"
+     },
+     {
+      "label": "Book value per share",
+      "value": null
      }
     ]
    },
@@ -2553,6 +2679,17 @@
      "Trading has thinned to about EGP 250m a session since the first days."
     ],
     "change": "Full-year results and its first dividend as a listed bank."
+   },
+   "filed": {
+    "period": "2026-09-30",
+    "eps_ttm": 1.0917,
+    "bvps": null,
+    "profit_ttm": 16660000000.0,
+    "shares": 15260000000.0,
+    "how": "13,110,000,000 this year to date + 16,070,000,000 last year - 12,520,000,000 a year earlier",
+    "source": "Arab Finance",
+    "url": "http://arabfinance.com/en/news/newdetails/49615",
+    "recorded": "2026-11-15"
    }
   },
   "V": {

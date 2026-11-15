@@ -365,6 +365,13 @@
      "source": "CNBC",
      "url": "https://www.cnbc.com/2026/11/12/us-treasurys-bonds-yields.html",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-15",
+     "text": "Talaat Moustafa's nine-month profit rose 19% on revenue up 24.1%, with third-quarter profit up only about 12.5% as finance costs climbed: sales hold, high rates squeeze the profit.",
+     "source": "Almasdar",
+     "url": "https://www.almasdar.com/176055",
+     "effect": "supports"
     }
    ],
    "driver": "egp-rates"
@@ -589,6 +596,11 @@
    "result": {
     "date": "2026-11-15",
     "text": "Judged on its date: CIB +6.9% against egx30 +4.9% since 2026-10-30."
+   },
+   "lesson": {
+    "date": "2026-11-15",
+    "text": "CIB rose 6.9% against the EGX30's 4.9% after the October 29 hike, as the view argued: buyers paid for its deposit base earning 26% in bills, even though its third-quarter margin had slipped to 8.02%. Nothing: the reasoning held.",
+    "tag": "reasoning-held"
    }
   },
   {
@@ -830,6 +842,13 @@
      "source": "Maspero",
      "url": "https://www.maspero.eg/reports-economy/2026/11/13/1005222/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-15",
+     "text": "Suez Canal revenue rose 94% to $724m in October, its best month since late 2023, a second dollar source alongside foreign bill buying.",
+     "source": "Al-Monitor",
+     "url": "https://www.al-monitor.com/originals/2026/11/suez-canal-revenue-jumps-94-despite-houthi-red-sea-threats",
+     "effect": "supports"
     }
    ],
    "wrongIf": [
@@ -924,6 +943,13 @@
      "source": "Reuters (via RTÉ)",
      "url": "https://www.rte.ie/news/business/2026/1113/1599081-world-oil-prices/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-15",
+     "text": "Iran said three tankers hit mines near Hormuz on Saturday and claimed a drone strike on a US radar in Bahrain on Sunday; both unconfirmed, but an escalation while talks stall makes a spike above $105 more likely.",
+     "source": "Anadolu",
+     "url": "https://www.aa.com.tr/en/middle-east/2-oil-tankers-hit-mines-catch-fire-near-strait-of-hormuz-irans-revolutionary-guard/4125453",
+     "effect": "against"
     }
    ],
    "wrongIf": [
