@@ -32,8 +32,8 @@
    "newsletter": 20.71,
    "newsletter_flag": "Fell back to Opus 4.8,\nthen crashed and was resumed",
    "flag_at": [
-    -1.6,
-    23.2
+    -1.75,
+    17.5
    ],
    "hatch": true
   },
@@ -54,6 +54,16 @@
     -0.15,
     12.6
    ]
+  },
+  "2026-11-16": {
+   "desk": 5.31,
+   "newsletter": 0.84,
+   "newsletter_flag": "Failed: auto-mode safety\ncheck blocked every\nshell command",
+   "flag_at": [
+    -0.15,
+    15.5
+   ],
+   "hatch": true
   }
  }
 }
