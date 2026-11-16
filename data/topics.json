@@ -14,8 +14,8 @@
    "drivers": [
     "oil"
    ],
-   "now": "Iran's Revolutionary Guard claimed a six-drone strike on a US radar in Bahrain on November 15, prompting Bahrain's first nationwide alerts since September; the claim is unconfirmed. Iran says three tankers hit mines near Hormuz, the Houthis keep firing at Saudi Arabia, and the GCC has asked the UN Security Council to make Iran pay compensation. Brent ended the week of November 13 at $95.84.",
-   "now_date": "2026-11-15"
+   "now": "Iran says it has cut the time its plan to reopen the Strait of Hormuz would take from seven days to two and rules out UN nuclear inspections until the war ends. The USS Theodore Roosevelt became the third US carrier in the region, a tanker was hit by a projectile near Hormuz on November 16, and Bahrain jailed 64 people for life for colluding with Iran's Revolutionary Guard.",
+   "now_date": "2026-11-16"
   },
   {
    "id": "pound-cbe",
@@ -30,8 +30,8 @@
    "drivers": [
     "egp-rates"
    ],
-   "now": "The central bank's dollar rate stands at 53.50, within 0.2% of the pound's strongest level in a year. Policy rates are 20% for deposits and 21% for lending after the October 29 hike, the one-year treasury-bill yield was 26.07% at the November 12 auction, and the next rate meeting is December 17.",
-   "now_date": "2026-11-15"
+   "now": "The central bank's dollar rate eased to EGP 53.75 on November 16 from 53.86, after the October 29 hike left the deposit rate at 20% and the lending rate at 21%. Deutsche Bank Research sees the pound between 48 and 60 to the dollar depending on the Iran war; the next rate meeting is December 17.",
+   "now_date": "2026-11-16"
   },
   {
    "id": "ai-chips",
@@ -46,8 +46,8 @@
    "drivers": [
     "ai-spending"
    ],
-   "now": "Nvidia closed the week of November 13 at $162.85, a 52-week low, after Jensen Huang resigned as chief executive on November 12; a petition to reinstate him passed 115,000 signatures. Interim chief Colette Kress presents results on November 17, and Anthropic plans to price 825 million shares at $70-78 on November 18, with orders six times the offer.",
-   "now_date": "2026-11-15"
+   "now": "Chip stocks led a global sell-off on November 16 before Nvidia's results on November 17, its first under interim chief Colette Kress after Jensen Huang resigned on November 12; Nvidia closed November 13 at $162.85, a 52-week low. Anthropic prices its IPO on November 18, and Congress is pushing tighter AI chip export rules.",
+   "now_date": "2026-11-16"
   },
   {
    "id": "us-midterms",
@@ -103,8 +103,8 @@
     ]
    ],
    "drivers": [],
-   "now": "Egypt's eighth and final IMF review moved to online talks after a mission to Cairo from October 25 to November 5 ended without a staff-level agreement. About $2.3 billion from the loan and the climate facility is at stake, and the program expires on December 15; no board date has been set.",
-   "now_date": "2026-11-15"
+   "now": "No staff-level agreement on Egypt's eighth and final IMF review has been announced, with about $2.3 billion at stake and the program expiring on December 15. Deutsche Bank Research expects the last tranches to be approved before year-end, while Fitch Solutions does not rule out a new program.",
+   "now_date": "2026-11-16"
   },
   {
    "id": "gaza-lebanon",
@@ -112,8 +112,8 @@
    "match": "\\b(Gaza|Hamas|Hezbollah|Lebanon|Lebanese)\\b",
    "related": [],
    "drivers": [],
-   "now": "Israeli strikes continue in Gaza despite the October 2025 ceasefire: a strike in Khan Younis killed Rafah brigade commander Samir Abu Younis, and Gaza's health authorities count at least 1,600 killed since the truce. Egypt and 17 countries condemned the November 12 strike on Nasser Hospital as winter storms flood displacement camps.",
-   "now_date": "2026-11-15"
+   "now": "Israeli strikes continue in Gaza despite the October 2025 ceasefire, and heavy rain is flooding displacement camps. On November 15 Australia, Canada, Italy and the UK urged Israel to let aid in, saying 150,000 tents are being kept out.",
+   "now_date": "2026-11-16"
   },
   {
    "id": "oil",
@@ -128,8 +128,8 @@
    "drivers": [
     "oil"
    ],
-   "now": "Brent settled at $95.84 a barrel on November 13, its second weekly fall, despite the US naval blockade of Iran and Iranian claims of tankers hitting mines near Hormuz. Cheaper oil eases Egypt's fuel import bill.",
-   "now_date": "2026-11-15"
+   "now": "Brent slipped to about $94 a barrel on November 16 from a $95.84 settle on November 13, as Hormuz shipments recover and a supply surplus looms. Cheaper oil eases Egypt's fuel import bill.",
+   "now_date": "2026-11-16"
   },
   {
    "id": "saudi-deployment",
@@ -142,6 +142,87 @@
   }
  ],
  "stories": [
+  {
+   "ed": "2026-11-16",
+   "id": "story-pound-and-the-imf",
+   "lead": "Pound and the IMF",
+   "sec": "Markets",
+   "text": "The central bank's dollar rate eased to EGP 53.75 on Monday from 53.86 on Sunday. Deutsche Bank Research expects the pound to trade between 48 and 60 to the dollar depending on the course of the Iran war, and sees the IMF approving Egypt's…",
+   "topics": [
+    "pound-cbe",
+    "imf"
+   ]
+  },
+  {
+   "ed": "2026-11-16",
+   "id": "story-iran-shortens-its-hormuz-timeline",
+   "lead": "Iran shortens its Hormuz timeline",
+   "sec": "Regional and Gulf",
+   "text": "Deputy Foreign Minister Kazem Gharibabadi told state TV that Iran had cut the time its plan to reopen the Strait of Hormuz would take from seven days to two, after talks with mediators including Qatar and Pakistan, and said Washington must…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-16",
+   "id": "story-gulf-markets-fall",
+   "lead": "Gulf markets fall",
+   "sec": "Markets",
+   "text": "Gulf stocks dropped on Sunday on Iranian attacks on Bahrain and Hormuz worries, with Saudi Arabia's index down 0.7% to 10,258 and Qatar 1.8%. EFG Hermes is co-leading Emaar Properties' offer of AED 15 a share for the roughly 20% of Emaar…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-16",
+   "id": "story-gold-and-oil-slide",
+   "lead": "Gold and oil slide",
+   "sec": "Markets",
+   "text": "Spot gold fell to about $3,840 an ounce, its lowest since October 2025, before steadying near $3,865, while Brent crude slipped to about $94 a barrel from Friday's $95.84 as Hormuz shipments recover and a supply surplus looms, according to…",
+   "topics": [
+    "oil"
+   ]
+  },
+  {
+   "ed": "2026-11-16",
+   "id": "story-gaza-floods",
+   "lead": "Gaza floods",
+   "sec": "Regional and Gulf",
+   "text": "Australia, Canada, Italy and the UK urged Israel to let aid workers and supplies into Gaza, saying 150,000 tents are being kept out as heavy rain floods camps where most of the population shelters.",
+   "topics": [
+    "gaza-lebanon"
+   ]
+  },
+  {
+   "ed": "2026-11-16",
+   "id": "story-congress-targets-chip-exports",
+   "lead": "Congress targets chip exports",
+   "sec": "In Other News",
+   "text": "Democrats and Republicans are backing bills to tighten exports of AI chips to China after the spy scandal that forced out Nvidia's chief executive, and want Nvidia's leaders to testify, The Verge reported. Senate Democratic leader Chuck…",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-11-16",
+   "id": "story-bahrain-jails-clerics",
+   "lead": "Bahrain jails clerics",
+   "sec": "Regional and Gulf",
+   "text": "A Bahraini court sentenced 64 people to life in prison and five to 15 years for colluding with Iran's Revolutionary Guard, in a case rights groups say mostly involved Shi'ite clerics. The ruling comes as Iran claims drone attacks on US…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-16",
+   "id": "story-ai-sell-off",
+   "lead": "AI sell-off",
+   "sec": "Markets",
+   "text": "Chip stocks led a global sell-off on Monday before Nvidia's results on Tuesday and Anthropic's IPO pricing on Wednesday. Japan's Nikkei fell 2.4% to 59,662.02 and South Korea's Kospi 3.6%, with SK Hynix down 7.9%, while Taiwan's Taiex lost…",
+   "topics": [
+    "ai-chips"
+   ]
+  },
   {
    "ed": "2026-11-15",
    "id": "story-wall-street-s-winning-week",

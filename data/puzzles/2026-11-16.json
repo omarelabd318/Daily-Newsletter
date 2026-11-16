@@ -1,0 +1,502 @@
+{
+ "date": "2026-11-16",
+ "no": 5,
+ "crossword": {
+  "size": 9,
+  "grid": [
+   "HER##FAIL",
+   "EYE#VOICE",
+   "YEP#ARMED",
+   "#DANCE###",
+   "##YEAST##",
+   "###ATTIC#",
+   "STARE#GOD",
+   "AIRED#ERA",
+   "DEER##RED"
+  ],
+  "clues": {
+   "across": [
+    {
+     "n": 1,
+     "row": 0,
+     "col": 0,
+     "len": 3,
+     "answer": "HER",
+     "clue": "Possessive word that could precede 'majesty'"
+    },
+    {
+     "n": 4,
+     "row": 0,
+     "col": 5,
+     "len": 4,
+     "answer": "FAIL",
+     "clue": "Fall short, or flunk an exam"
+    },
+    {
+     "n": 8,
+     "row": 1,
+     "col": 0,
+     "len": 3,
+     "answer": "EYE",
+     "clue": "Organ with an iris and a lens"
+    },
+    {
+     "n": 9,
+     "row": 1,
+     "col": 4,
+     "len": 5,
+     "answer": "VOICE",
+     "clue": "What a singer trains, or a vote expresses"
+    },
+    {
+     "n": 10,
+     "row": 2,
+     "col": 0,
+     "len": 3,
+     "answer": "YEP",
+     "clue": "Casual 'yes'"
+    },
+    {
+     "n": 11,
+     "row": 2,
+     "col": 4,
+     "len": 5,
+     "answer": "ARMED",
+     "clue": "Carrying weapons, or set like an alarm"
+    },
+    {
+     "n": 12,
+     "row": 3,
+     "col": 1,
+     "len": 5,
+     "answer": "DANCE",
+     "clue": "Tango, waltz or tahtib"
+    },
+    {
+     "n": 14,
+     "row": 4,
+     "col": 2,
+     "len": 5,
+     "answer": "YEAST",
+     "clue": "It makes the baladi bread rise"
+    },
+    {
+     "n": 16,
+     "row": 5,
+     "col": 3,
+     "len": 5,
+     "answer": "ATTIC",
+     "clue": "Room under the roof, often full of old boxes"
+    },
+    {
+     "n": 18,
+     "row": 6,
+     "col": 0,
+     "len": 5,
+     "answer": "STARE",
+     "clue": "Look fixedly without blinking"
+    },
+    {
+     "n": 21,
+     "row": 6,
+     "col": 6,
+     "len": 3,
+     "answer": "GOD",
+     "clue": "Ra or Amun, to the ancient Egyptians"
+    },
+    {
+     "n": 23,
+     "row": 7,
+     "col": 0,
+     "len": 5,
+     "answer": "AIRED",
+     "clue": "Broadcast, as a TV episode"
+    },
+    {
+     "n": 24,
+     "row": 7,
+     "col": 6,
+     "len": 3,
+     "answer": "ERA",
+     "clue": "A long stretch of history, such as the Ptolemaic one"
+    },
+    {
+     "n": 25,
+     "row": 8,
+     "col": 0,
+     "len": 4,
+     "answer": "DEER",
+     "clue": "Animal whose male grows antlers"
+    },
+    {
+     "n": 26,
+     "row": 8,
+     "col": 6,
+     "len": 3,
+     "answer": "RED",
+     "clue": "Color of the stripe at the top of Egypt's flag"
+    }
+   ],
+   "down": [
+    {
+     "n": 1,
+     "row": 0,
+     "col": 0,
+     "len": 3,
+     "answer": "HEY",
+     "clue": "Informal greeting to get someone's attention"
+    },
+    {
+     "n": 2,
+     "row": 0,
+     "col": 1,
+     "len": 4,
+     "answer": "EYED",
+     "clue": "Looked at with interest"
+    },
+    {
+     "n": 3,
+     "row": 0,
+     "col": 2,
+     "len": 5,
+     "answer": "REPAY",
+     "clue": "Settle a loan, or return a favor"
+    },
+    {
+     "n": 4,
+     "row": 0,
+     "col": 5,
+     "len": 6,
+     "answer": "FOREST",
+     "clue": "Amazon or Black, for example"
+    },
+    {
+     "n": 5,
+     "row": 0,
+     "col": 6,
+     "len": 3,
+     "answer": "AIM",
+     "clue": "Point a camera or a goal"
+    },
+    {
+     "n": 6,
+     "row": 0,
+     "col": 7,
+     "len": 3,
+     "answer": "ICE",
+     "clue": "Frozen water in a cold drink"
+    },
+    {
+     "n": 7,
+     "row": 0,
+     "col": 8,
+     "len": 3,
+     "answer": "LED",
+     "clue": "Was in front, or a kind of energy-saving bulb"
+    },
+    {
+     "n": 9,
+     "row": 1,
+     "col": 4,
+     "len": 7,
+     "answer": "VACATED",
+     "clue": "Left empty, as Yemeni government forces did with positions near Bab el-Mandeb"
+    },
+    {
+     "n": 13,
+     "row": 3,
+     "col": 3,
+     "len": 6,
+     "answer": "NEARER",
+     "clue": "Closer"
+    },
+    {
+     "n": 15,
+     "row": 4,
+     "col": 6,
+     "len": 5,
+     "answer": "TIGER",
+     "clue": "Striped big cat"
+    },
+    {
+     "n": 17,
+     "row": 5,
+     "col": 7,
+     "len": 4,
+     "answer": "CORE",
+     "clue": "Apple's center, or a type of inflation that leaves out food and energy"
+    },
+    {
+     "n": 18,
+     "row": 6,
+     "col": 0,
+     "len": 3,
+     "answer": "SAD",
+     "clue": "Unhappy"
+    },
+    {
+     "n": 19,
+     "row": 6,
+     "col": 1,
+     "len": 3,
+     "answer": "TIE",
+     "clue": "Draw in a match, or a neckpiece"
+    },
+    {
+     "n": 20,
+     "row": 6,
+     "col": 2,
+     "len": 3,
+     "answer": "ARE",
+     "clue": "Form of 'to be' used with 'they'"
+    },
+    {
+     "n": 22,
+     "row": 6,
+     "col": 8,
+     "len": 3,
+     "answer": "DAD",
+     "clue": "Father, informally"
+    }
+   ]
+  },
+  "news": []
+ },
+ "killer": {
+  "level": 1,
+  "solution": "239517468487936512651284397594873126726149853813652974345721689162398745978465231",
+  "cages": [
+   {
+    "sum": 18,
+    "cells": [
+     20,
+     21,
+     30,
+     31
+    ]
+   },
+   {
+    "sum": 11,
+    "cells": [
+     38,
+     39,
+     40
+    ]
+   },
+   {
+    "sum": 29,
+    "cells": [
+     25,
+     26,
+     34,
+     35,
+     43
+    ]
+   },
+   {
+    "sum": 13,
+    "cells": [
+     28,
+     29
+    ]
+   },
+   {
+    "sum": 13,
+    "cells": [
+     14,
+     23,
+     24
+    ]
+   },
+   {
+    "sum": 25,
+    "cells": [
+     5,
+     6,
+     7,
+     8
+    ]
+   },
+   {
+    "sum": 28,
+    "cells": [
+     60,
+     61,
+     62,
+     71
+    ]
+   },
+   {
+    "sum": 19,
+    "cells": [
+     68,
+     76,
+     77
+    ]
+   },
+   {
+    "sum": 8,
+    "cells": [
+     15,
+     16,
+     17
+    ]
+   },
+   {
+    "sum": 10,
+    "cells": [
+     47,
+     56,
+     65
+    ]
+   },
+   {
+    "sum": 16,
+    "cells": [
+     63,
+     64,
+     72
+    ]
+   },
+   {
+    "sum": 9,
+    "cells": [
+     33,
+     42
+    ]
+   },
+   {
+    "sum": 12,
+    "cells": [
+     50,
+     51,
+     59
+    ]
+   },
+   {
+    "sum": 9,
+    "cells": [
+     0,
+     1,
+     9
+    ]
+   },
+   {
+    "sum": 14,
+    "cells": [
+     44,
+     52,
+     53
+    ]
+   },
+   {
+    "sum": 11,
+    "cells": [
+     69,
+     70
+    ]
+   },
+   {
+    "sum": 6,
+    "cells": [
+     78,
+     79,
+     80
+    ]
+   },
+   {
+    "sum": 7,
+    "cells": [
+     54,
+     55
+    ]
+   },
+   {
+    "sum": 14,
+    "cells": [
+     27,
+     36,
+     37
+    ]
+   },
+   {
+    "sum": 9,
+    "cells": [
+     3,
+     4,
+     13
+    ]
+   },
+   {
+    "sum": 7,
+    "cells": [
+     49,
+     58
+    ]
+   },
+   {
+    "sum": 12,
+    "cells": [
+     66,
+     67
+    ]
+   },
+   {
+    "sum": 19,
+    "cells": [
+     10,
+     18,
+     19
+    ]
+   },
+   {
+    "sum": 9,
+    "cells": [
+     45,
+     46
+    ]
+   },
+   {
+    "sum": 16,
+    "cells": [
+     2,
+     11
+    ]
+   },
+   {
+    "sum": 19,
+    "cells": [
+     73,
+     74,
+     75
+    ]
+   },
+   {
+    "sum": 13,
+    "cells": [
+     48,
+     57
+    ]
+   },
+   {
+    "sum": 12,
+    "cells": [
+     32,
+     41
+    ]
+   },
+   {
+    "sum": 8,
+    "cells": [
+     22
+    ]
+   },
+   {
+    "sum": 9,
+    "cells": [
+     12
+    ]
+   }
+  ]
+ }
+}
