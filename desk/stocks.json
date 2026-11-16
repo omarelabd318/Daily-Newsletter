@@ -5,7 +5,7 @@
    "sector": "Banks",
    "valuation": {
     "source": "Company filing (Mubasher Banks (EGX disclosure))",
-    "asOf": "2026-11-15",
+    "asOf": "2026-11-16",
     "period": "2026-09-30",
     "basis": "results for the 12 months to September 2026",
     "price": 128.75,
@@ -168,6 +168,12 @@
    "sector": "Real estate",
    "news": [
     {
+     "date": "2026-11-16",
+     "text": "Nine-month profit attributable to shareholders rose 11.9% to EGP 11.72bn from EGP 10.47bn, half the pace of revenue growth of about 24%.",
+     "source": "Arab Finance",
+     "url": "https://www.arabfinance.com/en/news/newdetails/tmg-holding-consolidated-profits-rise-in-9-months-2026"
+    },
+    {
      "date": "2026-11-15",
      "text": "Nine-month consolidated net profit after tax rose 19% to EGP 15.01bn from EGP 12.63bn, on revenue up 24.1% to EGP 47.55bn; third-quarter contracted sales rose 54.6% to EGP 71bn.",
      "source": "Almasdar",
@@ -188,7 +194,7 @@
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-15",
+    "asOf": "2026-11-16",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
     "price": 83.95,
@@ -309,7 +315,7 @@
    },
    "valuation": {
     "source": "Company filing (Arab Finance (unaudited statement filed to the EGX 29 Oct); Al Borsa)",
-    "asOf": "2026-11-15",
+    "asOf": "2026-11-16",
     "period": "2026-09-30",
     "basis": "results for the 12 months to September 2026",
     "price": 77.5,
@@ -391,6 +397,12 @@
    "sector": "Real estate",
    "news": [
     {
+     "date": "2026-11-16",
+     "text": "Nine-month consolidated profit attributable to shareholders fell 4.7% to EGP 3.37bn from EGP 3.54bn, on revenue up 24.4% to EGP 31.80bn; the gross margin fell to 35.1% from 40.8% (Youm7; Alboslanews gives EGP 3.68bn against 3.70bn before minorities).",
+     "source": "Youm7",
+     "url": "https://www.youm7.com/story/2026/11/16/خريطة-الأرباح-والخسائر-في-البورصة-قفزة-قياسية-لـ-إيديتا-وتراجع/7620117"
+    },
+    {
      "date": "2026-11-08",
      "text": "An insider sold 443,600 shares in Sunday's session, the largest insider sale reported that day (Youm7).",
      "source": "Youm7",
@@ -411,7 +423,7 @@
    },
    "valuation": {
     "source": "TradingView and Mubasher",
-    "asOf": "2026-11-15",
+    "asOf": "2026-11-16",
     "period": null,
     "basis": "per-share figures that do not match the price",
     "price": 12.4,
@@ -463,6 +475,20 @@
     "source": "Arab Finance",
     "url": "https://arabfinance.com/en/news/newdetails/palm-hills-delivers-higher-consolidated-revenues-in-h1-2026",
     "written": "2026-11-13"
+   },
+   "lastResults": {
+    "date": "2026-11-16",
+    "period": "Nine months to September 2026",
+    "verdict": "miss",
+    "headline": "Attributable profit down 4.7% to EGP 3.37bn as revenue rose 24.4% to EGP 31.80bn",
+    "points": [
+     "Consolidated profit attributable to shareholders EGP 3.374bn against EGP 3.542bn; profit before minorities EGP 3.68bn against EGP 3.70bn (Alboslanews).",
+     "Gross margin 35.1% against 40.8%; EBITDA up 3.8% to EGP 6.94bn. Third-quarter attributable profit EGP 1.11bn, up 1%, on revenue up 23%."
+    ],
+    "thesis": "Sales are growing but margins are shrinking, which fits the desk's view that developers lag while rates stay high.",
+    "source": "Youm7",
+    "url": "https://www.youm7.com/story/2026/11/16/خريطة-الأرباح-والخسائر-في-البورصة-قفزة-قياسية-لـ-إيديتا-وتراجع/7620117",
+    "basis": "outlet reports of the filing; the attributable figure from one outlet; the filing was not read"
    }
   },
   "XOM": {
@@ -817,7 +843,7 @@
    },
    "valuation": {
     "source": "Company filing (Telecom Egypt 9M 2026 release; Arab Finance for 2025 and 9M 2025)",
-    "asOf": "2026-11-15",
+    "asOf": "2026-11-16",
     "period": "2026-09-30",
     "basis": "results for the 12 months to September 2026",
     "price": 133.0,
@@ -958,7 +984,7 @@
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-15",
+    "asOf": "2026-11-16",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
     "price": 120.7,
@@ -1051,7 +1077,7 @@
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-15",
+    "asOf": "2026-11-16",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
     "price": 799.9,
@@ -1161,7 +1187,7 @@
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-15",
+    "asOf": "2026-11-16",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
     "price": 17.87,
@@ -1189,6 +1215,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-15",
+     "text": "Nine-month consolidated net profit rose 32.2% to EGP 2.69bn on revenue up 38% to EGP 8.35bn; the value of payments it handled rose 51.6% to EGP 968.6bn.",
+     "source": "Hapi Journal",
+     "url": "https://hapijournal.com/2026/11/15/فوري-تُحقق-2-69-مليار-جنيه-أرباحًا-مجمعة-ف/"
+    },
     {
      "date": "2026-11-08",
      "text": "A group linked to an insider bought 100,000 shares in Sunday's session (Youm7).",
@@ -1220,6 +1252,20 @@
      "Competition from banks' own apps and InstaPay."
     ],
     "change": "Two more quarters of profit growth above 40% would settle the argument in the brokers' favor."
+   },
+   "lastResults": {
+    "date": "2026-11-15",
+    "period": "Nine months to September 2026",
+    "verdict": "beat",
+    "headline": "Consolidated net profit up 32.2% to EGP 2.69bn on revenue up 38% to EGP 8.35bn",
+    "points": [
+     "Banking-services revenue up 42.1% and financial services up 59.7%; payment value up 51.6% to EGP 968.6bn (Masrawy).",
+     "The board approved one free share for every share held, doubling issued capital to EGP 3.4bn (Al Borsa, one source)."
+    ],
+    "thesis": "Growth in lending and banking services is carrying profit; the bonus issue changes per-share figures, not value.",
+    "source": "Hapi Journal",
+    "url": "https://hapijournal.com/2026/11/15/فوري-تُحقق-2-69-مليار-جنيه-أرباحًا-مجمعة-ف/",
+    "basis": "company statement as reported by Hapi Journal and Khabry News; the filing was not read"
    }
   },
   "HRHO": {
@@ -1232,7 +1278,7 @@
    },
    "valuation": {
     "source": "TradingView and Mubasher",
-    "asOf": "2026-11-15",
+    "asOf": "2026-11-16",
     "period": null,
     "basis": "per-share figures that do not match the price",
     "price": 25.36,
@@ -1328,7 +1374,7 @@
    },
    "valuation": {
     "source": "TradingView and Mubasher",
-    "asOf": "2026-11-15",
+    "asOf": "2026-11-16",
     "period": null,
     "basis": "per-share figures that do not match the price",
     "price": 14.4,
@@ -1392,7 +1438,7 @@
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-15",
+    "asOf": "2026-11-16",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
     "price": 24.13,
@@ -1508,7 +1554,7 @@
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-15",
+    "asOf": "2026-11-16",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
     "price": 33.39,
@@ -1536,6 +1582,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-15",
+     "text": "Nine-month net profit after tax rose 15% to EGP 5.72bn from EGP 4.96bn, on revenue of EGP 6.77bn against EGP 6.34bn.",
+     "source": "Al Mal",
+     "url": "https://almalnews.com/2147339/أرباح-الإسكندرية-لتداول-الحاويات-ترتفع-15-لتسجل/"
+    },
     {
      "date": "2026-11-12",
      "text": "Al Ahly Pharos sees no buying opportunity at current prices despite first-half net profit of about EGP 3.8bn and net cash of EGP 5.5bn.",
@@ -1579,6 +1631,20 @@
      "Concession terms set by the state."
     ],
     "change": "Volumes and the average dollar tariff in the full-year figures."
+   },
+   "lastResults": {
+    "date": "2026-11-15",
+    "period": "Nine months to September 2026",
+    "verdict": "in line",
+    "headline": "Net profit up 15% to EGP 5.72bn on revenue of EGP 6.77bn",
+    "points": [
+     "Net profit after tax EGP 5.72bn against EGP 4.96bn; revenue EGP 6.77bn against EGP 6.34bn.",
+     "Profit at 84% of revenue points to large financial income; the basis (consolidated or standalone) was not stated."
+    ],
+    "thesis": "Steady container volumes; the earnings depend heavily on interest and currency gains.",
+    "source": "Al Mal",
+    "url": "https://almalnews.com/2147339/أرباح-الإسكندرية-لتداول-الحاويات-ترتفع-15-لتسجل/",
+    "basis": "outlet reports with the same wording (one source); the filing was not read"
    }
   },
   "AAPL": {
@@ -1703,6 +1769,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-16",
+     "text": "Taiwan's Taiex fell more than 4% and Nasdaq 100 futures 0.5% on Monday before Nvidia's results on Tuesday after the close; it has shed about $1.9tn of market value since early October (LSEG).",
+     "source": "Reuters (via Yahoo Finance)",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/morning-bid-ai-selloff-resumes-053223150.html"
+    },
     {
      "date": "2026-11-14",
      "text": "Fell 2.0% to $162.85, a sixth straight weekly fall and the longest since October 2012, below $4tn in market value; results are due November 17.",
@@ -2145,7 +2217,7 @@
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-15",
+    "asOf": "2026-11-16",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
     "price": 39.26,
@@ -2173,6 +2245,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-15",
+     "text": "Nine-month net profit after tax rose 56% to EGP 12.14bn from EGP 7.78bn, on sales up 47% to EGP 27.39bn; the board approved a $165m bank loan for plant upgrades. The stock rose 3.7% to EGP 40.70.",
+     "source": "Egypt Oil & Gas",
+     "url": "https://egyptoil-gas.com/news/mopco-posts-56-rise-in-net-profit-in-9m-of-2026/"
+    },
     {
      "date": "2026-11-08",
      "text": "Told the EGX its gas supply has been cut by 33% and operations are managed to the gas available (Arab Finance, Ahram Online); the stock fell 5.85% to EGP 38.60, the EGX30's biggest loser (Amwal Al Ghad).",
@@ -2210,6 +2288,20 @@
      "A stronger pound trimming export earnings in pounds."
     ],
     "change": "Gas allocations restored: that removes the main reason the stock trades below its fair value. A cut held beyond the winter would lower the fair value itself."
+   },
+   "lastResults": {
+    "date": "2026-11-15",
+    "period": "Nine months to September 2026",
+    "verdict": "beat",
+    "headline": "Net profit up 56% to EGP 12.14bn on sales up 47% to EGP 27.39bn",
+    "points": [
+     "Net profit after tax EGP 12.139bn against EGP 7.784bn; gross profit up 50% to EGP 14.20bn; operating profit up 41% to EGP 12.48bn.",
+     "The board approved a $165m bank loan for plant upgrades and capacity."
+    ],
+    "thesis": "Urea prices are more than covering the gas cuts, which argues against the desk's bearish fertilizer view.",
+    "source": "Egypt Oil & Gas",
+    "url": "https://egyptoil-gas.com/news/mopco-posts-56-rise-in-net-profit-in-9m-of-2026/",
+    "basis": "income statement as reported by Egypt Oil & Gas and Power News; the filing was not read"
    }
   },
   "EAST": {
@@ -2222,7 +2314,7 @@
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-15",
+    "asOf": "2026-11-16",
     "period": "2026-03-31",
     "basis": "results for the 12 months to March 2026",
     "price": 34.55,
@@ -2332,7 +2424,7 @@
    },
    "valuation": {
     "source": "TradingView and Mubasher",
-    "asOf": "2026-11-15",
+    "asOf": "2026-11-16",
     "period": null,
     "basis": "per-share figures that do not match the price",
     "price": 24.97,
@@ -2442,7 +2534,7 @@
    },
    "valuation": {
     "source": "Company filing (Mubasher; Hapi Journal for 2025)",
-    "asOf": "2026-11-15",
+    "asOf": "2026-11-16",
     "period": "2026-09-30",
     "basis": "results for the 12 months to September 2026",
     "price": 12.69,
@@ -2608,7 +2700,7 @@
    ],
    "valuation": {
     "source": "Company filing (Arab Finance)",
-    "asOf": "2026-11-15",
+    "asOf": "2026-11-16",
     "period": "2026-09-30",
     "basis": "results for the 12 months to September 2026",
     "price": 5.63,
@@ -2897,7 +2989,7 @@
    },
    "valuation": {
     "source": "Company filing (Arab Finance (EGX filing); ekhbary24)",
-    "asOf": "2026-11-15",
+    "asOf": "2026-11-16",
     "period": "2026-09-30",
     "basis": "results for the 12 months to September 2026; book value from TradingView, to June 2026",
     "price": 325.0,
@@ -3023,7 +3115,7 @@
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-15",
+    "asOf": "2026-11-16",
     "period": "2026-03-31",
     "basis": "results for the 12 months to March 2026",
     "price": 13.04,
@@ -3051,6 +3143,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-15",
+     "text": "Nine-month consolidated net profit rose to EGP 3.47bn from EGP 1.37bn (standalone EGP 3.00bn from 1.03bn), The Edge reported from its EGX disclosure; one source. The stock rose 4.8% to EGP 13.67.",
+     "source": "ad-hoc-news (The Edge)",
+     "url": "https://www.ad-hoc-news.de/boerse/news/nebenwerte/alexandria-mineral-oils-stock-posts-153-7-nine-month-profit-gain/70518306"
+    },
     {
      "date": "2026-11-01",
      "text": "Nine-month consolidated net profit rose 154% to EGP 3.47bn on sales up 41% to EGP 43.17bn, according to its EGX disclosure as reported by Egypt Oil & Gas (one outlet); an insider bought 100,000 shares on November 8 (Youm7).",
@@ -3082,6 +3180,20 @@
      "Margins falling with oil prices."
     ],
     "change": "Audited results confirming or correcting the nine-month figure."
+   },
+   "lastResults": {
+    "date": "2026-11-15",
+    "period": "Nine months to September 2026",
+    "verdict": "beat",
+    "headline": "Consolidated net profit EGP 3.47bn against EGP 1.37bn",
+    "points": [
+     "Standalone profit EGP 3.00bn against EGP 1.03bn.",
+     "The chairman spoke of doubling dollar earnings at the November 14 extraordinary assembly (Al-Masry Al-Youm)."
+    ],
+    "thesis": "Refining margins have recovered sharply; one source so far.",
+    "source": "ad-hoc-news (The Edge)",
+    "url": "https://www.ad-hoc-news.de/boerse/news/nebenwerte/alexandria-mineral-oils-stock-posts-153-7-nine-month-profit-gain/70518306",
+    "basis": "one outlet's report of the EGX disclosure; the filing was not read"
    }
   },
   "SKPC": {
@@ -3094,7 +3206,7 @@
    },
    "valuation": {
     "source": "TradingView and Mubasher",
-    "asOf": "2026-11-15",
+    "asOf": "2026-11-16",
     "period": null,
     "basis": "per-share figures that do not match the price",
     "price": 14.99,
@@ -3145,7 +3257,7 @@
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-15",
+    "asOf": "2026-11-16",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
     "price": 19.59,
@@ -3173,6 +3285,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-16",
+     "text": "Third-quarter net profit rose 41.5% to EGP 938.1m on record revenue of EGP 7.3bn (+32.9%); the company put nine-month profit at EGP 2.4bn, up 54%, and exports at EGP 1.84bn, up 40%.",
+     "source": "Arab Finance",
+     "url": "https://www.arabfinance.com/en/news/newdetails/edita-posts-record-revenues-in-q3-2026"
+    },
     {
      "date": "2026-11-08",
      "text": "Edita has bought about 3.42 million of its own shares under a 30 million-share, one-month program approved October 26.",
@@ -3223,6 +3341,20 @@
      "A valuation that already reflects its high returns."
     ],
     "change": "Third-quarter results: margins after this year's input costs."
+   },
+   "lastResults": {
+    "date": "2026-11-16",
+    "period": "Third quarter and nine months to September 2026",
+    "verdict": "beat",
+    "headline": "Third-quarter profit up 41.5% to EGP 938.1m on record revenue of EGP 7.3bn",
+    "points": [
+     "Third-quarter revenue up 32.9%; gross margin 32.9% against 35%; EBITDA up 32.5% to EGP 1.4bn.",
+     "The company put nine-month net profit at EGP 2.4bn, up 54%, on revenue of EGP 19.5bn (+32.6%); Alboslanews gives EGP 2.61bn against 1.72bn, a different line not yet reconciled."
+    ],
+    "thesis": "Volumes and prices both grew while the margin held near 33%, keeping food producers among the desk's preferred sectors.",
+    "source": "Arab Finance",
+    "url": "https://www.arabfinance.com/en/news/newdetails/edita-posts-record-revenues-in-q3-2026",
+    "basis": "company release as reported by Arab Finance and EnterpriseAM; the filing was not read"
    }
   },
   "NFLX": {

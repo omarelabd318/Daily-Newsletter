@@ -21,13 +21,20 @@
     "ETEL",
     "EAST"
    ],
-   "status": "open",
+   "status": "on track",
    "updates": [
     {
      "date": "2026-11-13",
      "text": "MSCI confirmed the change takes effect after the close on November 30; Eastern moves to the small cap index and Housing and Development Bank joins it.",
      "source": "Sada Elbalad",
      "url": "https://see.news/telecom-egypt-joins-msci-global-standard-index-for-emerging-markets",
+     "effect": "supports"
+    },
+    {
+     "date": "2026-11-16",
+     "text": "Telecom Egypt rose 2.2% to EGP 135.94 on Sunday, back above the view's EGP 135.01 start, two weeks before MSCI's inclusion.",
+     "source": "TradingView",
+     "url": "https://www.tradingview.com/symbols/EGX-ETEL/",
      "effect": "supports"
     }
    ],
@@ -372,6 +379,13 @@
      "source": "Almasdar",
      "url": "https://www.almasdar.com/176055",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-16",
+     "text": "Palm Hills' nine-month attributable profit fell 4.7% to EGP 3.37bn as its gross margin dropped to 35.1% from 40.8%, though revenue rose 24.4%.",
+     "source": "Youm7",
+     "url": "https://www.youm7.com/story/2026/11/16/خريطة-الأرباح-والخسائر-في-البورصة-قفزة-قياسية-لـ-إيديتا-وتراجع/7620117",
+     "effect": "supports"
     }
    ],
    "driver": "egp-rates"
@@ -623,7 +637,7 @@
     "ABUK",
     "MFPC"
    ],
-   "status": "on track",
+   "status": "open",
    "updates": [
     {
      "date": "2026-11-04",
@@ -667,6 +681,14 @@
      "source": "Arab Finance",
      "url": "https://www.arabfinance.com/en/news/newdetails/aoi-to-install-mmw-solar-power-plants-at-abu-qir-fertilizers",
      "effect": "neutral"
+    },
+    {
+     "date": "2026-11-16",
+     "text": "MOPCO's nine-month profit rose 56% to EGP 12.14bn on sales up 47%, showing urea prices covering the gas cuts; the stock rose 3.7% and Abu Qir 1.9% on Sunday.",
+     "source": "Egypt Oil & Gas",
+     "url": "https://egyptoil-gas.com/news/mopco-posts-56-rise-in-net-profit-in-9m-of-2026/",
+     "effect": "against",
+     "confidence": "low"
     }
    ],
    "wrongIf": [
@@ -849,6 +871,13 @@
      "source": "Al-Monitor",
      "url": "https://www.al-monitor.com/originals/2026/11/suez-canal-revenue-jumps-94-despite-houthi-red-sea-threats",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-16",
+     "text": "The central bank's dollar rate rose 35 piasters to EGP 53.86 on Sunday as the dollar held near a 19-month high abroad, while foreigners bought more than $2bn of debt in the four sessions to Thursday; still well short of the EGP 56 line.",
+     "source": "Sada Elbalad",
+     "url": "https://www.elbalad.news/7181766",
+     "effect": "against"
     }
    ],
    "wrongIf": [
@@ -950,6 +979,14 @@
      "source": "Anadolu",
      "url": "https://www.aa.com.tr/en/middle-east/2-oil-tankers-hit-mines-catch-fire-near-strait-of-hormuz-irans-revolutionary-guard/4125453",
      "effect": "against"
+    },
+    {
+     "date": "2026-11-16",
+     "text": "Brent slipped 54 cents to $95.30 early on Monday after the IEA forecast a fourth-quarter surplus; four sessions remain before the November 20 judgment, about $10 below the line.",
+     "source": "Reuters (via Shafaq)",
+     "url": "https://shafaq.com/en/Economy/Oil-slides-on-looming-surplus-and-Hormuz-recovery",
+     "effect": "supports",
+     "confidence": "medium"
     }
    ],
    "wrongIf": [
