@@ -1,12 +1,12 @@
 {
  "note": "The desk's stocks' coming results and dividends, from TradingView (fetch_calendar.py); for the US stocks, declared dividends and stock splits from Polygon. Results dates for Egyptian companies are often TradingView's estimate until the company announces one.",
- "fetched": "2026-11-16",
+ "fetched": "2026-11-17",
  "items": [
   {
    "t": "CLHO",
    "market": "egx",
    "kind": "results",
-   "date": "2026-11-16",
+   "date": "2026-11-17",
    "period": "2026-09-30",
    "time": null,
    "expected": true
@@ -15,7 +15,7 @@
    "t": "EFID",
    "market": "egx",
    "kind": "results",
-   "date": "2026-11-16",
+   "date": "2026-11-17",
    "period": "2026-09-30",
    "time": null,
    "expected": true
@@ -24,39 +24,10 @@
    "t": "JUFO",
    "market": "egx",
    "kind": "results",
-   "date": "2026-11-16",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
-  {
-   "t": "PHDC",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-11-16",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
-  {
-   "t": "XOM",
-   "market": "us",
-   "kind": "dividend",
-   "date": "2026-11-16",
-   "pay": "2026-12-10",
-   "amount": 1.07,
-   "cur": "$",
-   "declared": "2026-10-29",
-   "src": "Polygon"
-  },
-  {
-   "t": "EGAL",
-   "market": "egx",
-   "kind": "dividend",
    "date": "2026-11-17",
-   "pay": "2026-11-19",
-   "amount": 16,
-   "cur": "EGP"
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
   },
   {
    "t": "NVDA",
@@ -65,6 +36,15 @@
    "date": "2026-11-17",
    "period": "2026-10-31",
    "time": "after the close",
+   "expected": true
+  },
+  {
+   "t": "PHDC",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-17",
+   "period": "2026-09-30",
+   "time": null,
    "expected": true
   },
   {

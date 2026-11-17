@@ -92,7 +92,7 @@
     "AMOC",
     "ETEL"
    ],
-   "status": "on track",
+   "status": "open",
    "updates": [
     {
      "date": "2026-11-12",
@@ -301,7 +301,7 @@
     "TMGH",
     "PHDC"
    ],
-   "status": "open",
+   "status": "on track",
    "updates": [
     {
      "date": "2026-10-28",
@@ -637,7 +637,7 @@
     "ABUK",
     "MFPC"
    ],
-   "status": "open",
+   "status": "on track",
    "updates": [
     {
      "date": "2026-11-04",
@@ -908,7 +908,7 @@
    "tickers": [
     "XOM"
    ],
-   "status": "open",
+   "status": "on track",
    "updates": [
     {
      "date": "2026-11-06",
