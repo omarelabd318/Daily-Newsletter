@@ -1,0 +1,1412 @@
+{
+ "date": "2026-11-17",
+ "asOf": "2026-11-16",
+ "fetched": "Tue, Nov 17, 10:20 Cairo",
+ "egypt": {
+  "finding": "Foreigners bought a net EGP 29.4bn of Egyptian debt on Monday, about $547m, while the Nasdaq slid into a correction, and the pound firmed to EGP 53.75 by Tuesday morning. The EGX30 held flat but small caps fell 3.76% on profit-taking.",
+  "next": "Nvidia reports Tuesday night; EFG Holding Wednesday; Misr Life's offering in December.",
+  "close": {
+   "title": "Monday's close",
+   "groups": [
+    {
+     "name": "Egypt",
+     "rows": [
+      {
+       "label": "EGX30",
+       "value": "52,199.80",
+       "change": 0.02,
+       "lead": true
+      },
+      {
+       "label": "EGX70 EWI",
+       "value": "18,028.40",
+       "change": -3.76
+      },
+      {
+       "label": "USD/EGP (central bank, sell)",
+       "value": "53.75",
+       "change": -0.2
+      },
+      {
+       "label": "Gold 24K, per gram",
+       "value": "6,755",
+       "change": -0.73
+      }
+     ]
+    },
+    {
+     "name": "Global",
+     "rows": [
+      {
+       "label": "Brent, $ per barrel (front month)",
+       "value": "92.44",
+       "change": -3.55
+      },
+      {
+       "label": "Gold, $ per ounce",
+       "value": "3,853.00",
+       "change": -0.86
+      },
+      {
+       "label": "Dollar index",
+       "value": "103.59",
+       "change": 0.17
+      },
+      {
+       "label": "Bitcoin, $",
+       "value": "64,604",
+       "change": 0.39
+      }
+     ]
+    }
+   ],
+   "note": "The EGX30 and EGX70 EWI are Monday's closes. The dollar rate is the central bank's Tuesday-morning selling rate, against Monday's. Gold 24K is Monday's retail price. Brent, gold and the dollar index are Monday's closes (the dollar index unconfirmed at a second source); Bitcoin is Tuesday morning's price."
+  },
+  "board": {
+   "horizon": "EGX sectors · next 1–4 weeks",
+   "helped": [
+    {
+     "name": "Telecoms: Telecom Egypt",
+     "why": "Rose 5.2% to EGP 143.00 on Monday, two weeks before MSCI adds it to its standard index, on nine-month profit up 44% to EGP 24.4bn.",
+     "confidence": "medium"
+    },
+    {
+     "name": "Food producers: Edita, Juhayna",
+     "why": "Edita rose 7.4% after third-quarter profit rose 41.5% on revenue up 32.9%, after Juhayna's 33% rise.",
+     "confidence": "medium"
+    },
+    {
+     "name": "Banks: CIB",
+     "why": "Foreigners bought a net EGP 29.4bn of debt on Monday and bonds sold 15% over target at about 24.7%, keeping bill income high; CIB rose 0.2% as small caps fell.",
+     "confidence": "medium"
+    }
+   ],
+   "hurt": [
+    {
+     "name": "Small and mid caps",
+     "why": "The EGX70 EWI fell 3.76% on Monday after a 7.7% week, on profit-taking with no single trigger.",
+     "confidence": "low"
+    },
+    {
+     "name": "Fertilizers: MOPCO, Abu Qir",
+     "why": "MOPCO fell 4.1% and Abu Qir 2.4% as gas for exports was reported 50% dearer, at $12.75 per mmBtu, with cuts still in place.",
+     "confidence": "low"
+    },
+    {
+     "name": "Developers: Palm Hills, Talaat Moustafa",
+     "why": "Palm Hills fell 3.4% to EGP 11.85 after attributable nine-month profit fell 4.7% as its gross margin dropped to 35.1%.",
+     "confidence": "low"
+    }
+   ]
+  },
+  "stocksNote": "<b>Edita rose 7.4% to EGP 20.66 on its 41.5% profit rise and Telecom Egypt 5.2% to EGP 143.00 before MSCI's inclusion; MOPCO fell 4.1% and Palm Hills 3.4%.</b> Fawry's third-quarter profit rose 37.5% to EGP 1.07bn (EnterpriseAM, CNN Arabic), but the stock fell 1.7%. Cleopatra fell 3.3% and EFG Holding 3.2% with no company news; EFG Hermes runs Misr Life's December offering and EFG Holding reports on Wednesday. Egypt Aluminium trades without its EGP 16 dividend on Tuesday.",
+  "week": [
+   {
+    "day": "Tue, Nov 17",
+    "event": "Egypt Aluminium trades without its EGP 16 dividend; Nvidia results after the US close",
+    "impact": "medium",
+    "why": "The dividend is about 4.9% of Monday's EGP 326.99; Nvidia sets the tone for risk appetite, and the Nasdaq is in a correction."
+   },
+   {
+    "day": "Wed, Nov 18",
+    "event": "EFG Holding results (expected); Fed minutes",
+    "impact": "medium",
+    "why": "Brokerage income from the busiest turnover in a year; the minutes show how many officials wanted a hike."
+   },
+   {
+    "day": "Thu, Nov 19",
+    "event": "Egypt Aluminium pays its dividend; Trump, Xi and Putin meet in Shenzhen",
+    "impact": "low",
+    "why": "EGP 16 a share; the summit matters for oil and the dollar more than for the EGX directly."
+   },
+   {
+    "day": "Tue, Nov 24",
+    "event": "Orascom Construction's new shares due to list on the EGX and ADX",
+    "impact": "medium",
+    "why": "97.2 million new shares can weigh on a stock that fell 1.4% on Monday."
+   },
+   {
+    "day": "Late November",
+    "event": "IMF's eighth and final review (expected)",
+    "impact": "high",
+    "why": "About $2.3bn at stake before the program expires on December 15."
+   },
+   {
+    "day": "Mon, Nov 30",
+    "event": "MSCI's index changes take effect at the close",
+    "impact": "medium",
+    "why": "Index funds buy Telecom Egypt and sell Eastern Company on the day."
+   },
+   {
+    "day": "December",
+    "event": "Misr Life Insurance offering of 15% (expected)",
+    "impact": "medium",
+    "why": "750 million existing shares; a test of demand for the state's program after Banque du Caire."
+   },
+   {
+    "day": "Wed, Dec 9",
+    "event": "Federal Reserve decision",
+    "impact": "high",
+    "why": "Futures price more than a 90% chance of a quarter-point hike; it lands eight days before the central bank."
+   },
+   {
+    "day": "Thu, Dec 17",
+    "event": "Central bank Monetary Policy Committee",
+    "impact": "high",
+    "why": "Inflation of 12.7% against a 20% deposit rate leaves room to cut, but a Fed hike argues for holding."
+   }
+  ],
+  "calls": [
+   {
+    "headline": "Foreigners buy $547m of Egyptian debt as Wall Street slides",
+    "body": "Arab and foreign investors bought a net EGP 29.38bn of Egyptian government debt on Monday, about $547m, almost all of it foreign (Amwal Al Ghad, Almasraf, Elmaser). The central bank's dollar rate eased to EGP 53.61 to buy and 53.75 to sell on Tuesday morning from 53.86 on Monday. The same day the finance ministry sold EGP 23.1bn of 18-month and three-year bonds against a EGP 20bn target, at average yields of 24.75% and 24.72%, little changed (Al Taameer, Cairo24). In shares, foreigners were net buyers of EGP 60.5m (Vetogate).",
+    "view": "A global sell-off that sent the Nasdaq down 2.49% did not pull money out of Egypt: foreigners kept buying debt at about 25%, and Treasury yields eased, which widens the carry. That keeps the desk's view of the pound firmer than EGP 56 into the IMF review on track, at medium confidence. Banks earn on the bills either way; importers keep their October margin while the dollar stays under EGP 54.",
+    "wrong": "The dollar closes above EGP 55.50 before December 9, or a debt auction clears with bids below the amount offered.",
+    "confidence": "medium",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "Banks",
+      "dir": "up"
+     },
+     {
+      "kind": "stock",
+      "dir": "up",
+      "t": "COMI",
+      "chg": 0.2
+     },
+     {
+      "kind": "sector",
+      "name": "Importers",
+      "dir": "up"
+     },
+     {
+      "kind": "market",
+      "name": "Pound",
+      "dir": "up",
+      "chg": 0.2
+     },
+     {
+      "kind": "market",
+      "name": "T-bill yields",
+      "dir": "mixed"
+     }
+    ]
+   },
+   {
+    "headline": "Small caps fall 3.76% while the EGX30 holds flat",
+    "line": "Profit-taking after a 10% run; market value fell EGP 51.8bn.",
+    "body": "The EGX70 EWI fell 3.76% to 18,028.40 on Monday and the EGX100 2.88%, while the EGX30 edged up 0.02% to 52,199.80 on gains in CIB, Telecom Egypt and Eastern Company (Al Borsa, Al Raees News). Market value fell about EGP 51.8bn to EGP 4.147tn on EGP 11.1bn of share trading (Al Masdar, Youm7). Al Borsa's analyst called it profit-taking after the EGX30's roughly 10% climb from 48,000; no outlet named a single trigger.",
+    "view": "The small-cap index had run 7.7% in a week to Thursday on speculative buying, so a one-day fall of this size is a reset, not a turn in the market. The desk expects the blue chips to hold up better than small caps into the MSCI changes on November 30, at low confidence: there is no news behind the selling to argue either way.",
+    "wrong": "The EGX70 EWI closes back above 18,700, Sunday's level, before November 30.",
+    "confidence": "low",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "Small and mid caps",
+      "dir": "down"
+     },
+     {
+      "kind": "stock",
+      "dir": "up",
+      "t": "COMI",
+      "chg": 0.2
+     },
+     {
+      "kind": "stock",
+      "dir": "up",
+      "t": "EAST",
+      "chg": 2.9
+     },
+     {
+      "kind": "market",
+      "name": "EGX70 EWI",
+      "dir": "down",
+      "chg": -3.76
+     },
+     {
+      "kind": "market",
+      "name": "EGX30",
+      "dir": "mixed",
+      "chg": 0.02
+     }
+    ]
+   },
+   {
+    "headline": "Misr Life Insurance will float 15% on the EGX in December",
+    "line": "The state's second offering this quarter, run by EFG Hermes.",
+    "body": "Misr Life Insurance plans to sell 750 million existing shares, 15% of its capital, in December, subject to approval, through a private placement and a public offering at one book-built price; the shares belong to Misr Insurance Holding, owned by the Sovereign Fund of Egypt, so the company raises nothing (press release via Fintech Gate; Al Borsa, Hapi Journal). EFG Hermes is sole global coordinator. It follows Banque du Caire's listing earlier this month.",
+    "view": "A second state sale in a quarter tests demand at a time foreigners are buying debt more than shares; Banque du Caire closed at EGP 5.58 on Monday, down 1.6%. A well-covered book would help EFG Holding's fees and the case that the program can raise money, but each offering also draws cash from the listed market for weeks. Medium confidence that it goes ahead in December.",
+    "wrong": "The offering is postponed past December, or Banque du Caire closes below EGP 5.00 before it prices.",
+    "confidence": "medium",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "Insurance",
+      "dir": "up"
+     },
+     {
+      "kind": "stock",
+      "dir": "up",
+      "t": "HRHO",
+      "chg": -3.2
+     },
+     {
+      "kind": "stock",
+      "dir": "mixed",
+      "t": "BQDC",
+      "chg": -1.6
+     },
+     {
+      "kind": "market",
+      "name": "EGX30",
+      "dir": "mixed"
+     }
+    ]
+   },
+   {
+    "headline": "Telecom Egypt and Edita lead on results and index buying",
+    "line": "Telecom Egypt rose 5.2% to EGP 143.00, Edita 7.4% to EGP 20.66.",
+    "body": "Telecom Egypt rose 5.2% to EGP 143.00 on Monday, more than double its price at the start of the year, two weeks before MSCI adds it to its standard index at the November 30 close; its nine-month profit rose 44% to EGP 24.4bn. Edita rose 7.4% to EGP 20.66, the top EGX30 gainer, after third-quarter net profit rose 41.5% to EGP 938.1m on record revenue of EGP 7.3bn, up 32.9% (Daily News Egypt, Arab Finance).",
+    "view": "Both moves rest on figures, not tips: earnings growth of 40% or more and, for Telecom Egypt, index buying with a date. The desk keeps Telecom Egypt on track for the MSCI inclusion and food producers among its preferred sectors, at medium confidence. After a 117% gain this year, Telecom Egypt may give some back once the index funds have bought.",
+    "wrong": "Telecom Egypt closes below EGP 122 before November 30, or Edita falls back below EGP 18.50 before December 15.",
+    "confidence": "medium",
+    "notice": "Alhoria News reported that the state auditors' review of Telecom Egypt's September accounts lists reservations, including an EGP 1.48bn loss from the Ramses exchange fire; no second outlet has confirmed it, and the view does not rely on it.",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "Telecoms",
+      "dir": "up"
+     },
+     {
+      "kind": "stock",
+      "dir": "up",
+      "t": "ETEL",
+      "chg": 5.2
+     },
+     {
+      "kind": "sector",
+      "name": "Food producers",
+      "dir": "up"
+     },
+     {
+      "kind": "stock",
+      "dir": "up",
+      "t": "EFID",
+      "chg": 7.4
+     },
+     {
+      "kind": "market",
+      "name": "EGX30",
+      "dir": "up"
+     }
+    ]
+   },
+   {
+    "headline": "Fertilizer stocks fall as gas for exports gets 50% dearer",
+    "line": "MOPCO fell 4.1% and Abu Qir 2.4% on Monday.",
+    "body": "MOPCO fell 4.1% to EGP 39.03 and Abu Qir 2.4% to EGP 77.10 on Monday. EnterpriseAM, citing Asharq Business, reported that seven producers agreed to pay $175m up front for 45 days of gas from November 16 at $12.75 per mmBtu, up from $8.5, in exchange for exporting their full output into early January, with supply cuts of 20–40% still in place.",
+    "view": "Whatever the final terms, the plants are paying more for less gas, which supports the desk's view that rationing keeps fertilizer stocks under pressure through November; MOPCO's 56% profit rise shows urea prices still cover a lot. Low confidence: Abu Qir is EGP 8 under the EGP 85 line.",
+    "wrong": "Abu Qir closes above EGP 85 before November 30, or full gas supply is restored.",
+    "confidence": "low",
+    "notice": "The gas price and terms come from Asharq Business, citing government sources; every other outlet repeats that report, so they are not independently confirmed, and the view does not rely on them.",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "Fertilizers",
+      "dir": "down"
+     },
+     {
+      "kind": "stock",
+      "dir": "down",
+      "t": "MFPC",
+      "chg": -4.1
+     },
+     {
+      "kind": "stock",
+      "dir": "down",
+      "t": "ABUK",
+      "chg": -2.4
+     },
+     {
+      "kind": "market",
+      "name": "EGX70 EWI",
+      "dir": "down"
+     }
+    ]
+   }
+  ],
+  "flows": {
+   "title": "Who bought and who sold",
+   "sub": "Net EGX equity flows, Mon, Nov 16, EGP bn · Vetogate (one report)",
+   "confirmed": false,
+   "rows": [
+    {
+     "who": "Egyptian investors",
+     "net": 0.1014
+    },
+    {
+     "who": "Arab investors",
+     "net": -0.1619
+    },
+    {
+     "who": "Foreign investors",
+     "net": 0.0605
+    }
+   ],
+   "read": "Foreigners bought a net EGP 60.5m and Arabs sold EGP 161.9m, excluding deals, out of about EGP 11.1bn traded (Vetogate); the Egyptian figure is the remainder, not reported. Egyptians made 87.5% of trading, foreigners 9.7% and Arabs 2.8%. Only one report gave the figures, and the bigger foreign money went into debt: EGP 29.4bn net."
+  },
+  "views": [
+   {
+    "call": "Telecom Egypt holds its ground into MSCI's November 30 inclusion",
+    "status": "on track",
+    "note": "From EGP 135.01. Monday: EGP 143.00 (+5.2% on the day). Wrong if it closes below EGP 122; judged November 30."
+   },
+   {
+    "call": "The pound stays firmer than EGP 56 per dollar into the IMF review",
+    "status": "on track",
+    "note": "From Nov 5: USD/EGP 54.77. Tuesday morning: 53.75, firmer by 11 piasters as foreigners bought EGP 29.4bn of debt. Judged November 26."
+   },
+   {
+    "call": "Gas rationing keeps fertilizer stocks under pressure through November",
+    "status": "on track",
+    "note": "From Nov 4: Abu Qir EGP 77.71. Monday: EGP 77.10 (-2.4%) as gas for exports was reported 50% dearer. Wrong if Abu Qir closes above EGP 85; judged November 30."
+   },
+   {
+    "call": "Developers lag while rates stay high",
+    "status": "on track",
+    "note": "From Oct 30. Palm Hills fell 3.4% and Talaat Moustafa 0.7% on Monday as the EGX30 held flat. Judged November 27."
+   },
+   {
+    "call": "Juhayna returns to EGP 27–28 by end of January",
+    "status": "open",
+    "note": "From EGP 24.95. Monday: EGP 23.90. Wrong if it closes below EGP 22."
+   }
+  ]
+ },
+ "global": {
+  "finding": "The Nasdaq fell 2.49% into a correction on Monday as chip stocks slid 5.3% before Nvidia's results tonight and a new US rule on remote access to AI chips. Treasuries rallied and Brent fell 3.5%, so the sell-off was about AI, not rates.",
+  "next": "Nvidia results Tuesday after the close; Fed minutes and Anthropic's pricing Wednesday; Walmart Thursday.",
+  "close": {
+   "title": "Monday's close",
+   "groups": [
+    {
+     "name": "USA",
+     "rows": [
+      {
+       "label": "S&P 500",
+       "value": "7,416.59",
+       "change": -1.92,
+       "lead": true
+      },
+      {
+       "label": "Nasdaq",
+       "value": "24,509.76",
+       "change": -2.49
+      },
+      {
+       "label": "Dow Jones",
+       "value": "51,608.17",
+       "change": -1.41
+      }
+     ]
+    },
+    {
+     "name": "Global",
+     "rows": [
+      {
+       "label": "Brent, $ per barrel (front month)",
+       "value": "92.44",
+       "change": -3.55
+      },
+      {
+       "label": "Gold, $ per ounce",
+       "value": "3,853.00",
+       "change": -0.86
+      },
+      {
+       "label": "Dollar index",
+       "value": "103.59",
+       "change": 0.17
+      },
+      {
+       "label": "Bitcoin, $",
+       "value": "64,604",
+       "change": 0.39
+      }
+     ]
+    }
+   ],
+   "note": "Monday's closes, as logged by the newsletter. Brent is the front-month settlement and gold the spot close. Bitcoin is Tuesday morning's price."
+  },
+  "board": {
+   "horizon": "US sectors · next 1–4 weeks",
+   "helped": [
+    {
+     "name": "Steady earners: Walmart, Costco",
+     "why": "Walmart rose 0.2% and Costco 0.7% on a day the S&P 500 fell 1.92%; Walmart is up 5.9% since October 30 and reports November 19.",
+     "confidence": "medium"
+    },
+    {
+     "name": "Health insurers",
+     "why": "Molina rose 11.3% and peers Centene and Elevance gained in a sector-wide rally on Monday (AlphaStreet); the trigger is not confirmed.",
+     "confidence": "low"
+    }
+   ],
+   "hurt": [
+    {
+     "name": "AI chips: Nvidia, Broadcom, Intel",
+     "why": "The Philadelphia chip index fell 5.3% on Monday on Nvidia nerves and a new license rule for advanced chips in five countries.",
+     "confidence": "medium"
+    },
+    {
+     "name": "AI spenders: Oracle, Alphabet, Amazon",
+     "why": "Oracle fell 5.0%, Alphabet 4.1% and Amazon 3.3%; a Fed governor put the largest AI firms' debt above $800bn by year-end.",
+     "confidence": "medium"
+    },
+    {
+     "name": "Energy: Exxon",
+     "why": "Brent fell 3.5% to $92.44 on the IEA's surplus forecast, down 18.5% this month; Exxon lost 2.2%.",
+     "confidence": "medium"
+    }
+   ]
+  },
+  "stocksNote": "<b>Intel fell 7.0% to $55.47, Oracle 5.0% to $119.09 and Nvidia 4.1% to $156.14 as chip stocks slid before Nvidia's results tonight; Alphabet lost 4.1% and Amazon 3.3%.</b> Oracle also fell on a single-source report that a data-center landlord wants guarantees before new leases (Invezz). Walmart rose 0.2% and Costco 0.7%, the only desk stocks besides Visa to gain. Walmart reports on Thursday.",
+  "week": [
+   {
+    "day": "Tue, Nov 17",
+    "event": "US retail sales for October",
+    "impact": "medium",
+    "why": "Forecast up 0.2% on the month; a strong reading adds to hike bets."
+   },
+   {
+    "day": "Tue, Nov 17",
+    "event": "Nvidia results after the close, its first under an interim chief",
+    "impact": "high",
+    "why": "Consensus revenue of $109.1bn, up 91% (LSEG); the stock sits at its lowest since July 2025 and sets the tone for the AI trade."
+   },
+   {
+    "day": "Wed, Nov 18",
+    "event": "Fed minutes; Anthropic prices its listing",
+    "impact": "medium",
+    "why": "The minutes show how many officials wanted a hike in October; Anthropic's range is $70–78."
+   },
+   {
+    "day": "Thu, Nov 19",
+    "event": "Walmart third-quarter results; Anthropic starts trading; Trump, Xi and Putin meet in Shenzhen",
+    "impact": "high",
+    "why": "Walmart tests the steady-earner trade; the listing tests demand for AI stocks; the summit can move chip-export policy."
+   },
+   {
+    "day": "Thu, Nov 19",
+    "event": "Microsoft trades without its $0.98 dividend",
+    "impact": "low",
+    "why": "About 0.2% of the price."
+   },
+   {
+    "day": "Thu, Nov 26",
+    "event": "US markets closed for Thanksgiving",
+    "impact": "low",
+    "why": "A short week; Friday is a half session."
+   },
+   {
+    "day": "Wed, Dec 9",
+    "event": "Federal Reserve decision",
+    "impact": "high",
+    "why": "Futures price more than a 90% chance of a quarter-point hike; a half point is the risk."
+   }
+  ],
+  "calls": [
+   {
+    "headline": "Nasdaq enters a correction as chip stocks fall 5.3% before Nvidia",
+    "body": "The S&P 500 lost 1.92% to 7,416.59 on Monday, the Nasdaq 2.49% to 24,509.76, more than 10% below its record, and the Dow 1.41% to 51,608.17 (BusinessToday, Bloomberg). The Philadelphia chip index fell 5.3%; Nvidia lost 4.1% to $156.14, its lowest close since July 2025, Broadcom 3.9%, Intel 7.0%, Oracle 5.0% and Alphabet 4.1%. The VIX rose 18.7% to 22.91. Nvidia reports after the close tonight, against an LSEG consensus of $109.1bn in revenue, up 91% (Briefs Finance, BusinessToday).",
+    "view": "The quarter itself is not the question: worries about how AI spending is financed (Fed Governor Barr put the largest AI firms' on-balance-sheet debt above $800bn by year-end) and the new export curbs will outlast one beat. Nvidia at RSI 23 is washed out, so a relief bounce is likely, but the desk expects chip and AI-spender stocks to lag steady earners through November, at medium confidence.",
+    "wrong": "The Nasdaq closes back above 26,000 before November 27.",
+    "confidence": "medium",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "AI chips",
+      "dir": "down"
+     },
+     {
+      "kind": "stock",
+      "dir": "down",
+      "t": "NVDA",
+      "chg": -4.1
+     },
+     {
+      "kind": "stock",
+      "dir": "down",
+      "t": "AVGO",
+      "chg": -3.9
+     },
+     {
+      "kind": "stock",
+      "dir": "down",
+      "t": "INTC",
+      "chg": -7.0
+     },
+     {
+      "kind": "stock",
+      "dir": "down",
+      "t": "ORCL",
+      "chg": -5.0
+     },
+     {
+      "kind": "market",
+      "name": "Nasdaq",
+      "dir": "down",
+      "chg": -2.49
+     },
+     {
+      "kind": "market",
+      "name": "VIX",
+      "dir": "up",
+      "chg": 18.7
+     }
+    ]
+   },
+   {
+    "headline": "Washington shuts the overseas route to US AI chips for Chinese firms",
+    "line": "Data centers in five countries now need a license for advanced Nvidia and AMD chips.",
+    "body": "The Commerce Department issued a rule on Monday to stop Chinese companies using advanced AI chips through overseas data centers: customers in Indonesia, Malaysia, Singapore, Thailand and Brazil now need a special license to buy advanced Nvidia and AMD chips, and the rule takes effect in 90 days (NBC News, The New York Times).",
+    "view": "It cuts into Southeast Asian sales that had been one of Nvidia's fastest-growing channels, and it lands as the company reports under an interim chief. The size is unknown, so for now it weighs on sentiment more than earnings; the desk reads it as a reason the chip sell-off can last past tonight, at low confidence.",
+    "wrong": "Nvidia's guidance tonight shows no hit from the rule and the chip stocks recover Monday's 5.3% loss by November 20.",
+    "confidence": "low",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "AI chips",
+      "dir": "down"
+     },
+     {
+      "kind": "stock",
+      "dir": "down",
+      "t": "NVDA"
+     },
+     {
+      "kind": "stock",
+      "name": "AMD",
+      "dir": "down",
+      "t": "AMD"
+     },
+     {
+      "kind": "stock",
+      "dir": "mixed",
+      "t": "ORCL"
+     },
+     {
+      "kind": "market",
+      "name": "Nasdaq",
+      "dir": "down"
+     }
+    ]
+   },
+   {
+    "headline": "Brent falls 3.5% to $92.44 as a surplus outweighs Hormuz",
+    "line": "Down 18.5% this month although Hormuz traffic is still 95% below last year.",
+    "body": "Brent fell about 3.5% on Monday to $92.44 a barrel, as the IEA's forecast of a fourth-quarter surplus outweighed Iran's claim that a fourth tanker hit a mine east of the Strait of Hormuz (Reuters via ET CFO; the mine claim is unconfirmed). IMF PortWatch counted 107 transits through Hormuz in the four weeks to November 8, against 2,389 a year earlier. Exxon fell 2.2% to $166.87. Treasuries rallied, the 10-year easing to 5.12% from 5.15% (US Treasury).",
+    "view": "With Hormuz traffic near zero and oil still falling, the market has priced the closure and is trading the surplus; that is the desk's case for Brent below $105 to November 20, still on track. Cheaper oil eases the inflation that drives Fed hike bets, which helps bonds more than energy stocks. Medium confidence.",
+    "wrong": "Brent closes above $105 before November 20.",
+    "confidence": "medium",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "Energy",
+      "dir": "down"
+     },
+     {
+      "kind": "stock",
+      "dir": "down",
+      "t": "XOM",
+      "chg": -2.2
+     },
+     {
+      "kind": "market",
+      "name": "Brent",
+      "dir": "down",
+      "chg": -3.55
+     },
+     {
+      "kind": "market",
+      "name": "Treasury yields",
+      "dir": "down"
+     }
+    ]
+   },
+   {
+    "headline": "Anthropic prices its IPO Wednesday at $70–78 into a falling market",
+    "line": "A crypto contract tracking it traded about 26% above the range on Monday.",
+    "body": "Anthropic prices its shares on Wednesday and starts trading on the Nasdaq on Thursday under the ticker ANT, with a range of $70 to $78 a share (Yahoo Finance, The Conversation). A crypto contract tracking the stock traded at about $98.67 on Monday, roughly 26% above the top of the range.",
+    "view": "A strong debut would show money still wants AI at the right price and could steady the sell-off; a weak one would deepen it. Alphabet and Amazon both hold stakes, so the price also marks their holdings. Low confidence either way until the book closes.",
+    "wrong": "Anthropic opens below $70 on Thursday, under its range.",
+    "confidence": "low",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "AI software",
+      "dir": "mixed"
+     },
+     {
+      "kind": "stock",
+      "dir": "mixed",
+      "t": "GOOGL"
+     },
+     {
+      "kind": "stock",
+      "dir": "mixed",
+      "t": "AMZN"
+     },
+     {
+      "kind": "market",
+      "name": "Nasdaq",
+      "dir": "mixed"
+     }
+    ]
+   },
+   {
+    "headline": "December hike odds hold above 90% before retail sales",
+    "line": "October retail sales at 3:30pm Cairo are forecast up 0.2%.",
+    "body": "Futures still price more than a 90% chance of a quarter-point Fed rise in December, from 3.75–4.00% (BigGo; EnterpriseAM, citing Reuters, put it at 91%). The 2-year yield eased to 4.83% from 4.88% on Monday (US Treasury). October retail sales, due at 3:30pm Cairo, are forecast up 0.2% on the month (TradingKey).",
+    "view": "A hike is priced; the risk now is a half point, which PIMCO's Tiffany Wilding says has become more likely. A strong sales figure would push yields up again and hurt the same growth stocks that fell on Monday; banks gain from a steeper path. Medium confidence that the Fed hikes a quarter point on December 9.",
+    "wrong": "The Fed holds rates on December 9.",
+    "confidence": "medium",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "Banks",
+      "dir": "up"
+     },
+     {
+      "kind": "stock",
+      "dir": "mixed",
+      "t": "JPM",
+      "chg": -2.3
+     },
+     {
+      "kind": "market",
+      "name": "Rate-hike odds",
+      "dir": "up"
+     },
+     {
+      "kind": "market",
+      "name": "Treasury yields",
+      "dir": "mixed"
+     }
+    ]
+   }
+  ],
+  "views": [
+   {
+    "call": "Money rotates from AI spenders to steady earners",
+    "status": "on track",
+    "note": "From Oct 30: Walmart $121.25, Alphabet $283.82. Monday: Walmart $128.41 (+5.9%), Alphabet $283.72 (0.0%). Judged November 27."
+   },
+   {
+    "call": "Brent stays below $105 while Iran talks continue",
+    "status": "on track",
+    "note": "From Nov 5: $94.62. Monday: $92.44, down 3.5% on the IEA's surplus forecast. Wrong if Brent closes above $105; judged November 20."
+   }
+  ]
+ },
+ "pages": {
+  "egx": {
+   "finding": "The EGX30 edged up 0.02% to 52,199.80 on Monday on CIB, Telecom Egypt and Eastern Company, while the EGX70 EWI fell 3.76% on profit-taking in small caps; foreigners were net buyers of EGP 60.5m.",
+   "session": {
+    "turnover": 11.1,
+    "vs90": null,
+    "breadth": null
+   },
+   "outlook": {
+    "bull": {
+     "sectors": [
+      {
+       "name": "Telecoms",
+       "confidence": "medium",
+       "why": "MSCI adds Telecom Egypt to its Egypt standard index at the November 30 close; the stock rose 5.2% to EGP 143.00 on Monday after nine-month profit rose 44% to EGP 24.4bn."
+      },
+      {
+       "name": "Banks",
+       "confidence": "medium",
+       "why": "Foreigners bought a net EGP 29.4bn of government debt on Monday and bonds sold 15% over target at about 24.7%, keeping bill income high."
+      },
+      {
+       "name": "Food producers",
+       "confidence": "medium",
+       "why": "Edita's third-quarter profit rose 41.5% on revenue up 32.9%, after Juhayna's 33% rise, with Juhayna guiding the fourth quarter at the same pace."
+      }
+     ],
+     "stocks": [
+      {
+       "t": "JUFO",
+       "range": [
+        27,
+        28
+       ],
+       "dp": 0,
+       "by": "end of January",
+       "confidence": "low",
+       "why": "A return to its 52-week high of about EGP 27.63: third-quarter revenue rose 25% to EGP 10bn and profit 33% to EGP 654m, and management expects the fourth quarter to keep the pace; Edita's 41.5% profit rise shows the sector's demand holding. At EGP 23.90 it is below its 50-day average of about EGP 25. Low confidence: exports fell 11% and consumers face more price rises.",
+       "wrong": "it closes below EGP 22."
+      },
+      {
+       "t": "ORAS",
+       "range": [
+        860,
+        900
+       ],
+       "dp": 0,
+       "by": "end of January",
+       "confidence": "low",
+       "why": "Dollar revenue from Gulf and US projects, and the 900 MW Gulf of Suez wind farm, 25% its own, reached financial close. At EGP 815.38 after a 1.4% fall on Monday it sits below its 50-day average of about EGP 834. The 97.2m new shares listing on November 24 can cap the price, and a firmer pound trims the pound value of dollar earnings.",
+       "wrong": "it closes below EGP 780, or the dollar falls below EGP 52."
+      },
+      {
+       "t": "EGAL",
+       "range": [
+        335,
+        345
+       ],
+       "dp": 0,
+       "by": "end of December",
+       "confidence": "medium",
+       "why": "A return to about its 50-day average of EGP 336. First-quarter profit of EGP 4.93bn (+104%) puts the stock at about 7.5 times earnings at EGP 326.99; the EGP 16 dividend goes ex on Tuesday, which takes about 4.9% off the price that day and makes the range harder to reach.",
+       "wrong": "it closes below EGP 290."
+      }
+     ]
+    },
+    "bear": {
+     "sectors": [
+      {
+       "name": "Fertilizers",
+       "confidence": "low",
+       "why": "Supply cuts of 20–40% stay, and gas for exports was reported 50% dearer at $12.75 per mmBtu; MOPCO fell 4.1% on Monday, though its nine-month profit rose 56% on urea prices."
+      },
+      {
+       "name": "Real estate developers",
+       "confidence": "low",
+       "why": "Palm Hills' attributable profit fell 4.7% and Talaat Moustafa's rose 11.9%, both well behind revenue growth of about 24%, as costs and financing at about 25% bite; Palm Hills fell 3.4% on Monday."
+      }
+     ],
+     "stocks": [
+      {
+       "t": "TMGH",
+       "range": [
+        72,
+        76
+       ],
+       "dp": 0,
+       "by": "end of December",
+       "confidence": "low",
+       "why": "At EGP 83.88, below its 50-day average of about EGP 88.6; attributable profit rose 11.9% against revenue up 24%, as dearer money weighs on buyers and debt. A single-source report that the military wants a share of its projects (Africa Intelligence) adds uncertainty; the projects themselves argue against the call.",
+       "wrong": "it closes back above EGP 88, near its 50-day average, or a big sales launch beats expectations."
+      },
+      {
+       "t": "PHDC",
+       "range": [
+        10.2,
+        10.8
+       ],
+       "dp": 1,
+       "by": "end of December",
+       "confidence": "low",
+       "why": "At EGP 11.85 after a 3.4% fall on Monday, below its 50-day average of about EGP 12.99. Nine-month attributable profit fell 4.7% to EGP 3.37bn as the gross margin dropped to 35.1% from 40.8%; the EGP 75bn of Ras El-Hekma sales booked in the third quarter argue against a deep fall.",
+       "wrong": "it closes above EGP 12.50."
+      }
+     ]
+    }
+   },
+   "news": [
+    {
+     "headline": "Small caps fall 3.76% as the EGX30 holds at 52,199.80",
+     "text": "The EGX70 EWI fell to 18,028.40 and the EGX100 2.88%, while CIB, Telecom Egypt and Eastern Company held up the EGX30; an analyst called it profit-taking after a 10% run.",
+     "source": "Al Borsa",
+     "url": "https://alborsaanews.com/2026/11/16/2006899",
+     "impact": "bearish",
+     "affects": [
+      {
+       "kind": "market",
+       "name": "EGX70 EWI",
+       "dir": "down",
+       "chg": -3.76
+      },
+      {
+       "kind": "market",
+       "name": "EGX30",
+       "dir": "mixed",
+       "chg": 0.02
+      }
+     ]
+    },
+    {
+     "headline": "Misr Life Insurance to float 15% in December via EFG Hermes",
+     "text": "Misr Insurance Holding will sell 750 million existing shares through a private placement and a public offering at one book-built price, subject to approval.",
+     "source": "Al Borsa",
+     "url": "https://alborsaanews.com/2026/11/17/2006967",
+     "impact": "mixed",
+     "affects": [
+      {
+       "kind": "sector",
+       "name": "Insurance",
+       "dir": "up"
+      },
+      {
+       "kind": "stock",
+       "dir": "up",
+       "t": "HRHO"
+      }
+     ]
+    },
+    {
+     "headline": "Edita jumps 7.4% after a 41.5% rise in quarterly profit",
+     "text": "Third-quarter net profit rose to EGP 938.1m on record revenue of EGP 7.3bn, up 32.9%.",
+     "source": "Daily News Egypt",
+     "url": "https://dailynewsegypt.com/2026/11/16/editas-q3-profit-jumps-41-5-on-record-sales/",
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "sector",
+       "name": "Food producers",
+       "dir": "up"
+      },
+      {
+       "kind": "stock",
+       "dir": "up",
+       "t": "EFID",
+       "chg": 7.4
+      }
+     ]
+    },
+    {
+     "headline": "Fawry's quarterly profit rises 37.5% to EGP 1.07bn",
+     "text": "Third-quarter net income rose from a year earlier on revenue up 36.4% to EGP 3.13bn; the stock fell 1.7% to EGP 17.44.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/17/gb-corps-income-rises-9-9-in-3q-fawrys-climbs-37-5/",
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "sector",
+       "name": "Fintech",
+       "dir": "up"
+      },
+      {
+       "kind": "stock",
+       "dir": "up",
+       "t": "FWRY",
+       "chg": -1.7
+      }
+     ]
+    },
+    {
+     "headline": "Fertilizer makers to pay $12.75 per mmBtu to keep exporting",
+     "text": "Seven producers pay $175m up front for 45 days of gas at a price 50% higher, with 20–40% supply cuts in place, Asharq Business reported.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/17/why-fertilizer-exports-cost-the-state-more-in-gas-than-they-earn/",
+     "impact": "bearish",
+     "affects": [
+      {
+       "kind": "sector",
+       "name": "Fertilizers",
+       "dir": "down"
+      }
+     ]
+    },
+    {
+     "headline": "Orascom's 900 MW Gulf of Suez wind farm reaches financial close",
+     "text": "Orascom Construction owns 25% of the project with ENGIE and Aeolus; the first 300 MW are due in January 2028.",
+     "source": "AJOT",
+     "url": "https://www.ajot.com/news/engie-reaches-financial-close-for-the-900-megawatt-mw-gulf-of-suez-3-wind-farm-in-egypt",
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "sector",
+       "name": "Construction",
+       "dir": "up"
+      },
+      {
+       "kind": "stock",
+       "dir": "up",
+       "t": "ORAS"
+      }
+     ]
+    }
+   ]
+  },
+  "egp": {
+   "finding": "The central bank's dollar rate eased to EGP 53.75 on Tuesday morning from 53.86 as foreigners bought a net EGP 29.4bn of Egyptian debt on Monday, about $547m, while US stocks sold off.",
+   "rates": [
+    {
+     "label": "18-month bond (Monday auction)",
+     "value": "24.75%, unchanged"
+    },
+    {
+     "label": "3-year bond (Monday auction)",
+     "value": "24.72%, from 24.74%"
+    },
+    {
+     "label": "Sold on Monday",
+     "value": "EGP 23.1bn of fixed-rate bonds against a EGP 20bn target"
+    }
+   ],
+   "drivers": [
+    {
+     "name": "Foreign money in debt",
+     "confidence": "high",
+     "why": "Arab and foreign investors bought a net EGP 29.38bn of government debt on Monday, about $547m, as US stocks fell (Amwal Al Ghad, Almasraf); Monday's bond sale was 15% over target."
+    },
+    {
+     "name": "Record remittances",
+     "confidence": "high",
+     "why": "$13bn in July–September, up 20.4%, and $38.2bn in nine months, the economy's largest single source of dollars (central bank via EnterpriseAM)."
+    },
+    {
+     "name": "A stronger dollar abroad",
+     "confidence": "medium",
+     "why": "The dollar index is near a 19-month high at about 103.6 and futures price more than a 90% chance of a December Fed hike; the US 10-year eased to 5.12% on Monday."
+    },
+    {
+     "name": "Suez traffic recovers",
+     "confidence": "medium",
+     "why": "IMF PortWatch counts 1,211 Suez transits in the four weeks to November 8, 2.6% more than a year earlier, and Maersk and Hapag-Lloyd move three more services to the canal from December (gCaptain)."
+    },
+    {
+     "name": "Cheaper oil",
+     "confidence": "medium",
+     "why": "Brent fell 3.5% to $92.44 on Monday and 18.5% this month, trimming the fuel and LNG import bill."
+    },
+    {
+     "name": "Lost export dollars from gas cuts",
+     "confidence": "medium",
+     "why": "Fertilizer plants still face supply cuts of 20–40%; they were reported to be paying 50% more for gas to keep exporting into January."
+    }
+   ],
+   "view": {
+    "headline": "Debt inflows and remittances keep the dollar in EGP 52–55",
+    "confidence": "medium",
+    "body": "Foreigners bought about $547m of Egyptian debt on the day the Nasdaq slid into a correction, which says the carry trade is not being unwound by the sell-off abroad. With bonds yielding about 24.7%, record remittances and cheaper oil, the pound has room to hold near EGP 53–55 into the IMF program's December 15 expiry. The risks are a half-point Fed hike and a delay to the final IMF review.",
+    "wrong": "The dollar closes above EGP 55.50 before December 9, or a debt auction clears with bids below the amount offered.",
+    "affects": [
+     {
+      "kind": "sector",
+      "dir": "up",
+      "name": "Banks"
+     },
+     {
+      "kind": "sector",
+      "dir": "up",
+      "name": "Importers"
+     },
+     {
+      "kind": "sector",
+      "dir": "down",
+      "name": "Exporters"
+     },
+     {
+      "kind": "stock",
+      "dir": "up",
+      "t": "COMI"
+     },
+     {
+      "kind": "market",
+      "dir": "up",
+      "name": "Pound"
+     },
+     {
+      "kind": "market",
+      "dir": "mixed",
+      "name": "T-bill yields"
+     }
+    ]
+   },
+   "news": [
+    {
+     "headline": "Foreigners buy a net EGP 29.4bn of Egyptian debt, about $547m",
+     "text": "Foreign investors bought EGP 28.82bn and Arabs EGP 556m on Monday on the secondary market.",
+     "source": "Almasraf",
+     "url": "https://www.almasraf.news/29-4-مليار-جنيه-صافي-مشتريات-أجنبية-وعربي/",
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "market",
+       "name": "Pound",
+       "dir": "up"
+      },
+      {
+       "kind": "market",
+       "name": "T-bill yields",
+       "dir": "down"
+      }
+     ]
+    },
+    {
+     "headline": "Bond sale beats target by 15% at about 24.7%",
+     "text": "The finance ministry sold EGP 23.1bn of 18-month and three-year bonds against EGP 20bn, at 24.75% and 24.72%; bids totaled EGP 35.7bn.",
+     "source": "Cairo24",
+     "url": "https://www.cairo24.com/2530604",
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "market",
+       "name": "T-bill yields",
+       "dir": "mixed"
+      },
+      {
+       "kind": "market",
+       "name": "Pound",
+       "dir": "up"
+      }
+     ]
+    },
+    {
+     "headline": "Dollar eases to EGP 53.75 at the central bank",
+     "text": "The central bank's rate was EGP 53.61 to buy and 53.75 to sell on Tuesday morning, within 1% of the pound's strongest level of the past year.",
+     "source": "Central Bank of Egypt",
+     "url": "https://www.cbe.org.eg/en/economic-research/statistics/cbe-exchange-rates",
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "market",
+       "name": "Pound",
+       "dir": "up",
+       "chg": 0.2
+      }
+     ]
+    },
+    {
+     "headline": "Three more Gemini services return to the Suez Canal",
+     "text": "Maersk and Hapag-Lloyd move AE1, AE2 and AE3 from the Cape route to Suez between December and January, adding canal fees in dollars.",
+     "source": "gCaptain",
+     "url": "https://gcaptain.com/maersk-hapag-lloyd-expand-suez-canal-return-with-three-more-gemini-services/",
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "market",
+       "name": "Pound",
+       "dir": "up"
+      },
+      {
+       "kind": "market",
+       "name": "Suez Canal",
+       "dir": "up"
+      }
+     ]
+    }
+   ]
+  },
+  "us": {
+   "finding": "The Nasdaq fell 2.49% into a correction on Monday and the S&P 500 1.92%, as chip stocks slid 5.3% before Nvidia's results tonight; Treasuries rallied, so this was an AI scare, not a rates one.",
+   "rates": [
+    {
+     "label": "December Fed hike odds (futures, Monday)",
+     "value": "More than 90% for a quarter point (BigGo; 91% per Reuters via EnterpriseAM)"
+    },
+    {
+     "label": "Retail sales, October (Tuesday, 3:30pm Cairo)",
+     "value": "Forecast +0.2% on the month"
+    }
+   ],
+   "afterBell": [],
+   "outlook": {
+    "bull": {
+     "sectors": [
+      {
+       "name": "Steady earners",
+       "confidence": "medium",
+       "why": "Walmart rose 0.2% and Costco 0.7% on Monday as the S&P 500 fell 1.92%; Walmart is up 5.9% since October 30 and reports November 19."
+      },
+      {
+       "name": "Banks",
+       "confidence": "medium",
+       "why": "Futures price more than a 90% chance of a December hike, supporting lending margins, though JPMorgan fell 2.3% with the market on Monday."
+      }
+     ],
+     "stocks": [
+      {
+       "t": "XOM",
+       "range": [
+        185,
+        195
+       ],
+       "dp": 0,
+       "by": "end of December",
+       "confidence": "low",
+       "why": "At $166.87 after a 2.2% fall, below its 50-day average of about $169 and 11% under its 52-week high of $187.25. The range needs Brent back above $105, which runs against the desk's own oil view, and Brent fell 3.5% on Monday on the IEA's surplus forecast, so confidence stays low.",
+       "wrong": "Brent falls below $85, for example on an Iran settlement."
+      }
+     ]
+    },
+    "bear": {
+     "sectors": [
+      {
+       "name": "AI chips and hardware",
+       "confidence": "medium",
+       "why": "The Philadelphia chip index fell 5.3% on Monday and the Nasdaq entered a correction; a new rule requires licenses for advanced chips in five countries, and Nvidia reports under an interim chief."
+      },
+      {
+       "name": "Housing and small caps",
+       "confidence": "medium",
+       "why": "The 2-year yield is 4.83% and a December hike is priced at over 90%; Monday's dip in yields came with an equity sell-off, not relief."
+      }
+     ],
+     "stocks": [
+      {
+       "t": "GOOGL",
+       "range": [
+        265,
+        280
+       ],
+       "dp": 0,
+       "by": "end of November",
+       "confidence": "low",
+       "why": "At $283.72 after a 4.1% fall on Monday, near the top of the projected $265–280 and well below its 50-day average of about $330; heavy AI spending before returns show and higher rates weigh, though its Anthropic stake, priced on Wednesday, argues against the call.",
+       "wrong": "it closes above $300 before the end of November."
+      }
+     ]
+    }
+   },
+   "news": [
+    {
+     "headline": "Nasdaq enters a correction as the chip index falls 5.3%",
+     "text": "The Nasdaq lost 2.49% to 24,509.76, more than 10% below its record, and the S&P 500 1.92%; Nvidia fell 4.1% to $156.14, its lowest close since July 2025.",
+     "source": "BusinessToday",
+     "url": "https://www.businesstoday.com.my/2026/11/17/wall-street-sinks-as-ai-jitters-hit-nvidia-and-chip-stocks/",
+     "impact": "bearish",
+     "affects": [
+      {
+       "kind": "sector",
+       "name": "Semiconductors",
+       "dir": "down"
+      },
+      {
+       "kind": "stock",
+       "dir": "down",
+       "t": "NVDA",
+       "chg": -4.1
+      },
+      {
+       "kind": "market",
+       "name": "Nasdaq",
+       "dir": "down",
+       "chg": -2.49
+      }
+     ]
+    },
+    {
+     "headline": "New license rule shuts Chinese firms' overseas route to AI chips",
+     "text": "Data-center customers in Indonesia, Malaysia, Singapore, Thailand and Brazil need a special license for advanced Nvidia and AMD chips; the rule takes effect in 90 days.",
+     "source": "NBC News",
+     "url": "https://www.nbcnews.com/tech/tech-news/us-closes-loophole-let-chinese-companies-use-top-ai-chips-rcna609634",
+     "impact": "bearish",
+     "affects": [
+      {
+       "kind": "sector",
+       "name": "Semiconductors",
+       "dir": "down"
+      },
+      {
+       "kind": "stock",
+       "dir": "down",
+       "t": "NVDA"
+      },
+      {
+       "kind": "stock",
+       "name": "AMD",
+       "dir": "down",
+       "t": "AMD"
+      }
+     ]
+    },
+    {
+     "headline": "Oracle falls 5% as its debt-funded AI build-out is tested",
+     "text": "Oracle fell to $119.09; it carried $125.3bn of borrowings at August 31 and announced a $20bn equity and debt raise this month.",
+     "source": "Invezz (via TradingView)",
+     "url": "https://www.tradingview.com/news/invezz:b34e4a7d1094b:0-why-oracle-stock-is-declining-on-monday/",
+     "impact": "bearish",
+     "affects": [
+      {
+       "kind": "stock",
+       "dir": "down",
+       "t": "ORCL",
+       "chg": -5.0
+      }
+     ]
+    },
+    {
+     "headline": "Quebecor bids C$31bn for TELUS; TELUS jumps 12.2%",
+     "text": "Quebecor made a non-binding cash-and-stock proposal for TELUS at about a 60% premium; TELUS's chief executive called it opportunistic.",
+     "source": "Bloomberg",
+     "url": "https://www.bloomberg.com/news/articles/2026-11-16/telus-ceo-dodig-slams-quebecor-s-c-31-billion-bid-cites-fiber-asset-value",
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "sector",
+       "name": "Telecoms",
+       "dir": "up"
+      },
+      {
+       "kind": "stock",
+       "name": "TELUS",
+       "dir": "up",
+       "t": "TU",
+       "chg": 12.2
+      }
+     ]
+    },
+    {
+     "headline": "Tyson rises 8.7% as it sees beef losses easing",
+     "text": "Tyson's fourth-quarter GAAP operating income fell to $1m from $158m, but it said cattle supplies are improving, and the stock closed at $63.95.",
+     "source": "Bloomberg",
+     "url": "https://www.bloomberg.com/news/articles/2026-11-16/tyson-sees-beef-woes-easing-as-cattle-supplies-improve",
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "sector",
+       "name": "Food producers",
+       "dir": "up"
+      },
+      {
+       "kind": "stock",
+       "name": "Tyson Foods",
+       "dir": "up",
+       "t": "TSN",
+       "chg": 8.7
+      }
+     ]
+    },
+    {
+     "headline": "Anthropic prices Wednesday at $70–78; trades Thursday as ANT",
+     "text": "A crypto contract tracking the stock traded at about $98.67 on Monday, roughly 26% above the top of the range.",
+     "source": "Yahoo Finance",
+     "url": "https://finance.yahoo.com/technology/ai/article/anthropic-ipo-what-we-know-143321078.html",
+     "impact": "mixed",
+     "affects": [
+      {
+       "kind": "sector",
+       "name": "AI software",
+       "dir": "mixed"
+      },
+      {
+       "kind": "market",
+       "name": "Nasdaq",
+       "dir": "mixed"
+      }
+     ]
+    }
+   ]
+  },
+  "global": {
+   "finding": "Brent fell 3.5% to $92.44 on Monday as the IEA's surplus forecast outweighed Hormuz attacks, and gold slipped to $3,853, near a one-year low, as rising rate bets curb demand.",
+   "notes": {
+    "brent": "Egypt imports fuel and LNG, so Brent at $92.44, down 18.5% this month, eases the import bill and inflation; the IEA's surplus forecast is why the desk's $105 line holds.",
+    "gold_usd": "Sets the base for Egyptian gold: the 24K gram fell 0.7% to EGP 6,755 on Monday as dollar gold slipped and the pound firmed.",
+    "dxy": "About 103.6, near a 19-month high; the pound still firmed 11 piasters as foreigners bought Egyptian debt.",
+    "btc": "A gauge of risk appetite: about $64,600 on Tuesday morning after about $2bn of crypto positions were liquidated over the weekend."
+   },
+   "news": [
+    {
+     "headline": "Brent falls 3.5% to $92.44 as the IEA sees a surplus",
+     "text": "Oil fell more than 3% on Monday and Treasury yields eased, though analysts still see a December Fed hike.",
+     "source": "Reuters (via ET CFO)",
+     "url": "https://cfo.economictimes.indiatimes.com/amp/news/us-yields-ease-as-oil-prices-drop-3/135908871",
+     "impact": "bearish",
+     "affects": [
+      {
+       "kind": "market",
+       "name": "Brent",
+       "dir": "down",
+       "chg": -3.55
+      },
+      {
+       "kind": "market",
+       "name": "Treasury yields",
+       "dir": "down"
+      }
+     ]
+    },
+    {
+     "headline": "Hormuz transits down 95.5% on a year; Suez up 2.6%",
+     "text": "IMF PortWatch counted 107 Hormuz transits in the four weeks to November 8 against 2,389 a year earlier; Suez had 1,211 against 1,180, and Bab el-Mandeb was down 25.4%.",
+     "source": "IMF PortWatch",
+     "url": "https://portwatch.imf.org/",
+     "impact": "mixed",
+     "affects": [
+      {
+       "kind": "market",
+       "name": "Brent",
+       "dir": "mixed"
+      },
+      {
+       "kind": "market",
+       "name": "Suez Canal",
+       "dir": "up"
+      }
+     ]
+    },
+    {
+     "headline": "Maersk and Hapag-Lloyd move three more services to Suez",
+     "text": "Gemini's AE1, AE2 and AE3 move from the Cape route to the Suez Canal between December and January.",
+     "source": "gCaptain",
+     "url": "https://gcaptain.com/maersk-hapag-lloyd-expand-suez-canal-return-with-three-more-gemini-services/",
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "sector",
+       "name": "Shipping",
+       "dir": "up"
+      },
+      {
+       "kind": "market",
+       "name": "Suez Canal",
+       "dir": "up"
+      }
+     ]
+    },
+    {
+     "headline": "Gold near a one-year low; Goldman sees two years to a record",
+     "text": "Spot gold closed near $3,853 on Monday, its lowest since September 2025, as rising rates curb investor demand.",
+     "source": "CNBC TV18",
+     "url": "https://www.cnbctv18.com/market/commodities/global-gold-prices-when-will-they-hit-record-high-goldman-sachs-answers-fed-dollar-20035445.htm",
+     "impact": "bearish",
+     "affects": [
+      {
+       "kind": "market",
+       "name": "Gold",
+       "dir": "down",
+       "chg": -0.86
+      }
+     ]
+    },
+    {
+     "headline": "Gulf bourses recover; Qatar up 2.6% despite Bahrain attacks",
+     "text": "Qatar rose 2.6% on Monday and Dubai and Abu Dhabi 0.2%.",
+     "source": "Zawya",
+     "url": "https://www.zawya.com/en/capital-markets/mideast-stocks-gulf-bourses-recover-losses-amid-regional-security-fears-2290720",
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "market",
+       "name": "Gulf stocks",
+       "dir": "up"
+      }
+     ]
+    },
+    {
+     "headline": "Bitcoin holds near $64,600 after $2bn of liquidations",
+     "text": "Bitcoin steadied on Tuesday morning after about $2bn of crypto positions were liquidated over the weekend.",
+     "source": "Bitbo",
+     "url": "https://bitbo.io/news/bitcoin-slips-nvidia-anthropic-ipo/",
+     "impact": "mixed",
+     "affects": [
+      {
+       "kind": "market",
+       "name": "Bitcoin",
+       "dir": "mixed",
+       "chg": 0.39
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

@@ -36,6 +36,13 @@
      "source": "TradingView",
      "url": "https://www.tradingview.com/symbols/EGX-ETEL/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-17",
+     "text": "Telecom Egypt rose 5.2% to EGP 143.00 on Monday, two weeks before MSCI's inclusion.",
+     "source": "Al Borsa",
+     "url": "https://alborsaanews.com/2026/11/16/2006899",
+     "effect": "supports"
     }
    ],
    "wrongIf": [
@@ -134,6 +141,13 @@
      "text": "On its call Juhayna put third-quarter revenue up 25% to EGP 10bn and profit up 33% to EGP 654m, and guided the fourth quarter at the same pace; the stock fell 2.3% to EGP 24.13.",
      "source": "Investing.com",
      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-juhayna-posts-record-q3-2026-sales-as-stock-slips-93CH-5021816",
+     "effect": "supports"
+    },
+    {
+     "date": "2026-11-17",
+     "text": "Edita's third-quarter profit rose 41.5% on revenue up 32.9%, a second food producer showing demand holding; Juhayna slipped 1.6% to EGP 23.90.",
+     "source": "Daily News Egypt",
+     "url": "https://dailynewsegypt.com/2026/11/16/editas-q3-profit-jumps-41-5-on-record-sales/",
      "effect": "supports"
     }
    ],
@@ -386,6 +400,13 @@
      "source": "Youm7",
      "url": "https://www.youm7.com/story/2026/11/16/خريطة-الأرباح-والخسائر-في-البورصة-قفزة-قياسية-لـ-إيديتا-وتراجع/7620117",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-17",
+     "text": "Palm Hills fell 3.4% to EGP 11.85 on Monday after nine-month attributable profit fell 4.7%, while the EGX30 held flat.",
+     "source": "CNBC Arabia",
+     "url": "https://www.cnbcarabia.com/159896/2026/16/11/أرباح-\"بالم-هيلز\"-المصرية-ترتفع-هامشياً-إلى-1.1-مليار-ج",
+     "effect": "supports"
     }
    ],
    "driver": "egp-rates"
@@ -507,6 +528,13 @@
      "text": "Consumer staples led the S&P 500 on Friday, up 1.4%, as tech fell 2.0%; Walmart rose 1.5% to $128.09 and JPMorgan 1.0%, while Alphabet slipped 1.0%.",
      "source": "CappNotes",
      "url": "https://cappnotes.substack.com/p/closing-look-friday-november-13-2026",
+     "effect": "supports"
+    },
+    {
+     "date": "2026-11-17",
+     "text": "The Nasdaq fell 2.49% into a correction on Monday; Alphabet lost 4.1% and Amazon 3.3% while Walmart rose 0.2%.",
+     "source": "BusinessToday",
+     "url": "https://www.businesstoday.com.my/2026/11/17/wall-street-sinks-as-ai-jitters-hit-nvidia-and-chip-stocks/",
      "effect": "supports"
     }
    ],
@@ -689,6 +717,13 @@
      "url": "https://egyptoil-gas.com/news/mopco-posts-56-rise-in-net-profit-in-9m-of-2026/",
      "effect": "against",
      "confidence": "low"
+    },
+    {
+     "date": "2026-11-17",
+     "text": "Asharq Business reported that seven producers will pay $12.75 per mmBtu for gas, 50% more, to keep exporting for 45 days, with 20–40% cuts in place; MOPCO fell 4.1% and Abu Qir 2.4% on Monday. One origin, not independently confirmed.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/17/why-fertilizer-exports-cost-the-state-more-in-gas-than-they-earn/",
+     "effect": "supports"
     }
    ],
    "wrongIf": [
@@ -878,6 +913,13 @@
      "source": "Sada Elbalad",
      "url": "https://www.elbalad.news/7181766",
      "effect": "against"
+    },
+    {
+     "date": "2026-11-17",
+     "text": "Arab and foreign investors bought a net EGP 29.4bn of Egyptian debt on Monday, about $547m, as the Nasdaq fell into a correction; the dollar eased to EGP 53.75.",
+     "source": "Almasraf",
+     "url": "https://www.almasraf.news/29-4-مليار-جنيه-صافي-مشتريات-أجنبية-وعربي/",
+     "effect": "supports"
     }
    ],
    "wrongIf": [
@@ -987,6 +1029,13 @@
      "url": "https://shafaq.com/en/Economy/Oil-slides-on-looming-surplus-and-Hormuz-recovery",
      "effect": "supports",
      "confidence": "medium"
+    },
+    {
+     "date": "2026-11-17",
+     "text": "Brent fell about 3.5% to $92.44 on Monday as the IEA's fourth-quarter surplus forecast outweighed reports of tankers hitting mines near Hormuz.",
+     "source": "Reuters (via ET CFO)",
+     "url": "https://cfo.economictimes.indiatimes.com/amp/news/us-yields-ease-as-oil-prices-drop-3/135908871",
+     "effect": "supports"
     }
    ],
    "wrongIf": [

@@ -15,19 +15,19 @@
    "t": "EFID",
    "market": "egx",
    "kind": "results",
-   "date": "2026-11-17",
+   "date": "2026-11-16",
    "period": "2026-09-30",
    "time": null,
-   "expected": true
+   "expected": false
   },
   {
    "t": "JUFO",
    "market": "egx",
    "kind": "results",
-   "date": "2026-11-17",
+   "date": "2026-11-11",
    "period": "2026-09-30",
    "time": null,
-   "expected": true
+   "expected": false
   },
   {
    "t": "NVDA",
@@ -42,28 +42,28 @@
    "t": "PHDC",
    "market": "egx",
    "kind": "results",
-   "date": "2026-11-17",
+   "date": "2026-11-16",
    "period": "2026-09-30",
    "time": null,
-   "expected": true
+   "expected": false
   },
   {
    "t": "EAST",
    "market": "egx",
    "kind": "results",
-   "date": "2026-11-18",
+   "date": "2026-11-11",
    "period": "2026-09-30",
    "time": null,
-   "expected": true
+   "expected": false
   },
   {
    "t": "EFIH",
    "market": "egx",
    "kind": "results",
-   "date": "2026-11-18",
+   "date": "2026-11-12",
    "period": "2026-09-30",
    "time": null,
-   "expected": true
+   "expected": false
   },
   {
    "t": "HRHO",

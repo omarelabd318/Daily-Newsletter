@@ -287,6 +287,26 @@
      "url": "https://www.masrawy.com/news/news_economy/details/2026/11/15/3079149/"
     }
    ]
+  },
+  {
+   "date": "2026-11-16",
+   "confirmed": false,
+   "rows": {
+    "Egyptian investors": 0.1014,
+    "Arab investors": -0.1619,
+    "Foreign investors": 0.0605
+   },
+   "sources": [
+    "Vetogate"
+   ],
+   "turnover": 11.1,
+   "links": [
+    {
+     "source": "Vetogate",
+     "url": "https://www.vetogate.com/5772021"
+    }
+   ],
+   "note": "One report; the Egyptian figure is the remainder of the foreign and Arab figures, not reported."
   }
  ]
 }

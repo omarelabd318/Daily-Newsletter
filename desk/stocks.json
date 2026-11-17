@@ -265,6 +265,12 @@
    "sector": "Fertilizers",
    "news": [
     {
+     "date": "2026-11-17",
+     "text": "Fell 2.4% to EGP 77.10 on Monday on a report that fertilizer producers will pay 50% more for gas, $12.75 per mmBtu, to keep exporting into January (Asharq Business, one origin).",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/17/why-fertilizer-exports-cost-the-state-more-in-gas-than-they-earn/"
+    },
+    {
      "date": "2026-11-12",
      "text": "Signed a EGP 76.17m contract with the Arab Organization for Industrialization for 3 MW of solar plants at its Alexandria site, due within 12 months.",
      "source": "Arab Finance",
@@ -398,6 +404,12 @@
    "news": [
     {
      "date": "2026-11-16",
+     "text": "Fell 3.4% to EGP 11.85 after its results: third-quarter attributable profit was about EGP 1.1bn, and nine-month attributable profit fell 4.7% to EGP 3.37bn as the gross margin dropped.",
+     "source": "CNBC Arabia",
+     "url": "https://www.cnbcarabia.com/159896/2026/16/11/أرباح-\"بالم-هيلز\"-المصرية-ترتفع-هامشياً-إلى-1.1-مليار-ج"
+    },
+    {
+     "date": "2026-11-16",
      "text": "Nine-month consolidated profit attributable to shareholders fell 4.7% to EGP 3.37bn from EGP 3.54bn, on revenue up 24.4% to EGP 31.80bn; the gross margin fell to 35.1% from 40.8% (Youm7; Alboslanews gives EGP 3.68bn against 3.70bn before minorities).",
      "source": "Youm7",
      "url": "https://www.youm7.com/story/2026/11/16/خريطة-الأرباح-والخسائر-في-البورصة-قفزة-قياسية-لـ-إيديتا-وتراجع/7620117"
@@ -478,7 +490,7 @@
    },
    "lastResults": {
     "date": "2026-11-16",
-    "period": "Nine months to September 2026",
+    "period": "Third quarter 2026 (nine months to September)",
     "verdict": "miss",
     "headline": "Attributable profit down 4.7% to EGP 3.37bn as revenue rose 24.4% to EGP 31.80bn",
     "points": [
@@ -707,6 +719,12 @@
    "sector": "Internet",
    "news": [
     {
+     "date": "2026-11-16",
+     "text": "Fell 4.1% to $283.72 as the Nasdaq entered a correction; Anthropic, in which it holds a stake, prices its IPO on Wednesday at $70–78.",
+     "source": "BusinessToday",
+     "url": "https://www.businesstoday.com.my/2026/11/17/wall-street-sinks-as-ai-jitters-hit-nvidia-and-chip-stocks/"
+    },
+    {
      "date": "2026-11-05",
      "text": "Rose 3.2% to $288.93 after the midterm result; data-centre regulation was a campaign issue and analysts argue it favours large operators.",
      "source": "Yahoo Finance (Motley Fool)",
@@ -768,6 +786,12 @@
   "AVGO": {
    "sector": "Semiconductors",
    "news": [
+    {
+     "date": "2026-11-16",
+     "text": "Fell 3.9% to $333.40 as chip stocks slid 5.3% before Nvidia's results.",
+     "source": "Gotrade",
+     "url": "https://www.heygotrade.com/en/news/broadcom-avgo-stock-news-november-17-2026/"
+    },
     {
      "date": "2026-11-14",
      "text": "Fell 4.8% to $347.01 on Friday, giving back Thursday's gain as the Philadelphia semiconductor index lost 3.4%.",
@@ -871,6 +895,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-16",
+     "text": "Rose 5.2% to EGP 143.00, more than double its price at the start of the year, two weeks before MSCI adds it to its standard index at the November 30 close; no new company news behind the move.",
+     "source": "Al Borsa",
+     "url": "https://alborsaanews.com/2026/11/16/2006899"
+    },
     {
      "date": "2026-11-12",
      "text": "Nine-month profit rose 44% to EGP 24.4bn on revenue up 19% to EGP 93.6bn; EBITDA rose 24% to EGP 43.1bn, a 46% margin, and net debt fell to 0.8 times EBITDA. Mubasher's 88% rise compares with a lower prior-year figure than the company's own.",
@@ -1216,6 +1246,12 @@
    },
    "news": [
     {
+     "date": "2026-11-17",
+     "text": "Third-quarter consolidated net profit rose 37.5% to EGP 1.07bn from EGP 778.6m on revenue up 36.4% to EGP 3.13bn; the stock fell 1.7% to EGP 17.44 on Monday.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/17/gb-corps-income-rises-9-9-in-3q-fawrys-climbs-37-5/"
+    },
+    {
      "date": "2026-11-15",
      "text": "Nine-month consolidated net profit rose 32.2% to EGP 2.69bn on revenue up 38% to EGP 8.35bn; the value of payments it handled rose 51.6% to EGP 968.6bn.",
      "source": "Hapi Journal",
@@ -1294,6 +1330,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-17",
+     "text": "EFG Hermes is sole global coordinator for Misr Life Insurance's sale of 750 million existing shares, 15%, planned for December; the stock fell 3.2% to EGP 24.10 on Monday with no company news.",
+     "source": "Al Borsa",
+     "url": "https://alborsaanews.com/2026/11/17/2006967"
+    },
     {
      "date": "2026-11-11",
      "text": "EFG Hermes was joint offering manager of DIB Holding's AED 1.94bn ($529m) IPO on the Dubai Financial Market, priced at AED 1.12 a share.",
@@ -1415,7 +1457,7 @@
     "change": "Results on November 16: profit growth well above 30% would support the multiple."
    },
    "preview": {
-    "date": "2026-11-16",
+    "date": "2026-11-17",
     "period": "Third quarter 2026",
     "watch": [
      "Profit attributable after a 40% fall in the first half to EGP 270.7m while revenue rose 27.4% to EGP 4.31bn: whether the third quarter stops the slide.",
@@ -1771,6 +1813,12 @@
    "news": [
     {
      "date": "2026-11-16",
+     "text": "Fell 4.1% to $156.14, its lowest close since July 2025, a day before results; a new Commerce rule requires licenses for advanced chips sold to data centers in Indonesia, Malaysia, Singapore, Thailand and Brazil.",
+     "source": "NBC News",
+     "url": "https://www.nbcnews.com/tech/tech-news/us-closes-loophole-let-chinese-companies-use-top-ai-chips-rcna609634"
+    },
+    {
+     "date": "2026-11-16",
      "text": "Taiwan's Taiex fell more than 4% and Nasdaq 100 futures 0.5% on Monday before Nvidia's results on Tuesday after the close; it has shed about $1.9tn of market value since early October (LSEG).",
      "source": "Reuters (via Yahoo Finance)",
      "url": "https://finance.yahoo.com/markets/stocks/articles/morning-bid-ai-selloff-resumes-053223150.html"
@@ -1886,6 +1934,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-16",
+     "text": "Fell 3.3% to $257.75 in the AI sell-off, on the day a ULA Vulcan rocket failed to deliver 40 of its Leo satellites (one origin).",
+     "source": "Gotrade",
+     "url": "https://www.heygotrade.com/en/news/amazon-amzn-stock-news-november-17-2026/"
+    },
     {
      "date": "2026-11-05",
      "text": "Rallied after Democrats won both chambers of Congress, which JPMorgan Asset Management said reduces uncertainty; Needham argued regulation favours the largest AI operators.",
@@ -2245,6 +2299,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-17",
+     "text": "Fell 4.1% to EGP 39.03 on Monday as seven fertilizer producers were reported to be paying $12.75 per mmBtu for gas, up from $8.5, to keep exporting for 45 days, with 20–40% supply cuts in place (Asharq Business, one origin).",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/17/why-fertilizer-exports-cost-the-state-more-in-gas-than-they-earn/"
+    },
     {
      "date": "2026-11-15",
      "text": "Nine-month net profit after tax rose 56% to EGP 12.14bn from EGP 7.78bn, on sales up 47% to EGP 27.39bn; the board approved a $165m bank loan for plant upgrades. The stock rose 3.7% to EGP 40.70.",
@@ -2883,6 +2943,12 @@
    },
    "news": [
     {
+     "date": "2026-11-16",
+     "text": "Fell 5.0% to $119.09 with the AI sell-off; it carried $125.3bn of borrowings at August 31 and announced a $20bn equity and debt raise this month.",
+     "source": "Invezz (via TradingView)",
+     "url": "https://www.tradingview.com/news/invezz:b34e4a7d1094b:0-why-oracle-stock-is-declining-on-monday/"
+    },
+    {
      "date": "2026-11-12",
      "text": "Rose 8.8% to $128.38 as CoreWeave's results eased worries about debt-funded AI data centers; Stephens upgraded it to overweight with a $213 target.",
      "source": "Investing.com",
@@ -3287,6 +3353,12 @@
    "news": [
     {
      "date": "2026-11-16",
+     "text": "Rose 7.4% to EGP 20.66, the top EGX30 gainer, after third-quarter net profit rose 41.5% to EGP 938.1m on record revenue of EGP 7.3bn; the board also called an assembly to cancel treasury shares.",
+     "source": "Daily News Egypt",
+     "url": "https://dailynewsegypt.com/2026/11/16/editas-q3-profit-jumps-41-5-on-record-sales/"
+    },
+    {
+     "date": "2026-11-16",
      "text": "Third-quarter net profit rose 41.5% to EGP 938.1m on record revenue of EGP 7.3bn (+32.9%); the company put nine-month profit at EGP 2.4bn, up 54%, and exports at EGP 1.84bn, up 40%.",
      "source": "Arab Finance",
      "url": "https://www.arabfinance.com/en/news/newdetails/edita-posts-record-revenues-in-q3-2026"
@@ -3404,6 +3476,12 @@
   "INTC": {
    "sector": "Semiconductors",
    "news": [
+    {
+     "date": "2026-11-16",
+     "text": "Fell 7.0% to $55.47 as the Philadelphia chip index lost 5.3% on Nvidia nerves and a new US license rule on advanced chips for data centers in five countries; no Intel-specific news.",
+     "source": "Chosun Biz",
+     "url": "https://biz.chosun.com/en/en-international/2026/11/17/BSJAGL266RFBDLYN6KMYOULCY4/"
+    },
     {
      "date": "2026-11-12",
      "text": "Bank of America cut its target to $80 from $100 and kept neutral; the stock fell 2.1% to $61.20.",
