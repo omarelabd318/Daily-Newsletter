@@ -1,0 +1,507 @@
+{
+ "date": "2026-11-17",
+ "no": 6,
+ "crossword": {
+  "size": 9,
+  "grid": [
+   "MAC###WAY",
+   "ERA#SHARE",
+   "NOR#HURTS",
+   "#SERUM###",
+   "#EDITORS#",
+   "###STRIP#",
+   "ANGEL#VAN",
+   "GOOSE#ARE",
+   "END###LET"
+  ],
+  "clues": {
+   "across": [
+    {
+     "n": 1,
+     "row": 0,
+     "col": 0,
+     "len": 3,
+     "answer": "MAC",
+     "clue": "Raincoat that takes its name from a Scottish inventor"
+    },
+    {
+     "n": 4,
+     "row": 0,
+     "col": 6,
+     "len": 3,
+     "answer": "WAY",
+     "clue": "Route, or manner"
+    },
+    {
+     "n": 7,
+     "row": 1,
+     "col": 0,
+     "len": 3,
+     "answer": "ERA",
+     "clue": "Age of history, like the Ptolemaic one"
+    },
+    {
+     "n": 8,
+     "row": 1,
+     "col": 4,
+     "len": 5,
+     "answer": "SHARE",
+     "clue": "One of 750 million that Misr Life Insurance's state owner plans to sell in December"
+    },
+    {
+     "n": 10,
+     "row": 2,
+     "col": 0,
+     "len": 3,
+     "answer": "NOR",
+     "clue": "Neither's partner"
+    },
+    {
+     "n": 11,
+     "row": 2,
+     "col": 4,
+     "len": 5,
+     "answer": "HURTS",
+     "clue": "Aches"
+    },
+    {
+     "n": 12,
+     "row": 3,
+     "col": 1,
+     "len": 5,
+     "answer": "SERUM",
+     "clue": "Vaccine-making fluid from blood"
+    },
+    {
+     "n": 14,
+     "row": 4,
+     "col": 1,
+     "len": 7,
+     "answer": "EDITORS",
+     "clue": "They decide what makes the front page"
+    },
+    {
+     "n": 17,
+     "row": 5,
+     "col": 3,
+     "len": 5,
+     "answer": "STRIP",
+     "clue": "Comic in a newspaper, or Gaza's coastline"
+    },
+    {
+     "n": 18,
+     "row": 6,
+     "col": 0,
+     "len": 5,
+     "answer": "ANGEL",
+     "clue": "Early backer of a startup, in investor slang"
+    },
+    {
+     "n": 21,
+     "row": 6,
+     "col": 6,
+     "len": 3,
+     "answer": "VAN",
+     "clue": "Removal vehicle"
+    },
+    {
+     "n": 23,
+     "row": 7,
+     "col": 0,
+     "len": 5,
+     "answer": "GOOSE",
+     "clue": "Bird that laid golden eggs in the fable"
+    },
+    {
+     "n": 24,
+     "row": 7,
+     "col": 6,
+     "len": 3,
+     "answer": "ARE",
+     "clue": "Exist, plurally"
+    },
+    {
+     "n": 25,
+     "row": 8,
+     "col": 0,
+     "len": 3,
+     "answer": "END",
+     "clue": "Finish"
+    },
+    {
+     "n": 26,
+     "row": 8,
+     "col": 6,
+     "len": 3,
+     "answer": "LET",
+     "clue": "Allow, or a tennis replay"
+    }
+   ],
+   "down": [
+    {
+     "n": 1,
+     "row": 0,
+     "col": 0,
+     "len": 3,
+     "answer": "MEN",
+     "clue": "Chess pieces, collectively"
+    },
+    {
+     "n": 2,
+     "row": 0,
+     "col": 1,
+     "len": 5,
+     "answer": "AROSE",
+     "clue": "Got up or came about"
+    },
+    {
+     "n": 3,
+     "row": 0,
+     "col": 2,
+     "len": 5,
+     "answer": "CARED",
+     "clue": "Looked after"
+    },
+    {
+     "n": 4,
+     "row": 0,
+     "col": 6,
+     "len": 3,
+     "answer": "WAR",
+     "clue": "Egypt's foreign minister rejected the Houthi claim that the Saudi deployment declared this"
+    },
+    {
+     "n": 5,
+     "row": 0,
+     "col": 7,
+     "len": 3,
+     "answer": "ART",
+     "clue": "Painting or sculpture"
+    },
+    {
+     "n": 6,
+     "row": 0,
+     "col": 8,
+     "len": 3,
+     "answer": "YES",
+     "clue": "Word of agreement"
+    },
+    {
+     "n": 8,
+     "row": 1,
+     "col": 4,
+     "len": 7,
+     "answer": "SHUTTLE",
+     "clue": "Badminton projectile, or a bus between airport and hotel"
+    },
+    {
+     "n": 9,
+     "row": 1,
+     "col": 5,
+     "len": 5,
+     "answer": "HUMOR",
+     "clue": "What a comedian trades in"
+    },
+    {
+     "n": 13,
+     "row": 3,
+     "col": 3,
+     "len": 5,
+     "answer": "RISES",
+     "clue": "Goes up, as Telecom Egypt's shares did on Monday"
+    },
+    {
+     "n": 15,
+     "row": 4,
+     "col": 6,
+     "len": 5,
+     "answer": "RIVAL",
+     "clue": "Pyramids, to Al Ahly, before their November 23 meeting"
+    },
+    {
+     "n": 16,
+     "row": 4,
+     "col": 7,
+     "len": 5,
+     "answer": "SPARE",
+     "clue": "Extra tire in the trunk"
+    },
+    {
+     "n": 18,
+     "row": 6,
+     "col": 0,
+     "len": 3,
+     "answer": "AGE",
+     "clue": "Stone, Bronze or Iron period"
+    },
+    {
+     "n": 19,
+     "row": 6,
+     "col": 1,
+     "len": 3,
+     "answer": "NON",
+     "clue": "Prefix meaning not"
+    },
+    {
+     "n": 20,
+     "row": 6,
+     "col": 2,
+     "len": 3,
+     "answer": "GOD",
+     "clue": "Ra or Amun, to the ancient Egyptians"
+    },
+    {
+     "n": 22,
+     "row": 6,
+     "col": 8,
+     "len": 3,
+     "answer": "NET",
+     "clue": "Profit after all costs"
+    }
+   ]
+  },
+  "news": []
+ },
+ "killer": {
+  "level": 2,
+  "solution": "256743198319258467487916523925471386873695241164832975641589732592367814738124659",
+  "cages": [
+   {
+    "sum": 14,
+    "cells": [
+     6,
+     7,
+     15
+    ]
+   },
+   {
+    "sum": 19,
+    "cells": [
+     67,
+     68,
+     76,
+     77
+    ]
+   },
+   {
+    "sum": 22,
+    "cells": [
+     2,
+     11,
+     20
+    ]
+   },
+   {
+    "sum": 5,
+    "cells": [
+     47,
+     56
+    ]
+   },
+   {
+    "sum": 15,
+    "cells": [
+     12,
+     21,
+     30
+    ]
+   },
+   {
+    "sum": 21,
+    "cells": [
+     63,
+     64,
+     72
+    ]
+   },
+   {
+    "sum": 12,
+    "cells": [
+     13,
+     22,
+     23
+    ]
+   },
+   {
+    "sum": 23,
+    "cells": [
+     31,
+     40,
+     41,
+     50
+    ]
+   },
+   {
+    "sum": 11,
+    "cells": [
+     3,
+     4
+    ]
+   },
+   {
+    "sum": 13,
+    "cells": [
+     65,
+     73,
+     74
+    ]
+   },
+   {
+    "sum": 27,
+    "cells": [
+     59,
+     60,
+     61,
+     69
+    ]
+   },
+   {
+    "sum": 11,
+    "cells": [
+     45,
+     54,
+     55
+    ]
+   },
+   {
+    "sum": 13,
+    "cells": [
+     71,
+     80
+    ]
+   },
+   {
+    "sum": 10,
+    "cells": [
+     24,
+     25,
+     26
+    ]
+   },
+   {
+    "sum": 16,
+    "cells": [
+     49,
+     57,
+     58
+    ]
+   },
+   {
+    "sum": 12,
+    "cells": [
+     32,
+     33,
+     34
+    ]
+   },
+   {
+    "sum": 17,
+    "cells": [
+     27,
+     36
+    ]
+   },
+   {
+    "sum": 15,
+    "cells": [
+     9,
+     18,
+     19
+    ]
+   },
+   {
+    "sum": 15,
+    "cells": [
+     28,
+     37,
+     46
+    ]
+   },
+   {
+    "sum": 8,
+    "cells": [
+     0,
+     1,
+     10
+    ]
+   },
+   {
+    "sum": 11,
+    "cells": [
+     5,
+     14
+    ]
+   },
+   {
+    "sum": 7,
+    "cells": [
+     35,
+     44
+    ]
+   },
+   {
+    "sum": 11,
+    "cells": [
+     78,
+     79
+    ]
+   },
+   {
+    "sum": 16,
+    "cells": [
+     43,
+     52,
+     53
+    ]
+   },
+   {
+    "sum": 14,
+    "cells": [
+     39,
+     48
+    ]
+   },
+   {
+    "sum": 8,
+    "cells": [
+     29,
+     38
+    ]
+   },
+   {
+    "sum": 4,
+    "cells": [
+     66,
+     75
+    ]
+   },
+   {
+    "sum": 21,
+    "cells": [
+     8,
+     16,
+     17
+    ]
+   },
+   {
+    "sum": 11,
+    "cells": [
+     42,
+     51
+    ]
+   },
+   {
+    "sum": 2,
+    "cells": [
+     62
+    ]
+   },
+   {
+    "sum": 1,
+    "cells": [
+     70
+    ]
+   }
+  ]
+ }
+}

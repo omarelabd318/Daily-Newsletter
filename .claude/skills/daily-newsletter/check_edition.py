@@ -537,7 +537,7 @@ def main(path):
         n, cap = words(item), (55 if i == 0 else 45)
         if n > cap:
             lead = re.match(r"\*\*([^*]+)\*\*", item.strip())
-            warnings.append(f"Sports item {lead.group(1).rstrip(":") if lead else i + 1}: {n} words; keep it to about {cap - 5} (one or two sentences: the result or fixture, the one fact that matters).")
+            warnings.append(f"Sports item {lead.group(1).rstrip(':') if lead else i + 1}: {n} words; keep it to about {cap - 5} (one or two sentences: the result or fixture, the one fact that matters).")
     # Sports: no sport-name headings or standalone bold lines.
     for line in sections.get("In Other News", {}).get("parts", {}).get("Sports", []):
         if re.fullmatch(r"\s*(\*\*[^*]+\*\*|#{4,}\s+.+)\s*", line):
