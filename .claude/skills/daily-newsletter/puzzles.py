@@ -4,15 +4,16 @@
 Usage (from the repo root):
   puzzles.py make DATE [--news WORD,WORD] [--avoid WORD,WORD]
                                             build both puzzles (--avoid: answers not to use, to remake a grid
-                                            with a weak answer; add lasting ones to AVOID below) for the edition (a few seconds); prints the crossword's
+                                            with a weak answer; add lasting ones to AVOID below) for the edition (one to two minutes); prints the crossword's
                                             answers, which still need clues
   puzzles.py clues DATE FILE                add the clues: FILE is JSON {"ANSWER": "clue", ...}, one per answer
   puzzles.py check DATE                     fail if an answer has no clue or a puzzle is missing
   puzzles.py show DATE                      print both grids
 
 Crossword (built like a newspaper's, after the NYT's rules): a symmetric grid (it looks the same turned upside down),
-every answer three letters or more, every letter in both an across and a down answer. 9 by 9 from Sunday to Friday,
-11 by 11 on Saturday, so it takes ten minutes or more. Answers are words solvers know (see words()), so little
+every answer three letters or more, every letter in both an across and a down answer. 11 by 11 every day (from
+November 19, 2026; before that 9 by 9 except Saturdays), so it takes ten minutes or more. No answer used in the
+previous RECENT days' crosswords is used again (news words excepted), so the short filler does not keep coming back. Answers are words solvers know (see words()), so little
 crossword filler: --news adds up to three words from the day's stories (NILE, SUEZ, GAZA), placed when
 they fit. The script fills the grid; the run writes the clues, most of them general, a few pointing at the news.
 
@@ -31,6 +32,7 @@ import time
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
 OUT = os.path.join(ROOT, "data", "puzzles")
+RECENT = 14   # days of earlier crosswords whose answers are not used again
 CACHE = os.path.expanduser("~/.cache/daily-newsletter/words.json")
 AVOID = set("""abort anal anus arse bitch boob butt cock crap cunt damn dick dildo dyke fag fuck gay gook hell homo jap kike
 lesbo nazi nigga nigger penis piss porn prick pussy rape rapist semen sex sexy shit slut spic tit tits twat vagina whore wank
@@ -267,16 +269,37 @@ def fill(g, n, W, rng, news, limit=6.0):
     return dict(grid) if solve() else None
 
 
+def recent_answers(date, days=RECENT):
+    """Every crossword answer of the `days` days before `date` (not the day itself, so a remake is unaffected)."""
+    d, out = datetime.date.fromisoformat(date), set()
+    for k in range(1, days + 1):
+        f = path((d - datetime.timedelta(days=k)).isoformat())
+        if os.path.exists(f):
+            cw = json.load(open(f)).get("crossword") or {}
+            out |= {a["answer"] for x in ("across", "down") for a in cw.get("clues", {}).get(x, [])}
+    return out
+
+
 def crossword(date, news, avoid=()):
-    d = datetime.date.fromisoformat(date)
-    n = 11 if d.weekday() == 5 else 9
-    rng = random.Random("crossword" + date)
-    W = words(loose=n > 9)
-    if avoid:
-        bad = {x.upper() for x in avoid}
-        W = {L: [w for w in v if w not in bad] for L, v in W.items()}
+    n = 11
     news = [re.sub(r"[^A-Z]", "", x.upper()) for x in news][:3]
     news = [x for x in news if 3 <= len(x) <= n]
+    bad = {x.upper() for x in avoid}
+    # skip recent answers; if the grid will not fill that way, try again with a shorter memory
+    for days in (RECENT, RECENT // 2, 0):
+        try:
+            return _crossword(date, news, bad | (recent_answers(date, days) - set(news)), n)
+        except RuntimeError:
+            if days == 0:
+                raise
+            print(f"(no fill without the last {days} days' answers; trying a shorter memory)", file=sys.stderr)
+
+
+def _crossword(date, news, bad, n):
+    rng = random.Random("crossword" + date)
+    W = words(loose=n > 9)
+    if bad:
+        W = {L: [w for w in v if w not in bad] for L, v in W.items()}
     tries = 0
     for attempt in range(20000):
         g = pattern(n, rng, rng.choice([16, 18, 20]) if n == 9 else rng.choice([24, 26, 28]))
