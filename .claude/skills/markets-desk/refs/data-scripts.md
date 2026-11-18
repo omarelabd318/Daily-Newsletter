@@ -12,6 +12,9 @@ when a step fails, or its output needs judging. Moved here from SKILL.md so the 
    minutes (1W) and the last 23 every 30 minutes (1M). A US series Nasdaq refuses comes from Polygon, then Yahoo;
    Polygon also fills gaps in the saved US sessions (its key is a network secret on the environment, added by the
    proxy; five requests a minute, so a few gaps add a minute or two to the run).
+   The EGX30 and the desk's Egyptian stocks come from Mubasher's minute bars, or, when Mubasher fails (since November
+   2026 its stock pages carry no intraday link and its API answers 401 "Session invalid token"), from TradingView's
+   5-minute bars (`EGX:<code>`, `EGX:EGX30`), which also fill the week's EGX sessions that a failed day left out.
    It keeps the saved session if a market is still trading, and takes under a minute. It also keeps the last
    five sessions (`week`, every 15 minutes), which the 1W charts draw once two or more are saved. The dollar in pounds
    has no 1D chart: the official rate barely moves within a day. Then run
@@ -24,7 +27,11 @@ when a step fails, or its output needs judging. Moved here from SKILL.md so the 
    for US ones; P/E and P/B are worked out at the latest close, with the results period they rest on). It keeps a stock's card if its fetch fails.
    Then run `python3 .claude/skills/markets-desk/fetch_movers.py` for the whole market's biggest gainers and
    losers of the last session (`desk/movers.json`): all EGX stocks that traded at least EGP 1m, and US
-   companies worth $10bn or more. The EGX and Wall Street pages show them under "Whole market"; mention a
+   companies worth $10bn or more. The EGX list is Mubasher's price list; when Mubasher refuses it (401 since November
+   2026) it is read from TradingView's screener (closes and `Value.Traded`, or `close[1]`, `close[2]` and
+   `Value.Traded[1]` while the next session trades), dated by the EGX30's last daily bar, with the names (English and
+   Arabic) saved from Mubasher earlier or else TradingView's `description`; breadth is then labelled TradingView. Few
+   rows have Arabic names on those days, so `--leads` searches more of them in English. The EGX and Wall Street pages show them under "Whole market"; mention a
    standout mover from outside the desk's stocks in the stories or News when there is a reason behind it.
    Then run `python3 .claude/skills/markets-desk/indicators.py` (`desk/indicators.json`: moving averages, RSI and MACD for
    every logged series, shown on stock pages as Trend and momentum; no network; its docstring has each formula, and

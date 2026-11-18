@@ -532,9 +532,9 @@
     }
    ],
    "cap": {
-    "value": 696.0,
+    "value": 681.1,
     "currency": "USD",
-    "date": "2026-11-17",
+    "date": "2026-11-18",
     "source": "Nasdaq"
    },
    "valuation": {
@@ -647,9 +647,9 @@
     }
    ],
    "cap": {
-    "value": 3890.4,
+    "value": 3846.7,
     "currency": "USD",
-    "date": "2026-11-17",
+    "date": "2026-11-18",
     "source": "Nasdaq"
    },
    "valuation": {
@@ -744,9 +744,9 @@
     }
    ],
    "cap": {
-    "value": 3636.2,
+    "value": 3488.1,
     "currency": "USD",
-    "date": "2026-11-17",
+    "date": "2026-11-18",
     "source": "Nasdaq"
    },
    "valuation": {
@@ -818,9 +818,9 @@
     }
    ],
    "cap": {
-    "value": 1656.5,
+    "value": 1591.5,
     "currency": "USD",
-    "date": "2026-11-17",
+    "date": "2026-11-18",
     "source": "Nasdaq"
    },
    "valuation": {
@@ -1692,9 +1692,9 @@
   "AAPL": {
    "sector": "Hardware",
    "cap": {
-    "value": 5177.4,
+    "value": 5126.7,
     "currency": "USD",
-    "date": "2026-11-17",
+    "date": "2026-11-18",
     "source": "Nasdaq"
    },
    "valuation": {
@@ -1772,9 +1772,9 @@
   "NVDA": {
    "sector": "Semiconductors",
    "cap": {
-    "value": 3924.7,
+    "value": 3763.0,
     "currency": "USD",
-    "date": "2026-11-17",
+    "date": "2026-11-18",
     "source": "Nasdaq"
    },
    "valuation": {
@@ -1895,9 +1895,9 @@
   "AMZN": {
    "sector": "Retail and cloud",
    "cap": {
-    "value": 2883.4,
+    "value": 2787.1,
     "currency": "USD",
-    "date": "2026-11-17",
+    "date": "2026-11-18",
     "source": "Nasdaq"
    },
    "valuation": {
@@ -1951,9 +1951,9 @@
   "META": {
    "sector": "Internet",
    "cap": {
-    "value": 1640.3,
+    "value": 1601.3,
     "currency": "USD",
-    "date": "2026-11-17",
+    "date": "2026-11-18",
     "source": "Nasdaq"
    },
    "valuation": {
@@ -2019,9 +2019,9 @@
   "TSLA": {
    "sector": "Cars",
    "cap": {
-    "value": 1542.4,
+    "value": 1501.0,
     "currency": "USD",
-    "date": "2026-11-17",
+    "date": "2026-11-18",
     "source": "Nasdaq"
    },
    "valuation": {
@@ -2093,9 +2093,9 @@
   "JPM": {
    "sector": "Banks",
    "cap": {
-    "value": 919.5,
+    "value": 898.6,
     "currency": "USD",
-    "date": "2026-11-17",
+    "date": "2026-11-18",
     "source": "Nasdaq"
    },
    "valuation": {
@@ -2135,9 +2135,9 @@
   "BRK.B": {
    "sector": "Conglomerate",
    "cap": {
-    "value": 1308.6,
+    "value": 1308.7,
     "currency": "USD",
-    "date": "2026-11-17",
+    "date": "2026-11-18",
     "source": "Nasdaq"
    },
    "valuation": {
@@ -2205,9 +2205,9 @@
   "WMT": {
    "sector": "Retail",
    "cap": {
-    "value": 1016.2,
+    "value": 1018.8,
     "currency": "USD",
-    "date": "2026-11-17",
+    "date": "2026-11-18",
     "source": "Nasdaq"
    },
    "valuation": {
@@ -2847,9 +2847,9 @@
   "V": {
    "sector": "Payments",
    "cap": {
-    "value": 768.2,
+    "value": 769.0,
     "currency": "USD",
-    "date": "2026-11-17",
+    "date": "2026-11-18",
     "source": "Nasdaq"
    },
    "valuation": {
@@ -2903,9 +2903,9 @@
   "ORCL": {
    "sector": "Software and cloud",
    "cap": {
-    "value": 379.1,
+    "value": 360.0,
     "currency": "USD",
-    "date": "2026-11-17",
+    "date": "2026-11-18",
     "source": "Nasdaq"
    },
    "valuation": {
@@ -2983,9 +2983,9 @@
   "COST": {
    "sector": "Retail",
    "cap": {
-    "value": 490.2,
+    "value": 493.5,
     "currency": "USD",
-    "date": "2026-11-17",
+    "date": "2026-11-18",
     "source": "Nasdaq"
    },
    "valuation": {
@@ -3467,9 +3467,9 @@
     ]
    },
    "cap": {
-    "value": 255.2,
+    "value": 249.5,
     "currency": "USD",
-    "date": "2026-11-17",
+    "date": "2026-11-18",
     "source": "Nasdaq"
    }
   },
@@ -3530,9 +3530,9 @@
     ]
    },
    "cap": {
-    "value": 317.1,
+    "value": 294.7,
     "currency": "USD",
-    "date": "2026-11-17",
+    "date": "2026-11-18",
     "source": "Nasdaq"
    }
   },
@@ -3581,9 +3581,9 @@
     ]
    },
    "cap": {
-    "value": 1359.0,
+    "value": 1348.6,
     "currency": "USD",
-    "date": "2026-11-17",
+    "date": "2026-11-18",
     "source": "Nasdaq"
    }
   }

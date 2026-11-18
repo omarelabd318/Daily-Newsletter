@@ -13,7 +13,8 @@ Also saves each market's biggest movers over the past week and month ("week", "m
 and the reasons written in the last 31 days ("why_log"), which those lists reuse.
 
 Writes desk/movers.json: the EGX session's breadth (how many stocks that traded rose, fell or were unchanged),
-and the ten biggest rises and falls and the ten most traded by value ("active") among all EGX stocks (Mubasher's price list) and
+and the ten biggest rises and falls and the ten most traded by value ("active") among all EGX stocks (Mubasher's price list; TradingView's screener when Mubasher refuses it, as it has since
+November 2026, with the names saved from Mubasher earlier or else TradingView's) and
 among US companies worth $10bn or more (TradingView's screener). Thinly traded stocks are
 left out so a few trades cannot top the list: on the EGX, those that traded under EGP 1m in the session.
 While the EGX trades (the desk runs after its 10:00 open), the session that just finished is read from
@@ -75,8 +76,8 @@ def weekly(market):
     if market == "egx":   # Mubasher's company names, as on the day's list (TradingView's carry the odd typo)
         try:
             names = {p["code"]: p["name"] for p in json.loads(get("https://english.mubasher.info/api/1/stocks/prices?country=eg"))["prices"]}
-        except Exception:
-            pass
+        except Exception:   # Mubasher refuses its list (401 since November 2026): the names saved from it earlier
+            names = {t: v["name"] for t, v in saved_names().items()}
     rows = {"week": [], "month": []}
     # TradingView lists a few EGX stocks only by their ISIN (EGS3I0S1C019): find the ticker on Mubasher by company name
     namekey = lambda n: re.sub(r"[^a-z]", "", re.sub(r"\(.*?\)", "", n.lower()))[:24]
@@ -161,8 +162,83 @@ def egx_previous(d, ar, today):
     return out, f"EGX: {session} (read during the next session from TradingView's previous closes), {out['count']} stocks"
 
 
+def saved_names():
+    """{code: {"name", "ar"}} from the EGX rows already saved in desk/movers.json (Mubasher's English and Arabic names,
+    from the days its list answered), for naming stocks when TradingView is the only source."""
+    out = {}
+    try:
+        X = json.load(open(OUT)).get("egx") or {}
+    except Exception:
+        return out
+    lists = [X] + [X.get(k) or {} for k in ("week", "month")]
+    for L in lists:
+        for side in ("gainers", "losers", "active"):
+            for r in L.get(side, []):
+                cur = out.setdefault(r["t"], {"name": r.get("name"), "ar": None})
+                cur["ar"] = cur["ar"] or r.get("ar")
+    return out
+
+
+def clean_name(name):
+    name = re.sub(r"\s*\([A-Z0-9]{2,6}\)$", "", name or "")
+    name = re.sub(r"\s+-\s+[A-Z0-9]{2,6}$", "", name)   # TradingView's "Egypt Education Platform - EEP"
+    return re.sub(r",?\s+(S\.A\.E\.?|SAE|Co\.)$", "", name).strip(" ,.")
+
+
+def egx_tradingview(now, ar=None):
+    """The session's movers and breadth from TradingView's screener alone, for when Mubasher refuses its list. The
+    session is the date of the EGX30's last daily bar; while the next session trades (before 14:45 Cairo), the one
+    before it, read from each stock's previous-bar closes (close[1], close[2], Value.Traded[1]). Names are those saved
+    from Mubasher's list earlier, else TradingView's own ("description")."""
+    import tradingview
+    today = now.date().isoformat()
+    try:
+        days = sorted({t.astimezone(CAIRO).date().isoformat() for t, _ in tradingview.bars("EGX:EGX30", "1D", 5)})
+        trading = days[-1] == today and now.strftime("%H:%M") < "14:45"
+        session = days[-2] if trading else days[-1]
+    except Exception:   # no daily bars: the weekday rule
+        trading = now.weekday() not in (4, 5) and "10:00" <= now.strftime("%H:%M") < "14:45"
+        if not trading:
+            raise
+        session = previous_egx_session(now.date())
+    cols = ["close[1]", "close[2]", "Value.Traded[1]"] if trading else ["close", "close[1]", "Value.Traded"]
+    body = json.dumps({"filter": [{"left": "type", "operation": "equal", "right": "stock"}],
+                       "columns": ["name", "description"] + cols, "range": [0, 1000]}).encode()
+    req = urllib.request.Request("https://scanner.tradingview.com/egypt/scan", data=body, headers={"User-Agent": UA, "Content-Type": "application/json"})
+    known, ar = saved_names(), ar or {}
+    rows, breadth = [], {"up": 0, "down": 0, "flat": 0}
+    for r in json.loads(urllib.request.urlopen(req, timeout=30).read())["data"]:
+        code, desc, c1, c2, turnover = r["d"]
+        # ISIN-coded duplicates (EGS3I0S1C019) and odd lines, as Mubasher's list leaves them out
+        if not c1 or not c2 or not code or re.fullmatch(r"EG[A-Z0-9]{10}", code) or "/" in code or "." in code:
+            continue
+        pct = round((c1 / c2 - 1) * 100, 2)
+        if (turnover or 0) > 0:
+            breadth["up" if pct > 0 else "down" if pct < 0 else "flat"] += 1
+        if (turnover or 0) < MIN_TURNOVER_EGP:
+            continue
+        k = known.get(code) or {}
+        rows.append({"t": code, "name": k.get("name") or clean_name(desc) or code, "ar": ar.get(code) or k.get("ar"),
+                     "price": round(c1, 3), "pct": pct, "turnover": round(turnover, 2)})
+    if len(rows) < 50:
+        raise RuntimeError(f"only {len(rows)} stocks")
+    out = rank(rows)
+    out.update(session=session, basis=f"All EGX stocks that traded at least EGP 1m ({out['count']} on the day)", breadth=breadth, breadthSource="TradingView")
+    if not trading:
+        try:
+            out["indices"] = indices()
+        except Exception:
+            pass
+    how = "previous closes, read during the next session" if trading else "closes"
+    return out, f"EGX: {session} (TradingView's {how}; Mubasher's list refused), {out['count']} stocks"
+
+
 def egx():
-    d = json.loads(get("https://english.mubasher.info/api/1/stocks/prices?country=eg"))
+    try:
+        d = json.loads(get("https://english.mubasher.info/api/1/stocks/prices?country=eg"))
+    except Exception as e:   # Mubasher's list answers 401 "Session invalid token" since November 2026
+        print(f"EGX: Mubasher's list failed ({e}); reading the session from TradingView")
+        return egx_tradingview(datetime.datetime.now(CAIRO))
     try:   # Arabic names, for searching Egyptian news about smaller companies
         ar = {p["code"]: p["name"] for p in json.loads(get("https://www.mubasher.info/api/1/stocks/prices?country=eg"))["prices"]}
     except Exception:

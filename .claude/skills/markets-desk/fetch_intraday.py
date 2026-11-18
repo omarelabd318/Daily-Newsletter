@@ -5,7 +5,8 @@ Usage:
   python3 .claude/skills/markets-desk/fetch_intraday.py
 
 Writes desk/intraday.json ("week" also keeps the last five sessions of each market every 15 minutes, for
-the 1W charts, and "month" the last 23 every 30 minutes, for the 1M charts): the EGX30 and the 12 Egyptian stocks from Mubasher (Cairo time), the
+the 1W charts, and "month" the last 23 every 30 minutes, for the 1M charts): the EGX30 and the desk's Egyptian stocks from Mubasher (Cairo time), or from TradingView's 5-minute bars
+when Mubasher fails (as it has since November 2026; the week's missed EGX sessions are then filled from the same bars), the
 EGX70 EWI from TradingView's chart feed (tradingview.py; no other free source publishes it through the session), and the
 Nasdaq Composite and the 12 US stocks from Nasdaq (New York time, regular session only), and the last
 24 hours of Bitcoin (CoinGecko). Yahoo adds the S&P 500, the Dow, Brent, gold and the dollar index on the
@@ -115,6 +116,47 @@ def mubasher(key):
     pts = [(datetime.datetime.strptime(r[0], "%Y-%m-%d/%H:%M:%S").replace(tzinfo=utc2).astimezone(CAIRO), float(r[4])) for r in rows]
     day = max(t.date() for t, _ in pts)
     return day.isoformat(), every5([(t.strftime("%H:%M"), v) for t, v in pts if t.date() == day])
+
+
+def tv_egx(key):
+    """The same as mubasher(key), from TradingView's 5-minute bars (EGX:<code>; EGX30 is EGX:EGX30): the last finished
+    session, Cairo time. Today's bars are left out until the close (14:45), so a session still trading is never taken."""
+    now = datetime.datetime.now(CAIRO)
+    by_day = tv_sessions("EGX:" + key, 400)
+    days = [d for d in sorted(by_day) if d < now.date().isoformat() or now.strftime("%H:%M") >= "14:45"]
+    if not days:
+        raise RuntimeError("TradingView: no finished session for " + key)
+    TV_DAYS[key] = by_day
+    return days[-1], every5(by_day[days[-1]])
+
+
+TV_DAYS = {}   # each EGX series' sessions from TradingView, kept by tv_egx to fill the week's missed sessions
+
+
+def egx_series(key):
+    """An EGX series for the day: Mubasher's minute bars, or TradingView's 5-minute bars when Mubasher fails (its stock
+    pages lost their intraday link, and its API answers 401, in November 2026)."""
+    try:
+        return mubasher(key)
+    except Exception:
+        return tv_egx(key)
+
+
+def egx_week_fill(week, today_session):
+    """Adds to the EGX week the finished sessions it lacks (the days Mubasher failed) from the TradingView bars tv_egx
+    fetched, every 15 minutes."""
+    ref = TV_DAYS.get("EGX30") or {}
+    have = {x["session"] for x in week.get("egx", [])}
+    added = []
+    for d in sorted(ref):
+        if d in have or d >= today_session:
+            continue
+        series = {k: every15(every5(v[d])) for k, v in TV_DAYS.items() if len(v.get(d, [])) >= 6}
+        if "EGX30" in series:
+            week.setdefault("egx", []).append({"session": d, "series": series})
+            added.append(d)
+    week["egx"] = sorted(week.get("egx", []), key=lambda x: x["session"])[-5:]
+    return added
 
 
 def nasdaq(key, cls=None):
@@ -363,7 +405,7 @@ def main():
     egx_done = lambda day, s: day < now_cairo.date().isoformat() or now_cairo.strftime("%H:%M") >= "14:45"
     us_done = lambda day, s: day < now_ny.date().isoformat() or now_ny.strftime("%H:%M") >= "16:15"
     out = dict(saved)
-    for name, keys, fn, done in (("egx", ["EGX30"] + EGX, mubasher, egx_done), ("us", ["COMP", "sp500", "dow"] + US, nasdaq, us_done)):
+    for name, keys, fn, done in (("egx", ["EGX30"] + EGX, egx_series, egx_done), ("us", ["COMP", "sp500", "dow"] + US, nasdaq, us_done)):
         data, line = market(name.upper(), keys, fn, done)
         if data and data["session"] >= (saved.get(name) or {}).get("session", ""):
             if name == "us" and PROXY:
@@ -387,6 +429,10 @@ def main():
                 keep.append({"session": x["session"], "series": dict(x["series"])})
                 print(f"{name.upper()} week: added the missed {x['session']} session from the month's copy")
         week[name] = sorted(keep, key=lambda x: x["session"])[-5:]
+        if name == "egx" and TV_DAYS:
+            added = egx_week_fill(week, latest["session"])
+            if added:
+                print(f"EGX week: added the missed {', '.join(added)} session{'s' if len(added) > 1 else ''} from TradingView")
     # a stock missing from a saved US session (a fetch that failed that day) is filled from Yahoo's last five sessions
     holes = sorted({k for x in week.get("us", []) for k in US if k not in x["series"]})
     for k in holes:
@@ -439,7 +485,7 @@ def main():
         out["global"] = data
     print(line)
     print(global_history(out))
-    out["note"] = "Last finished session, every 5 minutes: EGX in Cairo time (Mubasher), US in New York time (Nasdaq; S&P 500 and Dow from Yahoo when it answers, otherwise from the funds named under proxy, scaled to the index's close); global: the last 24 hours in Cairo time (Bitcoin from CoinGecko; Brent, gold and the dollar index from Yahoo when it answers). Written by fetch_intraday.py."
+    out["note"] = "Last finished session, every 5 minutes: EGX in Cairo time (Mubasher, or TradingView when Mubasher fails), US in New York time (Nasdaq; S&P 500 and Dow from Yahoo when it answers, otherwise from the funds named under proxy, scaled to the index's close); global: the last 24 hours in Cairo time (Bitcoin from CoinGecko; Brent, gold and the dollar index from Yahoo when it answers). Written by fetch_intraday.py."
     with open(OUT, "w") as f:
         json.dump(out, f, separators=(",", ":"))
         f.write("\n")
