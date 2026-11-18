@@ -11,12 +11,18 @@ Checks origin/main every 30 seconds for up to MINUTES (default 9, inside one com
 Then it pulls and prints one line saying which arrived:
 - "READY": read desk/brief.md; rerun only the steps it lists as FAILED, with run_data.py NAME (the brief keeps the
   others' output).
-- "WAITING": run it again (the skill allows up to 30 minutes in all for the edition, 25 for the data).
+- "WAITING": run it again (up to 30 minutes in all for the edition, 25 for the data).
+- "NO EDITION": 30 minutes have passed since the run's first call and the edition is still missing. Stop: write and
+  publish nothing. The desk never goes out without the day's edition; the silent "Markets Desk backup check"
+  scheduled task fires the desk again about two hours later if the edition has arrived by then, and skips the day
+  if it has not.
 - "NO DESK DATA": the edition is in but GitHub Actions has not delivered: run run_data.py yourself, as before.
 """
 import datetime
 import json
+import os
 import subprocess
+import tempfile
 import sys
 import time
 
@@ -45,6 +51,14 @@ def main(a):
     minutes = float(a[1]) if len(a) > 1 else 9
     end = time.time() + minutes * 60
     t0 = time.time()
+    # the run's first call starts the 30-minute clock for the edition (kept in a temp file, one per date)
+    mark = os.path.join(tempfile.gettempdir(), f"desk-wait-{date}")
+    if not os.path.exists(mark):
+        open(mark, "w").write(str(t0))
+    try:
+        first = float(open(mark).read())
+    except (OSError, ValueError):
+        first = t0
     while True:
         ed, data, S = state(date)
         if (ed and data) or time.time() >= end:
@@ -67,6 +81,10 @@ def main(a):
             print(f"WAITING: the edition is in (pushed {age:.0f} min ago); GitHub Actions' desk data is not yet. Run this again.")
         else:
             print(f"NO DESK DATA: the edition was pushed {age:.0f} min ago and GitHub Actions has not delivered. Run run_data.py yourself.")
+    elif (time.time() - first) / 60 >= 29:
+        print(f"NO EDITION after {(time.time() - first) / 60:.0f} min in all: today's edition is still not on main. Stop here: "
+              "write and publish nothing (the desk never goes out without the edition). The Markets Desk backup check "
+              "fires this run again about two hours later if the edition has arrived, and skips the day if not.")
     else:
         print(f"WAITING after {waited} min: the edition is not in yet. Run this again (up to 30 minutes in all).")
 

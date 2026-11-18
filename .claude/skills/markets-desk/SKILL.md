@@ -26,7 +26,9 @@ the parts of today's edition the desk uses with `python3 .claude/skills/markets-
 full: Today at a Glance, both Markets parts, Stocks Watch, the currency table and the calendar; the first sentence of
 each Egypt, region, world and tech story; on a Saturday the whole recap), its figures already checked and logged.
 Open `editions/DATE.md` itself only for a story you need in full or its links; if it is not there yet,
-check again every few minutes for up to half an hour, then research the markets yourself. Add your own searches
+wait_desk_data.py checks for up to half an hour; **the desk never goes out without the edition**: on NO EDITION
+stop, write and publish nothing, and say so in the final reply (the silent Markets Desk backup check fires the desk
+again about two hours later if the edition has arrived by then, and skips the day if not). Add your own searches
 for anything the desk needs beyond the edition (the stock research below, flows, movers' reasons), with search.py first. Do not write
 or change the newsletter, and do not log figures the edition already logged. On days with no session (Friday and Saturday for the EGX, Saturday and Sunday for the US) the
 closes are the last session's; the news, stock research and analysis are still updated.
@@ -81,7 +83,7 @@ once. Its `--help` has the path rules.
    edition is pushed and commits desk/brief.md. On READY read `desk/brief.md` up to its per-stock news leads (the
    `sed` line above; the stocks session reads those) and rerun only the steps it lists as
    FAILED (`run_data.py NAME`; the brief keeps the others). On WAITING run it again (30 minutes in all for the
-   edition). On NO DESK DATA **run `python3 .claude/skills/markets-desk/run_data.py` once, then read
+   edition); on NO EDITION stop and publish nothing (see above). On NO DESK DATA **run `python3 .claude/skills/markets-desk/run_data.py` once, then read
    `desk/brief.md`**. It runs every fetch and
    calculation below in order (intraday, rates, valuation, movers, calendar, indicators, fair value, judging the
    views, the stock news leads and the movers' leads), each with a time limit, over one shared fetch layer
