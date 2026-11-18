@@ -24,9 +24,14 @@ What the chart shows (the script does all of it):
   day that has since run, so the projection can be checked against the real figure.
 - **Under the bars, words and quality** (quality.py, run by the chart itself): one line per run of the words it
   published, and a "Quality:" row with each run's score, D (desk) and N (newsletter), green 95+ (holding), amber
-  85-95 (watch), red below 85 (dropped). Each run is scored against the same kind of run before it: stories, source
-  links, distinct outlets and the share of facts confirmed at a second outlet (newsletter); calls, views and confirmed
-  flows (desk); a missing section or a checker error costs points; fewer words count only below 85% of usual.
+  85-95 (watch), red below 85 (dropped). Each run is scored against the same kind of run before it on weighted
+  pillars. Newsletter: Coverage (stories in each section and part), Verification (side-session stories confirmed at
+  a second outlet, in all and per research block, and open points), Sourcing (links, outlets, Egyptian outlets,
+  reliance on one outlet, pages read), Depth (words per story in Egypt News and Markets, figures in Markets),
+  Freshness (source links dated within two days, lead-ins repeated from the day before) and Process (searches and
+  pages against the floors). Desk: Coverage (calls, views, week ahead, news, stocks researched), Verification
+  (flows, research floors), Depth, Sourcing and Discipline (short headlines, wrong-ifs, tagged news). A missing
+  section or a checker error costs points; fewer words count only below 80% of usual.
 - The title gives the range and its total: "Daily runs, Tue Nov 10 to Mon Nov 16: ~$128,
   ≈37% of the weekly limit".
 
@@ -51,7 +56,11 @@ python3 .claude/skills/usage-chart/usage_chart.py START END OUT.png --today DATE
 After a change meant to cut cost, pass `--baseline-end` with the last day before it (e.g. `--baseline-end
 2026-11-18` for the Nov 19 cuts), so every later run is compared with the runs before the change, not with other
 runs after it. `python3 .claude/skills/usage-chart/quality.py START END [--baseline-end DATE]` prints the same
-scores with each run's figures and what fell short (LOW: ...); quote those lines when a run scores below 95.
+scores with each run's pillars and figures and what fell short (LOW: ...); quote those lines when a run scores
+below 95. `--blocks` adds the newsletter's verification per research block (egypt, markets, world, other, checks:
+confirmed in full + partly, of the stories checked), where a cheaper research model shows first; `--detail` prints
+every measure against its baseline. The research log split pages the main run opened from pages read by scripts
+and side sessions on Nov 15, so pages are compared in total; only the floors use the main run's own.
 
 Base projections on the last few normal runs plus the changes made since, give a range,
 and say in the note what they assume. Needs matplotlib (`pip install matplotlib`).

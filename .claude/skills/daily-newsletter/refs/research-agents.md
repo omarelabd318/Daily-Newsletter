@@ -64,7 +64,8 @@ gets the prompt below with its own block and NAME filled in (NAME in brackets af
    run (on its own model) still chooses the stories, decides what leads, writes every word and opens any page a note
    marks `Open:`. Since Nov 19, Egypt and global markets moved to Sonnet too (they were the last two on the
    run's model, and the most costly research of the day); if an edition's Egypt or Markets sections come out thinner
-   or less sure of their figures (usage-chart's quality.py compares them with the weeks before), put those two back
+   or less sure of their figures (`usage-chart/quality.py START END --baseline-end 2026-11-18 --blocks` compares their confirmation rate,
+   block by block, with the days before), put those two back
    on the run's model by leaving `model` out.
 
 ### Saved notes, for the desk
