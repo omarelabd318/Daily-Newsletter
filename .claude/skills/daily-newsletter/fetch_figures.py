@@ -12,8 +12,9 @@ closing or a live price, the time of the quote and the source. Anything it canno
 NOT FOUND with the reason. It ends with a ready-to-run log_figures.py command holding closing prices only
 (while the EGX is trading, each Egyptian stock's and the EGX30's previous close).
 
-Sources: Mubasher for the EGX (the official close is the previous close plus the day's change; the
-"last price" on the page can be an earlier trade), egypt.gold-price-today.com for 21K gold, open.er-api.com
+Sources: TradingView's screener for the EGX (one request for every stock and the EGX30; the close and the
+change from the previous session, delayed 15 minutes while the EGX trades), with Mubasher as the fallback (its
+pages became a script-only app in November 2026 and its API refuses, so it rarely answers now), egypt.gold-price-today.com for 21K gold, open.er-api.com
 for exchange rates (market mid-rates, not the central bank's rate), Yahoo Finance for US stocks, indices,
 Brent, gold and Bitcoin, with Nasdaq's quote feed, FRED (for the Dow) and CoinGecko as backups.
 """
@@ -69,6 +70,41 @@ def egx_open(now):
         hols = set()
     return now.weekday() in (6, 0, 1, 2, 3) and now.date().isoformat() not in hols \
         and datetime.time(10, 0) <= now.time() <= datetime.time(14, 45)
+
+
+EGX_TV = {}
+
+
+def egx_tv(t):
+    """An EGX stock or index (\"EGX30\") from TradingView's screener: the first call fetches every EGX symbol the
+    run needs in one request and keeps the answers for the rest of the run."""
+    if t not in EGX_TV:
+        want = sorted(set(EGX + DESK_EGX + ["EGX30", t] + [a.split(".", 1)[1] for a in sys.argv[2:] if a.startswith("egx.")]))
+        body = json.dumps({"symbols": {"tickers": [f"EGX:{x}" for x in want]},
+                           "columns": ["close", "change", "change_abs", "volume"]}).encode()
+        req = urllib.request.Request("https://scanner.tradingview.com/egypt/scan", data=body,
+                                     headers={"User-Agent": UA, "Content-Type": "application/json"})
+        for row in json.loads(urllib.request.urlopen(req, timeout=30).read())["data"]:
+            close, pct, chg, vol = row["d"]
+            if close is not None and chg is not None:
+                EGX_TV[row["s"].split(":", 1)[1]] = {"prev": round(close - chg, 4), "value": round(close, 4),
+                                                     "pct": pct, "volume": vol, "when": "TradingView, 15-min delay",
+                                                     "src": "TradingView"}
+    if t not in EGX_TV:
+        raise RuntimeError(f"TradingView has no quote for EGX:{t}")
+    return dict(EGX_TV[t])
+
+
+def egx_quote(path):
+    """TradingView first, then Mubasher: path is \"stocks/TICKER\" or \"indices/EGX30\"."""
+    t = path.split("/", 1)[1]
+    try:
+        return egx_tv(t)
+    except Exception as e:
+        try:
+            return dict(mubasher(path), src="Mubasher")
+        except Exception as e2:
+            raise RuntimeError(f"TradingView: {e}; Mubasher: {e2}")
 
 
 def mubasher(path):
@@ -302,10 +338,10 @@ def main(args):
         extras.append((m.group(1), m.group(2)))
 
     for t in EGX:
-        add(t, f"EGX {t}", lambda t=t: dict(mubasher(f"stocks/{t}"), src="Mubasher"), f"egx.{t}", egx_live)
+        add(t, f"EGX {t}", lambda t=t: egx_quote(f"stocks/{t}"), f"egx.{t}", egx_live)
     for t in DESK_EGX:
-        add(t, f"Desk only: EGX {t}", lambda t=t: dict(mubasher(f"stocks/{t}"), src="Mubasher"), f"egx.{t}", egx_live)
-    add("egx30", "EGX30", lambda: dict(mubasher("indices/EGX30"), src="Mubasher"), "egx30", egx_live)
+        add(t, f"Desk only: EGX {t}", lambda t=t: egx_quote(f"stocks/{t}"), f"egx.{t}", egx_live)
+    add("egx30", "EGX30", lambda: egx_quote("indices/EGX30"), "egx30", egx_live)
     # shares traded in the EGX30's companies, for the desk's comparison with the 90-day average (finished sessions only)
     e30 = next((r for label, r, _ in rows if label == "EGX30"), None)
     if e30 and e30.get("volume") and not egx_live:
@@ -351,7 +387,7 @@ def main(args):
 
     for group, t in extras:
         if group == "egx":
-            add(t, f"Mover EGX {t} (YTD n/a)", lambda t=t: dict(mubasher(f"stocks/{t}"), src="Mubasher"), None, egx_live)
+            add(t, f"Mover EGX {t} (YTD n/a)", lambda t=t: egx_quote(f"stocks/{t}"), None, egx_live)
         else:
             sym = t.replace(".", "-")
             ytd = yahoo_ytd(sym)
