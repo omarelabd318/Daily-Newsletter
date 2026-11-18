@@ -1,12 +1,21 @@
 {
  "note": "The desk's stocks' coming results and dividends, from TradingView (fetch_calendar.py); for the US stocks, declared dividends and stock splits from Polygon. Results dates for Egyptian companies are often TradingView's estimate until the company announces one.",
- "fetched": "2026-11-17",
+ "fetched": "2026-11-18",
  "items": [
   {
    "t": "CLHO",
    "market": "egx",
    "kind": "results",
-   "date": "2026-11-17",
+   "date": "2026-11-18",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "EAST",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-18",
    "period": "2026-09-30",
    "time": null,
    "expected": true
@@ -15,58 +24,40 @@
    "t": "EFID",
    "market": "egx",
    "kind": "results",
-   "date": "2026-11-16",
+   "date": "2026-11-18",
    "period": "2026-09-30",
    "time": null,
-   "expected": false
-  },
-  {
-   "t": "JUFO",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-11-11",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": false
-  },
-  {
-   "t": "NVDA",
-   "market": "us",
-   "kind": "results",
-   "date": "2026-11-17",
-   "period": "2026-10-31",
-   "time": "after the close",
    "expected": true
-  },
-  {
-   "t": "PHDC",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-11-16",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": false
-  },
-  {
-   "t": "EAST",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-11-11",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": false
   },
   {
    "t": "EFIH",
    "market": "egx",
    "kind": "results",
-   "date": "2026-11-12",
+   "date": "2026-11-18",
    "period": "2026-09-30",
    "time": null,
-   "expected": false
+   "expected": true
   },
   {
    "t": "HRHO",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-18",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "JUFO",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-18",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "PHDC",
    "market": "egx",
    "kind": "results",
    "date": "2026-11-18",
@@ -133,15 +124,6 @@
    "expected": true
   },
   {
-   "t": "FWRY",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-12-02",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
-  {
    "t": "MFPC",
    "market": "egx",
    "kind": "results",
@@ -152,15 +134,6 @@
   },
   {
    "t": "SKPC",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-12-02",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
-  {
-   "t": "TMGH",
    "market": "egx",
    "kind": "results",
    "date": "2026-12-02",
