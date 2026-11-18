@@ -75,8 +75,14 @@
   // markets: the close and the change over the last seven days
   const MK = [['egx30', 'EGX30', 'egx', 2], ['egx70', 'EGX70 EWI', 'egx', 2], ['usd_egp', 'Dollar in pounds', 'fx', 2], ['sp500', 'S&P 500', 'us', 2], ['nasdaq', 'Nasdaq', 'us', 2],
     ['dow', 'Dow', 'us', 2], ['brent', 'Brent, $', 'us', 2], ['gold_usd', 'Gold, $ an ounce', 'us', 0], ['btc', 'Bitcoin, $', 'all', 0]];
-  const rows = MK.map(([k, n, m, dp]) => { const s = M.series((e) => e[k], m); return { n, s, c: M.change(s, 7), v: M.last(s), dp }; }).filter((r) => r.s.length);
-  M.$('mk').innerHTML = rows.map((r) => `<tr><td>${M.esc(r.n)}</td><td class="trend">${M.spark(r.s, 7)}</td><td class="num">${M.num(r.v, r.dp)}</td><td class="num"><span class="${M.cls(r.c)}">${M.pct(r.c)}</span></td></tr>`).join('');
+  // the trend line runs through each session (every 15 minutes, desk/intraday.json), like the stock tables' 1W lines,
+  // when the saved sessions reach the market's last close; otherwise the daily closes. The dollar is set once a day.
+  const IK = { egx30: ['egx', 'EGX30'], egx70: ['egx', 'EGX70EWI'], sp500: ['us', 'sp500'], nasdaq: ['us', 'COMP'], dow: ['us', 'dow'],
+    brent: ['g_brent', 'brent'], gold_usd: ['g_gold_usd', 'gold_usd'], btc: ['g_btc', 'btc'] };
+  const through = (k, s) => { const x = IK[k], ss = x && M.intraPeriod(x[0], x[1], 7);
+    return ss && ss.at(-1).session >= M.lastDate(s) ? ss.flatMap((d) => d.series[x[1]].map(([, v]) => v)) : null; };
+  const rows = MK.map(([k, n, m, dp]) => { const s = M.series((e) => e[k], m); return { n, s, w: s.length ? through(k, s) : null, c: M.change(s, 7), v: M.last(s), dp }; }).filter((r) => r.s.length);
+  M.$('mk').innerHTML = rows.map((r) => `<tr><td>${M.esc(r.n)}</td><td class="trend">${M.spark(r.s, 7, null, r.w)}</td><td class="num">${M.num(r.v, r.dp)}</td><td class="num"><span class="${M.cls(r.c)}">${M.pct(r.c)}</span></td></tr>`).join('');
   M.$('mk-meta').textContent = 'Last seven days';
   const eg = rows[0], sp = rows.find((r) => r.n === 'S&P 500'), fx = rows.find((r) => r.n === 'Dollar in pounds');
 
@@ -96,8 +102,9 @@
     el.innerHTML = `<div class="movers"><div><h3><span class="chg up" aria-hidden="true"></span>Gainers</h3>${W.gainers.slice(0, 5).map(r).join('')}</div><div><h3><span class="chg down" aria-hidden="true"></span>Losers</h3>${W.losers.slice(0, 5).map(r).join('')}</div></div>`;
   }
 
-  // the EGX30 by sector over the last five sessions (the same map as the EGX page, opening on the week)
-  { const HT = M.MOVERS && M.MOVERS.egx && M.MOVERS.egx.heat; if (HT && HT.rows && HT.rows.length && window.DeskHeat) window.DeskHeat(M, HT, 'w1'); }
+  // the EGX30 by sector over the week's five sessions (the same map as the EGX page, opening on the week), from the
+  // week's last session, not the latest one
+  { const HT = await M.heatFor('egx', M.ASOF < end ? M.ASOF : end); if (HT && window.DeskHeat) window.DeskHeat(M, HT, 'w1'); }
   // foreign investors: each session's net, and the week's total (a session dominated by a one-off deal is named)
   const FL = ((await M.get('/desk/flows.json')) || {}).days || [];
   const fw = FL.filter((d) => d.date >= M.cut(end, 7) && d.date < end);

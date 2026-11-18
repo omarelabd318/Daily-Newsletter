@@ -146,7 +146,7 @@
   M.outlook(M.$('outlook'), P.outlook, '$');
   M.news(M.$('news'), P.news, true);
   // the 100 largest S&P 500 companies by sector, sized by market value (desk/movers.json)
-  { const HT = M.MOVERS && M.MOVERS.us && M.MOVERS.us.heat; if (HT && HT.rows && HT.rows.length && HT.session === M.asOfFor('us') && window.DeskHeat) window.DeskHeat(M, HT, 'd1'); }
+  { const HT = await M.heatFor('us', M.asOfFor('us')); if (HT && window.DeskHeat) window.DeskHeat(M, HT, 'd1'); }
   // with nothing after the bell, the movers take the full width (gainers and losers side by side)
   { const mv = M.$('movers').closest('section'); if (M.$('c-bell').hidden && mv) mv.className = mv.className.replace('c6', 'c12'); }
   M.pageTabs([['today', 'Today'], ['movers', 'Movers and results'], ['stocks', 'Stocks and views']]);

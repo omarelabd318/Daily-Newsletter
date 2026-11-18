@@ -27,7 +27,10 @@
   average of the 30 before it; the EGP page reads the central bank's dollar rate, policy rates, the one-year T-bill
   yield and inflation from the log. The day's file only adds what the log does not hold. The EGX page's session
   card reads turnover from the log (`egx_turnover`), advancers and decliners from desk/movers.json (which also
-  holds the session's most active stocks and the EGX30 heatmap, `egx.heat`, from TradingView), and, until
+  holds the session's most active stocks and the EGX30 heatmap, `egx.heat`, from TradingView; fetch_movers.py also
+  keeps each session's heatmap in desk/heat/<market>/<session>.json, listed in desk/heat/index.json, so the EGX, Wall
+  Street and The week pages show the map for their own session, or the last one in the week before it; a missed
+  EGX session can be rebuilt with `fetch_movers.py --heat-backfill YYYY-MM-DD`), and, until
   turnover has about 60 sessions logged, compares the EGX30 companies' shares traded (`egx30_vol`) with its 90-day
   average. Its "Blue chips against small and mid caps" table comes from the movers file (TradingView's EGX30 and
   EGX70 EWI); Give `session.breadth` in the day's
