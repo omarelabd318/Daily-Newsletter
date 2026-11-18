@@ -31,8 +31,8 @@ TARGETS = {"newsletter": {"searches": 25, "pages": 12, "read": 20}, "desk": {"se
 CEILINGS = {"newsletter": {"searches": 60, "pages": 30}, "desk": {"searches": 35, "pages": 20}}
 # Hard caps on searches, side sessions included: search.py runs no query past it, and the WebSearch hook
 # (.claude/hooks/search_cap.py) blocks the built-in web search once the log reaches it. The Weekly Recap logs as
-# newsletter, so it shares the newsletter's cap.
-HARD_CAPS = {"newsletter": 60}
+# newsletter, so it shares the newsletter's cap; the Markets Desk has its own, at its ceiling (it ran to 51 on Nov 17).
+HARD_CAPS = {"newsletter": 60, "desk": 35}
 CAP_NOTE = ("SEARCH CAP REACHED: {n} of {cap} {part} searches used today. No more searches in this run: write from "
             "the notes and pages already gathered, and mark a figure with no second source as unconfirmed.")
 

@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""PreToolUse hook: the newsletter's hard cap on searches, for the built-in web search.
+"""PreToolUse hook: the newsletter's and the desk's hard caps on searches (60 and 35), for the built-in web search.
 
 search.py enforces the cap on its own queries; this blocks WebSearch once the day's research log
 (data/research/DATE.json) holds the cap's number of newsletter searches, side sessions included.
 
 Which run a session is: the hook also sees every Bash call, and the first research_log.py or
 search.py --log call that names a part (newsletter or desk) and a date ties the session to them
-(kept in data/research/.sessions.json, not committed). A session never tied (an interactive session,
-the desk) is never blocked. An allowed WebSearch is logged at once, under the lock, so side sessions
+(kept in data/research/.sessions.json, not committed). A session never tied (an interactive session)
+is never blocked. An allowed WebSearch is logged at once, under the lock, so side sessions
 searching at the same time cannot overshoot the cap; logging the same query afterwards with
 research_log.py does not count it twice.
 """
