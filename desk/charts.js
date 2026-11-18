@@ -176,7 +176,7 @@
   // shaded spans go under the data; marker lines and the label rows over it
   function notesUnder(g, el, N, { padT, h, padB }) {
     const ink = css(el, '--axis-ink', '#6b6b6b'), op = cssNum(el, '--chart-span', 0.07);
-    for (const it of N.items) if (it.span) svg('rect', { x: it.x0, y: padT, width: it.x1 - it.x0, height: h - padT - padB, fill: ink, opacity: op }, g);
+    for (const it of N.items) if (it.span) svg('rect', { x: it.x0, y: padT, width: it.x1 - it.x0, height: Math.max(0, h - padT - padB), fill: ink, opacity: op }, g);
   }
   function notesOver(g, el, N, { padT, h, padB }) {
     const ink = css(el, '--axis-ink', '#6b6b6b');
@@ -315,7 +315,7 @@
       // hover: a rule, a dot per series and a bare tooltip
       const tip = tooltip(el), rule = svg('line', { y1: padT, y2: h - padB, stroke: css(el, '--axis-ink', '#6b6b6b'), 'stroke-width': 1, opacity: 0 }, g);
       const dots = series.map((sr, k) => svg('circle', { r: 3.5, fill: css(el, '--surface', '#fff'), stroke: colourOf(sr, k), 'stroke-width': 2, opacity: 0 }, g));
-      const hit = svg('rect', { x: padL, y: padT, width: w - padL, height: h - padT - padB, fill: 'transparent' }, s);
+      const hit = svg('rect', { x: padL, y: padT, width: Math.max(0, w - padL), height: Math.max(0, h - padT - padB), fill: 'transparent' }, s);
       const move = (ev) => { const r = s.getBoundingClientRect(); const px = ((ev.clientX - r.left) / r.width) * w; const i = Math.max(0, Math.min(labels.length - 1, Math.round(((px - padL) / (w - padL - padR)) * (labels.length - 1)))); rule.setAttribute('x1', x(i)); rule.setAttribute('x2', x(i)); rule.setAttribute('opacity', 0.35); series.forEach((sr, k) => { const v = sr.values[i]; dots[k].setAttribute('cx', x(i)); dots[k].setAttribute('cy', v == null ? -99 : y(Math.min(v, yt.at(-1)))); dots[k].setAttribute('opacity', v == null ? 0 : 1); }); tip.innerHTML = `<div style="opacity:.7">${labels[i]}</div>` + series.map((sr) => `<div><b style="font-weight:600">${sr.values[i] == null ? '–' : format(sr.values[i])}</b> ${series.length > 1 ? sr.name : ''}</div>`).join(''); const left = Math.min((x(i) / w) * r.width + 12, r.width - tip.offsetWidth - 4); tip.style.left = `${Math.max(0, left)}px`; tip.style.top = '0px'; tip.style.opacity = 1; };
       hit.addEventListener('pointermove', move); hit.addEventListener('pointerleave', () => { tip.style.opacity = 0; rule.setAttribute('opacity', 0); dots.forEach((d) => d.setAttribute('opacity', 0)); });
       const last = series[0].values.filter((v) => v != null).at(-1);

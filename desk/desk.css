@@ -715,5 +715,19 @@ table.mini th + th,table.mini td + td{padding-left:10px}
 /* week ahead: a date like "Wed, Nov 18" stays on one line, and the impact tag sits level with the event's first line */
 .wk{grid-template-columns:92px minmax(0,1fr) auto}
 .wk .imp{align-self:start;line-height:20px}
+/* a date on two lines ("Late November") takes the rows beside the event and its note, so the note stays under its title */
+.wk .day{grid-row:span 2}
 /* story headlines break evenly instead of leaving one word on its own line */
 .vcard h2,.lead-story h2,.lead-story h3,.read h3,.story h3,.news .nh,h2.call{text-wrap:balance}
+
+/* the smallest phones (320–360px): tables keep inside the card. Tighter card padding, smaller figures, and column
+   headings may wrap onto two lines rather than push the last column off the screen */
+@media (max-width:360px){
+  .card{padding:14px 12px}
+  table td,table th{font-size:12px}
+  table th,table th .sorth{white-space:normal;line-height:1.2;text-align:inherit}
+  th.num .sorth{justify-content:flex-end}
+  table td + td,table th + th{padding-left:6px}
+  .stable td + td,.stable th + th{padding-left:6px}
+  td.name span,.sx-n{font-size:11px}
+}

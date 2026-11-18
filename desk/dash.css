@@ -488,5 +488,7 @@ body[data-day] .toprow{display:block}
 /* week ahead: a date like "Wed, Nov 18" stays on one line, and the impact tag sits level with the event's first line */
 .wk{grid-template-columns:92px minmax(0,1fr) auto}
 .wk .imp{align-self:start;line-height:20px}
+/* a date on two lines ("Late November") takes the rows beside the event and its note, so the note stays under its title */
+.wk .day{grid-row:span 2}
 /* story headlines break evenly instead of leaving one word on its own line */
 .vcard h2,.lead-story h2,.lead-story h3,.read h3,.story h3,.news .nh,h2.call{text-wrap:balance}
