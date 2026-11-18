@@ -67,7 +67,7 @@ Stocks Watch do not.
     "Fetch the figures first" and "Log the day's figures" describe. The EGX is closed, so its figures are Thursday's
     and are not logged again; Wall Street's are Friday's closes; gold, Brent, Bitcoin and the pound are the latest.
     The desk's Saturday run relies on this entry.
-  - **Puzzles:** the Saturday crossword (11 by 11) and the week's hardest killer sudoku, made, clued and checked as
+  - **Puzzles:** the crossword (11 by 11, as every day) and the week's hardest killer sudoku, made, clued and checked as
     the main skill's "Puzzles" section describes; commit `data/puzzles/DATE.json`. The recap page shows them.
   - **Research log:** log every search and page under `newsletter` (the recap is Saturday's newsletter).
 - On the recap page, the site draws year-long trend lines next to the Markets This Week rows by itself;

@@ -4,8 +4,9 @@ Each edition (on Saturdays, the recap) has a crossword and a killer sudoku, play
 front page. `puzzles.py` builds both; the run only writes the clues. Keep it cheap: one `make`, one clues file.
 
 1. `python3 .claude/skills/daily-newsletter/puzzles.py make YYYY-MM-DD --news WORD,WORD` with the edition's date and
-   up to three plain words from the day's stories (NILE, GAZA, TRAIN: never a person's name). It takes a few seconds
-   (about a minute on Saturdays, the larger 11 by 11 grid) and prints the grid and the answers needing clues. The
+   up to three plain words from the day's stories (NILE, GAZA, TRAIN: never a person's name). The crossword is 11 by 11
+   every day and leaves out every answer from the last 14 days' crosswords, so it takes one to two minutes (run it in
+   the background if the shell times out at two); it prints the grid and the answers needing clues (about 45). The
    killer sudoku gets harder through the week (Sunday easy, Saturday hardest) and is checked to have one solution.
 2. Read the answers. If one is a name, an abbreviation or an obscure word, run `make` again with
    `--avoid WORD` (the same `--news`), and add lasting ones to `AVOID` in the script. Do not run `make` again after
