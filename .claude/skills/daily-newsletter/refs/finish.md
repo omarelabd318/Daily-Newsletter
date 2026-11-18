@@ -46,7 +46,9 @@ Mechanical only, each with the smallest change that fixes it:
 Everything else goes back to the main run unchanged, quoted in the report: a story in two sections, a section below
 its minimum, a research shortfall, a voice problem beyond one clause, a desk view to judge or a mover's reason to
 find, flows to add, and any fix that would change what a story says. Word-count warnings are information only:
-never cut text to clear one.
+never cut text to clear one. The one exception is a Markets part's "TRIM before publishing" warning (Egypt Markets
+or Global Markets over its ceiling): treat it like an ERROR, do not publish, and hand it back quoted, for the main
+run to tighten the wording itself.
 
 ## After the report
 

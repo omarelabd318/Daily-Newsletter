@@ -407,6 +407,11 @@ def main(path):
                             "never pad. If there truly are fewer, say so in the Publishing note.")
     for name, (lo, hi) in ({} if recap else BUDGET).items():
         n = counts.get(name)
+        # the two Markets parts are held to their ceiling (SKILL.md, from Nov 18, 2026): trim words, not stories
+        if name in ("Egypt Markets", "Global Markets") and n is not None and n > hi * 1.2:
+            warnings.append(f"{name}: {n} words, over its ceiling of about {hi}: TRIM before publishing (cut wording "
+                            f"and secondary figures, keep every story; the desk and the tables carry the detail).")
+            continue
         if n is not None and (n < lo * 0.7 or n > hi * 1.3):
             warnings.append(f"{name}: {n} words (guide {lo}-{hi}; fine if the stories justify it, never cut a story to fit).")
     total = sum(counts.values())

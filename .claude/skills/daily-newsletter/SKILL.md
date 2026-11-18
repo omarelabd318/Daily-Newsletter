@@ -74,6 +74,14 @@ order (with a warning) in case a task prompt sets it.
 Sports is the deepest part of In Other News, but it no longer outweighs Markets. Global Markets got the
 extra room: use it to explain what drives the moves and what they mean for Egypt and emerging markets.
 
+**The two Markets parts are the exception to "a guide, never a limit" (from November 18, 2026).** Every edition
+from Nov 10 to 17 ran 3,650 to 4,250 words, and Egypt Markets and Global Markets ran up to 1.7 times their guides,
+which the Markets Desk already covers in depth. Write them to their ceilings: Egypt Markets about 340 words, Global
+Markets about 260. Keep every story that deserves a place, but tighten it: what moved, why, and one context line;
+the two or three figures that carry the story, not every figure gathered (the tables and the desk carry the rest);
+no second paragraph restating the first. The checker asks for a trim when a part runs more than a fifth over: cut
+words, never a story. The rest of the edition keeps the old rule.
+
 ### Minimum stories per section
 
 A busy section, often Markets, must not crowd out the rest. Aim for at least this many separate stories:
