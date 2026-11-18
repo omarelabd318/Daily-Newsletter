@@ -16,8 +16,9 @@ pages it leads to. All queries run at once: send several per call.
 a query) and appends the full blocks to editions/search.md (a worksheet, not committed), to grep for one story's
 excerpt when the short line is not enough. Side sessions use the full form.
 
-With --log newsletter, no query runs past the newsletter's hard cap of 60 searches a day (research_log.py's
-HARD_CAPS, side sessions and the recap included): queries past it are listed as not run.
+With --log newsletter or --log desk, no query runs past that part's hard cap (research_log.py's HARD_CAPS: 60
+searches a day for the newsletter, the recap included, and 35 for the desk, side sessions included): queries past
+it are listed as not run.
 
 --days N limits the search to the last N days (default 2). --log records each query as a search and each page whose
 excerpt was printed as read (research_log.py, one call for the batch), so the research floors count them. The

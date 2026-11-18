@@ -51,7 +51,9 @@ meanwhile copies the template to desk/days/DATE.json and starts on the close car
 > wording are one source). Research news with `python3 .claude/skills/daily-newsletter/search.py --log DATE desk
 > "q1" "q2" ...` first, several queries per call (it reads the top pages, prints short excerpts and logs itself);
 > use web search and full page reads only for data pages, filings and what the excerpts do not settle, several
-> pages per `articles.py --log DATE desk URL ...` call. Log those searches and pages, and every stock line, with
+> pages per `articles.py --log DATE desk URL ...` call. Your search budget is N searches (search.py queries and web
+> searches together; the desk's hard cap is 35 a day for all its sessions): stop at N, and mark anything still
+> without a second source `Open:`. Log those searches and pages, and every stock line, with
 > `python3 .claude/skills/daily-newsletter/research_log.py DATE desk search|page|stock ...` (several per call).
 > Stop on a story once each figure has its outlet and one independent confirmation: about two pages opened per
 > story beyond search.py's excerpts, more only where sources conflict.
@@ -61,6 +63,11 @@ meanwhile copies the template to desk/days/DATE.json and starts on the close car
 > or "single source"; `Angle:` a few words on what it means for the stock, sector or market; `Open:` only if
 > something is unclear. Keep every figure, basis and source; cut background. End with one line per item done to the
 > files (results recorded, news added) and anything left undone and why.
+
+**Search budgets (the desk's hard cap is 35 a day in all).** search.py refuses queries past it and the built-in web
+search is blocked, so write each session's number into its prompt as N: stocks 12, markets and macro 15, leaving the
+main run about 8 for its own gaps (on a light Saturday or Sunday run, stocks 6 and macro 8). A session stops at its
+number; a story still without a second source past it is noted `Open:` for the main run.
 
 For the stocks session FILES-YOU-MAY-WRITE is "You may run set_results.py and fetch_valuation.py (numbers only) and
 correct dates in desk/calendar.json; write nothing else: return news items and results as notes". For the macro session it

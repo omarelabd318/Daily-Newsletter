@@ -48,8 +48,9 @@ stock with news; start the stocks side session only if the brief shows results t
 and the macro session only for news since Saturday the edition's notes do not hold. Same floor as a Saturday: 10
 searches and 5 pages opened; aim to stay near it.
 
-**A ceiling as well as a floor:** about 35 searches and 20 pages opened in all, side sessions included
-(research_log.py and search.py say when the run is past it). Each figure needs its outlet and one confirmation;
+**A ceiling as well as a floor:** 35 searches and about 20 pages opened in all, side sessions included. The 35 is a
+hard cap: search.py runs no query past it and the built-in web search is blocked once the day's desk log holds 35
+(research_log.py says when the run is past either figure). Each figure needs its outlet and one confirmation;
 once it has them, stop. In the main run use `search.py --short` (one line and a figures fragment a page).
 
 **Never read or rewrite the desk's big JSON files whole** (the day file, about 50 KB and three quarters the same
