@@ -10,6 +10,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&family=Inter:wght@500;600;700&family=UnifrakturCook:wght@700&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2352d6b5'/%3E%3Cpath d='M18 14h14c11 0 18 7 18 18s-7 18-18 18H18z' fill='%230e1216'/%3E%3C/svg%3E">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/icons/newsletter-apple-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Newsletter">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#faf8f3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e1216" media="(prefers-color-scheme: dark)">
 <script>document.documentElement.className='js';try{if(localStorage.getItem('width')==='wide')document.documentElement.setAttribute('data-width','wide');var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');else if(t!=='light')document.documentElement.setAttribute('data-theme','paper')}catch(e){document.documentElement.setAttribute('data-theme','paper')}</script>
 <style>
 :root{
@@ -650,6 +658,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 :root[data-theme="paper"] .f-inside li span{order:2;font:600 12px var(--sans);font-variant-numeric:lining-nums tabular-nums}
 :root[data-theme="paper"] .f-inside li[hidden]{display:none}
 </style>
+<link rel="stylesheet" href="phone.css">
 </head>
 <body>
 <div class="frame mast-frame">
@@ -1616,5 +1625,6 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
   }).catch(function(){state('Could not load the newsletter','Please try again in a moment.')});
 })();
 </script>
+<script src="phone.js"></script>
 </body>
 </html>
