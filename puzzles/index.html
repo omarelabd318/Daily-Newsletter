@@ -202,8 +202,11 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
   // ---------------- crossword ----------------
   function crossword(P){
     var C = P.crossword, n = C.size, key = 'puz:cw:' + P.date, saved = store.get(key) || {};
-    var cs = Math.min(52, Math.floor((Math.min(innerWidth, 1180) - (innerWidth < 860 ? 30 : 680)) / n));
-    $('cw-grid').style.setProperty('--cs', Math.max(28, cs) + 'px');
+    // square size: on a phone the grid fills the width (the page's 12px sides, the 2px frame and the 1px lines between
+    // squares taken off), so an 11 by 11 grid fits a 320px-wide phone; on a computer it also fits the screen's height
+    var phone = innerWidth < 860, room = phone ? innerWidth - 24 - 4 - (n - 1) : Math.min(innerWidth, 1180) - 680;
+    var cs = Math.max(22, Math.min(52, Math.floor(room / n), phone ? 99 : Math.floor((innerHeight - 170) / n)));
+    $('cw-grid').style.setProperty('--cs', cs + 'px');
     $('cw-grid').style.gridTemplateColumns = 'repeat(' + n + ',var(--cs))';
     var clues = C.clues.across.map(function(a){ return Object.assign({d:'A'}, a); }).concat(C.clues.down.map(function(a){ return Object.assign({d:'D'}, a); }));
     var letters = saved.l || {}, shown = saved.s || {}, cells = {}, dir = 'A', cur = null;
