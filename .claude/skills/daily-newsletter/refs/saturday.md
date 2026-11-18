@@ -67,8 +67,8 @@ Stocks Watch do not.
     "Fetch the figures first" and "Log the day's figures" describe. The EGX is closed, so its figures are Thursday's
     and are not logged again; Wall Street's are Friday's closes; gold, Brent, Bitcoin and the pound are the latest.
     The desk's Saturday run relies on this entry.
-  - **Puzzles:** the crossword (11 by 11, as every day) and the week's hardest killer sudoku, made, clued and checked as
-    the main skill's "Puzzles" section describes; commit `data/puzzles/DATE.json`. The recap page shows them.
+  - **Puzzles:** the crossword (11 by 11, as every day) and the week's hardest killer sudoku, made, clued and checked by a Sonnet
+    side session as refs/puzzles.md describes; commit `data/puzzles/DATE.json`. The recap page shows them.
   - **Research log:** log every search and page under `newsletter` (the recap is Saturday's newsletter).
 - On the recap page, the site draws year-long trend lines next to the Markets This Week rows by itself;
   nothing to add for that.
@@ -95,8 +95,8 @@ into each side session's prompt with its block.
 The recap uses the same side sessions and batching as a daily edition (`refs/research-agents.md`), with these
 blocks: (1) Since Friday (what is new since Friday's edition, every section); (2) the week in Egypt (news and
 markets, from the week's editions and data/topics.json, and where each story stands now); (3) the week in the region
-and the world; (4) the week's markets, the coming week's calendar and In Other News. Saturday's figures, puzzles and
-check_log.py stay in the main run. Their NAMEs for the saved notes: since-friday, egypt, world, markets. Blocks 2 to
+and the world; (4) the week's markets, the coming week's calendar and In Other News. Saturday's figures and
+check_log.py stay in the main run; the puzzles go to their own Sonnet side session (refs/puzzles.md). Their NAMEs for the saved notes: since-friday, egypt, world, markets. Blocks 2 to
 4 start from the week's saved notes in `editions/notes/` (the daily side sessions' checked facts and sources) and
 search for how each story developed since, rather than researching each day's stories again.
 

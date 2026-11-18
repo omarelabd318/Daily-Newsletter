@@ -1,18 +1,34 @@
-# Finishing a run: checks, fixes and publishing in a fresh side session
+# Finishing a run: publish in one call, a side session only when there is work
 
-Why: by the time the edition (or the desk) is written, the main run has every note, page and draft open, and each
-further step re-sends all of it. The checker runs, the link and figure fixes, the commit and the push are about a
-quarter of a run's steps but, at that size, a third of its cost. A side session that starts with only the finished
-file does them for a small part of that. The writing is finished before it starts: it fixes mechanical problems and
-hands anything that needs an editor's judgment back to the main run.
+Why: by the time the edition (or the desk) is written, the main run has every note, page and draft open, so each
+further step re-sends all of it. On most days the checker finds nothing to fix, and one call publishes; a fresh
+Sonnet side session (below) costs less than many fix-up steps at that size, but more than one or two.
 
 ## What the main run does first
 
-Before handing over, the main run has: written the edition (or the desk's files), done the edit pass, added the
+Before publishing, the main run has: written the edition (or the desk's files), done the edit pass, added the
 editions/index.json entry, tagged the topics and rewritten their "Where it stands" (`topics.py`, the skill's
-"Running topics"), made the puzzles, and logged the figures. Everything the checker needs is on disk.
+"Running topics"), made the puzzles, and logged the figures. For the newsletter and the recap it has also run
+`python3 .claude/skills/daily-newsletter/make_audio.py --names EDITION` and fixed any names in pronounce.json
+(refs/listen.md), in the same step as the topics or the puzzles check. Everything the checker needs is on disk.
 
-## The hand-off
+## Publish in one call
+
+Run `python3 .claude/skills/daily-newsletter/publish.py KIND DATE --push-if-clean` (KIND is `newsletter`, `recap`
+or `desk`). It runs the checks and, when nothing is left to fix (no ERROR, no TRIM, no WARNING other than the
+information-only ones: word counts, links a site refused to check, research notes), commits and pushes and prints
+PUBLISHED. That is the end: write the final reply, listing the information-only warnings it printed. On a rebase
+conflict it stops (exit 3): merge the files it names by hand, keeping both runs' entries, commit, and run it again.
+
+If it prints NOT PUBLISHED with findings to fix:
+- **A few (up to about four), or any that need judgment** (a TRIM, a story in two sections, a section below its
+  minimum, a research shortfall, a voice problem, a view to judge, a mover's reason, flows): fix them yourself, one
+  Edit or one `desk_json.py set` per section, then run `publish.py KIND DATE --push` (a warning you judged fine
+  stays as it is).
+- **Many mechanical ones** (dead links, figures against the data log, format errors, US spelling): hand them to
+  one finishing side session as below, with the judgment items fixed by you first.
+
+## The hand-off (only when there are many mechanical fixes)
 
 Start one side session with `model: "sonnet"` and wait for it (not in the background): its report is the last
 thing the main run needs before the final reply. KIND is `newsletter`, `recap` or `desk`; FILE is

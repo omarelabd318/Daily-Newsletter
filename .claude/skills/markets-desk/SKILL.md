@@ -55,6 +55,14 @@ hard cap: search.py runs no query past it and the built-in web search is blocked
 (research_log.py says when the run is past either figure). Each figure needs its outlet and one confirmation;
 once it has them, stop. In the main run use `search.py --short` (one line and a figures fragment a page).
 
+**About 12 steps from the notes to PUBLISHED.** Once the side sessions' notes are in, the run holds 120-180k tokens
+and every step re-sends all of it (about $0.07 a step on Opus): on Nov 18 the 28 steps after the notes cost as much
+as all the research before them. So, after the notes: one `desk_json.py set` per file with **every** path that
+changes in it (the day file's sections and pages together; views; stocks news; movers' reasons; flows and index),
+and several files' sets in one Bash step, one heredoc each; then `judge_views.py --write` and `publish.py desk DATE
+--push-if-clean` in one step. `show` a part only when its outline line is not enough, several parts per call. Open
+pages after the notes only for an `Open:` that matters, several at once. No step only to look, wait or plan.
+
 **Never read or rewrite the desk's big JSON files whole** (the day file, about 50 KB and three quarters the same
 from day to day; desk/stocks.json, 125 KB; desk/views.json, 40 KB). `desk_json.py` reads and writes only the parts
 that change, several in one call: `show FILE PATH ...` prints parts, `set FILE -` takes a heredoc of
@@ -107,11 +115,12 @@ once. Its `--help` has the path rules.
    `fetch_figures.py` shows a new `reserves_usd`), add that month to `desk/reserves.json`: total, foreign
    currencies, gold and `sdr` (the rest: total minus the other two), from the bank's release or a news report
    of it that gives all three (Daily News Egypt, Arab Finance, Egypt Today), with `source` and `url`.
-7. Before handing over, judge every view whose date has passed, add the flows and the movers' reasons (the
-   content warnings check_desk.py gives). Then the checks, mechanical fixes, commit and push are done by one Sonnet
-   side session through `python3 .claude/skills/daily-newsletter/publish.py desk DATE [--push]` (check_desk.py,
-   then commit `Desk DATE` and push), as `.claude/skills/daily-newsletter/refs/finish.md` describes; read it at
-   that step. It hands back anything that needs judgment. Nothing runs in the background after the final reply.
+7. Before publishing, judge every view whose date has passed, add the flows and the movers' reasons (the
+   content warnings check_desk.py gives). Then publish in one call, `python3
+   .claude/skills/daily-newsletter/publish.py desk DATE --push-if-clean` (check_desk.py, then commit `Desk DATE` and
+   push when nothing needs fixing), as `.claude/skills/daily-newsletter/refs/finish.md` describes (read it at that
+   step): fix a few findings yourself; start a Sonnet finishing session only for many mechanical ones. Nothing runs
+   in the background after the final reply.
 8. The spoken summary is recorded by GitHub Actions once the desk is pushed (`.github/workflows/publish.yml` runs
    desk_audio.py DATE and commits `Desk DATE: audio`): do not run it in the run.
 

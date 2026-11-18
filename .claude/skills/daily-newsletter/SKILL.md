@@ -23,9 +23,18 @@ EnterpriseAM and CairoScene are met by the Egypt side session, which reads them 
 as well as a floor: a hard cap of 60 searches in all, side sessions included (the tools refuse searches past it;
 split as refs/research-agents.md describes), and about 30 pages opened (research_log.py says when a run is past it). Each
 figure needs its outlet and one independent confirmation; once it has them, stop. (4) **Finish in a fresh side
-session:** once the edition is written and edited, the checks, mechanical fixes, commit and push are done by one
-Sonnet side session through `publish.py`, as `refs/finish.md` describes; read it at that step. (5) Nothing runs in
-the background after the final reply.
+session only when there is work:** once the edition is written and edited, one call,
+`publish.py newsletter DATE --push-if-clean`, checks, commits and pushes when nothing needs fixing; a Sonnet
+finishing session is started only when the checker finds many mechanical fixes, as `refs/finish.md` describes; read
+it at that step. (5) Nothing runs in the background after the final reply. (6) **About 12 steps from the notes to
+PUBLISHED.** Once the side sessions' notes are in, the run holds 150-200k tokens and every step re-sends all of it
+(about $0.07 a step on Opus, more than the step's own writing): the late steps were half of a run's cost. So, after
+the notes: write the whole edition in **one Write** (every section, Sources included; it is then open, so never read
+it back); in **one Bash step** add the index.json entry, run `topics.py tag DATE` and `make_audio.py --names
+editions/DATE.md`; start the **puzzles side session** (refs/puzzles.md) in that same response; do the edit pass in
+**one Edit per section that changes, or one Write of the whole file when more than three change**; put every
+`topics.py now`/`add`/`remove` and any pronounce.json fix in **one Bash step**; then `publish.py ... --push-if-clean`.
+Open a page after the notes only for an `Open:` that matters, several at once. No step only to look, wait or plan.
 
 These rules add to the task prompt that asks for the edition. Where the prompt sets voice, sources,
 section order or publishing steps, follow the prompt. This file sets how much space each section gets,
@@ -525,7 +534,7 @@ When the edition is written, read it once from the top as its editor, not its wr
 - **Once only:** no story, figure or explanation appears in two sections; no "today" or "yesterday" that is wrong
   for the edition's date; no term left unexplained on first use.
 
-Then hand over to the finishing session (refs/finish.md). End the final reply with one line, `Edit pass: N changes`, naming the biggest.
+Then publish as refs/finish.md describes (`publish.py newsletter DATE --push-if-clean`). End the final reply with one line, `Edit pass: N changes`, naming the biggest.
 
 ## The front page
 
@@ -551,10 +560,11 @@ Read `refs/lead-image.md` at the step where you choose the lead image (licenses,
 
 ## Puzzles (every edition)
 
-Read `refs/puzzles.md` at the puzzles step (`puzzles.py make`, clues, check), every edition.
+A Sonnet side session makes, clues and checks them, started once the edition is written: the prompt is in
+`refs/puzzles.md` (read it at that step). The main run does not run puzzles.py itself.
 
 ## Check before committing
 
-The checks, fixes, commit and push are done in one call, `publish.py newsletter|recap DATE [--push]`, by the
-finishing side session in `refs/finish.md` (read it at that step). `refs/check.md` says what check_edition.py checks;
-the finishing session reads it, not the main run.
+The checks, commit and push are one call, `publish.py newsletter|recap DATE --push-if-clean`, made by the main run;
+a finishing side session handles the fixes only when there are many (`refs/finish.md`, read it at that step).
+`refs/check.md` says what check_edition.py checks; open it only for a finding you do not understand.

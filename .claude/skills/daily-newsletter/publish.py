@@ -4,6 +4,9 @@
 Usage (from the repo root):
   python3 .claude/skills/daily-newsletter/publish.py newsletter|recap|desk DATE            checks only
   python3 .claude/skills/daily-newsletter/publish.py newsletter|recap|desk DATE --push     checks, then commits and pushes
+  python3 .claude/skills/daily-newsletter/publish.py newsletter|recap|desk DATE --push-if-clean
+      checks, and commits and pushes only when nothing is left to fix: no ERROR, no TRIM, and no WARNING other
+      than the information-only ones (word counts, links a site refused to check, research and data notes)
 
 Checks: editions/index.json parses and has the entry (newsletter, recap), check_edition.py on the edition (and
 check_log.py DATE for the recap), or check_desk.py (desk). The checkers print briefly, as they do on their own.
@@ -15,6 +18,7 @@ Prints one line per step and ends with PUBLISHED <commit> or NOT PUBLISHED and w
 """
 import json
 import os
+import re
 import subprocess
 import sys
 import time
@@ -43,6 +47,25 @@ def files_for(kind, date):
     return [x for x in f if os.path.exists(os.path.join(ROOT, x))]
 
 
+# Warnings that need no fix before publishing: they go in the final reply, if anywhere.
+INFO_ONLY = re.compile(r"words \(guide|words without Sources|could not be checked|^Research: the scripts read|"
+                       r"^Closes not compared|^Listen: |fine if several outlets", re.I)
+FOUND = []   # (kind, text) of every ERROR and WARNING the checkers printed
+
+
+def note(out):
+    for line in out.splitlines():
+        m = re.match(r"(ERROR|WARNING):\s*(.*)", line.strip())
+        if m:
+            FOUND.append((m.group(1), m.group(2)))
+
+
+def to_fix():
+    """The findings that block --push-if-clean: errors, a TRIM, and warnings that are not information only."""
+    return [f"{k}: {t}" for k, t in FOUND
+            if k == "ERROR" or "TRIM" in t or not INFO_ONLY.search(t)]
+
+
 def checks(kind, date):
     ok = True
     if kind in ("newsletter", "recap"):
@@ -59,14 +82,16 @@ def checks(kind, date):
             print(f"ERROR: editions/index.json does not parse ({e}).")
             ok = False
         print(f"--- check_edition.py editions/{key}.md")
-        code, _ = run(["python3", f"{NL}/check_edition.py", f"editions/{key}.md"])
+        code, out = run(["python3", f"{NL}/check_edition.py", f"editions/{key}.md"])
+        note(out)
         ok = ok and code == 0
         if kind == "recap":
             print(f"--- check_log.py {date}")
             run(["python3", f"{NL}/check_log.py", date])   # reports; problems go in the final reply, not a block
     else:
         print("--- check_desk.py")
-        code, _ = run(["python3", f"{DESK}/check_desk.py"])
+        code, out = run(["python3", f"{DESK}/check_desk.py"])
+        note(out)
         ok = code == 0
     return ok
 
@@ -112,6 +137,13 @@ def main(a):
         sys.exit(__doc__)
     kind, date = a[0], a[1]
     ok = checks(kind, date)
+    if "--push-if-clean" in a:
+        left = to_fix()
+        if left:
+            print(f"NOT PUBLISHED: {len(left)} finding(s) to fix first:")
+            print("\n".join("  " + x[:160] for x in left))
+            sys.exit(1)
+        sys.exit(push(kind, date))
     if "--push" not in a:
         print("CHECKS PASS (no errors)." if ok else "CHECKS FAIL: fix the errors above, then run again.")
         sys.exit(0 if ok else 1)

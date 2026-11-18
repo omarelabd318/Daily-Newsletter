@@ -13,8 +13,9 @@ the leads and returns what matters as notes; open a stock's leads yourself (`sed
 desk/brief.md`) only for a point its note leaves open.
 
 After wait_desk_data.py reports READY (or run_data.py has run) and you have read today's edition and desk/brief.md,
-start these two side sessions **in one step** (two Task calls in one response, so they run at once). The main run
-meanwhile copies the template to desk/days/DATE.json and starts on the close cards and the figures it already has.
+start these two side sessions **in one step** (two Task calls in one response, so they run at once), in the
+foreground (leave `run_in_background` false), so the main run gets both notes back together rather than waking for each. In the same
+response the main run starts the day file (`desk_json.py day DATE ASOF`), which runs while they do.
 
 1. **Stocks** (start it with `model: "sonnet"`: it gathers and checks, and writes no published text; the main run
    writes every published word, the `news` items and `lastResults` included, and makes every call on a stock):

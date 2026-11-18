@@ -41,7 +41,9 @@ Every step re-sends everything open, so put independent actions in one step:
 ## The newsletter's side sessions
 
 After reading editions/brief.md, editions/articles.md and the figures (fetch_figures.py), choose the day's stories,
-then start these side sessions **all in one step** (several Task calls in one response, so they run at once). Each
+then start these side sessions **all in one step** (several Task calls in one response, so they run at once), in
+the foreground (leave `run_in_background` false): the main run then waits once and gets every note back together,
+instead of waking for each one (each wake re-sends the whole run). Each
 gets the prompt below with its own block and NAME filled in (NAME in brackets after each block). They log their own searches and pages with research_log.py
 (the log is locked, so they can log at the same time), so do not log their work again.
 
@@ -101,7 +103,7 @@ world 10, global markets and calendar 10, In Other News 10, checks 6, leaving th
 gaps. A session stops at its number; a story still without a second source past it is noted `Open:` for the main run.
 
 Wait for all five before writing (never leave one running in the background past the final reply). Write the
-sections from the notes, each section in one Write or Edit. Open a page yourself only where a note says
+whole edition from the notes in one Write (see "About 12 steps" in the skill's "How the run works"). Open a page yourself only where a note says
 "Open:" something that matters, or a figure is single-source and the story needs it (search.py or articles.py,
 logged). The checker counts the side sessions' searches and pages, which they log themselves. Do not read the saved
 notes files again: they are the notes already returned to you.
