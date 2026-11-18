@@ -32,8 +32,8 @@
    "newsletter": 20.71,
    "newsletter_flag": "Fell back to Opus 4.8,\nthen crashed and was resumed",
    "flag_at": [
-    -1.6,
-    23.2
+    0.35,
+    22.6
    ],
    "hatch": true
   },
@@ -54,6 +54,20 @@
     -0.15,
     12.6
    ]
+  },
+  "2026-11-16": {
+   "desk": 5.31,
+   "newsletter": 7.84,
+   "newsletter_flag": "First run failed ($0.84):\nauto-mode check outage.\nRerun ≈$7 (estimate)",
+   "flag_at": [
+    -0.1,
+    17.2
+   ],
+   "hatch": true
+  },
+  "2026-11-17": {
+   "desk": 5.82,
+   "newsletter": 8.43
   }
  }
 }

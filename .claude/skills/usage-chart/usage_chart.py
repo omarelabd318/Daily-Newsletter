@@ -108,14 +108,16 @@ def main():
         handles.insert(0, Line2D([], [], marker="D", ls="", color="#222", markersize=10, label="What I projected earlier"))
     if proj:
         handles.append(Patch(facecolor="#bbb", hatch="/", edgecolor="white", label="Projected (bars: range)"))
-    ax.legend(handles=handles, loc="upper left", frameon=False, fontsize=15)
+    # Above the plot, in one row, so it never covers a tall bar or its label
+    ax.legend(handles=handles, loc="lower left", bbox_to_anchor=(0, 1.0), ncol=len(handles), frameon=False, fontsize=13.5,
+              handlelength=1.6, columnspacing=1.4, borderaxespad=0.2)
     actual = sum(days[d.isoformat()]["desk"] + days[d.isoformat()]["newsletter"] + days[d.isoformat()].get("recap", 0)
                  for d in dates if d.isoformat() in days)
     projected = sum(proj[d.isoformat()][0][0] + proj[d.isoformat()][1][0] for d in dates if d.isoformat() in proj)
     title = a.title or (f"Daily runs, {dates[0]:%a %b} {dates[0].day} to {dates[-1]:%a %b} {dates[-1].day}: "
                         f"~${actual + projected:.0f}, ≈{(actual + projected)/per:.0f}% of the weekly limit")
-    ax.set_title(title, fontsize=19, loc="left", pad=16)
-    fig.subplots_adjust(bottom=0.2, left=0.06, right=0.94)
+    ax.set_title(title, fontsize=19, loc="left", pad=46)
+    fig.subplots_adjust(bottom=0.2, top=0.84, left=0.06, right=0.94)
     fig.savefig(a.out, dpi=100)
 
 if __name__ == "__main__":
