@@ -61,7 +61,59 @@
   .dm-tools{display:none}
   .dm-n1{gap:18px} .dm-n1 a{font-size:11px;padding:11px 0 8px}
   .dm-n2{gap:20px} .dm-stamp{display:none} .dm-fig{display:none}
-}`;
+}
+/* phones (640px and narrower): a compact header that stays at the top (Egypt, US and Global as a switch, the market's
+   pages as chips), search and light/dark as icons, and a tab bar at the bottom; built by phone() below */
+.dp-tabs,.dp-ib,.dp-sheet,.dp-short{display:none}
+@media (max-width:640px){
+  .dmast{position:sticky;top:0;z-index:40;background:var(--ground);padding:env(safe-area-inset-top) 16px 0;transition:box-shadow .2s}
+  .dmast.dp-stuck{box-shadow:0 1px 0 var(--border),0 6px 18px rgba(0,0,0,.06)}
+  .dm-phone{display:none;padding:0 0 10px}
+  .dmast.dp-find .dm-phone{display:flex}
+  .dm-phone > a{display:none}
+  .dm-phone .dsearch{height:44px}
+  .dm-phone .dsearch input{font-size:16px}
+  .dm-top{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;column-gap:4px;padding:8px 0;border-bottom:0}
+  .dm-top .dm-name{grid-column:1;grid-row:1} .dm-top .dm-label{grid-column:1;grid-row:2;margin-top:2px} .dm-top .dp-ib{grid-row:1 / 3}
+  .dm-name{font-size:22px}
+  .dm-n1 a .dp-full{display:none} .dm-n1 a .dp-short{display:inline}
+  .dp-ib{display:grid;place-items:center;flex:none;width:44px;height:44px;padding:0;border:0;background:none;color:var(--text);cursor:pointer}
+  .dp-ib svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .dm-n1{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px;padding:3px;margin:0 0 2px;border:1px solid var(--border);background:var(--raised);overflow:visible}
+  .dm-n1 a{display:none;padding:0;min-height:38px;align-items:center;justify-content:center;border:0;font-size:12px;letter-spacing:.08em}
+  .dm-n1 a[data-k="egypt"],.dm-n1 a[data-k="us"],.dm-n1 a[data-k="global"]{display:flex}
+  .dm-n1 a[aria-current]{background:var(--surface);box-shadow:0 1px 2px rgba(0,0,0,.08);border:0}
+  .dm-n1 .dm-sep,.dm-n1 .dm-listen,.dm-n1 .dm-rate{display:none!important}
+  .dm-n1 .dm-pbar{bottom:-3px}
+  .dm-n1.dp-other{display:none}
+  .dm-n2{gap:8px;padding:8px 16px;margin:0 -16px;border-bottom:1px solid var(--border)}
+  .dm-n2 a{display:inline-flex;align-items:center;min-height:34px;padding:0 13px;border:1px solid var(--border);border-radius:999px;font-size:13px;color:var(--text)}
+  .dm-n2 a[aria-current]{background:var(--text);border-color:var(--text);color:var(--ground);font-weight:600}
+  body{padding-bottom:calc(60px + env(safe-area-inset-bottom))}
+  .dp-tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));position:fixed;left:0;right:0;bottom:0;z-index:45;padding:0 4px env(safe-area-inset-bottom);background:var(--ground);border-top:1px solid var(--text)}
+  .dp-tabs a,.dp-tabs button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;height:58px;padding:0;border:0;background:none;color:var(--muted);font:600 10.5px/1 var(--font);text-decoration:none;cursor:pointer;-webkit-tap-highlight-color:transparent;position:relative}
+  .dp-tabs svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .dp-tabs [aria-current],.dp-tabs .on{color:var(--accent)}
+  .dp-tabs [aria-current] svg,.dp-tabs .on svg{stroke-width:2.2}
+  .dp-tabs .dp-ring{position:absolute;left:12%;right:12%;top:0;height:2px;background:var(--accent);transform-origin:0 50%;transform:scaleX(var(--p,0))}
+  .dp-sheet{display:block;position:fixed;inset:0;z-index:60;visibility:hidden}
+  .dp-sheet.on{visibility:visible}
+  .dp-scrim{position:absolute;inset:0;background:rgba(0,0,0,.4);opacity:0;transition:opacity .25s}
+  .dp-sheet.on .dp-scrim{opacity:1}
+  .dp-panel{position:absolute;left:0;right:0;bottom:0;max-height:80vh;overflow-y:auto;background:var(--ground);border-top:3px double var(--text);border-radius:14px 14px 0 0;padding:6px 16px calc(16px + env(safe-area-inset-bottom));transform:translateY(100%);transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+  .dp-sheet.on .dp-panel{transform:none}
+  .dp-grab{width:40px;height:5px;margin:2px auto 8px;border-radius:3px;background:var(--border)}
+  .dp-h{margin:14px 0 4px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .dp-list a{display:flex;justify-content:space-between;align-items:center;min-height:50px;border-bottom:1px solid var(--border);color:var(--text);text-decoration:none;font:500 17px/1.25 var(--serif)}
+  .dp-list a::after{content:"\\203A";color:var(--muted);font:400 22px var(--font)}
+  .dp-list a[aria-current]{font-weight:700}
+  .dp-seg{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--text);margin-top:8px}
+  .dp-seg button{min-height:42px;border:0;background:none;color:var(--text);font:600 12px var(--font);letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+  .dp-seg button + button{border-left:1px solid var(--text)}
+  .dp-seg button[aria-pressed="true"]{background:var(--text);color:var(--ground)}
+}
+@media (max-width:640px) and (prefers-reduced-motion:reduce){.dp-panel,.dp-scrim,.dm-top{transition:none}}
+@media print{.dp-tabs,.dp-sheet,.dp-ib{display:none!important}}`;
   function mount(path, NAMES, GROUP) {
     if (document.querySelector('.dmast')) return;
     const t = new URLSearchParams(location.search).get('t'), egxStock = !!(t && GROUP && GROUP.egx.includes(t));
@@ -69,7 +121,7 @@
     const st = document.createElement('style'); st.textContent = CSS; document.head.appendChild(st);
     const dark = document.documentElement.getAttribute('data-theme') === 'dark';
     // Runs (how the daily runs went) is about the site, not the markets: it sits apart, at the right of the row
-    const top = TOP.map((x) => x ? `<a href="${x[2]}"${x[0] === w.top ? ' aria-current="page"' : ''}${x[0] === 'runs' ? ' class="dm-runs"' : ''}>${x[1]}</a>` : '<span class="dm-sep" aria-hidden="true"></span>').join('');
+    const top = TOP.map((x) => x ? `<a data-k="${x[0]}" href="${x[2]}"${x[0] === w.top ? ' aria-current="page"' : ''}${x[0] === 'runs' ? ' class="dm-runs"' : ''}>${x[1]}</a>` : '<span class="dm-sep" aria-hidden="true"></span>').join('');
     const sub = w.top && SUB[w.top] ? `<nav class="dm-n2" aria-label="${w.top === 'egypt' ? 'Egypt' : 'United States'}">${SUB[w.top].map(([n, h]) => `<a href="${h}"${h === w.sub ? ' aria-current="page"' : ''}>${n}</a>`).join('')}</nav>` : '';
     const hd = document.createElement('header'); hd.className = 'dmast';
     hd.innerHTML = `<div class="dm-phone">${SEARCH}<a href="/">Newsletter →</a></div>
@@ -104,6 +156,84 @@
     listen(hd);
     // the current tab stays in view on a phone
     hd.querySelectorAll('[aria-current]').forEach((a) => { const n = a.parentElement; n.scrollLeft = Math.max(0, a.offsetLeft - 16); });
+    phone(hd, w);
+  }
+  // the phone layout's parts: search and light/dark as icons in the name row, a tab bar (the market's dashboard, its
+  // stocks, the views, the day read aloud, and More), a More sheet, and the header that tucks its name row away once
+  // you scroll. CSS above; nothing shows wider than 640px.
+  function phone(hd, w) {
+    const ico = (d) => `<svg viewBox="0 0 24 24" aria-hidden="true">${d}</svg>`;
+    const I = {
+      find: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',
+      moon: '<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/>',
+      today: '<rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="5"/><rect x="13" y="10" width="8" height="11"/><rect x="3" y="13" width="8" height="8"/>',
+      stocks: '<path d="M4 17l5-5 4 3 7-8"/><path d="M15 7h5v5"/>',
+      views: '<path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+      listen: '<path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/>',
+      pause: '<path d="M8 5v14M16 5v14"/>',
+      more: '<path d="M4 6h16M4 12h16M4 18h16"/>',
+    };
+    const topRow = hd.querySelector('.dm-top');
+    const find = document.createElement('button'); find.type = 'button'; find.className = 'dp-ib'; find.setAttribute('aria-label', 'Find a stock'); find.innerHTML = ico(I.find);
+    const moon = document.createElement('button'); moon.type = 'button'; moon.className = 'dp-ib'; moon.setAttribute('aria-label', 'Light or dark'); moon.innerHTML = ico(I.moon);
+    const tools = topRow.querySelector('.dm-tools'); topRow.insertBefore(find, tools); topRow.insertBefore(moon, tools);
+    find.addEventListener('click', () => { const on = hd.classList.toggle('dp-find'); if (on) { const i = hd.querySelector('.dm-phone input'); if (i) i.focus(); } });
+    moon.addEventListener('click', () => hd.querySelector('.dm-theme').click());
+    // a page outside the three markets (Views, The week, Runs) has no market switch: its name says where you are
+    if (!['egypt', 'us', 'global'].includes(w.top)) hd.querySelector('.dm-n1').classList.add('dp-other');
+    const mk = w.top === 'us' ? 'us' : w.top === 'global' ? 'global' : 'egypt';
+    const dash = { egypt: '/desk/egypt/', us: '/desk/usa/', global: '/desk/global/' }[mk];
+    const stocks = mk === 'us' ? '/desk/stocks/us/' : '/desk/stocks/egypt/';
+    const p = location.pathname;
+    const tabs = document.createElement('nav'); tabs.className = 'dp-tabs'; tabs.setAttribute('aria-label', 'Desk');
+    tabs.innerHTML = `<a href="${dash}"${p === dash ? ' aria-current="page"' : ''}>${ico(I.today)}Today</a>`
+      + `<a href="${stocks}"${/^\/desk\/(stocks|stock)\//.test(p) ? ' aria-current="page"' : ''}>${ico(I.stocks)}Stocks</a>`
+      + `<a href="/desk/views/"${p === '/desk/views/' ? ' aria-current="page"' : ''}>${ico(I.views)}Views</a>`
+      + `<button type="button" class="dp-listen" aria-label="Listen to the day">${ico(I.listen)}<span>Listen</span><i class="dp-ring"></i></button>`
+      + `<button type="button" class="dp-more">${ico(I.more)}More</button>`;
+    document.body.appendChild(tabs);
+    // Listen plays the desk's audio through the header's own player (made by listen() once the day's file is found)
+    const lt = tabs.querySelector('.dp-listen');
+    lt.addEventListener('click', () => {
+      const b = hd.querySelector('.dm-listen');
+      if (!b) { lt.querySelector('span').textContent = 'No audio'; setTimeout(() => { lt.querySelector('span').textContent = 'Listen'; }, 1800); return; }
+      b.click();
+    });
+    new MutationObserver(() => {
+      const n1 = hd.querySelector('.dm-n1'), playing = n1.classList.contains('playing'), on = !!hd.querySelector('.dm-listen.on');
+      lt.classList.toggle('on', playing);
+      lt.firstElementChild.innerHTML = on ? I.pause : I.listen;
+      lt.querySelector('span').textContent = on ? 'Pause' : playing ? 'Resume' : 'Listen';
+      const i = n1.querySelector('.dm-pbar i'); if (i) lt.querySelector('.dp-ring').style.setProperty('--p', (parseFloat(i.style.width) || 0) / 100);
+    }).observe(hd.querySelector('.dm-n1'), { subtree: true, attributes: true, childList: true, characterData: true });
+    // More: every page of the desk, light or dark, and the newsletter
+    const sheet = document.createElement('div'); sheet.className = 'dp-sheet';
+    const link = (h, n) => `<a href="${h}"${(p + location.search) === h || p === h ? ' aria-current="page"' : ''}>${n}</a>`;
+    const egx = SUB.egypt.map(([n, h]) => link(h, n === 'Dashboard' ? 'Egypt dashboard' : n === 'Stocks' ? 'EGX stocks' : n)).join('');
+    const us = SUB.us.map(([n, h]) => link(h, n === 'Dashboard' ? 'United States dashboard' : n === 'Stocks' ? 'Wall Street stocks' : n === 'Fair value' ? 'Wall Street fair value' : n)).join('');
+    sheet.innerHTML = `<div class="dp-scrim"></div><div class="dp-panel" role="dialog" aria-modal="true" aria-label="More"><div class="dp-grab"></div>`
+      + `<p class="dp-h">Egypt</p><div class="dp-list">${egx}</div>`
+      + `<p class="dp-h">United States</p><div class="dp-list">${us}</div>`
+      + `<p class="dp-h">The desk</p><div class="dp-list">${link('/desk/global/', 'Global')}${link('/desk/views/', 'Views')}${link('/desk/week/', 'The week')}${link('/desk/runs/', 'Runs')}<a href="/">Daily Newsletter</a></div>`
+      + `<p class="dp-h">Look</p><div class="dp-seg"><button type="button" data-d="0">Light</button><button type="button" data-d="1">Dark</button></div></div>`;
+    document.body.appendChild(sheet);
+    const segSync = () => { const d = document.documentElement.getAttribute('data-theme') === 'dark'; sheet.querySelectorAll('.dp-seg button').forEach((b) => b.setAttribute('aria-pressed', String((b.dataset.d === '1') === d))); };
+    sheet.querySelector('.dp-seg').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; if ((b.dataset.d === '1') !== (document.documentElement.getAttribute('data-theme') === 'dark')) hd.querySelector('.dm-theme').click(); segSync(); });
+    const open = (on) => { sheet.classList.toggle('on', on); document.body.style.overflow = on ? 'hidden' : ''; if (on) segSync(); };
+    tabs.querySelector('.dp-more').addEventListener('click', () => open(true));
+    sheet.querySelector('.dp-scrim').addEventListener('click', () => open(false));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') open(false); });
+    const pnl = sheet.querySelector('.dp-panel'); let y0 = null, dy = 0;
+    pnl.addEventListener('touchstart', (e) => { if (pnl.scrollTop > 0) return; y0 = e.touches[0].clientY; dy = 0; }, { passive: true });
+    pnl.addEventListener('touchmove', (e) => { if (y0 === null) return; dy = Math.max(0, e.touches[0].clientY - y0); if (dy > 4) { pnl.style.transition = 'none'; pnl.style.transform = `translateY(${dy}px)`; } }, { passive: true });
+    pnl.addEventListener('touchend', () => { if (y0 === null) return; pnl.style.transition = ''; pnl.style.transform = ''; if (dy > 90) open(false); y0 = null; });
+    // the name row scrolls away with the page and the market switch and the page chips stay at the top: the header
+    // sticks that far above the screen's top edge (all of it shows while the search field is open)
+    const usTab = hd.querySelector('.dm-n1 a[data-k="us"]'); if (usTab) usTab.innerHTML = '<span class="dp-full">United States</span><span class="dp-short">US</span>' + usTab.innerHTML.replace('United States', '');
+    const fit = () => { hd.style.top = (!matchMedia('(max-width:640px)').matches || hd.classList.contains('dp-find')) ? '' : -(topRow.offsetHeight + (parseFloat(getComputedStyle(hd).paddingTop) || 0)) + 'px'; };
+    fit(); addEventListener('resize', fit); find.addEventListener('click', fit);
+    let tk = false;
+    addEventListener('scroll', () => { if (tk) return; tk = true; requestAnimationFrame(() => { tk = false; hd.classList.toggle('dp-stuck', scrollY > topRow.offsetHeight); }); }, { passive: true });
   }
   // pages change without a blank reload: the browser loads a desk page in the background as soon as the pointer rests on
   // its link (Chrome and Edge, through speculation rules), and desk.css and dash.css cross-fade one page into the next
