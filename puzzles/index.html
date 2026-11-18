@@ -75,6 +75,19 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
 .pad button:hover{background:var(--ink);color:var(--paper)}
 .pad button[data-d="0"]{grid-column:span 3} @media (max-width:860px){ .pad button[data-d="0"]{grid-column:auto} }
 .rules{font-size:15.5px;line-height:1.5}
+/* solved: a green wave across the grid, then a card */
+.cw-c.won,.ks-c.won{animation:won .7s var(--w,0ms) both}
+.cw-c.won{background:#cfe6d3} .ks-c.won{background:#cfe6d3}
+@keyframes won{0%{transform:scale(1);background:var(--cell)}45%{transform:scale(1.14);background:#7fc493}100%{transform:scale(1);background:#cfe6d3}}
+.won-card{position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(20,17,13,.45);animation:fade .25s both}
+.won-in{width:min(360px,100%);padding:26px 24px 22px;background:var(--paper);border:3px double var(--ink);text-align:center;box-shadow:0 18px 50px rgba(0,0,0,.3);animation:pop .45s cubic-bezier(.2,1.4,.4,1) both}
+.won-k{margin:0;font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
+.won-in h3{margin:6px 0 2px;font:700 54px/1 "UnifrakturCook",serif;color:var(--good)}
+.won-t{margin:4px 0 0;font:italic 18px var(--serif)} .won-t b{font:700 26px var(--sans);font-style:normal;font-variant-numeric:tabular-nums;color:var(--ink)}
+.won-s{margin:10px 0 16px;font:15px/1.4 var(--serif);color:var(--ink2)}
+.won-in button{padding:9px 22px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);font:600 12px var(--sans);letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+@keyframes fade{from{opacity:0}} @keyframes pop{from{opacity:0;transform:scale(.85) translateY(10px)}}
+@media (prefers-reduced-motion:reduce){.cw-c.won,.ks-c.won,.won-card,.won-in{animation:none}}
 .rules p{margin:0 0 10px}
 @media (max-width:860px){
   .sheet{margin:0;padding:14px 12px 30px}
@@ -83,7 +96,7 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
   .cw-l ol{max-height:none}
   .pad{grid-template-columns:repeat(5,1fr)}
   /* the clue being solved stays in view above the phone's keyboard */
-  .cw-clue{position:fixed;left:0;right:0;bottom:0;z-index:5;margin:0;padding:10px 14px;border-top:1px solid var(--ink)}
+  .cw-clue{position:fixed;left:0;right:0;bottom:0;z-index:5;width:auto;margin:0;padding:10px 14px;border-top:1px solid var(--ink);transition:transform .12s}
   .sheet{padding-bottom:80px}
 }
 </style>
@@ -99,7 +112,7 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
 
   <section id="cw">
     <h2>The Crossword</h2><p class="meta" id="cw-meta"></p>
-    <div class="bar"><button type="button" id="cw-check">Check</button><button type="button" id="cw-word">Reveal word</button><button type="button" id="cw-all">Reveal all</button><button type="button" id="cw-clear">Clear</button><span class="timer" id="cw-time">0:00</span></div>
+    <div class="bar"><button type="button" id="cw-check">Check</button><button type="button" id="cw-clear">Clear</button><span class="timer" id="cw-time">0:00</span></div>
     <div class="cw"><div class="mid"><p class="cw-clue" id="cw-clue"></p><div class="cw-grid" id="cw-grid"></div><p class="msg" id="cw-msg"></p></div>
       <div class="cw-l cw-across"><h3>Across</h3><ol id="cw-a"></ol></div>
       <div class="cw-l cw-down"><h3>Down</h3><ol id="cw-d"></ol></div></div>
@@ -157,6 +170,35 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
     killer(P);
   }
 
+  // a solved puzzle: the squares light up green one diagonal after another, then a card says so with the time
+  function solved(gridEl, what, time){
+    var sq = [].filter.call(gridEl.children, function(el){ return /cw-c|ks-c/.test(el.className) && !/blk/.test(el.className); }),
+        n = Math.round(Math.sqrt(gridEl.querySelectorAll('.cw-c,.ks-c').length)) || 9;
+    sq.forEach(function(el){ var i = [].indexOf.call(gridEl.children, el), r = Math.floor(i / n), c = i % n; el.style.setProperty('--w', ((r + c) * 45) + 'ms'); el.classList.remove('won'); void el.offsetWidth; el.classList.add('won'); });
+    var old = document.querySelector('.won-card'); if(old) old.remove();
+    var card = document.createElement('div'); card.className = 'won-card'; card.setAttribute('role', 'dialog'); card.setAttribute('aria-label', 'Solved');
+    card.innerHTML = '<div class="won-in"><p class="won-k">' + (window.PNO ? window.PNO + ' · ' : '') + 'The ' + what + '</p><h3>Solved</h3><p class="won-t">in <b></b></p><p class="won-s">Every square right. Come back tomorrow for the next one.</p><button type="button">Close</button></div>';
+    card.querySelector('b').textContent = time;
+    card.addEventListener('click', function(e){ if(e.target === card || e.target.tagName === 'BUTTON') card.remove(); });
+    setTimeout(function(){ document.body.appendChild(card); card.querySelector('button').focus(); }, Math.min(1400, sq.length * 12 + 500));
+  }
+
+  // on a phone the clue being solved sits at the bottom of the screen; when the keyboard opens it covers the bottom of
+  // the page (iPhones do not shrink the page for it), so the clue is lifted to sit just above the keyboard, and the
+  // square being filled is kept in view above the clue
+  (function(){
+    var vv = window.visualViewport, clue = $('cw-clue'); if(!vv) return;
+    function place(){
+      if(getComputedStyle(clue).position !== 'fixed'){ clue.style.transform = ''; return; }
+      var hid = Math.max(0, innerHeight - vv.height - vv.offsetTop);
+      clue.style.transform = hid > 40 ? 'translateY(' + (-hid) + 'px)' : '';
+      var sel = document.querySelector('.cw-c.sel');
+      if(hid > 40 && sel && !$('cw').hidden){ var r = sel.getBoundingClientRect(), top = vv.offsetTop + 8, bottom = vv.offsetTop + vv.height - clue.offsetHeight - 8;
+        if(r.bottom > bottom || r.top < top) window.scrollBy(0, r.bottom > bottom ? r.bottom - bottom : r.top - top); }
+    }
+    vv.addEventListener('resize', place); vv.addEventListener('scroll', place); document.addEventListener('click', function(){ setTimeout(place, 350); });
+  })();
+
   // ---------------- crossword ----------------
   function crossword(P){
     var C = P.crossword, n = C.size, key = 'puz:cw:' + P.date, saved = store.get(key) || {};
@@ -177,7 +219,7 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
     function cellsOf(cl){ var out = []; for(var i = 0; i < cl.len; i++) out.push(cl.d === 'A' ? cl.row + ',' + (cl.col + i) : (cl.row + i) + ',' + cl.col); return out; }
     function clueAt(k, d){ return clues.filter(function(cl){ return cl.d === d && cellsOf(cl).indexOf(k) >= 0; })[0]; }
     function setL(k, ch){ letters[k] = ch; var el = cells[k]; el.lastChild.nodeValue = ch; el.classList.remove('bad'); }
-    function save(){ store.set(key, {l: letters, s: shown}); }
+    function save(){ store.set(key, {l: letters, s: shown, won: saved.won ? 1 : 0}); }
     function lists(){
       ['A', 'D'].forEach(function(dd){ var ol = $(dd === 'A' ? 'cw-a' : 'cw-d'); ol.innerHTML = '';
         clues.filter(function(cl){ return cl.d === dd; }).forEach(function(cl){ var li = document.createElement('li'); li.innerHTML = '<b>' + cl.n + '</b><span></span>'; li.lastChild.textContent = cl.clue || '(clue to come)'; li.dataset.id = dd + cl.n;
@@ -204,7 +246,7 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
     function done(){ return Object.keys(cells).every(function(k){ return letters[k] === answerAt(k); }); }
     function answerAt(k){ var p = k.split(','); return C.grid[+p[0]][+p[1]]; }
     var clock = timer($('cw-time'), key + ':t', saved.won);
-    function finished(){ if(done() && !saved.won){ saved.won = true; clock.stop(); store.set(key + ':won', 1); $('cw-msg').textContent = 'Solved in ' + $('cw-time').textContent + '. Well done.'; } }
+    function finished(){ if(done() && !saved.won){ saved.won = true; clock.stop(); store.set(key + ':won', 1); save(); $('cw-msg').textContent = 'Solved in ' + $('cw-time').textContent + '. Well done.'; hidden.blur(); solved(g, 'crossword', $('cw-time').textContent); } }
     function key_(e){
       if(!cur || $('cw').hidden) return;
       var k = e.key;
@@ -216,11 +258,9 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
     }
     document.addEventListener('keydown', key_);
     hidden.addEventListener('input', function(){ var v = hidden.value.slice(-1); hidden.value = ''; if(/[a-zA-Z]/.test(v)) key_({key: v, preventDefault: function(){}}); });
-    $('cw-check').addEventListener('click', function(){ var wrong = 0; Object.keys(cells).forEach(function(k){ if(letters[k] && letters[k] !== answerAt(k)){ cells[k].classList.add('bad'); wrong++; } });
+    $('cw-check').addEventListener('click', function(){ if(done()){ if(!saved.won) finished(); else solved(g, 'crossword', $('cw-time').textContent); return; } var wrong = 0; Object.keys(cells).forEach(function(k){ if(letters[k] && letters[k] !== answerAt(k)){ cells[k].classList.add('bad'); wrong++; } });
       $('cw-msg').textContent = wrong ? wrong + ' square' + (wrong > 1 ? 's are' : ' is') + ' wrong.' : 'Everything filled so far is right.'; });
-    $('cw-word').addEventListener('click', function(){ var cl = cur && clueAt(cur, dir); if(!cl) return; cellsOf(cl).forEach(function(k){ setL(k, answerAt(k)); shown[k] = 1; cells[k].classList.add('shown'); }); save(); paint(); finished(); });
-    $('cw-all').addEventListener('click', function(){ if(!confirm('Reveal the whole crossword?')) return; Object.keys(cells).forEach(function(k){ if(letters[k] !== answerAt(k)){ setL(k, answerAt(k)); shown[k] = 1; cells[k].classList.add('shown'); } }); save(); paint(); clock.stop(); });
-    $('cw-clear').addEventListener('click', function(){ if(!confirm('Clear the crossword?')) return; Object.keys(cells).forEach(function(k){ setL(k, ''); cells[k].classList.remove('shown'); }); shown = {}; save(); paint(); });
+    $('cw-clear').addEventListener('click', function(){ if(!confirm('Clear the crossword?')) return; Object.keys(cells).forEach(function(k){ setL(k, ''); cells[k].classList.remove('shown', 'won'); }); shown = {}; save(); paint(); });
     Object.keys(shown).forEach(function(k){ if(cells[k]) cells[k].classList.add('shown'); });
     lists(); document.querySelector('.cw').style.setProperty('--lh', (g.parentNode.offsetHeight - 30) + 'px');
     var first = clues.filter(function(x){ return x.d === 'A'; })[0]; select(first.row + ',' + first.col);
@@ -282,7 +322,7 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
     // a digit that clashes with one in its row, column, box or cage shows red at once
     function clashes(){ cells.forEach(function(el, i){ el.classList.toggle('bad', !!val[i] && peers(i).some(function(x){ return val[x] === val[i]; })); }); }
     var clock = timer($('ks-time'), key + ':t', saved.won);
-    function finished(){ for(var i = 0; i < 81; i++) if(val[i] !== +K.solution[i]) return; if(!saved.won){ saved.won = true; clock.stop(); store.set(key, {v: val, n: notes, s: shown, won: 1}); $('ks-msg').textContent = 'Solved in ' + $('ks-time').textContent + '. Well done.'; } }
+    function finished(){ for(var i = 0; i < 81; i++) if(val[i] !== +K.solution[i]) return; if(!saved.won){ saved.won = true; clock.stop(); store.set(key, {v: val, n: notes, s: shown, won: 1}); $('ks-msg').textContent = 'Solved in ' + $('ks-time').textContent + '. Well done.'; solved(grid, 'killer sudoku', $('ks-time').textContent); } }
     function put(d){ if(cur == null || shown[cur]) return;
       if(noting && d){ var ns = notes[cur] || []; var at = ns.indexOf(d); if(at >= 0) ns.splice(at, 1); else ns.push(d); notes[cur] = ns; }
       else { val[cur] = d || 0; if(d){ peers(cur).forEach(function(x){ if(notes[x]){ var a = notes[x].indexOf(d); if(a >= 0){ notes[x].splice(a, 1); draw(x); } } }); } }
@@ -298,10 +338,10 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
       else if(/^Arrow/.test(e.key)){ var r = Math.floor(cur / 9), c = cur % 9; if(e.key === 'ArrowUp') r = (r + 8) % 9; if(e.key === 'ArrowDown') r = (r + 1) % 9; if(e.key === 'ArrowLeft') c = (c + 8) % 9; if(e.key === 'ArrowRight') c = (c + 1) % 9; cur = r * 9 + c; paint(); e.preventDefault(); }
     });
     $('ks-notes').addEventListener('click', function(){ noting = !noting; this.setAttribute('aria-pressed', noting); });
-    $('ks-check').addEventListener('click', function(){ var wrong = 0; for(var i = 0; i < 81; i++) if(val[i] && val[i] !== +K.solution[i]){ cells[i].classList.add('bad'); wrong++; }
+    $('ks-check').addEventListener('click', function(){ var all = true; for(var q = 0; q < 81; q++) if(val[q] !== +K.solution[q]) all = false; if(all){ if(!saved.won) finished(); else solved(grid, 'killer sudoku', $('ks-time').textContent); return; } var wrong = 0; for(var i = 0; i < 81; i++) if(val[i] && val[i] !== +K.solution[i]){ cells[i].classList.add('bad'); wrong++; }
       $('ks-msg').textContent = wrong ? wrong + ' digit' + (wrong > 1 ? 's are' : ' is') + ' wrong.' : 'Everything entered so far is right.'; });
     $('ks-cell').addEventListener('click', function(){ if(cur == null) return; val[cur] = +K.solution[cur]; shown[cur] = 1; draw(cur); clashes(); paint(); save(); finished(); });
-    $('ks-clear').addEventListener('click', function(){ if(!confirm('Clear the sudoku?')) return; val = {}; notes = {}; shown = {}; for(var i = 0; i < 81; i++) draw(i); clashes(); paint(); save(); });
+    $('ks-clear').addEventListener('click', function(){ if(!confirm('Clear the sudoku?')) return; val = {}; notes = {}; shown = {}; for(var i = 0; i < 81; i++){ draw(i); cells[i].classList.remove('won'); } clashes(); paint(); save(); });
     clashes();
     if(saved.won) $('ks-msg').textContent = 'Solved. Come back tomorrow for the next one.';
   }

@@ -9,6 +9,7 @@ Usage (from the repo root):
   puzzles.py clues DATE FILE                add the clues: FILE is JSON {"ANSWER": "clue", ...}, one per answer
   puzzles.py check DATE                     fail if an answer has no clue or a puzzle is missing
   puzzles.py show DATE                      print both grids
+  puzzles.py index                          rewrite data/puzzles/index.json (make and clues do it themselves)
 
 Crossword (built like a newspaper's, after the NYT's rules): a symmetric grid (it looks the same turned upside down),
 every answer three letters or more, every letter in both an across and a down answer. 9 by 9 from Sunday to Friday,
@@ -489,6 +490,21 @@ def path(date):
     return os.path.join(OUT, date + ".json")
 
 
+def days():
+    return sorted(f[:-5] for f in os.listdir(OUT) if re.fullmatch(r"\d{4}-\d{2}-\d{2}\.json", f))
+
+
+def index():
+    """data/puzzles/index.json: every day with puzzles (date, number, crossword size, sudoku level), oldest first, for
+    the archive's puzzle lists; rewritten whenever a day's puzzles are made or clued"""
+    out = []
+    for d in days():
+        x = json.load(open(path(d)))
+        out.append({"date": d, "no": x.get("no"), "size": (x.get("crossword") or {}).get("size"), "level": (x.get("killer") or {}).get("level")})
+    json.dump({"days": out}, open(os.path.join(OUT, "index.json"), "w"), indent=1)
+    open(os.path.join(OUT, "index.json"), "a").write("\n")
+
+
 def make(date, news, avoid=(), new_killer=False):
     os.makedirs(OUT, exist_ok=True)
     t = time.time()
@@ -501,11 +517,12 @@ def make(date, news, avoid=(), new_killer=False):
             a["clue"] = have.get(a["answer"], "")
     # the day's number, shared by both puzzles: one more than the days with puzzles before this one (No. 1 was
     # November 12, 2026); kept when the day's puzzles are made again
-    earlier = [f for f in os.listdir(OUT) if f.endswith(".json") and f[:-5] < date]
+    earlier = [d for d in days() if d < date]
     no = old.get("no") or len(earlier) + 1
     data = {"date": date, "no": no, "crossword": cw, "killer": (not new_killer and old.get("killer")) or killer(date)}
     json.dump(data, open(path(date), "w"), ensure_ascii=False, indent=1)
     open(path(date), "a").write("\n")
+    index()
     show(date)
     need = [a["answer"] for k in ("across", "down") for a in cw["clues"][k] if not a["clue"]]
     print(f"\nMade in {time.time() - t:.1f}s. {len(need)} answers need clues"
@@ -521,6 +538,7 @@ def clues(date, file):
                 a["clue"] = given[a["answer"]]
     json.dump(data, open(path(date), "w"), ensure_ascii=False, indent=1)
     open(path(date), "a").write("\n")
+    index()
     return check(date)
 
 
@@ -577,6 +595,8 @@ def main(a):
         sys.exit(check(a[1]))
     if len(a) == 2 and a[0] == "show":
         return show(a[1])
+    if a == ["index"]:
+        return index()
     print(__doc__)
 
 

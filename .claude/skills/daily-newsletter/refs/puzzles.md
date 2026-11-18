@@ -15,4 +15,4 @@ front page. `puzzles.py` builds both; the run only writes the clues. Keep it che
    the answer away in its own words); one to three point at the day's news (`"It ran again on the Cairo-High Dam
    line this week"`). Every fact in a news clue must be in the edition. A clue may not contain its answer.
 4. `puzzles.py check YYYY-MM-DD` must pass (every answer clued, cages joined and summing right). Commit
-   `data/puzzles/YYYY-MM-DD.json` with the edition.
+   `data/puzzles/YYYY-MM-DD.json` and `data/puzzles/index.json` (the archive's list, rewritten by make and clues) with the edition.

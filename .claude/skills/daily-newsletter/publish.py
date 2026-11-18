@@ -37,7 +37,7 @@ def files_for(kind, date):
     if kind == "desk":
         return ["desk/", f"data/research/{date}.json", "data/markets.json", "data/markets-recent.json"]
     f = ["editions/", "data/markets.json", "data/markets-recent.json", f"data/research/{date}.json", "data/topics.json",
-         f"data/puzzles/{date}.json", "desk/intraday.json", f"{NL}/pronounce.json"]
+         f"data/puzzles/{date}.json", "data/puzzles/index.json", "desk/intraday.json", f"{NL}/pronounce.json"]
     if kind == "newsletter":
         f.append(f"data/weeks/{date}.json")
     return [x for x in f if os.path.exists(os.path.join(ROOT, x))]

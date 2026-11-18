@@ -17,7 +17,9 @@ repo; every push to `main` redeploys it. There is no build step.
 - On a phone (640px and narrower) both have their own layout. The newsletter (`phone.css`, `phone.js`): a compact
   masthead, the market tape and Quick Hits as strips you swipe, the sections as chips, a bar that follows you down the
   page with the section you are in and a reading-progress line, a tab bar (Today, Sections, Listen, Archive, Desk),
-  sheets for the sections, the look and the archive, a swipe sideways to the older or newer edition, a Share button,
+  sheets for the sections, the look and the archive (its Puzzles button lists every day's crossword and killer sudoku,
+  oldest on the left, newest on the right), a swipe sideways to the older or newer edition (older editions lie to the
+  left: swipe left for the newer one), a Share button,
   and a note when a newer edition comes out while the page is open. The desk (the phone part of `desk/nav.js`): a
   header that keeps the Egypt / US / Global switch and the page chips at the top, search and light/dark as icons, and
   a tab bar (Today, Stocks, Views, Listen, More). Larger screens are unchanged.

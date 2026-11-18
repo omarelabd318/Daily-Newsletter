@@ -105,13 +105,37 @@
       pair.innerHTML = ($('prev').innerHTML || '') + ($('next').innerHTML || '');
       b.appendChild(pair);
       var more = document.createElement('div'); more.className = 'ph-pair';
-      more.innerHTML = '<a href="#topics">Topics</a><a href="/puzzles/">Puzzles</a>';
+      more.innerHTML = '<a href="#topics">Topics</a><button type="button" class="ph-btn" aria-expanded="false">Puzzles</button>';
       b.appendChild(more);
+      var pz = document.createElement('div'); pz.className = 'ph-puz'; pz.hidden = true; b.appendChild(pz);
+      more.querySelector('button').addEventListener('click', function(){ var on = pz.hidden; pz.hidden = !on; this.setAttribute('aria-expanded', on); if(on) puzzleLists(pz); });
       var arch = $('archive'); if(!arch) return;
       if(!archHome){ archHome = document.createComment('archive'); arch.parentNode.insertBefore(archHome, arch); }
       arch.classList.add('open'); b.appendChild(arch);
       if(focusSearch) setTimeout(function(){ $('q').focus(); }, 320);
     });
+  }
+  // the archive's puzzles: a row for each game, every day's puzzle from the oldest on the left to the newest on the
+  // right (scrolled to the newest), with the ones solved on this device ticked; from data/puzzles/index.json
+  var LEVEL = ['Easy', 'Easy', 'Medium', 'Medium', 'Hard', 'Hard', 'Hardest'];
+  function puzzleLists(box){
+    if(box.dataset.done) return; box.dataset.done = '1';
+    box.innerHTML = '<p class="ph-lbl">Loading the puzzles</p>';
+    fetch('/data/puzzles/index.json', {cache:'no-cache'}).then(function(r){ if(!r.ok) throw 0; return r.json(); }).then(function(ix){
+      var days = (ix.days || []).slice().sort(function(a, b){ return a.date < b.date ? -1 : 1; });
+      function got(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e){ return null; } }
+      function short(d){ return new Date(d + 'T12:00:00').toLocaleDateString('en-US', {weekday:'short', month:'short', day:'numeric'}); }
+      function row(name, tab, sub, won){
+        return '<p class="ph-lbl">' + name + '</p><div class="ph-puz-row">' + days.map(function(d){
+          var w = won(d.date);
+          return '<a href="/puzzles/?d=' + d.date + '#' + tab + '"' + (w ? ' class="won"' : '') + '><b>' + (d.no ? 'No. ' + d.no : '') + '</b><span>' + short(d.date) + '</span><small>' + (w ? '✓ Solved' : sub(d)) + '</small></a>';
+        }).join('') + '</div>';
+      }
+      box.innerHTML = days.length ? row('Crossword', 'cw', function(d){ return d.size ? d.size + ' by ' + d.size : ''; }, function(dt){ var x = got('puz:cw:' + dt); return (x && x.won) || got('puz:cw:' + dt + ':won'); })
+        + row('Killer sudoku', 'ks', function(d){ return d.level != null ? LEVEL[d.level] : ''; }, function(dt){ var x = got('puz:ks:' + dt); return x && x.won; })
+        : '<p class="ph-lbl">No puzzles yet</p>';
+      [].forEach.call(box.querySelectorAll('.ph-puz-row'), function(r){ r.scrollLeft = r.scrollWidth; });
+    }).catch(function(){ box.innerHTML = '<p class="ph-lbl"><a href="/puzzles/">Open today\'s puzzles</a></p>'; box.dataset.done = ''; });
   }
   window.addEventListener('hashchange', closeSheet);
 
@@ -198,11 +222,13 @@
       if(!ok) return; ok = false;
       var t = e.changedTouches[0], dx = t.clientX - x0, dy = t.clientY - y0;
       if(Date.now() - t0 > 700 || Math.abs(dx) < 90 || Math.abs(dy) > Math.abs(dx) * 0.45) return;
-      var a = (dx < 0 ? $('prev') : $('next')).querySelector('a');
-      if(!a){ say(dx < 0 ? 'This is the oldest edition' : 'This is the newest edition'); return; }
+      // older editions lie to the left and newer ones to the right (as the Older and Newer buttons): swiping left
+      // brings in the newer edition, swiping right the older one
+      var a = (dx < 0 ? $('next') : $('prev')).querySelector('a');
+      if(!a){ say(dx < 0 ? 'This is the newest edition' : 'This is the oldest edition'); return; }
       var c = $('content'); c.classList.add('ph-swiping'); c.style.transform = 'translateX('+(dx < 0 ? -40 : 40)+'px)'; c.style.opacity = '.3';
       setTimeout(function(){ location.hash = a.getAttribute('href').slice(1); window.scrollTo(0, 0); c.style.transform = ''; c.style.opacity = ''; setTimeout(function(){ c.classList.remove('ph-swiping'); }, 250); }, 160);
-      say(dx < 0 ? '← Older edition' : 'Newer edition →');
+      say(dx < 0 ? 'Newer edition →' : '← Older edition');
     }, {passive:true});
   })();
 

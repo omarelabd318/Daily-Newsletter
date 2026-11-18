@@ -54,14 +54,17 @@ window.Desk = (function () {
       el.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); onPick(i);
     }));
   }
-  // tabs for a long page: each <section data-tab="key"> shows under its tab; a tab whose sections are all hidden
-  // (no data that day) is left out. The tab is kept in the address (#movers), and a link to a section inside
-  // another tab (#c-heat) opens that tab first. Called last, so every chart is drawn at full width before hiding.
+  // tabs for a long page: each <section data-tab="key"> shows under its tab. The page calls this twice: first before
+  // its data loads, so the tab bar is there at once (every tab offered), and again once everything is drawn, when a tab
+  // whose sections are all hidden (no data that day) is dropped. Charts in a hidden tab redraw at full width when shown.
+  // The tab is kept in the address (#movers), and a link to a section inside another tab (#c-heat) opens that tab first.
   function pageTabs(defs) {
     const pages = document.querySelector('.pages'); if (!pages) return;
-    const secs = [...pages.querySelectorAll('[data-tab]')], bar = document.createElement('div');
-    bar.className = 'c12 ptabs'; bar.setAttribute('role', 'tablist'); pages.prepend(bar);
-    const live = defs.filter(([k]) => secs.some((x) => x.dataset.tab === k && !x.hasAttribute('hidden')));
+    const secs = [...pages.querySelectorAll('[data-tab]')];
+    let bar = pages.querySelector(':scope > .ptabs');
+    const first = !bar;
+    if (first) { bar = document.createElement('div'); bar.className = 'c12 ptabs'; bar.setAttribute('role', 'tablist'); pages.prepend(bar); }
+    const live = first ? defs : defs.filter(([k]) => secs.some((x) => x.dataset.tab === k && !x.hasAttribute('hidden')));
     bar.innerHTML = live.map(([k, n]) => `<button type="button" role="tab" data-k="${k}">${esc(n)}</button>`).join('');
     const show = (k, keepHash) => {
       pages.dataset.tab = k; secs.forEach((x) => x.classList.toggle('tab-off', x.dataset.tab !== k));
@@ -74,11 +77,12 @@ window.Desk = (function () {
       const h = decodeURIComponent(location.hash.slice(1)); if (!h) return false;
       if (live.some(([k]) => k === h)) { show(h, true); return true; }
       const el = document.getElementById(h), sec = el && el.closest('[data-tab]');
-      if (sec) { show(sec.dataset.tab, true); requestAnimationFrame(() => el.scrollIntoView({ block: 'start' })); return true; }
+      if (sec && live.some(([k]) => k === sec.dataset.tab)) { show(sec.dataset.tab, true); requestAnimationFrame(() => el.scrollIntoView({ block: 'start' })); return true; }
       return false;
     };
-    if (!fromHash() && live.length) show(live[0][0], true);
-    window.addEventListener('hashchange', fromHash);
+    const cur = pages.dataset.tab;   // the second call keeps the tab the reader is on (a click also puts it in the address)
+    if (!fromHash() && live.length) show(live.some(([k]) => k === cur) ? cur : live[0][0], true);
+    if (first) window.addEventListener('hashchange', fromHash);
   }
   // a pound series in dollars: each value divided by that day's dollar rate (strips out the pound's moves)
   function usd(s) {
@@ -456,7 +460,10 @@ window.Desk = (function () {
   }
   // tickers by market value, largest first (those without one last)
   const byCap = (tickers, S) => { const v = (t) => (((S || {})[t] || {}).cap || {}).value ?? -1; return [...tickers].sort((a, b) => v(b) - v(a)); };
-  const kv = (rows) => '<div class="kv">' + rows.map(([k, v]) => `<span class="k">${esc(k)}</span><span class="v num">${v}</span>`).join('') + '</div>';
+  // a key and its value side by side; a long value (a sentence rather than a figure) goes on its own line under its key,
+  // so neither column is squeezed to a word per line on a phone
+  const kv = (rows) => '<div class="kv">' + rows.map(([k, v]) => { const w = String(v).replace(/<[^>]*>/g, '').length > 24 ? ' kw' : '';
+    return `<span class="k${w}">${esc(k)}</span><span class="v num${w}">${v}</span>`; }).join('') + '</div>';
   const rangeBar = (lo, hi, v, f = (x) => num(x)) => lo == null ? '' : `<div class="range"><i style="left:calc(${((v - lo) / (hi - lo || 1) * 100).toFixed(1)}% - 1px)"></i></div><div class="range-l"><span>52-week low ${f(lo)}</span><span>high ${f(hi)}</span></div>`;
 
   // bullish and bearish: sectors with a reason, stocks with a projected range, each with a confidence level

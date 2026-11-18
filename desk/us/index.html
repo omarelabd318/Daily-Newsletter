@@ -91,6 +91,8 @@
 <script src="/desk/heat.js"></script>
 <script>
 (async () => {
+  const TABS = [['today', 'Today'], ['movers', 'Movers and results'], ['stocks', 'Stocks and views']];
+  Desk.pageTabs(TABS);   // the tab bar at once, before the data loads
   const M = Desk, D = await M.init('/desk/us/'); if (!D) return;
   const P = D.pages.us;
   M.$('title').textContent = 'Wall Street'; document.title = 'Wall Street · Markets Desk';
@@ -157,7 +159,7 @@
   { const HT = await M.heatFor('us', M.asOfFor('us')); if (HT && window.DeskHeat) window.DeskHeat(M, HT, 'd1'); }
   // with nothing after the bell, the movers take the full width (gainers and losers side by side)
   { const mv = M.$('movers').closest('section'); if (M.$('c-bell').hidden && mv) mv.className = mv.className.replace('c6', 'c12'); }
-  M.pageTabs([['today', 'Today'], ['movers', 'Movers and results'], ['stocks', 'Stocks and views']]);
+  M.pageTabs(TABS);   // again, now that every section is drawn: tabs with nothing to show drop out
 })();
 </script>
 </body>

@@ -15,7 +15,7 @@
   .mast h1,:root[data-theme="paper"] .mast h1{font-size:36px!important;line-height:1.05}
   .mast .what,.top,#widthBtn{display:none!important}
   #themeBtn{position:absolute;top:max(4px,env(safe-area-inset-top));right:0;min-height:44px;padding:0 2px}
-  .has-front #edition{display:none!important}
+  .has-front #edition,.rcp[data-theme="paper"] #edition{display:none!important}
   :root[data-theme="paper"] .p-dateline{margin-top:10px;font-size:9.5px;letter-spacing:.1em}
 
   /* the market tape: one line you swipe sideways, each figure in its own cell */
@@ -110,6 +110,17 @@
   .ph-pair{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0 4px}
   .ph-pair a,.ph-pair span,.ph-btn{display:flex;align-items:center;justify-content:center;min-height:46px;border:1px solid var(--ink);color:var(--ink);font:600 13px var(--sans);letter-spacing:.06em;text-transform:uppercase;text-decoration:none!important;background:none}
   .ph-pair span{border-color:var(--rule);color:var(--ink2)}
+  .ph-btn{width:100%;cursor:pointer} .ph-btn[aria-expanded="true"]{background:var(--ink);color:var(--ground)}
+  /* the archive's puzzles: a row per game, oldest on the left, newest on the right */
+  .ph-puz{margin:6px 0 14px}
+  .ph-puz-row{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;padding:2px 0 6px;scrollbar-width:none}
+  .ph-puz-row::-webkit-scrollbar{display:none}
+  .ph-puz-row a{flex:0 0 116px;scroll-snap-align:end;display:flex;flex-direction:column;gap:2px;padding:10px 10px 9px;border:1px solid var(--rule);color:var(--ink);text-decoration:none!important}
+  .ph-puz-row a b{font:600 11px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink2)}
+  .ph-puz-row a span{font:600 14px var(--sans);white-space:nowrap}
+  .ph-puz-row a small{font:400 13px var(--serif);color:var(--ink2)}
+  .ph-puz-row a:last-child{border-color:var(--ink)}
+  .ph-puz-row a.won small{color:#2e9e5b;font-weight:600}
   .ph-theme{display:grid;grid-template-columns:repeat(3,1fr);margin:14px 0 2px;border:1px solid var(--ink)}
   .ph-theme button{min-height:42px;border:0;border-left:1px solid var(--ink);background:none;color:var(--ink);font:600 12.5px var(--sans);letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
   .ph-theme button:first-child{border-left:0}

@@ -101,6 +101,8 @@
 <script src="/desk/heat.js"></script>
 <script>
 (async () => {
+  const TABS = [['today', 'Today'], ['movers', 'Movers and heatmap'], ['flows', 'Flows'], ['stocks', 'Stocks and views']];
+  Desk.pageTabs(TABS);   // the tab bar at once, before the data loads
   const M = Desk, D = await M.init('/desk/egx/'); if (!D) return;
   const P = D.pages.egx, X = D.egypt;
   M.$('title').textContent = 'EGX'; document.title = 'EGX · Markets Desk';
@@ -230,7 +232,7 @@
   M.calendar(M.$('calendar'), 'egx', await M.get('/desk/calendar.json'), ((await M.get('/desk/stocks.json')) || {}).stocks);
   M.outlook(M.$('outlook'), P.outlook, 'EGP');
   M.news(M.$('news'), P.news, true);
-  M.pageTabs([['today', 'Today'], ['movers', 'Movers and heatmap'], ['flows', 'Flows'], ['stocks', 'Stocks and views']]);
+  M.pageTabs(TABS);   // again, now that every section is drawn: tabs with nothing to show drop out
 })();
 </script>
 </body>
