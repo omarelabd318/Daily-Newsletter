@@ -236,8 +236,14 @@
   // their blocks is read, the matching item on the front page is highlighted instead
   function onPage(el){
     var s = el && el.closest && el.closest('.in-front');
-    if(!s) return el;
     var front = document.getElementById('front');
+    // the recap's The Week in Brief is shown on its front page in paper mode: the matching numbered story there
+    var rb = el && el.closest && el.closest('.rf-hide');
+    if(!s && rb && rb.offsetParent === null){
+      var bl = [].slice.call(rb.querySelectorAll('li')), j = bl.indexOf(el.closest('li'));
+      return document.querySelectorAll('#front .rf-brief li')[j] || front;
+    }
+    if(!s) return el;
     if(s.id === 'quick-hits'){
       var lis = [].slice.call(s.querySelectorAll('li')), i = lis.indexOf(el.closest('li'));
       return document.querySelectorAll('#front .f-band > div')[i] || front;

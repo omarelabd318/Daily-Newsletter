@@ -376,26 +376,26 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 .front{padding:26px 0 8px;border-bottom:1px solid var(--rule)}
 .front .frame,.has-front .mast-frame{max-width:1240px}
 .in-front{display:none}
-.has-front .edition .sum{display:none}
-.has-front .mast{border-bottom:0;padding-bottom:18px}
+:is(.has-front,.rcp[data-theme="paper"]) .edition .sum{display:none}
+:is(.has-front,.rcp[data-theme="paper"]) .mast{border-bottom:0;padding-bottom:18px}
 .f-strip{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));margin-top:18px;text-align:left;border-top:3px double var(--ink);border-bottom:1px solid var(--ink)}
 .f-strip:empty{display:none}
 .f-dek{margin:0 0 14px;font-size:20px;line-height:1.42}
 @media (min-width:1041px){
   /* the masthead as a newspaper's: the date and the links on one line above the name, the closes under it, then the
      sections with Listen at the right */
-  .nm .mast{padding:46px 0 0;text-align:center}
-  .nm .top{position:absolute;top:10px;right:0;margin:0;padding:0;border:0;gap:22px;align-items:center}
-  .nm .top .grp{gap:22px;align-items:center}
-  .nm .top{flex-wrap:nowrap;width:max-content} .nm .top .grp:nth-child(2){display:none}
-  .nm .top :is(a,button,.off){position:static!important;top:auto;left:auto;right:auto;display:inline-block;min-height:0;padding:4px 0;background:none;border:0;font:600 11px/1.4 var(--sans)!important;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)!important;cursor:pointer;white-space:nowrap}
-  .nm .top :is(a,button):hover,.nm .top [aria-current],.nm .top [aria-expanded="true"]{color:var(--accent)!important;background:none}
-  .nm .top .lg,.nm .top .lg2{display:none}
-  .has-front .edition{display:block;margin:0;position:static}
-  .has-front .edition .date{position:absolute;top:14px;left:0;font:500 11px var(--sans);letter-spacing:.14em;color:var(--ink2)}
-  .has-front .edition .date::before{content:"Cairo \00b7  "}
-  .has-front .what{margin-top:10px}
-  :root.has-front .toc{justify-content:flex-start;gap:0 24px;margin:0!important;padding:11px 190px 11px 0;min-height:56px;align-items:center;border-bottom:1px solid var(--rule);font:500 11.5px var(--sans);letter-spacing:.1em;text-transform:uppercase}
+  :is(.nm,.rcp[data-theme="paper"]) .mast{padding:46px 0 0;text-align:center}
+  :is(.nm,.rcp[data-theme="paper"]) .top{position:absolute;top:10px;right:0;margin:0;padding:0;border:0;gap:22px;align-items:center}
+  :is(.nm,.rcp[data-theme="paper"]) .top .grp{gap:22px;align-items:center}
+  :is(.nm,.rcp[data-theme="paper"]) .top{flex-wrap:nowrap;width:max-content} :is(.nm,.rcp[data-theme="paper"]) .top .grp:nth-child(2){display:none}
+  :is(.nm,.rcp[data-theme="paper"]) .top :is(a,button,.off){position:static!important;top:auto;left:auto;right:auto;display:inline-block;min-height:0;padding:4px 0;background:none;border:0;font:600 11px/1.4 var(--sans)!important;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)!important;cursor:pointer;white-space:nowrap}
+  :is(.nm,.rcp[data-theme="paper"]) .top :is(a,button):hover,:is(.nm,.rcp[data-theme="paper"]) .top [aria-current],:is(.nm,.rcp[data-theme="paper"]) .top [aria-expanded="true"]{color:var(--accent)!important;background:none}
+  :is(.nm,.rcp[data-theme="paper"]) .top .lg,:is(.nm,.rcp[data-theme="paper"]) .top .lg2{display:none}
+  :is(.has-front,.rcp[data-theme="paper"]) .edition{display:block;margin:0;position:static}
+  :is(.has-front,.rcp[data-theme="paper"]) .edition .date{position:absolute;top:14px;left:0;font:500 11px var(--sans);letter-spacing:.14em;color:var(--ink2)}
+  :is(.has-front,.rcp[data-theme="paper"]) .edition .date::before{content:"Cairo \00b7  "}
+  :is(.has-front,.rcp[data-theme="paper"]) .what{margin-top:10px}
+  :root:is(.has-front,.rcp[data-theme="paper"]) .toc{justify-content:flex-start;gap:0 24px;margin:0!important;padding:11px 190px 11px 0;min-height:56px;align-items:center;border-bottom:1px solid var(--rule);font:500 11.5px var(--sans);letter-spacing:.1em;text-transform:uppercase}
   .has-front #listenwrap{position:absolute;right:0;bottom:9px;margin:0;height:38px;padding:0 16px 0 7px;gap:0 8px;flex-wrap:nowrap;border-radius:999px;background:var(--ink);cursor:pointer}
   :root[data-theme="dark"].has-front #listenwrap{background:none;box-shadow:inset 0 0 0 1px var(--ink2)}
   :root[data-theme="dark"].has-front #listenwrap:hover{box-shadow:inset 0 0 0 1px var(--ink)}
@@ -404,9 +404,9 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
   .has-front .listen,.has-front .listen:hover{height:38px;padding:0;gap:10px;border:0;background:none;color:var(--ground);font:600 11.5px var(--sans);letter-spacing:.1em;text-transform:uppercase}
   .has-front .listen svg{width:22px;height:22px;padding:4px 3px 4px 5px;border-radius:50%;background:var(--ground);fill:var(--ink)}
   .has-front .listen-m{font:600 11.5px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ground)} .has-front .listen-m::before{content:"\00b7\00a0\00a0"}
-  .nm #prev,.nm #next{display:none}
+  :is(.nm,.rcp[data-theme="paper"]) #prev,:is(.nm,.rcp[data-theme="paper"]) #next{display:none}
   /* the archive opens over the page from under the top line, covering the closes strip, instead of pushing it down */
-  .nm #archive{position:absolute;top:44px;left:0;right:0;z-index:30;margin:0;padding:10px 22px;text-align:left;border:1px solid var(--ink);box-shadow:0 18px 40px rgba(0,0,0,.18);max-height:72vh}
+  :is(.nm,.rcp[data-theme="paper"]) #archive{position:absolute;top:44px;left:0;right:0;z-index:30;margin:0;padding:10px 22px;text-align:left;border:1px solid var(--ink);box-shadow:0 18px 40px rgba(0,0,0,.18);max-height:72vh}
   .nm:not(.has-front) .mast{padding-bottom:26px}
   @media (max-width:1260px){:root.has-front .toc{gap:0 15px;padding-right:176px;letter-spacing:.07em}}
   .has-front .front{padding-top:0} .has-front .f-main{margin-top:20px} .has-front .f-col article:first-of-type{padding-top:0} .has-front .f-rail h4{padding-top:9px}
@@ -493,12 +493,12 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 :root[data-theme="paper"] .f-strip span{display:inline;margin:0 6px 0 0;font-size:12px;font-weight:700;letter-spacing:.03em;text-transform:none;color:var(--ink)}
 :root[data-theme="paper"] .f-strip b{font:600 12px var(--sans);margin-right:5px}
 :root[data-theme="paper"] .f-strip em{font:500 12px var(--sans);font-style:normal;color:var(--ink)}
-:root[data-theme="paper"] .edition .date,:root[data-theme="paper"].has-front #listenwrap{display:none}
-:root[data-theme="paper"].has-front .toc{justify-content:center;padding:7px 0;min-height:0;border-bottom:0;font-size:10.5px;gap:0 20px}
+:root[data-theme="paper"] .edition .date,:root[data-theme="paper"]:is(.has-front,.rcp) #listenwrap{display:none}
+:root[data-theme="paper"]:is(.has-front,.rcp) .toc{justify-content:center;padding:7px 0;min-height:0;border-bottom:0;font-size:10.5px;gap:0 20px}
 :root[data-theme="paper"] .f-banner{display:block;margin:6px 0 0;padding-bottom:14px;text-align:center}
 :root[data-theme="paper"] .f-banner h2{margin:0;font:var(--p-hw) clamp(30px,4.5vw,62px)/1.04 var(--p-head),var(--serif);letter-spacing:-.005em;text-transform:var(--p-caps);text-wrap:balance}
 :root[data-theme="paper"] .f-banner h2 a{color:inherit}
-:root[data-theme="paper"] .f-deck{margin:10px auto 0;max-width:980px;font:italic 700 clamp(18px,1.8vw,24px)/1.27 "Playfair Display",var(--serif)}
+:root[data-theme="paper"] .f-deck{margin:10px auto 0;max-width:980px;text-wrap:balance;font:italic 700 clamp(18px,1.8vw,24px)/1.27 "Playfair Display",var(--serif)}
 :root[data-theme="paper"] .f-others{margin:9px auto 0;max-width:1080px;font:600 11px/1.6 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
 :root[data-theme="paper"] .f-main{margin-top:0;border-top:1px solid var(--ink);grid-template-columns:2.15fr 1fr 1fr}
 :root[data-theme="paper"] .f-main > *{padding-top:14px;border-left-color:var(--ink)}
@@ -544,7 +544,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 :root[data-theme="paper"] .f-big{font-family:var(--p-head),var(--serif);font-weight:var(--p-hw)}
 :root[data-theme="paper"] .f-band{border-top:3px double var(--ink)} :root[data-theme="paper"] .f-band > div{border-left-color:var(--ink)}
 :root[data-theme="paper"] .front{border-bottom:0;padding-top:4px}
-:root[data-theme="paper"].has-front .mast{padding-bottom:0} :root[data-theme="paper"] main{margin-top:0}
+:root[data-theme="paper"]:is(.has-front,.rcp) .mast{padding-bottom:0} :root[data-theme="paper"] main{margin-top:0}
 :root[data-theme="paper"] .f-lead .f-watch{clear:both;margin-top:34px}
 :root[data-theme="paper"] .s{background:none;padding-block:22px}
 :root[data-theme="paper"] .s h2{color:var(--ink);text-align:center;border-top:3px double var(--ink);border-bottom:1px solid var(--ink);padding:8px 0;font:700 13px var(--sans);letter-spacing:.2em}
@@ -589,6 +589,41 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
   :root[data-theme="paper"] .f-body{columns:1} :root[data-theme="paper"] .f-main{grid-template-columns:1fr}
   :root[data-theme="paper"] .p-dateline{grid-template-columns:auto 1fr auto;gap:10px;font-size:9.5px;letter-spacing:.08em} :root[data-theme="paper"] .p-dateline span:nth-child(2){text-align:center}
 }
+/* lists in newspaper columns (paper mode, and the wide page): each story in a list is its own list, and a list item's
+   margin is kept at the top of a column by some browsers and dropped by others, so a column could start a line low or a
+   little high against its neighbour. All the space between list stories is padding at their foot instead, which a
+   column break drops everywhere: every column starts flush with the others */
+:root[data-theme="paper"] .s-body .run > :is(ul,ol),:root[data-width="wide"] .s-body .run > :is(ul,ol){margin:0}
+:root[data-theme="paper"] .s-body .run li,:root[data-width="wide"] .s-body .run li{margin:0;padding-bottom:8px;--rd-gap:8px}
+:root[data-theme="paper"] .s-body .run li:last-child{padding-bottom:18px;--rd-gap:18px}
+:root[data-width="wide"]:not([data-theme="paper"]) .s-body .run li:last-child{padding-bottom:0;--rd-gap:18px}
+/* a label on its own line ("Coming up:") sits close over its list and never ends a column */
+:root[data-theme="paper"] .s-body .run > p.lbl{padding-bottom:6px;--rd-gap:6px;break-after:avoid}
+:root[data-width="wide"]:not([data-theme="paper"]) .s-body .run > p.lbl{border-bottom-width:6px;break-after:avoid}
+/* the Saturday recap's front page, paper mode only: a banner for the week, The Week in Brief as numbered stories in two
+   columns, and a rail with the week's markets and what is inside */
+.rf-main,.rf-kick{display:none}
+:root:not([data-theme="paper"]) .rf-only{display:none!important}
+:root[data-theme="paper"] .rf-kick{display:block;margin:0 0 4px;font:600 11px var(--sans);letter-spacing:.22em;text-transform:uppercase}
+:root[data-theme="paper"] .rf-main{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,1fr);border-top:1px solid var(--ink)}
+:root[data-theme="paper"] .rf-main > *{padding:14px 26px 0;border-left:1px solid var(--ink);min-width:0}
+:root[data-theme="paper"] .rf-main > :first-child{padding-left:0;border-left:0} :root[data-theme="paper"] .rf-main > :last-child{padding-right:0}
+:root[data-theme="paper"] .rf-brief h4{margin:0 0 12px;padding:3px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);text-align:center;font:600 10px var(--sans);letter-spacing:.14em;text-transform:uppercase}
+:root[data-theme="paper"] .rf-brief ol{list-style:none;margin:0;padding:0;columns:2;column-gap:36px;column-rule:1px solid var(--rule);counter-reset:rf}
+:root[data-theme="paper"] .rf-brief li{display:grid;grid-template-columns:40px minmax(0,1fr);break-inside:avoid;padding:0 0 14px;counter-increment:rf}
+:root[data-theme="paper"] .rf-brief li > *{grid-column:2}
+:root[data-theme="paper"] .rf-brief li::before{grid-column:1;grid-row:1 / span 2;content:counter(rf);font:var(--p-hw) 34px/.9 var(--p-head),var(--serif)}
+:root[data-theme="paper"] .rf-brief li a{color:var(--ink);text-decoration:none}
+:root[data-theme="paper"] .rf-brief li b{display:block;margin:0 0 3px;font:var(--p-hw) 20px/1.12 var(--p-head),var(--serif)}
+:root[data-theme="paper"] .rf-brief li a:hover b{text-decoration:underline}
+:root[data-theme="paper"] .rf-brief li span{display:block;font-size:15px;line-height:1.42;text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+:root[data-theme="paper"] .rfront .f-rail .f-inside{margin-top:0}
+:root[data-theme="paper"] .rfront .f-mbox td:first-child{white-space:nowrap}
+:root[data-theme="paper"] .rfront .f-mbox caption{caption-side:bottom;padding-top:6px;text-align:left;font:italic 12px/1.35 var(--serif);color:var(--ink2)}
+:root[data-theme="paper"] .rf-hide{display:none}
+@media print{ :root[data-theme="paper"] .rf-hide{display:block} }
+@media (max-width:1040px){ :root[data-theme="paper"] .rf-main{grid-template-columns:minmax(0,1fr)} :root[data-theme="paper"] .rf-main > *{padding:14px 0 0;border-left:0} }
+@media (max-width:640px){ :root[data-theme="paper"] .rf-brief ol{columns:1} }
 /* "Inside today": the section index at the foot of the rail, paper mode only */
 .f-inside{display:none}
 .f-puz{display:none}
@@ -779,7 +814,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 
   function show(){
     var date = (location.hash||'').replace('#','');
-    document.documentElement.classList.remove('has-front'); document.documentElement.classList.remove('nm'); (function(){ var x = document.getElementById('f-strip'); if(x) x.remove(); [].slice.call(document.querySelectorAll('.p-ear,.p-dateline')).forEach(function(y){ y.remove(); }); })();
+    document.documentElement.classList.remove('has-front'); document.documentElement.classList.remove('nm'); document.documentElement.classList.remove('rcp'); (function(){ var x = document.getElementById('f-strip'); if(x) x.remove(); [].slice.call(document.querySelectorAll('.p-ear,.p-dateline')).forEach(function(y){ y.remove(); }); })();
     if(date === 'topics'){ showTopics(); return; }
     if(date.indexOf('topic/') === 0){ showTopic(date.slice(6)); return; }
     $('topicsLink').removeAttribute('aria-current');
@@ -804,6 +839,14 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
       return r.text();
     }).then(function(md){
       var r = render(md);
+      // the two market tables come after In Other News, just before the Economic Calendar (from November 16, 2026);
+      // older editions, written with them after Markets, are shown in the same order
+      (function(){
+        var mv = r.sections.filter(function(s){ return /^(stocks-watch|currency-and-commodities-watch)$/.test(s.id); });
+        if(!mv.length || !r.sections.some(function(s){ return s.id === 'economic-calendar'; })) return;
+        var rest = r.sections.filter(function(s){ return mv.indexOf(s) < 0; }), at = rest.findIndex(function(s){ return s.id === 'economic-calendar'; });
+        r.sections = rest.slice(0, at).concat(mv, rest.slice(at));
+      })();
       // the intro line opens with the date, which the dateline above already shows: drop it there
       var lead = r.lead ? r.lead.replace(/<\/?p>/g,'') : '';
       lead = lead.replace(/^(\s*<(em|i)>)?\s*(Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday),?\s+[^:<]{3,30}?\d{4}\s*[:,\u2014\u2013-]\s*([a-z])/i, function(m, open, tag, wd, c){ return (open || '') + c.toUpperCase(); });
@@ -838,6 +881,9 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
           if(/^H[2-4]$/.test(el.tagName) || el.classList.contains('tablewrap') || el.classList.contains('pbar') || el.classList.contains('sp')){ run = null; return; }
           if(!run){ run = document.createElement('div'); run.className = 'run'; body.insertBefore(run, el); }
           run.appendChild(el);
+          // a paragraph that is only a bold label ("Coming up:") introduces the list after it
+          var f = el.firstElementChild;
+          if(el.tagName === 'P' && f && f.tagName === 'STRONG' && el.textContent.trim() === f.textContent.trim()) el.classList.add('lbl');
         });
         // a lone paragraph (a table's caption) gets no columns, or the wide page draws the column line beside it
         [].slice.call(body.querySelectorAll(':scope > .run')).forEach(function(r){ if(r.children.length < 2 && !/^(OL|UL)$/.test(r.firstElementChild.tagName)){ while(r.firstChild) body.insertBefore(r.firstChild, r); r.remove(); } });
@@ -886,16 +932,86 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
         box.hidden = false;
       }).catch(function(){});
   }
+  // ---- the Saturday recap's front page (paper mode): a banner for the week with the edition's summary as its deck,
+  // The Week in Brief as ten numbered stories in two columns, and a rail with the week's markets and what is inside;
+  // the masthead gets the daily front page's ears, dateline and market tape, with weekly changes ----
+  function weekSpan(d){
+    var end = new Date(d + 'T12:00:00'), start = new Date(end.getTime() - 6 * 864e5), M = function(x){ return x.toLocaleDateString('en-US', {month:'long'}); };
+    return M(start) === M(end) ? M(start) + ' ' + start.getDate() + ' to ' + end.getDate() : M(start) + ' ' + start.getDate() + ' to ' + M(end) + ' ' + end.getDate();
+  }
+  function recapFront(ed){
+    var B = document.getElementById('the-week-in-brief'), lis = B ? [].slice.call(B.querySelectorAll('ol > li, ul > li')) : [];
+    if(lis.length < 4) return '';
+    var items = lis.map(function(li){
+      var c = li.cloneNode(true), st = c.querySelector('strong'), lab = st && c.firstElementChild === st ? st.textContent.replace(/:\s*$/,'') : '';
+      if(lab) st.remove(); c.querySelectorAll('.topics,.tchips,.chg').forEach(function(x){ x.remove(); });
+      return '<li>'+(lab ? '<b>'+esc(lab)+'</b>' : '')+'<span>'+esc(c.textContent.trim())+'</span></li>';
+    });
+    B.classList.add('rf-hide');
+    var deck = (ed.summary || '').replace(/[:,;\u2014\u2013-]\s*(the\s+)?week\s+of\s+[^.]*\.?\s*$/i, '.').replace(/\.\.$/, '.');
+    var ins = [].slice.call(document.querySelectorAll('#content section.s')).filter(function(x){ return !/^(sources|since-friday|the-week-in-brief)$/.test(x.id); }).map(function(x){
+      var t = (x.querySelector('h2') || {}).textContent || '', n = x.querySelectorAll('[id^="story-"]').length;
+      return '<li><a href="#'+x.id+'" data-jump="1">'+esc(t)+'</a>'+(n ? '<span>'+n+'</span>' : '')+'</li>'; }).join('');
+    return '<div class="f-banner"><p class="rf-kick">The Weekly Recap</p><h2>The week of '+esc(weekSpan(ed.date))+'</h2>'+(deck ? '<p class="f-deck">'+esc(deck)+'</p>' : '')+'</div>'
+      + '<div class="rf-main"><div class="rf-brief"><h4>The week in brief</h4><ol>'+items.join('')+'</ol></div>'
+      + '<div class="f-rail"><div class="f-mbox" id="rf-mbox"></div>'+(ins ? '<div class="f-inside"><h4>Inside this week</h4><ol>'+ins+'</ol></div>' : '')+'</div></div>';
+  }
+  function recapMast(ed){
+    document.documentElement.classList.add('rcp');
+    var what = document.querySelector('.mast .what'), mast = document.querySelector('.mast'); if(!what || !mast) return;
+    var no = editions.filter(function(e){ return /-recap$/.test(key(e)) && e.date <= ed.date; }).length, dl = document.createElement('div');
+    dl.className = 'p-dateline'; dl.innerHTML = '<span>Weekly Recap No. '+no+'</span><span>Cairo, '+esc(pretty(ed.date))+'</span><span><button type="button" id="p-listen">Listen \u25b8</button></span>';
+    what.parentNode.insertBefore(dl, what.nextSibling);
+    dl.querySelector('#p-listen').addEventListener('click', function(){ var b = document.getElementById('listenBtn'); if(b) b.click(); });
+    var strip = document.createElement('div'); strip.className = 'f-strip rf-only'; strip.id = 'f-strip'; dl.parentNode.insertBefore(strip, dl.nextSibling);
+    function ear(side, lab, big, sub){ var d = document.createElement('div'); d.className = 'p-ear ' + side; d.innerHTML = lab + '<b>' + big + '</b>' + sub; mast.appendChild(d); }
+    var sp = weekSpan(ed.date), m = sp.match(/^(\w+) (\d+) to (?:(\w+) )?(\d+)$/);
+    ear('l', 'The week', m ? esc(m[1].slice(0,3) + ' ' + m[2] + '\u2013' + (m[3] ? m[3].slice(0,3) + ' ' : '') + m[4]) : esc(sp), 'Saturday recap');
+    loadMarket('markets-recent.json').then(function(L){
+      var days = ((L && L.days) || []).filter(function(e){ return e.date <= ed.date; });
+      var wk = new Date(new Date(ed.date + 'T12:00:00').getTime() - 7 * 864e5).toISOString().slice(0,10);
+      // each figure's latest value against its latest value a week earlier
+      function fig(k){
+        var v = days.filter(function(e){ return typeof e[k] === 'number'; }); if(!v.length) return null;
+        var now = v[v.length-1][k], prev = v.filter(function(e){ return e.date <= wk; }), was = prev.length ? prev[prev.length-1][k] : null;
+        return {now:now, chg:(was ? (now/was-1)*100 : null)};
+      }
+      var n0 = function(v){ return Math.round(v).toLocaleString('en-US'); }, n2 = function(v){ return v.toFixed(2); };
+      function pc(c, flip){ return c == null ? '' : (flip ? 'pound '+(c <= 0 ? '+' : '\u2212') : (c >= 0 ? '+' : '\u2212'))+Math.abs(c).toFixed(1)+'%'; }
+      function cell(lab, k, fmt, flip, href){ var f = fig(k); if(!f) return ''; var c = f.chg, good = c == null ? '' : ((flip ? -c : c) >= 0 ? 'f-up' : 'f-dn');
+        return '<a href="'+href+'"><span>'+lab+'</span><b>'+fmt(f.now)+'</b>'+(c == null ? '' : '<em class="'+good+'">'+pc(c, flip)+'</em>')+'</a>'; }
+      var cells = cell('EGX30','egx30',n0,false,'/desk/egx/') + cell('USD/EGP','usd_egp',n2,true,'/desk/egp/') + cell('Gold 24K','gold24_egp',n0,false,'/desk/egp/#c-gold') + cell('Brent','brent',function(v){return '$'+n2(v)},false,'/desk/global/') + cell('S&amp;P 500','sp500',n0,false,'/desk/us/')
+        + cell('Nasdaq','nasdaq',n0,false,'/desk/us/').replace('<a ', '<a class="f-x" ') + cell('Bitcoin','btc',n0,false,'/desk/global/#g-btc').replace('<a ', '<a class="f-x" ');
+      var el = document.getElementById('f-strip'); if(el){ if(cells) el.innerHTML = cells; else el.remove(); }
+      var ex = fig('egx30');
+      if(ex && document.documentElement.classList.contains('rcp')) ear('r', 'EGX30 this week', n0(ex.now), ex.chg == null ? '' : (ex.chg >= 0 ? 'Up ' : 'Down ') + Math.abs(ex.chg).toFixed(1) + '%');
+      var mb = document.getElementById('rf-mbox');
+      if(mb){
+        var v = days.map(function(e){ return e.egx30; }).filter(function(x){ return typeof x === 'number'; }).slice(-24);
+        var svg = '';
+        if(v.length > 2){ var lo = Math.min.apply(null, v), hi = Math.max.apply(null, v);
+          var d = 'M' + v.map(function(x, i){ return ((i / (v.length - 1)) * 244 + 3).toFixed(1) + ' ' + (66 - ((x - lo) / ((hi - lo) || 1)) * 58).toFixed(1); }).join('L');
+          svg = '<svg viewBox="0 0 250 72" preserveAspectRatio="none" aria-hidden="true"><path d="'+d+'L247 72L3 72Z" fill="currentColor" opacity=".09"/><path d="'+d+'" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>'; }
+        var row = function(lab, k, fmt, flip){ var f = fig(k); return f ? '<tr><td>'+lab+'</td><td>'+fmt(f.now)+'</td><td>'+pc(f.chg, flip)+'</td></tr>' : ''; };
+        var rows = row('EGX30','egx30',n0) + row('USD/EGP','usd_egp',n2,true) + row('Gold 21K, EGP','gold21_egp',n0) + row('Brent, $','brent',n2) + row('S&amp;P 500','sp500',n0) + row('Bitcoin, $','btc',n0);
+        if(rows) mb.innerHTML = '<h4>The week in markets</h4>' + svg + '<table><caption>Week\u2019s close and change; the line is the EGX30\u2019s past month</caption>' + rows + '</table>'; else mb.remove();
+      }
+    });
+  }
   function buildFront(ed){
     document.documentElement.classList.remove('has-front');
     var old = document.getElementById('front'); if(old) old.remove();
     var os = document.getElementById('f-strip'); if(os) os.remove();
     [].slice.call(document.querySelectorAll('.p-ear,.p-dateline')).forEach(function(x){ x.remove(); });
     if(/-recap$/.test(key(ed))){
-      // Saturday has no daily edition, only the recap: it still gets the day's puzzles (paper mode)
-      var ps = document.createElement('section'); ps.className = 'front'; ps.id = 'front'; ps.innerHTML = '<div class="frame"><div class="f-puz" hidden></div></div>';
+      // Saturday has no daily edition, only the recap: it still gets the day's puzzles, and in paper mode a front
+      // page of its own (buildRecapFront)
+      var ps = document.createElement('section'); ps.className = 'front rfront'; ps.id = 'front'; ps.innerHTML = '<div class="frame">'+recapFront(ed)+'<div class="f-puz" hidden></div></div>';
       $('content').insertBefore(ps, $('content').firstChild);
       fillPuz(ps.querySelector('.f-puz'), ed.date);
+      recapMast(ed);
+      var RS = {'The Week in Brief':'In brief','What Tied the Week Together':'The thread','Egypt This Week':'Egypt','Region and World':'World','Markets This Week':'Markets','Sports This Week':'Sports','Culture and Tech':'Culture and tech','How It Played Out':'How it played out','The Week Ahead':'Week ahead'};
+      [].slice.call($('toc').querySelectorAll('a')).forEach(function(a){ if(RS[a.textContent]) a.textContent = RS[a.textContent]; });
       return;
     }
     var G = document.getElementById('today-at-a-glance'); if(!G) return;
