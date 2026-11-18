@@ -220,7 +220,7 @@
   ],
   "stocks": {},
   "check": {
-   "at": "2026-11-17 10:06",
+   "at": "2026-11-18 03:05",
    "errors": [],
    "warnings": [
     "Egypt Markets: 445 words (guide 280-340; fine if the stories justify it, never cut a story to fit).",
@@ -228,7 +228,7 @@
     "Entertainment and Culture: 214 words (guide 120-150; fine if the stories justify it, never cut a story to fit).",
     "Economic Calendar: 229 words (guide 130-170; fine if the stories justify it, never cut a story to fit).",
     "Total 4091 words without Sources (guide about 3,150-3,250; never cut a worthwhile story to fit).",
-    "Sources: 6 of 76 links could not be checked (the site refused or timed out); open them by hand if in doubt.",
+    "Sources: 7 of 76 links could not be checked (the site refused or timed out); open them by hand if in doubt.",
     "Possible repeat: 'Saudi deployment' (Egypt News) and 'Saudi box office leads the region' (Entertainment and Culture).",
     "Possible repeat: 'Shipping returns to Suez' (Egypt News) and 'Gulf of Suez wind farm' (Egypt Markets)."
    ],
@@ -586,7 +586,7 @@
    "FWRY": "Q3 NI +37.4/37.5% to 1.07bn confirmed"
   },
   "check": {
-   "at": "2026-11-17 10:28",
+   "at": "2026-11-18 03:05",
    "errors": [],
    "warnings": []
   }
