@@ -135,10 +135,10 @@ def previous_egx_session(today):
     return d.isoformat()
 
 
-def egx_previous(d, ar, today):
+def egx_previous(names, ar, today):
     """The finished session's movers and breadth while the next session trades: each stock's last two closes
-    (close[1], close[2]) and turnover (Value.Traded[1]) from TradingView's screener, named from Mubasher's list."""
-    names = {p["code"]: p["name"] for p in d["prices"]}
+    (close[1], close[2]) and turnover (Value.Traded[1]) from TradingView's screener, named from Mubasher's list
+    (or TradingView's own names when Mubasher does not answer)."""
     body = json.dumps({"filter": [{"left": "type", "operation": "equal", "right": "stock"}],
                        "columns": ["name", "description", "close[1]", "close[2]", "Value.Traded[1]"], "range": [0, 1000]}).encode()
     req = urllib.request.Request("https://scanner.tradingview.com/egypt/scan", data=body, headers={"User-Agent": UA, "Content-Type": "application/json"})
@@ -161,8 +161,63 @@ def egx_previous(d, ar, today):
     return out, f"EGX: {session} (read during the next session from TradingView's previous closes), {out['count']} stocks"
 
 
+def egx_trading_day(day):
+    try:
+        hols = {h["date"] for h in json.load(open(os.path.join(ROOT, "data", "holidays.json")))["days"] if h.get("egx_closed")}
+    except Exception:
+        hols = set()
+    return day.weekday() in (6, 0, 1, 2, 3) and day.isoformat() not in hols
+
+
+def tv_names():
+    """{ticker: name} for every EGX stock on TradingView, leaving out the ISIN-coded duplicates."""
+    body = json.dumps({"filter": [{"left": "type", "operation": "equal", "right": "stock"}],
+                       "columns": ["name", "description"], "range": [0, 1000]}).encode()
+    req = urllib.request.Request("https://scanner.tradingview.com/egypt/scan", data=body, headers={"User-Agent": UA, "Content-Type": "application/json"})
+    return {c: n for c, n in (r["d"] for r in json.loads(urllib.request.urlopen(req, timeout=30).read())["data"])
+            if c and n and not re.fullmatch(r"EG[A-Z0-9]{10}", c)}
+
+
+def egx_tv():
+    """The day's EGX movers and breadth from TradingView's screener alone (Mubasher's price list has refused since
+    November 2026): while a session trades, the one before it from the previous-bar closes."""
+    now = datetime.datetime.now(CAIRO)
+    trading = egx_trading_day(now.date())
+    if trading and "10:00" <= now.strftime("%H:%M") < "14:45":
+        try:
+            return egx_previous(tv_names(), {}, now.date())
+        except Exception as e:
+            return None, f"EGX: today is still trading and the previous session could not be read ({e}); kept the saved session"
+    session = now.date().isoformat() if trading and now.strftime("%H:%M") >= "14:45" else previous_egx_session(now.date())
+    body = json.dumps({"filter": [{"left": "type", "operation": "equal", "right": "stock"}],
+                       "columns": ["name", "description", "close", "change", "Value.Traded"], "range": [0, 1000]}).encode()
+    req = urllib.request.Request("https://scanner.tradingview.com/egypt/scan", data=body, headers={"User-Agent": UA, "Content-Type": "application/json"})
+    rows, breadth = [], {"up": 0, "down": 0, "flat": 0}
+    for r in json.loads(urllib.request.urlopen(req, timeout=30).read())["data"]:
+        code, name, price, pct, turnover = r["d"]
+        if not code or re.fullmatch(r"EG[A-Z0-9]{10}", code) or pct is None or price is None:
+            continue
+        if (turnover or 0) > 0:
+            breadth["up" if pct > 0 else "down" if pct < 0 else "flat"] += 1
+        if (turnover or 0) < MIN_TURNOVER_EGP:
+            continue
+        rows.append({"t": code, "name": name, "ar": None, "price": round(price, 3), "pct": round(pct, 2), "turnover": round(turnover, 2)})
+    if len(rows) < 50:
+        raise RuntimeError(f"TradingView: only {len(rows)} stocks")
+    out = rank(rows)
+    out.update(session=session, basis=f"All EGX stocks that traded at least EGP 1m ({out['count']} on the day)", breadth=breadth, breadthSource="TradingView")
+    try:
+        out["indices"] = indices()
+    except Exception:
+        pass
+    return out, f"EGX: {session} (TradingView; Mubasher's list refused), {out['count']} stocks"
+
+
 def egx():
-    d = json.loads(get("https://english.mubasher.info/api/1/stocks/prices?country=eg"))
+    try:
+        d = json.loads(get("https://english.mubasher.info/api/1/stocks/prices?country=eg"))
+    except Exception:
+        return egx_tv()
     try:   # Arabic names, for searching Egyptian news about smaller companies
         ar = {p["code"]: p["name"] for p in json.loads(get("https://www.mubasher.info/api/1/stocks/prices?country=eg"))["prices"]}
     except Exception:
@@ -173,7 +228,7 @@ def egx():
         # the desk runs after the 10:00 open, so the session that just finished is read from TradingView's
         # previous-bar closes instead of Mubasher's live list
         try:
-            return egx_previous(d, ar, now.date())
+            return egx_previous({p["code"]: p["name"] for p in d["prices"]}, ar, now.date())
         except Exception as e:
             return None, f"EGX: {session} is still trading and the previous session could not be read ({e}); kept the saved session"
     rows, breadth = [], {"up": 0, "down": 0, "flat": 0}
@@ -214,14 +269,25 @@ def mubasher_cap(t):
     return num(m.group(1)) if m else None
 
 
+def tv_caps(tickers):
+    body = json.dumps({"symbols": {"tickers": [f"EGX:{t}" for t in tickers]}, "columns": ["market_cap_basic"]}).encode()
+    req = urllib.request.Request("https://scanner.tradingview.com/egypt/scan", data=body, headers={"User-Agent": UA, "Content-Type": "application/json"})
+    return {r["s"].split(":")[1]: r["d"][0] for r in json.loads(urllib.request.urlopen(req, timeout=30).read())["data"] if r["d"][0]}
+
+
 def caps():
     """Market value of each desk stock, in billions of its currency, into desk/stocks.json."""
     path = os.path.join(ROOT, "desk", "stocks.json")
     data = json.load(open(path))
     today = datetime.date.today().isoformat()
     found = {}
+    tv = _safe(tv_caps, DESK["egx"]) or {}   # TradingView first: Mubasher's pages no longer carry figures
+    for t, v in tv.items():
+        if t not in NOT_TRADING:
+            found[t] = {"value": round(v / 1e9, 1), "currency": "EGP", "date": today, "source": "TradingView"}
+    rest = [t for t in DESK["egx"] if t not in found]
     with concurrent.futures.ThreadPoolExecutor(6) as pool:
-        for t, v in zip(DESK["egx"], pool.map(lambda t: _safe(mubasher_cap, t), DESK["egx"])):
+        for t, v in zip(rest, pool.map(lambda t: _safe(mubasher_cap, t), rest)):
             if v and t not in NOT_TRADING:
                 found[t] = {"value": round(v / 1e9, 1), "currency": "EGP", "date": today, "source": "Mubasher"}
     try:
