@@ -22,6 +22,11 @@ What the chart shows (the script does all of it):
 - A run that went wrong (a model fallback, a crash and resume) gets a hatched bar and a
   short grey note with an arrow. Black diamonds mark what was projected earlier for a
   day that has since run, so the projection can be checked against the real figure.
+- **Under the bars, words and quality** (quality.py, run by the chart itself): one line per run of the words it
+  published, and a "Quality:" row with each run's score, D (desk) and N (newsletter), green 95+ (holding), amber
+  85-95 (watch), red below 85 (dropped). Each run is scored against the same kind of run before it: stories, source
+  links, distinct outlets and the share of facts confirmed at a second outlet (newsletter); calls, views and confirmed
+  flows (desk); a missing section or a checker error costs points; fewer words count only below 85% of usual.
 - The title gives the range and its total: "Daily runs, Tue Nov 10 to Mon Nov 16: ~$128,
   ≈37% of the weekly limit".
 
@@ -43,7 +48,12 @@ python3 .claude/skills/usage-chart/usage_chart.py START END OUT.png --today DATE
   --proj DATE=desk,lo,hi:news,lo,hi ... --earlier DATE=desk,news --proj-note "..."
 ```
 
+After a change meant to cut cost, pass `--baseline-end` with the last day before it (e.g. `--baseline-end
+2026-11-18` for the Nov 19 cuts), so every later run is compared with the runs before the change, not with other
+runs after it. `python3 .claude/skills/usage-chart/quality.py START END [--baseline-end DATE]` prints the same
+scores with each run's figures and what fell short (LOW: ...); quote those lines when a run scores below 95.
+
 Base projections on the last few normal runs plus the changes made since, give a range,
 and say in the note what they assume. Needs matplotlib (`pip install matplotlib`).
 After sending the chart, add a few lines: the range's total, what drove the biggest
-days, and how the last projection compared with what happened.
+days, how the last projection compared with what happened, and whether quality held (any run below 95, and why).

@@ -56,12 +56,16 @@ gets the prompt below with its own block and NAME filled in (NAME in brackets af
    where it holds the figure, as refs/side-rules.md describes.
 4. **In Other News** (`other`): Tech and AI, Sports (Egyptian football first; results and fixtures with dates and Cairo
    times), Health and Science, Entertainment and Culture.
-5. **Checks** (`checks`; start this one with `model: "sonnet"`: it compares figures between sources and writes no prose that
-   is published): every figure in the Stocks Watch and Currency and Commodities Watch tables that fetch_figures.py
-   could not confirm or flagged, plus the corrections check (yesterday's key figures against what is now known).
-   Start sessions 2 and 4 with `model: "sonnet"` too: their stories rarely lead the edition, and the main run
-   writes every word from their notes. Sessions 1 and 3 (Egypt, and global markets and the calendar) run on the
-   run's own model (leave `model` out): their notes shape the lead stories and the Markets section.
+5. **Checks** (`checks`): every figure in the Stocks Watch and Currency and Commodities Watch tables that
+   fetch_figures.py could not confirm or flagged, plus the corrections check (yesterday's key figures against what is
+   now known).
+
+   **Start all five with `model: "sonnet"`.** They gather, read and confirm; none writes published prose. The main
+   run (on its own model) still chooses the stories, decides what leads, writes every word and opens any page a note
+   marks `Open:`. Since Nov 19, Egypt and global markets moved to Sonnet too (they were the last two on the
+   run's model, and the most costly research of the day); if an edition's Egypt or Markets sections come out thinner
+   or less sure of their figures (usage-chart's quality.py compares them with the weeks before), put those two back
+   on the run's model by leaving `model` out.
 
 ### Saved notes, for the desk
 
@@ -88,13 +92,17 @@ Quick Hits, Weather (weather.py), Worth Knowing and the puzzles stay in the main
 > Stop researching a story once each figure has its outlet and one independent confirmation: about two pages
 > opened per story beyond search.py's excerpts, more only where sources conflict. Do not write or edit any file in the repo except through research_log.py, and one notes
 > file: when done, write the notes you return, exactly, to editions/notes/DATE-NAME.md.
-> Return notes only, about 60 to 80 words a story (more only for a story with many figures), in this format:
-> `### Headline in plain words` then terse bullets, no prose and no full sentences where a fragment does: each fact
-> with every figure, its basis (consolidated or standalone, quarter or nine months, nominal or real, year on year
-> or month on month) and its date; `Src:` outlet and URL; `Chk:` the second outlet and URL, or "single source" or
-> "same wording as X"; quotes word for word in quotation marks with the speaker; `Why:` a few words; `Open:` only
-> if something is unclear or conflicting. Keep every figure, basis and source; cut background the main run does not
-> need to write the story. Then one line listing stories you dropped and why (old, unconfirmed, not news).
+> Write the full notes to the file, about 60 to 80 words a story (more only for a story with many figures), in
+> this format: `### Headline in plain words` then terse bullets, no prose and no full sentences where a fragment
+> does: each fact with every figure, its basis (consolidated or standalone, quarter or nine months, nominal or real,
+> year on year or month on month) and its date; `Src:` outlet and URL; `Chk:` the second outlet and URL, or "single
+> source" or "same wording as X"; quotes word for word in quotation marks with the speaker; `Why:` a few words;
+> `Open:` only if something is unclear or conflicting. Keep every figure, basis and source; cut background the main
+> run does not need to write the story. Then one line listing stories you dropped and why (old, unconfirmed, not news).
+> **Return a shorter version** (the file keeps the rest): the same `###` headlines in the same order, each with at
+> most 45 words: its key figures with basis and date, the one quote the story turns on (word for word, with the
+> speaker), `Src:` and `Chk:` with their URLs exactly as in the file, and `Open:` if any; leave out `Why:`,
+> context and secondary figures. End with `Full notes: editions/notes/DATE-NAME.md` and the dropped-stories line.
 
 **Search budgets (the hard cap is 60 a day in all).** The newsletter's searches stop at 60, side sessions
 included: search.py refuses queries past it and the built-in web search is blocked. A session that spends past its
@@ -105,5 +113,7 @@ gaps. A session stops at its number; a story still without a second source past 
 Wait for all five before writing (never leave one running in the background past the final reply). Write the
 whole edition from the notes in one Write (see "About 12 steps" in the skill's "How the run works"). Open a page yourself only where a note says
 "Open:" something that matters, or a figure is single-source and the story needs it (search.py or articles.py,
-logged). The checker counts the side sessions' searches and pages, which they log themselves. Do not read the saved
-notes files again: they are the notes already returned to you.
+logged). The checker counts the side sessions' searches and pages, which they log themselves. The notes returned
+to you are the short version; for a story that needs a secondary figure, a quote or context they left out, read
+only that story from the saved file, several in one Bash step, before the edition's one Write:
+`sed -n '/^### Words of the headline/,/^### /p' editions/notes/DATE-NAME.md`. Never read a notes file whole.

@@ -467,25 +467,9 @@ NOTABLE lines) and tables.py (MOVER as tables.py takes it), each with a time lim
 attention, then ok or FAILED per step with the command to rerun a failed one. Do not run the six one by one. What
 each does and what to do with its output:
 
-**Bonus shares and splits** (`corporate_actions.py --check`): when an Egyptian stock in the log
-has passed its ex-date (the first session without the right to the free shares), confirm the ratio in the
-company's disclosure (Mubasher or Arab Finance, cross-checked against the reference price the script
-estimates), then run `corporate_actions.py --apply TICKER EXDATE BONUS` once (BONUS is free shares per
-share: 0.25 for one for every four) and refresh the spreadsheet. Without it, the charts show a fall that
-never happened to holders and the changes and YTD figures come out too low. Cash dividends are not adjusted.
-
-**Gaps** (`fill_gaps.py DATE 10 --write`): it finds figures missing from the last ten entries although the entries around them have them, and fills each
-from a dated source (Yahoo, Nasdaq or CoinGecko history; the desk's intraday file for Egyptian stocks; the last
-weekday's pound rates for Friday and Saturday closes), printing every value beside its neighbours. Check any line
-it marks as more than 8% from a neighbour, and fill the `MANUAL` lines it lists by hand with log_figures.py when a
-source confirms the figure (or leave them, and say so in the final reply).
-
-**The week behind the trend lines** (`fetch_intraday.py`, bringing the desk's intraday prices up to the last
-session, then `week_snapshot.py DATE`): it saves `data/weeks/DATE.json`, the last five sessions hour by hour for the desk's stocks and the indexes, which the
-site draws as this edition's "Last 7 days" lines; commit it, and `desk/intraday.json`, with the edition.
-
-The spreadsheet copy, `data/markets.xlsx`, is rewritten by GitHub Actions after the push (the "Audio and chores"
-workflow, `export_xlsx.py`): do not run it in the run.
+What to do with what it flags (a bonus share past its ex-date, a gap filled more than 8% from its
+neighbours, a `MANUAL` line, a FAILED step) is in `refs/after-log.md`: read it only when after_log.py prints one of
+those, not on a day it prints only ok lines.
 
 Log the same numbers the edition shows (the central bank's selling rate for the dollar when that is what
 the table shows), one value per key, with every Stocks Watch row as `egx.TICKER` or `us.TICKER`. Leave out
@@ -519,22 +503,9 @@ For work on the site itself rather than an edition, `refs/other-skills.md` lists
 
 ## Edit pass, before the checker
 
-When the edition is written, read it once from the top as its editor, not its writer, and fix what you find:
-
-- **Leads:** each item's first sentence states the news with its figure. Rewrite one that opens on background, a
-  date or a quote.
-- **Why it matters:** an Egypt, economy or markets item whose point for a reader in Egypt is not plain gets one
-  closing clause that says it (what it does to prices, the pound, jobs, a stock). Never a moral, never filler.
-- **Against earlier editions:** for each continuing story, find the last edition that carried it and read only
-  that story (`grep -n -A3 "Name" editions/*.md | tail`, not the whole file) and check that names, titles, counts and figures agree; where they differ, check the source
-  and say what changed ("revised from 125").
-- **Arithmetic:** recompute every percentage change, total and "highest since" from the figures in the text and the
-  data log.
-- **Glance and text agree:** each Today at a Glance line says what its story says, with the same figure.
-- **Once only:** no story, figure or explanation appears in two sections; no "today" or "yesterday" that is wrong
-  for the edition's date; no term left unexplained on first use.
-
-Then publish as refs/finish.md describes (`publish.py newsletter DATE --push-if-clean`). End the final reply with one line, `Edit pass: N changes`, naming the biggest.
+Once the edition is written, do the editor's read in `refs/edit-pass.md` (read it at that step,
+not before), then publish as refs/finish.md describes. End the final reply with one line, `Edit pass: N changes`,
+naming the biggest.
 
 ## The front page
 

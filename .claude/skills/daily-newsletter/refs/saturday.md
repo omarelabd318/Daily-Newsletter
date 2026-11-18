@@ -100,8 +100,8 @@ check_log.py stay in the main run; the puzzles go to their own Sonnet side sessi
 4 start from the week's saved notes in `editions/notes/` (the daily side sessions' checked facts and sources) and
 search for how each story developed since, rather than researching each day's stories again.
 
-Start blocks 3 and 4 with `model: "sonnet"`: they mostly follow up stories the week's editions already covered and
-confirm where each stands and its figures, and they write no published prose. Blocks 1 and 2 (what is new since
-Friday, and the week in Egypt) run on the run's own model (leave `model` out): their notes decide the recap's lead
-stories. The main run still writes every word and opens a page itself where a Sonnet note says "Open:" something
-that matters.
+Start all four blocks with `model: "sonnet"`: they follow up stories the week's editions already covered, find
+what is new since Friday and confirm where each stands and its figures, and they write no published prose. The main
+run still chooses the recap's lead stories, writes every word and opens a page itself where a note says "Open:"
+something that matters. They write their full notes to the file and return the short version, as
+refs/research-agents.md's prompt describes.

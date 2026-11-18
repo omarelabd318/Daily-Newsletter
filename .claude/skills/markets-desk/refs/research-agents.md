@@ -12,7 +12,8 @@ file, written in one Write or Edit; each checker run once per pass, its findings
 the leads and returns what matters as notes; open a stock's leads yourself (`sed -n '/^## TICKER /,/^## /p'
 desk/brief.md`) only for a point its note leaves open.
 
-After wait_desk_data.py reports READY (or run_data.py has run) and you have read today's edition and desk/brief.md,
+After wait_desk_data.py reports READY (or run_data.py has run) and you have read the parts of today's edition the desk
+uses (`edition_for_desk.py DATE`, never the whole file) and desk/brief.md,
 start these two side sessions **in one step** (two Task calls in one response, so they run at once), in the
 foreground (leave `run_in_background` false), so the main run gets both notes back together rather than waking for each. In the same
 response the main run starts the day file (`desk_json.py day DATE ASOF`), which runs while they do.
@@ -30,7 +31,9 @@ response the main run starts the day file (`desk_json.py day DATE ASOF`), which 
      source), not written into desk/stocks.json.
    The main run then writes the `news` items into desk/stocks.json from the notes in one `desk_json.py news -` call
    (all stocks at once) and `lastResults` in one `desk_json.py set stocks -` call, never reading the file whole.
-2. **Markets and macro** (on the run's own model: leave `model` out): the day's Egyptian macro and policy stories (the pound, rates, inflation, reserves,
+2. **Markets and macro** (start it with `model: "sonnet"` too, since Nov 19: it gathers and checks and writes no published
+   text; if the desk's macro stories or views come out thinner, usage-chart's quality.py shows it, and it goes back
+   on the run's own model): the day's Egyptian macro and policy stories (the pound, rates, inflation, reserves,
    gas, Suez), the US session and data, central banks, and a second source for every figure the desk's stories
    will use that the edition does not already carry (FactIQ where it holds it, as refs/side-rules.md
    describes). It starts from the newsletter's saved side-session notes, `editions/notes/DATE-*.md` (on a
@@ -62,7 +65,8 @@ response the main run starts the day file (`desk_json.py day DATE ASOF`), which 
 > `### TICKER or topic: headline` then terse bullets, each fact with every figure, its basis (consolidated or
 > standalone, quarter or nine months, year on year) and date; `Src:` outlet and URL; `Chk:` second outlet and URL,
 > or "single source"; `Angle:` a few words on what it means for the stock, sector or market; `Open:` only if
-> something is unclear. Keep every figure, basis and source; cut background. End with one line per item done to the
+> something is unclear. Keep every figure, basis and source; cut background and anything the edition's notes already
+> hold (point to them instead: `See editions/notes/FILE, "headline"`). End with one line per item done to the
 > files (results recorded, news added) and anything left undone and why.
 
 **Search budgets (the desk's hard cap is 35 a day in all).** search.py refuses queries past it and the built-in web
