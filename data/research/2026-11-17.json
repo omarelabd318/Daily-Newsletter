@@ -586,9 +586,26 @@
    "FWRY": "Q3 NI +37.4/37.5% to 1.07bn confirmed"
   },
   "check": {
-   "at": "2026-11-17 10:28",
+   "at": "2026-11-18 03:36",
    "errors": [],
-   "warnings": []
+   "warnings": [
+    "desk/movers.json: EGX INFI +10.0% has no reason: research it (fetch_movers.py --leads) and add why, source and url, or write \"No company news found.\"",
+    "desk/movers.json: EGX PRMH +6.9% has no reason: research it (fetch_movers.py --leads) and add why, source and url, or write \"No company news found.\"",
+    "desk/movers.json: EGX SAUD +5.3% has no reason: research it (fetch_movers.py --leads) and add why, source and url, or write \"No company news found.\"",
+    "desk/movers.json: EGX CRST -19.7% has no reason: research it (fetch_movers.py --leads) and add why, source and url, or write \"No company news found.\"",
+    "desk/movers.json: EGX AMES -12.2% has no reason: research it (fetch_movers.py --leads) and add why, source and url, or write \"No company news found.\"",
+    "desk/movers.json: EGX TYCN -8.7% has no reason: research it (fetch_movers.py --leads) and add why, source and url, or write \"No company news found.\"",
+    "desk/movers.json: EGX FTNS -6.4% has no reason: research it (fetch_movers.py --leads) and add why, source and url, or write \"No company news found.\"",
+    "desk/movers.json: EGX ZEOT -6.2% has no reason: research it (fetch_movers.py --leads) and add why, source and url, or write \"No company news found.\"",
+    "desk/movers.json: US ACM +11.1% has no reason: research it (fetch_movers.py --leads) and add why, source and url, or write \"No company news found.\"",
+    "desk/movers.json: US ESLT +5.8% has no reason: research it (fetch_movers.py --leads) and add why, source and url, or write \"No company news found.\"",
+    "desk/movers.json: US NXT -12.1% has no reason: research it (fetch_movers.py --leads) and add why, source and url, or write \"No company news found.\"",
+    "desk/movers.json: US CRM -9.5% has no reason: research it (fetch_movers.py --leads) and add why, source and url, or write \"No company news found.\"",
+    "desk/movers.json: US WCN -8.0% has no reason: research it (fetch_movers.py --leads) and add why, source and url, or write \"No company news found.\"",
+    "desk/movers.json: US QXO -7.5% has no reason: research it (fetch_movers.py --leads) and add why, source and url, or write \"No company news found.\"",
+    "desk/movers.json: US INTU -7.2% has no reason: research it (fetch_movers.py --leads) and add why, source and url, or write \"No company news found.\"",
+    "desk/intraday.json: the US session 2026-11-17 has no one-day line for BRK.B; run fetch_intraday.py again (it retries, then tries Yahoo)."
+   ]
   }
  }
 }
