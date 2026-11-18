@@ -5,7 +5,7 @@ Usage:
   python3 .claude/skills/markets-desk/fetch_intraday.py
 
 Writes desk/intraday.json ("week" also keeps the last five sessions of each market every 15 minutes, for
-the 1W charts, and "month" the last 23 every 30 minutes, for the 1M charts): the EGX30 and the 12 Egyptian stocks from Mubasher (Cairo time), the
+the 1W charts, and "month" the last 23 every 30 minutes, for the 1M charts): the EGX30 and the Egyptian stocks from TradingView's chart feed, with Mubasher as the fallback (Cairo time), the
 EGX70 EWI from TradingView's chart feed (tradingview.py; no other free source publishes it through the session), and the
 Nasdaq Composite and the 12 US stocks from Nasdaq (New York time, regular session only), and the last
 24 hours of Bitcoin (CoinGecko). Yahoo adds the S&P 500, the Dow, Brent, gold and the dollar index on the
@@ -103,6 +103,17 @@ def every5(points):
         h, m = map(int, hm.split(":"))
         out[f"{h:02d}:{m - m % 5:02d}"] = v
     return [[k, out[k]] for k in sorted(out)]
+
+
+def egx_day(key):
+    """The newest EGX session of key (\"EGX30\" or a ticker), every 5 minutes in Cairo time: TradingView's 5-minute
+    bars first (Mubasher's pages became a script-only app in November 2026), then Mubasher."""
+    try:
+        by_day = tv_sessions("EGX:" + key, 400)
+        day = max(by_day)
+        return day, every5([(hm, v) for hm, v in by_day[day]])
+    except Exception:
+        return mubasher(key)
 
 
 def mubasher(key):
@@ -313,12 +324,10 @@ def tv_sessions(symbol, count=2500):
 
 
 def egx_month(out, now_cairo):
-    """The EGX month (every 30 minutes, for the 1M charts) is built one session a run from Mubasher, which cannot
-    serve past sessions: while it is short, the finished sessions it lacks come from TradingView's bars."""
+    """The EGX month (every 30 minutes, for the 1M charts): any finished session among the last 23 that it lacks (a
+    day the fetch failed) comes from TradingView's bars, so the week, which fills its gaps from the month, does too."""
     month = out.setdefault("month", {})
     have = {x["session"]: x for x in month.get("egx", [])}
-    if len(have) >= 21:
-        return f"EGX month: {len(have)} sessions"
     today = now_cairo.date().isoformat()
     finished = lambda d: d < today or now_cairo.strftime("%H:%M") >= "14:45"
     got = {}
@@ -326,7 +335,8 @@ def egx_month(out, now_cairo):
         for k, res in zip(["EGX30"] + EGX, pool.map(lambda k: _try(tv_sessions, "EGX:" + k), ["EGX30"] + EGX)):
             if res:
                 got[k] = res
-    days = sorted(d for d in (got.get("EGX30") or {}) if finished(d) and d not in have)[-23:]
+    recent = sorted(d for d in (got.get("EGX30") or {}) if finished(d))[-23:]
+    days = [d for d in recent if d not in have]
     for d in days:
         series = {k: every_n(v[d], 30) for k, v in got.items() if len(v.get(d, [])) >= 6}
         if "EGX30" in series:
@@ -363,7 +373,7 @@ def main():
     egx_done = lambda day, s: day < now_cairo.date().isoformat() or now_cairo.strftime("%H:%M") >= "14:45"
     us_done = lambda day, s: day < now_ny.date().isoformat() or now_ny.strftime("%H:%M") >= "16:15"
     out = dict(saved)
-    for name, keys, fn, done in (("egx", ["EGX30"] + EGX, mubasher, egx_done), ("us", ["COMP", "sp500", "dow"] + US, nasdaq, us_done)):
+    for name, keys, fn, done in (("egx", ["EGX30"] + EGX, egx_day, egx_done), ("us", ["COMP", "sp500", "dow"] + US, nasdaq, us_done)):
         data, line = market(name.upper(), keys, fn, done)
         if data and data["session"] >= (saved.get(name) or {}).get("session", ""):
             if name == "us" and PROXY:

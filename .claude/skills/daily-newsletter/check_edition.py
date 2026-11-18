@@ -7,6 +7,7 @@ It opens every Sources link (about 20 seconds); --no-links skips that when offli
 
 Errors exit with code 1. Warnings are printed for a human (or Claude) to judge.
 """
+import datetime
 import json
 import os
 import re
@@ -209,11 +210,11 @@ def check_links(text, errors, warnings):
 
 
 def source_close(mk, t, v):
-    """True when the stock's quote at its source (Mubasher for the EGX, Nasdaq for the US) gives v as its latest close
+    """True when the stock's quote at its source (TradingView, else Mubasher, for the EGX; Nasdaq for the US) gives v as its latest close
     or the close before it, or for a US stock when Polygon has v as one of its last daily closes."""
     try:
         import fetch_figures as FF
-        q = FF.mubasher(f"stocks/{t}") if mk == "egx" else FF.nasdaq(t)
+        q = FF.egx_quote(f"stocks/{t}") if mk == "egx" else FF.nasdaq(t)
         if any(x is not None and abs(x - v) <= max(0.005, abs(v) * 0.0005) for x in (q.get("value"), q.get("prev"))):
             return True
     except Exception:
@@ -250,6 +251,14 @@ def check_closes(date, errors, warnings):
         sess = [w for w in week.get(mk, []) if w["session"] < date]
         if not sess:
             continue
+        # The log's closes are for the last session before the edition date, at most four days earlier (a weekend
+        # plus a holiday). Older intraday prices mean the intraday feed stalled: comparing with them would flag
+        # every stock that moved since, so say so once instead.
+        gap = (datetime.date.fromisoformat(date) - datetime.date.fromisoformat(sess[-1]["session"])).days
+        if gap > 4:
+            warnings.append(f"Closes not compared for {mk.upper()}: the newest intraday session in desk/intraday.json is "
+                            f"{sess[-1]['session']}, {gap} days before this edition (fetch_intraday.py has not updated it).")
+            continue
         ser = sess[-1].get("series") or {}
         for t, v in (E.get(mk) or {}).items():
             pts = ser.get(t)
@@ -267,7 +276,7 @@ def check_closes(date, errors, warnings):
             else:
                 errors.append(f"{t}: logged close {v}, but its last trade in the {sess[-1]['session']} session was {last} "
                               f"({abs(v / last - 1) * 100:.1f}% apart). Check the close at the source "
-                              f"({'Mubasher' if mk == 'egx' else 'Nasdaq or Yahoo'}): fix the log if it is wrong, or record it with "
+                              f"({'TradingView' if mk == 'egx' else 'Nasdaq or Yahoo'}): fix the log if it is wrong, or record it with "
                               f"research_log.py {date} newsletter close {t} {v} SOURCE.")
 
 
