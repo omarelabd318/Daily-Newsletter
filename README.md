@@ -10,6 +10,10 @@ repo; every push to `main` redeploys it. There is no build step.
   `editions/index.json`, shows the newest edition, and offers an archive with search, Older/Newer links,
   a Dark/Light switch (follows the device setting until you pick one, then remembered per device), green
   and red arrows on price changes, and a print-friendly layout.
+- Both the newsletter and the Markets Desk can be added to a phone's home screen as separate apps
+  (iPhone: Share, then Add to Home Screen; Android Chrome: menu, then Add to Home screen or Install app).
+  `manifest.webmanifest` and `desk/manifest.webmanifest` describe them, with icons in `icons/`; they open
+  full screen without the browser bar. There is no service worker, so each launch loads the latest edition.
 - Each edition is a Markdown file in `editions/`:
   - `YYYY-MM-DD.md` for the daily edition (Cairo date),
   - `YYYY-MM-DD-recap.md` for the Saturday weekly recap,
