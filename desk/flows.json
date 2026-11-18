@@ -307,6 +307,36 @@
     }
    ],
    "note": "One report; the Egyptian figure is the remainder of the foreign and Arab figures, not reported."
+  },
+  {
+   "date": "2026-11-17",
+   "confirmed": true,
+   "rows": {
+    "Egyptian investors": -0.1945,
+    "Arab investors": 0.115,
+    "Foreign investors": 0.0795
+   },
+   "sources": [
+    "Masrawy",
+    "Al Mal",
+    "Vetogate"
+   ],
+   "turnover": 9.42,
+   "links": [
+    {
+     "source": "Masrawy",
+     "url": "https://www.masrawy.com/news/news_economy/details/2026/11/17/3080148"
+    },
+    {
+     "source": "Al Mal",
+     "url": "https://almalnews.com/2147952/"
+    },
+    {
+     "source": "Vetogate",
+     "url": "https://www.vetogate.com/5772629"
+    }
+   ],
+   "note": "Listed stocks excluding deals. Elmaser swapped the Arab and foreign figures; three outlets agree on these. No split by institutions and individuals was reported."
   }
  ]
 }

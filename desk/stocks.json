@@ -266,7 +266,7 @@
    "news": [
     {
      "date": "2026-11-17",
-     "text": "Fell 2.4% to EGP 77.10 on Monday on a report that fertilizer producers will pay 50% more for gas, $12.75 per mmBtu, to keep exporting into January (Asharq Business, one origin).",
+     "text": "Its gas price rises 50% to $12.75 per mmBtu from $8.50 between November 16 and December 31 under a new decree; in return producers may export their full output, though gas cuts of 20–40% stay.",
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/2026/11/17/why-fertilizer-exports-cost-the-state-more-in-gas-than-they-earn/"
     },
@@ -1106,10 +1106,10 @@
     "source": "TradingView"
    },
    "valuation": {
-    "source": "TradingView",
+    "source": "Company filing (Orascom Construction Q3 2026 results press release (USD 279.5m 12-month attributable profit x EGP 53.7))",
     "asOf": "2026-11-18",
-    "period": "2026-06-30",
-    "basis": "results for the 12 months to June 2026",
+    "period": "2026-09-30",
+    "basis": "results for the 12 months to September 2026; book value from TradingView, to June 2026",
     "price": 815.1,
     "rows": [
      {
@@ -1118,7 +1118,7 @@
      },
      {
       "label": "P/E",
-      "value": "7.9"
+      "value": "6.0"
      },
      {
       "label": "P/B",
@@ -1126,7 +1126,7 @@
      },
      {
       "label": "Earnings per share (12 months)",
-      "value": "EGP 103.27"
+      "value": "EGP 136.32"
      },
      {
       "label": "Book value per share",
@@ -1135,6 +1135,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-18",
+     "text": "Nine-month profit attributable to shareholders rose 95.9% to $218.0m on an adjusted base (63.5% on the reported one), and the third quarter 103% to $102.7m; revenue rose to $4.78bn and the backlog stands at $11.6bn.",
+     "source": "Orascom Construction",
+     "url": "https://orascom.com/wp-content/uploads/Q3-2026-Results-Press-Release_.pdf"
+    },
     {
      "date": "2026-11-14",
      "text": "The 900 MW Gulf of Suez III wind farm, 25% owned by Orascom with ENGIE and Aeolus, reached financial close; Orascom does the civil and electrical works, and full operation is due in September 2028.",
@@ -1205,6 +1211,32 @@
      "New shares arriving on the market from November 24."
     ],
     "change": "The first accounts of the merged company, and how the new shares trade after they list on November 24."
+   },
+   "filed": {
+    "period": "2026-09-30",
+    "eps_ttm": 136.3229,
+    "bvps": null,
+    "profit_ttm": 15009150000.0,
+    "shares": 110100000.0,
+    "how": "12-month profit as filed",
+    "source": "Orascom Construction Q3 2026 results press release (USD 279.5m 12-month attributable profit x EGP 53.7)",
+    "url": "https://orascom.com/wp-content/uploads/Q3-2026-Results-Press-Release_.pdf",
+    "recorded": "2026-11-18"
+   },
+   "lastResults": {
+    "date": "2026-11-18",
+    "period": "Third quarter 2026 (nine months to September)",
+    "verdict": "beat",
+    "headline": "Nine-month attributable profit up 95.9% to $218.0m on an adjusted base; backlog $11.6bn",
+    "points": [
+     "Profit attributable to shareholders rose to $218.0m from an adjusted $111.3m, which excludes a $22.0m gain from legal cases; on the reported $133.3m the rise is 63.5%.",
+     "Third-quarter attributable profit rose 103% to $102.7m on revenue up 22.5% to $1.80bn; nine-month revenue was $4.78bn and EBITDA $333.1m, up 64.9%.",
+     "The backlog is $11.6bn, $4.8bn of it in the US; earnings per share rose to $1.98 from $1.21.",
+     "97.2m new shares for the OCI merger list on November 24."
+    ],
+    "thesis": "Dollar earnings are growing fast in both regions, which supports the stock at about 6 times earnings; the new shares on November 24 are the near-term weight.",
+    "source": "Orascom Construction",
+    "url": "https://orascom.com/wp-content/uploads/Q3-2026-Results-Press-Release_.pdf"
    }
   },
   "FWRY": {
@@ -1331,6 +1363,12 @@
    },
    "news": [
     {
+     "date": "2026-11-18",
+     "text": "Third-quarter profit after tax and minorities fell 15% to EGP 720m as revenue rose 5% to EGP 6.7bn; EFG Hermes' revenue rose 36%, while EFG Finance's profit fell 43%.",
+     "source": "Fintech Gate",
+     "url": "https://fintechgate.net/257795"
+    },
+    {
      "date": "2026-11-17",
      "text": "EFG Hermes is sole global coordinator for Misr Life Insurance's sale of 750 million existing shares, 15%, planned for December; the stock fell 3.2% to EGP 24.10 on Monday with no company news.",
      "source": "Al Borsa",
@@ -1404,6 +1442,20 @@
     "source": "Asharq Business",
     "url": "https://asharqbusiness.com/economics/143987/",
     "written": "2026-11-15"
+   },
+   "lastResults": {
+    "date": "2026-11-18",
+    "period": "Third quarter 2026",
+    "verdict": "miss",
+    "headline": "Third-quarter attributable profit down 15% to EGP 720m on revenue up 5% to EGP 6.7bn",
+    "points": [
+     "Profit after tax and minorities fell 15% to EGP 720m (Reuters: EGP 719.8m); revenue rose 5% to EGP 6.7bn, 27% excluding last year's one-off asset-sale gains at Banque Nextt.",
+     "EFG Hermes earned EGP 342m on revenue up 36% to EGP 2.9bn; EFG Finance's profit fell 43% to EGP 150m; Banque Nextt contributed EGP 228m.",
+     "Group taxes rose 18% on deferred tax on currency and seed-capital gains."
+    ],
+    "thesis": "The investment bank is benefiting from the busiest turnover in a year and the state's offerings, but the bank and the lending arm are dragging; nine-month figures were not found, so the P/E is not yet updated.",
+    "source": "Fintech Gate",
+    "url": "https://fintechgate.net/257795"
    }
   },
   "CLHO": {
@@ -1457,7 +1509,7 @@
     "change": "Results on November 16: profit growth well above 30% would support the multiple."
    },
    "preview": {
-    "date": "2026-11-17",
+    "date": "2026-11-18",
     "period": "Third quarter 2026",
     "watch": [
      "Profit attributable after a 40% fall in the first half to EGP 270.7m while revenue rose 27.4% to EGP 4.31bn: whether the third quarter stops the slide.",
@@ -1812,6 +1864,12 @@
    },
    "news": [
     {
+     "date": "2026-11-18",
+     "text": "Third-quarter revenue rose 103% to $115.8bn, above the $109.1bn consensus, and GAAP net income 105% to $65.3bn; it guided to about $130bn this quarter, assuming no data-center sales to China, and the shares rose about 3.5% after hours.",
+     "source": "Nvidia (SEC filing)",
+     "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000088/q3fy27pr.htm"
+    },
+    {
      "date": "2026-11-16",
      "text": "Fell 4.1% to $156.14, its lowest close since July 2025, a day before results; a new Commerce rule requires licenses for advanced chips sold to data centers in Indonesia, Malaysia, Singapore, Thailand and Brazil.",
      "source": "NBC News",
@@ -1890,6 +1948,21 @@
     "source": "Nvidia 8-K, August 26, 2026",
     "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000073/nvda-20260826.htm",
     "written": "2026-11-13"
+   },
+   "lastResults": {
+    "date": "2026-11-18",
+    "period": "Third quarter of fiscal 2027 (to October 25, 2026)",
+    "verdict": "beat",
+    "headline": "Revenue up 103% to $115.8bn against $109.1bn expected; guided to about $130bn",
+    "points": [
+     "Revenue rose to $115.8bn from $57.0bn a year earlier and 20% on the quarter; data-center revenue rose 110% to $107.6bn.",
+     "GAAP net income rose 105% to $65.3bn, or $2.70 a share against $1.30, including $1.77bn of gains on equity holdings; GAAP gross margin 74.8%.",
+     "Fourth-quarter guidance of $130bn, plus or minus 3%, includes an extra week and assumes no data-center sales to China; gross margin 71–72%.",
+     "The board added $150bn to the buyback, leaving $227.3bn."
+    ],
+    "thesis": "The beat answers the demand question but not the financing one the sell-off was about; the shares rose about 3.5% after hours from a close near their lowest since July 2025.",
+    "source": "Nvidia (SEC filing)",
+    "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000088/q3fy27pr.htm"
    }
   },
   "AMZN": {
@@ -2301,7 +2374,7 @@
    "news": [
     {
      "date": "2026-11-17",
-     "text": "Fell 4.1% to EGP 39.03 on Monday as seven fertilizer producers were reported to be paying $12.75 per mmBtu for gas, up from $8.5, to keep exporting for 45 days, with 20–40% supply cuts in place (Asharq Business, one origin).",
+     "text": "Seven fertilizer producers agreed to pay $175m upfront for gas at $12.75 per mmBtu, 50% more, for 45 days from November 16, in return for exporting all their output, Asharq Business reported.",
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/2026/11/17/why-fertilizer-exports-cost-the-state-more-in-gas-than-they-earn/"
     },
@@ -2942,6 +3015,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-17",
+     "text": "Fell 3.4% to $115.00 in a software-led sell-off that took Salesforce down 9.45% and ServiceNow 6.51%; no company news.",
+     "source": "MLQ.ai",
+     "url": "https://mlq.ai/news/us-stock-futures-slip-and-nvidia-edges-lower-before-its-results-as-europe-falls-1-and-deutsche-bank-drops-6/"
+    },
     {
      "date": "2026-11-16",
      "text": "Fell 5.0% to $119.09 with the AI sell-off; it carried $125.3bn of borrowings at August 31 and announced a $20bn equity and debt raise this month.",

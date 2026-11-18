@@ -12,58 +12,13 @@
    "expected": true
   },
   {
-   "t": "EAST",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-11-18",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
-  {
-   "t": "EFID",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-11-18",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
-  {
-   "t": "EFIH",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-11-18",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
-  {
    "t": "HRHO",
    "market": "egx",
    "kind": "results",
    "date": "2026-11-18",
    "period": "2026-09-30",
    "time": null,
-   "expected": true
-  },
-  {
-   "t": "JUFO",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-11-18",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
-  {
-   "t": "PHDC",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-11-18",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
+   "expected": false
   },
   {
    "t": "MSFT",
@@ -86,51 +41,6 @@
    "cur": "$",
    "declared": "2026-11-10",
    "src": "Polygon"
-  },
-  {
-   "t": "ALCN",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-12-02",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
-  {
-   "t": "AMOC",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-12-02",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
-  {
-   "t": "EGAL",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-12-02",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
-  {
-   "t": "EMFD",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-12-02",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
-  {
-   "t": "MFPC",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-12-02",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
   },
   {
    "t": "SKPC",

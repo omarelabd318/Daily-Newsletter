@@ -407,6 +407,13 @@
      "source": "CNBC Arabia",
      "url": "https://www.cnbcarabia.com/159896/2026/16/11/أرباح-\"بالم-هيلز\"-المصرية-ترتفع-هامشياً-إلى-1.1-مليار-ج",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-18",
+     "text": "Palm Hills fell 3.5% to EGP 11.44 and Talaat Moustafa 1.8% to EGP 82.38 on Tuesday, against 0.99% for the EGX30.",
+     "source": "Masrawy",
+     "url": "https://www.masrawy.com/news/news_economy/details/2026/11/17/3080148",
+     "effect": "supports"
     }
    ],
    "driver": "egp-rates"
@@ -536,6 +543,13 @@
      "source": "BusinessToday",
      "url": "https://www.businesstoday.com.my/2026/11/17/wall-street-sinks-as-ai-jitters-hit-nvidia-and-chip-stocks/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-18",
+     "text": "Nvidia's revenue rose 103% to $115.8bn against $109.1bn expected and it guided to $130bn, lifting its shares about 3.5% after hours; a relief rally in AI stocks is the main risk to the call. On Tuesday Alphabet fell 1.2% and Walmart 0.7%.",
+     "source": "MLQ.ai",
+     "url": "https://mlq.ai/news/nvidia-results-live-revenue-rises-103-to-1158-billion-and-it-guides-to-130-billion-in-its-first-report-since-jensen-huang-left/",
+     "effect": "against"
     }
    ],
    "driver": "ai-spending"
@@ -723,6 +737,13 @@
      "text": "Asharq Business reported that seven producers will pay $12.75 per mmBtu for gas, 50% more, to keep exporting for 45 days, with 20–40% cuts in place; MOPCO fell 4.1% and Abu Qir 2.4% on Monday. One origin, not independently confirmed.",
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/2026/11/17/why-fertilizer-exports-cost-the-state-more-in-gas-than-they-earn/",
+     "effect": "supports"
+    },
+    {
+     "date": "2026-11-18",
+     "text": "Abu Qir disclosed that its gas price changes under a new decree from November 16 to December 31, confirming the 50% rise to $12.75 per mmBtu; producers export their full output in return, with 20–40% cuts in place. Abu Qir closed at EGP 77.05.",
+     "source": "Al-Borsa",
+     "url": "https://alborsaanews.com/2026/11/17/2007010",
      "effect": "supports"
     }
    ],
@@ -920,6 +941,13 @@
      "source": "Almasraf",
      "url": "https://www.almasraf.news/29-4-مليار-جنيه-صافي-مشتريات-أجنبية-وعربي/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-18",
+     "text": "Sisi said the IMF program is nearly done, citing 5.1% growth; the dollar held at EGP 53.80 on Wednesday morning even with the dollar index near a 19-month high, and Arabs and foreigners bought a net EGP 195m of shares on Tuesday.",
+     "source": "Daily News Egypt",
+     "url": "https://dailynewsegypt.com/2026/11/17/al-sisi-egypts-imf-programme-nears-completion-as-economy-grows-5-1-in-fy2025-26/",
+     "effect": "supports"
     }
    ],
    "wrongIf": [
@@ -1036,6 +1064,13 @@
      "source": "Reuters (via ET CFO)",
      "url": "https://cfo.economictimes.indiatimes.com/amp/news/us-yields-ease-as-oil-prices-drop-3/135908871",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-18",
+     "text": "US jets struck a Revolutionary Guards site on Qeshm Island and Iran claimed a strike on a US base in Kuwait, yet Brent settled at $93.14, held down by the IEA's surplus forecast.",
+     "source": "The National",
+     "url": "https://www.thenationalnews.com/news/us/2026/11/17/us-jets-strike-irgc-missile-launch-site-on-irans-qeshm-island-in-self-defence/",
+     "effect": "supports"
     }
    ],
    "wrongIf": [
@@ -1077,6 +1112,13 @@
      "text": "First-quarter profit of EGP 4.93bn (+104%) is recorded, putting the stock at about 7.4 times earnings; the EGP 16 dividend goes ex on November 17, which lowers the price that day.",
      "source": "Arab Finance",
      "url": "https://www.arabfinance.com/en/news/newdetails/egypt-aluminum-sees-higher-net-profits-in-q1-fy2026-27",
+     "effect": "neutral"
+    },
+    {
+     "date": "2026-11-18",
+     "text": "The stock fell 5.2% to EGP 310.07 on Tuesday, almost all of it the EGP 16 dividend coming off the price; the range is now 8–11% above the close.",
+     "source": "Al-Masdar",
+     "url": "https://www.almasdar.com/176153",
      "effect": "neutral"
     }
    ],
