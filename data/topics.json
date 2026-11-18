@@ -14,8 +14,8 @@
    "drivers": [
     "oil"
    ],
-   "now": "Iran's navy says four tankers hit mines east of the Strait of Hormuz within 24 hours, a claim not independently confirmed, and the UKMTO reported a tanker disabled near Khasab, Oman. Israel reportedly abducted two Iranian generals in its search for missing airman Ron Arad.",
-   "now_date": "2026-11-17"
+   "now": "Iran's military claimed a drone strike on US Patriot systems at Kuwait's Ali Al Salem air base on November 18, and Bahrain said it intercepted several Iranian attacks, the third on the kingdom in under a week. US jets struck a Revolutionary Guards missile site on Qeshm Island in the Strait of Hormuz on November 17, and a third US aircraft carrier has reached the Arabian Sea.",
+   "now_date": "2026-11-18"
   },
   {
    "id": "pound-cbe",
@@ -30,8 +30,8 @@
    "drivers": [
     "egp-rates"
    ],
-   "now": "The central bank's dollar rate held at EGP 53.61 to buy and 53.75 to sell on November 17, within 1% of its strongest level in a year. Rates stand at 20% for deposits and 21% for lending, raised on October 29, with the next meeting on December 17.",
-   "now_date": "2026-11-17"
+   "now": "The central bank's dollar rate held at 53.66 to buy and 53.80 to sell on November 18, within 1% of its strongest level in a year, while overnight rates stay at 20% and 21% before the December 17 meeting.",
+   "now_date": "2026-11-18"
   },
   {
    "id": "ai-chips",
@@ -46,8 +46,8 @@
    "drivers": [
     "ai-spending"
    ],
-   "now": "The Nasdaq fell 2.49% to 24,509.76 on November 16, into a correction, and Nvidia closed at a 52-week low of $156.14 before its results on November 17, the first under interim chief Colette Kress. Anthropic prices its IPO at $70-78 a share on November 18 and starts trading on November 19.",
-   "now_date": "2026-11-17"
+   "now": "Nvidia's revenue rose 103% to $115.8 billion in the quarter to October 25, beating forecasts, and it guided to about $130 billion, lifting shares about 4% after hours after a fourth straight fall for the Nasdaq. Anthropic prices its IPO at $70-78 a share on November 18 and starts trading on November 19.",
+   "now_date": "2026-11-18"
   },
   {
    "id": "us-midterms",
@@ -89,8 +89,8 @@
    "drivers": [
     "gas-supply"
    ],
-   "now": "Seven fertilizer makers agreed to pay $175 million up front for 45 days of gas from November 16 at $12.75 per mmBtu, up from $8.5, in return for exporting their full output into early January, EnterpriseAM reported. Supply cuts of 20-40% remain.",
-   "now_date": "2026-11-17"
+   "now": "Abu Qir Fertilizers disclosed a new gas price for November 16 to December 31, a 50% rise to $12.75 per mmBtu from $8.50, in return for the right to export full output. Supply cuts to the plants remain in place.",
+   "now_date": "2026-11-18"
   },
   {
    "id": "imf",
@@ -103,8 +103,8 @@
     ]
    ],
    "drivers": [],
-   "now": "No staff-level agreement on Egypt's eighth and final IMF review has been announced, with about $2.3 billion at stake and the program expiring on December 15. Deutsche Bank Research expects the last tranches to be approved before year-end, while Fitch Solutions does not rule out a new program.",
-   "now_date": "2026-11-16"
+   "now": "President Sisi said on November 17 that Egypt's IMF program is nearing completion, citing 5.1% growth in fiscal 2025/26 and reserves of about $57.5 billion. No staff-level agreement on the eighth and final review, worth about $2.3 billion, has been announced, and the program expires on December 15.",
+   "now_date": "2026-11-18"
   },
   {
    "id": "gaza-lebanon",
@@ -112,8 +112,8 @@
    "match": "\\b(Gaza|Hamas|Hezbollah|Lebanon|Lebanese)\\b",
    "related": [],
    "drivers": [],
-   "now": "Israel killed Hamas's Rafah Brigade commander, Samir Mahmoud Abu Younis, in southern Gaza, two months after killing his predecessor, straining the ceasefire agreed in October 2025. Flooding in Gaza's tent camps continues as winter sets in.",
-   "now_date": "2026-11-17"
+   "now": "The US-backed Board of Peace told the UN Security Council on November 17 that Gaza's year-old ceasefire may be on the brink of collapse without immediate steps to carry out the 2025 deal. Israel killed Hamas's Rafah Brigade commander days earlier.",
+   "now_date": "2026-11-18"
   },
   {
    "id": "oil",
@@ -139,9 +139,137 @@
    "now_date": "2026-11-17",
    "related": [],
    "drivers": []
+  },
+  {
+   "id": "misr-life",
+   "name": "Misr Life Insurance listing",
+   "match": "Misr Life",
+   "now": "Misr Life Insurance plans to sell 750 million existing shares, 15% of its capital, on the EGX in December, pending approvals, with EFG Hermes as sole global coordinator. It earned EGP 5.2 billion in the first half of 2026 and targets a 70% payout.",
+   "now_date": "2026-11-18",
+   "related": [],
+   "drivers": []
   }
  ],
  "stories": [
+  {
+   "ed": "2026-11-18",
+   "id": "story-us-strike-on-qeshm",
+   "lead": "US strike on Qeshm",
+   "sec": "Regional and Gulf",
+   "text": "US jets struck a Revolutionary Guards missile launch site on Iran's Qeshm Island, in the Strait of Hormuz, on Tuesday \"in response to Iranian aggression,\" a US official said. Iranian media reported no casualties.",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-18",
+   "id": "story-trump-plot-sentence",
+   "lead": "Trump plot sentence",
+   "sec": "Top World Headlines",
+   "text": "Asif Merchant, a 48-year-old Pakistani national, was sentenced in Brooklyn to 27.5 years in prison for a murder-for-hire plot against US politicians, including Donald Trump, that prosecutors said was directed by Iran's Revolutionary Guards…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-18",
+   "id": "story-pound-steady",
+   "lead": "Pound steady",
+   "sec": "Markets",
+   "text": "The central bank's dollar rate held at 53.66 to buy and 53.80 to sell on Wednesday morning, within 1% of its strongest level in a year.",
+   "topics": [
+    "pound-cbe"
+   ],
+   "added": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-11-18",
+   "id": "story-nvidia-beats",
+   "lead": "Nvidia beats",
+   "sec": "Markets",
+   "text": "Nvidia's revenue rose 103% to $115.8 billion in the quarter to October 25, above the $109.1 billion analysts expected, and it guided to about $130 billion this quarter, assuming no data-center sales to China. Shares rose about 4% after…",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-11-18",
+   "id": "story-misr-life-details",
+   "lead": "Misr Life details",
+   "sec": "Markets",
+   "text": "Misr Life Insurance, which plans to sell 15% on the EGX in December, earned EGP 5.2 billion in the first half of 2026 and targets paying out 70% of profit from this year, EnterpriseAM reported. EFG Hermes is sole global coordinator; the…",
+   "topics": [
+    "misr-life"
+   ]
+  },
+  {
+   "ed": "2026-11-18",
+   "id": "story-iran-strikes-kuwait",
+   "lead": "Iran strikes Kuwait",
+   "sec": "Regional and Gulf",
+   "text": "Iran's military said it hit US Patriot systems and drone launch platforms at Ali Al Salem air base in Kuwait early on Wednesday, its first claimed strike on a US base there in months. Kuwait said its air defenses were countering \"hostile…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-18",
+   "id": "story-imf-program-nearly-done",
+   "lead": "IMF program nearly done",
+   "sec": "Egypt News",
+   "text": "President Abdel Fattah El-Sisi said Egypt's IMF program is nearing completion, citing 5.1% growth last fiscal year. He told the World Economic Forum's first country dialogue on Egypt, held in Cairo on November 16-17 with about 80 companies…",
+   "topics": [
+    "imf"
+   ]
+  },
+  {
+   "ed": "2026-11-18",
+   "id": "story-gaza-truce-at-risk",
+   "lead": "Gaza truce at risk",
+   "sec": "Regional and Gulf",
+   "text": "The US-backed Board of Peace told the UN Security Council that Gaza's year-old ceasefire \"may be on the brink of collapse\" without immediate steps to carry out the 2025 deal. Egypt is one of the deal's mediators.",
+   "topics": [
+    "gaza-lebanon"
+   ]
+  },
+  {
+   "ed": "2026-11-18",
+   "id": "story-fertilizer-gas-up-50",
+   "lead": "Fertilizer gas up 50%",
+   "sec": "Markets",
+   "text": "Abu Qir Fertilizers disclosed that its gas price changes from November 16 to December 31 under a new decree, a 50% rise to $12.75 per mmBtu from $8.50, according to Asharq Business. In return, producers may export their full output. Higher…",
+   "topics": [
+    "gas-fertilizer"
+   ]
+  },
+  {
+   "ed": "2026-11-18",
+   "id": "story-dirty-bomb-warning",
+   "lead": "Dirty-bomb warning",
+   "sec": "Regional and Gulf",
+   "text": "New US intelligence suggests Iran has drawn up options to set off a dirty bomb or chemical weapon in Washington, CNN reported, citing seven officials who stressed it is not an imminent plot. Tehran denies it. A third US aircraft carrier,…",
+   "topics": [
+    "iran-war"
+   ],
+   "added": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-18",
+   "id": "story-anthropic-prices-today",
+   "lead": "Anthropic prices today",
+   "sec": "Markets",
+   "text": "Anthropic prices 825 million shares at $70-78 after the US close, which would raise $57.8 billion to $64.4 billion, the second-largest IPO on record. Trading starts on the Nasdaq on Thursday.",
+   "topics": [
+    "ai-chips"
+   ],
+   "added": [
+    "ai-chips"
+   ]
+  },
   {
    "ed": "2026-11-17",
    "id": "story-what-it-means-for-egypt",
@@ -173,8 +301,7 @@
    ],
    "added": [
     "pound-cbe"
-   ],
-   "removed": []
+   ]
   },
   {
    "ed": "2026-11-17",
@@ -191,7 +318,7 @@
    "id": "story-nvidia-s-board-looks-elsewhere",
    "lead": "Nvidia's board looks elsewhere",
    "sec": "In Other News",
-   "text": "Nvidia's board is not planning to bring back Jensen Huang as chief executive, Reuters reported, even as President Trump said he backs a comeback for Huang, who resigned on November 12 after a spy scandal involving AI chip exports.",
+   "text": "Nvidia's board is not planning to bring back Jensen Huang as chief executive, even as President Trump said he backs a comeback for Huang, who resigned on November 12 after a spy scandal involving AI chip exports.",
    "topics": [
     "ai-chips"
    ]
@@ -207,15 +334,14 @@
    ],
    "added": [
     "saudi-deployment"
-   ],
-   "removed": []
+   ]
   },
   {
    "ed": "2026-11-17",
    "id": "story-new-chip-curbs",
    "lead": "New chip curbs",
    "sec": "In Other News",
-   "text": "The US is drawing up rules on chip sellers that supply overseas data centers serving Chinese companies, closing a route by which Chinese firms rent computing power they cannot buy, The New York Times reported. The move added to Monday's…",
+   "text": "The US is drawing up rules on chip sellers that supply overseas data centers serving Chinese companies, closing a route by which Chinese firms rent computing power they cannot buy. The move added to Monday's slide in chip stocks.",
    "topics": [
     "ai-chips"
    ]
@@ -228,6 +354,16 @@
    "text": "The Nasdaq fell into a correction on Monday, more than 10% below its record, as nerves over AI stocks built before Nvidia's results. The S&P 500 lost 1.92% to 7,416.59, the Nasdaq 2.49% to 24,509.76 and the Dow 1.41% to 51,608.17. The…",
    "topics": [
     "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-11-17",
+   "id": "story-misr-life-to-list",
+   "lead": "Misr Life to list",
+   "sec": "Markets",
+   "text": "Misr Life Insurance announced on Tuesday its intention to float 750 million existing shares, 15% of its capital, on the EGX in December, subject to regulatory approval. The shares belong to Misr Insurance Holding, which is wholly owned by…",
+   "topics": [
+    "misr-life"
    ]
   },
   {
@@ -267,7 +403,6 @@
    "sec": "Markets",
    "text": "Spot gold closed near $3,853 an ounce on Monday, its lowest since September 2025, and Goldman Sachs analysts said in a note that gold will take about two years to regain its record as rising rates curb investor demand, CNBC TV18 reported.",
    "topics": [],
-   "added": [],
    "removed": [
     "pound-cbe"
    ]
@@ -303,8 +438,7 @@
    ],
    "added": [
     "ai-chips"
-   ],
-   "removed": []
+   ]
   },
   {
    "ed": "2026-11-16",

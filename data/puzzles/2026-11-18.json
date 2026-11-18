@@ -1,0 +1,517 @@
+{
+ "date": "2026-11-18",
+ "no": 7,
+ "crossword": {
+  "size": 9,
+  "grid": [
+   "HOT###CAT",
+   "ONES##LIE",
+   "WENT#TORN",
+   "###RUINED",
+   "#TWISTED#",
+   "CHAPEL###",
+   "LETS#EYED",
+   "ART##DEAR",
+   "YES###TRY"
+  ],
+  "clues": {
+   "across": [
+    {
+     "n": 1,
+     "row": 0,
+     "col": 0,
+     "len": 3,
+     "answer": "HOT",
+     "clue": "Like Cairo in August, or a stolen car"
+    },
+    {
+     "n": 4,
+     "row": 0,
+     "col": 6,
+     "len": 3,
+     "answer": "CAT",
+     "clue": "Ancient Egyptian favorite, often mummified"
+    },
+    {
+     "n": 7,
+     "row": 1,
+     "col": 0,
+     "len": 4,
+     "answer": "ONES",
+     "clue": "Single-pound notes, say"
+    },
+    {
+     "n": 9,
+     "row": 1,
+     "col": 6,
+     "len": 3,
+     "answer": "LIE",
+     "clue": "Fib, or recline"
+    },
+    {
+     "n": 10,
+     "row": 2,
+     "col": 0,
+     "len": 4,
+     "answer": "WENT",
+     "clue": "Departed"
+    },
+    {
+     "n": 11,
+     "row": 2,
+     "col": 5,
+     "len": 4,
+     "answer": "TORN",
+     "clue": "Ripped, or undecided between two options"
+    },
+    {
+     "n": 12,
+     "row": 3,
+     "col": 3,
+     "len": 6,
+     "answer": "RUINED",
+     "clue": "Wrecked beyond repair"
+    },
+    {
+     "n": 14,
+     "row": 4,
+     "col": 1,
+     "len": 7,
+     "answer": "TWISTED",
+     "clue": "Like a corkscrew, or a plot with a surprise ending"
+    },
+    {
+     "n": 16,
+     "row": 5,
+     "col": 0,
+     "len": 6,
+     "answer": "CHAPEL",
+     "clue": "A much smaller place of worship than Sudan's newly excavated Great Church of Jesus"
+    },
+    {
+     "n": 17,
+     "row": 6,
+     "col": 0,
+     "len": 4,
+     "answer": "LETS",
+     "clue": "Allows, or replayed serves in tennis"
+    },
+    {
+     "n": 18,
+     "row": 6,
+     "col": 5,
+     "len": 4,
+     "answer": "EYED",
+     "clue": "Looked at closely"
+    },
+    {
+     "n": 22,
+     "row": 7,
+     "col": 0,
+     "len": 3,
+     "answer": "ART",
+     "clue": "Painting, sculpture and the like"
+    },
+    {
+     "n": 23,
+     "row": 7,
+     "col": 5,
+     "len": 4,
+     "answer": "DEAR",
+     "clue": "Expensive, or how a letter often begins"
+    },
+    {
+     "n": 24,
+     "row": 8,
+     "col": 0,
+     "len": 3,
+     "answer": "YES",
+     "clue": "An answer in the affirmative"
+    },
+    {
+     "n": 25,
+     "row": 8,
+     "col": 6,
+     "len": 3,
+     "answer": "TRY",
+     "clue": "Attempt, or a rugby score"
+    }
+   ],
+   "down": [
+    {
+     "n": 1,
+     "row": 0,
+     "col": 0,
+     "len": 3,
+     "answer": "HOW",
+     "clue": "In what way?"
+    },
+    {
+     "n": 2,
+     "row": 0,
+     "col": 1,
+     "len": 3,
+     "answer": "ONE",
+     "clue": "A single unit"
+    },
+    {
+     "n": 3,
+     "row": 0,
+     "col": 2,
+     "len": 3,
+     "answer": "TEN",
+     "clue": "A perfect score in gymnastics, once"
+    },
+    {
+     "n": 4,
+     "row": 0,
+     "col": 6,
+     "len": 5,
+     "answer": "CLONE",
+     "clue": "Genetic copy, like Dolly the sheep"
+    },
+    {
+     "n": 5,
+     "row": 0,
+     "col": 7,
+     "len": 5,
+     "answer": "AIRED",
+     "clue": "Broadcast, or let fresh breezes in"
+    },
+    {
+     "n": 6,
+     "row": 0,
+     "col": 8,
+     "len": 4,
+     "answer": "TEND",
+     "clue": "Look after a garden"
+    },
+    {
+     "n": 8,
+     "row": 1,
+     "col": 3,
+     "len": 6,
+     "answer": "STRIPS",
+     "clue": "Comic panels in a newspaper"
+    },
+    {
+     "n": 11,
+     "row": 2,
+     "col": 5,
+     "len": 6,
+     "answer": "TITLED",
+     "clue": "Bearing a name, or a noble rank"
+    },
+    {
+     "n": 13,
+     "row": 3,
+     "col": 4,
+     "len": 3,
+     "answer": "USE",
+     "clue": "Put to work"
+    },
+    {
+     "n": 14,
+     "row": 4,
+     "col": 1,
+     "len": 5,
+     "answer": "THERE",
+     "clue": "Not here"
+    },
+    {
+     "n": 15,
+     "row": 4,
+     "col": 2,
+     "len": 5,
+     "answer": "WATTS",
+     "clue": "Units an appliance's new energy-efficiency label might quote"
+    },
+    {
+     "n": 16,
+     "row": 5,
+     "col": 0,
+     "len": 4,
+     "answer": "CLAY",
+     "clue": "Potter's material, or a tennis surface"
+    },
+    {
+     "n": 19,
+     "row": 6,
+     "col": 6,
+     "len": 3,
+     "answer": "YET",
+     "clue": "So far, or nevertheless"
+    },
+    {
+     "n": 20,
+     "row": 6,
+     "col": 7,
+     "len": 3,
+     "answer": "EAR",
+     "clue": "Corn cob, or what a listener lends"
+    },
+    {
+     "n": 21,
+     "row": 6,
+     "col": 8,
+     "len": 3,
+     "answer": "DRY",
+     "clue": "Like the Western Desert, or a witty sense of humor"
+    }
+   ]
+  },
+  "news": []
+ },
+ "killer": {
+  "level": 3,
+  "solution": "186975243735412698429386715274639851953128467861547329548761932617293584392854176",
+  "cages": [
+   {
+    "sum": 18,
+    "cells": [
+     47,
+     56,
+     65,
+     74
+    ]
+   },
+   {
+    "sum": 18,
+    "cells": [
+     49,
+     50,
+     58,
+     59
+    ]
+   },
+   {
+    "sum": 15,
+    "cells": [
+     13,
+     22,
+     23
+    ]
+   },
+   {
+    "sum": 21,
+    "cells": [
+     44,
+     53,
+     61,
+     62
+    ]
+   },
+   {
+    "sum": 28,
+    "cells": [
+     20,
+     27,
+     28,
+     29,
+     30
+    ]
+   },
+   {
+    "sum": 12,
+    "cells": [
+     41,
+     42
+    ]
+   },
+   {
+    "sum": 12,
+    "cells": [
+     9,
+     10,
+     19
+    ]
+   },
+   {
+    "sum": 18,
+    "cells": [
+     69,
+     70,
+     77,
+     78
+    ]
+   },
+   {
+    "sum": 6,
+    "cells": [
+     31,
+     39,
+     40
+    ]
+   },
+   {
+    "sum": 13,
+    "cells": [
+     7,
+     16
+    ]
+   },
+   {
+    "sum": 28,
+    "cells": [
+     36,
+     45,
+     54,
+     63
+    ]
+   },
+   {
+    "sum": 23,
+    "cells": [
+     48,
+     57,
+     66,
+     67
+    ]
+   },
+   {
+    "sum": 8,
+    "cells": [
+     43,
+     52
+    ]
+   },
+   {
+    "sum": 17,
+    "cells": [
+     71,
+     79,
+     80
+    ]
+   },
+   {
+    "sum": 8,
+    "cells": [
+     37,
+     38
+    ]
+   },
+   {
+    "sum": 21,
+    "cells": [
+     15,
+     24,
+     33
+    ]
+   },
+   {
+    "sum": 23,
+    "cells": [
+     3,
+     4,
+     5,
+     6
+    ]
+   },
+   {
+    "sum": 2,
+    "cells": [
+     14
+    ]
+   },
+   {
+    "sum": 10,
+    "cells": [
+     46,
+     55
+    ]
+   },
+   {
+    "sum": 12,
+    "cells": [
+     51,
+     60
+    ]
+   },
+   {
+    "sum": 9,
+    "cells": [
+     0,
+     1
+    ]
+   },
+   {
+    "sum": 4,
+    "cells": [
+     18
+    ]
+   },
+   {
+    "sum": 6,
+    "cells": [
+     34,
+     35
+    ]
+   },
+   {
+    "sum": 9,
+    "cells": [
+     32
+    ]
+   },
+   {
+    "sum": 12,
+    "cells": [
+     11,
+     12,
+     21
+    ]
+   },
+   {
+    "sum": 6,
+    "cells": [
+     2
+    ]
+   },
+   {
+    "sum": 5,
+    "cells": [
+     26
+    ]
+   },
+   {
+    "sum": 11,
+    "cells": [
+     8,
+     17
+    ]
+   },
+   {
+    "sum": 1,
+    "cells": [
+     25
+    ]
+   },
+   {
+    "sum": 3,
+    "cells": [
+     68
+    ]
+   },
+   {
+    "sum": 5,
+    "cells": [
+     76
+    ]
+   },
+   {
+    "sum": 8,
+    "cells": [
+     75
+    ]
+   },
+   {
+    "sum": 13,
+    "cells": [
+     64,
+     72,
+     73
+    ]
+   }
+  ]
+ }
+}
