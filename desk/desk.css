@@ -711,3 +711,9 @@ table.mini th + th,table.mini td + td{padding-left:10px}
   .sx-t th:nth-child(3),.sx-t td:nth-child(3),.sx-t td:first-child .sx-n{display:none}
   .sx-t td:first-child{width:auto}
 }
+
+/* week ahead: a date like "Wed, Nov 18" stays on one line, and the impact tag sits level with the event's first line */
+.wk{grid-template-columns:92px minmax(0,1fr) auto}
+.wk .imp{align-self:start;line-height:20px}
+/* story headlines break evenly instead of leaving one word on its own line */
+.vcard h2,.lead-story h2,.lead-story h3,.read h3,.story h3,.news .nh,h2.call{text-wrap:balance}

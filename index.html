@@ -71,6 +71,8 @@ a:hover{text-decoration:underline}
 .s-in{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,5vw,72px);align-items:start}
 .s h2{margin:0;font:700 clamp(28px,3vw,40px)/1.1 var(--serif);letter-spacing:-.02em;position:sticky;top:24px;overflow-wrap:break-word}
 .s-body{min-width:0}
+/* a section's last paragraph adds no space of its own: the section's padding already separates it from the next rule */
+:root .s-body > .run:last-child > :last-child{margin-bottom:0;border-bottom-width:0}
 .s-body>*:first-child{margin-top:0}
 .s-body p,.s-body ul,.s-body ol{max-width:68ch}
 .s-body p{margin:0 0 18px}
