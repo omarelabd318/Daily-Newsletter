@@ -332,6 +332,17 @@ window.Desk = (function () {
   }
   // the session's most active stocks, by value traded (where the money went), in two columns of five
   const traded = (v, market) => (market === 'egx' ? 'EGP ' : '$') + (v >= 1e9 ? (v / 1e9).toFixed(2) + 'bn' : (v / 1e6).toFixed(v >= 1e8 ? 0 : 1) + 'm');
+  // the heatmap for a session: movers.json holds only the latest, so an earlier desk (or The week) reads its own
+  // session's copy from desk/heat/; a day with no session of its own (a holiday) shows the last one before it,
+  // up to a week back, and the map's caption names the session it shows
+  async function heatFor(market, upto) {
+    const H = MOVERS && MOVERS[market] && MOVERS[market].heat, ok = (h) => h && h.rows && h.rows.length;
+    if (ok(H) && H.session === upto) return H;
+    const idx = await get('/desk/heat/index.json'), s = (((idx || {})[market]) || []).filter((x) => x <= upto && x >= cut(upto, 7)).pop();
+    if (ok(H) && H.session < upto && H.session >= cut(upto, 7) && (!s || H.session >= s)) return H;
+    const A = s ? await get(`/desk/heat/${market}/${s}.json`) : null;
+    return ok(A) ? A : null;
+  }
   function marketActive(el, market, n = 10) {
     const X = MOVERS && MOVERS[market];
     if (!X || !X.active) { el.innerHTML = '<p class="sub">Not saved yet; the morning run saves the last session\'s most active stocks.</p>'; return ''; }
@@ -529,5 +540,5 @@ window.Desk = (function () {
       location.reload();
     });
   }
-  return { get ASOF() { return ASOF; }, SECTORS, lede, sortable, headText, showAllRows, calendar, asOfFor, lastDate, $, esc, pct, cls, num, get, dateLine, conf, confNow, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, marketActive, traded, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, pageTabs, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, weekChart, deskNotes, weekOf, monthOf, intraPeriod, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
+  return { get ASOF() { return ASOF; }, SECTORS, lede, sortable, headText, showAllRows, calendar, asOfFor, lastDate, $, esc, pct, cls, num, get, dateLine, conf, confNow, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, marketActive, heatFor, traded, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, pageTabs, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, weekChart, deskNotes, weekOf, monthOf, intraPeriod, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
 })();

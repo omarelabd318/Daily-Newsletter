@@ -240,6 +240,27 @@ def caps():
     return f"Market values: {len(found)} of {len(DESK['egx']) + len(DESK['us'])} updated"
 
 
+HEAT_DIR = os.path.join(ROOT, "desk", "heat")
+
+
+def save_heat(market, h):
+    """Keep a copy of each session's heatmap (desk/heat/<market>/<session>.json) and list the sessions kept in
+    desk/heat/index.json, so the desk for an earlier day, and The week, show the map for their own session; movers.json
+    holds only the latest."""
+    if not h or not h.get("session"):
+        return
+    os.makedirs(os.path.join(HEAT_DIR, market), exist_ok=True)
+    with open(os.path.join(HEAT_DIR, market, h["session"] + ".json"), "w") as f:
+        json.dump(h, f, separators=(",", ":"), ensure_ascii=False)
+        f.write("\n")
+    idx_path = os.path.join(HEAT_DIR, "index.json")
+    idx = json.load(open(idx_path)) if os.path.exists(idx_path) else {}
+    idx[market] = sorted(set(idx.get(market, [])) | {h["session"]})
+    with open(idx_path, "w") as f:
+        json.dump(idx, f, separators=(",", ":"))
+        f.write("\n")
+
+
 def _safe(fn, *a):
     try:
         return fn(*a)
@@ -345,7 +366,7 @@ def heatmap(upto=None):
     trading = now.weekday() not in (4, 5) and now.strftime("%H:%M") < "14:45"
 
     def closes(code):
-        bars = [(t.astimezone(CAIRO).date().isoformat(), v, vol) for t, v, vol in tradingview.bars("EGX:" + code, "1D", 30, volume=True)]
+        bars = [(t.astimezone(CAIRO).date().isoformat(), v, vol) for t, v, vol in tradingview.bars("EGX:" + code, "1D", 90 if upto else 30, volume=True)]
         if trading and bars and bars[-1][0] == now.date().isoformat():
             bars = bars[:-1]   # today's session is still trading
         return [b for b in bars if not upto or b[0] <= upto]   # upto: a backfill for an earlier desk
@@ -467,11 +488,13 @@ def main():
         try:
             saved["egx"]["heat"] = heatmap()
             h = saved["egx"]["heat"]
+            save_heat("egx", h)
             print(f"EGX30 heatmap: {h['session']}, {len(h['rows'])} members")
         except Exception as e:
             print(f"EGX30 heatmap: failed ({e}); kept the saved one")
         try:
             saved["us"]["heat"] = us_heatmap(saved["us"].get("session"))
+            save_heat("us", saved["us"]["heat"])
             print(f"US heatmap: {saved['us']['heat']['session']}, {len(saved['us']['heat']['rows'])} members")
         except Exception as e:
             print(f"US heatmap: failed ({e}); kept the saved one")
@@ -485,4 +508,18 @@ def main():
 
 
 if __name__ == "__main__":
+    if "--heat-backfill" in sys.argv:
+        # rebuild the EGX30 heatmap for earlier sessions from TradingView's daily bars (market values are today's):
+        # python3 fetch_movers.py --heat-backfill 2026-11-12 2026-11-13 ...
+        for s in sys.argv[sys.argv.index("--heat-backfill") + 1:]:
+            try:
+                h = heatmap(upto=s)
+                if h["session"] != s:
+                    print(f"{s}: no session (bars end {h['session']}); skipped")
+                    continue
+                save_heat("egx", h)
+                print(f"{s}: {len(h['rows'])} members")
+            except Exception as e:
+                print(f"{s}: failed ({e})")
+        sys.exit(0)
     sys.exit(main())

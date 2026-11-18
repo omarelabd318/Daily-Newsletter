@@ -178,8 +178,8 @@
 
   // the EGX30 by sector: a treemap of its members, each box sized by market value and coloured by its change over
   // the session, five sessions or 21 sessions (TradingView, saved in the movers file); a desk stock opens its page
-  const HT = M.MOVERS && M.MOVERS.egx && M.MOVERS.egx.heat;
-  if (HT && HT.session === M.ASOF && HT.rows && HT.rows.length) window.DeskHeat(M, HT, 'd1');
+  const HT = await M.heatFor('egx', M.ASOF);
+  if (HT) window.DeskHeat(M, HT, 'd1');
 
   // the session's flows: from the day's file, or else the flow history's entry for the same session
   const FL = await M.get('/desk/flows.json'), FH = ((FL && FL.days) || []).find((d) => d.date === M.ASOF);

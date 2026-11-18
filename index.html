@@ -1187,18 +1187,34 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
   // the section menu: when it has to wrap, the rows are evened out so no one link sits alone on the last line
   // paper mode sets stories in newspaper columns; a story may run from one column into the next, but never leaves a
   // line or two stranded at the foot or head of a column (CSS widows/orphans are not honoured everywhere), so any
-  // story whose piece in a column is shorter than three lines is kept whole instead
+  // story whose piece in a column is shorter than three lines is kept whole instead. The lines are counted from the
+  // text itself (a Range's line boxes, sorted into columns by their left edge): Safari gives a block split across
+  // columns a single box, so measuring the block found nothing there and left a story's first line alone at a foot
+  function colLines(el, run){
+    var cs = getComputedStyle(run), n = +cs.columnCount, gap = parseFloat(cs.columnGap) || 0;
+    var left = run.getBoundingClientRect().left + parseFloat(cs.paddingLeft || 0);
+    var cw = (run.clientWidth - parseFloat(cs.paddingLeft || 0) - parseFloat(cs.paddingRight || 0) - gap * (n - 1)) / n;
+    var lh = parseFloat(getComputedStyle(el).lineHeight) || 25;
+    var rg = document.createRange(); rg.selectNodeContents(el);
+    var cols = {};
+    [].forEach.call(rg.getClientRects(), function(r){
+      if(!r.width || !r.height) return;
+      var c = Math.max(0, Math.min(n - 1, Math.floor((r.left + 1 - left) / (cw + gap))));
+      var b = cols[c] || (cols[c] = {top: Infinity, bottom: -Infinity});
+      b.top = Math.min(b.top, r.top); b.bottom = Math.max(b.bottom, r.bottom);
+    });
+    return Object.keys(cols).map(function(k){ return Math.max(1, Math.round((cols[k].bottom - cols[k].top) / lh)); });
+  }
   function fixBreaks(){
     document.querySelectorAll('.run .keep').forEach(function(x){ x.classList.remove('keep'); });
     if(document.documentElement.getAttribute('data-theme') !== 'paper') return;
     document.querySelectorAll('.s-body .run').forEach(function(run){
       if(!(+getComputedStyle(run).columnCount > 1)) return;
-      for(var pass = 0; pass < 6; pass++){
+      for(var pass = 0; pass < 12; pass++){
         var bad = [].filter.call(run.querySelectorAll(':scope > p, li'), function(p){
-          var rs = p.getClientRects(), lh = parseFloat(getComputedStyle(p).lineHeight) || 25;
-          if(rs.length < 2) return false;
-          for(var i = 0; i < rs.length; i++) if(rs[i].height < lh * 2.5) return true;
-          return false;
+          if(p.classList.contains('keep')) return false;
+          var ls = colLines(p, run);
+          return ls.length > 1 && ls.some(function(k){ return k < 3; });
         });
         if(!bad.length) break;
         bad[0].classList.add('keep');   // one at a time: keeping one story whole moves everything after it
