@@ -290,14 +290,26 @@ def mubasher_cap(t):
     return num(m.group(1)) if m else None
 
 
+def tv_caps(tickers):
+    """{ticker: market value in EGP} from TradingView's screener, one request for every desk stock."""
+    body = json.dumps({"symbols": {"tickers": [f"EGX:{t}" for t in tickers]}, "columns": ["market_cap_basic"]}).encode()
+    req = urllib.request.Request("https://scanner.tradingview.com/egypt/scan", data=body, headers={"User-Agent": UA, "Content-Type": "application/json"})
+    return {r["s"].split(":")[1]: r["d"][0] for r in json.loads(urllib.request.urlopen(req, timeout=30).read())["data"] if r["d"][0]}
+
+
 def caps():
     """Market value of each desk stock, in billions of its currency, into desk/stocks.json."""
     path = os.path.join(ROOT, "desk", "stocks.json")
     data = json.load(open(path))
     today = datetime.date.today().isoformat()
     found = {}
+    tv = _safe(tv_caps, DESK["egx"]) or {}   # TradingView first: Mubasher's pages no longer carry figures (Nov 2026)
+    for t, v in tv.items():
+        if t not in NOT_TRADING:
+            found[t] = {"value": round(v / 1e9, 1), "currency": "EGP", "date": today, "source": "TradingView"}
+    rest = [t for t in DESK["egx"] if t not in found]
     with concurrent.futures.ThreadPoolExecutor(6) as pool:
-        for t, v in zip(DESK["egx"], pool.map(lambda t: _safe(mubasher_cap, t), DESK["egx"])):
+        for t, v in zip(rest, pool.map(lambda t: _safe(mubasher_cap, t), rest)):
             if v and t not in NOT_TRADING:
                 found[t] = {"value": round(v / 1e9, 1), "currency": "EGP", "date": today, "source": "Mubasher"}
     try:
