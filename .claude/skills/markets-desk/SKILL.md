@@ -24,7 +24,7 @@ The desk has its own scheduled run, about 45 minutes after the newsletter's, so 
 the edition and the desk gets a full session to itself. Start from the day's research: pull the repo and read
 the parts of today's edition the desk uses with `python3 .claude/skills/markets-desk/edition_for_desk.py DATE` (in
 full: Today at a Glance, both Markets parts, Stocks Watch, the currency table and the calendar; the first sentence of
-each Egypt, region, world and tech story; on a Saturday the whole recap), its figures already checked and logged.
+each Egypt, region, world and tech story; on a Saturday the same parts of the recap), its figures already checked and logged.
 Open `editions/DATE.md` itself only for a story you need in full or its links; if it is not there yet,
 wait_desk_data.py checks for up to half an hour; **the desk never goes out without the edition**: on NO EDITION
 stop, write and publish nothing, and say so in the final reply (the silent Markets Desk backup check fires the desk
@@ -335,20 +335,8 @@ Every day:
    two, which the status already shows. The entry's own `confidence` stays the level it opened at; the pages show
    the latest level, with "opened at low confidence" and each change in the news list. It cannot change once
    the entry is judged.
-3. **Judge** with `python3 .claude/skills/markets-desk/judge_views.py --write`, after logging the day's figures.
-   It marks an entry wrong as soon as a close (or, for tests marked `"intraday": true`, a price inside the
-   session) meets one of its `wrongIf` tests, judges each entry on its due date from its `track`, keeps
-   "on track" and "open" current, and writes each verdict's result line. Judge by hand only what it reports it
-   cannot decide (a wrong-if that is not a price, such as "the gas allocations are restored"). Never delete or
-   rewrite a judged entry: wrong calls stay on the record.
-
-4. **Write the lesson** for every entry judged that day (right, wrong or closed), in its `lesson`:
-   `{"date", "text", "tag"}`. `text` is two sentences: what decided it, in figures (the driver that moved, by how
-   much, against what the view assumed), and what the desk does differently because of it, or "nothing: the reasoning
-   held" when a right call was right for its stated reason. A call that came right for a different reason than the one
-   given says so. `tag` is a short slug for the kind of lesson (`one-driver`, `level-too-close`, `news-priced-in`,
-   `horizon-too-short`, `reasoning-held`...). The Views page shows it under the verdict. When the same tag appears
-   on two wrong calls, turn it into a rule under "Lessons from judged views" below, and apply it from then on.
+3. **Judge, and write each judged entry's lesson,** as `refs/judging.md` describes: read it at that step
+   (`judge_views.py --write`, after logging the day's figures), not before. Never delete or rewrite a judged entry.
 
 **Lessons from judged views** (add to this list; never remove):
 - `one-driver`: three calls that all needed oil to stay high broke on one 18% fall in Brent. At most two open

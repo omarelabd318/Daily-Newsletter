@@ -10,16 +10,20 @@ Prints, from editions/DATE.md:
   Currency and Commodities Watch and the Economic Calendar;
 - each story's bold lead-in and first sentence: Egypt News, Regional and Gulf, Top World Headlines, Tech and AI;
 - nothing from Quick Hits, Weather, Sports, Health and Science, Entertainment and Culture, Worth Knowing or Sources.
-On a Saturday (no DATE.md) it prints the Weekly Recap, editions/DATE-recap.md, in full. Open the edition itself only
-for a story you need in full or for its source links.
+On a Saturday (no DATE.md) it does the same for the Weekly Recap, editions/DATE-recap.md: in full Since Friday,
+Markets This Week and The Week Ahead; lead-ins and first sentences of The Week in Brief, What Tied the Week Together,
+Egypt This Week, Region and World and How It Played Out; nothing from Sports, Culture and Tech or Sources. Open the
+edition itself only for a story you need in full or for its source links.
 """
 import os
 import re
 import sys
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
-FULL = ("Today at a Glance", "Markets", "Stocks Watch", "Currency and Commodities Watch", "Economic Calendar")
-GIST = ("Egypt News", "Regional and Gulf", "Top World Headlines", "Tech and AI")
+FULL = ("Today at a Glance", "Markets", "Stocks Watch", "Currency and Commodities Watch", "Economic Calendar",
+        "Since Friday", "Markets This Week", "The Week Ahead")
+GIST = ("Egypt News", "Regional and Gulf", "Top World Headlines", "Tech and AI",
+        "The Week in Brief", "What Tied the Week Together", "Egypt This Week", "Region and World", "How It Played Out")
 
 
 def first_sentence(t):
@@ -31,13 +35,13 @@ def main(a):
     if not a:
         sys.exit(__doc__)
     date = a[0]
+    key = date
     path = os.path.join(ROOT, "editions", f"{date}.md")
     if not os.path.exists(path):
-        recap = os.path.join(ROOT, "editions", f"{date}-recap.md")
-        if os.path.exists(recap):
-            print(open(recap).read())
-            return
-        sys.exit(f"No edition for {date} yet.")
+        key = f"{date}-recap"
+        path = os.path.join(ROOT, "editions", f"{key}.md")
+        if not os.path.exists(path):
+            sys.exit(f"No edition for {date} yet.")
     lines = open(path).read().splitlines()
     out, mode = [], None
     for i, ln in enumerate(lines):
@@ -64,7 +68,7 @@ def main(a):
                 out.append(f"- {m.group(1)} {first_sentence(m.group(2))}")
     text = "\n".join(out).strip()
     print(text)
-    print(f"\n({len(text.split())} of {sum(len(l.split()) for l in lines)} words of editions/{date}.md; open it for a story in full or its links.)")
+    print(f"\n({len(text.split())} of {sum(len(l.split()) for l in lines)} words of editions/{key}.md; open it for a story in full or its links.)")
 
 
 if __name__ == "__main__":
