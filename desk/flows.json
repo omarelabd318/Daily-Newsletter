@@ -337,6 +337,26 @@
     }
    ],
    "note": "Listed stocks excluding deals. Elmaser swapped the Arab and foreign figures; three outlets agree on these. No split by institutions and individuals was reported."
+  },
+  {
+   "date": "2026-11-18",
+   "confirmed": false,
+   "rows": {
+    "Egyptian investors": -3.4461,
+    "Arab investors": 0.1866,
+    "Foreign investors": 3.2611
+   },
+   "sources": [
+    "Alam Al Mal"
+   ],
+   "turnover": 6.67,
+   "links": [
+    {
+     "source": "Alam Al Mal",
+     "url": "https://alamalmal.net/article/943623/"
+    }
+   ],
+   "note": "One report, likely including deals: foreign net buying of EGP 3.26bn exceeds foreigners' 9.34% share of the session (Arab Finance), and Youm7 says Egyptians and foreigners sold. Not confirmed."
   }
  ]
 }

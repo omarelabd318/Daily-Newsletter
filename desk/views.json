@@ -948,6 +948,13 @@
      "source": "Daily News Egypt",
      "url": "https://dailynewsegypt.com/2026/11/17/al-sisi-egypts-imf-programme-nears-completion-as-economy-grows-5-1-in-fy2025-26/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-19",
+     "text": "The IMF reached a staff-level agreement on the final review, worth up to $2.3bn, removing the main risk before the program expires; the dollar held at EGP 53.89.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/19/imf-staff-and-the-government-reached-agreement-on-the-final-review-putting-up-to-usd-2-3-bn-on-the-table-before-the-program-expires/",
+     "effect": "supports"
     }
    ],
    "wrongIf": [
@@ -1070,6 +1077,13 @@
      "text": "US jets struck a Revolutionary Guards site on Qeshm Island and Iran claimed a strike on a US base in Kuwait, yet Brent settled at $93.14, held down by the IEA's surplus forecast.",
      "source": "The National",
      "url": "https://www.thenationalnews.com/news/us/2026/11/17/us-jets-strike-irgc-missile-launch-site-on-irans-qeshm-island-in-self-defence/",
+     "effect": "supports"
+    },
+    {
+     "date": "2026-11-19",
+     "text": "Brent settled 1.3% lower at $91.95 on a US crude build, despite Houthi missiles at Riyadh and mine claims near Hormuz.",
+     "source": "Invezz",
+     "url": "https://invezz.com/pk/news/2026/11/18/oil-price-today-brent-slips-as-api-shows-528-million-barrel-us-crude-build/",
      "effect": "supports"
     }
    ],

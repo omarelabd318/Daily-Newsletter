@@ -507,6 +507,12 @@
    "sector": "Energy",
    "news": [
     {
+     "date": "2026-11-18",
+     "text": "Fell 4.0% to $160.58 as WTI dropped 3.2% to $83.26 on a 3.4m-barrel US crude build; no company news.",
+     "source": "MLQ.ai",
+     "url": "https://mlq.ai/news/oil-falls-as-wti-drops-more-than-4-to-about-82-after-us-crude-and-gasoline-stocks-rise-more-than-expected/"
+    },
+    {
      "date": "2026-11-12",
      "text": "Signed a non-binding agreement with Venezuela and PDVSA on November 9 to assess seven oil and gas areas, with a year's exclusive talks.",
      "source": "Egypt Oil & Gas",
@@ -1136,6 +1142,12 @@
    },
    "news": [
     {
+     "date": "2026-11-19",
+     "text": "Third-quarter profit attributable to shareholders rose 103% to $102.7m on revenue up 22.5% to $1.8bn; the backlog reached a record $11.6bn, excluding BESIX.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/19/efg-holdings-and-orascom-construction-report-their-3q-earnings/"
+    },
+    {
      "date": "2026-11-18",
      "text": "Nine-month profit attributable to shareholders rose 95.9% to $218.0m on an adjusted base (63.5% on the reported one), and the third quarter 103% to $102.7m; revenue rose to $4.78bn and the backlog stands at $11.6bn.",
      "source": "Orascom Construction",
@@ -1362,6 +1374,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-18",
+     "text": "Rose 5.0% to EGP 25.30 after third-quarter results: EFG Hermes' revenue rose 36% to EGP 2.9bn and EFG Finance's 26%, while Bank NXT's fell 31%; profit excluding one-offs rose 96% to EGP 805m.",
+     "source": "Khaleej Times",
+     "url": "https://www.khaleejtimes.com/business/efg-holding-reports-q3-2026-revenues-of-egp-67-billion-up-5-y-o-y"
+    },
     {
      "date": "2026-11-18",
      "text": "Third-quarter profit after tax and minorities fell 15% to EGP 720m as revenue rose 5% to EGP 6.7bn; EFG Hermes' revenue rose 36%, while EFG Finance's profit fell 43%.",
@@ -2007,6 +2025,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-18",
+     "text": "Rose 3.8% to $267.74 before Anthropic priced its listing at $83, raising $81.3bn; Amazon will hold 14.7% of Anthropic, according to the filing.",
+     "source": "Reuters (via Yahoo Finance)",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/anthropic-prices-ipo-83-share-014000480.html"
+    },
     {
      "date": "2026-11-16",
      "text": "Fell 3.3% to $257.75 in the AI sell-off, on the day a ULA Vulcan rocket failed to deliver 40 of its Leo satellites (one origin).",
