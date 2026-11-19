@@ -2,11 +2,16 @@
 const { chromium } = require('playwright');
 const path = require('path');
 const art = {
-  // blackletter D from the masthead, with the masthead's double rule
-  newsletter: s => `<div style="width:100%;height:100%;background:#faf8f3;display:grid;place-items:center">
-    <div style="transform:scale(${s});width:240px;height:240px;position:relative;display:grid;place-items:center">
-      <b style="font:700 190px/1 'UnifrakturCook';color:#16181a;margin-top:-14px">D</b>
-      <i style="position:absolute;left:40px;right:40px;bottom:34px;height:6px;border-top:4px solid #16181a;border-bottom:2px solid #16181a"></i></div></div>`,
+  // a front page: cream sheet on the desk's dark ground, blackletter "Daily" masthead, double rule, headline bar,
+  // a column of text and a photo block
+  newsletter: s => `<div style="width:100%;height:100%;background:#0e1216;display:grid;place-items:center">
+    <svg style="transform:scale(${s})" width="240" height="240" viewBox="0 0 240 240">
+      <rect x="46" y="30" width="148" height="184" rx="3" fill="#faf8f3"/>
+      <text x="120" y="82" text-anchor="middle" style="font-family:'UnifrakturCook';font-weight:700;font-size:44px" fill="#16181a">Daily</text>
+      <path d="M60 94h120" stroke="#16181a" stroke-width="4"/><path d="M60 101h120" stroke="#16181a" stroke-width="1.6"/>
+      <rect x="60" y="113" width="120" height="14" fill="#16181a"/>
+      <g stroke="#16181a" stroke-width="5" stroke-linecap="round"><path d="M62 144h50M62 158h50M62 172h50M62 186h36"/></g>
+      <rect x="124" y="139" width="56" height="52" fill="#16181a" opacity=".85"/></svg></div>`,
   // the desk's rising line in the brand teal, with a cream rule
   desk: s => `<div style="width:100%;height:100%;background:#16181a;display:grid;place-items:center">
     <svg style="transform:scale(${s})" width="240" height="240" viewBox="0 0 240 240">
