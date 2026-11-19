@@ -518,6 +518,24 @@ def main(path):
         for lab in ("Quote of the day", "This day in history", "Stat to know"):
             if not any(re.match(r"^\s*(?:[-*]\s+)?\*\*" + lab + r":\*\*", l) for l in sections.get("Quick Hits", {}).get("body", [])):
                 errors.append(f"Quick Hits should include a '**{lab}:**' item (the four are fixed: see the skill).")
+    # The front page builds its band of four figures from list items: a Quick Hits item without its "- " bullet
+    # (November 18 and 19, 2026) drops the band and shows the section as plain text instead.
+    if not recap:
+        bare = [l for l in sections.get("Quick Hits", {}).get("body", []) if re.match(r"^\*\*[^*]+:\*\*", l)]
+        if bare:
+            errors.append(f"Quick Hits: {len(bare)} item(s) without the '- ' bullet; write each as "
+                          "'- **Number of the day:** ...' (the front page's band of figures reads list items).")
+    # Stories are paragraphs with a bold lead-in, never bullets (November 15, 2026 bulleted every story).
+    STORY_SECS = {"Egypt News", "Top World Headlines", "Regional and Gulf", "Egypt Markets", "Global Markets",
+                  "Tech and AI", "Sports", "Health and Science", "Entertainment and Culture"}
+    blocks = [(n, sec["body"]) for n, sec in sections.items()] + \
+             [(pn, pb) for sec in sections.values() for pn, pb in sec["parts"].items()]
+    for name, body in blocks:
+        if name in STORY_SECS:
+            n = sum(1 for l in body if re.match(r"^\s*[-*]\s+\*\*[^*]+:\*\*", l))
+            if n:
+                warnings.append(f"{name}: {n} story(ies) written as bullets; write each story as its own paragraph "
+                                "opening with its bold lead-in, no '- '.")
 
     # The day's figures are logged for the site's trend lines (daily editions only).
     date = os.path.basename(path)[:10]

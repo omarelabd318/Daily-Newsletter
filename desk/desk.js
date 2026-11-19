@@ -7,7 +7,8 @@ window.Desk = (function () {
   const pct = (v, d = 1) => { if (v == null) return '—'; const r = +v.toFixed(d); return (r > 0 ? '+' : r < 0 ? MINUS : '') + Math.abs(r).toFixed(d) + '%'; };
   const cls = (v) => v == null ? 'dash' : v >= 0.05 ? 'chg up' : v <= -0.05 ? 'chg down' : 'chg flat';
   const num = (v, d = 2) => v == null ? '—' : v.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
-  const get = (u) => fetch(u, { cache: 'no-cache' }).then((r) => r.ok ? r.json() : null).catch(() => null);
+  // one fetch per file per page (the stock and EGX pages asked for stocks.json three times), shared with nav.js
+  const get = (u) => { const M = window.__deskGet || (window.__deskGet = {}); return M[u] || (M[u] = fetch(u, { cache: 'no-cache' }).then((r) => r.ok ? r.json() : null).catch(() => null)); };
   // ASOF is the EGX's last session; each market has its own last close (ASOF_M), since at weekends Wall Street
   // last traded on Friday and the EGX on Thursday. Every series runs up to the day before the desk's date (CUTOFF).
   let ASOF = null, CUTOFF = null, ASOF_M = {}, DESK = null, INTRA = null, MOVERS = null;
@@ -510,6 +511,8 @@ window.Desk = (function () {
     const main = document.querySelector('main.canvas');
     shell.appendChild(main);
     document.body.prepend(shell);
+    // the files every page reads start loading together, before the menu is built
+    ['/desk/index.json', '/desk/intraday.json', '/desk/movers.json', '/data/markets-recent.json'].forEach(get);
     (await withNav()).mount(page, NAMES, GROUP);
     const idx = await get('/desk/index.json');
     const latest = idx && idx.desks && idx.desks.length ? idx.desks.map((d) => d.date).sort().at(-1) : null;
@@ -543,7 +546,7 @@ window.Desk = (function () {
     tb.addEventListener('click', () => {
       const dark = document.documentElement.getAttribute('data-theme') !== 'dark';
       if (dark) document.documentElement.setAttribute('data-theme', 'dark'); else document.documentElement.removeAttribute('data-theme');
-      try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch (e) {}
+      try { localStorage.setItem('deskTheme', dark ? 'dark' : 'light'); } catch (e) {}
       location.reload();
     });
   }

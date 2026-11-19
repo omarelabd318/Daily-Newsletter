@@ -8,7 +8,9 @@
   const cls = (v) => v == null ? 'dash' : v >= 0.05 ? 'chg up' : v <= -0.05 ? 'chg down' : 'chg flat';
   // a finding's first sentence in bold (a sentence ends at . ! or ? before a space and a capital, never inside 54.31)
   const lede = (t) => { const m = String(t || '').match(/^(.+?[.!?])\s+(?=[A-Z"“])/); return m ? `<b>${esc(m[1])}</b> ${esc(t.slice(m[0].length))}` : `<b>${esc(t)}</b>`; };
-  const get = (u) => fetch(u, { cache: 'no-cache' }).then((r) => r.ok ? r.json() : null).catch(() => null);
+  // one fetch per file per page, shared with nav.js and started together rather than one after another
+  const get = (u) => { const M = window.__deskGet || (window.__deskGet = {}); return M[u] || (M[u] = fetch(u, { cache: 'no-cache' }).then((r) => r.ok ? r.json() : null).catch(() => null)); };
+  ['/desk/index.json', '/desk/intraday.json', '/desk/movers.json', '/desk/stocks.json', '/data/markets-recent.json', '/desk/views.json', '/desk/calendar.json'].forEach(get);
 
   // today's desk: the newest entry in desk/index.json
   const idx = await get('/desk/index.json');
@@ -452,7 +454,7 @@
   tb.addEventListener('click', () => {
     const dark = document.documentElement.getAttribute('data-theme') !== 'dark';
     if (dark) document.documentElement.setAttribute('data-theme', 'dark'); else document.documentElement.removeAttribute('data-theme');
-    try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch (e) {}
+    try { localStorage.setItem('deskTheme', dark ? 'dark' : 'light'); } catch (e) {}
     location.reload();
   });
 })();

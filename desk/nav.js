@@ -111,6 +111,10 @@
   .dp-seg button{min-height:42px;border:0;background:none;color:var(--text);font:600 12px var(--font);letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
   .dp-seg button + button{border-left:1px solid var(--text)}
   .dp-seg button[aria-pressed="true"]{background:var(--text);color:var(--ground)}
+  .dp-save{display:block;width:100%;margin-top:8px;padding:12px 14px;border:1px solid var(--text);background:none;color:var(--text);text-align:left;font:inherit;cursor:pointer}
+  .dp-save b{display:block;font:600 12px var(--font);letter-spacing:.08em;text-transform:uppercase}
+  .dp-save small{display:block;margin-top:4px;font-size:13px;opacity:.75}
+  .dp-save:disabled{opacity:.6;cursor:progress}
 }
 @media (max-width:640px) and (prefers-reduced-motion:reduce){.dp-panel,.dp-scrim,.dm-top{transition:none}}
 @media print{.dp-tabs,.dp-sheet,.dp-ib{display:none!important}}`;
@@ -139,13 +143,13 @@
     };
     tbtn.addEventListener('click', () => {
       const d = document.documentElement.getAttribute('data-theme') !== 'dark';
-      try { localStorage.setItem('theme', d ? 'dark' : 'light'); } catch (e) {}
+      try { localStorage.setItem('deskTheme', d ? 'dark' : 'light'); } catch (e) {}
       const go = () => setTheme(d);
       if (document.startViewTransition) document.startViewTransition(go); else go();
     });
     // a page loaded ahead in the background (see speculate below), or one brought back from the browser's cache, takes
     // the theme chosen since
-    const resync = () => { let t = null; try { t = localStorage.getItem('theme'); } catch (e) {} const d = t ? t === 'dark' : document.documentElement.getAttribute('data-theme') === 'dark'; if (d !== (document.documentElement.getAttribute('data-theme') === 'dark')) setTheme(d); };
+    const resync = () => { let t = null; try { t = localStorage.getItem('deskTheme'); } catch (e) {} const d = t ? t === 'dark' : document.documentElement.getAttribute('data-theme') === 'dark'; if (d !== (document.documentElement.getAttribute('data-theme') === 'dark')) setTheme(d); };
     document.addEventListener('prerenderingchange', resync);
     addEventListener('pageshow', (e) => { if (e.persisted) resync(); });
     speculate();
@@ -156,6 +160,7 @@
     listen(hd);
     // the current tab stays in view on a phone
     hd.querySelectorAll('[aria-current]').forEach((a) => { const n = a.parentElement; n.scrollLeft = Math.max(0, a.offsetLeft - 16); });
+    offline(null);
     phone(hd, w);
   }
   // the phone layout's parts: search and light/dark as icons in the name row, a tab bar (the market's dashboard, its
@@ -215,10 +220,12 @@
       + `<p class="dp-h">Egypt</p><div class="dp-list">${egx}</div>`
       + `<p class="dp-h">United States</p><div class="dp-list">${us}</div>`
       + `<p class="dp-h">The desk</p><div class="dp-list">${link('/desk/global/', 'Global')}${link('/desk/views/', 'Views')}${link('/desk/week/', 'The week')}${link('/desk/runs/', 'Runs')}<a href="/">Daily Newsletter</a></div>`
-      + `<p class="dp-h">Look</p><div class="dp-seg"><button type="button" data-d="0">Light</button><button type="button" data-d="1">Dark</button></div></div>`;
+      + `<p class="dp-h">Look</p><div class="dp-seg"><button type="button" data-d="0">Light</button><button type="button" data-d="1">Dark</button></div>`
+      + `<p class="dp-h">Offline</p><button type="button" class="dp-save"><b>Save the desk to this phone</b><small></small></button></div>`;
     document.body.appendChild(sheet);
     const segSync = () => { const d = document.documentElement.getAttribute('data-theme') === 'dark'; sheet.querySelectorAll('.dp-seg button').forEach((b) => b.setAttribute('aria-pressed', String((b.dataset.d === '1') === d))); };
     sheet.querySelector('.dp-seg').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; if ((b.dataset.d === '1') !== (document.documentElement.getAttribute('data-theme') === 'dark')) hd.querySelector('.dm-theme').click(); segSync(); });
+    offline(sheet.querySelector('.dp-save'));
     const open = (on) => { sheet.classList.toggle('on', on); document.body.style.overflow = on ? 'hidden' : ''; if (on) segSync(); };
     tabs.querySelector('.dp-more').addEventListener('click', () => open(true));
     sheet.querySelector('.dp-scrim').addEventListener('click', () => open(false));
@@ -245,7 +252,8 @@
     // a slow or data-saving connection); the rest load when the pointer rests on their link
     const c = navigator.connection || {};
     const top = where(location.pathname, false).top;
-    if (top && SUB[top] && !c.saveData && !/(^|-)2g|3g/.test(c.effectiveType || '')) {
+    const phone = matchMedia('(pointer: coarse)').matches;
+    if (top && SUB[top] && !phone && !c.saveData && !/(^|-)2g|3g/.test(c.effectiveType || '')) {
       const here = location.pathname + location.search;
       const urls = SUB[top].map(([, h]) => h).filter((h) => h !== here && h !== location.pathname).slice(0, 4);
       if (urls.length) rules.unshift({ source: 'list', urls, eagerness: 'immediate' });
@@ -279,11 +287,35 @@
       bar.addEventListener('click', (e) => { if (!au.duration) return; const r = bar.getBoundingClientRect(); au.currentTime = (e.clientX - r.left) / r.width * au.duration; });
     }).catch(() => {});
   }
+  // the desk's offline copy (desk/sw.js): pages open from it at once and refresh in the background; the More menu's
+  // button saves every page and data file, so the whole desk reads without a connection
+  function offline(btn) {
+    if (!('serviceWorker' in navigator)) { if (btn) btn.hidden = true; return; }
+    const sw = navigator.serviceWorker;
+    sw.register('/desk/sw.js', { scope: '/desk/' }).catch(() => {});
+    if (!btn) return;
+    const sm = btn.querySelector('small');
+    const when = (iso) => new Date(iso).toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+    let last = null; try { last = localStorage.getItem('deskSaved'); } catch (e) {}
+    sm.textContent = last ? 'Saved ' + when(last) + '. Tap to update.' : 'Every page and figure, for reading without a connection.';
+    sw.addEventListener('message', (e) => {
+      const m = e.data || {}; if (m.total == null) return;
+      if (!m.finished) { sm.textContent = `Saving… ${m.saved} of ${m.total}`; return; }
+      btn.disabled = false;
+      if (m.failed) { sm.textContent = `Saved ${m.total - m.failed} of ${m.total}; tap to try again.`; return; }
+      try { localStorage.setItem('deskSaved', m.at); } catch (e) {}
+      sm.textContent = 'Saved ' + when(m.at) + '. Tap to update.';
+    });
+    btn.addEventListener('click', async () => {
+      btn.disabled = true; sm.textContent = 'Saving…';
+      try { const r = await sw.ready; (r.active || sw.controller).postMessage({ save: true }); } catch (e) { btn.disabled = false; sm.textContent = 'Could not save: try again.'; }
+    });
+  }
   // the day's headline figure beside a market's name and pages (laptop only): the EGX30's and S&P 500's day change and
   // the central bank's dollar rate, from the data log; a day the market was shut repeats the last close, so the change
   // is measured from the last different one
   function figures(hd) {
-    fetch('/data/markets-recent.json').then((r) => r.json()).then((L) => {
+    ((window.__deskGet && window.__deskGet['/data/markets-recent.json']) || fetch('/data/markets-recent.json').then((r) => r.json())).then((L) => {
       const days = L.days || [];
       const chg = (k) => { const v = days.map((e) => e[k]).filter((x) => typeof x === 'number'); if (v.length < 2) return null; const now = v[v.length - 1]; let i = v.length - 2; while (i > 0 && v[i] === now) i--; return v[i] === now ? null : (now / v[i] - 1) * 100; };
       const pct = (c) => c == null ? null : [(c >= 0 ? '+' : '\u2212') + Math.abs(c).toFixed(2) + '%', c >= 0 ? 'up' : 'down'];

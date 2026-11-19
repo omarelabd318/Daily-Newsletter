@@ -160,7 +160,9 @@ values.
 
 Quick Hits has exactly these four items, in this order, every day (the front page shows them as a band of four; a
 missing one leaves a hole, and before November 12, 2026 only the first was required, so Stat to know came and went):
-`**Number of the day:**`, `**Quote of the day:**`, `**This day in history:**` and `**Stat to know:**`. Stat to know
+`**Number of the day:**`, `**Quote of the day:**`, `**This day in history:**` and `**Stat to know:**`, each a list
+item (`- **Number of the day:** ...`: on November 18 and 19, 2026 the bullets were dropped and the front page lost
+its band; the checker now fails it). Stat to know
 is a second figure from a different story than Number of the day, one that explains something rather than
 surprises: a rate, a share, a count, a comparison ("825 million. The number of shares..."). A correction, when
 there is one, is a fifth item after them. The checker fails an edition missing any of the four.
