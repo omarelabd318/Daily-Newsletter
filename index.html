@@ -641,15 +641,15 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 :root[data-theme="paper"] .f-puz[hidden]{display:none}
 :root[data-theme="paper"] .f-puz h4{margin:0 0 10px;text-align:center;font:700 11px var(--sans);letter-spacing:.18em;text-transform:uppercase}
 .f-puz-in{display:grid;grid-template-columns:1fr 1fr;gap:0}
-.f-puz-in a{display:grid;grid-template-columns:96px auto;grid-template-rows:auto 1fr;justify-content:center;column-gap:16px;align-items:start;padding:0 22px;color:var(--ink);text-decoration:none}
+.f-puz-in a{display:grid;grid-template-columns:96px auto;grid-template-rows:1fr auto auto 1fr;justify-content:center;column-gap:16px;align-items:start;padding:0 22px;color:var(--ink);text-decoration:none}
 .f-puz-in a + a{border-left:1px solid var(--ink)}
-.f-puz-in svg{grid-row:1 / 3;width:96px;height:96px;background:#f6f2e7;border:1.5px solid var(--ink)}
+.f-puz-in svg{grid-row:1 / 5;width:96px;height:96px;background:#f6f2e7;border:1.5px solid var(--ink)}
 .f-puz-in svg line{stroke:var(--ink);stroke-width:.35} .f-puz-in svg line.b{stroke-width:1.1} .f-puz-in svg rect{fill:var(--ink)}
 .f-puz-in svg text{font:700 3.6px var(--sans);fill:var(--ink)}
-.f-puz-in b{font:var(--p-hw) 22px/1.1 var(--p-head),var(--serif);margin-top:6px}
-.f-puz-in span{font:600 11px var(--sans);letter-spacing:.1em;text-transform:uppercase;margin-top:6px}
+.f-puz-in b{font:var(--p-hw) 22px/1.1 var(--p-head),var(--serif);grid-row:2;grid-column:2}
+.f-puz-in span{font:600 11px var(--sans);letter-spacing:.1em;text-transform:uppercase;margin-top:6px;grid-row:3;grid-column:2}
 .f-puz-in a:hover b{text-decoration:underline}
-@media (max-width:640px){ .f-puz-in{grid-template-columns:1fr} .f-puz-in a{padding:0;grid-template-rows:1fr auto auto 1fr} .f-puz-in svg{grid-row:1 / 5} .f-puz-in b{grid-row:2;grid-column:2;margin-top:0} .f-puz-in span{grid-row:3;grid-column:2} .f-puz-in a + a{border-left:0;border-top:1px solid var(--ink);padding-top:12px;margin-top:12px} }
+@media (max-width:640px){ .f-puz-in{grid-template-columns:1fr} .f-puz-in a{padding:0} .f-puz-in a + a{border-left:0;border-top:1px solid var(--ink);padding-top:12px;margin-top:12px} }
 :root[data-theme="paper"] .f-inside{display:block;margin-top:14px;padding:9px 11px;border:1px solid var(--ink)}
 :root[data-theme="paper"] .f-inside[hidden]{display:none}
 :root[data-theme="paper"] .f-inside h4{margin:0 0 4px;padding:0 0 5px;border:0;border-bottom:1px solid var(--ink);text-align:center;font:700 11px var(--sans);letter-spacing:.18em;text-transform:uppercase}
