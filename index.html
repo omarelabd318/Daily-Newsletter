@@ -649,7 +649,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 .f-puz-in b{font:var(--p-hw) 22px/1.1 var(--p-head),var(--serif);margin-top:6px}
 .f-puz-in span{font:600 11px var(--sans);letter-spacing:.1em;text-transform:uppercase;margin-top:6px}
 .f-puz-in a:hover b{text-decoration:underline}
-@media (max-width:640px){ .f-puz-in{grid-template-columns:1fr} .f-puz-in a{padding:0} .f-puz-in a + a{border-left:0;border-top:1px solid var(--ink);padding-top:12px;margin-top:12px} }
+@media (max-width:640px){ .f-puz-in{grid-template-columns:1fr} .f-puz-in a{padding:0;grid-template-rows:1fr auto auto 1fr} .f-puz-in svg{grid-row:1 / 5} .f-puz-in b{grid-row:2;grid-column:2;margin-top:0} .f-puz-in span{grid-row:3;grid-column:2} .f-puz-in a + a{border-left:0;border-top:1px solid var(--ink);padding-top:12px;margin-top:12px} }
 :root[data-theme="paper"] .f-inside{display:block;margin-top:14px;padding:9px 11px;border:1px solid var(--ink)}
 :root[data-theme="paper"] .f-inside[hidden]{display:none}
 :root[data-theme="paper"] .f-inside h4{margin:0 0 4px;padding:0 0 5px;border:0;border-bottom:1px solid var(--ink);text-align:center;font:700 11px var(--sans);letter-spacing:.18em;text-transform:uppercase}
