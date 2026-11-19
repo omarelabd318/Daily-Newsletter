@@ -14,8 +14,8 @@
    "drivers": [
     "oil"
    ],
-   "now": "Iran's military claimed a drone strike on US Patriot systems at Kuwait's Ali Al Salem air base on November 18, and Bahrain said it intercepted several Iranian attacks, the third on the kingdom in under a week. US jets struck a Revolutionary Guards missile site on Qeshm Island in the Strait of Hormuz on November 17, and a third US aircraft carrier has reached the Arabian Sea.",
-   "now_date": "2026-11-18"
+   "now": "Iran's Revolutionary Guards said three tankers caught fire after hitting mines east of the Strait of Hormuz on November 18, and the UK's maritime agency confirmed an attack on an ADNOC vessel that left one missing and 11 injured. Iran was on the agenda as Trump, Xi and Putin met in Shenzhen on November 19.",
+   "now_date": "2026-11-19"
   },
   {
    "id": "pound-cbe",
@@ -46,8 +46,8 @@
    "drivers": [
     "ai-spending"
    ],
-   "now": "Nvidia's revenue rose 103% to $115.8 billion in the quarter to October 25, beating forecasts, and it guided to about $130 billion, lifting shares about 4% after hours after a fourth straight fall for the Nasdaq. Anthropic prices its IPO at $70-78 a share on November 18 and starts trading on November 19.",
-   "now_date": "2026-11-18"
+   "now": "Nvidia fell 2.89% to $150.96 on November 18, its lowest since June 2025, despite record quarterly revenue of $115.8 billion, and has stopped shipping Hopper chips to China. Anthropic priced its IPO at $83 a share, raising about $81.3 billion, the largest on record, and starts trading on the Nasdaq on November 19.",
+   "now_date": "2026-11-19"
   },
   {
    "id": "us-midterms",
@@ -55,8 +55,8 @@
    "match": "\\b(midterms?|Democrats? (won|win|wins|take|took|retake)|control of (the )?(Senate|House|Congress))\\b",
    "related": [],
    "drivers": [],
-   "now": "Democrats won control of both chambers of Congress in the November 3 midterms. On November 9 President Trump questioned whether the vote was honest, without evidence, a day after saying he accepted the result; a Republican-led resolution to impeach Defense Secretary Pete Hegseth is pending.",
-   "now_date": "2026-11-10"
+   "now": "Democrat Mary Peltola won Alaska's Senate race with 50.1% of first-choice votes, the ninth Republican seat Democrats took in the November 3 midterms, their biggest gain since 1958. Democrats will hold 56 Senate seats from January.",
+   "now_date": "2026-11-19"
   },
   {
    "id": "bqdc",
@@ -103,8 +103,8 @@
     ]
    ],
    "drivers": [],
-   "now": "President Sisi said on November 17 that Egypt's IMF program is nearing completion, citing 5.1% growth in fiscal 2025/26 and reserves of about $57.5 billion. No staff-level agreement on the eighth and final review, worth about $2.3 billion, has been announced, and the program expires on December 15.",
-   "now_date": "2026-11-18"
+   "now": "IMF staff and Egypt reached a staff-level agreement on November 18 on the eighth and final review of the Extended Fund Facility, worth about $1.5 billion, and the third review of the Resilience and Sustainability Facility, worth up to about $800 million. Executive board approval is still needed, with no date set, and both arrangements expire on December 15.",
+   "now_date": "2026-11-19"
   },
   {
    "id": "gaza-lebanon",
@@ -112,8 +112,8 @@
    "match": "\\b(Gaza|Hamas|Hezbollah|Lebanon|Lebanese)\\b",
    "related": [],
    "drivers": [],
-   "now": "The US-backed Board of Peace told the UN Security Council on November 17 that Gaza's year-old ceasefire may be on the brink of collapse without immediate steps to carry out the 2025 deal. Israel killed Hamas's Rafah Brigade commander days earlier.",
-   "now_date": "2026-11-18"
+   "now": "Israeli tanks crossed the 'yellow line' into Hamas-held central Gaza on November 18, the first ground operation past the boundary since the October 2025 ceasefire; Hamas called it a violation. The US-backed Board of Peace had warned the UN Security Council a day earlier that the truce may be near collapse.",
+   "now_date": "2026-11-19"
   },
   {
    "id": "oil",
@@ -128,8 +128,8 @@
    "drivers": [
     "oil"
    ],
-   "now": "Brent fell about 3.5% to $92.44 a barrel on November 16 and is down 18.5% this month, as an IEA surplus forecast outweighs attacks on tankers near Hormuz.",
-   "now_date": "2026-11-17"
+   "now": "Brent settled at $91.95 a barrel on November 18, down 1.3%, after a build in US crude stocks, and is down sharply this month despite attacks on tankers near Hormuz.",
+   "now_date": "2026-11-19"
   },
   {
    "id": "saudi-deployment",
@@ -151,6 +151,76 @@
   }
  ],
  "stories": [
+  {
+   "ed": "2026-11-19",
+   "id": "story-tanks-cross-the-yellow-line",
+   "lead": "Tanks cross the yellow line",
+   "sec": "Regional and Gulf",
+   "text": "Israeli tanks pushed beyond the \"yellow line\" into Hamas-held central Gaza on Wednesday, near the Salah al-Din road, the first ground operation past the boundary since the October 2025 ceasefire, and dozens of residents fled. Hamas called…",
+   "topics": [
+    "gaza-lebanon"
+   ]
+  },
+  {
+   "ed": "2026-11-19",
+   "id": "story-tankers-burn-near-hormuz",
+   "lead": "Tankers burn near Hormuz",
+   "sec": "Regional and Gulf",
+   "text": "Iran's Revolutionary Guards said three oil tankers caught fire after hitting mines in a restricted zone east of the Strait of Hormuz, accusing their crews of ignoring warnings; there was no independent confirmation. The UK's maritime…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-19",
+   "id": "story-shenzhen-three-way-talks",
+   "lead": "Shenzhen three-way talks",
+   "sec": "Top World Headlines",
+   "text": "Donald Trump, Xi Jinping and Vladimir Putin were due to hold their first three-way meeting on Thursday, on the sidelines of the APEC summit in Shenzhen. Nuclear arms control, the Iran war and Ukraine top the agenda, according to AP. Why it…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-19",
+   "id": "story-nvidia-halts-hopper-to-china",
+   "lead": "Nvidia halts Hopper to China",
+   "sec": "In Other News",
+   "text": "Nvidia stopped shipping its US-approved Hopper chips to China, a business worth $2.4 billion last quarter, and now promises to stand behind customers only where \"necessary,\" EnterpriseAM reported. Interim chief executive Colette Kress…",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-11-19",
+   "id": "story-imf-deal-reached",
+   "lead": "IMF deal reached",
+   "sec": "Egypt News",
+   "text": "The IMF and Egypt reached a staff-level agreement on the final review of the country's loan program, which could release up to $2.3 billion. The deal covers the eighth and last review of the Extended Fund Facility, worth about $1.5…",
+   "topics": [
+    "imf"
+   ]
+  },
+  {
+   "ed": "2026-11-19",
+   "id": "story-gold-oil-and-bitcoin-slide",
+   "lead": "Gold, oil and Bitcoin slide",
+   "sec": "Markets",
+   "text": "Gold fell to about $3,740 an ounce, its lowest since September 2025, as the dollar index hit its highest since April 2025. Brent settled at $91.95, down 1.3%, after a build in US crude stocks. Bitcoin fell to about $63,500, down 27% this…",
+   "topics": [
+    "oil"
+   ]
+  },
+  {
+   "ed": "2026-11-19",
+   "id": "story-alaska-flips",
+   "lead": "Alaska flips",
+   "sec": "Top World Headlines",
+   "text": "Democrat Mary Peltola won Alaska's Senate race with 50.1% of first-choice votes, the ninth Republican seat Democrats took in the November 3 midterms, their biggest gain since 1958. Democrats will hold 56 of 100 seats from January. Why it…",
+   "topics": [
+    "us-midterms"
+   ]
+  },
   {
    "ed": "2026-11-18",
    "id": "story-us-strike-on-qeshm",

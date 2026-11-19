@@ -1,0 +1,597 @@
+{
+ "date": "2026-11-19",
+ "no": 8,
+ "crossword": {
+  "size": 11,
+  "grid": [
+   "BOO#ALL#CHI",
+   "OPT#VIA#HAN",
+   "NETTING#AID",
+   "#READ#ODDLY",
+   "#ARK#WOO###",
+   "##SILENCE##",
+   "###NUT#IVE#",
+   "SINGS#FLEX#",
+   "ORE#TALENTS",
+   "FOX#EGO#TRI",
+   "ANT#ROW#SAN"
+  ],
+  "clues": {
+   "across": [
+    {
+     "n": 1,
+     "row": 0,
+     "col": 0,
+     "len": 3,
+     "answer": "BOO",
+     "clue": "Ghostly shout"
+    },
+    {
+     "n": 4,
+     "row": 0,
+     "col": 4,
+     "len": 3,
+     "answer": "ALL",
+     "clue": "Every last one"
+    },
+    {
+     "n": 7,
+     "row": 0,
+     "col": 8,
+     "len": 3,
+     "answer": "CHI",
+     "clue": "Greek letter that looks like an X"
+    },
+    {
+     "n": 10,
+     "row": 1,
+     "col": 0,
+     "len": 3,
+     "answer": "OPT",
+     "clue": "Choose, with \"for\""
+    },
+    {
+     "n": 11,
+     "row": 1,
+     "col": 4,
+     "len": 3,
+     "answer": "VIA",
+     "clue": "By way of"
+    },
+    {
+     "n": 12,
+     "row": 1,
+     "col": 8,
+     "len": 3,
+     "answer": "HAN",
+     "clue": "Solo's first name"
+    },
+    {
+     "n": 13,
+     "row": 2,
+     "col": 0,
+     "len": 7,
+     "answer": "NETTING",
+     "clue": "Goalkeeper's backdrop, or what a fisherman hauls"
+    },
+    {
+     "n": 15,
+     "row": 2,
+     "col": 8,
+     "len": 3,
+     "answer": "AID",
+     "clue": "Help in a crisis"
+    },
+    {
+     "n": 16,
+     "row": 3,
+     "col": 1,
+     "len": 4,
+     "answer": "READ",
+     "clue": "Take in a page"
+    },
+    {
+     "n": 17,
+     "row": 3,
+     "col": 6,
+     "len": 5,
+     "answer": "ODDLY",
+     "clue": "In a peculiar fashion"
+    },
+    {
+     "n": 19,
+     "row": 4,
+     "col": 1,
+     "len": 3,
+     "answer": "ARK",
+     "clue": "Vessel with two of every animal"
+    },
+    {
+     "n": 20,
+     "row": 4,
+     "col": 5,
+     "len": 3,
+     "answer": "WOO",
+     "clue": "Court with flowers, perhaps"
+    },
+    {
+     "n": 21,
+     "row": 5,
+     "col": 2,
+     "len": 7,
+     "answer": "SILENCE",
+     "clue": "Golden, they say"
+    },
+    {
+     "n": 24,
+     "row": 6,
+     "col": 3,
+     "len": 3,
+     "answer": "NUT",
+     "clue": "Pecan or cashew, botanically speaking, or a hardware partner of bolt"
+    },
+    {
+     "n": 25,
+     "row": 6,
+     "col": 7,
+     "len": 3,
+     "answer": "IVE",
+     "clue": "Contraction of \"I have\""
+    },
+    {
+     "n": 27,
+     "row": 7,
+     "col": 0,
+     "len": 5,
+     "answer": "SINGS",
+     "clue": "Performs in the shower, often"
+    },
+    {
+     "n": 30,
+     "row": 7,
+     "col": 6,
+     "len": 4,
+     "answer": "FLEX",
+     "clue": "Show off a bicep"
+    },
+    {
+     "n": 31,
+     "row": 8,
+     "col": 0,
+     "len": 3,
+     "answer": "ORE",
+     "clue": "Miner's haul"
+    },
+    {
+     "n": 32,
+     "row": 8,
+     "col": 4,
+     "len": 7,
+     "answer": "TALENTS",
+     "clue": "Gifts that a parable tells of burying"
+    },
+    {
+     "n": 35,
+     "row": 9,
+     "col": 0,
+     "len": 3,
+     "answer": "FOX",
+     "clue": "Sly animal in a fable"
+    },
+    {
+     "n": 36,
+     "row": 9,
+     "col": 4,
+     "len": 3,
+     "answer": "EGO",
+     "clue": "Self-image, inflated or not"
+    },
+    {
+     "n": 37,
+     "row": 9,
+     "col": 8,
+     "len": 3,
+     "answer": "TRI",
+     "clue": "Prefix with cycle or angle"
+    },
+    {
+     "n": 38,
+     "row": 10,
+     "col": 0,
+     "len": 3,
+     "answer": "ANT",
+     "clue": "Picnic pest that marches in a line"
+    },
+    {
+     "n": 39,
+     "row": 10,
+     "col": 4,
+     "len": 3,
+     "answer": "ROW",
+     "clue": "Oar's work, or a squabble"
+    },
+    {
+     "n": 40,
+     "row": 10,
+     "col": 8,
+     "len": 3,
+     "answer": "SAN",
+     "clue": "Honorific after a Japanese name"
+    }
+   ],
+   "down": [
+    {
+     "n": 1,
+     "row": 0,
+     "col": 0,
+     "len": 3,
+     "answer": "BON",
+     "clue": "___ voyage"
+    },
+    {
+     "n": 2,
+     "row": 0,
+     "col": 1,
+     "len": 5,
+     "answer": "OPERA",
+     "clue": "Where a fat lady sings"
+    },
+    {
+     "n": 3,
+     "row": 0,
+     "col": 2,
+     "len": 6,
+     "answer": "OTTERS",
+     "clue": "Playful river swimmers that float on their backs"
+    },
+    {
+     "n": 4,
+     "row": 0,
+     "col": 4,
+     "len": 4,
+     "answer": "AVID",
+     "clue": "Keenly enthusiastic"
+    },
+    {
+     "n": 5,
+     "row": 0,
+     "col": 5,
+     "len": 3,
+     "answer": "LIN",
+     "clue": "Hamilton creator Manuel Miranda's middle name"
+    },
+    {
+     "n": 6,
+     "row": 0,
+     "col": 6,
+     "len": 6,
+     "answer": "LAGOON",
+     "clue": "Shallow body of water behind a reef"
+    },
+    {
+     "n": 7,
+     "row": 0,
+     "col": 8,
+     "len": 4,
+     "answer": "CHAD",
+     "clue": "Hanging piece on a ballot, or a Sahel country"
+    },
+    {
+     "n": 8,
+     "row": 0,
+     "col": 9,
+     "len": 4,
+     "answer": "HAIL",
+     "clue": "Icy pellets from a storm"
+    },
+    {
+     "n": 9,
+     "row": 0,
+     "col": 10,
+     "len": 4,
+     "answer": "INDY",
+     "clue": "Famous 500 race, informally"
+    },
+    {
+     "n": 14,
+     "row": 2,
+     "col": 3,
+     "len": 6,
+     "answer": "TAKING",
+     "clue": "Grabbing, as a seat"
+    },
+    {
+     "n": 18,
+     "row": 3,
+     "col": 7,
+     "len": 6,
+     "answer": "DOCILE",
+     "clue": "Easily led and gentle"
+    },
+    {
+     "n": 20,
+     "row": 4,
+     "col": 5,
+     "len": 3,
+     "answer": "WET",
+     "clue": "Like a day with rain"
+    },
+    {
+     "n": 22,
+     "row": 5,
+     "col": 4,
+     "len": 6,
+     "answer": "LUSTER",
+     "clue": "Shine on a pearl"
+    },
+    {
+     "n": 23,
+     "row": 5,
+     "col": 8,
+     "len": 6,
+     "answer": "EVENTS",
+     "clue": "Olympic contests"
+    },
+    {
+     "n": 26,
+     "row": 6,
+     "col": 9,
+     "len": 5,
+     "answer": "EXTRA",
+     "clue": "Bonus, or a movie walk-on"
+    },
+    {
+     "n": 27,
+     "row": 7,
+     "col": 0,
+     "len": 4,
+     "answer": "SOFA",
+     "clue": "Couch"
+    },
+    {
+     "n": 28,
+     "row": 7,
+     "col": 1,
+     "len": 4,
+     "answer": "IRON",
+     "clue": "Pump it at the gym, or press shirts with it"
+    },
+    {
+     "n": 29,
+     "row": 7,
+     "col": 2,
+     "len": 4,
+     "answer": "NEXT",
+     "clue": "Who's up after this one?"
+    },
+    {
+     "n": 30,
+     "row": 7,
+     "col": 6,
+     "len": 4,
+     "answer": "FLOW",
+     "clue": "Oil ___ past Hormuz, where three tankers reportedly caught fire this week"
+    },
+    {
+     "n": 33,
+     "row": 8,
+     "col": 5,
+     "len": 3,
+     "answer": "AGO",
+     "clue": "In the past, after a number"
+    },
+    {
+     "n": 34,
+     "row": 8,
+     "col": 10,
+     "len": 3,
+     "answer": "SIN",
+     "clue": "Pride or envy"
+    }
+   ]
+  },
+  "news": []
+ },
+ "killer": {
+  "level": 4,
+  "solution": "253189467491627835678453921826915743137246589945738216562891374314572698789364152",
+  "cages": [
+   {
+    "sum": 24,
+    "cells": [
+     19,
+     20,
+     21,
+     22
+    ]
+   },
+   {
+    "sum": 21,
+    "cells": [
+     29,
+     30,
+     31,
+     32
+    ]
+   },
+   {
+    "sum": 16,
+    "cells": [
+     40,
+     49,
+     58
+    ]
+   },
+   {
+    "sum": 28,
+    "cells": [
+     45,
+     46,
+     55,
+     64,
+     73
+    ]
+   },
+   {
+    "sum": 15,
+    "cells": [
+     54,
+     63,
+     72
+    ]
+   },
+   {
+    "sum": 11,
+    "cells": [
+     27,
+     28,
+     36
+    ]
+   },
+   {
+    "sum": 27,
+    "cells": [
+     14,
+     15,
+     23,
+     24
+    ]
+   },
+   {
+    "sum": 11,
+    "cells": [
+     69,
+     77,
+     78
+    ]
+   },
+   {
+    "sum": 17,
+    "cells": [
+     37,
+     38,
+     39,
+     47
+    ]
+   },
+   {
+    "sum": 18,
+    "cells": [
+     1,
+     2,
+     3,
+     10
+    ]
+   },
+   {
+    "sum": 19,
+    "cells": [
+     41,
+     42,
+     43
+    ]
+   },
+   {
+    "sum": 21,
+    "cells": [
+     4,
+     5,
+     6
+    ]
+   },
+   {
+    "sum": 19,
+    "cells": [
+     35,
+     44,
+     52,
+     53
+    ]
+   },
+   {
+    "sum": 12,
+    "cells": [
+     0,
+     9,
+     18
+    ]
+   },
+   {
+    "sum": 9,
+    "cells": [
+     11,
+     12,
+     13
+    ]
+   },
+   {
+    "sum": 14,
+    "cells": [
+     25,
+     26,
+     33,
+     34
+    ]
+   },
+   {
+    "sum": 20,
+    "cells": [
+     48,
+     57,
+     66
+    ]
+   },
+   {
+    "sum": 21,
+    "cells": [
+     7,
+     8,
+     16,
+     17
+    ]
+   },
+   {
+    "sum": 15,
+    "cells": [
+     67,
+     68,
+     76
+    ]
+   },
+   {
+    "sum": 16,
+    "cells": [
+     70,
+     79,
+     80
+    ]
+   },
+   {
+    "sum": 22,
+    "cells": [
+     60,
+     61,
+     62,
+     71
+    ]
+   },
+   {
+    "sum": 11,
+    "cells": [
+     50,
+     51,
+     59
+    ]
+   },
+   {
+    "sum": 18,
+    "cells": [
+     56,
+     65,
+     74,
+     75
+    ]
+   }
+  ]
+ }
+}
