@@ -8,7 +8,7 @@ const CACHE = 'desk-v1';
 const PAGES = ['/desk/egypt/', '/desk/usa/', '/desk/global/', '/desk/egp/', '/desk/egx/', '/desk/us/', '/desk/stocks/egypt/',
   '/desk/stocks/us/', '/desk/stock/', '/desk/sectors/', '/desk/fairvalue/', '/desk/views/', '/desk/week/', '/desk/runs/'];
 const ASSETS = ['/desk/dash.css', '/desk/desk.css', '/desk/charts.js', '/desk/dash.js', '/desk/desk.js', '/desk/heat.js',
-  '/desk/tags.js', '/desk/nav.js', '/desk/search.js', '/desk/manifest.webmanifest', '/icons/desk-apple-180.png'];
+  '/desk/tags.js', '/desk/nav.js', '/desk/search.js', '/desk/manifest.webmanifest', '/splash.js', '/icons/desk-apple-180.png'];
 const DATA = ['/desk/index.json', '/desk/intraday.json', '/desk/movers.json', '/desk/stocks.json', '/desk/views.json',
   '/desk/calendar.json', '/desk/fairvalue.json', '/desk/flows.json', '/desk/indicators.json', '/desk/rates.json',
   '/desk/reserves.json', '/desk/rolls.json', '/desk/sectors.json', '/desk/heat/index.json', '/data/markets-recent.json'];
