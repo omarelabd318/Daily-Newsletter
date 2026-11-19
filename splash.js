@@ -71,11 +71,14 @@
        '<div class="in d3 tick" style="margin-top:26px"></div>'
   };
 
+  // the desk's mark: the chart line draws itself, then takes the day's colour (green up, red down) once the EGX30 is in.
+  // On an iPhone the startup image (icons/startup/) already shows the mark drawn, so it is not drawn again there.
+  var drawn = navigator.standalone === true && !pv;
   var mark = function (w) {
     return '<svg width="' + w + '" height="' + w + '" viewBox="0 0 192 192" aria-hidden="true" style="display:block">' +
-      '<path d="M40 132L76 96l25 22 52-66" fill="none" stroke="' + C.acc + '" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" pathLength="1" ' +
-      'style="stroke-dasharray:1;stroke-dashoffset:1;animation:sp-draw .7s .05s cubic-bezier(.5,0,.2,1) forwards"/>' +
-      '<path d="M40 156h113" stroke="' + C.ink + '" stroke-width="4" style="transform-origin:96px 156px;animation:sp-rule .5s cubic-bezier(.2,.7,.2,1) both"/></svg>';
+      '<path class="mk-line" d="M40 132L76 96l25 22 52-66" fill="none" stroke="' + C.acc + '" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" pathLength="1" ' +
+      'style="transition:stroke .4s ease;stroke-dasharray:1;' + (drawn ? '' : 'stroke-dashoffset:1;animation:sp-draw .7s .05s cubic-bezier(.5,0,.2,1) forwards') + '"/>' +
+      '<path class="mk-base" d="M40 156h113" stroke="' + C.ink + '" stroke-width="4" style="transform-origin:96px 156px;' + (drawn ? '' : 'animation:sp-rule .5s cubic-bezier(.2,.7,.2,1) both') + '"/></svg>';
   };
   var lab = 'font:600 11px/1 Inter,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:' + C.mute;
   var tile = function (k, name) {
@@ -144,6 +147,7 @@
         if (v.length < 2) return;
         var c = (v[0] / v[1] - 1) * 100, s = Math.abs(c) < 0.005 ? '0.00%' : (c > 0 ? '▲ +' : '▼ −') + Math.abs(c).toFixed(2) + '%';
         set(k + '-chg', s, c > 0 ? C.up : c < 0 ? C.down : C.mute);
+        if (k === 'egx30' && Math.abs(c) >= 0.005) el.querySelectorAll('.mk-line').forEach(function (n) { n.setAttribute('stroke', c > 0 ? C.up : C.down); });
       });
     });
   }
