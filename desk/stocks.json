@@ -12,7 +12,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 436.6bn"
+      "value": "EGP 435.9bn"
      },
      {
       "label": "P/E",
@@ -103,7 +103,7 @@
     }
    ],
    "cap": {
-    "value": 436.6,
+    "value": 435.9,
     "currency": "EGP",
     "date": "2026-11-19",
     "source": "TradingView"
@@ -187,7 +187,7 @@
     }
    ],
    "cap": {
-    "value": 169.8,
+    "value": 170.0,
     "currency": "EGP",
     "date": "2026-11-19",
     "source": "TradingView"
@@ -201,7 +201,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 169.8bn"
+      "value": "EGP 170.0bn"
      },
      {
       "label": "P/E",
@@ -314,7 +314,7 @@
     }
    ],
    "cap": {
-    "value": 97.2,
+    "value": 96.2,
     "currency": "EGP",
     "date": "2026-11-19",
     "source": "TradingView"
@@ -328,7 +328,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 97.2bn"
+      "value": "EGP 96.2bn"
      },
      {
       "label": "P/E",
@@ -428,7 +428,7 @@
     }
    ],
    "cap": {
-    "value": 32.7,
+    "value": 32.9,
     "currency": "EGP",
     "date": "2026-11-19",
     "source": "TradingView"
@@ -442,7 +442,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 32.7bn"
+      "value": "EGP 32.9bn"
      },
      {
       "label": "Ratios",
@@ -538,7 +538,7 @@
     }
    ],
    "cap": {
-    "value": 682.2,
+    "value": 654.8,
     "currency": "USD",
     "date": "2026-11-19",
     "source": "Nasdaq"
@@ -552,7 +552,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$682.2bn"
+      "value": "$653.6bn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -653,7 +653,7 @@
     }
    ],
    "cap": {
-    "value": 3759.4,
+    "value": 3774.7,
     "currency": "USD",
     "date": "2026-11-19",
     "source": "Nasdaq"
@@ -667,7 +667,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$3.77tn"
+      "value": "$3.82tn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -683,7 +683,7 @@
      },
      {
       "label": "Dividend yield",
-      "value": "0.72%"
+      "value": "0.77%"
      },
      {
       "label": "Analysts' one-year target",
@@ -750,7 +750,7 @@
     }
    ],
    "cap": {
-    "value": 3444.8,
+    "value": 3472.3,
     "currency": "USD",
     "date": "2026-11-19",
     "source": "Nasdaq"
@@ -764,7 +764,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$3.44tn"
+      "value": "$3.55tn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -824,7 +824,7 @@
     }
    ],
    "cap": {
-    "value": 1630.7,
+    "value": 1690.1,
     "currency": "USD",
     "date": "2026-11-19",
     "source": "Nasdaq"
@@ -838,7 +838,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$1.63tn"
+      "value": "$1.72tn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -854,7 +854,7 @@
      },
      {
       "label": "Dividend yield",
-      "value": "0.76%"
+      "value": "0.73%"
      },
      {
       "label": "Analysts' one-year target",
@@ -1013,7 +1013,7 @@
   "SWDY": {
    "sector": "Cables and electrical",
    "cap": {
-    "value": 256.2,
+    "value": 252.4,
     "currency": "EGP",
     "date": "2026-11-19",
     "source": "TradingView"
@@ -1027,7 +1027,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 256.2bn"
+      "value": "EGP 252.4bn"
      },
      {
       "label": "P/E",
@@ -1762,7 +1762,7 @@
   "AAPL": {
    "sector": "Hardware",
    "cap": {
-    "value": 5114.0,
+    "value": 5121.9,
     "currency": "USD",
     "date": "2026-11-19",
     "source": "Nasdaq"
@@ -1776,7 +1776,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$5.11tn"
+      "value": "$5.09tn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -1842,7 +1842,7 @@
   "NVDA": {
    "sector": "Semiconductors",
    "cap": {
-    "value": 3746.6,
+    "value": 3638.1,
     "currency": "USD",
     "date": "2026-11-19",
     "source": "Nasdaq"
@@ -1856,7 +1856,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$3.75tn"
+      "value": "$3.68tn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -1864,7 +1864,7 @@
      },
      {
       "label": "Forecast P/E (fiscal 2027)",
-      "value": "16.3"
+      "value": "15.9"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -1872,11 +1872,11 @@
      },
      {
       "label": "Dividend yield",
-      "value": "0.64%"
+      "value": "0.66%"
      },
      {
       "label": "Analysts' one-year target",
-      "value": "$240.00"
+      "value": "$230.00"
      }
     ]
    },
@@ -1986,7 +1986,7 @@
   "AMZN": {
    "sector": "Retail and cloud",
    "cap": {
-    "value": 2788.6,
+    "value": 2895.1,
     "currency": "USD",
     "date": "2026-11-19",
     "source": "Nasdaq"
@@ -2000,7 +2000,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$2.79tn"
+      "value": "$2.92tn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -2048,7 +2048,7 @@
   "META": {
    "sector": "Internet",
    "cap": {
-    "value": 1582.0,
+    "value": 1575.6,
     "currency": "USD",
     "date": "2026-11-19",
     "source": "Nasdaq"
@@ -2116,7 +2116,7 @@
   "TSLA": {
    "sector": "Cars",
    "cap": {
-    "value": 1502.5,
+    "value": 1516.8,
     "currency": "USD",
     "date": "2026-11-19",
     "source": "Nasdaq"
@@ -2130,7 +2130,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$1.52tn"
+      "value": "$1.51tn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -2190,7 +2190,7 @@
   "JPM": {
    "sector": "Banks",
    "cap": {
-    "value": 876.3,
+    "value": 860.6,
     "currency": "USD",
     "date": "2026-11-19",
     "source": "Nasdaq"
@@ -2204,7 +2204,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$860.6bn"
+      "value": "$854.9bn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -2232,7 +2232,7 @@
   "BRK.B": {
    "sector": "Conglomerate",
    "cap": {
-    "value": 1295.5,
+    "value": 1267.0,
     "currency": "USD",
     "date": "2026-11-19",
     "source": "Nasdaq"
@@ -2246,7 +2246,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$1.30tn"
+      "value": "$1.25tn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -2302,7 +2302,7 @@
   "WMT": {
    "sector": "Retail",
    "cap": {
-    "value": 1011.7,
+    "value": 1010.4,
     "currency": "USD",
     "date": "2026-11-19",
     "source": "Nasdaq"
@@ -2316,7 +2316,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$1.01tn"
+      "value": "$997.4bn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -2464,7 +2464,7 @@
   "EAST": {
    "sector": "Tobacco",
    "cap": {
-    "value": 102.3,
+    "value": 102.2,
     "currency": "EGP",
     "date": "2026-11-19",
     "source": "TradingView"
@@ -2478,7 +2478,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 102.3bn"
+      "value": "EGP 102.2bn"
      },
      {
       "label": "P/E",
@@ -2864,7 +2864,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 84.2bn"
+      "value": "EGP 83.6bn"
      },
      {
       "label": "P/E",
@@ -2885,7 +2885,7 @@
     ]
    },
    "cap": {
-    "value": 84.2,
+    "value": 83.6,
     "currency": "EGP",
     "date": "2026-11-19",
     "source": "TradingView"
@@ -2944,7 +2944,7 @@
   "V": {
    "sector": "Payments",
    "cap": {
-    "value": 751.8,
+    "value": 748.5,
     "currency": "USD",
     "date": "2026-11-19",
     "source": "Nasdaq"
@@ -2958,7 +2958,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$751.8bn"
+      "value": "$728.0bn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -3000,7 +3000,7 @@
   "ORCL": {
    "sector": "Software and cloud",
    "cap": {
-    "value": 347.9,
+    "value": 344.4,
     "currency": "USD",
     "date": "2026-11-19",
     "source": "Nasdaq"
@@ -3086,7 +3086,7 @@
   "COST": {
    "sector": "Retail",
    "cap": {
-    "value": 491.9,
+    "value": 485.9,
     "currency": "USD",
     "date": "2026-11-19",
     "source": "Nasdaq"
@@ -3100,7 +3100,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$491.9bn"
+      "value": "$481.0bn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -3108,7 +3108,7 @@
      },
      {
       "label": "Forecast P/E (fiscal 2027)",
-      "value": "48.3"
+      "value": "48.2"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -3116,7 +3116,7 @@
      },
      {
       "label": "Dividend yield",
-      "value": "0.53%"
+      "value": "0.54%"
      },
      {
       "label": "Analysts' one-year target",
@@ -3368,7 +3368,7 @@
   "SKPC": {
    "sector": "Petrochemicals",
    "cap": {
-    "value": 16.8,
+    "value": 16.7,
     "currency": "EGP",
     "date": "2026-11-19",
     "source": "TradingView"
@@ -3382,7 +3382,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "EGP 16.8bn"
+      "value": "EGP 16.7bn"
      },
      {
       "label": "Ratios",
@@ -3545,7 +3545,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$245.1bn"
+      "value": "$245.5bn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -3570,7 +3570,7 @@
     ]
    },
    "cap": {
-    "value": 245.1,
+    "value": 245.6,
     "currency": "USD",
     "date": "2026-11-19",
     "source": "Nasdaq"
@@ -3608,7 +3608,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$293.2bn"
+      "value": "$304.9bn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -3633,7 +3633,7 @@
     ]
    },
    "cap": {
-    "value": 293.2,
+    "value": 290.6,
     "currency": "USD",
     "date": "2026-11-19",
     "source": "Nasdaq"
@@ -3659,7 +3659,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$1.33tn"
+      "value": "$1.28tn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -3684,7 +3684,7 @@
     ]
    },
    "cap": {
-    "value": 1331.6,
+    "value": 1300.4,
     "currency": "USD",
     "date": "2026-11-19",
     "source": "Nasdaq"

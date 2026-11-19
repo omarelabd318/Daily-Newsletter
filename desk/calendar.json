@@ -12,6 +12,42 @@
    "expected": true
   },
   {
+   "t": "EAST",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-19",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "EFID",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-19",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "EFIH",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-19",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "JUFO",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-19",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
    "t": "MSFT",
    "market": "us",
    "kind": "dividend",
@@ -21,6 +57,15 @@
    "cur": "$",
    "declared": "2026-09-14",
    "src": "Polygon"
+  },
+  {
+   "t": "PHDC",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-19",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
   },
   {
    "t": "COST",
@@ -62,15 +107,6 @@
   },
   {
    "t": "EMFD",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-12-02",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
-  {
-   "t": "MFPC",
    "market": "egx",
    "kind": "results",
    "date": "2026-12-02",
