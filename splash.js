@@ -13,7 +13,7 @@
   var standalone = (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
   var seen = false; try { seen = sessionStorage.getItem('splash-' + app) === '1'; sessionStorage.setItem('splash-' + app, '1'); } catch (e) {}
   if (!pv && (!standalone || seen)) return;
-  var MIN = 700, MAX = 1800, t0 = Date.now();
+  var MIN = 2200, MAX = 3500, t0 = Date.now();
   var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // colours follow the page's own setting (the newsletter: paper unless dark; the desk: dark unless light)
