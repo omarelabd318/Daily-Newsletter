@@ -13,6 +13,9 @@
 //   layout of its own, and it waits for a click ("Click to open").
 // - A refresh brings it up again. The "Tap / Click to open" line sits at the very bottom and does not pulse.
 // - Preview in any browser: ?splash=1|2|3 shows that look; add &hold to keep it up.
+// - The computer's front page can write itself out too: it starts with only the nameplate and the dateline, then
+//   each block is typed in turn, and each section's dividers come up once that section is written.
+//   data-wide-type="1" on the <script> tag turns it on; ?typewide previews it.
 (function () {
   var me = document.currentScript, d = document, root = d.documentElement;
   var app = me.dataset.app, q = new URLSearchParams(location.search), pv = q.get('splash');
@@ -117,7 +120,7 @@
        '<div style="height:8px;background:' + P.ink + '"></div>' +
        // the lead and the right-hand column
        '<div style="display:grid;grid-template-columns:2fr 1fr;margin-top:clamp(14px,2.4vh,22px)">' +
-       '<div style="padding-right:26px;border-right:' + rule + ';display:flex;flex-direction:column"><div class="in d2" style="' + kick + '" data-w="lead-kick">The Big Story</div>' +
+       '<div data-r="lead" style="padding-right:26px;border-right:' + rule + ';display:flex;flex-direction:column"><div class="in d2" style="' + kick + '" data-w="lead-kick">The Big Story</div>' +
        '<p class="late" data-w="lead" style="min-height:2.24em;margin-top:7px;font:900 clamp(26px,min(3vw,4.4vh),38px)/1.12 \'Playfair Display\',Georgia,serif;text-wrap:pretty"></p>' +
        '<div class="in d3" data-w="body" style="margin-top:12px;flex:1 1 0;min-height:min(105px,12vh);overflow:hidden;columns:2;column-fill:auto;column-gap:26px;column-rule:' + rule + '">' + bars([100, 96, 100, 88, 100, 94, 100, 70]) + '</div></div>' +
        '<div class="in d3" style="padding-left:26px;display:flex;flex-direction:column;gap:14px">' +
@@ -244,6 +247,18 @@
   // a computer can take a different look from the phone: data-wide-look on the <script> tag (?splash= previews both)
   var wl = +(pv || me.dataset.wideLook || look);
   var looks = app === 'desk' ? D : N, wideLook = wide && (app === 'desk' ? DW : NW)[wl];
+  var tw = app === 'news' && wl === 2 && wideLook && !still && (q.has('typewide') || me.dataset.wideType === '1');
+  if (tw) {
+    el.className = 'tw';
+    // until its turn each block is hidden; the rules of the stories' columns stay up as the empty page
+    css += '#splash.tw .wcol,#splash.tw [data-w]:not(.tw-on){visibility:hidden}' +
+      '#splash.tw [data-w=stories]:not(.tw-on){visibility:visible}#splash.tw [data-w=stories]>div:not(.tw-on)>*{visibility:hidden}' +
+      // the dividers: none on the empty page; each section's come up once the whole section is written
+      '#splash.tw [data-r],#splash.tw [data-w=body],#splash.tw [data-w=stories],#splash.tw [data-w=stories]>div,#splash.tw [data-w=watch]{transition:border-color .6s ease,column-rule-color .6s ease}' +
+      '#splash.tw:not(.r-lead) [data-r=lead]{border-right-color:transparent!important}#splash.tw:not(.r-lead) [data-w=body]{column-rule-color:transparent!important}' +
+      '#splash.tw:not(.r-stories) [data-w=stories],#splash.tw:not(.r-stories) [data-w=stories]>div{border-color:transparent!important}' +
+      '#splash.tw:not(.r-watch) [data-w=watch]{border-top-color:transparent!important}';
+  }
   el.innerHTML = '<style>' + css + '</style>' + (wideLook || looks[look] || looks[1]) +
     (tapOpen ? '<div class="late tap-hint">' + (phone ? 'Tap' : 'Click') + ' to open</div>' : '');
   if (d.body) d.body.appendChild(el); else { root.appendChild(el); d.addEventListener('DOMContentLoaded', function () { d.body.appendChild(el); }); }
@@ -309,6 +324,58 @@
     }).join(''));
     if (watch) put('watch', '<b style="font:700 10.5px/1 Inter,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;margin-right:10px">What to watch today</b>' +
       watch.split(/;\s*/).filter(Boolean).map(function (x) { return esc(x.replace(/\.$/, '')); }).join('<span style="margin:0 9px;color:' + P.ink2 + '">·</span>'));
+    if (tw) writeOut();
+  };
+  // the typed front page on a computer: every block is laid out at once with its words see-through, then they are
+  // written out one block after another (each block's own colours kept), so nothing on the sheet moves
+  var prep = function (box) {
+    var nodes = [], w = d.createTreeWalker(box, NodeFilter.SHOW_TEXT), t, n = 0;
+    while ((t = w.nextNode())) if (t.nodeValue.trim()) nodes.push(t);
+    var cols = nodes.map(function (t) { return getComputedStyle(t.parentNode).color; });
+    var parts = nodes.map(function (t, i) {
+      var par = t.parentNode, c = cols[i], a = d.createElement('span'), b = d.createElement('span');
+      a.style.color = c; b.style.color = 'transparent'; b.textContent = t.nodeValue;
+      par.insertBefore(a, t); par.insertBefore(b, t); par.removeChild(t);
+      par.style.color = 'transparent'; // a line cut short shows its "…" only once written
+      n += b.textContent.length;
+      return { a: a, b: b, par: par, c: c, s: b.textContent };
+    });
+    return { box: box, parts: parts, len: n };
+  };
+  var write = function (job, ms, done) {
+    // a few letters at a time on long blocks, so each block takes the time it is given (timers do not run under ~4ms)
+    var step = Math.max(16, ms / (job.len || 1)), per = Math.max(1, Math.round(job.len * step / (ms || 1))), k = 0, p = 0;
+    job.box.classList.add('tw-on');
+    var tick = function () {
+      for (var m = 0; m < per; m++) {
+        var x = job.parts[k];
+        if (!x) { job.parts.forEach(function (y) { y.par.style.color = y.c; }); return done(); }
+        p++; x.a.textContent = x.s.slice(0, p); x.b.textContent = x.s.slice(p);
+        if (p >= x.s.length) { k++; p = 0; }
+      }
+      setTimeout(tick, step);
+    };
+    tick();
+  };
+  var writeOut = function () {
+    var q = el.querySelector.bind(el), jobs = [];
+    var add = function (box, msPerChar, cap) { if (box) { var j = prep(box); j.ms = Math.min(cap, j.len * msPerChar); jobs.push(j); return j; } };
+    // a section's dividers come up after its last block (sec)
+    var end = function (j, sec) { if (j) j.sec = sec; else el.classList.add('r-' + sec); };
+    add(q('[data-w="lead-kick"]'), 20, 220);
+    var lj = add(q('[data-w="lead"]'), 22, 1600);
+    end(add(q('[data-w="body"]'), 3, 1100) || lj, 'lead');
+    add(q('[data-w="number"]'), 9, 800);
+    add(q('[data-w="quote"]'), 7, 900);
+    var sj; el.querySelectorAll('[data-w="stories"] > div').forEach(function (c) { sj = add(c, 8, 550) || sj; });
+    end(sj, 'stories');
+    end(add(q('[data-w="watch"]'), 4, 800), 'watch');
+    var run = function () {
+      var j = jobs.shift();
+      if (!j) { ['lead', 'stories', 'watch'].forEach(function (k) { el.classList.add('r-' + k); }); return; }
+      write(j, j.ms, function () { if (j.sec) el.classList.add('r-' + j.sec); setTimeout(run, 90); });
+    };
+    setTimeout(run, Math.max(0, 700 - (Date.now() - t0)));
   };
   // the phone's front page writes its headline out from the first letter, as if being typed. The whole line is laid out
   // at once (the part still to come is see-through), so the words never jump to a new line as they are written.
