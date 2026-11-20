@@ -95,13 +95,23 @@
       '<div class="late" data-k="' + k + '" style="margin-top:8px;font:600 20px/1.1 Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.01em">&nbsp;</div>' +
       '<div class="late" data-k="' + k + '-chg" style="margin-top:4px;font:600 13px/1 Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums">&nbsp;</div></div>';
   };
+  // the morning board under the EGX30 (look 1): a smaller tile, value and day change on one line
+  var mini = function (k, name) {
+    return '<div style="padding:10px 12px;background:' + C.tile + ';border:1px solid ' + C.line + ';border-radius:8px;text-align:left">' +
+      '<div style="font:600 10px/1 Inter,system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:' + C.mute + '">' + name + '</div>' +
+      '<div class="late" data-k="' + k + '" style="margin-top:7px;font:600 16px/1.1 Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.01em">&nbsp;</div>' +
+      '<div class="late" data-k="' + k + '-chg" style="margin-top:3px;font:600 11.5px/1 Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums">&nbsp;</div></div>';
+  };
   var D = {
-    // 1. The number: the mark draws itself, then the EGX30's last close and its day change
+    // 1. The number: the mark draws itself, then the EGX30's last close and its day change, and a board of six more
     1: '<div style="width:100%;max-width:360px;display:flex;flex-direction:column;align-items:center">' + mark(84) +
        '<div class="in d2" style="margin-top:26px;' + lab + '">EGX30 · last close</div>' +
        '<div class="late" data-k="egx30" style="margin-top:10px;font:600 clamp(44px,13vw,56px)/1 Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.03em">&nbsp;</div>' +
        '<div class="late" data-k="egx30-chg" style="margin-top:10px;font:600 17px/1 Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums">&nbsp;</div>' +
-       '<div class="in d3" style="margin-top:34px;font:500 13px/1.4 Inter,system-ui,sans-serif;color:' + C.mute + '"><b style="color:' + C.ink + ';font-weight:600">Markets Desk</b> · <span data-k="date"></span></div></div>',
+       '<div class="in d3" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;margin-top:26px">' +
+       mini('egx70', 'EGX70') + mini('usd_egp', 'Dollar · EGP') + mini('gold24_egp', 'Gold 24k · EGP') +
+       mini('brent', 'Brent') + mini('sp500', 'S&amp;P 500') + mini('btc', 'Bitcoin') + '</div>' +
+       '<div class="in d3" style="margin-top:26px;font:500 13px/1.4 Inter,system-ui,sans-serif;color:' + C.mute + '"><b style="color:' + C.ink + ';font-weight:600">Markets Desk</b> · <span data-k="date"></span></div></div>',
     // 2. Board: four numbers that set the morning
     2: '<div style="width:100%;max-width:380px">' +
        '<div style="display:flex;align-items:center;gap:12px">' + mark(40) +
@@ -147,7 +157,7 @@
     });
     if (look !== 3) json('/data/markets-recent.json').then(function (x) {
       var days = x && x.days; if (!days) return;
-      var fmt = { egx30: [1, ''], usd_egp: [2, ''], sp500: [2, ''], brent: [2, '$'] };
+      var fmt = { egx30: [1, ''], egx70: [1, ''], usd_egp: [2, ''], gold24_egp: [0, ''], sp500: [2, ''], brent: [2, '$'], btc: [0, '$'] };
       Object.keys(fmt).forEach(function (k) {
         var v = [];
         for (var i = days.length - 1; i >= 0 && v.length < 2; i--) if (days[i][k] != null && (!v.length || days[i][k] !== v[0])) v.push(days[i][k]);

@@ -16,7 +16,7 @@ repo; every push to `main` redeploys it. There is no build step.
   full screen without the browser bar. There is no service worker, so each launch loads the latest edition.
 - Launched from the home screen, each shows a short opening screen (`splash.js`) once per launch, until the page is
   ready (0.7 to 1.8 seconds; on a phone it waits for a tap, with "Tap to open" once the page is ready): the Newsletter's front page with the day's summary as its headline, the Desk's chart mark
-  with the EGX30's last close (the line green or red with the day). Links and browser tabs skip it. `data-look` on its
+  with the EGX30's last close (the line green or red with the day) and a board of six more: EGX70, Dollar, Gold 24k, Brent, S&P 500 and Bitcoin. Links and browser tabs skip it. `data-look` on its
   `<script>` tag picks one of three looks per app; `?splash=1`, `2` or `3` previews one in any browser (`&hold` keeps
   it up). On an iPhone the startup images in `icons/startup/` cover the moment before the page starts; they are the
   opening screen's first frame, rendered by `node icons/make_startup.js` (instructions at the top of the file).
