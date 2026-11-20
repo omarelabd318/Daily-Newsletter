@@ -1,0 +1,607 @@
+{
+ "date": "2026-11-20",
+ "no": 9,
+ "crossword": {
+  "size": 11,
+  "grid": [
+   "FUR#FAR#LAB",
+   "UNAWARE#AWE",
+   "SCIENCE#PAN",
+   "ELSE##VISIT",
+   "DEE##RESET#",
+   "###FRESH###",
+   "#SLEEP##BUS",
+   "STEEL##COLA",
+   "LOG#INFANTS",
+   "AKA#EARNERS",
+   "MEL#SPY#SAY"
+  ],
+  "clues": {
+   "across": [
+    {
+     "n": 1,
+     "row": 0,
+     "col": 0,
+     "len": 3,
+     "answer": "FUR",
+     "clue": "Coat that comes with a cat"
+    },
+    {
+     "n": 4,
+     "row": 0,
+     "col": 4,
+     "len": 3,
+     "answer": "FAR",
+     "clue": "Not near"
+    },
+    {
+     "n": 7,
+     "row": 0,
+     "col": 8,
+     "len": 3,
+     "answer": "LAB",
+     "clue": "Where experiments happen; Oregon State's lunar-soil potato study came from one"
+    },
+    {
+     "n": 10,
+     "row": 1,
+     "col": 0,
+     "len": 7,
+     "answer": "UNAWARE",
+     "clue": "Oblivious"
+    },
+    {
+     "n": 12,
+     "row": 1,
+     "col": 8,
+     "len": 3,
+     "answer": "AWE",
+     "clue": "Wonder at the Grand Canyon"
+    },
+    {
+     "n": 13,
+     "row": 2,
+     "col": 0,
+     "len": 7,
+     "answer": "SCIENCE",
+     "clue": "Chemistry or physics, broadly"
+    },
+    {
+     "n": 14,
+     "row": 2,
+     "col": 8,
+     "len": 3,
+     "answer": "PAN",
+     "clue": "Harsh review, or a skillet"
+    },
+    {
+     "n": 15,
+     "row": 3,
+     "col": 0,
+     "len": 4,
+     "answer": "ELSE",
+     "clue": "Otherwise"
+    },
+    {
+     "n": 16,
+     "row": 3,
+     "col": 6,
+     "len": 5,
+     "answer": "VISIT",
+     "clue": "Drop by"
+    },
+    {
+     "n": 18,
+     "row": 4,
+     "col": 0,
+     "len": 3,
+     "answer": "DEE",
+     "clue": "River that flows through Chester, or the letter D spelled out"
+    },
+    {
+     "n": 19,
+     "row": 4,
+     "col": 5,
+     "len": 5,
+     "answer": "RESET",
+     "clue": "Press to start over"
+    },
+    {
+     "n": 20,
+     "row": 5,
+     "col": 3,
+     "len": 5,
+     "answer": "FRESH",
+     "clue": "Just picked, not stale"
+    },
+    {
+     "n": 22,
+     "row": 6,
+     "col": 1,
+     "len": 5,
+     "answer": "SLEEP",
+     "clue": "What the alarm interrupts"
+    },
+    {
+     "n": 24,
+     "row": 6,
+     "col": 8,
+     "len": 3,
+     "answer": "BUS",
+     "clue": "Public transport with a route number"
+    },
+    {
+     "n": 27,
+     "row": 7,
+     "col": 0,
+     "len": 5,
+     "answer": "STEEL",
+     "clue": "Iron's tougher alloy"
+    },
+    {
+     "n": 28,
+     "row": 7,
+     "col": 7,
+     "len": 4,
+     "answer": "COLA",
+     "clue": "Fizzy brown drink"
+    },
+    {
+     "n": 29,
+     "row": 8,
+     "col": 0,
+     "len": 3,
+     "answer": "LOG",
+     "clue": "Captain's record, or a fireplace piece"
+    },
+    {
+     "n": 30,
+     "row": 8,
+     "col": 4,
+     "len": 7,
+     "answer": "INFANTS",
+     "clue": "Babies"
+    },
+    {
+     "n": 33,
+     "row": 9,
+     "col": 0,
+     "len": 3,
+     "answer": "AKA",
+     "clue": "Alias introducer, for short"
+    },
+    {
+     "n": 34,
+     "row": 9,
+     "col": 4,
+     "len": 7,
+     "answer": "EARNERS",
+     "clue": "Those bringing home a wage"
+    },
+    {
+     "n": 35,
+     "row": 10,
+     "col": 0,
+     "len": 3,
+     "answer": "MEL",
+     "clue": "Gibson of film, informally"
+    },
+    {
+     "n": 36,
+     "row": 10,
+     "col": 4,
+     "len": 3,
+     "answer": "SPY",
+     "clue": "Bond, for one"
+    },
+    {
+     "n": 37,
+     "row": 10,
+     "col": 8,
+     "len": 3,
+     "answer": "SAY",
+     "clue": "Express in words"
+    }
+   ],
+   "down": [
+    {
+     "n": 1,
+     "row": 0,
+     "col": 0,
+     "len": 5,
+     "answer": "FUSED",
+     "clue": "Blown, like a bulb circuit"
+    },
+    {
+     "n": 2,
+     "row": 0,
+     "col": 1,
+     "len": 5,
+     "answer": "UNCLE",
+     "clue": "Parent's brother"
+    },
+    {
+     "n": 3,
+     "row": 0,
+     "col": 2,
+     "len": 5,
+     "answer": "RAISE",
+     "clue": "Pay bump"
+    },
+    {
+     "n": 4,
+     "row": 0,
+     "col": 4,
+     "len": 3,
+     "answer": "FAN",
+     "clue": "Cooling device, or a devotee"
+    },
+    {
+     "n": 5,
+     "row": 0,
+     "col": 5,
+     "len": 3,
+     "answer": "ARC",
+     "clue": "Part of a circle"
+    },
+    {
+     "n": 6,
+     "row": 0,
+     "col": 6,
+     "len": 6,
+     "answer": "REEVES",
+     "clue": "Keanu and Christopher, for two"
+    },
+    {
+     "n": 7,
+     "row": 0,
+     "col": 8,
+     "len": 5,
+     "answer": "LAPSE",
+     "clue": "Brief slip in memory"
+    },
+    {
+     "n": 8,
+     "row": 0,
+     "col": 9,
+     "len": 5,
+     "answer": "AWAIT",
+     "clue": "Wait for"
+    },
+    {
+     "n": 9,
+     "row": 0,
+     "col": 10,
+     "len": 4,
+     "answer": "BENT",
+     "clue": "Not straight"
+    },
+    {
+     "n": 11,
+     "row": 1,
+     "col": 3,
+     "len": 3,
+     "answer": "WEE",
+     "clue": "Tiny, in Scotland"
+    },
+    {
+     "n": 17,
+     "row": 3,
+     "col": 7,
+     "len": 3,
+     "answer": "ISH",
+     "clue": "Suffix meaning roughly, as in 'six-___'"
+    },
+    {
+     "n": 19,
+     "row": 4,
+     "col": 5,
+     "len": 3,
+     "answer": "REP",
+     "clue": "Sales person, briefly"
+    },
+    {
+     "n": 20,
+     "row": 5,
+     "col": 3,
+     "len": 3,
+     "answer": "FEE",
+     "clue": "Charge for service"
+    },
+    {
+     "n": 21,
+     "row": 5,
+     "col": 4,
+     "len": 6,
+     "answer": "RELIES",
+     "clue": "Depends on"
+    },
+    {
+     "n": 22,
+     "row": 6,
+     "col": 1,
+     "len": 5,
+     "answer": "STOKE",
+     "clue": "Feed a fire"
+    },
+    {
+     "n": 23,
+     "row": 6,
+     "col": 2,
+     "len": 5,
+     "answer": "LEGAL",
+     "clue": "Within the law"
+    },
+    {
+     "n": 24,
+     "row": 6,
+     "col": 8,
+     "len": 5,
+     "answer": "BONES",
+     "clue": "Skeleton parts"
+    },
+    {
+     "n": 25,
+     "row": 6,
+     "col": 9,
+     "len": 5,
+     "answer": "ULTRA",
+     "clue": "Beyond, as a prefix"
+    },
+    {
+     "n": 26,
+     "row": 6,
+     "col": 10,
+     "len": 5,
+     "answer": "SASSY",
+     "clue": "Cheeky"
+    },
+    {
+     "n": 27,
+     "row": 7,
+     "col": 0,
+     "len": 4,
+     "answer": "SLAM",
+     "clue": "Door noise, or a poetry contest"
+    },
+    {
+     "n": 28,
+     "row": 7,
+     "col": 7,
+     "len": 3,
+     "answer": "CAN",
+     "clue": "Tin container, or be able to"
+    },
+    {
+     "n": 31,
+     "row": 8,
+     "col": 5,
+     "len": 3,
+     "answer": "NAP",
+     "clue": "Short daytime sleep"
+    },
+    {
+     "n": 32,
+     "row": 8,
+     "col": 6,
+     "len": 3,
+     "answer": "FRY",
+     "clue": "Lunar-soil potatoes, once harvested, might end up this way in oil"
+    }
+   ]
+  },
+  "news": []
+ },
+ "killer": {
+  "level": 5,
+  "solution": "942831675368957214571642398196274583854316927237598146713469852425183769689725431",
+  "cages": [
+   {
+    "sum": 22,
+    "cells": [
+     61,
+     62,
+     70,
+     71
+    ]
+   },
+   {
+    "sum": 26,
+    "cells": [
+     59,
+     68,
+     69,
+     76,
+     77
+    ]
+   },
+   {
+    "sum": 20,
+    "cells": [
+     4,
+     5,
+     13,
+     14,
+     22
+    ]
+   },
+   {
+    "sum": 22,
+    "cells": [
+     37,
+     38,
+     39,
+     40,
+     49
+    ]
+   },
+   {
+    "sum": 17,
+    "cells": [
+     46,
+     54,
+     55,
+     63,
+     64
+    ]
+   },
+   {
+    "sum": 10,
+    "cells": [
+     16,
+     25
+    ]
+   },
+   {
+    "sum": 25,
+    "cells": [
+     18,
+     27,
+     28,
+     36,
+     45
+    ]
+   },
+   {
+    "sum": 25,
+    "cells": [
+     47,
+     48,
+     56,
+     57,
+     58
+    ]
+   },
+   {
+    "sum": 19,
+    "cells": [
+     2,
+     3,
+     12
+    ]
+   },
+   {
+    "sum": 20,
+    "cells": [
+     8,
+     17,
+     26,
+     35
+    ]
+   },
+   {
+    "sum": 22,
+    "cells": [
+     24,
+     32,
+     33,
+     34,
+     43
+    ]
+   },
+   {
+    "sum": 23,
+    "cells": [
+     41,
+     42,
+     50
+    ]
+   },
+   {
+    "sum": 15,
+    "cells": [
+     6,
+     7,
+     15
+    ]
+   },
+   {
+    "sum": 13,
+    "cells": [
+     51,
+     52,
+     60
+    ]
+   },
+   {
+    "sum": 13,
+    "cells": [
+     44,
+     53
+    ]
+   },
+   {
+    "sum": 8,
+    "cells": [
+     78,
+     79,
+     80
+    ]
+   },
+   {
+    "sum": 17,
+    "cells": [
+     11,
+     20,
+     29,
+     30
+    ]
+   },
+   {
+    "sum": 25,
+    "cells": [
+     66,
+     67,
+     74,
+     75
+    ]
+   },
+   {
+    "sum": 16,
+    "cells": [
+     9,
+     10,
+     19
+    ]
+   },
+   {
+    "sum": 13,
+    "cells": [
+     0,
+     1
+    ]
+   },
+   {
+    "sum": 6,
+    "cells": [
+     21
+    ]
+   },
+   {
+    "sum": 2,
+    "cells": [
+     23
+    ]
+   },
+   {
+    "sum": 7,
+    "cells": [
+     31
+    ]
+   },
+   {
+    "sum": 14,
+    "cells": [
+     72,
+     73
+    ]
+   },
+   {
+    "sum": 5,
+    "cells": [
+     65
+    ]
+   }
+  ]
+ }
+}
