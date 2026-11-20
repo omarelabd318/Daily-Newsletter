@@ -13,8 +13,9 @@
 //   layout of its own, and it waits for a click ("Click to open").
 // - A refresh brings it up again. The "Tap / Click to open" line sits at the very bottom and does not pulse.
 // - Preview in any browser: ?splash=1|2|3 shows that look; add &hold to keep it up.
-// - The computer's front page can write itself out too: it starts with only the nameplate and the dateline, then
-//   each block is typed in turn, and the dividers all come up together once the page is written.
+// - The computer's front page can write itself out too: it starts as a blank sheet, then
+//   each block is typed in turn (the nameplate and the dateline first), and the dividers all come up together once the
+//   page is written.
 //   data-wide-type="1" on the <script> tag turns it on; ?typewide previews it.
 (function () {
   var me = document.currentScript, d = document, root = d.documentElement;
@@ -117,11 +118,11 @@
     // along the foot. In the newsletter's own colours.
     2: '<div style="width:100%;max-width:1040px;max-height:calc(100vh - 110px);overflow:hidden;padding:clamp(24px,4vh,36px) 44px clamp(20px,3.4vh,30px);background:' + P.sheet + ';background-image:radial-gradient(' + P.dots + ' 1px,transparent 1px);background-size:3px 3px;color:' + P.ink + ';border-radius:4px;box-shadow:0 30px 90px rgba(0,0,0,' + P.shadow + ');' +
        'transform-origin:center;animation:sp-grow .6s cubic-bezier(.2,.8,.2,1) both;text-align:left">' +
-       '<div style="text-align:center;font:700 min(8vw,10vh,96px)/1 UnifrakturCook,\'Old English Text MT\',serif">Daily Newsletter</div>' +
-       '<div style="margin-top:clamp(10px,1.8vh,16px);height:6px;border-top:2px solid ' + P.ink + ';border-bottom:1px solid ' + P.ink + '"></div>' +
-       '<div class="in d2" style="display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:center;padding:9px 0;font:600 11px/1.3 Inter,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap">' +
+       '<div data-w="name" style="text-align:center;font:700 min(8vw,10vh,96px)/1 UnifrakturCook,\'Old English Text MT\',serif">Daily Newsletter</div>' +
+       '<div data-rr style="margin-top:clamp(10px,1.8vh,16px);height:6px;border-top:2px solid ' + P.ink + ';border-bottom:1px solid ' + P.ink + '"></div>' +
+       '<div class="in d2" data-w="dateline" style="display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:center;padding:9px 0;font:600 11px/1.3 Inter,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap">' +
        '<span data-k="no">No.</span><span data-k="date" style="text-align:center">&nbsp;</span><span style="text-align:right">Cairo</span></div>' +
-       '<div style="height:8px;background:' + P.ink + '"></div>' +
+       '<div data-rr style="height:8px;background:' + P.ink + '"></div>' +
        // the lead and the right-hand column
        '<div style="display:grid;grid-template-columns:2fr 1fr;margin-top:clamp(14px,2.4vh,22px)">' +
        '<div data-r="lead" style="padding-right:26px;border-right:' + rule + ';display:flex;flex-direction:column"><div class="in d2" style="' + kick + '" data-w="lead-kick">The Big Story</div>' +
@@ -252,6 +253,8 @@
   var wl = +(pv || me.dataset.wideLook || look);
   var looks = app === 'desk' ? D : N, wideLook = wide && (app === 'desk' ? DW : NW)[wl];
   var tw = app === 'news' && wl === 2 && wideLook && !still && (q.has('typewide') || me.dataset.wideType === '1');
+  // if the day's edition does not come (or comes late), the sheet writes out what it has: never a blank page
+  if (tw) setTimeout(function () { writeOut(); }, 4000);
   if (tw) {
     el.className = 'tw';
     // until its turn each block is hidden; the rules of the stories' columns stay up as the empty page
@@ -261,6 +264,7 @@
       '#splash.tw [data-r],#splash.tw [data-w=body],#splash.tw [data-w=stories],#splash.tw [data-w=stories]>div,#splash.tw [data-w=watch]{transition:border-color .6s ease,column-rule-color .6s ease}' +
       '#splash.tw:not(.r-lead) [data-r=lead]{border-right-color:transparent!important}#splash.tw:not(.r-lead) [data-w=body]{column-rule-color:transparent!important}' +
       '#splash.tw:not(.r-stories) [data-w=stories],#splash.tw:not(.r-stories) [data-w=stories]>div{border-color:transparent!important}' +
+      '#splash.tw [data-rr]{transition:opacity .6s ease}#splash.tw:not(.r-watch) [data-rr]{opacity:0}' +
       '#splash.tw [data-w=watch] [data-rl]{transition:opacity .6s ease}#splash.tw:not(.r-watch) [data-w=watch] [data-rl]{opacity:0}' +
       '#splash.tw:not(.r-watch) [data-w=watch] [data-c]{border-color:transparent!important}';
   }
@@ -293,7 +297,7 @@
       else if ((m = l.match(/^- \*\*(.+?):\*\*\s*(.+)$/))) hits[m[1].toLowerCase()] = plain(m[2]);
       else if ((m = l.match(/^\*\*(.+?):\*\*\s*(.+)$/))) { var k = slug(plain(m[1])); if (!para[k]) para[k] = plain(m[2]); }
     });
-    if (!g.length) { put('lead', esc(e.summary || '')); return; }
+    if (!g.length) { put('lead', esc(e.summary || '')); if (tw) writeOut(); return; }
     var lead = g[0];
     put('lead-kick', esc(lead.k)); put('lead', esc(lead.t));
     var body = para[lead.a];
@@ -431,18 +435,24 @@
     };
     tick();
   };
+  var wrote = false;
   var writeOut = function () {
+    if (wrote) return; wrote = true;
     var q = el.querySelector.bind(el), jobs = [];
     // each block is made ready only when its turn comes (until then it is hidden), so the sheet can still settle
     // (fonts, what fits, how much of the Big Story's text) up to that moment; a block left off by then is skipped
     var add = function (box, msPerChar, cap) { if (box) jobs.push([box, msPerChar, cap]); };
-    add(q('[data-w="lead-kick"]'), 56, 640);
+    // the masthead first: the name, then the dateline (its number, the date, Cairo)
+    // the Big Story's headline at its own pace; every other block 40% slower than that scale
+    add(q('[data-w="name"]'), 98, 1820);
+    add(q('[data-w="dateline"]'), 39.2, 1540);
+    add(q('[data-w="lead-kick"]'), 78.4, 896);
     add(q('[data-w="lead"]'), 64, 4600);
-    add(q('[data-w="body"]'), 9, 3200);
-    add(q('[data-w="number"]'), 26, 2300);
-    add(q('[data-w="quote"]'), 20, 2600);
-    el.querySelectorAll('[data-w="stories"] > div').forEach(function (c) { add(c, 24, 1600); });
-    add(q('[data-w="watch"]'), 12, 2300);
+    add(q('[data-w="body"]'), 12.6, 4480);
+    add(q('[data-w="number"]'), 36.4, 3220);
+    add(q('[data-w="quote"]'), 28, 3640);
+    el.querySelectorAll('[data-w="stories"] > div').forEach(function (c) { add(c, 33.6, 2240); });
+    add(q('[data-w="watch"]'), 16.8, 3220);
     var run = function () {
       var x = jobs.shift();
       if (!x) { ['lead', 'stories', 'watch', 'done'].forEach(function (k) { el.classList.add('r-' + k); }); return; }
