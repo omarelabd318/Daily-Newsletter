@@ -20,8 +20,9 @@
   var me = document.currentScript, d = document, root = d.documentElement;
   var app = me.dataset.app, q = new URLSearchParams(location.search), pv = q.get('splash');
   var look = +(pv || me.dataset.look || 1), hold = q.has('hold');
-  // the computer's front page, second arrangement (data-wide-front="2", ?front=2 previews it): no quote of the day,
-  // the number of the day centred in the right-hand column, all six stories kept, the Big Story's text taking the room
+  // the computer's front page, second arrangement (data-wide-front="2", ?front=2 previews it): the number of the day
+  // (and the quote of the day under it, where there is room) centred in the right-hand column, all six stories kept,
+  // the Big Story's text taking the room the sheet has; on a shorter window the quote goes first, then what to watch
   var alt = q.get('front') === '2' || me.dataset.wideFront === '2';
   var standalone = (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
   var seen = false; try { seen = sessionStorage.getItem('splash-' + app) === '1'; sessionStorage.setItem('splash-' + app, '1'); } catch (e) {}
@@ -128,7 +129,7 @@
        '<div class="in d3" data-w="body" style="margin-top:12px;flex:1 1 0;min-height:min(105px,12vh);overflow:hidden;columns:2;column-fill:balance;column-gap:26px;column-rule:' + rule + '">' + bars([100, 96, 100, 88, 100, 94, 100, 70]) + '</div></div>' +
        '<div class="in d3" style="padding-left:26px;display:flex;flex-direction:column;gap:14px' + (alt ? ';justify-content:center' : '') + '">' +
        '<div data-w="number" style="padding:16px 18px;background:' + P.ink + ';color:' + P.sheet + '"><div style="' + kick + ';color:' + P.sheet + ';opacity:.7">Number of the day</div><div style="margin-top:10px;height:30px"></div></div>' +
-       (alt ? '' : '<div data-w="quote">' + bars([100, 84, 92, 50]) + '</div>') + '</div></div>' +
+       '<div data-w="quote">' + bars([100, 84, 92, 50]) + '</div></div></div>' +
        // six more stories in ruled columns
        '<div class="in d4" data-w="stories" style="display:grid;grid-template-columns:repeat(3,1fr);margin-top:clamp(14px,2.4vh,22px);border-top:2px solid ' + P.ink + '">' +
        [0, 1, 2, 3, 4, 5].map(function (i) { return '<div>' + bars([40, 100, 80 - i * 5]) + '</div>'; }).join('') + '</div>' +
@@ -297,7 +298,8 @@
     put('lead-kick', esc(lead.k)); put('lead', esc(lead.t));
     var body = para[lead.a];
     if (body) {
-      put('body', '<p style="font:400 14.5px/21px ' + P.body + ',Georgia,serif;text-align:justify;hyphens:auto">' + esc(body.replace(/\s*Why it matters:.*$/, '')) + '</p>');
+      bodyFull = body.replace(/\s*Why it matters:.*$/, '');
+      put('body', '<p style="font:400 14.5px/21px ' + P.body + ',Georgia,serif;text-align:justify;hyphens:auto">' + esc(bodyFull) + '</p>');
       // end each column on a whole line: the box takes the space the right-hand column leaves, rounded down to lines
       var bx = el.querySelector('[data-w="body"]'), col = bx.parentNode, row = col.parentNode;
       var fit = function () {
@@ -305,6 +307,7 @@
         bx.style.height = '21px';
         var room = row.getBoundingClientRect().bottom - bx.getBoundingClientRect().top;
         bx.style.height = Math.max(21 * 3, Math.floor(room / 21) * 21) + 'px';
+        trimBody();
       };
       bx.style.flex = 'none'; fit();
       if (window.ResizeObserver) new ResizeObserver(fit).observe(row.lastChild);
@@ -317,7 +320,7 @@
         '<p style="margin-top:8px;font:400 14px/1.4 ' + P.body + ',Georgia,serif;color:' + P.sheet + ';opacity:.88;' + clamp(4) + '">' + esc(rest) + '</p>');
     }
     var qt = hits['quote of the day'];
-    if (qt && !alt) {
+    if (qt) {
       var qm = qt.match(/^["“](.+?)["”]\s*(.*)$/);
       put('quote', '<div style="' + kick + '">Quote of the day</div><p style="margin-top:7px;font:italic 700 16px/1.3 \'Playfair Display\',Georgia,serif;' + clamp(4) + '">“' + esc(qm ? qm[1] : qt) + '”</p>' +
         (qm && qm[2] ? '<div style="margin-top:6px;font:500 12px/1.35 Inter,system-ui,sans-serif;color:' + P.ink2 + ';' + clamp(2) + '">' + esc(qm[2]) + '</div>' : ''));
@@ -346,29 +349,48 @@
   };
   // on a shorter window the front page keeps what fits: first the second row of stories goes, then the quote, and what
   // to watch only last; nothing is left cut through at the foot of the sheet
-  var altBody = null;
+  var altBody = null, bodyFull = '';
+  // the Big Story's text ends on a whole sentence: as many sentences as the box holds, never one cut through
+  // (if not even the first fits, it is cut at a word, with …). Left alone once its typing has begun.
+  var trimBody = function () {
+    var bx = el.querySelector('[data-w="body"]'), p = bx && bx.firstElementChild;
+    if (!p || !bodyFull || bx.classList.contains('tw-on') || bx.hasAttribute('data-prep')) return;
+    var over = function () { return bx.scrollHeight > bx.clientHeight + 1 || bx.scrollWidth > bx.clientWidth + 1; };
+    p.textContent = bodyFull; if (!over()) return;
+    var sents = bodyFull.split(/(?<=[.!?]["”’)]?)\s+(?=[A-Z“"‘(])/);
+    for (var n = sents.length - 1; n > 0; n--) { p.textContent = sents.slice(0, n).join(' '); if (!over()) return; }
+    var words = sents[0].split(' ');
+    for (var k = words.length - 1; k > 0; k--) { p.textContent = words.slice(0, k).join(' ').replace(/[,;:]$/, '') + '…'; if (!over()) return; }
+  };
   var fitSheet = function () {
     var sh = el.children[1], st = [].slice.call(el.querySelectorAll('[data-w="stories"] > div'));
     var groups = [st.slice(3), [el.querySelector('[data-w="quote"]')], [el.querySelector('[data-w="watch"]')]];
-    // the second arrangement keeps the six stories: what to watch goes first, the second row only after it
-    if (alt) groups = [[el.querySelector('[data-w="watch"]')], st.slice(3)];
+    // the second arrangement keeps the six stories: the quote goes first, then what to watch, the second row last
+    if (alt) groups = [[el.querySelector('[data-w="quote"]')], [el.querySelector('[data-w="watch"]')], st.slice(3)];
     if (altBody) altBody.style.height = '63px';
     groups.forEach(function (g) { g.forEach(function (n) { if (n) n.style.display = ''; }); });
     // the foot may run into half the sheet's bottom margin, never past it
     var room = sh.clientHeight + parseFloat(getComputedStyle(sh).paddingBottom) / 2;
     for (var i = 0; i < groups.length && sh.scrollHeight > room; i++)
       groups[i].forEach(function (n) { if (n) n.style.display = 'none'; });
+    if (altBody && !altBody.hasAttribute('data-prep') && altBody.firstElementChild && bodyFull) altBody.firstElementChild.textContent = bodyFull;
     if (altBody) {
+      // the text reaches at least the foot of the right-hand column, and on into what room the sheet has left, up to
+      // all of the text; whole lines only
       altBody.style.height = 'auto';
       var need = Math.ceil(altBody.getBoundingClientRect().height / 21) * 21;
       altBody.style.height = '63px';
+      var row = altBody.parentNode.parentNode, top = altBody.getBoundingClientRect().top;
+      var level = Math.floor((row.lastChild.getBoundingClientRect().bottom - top) / 21) * 21;
       var slack = window.innerHeight - 110 - sh.offsetHeight;
-      altBody.style.height = Math.max(63, Math.min(need, 63 + Math.floor(slack / 21) * 21)) + 'px';
+      altBody.style.height = Math.max(63, level, Math.min(need, 63 + Math.floor(slack / 21) * 21)) + 'px';
+      trimBody();
     }
   };
   // the typed front page on a computer: every block is laid out at once with its words see-through, then they are
   // written out one block after another (each block's own colours kept), so nothing on the sheet moves
   var prep = function (box) {
+    box.setAttribute('data-prep', '');
     var nodes = [], w = d.createTreeWalker(box, NodeFilter.SHOW_TEXT), t, n = 0;
     while ((t = w.nextNode())) if (t.nodeValue.trim()) nodes.push(t);
     var cols = nodes.map(function (t) { return getComputedStyle(t.parentNode).color; });
@@ -400,7 +422,9 @@
   };
   var writeOut = function () {
     var q = el.querySelector.bind(el), jobs = [];
-    var add = function (box, msPerChar, cap) { if (box && box.offsetParent !== null) { var j = prep(box); j.ms = Math.min(cap, j.len * msPerChar); jobs.push(j); return j; } };
+    // each block is made ready only when its turn comes (until then it is hidden), so the sheet can still settle
+    // (fonts, what fits, how much of the Big Story's text) up to that moment; a block left off by then is skipped
+    var add = function (box, msPerChar, cap) { if (box) jobs.push([box, msPerChar, cap]); };
     add(q('[data-w="lead-kick"]'), 28, 320);
     add(q('[data-w="lead"]'), 32, 2300);
     add(q('[data-w="body"]'), 4.5, 1600);
@@ -409,9 +433,11 @@
     el.querySelectorAll('[data-w="stories"] > div').forEach(function (c) { add(c, 12, 800); });
     add(q('[data-w="watch"]'), 6, 1150);
     var run = function () {
-      var j = jobs.shift();
-      if (!j) { ['lead', 'stories', 'watch', 'done'].forEach(function (k) { el.classList.add('r-' + k); }); return; }
-      write(j, j.ms, function () { setTimeout(run, 140); });
+      var x = jobs.shift();
+      if (!x) { ['lead', 'stories', 'watch', 'done'].forEach(function (k) { el.classList.add('r-' + k); }); return; }
+      if (x[0].offsetParent === null) return run();
+      var j = prep(x[0]);
+      write(j, Math.min(x[2], j.len * x[1]), function () { setTimeout(run, 140); });
     };
     setTimeout(run, Math.max(0, 700 - (Date.now() - t0)));
   };
