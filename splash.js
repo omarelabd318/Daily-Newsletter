@@ -130,7 +130,7 @@
        '<div class="in d4" data-w="stories" style="display:grid;grid-template-columns:repeat(3,1fr);margin-top:clamp(14px,2.4vh,22px);border-top:2px solid ' + P.ink + '">' +
        [0, 1, 2, 3, 4, 5].map(function (i) { return '<div>' + bars([40, 100, 80 - i * 5]) + '</div>'; }).join('') + '</div>' +
        // what to watch today
-       '<div class="in d4" data-w="watch" style="margin-top:14px;padding-top:10px;border-top:1px solid ' + P.ink + '"></div>' +
+       '<div class="in d4" data-w="watch" style="margin-top:12px"></div>' +
        '</div>'
   };
 
@@ -257,7 +257,8 @@
       '#splash.tw [data-r],#splash.tw [data-w=body],#splash.tw [data-w=stories],#splash.tw [data-w=stories]>div,#splash.tw [data-w=watch]{transition:border-color .6s ease,column-rule-color .6s ease}' +
       '#splash.tw:not(.r-lead) [data-r=lead]{border-right-color:transparent!important}#splash.tw:not(.r-lead) [data-w=body]{column-rule-color:transparent!important}' +
       '#splash.tw:not(.r-stories) [data-w=stories],#splash.tw:not(.r-stories) [data-w=stories]>div{border-color:transparent!important}' +
-      '#splash.tw:not(.r-watch) [data-w=watch]{border-top-color:transparent!important}';
+      '#splash.tw [data-w=watch] [data-rl]{transition:opacity .6s ease}#splash.tw:not(.r-watch) [data-w=watch] [data-rl]{opacity:0}' +
+      '#splash.tw:not(.r-watch) [data-w=watch] [data-c]{border-color:transparent!important}';
   }
   el.innerHTML = '<style>' + css + '</style>' + (wideLook || looks[look] || looks[1]) +
     (tapOpen ? '<div class="late tap-hint">' + (phone ? 'Tap' : 'Click') + ' to open</div>' : '');
@@ -323,11 +324,15 @@
         '<div style="' + kick + '">' + esc(s.k) + '</div><div style="margin-top:5px;font:700 16px/1.25 \'Playfair Display\',Georgia,serif;text-wrap:pretty;' + clamp(2) + '">' + esc(s.t) + '</div></div>';
     }).join(''));
     // what to watch: its first three items in three columns under the stories' three, up to two lines each
-    // its label is centred over all three, so it heads the row rather than the first item
-    if (watch) put('watch', '<div style="' + kick + ';color:' + P.ink + ';text-align:center">What to watch today</div>' +
-      '<div style="display:grid;grid-template-columns:repeat(3,1fr);margin-top:8px">' +
+    // what to watch: a section of its own under the stories. Its label sits between two rules across the sheet; its
+    // first three items stand in three columns lined up with the stories' three, ruled the same way, up to two lines each
+    if (watch) put('watch', '<div style="display:flex;align-items:center;gap:14px">' +
+      '<i data-rl style="flex:1;height:1px;background:' + P.ink + '"></i><div style="' + kick + ';color:' + P.ink + ';white-space:nowrap">What to watch today</div>' +
+      '<i data-rl style="flex:1;height:1px;background:' + P.ink + '"></i></div>' +
+      '<div style="display:grid;grid-template-columns:repeat(3,1fr);margin-top:10px">' +
       watch.split(/;\s*/).filter(Boolean).slice(0, 3).map(function (x, i) {
-        return '<div style="padding:0 ' + (i === 2 ? '0' : '20px') + ' 0 ' + (i === 0 ? '0' : '20px') + ';font:500 13px/1.4 Inter,system-ui,sans-serif;text-wrap:pretty;' + clamp(2) + '">' +
+        return '<div data-c style="padding:0 ' + (i === 2 ? '0' : '20px') + ' 0 ' + (i === 0 ? '0' : '20px') + ';' + (i ? 'border-left:' + rule + ';' : '') +
+          'font:400 15px/1.35 ' + P.body + ',Georgia,serif;text-wrap:pretty;' + clamp(2) + '">' +
           esc(x.replace(/\.$/, '').replace(/^./, function (c) { return c.toUpperCase(); })) + '</div>';
       }).join('') + '</div>');
     fitSheet();
@@ -369,7 +374,8 @@
     var tick = function () {
       for (var m = 0; m < per; m++) {
         var x = job.parts[k];
-        if (!x) { job.parts.forEach(function (y) { y.par.style.color = y.c; }); return done(); }
+        // written: the plain words go back in place of the two halves, so a line cut short ends in … as it should
+        if (!x) { job.parts.forEach(function (y) { y.par.style.color = y.c; y.par.replaceChild(d.createTextNode(y.s), y.a); y.b.remove(); }); return done(); }
         p++; x.a.textContent = x.s.slice(0, p); x.b.textContent = x.s.slice(p);
         if (p >= x.s.length) { k++; p = 0; }
       }
