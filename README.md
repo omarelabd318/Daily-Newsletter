@@ -22,8 +22,8 @@ repo; every push to `main` redeploys it. There is no build step.
   on it: the Newsletter as a black-and-white broadsheet front page with the day's real stories (a dateline with the
   edition's number, the date and Cairo; the Big Story with the start of its report in two justified columns; the
   number of the day as a black panel and the quote of the day; six more stories from Today at a Glance in ruled
-  columns; what to watch today along the foot), the Desk with the EGX30 beside the board of six, the desk's finding and what comes next. It stays 4.5 to 6.5
-  seconds; a click or any key opens the page sooner. `data-look` on its
+  columns; what to watch today along the foot, in the newsletter's own colours: paper, light or dark as set), the Desk with the EGX30 beside the board of six, the desk's finding and what comes next. It stays 4.5 to 6.5
+  seconds...  `data-look` on its
   `<script>` tag picks one of three looks per app; `?splash=1`, `2` or `3` previews one in any browser (`&hold` keeps
   it up). On an iPhone the startup images in `icons/startup/` cover the moment before the page starts; they are the
   opening screen's first frame, rendered by `node icons/make_startup.js` (instructions at the top of the file).
