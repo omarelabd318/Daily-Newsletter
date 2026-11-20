@@ -1,17 +1,19 @@
-// Renders the home-screen icons in icons/. Run: node icons/make_icons.js (needs Playwright + network for Google Fonts)
+// Renders the home-screen icons in icons/. Run: node icons/make_icons.js [newsletter|desk]
+// (needs Playwright + network for Google Fonts; with a name, only that app's icons are rendered)
 const { chromium } = require('playwright');
 const path = require('path');
 const art = {
-  // a front page: cream sheet on the desk's dark ground, blackletter "Daily" masthead, double rule, headline bar,
-  // a column of text and a photo block
-  newsletter: s => `<div style="width:100%;height:100%;background:#0e1216;display:grid;place-items:center">
+  // a front page in the newsletter's paper colours: the sheet on the paper's ground, blackletter "Daily" masthead,
+  // double rule, headline bar, a column of text and a photo block
+  newsletter: s => `<div style="width:100%;height:100%;background:#cfc9ba;display:grid;place-items:center">
     <svg style="transform:scale(${s})" width="240" height="240" viewBox="0 0 240 240">
-      <rect x="46" y="30" width="148" height="184" rx="3" fill="#faf8f3"/>
-      <text x="120" y="82" text-anchor="middle" style="font-family:'UnifrakturCook';font-weight:700;font-size:44px" fill="#16181a">Daily</text>
-      <path d="M60 94h120" stroke="#16181a" stroke-width="4"/><path d="M60 101h120" stroke="#16181a" stroke-width="1.6"/>
-      <rect x="60" y="113" width="120" height="14" fill="#16181a"/>
-      <g stroke="#16181a" stroke-width="5" stroke-linecap="round"><path d="M62 144h50M62 158h50M62 172h50M62 186h36"/></g>
-      <rect x="124" y="139" width="56" height="52" fill="#16181a" opacity=".85"/></svg></div>`,
+      <defs><filter id="sh" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#3c321e" flood-opacity=".28"/></filter></defs>
+      <rect x="46" y="30" width="148" height="184" rx="3" fill="#e8e3d6" filter="url(#sh)"/>
+      <text x="120" y="82" text-anchor="middle" style="font-family:'UnifrakturCook';font-weight:700;font-size:44px" fill="#14110d">Daily</text>
+      <path d="M60 94h120" stroke="#14110d" stroke-width="4"/><path d="M60 101h120" stroke="#14110d" stroke-width="1.6"/>
+      <rect x="60" y="113" width="120" height="14" fill="#14110d"/>
+      <g stroke="#14110d" stroke-width="5" stroke-linecap="round"><path d="M62 144h50M62 158h50M62 172h50M62 186h36"/></g>
+      <rect x="124" y="139" width="56" height="52" fill="#14110d" opacity=".85"/></svg></div>`,
   // the desk's rising line in the brand teal, with a cream rule
   desk: s => `<div style="width:100%;height:100%;background:#16181a;display:grid;place-items:center">
     <svg style="transform:scale(${s})" width="240" height="240" viewBox="0 0 240 240">
@@ -20,7 +22,7 @@ const art = {
 };
 (async () => {
   const b = await chromium.launch(); const p = await b.newPage();
-  for (const [name, f] of Object.entries(art)) {
+  for (const [name, f] of Object.entries(art).filter(([n]) => !process.argv[2] || n === process.argv[2])) {
     for (const [file, n, s] of [[`${name}-192.png`, 192, 1], [`${name}-512.png`, 512, 1],
                                 [`${name}-maskable-512.png`, 512, 0.8], [`${name}-apple-180.png`, 180, 1]]) {
       await p.setViewportSize({ width: n, height: n });

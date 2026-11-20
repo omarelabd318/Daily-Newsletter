@@ -36,13 +36,13 @@
             : { bg: '#faf8f3', ink: '#16181a', mute: '#5b6168', line: '#e6e1d5', acc: '#1a9e7f', up: '#1d7a3a', down: '#b3261e', tile: '#ffffff' })
     : (dark ? { bg: '#0e1216', ink: '#eef2f4', mute: '#a9b4be', line: '#2a333b', acc: '#52d6b5', paper: '#f4f1ea' }
             : { bg: '#faf8f3', ink: '#16181a', mute: '#5b6168', line: '#16181a', acc: '#8a1c1c', paper: '#faf8f3' });
-  if (app === 'news' && look === 2) { C.bg = '#0e1216'; C.mute = '#a9b4be'; } // the sheet on the icon's dark ground, whatever the theme
-  // on a computer the front page takes the newsletter's own colours instead: paper (the default), light or dark
+  // the newsletter's front page (look 2, on a phone and on a computer) takes the newsletter's own colours: paper (the
+  // default), light or dark, the sheet on its ground as on the app icon
   var th = root.getAttribute('data-theme');
   var P = th === 'dark' ? { bg: '#080b0e', sheet: '#0e1216', ink: '#eef2f4', ink2: '#a9b4be', rule: 'rgba(238,242,244,.22)', body: 'Newsreader', dots: 'rgba(255,255,255,.03)', shadow: '.6' }
         : th === 'paper' ? { bg: '#cfc9ba', sheet: '#e8e3d6', ink: '#14110d', ink2: '#4f4a40', rule: 'rgba(20,17,13,.28)', body: '\'Old Standard TT\'', dots: 'rgba(60,50,30,.05)', shadow: '.22' }
         : { bg: '#f0ebe0', sheet: '#faf8f3', ink: '#16181a', ink2: '#5b6168', rule: 'rgba(22,24,26,.28)', body: 'Newsreader', dots: 'rgba(60,50,30,.03)', shadow: '.18' };
-  if (wide && app === 'news' && look === 2) { C.bg = P.bg; C.mute = P.ink2; }
+  if (app === 'news' && (wide ? +(pv || me.dataset.wideLook || look) : look) === 2) { C.bg = P.bg; C.mute = P.ink2; }
 
   var css = '#splash{position:fixed;inset:0;z-index:2147483000;display:flex;flex-direction:column;align-items:center;justify-content:center;' +
     'padding:max(24px,env(safe-area-inset-top)) 28px max(24px,env(safe-area-inset-bottom));background:' + C.bg + ';color:' + C.ink + ';' +
@@ -77,16 +77,16 @@
        '<p class="late" data-k="summary" style="margin-top:22px;font:italic 700 clamp(19px,5.4vw,23px)/1.3 \'Playfair Display\',Georgia,serif;text-wrap:balance;color:' + C.ink + '"></p>' +
        '</div>',
     // 2. Front page: the paper sheet on the app icon grows into today's front page
-    2: '<div style="width:100%;max-width:380px;padding:30px 24px 26px;background:' + C.paper + ';color:#16181a;border-radius:6px;box-shadow:0 30px 80px rgba(0,0,0,.45);' +
+    2: '<div style="width:100%;max-width:380px;padding:30px 24px 26px;background:' + P.sheet + ';background-image:radial-gradient(' + P.dots + ' 1px,transparent 1px);background-size:3px 3px;color:' + P.ink + ';border-radius:4px;box-shadow:0 24px 70px rgba(0,0,0,' + P.shadow + ');' +
        'transform-origin:center;animation:sp-grow .55s cubic-bezier(.2,.8,.2,1) both">' +
        '<div style="font:700 clamp(54px,17vw,72px)/1 UnifrakturCook,\'Old English Text MT\',serif">Daily</div>' +
-       '<div style="margin-top:14px;height:5px;border-top:2px solid #16181a;border-bottom:1px solid #16181a"></div>' +
+       '<div style="margin-top:14px;height:5px;border-top:2px solid ' + P.ink + ';border-bottom:1px solid ' + P.ink + '"></div>' +
        '<div class="in d2" style="padding:8px 0;font:600 10.5px/1.3 Inter,system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase" data-k="date">&nbsp;</div>' +
-       '<div style="height:7px;background:#16181a"></div>' +
+       '<div style="height:7px;background:' + P.ink + '"></div>' +
        '<p class="late" data-k="summary" style="margin-top:18px;text-align:left;font:900 clamp(21px,6vw,26px)/1.18 \'Playfair Display\',Georgia,serif;text-wrap:pretty"></p>' +
        '<div class="in d4" style="display:grid;grid-template-columns:1fr 92px;gap:14px;margin-top:20px;text-align:left">' +
-       '<div style="display:grid;gap:8px;align-content:start"><i style="height:5px;background:#16181a"></i><i style="height:5px;background:#16181a;width:80%"></i><i style="height:5px;background:#16181a;width:90%"></i><i style="height:5px;background:#16181a;width:60%"></i></div>' +
-       '<i style="height:62px;background:#3a3d40"></i></div>' +
+       '<div style="display:grid;gap:8px;align-content:start"><i style="height:5px;background:' + P.ink + '"></i><i style="height:5px;background:' + P.ink + ';width:80%"></i><i style="height:5px;background:' + P.ink + ';width:90%"></i><i style="height:5px;background:' + P.ink + ';width:60%"></i></div>' +
+       '<i style="height:62px;background:' + P.ink + ';opacity:.8"></i></div>' +
        '</div>',
     // 3. Quiet: the icon, the name and the date, nothing else
     3: '<img class="in" src="/icons/newsletter-192.png" alt="" width="88" height="88" style="border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,' + (dark ? '.5' : '.18') + ')">' +

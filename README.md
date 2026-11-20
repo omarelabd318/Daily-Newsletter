@@ -26,7 +26,9 @@ repo; every push to `main` redeploys it. There is no build step.
   seconds...  `data-look` on its
   `<script>` tag picks one of three looks per app; `?splash=1`, `2` or `3` previews one in any browser (`&hold` keeps
   it up). On an iPhone the startup images in `icons/startup/` cover the moment before the page starts; they are the
-  opening screen's first frame, rendered by `node icons/make_startup.js` (instructions at the top of the file).
+  opening screen's first frame, rendered by `node icons/make_startup.js` (instructions at the top of the file). The
+  Newsletter's opening screen on a phone, its startup images and its app icon all use the newsletter's paper colours
+  (the sheet on its ground); the icons are rendered by `node icons/make_icons.js`.
 - On a phone (640px and narrower) both have their own layout. The newsletter (`phone.css`, `phone.js`): a compact
   masthead, the market tape and Quick Hits as strips you swipe, the sections as chips, a bar that follows you down the
   page with the section you are in and a reading-progress line, a tab bar (Today, Sections, Listen, Archive, Desk),
