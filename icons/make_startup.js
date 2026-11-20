@@ -2,7 +2,8 @@
 // page has loaded. Each is the first frame of that app's opening screen (splash.js), so the screen carries straight on:
 // the Newsletter's sheet before it grows, the Desk's chart mark already drawn.
 // Run from the repo root with the site served locally:
-//   python3 -m http.server 8765 --bind 127.0.0.1   then   node icons/make_startup.js
+//   python3 -m http.server 8765 --bind 127.0.0.1   then   node icons/make_startup.js [news|desk]
+// (with a name, only that app's images are rendered)
 // It also prints the <link> tags for index.html and desk/egypt/index.html.
 const { chromium } = require('playwright');
 const fs = require('fs');
@@ -35,7 +36,7 @@ const APPS = {
   fs.mkdirSync(out, { recursive: true });
   const b = await chromium.launch();
   const tags = { news: [], desk: [] };
-  for (const [app, A] of Object.entries(APPS)) {
+  for (const [app, A] of Object.entries(APPS).filter(([n]) => !process.argv[2] || n === process.argv[2])) {
     for (const [w, h, r] of PHONES) {
       const ctx = await b.newContext({ viewport: { width: w, height: h }, deviceScaleFactor: r });
       await ctx.addInitScript((t) => { for (const k in t) localStorage.setItem(k, t[k]); }, A.theme);
@@ -55,5 +56,5 @@ const APPS = {
     }
   }
   await b.close();
-  for (const app of Object.keys(tags)) console.log(`\n<!-- ${app} -->\n` + tags[app].join('\n'));
+  for (const app of Object.keys(tags)) if (tags[app].length) console.log(`\n<!-- ${app} -->\n` + tags[app].join('\n'));
 })();
