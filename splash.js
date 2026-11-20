@@ -13,6 +13,8 @@
 //   layout of its own, and it waits for a click ("Click to open").
 // - A refresh brings it up again. The "Tap / Click to open" line sits at the very bottom and does not pulse.
 // - Preview in any browser: ?splash=1|2|3 shows that look; add &hold to keep it up.
+// - The computer's front page can type its lines out too (the Big Story's headline, then the six stories' in turn):
+//   data-wide-type="1" on the <script> tag turns it on; ?typewide previews it.
 (function () {
   var me = document.currentScript, d = document, root = d.documentElement;
   var app = me.dataset.app, q = new URLSearchParams(location.search), pv = q.get('splash');
@@ -275,7 +277,10 @@
     });
     if (!g.length) { put('lead', esc(e.summary || '')); return; }
     var lead = g[0];
-    put('lead-kick', esc(lead.k)); put('lead', esc(lead.t));
+    put('lead-kick', esc(lead.k));
+    var typing = typeWide && !still, queue = [];
+    if (typing) { put('lead', ''); queue.push([el.querySelector('[data-w="lead"]'), lead.t, Math.min(2400, lead.t.length * 26)]); }
+    else put('lead', esc(lead.t));
     var body = para[lead.a];
     if (body) {
       put('body', '<p style="font:400 14.5px/21px ' + P.body + ',Georgia,serif;text-align:justify;hyphens:auto">' + esc(body.replace(/\s*Why it matters:.*$/, '')) + '</p>');
@@ -305,8 +310,13 @@
     var more = g.slice(1, 7);
     if (more.length) put('stories', more.map(function (s, i) {
       return '<div style="padding:12px ' + (i % 3 === 2 ? '0' : '20px') + ' 12px ' + (i % 3 === 0 ? '0' : '20px') + ';' + (i % 3 ? 'border-left:' + rule + ';' : '') + (i >= 3 ? 'border-top:' + rule + ';' : '') + '">' +
-        '<div style="' + kick + '">' + esc(s.k) + '</div><div style="margin-top:5px;font:700 16px/1.25 \'Playfair Display\',Georgia,serif;text-wrap:pretty;' + clamp(2) + '">' + esc(s.t) + '</div></div>';
+        '<div style="' + kick + '">' + esc(s.k) + '</div><div data-hl style="' + (typing ? 'color:transparent;' : '') + 'margin-top:5px;font:700 16px/1.25 \'Playfair Display\',Georgia,serif;text-wrap:pretty;' + clamp(2) + '">' + (typing ? '<span style="color:transparent">' + esc(s.t) + '</span>' : esc(s.t)) + '</div></div>';
     }).join(''));
+    if (typing) {
+      el.querySelectorAll('[data-w="stories"] [data-hl]').forEach(function (n, i) { queue.push([n, more[i].t, Math.min(900, more[i].t.length * 11)]); });
+      var run = function () { var j = queue.shift(); if (j) typeIn(j[0], j[1], j[2], function () { setTimeout(run, 140); }); };
+      setTimeout(run, Math.max(0, 600 - (Date.now() - t0)));
+    }
     if (watch) put('watch', '<b style="font:700 10.5px/1 Inter,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;margin-right:10px">What to watch today</b>' +
       watch.split(/;\s*/).filter(Boolean).map(function (x) { return esc(x.replace(/\.$/, '')); }).join('<span style="margin:0 9px;color:' + P.ink2 + '">·</span>'));
   };
@@ -321,6 +331,17 @@
     n.classList.add('on'); n.style.transition = 'none';
     setTimeout(tick, Math.max(0, 600 - (Date.now() - t0)));
   };
+  // the computer's front page types its lines one after another: the Big Story's headline first, then the six
+  // stories' headlines in turn, quicker. Same rule as the phone: the whole line is laid out at once.
+  var typeIn = function (n, t, ms, done) {
+    if (!n) return done && done();
+    var i = 0, w = t.length, step = Math.max(6, ms / (w || 1));
+    n.innerHTML = '<span></span><span style="color:transparent"></span>'; n.style.color = '';
+    var a = n.firstChild, b = n.lastChild;
+    var tick = function () { a.textContent = t.slice(0, i); b.textContent = t.slice(i); if (i++ < w) setTimeout(tick, step); else if (done) done(); };
+    tick();
+  };
+  var typeWide = q.has('typewide') || me.dataset.wideType === '1';
   var newest = function (list) { return list.slice().sort(function (a, b) { return (b.id || b.date) < (a.id || a.date) ? -1 : 1; })[0]; };
   var json = function (u) {
     if (app === 'desk') { var M = window.__deskGet || (window.__deskGet = {}); return M[u] || (M[u] = fetch(u, { cache: 'no-cache' }).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })); }
