@@ -27,9 +27,11 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Newsletter">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="theme-color" content="#faf8f3" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0e1216" media="(prefers-color-scheme: dark)">
-<script>document.documentElement.className='js';try{if(localStorage.getItem('width')==='wide')document.documentElement.setAttribute('data-width','wide');var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');else if(t!=='light')document.documentElement.setAttribute('data-theme','paper')}catch(e){document.documentElement.setAttribute('data-theme','paper')}</script>
+<meta name="theme-color" content="#e8e3d6">
+<script>document.documentElement.className='js';try{if(localStorage.getItem('width')==='wide')document.documentElement.setAttribute('data-width','wide');var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');else if(t!=='light')document.documentElement.setAttribute('data-theme','paper')}catch(e){document.documentElement.setAttribute('data-theme','paper')}
+// the status bar and browser bar take the colour at the top of the page in the current look: paper's sheet on a phone,
+// the darker ground around the sheet on a larger screen, light's cream, dark's ink
+window.syncBarColor=function(){var th=document.documentElement.getAttribute('data-theme'),ph=window.matchMedia&&matchMedia('(max-width:640px)').matches,c=th==='dark'?'#0e1216':th==='paper'?(ph?'#e8e3d6':'#cfc9ba'):'#faf8f3',m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',c)};syncBarColor();if(window.matchMedia){var bq=matchMedia('(max-width:640px)');bq.addEventListener?bq.addEventListener('change',syncBarColor):bq.addListener(syncBarColor)}</script>
 <script src="/splash.js" data-app="news" data-look="2" data-ready="#content > *"></script>
 <style>
 :root{
@@ -1305,6 +1307,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     var now = document.documentElement.getAttribute('data-theme') || 'light', next = {light:'Dark', dark:'Paper', paper:'Light'}[now] || 'Dark';
     $('themeBtn').textContent = next;
     $('themeBtn').setAttribute('aria-label', 'Switch to ' + next.toLowerCase() + ' mode');
+    if(window.syncBarColor) syncBarColor();   // the status bar follows the look
   }
   $('themeBtn').addEventListener('click',function(){
     var now = document.documentElement.getAttribute('data-theme') || 'light', next = {light:'dark', dark:'paper', paper:'light'}[now] || 'light';
