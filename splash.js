@@ -20,6 +20,9 @@
   var me = document.currentScript, d = document, root = d.documentElement;
   var app = me.dataset.app, q = new URLSearchParams(location.search), pv = q.get('splash');
   var look = +(pv || me.dataset.look || 1), hold = q.has('hold');
+  // the computer's front page, second arrangement (data-wide-front="2", ?front=2 previews it): no quote of the day,
+  // the number of the day centred in the right-hand column, all six stories kept, the Big Story's text taking the room
+  var alt = q.get('front') === '2' || me.dataset.wideFront === '2';
   var standalone = (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
   var seen = false; try { seen = sessionStorage.getItem('splash-' + app) === '1'; sessionStorage.setItem('splash-' + app, '1'); } catch (e) {}
   var phone = window.matchMedia && matchMedia('(pointer: coarse) and (hover: none)').matches;
@@ -59,7 +62,7 @@
     '#splash.tap{cursor:pointer;-webkit-tap-highlight-color:transparent}' +
     '#splash .tap-hint{position:absolute;left:0;right:0;bottom:max(18px,calc(env(safe-area-inset-bottom) + 8px));font:600 11px/1 Inter,system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:' + C.mute + '}' +
     '#splash .wcol{display:grid;gap:7px;align-content:start}#splash .wcol i{display:block;height:4px;background:' + P.ink + ';opacity:.85}' +
-    '@media (max-height:820px){#splash [data-w=stories]>:nth-child(n+4){display:none}}' +
+    (alt ? '' : '@media (max-height:820px){#splash [data-w=stories]>:nth-child(n+4){display:none}}') +
     
     '@keyframes sp-in{to{opacity:1;transform:none}}' +
     '@keyframes sp-rule{from{transform:scaleX(0)}to{transform:scaleX(1)}}' +
@@ -123,9 +126,9 @@
        '<div data-r="lead" style="padding-right:26px;border-right:' + rule + ';display:flex;flex-direction:column"><div class="in d2" style="' + kick + '" data-w="lead-kick">The Big Story</div>' +
        '<p class="late" data-w="lead" style="min-height:2.24em;margin-top:7px;font:900 clamp(26px,min(3vw,4.4vh),38px)/1.12 \'Playfair Display\',Georgia,serif;text-wrap:pretty"></p>' +
        '<div class="in d3" data-w="body" style="margin-top:12px;flex:1 1 0;min-height:min(105px,12vh);overflow:hidden;columns:2;column-fill:balance;column-gap:26px;column-rule:' + rule + '">' + bars([100, 96, 100, 88, 100, 94, 100, 70]) + '</div></div>' +
-       '<div class="in d3" style="padding-left:26px;display:flex;flex-direction:column;gap:14px">' +
+       '<div class="in d3" style="padding-left:26px;display:flex;flex-direction:column;gap:14px' + (alt ? ';justify-content:center' : '') + '">' +
        '<div data-w="number" style="padding:16px 18px;background:' + P.ink + ';color:' + P.sheet + '"><div style="' + kick + ';color:' + P.sheet + ';opacity:.7">Number of the day</div><div style="margin-top:10px;height:30px"></div></div>' +
-       '<div data-w="quote">' + bars([100, 84, 92, 50]) + '</div></div></div>' +
+       (alt ? '' : '<div data-w="quote">' + bars([100, 84, 92, 50]) + '</div>') + '</div></div>' +
        // six more stories in ruled columns
        '<div class="in d4" data-w="stories" style="display:grid;grid-template-columns:repeat(3,1fr);margin-top:clamp(14px,2.4vh,22px);border-top:2px solid ' + P.ink + '">' +
        [0, 1, 2, 3, 4, 5].map(function (i) { return '<div>' + bars([40, 100, 80 - i * 5]) + '</div>'; }).join('') + '</div>' +
@@ -298,6 +301,7 @@
       // end each column on a whole line: the box takes the space the right-hand column leaves, rounded down to lines
       var bx = el.querySelector('[data-w="body"]'), col = bx.parentNode, row = col.parentNode;
       var fit = function () {
+        if (alt) { altBody = bx; return fitSheet(); }
         bx.style.height = '21px';
         var room = row.getBoundingClientRect().bottom - bx.getBoundingClientRect().top;
         bx.style.height = Math.max(21 * 3, Math.floor(room / 21) * 21) + 'px';
@@ -313,7 +317,7 @@
         '<p style="margin-top:8px;font:400 14px/1.4 ' + P.body + ',Georgia,serif;color:' + P.sheet + ';opacity:.88;' + clamp(4) + '">' + esc(rest) + '</p>');
     }
     var qt = hits['quote of the day'];
-    if (qt) {
+    if (qt && !alt) {
       var qm = qt.match(/^["“](.+?)["”]\s*(.*)$/);
       put('quote', '<div style="' + kick + '">Quote of the day</div><p style="margin-top:7px;font:italic 700 16px/1.3 \'Playfair Display\',Georgia,serif;' + clamp(4) + '">“' + esc(qm ? qm[1] : qt) + '”</p>' +
         (qm && qm[2] ? '<div style="margin-top:6px;font:500 12px/1.35 Inter,system-ui,sans-serif;color:' + P.ink2 + ';' + clamp(2) + '">' + esc(qm[2]) + '</div>' : ''));
@@ -342,14 +346,25 @@
   };
   // on a shorter window the front page keeps what fits: first the second row of stories goes, then the quote, and what
   // to watch only last; nothing is left cut through at the foot of the sheet
+  var altBody = null;
   var fitSheet = function () {
     var sh = el.children[1], st = [].slice.call(el.querySelectorAll('[data-w="stories"] > div'));
     var groups = [st.slice(3), [el.querySelector('[data-w="quote"]')], [el.querySelector('[data-w="watch"]')]];
+    // the second arrangement keeps the six stories: what to watch goes first, the second row only after it
+    if (alt) groups = [[el.querySelector('[data-w="watch"]')], st.slice(3)];
+    if (altBody) altBody.style.height = '63px';
     groups.forEach(function (g) { g.forEach(function (n) { if (n) n.style.display = ''; }); });
     // the foot may run into half the sheet's bottom margin, never past it
     var room = sh.clientHeight + parseFloat(getComputedStyle(sh).paddingBottom) / 2;
     for (var i = 0; i < groups.length && sh.scrollHeight > room; i++)
       groups[i].forEach(function (n) { if (n) n.style.display = 'none'; });
+    if (altBody) {
+      altBody.style.height = 'auto';
+      var need = Math.ceil(altBody.getBoundingClientRect().height / 21) * 21;
+      altBody.style.height = '63px';
+      var slack = window.innerHeight - 110 - sh.offsetHeight;
+      altBody.style.height = Math.max(63, Math.min(need, 63 + Math.floor(slack / 21) * 21)) + 'px';
+    }
   };
   // the typed front page on a computer: every block is laid out at once with its words see-through, then they are
   // written out one block after another (each block's own colours kept), so nothing on the sheet moves
