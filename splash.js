@@ -64,7 +64,8 @@
     '@keyframes sp-tick{from{transform:translateX(-100%)}to{transform:translateX(250%)}}' +
     '#splash .tick{position:relative;overflow:hidden;width:56px;height:2px;background:' + C.line + '}' +
     '#splash .tick::after{content:"";position:absolute;inset:0;width:40%;background:' + C.acc + ';animation:sp-tick 1.1s ease-in-out infinite}' +
-    (still ? '#splash *,#splash *::after{animation:none!important;opacity:1!important;transform:none!important;stroke-dashoffset:0!important}' : '');
+    '#splash .mk-line.down{transform:scaleX(-1)}' +
+    (still ? '#splash *,#splash *::after{animation:none!important;opacity:1!important;transform:none!important;stroke-dashoffset:0!important}#splash .mk-line.down{transform:scaleX(-1)!important}' : '');
 
   var N = {
     // 1. Masthead: the front page's nameplate, the date line and the day's summary as its deck
@@ -129,13 +130,14 @@
        '</div>'
   };
 
-  // the desk's mark: the chart line draws itself, then takes the day's colour (green up, red down) once the EGX30 is in.
+  // the desk's mark: the chart line draws itself, then takes the day's colour once the EGX30 is in: green and rising on
+  // an up day, red and turned to fall (mirrored) on a down day.
   // On an iPhone the startup image (icons/startup/) already shows the mark drawn, so it is not drawn again there.
   var drawn = navigator.standalone === true && !pv;
   var mark = function (w) {
     return '<svg width="' + w + '" height="' + w + '" viewBox="0 0 192 192" aria-hidden="true" style="display:block">' +
       '<path class="mk-line" d="M40 132L76 96l25 22 52-66" fill="none" stroke="' + C.acc + '" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" pathLength="1" ' +
-      'style="transition:stroke .4s ease;stroke-dasharray:1;' + (drawn ? '' : 'stroke-dashoffset:1;animation:sp-draw .7s .05s cubic-bezier(.5,0,.2,1) forwards') + '"/>' +
+      'style="transition:stroke .4s ease,transform .5s cubic-bezier(.2,.7,.2,1);transform-box:view-box;transform-origin:96.5px 96px;stroke-dasharray:1;' + (drawn ? '' : 'stroke-dashoffset:1;animation:sp-draw .7s .05s cubic-bezier(.5,0,.2,1) forwards') + '"/>' +
       '<path class="mk-base" d="M40 156h113" stroke="' + C.ink + '" stroke-width="4" style="transform-origin:96px 156px;' + (drawn ? '' : 'animation:sp-rule .5s cubic-bezier(.2,.7,.2,1) both') + '"/></svg>';
   };
   var lab = 'font:600 11px/1 Inter,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:' + C.mute;
@@ -366,7 +368,7 @@
         var c = (v[0] / v[1] - 1) * 100, s = Math.abs(c) < 0.005 ? '0.00%' : (c > 0 ? '▲ +' : '▼ −') + Math.abs(c).toFixed(2) + '%';
         var g = k === 'usd_egp' ? -c : c; // the dollar in pounds: up is the pound weaker, so red
         set(k + '-chg', s, g > 0 ? C.up : g < 0 ? C.down : C.mute);
-        if (k === 'egx30' && Math.abs(c) >= 0.005) el.querySelectorAll('.mk-line').forEach(function (n) { n.setAttribute('stroke', c > 0 ? C.up : C.down); });
+        if (k === 'egx30' && Math.abs(c) >= 0.005) el.querySelectorAll('.mk-line').forEach(function (n) { n.setAttribute('stroke', c > 0 ? C.up : C.down); if (c < 0) n.classList.add('down'); });
       });
     });
   }
