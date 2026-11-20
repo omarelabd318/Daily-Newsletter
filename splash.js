@@ -53,7 +53,8 @@
         : { bg: '#f0ebe0', sheet: '#faf8f3', ink: '#16181a', ink2: '#5b6168', rule: 'rgba(22,24,26,.28)', body: 'Newsreader', dots: 'rgba(60,50,30,.03)', shadow: '.18' };
   if (app === 'news' && (wide ? +(pv || me.dataset.wideLook || look) : look) === 2) { C.bg = P.bg; C.mute = P.ink2; }
 
-  var css = '#splash{position:fixed;inset:0;z-index:2147483000;display:flex;flex-direction:column;align-items:center;justify-content:center;' +
+  var css = '#splash [data-w=number]{--nbg:' + P.ink + ';--nfg:' + P.sheet + ';transition:background-color .6s ease,color .6s ease}#splash [data-w=number] *{transition:color .6s ease}' +
+    '#splash{position:fixed;inset:0;z-index:2147483000;display:flex;flex-direction:column;align-items:center;justify-content:center;' +
     'padding:max(24px,env(safe-area-inset-top)) 28px max(24px,env(safe-area-inset-bottom));background:' + C.bg + ';color:' + C.ink + ';' +
     'text-align:center;-webkit-font-smoothing:antialiased;transition:opacity .32s cubic-bezier(.2,.7,.2,1),transform .32s cubic-bezier(.2,.7,.2,1)}' +
     '#splash.out{opacity:0;transform:scale(1.02);pointer-events:none}' +
@@ -129,7 +130,7 @@
        '<p class="late" data-w="lead" style="min-height:2.24em;margin-top:7px;font:900 clamp(26px,min(3vw,4.4vh),38px)/1.12 \'Playfair Display\',Georgia,serif;text-wrap:pretty"></p>' +
        '<div class="in d3" data-w="body" style="margin-top:12px;flex:1 1 0;min-height:min(105px,12vh);overflow:hidden;columns:2;column-fill:balance;column-gap:26px;column-rule:' + rule + '">' + bars([100, 96, 100, 88, 100, 94, 100, 70]) + '</div></div>' +
        '<div class="in d3" style="padding-left:26px;display:flex;flex-direction:column;gap:14px' + (alt ? ';justify-content:center' : '') + '">' +
-       '<div data-w="number" style="padding:16px 18px;background:' + P.ink + ';color:' + P.sheet + '"><div style="' + kick + ';color:' + P.sheet + ';opacity:.7">Number of the day</div><div style="margin-top:10px;height:30px"></div></div>' +
+       '<div data-w="number" style="padding:16px 18px;background:var(--nbg);color:var(--nfg)"><div style="' + kick + ';color:var(--nfg);opacity:.7">Number of the day</div><div style="margin-top:10px;height:30px"></div></div>' +
        '<div data-w="quote">' + bars([100, 84, 92, 50]) + '</div></div></div>' +
        // six more stories in ruled columns
        '<div class="in d4" data-w="stories" style="display:grid;grid-template-columns:repeat(3,1fr);margin-top:clamp(14px,2.4vh,22px);border-top:2px solid ' + P.ink + '">' +
@@ -264,6 +265,7 @@
       '#splash.tw [data-r],#splash.tw [data-w=body],#splash.tw [data-w=stories],#splash.tw [data-w=stories]>div,#splash.tw [data-w=watch]{transition:border-color .6s ease,column-rule-color .6s ease}' +
       '#splash.tw:not(.r-lead) [data-r=lead]{border-right-color:transparent!important}#splash.tw:not(.r-lead) [data-w=body]{column-rule-color:transparent!important}' +
       '#splash.tw:not(.r-stories) [data-w=stories],#splash.tw:not(.r-stories) [data-w=stories]>div{border-color:transparent!important}' +
+      '#splash.tw:not(.r-watch) [data-w=number]{--nbg:transparent;--nfg:' + P.ink + '}' +
       '#splash.tw [data-rr]{transition:opacity .6s ease}#splash.tw:not(.r-watch) [data-rr]{opacity:0}' +
       '#splash.tw [data-w=watch] [data-rl]{transition:opacity .6s ease}#splash.tw:not(.r-watch) [data-w=watch] [data-rl]{opacity:0}' +
       '#splash.tw:not(.r-watch) [data-w=watch] [data-c]{border-color:transparent!important}';
@@ -320,8 +322,8 @@
     var num = hits['number of the day'];
     if (num) {
       var cut = num.search(/\.\s/), fig = cut > 0 && cut < 24 ? num.slice(0, cut) : '', rest = fig ? num.slice(cut + 1).trim() : num;
-      put('number', '<div style="' + kick + ';color:' + P.sheet + ';opacity:.7">Number of the day</div>' + (fig ? '<div style="margin-top:8px;font:900 32px/1.05 \'Playfair Display\',Georgia,serif">' + esc(fig) + '</div>' : '') +
-        '<p style="margin-top:8px;font:400 14px/1.4 ' + P.body + ',Georgia,serif;color:' + P.sheet + ';opacity:.88;' + clamp(4) + '">' + esc(rest) + '</p>');
+      put('number', '<div style="' + kick + ';color:var(--nfg);opacity:.7">Number of the day</div>' + (fig ? '<div style="margin-top:8px;font:900 32px/1.05 \'Playfair Display\',Georgia,serif">' + esc(fig) + '</div>' : '') +
+        '<p style="margin-top:8px;font:400 14px/1.4 ' + P.body + ',Georgia,serif;color:var(--nfg);opacity:.88;' + clamp(4) + '">' + esc(rest) + '</p>');
     }
     var qt = hits['quote of the day'];
     if (qt) {
@@ -413,6 +415,7 @@
       var par = t.parentNode, c = cols[i], a = d.createElement('span'), b = d.createElement('span');
       a.style.color = c; b.style.color = 'transparent'; b.textContent = t.nodeValue;
       par.insertBefore(a, t); par.insertBefore(b, t); par.removeChild(t);
+      if (!par.hasAttribute('data-oc')) par.setAttribute('data-oc', par.style.color);
       par.style.color = 'transparent'; // a line cut short shows its "…" only once written
       n += b.textContent.length;
       return { a: a, b: b, par: par, c: c, s: b.textContent };
@@ -427,7 +430,13 @@
       for (var m = 0; m < per; m++) {
         var x = job.parts[k];
         // written: the plain words go back in place of the two halves, so a line cut short ends in … as it should
-        if (!x) { job.parts.forEach(function (y) { y.par.style.color = y.c; y.par.replaceChild(d.createTextNode(y.s), y.a); y.b.remove(); }); return done(); }
+        if (!x) {
+          job.parts.forEach(function (y) {
+            if (y.par.hasAttribute('data-oc')) { y.par.style.color = y.par.getAttribute('data-oc'); y.par.removeAttribute('data-oc'); }
+            y.par.replaceChild(d.createTextNode(y.s), y.a); y.b.remove();
+          });
+          return done();
+        }
         p++; x.a.textContent = x.s.slice(0, p); x.b.textContent = x.s.slice(p);
         if (p >= x.s.length) { k++; p = 0; }
       }
@@ -452,7 +461,7 @@
     add(q('[data-w="number"]'), 50.96, 4508);
     add(q('[data-w="quote"]'), 39.2, 5096);
     el.querySelectorAll('[data-w="stories"] > div').forEach(function (c) { add(c, 40.32, 2688); });
-    add(q('[data-w="watch"]'), 16.8, 3220);
+    add(q('[data-w="watch"]'), 20.16, 3864);
     var run = function () {
       var x = jobs.shift();
       if (!x) { ['lead', 'stories', 'watch', 'done'].forEach(function (k) { el.classList.add('r-' + k); }); return; }
