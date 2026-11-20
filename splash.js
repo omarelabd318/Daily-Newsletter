@@ -130,7 +130,7 @@
        '<div class="in d4" data-w="stories" style="display:grid;grid-template-columns:repeat(3,1fr);margin-top:clamp(14px,2.4vh,22px);border-top:2px solid ' + P.ink + '">' +
        [0, 1, 2, 3, 4, 5].map(function (i) { return '<div>' + bars([40, 100, 80 - i * 5]) + '</div>'; }).join('') + '</div>' +
        // what to watch today
-       '<div class="in d4" data-w="watch" style="margin-top:14px;padding-top:10px;border-top:1px solid ' + P.ink + ';font:500 12.5px/1.4 Inter,system-ui,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></div>' +
+       '<div class="in d4" data-w="watch" style="margin-top:14px;padding-top:10px;border-top:1px solid ' + P.ink + '"></div>' +
        '</div>'
   };
 
@@ -322,33 +322,21 @@
       return '<div style="padding:12px ' + (i % 3 === 2 ? '0' : '20px') + ' 12px ' + (i % 3 === 0 ? '0' : '20px') + ';' + (i % 3 ? 'border-left:' + rule + ';' : '') + (i >= 3 ? 'border-top:' + rule + ';' : '') + '">' +
         '<div style="' + kick + '">' + esc(s.k) + '</div><div style="margin-top:5px;font:700 16px/1.25 \'Playfair Display\',Georgia,serif;text-wrap:pretty;' + clamp(2) + '">' + esc(s.t) + '</div></div>';
     }).join(''));
-    if (watch) put('watch', '<b style="font:700 10.5px/1 Inter,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;margin-right:10px">What to watch today</b>' +
-      watch.split(/;\s*/).filter(Boolean).map(function (x) { return '<span data-i>' + esc(x.replace(/\.$/, '')) + '</span>'; }).join('<span style="margin:0 9px;color:' + P.ink2 + '">·</span>'));
+    // what to watch: its first three items in three columns under the stories' three, up to two lines each
+    if (watch) put('watch', '<div style="' + kick + ';color:' + P.ink + '">What to watch today</div>' +
+      '<div style="display:grid;grid-template-columns:repeat(3,1fr);margin-top:6px">' +
+      watch.split(/;\s*/).filter(Boolean).slice(0, 3).map(function (x, i) {
+        return '<div style="padding:0 ' + (i === 2 ? '0' : '20px') + ' 0 ' + (i === 0 ? '0' : '20px') + ';font:500 13px/1.4 Inter,system-ui,sans-serif;text-wrap:pretty;' + clamp(2) + '">' +
+          esc(x.replace(/\.$/, '').replace(/^./, function (c) { return c.toUpperCase(); })) + '</div>';
+      }).join('') + '</div>');
     fitSheet();
     if (window.ResizeObserver) new ResizeObserver(fitSheet).observe(el);
     if (d.fonts && d.fonts.ready) d.fonts.ready.then(fitSheet);
     if (tw) writeOut();
   };
-  // what to watch is one line. When the items do not all fit, the room is shared out: an item shorter than its share
-  // keeps all of it and leaves the rest to the others, and each longer one is cut to its share with a …
-  var trimWatch = function () {
-    var w = el.querySelector('[data-w="watch"]'); if (!w || w.offsetParent === null) return;
-    var its = [].slice.call(w.querySelectorAll('[data-i]'));
-    its.forEach(function (n) { n.style.cssText = 'display:inline-block;vertical-align:bottom;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'; });
-    var used = 0; [].forEach.call(w.children, function (n) { if (!n.hasAttribute('data-i')) used += n.getBoundingClientRect().width + parseFloat(getComputedStyle(n).marginLeft) + parseFloat(getComputedStyle(n).marginRight); });
-    var room = w.clientWidth - used - 2, nat = its.map(function (n) { return n.getBoundingClientRect().width; });
-    if (nat.reduce(function (a, b) { return a + b; }, 0) <= room) return;
-    var left = its.length, order = nat.map(function (x, k) { return k; }).sort(function (a, b) { return nat[a] - nat[b]; });
-    order.forEach(function (k) {
-      var share = room / left; left--;
-      var whole = nat[k] <= share, give = whole ? Math.ceil(nat[k]) : Math.floor(share); room -= give;
-      its[k].style.maxWidth = whole ? '' : give + 'px';
-    });
-  };
   // on a shorter window the front page keeps what fits: first the second row of stories goes, then the quote, and what
-  // to watch (one line, ending in … when it runs long) only last; nothing is left cut through at the foot of the sheet
+  // to watch only last; nothing is left cut through at the foot of the sheet
   var fitSheet = function () {
-    trimWatch();
     var sh = el.children[1], st = [].slice.call(el.querySelectorAll('[data-w="stories"] > div'));
     var groups = [st.slice(3), [el.querySelector('[data-w="quote"]')], [el.querySelector('[data-w="watch"]')]];
     groups.forEach(function (g) { g.forEach(function (n) { if (n) n.style.display = ''; }); });
