@@ -273,7 +273,7 @@
     css += '#splash.tw .wcol,#splash.tw [data-w]:not(.tw-on){visibility:hidden}' +
       '#splash.tw [data-w=stories]:not(.tw-on){visibility:visible}#splash.tw [data-w=stories]>div:not(.tw-on)>*{visibility:hidden}' +
       // the dividers: none on the empty page; once the whole page is written they come up one by one, top to bottom:
-      // the masthead's rules, the Big Story's, the number of the day's black panel, the stories', what to watch's
+      // the masthead's rules, the Big Story's, the stories', the number of the day's black panel, what to watch's
       '#splash.tw [data-r],#splash.tw [data-w=body],#splash.tw [data-w=stories],#splash.tw [data-w=stories]>div,#splash.tw [data-w=watch]{transition:border-color .6s ease,column-rule-color .6s ease}' +
       '#splash.tw:not(.r-lead) [data-r=lead]{border-right-color:transparent!important}#splash.tw:not(.r-lead) [data-w=body]{column-rule-color:transparent!important}' +
       '#splash.tw:not(.r-stories) [data-w=stories],#splash.tw:not(.r-stories) [data-w=stories]>div{border-color:transparent!important}' +
@@ -508,7 +508,7 @@
     var run = function () {
       var x = jobs.shift();
       if (!x) {
-        ['mast', 'lead', 'number', 'stories', 'watch', 'done'].forEach(function (k, i) { setTimeout(function () { el.classList.add('r-' + k); }, 200 + i * 380); });
+        ['mast', 'lead', 'stories', 'number', 'watch', 'done'].forEach(function (k, i) { setTimeout(function () { el.classList.add('r-' + k); }, 200 + i * 380); });
         return;
       }
       if (x[0].offsetParent === null) return run();
