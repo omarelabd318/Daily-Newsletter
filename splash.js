@@ -16,7 +16,9 @@
 // - The computer's front page can write itself out too: it starts as a blank sheet, then
 //   each block is typed in turn (the nameplate and the dateline first), and once the page is written the dividers and
 //   the number of the day's black panel come up one by one.
-//   data-wide-type="1" on the <script> tag turns it on; ?typewide previews it.
+//   data-wide-type="1" on the <script> tag turns it on; ?typewide previews it. The Markets Desk's board on a computer
+//   (wide look 1) writes itself out the same way: the name and date, the EGX30, the six tiles, the desk's finding and
+//   what comes next, then the EGX30's chart, each tile's frame and line, and the rule above "Next" come up one by one.
 (function () {
   var me = document.currentScript, d = document, root = d.documentElement;
   var app = me.dataset.app, q = new URLSearchParams(location.search), pv = q.get('splash');
@@ -172,33 +174,33 @@
   var chg = function (k, size) { return '<span class="late" data-k="' + k + '-chg" style="white-space:nowrap;font:600 ' + size + '/1 Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums">&nbsp;</span>'; };
   var head = function (w) {
     return '<div style="display:flex;align-items:center;gap:12px">' + mark(w) +
-      '<div class="in d1" style="text-align:left"><div style="font:600 16px/1.2 Inter,system-ui,sans-serif">Markets Desk</div><div style="margin-top:2px;font:500 13px/1.3 Inter,system-ui,sans-serif;color:' + C.mute + '" data-k="date"></div></div></div>';
+      '<div class="in d1" data-w="name" style="text-align:left"><div style="font:600 16px/1.2 Inter,system-ui,sans-serif">Markets Desk</div><div style="margin-top:2px;font:500 13px/1.3 Inter,system-ui,sans-serif;color:' + C.mute + '" data-k="date"></div></div></div>';
   };
   // a tile with its own three-month line
   var stile = function (k, name) {
-    return '<div style="padding:13px 14px 12px;background:' + C.tile + ';border:1px solid ' + C.line + ';border-radius:8px;text-align:left">' +
+    return '<div data-w="tile" data-tb style="padding:13px 14px 12px;background:' + C.tile + ';border:1px solid ' + C.line + ';border-radius:8px;text-align:left">' +
       '<div style="' + lab + '">' + name + '</div>' +
       '<div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-top:8px">' + num(k, '19px') + chg(k, '12.5px') + '</div>' +
-      '<div style="margin-top:10px">' + spark(k, 91, 30) + '</div></div>';
+      '<div data-rs style="margin-top:10px">' + spark(k, 91, 30) + '</div></div>';
   };
   var finding = function (size, lines) {
     return '<p class="late" data-k="finding" style="font:400 ' + size + '/1.45 \'Source Serif 4\',Georgia,serif;text-wrap:pretty;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:' + lines + ';overflow:hidden">&nbsp;</p>';
   };
-  var next = '<p class="late" data-k="next" style="margin-top:14px;padding-top:12px;border-top:1px solid ' + C.line + ';font:500 13.5px/1.45 Inter,system-ui,sans-serif;color:' + C.mute + '">&nbsp;</p>';
+  var next = '<p class="late" data-k="next" data-w="next" style="margin-top:14px;padding-top:12px;border-top:1px solid ' + C.line + ';font:500 13.5px/1.45 Inter,system-ui,sans-serif;color:' + C.mute + '">&nbsp;</p>';
   var DW = {
     // 1. Board: the EGX30 with its three months as an area chart on the left; six tiles with their own lines on the
     // right, and the desk's finding under them
     1: '<div style="width:100%;max-width:1120px;display:grid;grid-template-columns:1fr 1.35fr;gap:clamp(32px,4vw,56px);text-align:left">' +
        '<div style="display:flex;flex-direction:column">' + head(40) +
-       '<div class="in d2" style="margin-top:34px;' + lab + '">EGX30 · last close</div>' +
-       '<div style="margin-top:12px">' + num('egx30', 'clamp(52px,5.6vw,76px)') + '</div>' +
-       '<div style="margin-top:12px;display:flex;gap:14px;align-items:baseline">' + chg('egx30', '19px') + '<span class="late" data-k="egx30-3m" style="font:500 13px/1 Inter,system-ui,sans-serif;color:' + C.mute + '">&nbsp;</span></div>' +
-       '<div class="in d3" style="margin-top:auto;padding-top:26px">' + spark('egx30', 91, 150, true) + '</div></div>' +
+       '<div class="in d2" data-w="egx-label" style="margin-top:34px;' + lab + '">EGX30 · last close</div>' +
+       '<div data-w="egx" style="margin-top:12px">' + num('egx30', 'clamp(52px,5.6vw,76px)') + '</div>' +
+       '<div data-w="egx-chg" style="margin-top:12px;display:flex;gap:14px;align-items:baseline">' + chg('egx30', '19px') + '<span class="late" data-k="egx30-3m" style="font:500 13px/1 Inter,system-ui,sans-serif;color:' + C.mute + '">&nbsp;</span></div>' +
+       '<div class="in d3" data-rv="chart" style="margin-top:auto;padding-top:26px">' + spark('egx30', 91, 150, true) + '</div></div>' +
        '<div><div class="in d3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">' +
        stile('egx70', 'EGX70') + stile('usd_egp', 'Dollar · market') + stile('gold24_egp', 'Gold 24k · EGP') +
        stile('brent', 'Brent') + stile('sp500', 'S&amp;P 500') + stile('btc', 'Bitcoin') + '</div>' +
-       '<div class="in d4" style="margin-top:24px;' + lab + ';color:' + C.acc + '">The desk\'s finding</div>' +
-       '<div style="margin-top:10px">' + finding('17.5px', 4) + '</div>' + next + '</div></div>',
+       '<div class="in d4" data-w="find-label" style="margin-top:24px;' + lab + ';color:' + C.acc + '">The desk\'s finding</div>' +
+       '<div data-w="finding" style="margin-top:10px">' + finding('17.5px', 4) + '</div>' + next + '</div></div>',
     // 2. Chart: the EGX30's six months across the screen with the last close over it, six tiles in a row beneath
     2: '<div style="width:100%;max-width:1160px;text-align:left">' +
        '<div style="display:flex;justify-content:space-between;align-items:center">' + head(40) +
@@ -253,10 +255,19 @@
   // a computer can take a different look from the phone: data-wide-look on the <script> tag (?splash= previews both)
   var wl = +(pv || me.dataset.wideLook || look);
   var looks = app === 'desk' ? D : N, wideLook = wide && (app === 'desk' ? DW : NW)[wl];
-  var tw = app === 'news' && wl === 2 && wideLook && !still && (q.has('typewide') || me.dataset.wideType === '1');
+  var tw = (app === 'news' ? wl === 2 : wl === 1) && wideLook && !still && (q.has('typewide') || me.dataset.wideType === '1');
   // if the day's edition does not come (or comes late), the sheet writes out what it has: never a blank page
   if (tw) setTimeout(function () { writeOut(); }, 4000);
-  if (tw) {
+  if (tw && app === 'desk') {
+    el.className = 'tw';
+    // until its turn each block is hidden; the chart, the tiles' frames and lines and the rule above "Next" wait for
+    // the end, then come up one by one
+    css += '#splash.tw [data-w]:not(.tw-on){visibility:hidden}' +
+      '#splash.tw [data-rv=chart]{clip-path:inset(-6px 100% -6px 0);transition:clip-path 1.1s cubic-bezier(.5,0,.2,1)}#splash.tw [data-rv=chart].rv{clip-path:inset(-6px -6px -6px 0)}' +
+      '#splash.tw [data-tb]{transition:background-color .6s ease,border-color .6s ease}#splash.tw [data-tb]:not(.rv){background-color:transparent!important;border-color:transparent!important}' +
+      '#splash.tw [data-rs]{transition:opacity .6s ease}#splash.tw [data-tb]:not(.rv) [data-rs]{opacity:0}' +
+      '#splash.tw [data-w=next]{transition:opacity .35s ease,border-color .6s ease}#splash.tw [data-w=next]:not(.rv){border-top-color:transparent!important}';
+  } else if (tw) {
     el.className = 'tw';
     // until its turn each block is hidden; the rules of the stories' columns stay up as the empty page
     css += '#splash.tw .wcol,#splash.tw [data-w]:not(.tw-on){visibility:hidden}' +
@@ -452,9 +463,34 @@
     tick();
   };
   var wrote = false;
+  // the desk's board: written out block by block, then its chart, tiles and rule come up one after another
+  var writeDesk = function (q) {
+    var jobs = [], add = function (box, msPerChar, cap) { if (box) jobs.push([box, msPerChar, cap]); };
+    add(q('[data-w="name"]'), 60, 1500);
+    add(q('[data-w="egx-label"]'), 45, 900);
+    add(q('[data-w="egx"]'), 120, 1300);
+    add(q('[data-w="egx-chg"]'), 40, 1300);
+    el.querySelectorAll('[data-w="tile"]').forEach(function (c) { add(c, 45, 1300); });
+    add(q('[data-w="find-label"]'), 45, 900);
+    add(q('[data-w="finding"]'), 24, 5000);
+    add(q('[data-w="next"]'), 24, 3200);
+    var run = function () {
+      var x = jobs.shift();
+      if (!x) {
+        var ends = [q('[data-rv="chart"]')].concat([].slice.call(el.querySelectorAll('[data-tb]')), [q('[data-w="next"]')]).filter(Boolean);
+        ends.forEach(function (n, i) { setTimeout(function () { n.classList.add('rv'); }, 200 + i * 300); });
+        setTimeout(function () { el.classList.add('r-done'); }, 200 + ends.length * 300);
+        return;
+      }
+      var j = prep(x[0]);
+      write(j, Math.min(x[2], j.len * x[1]), function () { setTimeout(run, 140); });
+    };
+    setTimeout(run, Math.max(0, 700 - (Date.now() - t0)));
+  };
   var writeOut = function () {
     if (wrote) return; wrote = true;
     var q = el.querySelector.bind(el), jobs = [];
+    if (app === 'desk') return writeDesk(q);
     // each block is made ready only when its turn comes (until then it is hidden), so the sheet can still settle
     // (fonts, what fits, how much of the Big Story's text) up to that moment; a block left off by then is skipped
     var add = function (box, msPerChar, cap) { if (box) jobs.push([box, msPerChar, cap]); };
@@ -508,17 +544,17 @@
         .then(function (md) { front(md, e); });
     });
   } else {
-    json('/desk/index.json').then(function (x) {
+    var deskDay = json('/desk/index.json').then(function (x) {
       var e = x && x.desks && x.desks.length && newest(x.desks); if (!e) return;
       set('date', longDate(e.date)); set('summary', esc(e.summary || ''));
       // the wide board also carries the desk's finding for Egypt and what comes next
-      if (wideLook) json('/desk/days/' + e.date + '.json').then(function (y) {
+      if (wideLook) return json('/desk/days/' + e.date + '.json').then(function (y) {
         var g = y && y.egypt; if (!g) return;
         if (g.finding) set('finding', esc(g.finding));
         if (g.next) set('next', '<b style="color:' + C.ink + ';font-weight:600">Next</b> · ' + esc(g.next));
       });
     });
-    if (look !== 3 || wideLook) json('/data/markets-recent.json').then(function (x) {
+    var deskMarkets = (look !== 3 || wideLook) && json('/data/markets-recent.json').then(function (x) {
       var days = x && x.days; if (!days) return;
       // the lines: the last n sessions of each series, the EGX30's in the day's colour with a soft fill under it
       // n: calendar days back from the newest day, so every line covers the same stretch of time
@@ -554,7 +590,8 @@
         set(k + '-chg', s, g > 0 ? C.up : g < 0 ? C.down : C.mute);
         if (k === 'egx30' && Math.abs(c) >= 0.005) el.querySelectorAll('.mk-line').forEach(function (n) { n.setAttribute('stroke', c > 0 ? C.up : C.down); if (c < 0) n.classList.add('down'); });
       });
-    });
+    });    // the board writes itself out once the day's numbers and words are in (or after 4s, with what it has)
+    if (tw) Promise.all([deskDay, deskMarkets]).then(function () { writeOut(); });
   }
 
   // ---- leave once the page is ready (MIN to MAX after launch); on a phone or a computer it waits for a tap or a click
