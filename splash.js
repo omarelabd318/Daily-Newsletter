@@ -14,7 +14,7 @@
 // - A refresh brings it up again. The "Tap / Click to open" line sits at the very bottom and does not pulse.
 // - Preview in any browser: ?splash=1|2|3 shows that look; add &hold to keep it up.
 // - The computer's front page can write itself out too: it starts with only the nameplate and the dateline, then
-//   each block is typed in turn, and each section's dividers come up once that section is written.
+//   each block is typed in turn, and the dividers all come up together once the page is written.
 //   data-wide-type="1" on the <script> tag turns it on; ?typewide previews it.
 (function () {
   var me = document.currentScript, d = document, root = d.documentElement;
@@ -60,7 +60,7 @@
     '#splash .tap-hint{position:absolute;left:0;right:0;bottom:max(18px,calc(env(safe-area-inset-bottom) + 8px));font:600 11px/1 Inter,system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:' + C.mute + '}' +
     '#splash .wcol{display:grid;gap:7px;align-content:start}#splash .wcol i{display:block;height:4px;background:' + P.ink + ';opacity:.85}' +
     '@media (max-height:820px){#splash [data-w=stories]>:nth-child(n+4){display:none}}' +
-    '@media (max-height:720px){#splash [data-w=watch]{display:none}}@media (max-height:600px){#splash [data-w=quote]{display:none}}' +
+    
     '@keyframes sp-in{to{opacity:1;transform:none}}' +
     '@keyframes sp-rule{from{transform:scaleX(0)}to{transform:scaleX(1)}}' +
     '@keyframes sp-draw{to{stroke-dashoffset:0}}' +
@@ -122,7 +122,7 @@
        '<div style="display:grid;grid-template-columns:2fr 1fr;margin-top:clamp(14px,2.4vh,22px)">' +
        '<div data-r="lead" style="padding-right:26px;border-right:' + rule + ';display:flex;flex-direction:column"><div class="in d2" style="' + kick + '" data-w="lead-kick">The Big Story</div>' +
        '<p class="late" data-w="lead" style="min-height:2.24em;margin-top:7px;font:900 clamp(26px,min(3vw,4.4vh),38px)/1.12 \'Playfair Display\',Georgia,serif;text-wrap:pretty"></p>' +
-       '<div class="in d3" data-w="body" style="margin-top:12px;flex:1 1 0;min-height:min(105px,12vh);overflow:hidden;columns:2;column-fill:auto;column-gap:26px;column-rule:' + rule + '">' + bars([100, 96, 100, 88, 100, 94, 100, 70]) + '</div></div>' +
+       '<div class="in d3" data-w="body" style="margin-top:12px;flex:1 1 0;min-height:min(105px,12vh);overflow:hidden;columns:2;column-fill:balance;column-gap:26px;column-rule:' + rule + '">' + bars([100, 96, 100, 88, 100, 94, 100, 70]) + '</div></div>' +
        '<div class="in d3" style="padding-left:26px;display:flex;flex-direction:column;gap:14px">' +
        '<div data-w="number" style="padding:16px 18px;background:' + P.ink + ';color:' + P.sheet + '"><div style="' + kick + ';color:' + P.sheet + ';opacity:.7">Number of the day</div><div style="margin-top:10px;height:30px"></div></div>' +
        '<div data-w="quote">' + bars([100, 84, 92, 50]) + '</div></div></div>' +
@@ -253,7 +253,7 @@
     // until its turn each block is hidden; the rules of the stories' columns stay up as the empty page
     css += '#splash.tw .wcol,#splash.tw [data-w]:not(.tw-on){visibility:hidden}' +
       '#splash.tw [data-w=stories]:not(.tw-on){visibility:visible}#splash.tw [data-w=stories]>div:not(.tw-on)>*{visibility:hidden}' +
-      // the dividers: none on the empty page; each section's come up once the whole section is written
+      // the dividers: none on the empty page; they all come up together once the whole page is written
       '#splash.tw [data-r],#splash.tw [data-w=body],#splash.tw [data-w=stories],#splash.tw [data-w=stories]>div,#splash.tw [data-w=watch]{transition:border-color .6s ease,column-rule-color .6s ease}' +
       '#splash.tw:not(.r-lead) [data-r=lead]{border-right-color:transparent!important}#splash.tw:not(.r-lead) [data-w=body]{column-rule-color:transparent!important}' +
       '#splash.tw:not(.r-stories) [data-w=stories],#splash.tw:not(.r-stories) [data-w=stories]>div{border-color:transparent!important}' +
@@ -323,8 +323,39 @@
         '<div style="' + kick + '">' + esc(s.k) + '</div><div style="margin-top:5px;font:700 16px/1.25 \'Playfair Display\',Georgia,serif;text-wrap:pretty;' + clamp(2) + '">' + esc(s.t) + '</div></div>';
     }).join(''));
     if (watch) put('watch', '<b style="font:700 10.5px/1 Inter,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;margin-right:10px">What to watch today</b>' +
-      watch.split(/;\s*/).filter(Boolean).map(function (x) { return esc(x.replace(/\.$/, '')); }).join('<span style="margin:0 9px;color:' + P.ink2 + '">·</span>'));
+      watch.split(/;\s*/).filter(Boolean).map(function (x) { return '<span data-i>' + esc(x.replace(/\.$/, '')) + '</span>'; }).join('<span style="margin:0 9px;color:' + P.ink2 + '">·</span>'));
+    fitSheet();
+    if (window.ResizeObserver) new ResizeObserver(fitSheet).observe(el);
+    if (d.fonts && d.fonts.ready) d.fonts.ready.then(fitSheet);
     if (tw) writeOut();
+  };
+  // what to watch is one line. When the items do not all fit, the room is shared out: an item shorter than its share
+  // keeps all of it and leaves the rest to the others, and each longer one is cut to its share with a …
+  var trimWatch = function () {
+    var w = el.querySelector('[data-w="watch"]'); if (!w || w.offsetParent === null) return;
+    var its = [].slice.call(w.querySelectorAll('[data-i]'));
+    its.forEach(function (n) { n.style.cssText = 'display:inline-block;vertical-align:bottom;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'; });
+    var used = 0; [].forEach.call(w.children, function (n) { if (!n.hasAttribute('data-i')) used += n.getBoundingClientRect().width + parseFloat(getComputedStyle(n).marginLeft) + parseFloat(getComputedStyle(n).marginRight); });
+    var room = w.clientWidth - used - 2, nat = its.map(function (n) { return n.getBoundingClientRect().width; });
+    if (nat.reduce(function (a, b) { return a + b; }, 0) <= room) return;
+    var left = its.length, order = nat.map(function (x, k) { return k; }).sort(function (a, b) { return nat[a] - nat[b]; });
+    order.forEach(function (k) {
+      var share = room / left; left--;
+      var whole = nat[k] <= share, give = whole ? Math.ceil(nat[k]) : Math.floor(share); room -= give;
+      its[k].style.maxWidth = whole ? '' : give + 'px';
+    });
+  };
+  // on a shorter window the front page keeps what fits: first the second row of stories goes, then the quote, and what
+  // to watch (one line, ending in … when it runs long) only last; nothing is left cut through at the foot of the sheet
+  var fitSheet = function () {
+    trimWatch();
+    var sh = el.children[1], st = [].slice.call(el.querySelectorAll('[data-w="stories"] > div'));
+    var groups = [st.slice(3), [el.querySelector('[data-w="quote"]')], [el.querySelector('[data-w="watch"]')]];
+    groups.forEach(function (g) { g.forEach(function (n) { if (n) n.style.display = ''; }); });
+    // the foot may run into half the sheet's bottom margin, never past it
+    var room = sh.clientHeight + parseFloat(getComputedStyle(sh).paddingBottom) / 2;
+    for (var i = 0; i < groups.length && sh.scrollHeight > room; i++)
+      groups[i].forEach(function (n) { if (n) n.style.display = 'none'; });
   };
   // the typed front page on a computer: every block is laid out at once with its words see-through, then they are
   // written out one block after another (each block's own colours kept), so nothing on the sheet moves
@@ -359,21 +390,18 @@
   };
   var writeOut = function () {
     var q = el.querySelector.bind(el), jobs = [];
-    var add = function (box, msPerChar, cap) { if (box) { var j = prep(box); j.ms = Math.min(cap, j.len * msPerChar); jobs.push(j); return j; } };
-    // a section's dividers come up after its last block (sec)
-    var end = function (j, sec) { if (j) j.sec = sec; else el.classList.add('r-' + sec); };
-    add(q('[data-w="lead-kick"]'), 20, 220);
-    var lj = add(q('[data-w="lead"]'), 22, 1600);
-    end(add(q('[data-w="body"]'), 3, 1100) || lj, 'lead');
-    add(q('[data-w="number"]'), 9, 800);
-    add(q('[data-w="quote"]'), 7, 900);
-    var sj; el.querySelectorAll('[data-w="stories"] > div').forEach(function (c) { sj = add(c, 8, 550) || sj; });
-    end(sj, 'stories');
-    end(add(q('[data-w="watch"]'), 4, 800), 'watch');
+    var add = function (box, msPerChar, cap) { if (box && box.offsetParent !== null) { var j = prep(box); j.ms = Math.min(cap, j.len * msPerChar); jobs.push(j); return j; } };
+    add(q('[data-w="lead-kick"]'), 28, 320);
+    add(q('[data-w="lead"]'), 32, 2300);
+    add(q('[data-w="body"]'), 4.5, 1600);
+    add(q('[data-w="number"]'), 13, 1150);
+    add(q('[data-w="quote"]'), 10, 1300);
+    el.querySelectorAll('[data-w="stories"] > div').forEach(function (c) { add(c, 12, 800); });
+    add(q('[data-w="watch"]'), 6, 1150);
     var run = function () {
       var j = jobs.shift();
-      if (!j) { ['lead', 'stories', 'watch'].forEach(function (k) { el.classList.add('r-' + k); }); return; }
-      write(j, j.ms, function () { if (j.sec) el.classList.add('r-' + j.sec); setTimeout(run, 90); });
+      if (!j) { ['lead', 'stories', 'watch', 'done'].forEach(function (k) { el.classList.add('r-' + k); }); return; }
+      write(j, j.ms, function () { setTimeout(run, 140); });
     };
     setTimeout(run, Math.max(0, 700 - (Date.now() - t0)));
   };
