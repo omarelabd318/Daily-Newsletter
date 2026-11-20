@@ -70,7 +70,11 @@
       if (!p[1]) { const c1 = M.dayChart(M.$('ch' + i), 'global', k, n, dp ? Charts.fmt.dec(dp) : Charts.fmt.int); M.$('cap' + i).innerHTML = c1 || ''; return; }
       // a week or a month: the hourly line where it is saved (desk/intraday.json), else the daily closes below
       if (p[1] === 7 || p[1] === 30) { const w = M.weekChart(M.$('ch' + i), 'g_' + k, k, n, dp ? Charts.fmt.dec(dp) : Charts.fmt.int, false, p[1]);
-        if (w) { M.$('cap' + i).innerHTML = `${p[1] === 7 ? 'Every hour over seven days' : 'Every two hours over 30 days'}, Cairo time`; M.$('cap' + i).dataset.src = 'TradingView'; return; } }
+        if (w) {
+          // the line can run past the close the big number gives (Brent, gold and the dollar index trade on): name where it ends
+          const ss = M.intraPeriod('g_' + k, k, p[1]), lp = ss && ss.at(-1), lt = lp && lp.series[k].at(-1);
+          const past = lt && k !== 'btc' && lp.session > M.lastDate(s) ? `; the line runs on to ${M.day(lp.session).toLocaleDateString('en-US', { weekday: 'short' })} ${lt[0]}, after ${M.day(M.lastDate(s)).toLocaleDateString('en-US', { weekday: 'long' })}'s close above` : '';
+          M.$('cap' + i).innerHTML = `${p[1] === 7 ? 'Every hour over seven days' : 'Every two hours over 30 days'}, Cairo time${past}`; M.$('cap' + i).dataset.src = 'TradingView'; return; } }
       if (p[1] > 400) { if (!M.full.done) { await M.full(); M.full.done = true; } sAll = M.series((e) => e[k], k === 'btc' ? 'all' : 'us'); }
       M.$('cap' + i).innerHTML = ''; M.$('d' + i).innerHTML = M.heroChg(sAll, p);
       // Brent: a futures contract switch in view is marked on the chart

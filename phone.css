@@ -5,6 +5,8 @@
 #ph-bar,#ph-tabs,#ph-sheet,#ph-toast{display:none}
 @media (max-width:640px){
   :root{--ph-tab:58px;--ph-safe:env(safe-area-inset-bottom,0px)}
+  /* in the home-screen app the tab bar sits a little higher, clear of the home bar */
+  @media (display-mode:standalone){:root{--ph-safe:calc(env(safe-area-inset-bottom,0px) + 8px)}}
   html{scroll-padding-top:100px}
   body{padding-bottom:calc(var(--ph-tab) + var(--ph-safe))}
   :root[data-theme="paper"]{background:var(--ground)}

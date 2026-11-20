@@ -48,15 +48,16 @@
   const fmtDay = (iso) => M.day(iso).toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' }).replace('Sept', 'Sep');
   const ok = (b, yes, no) => `<span class="pill ${b ? 'ok' : 'bad'}">${b ? yes : no}</span>`;
   let pub = 0, due = 0, warnLeft = 0;
-  const row = (label, published, P, part, key, isDesk) => {
+  // today's runs not yet published read "Not yet" (grey) and are not counted as due
+  const row = (label, published, P, part, key, isDesk, pending = false) => {
     const c = P && P.check, s = P ? (P.searches || []).length : 0, pg = P ? new Set(P.pages || []).size : 0, rd = P ? [...new Set(P.read || [])].filter((u) => !(P.pages || []).includes(u)).length : 0, st = P ? Object.keys(P.stocks || {}).length : 0;
     const A = key && audio[key], voices = A ? A.voices.map((v) => v.name).join(', ') : '';
     const fq = P ? [...(P.searches || []), ...(P.pages || [])].filter((x) => /factiq/i.test(x)).length : 0;
-    due++; if (published) pub++; if (c) warnLeft += (c.warnings || []).length;
+    if (!pending) due++; if (published) pub++; if (c) warnLeft += (c.warnings || []).length;
     const det = c && ((c.errors || []).length || (c.warnings || []).length)
       ? `<details class="rdet"><summary>${(c.errors || []).length ? `${c.errors.length} error${c.errors.length > 1 ? 's' : ''}, ` : ''}${c.warnings.length} warning${c.warnings.length === 1 ? '' : 's'} left</summary><ul>${(c.errors || []).map((e) => `<li class="bad">${M.esc(e)}</li>`).join('')}${(c.warnings || []).map((w) => `<li>${M.esc(w)}</li>`).join('')}</ul></details>`
       : c ? '<span class="sub">Checker clean</span>' : '';
-    return `<div class="rrow"><b>${label}</b>${ok(published, 'Published', 'Missing')}
+    return `<div class="rrow"><b>${label}</b>${pending ? '<span class="pill open">Not yet</span>' : ok(published, 'Published', 'Missing')}
       <span class="rcell"><span class="meta">Checked</span>${c ? M.esc(c.at.slice(11)) + ' Cairo' : '—'}</span>
       <span class="rcell"><span class="meta">Research</span>${P ? `${s} searches, ${pg} pages${rd ? ` (+${rd} read by scripts)` : ''}${isDesk ? `, ${st} stocks` : ''}${fq ? `, ${fq} FactIQ` : ''}` : '—'}</span>
       <span class="rcell">${isDesk ? '' : `<span class="meta">Length and audio</span>${c && c.words ? M.num(c.words, 0) + ' words · ' : ''}${A ? 'recorded (' + M.esc(voices) + ')' : published ? 'device voice only' : '—'}`}</span>
@@ -67,9 +68,9 @@
     // a run counts from the first day it published (the desk began on October 30)
     // the day's edition: its date, or a second version of it (2026-10-28-v2)
     const nk = [...eds].find((k) => k === d || (k.startsWith(d + '-') && !k.endsWith('-recap'))) || d;
-    if (d >= first(eds)) rows.push(row('Newsletter', eds.has(nk), L.newsletter, 'newsletter', nk, false));
-    if (d >= first(desks)) rows.push(row('Markets Desk', desks.has(d), L.desk, 'desk', null, true));
-    if (sat && d >= firstRecap) rows.push(row('Weekly Recap', eds.has(d + '-recap'), L.recap, 'recap', d + '-recap', false));
+    if (d >= first(eds)) rows.push(row('Newsletter', eds.has(nk), L.newsletter, 'newsletter', nk, false, d === today && !eds.has(nk)));
+    if (d >= first(desks)) rows.push(row('Markets Desk', desks.has(d), L.desk, 'desk', null, true, d === today && !desks.has(d)));
+    if (sat && d >= firstRecap) rows.push(row('Weekly Recap', eds.has(d + '-recap'), L.recap, 'recap', d + '-recap', false, d === today && !eds.has(d + '-recap')));
     if (!rows.length) return '';
     return `<section class="card rday"><h2>${fmtDay(d)}</h2>${rows.join('')}</section>`;
   }).join('');

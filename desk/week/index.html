@@ -76,7 +76,7 @@
   // the week: built from what the desk already keeps (the data log, the day files, movers, flows, views, calendar)
   const M = Desk, D = await M.init('/desk/week/'); if (!D) return;
   const end = D.date, start = M.cut(end, 6);
-  const span = `${M.short(start)}–${M.short(end)}`;
+  const span = start.slice(0, 7) === end.slice(0, 7) ? `${M.short(start)}–${+end.slice(8)}` : `${M.short(start)}–${M.short(end)}`; // Nov 13–19, Oct 30–Nov 5
   M.$('title').textContent = 'The week · ' + span; document.title = 'The week · Markets Desk';
 
   // markets: the close and the change over the last seven days

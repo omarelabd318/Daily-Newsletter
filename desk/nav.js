@@ -65,6 +65,9 @@
 /* phones (640px and narrower): a compact header that stays at the top (Egypt, US and Global as a switch, the market's
    pages as chips), search and light/dark as icons, and a tab bar at the bottom; built by phone() below */
 .dp-tabs,.dp-ib,.dp-sheet,.dp-short{display:none}
+/* the bottom bar's space below: the home bar's inset, and in the home-screen app a little more, clear of the home bar */
+:root{--dp-safe:env(safe-area-inset-bottom,0px)}
+@media (display-mode:standalone){:root{--dp-safe:calc(env(safe-area-inset-bottom,0px) + 8px)}}
 @media (max-width:640px){
   .dmast{position:sticky;top:0;z-index:40;background:var(--ground);padding:env(safe-area-inset-top) 16px 0;transition:box-shadow .2s}
   .dmast.dp-stuck{box-shadow:0 1px 0 var(--border),0 6px 18px rgba(0,0,0,.06)}
@@ -89,8 +92,8 @@
   .dm-n2{gap:8px;padding:8px 16px;margin:0 -16px;border-bottom:1px solid var(--border)}
   .dm-n2 a{display:inline-flex;align-items:center;min-height:34px;padding:0 13px;border:1px solid var(--border);border-radius:999px;font-size:13px;color:var(--text)}
   .dm-n2 a[aria-current]{background:var(--text);border-color:var(--text);color:var(--ground);font-weight:600}
-  body{padding-bottom:calc(60px + env(safe-area-inset-bottom))}
-  .dp-tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));position:fixed;left:0;right:0;bottom:0;z-index:45;padding:0 4px env(safe-area-inset-bottom);background:var(--ground);border-top:1px solid var(--text)}
+  body{padding-bottom:calc(60px + var(--dp-safe))}
+  .dp-tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));position:fixed;left:0;right:0;bottom:0;z-index:45;padding:0 4px var(--dp-safe);background:var(--ground);border-top:1px solid var(--text)}
   .dp-tabs a,.dp-tabs button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;height:58px;padding:0;border:0;background:none;color:var(--muted);font:600 10.5px/1 var(--font);text-decoration:none;cursor:pointer;-webkit-tap-highlight-color:transparent;position:relative}
   .dp-tabs svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
   .dp-tabs [aria-current],.dp-tabs .on{color:var(--accent)}
@@ -100,7 +103,7 @@
   .dp-sheet.on{visibility:visible}
   .dp-scrim{position:absolute;inset:0;background:rgba(0,0,0,.4);opacity:0;transition:opacity .25s}
   .dp-sheet.on .dp-scrim{opacity:1}
-  .dp-panel{position:absolute;left:0;right:0;bottom:0;max-height:80vh;overflow-y:auto;background:var(--ground);border-top:3px double var(--text);border-radius:14px 14px 0 0;padding:6px 16px calc(16px + env(safe-area-inset-bottom));transform:translateY(100%);transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+  .dp-panel{position:absolute;left:0;right:0;bottom:0;max-height:80vh;overflow-y:auto;background:var(--ground);border-top:3px double var(--text);border-radius:14px 14px 0 0;padding:6px 16px calc(16px + var(--dp-safe));transform:translateY(100%);transition:transform .3s cubic-bezier(.2,.7,.2,1)}
   .dp-sheet.on .dp-panel{transform:none}
   .dp-grab{width:40px;height:5px;margin:2px auto 8px;border-radius:3px;background:var(--border)}
   .dp-h{margin:14px 0 4px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}

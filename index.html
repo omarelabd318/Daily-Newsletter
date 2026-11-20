@@ -530,7 +530,9 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 :root[data-theme="paper"] .f-by{display:block;margin:0 0 9px;padding:3px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);text-align:center;font:600 10px var(--sans);letter-spacing:.14em;text-transform:uppercase}
 :root[data-theme="paper"] .f-body{columns:3;column-gap:20px;column-rule:1px solid var(--rule);font-size:15.5px;line-height:1.45}
 :root[data-theme="paper"] .f-body::first-letter{font:var(--p-hw) 56px/44px var(--p-head),var(--serif)}
-:root[data-theme="paper"] .f-body,:root[data-theme="paper"] .f-col p,:root[data-theme="paper"] .f-band p,:root[data-theme="paper"] .s-body p,:root[data-theme="paper"] .s-body li{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+:root[data-theme="paper"] .s-body p,:root[data-theme="paper"] .s-body li{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+/* the front page's columns are too narrow to justify without wide gaps (capitalised words do not hyphenate): ragged right */
+:root[data-theme="paper"] .f-body,:root[data-theme="paper"] .f-col p,:root[data-theme="paper"] .f-band p{text-align:left;text-wrap:pretty;hyphens:auto;-webkit-hyphens:auto}
 :root[data-theme="paper"] .f-more{font:italic 13px var(--serif);display:block;text-align:right}
 :root[data-theme="paper"] .f-col h3{font:var(--p-hw) 24px/1.1 var(--p-head),var(--serif)}
 :root[data-theme="paper"] .f-col article{border-top-color:var(--ink)}
@@ -1000,11 +1002,12 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
         return {now:now, chg:(was ? (now/was-1)*100 : null)};
       }
       var n0 = function(v){ return Math.round(v).toLocaleString('en-US'); }, n2 = function(v){ return v.toFixed(2); };
-      function pc(c, flip){ return c == null ? '' : (flip ? 'pound '+(c <= 0 ? '+' : '\u2212') : (c >= 0 ? '+' : '\u2212'))+Math.abs(c).toFixed(1)+'%'; }
-      function cell(lab, k, fmt, flip, href){ var f = fig(k); if(!f) return ''; var c = f.chg, good = c == null ? '' : ((flip ? -c : c) >= 0 ? 'f-up' : 'f-dn');
+      function pc(c, flip){ if(c == null) return ''; var a = Math.abs(c).toFixed(1); if(+a === 0) return (flip ? 'pound ' : '')+'0.0%'; return (flip ? 'pound '+(c <= 0 ? '+' : '\u2212') : (c >= 0 ? '+' : '\u2212'))+a+'%'; }
+      // a change that rounds to zero shows as 0.0%, grey, with no sign
+      function cell(lab, k, fmt, flip, href){ var f = fig(k); if(!f) return ''; var c = f.chg, good = c == null ? '' : +Math.abs(c).toFixed(1) === 0 ? 'f-mu' : ((flip ? -c : c) >= 0 ? 'f-up' : 'f-dn');
         return '<a href="'+href+'"><span>'+lab+'</span><b>'+fmt(f.now)+'</b>'+(c == null ? '' : '<em class="'+good+'">'+pc(c, flip)+'</em>')+'</a>'; }
       var cells = cell('EGX30','egx30',n0,false,'/desk/egx/') + cell('USD/EGP','usd_egp',n2,true,'/desk/egp/') + cell('Gold 24K','gold24_egp',n0,false,'/desk/egp/#c-gold') + cell('Brent','brent',function(v){return '$'+n2(v)},false,'/desk/global/') + cell('S&amp;P 500','sp500',n0,false,'/desk/us/')
-        + cell('Nasdaq','nasdaq',n0,false,'/desk/us/').replace('<a ', '<a class="f-x" ') + cell('Bitcoin','btc',n0,false,'/desk/global/#g-btc').replace('<a ', '<a class="f-x" ');
+        + cell('Nasdaq','nasdaq',n0,false,'/desk/us/').replace('<a ', '<a class="f-x" ') + cell('Bitcoin','btc',function(v){return '$'+n0(v)},false,'/desk/global/#g-btc').replace('<a ', '<a class="f-x" ');
       var el = document.getElementById('f-strip'); if(el){ if(cells) el.innerHTML = cells; else el.remove(); }
       var ex = fig('egx30');
       if(ex && document.documentElement.classList.contains('rcp')) ear('r', 'EGX30 this week', n0(ex.now), ex.chg == null ? '' : (ex.chg >= 0 ? 'Up ' : 'Down ') + Math.abs(ex.chg).toFixed(1) + '%');
@@ -1163,11 +1166,12 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     loadMarket('markets-recent.json').then(function(L){
       var days = ((L && L.days) || []).filter(function(e){ return e.date <= ed.date; });
       function fig(k){ var v = days.map(function(e){ return e[k]; }).filter(function(x){ return typeof x === 'number'; }); if(!v.length) return null; var now = v[v.length-1], i = v.length-2; while(i > 0 && v[i] === now) i--; return {now:now, chg:(i >= 0 && v[i] !== now) ? (now/v[i]-1)*100 : null}; }
-      function cell(lab, k, fmt, flip, href){ var f = fig(k); if(!f) return ''; var c = f.chg, good = c == null ? '' : ((flip ? -c : c) >= 0 ? 'f-up' : 'f-dn');
-        return '<a href="'+href+'"><span>'+lab+'</span><b>'+fmt(f.now)+'</b>'+(c == null ? '' : '<em class="'+good+'">'+(flip ? 'pound '+(c <= 0 ? '+' : '−')+Math.abs(c).toFixed(1)+'%' : (c >= 0 ? '+' : '−')+Math.abs(c).toFixed(2)+'%')+'</em>')+'</a>'; }
+      // a change that rounds to zero shows as 0.0% (0.00%), grey, with no sign
+      function cell(lab, k, fmt, flip, href){ var f = fig(k); if(!f) return ''; var c = f.chg, dp = flip ? 1 : 2, a = c == null ? 0 : +Math.abs(c).toFixed(dp), good = c == null ? '' : a === 0 ? 'f-mu' : ((flip ? -c : c) >= 0 ? 'f-up' : 'f-dn');
+        return '<a href="'+href+'"><span>'+lab+'</span><b>'+fmt(f.now)+'</b>'+(c == null ? '' : '<em class="'+good+'">'+(flip ? 'pound ' : '')+(a === 0 ? '' : flip ? (c <= 0 ? '+' : '−') : (c >= 0 ? '+' : '−'))+a.toFixed(dp)+'%</em>')+'</a>'; }
       var n0 = function(v){ return Math.round(v).toLocaleString('en-US'); }, n2 = function(v){ return v.toFixed(2); };
       var cells = cell('EGX30','egx30',n0,false,'/desk/egx/') + cell('USD/EGP','usd_egp',n2,true,'/desk/egp/') + cell('Gold 24K','gold24_egp',n0,false,'/desk/egp/#c-gold') + cell('Brent','brent',function(v){return '$'+n2(v)},false,'/desk/global/') + cell('S&amp;P 500','sp500',n0,false,'/desk/us/')
-        + cell('Nasdaq','nasdaq',n0,false,'/desk/us/').replace('<a ', '<a class="f-x" ') + cell('Bitcoin','btc',n0,false,'/desk/global/#g-btc').replace('<a ', '<a class="f-x" ') + wx;
+        + cell('Nasdaq','nasdaq',n0,false,'/desk/us/').replace('<a ', '<a class="f-x" ') + cell('Bitcoin','btc',function(v){return '$'+n0(v)},false,'/desk/global/#g-btc').replace('<a ', '<a class="f-x" ') + wx;
       var el = document.getElementById('f-strip'); if(el){ if(cells) el.innerHTML = cells; else el.remove(); }
       // paper mode: the "ears" beside the name (the weather, the EGX30's close) and a boxed markets panel in the rail
       [].slice.call(document.querySelectorAll('.p-ear')).forEach(function(x){ x.remove(); });

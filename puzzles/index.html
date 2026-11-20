@@ -97,6 +97,7 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
   .pad{grid-template-columns:repeat(5,1fr)}
   /* the clue being solved stays in view above the phone's keyboard */
   .cw-clue{position:fixed;left:0;right:0;bottom:0;z-index:5;width:auto;margin:0;padding:10px 14px;border-top:1px solid var(--ink);transition:transform .12s}
+  @media (display-mode:standalone){.cw-clue{padding-bottom:calc(18px + env(safe-area-inset-bottom,0px))}} /* in the app, clear of the home bar */
   .sheet{padding-bottom:80px}
 }
 </style>
