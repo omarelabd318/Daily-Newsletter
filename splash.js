@@ -451,7 +451,7 @@
     add(q('[data-w="body"]'), 17.64, 6272);
     add(q('[data-w="number"]'), 50.96, 4508);
     add(q('[data-w="quote"]'), 39.2, 5096);
-    el.querySelectorAll('[data-w="stories"] > div').forEach(function (c) { add(c, 33.6, 2240); });
+    el.querySelectorAll('[data-w="stories"] > div').forEach(function (c) { add(c, 40.32, 2688); });
     add(q('[data-w="watch"]'), 16.8, 3220);
     var run = function () {
       var x = jobs.shift();
