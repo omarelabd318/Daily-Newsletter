@@ -14,8 +14,8 @@
 // - A refresh brings it up again. The "Tap / Click to open" line sits at the very bottom and does not pulse.
 // - Preview in any browser: ?splash=1|2|3 shows that look; add &hold to keep it up.
 // - The computer's front page can write itself out too: it starts as a blank sheet, then
-//   each block is typed in turn (the nameplate and the dateline first), and the dividers all come up together once the
-//   page is written.
+//   each block is typed in turn (the nameplate and the dateline first), and once the page is written the dividers and
+//   the number of the day's black panel come up one by one.
 //   data-wide-type="1" on the <script> tag turns it on; ?typewide previews it.
 (function () {
   var me = document.currentScript, d = document, root = d.documentElement;
@@ -261,12 +261,13 @@
     // until its turn each block is hidden; the rules of the stories' columns stay up as the empty page
     css += '#splash.tw .wcol,#splash.tw [data-w]:not(.tw-on){visibility:hidden}' +
       '#splash.tw [data-w=stories]:not(.tw-on){visibility:visible}#splash.tw [data-w=stories]>div:not(.tw-on)>*{visibility:hidden}' +
-      // the dividers: none on the empty page; they all come up together once the whole page is written
+      // the dividers: none on the empty page; once the whole page is written they come up one by one, top to bottom:
+      // the masthead's rules, the Big Story's, the number of the day's black panel, the stories', what to watch's
       '#splash.tw [data-r],#splash.tw [data-w=body],#splash.tw [data-w=stories],#splash.tw [data-w=stories]>div,#splash.tw [data-w=watch]{transition:border-color .6s ease,column-rule-color .6s ease}' +
       '#splash.tw:not(.r-lead) [data-r=lead]{border-right-color:transparent!important}#splash.tw:not(.r-lead) [data-w=body]{column-rule-color:transparent!important}' +
       '#splash.tw:not(.r-stories) [data-w=stories],#splash.tw:not(.r-stories) [data-w=stories]>div{border-color:transparent!important}' +
-      '#splash.tw:not(.r-watch) [data-w=number]{--nbg:transparent;--nfg:' + P.ink + '}' +
-      '#splash.tw [data-rr]{transition:opacity .6s ease}#splash.tw:not(.r-watch) [data-rr]{opacity:0}' +
+      '#splash.tw:not(.r-number) [data-w=number]{--nbg:transparent;--nfg:' + P.ink + '}' +
+      '#splash.tw [data-rr]{transition:opacity .6s ease}#splash.tw:not(.r-mast) [data-rr]{opacity:0}' +
       '#splash.tw [data-w=watch] [data-rl]{transition:opacity .6s ease}#splash.tw:not(.r-watch) [data-w=watch] [data-rl]{opacity:0}' +
       '#splash.tw:not(.r-watch) [data-w=watch] [data-c]{border-color:transparent!important}';
   }
@@ -432,9 +433,15 @@
         // written: the plain words go back in place of the two halves, so a line cut short ends in … as it should
         if (!x) {
           job.parts.forEach(function (y) {
-            if (y.par.hasAttribute('data-oc')) { y.par.style.color = y.par.getAttribute('data-oc'); y.par.removeAttribute('data-oc'); }
+            if (y.par.hasAttribute('data-oc')) {
+              // put the colour back at once: a block with a colour transition (the number of the day) would otherwise
+              // fade its words from see-through back in, and the whole block would blink
+              y.par.style.transition = 'none'; y.par.style.color = y.par.getAttribute('data-oc'); y.par.removeAttribute('data-oc');
+            }
             y.par.replaceChild(d.createTextNode(y.s), y.a); y.b.remove();
           });
+          void job.box.offsetWidth;
+          job.parts.forEach(function (y) { y.par.style.transition = ''; });
           return done();
         }
         p++; x.a.textContent = x.s.slice(0, p); x.b.textContent = x.s.slice(p);
@@ -464,7 +471,10 @@
     add(q('[data-w="watch"]'), 20.16, 3864);
     var run = function () {
       var x = jobs.shift();
-      if (!x) { ['lead', 'stories', 'watch', 'done'].forEach(function (k) { el.classList.add('r-' + k); }); return; }
+      if (!x) {
+        ['mast', 'lead', 'number', 'stories', 'watch', 'done'].forEach(function (k, i) { setTimeout(function () { el.classList.add('r-' + k); }, 200 + i * 380); });
+        return;
+      }
       if (x[0].offsetParent === null) return run();
       var j = prep(x[0]);
       write(j, Math.min(x[2], j.len * x[1]), function () { setTimeout(run, 140); });
