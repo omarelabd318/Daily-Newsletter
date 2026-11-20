@@ -350,17 +350,28 @@
   // on a shorter window the front page keeps what fits: first the second row of stories goes, then the quote, and what
   // to watch only last; nothing is left cut through at the foot of the sheet
   var altBody = null, bodyFull = '';
-  // the Big Story's text ends on a whole sentence: as many sentences as the box holds, never one cut through
-  // (if not even the first fits, it is cut at a word, with …). Left alone once its typing has begun.
+  // the Big Story's text fills its box: as many whole sentences as it holds, then as much of the next as still fits,
+  // cut at a word and ending in … (only when at least a few of its words fit; else it ends on the full stop).
+  // Left alone once its typing has begun.
   var trimBody = function () {
     var bx = el.querySelector('[data-w="body"]'), p = bx && bx.firstElementChild;
     if (!p || !bodyFull || bx.classList.contains('tw-on') || bx.hasAttribute('data-prep')) return;
     var over = function () { return bx.scrollHeight > bx.clientHeight + 1 || bx.scrollWidth > bx.clientWidth + 1; };
     p.textContent = bodyFull; if (!over()) return;
     var sents = bodyFull.split(/(?<=[.!?]["”’)]?)\s+(?=[A-Z“"‘(])/);
-    for (var n = sents.length - 1; n > 0; n--) { p.textContent = sents.slice(0, n).join(' '); if (!over()) return; }
-    var words = sents[0].split(' ');
-    for (var k = words.length - 1; k > 0; k--) { p.textContent = words.slice(0, k).join(' ').replace(/[,;:]$/, '') + '…'; if (!over()) return; }
+    var part = function (base, sent, least) {
+      var words = sent.split(' ');
+      for (var k = words.length - 1; k >= least; k--) {
+        p.textContent = (base ? base + ' ' : '') + words.slice(0, k).join(' ').replace(/[,;:–—-]$/, '') + '…';
+        if (!over()) return true;
+      }
+    };
+    for (var n = sents.length - 1; n > 0; n--) {
+      var base = sents.slice(0, n).join(' ');
+      p.textContent = base;
+      if (!over()) { if (!part(base, sents[n], 4)) p.textContent = base; return; }
+    }
+    part('', sents[0], 1);
   };
   var fitSheet = function () {
     var sh = el.children[1], st = [].slice.call(el.querySelectorAll('[data-w="stories"] > div'));
@@ -425,13 +436,13 @@
     // each block is made ready only when its turn comes (until then it is hidden), so the sheet can still settle
     // (fonts, what fits, how much of the Big Story's text) up to that moment; a block left off by then is skipped
     var add = function (box, msPerChar, cap) { if (box) jobs.push([box, msPerChar, cap]); };
-    add(q('[data-w="lead-kick"]'), 28, 320);
-    add(q('[data-w="lead"]'), 32, 2300);
-    add(q('[data-w="body"]'), 4.5, 1600);
-    add(q('[data-w="number"]'), 13, 1150);
-    add(q('[data-w="quote"]'), 10, 1300);
-    el.querySelectorAll('[data-w="stories"] > div').forEach(function (c) { add(c, 12, 800); });
-    add(q('[data-w="watch"]'), 6, 1150);
+    add(q('[data-w="lead-kick"]'), 56, 640);
+    add(q('[data-w="lead"]'), 64, 4600);
+    add(q('[data-w="body"]'), 9, 3200);
+    add(q('[data-w="number"]'), 26, 2300);
+    add(q('[data-w="quote"]'), 20, 2600);
+    el.querySelectorAll('[data-w="stories"] > div').forEach(function (c) { add(c, 24, 1600); });
+    add(q('[data-w="watch"]'), 12, 2300);
     var run = function () {
       var x = jobs.shift();
       if (!x) { ['lead', 'stories', 'watch', 'done'].forEach(function (k) { el.classList.add('r-' + k); }); return; }
