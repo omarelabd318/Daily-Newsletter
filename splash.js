@@ -5,6 +5,8 @@
 // - Shown only when the app opens from the home screen (standalone), once per launch; links and browser tabs go
 //   straight to the page.
 // - Leaves as soon as the page is ready, but stays at least MIN ms so it never just flashes, and never more than MAX.
+//   Exception: the newsletter on a phone stays up; once the page is ready a "Tap to open" line appears, and a tap
+//   anywhere on the screen brings up the newsletter.
 // - Preview in any browser: ?splash=1|2|3 shows that look; add &hold to keep it up.
 (function () {
   var me = document.currentScript, d = document, root = d.documentElement;
@@ -15,6 +17,8 @@
   if (!pv && (!standalone || seen)) return;
   var MIN = 2200, MAX = 3500, t0 = Date.now();
   var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var phone = window.matchMedia && matchMedia('(pointer: coarse) and (hover: none)').matches;
+  var tapOpen = app === 'news' && phone;
 
   // colours follow the page's own setting (the newsletter: paper unless dark; the desk: dark unless light)
   var dark = root.getAttribute('data-theme') === 'dark';
@@ -33,6 +37,10 @@
     '#splash .in{opacity:0;transform:translateY(6px);animation:sp-in .5s cubic-bezier(.2,.7,.2,1) forwards}' +
     '#splash .d1{animation-delay:.08s}#splash .d2{animation-delay:.18s}#splash .d3{animation-delay:.3s}#splash .d4{animation-delay:.42s}' +
     '#splash .late{opacity:0;transition:opacity .35s ease}#splash .late.on{opacity:1}' +
+    '#splash.tap{cursor:pointer;-webkit-tap-highlight-color:transparent}' +
+    '#splash .tap-hint{margin-top:26px;font:600 11px/1 Inter,system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:' + C.mute + '}' +
+    '#splash .tap-hint.on{animation:sp-pulse 2.2s ease-in-out .4s infinite}' +
+    '@keyframes sp-pulse{0%,100%{opacity:1}50%{opacity:.45}}' +
     '@keyframes sp-in{to{opacity:1;transform:none}}' +
     '@keyframes sp-rule{from{transform:scaleX(0)}to{transform:scaleX(1)}}' +
     '@keyframes sp-draw{to{stroke-dashoffset:0}}' +
@@ -110,7 +118,8 @@
 
   var el = d.createElement('div');
   el.id = 'splash'; el.setAttribute('aria-hidden', 'true');
-  el.innerHTML = '<style>' + css + '</style>' + ((app === 'desk' ? D : N)[look] || (app === 'desk' ? D : N)[1]);
+  el.innerHTML = '<style>' + css + '</style>' + ((app === 'desk' ? D : N)[look] || (app === 'desk' ? D : N)[1]) +
+    (tapOpen ? '<div class="late tap-hint">Tap to open</div>' : '');
   if (d.body) d.body.appendChild(el); else { root.appendChild(el); d.addEventListener('DOMContentLoaded', function () { d.body.appendChild(el); }); }
 
   // ---- fill in the day's details
@@ -152,11 +161,18 @@
     });
   }
 
-  // ---- leave once the page is ready (MIN to MAX after launch)
-  var gone = false;
+  // ---- leave once the page is ready (MIN to MAX after launch); on a phone the newsletter waits for a tap instead
+  var gone = false, armed = false;
+  var go = function () { if (gone) return; gone = true; el.classList.add('out'); setTimeout(function () { el.remove(); }, 400); };
   var leave = function () {
-    if (gone || hold) return; gone = true;
-    setTimeout(function () { el.classList.add('out'); setTimeout(function () { el.remove(); }, 400); }, Math.max(0, MIN - (Date.now() - t0)));
+    if (armed || hold) return; armed = true;
+    setTimeout(function () {
+      if (!tapOpen) return go();
+      el.classList.add('tap');
+      var h = el.querySelector('.tap-hint'); if (h) h.classList.add('on');
+      el.addEventListener('click', go);
+      d.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape') go(); });
+    }, Math.max(0, MIN - (Date.now() - t0)));
   };
   var sel = me.dataset.ready;
   var check = function () { if (sel && d.querySelector(sel)) { leave(); return true; } };
