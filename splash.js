@@ -443,15 +443,16 @@
     // (fonts, what fits, how much of the Big Story's text) up to that moment; a block left off by then is skipped
     var add = function (box, msPerChar, cap) { if (box) jobs.push([box, msPerChar, cap]); };
     // the masthead first: the name, then the dateline (its number, the date, Cairo)
-    add(q('[data-w="name"]'), 70, 1300);
-    add(q('[data-w="dateline"]'), 28, 1100);
-    add(q('[data-w="lead-kick"]'), 56, 640);
+    // the Big Story's headline at its own pace; every other block 40% slower than that scale
+    add(q('[data-w="name"]'), 98, 1820);
+    add(q('[data-w="dateline"]'), 39.2, 1540);
+    add(q('[data-w="lead-kick"]'), 78.4, 896);
     add(q('[data-w="lead"]'), 64, 4600);
-    add(q('[data-w="body"]'), 9, 3200);
-    add(q('[data-w="number"]'), 26, 2300);
-    add(q('[data-w="quote"]'), 20, 2600);
-    el.querySelectorAll('[data-w="stories"] > div').forEach(function (c) { add(c, 24, 1600); });
-    add(q('[data-w="watch"]'), 12, 2300);
+    add(q('[data-w="body"]'), 12.6, 4480);
+    add(q('[data-w="number"]'), 36.4, 3220);
+    add(q('[data-w="quote"]'), 28, 3640);
+    el.querySelectorAll('[data-w="stories"] > div').forEach(function (c) { add(c, 33.6, 2240); });
+    add(q('[data-w="watch"]'), 16.8, 3220);
     var run = function () {
       var x = jobs.shift();
       if (!x) { ['lead', 'stories', 'watch', 'done'].forEach(function (k) { el.classList.add('r-' + k); }); return; }
