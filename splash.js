@@ -6,7 +6,8 @@
 //   straight to the page.
 // - Leaves as soon as the page is ready, but stays at least MIN ms so it never just flashes, and never more than MAX.
 //   Exception: on a phone (the newsletter and the desk alike) it stays up; once the page is ready a "Tap to open"
-//   line appears, and a tap anywhere on the screen brings up the page.
+//   line appears, and a tap anywhere on the screen brings up the page. The newsletter's phone front page (look 2) writes
+//   its headline out letter by letter from the start.
 // - On a computer (a mouse, and a window 900px or wider) it is shown too: when the start page is opened from a
 //   bookmark, the address bar or another site (once per tab; moving between the site's own pages skips it), in a wide
 //   layout of its own, and it waits for a click ("Click to open").
@@ -309,6 +310,17 @@
     if (watch) put('watch', '<b style="font:700 10.5px/1 Inter,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;margin-right:10px">What to watch today</b>' +
       watch.split(/;\s*/).filter(Boolean).map(function (x) { return esc(x.replace(/\.$/, '')); }).join('<span style="margin:0 9px;color:' + P.ink2 + '">·</span>'));
   };
+  // the phone's front page writes its headline out from the first letter, as if being typed. The whole line is laid out
+  // at once (the part still to come is see-through), so the words never jump to a new line as they are written.
+  var type = function (n, t) {
+    if (!n) return;
+    var i = 0, w = t.length, step = Math.max(14, Math.min(32, 2600 / (w || 1)));
+    n.innerHTML = '<span></span><span style="color:transparent"></span>';
+    var a = n.firstChild, b = n.lastChild;
+    var tick = function () { a.textContent = t.slice(0, i); b.textContent = t.slice(i); if (i++ < w) setTimeout(tick, step); };
+    n.classList.add('on'); n.style.transition = 'none';
+    setTimeout(tick, Math.max(0, 600 - (Date.now() - t0)));
+  };
   var newest = function (list) { return list.slice().sort(function (a, b) { return (b.id || b.date) < (a.id || a.date) ? -1 : 1; })[0]; };
   var json = function (u) {
     if (app === 'desk') { var M = window.__deskGet || (window.__deskGet = {}); return M[u] || (M[u] = fetch(u, { cache: 'no-cache' }).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })); }
@@ -317,7 +329,8 @@
   if (app === 'news') {
     json('/editions/index.json').then(function (x) {
       var e = x && x.editions && x.editions.length && newest(x.editions); if (!e) return;
-      set('date', longDate(e.date)); set('year', e.date.slice(0, 4)); set('summary', esc(e.summary || ''));
+      set('date', longDate(e.date)); set('year', e.date.slice(0, 4));
+      if (!wideLook && look === 2 && !still) type(el.querySelector('[data-k="summary"]'), e.summary || ''); else set('summary', esc(e.summary || ''));
       // the edition's number, counted as the paper's own dateline counts it
       set('no', 'No. ' + x.editions.filter(function (y) { return !y.id && y.date <= e.date; }).length);
       if (wideLook) fetch('/editions/' + e.date + '.md', { cache: 'no-cache' }).then(function (r) { return r.ok ? r.text() : ''; }).catch(function () { return ''; })
