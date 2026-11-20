@@ -725,6 +725,12 @@
    "sector": "Internet",
    "news": [
     {
+     "date": "2026-11-19",
+     "text": "Fell 3.5% to $272.66 as Anthropic's debut put a fresh value on Google's stake without lifting AI stocks; the S&P 500 fell for a sixth day.",
+     "source": "Reuters (via Yahoo Finance)",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/wall-street-ends-sharply-lower-210028386.html"
+    },
+    {
      "date": "2026-11-16",
      "text": "Fell 4.1% to $283.72 as the Nasdaq entered a correction; Anthropic, in which it holds a stake, prices its IPO on Wednesday at $70–78.",
      "source": "BusinessToday",
@@ -901,6 +907,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-19",
+     "text": "Fell 3.5% to EGP 137.02 with no company news as the EGX30 slipped 0.17%; still up 108% this year before MSCI adds it on November 30.",
+     "source": "Masrawy",
+     "url": "https://www.masrawy.com/news/news_economy/details/2026/11/19/3081285/"
+    },
     {
      "date": "2026-11-16",
      "text": "Rose 5.2% to EGP 143.00, more than double its price at the start of the year, two weeks before MSCI adds it to its standard index at the November 30 close; no new company news behind the move.",
@@ -1527,7 +1539,7 @@
     "change": "Results on November 16: profit growth well above 30% would support the multiple."
    },
    "preview": {
-    "date": "2026-11-18",
+    "date": "2026-11-22",
     "period": "Third quarter 2026",
     "watch": [
      "Profit attributable after a 40% fall in the first half to EGP 270.7m while revenue rose 27.4% to EGP 4.31bn: whether the third quarter stops the slide.",
@@ -1882,6 +1894,12 @@
    },
    "news": [
     {
+     "date": "2026-11-19",
+     "text": "Fell 3.3% to $145.98 in the AI chip selloff, as AMD dropped almost 8% on China chip worries; its RSI is 20, washed out.",
+     "source": "Reuters (via Yahoo Finance)",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/wall-street-ends-sharply-lower-210028386.html"
+    },
+    {
      "date": "2026-11-18",
      "text": "Third-quarter revenue rose 103% to $115.8bn, above the $109.1bn consensus, and GAAP net income 105% to $65.3bn; it guided to about $130bn this quarter, assuming no data-center sales to China, and the shares rose about 3.5% after hours.",
      "source": "Nvidia (SEC filing)",
@@ -2025,6 +2043,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-19",
+     "text": "Fell 3.9% to $257.37 as Anthropic's record debut failed to revive the AI trade; Anthropic closed at $97.17, 17% above its $83 offer price.",
+     "source": "Reuters (via Yahoo Finance)",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/wall-street-ends-sharply-lower-210028386.html"
+    },
     {
      "date": "2026-11-18",
      "text": "Rose 3.8% to $267.74 before Anthropic priced its listing at $83, raising $81.3bn; Amazon will hold 14.7% of Anthropic, according to the filing.",
@@ -2227,7 +2251,15 @@
       "value": "$370.00"
      }
     ]
-   }
+   },
+   "news": [
+    {
+     "date": "2026-11-19",
+     "text": "Said some customer names and emails were exposed in a cyberattack on a third-party vendor, with no payment data and its own systems unaffected; the stock fell 1.2% to $320.22.",
+     "source": "Yahoo Finance",
+     "url": "https://finance.yahoo.com/markets/article/jpmorgan-visa-and-mastercard-disclose-cyberattack-on-third-party-vendors-190314490.html"
+    }
+   ]
   },
   "BRK.B": {
    "sector": "Conglomerate",
@@ -2342,21 +2374,32 @@
    },
    "news": [
     {
+     "date": "2026-11-19",
+     "text": "Third-quarter revenue rose 5.2% to $188.8bn and adjusted EPS 5.0% to $0.65; Walmart raised its full-year sales growth outlook to 4.9–5.2% in constant currency from 4–5%. The stock fell 1.0% to $126.04 as the S&P 500 lost 2%.",
+     "source": "Morningstar",
+     "url": "https://www.morningstar.com/stocks/walmart-earnings-digital-distribution-scale-lifts-margins-despite-freight-woes"
+    },
+    {
      "date": "2026-11-06",
      "text": "Fell 1.7% to $125.52 as investors rotated from defensive stocks into rebounding tech; no company news, Investing.com said, noting a valuation of about 45 times forward earnings. Results are due November 19.",
      "source": "Investing.com",
      "url": "https://www.investing.com/news/stock-market-news/why-is-walmart-stock-sliding-today-93CH-5008687"
     }
    ],
-   "next": [
-    {
-     "event": "Q3 results",
-     "when": "Thu, Nov 19",
-     "why": "Tests whether the defensive rotation holds at about 45 times forward earnings.",
-     "impact": "high",
-     "date": "2026-11-19"
-    }
-   ]
+   "lastResults": {
+    "date": "2026-11-19",
+    "period": "Third quarter of fiscal 2027 (to October 31, 2026)",
+    "verdict": "beat",
+    "headline": "Revenue up 5.2% to $188.8bn and outlook raised",
+    "points": [
+     "Revenue rose 5.2% to $188.8bn, 4.5% in constant currency; adjusted EPS rose 5.0% to $0.65 and GAAP EPS was $0.62.",
+     "US comparable sales grew 2.9% and US e-commerce 23%; the gross margin rose 30 basis points to 25.3%.",
+     "Full-year net sales growth raised to 4.9–5.2% in constant currency from 4–5%; adjusted EPS of $2.84–2.89."
+    ],
+    "thesis": "A beat and raise that supports the steady-earner case, but the stock slipped 1% as comparable sales and the guidance midpoint left little to pay up for.",
+    "source": "Morningstar",
+    "url": "https://www.morningstar.com/stocks/walmart-earnings-digital-distribution-scale-lifts-margins-despite-freight-woes"
+   }
   },
   "MFPC": {
    "sector": "Fertilizers",
@@ -2983,6 +3026,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-19",
+     "text": "Visa, JPMorgan and Mastercard said attackers reached some customer names and emails through a vendor; no card or payment data leaked. Visa fell 3.1% to $402.25.",
+     "source": "Yahoo Finance",
+     "url": "https://finance.yahoo.com/markets/article/jpmorgan-visa-and-mastercard-disclose-cyberattack-on-third-party-vendors-190314490.html"
+    },
     {
      "date": "2026-11-09",
      "text": "Finance chief told Citi's fintech conference US payment volumes, 6–8% for 18 months, have reached about 10%; October was stable; value-added services topped $14bn, up 30%, with low-to-mid 20s percent growth guided for fiscal 2027.",

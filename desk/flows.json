@@ -357,6 +357,32 @@
     }
    ],
    "note": "One report, likely including deals: foreign net buying of EGP 3.26bn exceeds foreigners' 9.34% share of the session (Arab Finance), and Youm7 says Egyptians and foreigners sold. Not confirmed."
+  },
+  {
+   "date": "2026-11-19",
+   "confirmed": true,
+   "rows": {
+    "Egyptian investors": 0.1719,
+    "Arab investors": 0.0134,
+    "Foreign investors": -0.1853
+   },
+   "sources": [
+    "Zawya (Arab Finance)",
+    "Youlyou",
+    "About Msr"
+   ],
+   "turnover": 6.24,
+   "links": [
+    {
+     "source": "Zawya (Arab Finance)",
+     "url": "https://www.zawya.com/en/capital-markets/the-egyptian-exchange-closes-thursday-on-varied-note-2416445"
+    },
+    {
+     "source": "Youlyou",
+     "url": "https://www.youlyou.com/98248"
+    }
+   ],
+   "note": "Egyptians' and foreigners' figures agree at two outlets and net to zero with Arabs' EGP 13.4m (Zawya); small against EGP 6.24bn traded."
   }
  ]
 }

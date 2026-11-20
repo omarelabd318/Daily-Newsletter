@@ -550,6 +550,13 @@
      "source": "MLQ.ai",
      "url": "https://mlq.ai/news/nvidia-results-live-revenue-rises-103-to-1158-billion-and-it-guides-to-130-billion-in-its-first-report-since-jensen-huang-left/",
      "effect": "against"
+    },
+    {
+     "date": "2026-11-20",
+     "text": "Walmart beat and raised its full-year sales outlook to 4.9–5.2% growth, while Anthropic's debut failed to lift Alphabet (-3.5%) and Amazon (-3.9%).",
+     "source": "Morningstar",
+     "url": "https://www.morningstar.com/stocks/walmart-earnings-digital-distribution-scale-lifts-margins-despite-freight-woes",
+     "effect": "supports"
     }
    ],
    "driver": "ai-spending"
@@ -745,6 +752,13 @@
      "source": "Al-Borsa",
      "url": "https://alborsaanews.com/2026/11/17/2007010",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-20",
+     "text": "Mina West started two months early, adding 160 mmcf/d of gas; too small alone to end the 50% gas price rise to December 31.",
+     "source": "Egypt Oil & Gas",
+     "url": "https://egyptoil-gas.com/news/mina-west-startup-adds-160-mmcf-d-of-gas-to-egypts-production/",
+     "effect": "neutral"
     }
    ],
    "wrongIf": [
@@ -955,6 +969,13 @@
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/2026/11/19/imf-staff-and-the-government-reached-agreement-on-the-final-review-putting-up-to-usd-2-3-bn-on-the-table-before-the-program-expires/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-20",
+     "text": "September's trade deficit widened 60.6% to $5.3bn as imports rose 29.7%, more dollar demand, though the rate held at EGP 53.88 and the state plans $3bn of new issues.",
+     "source": "Arab Finance",
+     "url": "https://www.arabfinance.com/en/news/newdetails/egypt-trade-deficit-widens-in-september-2026",
+     "effect": "against"
     }
    ],
    "wrongIf": [
@@ -1084,6 +1105,13 @@
      "text": "Brent settled 1.3% lower at $91.95 on a US crude build, despite Houthi missiles at Riyadh and mine claims near Hormuz.",
      "source": "Invezz",
      "url": "https://invezz.com/pk/news/2026/11/18/oil-price-today-brent-slips-as-api-shows-528-million-barrel-us-crude-build/",
+     "effect": "supports"
+    },
+    {
+     "date": "2026-11-20",
+     "text": "Brent held near $92 after a Houthi missile hit Riyadh's PIF Tower, heading for a weekly fall on surplus forecasts.",
+     "source": "Moneycontrol",
+     "url": "https://www.moneycontrol.com/news/business/markets/crude-oil-prices-steady-after-sharp-fall-brent-hovers-near-92-wti-at-82-as-supply-surplus-softens-sentiment-14084198.html",
      "effect": "supports"
     }
    ],
