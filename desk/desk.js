@@ -360,9 +360,10 @@ window.Desk = (function () {
   }
   // the change beside a chart's big number follows the chosen period, labelled ('in a month'); 1D is the day
   const SPAN = { 0: 'on the day', 7: 'in a week', 30: 'in a month', 182: 'in 6 months', 365: 'in a year', 1095: 'in 3 years', 1826: 'in 5 years' };
-  function heroChg(s, p) {
+  // inv: the colour reads the other way (the dollar in pounds: up is the pound weaker, so red)
+  function heroChg(s, p, inv = false) {
     const back = p ? p[1] : 0, c = change(s, back);
-    return `<span class="${cls(c)}">${pct(c, 2)}</span> <span class="span-l">${SPAN[back] || ''}</span>`;
+    return `<span class="${cls(c)}${inv ? ' inv' : ''}">${pct(c, 2)}</span> <span class="span-l">${SPAN[back] || ''}</span>`;
   }
   // sort: { key: 'chg' | 'ytd' | null, dir: -1 (highest first) | 1 } from sortable(); without a key, the order given
   // the EGX and Wall Street tables. group (a market: 'egx' or 'us') lists the stocks under the desk's broad sectors,

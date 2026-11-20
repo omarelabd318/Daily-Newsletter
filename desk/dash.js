@@ -156,7 +156,7 @@
     $('h-close').textContent = X.close.title || 'Close';
     $('close-rows').innerHTML = X.close.groups.map((g) => `<div class="strip-g"><h3>${esc(g.name)}</h3><div class="strip-row">` + g.rows.map((r) =>
       `<div class="fig${r.lead ? ' lead' : ''}"><span class="k">${esc(r.label)}</span><span class="v num${r.value == null ? ' dash' : ''}">${r.value == null ? '—' : esc(r.value)}</span>`
-      + `<span class="d num ${cls(r.change)}">${r.change == null ? '<span class="dash">—</span>' : pct(r.change, 2)}</span></div>`).join('') + '</div></div>').join('');
+      + `<span class="d num ${cls(r.change)}${/^USD\/EGP/.test(r.label || '') ? ' inv' : ''}">${r.change == null ? '<span class="dash">—</span>' : pct(r.change, 2)}</span></div>`).join('') + '</div></div>').join('');
     $('close-note').textContent = X.close.note || '';
     // each figure leads to its chart: an index on this dashboard's own chart, the VIX to its chart below, the
     // pound's figures to the EGP page, world markets to the Global page; the yields have no chart and no link

@@ -165,7 +165,8 @@
         set(k, fmt[k][1] + v[0].toLocaleString('en-US', { minimumFractionDigits: fmt[k][0], maximumFractionDigits: fmt[k][0] }));
         if (v.length < 2) return;
         var c = (v[0] / v[1] - 1) * 100, s = Math.abs(c) < 0.005 ? '0.00%' : (c > 0 ? '▲ +' : '▼ −') + Math.abs(c).toFixed(2) + '%';
-        set(k + '-chg', s, c > 0 ? C.up : c < 0 ? C.down : C.mute);
+        var g = k === 'usd_egp' ? -c : c; // the dollar in pounds: up is the pound weaker, so red
+        set(k + '-chg', s, g > 0 ? C.up : g < 0 ? C.down : C.mute);
         if (k === 'egx30' && Math.abs(c) >= 0.005) el.querySelectorAll('.mk-line').forEach(function (n) { n.setAttribute('stroke', c > 0 ? C.up : C.down); });
       });
     });

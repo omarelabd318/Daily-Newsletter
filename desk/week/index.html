@@ -88,8 +88,8 @@
     brent: ['g_brent', 'brent'], gold_usd: ['g_gold_usd', 'gold_usd'], btc: ['g_btc', 'btc'] };
   const through = (k, s) => { const x = IK[k], ss = x && M.intraPeriod(x[0], x[1], 7);
     return ss && ss.at(-1).session >= M.lastDate(s) ? ss.flatMap((d) => d.series[x[1]].map(([, v]) => v)) : null; };
-  const rows = MK.map(([k, n, m, dp]) => { const s = M.series((e) => e[k], m); return { n, s, w: s.length ? through(k, s) : null, c: M.change(s, 7), v: M.last(s), dp }; }).filter((r) => r.s.length);
-  M.$('mk').innerHTML = rows.map((r) => `<tr><td>${M.esc(r.n)}</td><td class="trend">${M.spark(r.s, 7, null, r.w)}</td><td class="num">${M.num(r.v, r.dp)}</td><td class="num"><span class="${M.cls(r.c)}">${M.pct(r.c)}</span></td></tr>`).join('');
+  const rows = MK.map(([k, n, m, dp]) => { const s = M.series((e) => e[k], m); return { k, n, s, w: s.length ? through(k, s) : null, c: M.change(s, 7), v: M.last(s), dp }; }).filter((r) => r.s.length);
+  M.$('mk').innerHTML = rows.map((r) => `<tr><td>${M.esc(r.n)}</td><td class="trend">${M.spark(r.s, 7, null, r.w)}</td><td class="num">${M.num(r.v, r.dp)}</td><td class="num"><span class="${M.cls(r.c)}${r.k === 'usd_egp' ? ' inv' : ''}">${M.pct(r.c)}</span></td></tr>`).join('');
   M.$('mk-meta').textContent = 'Last seven days';
   const eg = rows[0], sp = rows.find((r) => r.n === 'S&P 500'), fx = rows.find((r) => r.n === 'Dollar in pounds');
 
