@@ -1,12 +1,12 @@
 {
  "note": "The desk's stocks' coming results and dividends, from TradingView (fetch_calendar.py); for the US stocks, declared dividends and stock splits from Polygon. Results dates for Egyptian companies are often TradingView's estimate until the company announces one.",
- "fetched": "2026-11-19",
+ "fetched": "2026-11-20",
  "items": [
   {
    "t": "CLHO",
    "market": "egx",
    "kind": "results",
-   "date": "2026-11-19",
+   "date": "2026-11-20",
    "period": "2026-09-30",
    "time": null,
    "expected": true
@@ -15,7 +15,7 @@
    "t": "EAST",
    "market": "egx",
    "kind": "results",
-   "date": "2026-11-19",
+   "date": "2026-11-20",
    "period": "2026-09-30",
    "time": null,
    "expected": true
@@ -24,7 +24,7 @@
    "t": "EFID",
    "market": "egx",
    "kind": "results",
-   "date": "2026-11-19",
+   "date": "2026-11-20",
    "period": "2026-09-30",
    "time": null,
    "expected": true
@@ -33,7 +33,7 @@
    "t": "EFIH",
    "market": "egx",
    "kind": "results",
-   "date": "2026-11-19",
+   "date": "2026-11-20",
    "period": "2026-09-30",
    "time": null,
    "expected": true
@@ -42,27 +42,16 @@
    "t": "JUFO",
    "market": "egx",
    "kind": "results",
-   "date": "2026-11-19",
+   "date": "2026-11-20",
    "period": "2026-09-30",
    "time": null,
    "expected": true
   },
   {
-   "t": "MSFT",
-   "market": "us",
-   "kind": "dividend",
-   "date": "2026-11-19",
-   "pay": "2026-12-10",
-   "amount": 0.98,
-   "cur": "$",
-   "declared": "2026-09-14",
-   "src": "Polygon"
-  },
-  {
    "t": "PHDC",
    "market": "egx",
    "kind": "results",
-   "date": "2026-11-19",
+   "date": "2026-11-20",
    "period": "2026-09-30",
    "time": null,
    "expected": true
@@ -240,6 +229,24 @@
    "market": "us",
    "kind": "results",
    "date": "2027-02-02",
+   "period": "2026-12-31",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "META",
+   "market": "us",
+   "kind": "results",
+   "date": "2027-02-03",
+   "period": "2026-12-31",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "TSLA",
+   "market": "us",
+   "kind": "results",
+   "date": "2027-02-03",
    "period": "2026-12-31",
    "time": null,
    "expected": true
