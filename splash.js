@@ -323,8 +323,9 @@
         '<div style="' + kick + '">' + esc(s.k) + '</div><div style="margin-top:5px;font:700 16px/1.25 \'Playfair Display\',Georgia,serif;text-wrap:pretty;' + clamp(2) + '">' + esc(s.t) + '</div></div>';
     }).join(''));
     // what to watch: its first three items in three columns under the stories' three, up to two lines each
-    if (watch) put('watch', '<div style="' + kick + ';color:' + P.ink + '">What to watch today</div>' +
-      '<div style="display:grid;grid-template-columns:repeat(3,1fr);margin-top:6px">' +
+    // its label is centred over all three, so it heads the row rather than the first item
+    if (watch) put('watch', '<div style="' + kick + ';color:' + P.ink + ';text-align:center">What to watch today</div>' +
+      '<div style="display:grid;grid-template-columns:repeat(3,1fr);margin-top:8px">' +
       watch.split(/;\s*/).filter(Boolean).slice(0, 3).map(function (x, i) {
         return '<div style="padding:0 ' + (i === 2 ? '0' : '20px') + ' 0 ' + (i === 0 ? '0' : '20px') + ';font:500 13px/1.4 Inter,system-ui,sans-serif;text-wrap:pretty;' + clamp(2) + '">' +
           esc(x.replace(/\.$/, '').replace(/^./, function (c) { return c.toUpperCase(); })) + '</div>';
