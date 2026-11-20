@@ -5,8 +5,8 @@
 // - Shown only when the app opens from the home screen (standalone), once per launch; links and browser tabs go
 //   straight to the page.
 // - Leaves as soon as the page is ready, but stays at least MIN ms so it never just flashes, and never more than MAX.
-//   Exception: the newsletter on a phone stays up; once the page is ready a "Tap to open" line appears, and a tap
-//   anywhere on the screen brings up the newsletter.
+//   Exception: on a phone (the newsletter and the desk alike) it stays up; once the page is ready a "Tap to open"
+//   line appears, and a tap anywhere on the screen brings up the page.
 // - Preview in any browser: ?splash=1|2|3 shows that look; add &hold to keep it up.
 (function () {
   var me = document.currentScript, d = document, root = d.documentElement;
@@ -18,7 +18,7 @@
   var MIN = 2200, MAX = 3500, t0 = Date.now();
   var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var phone = window.matchMedia && matchMedia('(pointer: coarse) and (hover: none)').matches;
-  var tapOpen = app === 'news' && phone;
+  var tapOpen = phone;
 
   // colours follow the page's own setting (the newsletter: paper unless dark; the desk: dark unless light)
   var dark = root.getAttribute('data-theme') === 'dark';
@@ -161,7 +161,7 @@
     });
   }
 
-  // ---- leave once the page is ready (MIN to MAX after launch); on a phone the newsletter waits for a tap instead
+  // ---- leave once the page is ready (MIN to MAX after launch); on a phone it waits for a tap instead
   var gone = false, armed = false;
   var go = function () { if (gone) return; gone = true; el.classList.add('out'); setTimeout(function () { el.remove(); }, 400); };
   var leave = function () {
