@@ -448,9 +448,9 @@
     add(q('[data-w="dateline"]'), 39.2, 1540);
     add(q('[data-w="lead-kick"]'), 78.4, 896);
     add(q('[data-w="lead"]'), 64, 4600);
-    add(q('[data-w="body"]'), 12.6, 4480);
-    add(q('[data-w="number"]'), 36.4, 3220);
-    add(q('[data-w="quote"]'), 28, 3640);
+    add(q('[data-w="body"]'), 17.64, 6272);
+    add(q('[data-w="number"]'), 50.96, 4508);
+    add(q('[data-w="quote"]'), 39.2, 5096);
     el.querySelectorAll('[data-w="stories"] > div').forEach(function (c) { add(c, 33.6, 2240); });
     add(q('[data-w="watch"]'), 16.8, 3220);
     var run = function () {
