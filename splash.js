@@ -49,7 +49,7 @@
     '#splash .tap-hint.on{animation:sp-pulse 2.2s ease-in-out .4s infinite}' +
     '#splash .wcol{display:grid;gap:7px;align-content:start}#splash .wcol i{display:block;height:4px;background:#16181a;opacity:.85}' +
     '@media (max-height:820px){#splash [data-w=stories]>:nth-child(n+4){display:none}}' +
-    '@media (max-height:640px){#splash [data-w=deck],#splash [data-w=quote]{display:none}}' +
+    '@media (max-height:720px){#splash [data-w=watch]{display:none}}@media (max-height:600px){#splash [data-w=quote]{display:none}}' +
     '@keyframes sp-pulse{0%,100%{opacity:1}50%{opacity:.45}}' +
     '@keyframes sp-in{to{opacity:1;transform:none}}' +
     '@keyframes sp-rule{from{transform:scaleX(0)}to{transform:scaleX(1)}}' +
@@ -94,27 +94,32 @@
   // Until they arrive (or if they cannot be fetched) the slots keep grey text lines, as on a printed proof.
   var bars = function (ws) { return '<div class="wcol">' + ws.map(function (w) { return '<i style="width:' + w + '%"></i>'; }).join('') + '</div>'; };
   var kick = 'font:700 10.5px/1.2 Inter,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#5b6168';
+  var rule = '1px solid rgba(22,24,26,.3)';
   var NW = {
-    // 2. Front page: a broadsheet front page. The Big Story leads, with the edition's opening line as its deck and
-    // what to watch today under it; the number and the quote of the day on the right; six more stories along the foot.
-    2: '<div style="width:100%;max-width:1040px;max-height:calc(100vh - 96px);overflow:hidden;padding:clamp(24px,4vh,38px) 46px clamp(22px,3.6vh,34px);background:' + C.paper + ';color:#16181a;border-radius:6px;box-shadow:0 40px 120px rgba(0,0,0,.5);' +
+    // 2. Front page: a broadsheet front page. The nameplate, a dateline (the edition's number, the date, Cairo), the
+    // Big Story across two columns with the start of its report set in two justified columns, the number of the day
+    // as a black panel and the quote of the day beside it, six more stories in ruled columns, and what to watch today
+    // along the foot. Black and white only.
+    2: '<div style="width:100%;max-width:1040px;max-height:calc(100vh - 96px);overflow:hidden;padding:clamp(24px,4vh,36px) 44px clamp(20px,3.4vh,30px);background:' + C.paper + ';color:#16181a;border-radius:6px;box-shadow:0 40px 120px rgba(0,0,0,.5);' +
        'transform-origin:center;animation:sp-grow .6s cubic-bezier(.2,.8,.2,1) both;text-align:left">' +
-       '<div style="text-align:center;font:700 min(8vw,10.5vh,100px)/1 UnifrakturCook,\'Old English Text MT\',serif">Daily Newsletter</div>' +
-       '<div style="margin-top:clamp(10px,2vh,18px);height:6px;border-top:2px solid #16181a;border-bottom:1px solid #16181a"></div>' +
-       '<div class="in d2" style="display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;padding:9px 0;font:600 11px/1.3 Inter,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap">' +
-       '<span>Cairo · <span data-k="year"></span></span><span data-k="date" style="text-align:center">&nbsp;</span><span style="text-align:right">Egypt · World · Markets · Sports · Culture</span></div>' +
+       '<div style="text-align:center;font:700 min(8vw,10vh,96px)/1 UnifrakturCook,\'Old English Text MT\',serif">Daily Newsletter</div>' +
+       '<div style="margin-top:clamp(10px,1.8vh,16px);height:6px;border-top:2px solid #16181a;border-bottom:1px solid #16181a"></div>' +
+       '<div class="in d2" style="display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:center;padding:9px 0;font:600 11px/1.3 Inter,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap">' +
+       '<span data-k="no">No.</span><span data-k="date" style="text-align:center">&nbsp;</span><span style="text-align:right">Cairo</span></div>' +
        '<div style="height:8px;background:#16181a"></div>' +
-       '<div style="display:grid;grid-template-columns:1.75fr 1px 1fr;gap:30px;margin-top:clamp(16px,2.6vh,24px)">' +
-       '<div><div class="in d2" style="' + kick + '" data-w="lead-kick">The Big Story</div>' +
-       '<p class="late" data-w="lead" style="min-height:2.24em;margin-top:8px;font:900 clamp(26px,min(3vw,4.6vh),38px)/1.12 \'Playfair Display\',Georgia,serif;text-wrap:balance"></p>' +
-       '<p class="late" data-w="deck" style="margin-top:10px;font:italic 400 17px/1.4 Newsreader,Georgia,serif;color:#3a3d40;text-wrap:pretty"></p>' +
-       '<div class="in d4" data-w="watch" style="margin-top:16px;padding-top:12px;border-top:1px solid rgba(22,24,26,.25)">' + bars([100, 92, 100, 76]) + '</div></div>' +
-       '<i class="in d3" style="background:#16181a;opacity:.3"></i>' +
-       '<div class="in d3" style="display:grid;gap:18px;align-content:start">' +
-       '<div data-w="number">' + bars([60, 100, 90, 70]) + '</div>' +
-       '<div data-w="quote" style="padding-top:16px;border-top:1px solid rgba(22,24,26,.25)">' + bars([100, 84, 66]) + '</div></div></div>' +
-       '<div class="in d4" data-w="stories" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px 28px;margin-top:clamp(16px,2.6vh,24px);padding-top:16px;border-top:1px solid #16181a">' +
+       // the lead and the right-hand column
+       '<div style="display:grid;grid-template-columns:2fr 1fr;margin-top:clamp(14px,2.4vh,22px)">' +
+       '<div style="padding-right:26px;border-right:' + rule + ';display:flex;flex-direction:column"><div class="in d2" style="' + kick + '" data-w="lead-kick">The Big Story</div>' +
+       '<p class="late" data-w="lead" style="min-height:2.24em;margin-top:7px;font:900 clamp(26px,min(3vw,4.4vh),38px)/1.12 \'Playfair Display\',Georgia,serif;text-wrap:pretty"></p>' +
+       '<div class="in d3" data-w="body" style="margin-top:12px;flex:1 1 0;min-height:min(105px,12vh);overflow:hidden;columns:2;column-fill:auto;column-gap:26px;column-rule:' + rule + '">' + bars([100, 96, 100, 88, 100, 94, 100, 70]) + '</div></div>' +
+       '<div class="in d3" style="padding-left:26px;display:flex;flex-direction:column;gap:14px">' +
+       '<div data-w="number" style="padding:16px 18px;background:#16181a;color:' + C.paper + '"><div style="' + kick + ';color:#c9c6bd">Number of the day</div><div style="margin-top:10px;height:30px"></div></div>' +
+       '<div data-w="quote">' + bars([100, 84, 92, 50]) + '</div></div></div>' +
+       // six more stories in ruled columns
+       '<div class="in d4" data-w="stories" style="display:grid;grid-template-columns:repeat(3,1fr);margin-top:clamp(14px,2.4vh,22px);border-top:2px solid #16181a">' +
        [0, 1, 2, 3, 4, 5].map(function (i) { return '<div>' + bars([40, 100, 80 - i * 5]) + '</div>'; }).join('') + '</div>' +
+       // what to watch today
+       '<div class="in d4" data-w="watch" style="margin-top:14px;padding-top:10px;border-top:1px solid #16181a;font:500 12.5px/1.4 Inter,system-ui,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></div>' +
        '</div>'
   };
 
@@ -202,40 +207,53 @@
   var clamp = function (n) { return 'display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:' + n + ';overflow:hidden'; };
   var put = function (k, html) { var n = el.querySelector('[data-w="' + k + '"]'); if (!n) return; n.innerHTML = html; n.classList.add('late'); requestAnimationFrame(function () { n.classList.add('on'); }); };
   // the wide front page: fill it from the day's edition
+  var slug = function (t) { return t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''); };
+  // the wide front page: fill it from the day's edition
   var front = function (md, e) {
-    var g = [], deck = '', watch = '', hits = {};
+    var g = [], watch = '', hits = {}, para = {};
     md.split('\n').forEach(function (l) {
       var m;
-      if (!deck && (m = l.match(/^\*([^*].*[^*])\*\s*$/))) deck = plain(m[1]).replace(/^[A-Z][a-z]+day, [A-Z][a-z]+ \d+, \d{4}:\s*/, '');
-      else if ((m = l.match(/^\d+\.\s+\*\*(.+?):\*\*\s*(.+)$/))) g.push({ k: plain(m[1]), t: plain(m[2]) });
+      if ((m = l.match(/^\d+\.\s+\*\*(.+?):\*\*\s*(.+)$/))) { var a = m[2].match(/\(#story-([^)]+)\)/); g.push({ k: plain(m[1]), t: plain(m[2]), a: a ? a[1] : '' }); }
       else if ((m = l.match(/^\*\*What to watch today:\*\*\s*(.+)$/))) watch = plain(m[1]);
       else if ((m = l.match(/^- \*\*(.+?):\*\*\s*(.+)$/))) hits[m[1].toLowerCase()] = plain(m[2]);
+      else if ((m = l.match(/^\*\*(.+?):\*\*\s*(.+)$/))) { var k = slug(plain(m[1])); if (!para[k]) para[k] = plain(m[2]); }
     });
     if (!g.length) { put('lead', esc(e.summary || '')); return; }
     var lead = g[0];
     put('lead-kick', esc(lead.k)); put('lead', esc(lead.t));
-    if (deck) put('deck', esc(deck.charAt(0).toUpperCase() + deck.slice(1)));
-    if (watch) {
-      var w = watch.split(/;\s*/).filter(Boolean).slice(0, 4);
-      put('watch', '<div style="' + kick + '">What to watch today</div><ul style="margin-top:8px;padding:0;list-style:none;columns:2;column-gap:26px;font:500 13px/1.4 Inter,system-ui,sans-serif;color:#2a2d30">' +
-        w.map(function (x) { return '<li style="break-inside:avoid;padding:0 0 6px 12px;position:relative"><span style="position:absolute;left:0;top:.5em;width:5px;height:5px;background:#16181a"></span>' + esc(x.replace(/\.$/, '')) + '</li>'; }).join('') + '</ul>');
+    var body = para[lead.a];
+    if (body) {
+      put('body', '<p style="font:400 14.5px/21px Newsreader,Georgia,serif;text-align:justify;hyphens:auto">' + esc(body.replace(/\s*Why it matters:.*$/, '')) + '</p>');
+      // end each column on a whole line: the box takes the space the right-hand column leaves, rounded down to lines
+      var bx = el.querySelector('[data-w="body"]'), col = bx.parentNode, row = col.parentNode;
+      var fit = function () {
+        bx.style.height = '21px';
+        var room = row.getBoundingClientRect().bottom - bx.getBoundingClientRect().top;
+        bx.style.height = Math.max(21 * 3, Math.floor(room / 21) * 21) + 'px';
+      };
+      bx.style.flex = 'none'; fit();
+      if (window.ResizeObserver) new ResizeObserver(fit).observe(row.lastChild);
+      if (d.fonts && d.fonts.ready) d.fonts.ready.then(fit);
     }
     var num = hits['number of the day'];
     if (num) {
       var cut = num.search(/\.\s/), fig = cut > 0 && cut < 24 ? num.slice(0, cut) : '', rest = fig ? num.slice(cut + 1).trim() : num;
-      put('number', '<div style="' + kick + '">Number of the day</div>' + (fig ? '<div style="margin-top:6px;font:900 34px/1.05 \'Playfair Display\',Georgia,serif">' + esc(fig) + '</div>' : '') +
-        '<p style="margin-top:8px;font:400 14.5px/1.42 Newsreader,Georgia,serif;color:#2a2d30;' + clamp(4) + '">' + esc(rest) + '</p>');
+      put('number', '<div style="' + kick + ';color:#c9c6bd">Number of the day</div>' + (fig ? '<div style="margin-top:8px;font:900 32px/1.05 \'Playfair Display\',Georgia,serif">' + esc(fig) + '</div>' : '') +
+        '<p style="margin-top:8px;font:400 14px/1.4 Newsreader,Georgia,serif;color:#e6e2d8;' + clamp(4) + '">' + esc(rest) + '</p>');
     }
     var qt = hits['quote of the day'];
     if (qt) {
       var qm = qt.match(/^["“](.+?)["”]\s*(.*)$/);
-      put('quote', '<div style="' + kick + '">Quote of the day</div><p style="margin-top:8px;font:italic 700 16px/1.32 \'Playfair Display\',Georgia,serif;' + clamp(4) + '">“' + esc(qm ? qm[1] : qt) + '”</p>' +
+      put('quote', '<div style="' + kick + '">Quote of the day</div><p style="margin-top:7px;font:italic 700 16px/1.3 \'Playfair Display\',Georgia,serif;' + clamp(4) + '">“' + esc(qm ? qm[1] : qt) + '”</p>' +
         (qm && qm[2] ? '<div style="margin-top:6px;font:500 12px/1.35 Inter,system-ui,sans-serif;color:#5b6168;' + clamp(2) + '">' + esc(qm[2]) + '</div>' : ''));
     }
     var more = g.slice(1, 7);
-    if (more.length) put('stories', more.map(function (s) {
-      return '<div><div style="' + kick + '">' + esc(s.k) + '</div><div style="margin-top:5px;font:700 16px/1.25 \'Playfair Display\',Georgia,serif;text-wrap:pretty;' + clamp(3) + '">' + esc(s.t) + '</div></div>';
+    if (more.length) put('stories', more.map(function (s, i) {
+      return '<div style="padding:12px ' + (i % 3 === 2 ? '0' : '20px') + ' 12px ' + (i % 3 === 0 ? '0' : '20px') + ';' + (i % 3 ? 'border-left:' + rule + ';' : '') + (i >= 3 ? 'border-top:' + rule + ';' : '') + '">' +
+        '<div style="' + kick + '">' + esc(s.k) + '</div><div style="margin-top:5px;font:700 16px/1.25 \'Playfair Display\',Georgia,serif;text-wrap:pretty;' + clamp(2) + '">' + esc(s.t) + '</div></div>';
     }).join(''));
+    if (watch) put('watch', '<b style="font:700 10.5px/1 Inter,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;margin-right:10px">What to watch today</b>' +
+      watch.split(/;\s*/).filter(Boolean).map(function (x) { return esc(x.replace(/\.$/, '')); }).join('<span style="margin:0 9px;color:#8a8e93">·</span>'));
   };
   var newest = function (list) { return list.slice().sort(function (a, b) { return (b.id || b.date) < (a.id || a.date) ? -1 : 1; })[0]; };
   var json = function (u) {
@@ -246,6 +264,8 @@
     json('/editions/index.json').then(function (x) {
       var e = x && x.editions && x.editions.length && newest(x.editions); if (!e) return;
       set('date', longDate(e.date)); set('year', e.date.slice(0, 4)); set('summary', esc(e.summary || ''));
+      // the edition's number, counted as the paper's own dateline counts it
+      set('no', 'No. ' + x.editions.filter(function (y) { return !y.id && y.date <= e.date; }).length);
       if (wideLook) fetch('/editions/' + e.date + '.md', { cache: 'no-cache' }).then(function (r) { return r.ok ? r.text() : ''; }).catch(function () { return ''; })
         .then(function (md) { front(md, e); });
     });
