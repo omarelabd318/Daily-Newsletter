@@ -16,7 +16,14 @@ repo; every push to `main` redeploys it. There is no build step.
   full screen without the browser bar. There is no service worker, so each launch loads the latest edition.
 - Launched from the home screen, each shows a short opening screen (`splash.js`) once per launch, until the page is
   ready (0.7 to 1.8 seconds; on a phone it waits for a tap, with "Tap to open" once the page is ready): the Newsletter's front page with the day's summary as its headline, the Desk's chart mark
-  with the EGX30's last close (the line green or red with the day) and a board of six more: EGX70, Dollar, Gold 24k, Brent, S&P 500 and Bitcoin. Links and browser tabs skip it. `data-look` on its
+  with the EGX30's last close (the line green or red with the day) and a board of six more: EGX70, Dollar, Gold 24k, Brent, S&P 500 and Bitcoin. Links and browser tabs on a phone skip it.
+  On a computer (a mouse and a window 900px or wider) it shows too, once per tab, when the start page is opened from a
+  bookmark, the address bar or another site (not when moving between the site's own pages), in a wide layout with more
+  on it: the Newsletter as a black-and-white broadsheet front page with the day's real stories (a dateline with the
+  edition's number, the date and Cairo; the Big Story with the start of its report in two justified columns; the
+  number of the day as a black panel and the quote of the day; six more stories from Today at a Glance in ruled
+  columns; what to watch today along the foot), the Desk with the EGX30 beside the board of six, the desk's finding and what comes next. It stays 4.5 to 6.5
+  seconds; a click or any key opens the page sooner. `data-look` on its
   `<script>` tag picks one of three looks per app; `?splash=1`, `2` or `3` previews one in any browser (`&hold` keeps
   it up). On an iPhone the startup images in `icons/startup/` cover the moment before the page starts; they are the
   opening screen's first frame, rendered by `node icons/make_startup.js` (instructions at the top of the file).
