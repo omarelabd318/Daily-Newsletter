@@ -600,15 +600,18 @@
   // previews): 1 the sheet opens out into the page, 2 it turns like a page, 3 it lifts away like a cover, 4 the
   // masthead's black rule runs down the screen and prints the page behind it (the default); 0 (or none) the plain fade
   var out = +(q.get('out') || me.dataset.out || 0);
-  if (!(app === 'news' && phone && !wide && look === 2) || still) out = 0;
+  // the Markets Desk's phone board (look 1) has its own (data-out, ?out= too): 1 the chart line sweeps across the
+  // screen and uncovers the desk behind it, 2 the board clears row by row like a quote board, 3 the screen dives into
+  // the mark's line, 4 the screen splits open at the EGX30's number
+  if (!(phone && !wide && (app === 'news' ? look === 2 : look === 1)) || still) out = 0;
   var rise = function (ms, delay) {
     // the page under the sheet comes up a few pixels as it is uncovered
     var st = d.createElement('style');
-    st.textContent = '.mast-frame,#content{animation:sp-page ' + ms + 'ms ' + (delay || 0) + 'ms cubic-bezier(.2,.7,.2,1) both}' +
+    st.textContent = (app === 'desk' ? 'body>.app' : '.mast-frame,#content') + '{animation:sp-page ' + ms + 'ms ' + (delay || 0) + 'ms cubic-bezier(.2,.7,.2,1) both}' +
       '@keyframes sp-page{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}';
     d.head.appendChild(st); setTimeout(function () { st.remove(); }, ms + (delay || 0) + 60);
   };
-  var outs = {
+  var outs = app === 'desk' ? null : {
     1: function () {
       var sh = el.querySelector('style + div'), r = sh.getBoundingClientRect(), cs = getComputedStyle(sh);
       var bx = d.createElement('div');
@@ -657,9 +660,76 @@
       setTimeout(function () { el.remove(); bar.remove(); }, 950);
     }
   };
+  if (app === 'desk') outs = {
+    1: function () {
+      // a thin line in the desk's accent runs left to right like a chart's cursor; behind it the desk is uncovered
+      var bar = d.createElement('div');
+      bar.style.cssText = 'position:fixed;top:0;bottom:0;left:0;width:3px;background:' + C.acc + ';box-shadow:0 0 18px ' + C.acc + ';z-index:2147483001;transition:transform .7s cubic-bezier(.65,0,.3,1),opacity .2s ease .7s';
+      d.body.appendChild(bar);
+      el.style.transition = 'clip-path .7s cubic-bezier(.65,0,.3,1)'; el.style.clipPath = 'inset(0 0 0 0)';
+      rise(700);
+      requestAnimationFrame(function () { requestAnimationFrame(function () {
+        el.style.clipPath = 'inset(0 0 0 100%)'; bar.style.transform = 'translateX(' + (innerWidth - 3) + 'px)'; bar.style.opacity = 0;
+      }); });
+      setTimeout(function () { el.remove(); bar.remove(); }, 950);
+    },
+    2: function () {
+      // the board clears from the top down, each row flipping away, then the ground goes
+      var items = [];
+      [].forEach.call(el.querySelector('style + div').children, function (n) {
+        if (n.style.display === 'grid') [].forEach.call(n.children, function (c, i) { items.push([c, Math.floor(i / 2)]); });
+        else items.push([n, -1]);
+      });
+      var row = 0, last = null;
+      items.forEach(function (it) {
+        var n = it[0];
+        if (it[1] < 0 || it[1] !== last) row++; last = it[1];
+        n.style.animation = 'none'; n.style.opacity = 1;
+        n.style.transition = 'transform .32s cubic-bezier(.5,0,.75,0) ' + (row * 55) + 'ms,opacity .32s ease ' + (row * 55) + 'ms';
+        n.style.transformOrigin = '50% 0';
+      });
+      el.querySelector('.tap-hint').style.opacity = 0;
+      var end = row * 55 + 320;
+      el.style.transition = 'background-color .3s ease ' + (end - 120) + 'ms'; el.style.pointerEvents = 'none';
+      rise(500, end - 120);
+      requestAnimationFrame(function () { requestAnimationFrame(function () {
+        items.forEach(function (it) { it[0].style.transform = 'perspective(600px) rotateX(80deg) translateY(-12px)'; it[0].style.opacity = 0; });
+        el.style.backgroundColor = 'transparent';
+      }); });
+      setTimeout(function () { el.remove(); }, end + 250);
+    },
+    3: function () {
+      // the screen dives into the mark's rising line; the desk comes up out of it
+      var mk = el.querySelector('svg'), r = mk.getBoundingClientRect();
+      el.style.transformOrigin = (r.left + r.width * .6) + 'px ' + (r.top + r.height * .45) + 'px';
+      el.style.transition = 'transform .6s cubic-bezier(.6,0,.4,1),opacity .3s ease .3s';
+      var st = d.createElement('style');
+      st.textContent = 'body>.app{animation:sp-dive .55s .25s cubic-bezier(.2,.7,.2,1) both}@keyframes sp-dive{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}';
+      d.head.appendChild(st);
+      requestAnimationFrame(function () { el.style.transform = 'scale(9)'; el.style.opacity = 0; });
+      setTimeout(function () { el.remove(); }, 650); setTimeout(function () { st.remove(); }, 900);
+    },
+    4: function () {
+      // the screen splits at the EGX30's number: the top half goes up, the bottom half down
+      var n = el.querySelector('[data-k=egx30]'), y = n ? n.getBoundingClientRect().bottom + 4 : innerHeight / 2;
+      var cl = el.cloneNode(true);
+      // the bottom half is a copy of the whole screen, cut below the line
+      cl.querySelectorAll('*').forEach(function (x) { x.style.animation = 'none'; if (x.classList.contains('in') || x.classList.contains('late')) { x.style.opacity = 1; x.style.transition = 'none'; } if (x.classList.contains('in')) x.style.transform = 'none'; });
+      cl.querySelectorAll('path').forEach(function (x) { x.style.strokeDashoffset = 0; });
+      cl.style.clipPath = 'inset(' + y + 'px 0 0 0)';
+      el.style.clipPath = 'inset(0 0 ' + (innerHeight - y) + 'px 0)';
+      d.body.appendChild(cl);
+      [el, cl].forEach(function (x) { x.style.transition = 'transform .6s cubic-bezier(.7,0,.2,1)'; });
+      rise(600, 80);
+      requestAnimationFrame(function () { requestAnimationFrame(function () {
+        el.style.transform = 'translateY(-' + y + 'px)'; cl.style.transform = 'translateY(' + (innerHeight - y) + 'px)';
+      }); });
+      setTimeout(function () { el.remove(); cl.remove(); }, 650);
+    }
+  };
   var go = function () {
     if (gone) return; gone = true;
-    if (outs[out]) return outs[out]();
+    if (out && outs[out]) return outs[out]();
     el.classList.add('out'); setTimeout(function () { el.remove(); }, 400);
   };
   var leave = function () {
