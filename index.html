@@ -640,14 +640,20 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 :root[data-theme="paper"] .rf-main > :first-child{padding-left:0;border-left:0} :root[data-theme="paper"] .rf-main > :last-child{padding-right:0}
 :root[data-theme="paper"] .rf-brief h4{margin:0 0 12px;padding:3px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);text-align:center;font:600 10px var(--sans);letter-spacing:.14em;text-transform:uppercase}
 :root[data-theme="paper"] .rf-brief ol{list-style:none;margin:0;padding:0;columns:2;column-gap:36px;column-rule:1px solid var(--rule);counter-reset:rf}
-:root[data-theme="paper"] .rf-brief li{display:grid;grid-template-columns:40px minmax(0,1fr);break-inside:avoid;padding:0 0 14px;counter-increment:rf}
+:root[data-theme="paper"] .rf-brief li{display:grid;grid-template-columns:48px minmax(0,1fr);break-inside:avoid;padding:0 0 14px;counter-increment:rf}
 :root[data-theme="paper"] .rf-brief li > *{grid-column:2}
-:root[data-theme="paper"] .rf-brief li::before{grid-column:1;grid-row:1 / span 2;content:counter(rf);font:var(--p-hw) 34px/.9 var(--p-head),var(--serif)}
+:root[data-theme="paper"] .rf-brief li::before{grid-column:1;grid-row:1 / span 2;content:counter(rf);font:var(--p-hw) 34px/.9 var(--p-head),var(--serif);font-variant-numeric:lining-nums tabular-nums}   /* Playfair's old-style figures set 1 and 0 at x-height, so "10" sat lower and smaller than 1 to 9 */
 :root[data-theme="paper"] .rf-brief li a{color:var(--ink);text-decoration:none}
 :root[data-theme="paper"] .rf-brief li b{display:block;margin:0 0 3px;font:var(--p-hw) 20px/1.12 var(--p-head),var(--serif)}
 :root[data-theme="paper"] .rf-brief li a:hover b{text-decoration:underline}
 :root[data-theme="paper"] .rf-brief li span{display:block;font-size:15px;line-height:1.42;text-align:justify;hyphens:auto;-webkit-hyphens:auto}
-:root[data-theme="paper"] .rfront .f-rail .f-inside{display:none}   /* the masthead's section row already indexes the week; a second index only stretched the rail past the brief */
+:root[data-theme="paper"] .rfront .f-rail .f-inside{margin-top:12px;padding:7px 10px}
+/* the recap's index kept compact, in two columns, so the rail ends near where the brief does */
+:root[data-theme="paper"] .rfront .f-inside ol{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:14px}
+:root[data-theme="paper"] .rfront .f-inside li{padding:3px 0;font-size:13.5px;line-height:1.25}
+:root[data-theme="paper"] .rfront .f-inside li:nth-child(2){border-top:0}
+:root[data-theme="paper"] .rfront .f-inside li a{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+:root[data-theme="paper"] .rfront .f-inside li span{font-size:11px}
 /* the recap's tape: its week as a small kicker over the figures, so the seven changes keep to one line */
 @media (min-width:641px){
   :root[data-theme="paper"] .f-strip .rf-wk{display:block;flex:0 0 100%;padding:0 0 3px;border:0;text-align:center;font:600 10px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink2)}
@@ -1061,6 +1067,8 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
       recapMast(ed);
       var RS = {'The Week in Brief':'In brief','What Tied the Week Together':'The thread','Egypt This Week':'Egypt','Region and World':'World','Markets This Week':'Markets','Sports This Week':'Sports','Culture and Tech':'Culture and tech','How It Played Out':'How it played out','The Week Ahead':'Week ahead'};
       [].slice.call($('toc').querySelectorAll('a')).forEach(function(a){ if(RS[a.textContent]) a.textContent = RS[a.textContent]; });
+      // the rail's index uses the same short names, so its two narrow columns read whole
+      [].slice.call(ps.querySelectorAll('.f-inside li a')).forEach(function(a){ if(RS[a.textContent]) a.textContent = RS[a.textContent]; });
       return;
     }
     var G = document.getElementById('today-at-a-glance'); if(!G) return;
