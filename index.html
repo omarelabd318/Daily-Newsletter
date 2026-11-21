@@ -1017,7 +1017,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
         return {now:now, chg:(was ? (now/was-1)*100 : null)};
       }
       var n0 = function(v){ return Math.round(v).toLocaleString('en-US'); }, n2 = function(v){ return v.toFixed(2); };
-      function pc(c, flip){ if(c == null) return ''; var a = Math.abs(c).toFixed(1); if(+a === 0) return (flip ? 'pound ' : '')+'0.0%'; return (flip ? 'pound '+(c <= 0 ? '+' : '\u2212') : (c >= 0 ? '+' : '\u2212'))+a+'%'; }
+      function pc(c){ if(c == null) return ''; var a = Math.abs(c).toFixed(1); if(+a === 0) return '0.0%'; return (c >= 0 ? '+' : '\u2212')+a+'%'; }
       // a change that rounds to zero shows as 0.0%, grey, with no sign
       function cell(lab, k, fmt, flip, href){ var f = fig(k); if(!f) return ''; var c = f.chg, good = c == null ? '' : +Math.abs(c).toFixed(1) === 0 ? 'f-mu' : ((flip ? -c : c) >= 0 ? 'f-up' : 'f-dn');
         return '<a href="'+href+'"><span>'+lab+'</span><b>'+fmt(f.now)+'</b>'+(c == null ? '' : '<em class="'+good+'">'+pc(c, flip)+'</em>')+'</a>'; }
@@ -1183,9 +1183,10 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     loadMarket('markets-recent.json').then(function(L){
       var days = ((L && L.days) || []).filter(function(e){ return e.date <= ed.date; });
       function fig(k){ var v = days.map(function(e){ return e[k]; }).filter(function(x){ return typeof x === 'number'; }); if(!v.length) return null; var now = v[v.length-1], i = v.length-2; while(i > 0 && v[i] === now) i--; return {now:now, chg:(i >= 0 && v[i] !== now) ? (now/v[i]-1)*100 : null}; }
-      // a change that rounds to zero shows as 0.0% (0.00%), grey, with no sign
+      // a change that rounds to zero shows as 0.0% (0.00%), grey, with no sign; USD/EGP shows the dollar's own change,
+      // red when it rises (the pound weaker)
       function cell(lab, k, fmt, flip, href){ var f = fig(k); if(!f) return ''; var c = f.chg, dp = flip ? 1 : 2, a = c == null ? 0 : +Math.abs(c).toFixed(dp), good = c == null ? '' : a === 0 ? 'f-mu' : ((flip ? -c : c) >= 0 ? 'f-up' : 'f-dn');
-        return '<a href="'+href+'"><span>'+lab+'</span><b>'+fmt(f.now)+'</b>'+(c == null ? '' : '<em class="'+good+'">'+(flip ? 'pound ' : '')+(a === 0 ? '' : flip ? (c <= 0 ? '+' : '−') : (c >= 0 ? '+' : '−'))+a.toFixed(dp)+'%</em>')+'</a>'; }
+        return '<a href="'+href+'"><span>'+lab+'</span><b>'+fmt(f.now)+'</b>'+(c == null ? '' : '<em class="'+good+'">'+(a === 0 ? '' : c >= 0 ? '+' : '−')+a.toFixed(dp)+'%</em>')+'</a>'; }
       var n0 = function(v){ return Math.round(v).toLocaleString('en-US'); }, n2 = function(v){ return v.toFixed(2); };
       var cells = cell('EGX30','egx30',n0,false,'/desk/egx/') + cell('USD/EGP','usd_egp',n2,true,'/desk/egp/') + cell('Gold 24K','gold24_egp',n0,false,'/desk/egp/#c-gold') + cell('Brent','brent',function(v){return '$'+n2(v)},false,'/desk/global/') + cell('S&amp;P 500','sp500',n0,false,'/desk/us/')
         + cell('Nasdaq','nasdaq',n0,false,'/desk/us/').replace('<a ', '<a class="f-x" ') + cell('Bitcoin','btc',function(v){return '$'+n0(v)},false,'/desk/global/#g-btc').replace('<a ', '<a class="f-x" ') + wx;
