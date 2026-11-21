@@ -53,11 +53,11 @@
   const tickers = M.GROUP[MKT];
   M.$('finding').textContent = `All ${tickers.length} ${egx ? 'Egyptian' : 'US'} stocks on the desk. Tap one for its page: price chart, performance, valuation, trading, news and the desk's views.`;
   // a wider trend line for the cards
-  function line(vals) {
+  function line(vals, tr = null) {
     if (vals.length < 2) return '';
     const w = 220, h = 44, lo = Math.min(...vals), hi = Math.max(...vals), sp = hi - lo || 1, st = (w - 4) / (vals.length - 1);
     const xy = vals.map((v, i) => [2 + i * st, h - 3 - (v - lo) / sp * (h - 6)]);
-    return `<svg class="cline" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true"><path d="${xy.map((c, i) => (i ? 'L' : 'M') + c[0].toFixed(1) + ' ' + c[1].toFixed(1)).join('')}"/><circle cx="${xy.at(-1)[0].toFixed(1)}" cy="${xy.at(-1)[1].toFixed(1)}" r="2.6"/></svg>`;
+    return `<svg class="cline${tr ? ' ' + tr : ''}" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true"><path d="${xy.map((c, i) => (i ? 'L' : 'M') + c[0].toFixed(1) + ' ' + c[1].toFixed(1)).join('')}"/><circle cx="${xy.at(-1)[0].toFixed(1)}" cy="${xy.at(-1)[1].toFixed(1)}" r="2.6"/></svg>`;
   }
   // market value, e.g. 'EGP 370bn' or '$5.1tn'
   const capText = (t) => { const c = (prof[t] || {}).cap; if (!c) return ''; const v = c.value, cur = c.currency === 'USD' ? '$' : 'EGP ';
@@ -89,7 +89,7 @@
     </a>` : `<a class="card scard" href="/desk/stock/?t=${encodeURIComponent(r.t)}">
       <div class="sh"><span><b>${M.esc(M.NAMES[r.t])}</b><span class="t">${M.esc(r.t)}${(prof[r.t] || {}).sector ? ' · ' + M.esc(prof[r.t].sector) : ''}${capText(r.t)}</span></span>${r.open ? `<span class="pill open">${r.open} open view${r.open > 1 ? 's' : ''}</span>` : ''}</div>
       <div class="sp"><span class="lvl num">${cur}${M.num(M.last(r.s))}</span>${M.heroChg(r.s, per)}</div>
-      ${line(r.pts)}
+      ${line(r.pts, M.trend(r.c))}
       <div class="sk"><span>This year <span class="num ${M.cls(r.y)}">${M.pct(r.y)}</span></span><span class="num">52w ${M.num(r.lo, r.lo < 10 ? 2 : 0)}–${M.num(r.hi, r.hi < 10 ? 2 : 0)}</span></div>
       <div class="range" style="margin:8px 0 0"><i style="left:calc(${((r.now - r.lo) / (r.hi - r.lo || 1) * 100).toFixed(1)}% - 1px)"></i></div>
       <p class="snews">${r.news ? `<span class="when">${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][M.day(r.news.date).getMonth()]} ${M.day(r.news.date).getDate()}</span> ${M.esc(r.news.text.length > 120 ? r.news.text.slice(0, 117) + '…' : r.news.text)}` : '<span class="when">No recent news</span>'}</p>
@@ -104,7 +104,7 @@
       const trow = (r) => { const d = M.change(r.s, 0), pos = r.now == null ? null : ((r.now - r.lo) / (r.hi - r.lo || 1) * 100);
         return `<tr class="click" onclick="location='/desk/stock/?t=${encodeURIComponent(r.t)}'"><td class="name"><a href="/desk/stock/?t=${encodeURIComponent(r.t)}"><b>${M.esc(M.NAMES[r.t])}</b><span>${M.esc(r.t)}</span></a>${r.open ? `<span class="pill open" style="margin-left:8px">${r.open} view${r.open > 1 ? 's' : ''}</span>` : ''}</td>
           <td class="st-m meta">${M.esc((prof[r.t] || {}).sector || '')}</td>
-          <td class="trend st-m">${r.pts.length > 1 ? M.spark([], 7, null, r.pts) : ''}</td>
+          <td class="trend st-m">${r.pts.length > 1 ? M.spark([], 7, null, r.pts, M.trend(r.c)) : ''}</td>
           <td class="num">${r.now == null ? '<span class="dash">—</span>' : M.num(M.last(r.s))}</td>
           <td class="num"><span class="${M.cls(d)}">${M.pct(d)}</span></td>
           <td class="num st-m"><span class="${M.cls(r.c)}">${M.pct(r.c)}</span></td>

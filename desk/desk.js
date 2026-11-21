@@ -138,13 +138,14 @@ window.Desk = (function () {
   }
   // a trend line: the period's closes, or on 1D the last session through the day when it is saved (intra)
   // week: on 1W, the last sessions through the day (weekOf), and on 1M the month's (monthOf), when saved; otherwise closes
-  function spark(s, back, intra = null, week = null) {
+  // tr: the row's trend ('up' | 'down', from trend()), so the line reads the same way as the change beside it
+  function spark(s, back, intra = null, week = null, tr = null) {
     const pts = !back && intra && intra.length > 1 ? intra.map((x) => x[1]) : (back === 7 || back === 30) && week && week.length > 1 ? week
       : (back <= 7 ? s.slice(-7) : s.filter(([d]) => d >= cut(lastDate(s), back))).map((x) => x[1]);
     if (pts.length < 2) return '';
     const w = 72, h = 18, min = Math.min(...pts), max = Math.max(...pts), sp = max - min || 1, st = (w - 4) / (pts.length - 1);
     const xy = pts.map((v, i) => [2 + i * st, h - 2 - (v - min) / sp * (h - 4)]);
-    return `<svg class="spark" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true"><path d="${xy.map((c, i) => (i ? 'L' : 'M') + c[0].toFixed(1) + ' ' + c[1].toFixed(1)).join('')}"/><circle cx="${xy.at(-1)[0].toFixed(1)}" cy="${xy.at(-1)[1].toFixed(1)}" r="2.2"/></svg>`;
+    return `<svg class="spark${tr ? ' ' + tr : ''}" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true"><path d="${xy.map((c, i) => (i ? 'L' : 'M') + c[0].toFixed(1) + ' ' + c[1].toFixed(1)).join('')}"/><circle cx="${xy.at(-1)[0].toFixed(1)}" cy="${xy.at(-1)[1].toFixed(1)}" r="2.2"/></svg>`;
   }
   // the biggest move on the chart: consecutive sessions in the same direction count as one move, shaded
   // across its days ("22–25 Oct −6.9%"); a one-day move keeps a marker line. Only moves above the threshold.
@@ -375,7 +376,7 @@ window.Desk = (function () {
     const rows = tickers.map((t) => { const s = inUSD ? usd(stock(t)) : stock(t); return { t, s, c: change(s, back), y: ytd(s) }; });
     const v = (r) => (sort && sort.key === 'ytd' ? r.y : r.c);
     if (sort && sort.key) rows.sort((a, b) => (v(a) == null) - (v(b) == null) || sort.dir * (v(a) - v(b)));
-    const row = ({ t, s, c, y }) => `<tr class="click" onclick="location='/desk/stock/?t=${encodeURIComponent(t)}'"><td class="name"><a href="/desk/stock/?t=${encodeURIComponent(t)}"><b>${esc(NAMES[t])}</b><span>${esc(t)}</span></a></td><td class="trend">${spark(s, back, intraOf(t), back === 7 ? weekOf(t, inUSD) : back === 30 ? monthOf(t, inUSD) : null)}</td><td class="num">${num(last(s))}</td><td class="num"><span class="${cls(c)}">${pct(c)}</span></td><td class="num"><span class="${cls(y)}">${pct(y)}</span></td></tr>`;
+    const row = ({ t, s, c, y }) => `<tr class="click" onclick="location='/desk/stock/?t=${encodeURIComponent(t)}'"><td class="name"><a href="/desk/stock/?t=${encodeURIComponent(t)}"><b>${esc(NAMES[t])}</b><span>${esc(t)}</span></a></td><td class="trend">${spark(s, back, intraOf(t), back === 7 ? weekOf(t, inUSD) : back === 30 ? monthOf(t, inUSD) : null, trend(c))}</td><td class="num">${num(last(s))}</td><td class="num"><span class="${cls(c)}">${pct(c)}</span></td><td class="num"><span class="${cls(y)}">${pct(y)}</span></td></tr>`;
     body.dataset.grouped = group ? '1' : '';
     if (!group) { body.innerHTML = rows.map(row).join(''); return; }
     const avg = (rs, k) => { const xs = rs.map((r) => r[k]).filter((x) => x != null); return xs.length ? xs.reduce((a, x) => a + x, 0) / xs.length : null; };

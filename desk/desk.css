@@ -157,6 +157,9 @@ td.trend,th.trend{width:96px;text-align:center}
 td.trend svg{display:inline-block;vertical-align:middle}
 .spark path{fill:none;stroke:var(--chart-muted);stroke-width:1.5}
 .spark circle{fill:var(--chart-1)}
+/* a trend line coloured as the change beside it reads: green up, red down (flat keeps the chart hue) */
+.spark.up path,.cline.up path{stroke:var(--positive)} .spark.up circle,.cline.up circle{fill:var(--positive)}
+.spark.down path,.cline.down path{stroke:var(--negative)} .spark.down circle,.cline.down circle{fill:var(--negative)}
 .stock-note{margin:12px 0 0;font-size:13px;line-height:19px;color:var(--muted)}
 .stock-note b{color:var(--text);font-weight:500}
 

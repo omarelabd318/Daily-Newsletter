@@ -191,7 +191,7 @@
   const drawT = (p) => {
     M.$('chg-h').textContent = `Change (${p[0]})`; M.$('trend-h').textContent = p[1] <= 7 ? 'Last 7 days' : p[2];
     M.$('body').innerHTML = CUR.map(([k, n, c]) => { const s = M.series((e) => e[k], 'fx'), ch = M.change(s, p[1]), y = M.ytd(s);
-      return `<tr><td class="name"><b>${n}</b><span>${c}/EGP</span></td><td class="trend">${M.spark(s, p[1])}</td><td class="num">${M.num(M.last(s))}</td><td class="num"><span class="${M.cls(ch)}">${M.pct(ch)}</span></td><td class="num"><span class="${M.cls(y)}">${M.pct(y)}</span></td></tr>`; }).join('');
+      return `<tr><td class="name"><b>${n}</b><span>${c}/EGP</span></td><td class="trend">${M.spark(s, p[1], null, null, M.trend(ch))}</td><td class="num">${M.num(M.last(s))}</td><td class="num"><span class="${M.cls(ch)}">${M.pct(ch)}</span></td><td class="num"><span class="${M.cls(y)}">${M.pct(y)}</span></td></tr>`; }).join('');
   };
   M.segment(M.$('cseg'), '1D', drawT); drawT(M.PERIODS[0]);
   const V = P.view;
