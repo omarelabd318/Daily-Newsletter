@@ -19,6 +19,8 @@
 //   data-wide-type="1" on the <script> tag turns it on; ?typewide previews it. The Markets Desk's board on a computer
 //   (wide look 1) writes itself out the same way: the name and date, the EGX30, the six tiles, the desk's finding and
 //   what comes next, then the EGX30's chart, each tile's frame and line, and the rule above "Next" come up one by one.
+// - Wherever it types (the phone's headline, the computer's front page and the desk's board), a thin upright cursor
+//   sits at the end of what has been written: solid while it types, blinking while it waits.
 (function () {
   var me = document.currentScript, d = document, root = d.documentElement;
   var app = me.dataset.app, q = new URLSearchParams(location.search), pv = q.get('splash');
@@ -69,6 +71,11 @@
     '#splash .wcol{display:grid;gap:7px;align-content:start}#splash .wcol i{display:block;height:4px;background:' + P.ink + ';opacity:.85}' +
     (alt ? '' : '@media (max-height:820px){#splash [data-w=stories]>:nth-child(n+4){display:none}}') +
     
+    // the typing cursor: a thin upright line at the end of what has been written so far. An empty inline box (it takes
+    // no room and gives the line no new place to break, so no word moves); solid while it types, blinking while it waits
+    '#splash .caret{position:relative}#splash .caret::after{content:"";position:absolute;left:1px;top:.06em;bottom:.02em;width:max(2px,.07em);background:currentColor;animation:sp-blink 1.06s steps(1) infinite}' +
+    '#splash .caret.typing::after{animation:none}' +
+    '@keyframes sp-blink{50%{opacity:0}}' +
     '@keyframes sp-in{to{opacity:1;transform:none}}' +
     '@keyframes sp-rule{from{transform:scaleX(0)}to{transform:scaleX(1)}}' +
     '@keyframes sp-draw{to{stroke-dashoffset:0}}' +
@@ -434,6 +441,14 @@
     });
     return { box: box, parts: parts, len: n };
   };
+  // one cursor, moved along to whichever block is being written; it waits, blinking, at the end of the last
+  var caret = d.createElement('span'), cTimer;
+  caret.className = 'caret';
+  var caretAt = function (par, before, color) {
+    caret.style.color = color; par.insertBefore(caret, before);
+    caret.classList.add('typing'); clearTimeout(cTimer);
+    cTimer = setTimeout(function () { caret.classList.remove('typing'); }, 420);
+  };
   var write = function (job, ms, done) {
     // a few letters at a time on long blocks, so each block takes the time it is given (timers do not run under ~4ms)
     var step = Math.max(16, ms / (job.len || 1)), per = Math.max(1, Math.round(job.len * step / (ms || 1))), k = 0, p = 0;
@@ -443,6 +458,7 @@
         var x = job.parts[k];
         // written: the plain words go back in place of the two halves, so a line cut short ends in … as it should
         if (!x) {
+          var last = job.parts[job.parts.length - 1];
           job.parts.forEach(function (y) {
             if (y.par.hasAttribute('data-oc')) {
               // put the colour back at once: a block with a colour transition (the number of the day) would otherwise
@@ -451,11 +467,14 @@
             }
             y.par.replaceChild(d.createTextNode(y.s), y.a); y.b.remove();
           });
+          // the cursor stays at the end of the block until the next one takes it
+          if (last) last.par.appendChild(caret);
           void job.box.offsetWidth;
           job.parts.forEach(function (y) { y.par.style.transition = ''; });
           return done();
         }
         p++; x.a.textContent = x.s.slice(0, p); x.b.textContent = x.s.slice(p);
+        if (m === per - 1 || p >= x.s.length) caretAt(x.par, x.b, x.c);
         if (p >= x.s.length) { k++; p = 0; }
       }
       setTimeout(tick, step);
@@ -524,7 +543,7 @@
     var i = 0, w = t.length, step = Math.max(14, Math.min(32, 2600 / (w || 1)));
     n.innerHTML = '<span></span><span style="color:transparent"></span>';
     var a = n.firstChild, b = n.lastChild;
-    var tick = function () { a.textContent = t.slice(0, i); b.textContent = t.slice(i); if (i++ < w) setTimeout(tick, step); };
+    var tick = function () { a.textContent = t.slice(0, i); b.textContent = t.slice(i); caretAt(n, b, ''); if (i++ < w) setTimeout(tick, step); };
     n.classList.add('on'); n.style.transition = 'none';
     setTimeout(tick, Math.max(0, 600 - (Date.now() - t0)));
   };
