@@ -527,6 +527,15 @@ with it in mind; nothing extra goes in the file:
 The Today at a Glance and Quick Hits sections are hidden on the page (the front page shows them) but stay in the
 file for the archive, search and audio. The Saturday recap has no front page.
 
+## Colours for changes (the site, not the edition)
+
+Nothing to write in the edition: the site colours every change itself (the tables, the markets strip). When
+changing index.html, keep one set shared with the Markets Desk: green up, red down, grey for no change
+(`--up` #1f6f43 / dark #5ccb72, `--down` #a1281e / dark #ef7d6d, `--flat` #6d6a63 / dark #a9b4be, the same as the
+desk's `--positive`, `--negative` and `--flat` in desk/desk.css and desk/dash.css; change them together). A change
+that rounds to 0.0% is grey (`.chg.flat`, `.f-mu`), never green. The paper theme keeps black ink for gains and
+losses (`--up` and `--down` #14110d) with its own grey (`--flat` #4f4a40).
+
 ## The lead image (paper mode)
 
 Read `refs/lead-image.md` at the step where you choose the lead image (licenses, captions, `lead_image.py`).
