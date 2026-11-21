@@ -599,15 +599,18 @@
   // on a phone the newsletter's front page (look 2) leaves in one of a few ways (data-out on the <script> tag, ?out=
   // previews): 1 the sheet opens out into the page, 2 it turns like a page, 3 it lifts away like a cover, 4 the
   // masthead's black rule runs down the screen and prints the page behind it (the default); 0 (or none) the plain fade
-  var out = +(q.get('out') || me.dataset.out || 0);
+  // on a computer the same ways, chosen apart with data-wide-out (?out= previews it too): the newsletter's broadsheet
+  // (wide look 2) 1 settles into the page's own sheet, 2 turns like a page, 3 lifts away, 4 the ink rule; the desk's
+  // board (wide look 1) 1 the chart sweep, 2 the board clears, 3 dives into the mark's line, 4 splits open
+  var out = +(q.get('out') || (wide ? me.dataset.wideOut : me.dataset.out) || 0);
   // the Markets Desk's phone board (look 1) has its own (data-out, ?out= too): 1 the chart line sweeps across the
   // screen and uncovers the desk behind it, 2 the board clears row by row like a quote board, 3 the screen dives into
   // the mark's line (the default), 4 the screen splits open at the EGX30's number
-  if (!(phone && !wide && (app === 'news' ? look === 2 : look === 1)) || still) out = 0;
+  if (!(wide ? (app === 'news' ? wl === 2 : wl === 1) : phone && (app === 'news' ? look === 2 : look === 1)) || still) out = 0;
   var rise = function (ms, delay) {
     // the page under the sheet comes up a few pixels as it is uncovered
     var st = d.createElement('style');
-    st.textContent = (app === 'desk' ? 'body>.app' : '.mast-frame,#content') + '{animation:sp-page ' + ms + 'ms ' + (delay || 0) + 'ms cubic-bezier(.2,.7,.2,1) both}' +
+    st.textContent = (app === 'desk' ? (wide ? 'body>.app,body>.dmast' : 'body>.app') : '.mast-frame,#content') + '{animation:sp-page ' + ms + 'ms ' + (delay || 0) + 'ms cubic-bezier(.2,.7,.2,1) both}' +
       '@keyframes sp-page{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}';
     d.head.appendChild(st); setTimeout(function () { st.remove(); }, ms + (delay || 0) + 60);
   };
@@ -622,7 +625,9 @@
       sh.style.transition = 'opacity .16s ease'; sh.style.opacity = 0;
       el.querySelector('.tap-hint').style.opacity = 0;
       requestAnimationFrame(function () { requestAnimationFrame(function () {
-        bx.style.left = bx.style.top = '0px'; bx.style.width = '100vw'; bx.style.height = '100vh';
+        // on a phone the sheet fills the screen; on a computer it settles onto the page's own sheet
+        var pf = wide && d.querySelector('.mast-frame'), t = pf ? pf.getBoundingClientRect() : { left: 0, top: 0, width: innerWidth };
+        bx.style.left = t.left + 'px'; bx.style.top = Math.max(0, t.top) + 'px'; bx.style.width = t.width + 'px'; bx.style.height = (innerHeight - Math.max(0, t.top)) + 'px';
         bx.style.borderRadius = '0'; bx.style.boxShadow = '0 0 0 rgba(0,0,0,0)';
         setTimeout(function () { el.remove(); rise(420); bx.style.opacity = 0; }, 500);
         setTimeout(function () { bx.remove(); }, 900);
@@ -632,11 +637,11 @@
       var sh = el.querySelector('style + div');
       el.style.transition = 'background-color .55s ease'; el.style.backgroundColor = 'transparent';
       el.querySelector('.tap-hint').style.opacity = 0;
-      el.style.perspective = '1100px';
+      el.style.perspective = wide ? '2400px' : '1100px';
       sh.style.cssText += ';transform-origin:0 50%;transition:transform .7s cubic-bezier(.55,0,.25,1),filter .7s ease,opacity .25s ease .5s;animation:none';
       rise(600, 120);
       requestAnimationFrame(function () { requestAnimationFrame(function () {
-        sh.style.transform = 'translateX(-' + (sh.getBoundingClientRect().left + 2) + 'px) rotateY(-100deg)';
+        sh.style.transform = (wide ? '' : 'translateX(-' + (sh.getBoundingClientRect().left + 2) + 'px) ') + 'rotateY(-100deg)';
         sh.style.filter = 'brightness(.7)'; sh.style.opacity = 0;
       }); });
       setTimeout(function () { el.remove(); }, 780);
@@ -664,22 +669,32 @@
     1: function () {
       // a thin line in the desk's accent runs left to right like a chart's cursor; behind it the desk is uncovered
       var bar = d.createElement('div');
-      bar.style.cssText = 'position:fixed;top:0;bottom:0;left:0;width:3px;background:' + C.acc + ';box-shadow:0 0 18px ' + C.acc + ';z-index:2147483001;transition:transform .7s cubic-bezier(.65,0,.3,1),opacity .2s ease .7s';
+      var sw = wide ? 900 : 700;
+      bar.style.cssText = 'position:fixed;top:0;bottom:0;left:0;width:3px;background:' + C.acc + ';box-shadow:0 0 18px ' + C.acc + ';z-index:2147483001;transition:transform ' + sw + 'ms cubic-bezier(.65,0,.3,1),opacity .2s ease ' + sw + 'ms';
       d.body.appendChild(bar);
-      el.style.transition = 'clip-path .7s cubic-bezier(.65,0,.3,1)'; el.style.clipPath = 'inset(0 0 0 0)';
-      rise(700);
+      el.style.transition = 'clip-path ' + sw + 'ms cubic-bezier(.65,0,.3,1)'; el.style.clipPath = 'inset(0 0 0 0)';
+      rise(sw);
       requestAnimationFrame(function () { requestAnimationFrame(function () {
         el.style.clipPath = 'inset(0 0 0 100%)'; bar.style.transform = 'translateX(' + (innerWidth - 3) + 'px)'; bar.style.opacity = 0;
       }); });
-      setTimeout(function () { el.remove(); bar.remove(); }, 950);
+      setTimeout(function () { el.remove(); bar.remove(); }, sw + 250);
     },
     2: function () {
       // the board clears from the top down, each row flipping away, then the ground goes
       var items = [];
-      [].forEach.call(el.querySelector('style + div').children, function (n) {
+      if (!wide) [].forEach.call(el.querySelector('style + div').children, function (n) {
         if (n.style.display === 'grid') [].forEach.call(n.children, function (c, i) { items.push([c, Math.floor(i / 2)]); });
         else items.push([n, -1]);
       });
+      if (wide) {
+        // on a computer: every block of the board (the leaves among them), row by row as they stand on the screen
+        var set = [].slice.call(el.querySelectorAll('[data-w],[data-rv],.in')).concat([el.querySelector('svg')]);
+        set = set.filter(function (n) { return n && !set.some(function (m) { return m && m !== n && n.contains(m); }); });
+        var tops = set.map(function (n) { return Math.round(n.getBoundingClientRect().top / 40); });
+        var uniq = tops.slice().sort(function (x, y) { return x - y; }).filter(function (v, i, A) { return !i || A[i - 1] !== v; });
+        items = set.map(function (n, i) { return [n, uniq.indexOf(tops[i]) + 100]; });
+        items.sort(function (x, y) { return x[1] - y[1]; });
+      }
       var row = 0, last = null;
       items.forEach(function (it) {
         var n = it[0];
