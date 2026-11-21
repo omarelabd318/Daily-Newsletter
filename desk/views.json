@@ -451,7 +451,7 @@
     "GOOGL",
     "AMZN"
    ],
-   "status": "open",
+   "status": "on track",
    "updates": [
     {
      "date": "2026-10-29",
@@ -1006,7 +1006,7 @@
    "tickers": [
     "XOM"
    ],
-   "status": "on track",
+   "status": "right",
    "updates": [
     {
      "date": "2026-11-06",
@@ -1122,7 +1122,11 @@
      "level": 105
     }
    ],
-   "driver": "oil"
+   "driver": "oil",
+   "result": {
+    "date": "2026-11-21",
+    "text": "Judged on its date: Brent at 92.57 from 94.62 (-2.2%)."
+   }
   },
   {
    "id": "2026-11-09-egal-earnings",
