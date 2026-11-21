@@ -602,7 +602,7 @@
   var out = +(q.get('out') || me.dataset.out || 0);
   // the Markets Desk's phone board (look 1) has its own (data-out, ?out= too): 1 the chart line sweeps across the
   // screen and uncovers the desk behind it, 2 the board clears row by row like a quote board, 3 the screen dives into
-  // the mark's line, 4 the screen splits open at the EGX30's number
+  // the mark's line (the default), 4 the screen splits open at the EGX30's number
   if (!(phone && !wide && (app === 'news' ? look === 2 : look === 1)) || still) out = 0;
   var rise = function (ms, delay) {
     // the page under the sheet comes up a few pixels as it is uncovered
