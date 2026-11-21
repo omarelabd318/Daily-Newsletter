@@ -94,7 +94,7 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
 /* the globe */
 .gl{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:32px;align-items:start}
 .gl .rules{grid-column:1;grid-row:1} .gl .side{grid-column:3;grid-row:1}
-.gl-form{position:relative;display:flex;gap:8px;width:100%;max-width:440px;margin:0 0 6px}
+.gl-form{position:relative;display:flex;gap:8px;width:100%;max-width:440px;margin:22px 0 6px}
 .gl-form input{flex:1;min-width:0;padding:9px 12px;border:1px solid var(--ink);background:var(--cell);color:var(--ink);font:17px var(--serif);border-radius:0;-webkit-appearance:none}
 .gl-form input:focus{outline:2px solid var(--ink);outline-offset:-2px}
 .gl-form input:disabled{background:transparent;color:var(--ink2)}
@@ -168,14 +168,14 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
     <h2>The Globe</h2><p class="meta" id="gl-meta"></p>
     <div class="bar"><button type="button" id="gl-daily" aria-pressed="true">Today's country</button><button type="button" id="gl-prac" aria-pressed="false">Practice</button></div>
     <div class="gl"><div class="mid">
-        <form class="gl-form" id="gl-form" autocomplete="off"><input id="gl-in" type="text" placeholder="Type a country" aria-label="Guess a country" autocapitalize="words" spellcheck="false" enterkeyhint="go"><button type="submit">Guess</button><ul class="gl-sug" id="gl-sug" role="listbox" hidden></ul></form>
-        <p class="msg" id="gl-msg" aria-live="polite"></p>
         <div class="gl-wrap"><canvas id="gl-cv" width="400" height="400" aria-label="A globe showing your guesses"></canvas><div class="gl-tip" id="gl-tip" hidden></div>
-          <div class="gl-zoom"><button type="button" id="gl-zin" aria-label="Zoom in">+</button><button type="button" id="gl-zout" aria-label="Zoom out">&minus;</button></div></div></div>
+          <div class="gl-zoom"><button type="button" id="gl-zin" aria-label="Zoom in">+</button><button type="button" id="gl-zout" aria-label="Zoom out">&minus;</button></div></div>
+        <form class="gl-form" id="gl-form" autocomplete="off"><input id="gl-in" type="text" placeholder="Type a country" aria-label="Guess a country" autocapitalize="words" spellcheck="false" enterkeyhint="go"><button type="submit">Guess</button><ul class="gl-sug" id="gl-sug" role="listbox" hidden></ul></form>
+        <p class="msg" id="gl-msg" aria-live="polite"></p></div>
       <div class="side gl-l"><h3>Your guesses</h3><ol id="gl-list"></ol>
         <div class="gl-scale" aria-hidden="true"><span style="background:#f7eed6"></span><span style="background:#f6deaa"></span><span style="background:#f2ba7a"></span><span style="background:#eb8c50"></span><span style="background:#d65632"></span><span style="background:#aa281a"></span><span style="background:#7a1610"></span></div>
         <div class="gl-scale-k"><span>Far</span><span>Borders it</span></div>
-        <div class="gl-btns"><button type="button" id="gl-give" hidden>Give up</button><button type="button" id="gl-share" hidden>Share</button><button type="button" id="gl-new">Practice round</button></div>
+        <div class="gl-btns"><button type="button" id="gl-give" hidden>Give up</button><button type="button" id="gl-new">Practice round</button></div>
         <p class="gl-stats" id="gl-stats"></p></div>
       <div class="rules"><p><b>How to play.</b> A country is hidden somewhere on the globe. Guess any country and it is painted in: the deeper the red, the closer its border is to the answer's. A country that shares a border turns the darkest red.</p>
         <p>Each guess tells you how far it is, border to border, and whether you are getting warmer or colder. Keep going until you find it; there is no limit.</p>

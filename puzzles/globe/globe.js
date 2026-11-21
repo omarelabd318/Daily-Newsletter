@@ -33,7 +33,6 @@
     $('gl-prac').addEventListener('click', function(){ setMode('practice'); });
     $('gl-new').addEventListener('click', function(){ if(mode !== 'practice') return setMode('practice'); if(state.g.length && !state.won && !state.gave && !confirm('Start a new country? This one will count as unsolved.')) return; if(state.g.length && !state.won && !state.gave) record(false); newPractice(); });
     $('gl-give').addEventListener('click', function(){ if(state.won || state.gave) return; if(!confirm(mode === 'daily' ? 'Give up on today’s country and see the answer?' : 'Show the answer?')) return; state.gave = 1; if(mode === 'practice') record(false); save(); msg = 'The answer was ' + byIdx[ans].p.n + '.'; render(); fly(byIdx[ans]); });
-    $('gl-share').addEventListener('click', share);
     setMode(location.hash === '#gl-practice' ? 'practice' : 'daily');
   }
 
@@ -123,7 +122,7 @@
     $('gl-meta').textContent = (mode === 'daily' ? 'Today’s country · ' + new Date(date + 'T12:00:00').toLocaleDateString('en-US', {month:'long', day:'numeric'}) : 'Practice round') + ' · ' + g.length + (g.length === 1 ? ' guess' : ' guesses');
     $('gl-in').disabled = !!done; $('gl-in').placeholder = done ? (mode === 'daily' ? 'Done for today' : 'Press New country') : 'Type a country';
     $('gl-give').hidden = !!done || !g.length; $('gl-give').textContent = mode === 'daily' ? 'Give up' : 'Show answer';
-    $('gl-share').hidden = !(mode === 'daily' && state.won);
+    $('gl-new').hidden = mode === 'daily';
     $('gl-new').textContent = mode === 'daily' ? 'Practice round' : 'New country';
     var rows = g.slice().sort(function(a, b){ return dist(a, ans) - dist(b, ans); });
     $('gl-list').innerHTML = rows.length ? rows.map(function(i){ return '<li data-i="' + i + '"><i style="background:' + color(i) + '"></i><span>' + esc(byIdx[i].p.n) + '</span><small>' + (i === ans ? 'The answer' : km(dist(i, ans))) + '</small></li>'; }).join('') : '<li class="none">Your guesses will be listed here, closest first.</li>';
@@ -143,15 +142,6 @@
     card.addEventListener('click', function(e){ var a = e.target.dataset && e.target.dataset.a; if(e.target === card || a === 'close') card.remove(); if(a === 'more'){ card.remove(); if(mode === 'daily') setMode('practice'); else newPractice(); } });
     document.body.appendChild(card); card.querySelector('button').focus();
   }
-  function share(){
-    var g = state.g, line = g.map(function(i){ var d = dist(i, ans); return i === ans ? '🟩' : d === 0 ? '🟥' : d < 1500 ? '🟧' : d < 4500 ? '🟨' : '⬜'; }).join('');
-    var txt = 'The Globe, ' + new Date(date + 'T12:00:00').toLocaleDateString('en-US', {month:'long', day:'numeric'}) + ': found in ' + g.length + (g.length === 1 ? ' guess' : ' guesses') + '\n' + line + '\n' + location.origin + '/puzzles/#gl';
-    var b = $('gl-share'), ok = function(){ b.textContent = 'Copied'; setTimeout(function(){ b.textContent = 'Share'; }, 1600); };
-    if(navigator.share && /Mobi/.test(navigator.userAgent)) navigator.share({text: txt}).catch(function(){});
-    else if(navigator.clipboard) navigator.clipboard.writeText(txt).then(ok, function(){ prompt('Copy your result', txt); });
-    else prompt('Copy your result', txt);
-  }
-
   // ---- the globe: an orthographic map on a canvas; drag to turn it, scroll or pinch to zoom, tap a guess for its name ----
   var cv, cx, proj, path, size, zoom = 1, rot = [-30, -20], anim = null, spin = null, grat = d3.geoGraticule10(), tip;
   function globe(){
