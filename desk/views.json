@@ -557,6 +557,13 @@
      "source": "Morningstar",
      "url": "https://www.morningstar.com/stocks/walmart-earnings-digital-distribution-scale-lifts-margins-despite-freight-woes",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-20",
+     "text": "Nvidia fell 14% on a report of an SEC accounting probe while Walmart rose 1.5% to $127.95 and Costco 0.8%, on a day the S&P 500 lost 3.7%.",
+     "source": "Yahoo Finance",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/nvidia-stock-plunge-wipes-nearly-212722915.html",
+     "effect": "supports"
     }
    ],
    "driver": "ai-spending"
@@ -1126,6 +1133,11 @@
    "result": {
     "date": "2026-11-21",
     "text": "Judged on its date: Brent at 92.57 from 94.62 (-2.2%)."
+   },
+   "lesson": {
+    "date": "2026-11-21",
+    "text": "Brent ended at $92.57 on November 20, 2.2% below its $94.62 start and never near $105, because Hormuz exports recovered and the IEA's surplus forecast outweighed attacks on Riyadh and in Hormuz, while the Iran talks the call named stalled. It came right for supply rather than diplomacy, so the desk will name supply, not talks, as the driver of its oil calls.",
+    "tag": "right-other-reason"
    }
   },
   {

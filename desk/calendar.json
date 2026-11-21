@@ -12,51 +12,6 @@
    "expected": true
   },
   {
-   "t": "EAST",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-11-23",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
-  {
-   "t": "EFID",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-11-23",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
-  {
-   "t": "EFIH",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-11-23",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
-  {
-   "t": "JUFO",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-11-23",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
-  {
-   "t": "PHDC",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-11-23",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
-  {
    "t": "COST",
    "market": "us",
    "kind": "dividend",
