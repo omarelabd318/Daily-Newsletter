@@ -43,7 +43,8 @@
   :root[data-theme="paper"] .rf-main{border-top:0}
   :root[data-theme="paper"] .rf-main > :first-child{padding-top:0}
   :root[data-theme="paper"] .rf-brief h4{padding:5px 0;border-top:3px double var(--ink)}
-  :root[data-theme="paper"] .rf-brief li{grid-template-columns:52px minmax(0,1fr)}
+  :root[data-theme="paper"] .rf-brief li{grid-template-columns:50px minmax(0,1fr)}
+  :root[data-theme="paper"] .rf-brief li::before{padding-right:10px}
 
   /* the sections as chips on one swiping line */
   .toc,:root:is(.has-front,.rcp) .toc,:root[data-theme="paper"]:is(.has-front,.rcp) .toc{display:flex;flex-wrap:nowrap!important;justify-content:flex-start!important;gap:8px!important;max-width:none!important;margin:0 -16px!important;padding:12px 16px!important;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--rule);min-height:0}
@@ -75,7 +76,7 @@
 
   /* reading: ragged right (justified type in a narrow column leaves rivers of space), a comfortable size */
   .s-body p,.s-body li,.f-body,.f-col p,.f-band p,.f-watch,
-  :root[data-theme="paper"] .s-body p,:root[data-theme="paper"] .s-body li,:root[data-theme="paper"] .f-body,:root[data-theme="paper"] .f-col p,:root[data-theme="paper"] .f-band p,:root[data-theme="paper"] .f-watch{text-align:left!important;hyphens:manual!important;-webkit-hyphens:manual!important}
+  :root[data-theme="paper"] .s-body p,:root[data-theme="paper"] .s-body li,:root[data-theme="paper"] .f-body,:root[data-theme="paper"] .f-col p,:root[data-theme="paper"] .f-band p,:root[data-theme="paper"] .f-watch,:root[data-theme="paper"] .rf-brief li span{text-align:left!important;hyphens:manual!important;-webkit-hyphens:manual!important}
   .s-body,:root[data-theme="paper"] .s-body{font-size:17.5px;line-height:1.58}
   .s,:root[data-theme="paper"] .s{padding-block:26px}
   .s-body h3,:root[data-theme="paper"] .s-body h3{font-size:23px;line-height:1.18}

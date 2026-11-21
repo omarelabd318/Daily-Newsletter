@@ -156,6 +156,14 @@ footer p{margin:clamp(16px,2vw,24px) 0 0;max-width:60ch;text-wrap:balance;color:
   tr td.trend::before{display:block;min-width:0;margin:0 0 3px;font-size:9.5px;letter-spacing:.08em}
   tr td.trend .spark{margin:0 auto}
   tr:not(.has-trend) td.trend{display:none}
+  /* an edition's other tables (the recap's markets table, calendars): each label sits over its value and the pairs
+     run side by side, wrapping as needed, so a long label such as "Weekly change" no longer runs into its figure */
+  #content .tablewrap > table:not(.watch) tbody tr{display:flex;flex-wrap:wrap;align-items:flex-start;gap:6px 22px}
+  #content .tablewrap > table:not(.watch) td:first-child{flex:1 1 100%;padding:0}
+  #content .tablewrap > table:not(.watch) td[data-label]:not(.trend){flex:0 1 auto;min-width:0;padding:0}
+  #content .tablewrap > table:not(.watch) td[data-label]:not(.trend)::before{display:block;min-width:0;margin:0 0 1px}
+  #content .tablewrap > table:not(.watch) tr.has-trend{padding-right:100px}
+  #content .tablewrap > table:not(.watch) tr.trend-long{padding-right:156px}
   /* watch tables on a phone: one compact row per item, like a stock app: name and YTD on the left, the trend line,
      then the price over its change; a currency's note runs underneath */
   #content table.watch tbody tr{display:grid;grid-template-columns:minmax(0,1fr) 64px minmax(78px,auto);grid-template-areas:"name trend val" "sub trend chg" "note note note";column-gap:12px;row-gap:1px;align-items:center;padding:10px 14px;margin:0 0 4px}
@@ -241,7 +249,7 @@ td.num.na{text-align:center}
 .pbar button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--ground)}
 @media print{.pbar{display:none}}
 /* the watch tables: notes stay on one or two lines; the less-watched currency and gold rows fold behind a button */
-#content table.watch td,#content table.watch th{padding-left:12px;padding-right:12px}
+@media (min-width:861px){ #content table.watch td,#content table.watch th{padding-left:12px;padding-right:12px} }
 #content table.watch td{padding-top:10px;padding-bottom:10px}
 #content table.watch td.num,#content table.watch td[data-label="Level"]{white-space:nowrap}
 #content table.watch td.c3[data-label="Note"]{min-width:140px;font-size:15px;line-height:21px}
@@ -1568,7 +1576,8 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
         var series = [].map.call(table.querySelectorAll('tbody tr'), function(tr){
           var cell = tr.querySelector('td'), pts = [];
           if(cell) days.forEach(function(x){ var v = pick(x, cell.textContent); if(typeof v === 'number') pts.push({d:x.date, v:v}); });
-          return pts.length && pts[pts.length-1].d === upto ? pts : [];
+          // the latest close may be a day or two old: the EGX shuts on Friday and Saturday, so a weekend edition's last EGX30 is Thursday's
+          return pts.length && pts[pts.length-1].d >= cutoff(upto, 3) ? pts : [];
         });
         // the week through each session, hour by hour, where the edition's snapshot has it (data/weeks/DATE.json)
         var weeks = [].map.call(table.querySelectorAll('tbody tr'), function(tr){ var c = tr.querySelector('td'); return !long && c ? weekPts(WK, c.textContent) : null; });

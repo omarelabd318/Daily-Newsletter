@@ -32,6 +32,9 @@ header p{margin:0;font:italic 15px var(--serif);color:var(--ink2)}
 .tabs{display:flex;justify-content:center;gap:28px;padding:8px 0;border-bottom:1px solid var(--ink);font:600 12px var(--sans);letter-spacing:.14em;text-transform:uppercase}
 .tabs button{background:none;border:0;padding:4px 0;font:inherit;letter-spacing:inherit;text-transform:inherit;color:var(--ink2);cursor:pointer;border-bottom:2px solid transparent}
 .tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+/* a phone: every tab on one line, the row spread edge to edge (and scrollable on the narrowest screens rather than wrapping) */
+@media (max-width:480px){ .tabs{justify-content:space-between;gap:12px;font-size:11px;letter-spacing:.07em;overflow-x:auto;scrollbar-width:none} .tabs::-webkit-scrollbar{display:none} .tabs button{flex:none;white-space:nowrap} }
+@media (max-width:360px){ .tabs{gap:8px;font-size:10px;letter-spacing:.03em} }
 section{margin-top:22px}
 section[hidden]{display:none}
 h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
