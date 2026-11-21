@@ -415,3 +415,12 @@ with its dark mode. Dashboard: a close column on the left with a side card (Egyp
 USA: oil) and, for Egypt, who bought and who sold; on the right the stories first, then the index chart
 (EGX30 or Nasdaq) as its own card, then winners and losers, Stocks with the 1D–1Y switch, the week
 ahead and open views. On a phone the stories come first.
+
+**Changes: green up, red down, grey for no change.** One set of colours, the same on every desk page and on the
+newsletter (light and dark; the newsletter's paper theme keeps black ink): `--positive` #1f6f43 / dark #5ccb72,
+`--negative` #a1281e / dark #ef7d6d, `--flat` #6d6a63 / dark #a9b4be, kept in step in desk.css, dash.css and
+index.html (`--up`, `--down`, `--flat`). A change that rounds to 0.0% is grey, never green or the chart hue.
+Trend lines (the charts, the tables' sparklines, the stock cards' lines) take the colour of the change printed
+beside them through `trend()` ('up', 'down' or 'flat'; the pound and the VIX are inverted, a rise reads red);
+only a chart with no change beside it keeps the chart hue (`--chart-1`). Never use the dark mode's teal for a
+gain: it is the chart and accent colour and reads as no change.
