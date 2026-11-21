@@ -657,7 +657,8 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 :root[data-theme="paper"] .f-puz{display:block;margin-top:18px;padding-top:10px;border-top:3px double var(--ink)}
 :root[data-theme="paper"] .f-puz[hidden]{display:none}
 :root[data-theme="paper"] .f-puz h4{margin:0 0 10px;text-align:center;font:700 11px var(--sans);letter-spacing:.18em;text-transform:uppercase}
-.f-puz-in{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.f-puz-in{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0}
+.f-puz-in svg.gl{background:none;border:0} .f-puz-in svg.gl circle{fill:#b9c9cd;stroke:var(--ink);stroke-width:1.5} .f-puz-in svg.gl path{fill:none;stroke:var(--ink);stroke-width:.6;opacity:.55} .f-puz-in svg.gl path.l{fill:#d9d3bf;stroke-width:.8;opacity:1} .f-puz-in svg.gl path.h{fill:#b8321f;stroke-width:.8;opacity:1}
 .f-puz-in a{display:grid;grid-template-columns:96px auto;grid-template-rows:1fr auto auto 1fr;justify-content:center;column-gap:16px;align-items:start;padding:0 22px;color:var(--ink);text-decoration:none}
 .f-puz-in a + a{border-left:1px solid var(--ink)}
 .f-puz-in svg{grid-row:1 / 5;width:96px;height:96px;background:#f6f2e7;border:1.5px solid var(--ink)}
@@ -956,7 +957,8 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
         var q = '/puzzles/?d=' + d;
         box.innerHTML = '<h4>Puzzles'+(P.no ? ' · No. '+P.no : '')+'</h4><div class="f-puz-in">'
           + '<a href="'+q+'#cw"><svg viewBox="0 0 100 100" class="cw" aria-hidden="true">'+cw+'</svg><b>The Crossword</b><span>'+n+' by '+n+' · '+(C.clues.across.length + C.clues.down.length)+' clues</span></a>'
-          + '<a href="'+q+'#ks"><svg viewBox="0 0 100 100" class="ks" aria-hidden="true">'+ks+'</svg><b>Killer Sudoku</b><span>'+LV[K.level]+' · '+K.cages.length+' cages</span></a></div>';
+          + '<a href="'+q+'#ks"><svg viewBox="0 0 100 100" class="ks" aria-hidden="true">'+ks+'</svg><b>Killer Sudoku</b><span>'+LV[K.level]+' · '+K.cages.length+' cages</span></a>'
+          + '<a href="'+q+'#gl"><svg viewBox="0 0 100 100" class="gl" aria-hidden="true"><circle cx="50" cy="50" r="46"/><path class="l" d="M22 30c10-8 26-10 34-4 6 4 2 12 8 16s16 2 18 10-8 16-16 20-12 12-20 10-6-12-12-16-14-2-16-10 0-18 4-26z"/><path class="h" d="M56 58l8-4 6 6-2 8-8 2-5-5z"/><path d="M4 50h92M10 28h80M10 72h80M50 4v92M50 4c-24 12-24 80 0 92M50 4c24 12 24 80 0 92"/></svg><b>The Globe</b><span>Find the country</span></a></div>';
         box.hidden = false;
       }).catch(function(){});
   }

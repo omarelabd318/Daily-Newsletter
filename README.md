@@ -29,10 +29,15 @@ repo; every push to `main` redeploys it. There is no build step.
   opening screen's first frame, rendered by `node icons/make_startup.js` (instructions at the top of the file). The
   Newsletter's opening screen on a phone, its startup images and its app icon all use the newsletter's paper colours
   (the sheet on its ground); the icons are rendered by `node icons/make_icons.js`.
+- `/puzzles/` also has **The Globe**, a country-finding game: one mystery country a day (picked from the date, the
+  same for everyone) and unlimited practice rounds. Each guess is painted on a turning globe, redder the closer its
+  border is to the answer's. It needs no daily work: its map and the border-to-border distances are in
+  `puzzles/globe/world.json`, built once by `puzzles/globe/build.mjs` from Natural Earth (world-atlas); `lib.js` is
+  d3-array, d3-geo and topojson-client, bundled.
 - On a phone (640px and narrower) both have their own layout. The newsletter (`phone.css`, `phone.js`): a compact
   masthead, the market tape and Quick Hits as strips you swipe, the sections as chips, a bar that follows you down the
   page with the section you are in and a reading-progress line, a tab bar (Today, Sections, Listen, Archive, Desk),
-  sheets for the sections, the look and the archive (its Puzzles button lists every day's crossword and killer sudoku,
+  sheets for the sections, the look and the archive (its Puzzles button lists every day's crossword, killer sudoku and globe game,
   oldest on the left, newest on the right), a swipe sideways to the older or newer edition (older editions lie to the
   left: swipe left for the newer one), a Share button,
   and a note when a newer edition comes out while the page is open. The desk (the phone part of `desk/nav.js`): a

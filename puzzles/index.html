@@ -14,7 +14,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="theme-color" content="#faf8f3" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0e1216" media="(prefers-color-scheme: dark)">
-<meta name="description" content="The Daily Newsletter's crossword and killer sudoku.">
+<meta name="description" content="The Daily Newsletter's crossword, killer sudoku and globe game.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@700;900&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -91,10 +91,43 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
 @keyframes fade{from{opacity:0}} @keyframes pop{from{opacity:0;transform:scale(.85) translateY(10px)}}
 @media (prefers-reduced-motion:reduce){.cw-c.won,.ks-c.won,.won-card,.won-in{animation:none}}
 .rules p{margin:0 0 10px}
+/* the globe */
+.gl{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:32px;align-items:start}
+.gl .rules{grid-column:1;grid-row:1} .gl .side{grid-column:3;grid-row:1}
+.gl-form{position:relative;display:flex;gap:8px;width:100%;max-width:440px;margin:0 0 6px}
+.gl-form input{flex:1;min-width:0;padding:9px 12px;border:1px solid var(--ink);background:var(--cell);color:var(--ink);font:17px var(--serif);border-radius:0;-webkit-appearance:none}
+.gl-form input:focus{outline:2px solid var(--ink);outline-offset:-2px}
+.gl-form input:disabled{background:transparent;color:var(--ink2)}
+.gl-form button{padding:0 18px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);font:600 12px var(--sans);letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+.gl-sug{position:absolute;left:0;right:0;top:100%;z-index:6;margin:2px 0 0;padding:0;list-style:none;background:var(--paper);border:1px solid var(--ink);box-shadow:0 8px 20px rgba(0,0,0,.15)}
+.gl-sug li{padding:7px 12px;cursor:pointer;font-size:16px} .gl-sug li.on,.gl-sug li:hover{background:var(--word)}
+#gl .msg{text-align:center;min-height:48px;max-width:440px;margin:4px 0 8px}
+.gl-wrap{position:relative;touch-action:none}
+#gl-cv{display:block;cursor:grab;touch-action:none;border-radius:50%;box-shadow:0 0 0 10px rgba(20,17,13,.04),0 14px 40px rgba(20,17,13,.18)}
+#gl-cv:active{cursor:grabbing}
+.gl-zoom{position:absolute;right:0;bottom:0;display:flex;flex-direction:column;gap:4px}
+.gl-zoom button{width:34px;height:34px;border:1px solid var(--ink);background:var(--paper);font:600 18px var(--sans);color:var(--ink);cursor:pointer}
+.gl-tip{position:absolute;z-index:4;transform:translate(-50%,calc(-100% - 12px));padding:4px 9px;background:var(--ink);color:var(--paper);font:600 12px var(--sans);white-space:nowrap;pointer-events:none}
+.gl-tip[hidden]{display:none}
+.gl-l h3{margin:0 0 6px;padding-bottom:4px;border-bottom:1px solid var(--ink);font:700 12px var(--sans);letter-spacing:.16em;text-transform:uppercase}
+.gl-l ol{list-style:none;margin:0 0 14px;padding:0;max-height:420px;overflow:auto}
+.gl-l li{display:grid;grid-template-columns:16px 1fr auto;gap:10px;align-items:center;padding:5px 4px;border-bottom:1px dotted var(--rule);font-size:16px;cursor:pointer}
+.gl-l li:hover{background:var(--word)}
+.gl-l li i{width:16px;height:16px;border:1px solid var(--ink)}
+.gl-l li small{font:600 12px var(--sans);color:var(--ink2);font-variant-numeric:tabular-nums}
+.gl-l li.none{display:block;border:0;color:var(--ink2);font-style:italic;cursor:default} .gl-l li.none:hover{background:none}
+.gl-scale{display:flex;height:10px;margin:2px 0 3px;border:1px solid var(--ink)} .gl-scale span{flex:1}
+.gl-scale-k{display:flex;justify-content:space-between;margin:0 0 14px;font:600 10px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink2)}
+.gl-btns{display:flex;flex-wrap:wrap;gap:8px}
+.gl-btns button{padding:7px 12px;border:1px solid var(--ink);background:none;color:var(--ink);font:600 11px var(--sans);letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.gl-btns button:hover{background:var(--ink);color:var(--paper)} .gl-btns button[hidden]{display:none}
+.gl-stats{margin:12px 0 0;font:italic 15px var(--serif);color:var(--ink2)}
+.won-b{display:flex;justify-content:center;gap:8px} .won-in button.ghost{background:none;color:var(--ink)}
 @media (max-width:860px){
   .sheet{margin:0;padding:14px 12px 30px}
   /* on a phone: the grid, then the pad or the clues, then the rest */
-  .cw,.ks{grid-template-columns:1fr;gap:16px} .cw > *,.ks > *{grid-column:1!important;grid-row:auto!important}
+  .cw,.ks,.gl{grid-template-columns:1fr;gap:16px} .cw > *,.ks > *,.gl > *{grid-column:1!important;grid-row:auto!important}
+  .gl .side{order:1} .gl .rules{order:2} .gl-l ol{max-height:none}
   .cw-l ol{max-height:none}
   .pad{grid-template-columns:repeat(5,1fr)}
   /* the clue being solved stays in view above the phone's keyboard */
@@ -111,7 +144,7 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
     <h1>Daily Newsletter</h1>
     <p id="pno">The day's puzzles</p>
   </header>
-  <nav class="tabs" role="tablist"><button type="button" role="tab" data-t="cw" aria-selected="true">Crossword</button><button type="button" role="tab" data-t="ks" aria-selected="false">Killer sudoku</button></nav>
+  <nav class="tabs" role="tablist"><button type="button" role="tab" data-t="cw" aria-selected="true">Crossword</button><button type="button" role="tab" data-t="ks" aria-selected="false">Killer sudoku</button><button type="button" role="tab" data-t="gl" aria-selected="false">The Globe</button></nav>
 
   <section id="cw">
     <h2>The Crossword</h2><p class="meta" id="cw-meta"></p>
@@ -130,6 +163,24 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
         <p>The dashed shapes are cages: the digits in a cage add up to the number in its corner, and no digit appears twice in a cage. There are no starting digits; the cages are all you need, and there is only one solution.</p>
         <p>Tap a square and type a digit (or use the buttons). Notes lets you pencil in candidates. Arrow keys move.</p></div></div>
   </section>
+
+  <section id="gl" hidden>
+    <h2>The Globe</h2><p class="meta" id="gl-meta"></p>
+    <div class="bar"><button type="button" id="gl-daily" aria-pressed="true">Today's country</button><button type="button" id="gl-prac" aria-pressed="false">Practice</button></div>
+    <div class="gl"><div class="mid">
+        <form class="gl-form" id="gl-form" autocomplete="off"><input id="gl-in" type="text" placeholder="Type a country" aria-label="Guess a country" autocapitalize="words" spellcheck="false" enterkeyhint="go"><button type="submit">Guess</button><ul class="gl-sug" id="gl-sug" role="listbox" hidden></ul></form>
+        <p class="msg" id="gl-msg" aria-live="polite"></p>
+        <div class="gl-wrap"><canvas id="gl-cv" width="400" height="400" aria-label="A globe showing your guesses"></canvas><div class="gl-tip" id="gl-tip" hidden></div>
+          <div class="gl-zoom"><button type="button" id="gl-zin" aria-label="Zoom in">+</button><button type="button" id="gl-zout" aria-label="Zoom out">&minus;</button></div></div></div>
+      <div class="side gl-l"><h3>Your guesses</h3><ol id="gl-list"></ol>
+        <div class="gl-scale" aria-hidden="true"><span style="background:#f7eed6"></span><span style="background:#f6deaa"></span><span style="background:#f2ba7a"></span><span style="background:#eb8c50"></span><span style="background:#d65632"></span><span style="background:#aa281a"></span><span style="background:#7a1610"></span></div>
+        <div class="gl-scale-k"><span>Far</span><span>Borders it</span></div>
+        <div class="gl-btns"><button type="button" id="gl-give" hidden>Give up</button><button type="button" id="gl-share" hidden>Share</button><button type="button" id="gl-new">Practice round</button></div>
+        <p class="gl-stats" id="gl-stats"></p></div>
+      <div class="rules"><p><b>How to play.</b> A country is hidden somewhere on the globe. Guess any country and it is painted in: the deeper the red, the closer its border is to the answer's. A country that shares a border turns the darkest red.</p>
+        <p>Each guess tells you how far it is, border to border, and whether you are getting warmer or colder. Keep going until you find it; there is no limit.</p>
+        <p>Drag to turn the globe, scroll or pinch to zoom, and tap a painted country for its name. There is one country a day for everyone; <b>Practice</b> hides a fresh one every round, as often as you like.</p></div></div>
+  </section>
 </div>
 <script>
 (function(){
@@ -147,9 +198,21 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
   // tabs
   [].forEach.call(document.querySelectorAll('.tabs button'), function(b){ b.addEventListener('click', function(){
     [].forEach.call(document.querySelectorAll('.tabs button'), function(x){ x.setAttribute('aria-selected', x === b); });
-    $('cw').hidden = b.dataset.t !== 'cw'; $('ks').hidden = b.dataset.t !== 'ks'; try { history.replaceState(null, '', location.pathname + location.search + '#' + b.dataset.t); } catch(e){}
+    ['cw', 'ks', 'gl'].forEach(function(t){ $(t).hidden = b.dataset.t !== t; });
+    if(b.dataset.t === 'gl') loadGlobe(); else try { history.replaceState(null, '', location.pathname + location.search + '#' + b.dataset.t); } catch(e){}
   }); });
+  // the globe game needs its own map and drawing code, fetched only when its tab is first opened; it plays today's
+  // country (or the day in ?d=), whether or not that day has a crossword
+  var globeOn = false;
+  function loadGlobe(){
+    if(globeOn) return; globeOn = true;
+    var now = new Date(), today = now.getFullYear() + '-' + ('0' + (now.getMonth() + 1)).slice(-2) + '-' + ('0' + now.getDate()).slice(-2);
+    var d = (location.search.match(/[?&]d=(\d{4}-\d{2}-\d{2})/) || [])[1] || today, n = 0;
+    ['/puzzles/globe/lib.js', '/puzzles/globe/globe.js'].reduce(function(p, src){ return p.then(function(){ return new Promise(function(ok, no){ var s = document.createElement('script'); s.src = src; s.onload = ok; s.onerror = no; document.body.appendChild(s); }); }); }, Promise.resolve())
+      .then(function(){ Globe.start(d > today ? today : d); }, function(){ $('gl-meta').textContent = 'The globe did not load. Try again later.'; globeOn = false; });
+  }
   if(location.hash === '#ks') document.querySelector('.tabs [data-t="ks"]').click();
+  if(/^#gl/.test(location.hash)) document.querySelector('.tabs [data-t="gl"]').click();
 
   // which day: ?d=DATE, else the newest edition with puzzles
   var want = (location.search.match(/[?&]d=(\d{4}-\d{2}-\d{2})/) || [])[1];
