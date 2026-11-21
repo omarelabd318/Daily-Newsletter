@@ -6,8 +6,9 @@
   // a change that rounds to zero shows as 0.0%, with no sign
   const pct = (v, d = 1) => { if (v == null) return '—'; const r = +v.toFixed(d); return (r > 0 ? '+' : r < 0 ? MINUS : '') + Math.abs(r).toFixed(d) + '%'; };
   const cls = (v) => v == null ? 'dash' : v >= 0.05 ? 'chg up' : v <= -0.05 ? 'chg down' : 'chg flat';
-  // a chart's line is red when the change printed beside it is (a fall, or a rise where up reads badly: inv)
-  const isDown = (v, inv = false) => v != null && (inv ? v >= 0.05 : v <= -0.05);
+  // a chart's line is red or green when the change printed beside it is ('down' or 'up'; inv: up reads badly, so a
+  // rise is 'down'), in the chart hue when it is flat
+  const trend = (v, inv = false) => { if (v == null) return null; const x = inv ? -v : v; return x <= -0.05 ? 'down' : x >= 0.05 ? 'up' : null; };
   // a finding's first sentence in bold (a sentence ends at . ! or ? before a space and a capital, never inside 54.31)
   const lede = (t) => { const m = String(t || '').match(/^(.+?[.!?])\s+(?=[A-Z"“])/); return m ? `<b>${esc(m[1])}</b> ${esc(t.slice(m[0].length))}` : `<b>${esc(t)}</b>`; };
   // one fetch per file per page, shared with nav.js and started together rather than one after another
@@ -214,7 +215,7 @@
         const drawVix = (p) => {
           const pts = VX.filter(([d]) => d >= cut(lastDate(VX), p[1])), el = $('vix-chart'), v = pts.map((x) => x[1]);
           const c = (v[v.length - 1] / v[0] - 1) * 100;   // shown red when it rises, as fear does
-          Charts.line(el, { ...axis(pts.map((x) => x[0]), p[1], el.clientWidth), series: [{ name: 'VIX', values: v }], format: Charts.fmt.dec(2), endLabel: true, down: isDown(c, true), height: el.clientHeight,
+          Charts.line(el, { ...axis(pts.map((x) => x[0]), p[1], el.clientWidth), series: [{ name: 'VIX', values: v }], format: Charts.fmt.dec(2), endLabel: true, trend: trend(c, true), height: el.clientHeight,
             reference: [{ value: 20, label: 'Long-run average, about 20' }], min: Math.min(...v, 20) - 1 });
           $('vix-lvl').textContent = v[v.length - 1].toFixed(2);
           $('vix-chg').innerHTML = `<span class="${cls(-c)}">${pct(c, 1)}</span> <span class="span-l">${SPAN_OF[p[1]] || ''}</span>`;
@@ -370,7 +371,7 @@
         // a dotted line at the previous session's close, so a day that opened lower and climbed still reads as down
         const pv = idx.length > 1 ? idx[idx.length - 2][1] : null, ref = pv != null ? [{ value: pv, label: 'Prev. close ' + Charts.fmt.int(pv) }] : null;
         const v = I.map((x) => x[1]), vr = ref ? v.concat(pv) : v, lo = Math.min(...vr), hi = Math.max(...vr), mid = (lo + hi) / 2, half = Math.max((hi - lo) * 0.6, mid * 0.01);
-        Charts.line(el, { ...dayAxis(I.map((x) => x[0]), el.clientWidth), series: [{ name: cur.n, values: v }], format: Charts.fmt.int, endLabel: true, down: isDown(hc), height: el.clientHeight, min: mid - half, max: mid + half, reference: ref });
+        Charts.line(el, { ...dayAxis(I.map((x) => x[0]), el.clientWidth), series: [{ name: cur.n, values: v }], format: Charts.fmt.int, endLabel: true, trend: trend(hc), height: el.clientHeight, min: mid - half, max: mid + half, reference: ref });
         const ch = change(idx, 0);
         $('egx-cap').innerHTML = `${day(INTRA[mk].session).toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'short' }).replace('Sept', 'Sep')}, ${I[0][0]}–${I.at(-1)[0]} ${mk === 'egx' ? 'Cairo' : 'New York'} time · on the day <span class="num ${cls(ch)}">${pct(ch, 2)}</span>${INTRA[mk].proxy && INTRA[mk].proxy[cur.intra] ? ` · traced by the ${esc(INTRA[mk].proxy[cur.intra])} fund, which tracks it` : ''}`;
         return;
@@ -387,7 +388,7 @@
             x.series[cur.intra].forEach(([t, v]) => { labels.push(`${dl} ${t}`); vals.push(v); text.push(dl); }); });
           if (mo && at.length > 2 && at[1] - at[0] < (at[2] - at[1]) / 2) at.shift();
           const lo = Math.min(...vals), hi = Math.max(...vals);
-          Charts.line(el, { labels, xAt: el.clientWidth < 520 && at.length > 3 ? at.filter((_, j) => (at.length - 1 - j) % 2 === 0) : at, xText: text, series: [{ name: cur.n, values: vals }], format: Charts.fmt.int, endLabel: true, down: isDown(hc), height: el.clientHeight, min: lo - (hi - lo) * 0.15 });
+          Charts.line(el, { labels, xAt: el.clientWidth < 520 && at.length > 3 ? at.filter((_, j) => (at.length - 1 - j) % 2 === 0) : at, xText: text, series: [{ name: cur.n, values: vals }], format: Charts.fmt.int, endLabel: true, trend: trend(hc), height: el.clientHeight, min: lo - (hi - lo) * 0.15 });
           const ch = (vals.at(-1) / vals[0] - 1) * 100;
           $('egx-cap').innerHTML = `${esc(cur.n)}, last ${W.length} sessions through the day: <span class="num ${cls(ch)}">${pct(ch, 2)}</span> from the first trade`;
           return;
@@ -397,7 +398,7 @@
       if (pts.length < 2) { el.textContent = 'Not enough closes logged yet.'; $('egx-cap').textContent = ''; return; }
       // a week has no shaded move; short series get a dot on each close
       const ann = back > 7 ? bigMove(pts) : [], vals = pts.map((x) => x[1]), lo = Math.min(...vals), hi = Math.max(...vals);
-      Charts.line(el, { ...axis(pts.map((x) => x[0]), back, el.clientWidth), series: [{ name: cur.n, values: vals }], format: Charts.fmt.int, annotations: ann, endLabel: true, down: isDown(hc), marks: pts.length <= 12, height: el.clientHeight, min: lo - (hi - lo) * 0.15 });
+      Charts.line(el, { ...axis(pts.map((x) => x[0]), back, el.clientWidth), series: [{ name: cur.n, values: vals }], format: Charts.fmt.int, annotations: ann, endLabel: true, trend: trend(hc), marks: pts.length <= 12, height: el.clientHeight, min: lo - (hi - lo) * 0.15 });
       const y = ytd(idx);
       $('egx-cap').innerHTML = `${esc(cur.n)}, ${p[2].toLowerCase()} · this year <span class="num ${cls(y)}">${pct(y)}</span>`;
     }

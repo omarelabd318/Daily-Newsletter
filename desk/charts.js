@@ -7,7 +7,7 @@
 //   --grid, --axis-ink, --ink, --surface, --raised, --rule, --negative
 // Usage (after this file loads):
 //   Charts.line(el, { labels: ['1 Oct', …], series: [{ name: 'Requests', values: [...] }], format: Charts.fmt.compact })
-//                                                          down: true draws the first line in --negative (a fall)
+//                                                          trend: 'down' | 'up' draws the first line in --negative | --positive
 //   Charts.bars(el, { labels, values, highlight: 6, format })        one bar (or [indices]) may carry the accent; dim: [indices]
 //   Charts.diverging(el, { labels, up, down, above: 'Sold', below: 'Bought', mark: [3, 9], markLabel: 'Car charged' })
 //   Charts.ring(el, { value: 0.72, label: '72%', sub: 'of capacity' }) a progress ring with its total inside
@@ -253,10 +253,11 @@
   function settle(draw) { if (document.fonts) { document.fonts.ready.then(draw); document.fonts.addEventListener?.('loadingdone', draw, { once: true }); } }
   const heightOf = (h) => (typeof h === 'function' ? h() : h);
 
-  function line(el, { labels, series, format = fmt.int, tickFormat = null, height = 220, fill = false, min, max, step = false, marks = false, annotations, reference, today = null, todayLabel = 'Today', down = false, endLabel = false, yTicks = null, xAt = null, xText = null, legend = null }) {
+  function line(el, { labels, series, format = fmt.int, tickFormat = null, height = 220, fill = false, min, max, step = false, marks = false, annotations, reference, today = null, todayLabel = 'Today', trend = null, endLabel = false, yTicks = null, xAt = null, xText = null, legend = null }) {
     el._fmt = format;
-    // down: the first series is drawn in --negative, so the line reads the same way as the change printed beside it
-    const colourOf = (sr, k) => sr.colour || (k === 0 ? (down && !sr.muted ? css(el, '--negative', '#b3261e') : css(el, '--chart-1', '#2f6fdf')) : css(el, `--chart-${k + 1}`, css(el, '--chart-muted', '#a3a3a3')));
+    // trend: 'down' draws the first series in --negative and 'up' in --positive, so the line reads the same way as the
+    // change printed beside it; anything else (a flat move) keeps the chart hue
+    const colourOf = (sr, k) => sr.colour || (k === 0 ? (trend === 'down' && !sr.muted ? css(el, '--negative', '#b3261e') : trend === 'up' && !sr.muted ? css(el, '--positive', '#1d7a3a') : css(el, '--chart-1', '#2f6fdf')) : css(el, `--chart-${k + 1}`, css(el, '--chart-muted', '#a3a3a3')));
     const draw = () => {
       const { s, w, h } = frame(el, heightOf(height));
       const all = series.flatMap((x) => x.values.filter((v) => v != null)).concat([].concat(reference || []).map((r) => r.value));

@@ -130,14 +130,14 @@ try {
       if (pts.length >= 2 && b0 && i0) {
         const a = pts.map(([, x]) => x / b0 * 100), bb = pts.map(([tm]) => xAt(tm) / i0 * 100), el = M.$('chart'); el.innerHTML = '';
         const pad = (Math.max(...a, ...bb) - Math.min(...a, ...bb)) * 0.15 || 0.2;
-        const res = Charts.line(el, { ...M.dayAxis(pts.map((x) => x[0]), el.clientWidth), series: [{ name: t, values: a }, { name: idxN, values: bb, muted: true }], format: Charts.fmt.dec(1), endLabel: true, down: M.isDown(M.change(inUSD ? M.usd(sx) : sx, 0)), height: el.clientHeight, min: Math.min(...a, ...bb) - pad, max: Math.max(...a, ...bb) + pad });
+        const res = Charts.line(el, { ...M.dayAxis(pts.map((x) => x[0]), el.clientWidth), series: [{ name: t, values: a }, { name: idxN, values: bb, muted: true }], format: Charts.fmt.dec(1), endLabel: true, trend: M.trend(M.change(inUSD ? M.usd(sx) : sx, 0)), height: el.clientHeight, min: Math.min(...a, ...bb) - pad, max: Math.max(...a, ...bb) + pad });
         const ca = a.at(-1) - 100, cb = bb.at(-1) - 100;
         M.$('cap').innerHTML = `${M.day(ses).toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'short' }).replace('Sept', 'Sep')}, both from 100 at the first trade: ${t} <span class="num ${M.cls(ca)}">${M.pct(ca, 2)}</span>, ${idxN} <span class="num ${M.cls(cb)}">${M.pct(cb, 2)}</span> · ${Math.abs(ca - cb) < 0.05 ? 'level with' : `${M.num(Math.abs(ca - cb), 2)} pts ${ca > cb ? 'ahead of' : 'behind'}`} the index`;
         if (res && res.legend) M.$('cap').prepend(res.legend);
       }
       return;
     }
-    if (!per[1]) { M.$('lvl').textContent = M.num(M.last(inUSD ? M.usd(sx) : sx)); M.$('cur').textContent = egx && !inUSD ? 'EGP' : 'USD'; M.$('dchg').innerHTML = M.heroChg(inUSD ? M.usd(sx) : sx, per); const ps = inUSD ? M.usd(sx) : sx, c1 = M.dayChart(M.$('chart'), egx ? 'egx' : 'us', t, t, Charts.fmt.dec(2), egx && inUSD, ps.length > 1 ? ps.at(-2)[1] : null, M.isDown(M.change(ps, 0))); const d1 = inUSD ? M.change(M.usd(sx), 0) : dc; M.$('cap').innerHTML = c1 ? `${c1} · on the day <span class="num ${M.cls(d1)}">${M.pct(d1, 2)}</span>` : ''; return; }
+    if (!per[1]) { M.$('lvl').textContent = M.num(M.last(inUSD ? M.usd(sx) : sx)); M.$('cur').textContent = egx && !inUSD ? 'EGP' : 'USD'; M.$('dchg').innerHTML = M.heroChg(inUSD ? M.usd(sx) : sx, per); const ps = inUSD ? M.usd(sx) : sx, c1 = M.dayChart(M.$('chart'), egx ? 'egx' : 'us', t, t, Charts.fmt.dec(2), egx && inUSD, ps.length > 1 ? ps.at(-2)[1] : null, M.trend(M.change(ps, 0))); const d1 = inUSD ? M.change(M.usd(sx), 0) : dc; M.$('cap').innerHTML = c1 ? `${c1} · on the day <span class="num ${M.cls(d1)}">${M.pct(d1, 2)}</span>` : ''; return; }
     if (per[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; sx = M.stock(t); idxAll = M.series((e) => e[egx ? 'egx30' : 'sp500'], egx ? 'egx' : 'us'); return draw(); }
     const v = inUSD ? M.usd(sx) : sx, vi = inUSD ? M.usd(idxAll) : idxAll, unit = inUSD ? ' in dollars' : '';
     // against the index: both lines start at 100 on the period's first close, so the gap is the stock's lead or lag
@@ -153,7 +153,7 @@ try {
       if (a0.length >= 2) {
         const a = a0.map((x) => x / a0[0] * 100), bb = b0.map((x) => x / b0[0] * 100), el = M.$('chart'); el.innerHTML = '';
         const pad = (Math.max(...a, ...bb) - Math.min(...a, ...bb)) * 0.15 || 0.2;
-        const res = Charts.line(el, { labels, xAt: el.clientWidth < 520 && at.length > 3 ? at.filter((_, j) => (at.length - 1 - j) % 2 === 0) : at, xText: text, series: [{ name: t, values: a }, { name: idxN, values: bb, muted: true }], format: Charts.fmt.dec(1), endLabel: true, down: M.isDown(M.change(sx, per[1])), height: el.clientHeight, min: Math.min(...a, ...bb) - pad, max: Math.max(...a, ...bb) + pad });
+        const res = Charts.line(el, { labels, xAt: el.clientWidth < 520 && at.length > 3 ? at.filter((_, j) => (at.length - 1 - j) % 2 === 0) : at, xText: text, series: [{ name: t, values: a }, { name: idxN, values: bb, muted: true }], format: Charts.fmt.dec(1), endLabel: true, trend: M.trend(M.change(sx, per[1])), height: el.clientHeight, min: Math.min(...a, ...bb) - pad, max: Math.max(...a, ...bb) + pad });
         const ca = a.at(-1) - 100, cb = bb.at(-1) - 100;
         M.$('cap').innerHTML = `Last ${wp.length} sessions through the day, both from 100 at the first trade: ${t} <span class="num ${M.cls(ca)}">${M.pct(ca, 1)}</span>, ${idxN} <span class="num ${M.cls(cb)}">${M.pct(cb, 1)}</span> · ${Math.abs(ca - cb) < 0.05 ? 'level with' : `${M.num(Math.abs(ca - cb), 1)} pts ${ca > cb ? 'ahead of' : 'behind'}`} the index`;
         if (res && res.legend) M.$('cap').prepend(res.legend);
@@ -166,7 +166,7 @@ try {
       if (pts.length >= 2 && b0 && i0) {
         const a = pts.map(([, x]) => x / b0 * 100), bb = pts.map(([d]) => (M.valueAt(vi, d) || i0) / i0 * 100), el = M.$('chart'); el.innerHTML = '';
         const pad = (Math.max(...a, ...bb) - Math.min(...a, ...bb)) * 0.15 || 1;
-        const res = Charts.line(el, { ...M.axis(pts.map((x) => x[0]), back, el.clientWidth), series: [{ name: t, values: a }, { name: idxN, values: bb, muted: true }], format: Charts.fmt.dec(1), endLabel: true, down: M.isDown(M.change(v, per[1])), height: el.clientHeight, marks: pts.length <= 12, min: Math.min(...a, ...bb) - pad, max: Math.max(...a, ...bb) + pad });
+        const res = Charts.line(el, { ...M.axis(pts.map((x) => x[0]), back, el.clientWidth), series: [{ name: t, values: a }, { name: idxN, values: bb, muted: true }], format: Charts.fmt.dec(1), endLabel: true, trend: M.trend(M.change(v, per[1])), height: el.clientHeight, marks: pts.length <= 12, min: Math.min(...a, ...bb) - pad, max: Math.max(...a, ...bb) + pad });
         const ca = a.at(-1) - 100, cb = bb.at(-1) - 100;
         M.$('cap').innerHTML = `Both start at 100 on ${M.short(pts[0][0])}${unit}: ${t} <span class="num ${M.cls(ca)}">${M.pct(ca, 1)}</span>, ${idxN} <span class="num ${M.cls(cb)}">${M.pct(cb, 1)}</span> · ${Math.abs(ca - cb) < 0.05 ? 'level with' : `${M.num(Math.abs(ca - cb), 1)} pts ${ca > cb ? 'ahead of' : 'behind'}`} the index`;
         if (res && res.legend) M.$('cap').prepend(res.legend);
@@ -174,9 +174,9 @@ try {
       return;
     }
     M.$('lvl').textContent = M.num(M.last(v)); M.$('dchg').innerHTML = M.heroChg(v, per); M.$('cur').textContent = egx && !inUSD ? 'EGP' : 'USD';
-    const w1 = per[1] === 7 || per[1] === 30 ? M.weekChart(M.$('chart'), egx ? 'egx' : 'us', t, t, Charts.fmt.dec(2), egx && inUSD, per[1], M.isDown(M.change(v, per[1]))) : null;
+    const w1 = per[1] === 7 || per[1] === 30 ? M.weekChart(M.$('chart'), egx ? 'egx' : 'us', t, t, Charts.fmt.dec(2), egx && inUSD, per[1], M.trend(M.change(v, per[1]))) : null;
     if (w1) { M.$('lvl').textContent = M.num(M.last(v)); M.$('dchg').innerHTML = M.heroChg(v, per); M.$('cap').innerHTML = `${w1} · ${idxN} in a ${per[1] === 7 ? 'week' : 'month'} <span class="num ${M.cls(M.change(vi, per[1]))}">${M.pct(M.change(vi, per[1]), 2)}</span>`; return; }
-    M.chart(M.$('chart'), v, per[1], t + unit, Charts.fmt.dec(2), { down: M.isDown(M.change(v, per[1])) }); const c = M.change(v, per[1]), ci = M.change(vi, per[1]);
+    M.chart(M.$('chart'), v, per[1], t + unit, Charts.fmt.dec(2), { trend: M.trend(M.change(v, per[1])) }); const c = M.change(v, per[1]), ci = M.change(vi, per[1]);
     M.$('cap').innerHTML = `${per[2]}${unit}: <span class="num ${M.cls(c)}">${M.pct(c, 2)}</span> · ${idxN} <span class="num ${M.cls(ci)}">${M.pct(ci, 2)}</span>`;
   };
   if (egx) { M.$('curtog').hidden = false; M.toggle(M.$('curtog'), ['EGP', 'USD'], (i) => { inUSD = i === 1; draw(); perfCard(inUSD); }); }

@@ -110,7 +110,7 @@
   const draw = async (p) => {
     if (p[1] > 400 && !M.full.done) { await M.full(); M.full.done = true; fxAll = M.series((e) => e.usd_egp, 'fx'); }
     M.$('dchg').innerHTML = M.heroChg(fxAll, p, true);
-    M.chart(M.$('chart'), fxAll, p[1], 'USD/EGP', Charts.fmt.dec(2), { markAt: 0.02, down: M.isDown(M.change(fxAll, p[1]), true) }); const c = M.change(fxAll, p[1]); M.$('cap').innerHTML = `${p[2]}: <span class="num ${M.cls(c)} inv">${M.pct(c, 2)}</span> · this year <span class="num ${M.cls(M.ytd(fx))} inv">${M.pct(M.ytd(fx))}</span>`; };
+    M.chart(M.$('chart'), fxAll, p[1], 'USD/EGP', Charts.fmt.dec(2), { markAt: 0.02, trend: M.trend(M.change(fxAll, p[1]), true) }); const c = M.change(fxAll, p[1]); M.$('cap').innerHTML = `${p[2]}: <span class="num ${M.cls(c)} inv">${M.pct(c, 2)}</span> · this year <span class="num ${M.cls(M.ytd(fx))} inv">${M.pct(M.ytd(fx))}</span>`; };
   M.segment(M.$('seg'), '1M', draw, M.PERIODS.slice(1).concat(M.LONG)); draw(M.PERIODS[2]);
   const dx = M.series((e) => e.dxy, 'us'), dash = '<span class="dash">—</span>';
   // the central bank's rate and policy rates come from the data log; the day's file adds what the log lacks
@@ -181,7 +181,7 @@
     const c = v != null && before != null ? +(v - before).toFixed(3) : null;
     M.$('ichg').innerHTML = c == null ? '' : `<span class="${M.cls(c)}${m.inv ? ' inv' : ''}">${pts(c)}</span> ${m.since}`;
     M.$('imeta').textContent = m.meta;
-    M.chart(M.$('ichart'), s, iPer[1], m.title, Charts.fmt.dec(m.d === 2 ? 2 : 1), { mark: false, down: M.isDown(c, m.inv) });
+    M.chart(M.$('ichart'), s, iPer[1], m.title, Charts.fmt.dec(m.d === 2 ? 2 : 1), { mark: false, trend: M.trend(c, m.inv) });
     M.$('icap').innerHTML = (y != null && v != null ? `${iPer[2]}: from <span class="num">${M.num(y, m.d)}${u}</span> to <span class="num">${M.num(v, m.d)}${u}</span> (<span class="num">${pts(v - y)}</span>) · ` : '') + m.note;
   };
   M.toggle(M.$('itab'), MODES.map((m) => m.tab), (i) => { iMode = i; drawI(); });
@@ -204,7 +204,7 @@
     const [k, n, unit] = G[gi], s = M.series((e) => e[k], 'all'), signed = (c) => `<span class="${M.cls(c)}">${M.pct(c)}</span>`;
     const dc = M.change(s, 0);
     M.$('glvl').textContent = M.num(M.last(s), 0); M.$('gd').innerHTML = M.heroChg(s, gp); M.$('gunit').textContent = unit;
-    M.chart(M.$('gch'), s, gp[1], `Gold ${n}`, Charts.fmt.int, { xAt: true, down: M.isDown(M.change(s, gp[1])) });
+    M.chart(M.$('gch'), s, gp[1], `Gold ${n}`, Charts.fmt.int, { xAt: true, trend: M.trend(M.change(s, gp[1])) });
     const c = M.change(s, gp[1]); M.$('gcap').innerHTML = `${gp[2]}: <span class="num ${M.cls(c)}">${M.pct(c, 2)}</span>`;
     const [lo, hi] = M.range52(s);
     M.$('gkv').innerHTML = M.kv([['Day', signed(dc)], ['Week', signed(M.change(s, 7))], ['Month', signed(M.change(s, 30))], ['This year', signed(M.ytd(s))]]) + M.rangeBar(lo, hi, M.last(s), (x) => M.num(x, 0));
