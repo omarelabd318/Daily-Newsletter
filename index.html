@@ -582,6 +582,8 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 :root[data-theme="paper"] .s-body h3{font-family:var(--p-head),var(--serif);font-weight:var(--p-hw)}
 :root[data-theme="paper"] .tchips,:root[data-theme="paper"] .topics{display:none}
 :root[data-theme="paper"] .run .keep{break-inside:avoid}
+/* the story ending a column whose space at the foot was carried over to the head of the next (fixBreaks) */
+:root[data-theme="paper"] .s-body .run .cend{padding-bottom:0!important}
 :root[data-theme="paper"] .s h2{margin-bottom:14px}
 :root[data-theme="paper"] .s-body h3{margin:26px 0 8px;line-height:1.15} :root[data-theme="paper"] .s-body h3:first-child{margin-top:0}
 /* a bold story title in a slightly larger size must not make its first line taller than the column beside it */
@@ -1398,7 +1400,31 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
         if(!bad.length) break;
         bad[0].classList.add('keep');   // one at a time: keeping one story whole moves everything after it
       }
+      alignCols(run);
     });
+  }
+  // every column starts flush with the first: Safari can carry the space at the foot of the story that ends a column
+  // (its bottom padding, after a story kept whole) over to the head of the next, starting that column a line low.
+  // The first line of each column is measured from the text; where one sits low, the story ending the column before
+  // loses its bottom space, which at a column's foot is not needed anyway
+  function alignCols(run){
+    [].forEach.call(run.querySelectorAll('.cend'), function(x){ x.classList.remove('cend'); });
+    var cs = getComputedStyle(run), n = +cs.columnCount, gap = parseFloat(cs.columnGap) || 0;
+    var left = run.getBoundingClientRect().left + parseFloat(cs.paddingLeft || 0);
+    var cw = (run.clientWidth - parseFloat(cs.paddingLeft || 0) - parseFloat(cs.paddingRight || 0) - gap * (n - 1)) / n;
+    var col = function(r){ return Math.max(0, Math.min(n - 1, Math.floor((r.left + 1 - left) / (cw + gap)))); };
+    var lines = function(el){ var rg = document.createRange(); rg.selectNodeContents(el); return [].filter.call(rg.getClientRects(), function(r){ return r.width && r.height; }); };
+    for(var pass = 0; pass < 3; pass++){
+      var items = [].slice.call(run.querySelectorAll(':scope > p, :scope > blockquote, li')), top0 = null, prev = null, fixed = false;
+      items.forEach(function(el){
+        var ls = lines(el); if(!ls.length) return;
+        var first = ls[0], last = ls[ls.length - 1];
+        if(top0 === null) top0 = first.top;
+        else if(prev && col(first) > prev.c && first.top - top0 > 2 && !prev.el.classList.contains('cend')){ prev.el.classList.add('cend'); fixed = true; }
+        prev = {el: el, c: col(last)};
+      });
+      if(!fixed) break;
+    }
   }
   var brkTimer; window.addEventListener('resize', function(){ clearTimeout(brkTimer); brkTimer = setTimeout(fixBreaks, 200); });
   function balanceToc(){
