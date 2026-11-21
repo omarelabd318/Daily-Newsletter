@@ -598,7 +598,7 @@
   var gone = false, armed = false;
   // on a phone the newsletter's front page (look 2) leaves in one of a few ways (data-out on the <script> tag, ?out=
   // previews): 1 the sheet opens out into the page, 2 it turns like a page, 3 it lifts away like a cover, 4 the
-  // masthead's black rule runs down the screen and prints the page behind it; 0 (or none) the plain fade
+  // masthead's black rule runs down the screen and prints the page behind it (the default); 0 (or none) the plain fade
   var out = +(q.get('out') || me.dataset.out || 0);
   if (!(app === 'news' && phone && !wide && look === 2) || still) out = 0;
   var rise = function (ms, delay) {
