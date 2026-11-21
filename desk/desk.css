@@ -460,8 +460,8 @@ tbody tr.sec-row:first-child th,tbody tr.sec-row:first-child td{padding-top:8px;
   --text:#eef2f4; --muted:#a9b4be; --faint:#7d8791;
   --primary:#eef2f4; --primary-ink:#0e1216; --brand:#ef7d6d;
   --chart-1:#52d6b5; --chart-muted:#7d8791; --grid:#1d242b; --axis-ink:#a9b4be; --ink:#eef2f4;
-  --positive:#52d6b5; --negative:#ef7d6d; --negative-ink:#ef7d6d; --sell:#ef7d6d;
-  --pill-pos-bg:transparent; --pill-pos-ink:#52d6b5; --pill-neg-bg:transparent; --pill-neg-ink:#ef7d6d;
+  --positive:#5ccb72; --negative:#ef7d6d; --negative-ink:#ef7d6d; --sell:#ef7d6d;
+  --pill-pos-bg:transparent; --pill-pos-ink:#5ccb72; --pill-neg-bg:transparent; --pill-neg-ink:#ef7d6d;
   --accent:#52d6b5; --kick:#ef7d6d;
 }
 /* the page: one column under the masthead (desk/nav.js), no sidebar */
