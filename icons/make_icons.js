@@ -1,4 +1,4 @@
-// Renders the home-screen icons and the browser-tab icons (*-tab-*.png) in icons/. Run: node icons/make_icons.js [newsletter|desk]
+// Renders the home-screen icons in icons/, and the browser-tab icons (*-tab-*.png): the same art, shrunk. Run: node icons/make_icons.js [newsletter|desk]
 // (needs Playwright + network for Google Fonts; with a name, only that app's icons are rendered)
 const { chromium } = require('playwright');
 const path = require('path');
@@ -20,22 +20,6 @@ const art = {
       <path d="M48 168l46-46 34 26 64-80" fill="none" stroke="#52d6b5" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
       <path d="M48 196h144" stroke="#faf8f3" stroke-width="5"/></svg></div>`,
 };
-// the same marks cut down for a browser tab (16-32px): rounded tiles, bigger shapes, nothing finer than the tab can draw
-const tab = {
-  // a mini front page: the sheet with its blackletter masthead, double rule, headline bar, a column of text and a photo block
-  newsletter: `<svg width="240" height="240" viewBox="0 0 240 240">
-      <rect x="24" y="6" width="192" height="228" rx="18" fill="#e8e3d6" stroke="#14110d" stroke-width="12"/>
-      <text x="120" y="76" text-anchor="middle" style="font-family:'UnifrakturCook';font-weight:700;font-size:64px" fill="#14110d">Daily</text>
-      <path d="M46 92h148" stroke="#14110d" stroke-width="10"/><path d="M46 106h148" stroke="#14110d" stroke-width="5"/>
-      <rect x="46" y="120" width="148" height="22" fill="#14110d"/>
-      <g stroke="#14110d" stroke-width="12" stroke-linecap="round"><path d="M52 164h54M52 188h54M52 210h40"/></g>
-      <rect x="122" y="156" width="72" height="60" fill="#14110d"/></svg>`,
-  // the desk's rising teal line and cream rule on its dark ground
-  desk: `<svg width="240" height="240" viewBox="0 0 240 240">
-      <rect width="240" height="240" rx="48" fill="#16181a"/>
-      <path d="M40 160l52-52 38 30 72-90" fill="none" stroke="#52d6b5" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M40 200h160" stroke="#faf8f3" stroke-width="12" stroke-linecap="round"/></svg>`,
-};
 (async () => {
   const b = await chromium.launch(); const p = await b.newPage();
   for (const [name, f] of Object.entries(art).filter(([n]) => !process.argv[2] || n === process.argv[2])) {
@@ -50,9 +34,9 @@ const tab = {
     for (const n of [32, 64]) {
       await p.setViewportSize({ width: n, height: n });
       await p.setContent(`<html><head><link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=block" rel="stylesheet"></head>
-        <body style="margin:0;width:${n}px;height:${n}px;overflow:hidden;background:transparent"><div style="width:240px;height:240px;transform:scale(${n / 240});transform-origin:0 0">${tab[name]}</div></body></html>`);
+        <body style="margin:0;width:${n}px;height:${n}px;overflow:hidden"><div style="width:240px;height:240px;transform:scale(${n / 240});transform-origin:0 0">${art[name](1)}</div></body></html>`);
       await p.evaluate(() => document.fonts.ready); await p.waitForTimeout(300);
-      await p.screenshot({ path: path.join(__dirname, `${name}-tab-${n}.png`), omitBackground: true });
+      await p.screenshot({ path: path.join(__dirname, `${name}-tab-${n}.png`) });
     }
   }
   await b.close();
