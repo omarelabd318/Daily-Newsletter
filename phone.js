@@ -132,8 +132,8 @@
         }).join('') + '</div>';
       }
       box.innerHTML = days.length ? row('Crossword', 'cw', function(d){ return d.size ? d.size + ' by ' + d.size : ''; }, function(dt){ var x = got('puz:cw:' + dt); return (x && x.won) || got('puz:cw:' + dt + ':won'); })
-        + row('Killer sudoku', 'ks', function(d){ return d.level != null ? LEVEL[d.level] : ''; }, function(dt){ var x = got('puz:ks:' + dt); return x && x.won; })
         + row('The Globe', 'gl', function(){ return 'Find the country'; }, function(dt){ var x = got('puz:gl:' + dt); return x && x.won; })
+        + row('Killer sudoku', 'ks', function(d){ return d.level != null ? LEVEL[d.level] : ''; }, function(dt){ var x = got('puz:ks:' + dt); return x && x.won; })
         : '<p class="ph-lbl">No puzzles yet</p>';
       [].forEach.call(box.querySelectorAll('.ph-puz-row'), function(r){ r.scrollLeft = r.scrollWidth; });
     }).catch(function(){ box.innerHTML = '<p class="ph-lbl"><a href="/puzzles/">Open today\'s puzzles</a></p>'; box.dataset.done = ''; });
