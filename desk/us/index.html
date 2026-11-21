@@ -100,11 +100,11 @@
   const IDX = [['sp500', 'S&P 500'], ['nasdaq', 'Nasdaq'], ['dow', 'Dow Jones']].map(([k, n]) => ({ k, n, s: M.series((e) => e[k], 'us') }));
   let cur = IDX[0], per = M.startPeriod('us', cur.k === 'nasdaq' ? 'COMP' : cur.k);
   const draw = () => {
-    M.$('lvl').textContent = M.num(M.last(cur.s)); M.$('dchg').innerHTML = M.heroChg(cur.s, per);
-    if (!per[1]) { const c1 = M.dayChart(M.$('chart'), 'us', cur.k === 'nasdaq' ? 'COMP' : cur.k, cur.n, Charts.fmt.int, false, cur.s.length > 1 ? cur.s.at(-2)[1] : null), dc1 = M.change(cur.s, 0); M.$('cap').innerHTML = c1 ? `${c1} · on the day <span class="num ${M.cls(dc1)}">${M.pct(dc1, 2)}</span>` : ''; return; }
-    const w1 = per[1] === 7 || per[1] === 30 ? M.weekChart(M.$('chart'), 'us', cur.k === 'nasdaq' ? 'COMP' : cur.k, cur.n, Charts.fmt.int, false, per[1]) : null;
+    M.$('lvl').textContent = M.num(M.last(cur.s)); M.$('dchg').innerHTML = M.heroChg(cur.s, per); const dn = M.isDown(M.change(cur.s, per[1]));
+    if (!per[1]) { const c1 = M.dayChart(M.$('chart'), 'us', cur.k === 'nasdaq' ? 'COMP' : cur.k, cur.n, Charts.fmt.int, false, cur.s.length > 1 ? cur.s.at(-2)[1] : null, dn), dc1 = M.change(cur.s, 0); M.$('cap').innerHTML = c1 ? `${c1} · on the day <span class="num ${M.cls(dc1)}">${M.pct(dc1, 2)}</span>` : ''; return; }
+    const w1 = per[1] === 7 || per[1] === 30 ? M.weekChart(M.$('chart'), 'us', cur.k === 'nasdaq' ? 'COMP' : cur.k, cur.n, Charts.fmt.int, false, per[1], dn) : null;
     if (w1) { M.$('cap').innerHTML = `${M.esc(cur.n)}: ${w1}`; return; }
-    M.chart(M.$('chart'), cur.s, per[1], cur.n, Charts.fmt.int);
+    M.chart(M.$('chart'), cur.s, per[1], cur.n, Charts.fmt.int, { down: dn });
     const c = M.change(cur.s, per[1]); M.$('cap').innerHTML = `${M.esc(cur.n)}, ${per[2].toLowerCase()}: <span class="num ${M.cls(c)}">${M.pct(c, 2)}</span> · this year <span class="num ${M.cls(M.ytd(cur.s))}">${M.pct(M.ytd(cur.s))}</span>`;
   };
   M.$('itabs').innerHTML = IDX.map((x, i) => `<button type="button" aria-pressed="${!i}">${M.esc(x.n)}</button>`).join('');

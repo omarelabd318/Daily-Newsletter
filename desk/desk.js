@@ -6,6 +6,8 @@ window.Desk = (function () {
   // a change that rounds to zero shows as 0.0%, with no sign
   const pct = (v, d = 1) => { if (v == null) return '—'; const r = +v.toFixed(d); return (r > 0 ? '+' : r < 0 ? MINUS : '') + Math.abs(r).toFixed(d) + '%'; };
   const cls = (v) => v == null ? 'dash' : v >= 0.05 ? 'chg up' : v <= -0.05 ? 'chg down' : 'chg flat';
+  // a chart's line is red when the change printed beside it is (a fall, or a rise where up reads badly: inv)
+  const isDown = (v, inv = false) => v != null && (inv ? v >= 0.05 : v <= -0.05);
   const num = (v, d = 2) => v == null ? '—' : v.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
   // one fetch per file per page (the stock and EGX pages asked for stocks.json three times), shared with nav.js
   const get = (u) => { const M = window.__deskGet || (window.__deskGet = {}); return M[u] || (M[u] = fetch(u, { cache: 'no-cache' }).then((r) => r.ok ? r.json() : null).catch(() => null)); };
@@ -198,7 +200,7 @@ window.Desk = (function () {
     return ss && ss.flatMap((x) => { const r = inUSD ? rateOn(x.session) : 1, pts = x.series[t];
       return pts.filter(([tm], i) => tm.endsWith(':00') || i === pts.length - 1).map(([, v]) => v / r); });
   }
-  function weekChart(el, market, key, name, fmt, inUSD = false, back = 7) {
+  function weekChart(el, market, key, name, fmt, inUSD = false, back = 7, down = false) {
     const ss = intraPeriod(market, key, back, inUSD);
     if (!ss) return null;
     const labels = [], vals = [], text = [], at = [];
@@ -214,7 +216,7 @@ window.Desk = (function () {
     if (back > 7 && at.length > 2 && at[1] - at[0] < (at[2] - at[1]) / 2) at.shift();
     const lo = Math.min(...vals), hi = Math.max(...vals), pad = (hi - lo) * 0.15 || lo * 0.002;
     Charts.line(el, { labels, xAt: el.clientWidth < 520 && at.length > 3 ? at.filter((_, j) => (at.length - 1 - j) % 2 === 0) : at, xText: text,
-      series: [{ name, values: vals }], format: fmt, endLabel: true, height: el.clientHeight, min: lo >= 0 ? Math.max(0, lo - pad) : lo - pad });   // a price never gets a negative axis
+      series: [{ name, values: vals }], format: fmt, endLabel: true, down, height: el.clientHeight, min: lo >= 0 ? Math.max(0, lo - pad) : lo - pad });   // a price never gets a negative axis
     const ch = (vals.at(-1) / vals[0] - 1) * 100;
     return `Last ${ss.length} sessions through the day${inUSD ? ', in dollars at each day\'s rate' : ''}: <span class="num ${cls(ch)}">${pct(ch, 2)}</span> from the first trade`;
   }
@@ -223,7 +225,7 @@ window.Desk = (function () {
     const lo = Math.min(...vals), hi = Math.max(...vals), mid = (lo + hi) / 2, half = Math.max((hi - lo) * 0.6, mid * 0.01);
     return [mid - half, mid + half];
   }
-  function dayChart(el, market, key, name, fmt, inUSD = false, prev = null) {
+  function dayChart(el, market, key, name, fmt, inUSD = false, prev = null, down = false) {
     const M_ = INTRA && INTRA[market]; el.innerHTML = '';
     // the session's 5-minute line, or else the same session's 15-minute line from the week, where only that was saved
     const wk = !M_ || M_.window ? null : ((INTRA.week || {})[market] || []).find((x) => x.session === M_.session);
@@ -233,7 +235,7 @@ window.Desk = (function () {
     // a dotted line at the previous session's close, so a day that opened lower and climbed still reads as down
     const ref = prev != null && !M_.window ? [{ value: prev, label: 'Prev. close ' + fmt(prev) }] : null;
     const vals = I.map((x) => x[1]), [ymin, ymax] = dayRange(ref ? vals.concat(prev) : vals);
-    Charts.line(el, { ...dayAxis(I.map((x) => x[0]), el.clientWidth, !!M_.window), series: [{ name, values: vals }], format: fmt, endLabel: true, height: el.clientHeight, min: ymin, max: ymax, reference: ref });
+    Charts.line(el, { ...dayAxis(I.map((x) => x[0]), el.clientWidth, !!M_.window), series: [{ name, values: vals }], format: fmt, endLabel: true, down, height: el.clientHeight, min: ymin, max: ymax, reference: ref });
     const ch = (vals.at(-1) / vals[0] - 1) * 100;
     if (M_.window) {   // round-the-clock markets: the last 24 hours, Cairo time
       const to = new Date(M_.to.replace(' ', 'T'));
@@ -285,7 +287,7 @@ window.Desk = (function () {
     const rolls = (opts.rolls || []).map((r) => ({ r, at: pts.findIndex(([d]) => d >= r.session) })).filter((x) => x.at > 0);
     const ann = rolls.length ? rolls.map(({ r, at }) => ({ at, label: `Switched to the ${r.to} contract`, short: 'Contract switch' }))
       : opts.mark !== false && back > 7 ? bigMove(pts, opts.markAt || 0.025) : [];
-    Charts.line(el, { ...axis(pts.map((x) => x[0]), Math.max(back, 7), el.clientWidth), series: [{ name, values: vals, muted: !!opts.muted }], format: fmt, annotations: ann, endLabel: true, marks: pts.length <= 12, height: el.clientHeight, min: lo >= 0 ? Math.max(0, lo - pad) : lo - pad });
+    Charts.line(el, { ...axis(pts.map((x) => x[0]), Math.max(back, 7), el.clientWidth), series: [{ name, values: vals, muted: !!opts.muted }], format: fmt, annotations: ann, endLabel: true, down: !!opts.down, marks: pts.length <= 12, height: el.clientHeight, min: lo >= 0 ? Math.max(0, lo - pad) : lo - pad });
     return rolls.map(({ r }) => r);
   }
   // the desk's stocks over a period; notes ({ticker: {why, source, url}}, from deskNotes) add a line under each on 1D
@@ -551,5 +553,5 @@ window.Desk = (function () {
       location.reload();
     });
   }
-  return { get ASOF() { return ASOF; }, SECTORS, lede, sortable, headText, showAllRows, calendar, asOfFor, lastDate, $, esc, pct, cls, num, get, dateLine, conf, confNow, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, marketActive, heatFor, traded, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, pageTabs, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, weekChart, deskNotes, weekOf, monthOf, intraPeriod, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
+  return { get ASOF() { return ASOF; }, SECTORS, lede, sortable, headText, showAllRows, calendar, asOfFor, lastDate, $, esc, pct, cls, isDown, num, get, dateLine, conf, confNow, drivers, day, cut, short, PERIODS, NAMES, GROUP, series, valueAt, last, change, ytd, range52, stock, segment, spark, chart, movers, stockTable, kv, rangeBar, marketActive, heatFor, traded, outlook, news, dayChart, axis, dayAxis, LONG, full, usd, toggle, pageTabs, trendHead, marketMovers, heroChg, startPeriod, clipRows, byCap, weekChart, deskNotes, weekOf, monthOf, intraPeriod, get INTRA() { return INTRA; }, get MOVERS() { return MOVERS; }, init };
 })();
