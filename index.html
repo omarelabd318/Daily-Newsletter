@@ -32,7 +32,7 @@
 // the status bar and browser bar take the colour at the top of the page in the current look: paper's sheet on a phone,
 // the darker ground around the sheet on a larger screen, light's cream, dark's ink
 window.syncBarColor=function(){var th=document.documentElement.getAttribute('data-theme'),ph=window.matchMedia&&matchMedia('(max-width:640px)').matches,c=th==='dark'?'#0e1216':th==='paper'?(ph?'#e8e3d6':'#cfc9ba'):'#faf8f3',m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',c)};syncBarColor();if(window.matchMedia){var bq=matchMedia('(max-width:640px)');bq.addEventListener?bq.addEventListener('change',syncBarColor):bq.addListener(syncBarColor)}</script>
-<script src="/splash.js" data-app="news" data-look="2" data-out="4" data-wide-type="1" data-wide-front="2" data-ready="#content > *"></script>
+<script src="/splash.js" data-app="news" data-look="2" data-out="4" data-wide-out="4" data-wide-type="1" data-wide-front="2" data-ready="#content > *"></script>
 <style>
 :root{
   --ground:#0e1216; --raised:#151b21; --ink:#eef2f4; --ink2:#a9b4be; --accent:#52d6b5; --accent-ink:#07201a;
