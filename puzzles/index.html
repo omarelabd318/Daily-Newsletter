@@ -123,6 +123,26 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
 .gl-btns button:hover{background:var(--ink);color:var(--paper)} .gl-btns button[hidden]{display:none}
 .gl-stats{margin:12px 0 0;font:italic 15px var(--serif);color:var(--ink2)}
 .won-b{display:flex;justify-content:center;gap:8px} .won-in button.ghost{background:none;color:var(--ink)}
+/* the archive: every day's three puzzles in one table, newest first, with what you have solved on this device */
+.ar-sum{text-align:center;margin:0 0 16px;font:italic 16px var(--serif);color:var(--ink2)}
+.ar-t{width:100%;border-collapse:collapse;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.ar-t th{padding:8px 10px;border-bottom:1px solid var(--ink);font:700 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;text-align:left}
+.ar-t td{padding:0;border-bottom:1px dotted var(--rule);vertical-align:middle}
+.ar-t tr:last-child td{border-bottom:0}
+.ar-t td.d{padding:10px;white-space:nowrap} .ar-t td.d b{display:block;font:700 12px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink2)} .ar-t td.d span{font-size:17px}
+.ar-t tr.today td.d span::after{content:"Today";margin-left:8px;padding:1px 6px;background:var(--ink);color:var(--paper);font:700 10px var(--sans);letter-spacing:.1em;text-transform:uppercase;vertical-align:2px}
+.ar-t td a{display:flex;align-items:center;gap:10px;padding:10px;color:var(--ink);text-decoration:none;min-height:58px}
+.ar-t td a:hover{background:var(--word)}
+.ar-t td a i{flex:none;width:22px;height:22px;border:1.5px solid var(--ink);border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 12px var(--sans);font-style:normal}
+.ar-t td a.won i{background:var(--good);border-color:var(--good);color:#fff} .ar-t td a.part i{background:linear-gradient(90deg,var(--ink) 50%,transparent 50%)}
+.ar-t td a.gave i{border-style:dashed;color:var(--ink2)}
+.ar-t td a span{display:flex;flex-direction:column;line-height:1.25} .ar-t td a span b{font:600 14px var(--sans)} .ar-t td a span small{font:600 11px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+.ar-t td a.won span b{color:var(--good)} .ar-t td a small em{display:none;font-style:normal}
+.ar-key{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 18px;margin:12px 0 0;font:600 11px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
+.ar-key span{display:flex;align-items:center;gap:6px} .ar-key i{width:12px;height:12px;border:1.5px solid var(--ink);border-radius:50%} .ar-key i.won{background:var(--good);border-color:var(--good)} .ar-key i.part{background:linear-gradient(90deg,var(--ink) 50%,transparent 50%)}
+@media (max-width:860px){
+  .ar-t thead{display:none} .ar-t,.ar-t tbody,.ar-t tr,.ar-t td{display:block} .ar-t tr{padding:6px 0;border-bottom:1px solid var(--ink)} .ar-t td{border:0} .ar-t td.d{padding:6px 4px} .ar-t td a{min-height:0;padding:6px 4px} .ar-t td a small em{display:inline}
+}
 @media (max-width:860px){
   .sheet{margin:0;padding:14px 12px 30px}
   /* on a phone: the grid, then the pad or the clues, then the rest */
@@ -144,7 +164,7 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
     <h1>Daily Newsletter</h1>
     <p id="pno">The day's puzzles</p>
   </header>
-  <nav class="tabs" role="tablist"><button type="button" role="tab" data-t="cw" aria-selected="true">Crossword</button><button type="button" role="tab" data-t="gl" aria-selected="false">The Globe</button><button type="button" role="tab" data-t="ks" aria-selected="false">Killer sudoku</button></nav>
+  <nav class="tabs" role="tablist"><button type="button" role="tab" data-t="cw" aria-selected="true">Crossword</button><button type="button" role="tab" data-t="gl" aria-selected="false">The Globe</button><button type="button" role="tab" data-t="ks" aria-selected="false">Killer sudoku</button><button type="button" role="tab" data-t="ar" aria-selected="false">Archive</button></nav>
 
   <section id="cw">
     <h2>The Crossword</h2><p class="meta" id="cw-meta"></p>
@@ -162,6 +182,13 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
         <div class="rules"><p><b>How to play.</b> Fill the grid so every row, column and 3 by 3 box holds the digits 1 to 9 once each.</p>
         <p>The dashed shapes are cages: the digits in a cage add up to the number in its corner, and no digit appears twice in a cage. There are no starting digits; the cages are all you need, and there is only one solution.</p>
         <p>Tap a square and type a digit (or use the buttons). Notes lets you pencil in candidates. Arrow keys move.</p></div></div>
+  </section>
+
+  <section id="ar" hidden>
+    <h2>The Puzzle Archive</h2><p class="meta">Every day's crossword, globe and killer sudoku · pick any one to play it</p>
+    <p class="ar-sum" id="ar-sum"></p>
+    <table class="ar-t"><thead><tr><th>Day</th><th>The Crossword</th><th>The Globe</th><th>Killer sudoku</th></tr></thead><tbody id="ar-list"></tbody></table>
+    <div class="ar-key"><span><i class="won"></i>Solved</span><span><i class="part"></i>Started</span><span><i></i>Not played</span><span>Progress is kept on this device</span></div>
   </section>
 
   <section id="gl" hidden>
@@ -198,7 +225,8 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
   // tabs
   [].forEach.call(document.querySelectorAll('.tabs button'), function(b){ b.addEventListener('click', function(){
     [].forEach.call(document.querySelectorAll('.tabs button'), function(x){ x.setAttribute('aria-selected', x === b); });
-    ['cw', 'ks', 'gl'].forEach(function(t){ $(t).hidden = b.dataset.t !== t; });
+    ['cw', 'ks', 'gl', 'ar'].forEach(function(t){ $(t).hidden = b.dataset.t !== t; });
+    if(b.dataset.t === 'ar') archive();
     if(b.dataset.t === 'gl') loadGlobe(); else try { history.replaceState(null, '', location.pathname + location.search + '#' + b.dataset.t); } catch(e){}
   }); });
   // the globe game needs its own map and drawing code, fetched only when its tab is first opened; it plays today's
@@ -213,6 +241,40 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
   }
   if(location.hash === '#ks') document.querySelector('.tabs [data-t="ks"]').click();
   if(/^#gl/.test(location.hash)) document.querySelector('.tabs [data-t="gl"]').click();
+  if(location.hash === '#ar') document.querySelector('.tabs [data-t="ar"]').click();
+
+  // the archive tab: one row a day from data/puzzles/index.json, newest first; each puzzle shows whether it was solved
+  // (with the time), started or not played on this device, read from the same saved state the games write
+  var arOn = false;
+  function archive(){
+    if(arOn) return; arOn = true;
+    $('ar-list').innerHTML = '<tr><td class="d" colspan="4">Loading the archive…</td></tr>';
+    fetch('/data/puzzles/index.json', {cache:'no-cache'}).then(function(r){ if(!r.ok) throw 0; return r.json(); }).then(function(ix){
+      var days = (ix.days || []).slice().sort(function(a, b){ return a.date < b.date ? 1 : -1; });
+      var now = new Date(), today = now.getFullYear() + '-' + ('0' + (now.getMonth() + 1)).slice(-2) + '-' + ('0' + now.getDate()).slice(-2), open = window.PDATE;
+      function mmss(t){ return t ? Math.floor(t / 60) + ':' + ('0' + t % 60).slice(-2) : ''; }
+      function any(o){ return !!o && Object.keys(o).some(function(k){ return o[k]; }); }
+      var tally = {cw: 0, gl: 0, ks: 0};
+      function cell(dt, tab, sub, st){
+        if(st.won) tally[tab]++;
+        var cls = st.won ? 'won' : st.gave ? 'gave' : st.part ? 'part' : '', mark = st.won ? '✓' : st.gave ? '–' : '';
+        var label = st.won ? 'Solved' + (st.time ? ' in ' + st.time : '') : st.gave ? 'Gave up' : st.part ? 'Carry on' : 'Play';
+        return '<td><a href="/puzzles/?d=' + dt + '#' + tab + '"' + (cls ? ' class="' + cls + '"' : '') + '><i aria-hidden="true">' + mark + '</i><span><b>' + label + '</b><small><em>' + {cw: 'Crossword', gl: 'The Globe', ks: 'Killer sudoku'}[tab] + ' · </em>' + sub + '</small></span></a></td>';
+      }
+      $('ar-list').innerHTML = days.length ? days.map(function(d){
+        var dt = d.date, cw = store.get('puz:cw:' + dt) || {}, gl = store.get('puz:gl:' + dt) || {}, ks = store.get('puz:ks:' + dt) || {};
+        var x = new Date(dt + 'T12:00:00');
+        return '<tr' + (dt === today ? ' class="today"' : '') + (dt === open ? ' aria-current="true"' : '') + '><td class="d"><b>' + (d.no ? 'No. ' + d.no : '') + '</b><span>' + x.toLocaleDateString('en-US', {weekday:'short', month:'short', day:'numeric'}) + '</span></td>'
+          + cell(dt, 'cw', d.size ? d.size + ' by ' + d.size : 'Crossword', {won: cw.won || store.get('puz:cw:' + dt + ':won'), part: any(cw.l), time: mmss(store.get('puz:cw:' + dt + ':t'))})
+          + cell(dt, 'gl', 'Find the country', {won: gl.won, gave: gl.gave, part: gl.g && gl.g.length, time: gl.won && gl.g ? gl.g.length + ' guess' + (gl.g.length > 1 ? 'es' : '') : ''})
+          + cell(dt, 'ks', d.level != null ? LEVEL[d.level] : 'Killer sudoku', {won: ks.won, part: any(ks.v), time: mmss(store.get('puz:ks:' + dt + ':t'))})
+          + '</tr>';
+      }).join('') : '<tr><td class="d" colspan="4">No puzzles yet.</td></tr>';
+      var all = tally.cw + tally.gl + tally.ks;
+      $('ar-sum').textContent = days.length ? days.length + ' day' + (days.length > 1 ? 's' : '') + ' of puzzles · you have solved ' + all + ' of ' + days.length * 3
+        + ' (' + tally.cw + ' crossword' + (tally.cw === 1 ? '' : 's') + ', ' + tally.gl + ' globe' + (tally.gl === 1 ? '' : 's') + ', ' + tally.ks + ' sudoku)' : '';
+    }).catch(function(){ $('ar-list').innerHTML = '<tr><td class="d" colspan="4">The archive did not load. Try again later.</td></tr>'; arOn = false; });
+  }
 
   // which day: ?d=DATE, else the newest edition with puzzles
   var want = (location.search.match(/[?&]d=(\d{4}-\d{2}-\d{2})/) || [])[1];
@@ -230,7 +292,7 @@ h2{margin:0;font:900 30px/1.1 var(--head);text-align:center}
   function start(P){
     $('dl').textContent = day(P.date);
     var no = P.no ? 'No. ' + P.no : ''; if(no){ $('pno').textContent = 'The day\'s puzzles · ' + no; }
-    window.PNO = no;
+    window.PNO = no; window.PDATE = P.date;
     document.title = 'Puzzles, ' + day(P.date) + ' · Daily Newsletter';
     crossword(P);
     killer(P);

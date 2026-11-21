@@ -63,6 +63,8 @@ a:hover{text-decoration:underline}
 .top .off{color:var(--ink2);opacity:.45;cursor:default}
 #archive{display:none;background:var(--raised);padding:8px var(--pad);margin:16px calc(var(--pad) * -1) 0;max-height:60vh;overflow:auto}
 #archive.open{display:block}
+#archive a#puzArch{display:block;padding:10px 0 12px;border-bottom:1px solid var(--rule,currentColor);font:600 14px var(--sans);color:var(--accent)}
+#archive a#puzArch:hover{text-decoration:underline}
 #archive a{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:24px;padding:16px 0;color:var(--ink)}
 #archive a small{font-size:16px;color:var(--ink2)}
 #archive a.current{color:var(--accent)}
@@ -690,7 +692,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
       <div class="grp"><span id="prev"></span><span id="next"></span></div>
       <div class="grp grp-r"><button id="widthBtn" type="button" aria-pressed="false">Wide</button><button id="themeBtn" type="button" aria-label="Switch to dark mode">Dark</button></div>
     </div>
-    <div id="archive"><input id="q" type="search" placeholder="Search all editions" aria-label="Search all editions" autocomplete="off"><div id="archList" role="list"></div><div id="results" role="list" hidden></div></div>
+    <div id="archive"><a id="puzArch" href="/puzzles/#ar">Puzzle archive: every crossword, globe and killer sudoku →</a><input id="q" type="search" placeholder="Search all editions" aria-label="Search all editions" autocomplete="off"><div id="archList" role="list"></div><div id="results" role="list" hidden></div></div>
     <div class="edition" id="edition" hidden>
       <div class="date" id="dateline"></div>
       <div><p class="sum" id="summary"></p><div id="leadwrap"></div><div id="listenwrap"></div></div>
