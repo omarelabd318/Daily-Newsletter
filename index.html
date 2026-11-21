@@ -1405,8 +1405,8 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
       alignCols(run);
     });
   }
-  // every column starts flush with the first: when a column ends inside the space after a story (its bottom padding),
-  // Safari carries that space over to the head of the next column, starting it a line low. The first line of each
+  // every column starts flush with the first: when a column ends inside the space after a story or list item (its
+  // bottom padding), Safari carries that space over to the head of the next column, starting it low. The first line of each
   // column is measured from the text, and a story that opens a column low is pulled up by the difference, over the
   // empty space carried into its column. The run's height is pinned first and its columns filled in turn rather than
   // rebalanced, so the lift moves no line between columns (it is less than a line). Other browsers measure nothing
@@ -1416,14 +1416,14 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     var left = run.getBoundingClientRect().left + parseFloat(cs.paddingLeft || 0);
     var cw = (run.clientWidth - parseFloat(cs.paddingLeft || 0) - parseFloat(cs.paddingRight || 0) - gap * (n - 1)) / n;
     var col = function(r){ return Math.max(0, Math.min(n - 1, Math.floor((r.left + 1 - left) / (cw + gap)))); };
-    var top0 = null, prev = null, out = [], cols = [];
-    [].forEach.call(run.querySelectorAll(':scope > p'), function(el){
+    var top0 = null, prev = null, last = null, out = [], cols = [];
+    [].forEach.call(run.querySelectorAll(':scope > p, li'), function(el){
       var rg = document.createRange(); rg.selectNodeContents(el);
       var ls = [].filter.call(rg.getClientRects(), function(r){ return r.width && r.height; });
       if(!ls.length) return;
       if(top0 === null) top0 = ls[0].top;
-      else if(prev !== null && col(ls[0]) > prev) out.push({el: el, d: ls[0].top - top0, prev: el.previousElementSibling});
-      prev = col(ls[ls.length - 1]);
+      else if(prev !== null && col(ls[0]) > prev) out.push({el: el, d: ls[0].top - top0, prev: last});
+      prev = col(ls[ls.length - 1]); last = el;
       cols.push(col(ls[0]) + '-' + prev);
     });
     out.cols = cols.join();
@@ -1439,7 +1439,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
       // the space the lift frees is given back at the foot of the column, so no line moves up into it
       var next = before.filter(function(x){ return x.el.compareDocumentPosition(o.el) & Node.DOCUMENT_POSITION_PRECEDING; })[0];
       var foot = next && next.prev;
-      if(foot && foot !== o.el.previousElementSibling){ pads.push(foot); foot.classList.add('lift'); foot.style.paddingBottom = (parseFloat(getComputedStyle(foot).paddingBottom) + Math.round(o.d)) + 'px'; }
+      if(foot && foot !== o.prev){ pads.push(foot); foot.classList.add('lift'); foot.style.paddingBottom = (parseFloat(getComputedStyle(foot).paddingBottom) + Math.round(o.d)) + 'px'; }
     });
     var after = colOpeners(run);
     var moved = after.cols !== before.cols || low.some(function(o){ var a = after.filter(function(x){ return x.el === o.el; })[0]; return !a || Math.abs(a.d) > 4; });
