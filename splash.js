@@ -282,11 +282,14 @@
     css += '#splash.tw .wcol,#splash.tw [data-w]:not(.tw-on){visibility:hidden}' +
       '#splash.tw [data-w=stories]:not(.tw-on){visibility:visible}#splash.tw [data-w=stories]>div:not(.tw-on)>*{visibility:hidden}' +
       // the dividers: none on the empty page; once the whole page is written they come up one by one, top to bottom:
-      // the masthead's rules, the Big Story's, the stories', the number of the day's black panel, what to watch's
+      // the masthead's rules, the Big Story's, the stories', the number of the day's black panel (and on the recap
+      // Since Friday's beside it), what to watch's
       '#splash.tw [data-r],#splash.tw [data-w=body],#splash.tw [data-w=stories],#splash.tw [data-w=stories]>div,#splash.tw [data-w=watch]{transition:border-color .6s ease,column-rule-color .6s ease}' +
       '#splash.tw:not(.r-lead) [data-r=lead]{border-right-color:transparent!important}#splash.tw:not(.r-lead) [data-w=body]{column-rule-color:transparent!important}' +
       '#splash.tw:not(.r-stories) [data-w=stories],#splash.tw:not(.r-stories) [data-w=stories]>div{border-color:transparent!important}' +
       '#splash.tw:not(.r-number) [data-w=number]{--nbg:transparent;--nfg:' + P.ink + '}' +
+      // the recap's Since Friday, beside the week's markets panel: its rules come up with that panel
+      '#splash.tw [data-sf]{transition:border-color .6s ease}#splash.tw:not(.r-number) [data-sf]{border-top-color:transparent!important}' +
       '#splash.tw [data-rr]{transition:opacity .6s ease}#splash.tw:not(.r-mast) [data-rr]{opacity:0}' +
       '#splash.tw [data-w=watch] [data-rl]{transition:opacity .6s ease}#splash.tw:not(.r-watch) [data-w=watch] [data-rl]{opacity:0}' +
       '#splash.tw:not(.r-watch) [data-w=watch] [data-c]{border-color:transparent!important}';
