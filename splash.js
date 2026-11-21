@@ -8,7 +8,8 @@
 //   Exception: on a phone (the newsletter and the desk alike) it stays up; once the page is ready a "Tap to open"
 //   line appears, and a tap anywhere on the screen brings up the page. The newsletter's phone front page (look 2) writes
 //   itself out as the computer's does: the name, the date and the headline typed in turn, then the masthead's rules,
-//   the four lines and the black box come up one by one.
+//   the four lines and the black box come up one by one. The Markets Desk's phone board (look 1) does the same: the
+//   mark draws itself, the EGX30, its change, the six tiles and the foot are typed in turn, then the tiles' frames.
 // - On a computer (a mouse, and a window 900px or wider) it is shown too: when the start page is opened from a
 //   bookmark, the address bar or another site (once per tab; moving between the site's own pages skips it), in a wide
 //   layout of its own, and it waits for a click ("Click to open").
@@ -169,7 +170,7 @@
   };
   // the morning board under the EGX30 (look 1): a smaller tile, value and day change on one line
   var mini = function (k, name) {
-    return '<div style="padding:10px 12px;background:' + C.tile + ';border:1px solid ' + C.line + ';border-radius:8px;text-align:left">' +
+    return '<div data-w="tile" data-tb style="padding:10px 12px;background:' + C.tile + ';border:1px solid ' + C.line + ';border-radius:8px;text-align:left">' +
       '<div style="font:600 10px/1 Inter,system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:' + C.mute + '">' + name + '</div>' +
       '<div class="late" data-k="' + k + '" style="margin-top:7px;font:600 16px/1.1 Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.01em">&nbsp;</div>' +
       '<div class="late" data-k="' + k + '-chg" style="margin-top:3px;font:600 11.5px/1 Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums">&nbsp;</div></div>';
@@ -237,13 +238,13 @@
   var D = {
     // 1. The number: the mark draws itself, then the EGX30's last close and its day change, and a board of six more
     1: '<div style="width:100%;max-width:360px;display:flex;flex-direction:column;align-items:center">' + mark(84) +
-       '<div class="in d2" style="margin-top:26px;' + lab + '">EGX30 · last close</div>' +
-       '<div class="late" data-k="egx30" style="margin-top:10px;font:600 clamp(44px,13vw,56px)/1 Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.03em">&nbsp;</div>' +
-       '<div class="late" data-k="egx30-chg" style="margin-top:10px;font:600 17px/1 Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums">&nbsp;</div>' +
+       '<div class="in d2" data-w="egx-label" style="margin-top:26px;' + lab + '">EGX30 · last close</div>' +
+       '<div class="late" data-w="egx" data-k="egx30" style="margin-top:10px;font:600 clamp(44px,13vw,56px)/1 Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.03em">&nbsp;</div>' +
+       '<div class="late" data-w="egx-chg" data-k="egx30-chg" style="margin-top:10px;font:600 17px/1 Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums">&nbsp;</div>' +
        '<div class="in d3" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;margin-top:26px">' +
        mini('egx70', 'EGX70') + mini('usd_egp', 'Dollar · market') + mini('gold24_egp', 'Gold 24k · EGP') +
        mini('brent', 'Brent') + mini('sp500', 'S&amp;P 500') + mini('btc', 'Bitcoin') + '</div>' +
-       '<div class="in d3" style="margin-top:26px;font:500 13px/1.4 Inter,system-ui,sans-serif;color:' + C.mute + '"><b style="color:' + C.ink + ';font-weight:600">Markets Desk</b> · <span data-k="date"></span></div></div>',
+       '<div class="in d3" data-w="foot" style="margin-top:26px;font:500 13px/1.4 Inter,system-ui,sans-serif;color:' + C.mute + '"><b style="color:' + C.ink + ';font-weight:600">Markets Desk</b> · <span data-k="date"></span></div></div>',
     // 2. Board: four numbers that set the morning
     2: '<div style="width:100%;max-width:380px">' +
        '<div style="display:flex;align-items:center;gap:12px">' + mark(40) +
@@ -293,8 +294,15 @@
   // the phone's front page writes itself out too, as the computer's does: a blank sheet, then the name, the date and
   // the day's headline typed in turn; once written, the masthead's rules come up, then the four lines draw in one by
   // one, then the black box
-  var pt = app === 'news' && !wideLook && look === 2 && !still;
-  if (pt) {
+  // the desk's phone board (look 1) the same way: the mark draws itself, then the EGX30's label, its last close and
+  // its change, the six tiles and the foot are typed in turn, and the tiles' frames come up one by one
+  var pt = !wideLook && !still && (app === 'news' ? look === 2 : look === 1);
+  if (pt && app === 'desk') {
+    el.className = 'pt';
+    css += '#splash.pt [data-w]:not(.tw-on){visibility:hidden}' +
+      '#splash.pt [data-tb]{transition:background-color .6s ease,border-color .6s ease}#splash.pt [data-tb]:not(.rv){background-color:transparent!important;border-color:transparent!important}';
+    setTimeout(function () { writePhone(); }, 4000);
+  } else if (pt) {
     el.className = 'pt';
     css += '#splash.pt [data-w]:not(.tw-on){visibility:hidden}' +
       '#splash.pt [data-rr]{transition:opacity .6s ease}#splash.pt:not(.r-mast) [data-rr]{opacity:0}' +
@@ -557,14 +565,24 @@
     if (wrotePhone) return; wrotePhone = true;
     var q = el.querySelector.bind(el), jobs = [];
     var add = function (box, msPerChar, cap) { if (box) jobs.push([box, msPerChar, cap]); };
-    add(q('[data-w="name"]'), 98, 700);
-    add(q('[data-w="date"]'), 39, 1100);
-    add(q('[data-w="summary"]'), 32, 2800);
+    var rv = function (sel) { return [].map.call(el.querySelectorAll(sel), function (n) { return function () { n.classList.add('rv'); }; }); };
+    var ends;
+    if (app === 'desk') {
+      add(q('[data-w="egx-label"]'), 45, 800);
+      add(q('[data-w="egx"]'), 110, 1100);
+      add(q('[data-w="egx-chg"]'), 40, 900);
+      el.querySelectorAll('[data-w="tile"]').forEach(function (c) { add(c, 28, 650); });
+      add(q('[data-w="foot"]'), 32, 1100);
+      ends = rv('[data-tb]');
+    } else {
+      add(q('[data-w="name"]'), 98, 700);
+      add(q('[data-w="date"]'), 39, 1100);
+      add(q('[data-w="summary"]'), 32, 2800);
+      ends = [function () { el.classList.add('r-mast'); }].concat(rv('[data-ln],[data-bx]'));
+    }
     var run = function () {
       var x = jobs.shift();
       if (!x) {
-        var ends = [function () { el.classList.add('r-mast'); }].concat(
-          [].map.call(el.querySelectorAll('[data-ln],[data-bx]'), function (n) { return function () { n.classList.add('rv'); }; }));
         ends.forEach(function (f, i) { setTimeout(f, 200 + i * 260); });
         return;
       }
@@ -638,6 +656,7 @@
       });
     });    // the board writes itself out once the day's numbers and words are in (or after 4s, with what it has)
     if (tw) Promise.all([deskDay, deskMarkets]).then(function () { writeOut(); });
+    if (pt) Promise.all([deskDay, deskMarkets]).then(function () { writePhone(); });
   }
 
   // ---- leave once the page is ready (MIN to MAX after launch); on a phone or a computer it waits for a tap or a click
