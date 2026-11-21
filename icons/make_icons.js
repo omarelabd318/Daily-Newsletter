@@ -22,11 +22,14 @@ const art = {
 };
 // the same marks cut down for a browser tab (16-32px): rounded tiles, bigger shapes, nothing finer than the tab can draw
 const tab = {
-  // the front page's masthead: a blackletter "D" over the double rule, on the sheet's cream
+  // a mini front page: the sheet with its blackletter masthead, double rule, headline bar, a column of text and a photo block
   newsletter: `<svg width="240" height="240" viewBox="0 0 240 240">
-      <rect x="6" y="6" width="228" height="228" rx="44" fill="#e8e3d6" stroke="#14110d" stroke-width="12"/>
-      <text x="120" y="158" text-anchor="middle" style="font-family:'UnifrakturCook';font-weight:700;font-size:150px" fill="#14110d">D</text>
-      <path d="M52 182h136" stroke="#14110d" stroke-width="14"/><path d="M52 204h136" stroke="#14110d" stroke-width="7"/></svg>`,
+      <rect x="24" y="6" width="192" height="228" rx="18" fill="#e8e3d6" stroke="#14110d" stroke-width="12"/>
+      <text x="120" y="76" text-anchor="middle" style="font-family:'UnifrakturCook';font-weight:700;font-size:64px" fill="#14110d">Daily</text>
+      <path d="M46 92h148" stroke="#14110d" stroke-width="10"/><path d="M46 106h148" stroke="#14110d" stroke-width="5"/>
+      <rect x="46" y="120" width="148" height="22" fill="#14110d"/>
+      <g stroke="#14110d" stroke-width="12" stroke-linecap="round"><path d="M52 164h54M52 188h54M52 210h40"/></g>
+      <rect x="122" y="156" width="72" height="60" fill="#14110d"/></svg>`,
   // the desk's rising teal line and cream rule on its dark ground
   desk: `<svg width="240" height="240" viewBox="0 0 240 240">
       <rect width="240" height="240" rx="48" fill="#16181a"/>
