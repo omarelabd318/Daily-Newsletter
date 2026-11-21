@@ -10,8 +10,8 @@
   --primary:#16181a; --primary-ink:#ffffff;
   --brand:#8a1c1c;
   --chart-1:#1d5fbf; --chart-muted:#8b9097; --grid:#ebe7de; --axis-ink:#5b6168; --ink:#16181a; --chart-span:.06;
-  --positive:#1d7a3a; --negative:#b3261e; --negative-ink:#b3261e; --sell:#8e1b15;
-  --pill-pos-bg:#dcfae5; --pill-pos-ink:#04250e; --pill-neg-bg:#ffedea; --pill-neg-ink:#831c1e;
+  --positive:#1f6f43; --negative:#a1281e; --negative-ink:#a1281e; --flat:#6d6a63; --sell:#8e1b15;
+  --pill-pos-bg:#dcfae5; --pill-pos-ink:#1f6f43; --pill-neg-bg:#ffedea; --pill-neg-ink:#a1281e;
   --pill-warn-bg:#fffbeb; --pill-warn-ink:#92400e; --pill-warn-line:#fde68a;
   --radius-card:8px; --radius-control:6px; --radius-chip:4px;
   --gap:24px; --pad:20px;
@@ -26,8 +26,8 @@
   --primary:#eef2f4; --primary-ink:#0e1216;
   --brand:#e0605a;
   --chart-1:#6ea0ff; --chart-muted:#7d8791; --grid:#232b33; --axis-ink:#b0b8c0; --ink:#eef2f4; --chart-span:.12;
-  --positive:#5fd08a; --negative:#e8605a; --negative-ink:#e8605a; --sell:#b83f39;
-  --pill-pos-bg:#16291d; --pill-pos-ink:#5fd08a; --pill-neg-bg:#2c1a1c; --pill-neg-ink:#ff8a80;
+  --positive:#5ccb72; --negative:#ef7d6d; --negative-ink:#ef7d6d; --flat:#a9b4be; --sell:#b83f39;
+  --pill-pos-bg:#16291d; --pill-pos-ink:#5ccb72; --pill-neg-bg:#2c1a1c; --pill-neg-ink:#ef7d6d;
   --pill-warn-bg:#2a2414; --pill-warn-ink:#f2c56b; --pill-warn-line:#4a3e1c;
   color-scheme:dark;
 }
@@ -99,7 +99,7 @@ h2{margin:0;font-size:16px;line-height:22px;font-weight:600}
 .chg::before{content:"";display:inline-block;width:0;height:0;margin-right:5px;vertical-align:1px;border-left:4px solid transparent;border-right:4px solid transparent}
 .chg.up::before{border-bottom:6px solid currentColor}
 .chg.down::before{border-top:6px solid currentColor}
-.chg.flat{color:var(--muted)}
+.chg.flat{color:var(--flat)}
 .chg{white-space:nowrap}
 .ledger-note{margin-top:12px;font-size:12px;line-height:16px;color:var(--muted)}
 
@@ -157,9 +157,10 @@ td.trend,th.trend{width:96px;text-align:center}
 td.trend svg{display:inline-block;vertical-align:middle}
 .spark path{fill:none;stroke:var(--chart-muted);stroke-width:1.5}
 .spark circle{fill:var(--chart-1)}
-/* a trend line coloured as the change beside it reads: green up, red down (flat keeps the chart hue) */
+/* a trend line coloured as the change beside it reads: green up, red down, grey for no change */
 .spark.up path,.cline.up path{stroke:var(--positive)} .spark.up circle,.cline.up circle{fill:var(--positive)}
 .spark.down path,.cline.down path{stroke:var(--negative)} .spark.down circle,.cline.down circle{fill:var(--negative)}
+.spark.flat path,.cline.flat path{stroke:var(--flat)} .spark.flat circle,.cline.flat circle{fill:var(--flat)}
 .stock-note{margin:12px 0 0;font-size:13px;line-height:19px;color:var(--muted)}
 .stock-note b{color:var(--text);font-weight:500}
 
@@ -369,7 +370,7 @@ a.tag:hover{background:var(--active)}
 .tag.market{background:transparent;box-shadow:inset 0 0 0 1px var(--rule)}
 .tag .chg::before{margin-right:0}
 .tag.up .chg,.tag.up .num{color:var(--positive)} .tag.down .chg,.tag.down .num{color:var(--negative)}
-.tag.flat .chg::before{content:"";width:6px;height:2px;border:0;background:var(--muted);vertical-align:3px}
+.tag.flat .chg::before{content:"";width:6px;height:2px;border:0;background:var(--flat);vertical-align:3px}
 .tags-h{display:block;margin:0 0 6px;color:var(--muted);font-size:12px}
 .news .naff{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin-top:8px} .news .naff .tags-h{margin:0}
 /* stock lists grouped by sector */
@@ -448,7 +449,7 @@ tbody tr.sec-row:first-child th,tbody tr.sec-row:first-child td{padding-top:8px;
   --text:#1c1c1a; --muted:#6d6a63; --faint:#8a867d;
   --primary:#1c1c1a; --primary-ink:#fbfaf7; --brand:#a1281e;
   --chart-1:#14365d; --chart-muted:#9a958a; --grid:#ebe6da; --axis-ink:#6d6a63; --ink:#1c1c1a;
-  --positive:#1f6f43; --negative:#a1281e; --negative-ink:#a1281e; --sell:#a1281e;
+  --positive:#1f6f43; --negative:#a1281e; --negative-ink:#a1281e; --flat:#6d6a63; --sell:#a1281e;
   --pill-pos-bg:transparent; --pill-pos-ink:#1f6f43; --pill-neg-bg:transparent; --pill-neg-ink:#a1281e;
   --accent:#14365d; --kick:#a1281e;
   --serif:"Source Serif 4",Georgia,"Times New Roman",serif; --brand-font:var(--serif);
@@ -460,7 +461,7 @@ tbody tr.sec-row:first-child th,tbody tr.sec-row:first-child td{padding-top:8px;
   --text:#eef2f4; --muted:#a9b4be; --faint:#7d8791;
   --primary:#eef2f4; --primary-ink:#0e1216; --brand:#ef7d6d;
   --chart-1:#52d6b5; --chart-muted:#7d8791; --grid:#1d242b; --axis-ink:#a9b4be; --ink:#eef2f4;
-  --positive:#5ccb72; --negative:#ef7d6d; --negative-ink:#ef7d6d; --sell:#ef7d6d;
+  --positive:#5ccb72; --negative:#ef7d6d; --negative-ink:#ef7d6d; --flat:#a9b4be; --sell:#ef7d6d;
   --pill-pos-bg:transparent; --pill-pos-ink:#5ccb72; --pill-neg-bg:transparent; --pill-neg-ink:#ef7d6d;
   --accent:#52d6b5; --kick:#ef7d6d;
 }

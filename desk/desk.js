@@ -7,8 +7,8 @@ window.Desk = (function () {
   const pct = (v, d = 1) => { if (v == null) return '—'; const r = +v.toFixed(d); return (r > 0 ? '+' : r < 0 ? MINUS : '') + Math.abs(r).toFixed(d) + '%'; };
   const cls = (v) => v == null ? 'dash' : v >= 0.05 ? 'chg up' : v <= -0.05 ? 'chg down' : 'chg flat';
   // a chart's line is red or green when the change printed beside it is ('down' or 'up'; inv: up reads badly, so a
-  // rise is 'down'), in the chart hue when it is flat
-  const trend = (v, inv = false) => { if (v == null) return null; const x = inv ? -v : v; return x <= -0.05 ? 'down' : x >= 0.05 ? 'up' : null; };
+  // rise is 'down'), grey ('flat', --flat) when it rounds to no change
+  const trend = (v, inv = false) => { if (v == null) return null; const x = inv ? -v : v; return x <= -0.05 ? 'down' : x >= 0.05 ? 'up' : 'flat'; };
   const num = (v, d = 2) => v == null ? '—' : v.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
   // one fetch per file per page (the stock and EGX pages asked for stocks.json three times), shared with nav.js
   const get = (u) => { const M = window.__deskGet || (window.__deskGet = {}); return M[u] || (M[u] = fetch(u, { cache: 'no-cache' }).then((r) => r.ok ? r.json() : null).catch(() => null)); };
@@ -138,7 +138,7 @@ window.Desk = (function () {
   }
   // a trend line: the period's closes, or on 1D the last session through the day when it is saved (intra)
   // week: on 1W, the last sessions through the day (weekOf), and on 1M the month's (monthOf), when saved; otherwise closes
-  // tr: the row's trend ('up' | 'down', from trend()), so the line reads the same way as the change beside it
+  // tr: the row's trend ('up' | 'down' | 'flat', from trend()), so the line reads the same way as the change beside it
   function spark(s, back, intra = null, week = null, tr = null) {
     const pts = !back && intra && intra.length > 1 ? intra.map((x) => x[1]) : (back === 7 || back === 30) && week && week.length > 1 ? week
       : (back <= 7 ? s.slice(-7) : s.filter(([d]) => d >= cut(lastDate(s), back))).map((x) => x[1]);

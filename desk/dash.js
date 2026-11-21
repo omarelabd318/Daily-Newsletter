@@ -7,8 +7,8 @@
   const pct = (v, d = 1) => { if (v == null) return '—'; const r = +v.toFixed(d); return (r > 0 ? '+' : r < 0 ? MINUS : '') + Math.abs(r).toFixed(d) + '%'; };
   const cls = (v) => v == null ? 'dash' : v >= 0.05 ? 'chg up' : v <= -0.05 ? 'chg down' : 'chg flat';
   // a chart's line is red or green when the change printed beside it is ('down' or 'up'; inv: up reads badly, so a
-  // rise is 'down'), in the chart hue when it is flat
-  const trend = (v, inv = false) => { if (v == null) return null; const x = inv ? -v : v; return x <= -0.05 ? 'down' : x >= 0.05 ? 'up' : null; };
+  // rise is 'down'), grey ('flat', --flat) when it rounds to no change
+  const trend = (v, inv = false) => { if (v == null) return null; const x = inv ? -v : v; return x <= -0.05 ? 'down' : x >= 0.05 ? 'up' : 'flat'; };
   // a finding's first sentence in bold (a sentence ends at . ! or ? before a space and a capital, never inside 54.31)
   const lede = (t) => { const m = String(t || '').match(/^(.+?[.!?])\s+(?=[A-Z"“])/); return m ? `<b>${esc(m[1])}</b> ${esc(t.slice(m[0].length))}` : `<b>${esc(t)}</b>`; };
   // one fetch per file per page, shared with nav.js and started together rather than one after another
