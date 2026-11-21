@@ -364,7 +364,7 @@
           return '<span style="opacity:.88">' + esc(n) + '</span><b style="font-weight:700;text-align:right">' + esc(r[1].replace(/^-/, '\u2212')) + '</b>';
         }).join('') + '</div>');
       if (since.length) put('quote', '<div style="' + kick + '">Since Friday</div>' + since.slice(0, 3).map(function (h, i) {
-        return '<div style="' + (i ? 'margin-top:7px;padding-top:7px;border-top:' + rule + ';' : 'margin-top:7px;') + 'font:700 16px/1.25 \'Playfair Display\',Georgia,serif">' + esc(h) + '</div>';
+        return '<div data-sf style="' + (i ? 'margin-top:7px;padding-top:7px;border-top:' + rule + ';' : 'margin-top:7px;') + 'font:700 16px/1.25 \'Playfair Display\',Georgia,serif">' + esc(h) + '</div>';
       }).join(''));
     }
     put('lead-kick', esc(lead.k)); put('lead', esc(lead.t));
@@ -455,6 +455,18 @@
     var room = sh.clientHeight + parseFloat(getComputedStyle(sh).paddingBottom) / 2;
     for (var i = 0; i < groups.length && sh.scrollHeight > room; i++)
       groups[i].forEach(function (n) { if (n) n.style.display = 'none'; });
+    // a part taken off that turns out to cost no height (the right-hand column beside a longer Big Story) comes
+    // back, the most wanted first
+    for (var j = i - 1; j >= 0; j--) {
+      groups[j].forEach(function (n) { if (n) n.style.display = ''; });
+      // the recap's Since Friday keeps as many of its headlines as fit, at least one
+      var sf = [].slice.call(el.querySelectorAll('[data-w="quote"] [data-sf]'));
+      if (groups[j][0] && groups[j][0].getAttribute('data-w') === 'quote') {
+        sf.forEach(function (n) { n.style.display = ''; });
+        for (var k = sf.length - 1; k > 0 && sh.scrollHeight > room; k--) sf[k].style.display = 'none';
+      }
+      if (sh.scrollHeight > room) groups[j].forEach(function (n) { if (n) n.style.display = 'none'; });
+    }
     if (altBody && !altBody.hasAttribute('data-prep') && altBody.firstElementChild && bodyFull) altBody.firstElementChild.textContent = bodyFull;
     if (altBody) {
       // the text reaches at least the foot of the right-hand column, and on into what room the sheet has left, up to
