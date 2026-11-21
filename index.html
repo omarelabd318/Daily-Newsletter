@@ -513,6 +513,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 :root[data-theme="paper"] .what{font:italic 15px var(--serif);letter-spacing:0;text-transform:none;margin-top:6px}
 :root[data-theme="paper"] .p-dateline{display:grid;grid-template-columns:1fr auto 1fr;margin-top:12px;padding:5px 0;border-top:3px double var(--ink);border-bottom:3px double var(--ink);font:600 10.5px var(--sans);letter-spacing:.14em;text-transform:uppercase;text-align:left}
 :root[data-theme="paper"] .p-dateline span:last-child{text-align:right}
+.p-dateline i{font-style:normal} .p-dateline .dl-ws{display:none}
 :root[data-theme="paper"] .p-dateline button{background:none;border:0;padding:0;font:inherit;letter-spacing:inherit;text-transform:inherit;color:var(--ink);cursor:pointer}
 :root[data-theme="paper"] .f-strip{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 18px;margin-top:0;padding:6px 0;border-top:0;border-bottom:1px solid var(--ink)}
 :root[data-theme="paper"] .f-strip a{display:inline;padding:0;border:0;font:600 12px var(--sans);letter-spacing:.03em}
@@ -631,7 +632,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 :root[data-width="wide"]:not([data-theme="paper"]) .s-body .run > p.lbl{border-bottom-width:6px;break-after:avoid}
 /* the Saturday recap's front page, paper mode only: a banner for the week, The Week in Brief as numbered stories in two
    columns, and a rail with the week's markets and what is inside */
-.rf-main,.rf-kick{display:none}
+.rf-main,.rf-kick,.rf-wk{display:none}
 :root:not([data-theme="paper"]) .rf-only{display:none!important}
 :root[data-theme="paper"] .rf-kick{display:block;margin:0 0 4px;font:600 11px var(--sans);letter-spacing:.22em;text-transform:uppercase}
 :root[data-theme="paper"] .rf-main{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,1fr);border-top:1px solid var(--ink)}
@@ -815,6 +816,11 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     })};
   }
 
+  // the paper dateline's place and date; its weekday has a short form the narrowest phones use (Sat.)
+  function dlDate(d){
+    var p = pretty(d), m = p.match(/^(\w+)(,.*)$/);
+    return 'Cairo, ' + (m ? '<i class="dl-wl">'+m[1]+'</i><i class="dl-ws">'+m[1].slice(0,3)+'.</i>'+esc(m[2]) : esc(p));
+  }
   function pretty(d){
     var dt = new Date(d+'T12:00:00');
     if(isNaN(dt)) return d;
@@ -994,7 +1000,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     document.documentElement.classList.add('rcp');
     var what = document.querySelector('.mast .what'), mast = document.querySelector('.mast'); if(!what || !mast) return;
     var no = editions.filter(function(e){ return /-recap$/.test(key(e)) && e.date <= ed.date; }).length, dl = document.createElement('div');
-    dl.className = 'p-dateline'; dl.innerHTML = '<span>Weekly Recap No. '+no+'</span><span>Cairo, '+esc(pretty(ed.date))+'</span><span><button type="button" id="p-listen">Listen \u25b8</button></span>';
+    dl.className = 'p-dateline'; dl.innerHTML = '<span><i class="dl-l">Weekly </i>Recap No. '+no+'</span><span>'+dlDate(ed.date)+'</span><span><button type="button" id="p-listen">Listen \u25b8</button></span>';
     what.parentNode.insertBefore(dl, what.nextSibling);
     dl.querySelector('#p-listen').addEventListener('click', function(){ var b = document.getElementById('listenBtn'); if(b) b.click(); });
     var strip = document.createElement('div'); strip.className = 'f-strip rf-only'; strip.id = 'f-strip'; dl.parentNode.insertBefore(strip, dl.nextSibling);
@@ -1017,6 +1023,8 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
         return '<a href="'+href+'"><span>'+lab+'</span><b>'+fmt(f.now)+'</b>'+(c == null ? '' : '<em class="'+good+'">'+pc(c, flip)+'</em>')+'</a>'; }
       var cells = cell('EGX30','egx30',n0,false,'/desk/egx/') + cell('USD/EGP','usd_egp',n2,true,'/desk/egp/') + cell('Gold 24K','gold24_egp',n0,false,'/desk/egp/#c-gold') + cell('Brent','brent',function(v){return '$'+n2(v)},false,'/desk/global/') + cell('S&amp;P 500','sp500',n0,false,'/desk/us/')
         + cell('Nasdaq','nasdaq',n0,false,'/desk/us/').replace('<a ', '<a class="f-x" ') + cell('Bitcoin','btc',function(v){return '$'+n0(v)},false,'/desk/global/#g-btc').replace('<a ', '<a class="f-x" ');
+      // on a phone the tape opens with the week it covers, so its changes read as the week's, not the day's
+      if(cells && document.documentElement.classList.contains('rcp') && m) cells = '<div class="rf-wk"><span>This week</span><b>'+esc(m[1].slice(0,3)+' '+m[2]+'\u2013'+(m[3] ? m[3].slice(0,3)+' ' : '')+m[4])+'</b><em>weekly change</em></div>' + cells;
       var el = document.getElementById('f-strip'); if(el){ if(cells) el.innerHTML = cells; else el.remove(); }
       var ex = fig('egx30');
       if(ex && document.documentElement.classList.contains('rcp')) ear('r', 'EGX30 this week', n0(ex.now), ex.chg == null ? '' : (ex.chg >= 0 ? 'Up ' : 'Down ') + Math.abs(ex.chg).toFixed(1) + '%');
@@ -1077,7 +1085,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     // paper mode's dateline: the edition's number, the place and date, and Listen
     [].slice.call(document.querySelectorAll('.p-dateline')).forEach(function(x){ x.remove(); });
     var no = editions.filter(function(e){ return !e.id && e.date <= ed.date; }).length, dl = document.createElement('div');
-    dl.className = 'p-dateline'; dl.innerHTML = '<span>No. '+no+'</span><span>Cairo, '+esc(pretty(ed.date))+'</span><span><button type="button" id="p-listen">Listen \u25b8</button></span>';
+    dl.className = 'p-dateline'; dl.innerHTML = '<span>No. '+no+'</span><span>'+dlDate(ed.date)+'</span><span><button type="button" id="p-listen">Listen \u25b8</button></span>';
     what.parentNode.insertBefore(dl, strip);
     dl.querySelector('#p-listen').addEventListener('click', function(){ var b = document.getElementById('listenBtn'); if(b) b.click(); });
     // the lead: its first sentence is the standfirst, the rest runs in two columns
@@ -1181,6 +1189,8 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
       var n0 = function(v){ return Math.round(v).toLocaleString('en-US'); }, n2 = function(v){ return v.toFixed(2); };
       var cells = cell('EGX30','egx30',n0,false,'/desk/egx/') + cell('USD/EGP','usd_egp',n2,true,'/desk/egp/') + cell('Gold 24K','gold24_egp',n0,false,'/desk/egp/#c-gold') + cell('Brent','brent',function(v){return '$'+n2(v)},false,'/desk/global/') + cell('S&amp;P 500','sp500',n0,false,'/desk/us/')
         + cell('Nasdaq','nasdaq',n0,false,'/desk/us/').replace('<a ', '<a class="f-x" ') + cell('Bitcoin','btc',function(v){return '$'+n0(v)},false,'/desk/global/#g-btc').replace('<a ', '<a class="f-x" ') + wx;
+      // on a phone the tape opens with the week it covers, so its changes read as the week's, not the day's
+      if(cells && document.documentElement.classList.contains('rcp') && m) cells = '<div class="rf-wk"><span>This week</span><b>'+esc(m[1].slice(0,3)+' '+m[2]+'\u2013'+(m[3] ? m[3].slice(0,3)+' ' : '')+m[4])+'</b><em>weekly change</em></div>' + cells;
       var el = document.getElementById('f-strip'); if(el){ if(cells) el.innerHTML = cells; else el.remove(); }
       // paper mode: the "ears" beside the name (the weather, the EGX30's close) and a boxed markets panel in the rail
       [].slice.call(document.querySelectorAll('.p-ear')).forEach(function(x){ x.remove(); });

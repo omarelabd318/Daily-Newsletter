@@ -333,17 +333,41 @@
   // the wide front page: fill it from the day's edition
   var front = function (md, e) {
     var g = [], watch = '', hits = {}, para = {};
+    // the Saturday recap has no daily sections: its own parts are kept by section (The Week in Brief, What Tied the
+    // Week Together, Since Friday, the markets table)
+    var rc = /-recap$/.test(e.id || ''), sec = '', tied = [], since = [], tab = [];
     md.split('\n').forEach(function (l) {
       var m;
+      if ((m = l.match(/^##\s+(.+)$/))) { sec = slug(m[1]); return; }
+      if (rc && sec === 'what-tied-the-week-together' && /^[A-Z]/.test(l)) tied.push(plain(l));
+      if (rc && sec === 'markets-this-week' && (m = l.match(/^\|\s*([^|]+?)\s*\|[^|]*\|\s*([+\-\u2212][\d.]+%)\s*\|$/))) tab.push([m[1], m[2]]);
       if ((m = l.match(/^\d+\.\s+\*\*(.+?):\*\*\s*(.+)$/))) { var a = m[2].match(/\(#story-([^)]+)\)/); g.push({ k: plain(m[1]), t: plain(m[2]), a: a ? a[1] : '' }); }
       else if ((m = l.match(/^\*\*What to watch today:\*\*\s*(.+)$/))) watch = plain(m[1]);
       else if ((m = l.match(/^- \*\*(.+?):\*\*\s*(.+)$/))) hits[m[1].toLowerCase()] = plain(m[2]);
-      else if ((m = l.match(/^\*\*(.+?):\*\*\s*(.+)$/))) { var k = slug(plain(m[1])); if (!para[k]) para[k] = plain(m[2]); }
+      else if ((m = l.match(/^\*\*(.+?):\*\*\s*(.+)$/))) { var k = slug(plain(m[1])); if (!para[k]) para[k] = plain(m[2]); if (rc && sec === 'since-friday' && k !== 'weather') since.push(plain(m[1])); }
     });
     if (!g.length) { put('lead', esc(e.summary || '')); if (tw) writeOut(); return; }
-    var lead = g[0];
+    var lead = g[0], body = para[lead.a];
+    if (rc) {
+      // the recap's front page: the week as the Big Story (its summary as the headline, What Tied the Week Together
+      // as its text), the week's markets in the black panel, Since Friday beside it, and The Week in Brief below
+      var end = new Date(e.date + 'T12:00:00'), start = new Date(end.getTime() - 6 * 864e5), mo = function (x) { return x.toLocaleDateString('en-US', { month: 'long' }); };
+      var span = mo(start) + ' ' + start.getDate() + '\u2013' + (mo(start) === mo(end) ? '' : mo(end) + ' ') + end.getDate();
+      lead = { k: 'The Weekly Recap \u00b7 ' + span, t: e.summary || '' };
+      body = tied.slice(0, 2).join(' ');
+      g.unshift(null);
+      hits = {};
+      if (tab.length) put('number', '<div style="' + kick + ';color:var(--nfg);opacity:.7">The week in markets</div>' +
+        '<div style="margin-top:8px;display:grid;grid-template-columns:1fr auto;gap:5px 14px;font:500 14px/1.25 Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums">' +
+        tab.slice(0, 5).map(function (r) {
+          var n = r[0].replace(/\s*\(.*\)\s*/, '').replace(/\s+per gram.*$/i, '');
+          return '<span style="opacity:.88">' + esc(n) + '</span><b style="font-weight:700;text-align:right">' + esc(r[1].replace(/^-/, '\u2212')) + '</b>';
+        }).join('') + '</div>');
+      if (since.length) put('quote', '<div style="' + kick + '">Since Friday</div>' + since.slice(0, 3).map(function (h, i) {
+        return '<div style="' + (i ? 'margin-top:7px;padding-top:7px;border-top:' + rule + ';' : 'margin-top:7px;') + 'font:700 16px/1.25 \'Playfair Display\',Georgia,serif">' + esc(h) + '</div>';
+      }).join(''));
+    }
     put('lead-kick', esc(lead.k)); put('lead', esc(lead.t));
-    var body = para[lead.a];
     if (body) {
       bodyFull = body.replace(/\s*Why it matters:.*$/, '');
       put('body', '<p style="font:400 14.5px/21px ' + P.body + ',Georgia,serif;text-align:justify;hyphens:auto">' + esc(bodyFull) + '</p>');
@@ -603,8 +627,12 @@
       set('summary', esc(e.summary || ''));
       if (pt) writePhone();
       // the edition's number, counted as the paper's own dateline counts it
-      set('no', 'No. ' + x.editions.filter(function (y) { return !y.id && y.date <= e.date; }).length);
-      if (wideLook) fetch('/editions/' + e.date + '.md', { cache: 'no-cache' }).then(function (r) { return r.ok ? r.text() : ''; }).catch(function () { return ''; })
+      // (a Saturday recap counts its own: Weekly Recap No. 4)
+      var rc = /-recap$/.test(e.id || '');
+      set('no', rc ? 'Weekly Recap No. ' + x.editions.filter(function (y) { return /-recap$/.test(y.id || '') && y.date <= e.date; }).length
+        : 'No. ' + x.editions.filter(function (y) { return !y.id && y.date <= e.date; }).length);
+      // the newest edition's own file: the recap (or an extra edition) is filed under its id, not its date
+      if (wideLook) fetch('/editions/' + (e.id || e.date) + '.md', { cache: 'no-cache' }).then(function (r) { return r.ok ? r.text() : ''; }).catch(function () { return ''; })
         .then(function (md) { front(md, e); });
     });
   } else {
