@@ -1,0 +1,637 @@
+{
+ "date": "2026-11-21",
+ "no": 10,
+ "crossword": {
+  "size": 11,
+  "grid": [
+   "CLAP###SAGA",
+   "POLE##SPRAY",
+   "UTTER#HORSE",
+   "###RECITE##",
+   "ABS#SHE#SHY",
+   "NAT#TIL#TOE",
+   "DYE#OLD#SPA",
+   "##VARIES###",
+   "SCENE#DATED",
+   "AUNTS##GAGA",
+   "MESS###EGGS"
+  ],
+  "clues": {
+   "across": [
+    {
+     "n": 1,
+     "row": 0,
+     "col": 0,
+     "len": 4,
+     "answer": "CLAP",
+     "clue": "Applaud, or a thunder noise"
+    },
+    {
+     "n": 5,
+     "row": 0,
+     "col": 7,
+     "len": 4,
+     "answer": "SAGA",
+     "clue": "Long family epic, Icelandic style"
+    },
+    {
+     "n": 9,
+     "row": 1,
+     "col": 0,
+     "len": 4,
+     "answer": "POLE",
+     "clue": "Santa's northern address"
+    },
+    {
+     "n": 10,
+     "row": 1,
+     "col": 6,
+     "len": 5,
+     "answer": "SPRAY",
+     "clue": "Paint can's output"
+    },
+    {
+     "n": 11,
+     "row": 2,
+     "col": 0,
+     "len": 5,
+     "answer": "UTTER",
+     "clue": "Complete, as nonsense; or say aloud"
+    },
+    {
+     "n": 13,
+     "row": 2,
+     "col": 6,
+     "len": 5,
+     "answer": "HORSE",
+     "clue": "Trojan one held soldiers"
+    },
+    {
+     "n": 14,
+     "row": 3,
+     "col": 3,
+     "len": 6,
+     "answer": "RECITE",
+     "clue": "Say a poem from memory"
+    },
+    {
+     "n": 16,
+     "row": 4,
+     "col": 0,
+     "len": 3,
+     "answer": "ABS",
+     "clue": "Core gym goals, for short"
+    },
+    {
+     "n": 19,
+     "row": 4,
+     "col": 4,
+     "len": 3,
+     "answer": "SHE",
+     "clue": "Pronoun for Cleopatra"
+    },
+    {
+     "n": 20,
+     "row": 4,
+     "col": 8,
+     "len": 3,
+     "answer": "SHY",
+     "clue": "Bashful, or a little under"
+    },
+    {
+     "n": 23,
+     "row": 5,
+     "col": 0,
+     "len": 3,
+     "answer": "NAT",
+     "clue": "King Cole's first name"
+    },
+    {
+     "n": 24,
+     "row": 5,
+     "col": 4,
+     "len": 3,
+     "answer": "TIL",
+     "clue": "Informal 'up to the time that', one L short"
+    },
+    {
+     "n": 25,
+     "row": 5,
+     "col": 8,
+     "len": 3,
+     "answer": "TOE",
+     "clue": "Place for a stubbed pain"
+    },
+    {
+     "n": 26,
+     "row": 6,
+     "col": 0,
+     "len": 3,
+     "answer": "DYE",
+     "clue": "Change hair color at home"
+    },
+    {
+     "n": 27,
+     "row": 6,
+     "col": 4,
+     "len": 3,
+     "answer": "OLD",
+     "clue": "Past the prime, like fashions"
+    },
+    {
+     "n": 28,
+     "row": 6,
+     "col": 8,
+     "len": 3,
+     "answer": "SPA",
+     "clue": "Place for mud and massage"
+    },
+    {
+     "n": 29,
+     "row": 7,
+     "col": 2,
+     "len": 6,
+     "answer": "VARIES",
+     "clue": "Isn't always the same"
+    },
+    {
+     "n": 32,
+     "row": 8,
+     "col": 0,
+     "len": 5,
+     "answer": "SCENE",
+     "clue": "Part of an act in a play"
+    },
+    {
+     "n": 34,
+     "row": 8,
+     "col": 6,
+     "len": 5,
+     "answer": "DATED",
+     "clue": "Went out of style; or had a night out with"
+    },
+    {
+     "n": 38,
+     "row": 9,
+     "col": 0,
+     "len": 5,
+     "answer": "AUNTS",
+     "clue": "Your parents' sisters"
+    },
+    {
+     "n": 39,
+     "row": 9,
+     "col": 7,
+     "len": 4,
+     "answer": "GAGA",
+     "clue": "Madly in love, or a pop star's surname"
+    },
+    {
+     "n": 40,
+     "row": 10,
+     "col": 0,
+     "len": 4,
+     "answer": "MESS",
+     "clue": "Untidy room"
+    },
+    {
+     "n": 41,
+     "row": 10,
+     "col": 7,
+     "len": 4,
+     "answer": "EGGS",
+     "clue": "Easter basket fillers"
+    }
+   ],
+   "down": [
+    {
+     "n": 1,
+     "row": 0,
+     "col": 0,
+     "len": 3,
+     "answer": "CPU",
+     "clue": "Computer's brain, for short"
+    },
+    {
+     "n": 2,
+     "row": 0,
+     "col": 1,
+     "len": 3,
+     "answer": "LOT",
+     "clue": "Parking space or auction item"
+    },
+    {
+     "n": 3,
+     "row": 0,
+     "col": 2,
+     "len": 3,
+     "answer": "ALT",
+     "clue": "Keyboard key beside the space bar"
+    },
+    {
+     "n": 4,
+     "row": 0,
+     "col": 3,
+     "len": 4,
+     "answer": "PEER",
+     "clue": "Look closely; an equal"
+    },
+    {
+     "n": 5,
+     "row": 0,
+     "col": 7,
+     "len": 4,
+     "answer": "SPOT",
+     "clue": "Dalmatian's mark, or see"
+    },
+    {
+     "n": 6,
+     "row": 0,
+     "col": 8,
+     "len": 7,
+     "answer": "ARRESTS",
+     "clue": "Police make them, putting suspects in cuffs"
+    },
+    {
+     "n": 7,
+     "row": 0,
+     "col": 9,
+     "len": 3,
+     "answer": "GAS",
+     "clue": "Fertilizer plants now pay $12.75 per mmBtu for it, up 50% from $8.50"
+    },
+    {
+     "n": 8,
+     "row": 0,
+     "col": 10,
+     "len": 3,
+     "answer": "AYE",
+     "clue": "Sailor's yes"
+    },
+    {
+     "n": 10,
+     "row": 1,
+     "col": 6,
+     "len": 8,
+     "answer": "SHIELDED",
+     "clue": "Kept safe from harm"
+    },
+    {
+     "n": 12,
+     "row": 2,
+     "col": 4,
+     "len": 8,
+     "answer": "RESTORES",
+     "clue": "Brings an old painting back to life"
+    },
+    {
+     "n": 15,
+     "row": 3,
+     "col": 5,
+     "len": 5,
+     "answer": "CHILI",
+     "clue": "Spicy bowl with beans"
+    },
+    {
+     "n": 16,
+     "row": 4,
+     "col": 0,
+     "len": 3,
+     "answer": "AND",
+     "clue": "Plus, in words"
+    },
+    {
+     "n": 17,
+     "row": 4,
+     "col": 1,
+     "len": 3,
+     "answer": "BAY",
+     "clue": "Curved inlet of the sea"
+    },
+    {
+     "n": 18,
+     "row": 4,
+     "col": 2,
+     "len": 7,
+     "answer": "STEVENS",
+     "clue": "Cat singer Yusuf's former surname"
+    },
+    {
+     "n": 21,
+     "row": 4,
+     "col": 9,
+     "len": 3,
+     "answer": "HOP",
+     "clue": "Bunny's way of moving"
+    },
+    {
+     "n": 22,
+     "row": 4,
+     "col": 10,
+     "len": 3,
+     "answer": "YEA",
+     "clue": "Vote in favor"
+    },
+    {
+     "n": 30,
+     "row": 7,
+     "col": 3,
+     "len": 4,
+     "answer": "ANTS",
+     "clue": "Picnic invaders marching in line"
+    },
+    {
+     "n": 31,
+     "row": 7,
+     "col": 7,
+     "len": 4,
+     "answer": "SAGE",
+     "clue": "Wise one, or an herb"
+    },
+    {
+     "n": 32,
+     "row": 8,
+     "col": 0,
+     "len": 3,
+     "answer": "SAM",
+     "clue": "Uncle in red, white and blue"
+    },
+    {
+     "n": 33,
+     "row": 8,
+     "col": 1,
+     "len": 3,
+     "answer": "CUE",
+     "clue": "Director's signal; a pool stick"
+    },
+    {
+     "n": 35,
+     "row": 8,
+     "col": 8,
+     "len": 3,
+     "answer": "TAG",
+     "clue": "Playground chase game"
+    },
+    {
+     "n": 36,
+     "row": 8,
+     "col": 9,
+     "len": 3,
+     "answer": "EGG",
+     "clue": "Omelet starter"
+    },
+    {
+     "n": 37,
+     "row": 8,
+     "col": 10,
+     "len": 3,
+     "answer": "DAS",
+     "clue": "German 'the', neuter"
+    }
+   ]
+  },
+  "news": []
+ },
+ "killer": {
+  "level": 6,
+  "solution": "657412893948357126213698745874931652362574918195826374586749231731285469429163587",
+  "cages": [
+   {
+    "sum": 17,
+    "cells": [
+     52,
+     53,
+     60,
+     61,
+     62
+    ]
+   },
+   {
+    "sum": 20,
+    "cells": [
+     6,
+     7,
+     8
+    ]
+   },
+   {
+    "sum": 23,
+    "cells": [
+     29,
+     30,
+     31,
+     38,
+     39
+    ]
+   },
+   {
+    "sum": 18,
+    "cells": [
+     2,
+     11,
+     20
+    ]
+   },
+   {
+    "sum": 16,
+    "cells": [
+     9,
+     10,
+     18,
+     19
+    ]
+   },
+   {
+    "sum": 22,
+    "cells": [
+     15,
+     23,
+     24,
+     33
+    ]
+   },
+   {
+    "sum": 20,
+    "cells": [
+     54,
+     63,
+     64,
+     65,
+     72
+    ]
+   },
+   {
+    "sum": 12,
+    "cells": [
+     16,
+     25,
+     34,
+     43
+    ]
+   },
+   {
+    "sum": 24,
+    "cells": [
+     67,
+     74,
+     75,
+     76
+    ]
+   },
+   {
+    "sum": 26,
+    "cells": [
+     40,
+     41,
+     42,
+     50
+    ]
+   },
+   {
+    "sum": 18,
+    "cells": [
+     69,
+     70,
+     77,
+     78
+    ]
+   },
+   {
+    "sum": 15,
+    "cells": [
+     4,
+     5,
+     13,
+     14
+    ]
+   },
+   {
+    "sum": 31,
+    "cells": [
+     47,
+     56,
+     57,
+     58,
+     59
+    ]
+   },
+   {
+    "sum": 24,
+    "cells": [
+     71,
+     79,
+     80
+    ]
+   },
+   {
+    "sum": 15,
+    "cells": [
+     27,
+     28
+    ]
+   },
+   {
+    "sum": 11,
+    "cells": [
+     0,
+     1
+    ]
+   },
+   {
+    "sum": 1,
+    "cells": [
+     32
+    ]
+   },
+   {
+    "sum": 5,
+    "cells": [
+     68
+    ]
+   },
+   {
+    "sum": 10,
+    "cells": [
+     48,
+     49
+    ]
+   },
+   {
+    "sum": 2,
+    "cells": [
+     73
+    ]
+   },
+   {
+    "sum": 3,
+    "cells": [
+     12
+    ]
+   },
+   {
+    "sum": 15,
+    "cells": [
+     21,
+     22
+    ]
+   },
+   {
+    "sum": 4,
+    "cells": [
+     3
+    ]
+   },
+   {
+    "sum": 3,
+    "cells": [
+     51
+    ]
+   },
+   {
+    "sum": 2,
+    "cells": [
+     66
+    ]
+   },
+   {
+    "sum": 2,
+    "cells": [
+     35
+    ]
+   },
+   {
+    "sum": 11,
+    "cells": [
+     17,
+     26
+    ]
+   },
+   {
+    "sum": 8,
+    "cells": [
+     44
+    ]
+   },
+   {
+    "sum": 9,
+    "cells": [
+     46
+    ]
+   },
+   {
+    "sum": 8,
+    "cells": [
+     55
+    ]
+   },
+   {
+    "sum": 10,
+    "cells": [
+     36,
+     37,
+     45
+    ]
+   }
+  ]
+ }
+}

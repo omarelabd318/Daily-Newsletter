@@ -14,8 +14,8 @@
    "drivers": [
     "oil"
    ],
-   "now": "A Houthi missile damaged Riyadh's PIF Tower, home of Saudi Arabia's sovereign wealth fund, on November 19, the second landmark in the capital hit this month, and the US Embassy in Kuwait warned Americans across the region to prepare for airspace closures. The US Senate rejected a resolution to end US involvement in the war 51-48 the same day, and talks with Tehran remain stalled.",
-   "now_date": "2026-11-20"
+   "now": "The Houthis fired three missiles at Riyadh early on November 21, all intercepted by the Saudi-led coalition, two days after a Houthi missile damaged the PIF Tower, and their forces were about 80 kilometers from Aden. Tankers were hit near Khasab, Oman, on November 20 and 21, and talks with Tehran remain stalled.",
+   "now_date": "2026-11-21"
   },
   {
    "id": "pound-cbe",
@@ -46,8 +46,8 @@
    "drivers": [
     "ai-spending"
    ],
-   "now": "An AI-led selloff deepened on November 19 and 20: Nvidia fell 3.3% to $145.98 and AMD almost 8%, the Nasdaq lost 2.25%, and on Friday Taiwan's market fell 6.2% to cap its worst week since 1991. Anthropic closed its first trading day at $97.17, 17% above its $83 offer price, without lifting the market.",
-   "now_date": "2026-11-20"
+   "now": "The AI-led selloff ended the week of November 16-20 with the Nasdaq down 10% and the S&P 500 and Dow in correction. Nvidia fell 14% to $125.53 on November 20 after a Reuters report that SEC staff are examining its accounting, a 23% loss on the week, and Anthropic closed its second day at $88.30, below its $97.17 debut close.",
+   "now_date": "2026-11-21"
   },
   {
    "id": "us-midterms",
@@ -104,7 +104,7 @@
    ],
    "drivers": [],
    "now": "IMF staff and Egypt reached a staff-level agreement on November 18 on the eighth and final review of the Extended Fund Facility, worth about $1.5 billion, and the third review of the Resilience and Sustainability Facility, worth up to about $800 million. Executive board approval is still needed, with no date set, and both arrangements expire on December 15.",
-   "now_date": "2026-11-19"
+   "now_date": "2026-11-21"
   },
   {
    "id": "gaza-lebanon",
@@ -128,15 +128,15 @@
    "drivers": [
     "oil"
    ],
-   "now": "Brent settled at $91.98 a barrel on November 19 and held near $92 on November 20 after a Houthi strike on Riyadh, though it is down about 19% this month.",
-   "now_date": "2026-11-20"
+   "now": "Brent settled at $92.57 a barrel on November 20, up 0.64% on the day but down about 3.4% on the week, its third weekly fall, as exports through Hormuz recovered.",
+   "now_date": "2026-11-21"
   },
   {
    "id": "saudi-deployment",
    "name": "Egypt's forces in Saudi Arabia",
    "match": "Egyptian (troops|forces) in Saudi|deployment to Saudi|Saudi deployment|military presence there|troops in Saudi",
-   "now": "Foreign Minister Badr Abdelatty says Egyptian troops have been in Saudi Arabia for months on a defensive mission and will not enter Yemen. Saudi Arabia replaced its Yemen coalition commander on November 16 as the Houthis pushed to about 60 kilometers from Aden.",
-   "now_date": "2026-11-17",
+   "now": "Foreign Minister Badr Abdelatty says Egyptian troops have been in Saudi Arabia for months on a defensive mission and will not enter Yemen. Houthi missiles were fired at Riyadh on November 19 and 21 as Houthi forces pressed toward Aden.",
+   "now_date": "2026-11-21",
    "related": [],
    "drivers": []
   },
@@ -151,6 +151,160 @@
   }
  ],
  "stories": [
+  {
+   "ed": "2026-11-21-recap",
+   "id": "story-wall-street-s-rout-deepens",
+   "lead": "Wall Street's rout deepens",
+   "sec": "Since Friday",
+   "text": "US stocks had their worst week since 2020 on Friday, when the S&P 500 fell 3.7% to 6,910.39, the Nasdaq 5.28% to 22,617.73 and the Dow 1.93% to 48,147.33. The S&P 500 and the Dow closed in correction territory, the S&P's seventh straight…",
+   "topics": [
+    "ai-chips"
+   ],
+   "added": [
+    "ai-chips"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-21-recap",
+   "id": "story-treasury-bill-auction",
+   "lead": "Treasury bill auction",
+   "sec": "How It Played Out",
+   "text": "Watched for demand after a week of foreign selling; the one-year bill cleared at 26.16%, up from 26.07%.",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-11-21-recap",
+   "id": "story-the-iran-war-without-talks",
+   "lead": "The Iran war, without talks",
+   "sec": "Region and World",
+   "text": "Iran claimed drone strikes on US radar sites in Bahrain and a US base in Kuwait during the week; US Central Command said the November 17 attack was intercepted with no damage. The US Senate rejected a resolution to end US involvement in…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-21-recap",
+   "id": "story-the-imf-program-s-last-step",
+   "lead": "The IMF program's last step",
+   "sec": "Egypt This Week",
+   "text": "IMF staff and Egypt reached a staff-level agreement on November 18 on the eighth and final review of the Extended Fund Facility, worth about $1.5 billion, and the third review of the Resilience and Sustainability Facility, worth up to…",
+   "topics": [
+    "imf"
+   ]
+  },
+  {
+   "ed": "2026-11-21-recap",
+   "id": "story-prices-and-listings",
+   "lead": "Prices and listings",
+   "sec": "Egypt This Week",
+   "text": "The Consumer Protection Agency warned that sellers who hide prices behind \"DM for price\" posts face fines of up to EGP 500,000 or the value of the goods, whichever is higher, under existing law. Misr Life Insurance plans to sell 750…",
+   "topics": [
+    "misr-life"
+   ],
+   "added": [
+    "misr-life"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-21-recap",
+   "id": "story-nvidia-s-results",
+   "lead": "Nvidia's results",
+   "sec": "How It Played Out",
+   "text": "Expected to show whether AI spending still held up; revenue rose to $115.8 billion and guidance to $130 billion beat forecasts, but the shares fell 23% on the week.",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-11-21-recap",
+   "id": "story-missiles-over-riyadh",
+   "lead": "Missiles over Riyadh",
+   "sec": "Since Friday",
+   "text": "The Saudi-led coalition said its air defenses intercepted and destroyed three ballistic missiles fired by the Houthis toward Riyadh early on Saturday, with no casualties reported. It was the second attack on the Saudi capital in three…",
+   "topics": [
+    "iran-war"
+   ],
+   "added": [
+    "iran-war"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-21-recap",
+   "id": "story-libya-india-and-saudi-arabia",
+   "lead": "Libya, India and Saudi Arabia",
+   "sec": "Egypt This Week",
+   "text": "Egypt and Libya signed agreements on gas infrastructure, fisheries and labor during Libyan Prime Minister Abdulhamid Dbeibah's visit on November 19, a day after Cairo called the Turkey-Libya maritime memorandum \"null\" and not binding on…",
+   "topics": [
+    "saudi-deployment"
+   ],
+   "added": [
+    "saudi-deployment"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-21-recap",
+   "id": "story-houthis-close-in-on-aden",
+   "lead": "Houthis close in on Aden",
+   "sec": "Region and World",
+   "text": "Houthi forces were about 80 kilometers north and 110 kilometers west of Aden by November 20, according to Reuters, after government forces left positions on the Bab el-Mandeb strait; Saudi Arabia replaced its Yemen coalition commander on…",
+   "topics": [
+    "iran-war"
+   ],
+   "added": [
+    "iran-war"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-21-recap",
+   "id": "story-gaza-s-truce-strained",
+   "lead": "Gaza's truce strained",
+   "sec": "Region and World",
+   "text": "Israeli tanks crossed the \"yellow line\" near Nuseirat and Bureij in central Gaza on November 18, the first announced ground operation past the boundary since the October 2025 ceasefire, targeting a tunnel, and Israel said the operation…",
+   "topics": [
+    "gaza-lebanon"
+   ]
+  },
+  {
+   "ed": "2026-11-21-recap",
+   "id": "story-energy-gas-and-the-canal",
+   "lead": "Energy, gas and the canal",
+   "sec": "Egypt This Week",
+   "text": "Gas for fertilizer plants now costs $12.75 per mmBtu, up 50% from $8.50, from November 16 to December 31, in return for the right to export full output, Abu Qir Fertilizers disclosed. The Mina West gas field began producing two months…",
+   "topics": [
+    "gas-fertilizer"
+   ]
+  },
+  {
+   "ed": "2026-11-21-recap",
+   "id": "story-chips-for-china",
+   "lead": "Chips for China",
+   "sec": "Culture and Tech",
+   "text": "US officials approved the sale of almost 580,000 Nvidia chips to Chinese companies under a revenue-sharing plan, according to House Foreign Affairs Committee documents reported by The Washington Post, as worries over chip sales to China…",
+   "topics": [
+    "ai-chips"
+   ],
+   "added": [
+    "ai-chips"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-21-recap",
+   "id": "story-america-s-new-senate",
+   "lead": "America's new Senate",
+   "sec": "Region and World",
+   "text": "Democrat Mary Peltola won Alaska's Senate race on November 17 with 50.1% of first-choice votes, the ninth Republican seat Democrats took in the November 3 midterms, their biggest gain since 1958, leaving them with 56 seats from January.",
+   "topics": [
+    "us-midterms"
+   ]
+  },
   {
    "ed": "2026-11-20",
    "id": "story-us-warning-in-the-gulf",

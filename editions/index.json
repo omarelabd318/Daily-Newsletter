@@ -1,6 +1,12 @@
 {
   "editions": [
     {
+      "date": "2026-11-21",
+      "id": "2026-11-21-recap",
+      "label": "Weekly Recap",
+      "summary": "An IMF deal closes Egypt's loan program, the minimum wage rises, and Wall Street has its worst week since 2020."
+    },
+    {
       "date": "2026-11-20",
       "summary": "Egypt and Libya sign energy deals, trade deficit widens 60.6%, $38.2bn debt service, AI selloff hits Wall Street and Asia"
     },
