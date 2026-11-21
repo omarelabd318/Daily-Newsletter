@@ -596,7 +596,72 @@
 
   // ---- leave once the page is ready (MIN to MAX after launch); on a phone or a computer it waits for a tap or a click
   var gone = false, armed = false;
-  var go = function () { if (gone) return; gone = true; el.classList.add('out'); setTimeout(function () { el.remove(); }, 400); };
+  // on a phone the newsletter's front page (look 2) leaves in one of a few ways (data-out on the <script> tag, ?out=
+  // previews): 1 the sheet opens out into the page, 2 it turns like a page, 3 it lifts away like a cover, 4 the
+  // masthead's black rule runs down the screen and prints the page behind it; 0 (or none) the plain fade
+  var out = +(q.get('out') || me.dataset.out || 0);
+  if (!(app === 'news' && phone && !wide && look === 2) || still) out = 0;
+  var rise = function (ms, delay) {
+    // the page under the sheet comes up a few pixels as it is uncovered
+    var st = d.createElement('style');
+    st.textContent = '.mast-frame,#content{animation:sp-page ' + ms + 'ms ' + (delay || 0) + 'ms cubic-bezier(.2,.7,.2,1) both}' +
+      '@keyframes sp-page{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}';
+    d.head.appendChild(st); setTimeout(function () { st.remove(); }, ms + (delay || 0) + 60);
+  };
+  var outs = {
+    1: function () {
+      var sh = el.querySelector('style + div'), r = sh.getBoundingClientRect(), cs = getComputedStyle(sh);
+      var bx = d.createElement('div');
+      bx.style.cssText = 'position:fixed;left:' + r.left + 'px;top:' + r.top + 'px;width:' + r.width + 'px;height:' + r.height + 'px;' +
+        'background:' + P.sheet + ';border-radius:4px;box-shadow:' + cs.boxShadow + ';z-index:2147483001;' +
+        'transition:left .5s cubic-bezier(.7,0,.2,1),top .5s cubic-bezier(.7,0,.2,1),width .5s cubic-bezier(.7,0,.2,1),height .5s cubic-bezier(.7,0,.2,1),border-radius .5s,box-shadow .5s,opacity .3s ease .5s';
+      d.body.appendChild(bx);
+      sh.style.transition = 'opacity .16s ease'; sh.style.opacity = 0;
+      el.querySelector('.tap-hint').style.opacity = 0;
+      requestAnimationFrame(function () { requestAnimationFrame(function () {
+        bx.style.left = bx.style.top = '0px'; bx.style.width = '100vw'; bx.style.height = '100vh';
+        bx.style.borderRadius = '0'; bx.style.boxShadow = '0 0 0 rgba(0,0,0,0)';
+        setTimeout(function () { el.remove(); rise(420); bx.style.opacity = 0; }, 500);
+        setTimeout(function () { bx.remove(); }, 900);
+      }); });
+    },
+    2: function () {
+      var sh = el.querySelector('style + div');
+      el.style.transition = 'background-color .55s ease'; el.style.backgroundColor = 'transparent';
+      el.querySelector('.tap-hint').style.opacity = 0;
+      el.style.perspective = '1100px';
+      sh.style.cssText += ';transform-origin:0 50%;transition:transform .7s cubic-bezier(.55,0,.25,1),filter .7s ease,opacity .25s ease .5s;animation:none';
+      rise(600, 120);
+      requestAnimationFrame(function () { requestAnimationFrame(function () {
+        sh.style.transform = 'translateX(-' + (sh.getBoundingClientRect().left + 2) + 'px) rotateY(-100deg)';
+        sh.style.filter = 'brightness(.7)'; sh.style.opacity = 0;
+      }); });
+      setTimeout(function () { el.remove(); }, 780);
+    },
+    3: function () {
+      el.style.transition = 'transform .6s cubic-bezier(.6,0,.2,1),box-shadow .6s';
+      el.style.boxShadow = '0 18px 40px rgba(0,0,0,.25)';
+      rise(650, 60);
+      requestAnimationFrame(function () { el.style.transform = 'translateY(-104%)'; });
+      setTimeout(function () { el.remove(); }, 650);
+    },
+    4: function () {
+      var bar = d.createElement('div');
+      bar.style.cssText = 'position:fixed;left:0;right:0;top:0;height:7px;background:' + P.ink + ';z-index:2147483001;transition:transform .7s cubic-bezier(.65,0,.3,1),opacity .2s ease .7s';
+      d.body.appendChild(bar);
+      el.style.transition = 'clip-path .7s cubic-bezier(.65,0,.3,1)'; el.style.clipPath = 'inset(0 0 0 0)';
+      rise(700);
+      requestAnimationFrame(function () { requestAnimationFrame(function () {
+        el.style.clipPath = 'inset(100% 0 0 0)'; bar.style.transform = 'translateY(' + (innerHeight - 7) + 'px)'; bar.style.opacity = 0;
+      }); });
+      setTimeout(function () { el.remove(); bar.remove(); }, 950);
+    }
+  };
+  var go = function () {
+    if (gone) return; gone = true;
+    if (outs[out]) return outs[out]();
+    el.classList.add('out'); setTimeout(function () { el.remove(); }, 400);
+  };
   var leave = function () {
     if (armed || hold) return; armed = true;
     setTimeout(function () {
