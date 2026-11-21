@@ -7,7 +7,8 @@
 // - Leaves as soon as the page is ready, but stays at least MIN ms so it never just flashes, and never more than MAX.
 //   Exception: on a phone (the newsletter and the desk alike) it stays up; once the page is ready a "Tap to open"
 //   line appears, and a tap anywhere on the screen brings up the page. The newsletter's phone front page (look 2) writes
-//   its headline out letter by letter from the start.
+//   itself out as the computer's does: the name, the date and the headline typed in turn, then the masthead's rules,
+//   the four lines and the black box come up one by one.
 // - On a computer (a mouse, and a window 900px or wider) it is shown too: when the start page is opened from a
 //   bookmark, the address bar or another site (once per tab; moving between the site's own pages skips it), in a wide
 //   layout of its own, and it waits for a click ("Click to open").
@@ -99,14 +100,14 @@
     // 2. Front page: the paper sheet on the app icon grows into today's front page
     2: '<div style="width:100%;max-width:380px;padding:30px 24px 26px;background:' + P.sheet + ';background-image:radial-gradient(' + P.dots + ' 1px,transparent 1px);background-size:3px 3px;color:' + P.ink + ';border-radius:4px;box-shadow:0 24px 70px rgba(0,0,0,' + P.shadow + ');' +
        'transform-origin:center;animation:sp-grow .55s cubic-bezier(.2,.8,.2,1) both">' +
-       '<div style="font:700 clamp(54px,17vw,72px)/1 UnifrakturCook,\'Old English Text MT\',serif">Daily</div>' +
-       '<div style="margin-top:14px;height:5px;border-top:2px solid ' + P.ink + ';border-bottom:1px solid ' + P.ink + '"></div>' +
-       '<div class="in d2" style="padding:8px 0;font:600 10.5px/1.3 Inter,system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase" data-k="date">&nbsp;</div>' +
-       '<div style="height:7px;background:' + P.ink + '"></div>' +
-       '<p class="late" data-k="summary" style="margin-top:18px;text-align:left;font:900 clamp(21px,6vw,26px)/1.18 \'Playfair Display\',Georgia,serif;text-wrap:pretty"></p>' +
+       '<div data-w="name" style="font:700 clamp(54px,17vw,72px)/1 UnifrakturCook,\'Old English Text MT\',serif">Daily</div>' +
+       '<div data-rr style="margin-top:14px;height:5px;border-top:2px solid ' + P.ink + ';border-bottom:1px solid ' + P.ink + '"></div>' +
+       '<div class="in d2" style="padding:8px 0;font:600 10.5px/1.3 Inter,system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase" data-w="date" data-k="date">&nbsp;</div>' +
+       '<div data-rr style="height:7px;background:' + P.ink + '"></div>' +
+       '<p class="late" data-w="summary" data-k="summary" style="margin-top:18px;text-align:left;font:900 clamp(21px,6vw,26px)/1.18 \'Playfair Display\',Georgia,serif;text-wrap:pretty"></p>' +
        '<div class="in d4" style="display:grid;grid-template-columns:1fr 92px;gap:14px;margin-top:20px;text-align:left">' +
-       '<div style="display:grid;gap:8px;align-content:start"><i style="height:5px;background:' + P.ink + '"></i><i style="height:5px;background:' + P.ink + ';width:80%"></i><i style="height:5px;background:' + P.ink + ';width:90%"></i><i style="height:5px;background:' + P.ink + ';width:60%"></i></div>' +
-       '<i style="height:62px;background:' + P.ink + ';opacity:.8"></i></div>' +
+       '<div style="display:grid;gap:8px;align-content:start">' + [100, 80, 90, 60].map(function (w) { return '<i data-ln style="height:5px;background:' + P.ink + ';width:' + w + '%"></i>'; }).join('') + '</div>' +
+       '<i data-bx style="height:62px;background:' + P.ink + ';opacity:.8"></i></div>' +
        '</div>',
     // 3. Quiet: the icon, the name and the date, nothing else
     3: '<img class="in" src="/icons/newsletter-192.png" alt="" width="88" height="88" style="border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,' + (dark ? '.5' : '.18') + ')">' +
@@ -288,6 +289,19 @@
       '#splash.tw [data-rr]{transition:opacity .6s ease}#splash.tw:not(.r-mast) [data-rr]{opacity:0}' +
       '#splash.tw [data-w=watch] [data-rl]{transition:opacity .6s ease}#splash.tw:not(.r-watch) [data-w=watch] [data-rl]{opacity:0}' +
       '#splash.tw:not(.r-watch) [data-w=watch] [data-c]{border-color:transparent!important}';
+  }
+  // the phone's front page writes itself out too, as the computer's does: a blank sheet, then the name, the date and
+  // the day's headline typed in turn; once written, the masthead's rules come up, then the four lines draw in one by
+  // one, then the black box
+  var pt = app === 'news' && !wideLook && look === 2 && !still;
+  if (pt) {
+    el.className = 'pt';
+    css += '#splash.pt [data-w]:not(.tw-on){visibility:hidden}' +
+      '#splash.pt [data-rr]{transition:opacity .6s ease}#splash.pt:not(.r-mast) [data-rr]{opacity:0}' +
+      '#splash.pt [data-ln]{transform-origin:0 50%;transition:transform .5s cubic-bezier(.2,.7,.2,1)}#splash.pt [data-ln]:not(.rv){transform:scaleX(0)}' +
+      '#splash.pt [data-bx]{transition:opacity .6s ease}#splash.pt [data-bx]:not(.rv){opacity:0!important}';
+    // if the day's edition does not come (or comes late), the sheet writes out what it has
+    setTimeout(function () { writePhone(); }, 4000);
   }
   el.innerHTML = '<style>' + css + '</style>' + (wideLook || looks[look] || looks[1]) +
     (tapOpen ? '<div class="late tap-hint">' + (phone ? 'Tap' : 'Click') + ' to open</div>' : '');
@@ -536,16 +550,28 @@
     };
     setTimeout(run, Math.max(0, 700 - (Date.now() - t0)));
   };
-  // the phone's front page writes its headline out from the first letter, as if being typed. The whole line is laid out
-  // at once (the part still to come is see-through), so the words never jump to a new line as they are written.
-  var type = function (n, t) {
-    if (!n) return;
-    var i = 0, w = t.length, step = Math.max(14, Math.min(32, 2600 / (w || 1)));
-    n.innerHTML = '<span></span><span style="color:transparent"></span>';
-    var a = n.firstChild, b = n.lastChild;
-    var tick = function () { a.textContent = t.slice(0, i); b.textContent = t.slice(i); caretAt(n, b, ''); if (i++ < w) setTimeout(tick, step); };
-    n.classList.add('on'); n.style.transition = 'none';
-    setTimeout(tick, Math.max(0, 600 - (Date.now() - t0)));
+  // the phone's front page: the name, the date and the headline typed one after another (each laid out at once with
+  // the part still to come see-through, so no word moves), then the rules, the four lines and the black box
+  var wrotePhone = false;
+  var writePhone = function () {
+    if (wrotePhone) return; wrotePhone = true;
+    var q = el.querySelector.bind(el), jobs = [];
+    var add = function (box, msPerChar, cap) { if (box) jobs.push([box, msPerChar, cap]); };
+    add(q('[data-w="name"]'), 98, 700);
+    add(q('[data-w="date"]'), 39, 1100);
+    add(q('[data-w="summary"]'), 32, 2800);
+    var run = function () {
+      var x = jobs.shift();
+      if (!x) {
+        var ends = [function () { el.classList.add('r-mast'); }].concat(
+          [].map.call(el.querySelectorAll('[data-ln],[data-bx]'), function (n) { return function () { n.classList.add('rv'); }; }));
+        ends.forEach(function (f, i) { setTimeout(f, 200 + i * 260); });
+        return;
+      }
+      var j = prep(x[0]);
+      write(j, Math.min(x[2], j.len * x[1]), function () { setTimeout(run, 140); });
+    };
+    setTimeout(run, Math.max(0, 600 - (Date.now() - t0)));
   };
   var newest = function (list) { return list.slice().sort(function (a, b) { return (b.id || b.date) < (a.id || a.date) ? -1 : 1; })[0]; };
   var json = function (u) {
@@ -556,7 +582,8 @@
     json('/editions/index.json').then(function (x) {
       var e = x && x.editions && x.editions.length && newest(x.editions); if (!e) return;
       set('date', longDate(e.date)); set('year', e.date.slice(0, 4));
-      if (!wideLook && look === 2 && !still) type(el.querySelector('[data-k="summary"]'), e.summary || ''); else set('summary', esc(e.summary || ''));
+      set('summary', esc(e.summary || ''));
+      if (pt) writePhone();
       // the edition's number, counted as the paper's own dateline counts it
       set('no', 'No. ' + x.editions.filter(function (y) { return !y.id && y.date <= e.date; }).length);
       if (wideLook) fetch('/editions/' + e.date + '.md', { cache: 'no-cache' }).then(function (r) { return r.ok ? r.text() : ''; }).catch(function () { return ''; })
