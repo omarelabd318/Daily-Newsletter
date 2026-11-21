@@ -647,7 +647,13 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 :root[data-theme="paper"] .rf-brief li b{display:block;margin:0 0 3px;font:var(--p-hw) 20px/1.12 var(--p-head),var(--serif)}
 :root[data-theme="paper"] .rf-brief li a:hover b{text-decoration:underline}
 :root[data-theme="paper"] .rf-brief li span{display:block;font-size:15px;line-height:1.42;text-align:justify;hyphens:auto;-webkit-hyphens:auto}
-:root[data-theme="paper"] .rfront .f-rail .f-inside{margin-top:0}
+:root[data-theme="paper"] .rfront .f-rail .f-inside{display:none}   /* the masthead's section row already indexes the week; a second index only stretched the rail past the brief */
+/* the recap's tape: its week as a small kicker over the figures, so the seven changes keep to one line */
+@media (min-width:641px){
+  :root[data-theme="paper"] .f-strip .rf-wk{display:block;flex:0 0 100%;padding:0 0 3px;border:0;text-align:center;font:600 10px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink2)}
+  :root[data-theme="paper"] .f-strip .rf-wk span,:root[data-theme="paper"] .f-strip .rf-wk b,:root[data-theme="paper"] .f-strip .rf-wk em{display:inline;margin:0;font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit}
+  :root[data-theme="paper"] .f-strip .rf-wk span::after,:root[data-theme="paper"] .f-strip .rf-wk b::after{content:" \00b7 "}
+}
 :root[data-theme="paper"] .rfront .f-mbox td:first-child{white-space:nowrap}
 :root[data-theme="paper"] .rfront .f-mbox caption{caption-side:bottom;padding-top:6px;text-align:left;font:italic 12px/1.35 var(--serif);color:var(--ink2)}
 :root[data-theme="paper"] .rf-hide{display:none}
