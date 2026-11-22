@@ -5,6 +5,30 @@
       "audio": false
     }
   },
+  "redirects": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "markets-desk-eg.vercel.app"
+        }
+      ],
+      "destination": "/desk/egypt/",
+      "permanent": false
+    },
+    {
+      "source": "/desk/:path([a-z0-9/-]*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "daily-newsletter-eg.vercel.app"
+        }
+      ],
+      "destination": "https://markets-desk-eg.vercel.app/desk/:path",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
       "source": "/podcast/heart.xml",

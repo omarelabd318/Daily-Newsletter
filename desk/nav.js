@@ -9,6 +9,9 @@
     egypt: [['Dashboard', '/desk/egypt/'], ['EGP', '/desk/egp/'], ['EGX', '/desk/egx/'], ['Stocks', '/desk/stocks/egypt/'], ['Sectors', '/desk/sectors/'], ['Fair value', '/desk/fairvalue/']],
     us: [['Dashboard', '/desk/usa/'], ['Wall Street', '/desk/us/'], ['Stocks', '/desk/stocks/us/'], ['Fair value', '/desk/fairvalue/?m=us']],
   };
+  // on its own address (markets-desk-eg.vercel.app, so Safari Favorites shows the desk's icon) the desk's "/" is the
+  // desk itself (vercel.json), so the newsletter link names the newsletter's address
+  const NEWS = location.hostname === 'markets-desk-eg.vercel.app' ? 'https://daily-newsletter-eg.vercel.app/' : '/';
   // which market and page a path belongs to, and the masthead's label
   function where(path, egxStock) {
     const p = path.replace(/index\.html$/, '');
@@ -131,9 +134,9 @@
     const top = TOP.map((x) => x ? `<a data-k="${x[0]}" href="${x[2]}"${x[0] === w.top ? ' aria-current="page"' : ''}${x[0] === 'runs' ? ' class="dm-runs"' : ''}>${x[1]}</a>` : '<span class="dm-sep" aria-hidden="true"></span>').join('');
     const sub = w.top && SUB[w.top] ? `<nav class="dm-n2" aria-label="${w.top === 'egypt' ? 'Egypt' : 'United States'}">${SUB[w.top].map(([n, h]) => `<a href="${h}"${h === w.sub ? ' aria-current="page"' : ''}>${n}</a>`).join('')}</nav>` : '';
     const hd = document.createElement('header'); hd.className = 'dmast';
-    hd.innerHTML = `<div class="dm-phone">${SEARCH}<a href="/">Newsletter →</a></div>
+    hd.innerHTML = `<div class="dm-phone">${SEARCH}<a href="${NEWS}">Newsletter →</a></div>
       <div class="dm-top"><a class="dm-name" href="/desk/">Markets Desk</a><span class="dm-label" id="dm-label">${esc(w.label)}</span>
-      <div class="dm-tools">${SEARCH}<button type="button" class="dm-theme">${dark ? 'Light' : 'Dark'}</button><a href="/">Newsletter →</a></div></div>
+      <div class="dm-tools">${SEARCH}<button type="button" class="dm-theme">${dark ? 'Light' : 'Dark'}</button><a href="${NEWS}">Newsletter →</a></div></div>
       <nav class="dm-n1" aria-label="Markets Desk">${top}</nav>${sub}`;
     document.body.prepend(hd);
     // light and dark switch in place: the colours are the stylesheet's, and the charts redraw themselves on the
@@ -222,7 +225,7 @@
     sheet.innerHTML = `<div class="dp-scrim"></div><div class="dp-panel" role="dialog" aria-modal="true" aria-label="More"><div class="dp-grab"></div>`
       + `<p class="dp-h">Egypt</p><div class="dp-list">${egx}</div>`
       + `<p class="dp-h">United States</p><div class="dp-list">${us}</div>`
-      + `<p class="dp-h">The desk</p><div class="dp-list">${link('/desk/global/', 'Global')}${link('/desk/views/', 'Views')}${link('/desk/week/', 'The week')}${link('/desk/runs/', 'Runs')}<a href="/">Daily Newsletter</a></div>`
+      + `<p class="dp-h">The desk</p><div class="dp-list">${link('/desk/global/', 'Global')}${link('/desk/views/', 'Views')}${link('/desk/week/', 'The week')}${link('/desk/runs/', 'Runs')}<a href="${NEWS}">Daily Newsletter</a></div>`
       + `<p class="dp-h">Look</p><div class="dp-seg"><button type="button" data-d="0">Light</button><button type="button" data-d="1">Dark</button></div>`
       + `<p class="dp-h">Offline</p><button type="button" class="dp-save"><b>Save the desk to this phone</b><small></small></button></div>`;
     document.body.appendChild(sheet);
