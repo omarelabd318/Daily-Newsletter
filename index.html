@@ -264,6 +264,9 @@ td.trend{vertical-align:middle}
 .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .spark path{fill:none;stroke:var(--ink2);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
 .spark circle{fill:var(--accent);stroke:var(--panel);stroke-width:1.5}
+.spark.daily path{stroke-width:1.25;opacity:.55}
+.spark circle.pt{fill:var(--ink2);stroke:none}
+.trend-note{font:italic 14px/1.4 var(--serif);color:var(--ink2);margin:-16px 0 24px}
 #q{width:100%;margin:8px 0 4px;padding:10px 12px;font:500 15px var(--sans);color:var(--ink);background:var(--ground);border:1px solid var(--rule);border-radius:0}
 #q:focus{outline:2px solid var(--accent);outline-offset:0}
 #results a small.where{display:block;margin-top:2px;font:600 11px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
@@ -1510,7 +1513,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     for(var i=0;i<SERIES.length;i++) if(SERIES[i][0].test(label)) return day[SERIES[i][1]] != null ? day[SERIES[i][1]] : null;
     return null;
   }
-  function spark(pts, long, title){
+  function spark(pts, long, title, dots){
     var w = long ? 120 : 56, h = long ? 26 : 16, p = 2, min = Math.min.apply(null, pts.map(function(x){return x.v})), max = Math.max.apply(null, pts.map(function(x){return x.v}));
     var span = max - min || 1, step = (w - 2*p) / (pts.length - 1);
     var xy = pts.map(function(x,i){ return [p + i*step, h - p - (x.v - min) / span * (h - 2*p)]; });
@@ -1518,8 +1521,8 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     var last = xy[xy.length-1], nf = function(v){ return v.toLocaleString('en-US'); };
     var tip = (long || title) ? ((title || 'Last 12 months') + ': ' + nf(pts[0].v) + ' → ' + nf(pts[pts.length-1].v) + ' (low ' + nf(min) + ', high ' + nf(max) + ')')
                    : pts.map(function(x){ return x.d.slice(5) + ': ' + nf(x.v); }).join('  ·  ');
-    return '<svg class="spark" viewBox="0 0 '+w+' '+h+'" width="'+w+'" height="'+h+'" role="img" aria-label="Trend: '+esc(tip)+'"><title>'+esc(tip)+'</title>'+
-      '<path d="'+d+'"/><circle cx="'+last[0].toFixed(1)+'" cy="'+last[1].toFixed(1)+'" r="2.5"/></svg>';
+    return '<svg class="spark' + (dots ? ' daily' : '') + '" viewBox="0 0 '+w+' '+h+'" width="'+w+'" height="'+h+'" role="img" aria-label="Trend: '+esc(tip)+'"><title>'+esc(tip)+'</title>'+
+      '<path d="'+d+'"/>' + (dots ? xy.slice(0, -1).map(function(c){ return '<circle class="pt" cx="'+c[0].toFixed(1)+'" cy="'+c[1].toFixed(1)+'" r="2"/>'; }).join('') : '') + '<circle cx="'+last[0].toFixed(1)+'" cy="'+last[1].toFixed(1)+'" r="2.5"/></svg>';
   }
   // the week's snapshot saved with each edition: the last five sessions of the desk's stocks and the indexes, hourly
   var weekCache = {};
@@ -1652,7 +1655,8 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
       head.textContent = label;
       // 1D draws each row's last session where the edition saved one; a row logged once a day (the EGP rates, Egyptian gold) keeps its last 7 days
       var dayAll = days && days.every(Boolean), daySome = days && days.some(Boolean);
-      var trendLabel = !p[1] ? (dayAll ? 'Last session' : daySome ? 'Last session or 7 days' : 'Last 7 days') : p[2];
+      var trendLabel = !p[1] ? (dayAll ? 'Last session' : daySome ? 'Trend' : 'Last 7 days') : p[2];
+      var mixed = false;
       if(trendHead) trendHead.textContent = trendLabel;
       rows.forEach(function(tr, i){
         var cell = tr.children[ci], pts = series[i] || [];
@@ -1663,11 +1667,18 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
         if(t){
           var win = p[1] <= 7 ? pts.slice(-7) : pts.filter(function(x){ return x.d >= cutoff(upto, p[1]); });
           var dl = !p[1] && days && days[i];
-          t.innerHTML = dl ? spark(dl.pts, false, dl.title) : p[1] <= 7 && weeks && weeks[i] ? spark(weeks[i], false, weeks[i].title) : p[1] === 30 && months && months[i] ? spark(months[i], false, 'Last 30 days, hourly') : win.length >= 2 ? spark(win, false, p[1] > 7 ? p[2] : !p[1] ? 'Last 7 days' : null) : '';
+          t.innerHTML = dl ? spark(dl.pts, false, dl.title) : p[1] <= 7 && weeks && weeks[i] ? spark(weeks[i], false, weeks[i].title) : p[1] === 30 && months && months[i] ? spark(months[i], false, 'Last 30 days, hourly') : win.length >= 2 ? spark(win, false, p[1] > 7 ? p[2] : !p[1] ? 'Last 7 days, one price a day' : null, p[1] <= 7) : '';
+          if(p[1] <= 7 && !dl && !(weeks && weeks[i]) && win.length >= 2) mixed = true;
           t.setAttribute('data-label', dl ? dl.title : p[1] <= 7 ? (weeks && weeks[i] ? weeks[i].title.replace(', hourly', '') : 'Last 7 days') : p[2]);
         }
       });
+      // where daily-only lines sit beside detailed ones, say why they look different
+      var detailed = rows.some(function(tr, i){ return (!p[1] && days && days[i]) || (p[1] <= 7 && weeks && weeks[i]); });
+      note.hidden = !(mixed && detailed);
     }
+    var note = document.createElement('p');
+    note.className = 'trend-note'; note.hidden = true;
+    note.textContent = 'Dotted lines have one price a day: the EGP rates and Egyptian gold are set once a day; the dollar index, gold and Brent trade around the clock.';
     var bar = document.createElement('div');
     bar.className = 'pbar'; bar.setAttribute('role', 'group'); bar.setAttribute('aria-label', 'Change over');
     bar.innerHTML = '<span class="pbar-l">Change over</span>' + PERIODS.map(function(p, i){ return '<button type="button" aria-pressed="' + (i === 0) + '">' + p[0] + '</button>'; }).join('');
@@ -1678,6 +1689,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
       });
     });
     table.closest('.tablewrap').insertAdjacentElement('beforebegin', bar);
+    table.closest('.tablewrap').insertAdjacentElement('afterend', note);
     apply(PERIODS[0]);
   }
 
