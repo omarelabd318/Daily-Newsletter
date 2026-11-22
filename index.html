@@ -1527,12 +1527,18 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     if(!weekCache[date]) weekCache[date] = fetch('data/weeks/' + date + '.json', {cache:'no-cache'}).then(function(r){ return r.ok ? r.json() : null; }).catch(function(){ return null; });
     return weekCache[date];
   }
-  var WKEY = [[/^EGX30/i, 'egx', 'EGX30'], [/^S&P 500/i, 'us', 'sp500'], [/^Nasdaq/i, 'us', 'COMP'], [/^Dow/i, 'us', 'dow']];
+  // the round-the-clock markets (the currency table's dollar index, Brent, gold and Bitcoin) are saved as g_KEY
+  var WKEY = [[/^EGX30/i, 'egx', 'EGX30'], [/^S&P 500/i, 'us', 'sp500'], [/^Nasdaq/i, 'us', 'COMP'], [/^Dow/i, 'us', 'dow'],
+    [/dollar index|\bDXY\b/i, 'g_dxy', 'dxy'], [/brent/i, 'g_brent', 'brent'], [/gold.*(global|ounce|oz|spot)|(global|spot).*gold/i, 'g_gold_usd', 'gold_usd'], [/bitcoin|\bBTC\b/i, 'g_btc', 'btc']];
+  function seriesKey(W, label){
+    var t = label.match(/\(([A-Z][A-Z.]{0,5})\)/);
+    if(t && !/^(DXY|BTC)$/.test(t[1])) return [(W.egx || []).some(function(w){ return w.series[t[1]]; }) ? 'egx' : 'us', t[1]];
+    for(var i = 0; i < WKEY.length; i++) if(WKEY[i][0].test(label.trim())) return [WKEY[i][1], WKEY[i][2]];
+    return [null, null];
+  }
   function weekPts(WK, label){
     if(!WK) return null;
-    var mk = null, k = null, t = label.match(/\(([A-Z][A-Z.]{0,5})\)/);
-    if(t){ k = t[1]; mk = (WK.egx || []).some(function(w){ return w.series[k]; }) ? 'egx' : 'us'; }
-    else for(var i = 0; i < WKEY.length; i++) if(WKEY[i][0].test(label.trim())){ mk = WKEY[i][1]; k = WKEY[i][2]; break; }
+    var sk = seriesKey(WK, label), mk = sk[0], k = sk[1];
     if(!mk) return null;
     var S = WK[mk] || [];
     // only a full week: the row's prices must run to the market's latest saved session, over three sessions or more
@@ -1540,16 +1546,25 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     if(has.length < 3 || !S.length || has[has.length - 1].session !== S[S.length - 1].session) return null;
     var pts = [];
     has.forEach(function(w){ w.series[k].forEach(function(p){ pts.push({d: w.session.slice(5) + ' ' + p[0], v: p[1]}); }); });
+    pts.title = mk.indexOf('g_') === 0 ? 'Last 7 days, hourly' : 'Last 5 sessions, hourly';
     return pts;
+  }
+  // the last session, every 10 minutes (EGX, US), or the last 24 hours (dollar index, Brent, gold, Bitcoin): the 1D line
+  function dayPts(WK, label){
+    var D = WK && WK.day;
+    if(!D) return null;
+    var sk = seriesKey(WK, label), mk = sk[0], k = sk[1];
+    if(!mk) return null;
+    var g = mk.indexOf('g_') === 0, S = g ? D.global : D[mk], a = S && S.series && S.series[k];
+    if(!a || a.length < 5) return null;
+    return {title: g ? 'Last 24 hours' : 'Session of ' + S.session.slice(5), pts: a.map(function(p){ return {d: p[0], v: p[1]}; })};
   }
   // the month through the day (desk/intraday.json's "month", every 30 minutes): a 1M line drawn hourly, for an
   // edition whose sessions the store still covers in full; older editions keep their daily closes
   var monthP = null;
   function monthPts(MO, label, upto){
     if(!MO) return null;
-    var mk = null, k = null, t = label.match(/\(([A-Z][A-Z.]{0,5})\)/);
-    if(t){ k = t[1]; mk = (MO.egx || []).some(function(w){ return w.series[k]; }) ? 'egx' : 'us'; }
-    else for(var i = 0; i < WKEY.length; i++) if(WKEY[i][0].test(label.trim())){ mk = WKEY[i][1]; k = WKEY[i][2]; break; }
+    var sk = seriesKey(MO, label), mk = sk[0], k = sk[1];
     if(!mk) return null;
     var from = new Date(new Date(upto + 'T12:00:00') - 30 * 864e5).toISOString().slice(0, 10);
     var S = (MO[mk] || []).filter(function(w){ return w.session < upto && w.session > from; });
@@ -1582,7 +1597,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
         // the week through each session, hour by hour, where the edition's snapshot has it (data/weeks/DATE.json)
         var weeks = [].map.call(table.querySelectorAll('tbody tr'), function(tr){ var c = tr.querySelector('td'); return !long && c ? weekPts(WK, c.textContent) : null; });
         var lines = series.map(function(pts, i){
-          if(weeks[i] && pts.length) return spark(weeks[i], false, 'Last 5 sessions, hourly');
+          if(weeks[i] && pts.length) return spark(weeks[i], false, weeks[i].title);
           pts = pts.slice(long ? -260 : -7);
           return pts.length >= 2 ? spark(pts, long) : '';
         });
@@ -1596,7 +1611,8 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
         });
         var sec = table.closest('.s'), name = sec && sec.querySelector('h2') ? sec.querySelector('h2').textContent.trim() : '';
         var months = [].map.call(table.querySelectorAll('tbody tr'), function(tr){ var c = tr.querySelector('td'); return !long && c ? monthPts(MO, c.textContent, upto) : null; });
-        if(!long && /^(Stocks Watch|Currency and Commodities Watch)$/.test(name)) addPeriods(table, series, upto, name !== 'Stocks Watch', weeks, months);
+        var dayl = [].map.call(table.querySelectorAll('tbody tr'), function(tr){ var c = tr.querySelector('td'); return !long && c ? dayPts(WK, c.textContent) : null; });
+        if(!long && /^(Stocks Watch|Currency and Commodities Watch)$/.test(name)) addPeriods(table, series, upto, name !== 'Stocks Watch', weeks, months, dayl);
       });
       });
     });
@@ -1605,7 +1621,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
   // ---- change over 1D / 1W / 1M / 6M / 1Y: a switch above Stocks Watch and the currency table ----
   // The 1D figures in Stocks Watch are the run's own; every other figure is worked out from the data log,
   // and the trend line redraws over the same period.
-  var PERIODS = [['1D',0,'Last 7 days'],['1W',7,'Last 7 days'],['1M',30,'Last 30 days'],['6M',182,'Last 6 months'],['1Y',365,'Last 12 months']];
+  var PERIODS = [['1D',0,'Last session'],['1W',7,'Last 7 days'],['1M',30,'Last 30 days'],['6M',182,'Last 6 months'],['1Y',365,'Last 12 months']];
   function cutoff(upto, back){ return new Date(new Date(upto+'T12:00:00') - back * 864e5).toISOString().slice(0,10); }
   function chgHtml(v, bold){
     if(v == null) return 'n/a';
@@ -1619,7 +1635,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     else { var cut = cutoff(upto, back); for(var j = pts.length-1; j >= 0; j--) if(pts[j].d <= cut){ base = pts[j].v; break; } }
     return base ? (last / base - 1) * 100 : null;
   }
-  function addPeriods(table, series, upto, addColumn, weeks, months){
+  function addPeriods(table, series, upto, addColumn, weeks, months, days){
     var heads = [].slice.call(table.querySelectorAll('thead th')), ci;
     if(addColumn){   // the currency table gets a Change column after Level
       var li = heads.findIndex(function(th){ return th.textContent.trim() === 'Level'; });
@@ -1634,7 +1650,10 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     function apply(p){
       var label = p[0] === '1D' ? 'Change' : 'Change (' + p[0] + ')';
       head.textContent = label;
-      if(trendHead) trendHead.textContent = p[2];
+      // 1D draws each row's last session where the edition saved one; a row logged once a day (the EGP rates, Egyptian gold) keeps its last 7 days
+      var dayAll = days && days.every(Boolean), daySome = days && days.some(Boolean);
+      var trendLabel = !p[1] ? (dayAll ? 'Last session' : daySome ? 'Last session or 7 days' : 'Last 7 days') : p[2];
+      if(trendHead) trendHead.textContent = trendLabel;
       rows.forEach(function(tr, i){
         var cell = tr.children[ci], pts = series[i] || [];
         if(p[0] === '1D' && !addColumn) cell.innerHTML = orig[i];
@@ -1643,8 +1662,9 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
         var t = tr.querySelector('td.trend');
         if(t){
           var win = p[1] <= 7 ? pts.slice(-7) : pts.filter(function(x){ return x.d >= cutoff(upto, p[1]); });
-          t.innerHTML = p[1] <= 7 && weeks && weeks[i] ? spark(weeks[i], false, 'Last 5 sessions, hourly') : p[1] === 30 && months && months[i] ? spark(months[i], false, 'Last 30 days, hourly') : win.length >= 2 ? spark(win, false, p[1] > 7 ? p[2] : null) : '';
-          t.setAttribute('data-label', p[2]);
+          var dl = !p[1] && days && days[i];
+          t.innerHTML = dl ? spark(dl.pts, false, dl.title) : p[1] <= 7 && weeks && weeks[i] ? spark(weeks[i], false, weeks[i].title) : p[1] === 30 && months && months[i] ? spark(months[i], false, 'Last 30 days, hourly') : win.length >= 2 ? spark(win, false, p[1] > 7 ? p[2] : !p[1] ? 'Last 7 days' : null) : '';
+          t.setAttribute('data-label', dl ? dl.title : p[1] <= 7 ? (weeks && weeks[i] ? weeks[i].title.replace(', hourly', '') : 'Last 7 days') : p[2]);
         }
       });
     }

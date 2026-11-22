@@ -9,6 +9,11 @@ Keeps, from desk/intraday.json's "week", the sessions before DATE (the closes th
 Nasdaq Composite, the S&P 500, the Dow and the desk's stocks, one price an hour plus each session's last, so every
 edition keeps its own detailed week however the intraday file changes later. About 15 KB a day. The site draws the
 Stocks Watch lines from it, and falls back to daily closes for anything it lacks.
+
+Also kept: "g_dxy", "g_brent", "g_gold_usd" and "g_btc", the round-the-clock markets' last seven days one price an
+hour (the currency table's 1W lines), and "day", the last session of each market before DATE every 10 minutes and the
+global markets' last 24 hours every 15 (the 1D lines of both tables). About 60 KB a day in all. The EGP rates and
+Egyptian gold are logged once a day, so their lines stay daily.
 """
 import datetime
 import json
@@ -38,12 +43,29 @@ def main(a):
     for mk in ("egx", "us"):
         sess = [w for w in W.get(mk, []) if w["session"] < date]
         out[mk] = [{"session": w["session"], "series": {k: hourly(v) for k, v in (w.get("series") or {}).items() if len(v) >= 2}} for w in sess[-5:]]
+    for key in ("dxy", "brent", "gold_usd", "btc"):
+        sess = [w for w in W.get("g_" + key, []) if w["session"] < date]
+        if sess:
+            out["g_" + key] = [{"session": w["session"], "series": {k: hourly(v) for k, v in w["series"].items() if len(v) >= 2}} for w in sess[-7:]]
+    I = json.load(open(SRC))
+    day = {}
+    for mk in ("egx", "us"):
+        d = I.get(mk) or {}
+        if d.get("session") and d["session"] < date:
+            day[mk] = {"session": d["session"], "series": {k: [[t, round(v, 4)] for i, (t, v) in enumerate(pts) if i == len(pts) - 1 or str(t)[3:] in ("00", "10", "20", "30", "40", "50")]
+                                                       for k, pts in (d.get("series") or {}).items() if len(pts) >= 2}}
+    g = I.get("global") or {}
+    if g.get("to") and g["to"][:10] <= date:
+        day["global"] = {"to": g["to"], "series": {k: [[t, round(v, 4)] for i, (t, v) in enumerate(pts) if i == len(pts) - 1 or str(t)[3:] in ("00", "15", "30", "45")]
+                                                 for k, pts in (g.get("series") or {}).items() if len(pts) >= 2}}
+    if day:
+        out["day"] = day
     os.makedirs(OUT, exist_ok=True)
     path = os.path.join(OUT, f"{date}.json")
     with open(path, "w") as f:
         json.dump(out, f, separators=(",", ":"))
     print(f"Saved {path}: " + ", ".join(f"{mk} {len(out[mk])} sessions ({out[mk][0]['session'] if out[mk] else '—'} to {out[mk][-1]['session'] if out[mk] else '—'})"
-                                          for mk in ("egx", "us")) + f", {os.path.getsize(path) // 1024} KB")
+                                          for mk in ("egx", "us")) + f", global week {sum(1 for k in out if k.startswith('g_'))} of 4, day {'/'.join(out.get('day', {})) or '—'}, {os.path.getsize(path) // 1024} KB")
 
 
 if __name__ == "__main__":
