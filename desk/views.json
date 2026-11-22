@@ -414,6 +414,13 @@
      "source": "Masrawy",
      "url": "https://www.masrawy.com/news/news_economy/details/2026/11/17/3080148",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-22",
+     "text": "Goldman Sachs sees no rate cut before late in the first quarter of 2027, so the high rates the view rests on stay through its date.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/22/goldman-sachs-expects-cbe-to-hold-at-20-until-late-1q-then-cut-by-700-bps-through-2028/",
+     "effect": "supports"
     }
    ],
    "driver": "egp-rates"
@@ -983,6 +990,13 @@
      "source": "Arab Finance",
      "url": "https://www.arabfinance.com/en/news/newdetails/egypt-trade-deficit-widens-in-september-2026",
      "effect": "against"
+    },
+    {
+     "date": "2026-11-22",
+     "text": "Goldman Sachs expects the central bank to hold at 20% until late in the first quarter and sees the dollar at EGP 53 in three months, which keeps the carry that holds foreign money.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/22/goldman-sachs-expects-cbe-to-hold-at-20-until-late-1q-then-cut-by-700-bps-through-2028/",
+     "effect": "supports"
     }
    ],
    "wrongIf": [

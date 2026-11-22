@@ -793,6 +793,35 @@
       "value": "$400.00"
      }
     ]
+   },
+   "brief": {
+    "written": "2026-11-22",
+    "business": "Google's parent earns most of its money from search and YouTube ads, with Google Cloud now its fastest-growing unit. Third-quarter revenue rose 25% from a year earlier, and Cloud revenue more than doubled to $30.7bn.",
+    "drivers": [
+     {
+      "name": "Search",
+      "text": "Search growth slowed in the third quarter and missed forecasts, which is what the stock fell on after the results; AI answers are the worry."
+     },
+     {
+      "name": "Google Cloud",
+      "text": "Revenue more than doubled to $30.7bn in the third quarter on AI demand, the part of the business the market still rewards."
+     },
+     {
+      "name": "Capital spending",
+      "text": "Record quarterly capital spending in the third quarter, with a significant rise guided for 2027, has pushed free cash flow below zero."
+     },
+     {
+      "name": "Stakes",
+      "text": "A paper loss on its SpaceX stake cut third-quarter earnings per share; it also holds a stake in Anthropic, which listed this month, so reported profit swings with both."
+     }
+    ],
+    "value": "13.7 times the last twelve months' earnings, its lowest in years, against the desk's fair value of about $370. The catch: the earnings include stake gains and losses, and the spending now runs ahead of cash flow.",
+    "risks": [
+     "AI answers taking search queries faster than Cloud can grow.",
+     "Spending rising again in 2027 with no return in sight, keeping free cash flow negative.",
+     "Swings in the value of its private stakes moving reported profit."
+    ],
+    "change": "Fourth-quarter results in early February: search growth back above 15% or capex guidance for 2027 well above the $300bn analysts expect would change the view."
    }
   },
   "AVGO": {
@@ -1899,6 +1928,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-21",
+     "text": "The New York Times reported the SEC's confidential inquiry into its accounting is at an early stage; the stock lost more than 20% on the week.",
+     "source": "Yahoo Finance (AFP)",
+     "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-faces-us-accounting-probe-215354861.html"
+    },
     {
      "date": "2026-11-20",
      "text": "Fell 14.0% to $125.53, erasing about $491bn of market value, after Reuters reported the SEC is examining its accounting; its RSI is 15.",
@@ -3669,6 +3704,12 @@
      "text": "Fell 8.0% to $51.28 in the AI chip selloff; no company news.",
      "source": "MarketBeat",
      "url": "https://www.marketbeat.com/instant-alerts/price-intel-nasdaq-intc-stock-falls-81-heres-what-happened-2026-11-20/"
+    },
+    {
+     "date": "2026-11-18",
+     "text": "Signed its first outside customer for the 18A chipmaking process, chief executive Lip-Bu Tan said, and widened its supply deal with Microsoft; outside foundry revenue was $411m in the third quarter.",
+     "source": "The Globe and Mail",
+     "url": "https://www.theglobeandmail.com/investing/markets/stocks/INTC/pressreleases/8954290/intel-says-it-just-signed-its-first-customer-for-its-most-advanced-chipmaking-process-the-stock-is-still-more-than-60-below-its-june-record/"
     },
     {
      "date": "2026-11-16",

@@ -293,8 +293,34 @@
   }
  },
  "desk": {
-  "searches": [],
-  "pages": [],
+  "searches": [
+   "Jensen Huang Nvidia CEO Reuters",
+   "Nvidia SEC accounting probe",
+   "Goldman Sachs Egypt central bank rate cuts 2027",
+   "Misr Life Insurance IPO EGX prospectus",
+   "Hormuz tankers attacked Qatar Tehran talks oil",
+   "Eastern Company nine months profit 2026",
+   "EFG Holding third quarter 2026 results",
+   "Gulf stocks Sunday Nvidia selloff Saudi",
+   "مصر لتأمينات الحياة طرح البورصة نشرة الاكتتاب",
+   "الشرقية للدخان نتائج أعمال",
+   "هيرميس تتوقع صعود البورصة المصرية 30% 2027",
+   "Dell HP earnings Tuesday November 24",
+   "Hermes EGX 2027 forecast 25% 30% P/E 9.6",
+   "Alphabet third quarter 2026 results revenue Google Cloud capital expenditure",
+   "Broadcom third quarter fiscal 2026 results AI semiconductor revenue",
+   "Broadcom reports third quarter fiscal 2026 revenue AI revenue September guidance",
+   "Broadcom third quarter results AI revenue Hock Tan September 2026",
+   "Alphabet Q3 2026 search revenue 63.4 billion capex 51.4 billion"
+  ],
+  "pages": [
+   "https://www.elaosboa.com/3029241/",
+   "https://finance.yahoo.com/technology/ai/articles/nvidia-faces-us-accounting-probe-215354861.html",
+   "https://www.newindianexpress.com/world/2026/Nov/21/tankers-struck-in-hormuz-as-iran-says-held-talks-with-mediator-qatar",
+   "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-worst-week-covid-nvidia-anthropic-vix-fear-gauge/",
+   "https://fortune.com/2026/10/28/alphabet-google-stock-drops-cloud-revenue-doubles-free-cash-flow-negative/",
+   "https://abc.xyz/investor/events/event-details/2026/2026-Q3-Earnings-Call-2026-Ujou16CTw9/default.aspx"
+  ],
   "read": [
    "https://www.aleqaria.com.eg/post/details/358976/%D8%A3%D9%81%D8%B6%D9%84-%D8%B4%D9%87%D8%A7%D8%AF%D8%AA%D9%8A-%D8%A7%D8%AF%D8%AE%D8%A7%D8%B1-%D9%81%D9%8A-%D8%A7%D9%84%D8%A8%D9%86%D9%83-%D8%A7%D9%84%D8%AA%D8%AC%D8%A7%D8%B1%D9%8A-%D8%A7%D9%84%D8%AF%D9%88%D9%84%D9%8A-cib-%D8%AE%D9%84%D8%A7%D9%84-%D9%86%D9%88%D9%81%D9%85%D8%A8%D8%B1-2026..-%D8%A7%D9%84%D8%B9%D8%A7%D8%A6%D8%AF-%D9%8A%D8%B5%D9%84-%D8%A5%D9%84%D9%89-20.50",
    "https://www.bankygate.com/products/cards/410",
@@ -374,8 +400,55 @@
    "https://www.marketbeat.com/instant-alerts/filing-netflix-inc-nflx-stock-position-lowered-by-edgewood-management-llc-2026-11-21/",
    "https://www.theglobeandmail.com/investing/markets/stocks/INTC/pressreleases/8954290/intel-says-it-just-signed-its-first-customer-for-its-most-advanced-chipmaking-process-the-stock-is-still-more-than-60-below-its-june-record/",
    "https://simplywall.st/stocks/us/semiconductors/nasdaq-intc/intel/news/intel-stock-gets-a-foundry-win-with-microsoft-backing",
-   "https://observer.com/2026/11/eli-lilly-ceo-david-ricks-is-using-the-weight-loss-boom-to-buy-his-next-bet/"
+   "https://observer.com/2026/11/eli-lilly-ceo-david-ricks-is-using-the-weight-loss-boom-to-buy-his-next-bet/",
+   "https://finance.yahoo.com/technology/ai/articles/nvidia-faces-us-accounting-probe-215354861.html",
+   "https://enterpriseam.com/egypt/2026/11/22/goldman-sachs-expects-cbe-to-hold-at-20-until-late-1q-then-cut-by-700-bps-through-2028/",
+   "https://ceoworld.biz/2026/11/22/goldman-sachs-backs-gold-over-silver-with-a-forecast-31-above-todays-price/",
+   "https://www.devdiscourse.com/article/business/4010211-sp-500-earnings-growth-projected-to-slow-to-11-in-2027-as-ai-investment-impulse-peaks-goldman-sachs?amp",
+   "https://enterpriseam.com/egypt/2026/11/22/brussels-weighs-a-bloc-wide-bidding-ban-for-foreign-firms-caught-with-distortive-subsidies/",
+   "https://www.newindianexpress.com/world/2026/Nov/21/tankers-struck-in-hormuz-as-iran-says-held-talks-with-mediator-qatar",
+   "https://gulfnews.com/world/mena/iran-readies-14-tankers-to-break-us-blockade-what-happens-if-they-try-1.500756460",
+   "https://www.haaretz.com/middle-east-news/iran/2026-11-21/ty-article/two-oil-tankers-hit-by-unidentified-projectiles-near-strait-of-hormuz/000001a1-fe7c-dad7-a9fd-fe7f22a00000",
+   "https://www.tbsnews.net/worldbiz/middle-east/iran-attacks-us-military-radar-system-bahrain-despite-talks-mediators-1605721",
+   "https://www.mykxlg.com/online_features/press_releases/ten-ltd-reports-record-profits-for-the-nine-months-and-third-quarter-of-2026/article_479641a3-577b-5dc9-a613-a799d8918359.html",
+   "https://www.tradingview.com/news/prnewswire:df38d9605deac:0-ross-stores-reports-strong-third-quarter-sales-and-earnings-results/",
+   "https://www.plataformamedia.com/en/2026/11/20/sm-investments-nine-month-net-income-rises-9-to-php70-billion/",
+   "https://www.gulfcoastnewsnow.com/article/sp-500-sinks-nasdaq-composite-goes-negative-nov-20/74494971",
+   "https://www.youm7.com/story/2026/11/20/%D8%B3-%D9%88%D8%AC-%D9%83%D9%8A%D9%81-%D8%AA%D8%B4%D8%AA%D8%B1%D9%89-%D8%A3%D8%B3%D9%87%D9%85-%D8%B9%D9%85%D9%84%D8%A7%D9%82-%D8%A7%D9%84%D8%AA%D8%A3%D9%85%D9%8A%D9%86-%D8%A7%D9%84%D8%AD%D9%83%D9%88%D9%85%D9%8A-%D9%81%D9%8A-%D8%A7%D9%84%D8%A8%D9%88%D8%B1%D8%B5%D8%A9/7625666",
+   "https://www.akhbarak.net/news/details/49557899/4/%D9%85%D8%B5%D8%B1-%D9%84%D8%AA%D8%A3%D9%85%D9%8A%D9%86%D8%A7%D8%AA-%D8%A7%D9%84%D8%AD%D9%8A%D8%A7%D8%A9-%D8%AA%D8%AE%D8%B5%D8%B5-5-%D8%A5%D9%84%D9%89-10-%D9%85%D9%86-%D8%A7%D9%84%D8%B7%D8%B1%D8%AD-%D9%84%D9%84%D8%A7%D9%83%D8%AA%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%B9%D8%A7%D9%85-%D8%A3%D9%85%D9%88%D8%A7%D9%84-%D8%A7%D9%84%D8%BA%D8%AF",
+   "https://www.iqraa.news/237913/%D9%85%D8%B5%D8%B1-%D9%84%D8%AA%D8%A3%D9%85%D9%8A%D9%86%D8%A7%D8%AA-%D8%A7%D9%84%D8%AD%D9%8A%D8%A7%D8%A9-%D8%AA%D8%B9%D8%AA%D8%B2%D9%85-%D8%A5%D8%AA%D8%A7%D8%AD%D8%A9-5-%D9%85%D9%86-%D8%A7%D9%84%D8%A3/",
+   "https://bloom-gate.com/%D8%A3%D8%B3%D9%88%D8%A7%D9%82/%D9%85%D8%B5%D8%B1-%D9%84%D8%AA%D8%A3%D9%85%D9%8A%D9%86%D8%A7%D8%AA-%D8%A7%D9%84%D8%AD%D9%8A%D8%A7%D8%A9-%D8%AA%D8%AF%D8%B1%D8%B3-%D8%B1%D9%81%D8%B9-%D8%AD%D8%B5%D8%A9-%D8%B7%D8%B1%D8%AD%D9%87%D8%A7/",
+   "https://alborsaanews.com/2026/11/22/2007924",
+   "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-worst-week-covid-nvidia-anthropic-vix-fear-gauge/",
+   "https://www.tradingkey.com/analysis/stocks/us-stocks/262316778-week-ahead-us-gdp-pce-dell-hpe-report-anthropic-tradingkey",
+   "https://siliconangle.com/2026/11/20/anthropic-goes-public-but-is-it-too-late-to-save-the-ai-trade/",
+   "https://pro.thestreet.com/portfolio/weekly-roundup-digesting-the-selloff-preparing-for-what-comes-next",
+   "https://247wallst.com/investing/2026/11/20/dell-stock-plunges-10-in-the-ai-selloff-and-heads-for-its-worst-month-since-its-2018-return-to-the-stock-market-earnings-are-tuesday/",
+   "https://abc.xyz/investor/events/event-details/2026/2026-Q3-Earnings-Call-2026-Ujou16CTw9/default.aspx",
+   "https://fortune.com/2026/10/28/alphabet-google-stock-drops-cloud-revenue-doubles-free-cash-flow-negative/",
+   "https://www.trefis.com/stock/avgo/articles/621512/is-broadcom-stock-priced-right-against-its-peers/2026-10-30",
+   "https://finance.yahoo.com/markets/stocks/articles/broadcom-stock-buy-now-182000414.html",
+   "https://247wallst.com/investing/2026/11/17/broadcoms-ai-revenue-is-contracted-to-double-in-2027-so-im-buying/",
+   "https://www.fool.com/investing/2026/08/30/hock-tan-guided-broadcom-past-usd100-billion-of-ai-revenue-in-2027-the-stock-is-25-off-its-high/"
   ],
-  "stocks": {}
+  "stocks": {
+   "NVDA": "NYT: SEC accounting inquiry at an early stage (Yahoo/AFP); no new company statement",
+   "INTC": "First 18A customer and wider Microsoft deal (Globe and Mail, Simply Wall St)",
+   "GOOGL": "Q3 figures checked for the desk's note (Fortune; Cloud and revenue growth also BigGo, shattered.io)",
+   "AVGO": "Leads read: commentary and rewrites only, no new company news since Saturday's desk",
+   "ORCL": "Leads read: commentary and rewrites only, no new company news since Saturday's desk",
+   "TSLA": "Leads read: commentary and rewrites only, no new company news since Saturday's desk",
+   "META": "Leads read: commentary and rewrites only, no new company news since Saturday's desk",
+   "AMZN": "Leads read: commentary and rewrites only, no new company news since Saturday's desk",
+   "JPM": "Leads read: commentary and rewrites only, no new company news since Saturday's desk",
+   "ETEL": "Leads read: commentary and rewrites only, no new company news since Saturday's desk",
+   "EAST": "No results filed yet; leads only sports",
+   "HRHO": "EFG Hermes forecasts a 25-30% EGX rise in 2027 at 9.6x 2026 P/E (Al-Osboa, single source)"
+  },
+  "check": {
+   "at": "2026-11-22 10:23",
+   "errors": [],
+   "warnings": []
+  }
  }
 }
