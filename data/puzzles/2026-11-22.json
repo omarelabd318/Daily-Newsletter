@@ -1,0 +1,652 @@
+{
+ "date": "2026-11-22",
+ "no": 11,
+ "crossword": {
+  "size": 11,
+  "grid": [
+   "SLAIN##SEN#",
+   "TABOO##IVY#",
+   "ICONIC#TALL",
+   "REV#RAW#DOE",
+   "#SEC#SERENE",
+   "###ALIBI###",
+   "PATRON#GUN#",
+   "UGH#WON#SUB",
+   "BIRD#SUTURE",
+   "#NEO##TEASE",
+   "#GEN##SALES"
+  ],
+  "clues": {
+   "across": [
+    {
+     "n": 1,
+     "row": 0,
+     "col": 0,
+     "len": 5,
+     "answer": "SLAIN",
+     "clue": "Killed, as a dragon by a knight"
+    },
+    {
+     "n": 6,
+     "row": 0,
+     "col": 7,
+     "len": 3,
+     "answer": "SEN",
+     "clue": "Hundredth of a yen"
+    },
+    {
+     "n": 9,
+     "row": 1,
+     "col": 0,
+     "len": 5,
+     "answer": "TABOO",
+     "clue": "Forbidden by custom"
+    },
+    {
+     "n": 10,
+     "row": 1,
+     "col": 7,
+     "len": 3,
+     "answer": "IVY",
+     "clue": "Clinging wall climber, or a league of eight schools"
+    },
+    {
+     "n": 11,
+     "row": 2,
+     "col": 0,
+     "len": 6,
+     "answer": "ICONIC",
+     "clue": "Instantly recognizable and legendary"
+    },
+    {
+     "n": 13,
+     "row": 2,
+     "col": 7,
+     "len": 4,
+     "answer": "TALL",
+     "clue": "Like a story that is hard to believe"
+    },
+    {
+     "n": 15,
+     "row": 3,
+     "col": 0,
+     "len": 3,
+     "answer": "REV",
+     "clue": "Give the engine more gas"
+    },
+    {
+     "n": 16,
+     "row": 3,
+     "col": 4,
+     "len": 3,
+     "answer": "RAW",
+     "clue": "Uncooked, like sushi fish"
+    },
+    {
+     "n": 18,
+     "row": 3,
+     "col": 8,
+     "len": 3,
+     "answer": "DOE",
+     "clue": "A deer, a female deer"
+    },
+    {
+     "n": 19,
+     "row": 4,
+     "col": 1,
+     "len": 3,
+     "answer": "SEC",
+     "clue": "Champagne term for 'dry'; also, a moment"
+    },
+    {
+     "n": 21,
+     "row": 4,
+     "col": 5,
+     "len": 6,
+     "answer": "SERENE",
+     "clue": "Calm and untroubled"
+    },
+    {
+     "n": 23,
+     "row": 5,
+     "col": 3,
+     "len": 5,
+     "answer": "ALIBI",
+     "clue": "Suspect's claim of being elsewhere"
+    },
+    {
+     "n": 25,
+     "row": 6,
+     "col": 0,
+     "len": 6,
+     "answer": "PATRON",
+     "clue": "Regular customer, or a sponsor of the arts"
+    },
+    {
+     "n": 28,
+     "row": 6,
+     "col": 7,
+     "len": 3,
+     "answer": "GUN",
+     "clue": "Starter's pistol at a race"
+    },
+    {
+     "n": 31,
+     "row": 7,
+     "col": 0,
+     "len": 3,
+     "answer": "UGH",
+     "clue": "Groan of disgust"
+    },
+    {
+     "n": 32,
+     "row": 7,
+     "col": 4,
+     "len": 3,
+     "answer": "WON",
+     "clue": "Came out on top; Korean currency"
+    },
+    {
+     "n": 34,
+     "row": 7,
+     "col": 8,
+     "len": 3,
+     "answer": "SUB",
+     "clue": "Sandwich on a long roll, or a bench replacement"
+    },
+    {
+     "n": 36,
+     "row": 8,
+     "col": 0,
+     "len": 4,
+     "answer": "BIRD",
+     "clue": "Robin or sparrow"
+    },
+    {
+     "n": 38,
+     "row": 8,
+     "col": 5,
+     "len": 6,
+     "answer": "SUTURE",
+     "clue": "Surgeon's stitch"
+    },
+    {
+     "n": 40,
+     "row": 9,
+     "col": 1,
+     "len": 3,
+     "answer": "NEO",
+     "clue": "Prefix meaning 'new'; Keanu's Matrix hero"
+    },
+    {
+     "n": 41,
+     "row": 9,
+     "col": 6,
+     "len": 5,
+     "answer": "TEASE",
+     "clue": "Playfully mock"
+    },
+    {
+     "n": 42,
+     "row": 10,
+     "col": 1,
+     "len": 3,
+     "answer": "GEN",
+     "clue": "Info, in British slang"
+    },
+    {
+     "n": 43,
+     "row": 10,
+     "col": 6,
+     "len": 5,
+     "answer": "SALES",
+     "clue": "Black Friday figure to watch"
+    }
+   ],
+   "down": [
+    {
+     "n": 1,
+     "row": 0,
+     "col": 0,
+     "len": 4,
+     "answer": "STIR",
+     "clue": "Mix with a spoon"
+    },
+    {
+     "n": 2,
+     "row": 0,
+     "col": 1,
+     "len": 5,
+     "answer": "LACES",
+     "clue": "Shoe ties"
+    },
+    {
+     "n": 3,
+     "row": 0,
+     "col": 2,
+     "len": 5,
+     "answer": "ABOVE",
+     "clue": "Over, overhead"
+    },
+    {
+     "n": 4,
+     "row": 0,
+     "col": 3,
+     "len": 3,
+     "answer": "ION",
+     "clue": "Charged atom"
+    },
+    {
+     "n": 5,
+     "row": 0,
+     "col": 4,
+     "len": 4,
+     "answer": "NOIR",
+     "clue": "Dark crime film genre; black in French"
+    },
+    {
+     "n": 6,
+     "row": 0,
+     "col": 7,
+     "len": 3,
+     "answer": "SIT",
+     "clue": "Take a chair"
+    },
+    {
+     "n": 7,
+     "row": 0,
+     "col": 8,
+     "len": 5,
+     "answer": "EVADE",
+     "clue": "Dodge, as taxes or capture"
+    },
+    {
+     "n": 8,
+     "row": 0,
+     "col": 9,
+     "len": 5,
+     "answer": "NYLON",
+     "clue": "Synthetic fiber in stockings"
+    },
+    {
+     "n": 12,
+     "row": 2,
+     "col": 5,
+     "len": 7,
+     "answer": "CASINOS",
+     "clue": "Places with slots and roulette"
+    },
+    {
+     "n": 14,
+     "row": 2,
+     "col": 10,
+     "len": 3,
+     "answer": "LEE",
+     "clue": "Sheltered side, away from the wind"
+    },
+    {
+     "n": 17,
+     "row": 3,
+     "col": 6,
+     "len": 3,
+     "answer": "WEB",
+     "clue": "Spider's trap"
+    },
+    {
+     "n": 20,
+     "row": 4,
+     "col": 3,
+     "len": 3,
+     "answer": "CAR",
+     "clue": "Sedan or coupe"
+    },
+    {
+     "n": 22,
+     "row": 4,
+     "col": 7,
+     "len": 3,
+     "answer": "RIG",
+     "clue": "Egypt's state oil firm plans to revive about 100 idle wells with repairs needing no drilling one"
+    },
+    {
+     "n": 24,
+     "row": 5,
+     "col": 4,
+     "len": 3,
+     "answer": "LOW",
+     "clue": "Cattle's call"
+    },
+    {
+     "n": 25,
+     "row": 6,
+     "col": 0,
+     "len": 3,
+     "answer": "PUB",
+     "clue": "British local for a pint"
+    },
+    {
+     "n": 26,
+     "row": 6,
+     "col": 1,
+     "len": 5,
+     "answer": "AGING",
+     "clue": "Getting on in years"
+    },
+    {
+     "n": 27,
+     "row": 6,
+     "col": 2,
+     "len": 5,
+     "answer": "THREE",
+     "clue": "Magic number in a hat trick"
+    },
+    {
+     "n": 29,
+     "row": 6,
+     "col": 8,
+     "len": 5,
+     "answer": "USUAL",
+     "clue": "Regular order at the bar: 'the ___'"
+    },
+    {
+     "n": 30,
+     "row": 6,
+     "col": 9,
+     "len": 5,
+     "answer": "NURSE",
+     "clue": "Hospital caregiver"
+    },
+    {
+     "n": 33,
+     "row": 7,
+     "col": 6,
+     "len": 4,
+     "answer": "NUTS",
+     "clue": "Almonds and cashews"
+    },
+    {
+     "n": 35,
+     "row": 7,
+     "col": 10,
+     "len": 4,
+     "answer": "BEES",
+     "clue": "Hive workers"
+    },
+    {
+     "n": 37,
+     "row": 8,
+     "col": 3,
+     "len": 3,
+     "answer": "DON",
+     "clue": "Put on, as a coat"
+    },
+    {
+     "n": 39,
+     "row": 8,
+     "col": 7,
+     "len": 3,
+     "answer": "TEA",
+     "clue": "Earl Grey, for one"
+    }
+   ]
+  },
+  "news": []
+ },
+ "killer": {
+  "level": 0,
+  "solution": "327951468518467923694283715786549231451632897239718546162895374873124659945376182",
+  "cages": [
+   {
+    "sum": 8,
+    "cells": [
+     37,
+     46
+    ]
+   },
+   {
+    "sum": 13,
+    "cells": [
+     72,
+     73
+    ]
+   },
+   {
+    "sum": 13,
+    "cells": [
+     26,
+     35,
+     44
+    ]
+   },
+   {
+    "sum": 10,
+    "cells": [
+     38,
+     47
+    ]
+   },
+   {
+    "sum": 20,
+    "cells": [
+     6,
+     14,
+     15
+    ]
+   },
+   {
+    "sum": 23,
+    "cells": [
+     22,
+     31,
+     32,
+     41
+    ]
+   },
+   {
+    "sum": 17,
+    "cells": [
+     7,
+     8,
+     17
+    ]
+   },
+   {
+    "sum": 8,
+    "cells": [
+     74,
+     75
+    ]
+   },
+   {
+    "sum": 18,
+    "cells": [
+     9,
+     18,
+     27
+    ]
+   },
+   {
+    "sum": 23,
+    "cells": [
+     34,
+     43,
+     52,
+     61
+    ]
+   },
+   {
+    "sum": 16,
+    "cells": [
+     48,
+     49,
+     57
+    ]
+   },
+   {
+    "sum": 15,
+    "cells": [
+     63,
+     64
+    ]
+   },
+   {
+    "sum": 6,
+    "cells": [
+     36,
+     45
+    ]
+   },
+   {
+    "sum": 3,
+    "cells": [
+     16,
+     25
+    ]
+   },
+   {
+    "sum": 10,
+    "cells": [
+     53,
+     62
+    ]
+   },
+   {
+    "sum": 16,
+    "cells": [
+     2,
+     3
+    ]
+   },
+   {
+    "sum": 13,
+    "cells": [
+     21,
+     29,
+     30
+    ]
+   },
+   {
+    "sum": 12,
+    "cells": [
+     11,
+     20
+    ]
+   },
+   {
+    "sum": 13,
+    "cells": [
+     76,
+     77
+    ]
+   },
+   {
+    "sum": 6,
+    "cells": [
+     0,
+     1,
+     10
+    ]
+   },
+   {
+    "sum": 10,
+    "cells": [
+     33,
+     42
+    ]
+   },
+   {
+    "sum": 17,
+    "cells": [
+     19,
+     28
+    ]
+   },
+   {
+    "sum": 17,
+    "cells": [
+     58,
+     59,
+     60
+    ]
+   },
+   {
+    "sum": 5,
+    "cells": [
+     56,
+     65
+    ]
+   },
+   {
+    "sum": 13,
+    "cells": [
+     70,
+     79
+    ]
+   },
+   {
+    "sum": 9,
+    "cells": [
+     39,
+     40
+    ]
+   },
+   {
+    "sum": 7,
+    "cells": [
+     66,
+     67,
+     68
+    ]
+   },
+   {
+    "sum": 13,
+    "cells": [
+     50,
+     51
+    ]
+   },
+   {
+    "sum": 7,
+    "cells": [
+     54,
+     55
+    ]
+   },
+   {
+    "sum": 10,
+    "cells": [
+     12,
+     13
+    ]
+   },
+   {
+    "sum": 10,
+    "cells": [
+     23,
+     24
+    ]
+   },
+   {
+    "sum": 7,
+    "cells": [
+     69,
+     78
+    ]
+   },
+   {
+    "sum": 11,
+    "cells": [
+     71,
+     80
+    ]
+   },
+   {
+    "sum": 6,
+    "cells": [
+     4,
+     5
+    ]
+   }
+  ]
+ }
+}

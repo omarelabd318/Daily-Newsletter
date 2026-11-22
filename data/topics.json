@@ -14,8 +14,8 @@
    "drivers": [
     "oil"
    ],
-   "now": "The Houthis fired three missiles at Riyadh early on November 21, all intercepted by the Saudi-led coalition, two days after a Houthi missile damaged the PIF Tower, and their forces were about 80 kilometers from Aden. Tankers were hit near Khasab, Oman, on November 20 and 21, and talks with Tehran remain stalled.",
-   "now_date": "2026-11-21"
+   "now": "Two tankers were attacked in the Strait of Hormuz on November 21 as Iran held talks in Tehran with Qatari mediators, while US-Iran negotiations stay stalled. Bahrain said an Iranian attack hit an industrial facility that night, and US Central Command denied Iran's claim to have damaged a US F-16. The Saudi-led coalition intercepted a Houthi missile aimed at western Saudi Arabia early on November 22.",
+   "now_date": "2026-11-22"
   },
   {
    "id": "pound-cbe",
@@ -30,8 +30,8 @@
    "drivers": [
     "egp-rates"
    ],
-   "now": "The central bank's dollar rate held at 53.74 to buy and 53.88 to sell on November 19, within 1% of the pound's strongest level in a year. The one-year treasury bill yield rose to 26.16% at that day's auction from 26.07% a week earlier, with overnight rates at 20% and 21% since October 29.",
-   "now_date": "2026-11-20"
+   "now": "The central bank's dollar rate held at 53.74 to buy and 53.88 to sell, unchanged from November 19 to the morning of November 22 and within 1% of the pound's strongest level in a year. Overnight rates stand at 20% and 21%, and Goldman Sachs expects a hold until late in the first quarter of 2027, then 700 basis points of cuts through 2028. The next rate meeting is December 17.",
+   "now_date": "2026-11-22"
   },
   {
    "id": "ai-chips",
@@ -46,8 +46,8 @@
    "drivers": [
     "ai-spending"
    ],
-   "now": "The AI-led selloff ended the week of November 16-20 with the Nasdaq down 10% and the S&P 500 and Dow in correction. Nvidia fell 14% to $125.53 on November 20 after a Reuters report that SEC staff are examining its accounting, a 23% loss on the week, and Anthropic closed its second day at $88.30, below its $97.17 debut close.",
-   "now_date": "2026-11-21"
+   "now": "Wall Street had its worst week since 2020 to November 20: the S&P 500 fell 3.70% to 6,910.39 on the day, its seventh straight loss, and the Nasdaq 5.28% to 22,617.73, about 10% down on the week. Nvidia fell 14% to $125.53 after a Reuters report that SEC staff are examining its accounting, and Anthropic closed its second day near $88, above its $83 offer price.",
+   "now_date": "2026-11-22"
   },
   {
    "id": "us-midterms",
@@ -103,8 +103,8 @@
     ]
    ],
    "drivers": [],
-   "now": "IMF staff and Egypt reached a staff-level agreement on November 18 on the eighth and final review of the Extended Fund Facility, worth about $1.5 billion, and the third review of the Resilience and Sustainability Facility, worth up to about $800 million. Executive board approval is still needed, with no date set, and both arrangements expire on December 15.",
-   "now_date": "2026-11-21"
+   "now": "Egypt's IMF program expires on December 15, with the board expected to take up its final review before then. Goldman Sachs favors a successor program.",
+   "now_date": "2026-11-22"
   },
   {
    "id": "gaza-lebanon",
@@ -112,8 +112,8 @@
    "match": "\\b(Gaza|Hamas|Hezbollah|Lebanon|Lebanese)\\b",
    "related": [],
    "drivers": [],
-   "now": "Israeli tanks crossed the 'yellow line' into Hamas-held central Gaza on November 18, the first ground operation past the boundary since the October 2025 ceasefire; Hamas called it a violation. The US-backed Board of Peace had warned the UN Security Council a day earlier that the truce may be near collapse.",
-   "now_date": "2026-11-19"
+   "now": "An Israeli strike on a food-aid van in Gaza City killed at least three people on November 21, among at least four Palestinians killed that day despite the October 2025 ceasefire. Israeli tanks had crossed the yellow line into central Gaza on November 18, the first ground operation past it since the truce.",
+   "now_date": "2026-11-22"
   },
   {
    "id": "oil",
@@ -144,13 +144,107 @@
    "id": "misr-life",
    "name": "Misr Life Insurance listing",
    "match": "Misr Life",
-   "now": "Misr Life Insurance plans to sell 750 million existing shares, 15% of its capital, on the EGX in December, pending approvals, with EFG Hermes as sole global coordinator. It earned EGP 5.2 billion in the first half of 2026 and targets a 70% payout.",
-   "now_date": "2026-11-18",
+   "now": "Misr Life Insurance plans to sell 750 million existing shares, 15% of its capital, on the EGX in December, with prospectus approval expected in the week of November 23 and all proceeds going to the state. It earned EGP 5.8 billion in 2025 and targets a 70% dividend payout from 2026.",
+   "now_date": "2026-11-22",
    "related": [],
    "drivers": []
   }
  ],
  "stories": [
+  {
+   "ed": "2026-11-22",
+   "id": "story-wall-street-s-worst-week-since-2020",
+   "lead": "Wall Street's worst week since 2020",
+   "sec": "Markets",
+   "text": "The S&P 500 lost 3.70% to 6,910.39 on Friday, the Nasdaq 5.28% to 22,617.73 and the Dow 1.93% to 48,147.33. The S&P's seventh straight fall left it and the Dow in correction, 10% below their highs, and the Nasdaq lost about 10% on the…",
+   "topics": [
+    "ai-chips"
+   ],
+   "added": [
+    "ai-chips"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-22",
+   "id": "story-nvidia-s-accounting-probe",
+   "lead": "Nvidia's accounting probe",
+   "sec": "Markets",
+   "text": "Nvidia fell 14% to $125.53, erasing about $490 billion in value, after Reuters reported that SEC staff are examining its accounting; it is now down 33% this year. Broadcom lost 12.2%. Anthropic fell about 9% on its second day of trading to…",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-11-22",
+   "id": "story-missile-toward-western-saudi-arabia",
+   "lead": "Missile toward western Saudi Arabia",
+   "sec": "Regional and Gulf",
+   "text": "The Saudi-led coalition said it intercepted a Houthi missile aimed at the kingdom's western region early on Sunday, after three missiles were fired at Riyadh on Saturday. The coalition has stepped up strikes on Hodeidah, Sanaa and Taiz…",
+   "topics": [
+    "iran-war"
+   ],
+   "added": [
+    "iran-war"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-22",
+   "id": "story-misr-life-listing",
+   "lead": "Misr Life listing",
+   "sec": "Markets",
+   "text": "Misr Life Insurance plans to sell 750 million existing shares, 15% of its capital, on the EGX in December, with prospectus approval expected early this week and all proceeds going to the state. It earned EGP 5.8 billion in 2025 and targets…",
+   "topics": [
+    "misr-life"
+   ]
+  },
+  {
+   "ed": "2026-11-22",
+   "id": "story-hormuz-tankers-and-qatari-mediation",
+   "lead": "Hormuz tankers and Qatari mediation",
+   "sec": "Regional and Gulf",
+   "text": "Two tankers were attacked in the Strait of Hormuz on Saturday, a maritime monitor said, as Iran announced talks in Tehran with a Qatari delegation acting as mediator. US-Iran negotiations remain stalled despite a memorandum signed in June.…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-22",
+   "id": "story-goldman-on-rates",
+   "lead": "Goldman on rates",
+   "sec": "Markets",
+   "text": "Goldman Sachs expects the central bank to hold its overnight deposit rate at 20% until late in the first quarter of 2027, then cut 500 basis points in 2027 and 200 in 2028, to 13%, EnterpriseAM reported from the bank's note. It sees…",
+   "topics": [
+    "pound-cbe",
+    "imf"
+   ],
+   "added": [
+    "pound-cbe",
+    "imf"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-22",
+   "id": "story-gaza-aid-van-hit",
+   "lead": "Gaza aid van hit",
+   "sec": "Regional and Gulf",
+   "text": "An Israeli strike on a van delivering food in Gaza City's Tal al-Hawa district killed at least three people on Saturday, Al Jazeera reported, among at least four Palestinians killed that day despite the October 2025 ceasefire.",
+   "topics": [
+    "gaza-lebanon"
+   ]
+  },
+  {
+   "ed": "2026-11-22",
+   "id": "story-bahrain-and-the-f-16-claim",
+   "lead": "Bahrain and the F-16 claim",
+   "sec": "Regional and Gulf",
+   "text": "Bahrain said late on Saturday that its air defenses intercepted Iranian attacks and that one hit an industrial facility, causing damage but no injuries. Iran claimed it had damaged a US F-16 over the Gulf; US Central Command said Iran \"did…",
+   "topics": [
+    "iran-war"
+   ]
+  },
   {
    "ed": "2026-11-21-recap",
    "id": "story-wall-street-s-rout-deepens",
