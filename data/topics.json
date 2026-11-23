@@ -14,8 +14,8 @@
    "drivers": [
     "oil"
    ],
-   "now": "Two tankers were attacked in the Strait of Hormuz on November 21 as Iran held talks in Tehran with Qatari mediators, while US-Iran negotiations stay stalled. Bahrain said an Iranian attack hit an industrial facility that night, and US Central Command denied Iran's claim to have damaged a US F-16. The Saudi-led coalition intercepted a Houthi missile aimed at western Saudi Arabia early on November 22.",
-   "now_date": "2026-11-22"
+   "now": "Iranian strikes on Bahrain injured two people on November 21-22, one critically, and Manama demanded reparations, while the Houthis claimed a hit on Saudi Arabia's Rabigh refinery on November 22 with no Saudi confirmation. Trump said he is inclined to strike Iran next year if there is no deal, and US-Iran talks remain stalled.",
+   "now_date": "2026-11-23"
   },
   {
    "id": "pound-cbe",
@@ -30,8 +30,8 @@
    "drivers": [
     "egp-rates"
    ],
-   "now": "The central bank's dollar rate held at 53.74 to buy and 53.88 to sell, unchanged from November 19 to the morning of November 22 and within 1% of the pound's strongest level in a year. Overnight rates stand at 20% and 21%, and Goldman Sachs expects a hold until late in the first quarter of 2027, then 700 basis points of cuts through 2028. The next rate meeting is December 17.",
-   "now_date": "2026-11-22"
+   "now": "The central bank's dollar selling rate rose 63 piastres to 54.50 by the morning of November 23, from 53.87 at the November 19 close, as a global sell-off hit Egyptian assets; the EGX30 fell 2.85% to 49,989.80 on November 22. Overnight rates stand at 20% and 21%, and the next rate meeting is December 17.",
+   "now_date": "2026-11-23"
   },
   {
    "id": "ai-chips",
@@ -46,8 +46,8 @@
    "drivers": [
     "ai-spending"
    ],
-   "now": "Wall Street had its worst week since 2020 to November 20: the S&P 500 fell 3.70% to 6,910.39 on the day, its seventh straight loss, and the Nasdaq 5.28% to 22,617.73, about 10% down on the week. Nvidia fell 14% to $125.53 after a Reuters report that SEC staff are examining its accounting, and Anthropic closed its second day near $88, above its $83 offer price.",
-   "now_date": "2026-11-22"
+   "now": "Wall Street had its worst week since 2020 to November 20, with the S&P 500 down 3.70% to 6,910.39 that day and Nvidia down 14% to $125.53, a 52-week low, after founder Jensen Huang's resignation and questions over its accounting and China chip sales. Asian markets fell again on November 23, while US futures rebounded about 3%; Nvidia's board is searching for a new chief executive.",
+   "now_date": "2026-11-23"
   },
   {
    "id": "us-midterms",
@@ -89,8 +89,8 @@
    "drivers": [
     "gas-supply"
    ],
-   "now": "Abu Qir Fertilizers disclosed a new gas price for November 16 to December 31, a 50% rise to $12.75 per mmBtu from $8.50, in return for the right to export full output. Supply cuts to the plants remain in place.",
-   "now_date": "2026-11-18"
+   "now": "Three LNG cargoes bound for Egypt turned away in November as European buyers outbid Cairo, with a cargo costing about $100 million; Egypt asked for about 10 cargoes in November, down from 12 in October, and deferred five of 15 contracted cargoes into 2027. Gas supply to fertilizer plants is cut by 20% to 40%, and plants pay $12.75 per mmBtu, up 50%, through December 31.",
+   "now_date": "2026-11-23"
   },
   {
    "id": "imf",
@@ -144,13 +144,97 @@
    "id": "misr-life",
    "name": "Misr Life Insurance listing",
    "match": "Misr Life",
-   "now": "Misr Life Insurance plans to sell 750 million existing shares, 15% of its capital, on the EGX in December, with prospectus approval expected in the week of November 23 and all proceeds going to the state. It earned EGP 5.8 billion in 2025 and targets a 70% dividend payout from 2026.",
-   "now_date": "2026-11-22",
+   "now": "Misr Life Insurance plans to sell 750 million existing shares, 15% of its capital, on the EGX in December, with all proceeds going to the state. A government committee valued it at about EGP 69.1 billion, or EGP 13.82 a share, an unnamed official told Asharq Business; prospectus approval is expected in the week of November 23.",
+   "now_date": "2026-11-23",
    "related": [],
    "drivers": []
   }
  ],
  "stories": [
+  {
+   "ed": "2026-11-23",
+   "id": "story-treasury-bills",
+   "lead": "Treasury bills",
+   "sec": "Markets",
+   "text": "At Sunday's auction, the central bank sold 273-day bills at 26.29%, near the highest in a year, and 91-day bills at 24.92%, accepting EGP 140.5 billion in all.",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-11-23",
+   "id": "story-pound-past-54-50",
+   "lead": "Pound past 54.50",
+   "sec": "Markets",
+   "text": "The central bank's dollar selling rate stood at 54.50 on Monday morning, up 63 piastres from 53.87 at Thursday's close, as the global rout reached Cairo. The jump came in one move after a week of stability, though the pound remains within…",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-11-23",
+   "id": "story-nvidia-under-pressure",
+   "lead": "Nvidia under pressure",
+   "sec": "Markets",
+   "text": "Nvidia fell 14% to $125.53 on Friday, a 52-week low and down 33% this year, and Broadcom fell 12.2%. Treasury Secretary Scott Bessent said on Sunday: \"We do need answers\" on Nvidia's chip sales to China.",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-11-23",
+   "id": "story-nvidia-s-ceo-search",
+   "lead": "Nvidia's CEO search",
+   "sec": "In Other News",
+   "text": "Nvidia's board has hired a search firm to find a successor to founder Jensen Huang and will consider internal and external candidates, Fortune reported, after Huang resigned this month. Trump said Huang's return \"would be the best thing…",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-11-23",
+   "id": "story-misr-life-listing",
+   "lead": "Misr Life listing",
+   "sec": "Markets",
+   "text": "A government committee valued Misr Life Insurance at about EGP 69.1 billion, or EGP 13.82 a share, an unnamed official told Asharq Business, ahead of the sale of 15% of the state insurer on the EGX in December.",
+   "topics": [
+    "misr-life"
+   ]
+  },
+  {
+   "ed": "2026-11-23",
+   "id": "story-lng-cargoes-turn-away",
+   "lead": "LNG cargoes turn away",
+   "sec": "Egypt News",
+   "text": "Three liquefied natural gas tankers bound for Egyptian terminals changed course in recent days, two of them heading to Europe, where buyers are paying more, EnterpriseAM reported, citing Bloomberg ship-tracking data compiled with Kpler.…",
+   "topics": [
+    "gas-fertilizer"
+   ]
+  },
+  {
+   "ed": "2026-11-23",
+   "id": "story-iranian-strikes-on-bahrain",
+   "lead": "Iranian strikes on Bahrain",
+   "sec": "Regional and Gulf",
+   "text": "Bahrain's interior ministry said two people were injured, a Pakistani resident critically, after an Iranian attack hit a civilian industrial site, Gulf News reported. Manama demanded reparations and called the site \"exclusively civilian\";…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-23",
+   "id": "story-houthis-target-a-saudi-refinery",
+   "lead": "Houthis target a Saudi refinery",
+   "sec": "Regional and Gulf",
+   "text": "Yemen's Houthis claimed a \"direct hit\" on Saudi Arabia's Rabigh oil refinery on Sunday, with no Saudi comment and no confirmed damage. US President Donald Trump said he is inclined to strike Iran next year if there is no deal. Attacks near…",
+   "topics": [
+    "iran-war"
+   ],
+   "added": [
+    "iran-war"
+   ],
+   "removed": []
+  },
   {
    "ed": "2026-11-22",
    "id": "story-wall-street-s-worst-week-since-2020",
