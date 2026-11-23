@@ -4,6 +4,7 @@ that runs here; no account or key).
 
 Usage (from the repo root, after the edition is final):
   python3 .claude/skills/daily-newsletter/make_audio.py EDITION [--voice af_heart,am_michael] [--local] [--force]
+  python3 .claude/skills/daily-newsletter/make_audio.py --republish   (repair: rewrite the branch from the manifests)
 
 EDITION is the file key (2026-11-06, or 2026-10-28-v2). It reads the blocks read_aloud.py gives (the same ones the
 site highlights), writes an MP3 and data/audio/EDITION.json (when each block starts), and publishes the MP3 on the
@@ -265,9 +266,11 @@ def record(key, voice, out_mp3):
     return segs, round(t, 1)
 
 
-def publish(files):
+def publish(files, earlier=None):
     """files: {name: local path or None to keep from the branch}. Rewrites the audio branch as one commit holding
-    exactly these files and returns its sha."""
+    exactly these files and returns its sha. A kept file the branch no longer holds is looked for in the commit its
+    manifest last pointed to (earlier: {name: sha}); if it is in neither, nothing is pushed and it fails, rather than
+    publish a manifest whose MP3 is gone (a 404 on the site and in the podcast feeds)."""
     env = dict(os.environ, GIT_INDEX_FILE=os.path.join(tempfile.mkdtemp(), "index"))
     old = {}
     try:
@@ -277,10 +280,16 @@ def publish(files):
             old[name] = meta.split()[2]
     except subprocess.CalledProcessError:
         pass   # no audio branch yet
+    missing = []
     for name, path in files.items():
-        blob = sh("git", "hash-object", "-w", path) if path else old.get(name)
-        if blob:
-            subprocess.run(["git", "update-index", "--add", "--cacheinfo", f"100644,{blob},{name}"], cwd=ROOT, env=env, check=True)
+        blob = sh("git", "hash-object", "-w", path) if path else old.get(name) or older(name, (earlier or {}).get(name))
+        if not blob:
+            missing.append(name)
+            continue
+        subprocess.run(["git", "update-index", "--add", "--cacheinfo", f"100644,{blob},{name}"], cwd=ROOT, env=env, check=True)
+    if missing:
+        raise RuntimeError(f"not on the {BRANCH} branch any more, nor where its manifest pointed: {', '.join(missing)}; "
+                           f"record it again with --force (the branch was left as it was)")
     tree = subprocess.run(["git", "write-tree"], cwd=ROOT, env=env, check=True, capture_output=True, text=True).stdout.strip()
     sha = sh("git", "commit-tree", tree, "-m", f"Audio for the last {KEEP} editions (rewritten each day)")
     for n in range(5):
@@ -289,6 +298,23 @@ def publish(files):
             return sha
         time.sleep(2 ** (n + 1))
     raise RuntimeError(r.stderr.strip())
+
+
+def older(name, sha):
+    """The blob of name in an earlier audio commit (sha), fetched if need be; None if it is not there."""
+    if not sha:
+        return None
+    try:
+        if subprocess.run(["git", "cat-file", "-e", sha], cwd=ROOT, capture_output=True).returncode:
+            subprocess.run(["git", "fetch", "-q", "origin", sha], cwd=ROOT, check=True, capture_output=True)
+        return sh("git", "rev-parse", f"{sha}:{name}")
+    except subprocess.CalledProcessError:
+        return None
+
+
+def sha_of(url):
+    m = re.search(r"@([0-9a-f]{40})/", url or "")
+    return m.group(1) if m else None
 
 
 def warm(url):
@@ -319,7 +345,45 @@ def names(key):
     print(f"{len(found)} names to check; add wrong ones to pronounce.json 'words' and right ones to 'checked'.")
 
 
+def republish(key=None, new=None, made=None):
+    """Rewrite the audio branch with the newest KEEP editions' audio and the last seven desks' (new: the manifest just
+    made for key, made: its new MP3s), point the manifests at it, drop the older manifests and refresh the podcast
+    feeds. With no key it only republishes what the manifests list (--republish: a repair, nothing recorded)."""
+    made = made or {}
+    # keep the newest KEEP editions' audio; the older manifests go (the site then uses the device's voice)
+    # the newsletter keeps its last KEEP editions and the desk its last seven, each counted on its own
+    mans = sorted(f[:-5] for f in os.listdir(AUDIO) if f.endswith(".json") and not f.startswith("feed"))
+    allk = sorted(set(mans + ([key] if key else [])))
+    keep = [k for k in allk if not k.startswith("desk-")][-KEEP:] + [k for k in allk if k.startswith("desk-")][-7:]
+    files, kept, earlier = {}, {}, {}
+    for k2 in keep:
+        m = new if k2 == key else json.load(open(os.path.join(AUDIO, k2 + ".json")))
+        for v in m["voices"]:
+            files[v["file"]] = made.get(v["file"])   # None: already on the branch
+            earlier[v["file"]] = sha_of(v.get("url"))
+        kept[k2] = m
+    sha = publish(files, earlier)
+    for k2, m in kept.items():
+        for v in m["voices"]:
+            v["url"] = f"https://cdn.jsdelivr.net/gh/{REPO}@{sha}/{v['file']}"
+        json.dump(m, open(os.path.join(AUDIO, k2 + ".json"), "w"), separators=(",", ":"))
+    for k2 in mans:
+        if k2 not in kept:
+            os.remove(os.path.join(AUDIO, k2 + ".json"))
+    for k2, m in kept.items():
+        for v in m["voices"]:
+            warm(v["url"])
+    try:   # the podcast feeds (data/audio/feed-*.xml) list what the branch now holds
+        import podcast_feed
+        podcast_feed.main()
+    except Exception as e:
+        print(f"Podcast feeds not updated ({type(e).__name__}: {e}).")
+    return f"published on the {BRANCH} branch ({len(kept)} editions kept); commit data/audio/"
+
+
 def main(a):
+    if "--republish" in a:
+        return print(republish().capitalize() + ".")
     if "--names" in a:
         return names([x for x in a if not x.startswith("--")][0])
     args = [x for x in a if not x.startswith("--")]
@@ -365,35 +429,8 @@ def main(a):
             json.dump({"edition": key, "source": digest, "voices": entries}, open(man, "w"), separators=(",", ":"))
             print(f"Recorded {key} locally: " + "; ".join(report) + ".")
             return
-        # keep the newest KEEP editions' audio; the older manifests go (the site then uses the device's voice)
-        # the newsletter keeps its last KEEP editions and the desk its last seven, each counted on its own
-        mans = sorted(f[:-5] for f in os.listdir(AUDIO) if f.endswith(".json") and not f.startswith("feed"))
-        allk = sorted(set(mans + [key]))
-        keep = [k for k in allk if not k.startswith("desk-")][-KEEP:] + [k for k in allk if k.startswith("desk-")][-7:]
-        files, kept = {}, {}
-        for k2 in keep:
-            m = {"edition": key, "source": digest, "voices": entries} if k2 == key else json.load(open(os.path.join(AUDIO, k2 + ".json")))
-            for v in m["voices"]:
-                files[v["file"]] = made.get(v["file"])   # None: already on the branch
-            kept[k2] = m
-        sha = publish(files)
-        for k2, m in kept.items():
-            for v in m["voices"]:
-                v["url"] = f"https://cdn.jsdelivr.net/gh/{REPO}@{sha}/{v['file']}"
-            json.dump(m, open(os.path.join(AUDIO, k2 + ".json"), "w"), separators=(",", ":"))
-        for k2 in mans:
-            if k2 not in kept:
-                os.remove(os.path.join(AUDIO, k2 + ".json"))
-        for k2, m in kept.items():
-            for v in m["voices"]:
-                warm(v["url"])
-        print(f"Audio for {key}: " + "; ".join(report) + f"; {time.time() - t0:.0f}s in all; published on the {BRANCH} branch "
-              f"({len(kept)} editions kept). Commit data/audio/.")
-        try:   # the podcast feeds (data/audio/feed-*.xml) list what the branch now holds
-            import podcast_feed
-            podcast_feed.main()
-        except Exception as e:
-            print(f"Podcast feeds not updated ({type(e).__name__}: {e}).")
+        report.append(republish(key, {"edition": key, "source": digest, "voices": entries}, made))
+        print(f"Audio for {key}: " + "; ".join(report) + f"; {time.time() - t0:.0f}s in all.")
     except Exception as e:
         print(f"Audio not made ({type(e).__name__}: {e}). The site reads this edition with the device's voice instead.")
 
