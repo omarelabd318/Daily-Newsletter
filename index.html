@@ -546,6 +546,8 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
 :root[data-theme="paper"] .f-fig figcaption{font-size:13px;color:var(--ink)}
 :root[data-theme="paper"] .f-by{display:block;margin:0 0 9px;padding:3px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);text-align:center;font:600 10px var(--sans);letter-spacing:.14em;text-transform:uppercase}
 :root[data-theme="paper"] .f-body{columns:3;column-gap:20px;column-rule:1px solid var(--rule);font-size:15.5px;line-height:1.45}
+/* a short lead (a sentence or two after the standfirst) runs in one column, not stranded across three */
+.f-body.short,:root[data-theme="paper"] .f-body.short,:root[data-theme="paper"] .f-main.no-img .f-body.short{columns:1}
 :root[data-theme="paper"] .f-body::first-letter{font:var(--p-hw) 56px/44px var(--p-head),var(--serif)}
 :root[data-theme="paper"] .s-body p,:root[data-theme="paper"] .s-body li{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
 /* the front page's columns are too narrow to justify without wide gaps (capitalised words do not hyphenate): ragged right */
@@ -1123,7 +1125,7 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
       + '<figcaption>'+esc(im.caption || '')+' <span>'+(im.url ? '<a href="'+esc(im.url)+'" target="_blank" rel="noopener">' : '')+esc(im.credit || '')+(im.url ? '</a>' : '')+'</span></figcaption></figure>' : '';
     // paper mode sets the lead's headline as a banner across the page, with the next stories named under it
     var h = '<div class="f-banner"><h2>'+link(lead, esc(lead.text))+'</h2>'+(restTxt.length > 120 ? '<p class="f-deck">'+esc(dek)+'</p>' : '')+'<p class="f-others">'+mid.map(function(it){ return esc(it.text); }).join(' \u00b7 ')+'</p></div>'
-      + '<div class="f-main'+(fig ? '' : ' no-img')+'"><div class="f-lead"><span class="f-kick">'+esc(lead.label || 'The big story')+'</span><h2>'+link(lead, esc(lead.text))+'</h2>'+fig+'<div class="f-by">'+esc(lead.label || 'The big story')+' \u00b7 '+esc(sectionOf(lead.story))+'</div>'+(restTxt.length > 120 ? '<p class="f-dek">'+esc(dek)+'</p><p class="f-body">'+esc(restTxt)+'</p>' : '<p class="f-body cap">'+lhtml+'</p>')
+      + '<div class="f-main'+(fig ? '' : ' no-img')+'"><div class="f-lead"><span class="f-kick">'+esc(lead.label || 'The big story')+'</span><h2>'+link(lead, esc(lead.text))+'</h2>'+fig+'<div class="f-by">'+esc(lead.label || 'The big story')+' \u00b7 '+esc(sectionOf(lead.story))+'</div>'+(restTxt.length > 120 ? '<p class="f-dek">'+esc(dek)+'</p><p class="f-body'+(restTxt.length < 450 ? ' short' : '')+'">'+esc(restTxt)+'</p>' : '<p class="f-body cap">'+lhtml+'</p>')
       + link(lead, '<span class="f-more">Continue in '+esc(sectionOf(lead.story))+' ↓</span>') + '</div><div class="f-col">'
       + mid.map(function(it){ return '<article><span class="f-kick">'+esc(it.label)+'</span><h3>'+link(it, esc(it.text))+'</h3><p data-s="'+esc(JSON.stringify(sentences(it.story)))+'">'+esc(first(it.story))+'</p></article>'; }).join('') + '</div><div class="f-rail"><div class="f-mbox" id="f-mbox"></div>'
       + (rest.length ? '<h4>Also today</h4><ol class="f-glance">'+rest.map(function(it, i){ return '<li><span><small>'+esc(it.label)+'</small>'+link(it, esc(it.text))+'</span></li>'; }).join('')+'</ol>' : '')

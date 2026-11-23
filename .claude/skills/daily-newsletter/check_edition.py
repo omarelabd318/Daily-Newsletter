@@ -712,6 +712,21 @@ def main(path):
                 errors.append(f"Today at a Glance item has no link to its story: {line.strip()[:80]}")
             elif link.group(1) not in anchors:
                 errors.append(f"Today at a Glance link #{link.group(1)} matches no story lead-in or section.")
+    # The lead (item 1) fills the front page: its first sentence is the standfirst and the rest runs in columns, so a
+    # two-sentence lead leaves one sentence stranded in three columns (November 23, 2026).
+    first_item = next((l for l in glance if re.match(r"^\s*1\.", l)), "")
+    lk = re.search(r"\]\(#(story-[a-z0-9-]+)\)", first_item)
+    if lk and not recap:
+        for name, sec in sections.items():
+            for body in [sec["body"]] + list(sec["parts"].values()):
+                for line in body:
+                    m = re.match(r"^\s*(?:[-*]|\d+\.)?\s*\*\*([^*]+?)\*\*\s*(.*)", line)
+                    if m and "story-" + slug(m.group(1).rstrip(":")) == lk.group(1):
+                        nw = len(m.group(2).split())
+                        if nw < 80:
+                            warnings.append(f"The lead story ({m.group(1).rstrip(':')}) is {nw} words; the front page "
+                                            "prints it under the banner, so give it at least about 80 (fold in the related "
+                                            "story the headline names) or the body leaves empty columns.")
     if not recap and not any(re.match(r"^\s*\*\*What to watch today:\*\*", l) for l in glance):
         errors.append("Today at a Glance should end with a '**What to watch today:**' line.")
 
