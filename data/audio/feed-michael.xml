@@ -14,12 +14,22 @@
     <itunes:type>episodic</itunes:type>
     <itunes:block>Yes</itunes:block>
     <item>
+      <title>Monday, November 23</title>
+      <description>Pound slips past 54.50 as EGX30 drops 2.85%, LNG cargoes bound for Egypt turn away, and COP31 ends without a deal. Read the edition: https://daily-newsletter-eg.vercel.app/#2026-11-23</description>
+      <link>https://daily-newsletter-eg.vercel.app/#2026-11-23</link>
+      <guid isPermaLink="false">2026-11-23-am_michael</guid>
+      <pubDate>Mon, 23 Nov 2026 10:00:00 +0200</pubDate>
+      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@8e8d8c6c7dd2486b5ca496371b0e2576a87a7efd/2026-11-23-am_michael.mp3" length="9957692" type="audio/mpeg"/>
+      <itunes:duration>0:27:40</itunes:duration>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
       <title>Sunday, November 22</title>
       <description>EGPC hires Weatherford to restart 100 idle wells, Goldman sees rates on hold, Misr Life readies IPO, Wall Street's worst week Read the edition: https://daily-newsletter-eg.vercel.app/#2026-11-22</description>
       <link>https://daily-newsletter-eg.vercel.app/#2026-11-22</link>
       <guid isPermaLink="false">2026-11-22-am_michael</guid>
       <pubDate>Sun, 22 Nov 2026 10:00:00 +0200</pubDate>
-      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@ef0ab77c8894a58d5eef4826d8f61697b65e17f5/2026-11-22-am_michael.mp3" length="9393068" type="audio/mpeg"/>
+      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@8e8d8c6c7dd2486b5ca496371b0e2576a87a7efd/2026-11-22-am_michael.mp3" length="9393068" type="audio/mpeg"/>
       <itunes:duration>0:26:05</itunes:duration>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -29,7 +39,7 @@
       <link>https://daily-newsletter-eg.vercel.app/#2026-11-21-recap</link>
       <guid isPermaLink="false">2026-11-21-recap-am_michael</guid>
       <pubDate>Sat, 21 Nov 2026 14:00:00 +0200</pubDate>
-      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@ef0ab77c8894a58d5eef4826d8f61697b65e17f5/2026-11-21-recap-am_michael.mp3" length="8882732" type="audio/mpeg"/>
+      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@8e8d8c6c7dd2486b5ca496371b0e2576a87a7efd/2026-11-21-recap-am_michael.mp3" length="8882732" type="audio/mpeg"/>
       <itunes:duration>0:24:40</itunes:duration>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -39,7 +49,7 @@
       <link>https://daily-newsletter-eg.vercel.app/#2026-11-20</link>
       <guid isPermaLink="false">2026-11-20-am_michael</guid>
       <pubDate>Fri, 20 Nov 2026 10:00:00 +0200</pubDate>
-      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@ef0ab77c8894a58d5eef4826d8f61697b65e17f5/2026-11-20-am_michael.mp3" length="9898508" type="audio/mpeg"/>
+      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@8e8d8c6c7dd2486b5ca496371b0e2576a87a7efd/2026-11-20-am_michael.mp3" length="9898508" type="audio/mpeg"/>
       <itunes:duration>0:27:30</itunes:duration>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -49,7 +59,7 @@
       <link>https://daily-newsletter-eg.vercel.app/#2026-11-19</link>
       <guid isPermaLink="false">2026-11-19-am_michael</guid>
       <pubDate>Thu, 19 Nov 2026 10:00:00 +0200</pubDate>
-      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@ef0ab77c8894a58d5eef4826d8f61697b65e17f5/2026-11-19-am_michael.mp3" length="10663004" type="audio/mpeg"/>
+      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@8e8d8c6c7dd2486b5ca496371b0e2576a87a7efd/2026-11-19-am_michael.mp3" length="10663004" type="audio/mpeg"/>
       <itunes:duration>0:29:37</itunes:duration>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -59,7 +69,7 @@
       <link>https://daily-newsletter-eg.vercel.app/#2026-11-18</link>
       <guid isPermaLink="false">2026-11-18-am_michael</guid>
       <pubDate>Wed, 18 Nov 2026 10:00:00 +0200</pubDate>
-      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@ef0ab77c8894a58d5eef4826d8f61697b65e17f5/2026-11-18-am_michael.mp3" length="10077788" type="audio/mpeg"/>
+      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@8e8d8c6c7dd2486b5ca496371b0e2576a87a7efd/2026-11-18-am_michael.mp3" length="10077788" type="audio/mpeg"/>
       <itunes:duration>0:28:00</itunes:duration>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -69,7 +79,7 @@
       <link>https://daily-newsletter-eg.vercel.app/#2026-11-17</link>
       <guid isPermaLink="false">2026-11-17-am_michael</guid>
       <pubDate>Tue, 17 Nov 2026 10:00:00 +0200</pubDate>
-      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@ef0ab77c8894a58d5eef4826d8f61697b65e17f5/2026-11-17-am_michael.mp3" length="11347580" type="audio/mpeg"/>
+      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@8e8d8c6c7dd2486b5ca496371b0e2576a87a7efd/2026-11-17-am_michael.mp3" length="11347580" type="audio/mpeg"/>
       <itunes:duration>0:31:31</itunes:duration>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
@@ -79,18 +89,8 @@
       <link>https://daily-newsletter-eg.vercel.app/#2026-11-16</link>
       <guid isPermaLink="false">2026-11-16-am_michael</guid>
       <pubDate>Mon, 16 Nov 2026 10:00:00 +0200</pubDate>
-      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@ef0ab77c8894a58d5eef4826d8f61697b65e17f5/2026-11-16-am_michael.mp3" length="11075996" type="audio/mpeg"/>
+      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@8e8d8c6c7dd2486b5ca496371b0e2576a87a7efd/2026-11-16-am_michael.mp3" length="11075996" type="audio/mpeg"/>
       <itunes:duration>0:30:46</itunes:duration>
-      <itunes:episodeType>full</itunes:episodeType>
-    </item>
-    <item>
-      <title>Sunday, November 15</title>
-      <description>Egypt's final IMF review goes virtual with $2.3bn at stake, Suez revenue nearly doubles, Iran claims a strike in Bahrain. Read the edition: https://daily-newsletter-eg.vercel.app/#2026-11-15</description>
-      <link>https://daily-newsletter-eg.vercel.app/#2026-11-15</link>
-      <guid isPermaLink="false">2026-11-15-am_michael</guid>
-      <pubDate>Sun, 15 Nov 2026 10:00:00 +0200</pubDate>
-      <enclosure url="https://cdn.jsdelivr.net/gh/omarelabd318/Daily-Newsletter@ef0ab77c8894a58d5eef4826d8f61697b65e17f5/2026-11-15-am_michael.mp3" length="11752364" type="audio/mpeg"/>
-      <itunes:duration>0:32:39</itunes:duration>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
   </channel>
