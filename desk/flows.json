@@ -383,6 +383,31 @@
     }
    ],
    "note": "Egyptians' and foreigners' figures agree at two outlets and net to zero with Arabs' EGP 13.4m (Zawya); small against EGP 6.24bn traded."
+  },
+  {
+   "date": "2026-11-22",
+   "confirmed": false,
+   "rows": {
+    "Egyptian investors": -0.1198,
+    "Arab investors": -0.0385,
+    "Foreign investors": 0.1583
+   },
+   "sources": [
+    "Arab Finance",
+    "Osoul Misr"
+   ],
+   "turnover": 6.615,
+   "links": [
+    {
+     "source": "Arab Finance",
+     "url": "https://www.arabfinance.com/en/news/newdetails/egx-closes-sunday-november-22-trading-session-down"
+    },
+    {
+     "source": "Osoul Misr",
+     "url": "https://www.osoulmisrmagazine.com/453210"
+    }
+   ],
+   "note": "Foreigners' net buying of EGP 158.3m agrees at Arab Finance and Osoul Misr (EGP 170.1m by institutions less EGP 11.8m by individuals); the split between Egyptians and Arabs differs by outlet, so the rows are Arab Finance's. Local institutions led the selling."
   }
  ]
 }

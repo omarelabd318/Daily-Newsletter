@@ -3,13 +3,7 @@
 Built by run_data.py. Work for the run, not for publication.
 
 ## Steps
-- **intraday**: FAILED in 311s (GitHub Actions). PARTIAL on GitHub Actions (a source refused it there): rerun this step in the session.
-    US month: 23 sessions, 21 series filled
-    EGX month: 23 sessions
-    EGX70 EWI: TradingView, 48 sessions fetched, added to 3 saved sessions
-    GLOBAL: last 24 hours to Mon 10:00 Cairo, btc, brent, gold_usd, dxy
-    GLOBAL week and month: hourly from TradingView, brent, gold_usd, dxy, btc
-    PARTIAL on GitHub Actions (a source refused it there): rerun this step in the session.
+- **intraday**: ok in 293s. GLOBAL week and month: hourly from TradingView, brent, gold_usd, dxy, btc
 - **rates**: ok in 1s (GitHub Actions). Rates: VIX to 2026-11-20 (35.89); Treasury yields to 2026-11-20 (10-year 4.92%).
 - **valuation**: ok in 20s (GitHub Actions). LLY: $1.27tn, P/E (last 12 months) 42.2, Forecast P/E (fiscal 2026) 37.8 (the four quarters to Sep 2026)
 - **movers**: ok in 9s (GitHub Actions). Market values: 39 of 39 updated
@@ -20,7 +14,7 @@ Built by run_data.py. Work for the run, not for publication.
 - **results**: ok in 52s (GitHub Actions). 
 - **news**: ok in 104s (GitHub Actions). 
 - **leads**: ok in 74s (GitHub Actions). 
-- **sources**: english.mubasher.info: 4 failed, 0 needed a retry (fetch_movers.py); query2.finance.yahoo.com: 3 failed, 0 needed a retry (fetch_intraday.py); data.sec.gov: 7 failed, 0 needed a retry (results_due.py); news.google.com: 0 failed, 5 needed a retry.
+- **sources**: api.nasdaq.com: 42 failed, 0 needed a retry (fetch_intraday.py); query2.finance.yahoo.com: 4 failed, 0 needed a retry (fetch_intraday.py).
 
 ## What moved (latest close against the one before)
 - EGX30 49,989.80 (-2.85%); EGX70 EWI 16,534.40 (-5.55%); USD/EGP 54.50 (+1.16%); Gold 21K 5,570.00 (+1.09%); Brent 92.57 (+0.64%); S&P 500 6,910.39 (-3.70%); Nasdaq 22,617.73 (-5.28%); Bitcoin 61,450.00 (+4.06%)
@@ -38,7 +32,7 @@ Built by run_data.py. Work for the run, not for publication.
     - NVDA: Turning down: below both its 50-day average (39.4% under) and its 200-day (38.3% under), though the 50-day is still above the 200-day; RSI 15, washed out: below 30.
 
 ## Movers that still need a reason (top five each way, 5% or more)
-- EGX INEG (Integrated Engineering Group) +63.9%; EGX CRST (Creast mark For Contracting) -19.9%; EGX AMII (Arabian Metal Industries and Industrial Investments) -12.4%; EGX GSSC (General Silos & Storage) -11.8%; EGX AALR (General Co. for Land Reclamation Development & Reconstruction) -11.7%; EGX GTWL (Goldentex) -10.5%
+- None: every one has a reason or is under 5%.
 
 Leads for them (open before using; never guess a reason):
 ```
@@ -173,16 +167,10 @@ Market values: 39 of 39 updated
 
 ## Coming up (seven days)
 - 2026-11-23 CLHO results (expected)
-- 2026-11-23 EAST results (expected)  <- write its preview
-- 2026-11-23 EFID results (expected)
-- 2026-11-23 EFIH results (expected)  <- write its preview
-- 2026-11-23 JUFO results (expected)
-- 2026-11-23 PHDC results (expected)
 - 2026-11-24 COST dividend
 
 ## Views
 - due 2026-11-30: Telecom Egypt holds its ground into MSCI's November 30 inclusion (on track)
-- judged wrong with no lesson yet: Juhayna returns to EGP 27–28 by end of January  <- write its `lesson`
 - due 2026-11-27: Developers lag while rates stay high (on track)
 - due 2026-11-27: Money rotates from AI spenders to steady earners (on track)
 - due 2026-11-30: Gas rationing keeps fertilizer stocks under pressure through November (on track)
@@ -190,7 +178,7 @@ Market values: 39 of 39 updated
     2026-11-11-jufo-results: open -> wrong  (Juhayna closed at 21.77 on November 22, below the 22 that makes the call wrong.)
 
 ## Fair value
-- Changed since the last run: GBCO +21% -> +23% (low -> medium); ISPH +11% -> -1% (medium -> medium); AMOC -12% -> -11% (high -> medium). Dropped out: TMGH.
+- Changed since the last run: nothing by 10 points or more.
 - In the ten cheapest or dearest with no note: MCQE, ADIB, EMFD, MTIE, AMOC, AMIA, LCSW, BINV.
 
 ## Due today

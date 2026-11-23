@@ -43,6 +43,13 @@
      "source": "Al Borsa",
      "url": "https://alborsaanews.com/2026/11/16/2006899",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-23",
+     "text": "Telecom Egypt closed unchanged at EGP 137.00 as the EGX30 fell 2.85% and 205 stocks declined.",
+     "source": "Arab Finance",
+     "url": "https://www.arabfinance.com/en/news/newdetails/egx-closes-sunday-november-22-trading-session-down",
+     "effect": "supports"
     }
    ],
    "wrongIf": [
@@ -162,6 +169,11 @@
    "result": {
     "date": "2026-11-23",
     "text": "Juhayna closed at 21.77 on November 22, below the 22 that makes the call wrong."
+   },
+   "lesson": {
+    "date": "2026-11-23",
+    "text": "Juhayna fell 12.7% in eight sessions from EGP 24.95 to 21.77, the last 6.0% in a sell-off that took the EGX70 EWI down 5.55% and 205 stocks with it; the 33% profit rise the call rested on was not in question. The desk now opens a single-stock bull projection only when the market is not already falling, or sets its wrong-if beyond what a market-wide fall of a week could reach.",
+    "tag": "market-beta"
    }
   },
   {
@@ -424,6 +436,13 @@
      "text": "Goldman Sachs sees no rate cut before late in the first quarter of 2027, so the high rates the view rests on stay through its date.",
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/2026/11/22/goldman-sachs-expects-cbe-to-hold-at-20-until-late-1q-then-cut-by-700-bps-through-2028/",
+     "effect": "supports"
+    },
+    {
+     "date": "2026-11-23",
+     "text": "Palm Hills fell 5.1% and Talaat Moustafa 4.3% on Sunday against 2.85% for the EGX30, as 273-day bills cleared at 26.29%.",
+     "source": "Arab Finance",
+     "url": "https://www.arabfinance.com/en/news/newdetails/cbe-auctions-egp-140-billion-t-bills-on-november-22",
      "effect": "supports"
     }
    ],
@@ -777,6 +796,13 @@
      "source": "Egypt Oil & Gas",
      "url": "https://egyptoil-gas.com/news/mina-west-startup-adds-160-mmcf-d-of-gas-to-egypts-production/",
      "effect": "neutral"
+    },
+    {
+     "date": "2026-11-23",
+     "text": "Three LNG cargoes bound for Egypt changed course, two to Europe, per Bloomberg ship-tracking data; Abu Qir fell 3.1% to EGP 74.00.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/23/three-lng-cargoes-bound-for-egypt-turn-away-as-europe-outbids-cairo/",
+     "effect": "supports"
     }
    ],
    "wrongIf": [
@@ -1001,6 +1027,13 @@
      "source": "EnterpriseAM",
      "url": "https://enterpriseam.com/egypt/2026/11/22/goldman-sachs-expects-cbe-to-hold-at-20-until-late-1q-then-cut-by-700-bps-through-2028/",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-23",
+     "text": "The central bank's rate jumped 63 piastres to EGP 54.50 per dollar, from 53.87 at Thursday's close, which Manassa ties to import and debt-payment demand; 56 is now 2.7% away.",
+     "source": "Manassa",
+     "url": "https://manassa.news/en/news/35074",
+     "effect": "against"
     }
    ],
    "wrongIf": [
