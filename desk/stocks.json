@@ -544,7 +544,7 @@
     }
    ],
    "cap": {
-    "value": 648.4,
+    "value": 652.5,
     "currency": "USD",
     "date": "2026-11-23",
     "source": "Nasdaq"
@@ -558,7 +558,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$652.5bn"
+      "value": "$648.1bn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -578,7 +578,7 @@
      },
      {
       "label": "Analysts' one-year target",
-      "value": "$185.50"
+      "value": "$183.00"
      }
     ]
    },
@@ -659,7 +659,7 @@
     }
    ],
    "cap": {
-    "value": 3700.5,
+    "value": 3598.1,
     "currency": "USD",
     "date": "2026-11-23",
     "source": "Nasdaq"
@@ -673,7 +673,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$3.60tn"
+      "value": "$3.75tn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -689,7 +689,7 @@
      },
      {
       "label": "Dividend yield",
-      "value": "0.79%"
+      "value": "0.81%"
      },
      {
       "label": "Analysts' one-year target",
@@ -762,7 +762,7 @@
     }
    ],
    "cap": {
-    "value": 3352.1,
+    "value": 3261.5,
     "currency": "USD",
     "date": "2026-11-23",
     "source": "Nasdaq"
@@ -776,7 +776,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$3.26tn"
+      "value": "$3.45tn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -792,7 +792,7 @@
      },
      {
       "label": "Dividend yield",
-      "value": "0.32%"
+      "value": "0.33%"
      },
      {
       "label": "Analysts' one-year target",
@@ -871,7 +871,7 @@
     }
    ],
    "cap": {
-    "value": 1654.8,
+    "value": 1453.1,
     "currency": "USD",
     "date": "2026-11-23",
     "source": "Nasdaq"
@@ -885,7 +885,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$1.45tn"
+      "value": "$1.48tn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -901,7 +901,7 @@
      },
      {
       "label": "Dividend yield",
-      "value": "0.75%"
+      "value": "0.85%"
      },
      {
       "label": "Analysts' one-year target",
@@ -1821,7 +1821,7 @@
   "AAPL": {
    "sector": "Hardware",
    "cap": {
-    "value": 5074.8,
+    "value": 4978.1,
     "currency": "USD",
     "date": "2026-11-23",
     "source": "Nasdaq"
@@ -1835,7 +1835,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$4.98tn"
+      "value": "$5.06tn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -1851,7 +1851,7 @@
      },
      {
       "label": "Dividend yield",
-      "value": "0.31%"
+      "value": "0.32%"
      },
      {
       "label": "Analysts' one-year target",
@@ -1901,7 +1901,7 @@
   "NVDA": {
    "sector": "Semiconductors",
    "cap": {
-    "value": 3518.1,
+    "value": 3093.8,
     "currency": "USD",
     "date": "2026-11-23",
     "source": "Nasdaq"
@@ -1915,7 +1915,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$3.09tn"
+      "value": "$4.07tn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -1931,7 +1931,7 @@
      },
      {
       "label": "Dividend yield",
-      "value": "0.69%"
+      "value": "0.78%"
      },
      {
       "label": "Analysts' one-year target",
@@ -2063,7 +2063,7 @@
   "AMZN": {
    "sector": "Retail and cloud",
    "cap": {
-    "value": 2783.0,
+    "value": 2668.9,
     "currency": "USD",
     "date": "2026-11-23",
     "source": "Nasdaq"
@@ -2077,7 +2077,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$2.67tn"
+      "value": "$2.76tn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -2137,7 +2137,7 @@
   "META": {
    "sector": "Internet",
    "cap": {
-    "value": 1524.1,
+    "value": 1433.6,
     "currency": "USD",
     "date": "2026-11-23",
     "source": "Nasdaq"
@@ -2151,7 +2151,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$1.43tn"
+      "value": "$1.51tn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -2167,7 +2167,7 @@
      },
      {
       "label": "Dividend yield",
-      "value": "0.35%"
+      "value": "0.37%"
      },
      {
       "label": "Analysts' one-year target",
@@ -2211,7 +2211,7 @@
   "TSLA": {
    "sector": "Cars",
    "cap": {
-    "value": 1480.0,
+    "value": 1366.9,
     "currency": "USD",
     "date": "2026-11-23",
     "source": "Nasdaq"
@@ -2225,7 +2225,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$1.37tn"
+      "value": "$1.53tn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -2291,7 +2291,7 @@
   "JPM": {
    "sector": "Banks",
    "cap": {
-    "value": 850.5,
+    "value": 824.8,
     "currency": "USD",
     "date": "2026-11-23",
     "source": "Nasdaq"
@@ -2305,7 +2305,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$824.8bn"
+      "value": "$842.9bn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -2341,7 +2341,7 @@
   "BRK.B": {
    "sector": "Conglomerate",
    "cap": {
-    "value": 1262.5,
+    "value": 1257.3,
     "currency": "USD",
     "date": "2026-11-23",
     "source": "Nasdaq"
@@ -2375,7 +2375,7 @@
      },
      {
       "label": "Analysts' one-year target",
-      "value": "$556.00"
+      "value": "$582.50"
      }
     ]
    },
@@ -2411,7 +2411,7 @@
   "WMT": {
    "sector": "Retail",
    "cap": {
-    "value": 1000.0,
+    "value": 1015.1,
     "currency": "USD",
     "date": "2026-11-23",
     "source": "Nasdaq"
@@ -2425,7 +2425,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$1.02tn"
+      "value": "$1.01tn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -2433,7 +2433,7 @@
      },
      {
       "label": "Forecast P/E (fiscal 2027)",
-      "value": "44.6"
+      "value": "44.3"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -2441,11 +2441,11 @@
      },
      {
       "label": "Dividend yield",
-      "value": "0.79%"
+      "value": "0.77%"
      },
      {
       "label": "Analysts' one-year target",
-      "value": "$132.00"
+      "value": "$138.00"
      }
     ]
    },
@@ -3070,7 +3070,7 @@
   "V": {
    "sector": "Payments",
    "cap": {
-    "value": 725.7,
+    "value": 725.3,
     "currency": "USD",
     "date": "2026-11-23",
     "source": "Nasdaq"
@@ -3084,7 +3084,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$725.3bn"
+      "value": "$737.8bn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -3132,7 +3132,7 @@
   "ORCL": {
    "sector": "Software and cloud",
    "cap": {
-    "value": 334.2,
+    "value": 305.9,
     "currency": "USD",
     "date": "2026-11-23",
     "source": "Nasdaq"
@@ -3146,7 +3146,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$305.9bn"
+      "value": "$346.2bn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -3224,7 +3224,7 @@
   "COST": {
    "sector": "Retail",
    "cap": {
-    "value": 484.7,
+    "value": 488.4,
     "currency": "USD",
     "date": "2026-11-23",
     "source": "Nasdaq"
@@ -3238,7 +3238,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$488.4bn"
+      "value": "$483.2bn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -3254,7 +3254,7 @@
      },
      {
       "label": "Dividend yield",
-      "value": "0.54%"
+      "value": "0.53%"
      },
      {
       "label": "Analysts' one-year target",
@@ -3689,7 +3689,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$233.0bn"
+      "value": "$236.7bn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -3714,7 +3714,7 @@
     ]
    },
    "cap": {
-    "value": 240.1,
+    "value": 233.0,
     "currency": "USD",
     "date": "2026-11-23",
     "source": "Nasdaq"
@@ -3764,7 +3764,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$272.6bn"
+      "value": "$312.2bn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -3789,7 +3789,7 @@
     ]
    },
    "cap": {
-    "value": 296.2,
+    "value": 272.6,
     "currency": "USD",
     "date": "2026-11-23",
     "source": "Nasdaq"
@@ -3815,7 +3815,7 @@
     "rows": [
      {
       "label": "Market value",
-      "value": "$1.27tn"
+      "value": "$1.29tn"
      },
      {
       "label": "P/E (last 12 months)",
@@ -3840,7 +3840,7 @@
     ]
    },
    "cap": {
-    "value": 1271.6,
+    "value": 1268.8,
     "currency": "USD",
     "date": "2026-11-23",
     "source": "Nasdaq"
