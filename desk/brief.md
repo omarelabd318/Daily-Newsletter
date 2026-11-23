@@ -1,25 +1,35 @@
-# Desk brief, Sunday, November 22, 2026
+# Desk brief, Monday, November 23, 2026
 
 Built by run_data.py. Work for the run, not for publication.
 
 ## Steps
-- **intraday**: ok in 27s (GitHub Actions). GLOBAL week and month: hourly from TradingView, brent, gold_usd, dxy, btc
+- **intraday**: FAILED in 311s (GitHub Actions). PARTIAL on GitHub Actions (a source refused it there): rerun this step in the session.
+    US month: 23 sessions, 21 series filled
+    EGX month: 23 sessions
+    EGX70 EWI: TradingView, 48 sessions fetched, added to 3 saved sessions
+    GLOBAL: last 24 hours to Mon 10:00 Cairo, btc, brent, gold_usd, dxy
+    GLOBAL week and month: hourly from TradingView, brent, gold_usd, dxy, btc
+    PARTIAL on GitHub Actions (a source refused it there): rerun this step in the session.
 - **rates**: ok in 1s (GitHub Actions). Rates: VIX to 2026-11-20 (35.89); Treasury yields to 2026-11-20 (10-year 4.92%).
-- **valuation**: ok in 25s (GitHub Actions). LLY: $1.27tn, P/E (last 12 months) 42.2, Forecast P/E (fiscal 2026) 37.8 (the four quarters to Sep 2026)
-- **movers**: ok in 21s (GitHub Actions). Market values: 39 of 39 updated
-- **calendar**: ok in 0s (GitHub Actions). 2027-02-04 AMZN results  2026-12-31
-- **indicators**: ok in 0s (GitHub Actions). indicators: 48 series; EGX30 turning down, RSI 49.7
-- **fairvalue**: ok in 1s (GitHub Actions). fair value: 53 stocks, k 16.1%, median P/E 10.0; cheapest MASR +74%, PHAR +48%, MFPC +43%; dearest ARAB -62%, MOIN -65%, BTFH -67%
-- **views**: ok in 0s (GitHub Actions). Views: nothing to change.
-- **results**: ok in 63s (GitHub Actions). 
-- **news**: ok in 90s (GitHub Actions). 
-- **leads**: ok in 77s (GitHub Actions). 
-- **sources**: english.mubasher.info: 4 failed, 0 needed a retry (fetch_movers.py); query2.finance.yahoo.com: 2 failed, 0 needed a retry (fetch_intraday.py); data.sec.gov: 7 failed, 0 needed a retry (results_due.py); news.google.com: 0 failed, 6 needed a retry.
+- **valuation**: ok in 20s (GitHub Actions). LLY: $1.27tn, P/E (last 12 months) 42.2, Forecast P/E (fiscal 2026) 37.8 (the four quarters to Sep 2026)
+- **movers**: ok in 9s (GitHub Actions). Market values: 39 of 39 updated
+- **calendar**: ok in 234s (GitHub Actions). 2027-02-04 AMZN results  2026-12-31
+- **indicators**: ok in 0s (GitHub Actions). indicators: 49 series; EGX30 turning down, RSI 41.1
+- **fairvalue**: ok in 1s (GitHub Actions). fair value: 52 stocks, k 16.4%, median P/E 9.6; cheapest MASR +78%, PHAR +52%, MFPC +44%; dearest ARAB -62%, MOIN -64%, BTFH -67%
+- **views**: ok in 0s (GitHub Actions). 2026-11-11-jufo-results: open -> wrong  (Juhayna closed at 21.77 on November 22, below the 22 that makes the call wrong.)
+- **results**: ok in 52s (GitHub Actions). 
+- **news**: ok in 104s (GitHub Actions). 
+- **leads**: ok in 74s (GitHub Actions). 
+- **sources**: english.mubasher.info: 4 failed, 0 needed a retry (fetch_movers.py); query2.finance.yahoo.com: 3 failed, 0 needed a retry (fetch_intraday.py); data.sec.gov: 7 failed, 0 needed a retry (results_due.py); news.google.com: 0 failed, 5 needed a retry.
 
 ## What moved (latest close against the one before)
-- EGX30 51,458.00 (-0.17%); EGX70 EWI 17,505.80 (-0.33%); USD/EGP 53.88 (+0.12%); Gold 21K 5,510.00 (+0.92%); Brent 92.57 (+0.64%); S&P 500 6,910.39 (-3.70%); Nasdaq 22,617.73 (-5.28%); Bitcoin 59,051.00 (+2.10%)
-- Desk stocks that moved 3% or more (each needs its leads opened and a stock line in the research log): NVDA -14.0%, AVGO -12.2%, ORCL -8.5%, INTC -8.0%, TSLA -7.6%, META -5.9%, AMZN -4.1%, ETEL -3.5%, JPM -3.0%.
+- EGX30 49,989.80 (-2.85%); EGX70 EWI 16,534.40 (-5.55%); USD/EGP 54.50 (+1.16%); Gold 21K 5,570.00 (+1.09%); Brent 92.57 (+0.64%); S&P 500 6,910.39 (-3.70%); Nasdaq 22,617.73 (-5.28%); Bitcoin 61,450.00 (+4.06%)
+- Desk stocks that moved 3% or more (each needs its leads opened and a stock line in the research log): NVDA -14.0%, AVGO -12.2%, ORCL -8.5%, INTC -8.0%, TSLA -7.6%, EMFD -6.3%, JUFO -6.0%, META -5.9%, EFIH -5.6%, ALCN -5.3%, MFPC -5.3%, PHDC -5.1%, AMOC -4.9%, BQDC -4.5%, EAST -4.3%, TMGH -4.3%, EFID -4.3%, AMZN -4.1%, SKPC -3.4%, ABUK -3.1%, JPM -3.0%.
 - Trend and momentum worth a mention (description only, never a reason on its own):
+    - ALCN: No clear trend: 6.4% below its 50-day average and 1.9% above the 200-day; RSI 39, neither stretched nor washed out; momentum turned down today (MACD crossed its signal line).
+    - EGAL: Turning down: below both its 50-day average (9.2% under) and its 200-day (0.8% under), though the 50-day is still above the 200-day; RSI 38, neither stretched nor washed out; momentum turned down today (MACD crossed its signal line).
+    - JUFO: Turning down: below both its 50-day average (11.3% under) and its 200-day (8.6% under), though the 50-day is still above the 200-day; RSI 35, neither stretched nor washed out; momentum turned down today (MACD crossed its signal line).
+    - ORAS: No clear trend: 5.1% below its 50-day average and 15.5% above the 200-day; RSI 42, neither stretched nor washed out; momentum turned down today (MACD crossed its signal line).
     - AMZN: No clear trend: 3.2% below its 50-day average and 0.7% above the 200-day; RSI 42, neither stretched nor washed out; momentum turned down today (MACD crossed its signal line).
     - GOOGL: In a downtrend: below its 50-day average, which is below the 200-day; RSI 28, washed out: below 30; momentum turned down today (MACD crossed its signal line).
     - INTC: Turning down: below both its 50-day average (43.2% under) and its 200-day (41.4% under), though the 50-day is still above the 200-day; RSI 28, washed out: below 30; momentum turned up 2 sessions ago (MACD crossed its signal line).
@@ -28,138 +38,138 @@ Built by run_data.py. Work for the run, not for publication.
     - NVDA: Turning down: below both its 50-day average (39.4% under) and its 200-day (38.3% under), though the 50-day is still above the 200-day; RSI 15, washed out: below 30.
 
 ## Movers that still need a reason (top five each way, 5% or more)
-- None: every one has a reason or is under 5%.
+- EGX INEG (Integrated Engineering Group) +63.9%; EGX CRST (Creast mark For Contracting) -19.9%; EGX AMII (Arabian Metal Industries and Industrial Investments) -12.4%; EGX GSSC (General Silos & Storage) -11.8%; EGX AALR (General Co. for Land Reclamation Development & Reconstruction) -11.7%; EGX GTWL (Goldentex) -10.5%
 
 Leads for them (open before using; never guess a reason):
 ```
 EGX: Mubasher's list failed (HTTP Error 401: Unauthorized); reading the session from TradingView
-EGX: 2026-11-19 (TradingView's closes; Mubasher's list refused), 200 stocks
-EGX week and month: EGX stocks trading at least EGP 1m a day on average (212)
+EGX: 2026-11-22 (TradingView's closes; Mubasher's list refused), 207 stocks
+EGX week and month: EGX stocks trading at least EGP 1m a day on average (211)
 US: 2026-11-20, 807 companies
 US week and month: US companies worth $10bn or more (805)
-EGX30 heatmap: 2026-11-19, 31 members
+EGX30 heatmap: 2026-11-22, 31 members
 US heatmap: 2026-11-20, 100 members
 Market values: 39 of 39 updated
 
-# EGX 2026-11-19
-## ZEOT +17.0%  Extracted Oils & Derivatives
+# EGX 2026-11-22
+## INEG +63.9%  Integrated Engineering Group
 - no headlines found
-## MOSC +12.0%  Misr Oils & Soap
+## CPME +3.6%  Catalyst Partners Middle East
 - no headlines found
-## VERT +10.0%  Vertika for Industry & Trade
+## CSAG +0.4%  Canal Shipping Agencies
 - no headlines found
-## COSG +9.3%  Cairo Oils & Soap
+## PHTV +0.2%  Pyramisa Hotels
 - no headlines found
-## FIRE +8.2%  First Investment & Real Estate Development
+## MOIL +0.0%  Maridive & Oil Services
 - no headlines found
-## ADRI -5.1%  Arab Development & Real Estate Investment
+## CRST -19.9%  Creast mark For Contracting
 - no headlines found
-## ICFC -5.0%  International Co. for Fertilizers & Chemicals
+## AMII -12.4%  Arabian Metal Industries and Industrial Investments
 - no headlines found
-## EASB -4.9%  Egyptian Arabian Company for Securities Brokerage EAC
+## GSSC -11.8%  General Silos & Storage
 - no headlines found
-## AMER -4.8%  Amer Group Holding
+## AALR -11.7%  General Co. for Land Reclamation Development & Reconstruction
 - no headlines found
-## NINH -4.7%  Nozha International Hospital
+## GTWL -10.5%  Goldentex
 - no headlines found
 
 # US 2026-11-20
 ## GPN +9.9%  Global Payments
+- Sun 22 Nov | Yahoo Finance Australia | Global Payments Inc. (GPN) Stock forecasts
+  https://au.finance.yahoo.com/research/reports/MS_0P000002G8_AnalystReport_1795207236000
 - Sat 21 Nov | Yahoo Finance | Global Payments (GPN) Gets a Potential Lifeline as New Takeover Buzz Heats Up
   https://finance.yahoo.com/markets/stocks/articles/global-payments-gpn-gets-potential-065105957.html
 - Sat 21 Nov | Yahoo! Finance Canada | Global Payments Inc. (GPN) Stock Forecasts
   https://ca.finance.yahoo.com/research/reports/MS_0P000002G8_AnalystReport_1795207236000
 - Sat 21 Nov | Crain's Chicago Business | GTCR weighs $50 billion Global Payments buyout
   https://www.chicagobusiness.com/banking-finance/ccb-gtcr-global-payments-buyout-20261120/
-- Fri 20 Nov | BigGo Finance | Global Payments Jumps 10% as Largest Holder GTCR Weighs $50 Billion Buyout
-  https://finance.biggo.com/news/38051972-b0a9-43b9-b885-307db6a86767
 ## BIP +4.5%  Brookfield Infrastructure Partners L.P
-- Sat 21 Nov | Yahoo Finance Australia | Brookfield Infrastructure Partners L.P. (BIP) stock price, news, quote and history
-  https://au.finance.yahoo.com/quote/BIP/
-- Sat 21 Nov | Yahoo! Finance Canada | Brookfield Infrastructure Corporation (BIPC.TO) Stock Price, News, Quote & History
-  https://ca.finance.yahoo.com/quote/BIPC.TO/
-- Sat 21 Nov | Yahoo! Finance Canada | Brookfield Infrastructure Partners L.P. (BIP-PB) Stock Price, News, Quote & History
-  https://ca.finance.yahoo.com/quote/BIP-PB/
-- Sat 21 Nov | Yahoo! Finance Canada | Brookfield Infrastructure Partners L.P. (BIP) Stock Price, News, Quote & History
-  https://ca.finance.yahoo.com/quote/BIP/
+- Mon 23 Nov | Yahoo! Finance Canada | Brookfield Asset Management Ltd. (BAM.TO) Stock Price, News, Quote & History
+  https://ca.finance.yahoo.com/quote/BAM.TO/
+- Mon 23 Nov | Yahoo Finance | Brookfield Infrastructure (BIPC) is Back on Investors’ Radar Ahead of This Key Event
+  https://finance.yahoo.com/markets/stocks/articles/brookfield-infrastructure-bipc-back-investors-043222176.html
+- Sun 22 Nov | CoinGecko | RBIP to MYR: Brookfield Infrastructure Partners L.P. Tokenized Stock (Reality) Price in Malaysian Ringgit
+  https://www.coingecko.com/en/coins/brookfield-infrastructure-partners-l-p-rstock/myr
+- Sun 22 Nov | Yahoo! Finance Canada | Brookfield Infrastructure Partners L.P. (BIP-PF.TO) Stock Price, News, Quote & History
+  https://ca.finance.yahoo.com/quote/BIP-PF.TO/
 ## RKT +4.2%  Rocket Companies
-- Sat 21 Nov | Yahoo! Finance Canada | Rocket Companies, Inc. (RKT) Stock Price, News, Quote & History
+- Mon 23 Nov | MarketBeat | Rocket Companies, Inc. (NYSE:RKT) Stock Rated "Moderate Buy" by Sell-Side Analysts
+  https://www.marketbeat.com/instant-alerts/consensus-rocket-companies-inc-nyse-rkt-stock-rated-moderate-buy-by-sell-side-analysts-2026-11-23/
+- Sun 22 Nov | Yahoo! Finance Canada | Rocket Companies, Inc. (RKT) Stock Price, News, Quote & History
   https://ca.finance.yahoo.com/quote/RKT/
 - Sat 21 Nov | Yahoo Finance Singapore | Rocket Companies, Inc. (RKT) stock price, news, quote and history
   https://sg.finance.yahoo.com/quote/RKT/
 - Sat 21 Nov | Yahoo Finance | Rocket Companies (RKT) Just Got a Major Win — Wall Street Is Reacting
   https://finance.yahoo.com/markets/stocks/articles/rocket-companies-rkt-just-got-071103140.html
-- Sat 21 Nov | GuruFocus | Rocket Companies Inc (RKT) Shares Surge 4.2% -- What GF Score of 65 Tells Investors
-  https://www.gurufocus.com/news/9213506/rocket-companies-inc-rkt-shares-surge-42-what-gf-score-of-65-tells-investors
 ## MKC.V +3.8%  McCormick & Company, Incorporated
+- Sun 22 Nov | Investing.com Australia | Form 4 McCormick & Co: Margaret M. V. Preston (Director) For: 26 October
+  https://au.investing.com/news/stock-market-news/form-4-mccormick--co-margaret-m-v-preston-director-for-26-october-93CH-4788496
+- Sun 22 Nov | Yahoo! Finance Canada | McCormick & Company, Incorporated (MKC) Stock Price, News, Quote & History
+  https://ca.finance.yahoo.com/quote/MKC/
 - Sat 21 Nov | MarketBeat | McCormick & Company, Incorporated (NYSE:MKC) Stock Breaks Above 50 Day Moving Average - What's Next?
   https://www.marketbeat.com/instant-alerts/price-mccormick-company-incorporated-nyse-mkc-stock-breaks-above-50-day-moving-average-whats-next-2026-11-21/
-- Fri 20 Nov | kalkine.ca | McCormick & Company Incorporated (NYSE: MKC.V) Stock Price, News & Analysis
-  https://kalkine.ca/company/nyse-mkc-v/
-- Fri 20 Nov | MarketBeat | McCormick & Company, Incorporated (NYSE:MKC) Shares Climb 4.8% - Here's Why
-  https://www.marketbeat.com/instant-alerts/price-mccormick-company-incorporated-nyse-mkc-shares-climb-48-heres-why-2026-11-20/
-- Thu 19 Nov | Yahoo Finance | Do Wall Street Analysts Like McCormick & Company Stock?
-  https://finance.yahoo.com/markets/stocks/articles/wall-street-analysts-mccormick-company-121725694.html
+- Sat 21 Nov | Timothy Sykes | McCormick & Company Incorporated (MKC) Stock Price | Live Quotes & Charts | NYSE
+  https://www.timothysykes.com/quote/MKC/
 ## GIS +3.7%  General Mills
-- Sat 21 Nov | Investing.com Australia | Form 4 General Mills: Elizabeth Mascolo (Segment President) For: 17 November
-  https://au.investing.com/news/stock-market-news/form-4-general-mills-elizabeth-mascolo-segment-president-for-17-november-93CH-4788290
-- Sat 21 Nov | The Motley Fool | Here's How Much $2,500 in General Mills Stock Could Pay You in Dividends in 2027
-  https://www.fool.com/investing/2026/11/21/here-s-how-much-usd2-500-in-general-mills-stock-could-pay-you-in-dividends-in-2027/
-- Sat 21 Nov | Yahoo! Finance Canada | General Mills, Inc. (GIS) Stock Price, News, Quote & History
+- Sun 22 Nov | Simply Wall St | How Operating Reorganization Will Impact General Mills (GIS) Investors
+  https://simplywall.st/stocks/us/food-beverage-tobacco/nyse-gis/general-mills/news/how-operating-reorganization-will-impact-general-mills-gis-i
+- Sun 22 Nov | Yahoo Finance | General Mills vs. Kraft Heinz: Which Food Dividend Is Better for Retirees?
+  https://finance.yahoo.com/markets/stocks/articles/general-mills-vs-kraft-heinz-200733902.html
+- Sun 22 Nov | Yahoo! Finance Canada | General Mills, Inc. (GIS) Stock Price, News, Quote & History
   https://ca.finance.yahoo.com/quote/GIS/
-- Sat 21 Nov | Insider Monkey | General Mills (GIS) is Suddenly Drawing Wall Street’s Attention
-  https://www.insidermonkey.com/news/general-mills-gis-is-suddenly-drawing-wall-streets-attention-1868407/
+- Sat 21 Nov | Investing.com Australia | Form 4 General Mills: Pankaj MN Sharma (Segment President) For: 17 November
+  https://au.investing.com/news/stock-market-news/form-4-general-mills-pankaj-mn-sharma-segment-president-for-17-november-93CH-4788287
 ## NBIS -16.1%  Nebius Group
-- Sun 22 Nov | Simply Wall St | Nebius Group (NBIS) Stock Still Looks Cheap After a 49% Slide
-  https://simplywall.st/stocks/us/software/nasdaq-nbis/nebius-group/news/nebius-group-nbis-stock-still-looks-cheap-after-a-49-slide
-- Sat 21 Nov | SSBCrack | Nebius Group N.V. Ranked 7th Among the 10 Most Overvalued AI Stocks According to Short Sellers
-  https://news.ssbcrack.com/nebius-group-n-v-ranked-7th-among-the-10-most-overvalued-ai-stocks-according-to-short-sellers/
-- Sat 21 Nov | Pluang | Nebius shares drop 40% despite strong growth; $...
-  https://pluang.com/en/news-feed/investasi-500-bulan-nebius-pensiun-jutawan
-- Sat 21 Nov | The Motley Fool | Could Investing $500 a Month in Nebius Help You Retire a Millionaire?
-  https://www.fool.com/investing/2026/11/21/could-investing-500-a-month-in-nebius-help-you-retire-a-millionaire/
+- Mon 23 Nov | Simply Wall St | Is Nebius Group (NBIS) Cheap On Lower 2026 Guidance And AI Cloud Risks?
+  https://simplywall.st/stocks/us/software/nasdaq-nbis/nebius-group/news/is-nebius-group-nbis-cheap-on-lower-2026-guidance-and-ai-clo
+- Sun 22 Nov | Pluang | Nebius stock plunges 16%, down 72% from its pea...
+  https://pluang.com/en/news-feed/michael-burry-peringatkan-nebius-saham-turun-16-persen-72-persen-dari-rekor
+- Sun 22 Nov | Yahoo! Finance Canada | Nebius Group N.V. (NBIS) Stock Price, News, Quote & History
+  https://ca.finance.yahoo.com/quote/NBIS/
+- Sun 22 Nov | TradingKey | Nebius Stock Forecast: How Did NBIS Secure $44B in Contracts and What's Next?
+  https://www.tradingkey.com/analysis/stocks/us-stocks/261948514-nbis-stock-forecast-can-44bn-in-ai-contracts-drive-more-upside-tradingkey
 ## CLS -16.1%  Celestica
+- Mon 23 Nov | MarketBeat | Celestica (NYSE:CLS) Upgraded to Buy at Wall Street Zen
+  https://www.marketbeat.com/instant-alerts/analyst-celestica-nyse-cls-upgraded-to-buy-at-wall-street-zen-2026-11-23/
+- Sun 22 Nov | Kalkine Media | What Shapes Celestica (TSX:CLS)'s Role in AI Hardware Manufacturing?
+  https://kalkinemedia.com/ca/stocks/technology/what-shapes-celestica-tsxclss-role-in-ai-hardware-manufacturing
+- Fri 20 Nov | StockInvest.us | Celestica Stock Price Forecast. Should You Buy CLS.TO?
+  https://stockinvest.us/stock/CLS.TO
 - Fri 20 Nov | MarketBeat | Celestica (NYSE:CLS) Stock Price Down 16.3% - Time to Sell?
   https://www.marketbeat.com/instant-alerts/price-celestica-nyse-cls-stock-price-down-163-time-to-sell-2026-11-20/
-- Fri 20 Nov | Global Banking & Finance Review | Celestica falls 16.38% in Friday's session
-  https://www.globalbankingandfinance.com/celestica-cls-to-falls-2026-11-20/
-- Fri 20 Nov | GuruFocus | Celestica (CLS) Shares Drop 15% Amid Tech Selloff on November 20, 2026
-  https://www.gurufocus.com/news/9213149/celestica-cls-shares-drop-15-amid-tech-selloff-on-november-20-2026
-- Fri 20 Nov | Seeking Alpha | Celestica drops 15% amid broad tech selloff (CLS:NYSE)
-  https://seekingalpha.com/news/4675283-celestica-drops-15-percent-amid-broad-tech-selloff
 ## SNDK -16.1%  Sandisk
-- Sun 22 Nov | FinanceFeeds | Sandisk Stock $79.24: Dell and HP Report Tuesday
-  https://financefeeds.com/sandisk-sndk-stock-79-sunday-week-ahead-dell-hp-results-24-november-bull-88-bear-70/
-- Sun 22 Nov | shattered.io | Huang Exit: 3 Flash Sale AI Stocks, Sandisk 60% Off High
-  https://shattered.io/huang-resignation-flash-sale-3-ai-stocks-sandisk-amd-silicon-motion/
-- Sat 21 Nov | MarketWatch | Micron and Sandisk stocks might look like bargains, but analysts say that’s actually a red flag
-  https://www.marketwatch.com/story/micron-and-sandisk-stocks-might-look-like-bargains-but-analysts-say-thats-actually-a-red-flag-da1f1f5d
-- Sat 21 Nov | ad-hoc-news.de | Sandisk stock completes split as adjusted trading begins
-  https://www.ad-hoc-news.de/boerse/news/corporate-news/sandisk-stock-completes-split-as-adjusted-trading-begins/70542155
+- Mon 23 Nov | FinanceFeeds | Sandisk Stock $79.24: 5% Overnight Rebound Before Dell, HP
+  https://financefeeds.com/sandisk-sndk-stock-79-monday-5-percent-overnight-rebound-dell-hp-results-tuesday-bull-90-bear-73/
+- Mon 23 Nov | TipRanks | Why AMD, Micron, and Sandisk Stocks Are Bouncing Back Overnight After Friday’s Crash — and Which Has the Most Upside Ahead
+  https://www.tipranks.com/news/why-amd-micron-and-sandisk-stocks-are-bouncing-back-overnight-after-fridays-crash-and-which-has-the-most-upside-ahead
+- Mon 23 Nov | JournalArta | Micron and Sandisk Pitched as Cheaper AI Bets Than Nvidia
+  https://journalarta.com/en/2026/11/23/micron-sandisk-pitched-cheaper-ai-bets-than-nvidia/
+- Sun 22 Nov | The Globe and Mail | Micron Technology vs. Sandisk: Which Technology Stock Is a Better Buy for 2027?
+  https://www.theglobeandmail.com/investing/markets/markets-news/motley/8957101/micron-technology-vs-sandisk-which-technology-stock-is-a-better-buy-for-2027/
 ## BE -15.3%  Bloom Energy
+- Mon 23 Nov | Trefis | What Moved Bloom Energy Stock?
+  https://www.trefis.com/stock/be/articles/627709/what-moved-bloom-energy-stock/2026-11-23
 - Sun 22 Nov | Pluang | Bloom Energy's stock drops despite doubling rev...
-  https://pluang.com/en/news-feed/haruskah-anda-investasi-1000-dolar-di-bloom-energy-sekarang-2
-- Sun 22 Nov | Yahoo Finance | Should You Invest $1,000 in Bloom Energy Right Now?
-  https://finance.yahoo.com/markets/stocks/articles/invest-1-000-bloom-energy-005002138.html
-- Sat 21 Nov | TIKR.com | Bloom Energy Sinks 26% in a Week, Vertiv Down 18%, as Nvidia’s Turmoil Hits AI Power Stocks. Time to Buy?
-  https://www.tikr.com/blog/bloom-energy-sinks-26-in-a-week-vertiv-down-18-as-nvidias-turmoil-hits-ai-power-stocks-time-to-buy?ref=yahoofinance&tlnk=yf-261121-fv95h3w4
-- Sat 21 Nov | Kalkine Media | Can Bloom Energy (NYSE:BE) Turn Data Center Demand Into Lasting Growth?
-  https://kalkinemedia.com/us/stocks/energy/can-bloom-energy-nysebe-turn-data-center-demand-into-lasting-growth
+  https://pluang.com/en/news-feed/haruskah-anda-investasi-1000-dolar-di-bloom-energy-sekarang
+- Sun 22 Nov | Pluang | Bloom Energy's revenue soars 138% but stock dro...
+  https://pluang.com/en/news-feed/peluang-atau-penurunan-lanjutan-saham-bloom-energy
+- Sun 22 Nov | The Motley Fool | Bloom Energy Stock Has Crashed Nearly 60%. Is It a Once-in-a-Decade Opportunity at $145, or Should You Keep Waiting for a Bigger Drop?
+  https://www.fool.com/investing/2026/11/22/bloom-energy-stock-has-crashed-nearly-60-is-it-a-once-in-a-decade-opportunity-at-usd145-or-should-you-keep-waiting-for-a-bigger-drop/
 ## CRDO -15.2%  Credo Technology Group Holding
+- Sun 22 Nov | Simply Wall St | What Investors Got Wrong About Credo Technology Group Before The Drop
+  https://simplywall.st/stocks/us/semiconductors/nasdaq-crdo/credo-technology-group-holding/news/what-investors-got-wrong-about-credo-technology-group-before/amp
 - Sat 21 Nov | Benzinga | Benzinga Bulls and Bears: Nvidia, Credo, Red Cat
   https://www.benzinga.com/markets/market-summary/26/11/63515125/benzinga-bulls-and-bears-nvidia-credo-red-cat
 - Sat 21 Nov | GuruFocus | Credo Technology Group Holding Ltd (CRDO) Stock Down 15.2% -- No
   https://www.gurufocus.com/news/9213649/credo-technology-group-holding-ltd-crdo-stock-down-152-now-undervalued-gf-score-75100
 - Fri 20 Nov | GuruFocus | Credo Technology Group (CRDO) Shares Plunge Nearly 14% Amid Tech Sector Sell-Off
   https://www.gurufocus.com/news/9213209/credo-technology-group-crdo-shares-plunge-nearly-14-amid-tech-sector-selloff
-- Fri 20 Nov | TradingView | onsemi, Nova, Power Integrations, Credo Technology Group Holding, and Navitas Semiconductor shares plummet, what you need to know
-  https://www.tradingview.com/news/stockstory:335186cea094b:0-onsemi-nova-power-integrations-credo-technology-group-holding-and-navitas-semiconductor-shares-plummet-what-you-need-to-know/
 ```
 
 ## Results to record (results_due.py)
 - No new results waiting: every desk stock that reported in the period is recorded.
 - lastResults written but set_results.py not run, so the P/E is still on the old quarter: TMGH, PHDC, SWDY, FWRY, HRHO, JUFO, ALCN, MFPC, EAST, EFIH, AMOC, EFID.
-- Already recorded: NVDA, WMT, COMI, ABUK, ETEL, ORAS, EMFD, BQDC, EGAL.
+- Already recorded: WMT, COMI, ABUK, ETEL, ORAS, EMFD, BQDC, EGAL.
 
 ## Coming up (seven days)
 - 2026-11-23 CLHO results (expected)
@@ -171,435 +181,486 @@ Market values: 39 of 39 updated
 - 2026-11-24 COST dividend
 
 ## Views
+- due 2026-11-30: Telecom Egypt holds its ground into MSCI's November 30 inclusion (on track)
+- judged wrong with no lesson yet: Juhayna returns to EGP 27–28 by end of January  <- write its `lesson`
 - due 2026-11-27: Developers lag while rates stay high (on track)
 - due 2026-11-27: Money rotates from AI spenders to steady earners (on track)
+- due 2026-11-30: Gas rationing keeps fertilizer stocks under pressure through November (on track)
 - due 2026-11-26: The pound stays firmer than EGP 56 per dollar into the IMF review (on track)
-    Views: nothing to change.
+    2026-11-11-jufo-results: open -> wrong  (Juhayna closed at 21.77 on November 22, below the 22 that makes the call wrong.)
 
 ## Fair value
-- Changed since the last run: nothing by 10 points or more.
-- In the ten cheapest or dearest with no note: ADIB, MCQE, CSAG, MTIE, AMOC, LCSW, AMIA, BINV.
+- Changed since the last run: GBCO +21% -> +23% (low -> medium); ISPH +11% -> -1% (medium -> medium); AMOC -12% -> -11% (high -> medium). Dropped out: TMGH.
+- In the ten cheapest or dearest with no note: MCQE, ADIB, EMFD, MTIE, AMOC, AMIA, LCSW, BINV.
 
 ## Due today
-- Light run (no session since Saturday's desk): carry both sections over, update only news, the week ahead and views due; no movers' reasons; side sessions only if there is work for them.
-- Sunday: write the desk's note for two more stocks (16 still without one; next: GOOGL, AVGO), and read the whole fair-value table for figures that cannot be right.
+- Nothing beyond the daily steps.
 
 ## News leads by stock (stock_news.py; all leads for stocks that moved 2% or more, three for the rest)
-News leads for the last 3 days, 2026-11-22. Open each story before using it.
+News leads for the last 2 days, 2026-11-23. Open each story before using it.
 ## COMI  (8 leads)
-- Sat 21 Nov | الجريدة العقارية | أفضل شهادتي ادخار في البنك التجاري الدولي CIB خلال نوفمبر 2026.. العائد يصل إلى 20.50%
-  https://www.aleqaria.com.eg/post/details/358976/أفضل-شهادتي-ادخار-في-البنك-التجاري-الدولي-cib-خلال-نوفمبر-2026..-العائد-يصل-إلى-20.50
-  > تتصدر شهادات الادخار اهتمامات أصحاب المدخرات الراغبين في تحقيق عائد مناسب على أموالهم، خاصة مع استمرار البنوك في تقديم أوعية ادخارية متنوعة من حيث أسعار الفائدة ومدد الاستثمار ودوريات صرف العائد.
-- Sat 21 Nov | بنكي | بطاقة وورلد (World) الائتمانية — البنك التجاري الدولي-CIB
-  https://www.bankygate.com/products/cards/410
-  > - معدل الفائدة السنوي الفعلي 24 عرض ساري على البطاقة تقسيط بدون فوائد 13 · خصومات 12 · 11 بينتهوا خلال أيام - تقسيط المشتريات لمدة 12 شهرًا بدون فوائد Audio Technology شرف دي جي - تقسيط بدون فوائد + خصم حتى 25% Bosch بوش - خصم 10% DALYDRESS دالى دريس
-- Sat 21 Nov | شبكة تواصل الإخبارية | قبل ما تغير فلوسك.. أسعار الدولار اليوم في البنك الأهلي وبنك مصر وCIB
-  https://twaslnews1.twaslnews.com/8049002/
-  (page: did not load (403))
+- Mon 23 Nov | بنكي | شهادة 3 سنوات عائد متغير — البنك التجاري الدولي-CIB
+  https://www.bankygate.com/products/cds/21
+  > شهادة 3 سنوات عائد متغير شهادة متغيرة العائد تقدم حاليًا 20.25% عند صرف العائد يوميًا و20.50% عند صرفه شهريًا، مع حد أدنى منخفض يبدأ من 1,000 جنيه وإمكانية الاقتراض بضمانها حتى 95% من قيمتها. - 20.25% – 20.5% - يومي 20.25% · شهري 20.5% | 180 | 2.5% | السنة الأولى (بعد ٦ شهور) |
+- Mon 23 Nov | بنكي | تفعيل CIB Pay والدفع بالموبايل عبر NFC من البنك التجاري الدو
+  https://www.bankygate.com/202975
+  > أطلق البنك التجاري الدولي CIB تطبيق CIB Pay لهواتف أندرويد، والذي يتيح لعملاء البنك استخدام بطاقاتهم البنكية المؤهلة للدفع لدى التجار من خلال الهواتف المحمولة وتقنية الاتصال قريب المدى NFC، دون الحاجة إلى استخدام البطاقة البلاستيكية عند إتمام عملية الشراء.
+- Sun 22 Nov | ad-hoc-news.de | Commercial International Bank stock: 9M net income reaches EGP 63.1bn
+  https://www.ad-hoc-news.de/boerse/news/nebenwerte/commercial-international-bank-stock-9m-net-income-reaches-egp-63-1bn/70544867
+  > Commercial International Bank reported consolidated revenue of EGP 103 billion and net income of EGP 63.1 billion for the nine months ended September 30, 2026. The results were released on Monday, November 9, and later filed with the Egyptian Exchange. The bank's nine-month earnings release showed reported net income up 2 percent year over year. [Figures on the page: consolidated; nine months; one quarter. Check which one each figure is.]
 ## TMGH  (3 leads)
-- Sat 21 Nov | إيجبتكِ | النائب عبدالرحمن بشاري يبحث مع هشام طلعت مصطفى أولوية توظيف أبناء الأقصر
-  https://www.egyptke.com/305151
-  > النائب عبدالرحمن بشاري يبحث مع هشام طلعت مصطفى أولوية توظيف أبناء الأقصر النائب عبدالرحمن بشاري يبحث مع هشام طلعت مصطفى أولوية توظيف أبناء الأقصر بفندق فور سيزونز ودعم مشروعات التنمية بالمحافظة التقى النائب عبدالرحمن بشاري عضو مجلس النواب  برجل الأعمال هشام طلعت مصطفى، لفتح ملف أولوية التوظيف لأبناء محافظة الأقصر بفندق فور سيزونز
-- Sat 21 Nov | اليوم السابع | فى سوق المشتقات.. الكبار يراهنون على أسعار "طلعت مصطفى" وCIB حتى 2027
-  https://www.youm7.com/story/2026/11/21/فى-سوق-المشتقات-الكبار-يراهنون-على-أسعار-طلعت-مصطفى-وCIB/7625715
-  > سجلت تداولات سوق المشتقات المالية في البورصة المصرية قيمة إجمالية بلغت 9.374 مليون جنيه خلال الأسبوع، من خلال تنفيذ 60 عملية، على كمية متداولة بلغت 642 عقدًا، وفقًا للتقرير الأسبوعي الخاص بالمشتقات المالية.
-- Thu 19 Nov | مجلة البوصلة الاقتصادية | تراجع العقود المستقبلية لـ EGX30 و"طلعت مصطفى" هامشيًا.. وانخفاض البنك التجاري الدولي بنسب تتخطى 1% اليوم
-  https://alboslanews.com/أسواق-مال/تراجع-العقود-المستقبلية-لـ-egx30-وطلعت-مصطفى-هامشيًا-وانخفاض-البنك-التجاري-الدولي-بنسب-تتخطى-1-اليوم-431143
-  > تراجع العقود المستقبلية لـ EGX30 و"طلعت مصطفى" هامشيًا.. وانخفاض البنك التجاري الدولي بنسب تتخطى 1% اليوم الخميس 19 نوفمبر 2026 -03:56
-## ETEL  (3 leads)
-- Fri 20 Nov | المصري اليوم | الاستعلام عن فاتورة النت WE برقم التليفون الأرضي 2026.. الرابط والخطوات وطرق السداد
-  https://www.almasryalyoum.com/news/details/4415474
-  > الاستعلام عن فاتورة النت WE برقم التليفون الأرضي 2026.. الرابط والخطوات وطرق السداد يتزايد اهتمام عملاء الشركة المصرية للاتصالات WE بالبحث عن طريقة الاستعلام عن فاتورة النت WE برقم التليفون الأرضي 2026، لمعرفة قيمة الاشتراك الشهري ومتابعة موعد التجديد، وتجنب انقطاع خدمة الإنترنت المنزلي نتيجة التأخر في سداد المستحقات.
-- Thu 19 Nov | Masrawy | المصرية للاتصالات يهزم الترسانة في عقر داره ويرتقي بجدول الترتيب
-  https://www.masrawy.com/sports/sports_news/details/2026/11/19/3081357/المصرية-للاتصالات-يهزم-الترسانة-في-عقر-داره-ويرتقي-بجدول-الترتيب
-  > حقق فريق المصرية للاتصالات (وي) فوزًا مهمًا على حساب منافسه الترسانة بنتيجة 2-1، في المباراة التي جمعت الفريقين اليوم الخميس، ضمن منافسات الجولة الثالثة عشرة من دوري المحترفين المصري.
-- Thu 19 Nov | بوابة مولانا | المصرية للاتصالات توقع اتفاقية تعاون مع نيفيرا
-  https://mwlana.com/details/328560/
-  > وقّع المهندس تامر المهدي، العضو المنتدب والرئيس التنفيذي للشركة المصرية للاتصالات، والمهندس عبد الخالق عواد، الرئيس التنفيذي للشؤون العقارية بشركة «نيفيرا»، اتفاقية تعاون تتولى بموجبها المصرية للاتصالات دور شريك الاتصالات والتكنولوجيا للمشروع، وذلك بحضور الدكتور مصطفى مدبولي، رئيس مجلس الوزراء.
+- Sun 22 Nov | ارقام : اخبار ومعلومات سوق الأسهم السعودي - تاسي | صندوق الاستثمارات يوقع مذكرة تفاهم مع مجموعة طلعت مصطفى لتعزيز فرص التعاون
+  https://www.argaam.com/ar/article/articledetail/id/1910794
+  (page read: it never names the company, so probably not about it: skip)
+- Sun 22 Nov | Mubasher | مع تهاوي بورصة مصر.. كيف جاء أداء "التجاري الدولي" و"طلعت مصطفى"؟
+  https://www.mubasher.info/news/21588660/مع-تهاوي-بورصة-مصر-كيف-جاء-أداء-التجاري-الدولي-و-طلعت-مصطفى
+  > القاهرة - مباشر: قاد سهم التجاري الدولي هبوط المؤشر الرئيسي للبورصة "EGX30 دون 50000 نقطة، مع تراجعه في ختام اليوم نحو 2%. وفي ختام البوم انخفض سهم التجاري الدولي عند مستوى 125 جنيه مستقطبا تداولات قيمتها 267.2 مليون جنيه، فيما هبط كل من القلعة وطلعت مصطفى 4% و4.3% على التوالي.
+- Sat 21 Nov | شبكة تواصل الإخبارية | النائب عبدالرحمن بشاري يبحث مع هشام طلعت مصطفى أولوية توظيف أبناء الأقصر
+  https://twaslnews1.twaslnews.com/8087323/
+  (page: did not load (403))
 ## PHDC  (2 leads)
+- Sun 22 Nov | اليوم السابع | خريطة تحركات الكبار بالبورصة.. مشتريات في فوري ومصر الجديدة وتخارجات من بالم هيلز
+  https://www.youm7.com/story/2026/11/22/خريطة-تحركات-الكبار-بالبورصة-مشتريات-في-فوري-ومصر-الجديدة-وتخارجات/7627730
+  > شهدت تعاملات الداخليين والمساهمين الرئيسيين والمجموعات المرتبطة بهم بالبورصة المصرية خلال جلسة تداول يوم الخميس الماضي، تنفيذ عدد من عمليات الشراء والبيع على أسهم الشركات المقيدة، تصدرتها عمليات الشراء على سهم شركة نهر الخير للتنمية والاستثمار الزراعي والخدمات البيئية، إلى جانب تداولات على أسهم مينا للاستثمار السياحي والعقاري، وفوري لتكنولوجيا البنوك والمدفوعات الإلكترونية، وبالم هيلز ...
 - Sat 21 Nov | نيوز رووم | سمسار عقارات يحرر محضرًا ضد القائمين على إدارة كمبوند «بي إكس بالم هيلز» بسبب تلفيات بسيارته في أكتوبر أول
   https://www.newsroom.info/487470
   > سمسار عقارات يحرر محضرًا ضد القائمين على إدارة كمبوند «بي إكس بالم هيلز» بسبب تلفيات بسيارته في أكتوبر أول حرر سمسار عقارات محضرًا ضد القائمين على إدارة كمبوند «بي إكس بالم هيلز» تحت الإنشاء، بسبب تعرض سيارته لتلفيات أثناء تواجده بالكمبوند، واتهمهم بالإهمال، وتحرر محضر بالواقعة.
-- Thu 19 Nov | Masrawy | من فيلا بالم هيلز إلى عصابة الشرطة المزيفة ضربتان أمنيتان بأكتوبر
-  https://www.masrawy.com/news/news_cases/details/2026/11/19/3081493/من-فيلا-بالم-هيلز-إلى-عصابة-الشرطة-المزيفة-ضربتان-أمنيتان-بأكتوبر
-  > تسلل في الظلام من فيلا تحت الإنشاء، وكمين مفاجئ بـ30 ألف جنيه قدام نادي الصيد، خيطان لوقعتين مختلفتين في قسم أول أكتوبر، لكن كاميرات المراقبة والتحريات جمعتهم في نقطة واحدة: سقوط المتهمين. قفزة داخل بالم هيلز ومع تتبع الملابسات ومواجهة المتهم، اتضح أنه كان يتردد على منطقة بالم هيلز بحكم طبيعة عمله؛
-## SWDY  (2 leads)
-- Thu 19 Nov | جريدة باور نيوز الاخبارية | أحمد السويدي يلتقي رئيس شركة Gonvarri Industries في مدريد لبحث شراكات استراتيجية بقطاعي الطاقة والبنية التحتية
-  https://powernews.cc/?p=294462
-  > عقد المهندس أحمد السويدي، الرئيس التنفيذي لمجموعة السويدي إليكتريك، اجتماعًا مع السيد جون ريبيراس، رئيس مجلس الإدارة التنفيذي لشركة Gonvarri Industries، بمقر الشركة في العاصمة الإسبانية مدريد، بحضور السيد نيستور لاكارا، مدير الاستراتيجية، وعدد من أعضاء فريق القيادة بالشركة.
-- Thu 19 Nov | بوابة روز اليوسف | "السويدي الوطنية" تستعرض خطة 2027–2028 لزيادة الإنتاج والتوسع في إفريقيا والشرق الأوسط
-  https://www.rosaelyoussef.com/1452967
+## SWDY  (7 leads)
+- Mon 23 Nov | سولارابيك | باستطاعة 90 ميجاواط.. السويدي إليكتريك تنفّذ مشروعا للطاقة الشمسية في أنجولا
+  https://solarabic.com/أخبار-الطاقة-المتجددة/2026/11/باستطاعة-90-ميجاواط-السويدي-إليكتريك-ت/
+  > سولارابيك- دبي، الإمارات العربية المتحدة – 23 نوفمبر 2026: بدأت شركة السويدي إليكتريك لنقل وتوزيع الطاقة T&D تنفيذ مشروع كابيندا للطاقة الشمسية الكهروضوئية في أنجولا، بعد وضع حجر الأساس للمشروع بالتعاون مع شركة PRODEL-EP، الجهة المالكة، في خطوة تستهدف تعزيز إمدادات الكهرباء وتوسيع الاعتماد على مصادر الطاقة المتجددة في البلاد.
+- Sun 22 Nov | almotawwer.com | السويدي إليكتريك تنفذ محطة طاقة شمسية بقدرة 90 ميجاوات في أنجولا لخدمة 30 ألف أسرة
+  https://almotawwer.com/companies-and-investments/335050/
+  > تواصل الشركات المصرية توسيع حضورها في سوق مشروعات الطاقة والبنية التحتية بالقارة الإفريقية، مستفيدة من خبراتها الهندسية وقدراتها التنفيذية في اقتناص مشروعات خارج السوق المحلية، بالتزامن مع توجه عدد من الدول الإفريقية إلى زيادة الاعتماد على مصادر الطاقة المتجددة وتطوير شبكات الكهرباء.
+- Sun 22 Nov | خاص عن مصر | "السويدي إليكتريك" تعتزم رفع إنتاجها من شواحن السيارات الكهربائية بمصر لأكثر من 25 ألف سنويًا
+  https://aboutmsr.com/السويدي-إليكتريك-تعتزم-رفع-إنتاجها-م/
+  > تستهدف مجموعة السويدي إليكتريك زيادة الطاقة الإنتاجية لمصنعها المتخصص في تصنيع شواحن السيارات الكهربائية بمدينة العاشر من رمضان، لتتجاوز 25 ألف شاحن سنوياً، في خطوة تستهدف مواكبة نمو سوق التنقل الكهربائي في مصر، وتعزيز التصنيع المحلي لمكونات البنية التحتية اللازمة لتشغيل السيارات الكهربائية.
+- Sun 22 Nov | موقع و جريدة أخبار الناس اليوم | السويدي اليكتريك لنقل و توزيع الطاقة (T&D) تضع حجر الأساس لمشروع كابيندا للطاقة الشمسية لخدمة أكثر من 30 ألف أسرة في أنجولا
+  https://www.akhbarelnaselyoum.com/archives/208961
+  > احتفلت شركة السويدي إليكتريك لنقل وتوزيع الطاقة T&Dمع شركة PRODEL-EP، الجهة المالكة للمشروع، بوضع حجر الأساس لمشروع كابيندا للطاقة الشمسية الكهروضوئية في أنجولا، لتبدأ أعمال تنفيذ المشروع الذي يستهدف دعم قدرات قطاع الكهرباء الأنجولي، وتوسيع نطاق الاعتماد على مصادر الطاقة المتجددة، من خلال توفير إمدادات كهربائية نظيفة ومستقرة لأكثر من 30 ألف أسرة، بما يعزز ...
+- Sun 22 Nov | التعمير | السويدي إليكتريك تضع حجر الأساس لمشروع كابيندا للطاقة الشمسية في أنجولا لخدمة 30 ألف أسرة
+  https://eltaameer.com/archives/486006
+- Sun 22 Nov | أموال الغد | «السويدي إليكتريك» تنتج 25 ألف شاحن سيارات كهربائية سنويًا بمصنع العاشر من رمضان
+  https://amwalalghad.com/2026/11/22/السويدي-إليكتريك-تنتج-25-ألف-شاحن-سيار/
+- Sun 22 Nov | جريدة المال | السويدي إليكتريك تضع حجر أساس محطة شمسية بقدرة 90 ميجاوات بأنجولا لخدمة 30 ألف أسرة
+  https://almalnews.com/2148863/السويدي-إليكتريك-تضع-حجر-أساس-محطة-شمسية/
+## ORAS  (6 leads)
+- Sun 22 Nov | https://www.youlyou.com/ | البورصة تفحص مستندات زيادة رأسمال أوراسكوم كونستراكشون إلى 207.4 مليون دولار
+  https://www.youlyou.com/100438
+  > تقدمت شركة أوراسكوم كونستراكشون بي إل سي بمستندات قيد أسهم زيادة رأس المال المصدر والمدفوع إلى البورصة المصرية، ليرتفع رأس المال من 110.24 مليون دولار إلى 207.44 مليون دولار، بزيادة قدرها 97.2 مليون دولار. [Figures on the page: consolidated; nine months. Check which one each figure is.]
+- Sun 22 Nov | شبكة تواصل الإخبارية | «أوراسكوم كونستراكشون» تتقدم بمستندات زيادة رأس المال لـ207.4 مليون دولار
+  https://twaslnews1.twaslnews.com/8126107/
   (page: did not load (403))
-## ORAS  (8 leads)
-- Fri 20 Nov | SaudiGulf Projects | Orascom Construction Backlog Rises to $11.6 Billion in Q3 2026
-  https://www.saudigulfprojects.com/2026/11/orascom-construction-q3-2026-results-11-6-billion-backlog/
-  (page: did not load (403))
-- Fri 20 Nov | CNN الاقتصادية | «أوراسكوم كونستراكشون» تبدأ تشييد واحدة من أكبر محطات تحلية المياه عالمياً في الأردن
-  https://cnnbusinessarabic.com/finance-markets/1152977/أوراسكوم-كونستراكشون-تبدأ-تشييد-واحدة-من-أكبر-محطات-تحلية-المياه-عالميا-في-الأردن
-  > «أوراسكوم كونستراكشون» تبدأ تشييد واحدة من أكبر محطات تحلية المياه عالمياً في الأردن تاريخ النشر: قبل يومين أعلنت شركة «أوراسكوم كونستراكشون» وضع حجر الأساس لمشروع تحلية ونقل المياه من العقبة إلى عمّان في الأردن، وهو مشروع ضخم يتضمن إنشاء واحدة من أكبر محطات تحلية المياه على مستوى العالم.
-- Thu 19 Nov | Water Tech Online | Orascom Construction breaks ground on Jordan desalination and conveyance project
-  https://www.watertechonline.com/news-reports/news/55420378/orascom-construction-breaks-ground-on-jordan-desalination-and-conveyance-project
-  (page: only 62 words came back (a paywall or a page the reader cannot see): open it by hand if it matters)
-## FWRY  (6 leads)
-- Sat 21 Nov | بوابة التكنولوجيا المالية | الرئيس التنفيذي المشارك لشركة «CLOUD11»: «فوري» و«إنستاباي» أحدثتا تغييرات جوهرية في سوق المدفوعات المصري
-  https://fintechgate.net/258082
-  > الرئيس التنفيذي المشارك لشركة «CLOUD11»: «فوري» و«إنستاباي» أحدثتا تغييرات جوهرية في سوق المدفوعات المصري
-- Fri 20 Nov | بوابة التكنولوجيا المالية | تقريرلـ «AfricaNenda» : أفريقيا بها أكثر من 39 نظاما للمدفوعات الفورية تغطي 43 دولة
-  https://fintechgate.net/258034
-  > 1.8 تريليون دولار قيمة المدفوعات الفورية في أفريقيا خلال 2025 عبر 71.4 مليار معاملة تقريرلـ «AfricaNenda» : أفريقيا بها أكثر من 39 نظاما للمدفوعات الفورية تغطي 43 دولة
-- Thu 19 Nov | السودان اليوم | نقلة جديدة في المعاملات المالية.. السودان يتجه نحو الدفع الفوري
-  https://alsudantoday.com/business/economic-news/568347
-  (page: did not load (403))
-- Thu 19 Nov | بوابة المصرف | 10 بروتوكولات لتحديث التجارة الخارجية.. فوري وفيزا ومايكروسوفت ضمن الشركاء
-  https://www.almasraf.news/10-بروتوكولات-لتحديث-التجارة-الخارجية/
-  > وقّع المختبر التنظيمي ومركز الابتكار لتكنولوجيا التجارة (TradeTech Sandbox) 10 بروتوكولات تعاون مع مؤسسات وشركات مصرية ودولية، لتسريع تحديث التجارة الخارجية وتطوير حلول رقمية تستهدف تقليل الوقت والتكلفة المرتبطين بالإجراءات التجارية. وتضم الشراكات شركات متخصصة في التكنولوجيا والاتصالات والمدفوعات والخدمات المالية، من بينها فوري وفيزا ومايكروسوفت. 10 بروتوكولات تجمع شركات التكنولوجيا والمدفوعات لتطوير التجارة
-- Thu 19 Nov | آراب فاينانس | فوري وفيزا ومايكروسوفت ضمن 10 جهات تتعاون مع الحكومة لتطوير التجارة الخارجية
-  http://www.arabfinance.com/ar/news/newdetails/فوري-وفيزا-ومايكروسوفت
-- Thu 19 Nov | شبكة تواصل الإخبارية | «اتصالات» و«فوري» و«فيزا» ضمن 10 جهات تشارك في مختبر تكنولوجيا التجارة
-  https://twaslnews1.twaslnews.com/7954189/
+- Sun 22 Nov | جريدة المال | «أوراسكوم كونستراكشون» تقدم مستندات قيد زيادة رأسمالها لمبادلة أسهم «OCI N.V»
+  https://almalnews.com/2148879/«أوراسكوم-كونستراكشون»-تقدم-مستندات-قيد-زيادة-رأسمالها/
+  > أعلنت إدارة البورصة المصرية تقدم شركة أوراسكوم كونستراكشون بي إل سي بمستندات قيد أسهم زيادة رأس المال من 110.24 مليون دولار إلى 207.45 مليون دولار، بزيادة قدرها 97.20 مليون دولار.
+- Sun 22 Nov | جريدة البورصة | "أوراسكوم كونستراكشون" تتقدم بمستندات زيادة رأسمالها إلى 207.4 مليون دولار
+  https://alborsaanews.com/2026/11/22/2008136
+  > تقدمت شركة أوراسكوم كونستراكشون بي ال سي، إلى إدارة البورصة بمستندات قيد أسهم زيادة رأس المال المصدر والمدفوع من 110.24 مليون دولار، إلى 207.44 مليون دولار. [Figures on the page: first half; one quarter. Check which one each figure is.]
+- Sun 22 Nov | آراب فاينانس | أوراسكوم كونستراكشون تتقدم إلى البورصة بمستندات زيادة رأس المال
+  http://www.arabfinance.com/ar/news/newdetails/أوراسكوم-كونستراكشون-تتقدم
+- Sun 22 Nov | The Fintech Times | OCI Shareholders Approve Orascom Construction Combination at EGM
+  https://thefintechtimes.com/oci-shareholders-approve-orascom-construction-combination-at-egm/
+## FWRY  (3 leads)
+- Sun 22 Nov | موقع القيادي | قصة نجاح فوري.. من دفع الفواتير إلى أرباح 2.9 مليار جنيه
+  https://www.alqiyady.com/قصة-نجاح-فوري-من-دفع-الفواتير-إلى-أرباح-29-مليار-جنيه-897363.html
+  (page: only 42 words came back (a paywall or a page the reader cannot see): open it by hand if it matters)
+- Sun 22 Nov | CairoScene | Fawry Allocates $1.6 Million for Cybersecurity Investments
+  https://cairoscene.com/Business/Fawry-Allocates-1-6-Million-for-Cybersecurity-Investments
+  > Fawry Allocates $1.6 Million for Cybersecurity Investments The fintech company is directing LE 80 million towards technology upgrades by the end of 2026. Egyptian fintech company Fawry plans to allocate LE 80 million (approximately $1.6 million) towards technology investments by the end of 2026, prioritising cybersecurity and improvements to its digital infrastructure.
+- Sun 22 Nov | اليوم السابع | خريطة تحركات الكبار بالبورصة.. مشتريات في فوري ومصر الجديدة وتخارجات من بالم هيلز
+  https://www.youm7.com/story/2026/11/22/خريطة-تحركات-الكبار-بالبورصة-مشتريات-في-فوري-ومصر-الجديدة-وتخارجات/7627730
+  > شهدت تعاملات الداخليين والمساهمين الرئيسيين والمجموعات المرتبطة بهم بالبورصة المصرية خلال جلسة تداول يوم الخميس الماضي، تنفيذ عدد من عمليات الشراء والبيع على أسهم الشركات المقيدة، تصدرتها عمليات الشراء على سهم شركة نهر الخير للتنمية والاستثمار الزراعي والخدمات البيئية، إلى جانب تداولات على أسهم مينا للاستثمار السياحي والعقاري، وفوري لتكنولوجيا البنوك والمدفوعات الإلكترونية، وبالم هيلز ...
 ## ABUK  (1 leads)
-- Thu 19 Nov | لحظات نيوز | العربية للتصنيع توقع اتفاقا لبناء محطات طاقة شمسية لشركة أبوقير للأسمدة
-  https://nl7za.com/economy/العربية-للتصنيع-توقع-اتفاقا-لبناء-محطات-طاقة-شمسية
-  > وقعت الهيئة العربية للتصنيع عقدا استراتيجيا موسعا مع شركة أبوقير للأسمدة والصناعات الكيماوية لتنفيذ منظومة متكاملة من محطات توليد الطاقة الكهربائية النظيفة باستخدام الخلايا الشمسية بقدرات تشغيلية عالية، ويهدف المشروع الصناعي الضخم إلى تزويد المجمعات الإنتاجية للشركة بالطاقة المتجددة وخفض تكاليف التشغيل وترشيد استهلاك الوقود التقليدي بما يتوافق مع المعايير البيئية العالمية والتنمية المستدامة للدولة ...
-## HRHO  (2 leads)
-- Sat 21 Nov | موقع ليالينا | من شانيل إلى هيرميس: جولة داخل مجموعة حقائب كيندال جينر
-  https://www.layalina.com/من-شانيل-إلى-هيرميس-جولة-داخل-مجموعة-حقائب-كيندال-جينر-896577.html
-  (page: only 41 words came back (a paywall or a page the reader cannot see): open it by hand if it matters)
-- Sat 21 Nov | الأسبوع | الأسهم الكبري تقود المشهد.. «هيرميس» تتوقع صعود البورصة المصرية بنسبة تصل لـ30% خلال 2027
-  https://www.elaosboa.com/3029241/
-  > الأسهم الكبري تقود المشهد.. «هيرميس» تتوقع صعود البورصة المصرية بنسبة تصل لـ30% خلال 2027 [Figures on the page: unaudited or preliminary; first half; one quarter. Check which one each figure is.]
-## JUFO  (2 leads)
+- Sun 22 Nov | www.marketscreener.com | Abu Qir Fertilizers & Chemical Industries Company (S.A.E) Reports Earnings Results for the Third Quarter and Nine Months Ended September 30, 2026
+  https://www.marketscreener.com/news/abu-qir-fertilizers-chemical-industries-company-s-a-e-reports-earnings-results-for-the-third-qua-ce785ed3d088f024
+  (page: did not load (403))
+## HRHO  (6 leads)
+- Mon 23 Nov | ارقام : اخبار ومعلومات سوق الأسهم السعودي - تاسي | إعمار العقارية تعيّن هيرميس الإمارات مديراً رئيسياً مشاركاً إضافياً لعرض الاستحواذ على إعمار للتطوير
+  https://www.argaam.com/ar/article/articledetail/id/1953618
+  (page read: it never names the company, so probably not about it: skip)
+- Mon 23 Nov | ad-hoc-news.de | EFG Holding stock: Q3 revenue rises 5%, profit falls 15%
+  https://www.ad-hoc-news.de/boerse/news/nebenwerte/efg-holding-stock-q3-revenue-rises-5-profit-falls-15/70544966
+  > EFG Holding reported a mixed third quarter on November 18, 2026, as stronger investment-bank and non-bank finance revenue was offset by higher expenses and weaker commercial-bank performance. In its EFG Holding earnings release, the group reported net operating revenue of EGP6.652 billion for 3Q26 and net profit after tax and minority interest of EGP720 million. [Figures on the page: nine months; one quarter; attributable to shareholders. Check which one each figure is.]
+- Sun 22 Nov | آراب فاينانس | إي اف جي هيرميس تتم إصدار سندات توريق لصالح كليفر للتمويل الاستهلاكي
+  https://www.arabfinance.com/ar/news/newdetails/إي-اف-جي-هيرميس-تتم-إصدار-سندات-توريق-لصالح
+  > آراب فاينانس: أعلنت إي اف جي هيرميس، بنك الاستثمار التابع لمجموعة إي اف چي (HRHO) والرائد في أسواق الشرق الأوسط وشمال إفريقيا، عن نجاح قسم أسواق الدين بقطاع الترويج وتغطية الاكتتاب في إتمام الخدمات الاستشارية لإصدار سندات توريق بقيمة 301 مليون جنيه لصالح شركة كليفر للتمويل الاستهلاكي (Klivvr)، وفقا لما ذكره البيان المرسل بتاريخ 17 ...
+## CLHO  (1 leads)
+- Mon 23 Nov | ad-hoc-news.de | Cleopatra Hospitals stock flags delay in financial statements
+  https://www.ad-hoc-news.de/boerse/news/nebenwerte/cleopatra-hospitals-stock-flags-delay-in-financial-statements/70544940
+  > Cleopatra Hospital Company said on November 18, 2026, that it would submit its financial statements for the period ended September 30, 2026 later than scheduled. The disclosure was carried by Sigma Capital, citing a release from the Egyptian Exchange.
+## JUFO  (3 leads)
+- Mon 23 Nov | ad-hoc-news.de | Juhayna stock: Nine-month net profit jumps 60.1% in 2026
+  https://www.ad-hoc-news.de/boerse/news/nebenwerte/juhayna-stock-nine-month-net-profit-jumps-60-1-in-2026/70544931
+  > Juhayna Food Industries reported a sharp rise in earnings for the first nine months of 2026. According to Arab Finance, the company said on November 11, 2026, that consolidated net profit attributable to the parent company reached EGP 2.035 billion for the January-September period, compared with EGP 1.271 billion a year earlier. [Figures on the page: standalone; consolidated; nine months; attributable to shareholders. Check which one each figure is.]
+- Sun 22 Nov | INSITE OOH Media Platform | Juhayna Features Yasmina El Abd in Its Latest OOH Campaign in Egypt
+  https://insiteooh.com/public/article/14829-juhayna-features-yasmina-el-abd-in-its-latest-ooh-campaign-in-egypt
+  > Juhayna Features Yasmina El Abd in Its Latest OOH Campaign in Egypt Juhayna returns to Egypt’s out-of-home advertising scene with a campaign featuring Egyptian actress Yasmina El Abd, a refreshed brand identity and multiple products from its portfolio. The activity follows Juhayna’s May 2026 outdoor campaign promoting two Labna flavours.
 - Sun 22 Nov | مصر الآن | صيانة كهرباء مرتقبة في جهينة وطهطا اليوم.. فصل 20 مغذيًا لمدة 5 ساعات
   https://misrelaan.com/article/143767/صيانة-كهرباء-مرتقبة-في-جهينة-وطهطا-اليوم
   > صيانة كهرباء مرتقبة في جهينة وطهطا اليوم.. فصل 20 مغذيًا لمدة 5 ساعات من المقرر فصل التيار الكهربائي، اليوم الأحد 22 نوفمبر، عن مناطق ومحطات خدمية في مركزي جهينة وطهطا بمحافظة سوهاج، من العاشرة صباحًا حتى الثالثة عصرًا، لتنفيذ الصيانة المبرمجة بلوحة توزيع جهينة «2» في نزلة علي.
-- Thu 19 Nov | مستقبل وطن نيوز | «كُحل الجبل» يوثق بطولة أبناء جهينة في مواجهة الحملة الفرنسية بالمهرجان القومي للمسرح المدرسي
-  https://www.mwatan.news/1040342
+## MFPC  (4 leads)
+- Sun 22 Nov | ارقام : اخبار ومعلومات سوق الأسهم السعودي - تاسي | العقارية توقع عقدًا مع شركة موبكو لتنفيذ الحزمة الأولى من مشروع بورتا جدة بقيمة 463.1 مليون ريال
+  https://www.argaam.com/ar/article/articledetail/id/1936577
+  (page read: it never names the company, so probably not about it: skip)
+- Sun 22 Nov | ايكونومي بلس | "سي آي كابيتال" ترفع السعر المستهدف لسهمي "أبوقير" و"موبكو"
+  https://economyplusme.com/ar/news/34326
+  > "سي آي كابيتال" ترفع السعر المستهدف لسهمي "أبوقير" و"موبكو" أبقت شركة "سي آي كابيتال" على توصيتها المحايدة لسهمي "أبو قير للأسمدة" و"مصر لإنتاج الأسمدة – موبكو"، مع رفع السعر المستهدف للسهمين، في ظل تذبذب أسعار اليوريا والتوترات الجيوسياسية المرتبطة بمضيق هرمز.
+- Sun 22 Nov | بوابة الزهراء | سي آي كابيتال ترفع السعر المستهدف لسهمي أبوقير وموبكو في السوق المالية
+  https://zahraa.mr/1348/سي-آي-كابيتال-ترفع-السعر-المستهدف-لسهم/
+  > أكدت شركة “سي آي كابيتال” على موقفها المحايد لسهمي “أبو قير للأسمدة” و”موبكو” مع رفع السعر المستهدف لهما، وسط تقلبات أسعار اليوريا والتوترات الجيوسياسية في مضيق هرمز. رفع الأسعار المستهدفة لسهمي “أبو قير” و”موبكو” وسط تقلبات السوق
+- Sun 22 Nov | جريدة آخر الأخبار | سي آي كابيتال تعدل السعر المستهدف لسهمي أبوقير وموبكو
+  https://akher.news/1204/سي-آي-كابيتال-تعدل-السعر-المستهدف-لسهم/
   (page: did not load (403))
-## EAST  (1 leads)
-- Sat 21 Nov | شبكة تواصل الإخبارية | طائرة الزمالك تواصل الانتصارات.. ثلاثية نظيفة أمام إيسترن كومباني
-  https://twaslnews1.twaslnews.com/8090062/
-  (page: did not load (403))
-## EMFD  (1 leads)
-- Thu 19 Nov | أصول مصر | الأسهم العقارية بالبورصة المصرية.. «إعمار مصر» يتصدر الارتفاعات الخميس
-  https://www.osoulmisrmagazine.com/452994
-  > الأسهم العقارية بالبورصة المصرية.. «إعمار مصر» يتصدر الارتفاعات الخميس تباين أداء أسهم الشركات العقارية المقيدة بالبورصة المصرية خلال ختام تعاملات جلسة اليوم الخميس، إذ ارتفعت أسعار أسهم 4 شركات، مقابل تراجع أسهم 4 شركات، بينما استقر سهما مصر الجديدة للإسكان والتعمير والمطورون العرب القابضة دون تغيير.
+## EAST  (2 leads)
+- Sat 21 Nov | الهيئة الوطنية للإعلام | طائرة الزمالك تواصل الانتصارات.. ثلاثية نظيفة أمام إيسترن كومباني
+  https://www.maspero.eg/sport/2026/11/22/1007679/طائرة-الزمالك-تواصل-الانتصارات--ثلاثية-نظيفة-أمام-إيسترن-كومباني
+  > واصل الفريق الأول للكرة الطائرة بنادي الزمالك عروضه القوية في دوري الرجال، بعدما حقق فوزًا مستحقًا على إيسترن كومباني بثلاثة أشواط دون مقابل، ضمن منافسات الجولة السادسة من بطولة الدوري الممتاز للموسم المحلي 2026-2027.
+- Sat 21 Nov | اليوم السابع | الزمالك يهزم إيسترن كومبانى فى دورى الطائرة
+  https://www.youm7.com/story/2026/11/21/الزمالك-يهزم-إيسترن-كومبانى-فى-دورى-الطائرة/7627524
+  > فاز فريق رجال الكرة الطائرة بنادي الزمالك على نظيره إيسترن كومباني بنتيجة 3-0 على صعيد الجولة السادسة بدورى رجال الكرة الطائرة الممتاز للموسم المحلى الجديد 2026 -2027. ويسعى الزمالك إلى مواصلة سلسلة الفوز، بعدما نجح في الفوز بجميع مبارياته في الجولات السابقة.
 ## BQDC  (8 leads)
-- Sun 22 Nov | شبكة تواصل الإخبارية | المدعى عليهم: أردنيون.. أقامها: بنك القاهرة عمان (أسماء)
-  https://twaslnews1.twaslnews.com/8101475/
+- Sun 22 Nov | فيتو | مواصفات ماكينات الصراف الآلي المخصصة لصرف الحوالات في بنك القاهرة
+  https://www.vetogate.com/5776040
+  > مواصفات ماكينات الصراف الآلي المخصصة لصرف الحوالات في بنك القاهرة يبحث الكثير من عملاء بنك القاهرة عن مواصفات ماكينات الصراف الآلي المخصصة لصرف الحوالات.
+- Sun 22 Nov | عالم المال | هشام قنديل: طرح بنك القاهرة يعزز جاذبية البورصة ويفتح فرصا جديدة أمام السهم
+  https://alamalmal.net/article/943860/هشام-قنديل-طرح-بنك-القاهرة-يعزز-جاذبية
+  > يمثل طرح بنك القاهرة في البورصة المصرية خطوة مهمة ضمن برنامج الطروحات الحكومية، لما يحمله من انعكاسات على سوق المال والاقتصاد المصري، سواء من حيث زيادة السيولة وجذب شرائح جديدة من المستثمرين، أو تعزيز ثقة المؤسسات الأجنبية والمحلية في فرص الاستثمار بالسوق المصرية، فضلاً عن دعم توجه الدولة نحو توسيع مشاركة القطاع الخاص في النشاط ...
+- Sun 22 Nov | بنكي | بنك القاهرة يحصد 3 جوائز من «جلوبال براند» لعام 2026
+  https://www.bankygate.com/202967
+  > حصد بنك القاهرة ثلاث جوائز ضمن جوائز Global Brand Awards 2026، التي تنظمها مجلة Global Brands Magazine، بعدما فاز بجوائز «أفضل حملة تسويقية»، و«العلامة المصرفية الأكثر موثوقية»، و«التميز في المسؤولية المجتمعية والأثر المجتمعي»، ضمن فئات الجوائز المخصصة للسوق المصرية.
+- Sun 22 Nov | التعمير | بنك القاهرة يحصد 3 جوائز دولية في التسويق المصرفي وثقة العملاء والمسئولية المجتمعية لعام 2026
+  https://eltaameer.com/archives/486063
+  > سجل بنك القاهرة حضورًا لافتًا ضمن المؤسسات المصرفية الفائزة بجوائز «جلوبال براند أووردز» لعام 2026، بعدما حصد ثلاث جوائز منحتها مجلة «جلوبال براندز»، تقديرًا لتميزه في عدد من المجالات المرتبطة بتعزيز مكانة العلامة التجارية، وتطوير الحملات التسويقية، ودعم المسئولية المجتمعية وتحقيق التأثير الإيجابي في المجتمع.
+- Sun 22 Nov | صحيفة الخليج | «مؤسسة التمويل الدولية» تستثمر 100مليون دولار في الطرح العام الأولي لبنك القاهرة
+  https://www.alkhaleej.ae/2026-11-22/اقتصاد/أسواق-عربية-وعالمية/مؤسسة-التمويل-الدولية-تستثمر-100مليون-دولار-في-الطرح-العام-الأولي-لبنك-القاهرة
+- Sun 22 Nov | بنكي | الوديعة الشهرية ذات العائد عند الاستحقاق — بنك القاهرة
+  https://www.bankygate.com/products/deposits/2125
+- Sun 22 Nov | بنكي | وظيفة خالية ببنك القاهرة .. مسؤول أول رقابة تكنولوجيا المعلو
+  https://www.bankygate.com/202941
+- Sun 22 Nov | عالم المال | محمد عبد الهادي: طرح بنك القاهرة يعزز سيولة البورصة
+  https://alamalmal.net/article/943859/محمد-عبد-الهادي-طرح-بنك-القاهرة-يعزز
+## EGAL  (1 leads)
+- Sun 22 Nov | دار المعارف | طلائع مركز شباب قنا في ضيافة شركة مصر للألومنيوم
+  https://daralmaref.com/News/2611455.aspx
   (page: did not load (403))
-- Sat 21 Nov | بوابة الأهرام | صندوق النقد يشيد بأداء السياسة النقدية وقوة القطاع المصرفى المصرى.. نجاح طرح بنك القاهرة يعزز الثقة فى الاقتصاد مع الإسراع ببرنامج الطروحات
-  https://www.ahram.org.eg/Daily/News/205779/117/1036465/الأحد-الأقتصادي/صندوق-النقد-يشيد-بأداء-السياسة-النقدية-وقوة-القطاع.aspx
-  (page: did not load (403))
-- Sat 21 Nov | بوابة المصرف | 100 مليون دولار مقابل 7% من بنك القاهرة.. وخطة لمضاعفة العملاء
-  https://www.almasraf.news/100-مليون-دولار-مقابل-7-من-بنك-القاهرة-وخطة/
-  > استثمرت مؤسسة التمويل الدولية (IFC)، التابعة لمجموعة البنك الدولي، 100 مليون دولار في الطرح العام الأولي لبنك القاهرة بالبورصة المصرية، مقابل حصة تقارب 7% من رأسمال البنك، في صفقة تعكس اهتمام المؤسسات المالية الدولية بالقطاع المصرفي المصري، وتدعم خطط البنك لتوسيع خدمات التمويل للشركات والأفراد خلال السنوات المقبلة.
-## EFID  (2 leads)
-- Thu 19 Nov | Investing.com | Earnings call transcript: Edita Food posts record Q3 2026 revenue, shares rise
-  https://www.investing.com/news/transcripts/earnings-call-transcript-edita-food-posts-record-q3-2026-revenue-shares-rise-93CH-5039005
-  (page: did not load (403))
-- Thu 19 Nov | TradingView | Edita Food Industries Company Q3 2026 Earnings Call Is Live
-  https://www.tradingview.com/news/urn:live_audio:quartr.com:800175:0-edita-food-industries-company-q3-2026-earnings-call-is-live/
-  > Edita Food Industries Company Q3 2026 Earnings Call Is Live Edita Food Industries Company's quarterly earnings call has just begun.
-## AAPL  (8 leads)
-- Sat 21 Nov | Barchart.com | Apple Is Now Worth Over $5 Trillion Without Betting Big on AI Data Centers. AAPL Stock Now Trades Near Wall Street’s Targets.
-  https://www.barchart.com/story/news/8950358/apple-is-now-worth-over-5-trillion-without-betting-big-on-ai-data-centers-aapl-stock-now-trades-near-wall-streets-targets
-  (page: only 0 words came back (a paywall or a page the reader cannot see): open it by hand if it matters)
-- Sat 21 Nov | TradingKey | Apple Stock Forecast: Apple Posted $111.2B Revenue, So Why Did AAPL Fall After WWDC?
-  https://www.tradingkey.com/analysis/stocks/us-stocks/261955127-apple-stock-forecast-apple-posted-111-2b-revenue-so-why-did-aapl-fall-after-wwdc-tradingkey
-  > Apple Stock Forecast: Apple Posted $111.2B Revenue, So Why Did AAPL Fall After WWDC? Apple's stock pullback post-WWDC 2026 is attributed to a "buy the rumor, sell the news" sentiment, as key Apple Intelligence features are deferred to late 2026 or 2027, aligning with the iPhone 18 launch.
-- Sat 21 Nov | Seeking Alpha | Apple: Shows Us How To Win Without Joining The AI Bubble
-  https://seekingalpha.com/article/4970798-apple-shows-us-how-to-win-without-joining-the-ai-bubble
+## EFID  (6 leads)
+- Mon 23 Nov | القاهرة 24 | الرقابة المالية توافق على نشر إفصاح «إيديتا» بشأن تخفيض رأس المال بإعدام 11.3 مليون سهم خزينة
+  https://www.cairo24.com/2534225
+  > الرقابة المالية توافق على نشر إفصاح «إيديتا» بشأن تخفيض رأس المال بإعدام 11.3 مليون سهم خزينة أعلنت الهيئة العامة للرقابة المالية عدم ممانعتها على نشر تقرير إفصاح شركة إيديتا للصناعات الغذائية، بشأن تخفيض رأس المال المصدر والمدفوع بقيمة 2.2 مليون جنيه، ليصل إلى 416.7 مليون جنيه، مقارنة بنحو 418.9 مليون جنيه. تخفيض رأس مال إيديتا
+- Mon 23 Nov | جريدة حابي | الرقابة المالية تقر دعوة عمومية إيديتا للنظر في تخفيض رأس المال المُصدر والمدفوع
+  https://hapijournal.com/2026/11/23/الرقابة-المالية-تقر-دعوة-عمومية-إيديت/
+  > الرقابة المالية تقر دعوة عمومية إيديتا للنظر في تخفيض رأس المال المُصدر والمدفوع عن طريق إعدام 11.006 مليون سهم خزينة رنا ممدوح _ وافقت الهيئة العامة للرقابة المالية، على نشر تقرير إفصاح شركة إيديتا للصناعات الغذائية، تمهيدًا للسير في إجراءات دعوة الجمعية العامة غير العادية للنظر في تخفيض رأس المال المُصدر والمدفوع.
+- Mon 23 Nov | اليوم السابع | 11 مليون سهم خارج الخدمة.. كواليس خفض رأس مال "إيديتا" بالبورصة
+  https://www.youm7.com/story/2026/11/23/11-مليون-سهم-خارج-الخدمة-كواليس-خفض-رأس-مال-إيديتا/7628895
+  > تعتزم شركة إيديتا للصناعات الغذائية، تخفيض رأس المال المصدر والمدفوع بقيمة 2.2 مليون جنيه، من خلال إعدام 11 مليون سهم خزينة، ليصل رأس المال من 418.91 مليون جنيه إلى 416.71 مليون جنيه، وذلك بعد حصول الشركة على عدم ممانعة الهيئة العامة للرقابة المالية على نشر تقرير الإفصاح تمهيدًا لدعوة الجمعية العامة غير العادية للنظر في ...
+- Mon 23 Nov | www.youlyou.com | الرقابة المالية توافق على خفض رأسمال إيديتا إلى 4.167 مليار جنيه
+  https://www.youlyou.com/100748
+  > وافقت الهيئة العامة للرقابة المالية على نشر تقرير الإفصاح الخاص بشركة إيديتا للصناعات الغذائية، بشأن تخفيض رأس المال المصدر والمدفوع للشركة عن طريق إعدام أسهم خزينة، تمهيدا لدعوة الجمعية العامة غير العادية للنظر في اعتماد التخفيض. [Figures on the page: consolidated; nine months. Check which one each figure is.]
+- Mon 23 Nov | Mubasher | الرقابة المالية تقر تخفيض رأسمال"إيديتا" عبر إعدام 11 مليون سهم خزينة
+  https://www.mubasher.info/news/21588786/الرقابة-المالية-تقر-تخفيض-رأسمال-إيديتا-عبر-إعدام-11-مليون-سهم-خزينة
+- Sun 22 Nov | Assabah | انفصال “ديسلوغ” و “إيديتا” يضع حكامة استثمارات بلخياط تحت المجهر
+  https://assabah.ma/964597.html
+## AAPL  (7 leads)
+- Mon 23 Nov | MarketBeat | Apple Stock Earnings Estimates Decreased by Erste Group Bank
+  https://www.marketbeat.com/instant-alerts/estimates-apple-stock-earnings-estimates-decreased-by-erste-group-bank-2026-11-23/
+  > Apple Stock Earnings Estimates Decreased by Erste Group Bank - Erste Group Bank trimmed its FY2027 Apple EPS forecast to $9.50 from $9.57, slightly above the $9.45 consensus estimate. The bank also projected FY2028 EPS of $10.55.
+- Sun 22 Nov | AOL.com | Apple Is Now 25% of Berkshire Hathaway's Stock Portfolio. Here's What Holding Every Share Tells Investors.
+  https://www.aol.com/articles/apple-now-25-berkshire-hathaways-225502000.html
+  > - Berkshire Hathaway hasn't sold a single Apple share in 2026, despite its price soaring 29%. - With Apple's stock now trading at almost 40 times earnings, the decision to stay put suggests valuation is weighing less on the conglomerate’s thinking.
+- Sun 22 Nov | BeInCrypto | Why is Apple Stock Holding Strong While the Rest of the Market Falls?
+  https://beincrypto.com/apple-stock-market-crash-price-outlook/
   (page: did not load (403))
 ## MSFT  (8 leads)
-- Sun 22 Nov | Simply Wall St | Is Akamai Technologies (AKAM) Undervalued After $14b In Deals And A Microsoft Tie Up?
-  https://simplywall.st/stocks/us/software/nasdaq-akam/akamai-technologies/news/is-akamai-technologies-akam-undervalued-after-14b-in-deals-a
-  > Akamai Technologies (AKAM) is back in focus after management reported signing US$14b of large deals this year and highlighted power constraints that are limiting some AI infrastructure projects, even as new products and partnerships roll out.
-- Sun 22 Nov | Simply Wall St | Microsoft (MSFT) Launches Life Sciences AI Alliance For Smart Lab Instruments
-  https://simplywall.st/stocks/us/software/nasdaq-msft/microsoft/news/microsoft-msft-launches-life-sciences-ai-alliance-for-smart
-  > Microsoft (NasdaqGS:MSFT) and Danaher Corporation announced a new life sciences AI alliance focused on agentic platforms for smart instruments. The partnership aims to connect laboratory instruments and workflows through Microsoft Azure and Danaher's Foundry-powered AI agents.
-- Sun 22 Nov | 24/7 Wall St. | Nvidia Stock Has Crashed 48% and Now Trades at 15 Times Earnings, Its Cheapest in More Than a Decade and Cheaper Than Microsoft and Broadcom
-  https://247wallst.com/investing/2026/11/21/nvidia-stock-has-crashed-48-and-now-trades-at-15-times-earnings-its-cheapest-in-more-than-a-decade-and-cheaper-than-microsoft-and-broadcom/
-  > Nvidia Stock Has Crashed 48% and Now Trades at 15 Times Earnings, Its Cheapest in More Than a Decade and Cheaper Than Microsoft and Broadcom This post may contain links from our sponsors and affiliates, and Flywheel Publishing may receive compensation for actions taken through them.
-- Sat 21 Nov | TIKR.com | Buy Microsoft and Amazon at More Than 70x 2028 Free Cash Flow? Here’s What Their Capex Must Return
-  https://www.tikr.com/blog/buy-microsoft-and-amazon-at-more-than-70x-2028-free-cash-flow-heres-what-their-capex-must-return
-  > - At the Nov. 20 close, Microsoft traded at about 77x the free cash flow analysts expect for fiscal 2028, and Amazon traded at about 75x. - Amazon plans to spend about $220 billion on capex this year and more next year, and analysts expect its free cash flow to stay negative until 2028.
-- Sat 21 Nov | Simply Wall St | Intel Stock Gets A Foundry Win With Microsoft Backing
-  https://simplywall.st/stocks/us/semiconductors/nasdaq-intc/intel/news/intel-stock-gets-a-foundry-win-with-microsoft-backing
-- Sat 21 Nov | Trefis | Microsoft Was The Only Big AI Buyer Paying Down Debt. How Much More Can It Spend?
-  https://www.trefis.com/stock/msft/articles/627454/microsoft-was-the-only-big-ai-buyer-paying-down-debt-how-much-more-can-it-spend/2026-11-21
-- Sat 21 Nov | TIKR.com | Hank Paulson Has “Never Seen So Much Money Chasing One Opportunity.” That’s a Problem for Microsoft, Amazon and Alphabet
-  https://www.tikr.com/blog/hank-paulson-has-never-seen-so-much-money-chasing-one-opportunity-thats-a-problem-for-microsoft-amazon-and-alphabet?
-- Sat 21 Nov | ad-hoc-news.de | Microsoft's Azure Paradox: Blistering Cloud Growth, Shrinking Free Cash Flow
-  https://www.ad-hoc-news.de/boerse/news/unternehmensnachrichten/microsoft-s-azure-paradox-blistering-cloud-growth-shrinking-free-cash-flow/70542715
+- Mon 23 Nov | blockchain.news | Microsoft (MSFT) Stock Price Prediction: Earnings strength meets a still-fragile technical setup
+  https://blockchain.news/news/20261123-price-prediction-msft-earnings-strength-meets-a-still-fragile
+  > Strong quarter, but the tape is not confirming it yet Microsoft’s latest reported quarter was solid: revenue came in at $92.3 billion, up 19%, operating income rose 21% to $45.9 billion, and diluted EPS reached $4.92 on a GAAP basis, up 32%, according to Microsoft’s October 28, 2026 results release.
+- Mon 23 Nov | Simply Wall St | Akamai Stock and Microsoft Edge Mobile Security Deal What's Changed
+  https://simplywall.st/stocks/us/software/nasdaq-akam/akamai-technologies/news/akamai-stock-and-microsoft-edge-mobile-security-deal-whats-c
+  > Akamai Technologies recently expanded its enterprise security reach by integrating Workforce Protector into Microsoft Edge for Business on iOS and Android, giving mobile users web, SaaS, and generative AI protections within a familiar browser.
+- Sun 22 Nov | Fortune | Microsoft’s CFO admits she joined the tech giant without even knowing her salary—and then missed her first day of work
+  https://fortune.com/article/microsoft-cfo-amy-hood-career-advice-duke-university-commencement-class-of-2026/
+  > As an economics undergraduate at Duke University in the 1990s, Amy Hood had no master plan that would one day land her the top finance job at one of the world’s biggest tech companies.
+- Sun 22 Nov | Barchart.com | Microsoft Remains Attractively Valued as Azure and Cloud Drive Growth
+  https://www.barchart.com/story/news/8957349/microsoft-remains-attractively-valued-as-azure-and-cloud-drive-growth
+  (page: only 0 words came back (a paywall or a page the reader cannot see): open it by hand if it matters)
+- Sun 22 Nov | ad-hoc-news.de | Microsoft Faces Washington Scrutiny Over ByteDance Deal as It Untangles a Two-Month-Old Outlook Bug
+  https://www.ad-hoc-news.de/boerse/news/unternehmensnachrichten/microsoft-faces-washington-scrutiny-over-bytedance-deal-as-it-untangles-a-two-month-old-outlook-bug/70544740
+- Sun 22 Nov | TradingKey | Microsoft (MSFT) Q4 FY2026 Earnings Preview: $87.7B Revenue, Azure 40%, FY2027 Capex $255-260B
+  https://www.tradingkey.com/analysis/stocks/us-stocks/262060902-microsoft-msft-q4-fy2026-earnings-preview-july-29-azure-capex-tradingkey
+- Sun 22 Nov | Yahoo Finance Singapore | Is Microsoft (MSFT) Building A Bigger AI Role In Scientific Labs?
+  https://sg.finance.yahoo.com/news/microsoft-msft-building-bigger-ai-160715680.html
+- Sun 22 Nov | TheStreet | Bank of America sends strong signal to Microsoft stock investors
+  https://www.thestreet.com/investing/stocks/bank-of-america-sends-strong-signal-to-microsoft-stock-investors
 ## NVDA  (8 leads)
-- Sun 22 Nov | Yahoo Finance | Chamath Palihapitiya Praises Jensen Huang As ‘Biblically Good,’ But Warns Bringing Him Back At Nvidia Could Put ‘Everybody’ At Risk
-  https://finance.yahoo.com/markets/stocks/articles/chamath-palihapitiya-praises-jensen-huang-065225068.html
-  > Chamath Palihapitiya Praises Jensen Huang As ‘Biblically Good,’ But Warns Bringing Him Back At Nvidia Could Put ‘Everybody’ At Risk - Palihapitiya acknowledged that Huang was an "exceptional, legendary founder and CEO" who built what he called "the most important company in the most important industry in the world."
-- Sun 22 Nov | Yahoo Finance | Where Will Nvidia Stock Be in 20 Years? The Answer Might Surprise You.
-  https://finance.yahoo.com/markets/stocks/articles/where-nvidia-stock-20-years-052002804.html
-  > Nvidia (NASDAQ:NVDA) stock is currently the cheapest it has been in over a decade. Shares trade at just 16 times trailing earnings. That's even cheaper than the company's previous decade-low valuation set in early 2019. The GPU maker generated $43.8 billion in free cash flow last quarter.
-- Sun 22 Nov | Yahoo Finance | Nvidia Shock Puts MongoDB Stock And Cloud Software Names Back In Focus
-  https://finance.yahoo.com/technology/ai/articles/nvidia-shock-puts-mongodb-stock-051540855.html
-  > AI infrastructure just absorbed a shock, with Nvidia's leadership turmoil, customer investigations and eye catching Q3 FY2027 numbers all hitting at once, and that ripple now runs straight through the cloud and data center operators that power this boom. Pricing for compute is changing, expectations are resetting and some stocks are suddenly being repriced.
-- Sun 22 Nov | 조선일보 | Seohak Ants' 800 Billion Nvidia Buy Leads to 6 Trillion Loss
-  https://www.chosun.com/english/market-money-en/2026/11/22/UFVTVQ2ZBNCCJEEFQRFSQDP534/
-  (page: only 0 words came back (a paywall or a page the reader cannot see): open it by hand if it matters)
-- Sun 22 Nov | Investor's Business Daily | Dow Jones Futures: After Nvidia, Anthropic Fuel Worst Week Since Covid, Look For These 'Absolute Losers'
-  https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-worst-week-covid-nvidia-anthropic-vix-fear-gauge/
-- Sun 22 Nov | Yahoo Finance | Should You Forget Nvidia and Buy These 2 AI Memory Stocks Instead?
-  https://finance.yahoo.com/markets/stocks/articles/forget-nvidia-buy-2-ai-012302831.html
-- Sun 22 Nov | 24/7 Wall St. | Nvidia Stock Has Crashed 48% and Now Trades at 15 Times Earnings, Its Cheapest in More Than a Decade and Cheaper Than Microsoft and Broadcom
-  https://247wallst.com/investing/2026/11/21/nvidia-stock-has-crashed-48-and-now-trades-at-15-times-earnings-its-cheapest-in-more-than-a-decade-and-cheaper-than-microsoft-and-broadcom/
-- Sun 22 Nov | Yahoo Finance | Nvidia Without Jensen Huang: 3 Things That Could Go Right and 3 That Could Go Wrong
-  https://finance.yahoo.com/markets/stocks/articles/nvidia-without-jensen-huang-3-000101805.html
+- Mon 23 Nov | Yahoo Finance | Nvidia News Has Investors Rethinking These U.S. AI Chip Stocks
+  https://finance.yahoo.com/technology/ai/articles/nvidia-news-investors-rethinking-u-070751605.html
+  > AI chip stocks just came through a sharp sentiment swing, with Nvidia's leadership drama, export control worries and U.S.–China security concerns colliding with a sudden rebound in futures. That mix of anxiety and optimism can reset prices quickly, which matters if you care about where capital flows next. This article walks through 3 U.S.
+- Mon 23 Nov | Yahoo Finance | Nvidia (NVDA) Stock Looks Below Fair Value After Recent Turmoil
+  https://finance.yahoo.com/markets/stocks/articles/nvidia-nvda-stock-looks-below-070752587.html
+  > NVIDIA has dropped sharply in recent weeks after a long multi year climb, and with leadership turmoil and regulatory probes now in the mix, the key issue for investors is whether the current share price still lines up with what its earnings can reasonably support.
+- Mon 23 Nov | Trefis | Verizon Cut Its Buying In 2002. Can Nvidia’s Buyers Stop Now?
+  https://www.trefis.com/stock/nvda/articles/627418/verizon-cut-its-buying-in-2002-can-nvidia-s-buyers-stop-now/2026-11-23
+  > Verizon Cut Its Buying In 2002. Can Nvidia’s Buyers Stop Now? Today’s big story: Reported SEC Probe: Could Nvidia Stock Fall To $92? In an earlier piece, we looked at the phone companies that cut their spending in 2002.
+- Mon 23 Nov | Trefis | Google Can Spend $48 Billion More On AI From Its Own Cash. Is That Enough For Nvidia?
+  https://www.trefis.com/stock/googl/articles/627438/google-can-spend-48-billion-more-on-ai-from-its-own-cash-is-that-enough-for-nvidia/2026-11-23
+  > Google Can Spend $48 Billion More On AI From Its Own Cash. Is That Enough For Nvidia? Today’s big story: Reported SEC Probe: Could Nvidia Stock Fall To $92? It can spend about $48 billion more in 2027 than it is likely to spend in 2026, without new debt. [Figures on the page: nine months; one quarter. Check which one each figure is.]
+- Mon 23 Nov | Trefis | Nvidia Stock At $125: Where’s The Floor?
+  https://www.trefis.com/stock/nvda/articles/627453/nvidia-stock-at-125-where-s-the-floor/2026-11-23
+- Mon 23 Nov | Trefis | Nvidia’s Forecast Needs $1.4 Trillion Of AI Spending In 2027. Who Pays?
+  https://www.trefis.com/stock/nvda/articles/627446/nvidia-s-forecast-needs-1-4-trillion-of-ai-spending-in-2027-who-pays/2026-11-23
+- Mon 23 Nov | Trefis | Oracle Or The Fed: What Really Moves Nvidia Stock?
+  https://www.trefis.com/stock/nvda/articles/627412/oracle-or-the-fed-what-really-moves-nvidia-stock/2026-11-23
+- Mon 23 Nov | Trefis | Can The Fed Rescue Nvidia Stock Before Christmas?
+  https://www.trefis.com/stock/nvda/articles/627410/can-the-fed-rescue-nvidia-stock-before-christmas/2026-11-23
 ## AMZN  (8 leads)
-- Sun 22 Nov | shattered.io | Amazon Decart Acquisition: Up to $7.5B Deal Explained
-  https://shattered.io/amazon-nears-7-5-billion-decart-acquisition-cash-stock-deferred/
-  > Amazon is closing in on a purchase of Decart, an Israeli AI startup, in a transaction valued at more than $7 billion, according to Crypto Briefing’s summary of the reporting. The Financial Times reported that contingent payments could lift the total to nearly $7.5 billion.
-- Sun 22 Nov | The Motley Fool | ULA Vulcan Launch Ends in Disaster for Amazon's Satellite Internet Ambitions
-  https://www.fool.com/investing/2026/11/21/ula-vulcan-launch-ends-in-disaster-for-amazon-s-satellite-internet-ambitions/
-  > By Rich Smith – - A United Launch Alliance Vulcan Centaur rocket failed to reach orbit in its first attempt in nine months. - The rocket was carrying 40 Amazon Leo internet satellites -- all now lost. [Figures on the page: unaudited or preliminary; nine months. Check which one each figure is.]
-- Sun 22 Nov | ad-hoc-news.de | Amazon's $5 Billion Handoff: Blackstone Takes the Keys, AWS Keeps the Lease
-  https://www.ad-hoc-news.de/boerse/news/unternehmensnachrichten/amazon-s-5-billion-handoff-blackstone-takes-the-keys-aws-keeps-the-lease/70543692
-  > Amazon shares fell 3.8% on Friday, caught in a broad selloff of AI-linked and technology names. But the size of the drop is less telling than the question underneath it: what do all these artificial-intelligence investments actually have to earn to justify the data centers behind them — and the cost of financing that buildout?
-- Sun 22 Nov | ad-hoc-news.de | Amazon's Capital Reckoning: New York Delivery Costs, a $5 Billion Data-Center Deal, and the AI Payof
-  https://www.ad-hoc-news.de/boerse/news/unternehmensnachrichten/amazon-s-capital-reckoning-new-york-delivery-costs-a-5-billion-data-center-deal-and-the-ai-payoff/70543669
-  > Amazon shares shed 3.8% on Friday, caught in a broad selloff of AI-linked technology names. Reuters reported that investors were questioning whether the hefty sums being poured into artificial intelligence and data centers will earn an adequate return, pointing as well to restrictive signals from the Federal Reserve and worries about borrowing costs.
-- Sat 21 Nov | TipRanks | Amazon Stock (AMZN) Forecast – Oppenheimer Lifts Price Target to $310 After Anthropic IPO
-  https://www.tipranks.com/news/amazon-stock-amzn-forecast-oppenheimer-lifts-price-target-to-310-after-anthropic-ipo
-- Sat 21 Nov | TIKR.com | Cathie Wood Just Sold $9 Million of Amazon
-  https://www.tikr.com/blog/cathie-wood-just-sold-9-million-of-amazon
-- Sat 21 Nov | TIKR.com | Jim Cramer: Amazon Could Sell Its Anthropic Stake and Say “Our CapEx Is Paid For.” Does the Math Work?
-  https://www.tikr.com/blog/jim-cramer-amazon-could-sell-its-anthropic-stake-and-say-our-capex-is-paid-for-does-the-math-work
-- Sat 21 Nov | Financial Times | Amazon closes in on $7.5bn deal to buy AI start-up Decart
-  https://www.ft.com/content/dc7749dc-0f40-44a6-80bc-7f747d383616?syn-25a6b1a6=1
+- Mon 23 Nov | Blockchain News | Amazon (AMZN) Stock Price Prediction: Pullback Holds Above Key Support as AI Spending Keeps the Tape Heavy
+  https://blockchain.news/news/20261123-price-prediction-amzn-pullback-holds-above-key-support-as
+  > Price action still looks corrective, not impulsive Amazon (AMZN) is at $255.47, with the latest 24-hour range running from $251.74 to $257.36.
+- Mon 23 Nov | ad-hoc-news.de | Amazon's Satellite Setback and a Sold-Out Hedge Fund Stake Overshadow a Bullish Analyst Call
+  https://www.ad-hoc-news.de/boerse/news/unternehmensnachrichten/amazon-s-satellite-setback-and-a-sold-out-hedge-fund-stake-overshadow-a-bullish-analyst-call/70545362
+  > A failed rocket launch and a quiet exit by one prominent investor gave Amazon shareholders plenty to digest this week, even as Wall Street's price targets moved in the opposite direction. Third Point disclosed on November 16 that it had fully liquidated its Amazon position by September 30.
+- Mon 23 Nov | JournalArta | Nasdaq Falls Near 19% as Options Trader Eyes Amazon Strangle
+  https://journalarta.com/en/2026/11/23/nasdaq-falls-near-19-percent-amazon-options-strangle/
+  > Nasdaq Falls Near 19% as Options Trader Eyes Amazon Strangle The Nasdaq Composite is down nearly 19% from its recent high and the VIX touched 40 on Friday. Mike Khouw sees elevated options premiums on Amazon, which is off 14%, and outlines a December strangle trade that pays a $5.90 credit per share.
+- Mon 23 Nov | IGN | The PlayStation 5 Pro Console Is Going In and Out of Stock at Amazon
+  https://www.ign.com/articles/the-playstation-5-pro-console-is-going-in-and-out-of-stock-at-amazon
+  > The PlayStation 5 Pro will certainly not be discounted on Black Friday. In fact, you'd be lucky just to find one for retail price. Fortunately, Amazon appears to be restocking PlayStation 5 Pro consoles on a very sporadic basis. The least expensive bundle is the PS5 Pro with charging station for $928.99 with free shipping.
+- Sun 22 Nov | Beinsure | Jeff Bezos Amazon stock donation reaches $629 mn in 2026
+  https://beinsure.com/news/jeff-bezos-amazon-stock-donation-reaches-629mn/
+- Sun 22 Nov | bsinews.id | Bezos Donates 771492 Amazon Shares to Nonprofits
+  https://bsinews.id/en/bezos-amazon-share-donations
+- Sun 22 Nov | SuaraGarut.ID | Jeff Bezos Donates Nearly $199 Million in Amazon Shares
+  https://suaragarut.id/en/bezos-amazon-stock-donations-2026
+- Sun 22 Nov | cwibc.co.id | Jeff Bezos Donates 771492 Amazon Shares Worth Nearly 199 Million
+  https://cwibc.co.id/en/bezos-amazon-charity-donations-2026
 ## GOOGL  (8 leads)
-- Sun 22 Nov | Kalkine Media | Why Is Alphabet (NASDAQ:GOOG) Under Focus Amid AI Market Shifts?
-  https://kalkinemedia.com/us/stocks/communication/why-is-alphabet-nasdaqgoog-under-focus-amid-ai-market-shifts
-  > enters focus as the present US session places greater emphasis on company-level execution. - The reassessment of ai spending keep platform demand, infrastructure use and commercial execution near the centre of the market discussion.
-- Sun 22 Nov | Pluang | Alphabet's stock falls 34% as it borrows $10.9B for data center expansion amid AI demand uncertainty
-  https://pluang.com/en/news-feed/saham-alphabet-terendah-1-tahun-orang-tua-google-pinjam-banyak
+- Mon 23 Nov | blockchain.news | Alphabet (GOOGL) Stock Price Prediction: Price Rebounds, but Trend Still Needs Confirmation
+  https://blockchain.news/news/20261123-price-prediction-price-googl-rebounds-but-trend-still-needs-confirmation
+  > What the tape says now Alphabet (Google) (GOOGL) traded at $277.03, with a 24-hour range of $271.76 to $278.28 and volume of $91.4 million on Binance Futures. That puts the stock just above its pivot point of $275.69, but still below immediate resistance at $279.62 and strong resistance at $282.21. [Figures on the page: consolidated; one quarter. Check which one each figure is.]
+- Mon 23 Nov | JournalArta | Alphabet (GOOGL) Stock: $265.29, Down 2.70% Nov 20
+  https://journalarta.com/en/2026/11/23/alphabet-googl-stock-update-slides-2-70-down-17-2-in-a-month/
+  > Alphabet (GOOGL) Stock Update: Slides 2.70%, Down 17.2% in a Month Technical analysis of GOOGL stock on November 20, 2026: price 265.29 USD, trend downtrend, RSI 27.7, support 265.29, resistance 324.89.
+- Sun 22 Nov | TheStreet | Jim Cramer sends a strong signal to Google stock investors
+  https://www.thestreet.com/investing/stocks/jim-cramer-sends-a-strong-signal-to-google-stock-investors
   (page: did not load (403))
-- Sun 22 Nov | Yahoo Finance | Alphabet (GOOGL) Stock Gets Fair Value Trim As Analysts Weigh AI Spending And Monetization
-  https://finance.yahoo.com/markets/stocks/articles/alphabet-googl-stock-gets-fair-001209637.html
-  > The fair value estimate for Alphabet has been trimmed from US$408.09 to US$397.13, signalling a modest reset in how analysts are framing the stock. This shift aligns with fresh research that weighs heavy AI spending in Search, Google Cloud and custom TPUs against questions about near term monetization, margins and capital intensity.
-- Sat 21 Nov | Crypto Briefing | Alphabet keeps borrowing as AI spending drags its stock 34% below its peak
-  https://cryptobriefing.com/alphabet-debt-ai-spending-stock-decline/
-  > Google's parent is tapping bond markets to fund a capex forecast of up to $205 billion while free cash flow has turned negative Alphabet shares closed Friday 34% below their May record. The AI selloff that has been chewing through tech stocks took another bite out of Google’s parent.
-- Sat 21 Nov | The Motley Fool | Alphabet Stock Just Hit a 1-Year Low. Why Is Google's Parent Borrowing So Much Money?
-  https://www.fool.com/investing/2026/11/21/alphabet-stock-just-hit-a-1-year-low-why-is-google-s-parent-borrowing-so-much-money/
-- Sat 21 Nov | Wisevoter | Berkshire Hathaway Expands Alphabet Stake to 106 Million Shares
-  https://wisevoter.com/world/us/2026/11/21/berkshire-hathaway-alphabet-stake-106-million-shares
-- Sat 21 Nov | The Sunday Guardian | Nvidia Market Cap Drop 35 Percent: Share Slide Knocks Chipmaker Below Alphabet Valuation To Fourth Most Valuable US Company
-  https://sundayguardianlive.com/business/nvidia-market-cap-drop-35-percent-share-slide-knocks-chipmaker-below-alphabet-valuation-to-fourth-most-valuable-us-company-325630/
-- Sat 21 Nov | TradingKey | Alphabet (GOOGL) Stock Price Forecast 2026: Cloud Hit $20B But FCF Collapsed — Buy or Short?
+- Sun 22 Nov | Investing.com India | Form 4 Alphabet Inc Class A For: 22 November By Investing.com
+  https://in.investing.com/news/stock-market-news/form-4-alphabet-inc-class-a-for-22-november-93CH-5719850
+  (page: did not load (403))
+- Sun 22 Nov | Pluang | Alphabet's stock drops 34% as it borrows $10.9B for data center expansion amid AI demand uncertainty.
+  https://pluang.com/en/news-feed/saham-alphabet-terendah-1-tahun-induk-google-pinjam-besar
+- Sun 22 Nov | TradingKey | Alphabet (GOOGL) Stock Price Forecast 2026: Cloud Hit $20B But FCF Collapsed — Buy or Short?
   https://www.tradingkey.com/analysis/stocks/us-stocks/262008961-alphabet-googl-stock-price-forecast-2026-google-cloud-tradingkey
+- Sun 22 Nov | Stockhouse | 2026-11-22 | GOOG Investors Have Opportunity to Lead Alphabet Inc. Class Action Lawsuit - Contact Bronstein, Gewirtz and Grossman, LLC Today! | TSX:GOOG | Press Release
+  https://stockhouse.com/news/press-releases/2026/11/22/goog-investors-have-opportunity-to-lead-alphabet-inc-class-action-lawsuit
+- Sun 22 Nov | Kalkine Media | Will Alphabet Inc. (NASDAQ:GOOGL) Keep Moving Forward From Here?
+  https://kalkinemedia.com/us/stocks/communication/will-alphabet-inc-nasdaqgoogl-keep-moving-forward-from-here
 ## META  (8 leads)
-- Sun 22 Nov | Kalkine Media | Can Meta Platforms (NASDAQ:META) Make Its Turnaround Stick?
-  https://kalkinemedia.com/us/stocks/artificial-intelligence/can-meta-platforms-nasdaqmeta-make-its-turnaround-stick
-  > - Meta Platforms enters focus as the present US session places greater emphasis on company-level execution. - The reassessment of ai spending keep platform demand, infrastructure use and commercial execution near the centre of the market discussion. Meta Platforms (NASDAQ:META) Communication Services Meta Platforms Inc. [Figures on the page: standalone; unaudited or preliminary. Check which one each figure is.]
-- Sun 22 Nov | Simply Wall St | Meta (META) Stock Still Looks Cheap Despite AI Spending Concerns
-  https://simplywall.st/stocks/us/media/nasdaq-meta/meta-platforms/news/meta-meta-stock-still-looks-cheap-despite-ai-spending-concer
-  > Meta Platforms has pulled back sharply over the past month, and the question for anyone looking at the stock now is whether the current share price still lines up with what the company earns. Over the past 5 years, Meta has delivered a total return of 70.0%.
-- Sun 22 Nov | The Motley Fool | Mark Zuckerberg’s Meta Platforms Is Pouring Up to $145 Billion Into AI This Year. Investors Should Watch This 1 Number.
-  https://www.fool.com/investing/2026/11/21/mark-zuckerberg-s-meta-platforms-is-pouring-up-to-usd145-billion-into-ai-this-year-investors-should-watch-this-1-number/
-  > By Neil Patel – - Meta Platforms' huge spending plans make it fair for investors to question the company’s strategy. - Advertising revenue jumped 26% in Q3 2026, driven by double-digit gains in pricing and impressions. Mark Zuckerberg founded Facebook in his Harvard dorm room in 2004.
-- Sun 22 Nov | Billionaires.Africa | American billionaire Mark Zuckerberg's Meta freezes nonvoting share plan as investors sue
-  https://www.billionaires.africa/2026/11/22/american-billionaire-mark-zuckerbergs-meta-freezes-nonvoting-share-plan-as-investors-sue/
-  > American billionaire Mark Zuckerberg's Meta Platforms Inc. has agreed not to issue a new class of nonvoting shares while shareholders who say the plan entrenches his control pursue their lawsuit in Delaware.
-- Sat 21 Nov | FinanceFeeds | Meta stock prediction: $664.52 bull, $460.13 bear
-  https://financefeeds.com/meta-stock-prediction-560-84-bull-664-52-bear-460-13/
-- Sat 21 Nov | TIKR.com | If the AI Trade Blows Up, Meta’s Saving Grace Is That Its Social Media Business Still “Generates a Ton of Cash”
-  https://www.tikr.com/blog/if-the-ai-trade-blows-up-metas-saving-grace-is-that-its-social-media-business-still-generates-a-ton-of-cash
-- Sat 21 Nov | Yahoo Finance | AI May Have Just Broken Meta’s Climate Promise
-  https://finance.yahoo.com/technology/ai/articles/ai-may-just-broken-meta-170219234.html
-- Sat 21 Nov | Yahoo Finance | Meta Platforms (META) Rethinks 2030 Climate Goals After 45% AI Emissions Jump
-  https://finance.yahoo.com/technology/ai/articles/meta-platforms-meta-rethinks-2030-150951042.html
+- Mon 23 Nov | Wisevoter | Meta Shares Fall 12.6% on Week
+  https://wisevoter.com/world/us/2026/11/23/meta-platforms-shares-fall-week-litigation
+  > Meta Shares Fall 12.6% on Week Meta stock closed at $560.84 on Friday after a weekly decline tied to Delaware shareholder litigation and reported problems with its Muse AI agent. 23, 2026 in Public Companies
+- Mon 23 Nov | blockchain.news | Meta Platforms (META) Stock Price Prediction: Bulls have analyst support, but the chart is still fighting the trend
+  https://blockchain.news/news/20261123-price-prediction-meta-bulls-have-analyst-support-but-the
+  > Price action says the rebound still needs proof Meta Platforms (META) is changing hands at $580.28, up 1.61% on the latest read, but the broader technical picture remains soft.
+- Mon 23 Nov | FinanceFeeds | Meta Stock $560.84: Muse Safety Report After 13% Weekly Fall
+  https://financefeeds.com/meta-stock-560-monday-muse-safety-report-after-13-percent-weekly-fall-bull-626-bear-520/
+  (page: did not load (403))
+- Mon 23 Nov | Investing.com UK | Form 4 Meta Platforms Inc For: 23 November By Investing.com
+  https://uk.investing.com/news/stock-market-news/form-4-meta-platforms-inc-for-23-november-93CH-4998336
+  (page: did not load (403))
+- Mon 23 Nov | Trefis | Is Meta Stock Worth More Than Its Tech Rivals?
+  https://www.trefis.com/stock/meta/articles/627551/is-meta-stock-worth-more-than-its-tech-rivals/2026-11-22
+- Mon 23 Nov | Gotrade | Meta Stock Falls 5.9% as AI Stocks Slide (Nov 20)
+  https://www.heygotrade.com/en/news/meta-meta-stock-news-november-23-2026/
+- Mon 23 Nov | Yahoo Finance | After Blockbuster Anthropic IPO, OpenAI Wants AI Rivals To Agree On Development ‘Limits’, While Meta Calls For Controlled Approach
+  https://finance.yahoo.com/technology/ai/articles/blockbuster-anthropic-ipo-openai-wants-031510105.html
+- Sun 22 Nov | Pluang | Alphabet and Meta Platforms show strong growth but face distinct risks and valuation differences for 2027.
+  https://pluang.com/en/news-feed/alphabet-vs-meta-platforms-saham-media-terbaik-untuk-2027
 ## TSLA  (8 leads)
-- Sun 22 Nov | AOL.com | Tesla Just Started Selling Cybercabs, Here's What It Means for a SpaceX and Tesla Merger .
-  https://www.aol.com/articles/tesla-just-started-selling-cybercabs-072502000.html
-  > - A robotaxi ramp-up in 2027 could boost Tesla's valuation. - Tesla shareholders should be cautious about a SpaceX merger before robotaxi success. The news that Tesla(NASDAQ:TSLA)is inviting select customers to buy Cybercabs isn't a game changer from a financial perspective (at least not immediately).
-- Sun 22 Nov | Reuters | Tesla Inc (TSLA.O) | Stock Price & Latest News
+- Mon 23 Nov | ad-hoc-news.de | Tesla stock gains 0.77% to EUR 327.25 before Xetra
+  https://www.ad-hoc-news.de/boerse/news/vorboerse/tesla-stock-gains-0-77-to-eur-327-25-before-xetra/70545927
+  > Tesla designs, manufactures and sells electric vehicles as well as energy generation and storage systems. On Xetra, the stock closed at EUR 324.75 on Friday, November 20, 2026. Tesla designs, manufactures and sells electric vehicles and energy generation and storage systems.
+- Mon 23 Nov | Stocktwits | Cathie Wood Says TSLA Holders ‘Will Get’ A Premium If SpaceX Buys Tesla — HSBC Puts It At Over 30%
+  https://stocktwits.com/news-articles/markets/equity/cathie-wood-tsla-holders-premium-if-spacex-buys-tesla-hsbc/cNbYtWbR9Si
+  > If SpaceX wants Tesla shareholders to approve a buyout, ARK Investment Management CEO Cathie Wood believes it will have to offer them a premium, and HSBC estimates that a bid 33% above Tesla’s 30-day average would value the stock at $507 per share.
+- Mon 23 Nov | cwibc.co.id | Musk Loses 64 Billion as Tesla and SpaceX Shares Fall
+  https://cwibc.co.id/en/musk-wealth-tesla-spacex-decline
+  (page: did not load (520))
+- Mon 23 Nov | Trefis | Could Tesla Stock Really Fall To $140?
+  https://www.trefis.com/stock/tsla/articles/627621/could-tesla-stock-really-fall-to-140/2026-11-23
+  > Could Tesla Stock Really Fall To $140? Tesla stock closed at $345.82 on Friday, Nov 20, down 7.6% in one day. Nvidia dropped 14.0%, and the S&P 500 lost 3.7%. So could Tesla go to $140? Our read: that would be deeper than anything Tesla did in any past Nvidia crash.
+- Mon 23 Nov | TIKR.com | Musk Says Tesla’s Real-World AI Will Get Smarter by “About an Order of Magnitude per Year”
+  https://www.tikr.com/blog/musk-says-teslas-real-world-ai-will-get-smarter-by-about-an-order-of-magnitude-per-year?
+- Mon 23 Nov | Reuters | Tesla Inc (TSLA.O) | Stock Price & Latest News
   https://www.reuters.com/markets/companies/TSLA.O/
-  (page: did not load (401))
-- Sun 22 Nov | Energy News Beat | Tesla's New 8-Year Warranty in Canada Isn't About Tailpipes. The Stock Is Asking What Comes After the Car
-  https://energynewsbeat.co/electric-vehicles/teslas-new-8-year-warranty-in-canada-isnt-about-tailpipes-the-stock-is-asking-what-comes-after-the-car/
-  > Tesla’s North American warranty, effective Sept. 1, 2026, adds an Emissions Performance Warranty for 2027 and later Model 3 and Model Y vehicles: 8 years or 128,700 kilometers, whichever comes first. Tesla stock closed Friday, Nov. [Figures on the page: nine months; one quarter; attributable to shareholders. Check which one each figure is.]
-- Sat 21 Nov | TradingKey | If SpaceX and Tesla Truly Merge, Should Investors Celebrate or Exit Early?
-  https://www.tradingkey.com/analysis/stocks/us-stocks/261930373-stock-spacex-tsla-spcx-elon-musk-xai-terafab-fsd-x-tradingkey
-  > If SpaceX and Tesla Truly Merge, Should Investors Celebrate or Exit Early? Elon Musk has reportedly discussed merging SpaceX with Tesla. A merger might offer synergies, integrate energy networks, and reduce "Musk premium risk" for Tesla shareholders.
-- Sat 21 Nov | TradingKey | Tesla Stock Price Prediction: SpaceX Thruster-Equipped Roadster May Debut This Month, Could It Boost TSLA Stock?
-  https://www.tradingkey.com/analysis/stocks/us-stocks/262110784-tesla-stock-forecast-spacex-roadster-tsla-stock-tradingkey
-- Sat 21 Nov | Yahoo Finance | Cathie Wood, Brad Gerstner and 16 Other Big Funds Bought Tesla Last Quarter, While 15 Sold. Who’s Right?
-  https://finance.yahoo.com/markets/stocks/articles/cathie-wood-brad-gerstner-16-211905292.html
-- Sat 21 Nov | Yahoo Finance | Tesla (TSLA) Stock Looks Richly Priced After Its 47% Three Year Run
-  https://finance.yahoo.com/markets/stocks/articles/tesla-tsla-stock-looks-richly-210854263.html
-- Sat 21 Nov | Investor's Business Daily | Tesla FSD V15 Rolling Out, Goes 'Wide' Next Month. Elon Musk Says It's 'Something Special.'
-  https://www.investors.com/news/tesla-fsd-v15-coming-next-month-elon-musk-says-something-special/
+- Mon 23 Nov | Gotrade | Tesla Stock (TSLA) Falls 7.6% as Growth Stocks Slide (Nov 20)
+  https://www.heygotrade.com/en/news/tesla-tsla-stock-news-november-23-2026/
+- Mon 23 Nov | The Motley Fool | Forget Flying Roadsters. Tesla Investors Have 3 Bigger Challenges to Watch.
+  https://www.fool.com/investing/2026/11/22/forget-flying-roadsters-tesla-investors-have-3-bigger-challenges-to-watch/
 ## JPM  (8 leads)
-- Sun 22 Nov | Kalkine Media | Will JPMorgan Chase (NYSE:JPM) Keep Its Edge As Sentiment Shifts?
-  https://kalkinemedia.com/us/stocks/bluechip/will-jpmorgan-chase-nysejpm-keep-its-edge-as-sentiment-shifts
-  > - JPMorgan Chase enters focus as the present US session places greater emphasis on company-level execution. - Large-cap us conditions keep market leadership, operating resilience and capital discipline near the centre of the market discussion. [Figures on the page: standalone; unaudited or preliminary. Check which one each figure is.]
-- Sun 22 Nov | shattered.io | JPMorgan Data Breach: Vendor Hit, 16,000 Unconfirmed
-  https://shattered.io/jpmorgan-vendor-breach-names-emails-marketing-data-16000-unconfirmed/
-  > JPMorgan Chase confirmed this week that third parties providing services to the bank were the target of a cyberattack, and that attackers likely reached marketing data those vendors held. The bank said that data may include some customer names and email addresses, and it said its own services kept running without disruption.
-- Sat 21 Nov | Beinsure | JPMorgan Chase names Bregje de Best as CFO to succeed Jeremy Barnum in 2027
-  https://beinsure.com/news/jpmorgan-chase-names-bregje-de-best-as-cfo-to-succeed-jeremy-barnum-in-2027/
-  > JPMorgan Chase has appointed Bregje de Best as its next Chief Financial Officer, succeeding Jeremy Barnum after the bank reports its first-quarter 2027 financial results. De Best currently serves as CFO of JPMorgan Chase’s Commercial & Investment Bank (CIB).
-- Sat 21 Nov | finchannel | JPMorgan Chase cyberattack disclosure points to vendor-held marketing data
-  https://finchannel.com/jpmorgan-chase-cyberattack-disclosure-points-to-vendor-held-marketing-data/142607/american-business-trends/2026/11/
-  > The JPMorgan Chase cyberattack disclosure concerns third-party service providers holding marketing information that may include customers’ names and email addresses, the bank said Thursday. Its investigation into the vendor incident comes days after a separate software problem delayed some transactions.
-- Sat 21 Nov | MarketBeat | JPMorgan Chase & Co. $JPM Stock Position Cut by Voya Investment Management LLC
-  https://www.marketbeat.com/instant-alerts/filing-jpmorgan-chase-co-jpm-stock-position-cut-by-voya-investment-management-llc-2026-11-21/
-- Sat 21 Nov | Fox News | Visa, Mastercard and JPMorgan customer data leaked
-  https://www.foxnews.com/tech/visa-mastercard-jpmorgan-customer-data-leaked
-- Sat 21 Nov | Speaks Media | JP Morgan Chase Announces $0.5183 Quarterly Coupon for Alerian MLP Index ETN
-  https://speaks.co.in/business/jp-morgan-chase-announces-0-5183-quarterly-coupon-for-alerian-mlp-index-etn/
-- Sat 21 Nov | MarketBeat | JPMorgan Chase & Co. $JPM Stock: Cibc World Market Inc. Cuts Position
-  https://www.marketbeat.com/instant-alerts/filing-jpmorgan-chase-co-jpm-stock-cibc-world-market-inc-cuts-position-2026-11-21/
+- Mon 23 Nov | Investing.com | JPMorgan initiates HudBay Minerals stock coverage with overweight rating
+  https://www.investing.com/news/analyst-ratings/jpmorgan-initiates-hudbay-minerals-stock-coverage-with-overweight-rating-93CH-5044525
+  (page: did not load (403))
+- Mon 23 Nov | Yahoo Finance | JPMorgan Chase (JPM) CEO Warns UK Tax Rise Could Threaten £3 Billion HQ
+  https://finance.yahoo.com/economy/policy/articles/jpmorgan-chase-jpm-ceo-warns-070656078.html
+  > - JPMorgan Chase (NYSE:JPM) CEO Jamie Dimon warned that higher UK bank taxes could affect the bank's new £3b Canary Wharf headquarters plan. - Dimon linked the UK Labour government's increase to the bank surcharge to a review of JPMorgan's long term British investment commitments.
+- Mon 23 Nov | TradingView | Weekly Recap: Bond-conversion loan and JPMorgan economic interest
+  https://www.tradingview.com/news/tradingview:ac14f711b5722:0-weekly-recap-bond-conversion-loan-and-jpmorgan-economic-interest/
+  > Weekly Recap: Bond-conversion loan and JPMorgan economic interest Sibanye Stillwater Limited Sponsored ADR (JSE:SSW) approved a share loan and guarantee for Stillwater Mining bond conversions, with up to 398,946,781 ordinary shares potentially issued if all bondholders convert. It also reported that JPMorgan Chase acquired an economic interest in its securities.
+- Mon 23 Nov | Insajderi | Hackers stole customer data linked to Visa, Mastercard and JPMorgan Chase
+  https://insajderi.org/en/Hackers-steal-customer-data-linked-to-Visa--MasterCard-and-JPMorgan-Chase/
+  (page: did not load (403))
+- Sun 22 Nov | Kalkine | Champion Iron Sees JPMorgan Chase & Co. Lift Stake to 6.07% in 18 November 2026 Notice
+  https://kalkine.com.au/news/announcements/champion-iron-sees-jpmorgan-chase-co-lift-stake-to-607-in-18-november-2026-notice
+- Sun 22 Nov | Kalkine | JPMorgan Chase & Co. Ceases to Be Substantial Holder in Lindian Resources on 18 November 2026
+  https://kalkine.com.au/news/announcements/jpmorgan-chase-co-ceases-to-be-substantial-holder-in-lindian-resources-on-18-november-2026
+- Sun 22 Nov | Kalkine | JPMorgan Chase & Co. Becomes Substantial Holder in Liontown Resources with 5.07% Voting Power
+  https://kalkine.com.au/news/announcements/jpmorgan-chase-co-becomes-substantial-holder-in-liontown-resources-with-507-voting-power
+- Sun 22 Nov | TIKR.com | Trump Backs a 10% Card Rate Cap With Democrats. That’s a Big Risk for JPMorgan and Citigroup
+  https://www.tikr.com/blog/trump-backs-a-10-card-rate-cap-with-democrats-thats-a-big-risk-for-jpmorgan-and-citigroup?
 ## XOM  (8 leads)
-- Sun 22 Nov | Business Insider Africa | ExxonMobil-led group approves $4 billion Angola oil project as Block 15 makes 21st discovery, with production-sharing deal extended to 2037
-  https://africa.businessinsider.com/local/markets/exxonmobil-led-group-approves-dollar4-billion-angola-oil-project-as-block-15-makes/fsfsh5y
-  > - Block 15 partners approved a $4 billion investment decision. - The plan covers Kizomba A and B and the Likembe field. - Tchihumba West is the block’s 21st discovery. - Angola produced 1.05 million barrels of oil a day in September.
-- Sun 22 Nov | JournalArta | ExxonMobil Invokes Treaty to Challenge EU Carbon Storage Rules
-  https://journalarta.com/en/2026/11/22/exxonmobil-investment-treaty-eu-carbon-storage-rules/
-  > ExxonMobil Invokes Treaty to Challenge EU Carbon Storage Rules ExxonMobil subsidiaries have filed an arbitration notice against the European Commission over rules requiring oil and gas producers to help build carbon storage capacity.
-- Sun 22 Nov | KHOU | All-clear issued after fire at ExxonMobil Baytown Olefins Plant
-  https://www.khou.com/article/news/local/exxonmobil-baytown-olefins-plant-fire-all-clear/285-240e836f-9cc6-46e9-afc3-7661732cef78
-  (page: did not load (403))
-## AVGO  (8 leads)
-- Sun 22 Nov | Crypto Briefing | David Tepper exits AMD and Broadcom, doubles down on Nvidia and Micron
-  https://cryptobriefing.com/david-tepper-exits-amd-broadcom-ai-chips/
-  > Appaloosa's third-quarter filing shows a selective bet on the AI chip supply chain rather than a retreat from it David Tepper has changed his AI chip lineup. His hedge fund, Appaloosa Management, sold its entire positions in Advanced Micro Devices and Broadcom during the third quarter.
-- Sun 22 Nov | 24/7 Wall St. | Nvidia Stock Has Crashed 48% and Now Trades at 15 Times Earnings, Its Cheapest in More Than a Decade and Cheaper Than Microsoft and Broadcom
-  https://247wallst.com/investing/2026/11/21/nvidia-stock-has-crashed-48-and-now-trades-at-15-times-earnings-its-cheapest-in-more-than-a-decade-and-cheaper-than-microsoft-and-broadcom/
-  > Nvidia Stock Has Crashed 48% and Now Trades at 15 Times Earnings, Its Cheapest in More Than a Decade and Cheaper Than Microsoft and Broadcom This post may contain links from our sponsors and affiliates, and Flywheel Publishing may receive compensation for actions taken through them.
-- Sat 21 Nov | Barchart.com | Why It’s Time to Buy the Pullback in Broadcom Stock
-  https://www.barchart.com/story/news/8953006/why-its-time-to-buy-the-pullback-in-broadcom-stock
+- Mon 23 Nov | Trending Now Sustainable Construction | ExxonMobil and partners approve $4bn investment in Angola's Block 15
+  https://www.sustainableconstruction-now.com/article/564162/exxonmobil-and-partners-approve-4bn-investment-in-angolas-block-15
   (page: only 0 words came back (a paywall or a page the reader cannot see): open it by hand if it matters)
-- Sat 21 Nov | Seeking Alpha | Broadcom AI outlook in focus beyond quarterly results, Goldman says (AVGO:NASDAQ)
-  https://seekingalpha.com/news/4675236-broadcom-ai-outlook-in-focus-beyond-quarterly-results-goldman-says
-  (page: did not load (403))
-- Sat 21 Nov | MarketBeat | 3,322 Broadcom Inc. $AVGO Shares Purchased by Intesa Sanpaolo Wealth Management
-  https://www.marketbeat.com/instant-alerts/filing-3322-broadcom-inc-avgo-shares-purchased-by-intesa-sanpaolo-wealth-management-2026-11-21/
-- Sat 21 Nov | MarketBeat | Broadcom Inc. $AVGO Holdings Increased by State Street Corp
-  https://www.marketbeat.com/instant-alerts/filing-broadcom-inc-avgo-holdings-increased-by-state-street-corp-2026-11-21/
-- Sat 21 Nov | Yahoo Finance | The 1 Thing I'll Be Watching When Broadcom Reports on Dec. 9
-  https://finance.yahoo.com/markets/stocks/articles/1-thing-ill-watching-broadcom-134602300.html
-- Sat 21 Nov | MarketBeat | Broadcom Inc. $AVGO Stake Decreased by Resona Asset Management Co. Ltd.
-  https://www.marketbeat.com/instant-alerts/filing-broadcom-inc-avgo-stake-decreased-by-resona-asset-management-co-ltd-2026-11-21/
+- Mon 23 Nov | Construction Review | Greater Makarem: Oman Signs $400M+ Gas and LNG Deal with ExxonMobil and EDO
+  https://constructionreviewonline.com/greater-makarem-oman-signs-400m-gas-and-lng-deal-with-exxonmobil-and-edo/
+  > Oman inked a concession agreement with Energy Development Oman (EDO) and ExxonMobil to appraise and develop discovered natural gas resources in the Greater Makarem area (Block 20). The total initial investments of the development are expected to exceed $400 million. The minister said ExxonMobil’s investment reflects the attractiveness of Oman’s energy sector to international companies.
+- Mon 23 Nov | MarketBeat | Erste Group Bank Predicts Stronger Earnings for ExxonMobil
+  https://www.marketbeat.com/instant-alerts/estimates-erste-group-bank-predicts-stronger-earnings-for-exxonmobil-2026-11-23/
+  > Erste Group Bank Predicts Stronger Earnings for ExxonMobil - Erste Group raised its FY2027 EPS forecast for ExxonMobil to $12.12 from $11.82 and maintained a Buy rating. - ExxonMobil beat quarterly expectations, reporting EPS of $4.23 versus $4.12 forecast and revenue of $110.50 billion versus $104.89 billion expected.
+## AVGO  (8 leads)
+- Mon 23 Nov | Trefis | Why Did Broadcom Stock Drop On Friday?
+  https://www.trefis.com/stock/avgo/articles/627781/why-did-broadcom-stock-drop-on-friday/2026-11-23
+  > Why Did Broadcom Stock Drop On Friday? Today’s big story: Reported SEC Probe: Could Nvidia Stock Fall To $92? Broadcom (AVGO) stock fell 12.2% on Friday, November 20, 2026, while the S&P 500 lost 3.7%. Anthropic buys custom AI chips from Broadcom, and Broadcom bought roughly 13 million Anthropic shares for $1 billion. [Figures on the page: first half; one quarter. Check which one each figure is.]
+- Mon 23 Nov | blockchain.news | Broadcom (AVGO) Stock Price Prediction: Support is holding for now, but trend damage still needs repair
+  https://blockchain.news/news/20261123-price-prediction-avgo-support-is-holding-for-now-but
+  > What happened and why it matters Broadcom (AVGO) is trying to recover after a violent reset in the shares. The latest print at $320.08 sits below the 7-day SMA of $331.96, the 20-day SMA of $328.18 and the 50-day SMA of $336.57, which tells you the stock has not yet reclaimed the near-term trend.
+- Mon 23 Nov | Trefis | Is Broadcom Stock’s Drop A Chance To Buy?
+  https://www.trefis.com/stock/avgo/articles/627646/is-broadcom-stocks-drop-a-chance-to-buy/2026-11-23
+  > Is Broadcom Stock’s Drop A Chance To Buy? Today’s big story: Reported SEC Probe: Could Nvidia Stock Fall To $92? Broadcom (AVGO) designs custom AI chips for a few large customers, such as Google, and that business may be what its bulls are betting on.
+- Mon 23 Nov | Gotrade | Broadcom Stock (AVGO) Falls 12.2% on Reports of Google Cut (Nov 20)
+  https://www.heygotrade.com/en/news/broadcom-avgo-stock-news-november-23-2026/
+  > AI-powered contentSome parts of this article are powered by AI. Broadcom (AVGO) fell 12.19% to $304.41 on Friday, November 20, 2026, on volume of 60.1 million shares.
+- Mon 23 Nov | BigGo Finance | Google Cuts Broadcom TPU Orders by a Million Units; MediaTek Seen Capturing the Shift, Goldman Sachs Trims Broadcom Price Target
+  https://finance.biggo.com/news/2ae2d9ae-617c-4d3d-8a18-01c9472586f6
+- Sun 22 Nov | Yahoo Finance | Here's What a $1,000 Investment in Broadcom Stock Could Be Worth By 2035
+  https://finance.yahoo.com/markets/stocks/articles/heres-1-000-investment-broadcom-192202429.html
+- Sun 22 Nov | Simply Wall St | Broadcom Stock Faces Google Order Cuts And AI Customer Concentration Risk
+  https://simplywall.st/stocks/us/semiconductors/nasdaq-avgo/broadcom/news/broadcom-stock-faces-google-order-cuts-and-ai-customer-conce
+- Sun 22 Nov | Investing.com India | Form 4 Broadcom Inc For: 22 November By Investing.com
+  https://in.investing.com/news/stock-market-news/form-4-broadcom-inc-for-22-november-93CH-5719820
 ## BRK.B  (8 leads)
-- Sun 22 Nov | CEOWORLD magazine | Billionaire Warren Buffett’s $5.5 Billion Gift Opens a $160 Billion Handover
-  https://ceoworld.biz/2026/11/22/billionaire-warren-buffetts-5-5-billion-gift-opens-a-160-billion-handover/
-  > Each Warren Buffett donation now moves Berkshire Hathaway shares out of the hands that controlled the company for six decades, and the terms of the transfer matter more to shareholders than the size of any single gift.
-- Sun 22 Nov | Vietnam.vn | Warren Buffett donated nearly $5.5 billion to family funds, bringing Berkshire Hathaway's market capitalization to $1.26 trillion.
-  https://www.vietnam.vn/en/warren-buffett-quyen-gop-gan-5-5-ty-usd-cho-cac-quy-gia-dinh-von-hoa-berkshire-hathaway-cham-moc-1-260-ty-usd
-  > Donating $5.47 billion to four family funds, setting a target of distributing over $155 billion by 2034. According to a Thanksgiving announcement from Berkshire Hathaway, Warren Buffett converted 6,150 Class A shares into 9,225,000 Class B shares, equivalent to approximately $5.47 billion.
-- Sun 22 Nov | 24/7 Wall St. | Warren Buffett Bought a Farm in 1986 and Has Visited It Twice. Here's His Rule for a 66-Year-Old With $700,000 in an IRA and $2,900 a Month in Social Security
-  https://247wallst.com/investing/2026/11/21/warren-buffett-bought-a-farm-in-1986-and-has-visited-it-twice-heres-his-rule-for-a-66-year-old-with-700000-in-an-ira-and-2900-a-month-in-social-security/
-  > Warren Buffett Bought a Farm in 1986 and Has Visited It Twice. Here’s His Rule for a 66-Year-Old With $700,000 in an IRA and $2,900 a Month in Social Security
+- Mon 23 Nov | ad-hoc-news.de | Berkshire's AI Story Runs Through the Grid, Not the Trading Desk
+  https://www.ad-hoc-news.de/boerse/news/unternehmensnachrichten/berkshire-s-ai-story-runs-through-the-grid-not-the-trading-desk/70545918
+  > Berkshire Hathaway's most plausible route into the artificial intelligence boom may not involve buying a technology stock at all. It runs through the power plants, pipelines and utilities the conglomerate already owns — a thesis that has more to do with infrastructure economics than with any announced AI venture. [Figures on the page: nine months; one quarter. Check which one each figure is.]
+- Mon 23 Nov | The Motley Fool | Nvidia Just Reported Its First Quarter Without Jensen Huang. If the AI Trade Is Cracking, Warren Buffett’s Advice Comes Down to 1 Move.
+  https://www.fool.com/investing/2026/11/23/nvidia-just-reported-its-first-quarter-without-jensen-huang-if-the-ai-trade-is-cracking-warren-buffett-s-advice-comes-down-to-1-move/
+  > By Brett Schafer – - Nvidia just reported strong quarterly results, but investors are worried about the future with Jensen Huang gone. - Warren Buffett harps on avoiding complicated businesses like Nvidia for your portfolio. - Buffett survived for decades by avoiding the hottest stocks of the day, not buying them.
+- Mon 23 Nov | Pluang | Berkshire Hathaway holds $360B in stocks, led b...
+  https://pluang.com/en/news-feed/pengganti-warren-buffett-greg-abel-investasi-47-persen-portofolio-berkshire-tiga
+  (page: did not load (403))
 ## WMT  (8 leads)
-- Sun 22 Nov | Seeking Alpha | Walmart: A Boringly Solid Business At A Not-So-Boring Price (NASDAQ:WMT)
-  https://seekingalpha.com/article/4970900-walmart-stock-boringly-solid-business-at-not-so-boring-price
-  (page: only 43 words came back (a paywall or a page the reader cannot see): open it by hand if it matters)
-- Sun 22 Nov | Yahoo Finance | Walmart (WMT) Stock May Be Fully Valued After Earnings News
-  https://finance.yahoo.com/markets/stocks/articles/walmart-wmt-stock-may-fully-010939760.html
-  > Walmart has delivered a powerful long run for shareholders, and the latest burst of earnings news keeps attention squarely on whether the current share price is still backed by its profits.
-- Sun 22 Nov | Yahoo Finance | Lawsuit accuses Build-A-Bear of misleading investors over Walmart deal
-  https://finance.yahoo.com/markets/stocks/articles/lawsuit-accuses-build-bear-misleading-000619228.html
-  > Lawsuit accuses Build-A-Bear of misleading investors over Walmart deal LOUIS - A new lawsuit accuses St. Louis-based retailer Build-A-Bear Workshop of misleading investors about the strength of its Walmart partnership and maintaining an overly optimistic financial outlook before later lowering its revenue forecast.
+- Mon 23 Nov | Stocktwits | Michael Burry Names Apple, Costco And Walmart Early Crash Havens — The ‘Generals’ Fell Months After 2000 And 2007 Peaks
+  https://stocktwits.com/news-articles/markets/equity/michael-burry-apple-costco-walmart-havens-generals-2000-2007-peaks/cNbYM9pR9Sk
+  > With tech leaders now caught in the broader market slide, “The Big Short” investor Michael Burry is watching Apple (AAPL), Costco (COST) and Walmart (WMT) for a pattern that took six months to play out after the 2000 peak and seven to eight months after the 2007 peak.
+- Mon 23 Nov | ad-hoc-news.de | Walmart stock: EUR 115.81, down 2.19% before Xetra
+  https://www.ad-hoc-news.de/boerse/news/vorboerse/walmart-stock-eur-115-81-down-2-19-before-xetra/70545834
+  > Walmart stock traded at EUR 115.81 on Lang & Schwarz at 08:34 CET on Monday, November 23, 2026, 2.19% below the Xetra close of Friday, November 20, 2026, at EUR 118.40. Walmart reported fiscal third-quarter results on November 19, with revenue growth, stronger operating income and an upgraded annual outlook.
+- Mon 23 Nov | JournalArta | Walmart Beats Estimates, Lifts Forecast, Extends Dividend Streak to 53 Years
+  https://journalarta.com/en/2026/11/23/walmart-beats-estimates-extends-dividend-streak-53-years/
+  > Walmart Beats Estimates, Lifts Forecast, Extends Dividend Streak to 53 Years Walmart topped Wall Street estimates on November 19 and raised its full-year forecast, yet its shares fell about 2% in early trading. The retailer has raised its dividend for 53 straight years, and its next payout goes to holders of record on December 11.
 ## V  (8 leads)
-- Sat 21 Nov | TIKR.com | Prologis Has Gone Nowhere in a Year. Former Visa CEO Alfred Kelly Just Bought $587,000 of Stock
-  https://www.tikr.com/blog/prologis-has-gone-nowhere-in-a-year-former-visa-ceo-alfred-kelly-just-bought-587000-of-stock
-  > - Prologis director Alfred F. Kelly, Jr., Visa’s former CEO, bought $587,350 of Prologis stock on Nov. 18 at an average of $124.97 a share. - The stock is about 18% below its July closing high as higher interest rates weigh on property values, even though its third-quarter results held up. [Figures on the page: first half; one quarter. Check which one each figure is.]
-- Sat 21 Nov | Yahoo! Finance Canada | Leverage Shares 2x Visa ETP Securities A (VIS2.PA) Stock Forum & Discussion - Yahoo Finance
-  https://ca.finance.yahoo.com/quote/VIS2.PA/community/
-  (page: only 13 words came back (a paywall or a page the reader cannot see): open it by hand if it matters)
-- Sat 21 Nov | MarketBeat | Visa Inc. $V Holdings Boosted by State Street Corp
-  https://www.marketbeat.com/instant-alerts/filing-visa-inc-v-holdings-boosted-by-state-street-corp-2026-11-21/
-  > $V Holdings Boosted by State Street Corp - State Street increased its Visa stake by 2.4% in the third quarter, adding nearly 2 million shares to bring its holding to about 84.9 million shares, valued at roughly $30.5 billion.
+- Mon 23 Nov | MarketBeat | Equities Analysts Set Expectations for Visa FY2028 Earnings
+  https://www.marketbeat.com/instant-alerts/estimates-equities-analysts-set-expectations-for-visa-fy2028-earnings-2026-11-23/
+  > Equities Analysts Set Expectations for Visa FY2028 Earnings - Erste Group raised its FY2028 EPS estimate for Visa slightly to $17.13 from $17.11 and maintained a Buy rating. Analysts overall are bullish, with a consensus Buy rating and a $443.35 price target.
+- Mon 23 Nov | scanx.trade | MobiKwik's Zaakpay integrates Visa Payment Passkey for OTP-free checkout
+  https://scanx.trade/stock-market-news/companies/mobikwik-s-zaakpay-integrates-visa-payment-passkey-otp-free-checkout/56954547
+  > MobiKwik's Zaakpay integrates Visa Payment Passkey for OTP-free checkout - Zaakpay integrates Visa Payment Passkey to enable device-based authentication without SMS OTPs - Merchant Payments GMV grew 76% YoY to ₹13,300 crore in Q2FY27 - Merchant Payments revenue increased 150% YoY, reflecting strong monetization
+- Mon 23 Nov | FourWeekMBA | Visa Opens Agent Wallet to US Cards; Chase, Prepaid Excluded
+  https://fourweekmba.com/ai-visa-opens-agent-wallet-to-us-cards-chase-prepaid-excluded/
+  (page: did not load (403))
 ## ORCL  (8 leads)
-- Sun 22 Nov | Kalkine Media | Will Oracle Corporation (NYSE:ORCL) Keep Its Recovery On Track?
-  https://kalkinemedia.com/us/stocks/artificial-intelligence/will-oracle-corporation-nyseorcl-keep-its-recovery-on-track
-  > - Oracle Corporation enters focus as the present US session places greater emphasis on company-level execution. - The reassessment of ai spending keep platform demand, infrastructure use and commercial execution near the centre of the market discussion. - The case around Oracle Corporation rests on how clearly the business translates strategy into measurable delivery.
-- Sun 22 Nov | shattered.io | Oracle OpenAI Contract Fully Funded After $20B Raise
-  https://shattered.io/oracle-says-openai-contract-fully-funded-20-billion-final-raise/
-  > Oracle told investors on November 20, 2026 that it has locked down the money for its OpenAI infrastructure contract.
-- Sat 21 Nov | ad-hoc-news.de | Oracle Has the OpenAI Money in Hand; Now the Concrete Has to Catch Up
-  https://www.ad-hoc-news.de/boerse/news/unternehmensnachrichten/oracle-has-the-openai-money-in-hand-now-the-concrete-has-to-catch-up/70543355
-  > Oracle says the financing for its OpenAI infrastructure contract is fully assembled, closing a question that had dogged the stock. The harder question — whether the buildout can be delivered on time and on budget — is only now coming into focus.
-- Sat 21 Nov | Simply Wall St | Oracle (ORCL) Unveiled New AI Tools For Life Sciences And Finance
-  https://simplywall.st/stocks/us/software/nyse-orcl/oracle/news/oracle-orcl-unveiled-new-ai-tools-for-life-sciences-and-fina
-  > Oracle (NYSE:ORCL) launched new AI agents for life sciences in the past week to support clinical trial workflows. The firm introduced AI-powered analytics tools for financial services clients aimed at risk management and enterprise reporting. Oracle issued a major Java security patch addressing vulnerabilities affecting healthcare systems, including U.S.
-- Sat 21 Nov | ad-hoc-news.de | Oracle Says the OpenAI Bill Is Covered — the Hard Part Comes Next
-  https://www.ad-hoc-news.de/boerse/news/unternehmensnachrichten/oracle-says-the-openai-bill-is-covered-the-hard-part-comes-next/70542992
-- Sat 21 Nov | 24/7 Wall St. | Oracle Stock Is Now Down Almost 70% From its Peak
-  https://247wallst.com/investing/2026/11/21/oracle-stock-is-now-down-almost-70-from-its-peak/
-- Sat 21 Nov | Wisevoter | Oracle Shares Fall as AI Data-Center Bets Weigh
-  https://wisevoter.com/world/us/2026/11/21/oracle-shares-fall-ai-data-center-risk
-- Sat 21 Nov | ad-hoc-news.de | Oracle's Credit Insurance Hits October Highs as AI Selloff Meets a Funding Rebuttal
-  https://www.ad-hoc-news.de/boerse/news/unternehmensnachrichten/oracle-s-credit-insurance-hits-october-highs-as-ai-selloff-meets-a-funding-rebuttal/70542629
+- Mon 23 Nov | GuruFocus | Oracle (ORCL) Stock Valuation Shows 31.4% Upside Potential, Says Bernstein
+  https://www.gurufocus.com/news/9214363/oracle-orcl-stock-valuation-shows-314-upside-potential-says-bernstein
+  (page: did not load (403))
+- Mon 23 Nov | theopenpress.in | Oracle OpenAI Deal: Oracle Says $300 Billion Contract Is Fully Funded
+  https://theopenpress.in/article/oracle-openai-300-billion-fully-funded
+  > Oracle has told investors that every dollar is in place for its roughly $300 billion contract with OpenAI, saying a final capital raise earlier this month has made it the first of the big cloud companies to be fully funded for the current AI investment cycle. Why Oracle had to speak up
+- Mon 23 Nov | Blockchain News | Oracle (ORCL) Stock Price Prediction: Oracle slips below key averages as buyers test lower-band support
+  https://blockchain.news/news/20261123-price-prediction-orcl-oracle-slips-below-key-averages-as
+  > Price action and why it matters Oracle (ORCL) closed around $105.57 in the latest technical snapshot, down from an intraday range of $107.13 to $103.53 and still below the 7-day SMA at $108.98, the 20-day SMA at $116.63 and the 50-day SMA at $126.49.
+- Mon 23 Nov | Trefis | Oracle Or The Fed: What Really Moves Nvidia Stock?
+  https://www.trefis.com/stock/nvda/articles/627412/oracle-or-the-fed-what-really-moves-nvidia-stock/2026-11-23
+  > Oracle Or The Fed: What Really Moves Nvidia Stock? Today’s big story: Reported SEC Probe: Could Nvidia Stock Fall To $92? One is what Oracle says about its AI spending. We checked which one has mattered more since September 1. How much of Nvidia’s daily swings each one explains, since September 1:
+- Mon 23 Nov | MarketBeat | Oracle Stock Earnings Estimates Boosted by Erste Group Bank
+  https://www.marketbeat.com/instant-alerts/estimates-oracle-stock-earnings-estimates-boosted-by-erste-group-bank-2026-11-23/
+- Mon 23 Nov | ad-hoc-news.de | Oracle's AI Bill Is Paid; The Payback Is Still Three Years Out
+  https://www.ad-hoc-news.de/boerse/news/unternehmensnachrichten/oracle-s-ai-bill-is-paid-the-payback-is-still-three-years-out/70545409
+- Mon 23 Nov | Investor's Business Daily | Dow Jones Futures Jump As Oracle, Korea Try To Ease Market Fears; Look For These Absolute Losers
+  https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-worst-week-covid-nvidia-anthropic-vix-fear-gauge/
+- Mon 23 Nov | Gotrade | Oracle Stock (ORCL) Falls 8.5% as AI Stocks Slide (Nov 20)
+  https://www.heygotrade.com/en/news/oracle-orcl-stock-news-november-23-2026/
 ## COST  (8 leads)
-- Sat 21 Nov | The Economic Times | Costco makes major Thanksgiving closure decision as Americans rush to stock up on generators, canned food
-  https://m.economictimes.com/news/international/world-news/costco-makes-major-thanksgiving-closure-decision-as-americans-rush-to-stock-up-on-generators-canned-food-and-emergency-supplies-amid-growing-us-doomsday-fears/articleshow
-  > ALSO READ: Why is Melania Trump warning Barron about dating? Costco to close all US warehouses on Thanksgiving Costco has confirmed that all its US warehouses will remain closed on Thursday, November 26, in observance of Thanksgiving. According to TheStreet, Costco follows a longstanding policy of closing its warehouses on seven major holidays every year.
-- Sat 21 Nov | Yahoo Finance | Tech Outages Drive Costco Surge: How Much Emergency Prep Should You Buy?
-  https://finance.yahoo.com/markets/stocks/articles/tech-outages-drive-costco-surge-170042732.html
-  > Bulk essentials and generators were wiped out as shoppers rushed to stock up on emergency supplies. The buying spree follows several widespread outages, including a Microsoft Outlook outage and a nationwide halt for all U.S.
-- Sat 21 Nov | The Globe and Mail | Costco’s U.S. Comparable Sales Jumped 12.6% in October. Here’s the Number That Shows Its Moat Is Widening.
-  https://www.theglobeandmail.com/investing/markets/stocks/NVDA/pressreleases/8950139/costcos-us-comparable-sales-jumped-126-in-october-heres-the-number-that-shows-its-moat-is-widening/
-  > - Even excluding the impact of gas and foreign exchange, Costco's domestic same-store sales were up a strong 8.1%. - As the business brings on more members, which is critical to its financial success, it proves that the warehouse value proposition still holds.
+- Mon 23 Nov | Stocktwits | Michael Burry Names Apple, Costco And Walmart Early Crash Havens — The ‘Generals’ Fell Months After 2000 And 2007 Peaks
+  https://stocktwits.com/news-articles/markets/equity/michael-burry-apple-costco-walmart-havens-generals-2000-2007-peaks/cNbYM9pR9Sk
+  > With tech leaders now caught in the broader market slide, “The Big Short” investor Michael Burry is watching Apple (AAPL), Costco (COST) and Walmart (WMT) for a pattern that took six months to play out after the 2000 peak and seven to eight months after the 2007 peak.
+- Mon 23 Nov | JournalArta | Shopify, Costco, e.l.f: Full Details
+  https://journalarta.com/en/2026/11/23/shopify-costco-elf-stocks-buy-if-market-crashes/
+  > Shopify, Costco, e.l.f.: Why One Writer Would Buy in a Crash Motley Fool writer Jennifer Saibil says she would buy Shopify, Costco and e.l.f. Beauty if the S&P 500 sold off, citing fast sales growth but valuations of 53 to 75 times earnings. The index is up 7% this year.
+- Sun 22 Nov | Yahoo Finance | Costco (COST) Lifts Dividend After Strong 2026 Results And $7.5 Billion 2027 Plan
+  https://finance.yahoo.com/markets/stocks/articles/costco-cost-lifts-dividend-strong-180659480.html
+  > - Costco Wholesale (NasdaqGS:COST) reported strong fiscal 2026 results, reinforcing management's confidence in the warehouse retailer's growth plans. - The board approved a higher regular dividend for shareholders, signalling a larger ongoing cash return from the business.
 ## NFLX  (8 leads)
-- Sun 22 Nov | Yahoo Finance | Netflix Falls Below $60. Bill Ackman Explains Why That’s an Incredible Investment Opportunity.
-  https://finance.yahoo.com/markets/stocks/articles/netflix-falls-below-60-bill-042002519.html
-  > Netflix's (NASDAQ:NFLX) share price has been cut in half from the all-time high it reached last summer. The stock now trades below $60 per share, as of this writing.
-- Sat 21 Nov | The Motley Fool | Michael Burry Says He's Looking at Netflix Stock in the High $30s. I'd Consider It Now, Well Above That.
-  https://www.fool.com/investing/2026/11/21/michael-burry-says-he-s-looking-at-netflix-stock-in-the-high-usd30s-i-d-consider-it-now-well-above-that/
-  > By Daniel Sparks – - Michael Burry has said he's now looking at Netflix stock in the high $30s. - That price would value Netflix at around 10 times analysts' average 2027 earnings estimate. - Netflix expects its operating margin to hit 31.5% this year, up from 29.5% in 2025.
-- Sat 21 Nov | Stocktwits | Bill Ackman Takes Another Swing At NFLX After Colossal 2022 Loss: 'Netflix Has Effectively Won The Streaming Wars'
-  https://stocktwits.com/news-articles/markets/equity/bill-ackman-takes-another-swing-at-nflx-after-colossal-2022-loss-netflix-has-effectively-won-the-streaming-wars/cZoqP0uRJhK
-  > Billionaire investor William Ackman is taking a chance once again on Netflix Inc. (NFLX) by acquiring a fresh stake in the streaming giant through Pershing Square Holdings Ltd. In 2022, the investor sold NFLX shares after holding it for just three months, clocking a loss of more than $400 million.
-- Sat 21 Nov | MarketBeat | Netflix, Inc. $NFLX Stock Position Lowered by Edgewood Management LLC
-  https://www.marketbeat.com/instant-alerts/filing-netflix-inc-nflx-stock-position-lowered-by-edgewood-management-llc-2026-11-21/
-  > $NFLX Stock Position Lowered by Edgewood Management LLC - Edgewood Management cut its Netflix stake by 31.9% in the third quarter, selling 1.85 million shares. It retained about 3.95 million shares, worth approximately $275 million, making Netflix 4.4% of its portfolio.
-- Sat 21 Nov | Wisevoter | Netflix Shares First Reactions to Cliff Booth Film
-  https://wisevoter.com/world/us/2026/11/21/netflix-cliff-booth-reactions-ai-accusations
-- Fri 20 Nov | MarketBeat | Netflix (NASDAQ:NFLX) Stock Falls 3% - What's Next?
-  https://www.marketbeat.com/instant-alerts/price-netflix-nasdaq-nflx-stock-falls-3-whats-next-2026-11-20/
-- Fri 20 Nov | TIKR.com | Prediction: Netflix and Disney Will “Blame Grand Theft Auto” for Falling Viewership, per Scott Galloway
-  https://www.tikr.com/blog/prediction-netflix-and-disney-will-blame-grand-theft-auto-for-falling-viewership-per-scott-galloway?
-- Fri 20 Nov | Traders Union | Netflix stock forecast: Bearish outlook persists with sellers maintaining control
-  https://tradersunion.com/news/stocks/show/4351067-netflix-drops-2-91percent-today-to/
+- Mon 23 Nov | Blockchain News | Netflix (NFLX) Price Prediction: Oversold Setup Meets Heavy Overhead Resistance
+  https://blockchain.news/news/20261123-price-prediction-nflx-oversold-setup-meets-heavy-overhead-resistance
+  > Price action is stabilizing, but the trend is still down Netflix (NFLX) is trading at $57.48, essentially pinned near its pivot point of $57.42 and just above immediate support at $57.01.
+- Mon 23 Nov | MarketBeat | Brokers Set Expectations for Netflix FY2027 Earnings
+  https://www.marketbeat.com/instant-alerts/estimates-brokers-set-expectations-for-netflix-fy2027-earnings-2026-11-23/
+  > Brokers Set Expectations for Netflix FY2027 Earnings - Erste Group trimmed its FY2027 EPS forecast for Netflix slightly, to $3.74 from $3.75; the article cites a current-year consensus estimate of $3.59.
+- Mon 23 Nov | Trefis | What Will Move Netflix Stock Over Six Months?
+  https://www.trefis.com/stock/nflx/articles/627584/what-will-move-netflix-stock-over-six-months/2026-11-23
+  > What Will Move Netflix Stock Over Six Months? For questions about this article or underlying research, email help@trefis.com. Netflix (NFLX) stock closed at $56.73 on November 20, 2026, its lowest close in a year. The shares fell 15.4% over the past month, while the S&P 500 dropped 9.7%. [Figures on the page: first half; one quarter. Check which one each figure is.]
+- Sun 22 Nov | Simply Wall St | Netflix (NFLX) Stock Could Be 34% Undervalued Despite Ad Guidance Cuts
+  https://simplywall.st/stocks/us/media/nasdaq-nflx/netflix/news/netflix-nflx-stock-could-be-34-undervalued-despite-ad-guidan
+  > Netflix has seen its share price fall sharply over the past year, which puts a fresh spotlight on whether the current US$56.73 level is still in line with the cash it can generate for shareholders.
+- Sun 22 Nov | BigGo Finance | Netflix Stock Split Halves Price: Burry Eyes $39 Entry as Ackman Adds $1.07 Billion
+  https://finance.biggo.com/news/9b571bcb-c01d-45ce-8b7f-6ffa17379d2b
+- Sun 22 Nov | TheStreet | Michael Burry’s Netflix warning puts investors in a $39 dilemma
+  https://www.thestreet.com/entertainment/michael-burrys-netflix-warning-puts-investors-in-a-39-dilemma
+- Sun 22 Nov | Yahoo Finance | What's Going On With Netflix's Stock?
+  https://finance.yahoo.com/markets/stocks/articles/whats-going-netflixs-stock-172002682.html
+- Sun 22 Nov | Investing.com Australia | Form 4 Netflix Inc For: 22 November By Investing.com
+  https://au.investing.com/news/stock-market-news/form-4-netflix-inc-for-22-november-93CH-4788604
 ## INTC  (8 leads)
-- Sun 22 Nov | The Globe and Mail | Intel Says It Just Signed Its First Customer for Its Most Advanced Chipmaking Process. The Stock Is Still More Than 60% Below Its June Record.
-  https://www.theglobeandmail.com/investing/markets/stocks/INTC/pressreleases/8954290/intel-says-it-just-signed-its-first-customer-for-its-most-advanced-chipmaking-process-the-stock-is-still-more-than-60-below-its-june-record/
-  > - Intel CEO Lip-Bu Tan said on Nov. 18 that the company had just signed the first customer for its 18A chipmaking process. - Intel's foundry unit brought in $411 million from outside customers in the third quarter, out of $6.7 billion in total revenue.
-- Sun 22 Nov | Pluang | Intel signs first customer for its advanced 18A chipmaking process, marking a key foundry milestone.
-  https://pluang.com/en/news-feed/intel-tandatangani-pelanggan-pertama-proses-chipmaking-18a-canggih
-  (page: did not load (403))
-- Sun 22 Nov | Seeking Alpha | Intel's Turnaround Story Remains Firmly Intact, Buy The Panic
-  https://seekingalpha.com/article/4970889-intels-turnaround-story-remains-firmly-intact-buy-the-panic
-  (page: did not load (403))
-- Sat 21 Nov | Simply Wall St | Intel Stock Gets A Foundry Win With Microsoft Backing
-  https://simplywall.st/stocks/us/semiconductors/nasdaq-intc/intel/news/intel-stock-gets-a-foundry-win-with-microsoft-backing
-  > Intel secured its first external customer for its advanced 18A and 18A-P chip manufacturing process and expanded a long-term agreement with Microsoft, which will use Intel Foundry EMIB packaging and commit to future Xeon supply for Azure cloud and AI infrastructure.
-- Sat 21 Nov | Pluang | Intel's tech advances boost growth potential bu...
-  https://pluang.com/en/news-feed/setelah-turun-62-persen-bisakah-membeli-saham-intel-menguntungkan
-- Sat 21 Nov | Yahoo Finance | After Plummeting 62% This Year, Could Buying Intel Stock Today Set You Up for Life?
-  https://finance.yahoo.com/markets/stocks/articles/plummeting-62-could-buying-intel-155002179.html
-- Sat 21 Nov | Coinpaper | Intel Stock Crashes 21% Below CEO's $9.7M Insider Purchase Price
-  https://coinpaper.com/39191/intel-stock-crashes-21-below-ceo-s-9-7-m-insider-purchase-price
-- Sat 21 Nov | 富途牛牛 | Daily Short Sale Tracking: Intel's Short Volume Increased by 26 Million, With a Short Sale Ratio of 17%
-  https://news.futunn.com/en/post/1005270457/daily-short-sale-tracking-intel-s-short-volume-increased-by
+- Mon 23 Nov | blockchain.news | Intel (INTC) Stock Price Prediction: Weak post-earnings setup meets analyst target resets
+  https://blockchain.news/news/20261123-price-prediction-target-intc-weak-post-earnings-setup-meets-analyst
+  > Post-earnings pressure still defines the tape Intel’s latest read-through remains dominated by its October 29 third-quarter report and the weaker fourth-quarter outlook that followed.
+- Sun 22 Nov | Simply Wall St | Intel (INTC) Chip Breakthrough Opens A Fresh Angle On Its AI Push
+  https://simplywall.st/stocks/us/semiconductors/nasdaq-intc/intel/news/intel-intc-chip-breakthrough-opens-a-fresh-angle-on-its-ai-p
+  > Intel (NasdaqGS:INTC) announced a significant semiconductor manufacturing breakthrough, signaling progress in its chip process technology roadmap. The company also disclosed a new client partnership with RadixArk focused on open-source AI inference tuned for Intel hardware. RadixArk plans to optimize and distribute AI inference frameworks that are designed to run efficiently on Intel CPUs and accelerators.
+- Sun 22 Nov | Yahoo Finance | Intel Just Landed Its First 18A-P Chip Customer. What That Means for INTC Stock.
+  https://finance.yahoo.com/markets/stocks/articles/intel-just-landed-first-18a-193003252.html
+  > Intel (INTC) has long been a prominent name in the semiconductor industry, supplying processors for personal computers and data centers. Its stock, however, has had a difficult run, losing more than half its value since the end of September.
+- Sun 22 Nov | TradingKey | Intel Q2 2026: Revenue Up 25%, Data Center +59%, Stock Surges Then Retreats to $100
+  https://www.tradingkey.com/analysis/stocks/us-stocks/262088803-intel-intc-q2-2026-earnings-data-center-ai-foundry-loss-tradingkey
+  > Intel Q2 2026: Revenue Up 25%, Data Center +59%, Stock Surges Then Retreats to $100 Intel’s Q2 2026 results reflect a significant turnaround, highlighted by a 25% revenue increase and 59% growth in Data Center and AI segments.
+- Sun 22 Nov | International Business Times Australia | Will Intel Stock Bounce Back? Chipmaker Faces Worst Two-Month Plunge on Record as the PC Slump Deepens
+  https://www.ibtimes.com.au/intel-shares-plunge-weak-pc-outlook-1879169
+- Sun 22 Nov | FinanceFeeds | Intel Stock $51: HP and Dell Results Test PC Demand Tuesday
+  https://financefeeds.com/intel-intc-stock-51-sunday-week-ahead-hp-dell-results-thanksgiving-bull-56-bear-48/
+- Sun 22 Nov | MarketBeat | 73,760 Shares of Intel Corporation $INTC Acquired by N.F.U. MUTUAL UNIT MANAGERS Ltd
+  https://www.marketbeat.com/instant-alerts/filing-73760-shares-of-intel-corporation-intc-acquired-by-nfu-mutual-unit-managers-ltd-2026-11-22/
+- Sun 22 Nov | MarketBeat | Intel Corporation $INTC Stake Lessened by BRITISH COLUMBIA INVESTMENT MANAGEMENT Corp
+  https://www.marketbeat.com/instant-alerts/filing-intel-corporation-intc-stake-lessened-by-british-columbia-investment-management-corp-2026-11-22/
 ## LLY  (8 leads)
-- Sat 21 Nov | Observer | Eli Lilly CEO David Ricks Is Using the Weight-Loss Boom to Buy His Next Bet
-  https://observer.com/2026/11/eli-lilly-ceo-david-ricks-is-using-the-weight-loss-boom-to-buy-his-next-bet/
-  > Eli Lilly CEO David Ricks Is Using the Weight-Loss Boom to Buy His Next Bet Flush with billions from Mounjaro and Zepbound, Lilly is snapping up biotechs in blood cancer, neuroscience, immunology and other fields, sometimes before their drugs have even reached human trials.
-- Sat 21 Nov | Pluang | Eli Lilly's Zepbound shows strong weight loss r...
-  https://pluang.com/en/news-feed/peluang-pertumbuhan-eli-lilly-zepbound-pasar-obesitas-remaja
+- Mon 23 Nov | https://hrtoday.in/ | Eli Lilly and Company Appoints Michael Kopach as Vice President
+  https://hrtoday.in/eli-lilly-and-company-appoints-michael-kopach-as-vice-president/
   (page: did not load (403))
-- Sat 21 Nov | https://hrtoday.in/ | Eli Lilly and Company Appoints Sheila Chaiban as Chief Marketing Officer – Gulf
-  https://hrtoday.in/eli-lilly-and-company-appoints-sheila-chaiban-as-chief-marketing-officer-gulf/
-  (page: did not load (403))
-Read 80 lead pages for you (logged in the research log); open a page only where the excerpt is not enough.
-- No leads: CLHO, ALCN, MFPC, EFIH, EGAL, AMOC, SKPC.
+- Sun 22 Nov | Barchart.com | Eli Lilly's Next Obesity Drug Isn't Approved Yet, but Peptide Tracker Users Already Log It
+  https://www.barchart.com/story/news/8957887/eli-lilly-s-next-obesity-drug-isn-t-approved-yet-but-peptide-tracker-users-already-log-it
+  (page: only 0 words came back (a paywall or a page the reader cannot see): open it by hand if it matters)
+- Sun 22 Nov | JournalArta | Eli Lilly’s Next Weight-Loss Drug Shows 54.1-Pound Loss
+  https://journalarta.com/en/2026/11/23/eli-lilly-next-weight-loss-drug-trial-results/
+  > Eli Lilly’s Next Weight-Loss Drug Shows 54.1-Pound Loss Eli Lilly’s experimental EloraTZP produced average weight loss of up to 54.1 pounds in an early-stage trial of people with obesity and Type 2 diabetes.
+Read 93 lead pages for you (logged in the research log); open a page only where the excerpt is not enough.
+- No leads: ETEL, ALCN, EFIH, EMFD, AMOC, SKPC.

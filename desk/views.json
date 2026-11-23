@@ -134,7 +134,7 @@
    "tickers": [
     "JUFO"
    ],
-   "status": "open",
+   "status": "wrong",
    "updates": [
     {
      "date": "2026-11-13",
@@ -158,7 +158,11 @@
      "level": 22
     }
    ],
-   "driver": "food-earnings"
+   "driver": "food-earnings",
+   "result": {
+    "date": "2026-11-23",
+    "text": "Juhayna closed at 21.77 on November 22, below the 22 that makes the call wrong."
+   }
   },
   {
    "id": "2026-10-31-chips",
