@@ -5,10 +5,10 @@
    "sector": "Banks",
    "valuation": {
     "source": "Company filing (Mubasher Banks (EGX disclosure))",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-09-30",
     "basis": "results for the 12 months to September 2026; TradingView gives EGP 20.12 a share for the same period",
-    "price": 125.01,
+    "price": 126.5,
     "rows": [
      {
       "label": "Market value",
@@ -105,7 +105,7 @@
    "cap": {
     "value": 434.2,
     "currency": "EGP",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "TradingView"
    },
    "filed": {
@@ -189,15 +189,15 @@
    "cap": {
     "value": 170.1,
     "currency": "EGP",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "TradingView"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-09-30",
     "basis": "results for the 12 months to September 2026",
-    "price": 79.0,
+    "price": 79.5,
     "rows": [
      {
       "label": "Market value",
@@ -205,7 +205,7 @@
      },
      {
       "label": "P/E",
-      "value": "9.9"
+      "value": "10.0"
      },
      {
       "label": "P/B",
@@ -322,15 +322,15 @@
    "cap": {
     "value": 96.4,
     "currency": "EGP",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "TradingView"
    },
    "valuation": {
     "source": "Company filing (Arab Finance (unaudited statement filed to the EGX 29 Oct); Al Borsa)",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-09-30",
     "basis": "results for the 12 months to September 2026",
-    "price": 74.0,
+    "price": 74.41,
     "rows": [
      {
       "label": "Market value",
@@ -436,15 +436,15 @@
    "cap": {
     "value": 33.2,
     "currency": "EGP",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "TradingView"
    },
    "valuation": {
     "source": "TradingView and Mubasher",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": null,
     "basis": "per-share figures that do not match the price",
-    "price": 11.03,
+    "price": 11.55,
     "rows": [
      {
       "label": "Market value",
@@ -546,27 +546,27 @@
    "cap": {
     "value": 652.5,
     "currency": "USD",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "Nasdaq"
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 159.99,
+    "price": 156.9,
     "rows": [
      {
       "label": "Market value",
-      "value": "$648.1bn"
+      "value": "$652.5bn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "15.1"
+      "value": "14.8"
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "12.0"
+      "value": "11.8"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -661,27 +661,27 @@
    "cap": {
     "value": 3598.1,
     "currency": "USD",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "Nasdaq"
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 484.52,
+    "price": 492.5,
     "rows": [
      {
       "label": "Market value",
-      "value": "$3.75tn"
+      "value": "$3.60tn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "26.9"
+      "value": "27.3"
      },
      {
       "label": "Forecast P/E (fiscal 2027)",
-      "value": "24.3"
+      "value": "24.7"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -764,27 +764,27 @@
    "cap": {
     "value": 3261.5,
     "currency": "USD",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "Nasdaq"
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 265.29,
+    "price": 282.1,
     "rows": [
      {
       "label": "Market value",
-      "value": "$3.45tn"
+      "value": "$3.26tn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "13.8"
+      "value": "14.7"
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "13.4"
+      "value": "14.2"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -873,27 +873,27 @@
    "cap": {
     "value": 1453.1,
     "currency": "USD",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "Nasdaq"
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-07-31",
     "basis": "the four quarters to Jul 2026",
-    "price": 304.41,
+    "price": 313.55,
     "rows": [
      {
       "label": "Market value",
-      "value": "$1.48tn"
+      "value": "$1.45tn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "35.5"
+      "value": "36.6"
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "29.8"
+      "value": "30.7"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -915,15 +915,15 @@
    "cap": {
     "value": 233.9,
     "currency": "EGP",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "TradingView"
    },
    "valuation": {
     "source": "Company filing (Telecom Egypt 9M 2026 release; Arab Finance for 2025 and 9M 2025)",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-09-30",
     "basis": "results for the 12 months to September 2026; TradingView agrees; book value from TradingView, to September 2026",
-    "price": 137.0,
+    "price": 139.98,
     "rows": [
      {
       "label": "Market value",
@@ -931,11 +931,11 @@
      },
      {
       "label": "P/E",
-      "value": "7.8"
+      "value": "8.0"
      },
      {
       "label": "P/B",
-      "value": "2.8"
+      "value": "2.9"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -1068,15 +1068,15 @@
    "cap": {
     "value": 251.4,
     "currency": "EGP",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "TradingView"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
-    "price": 114.05,
+    "price": 116.99,
     "rows": [
      {
       "label": "Market value",
@@ -1084,11 +1084,11 @@
      },
      {
       "label": "P/E",
-      "value": "15.0"
+      "value": "15.4"
      },
      {
       "label": "P/B",
-      "value": "3.5"
+      "value": "3.6"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -1161,15 +1161,15 @@
    "cap": {
     "value": 96.1,
     "currency": "EGP",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "TradingView"
    },
    "valuation": {
     "source": "Company filing (Orascom Construction Q3 2026 results press release (USD 279.5m 12-month attributable profit x EGP 53.7))",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-09-30",
     "basis": "results for the 12 months to September 2026; book value from TradingView, to June 2026",
-    "price": 786.01,
+    "price": 792.12,
     "rows": [
      {
       "label": "Market value",
@@ -1315,15 +1315,15 @@
    "cap": {
     "value": 58.9,
     "currency": "EGP",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "TradingView"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-09-30",
     "basis": "results for the 12 months to September 2026",
-    "price": 16.98,
+    "price": 17.25,
     "rows": [
      {
       "label": "Market value",
@@ -1331,11 +1331,11 @@
      },
      {
       "label": "P/E",
-      "value": "16.3"
+      "value": "16.6"
      },
      {
       "label": "P/B",
-      "value": "5.7"
+      "value": "5.8"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -1412,15 +1412,15 @@
    "cap": {
     "value": 36.6,
     "currency": "EGP",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "TradingView"
    },
    "valuation": {
     "source": "TradingView and Mubasher",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": null,
     "basis": "per-share figures that do not match the price",
-    "price": 25.5,
+    "price": 25.68,
     "rows": [
      {
       "label": "Market value",
@@ -1540,15 +1540,15 @@
    "cap": {
     "value": 20.6,
     "currency": "EGP",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "TradingView"
    },
    "valuation": {
     "source": "TradingView and Mubasher",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": null,
     "basis": "per-share figures that do not match the price",
-    "price": 14.0,
+    "price": 14.13,
     "rows": [
      {
       "label": "Market value",
@@ -1604,15 +1604,15 @@
    "cap": {
     "value": 34.1,
     "currency": "EGP",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "TradingView"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
-    "price": 21.77,
+    "price": 22.0,
     "rows": [
      {
       "label": "Market value",
@@ -1620,7 +1620,7 @@
      },
      {
       "label": "P/E",
-      "value": "14.3"
+      "value": "14.5"
      },
      {
       "label": "P/B",
@@ -1720,15 +1720,15 @@
    "cap": {
     "value": 96.3,
     "currency": "EGP",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "TradingView"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-06-30",
     "basis": "results for the 12 months to June 2026",
-    "price": 30.6,
+    "price": 31.5,
     "rows": [
      {
       "label": "Market value",
@@ -1736,11 +1736,11 @@
      },
      {
       "label": "P/E",
-      "value": "14.1"
+      "value": "14.6"
      },
      {
       "label": "P/B",
-      "value": "11.3"
+      "value": "11.6"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -1823,27 +1823,27 @@
    "cap": {
     "value": 4978.1,
     "currency": "USD",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "Nasdaq"
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 342.56,
+    "price": 349.08,
     "rows": [
      {
       "label": "Market value",
-      "value": "$5.06tn"
+      "value": "$4.98tn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "38.9"
+      "value": "39.6"
      },
      {
       "label": "Forecast P/E (fiscal 2027)",
-      "value": "36.2"
+      "value": "36.9"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -1903,27 +1903,27 @@
    "cap": {
     "value": 3093.8,
     "currency": "USD",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "Nasdaq"
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-10-31",
     "basis": "the four quarters to Oct 2026",
-    "price": 125.53,
+    "price": 165.05,
     "rows": [
      {
       "label": "Market value",
-      "value": "$4.07tn"
+      "value": "$3.09tn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "15.1"
+      "value": "19.8"
      },
      {
       "label": "Forecast P/E (fiscal 2027)",
-      "value": "13.4"
+      "value": "17.2"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -2065,27 +2065,27 @@
    "cap": {
     "value": 2668.9,
     "currency": "USD",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "Nasdaq"
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 246.82,
+    "price": 255.39,
     "rows": [
      {
       "label": "Market value",
-      "value": "$2.76tn"
+      "value": "$2.67tn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "33.9"
+      "value": "35.1"
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "31.6"
+      "value": "32.7"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -2139,27 +2139,27 @@
    "cap": {
     "value": 1433.6,
     "currency": "USD",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "Nasdaq"
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 560.84,
+    "price": 597.6,
     "rows": [
      {
       "label": "Market value",
-      "value": "$1.51tn"
+      "value": "$1.43tn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "18.8"
+      "value": "20.1"
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "19.3"
+      "value": "20.6"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -2213,27 +2213,27 @@
    "cap": {
     "value": 1366.9,
     "currency": "USD",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "Nasdaq"
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 345.82,
+    "price": 385.46,
     "rows": [
      {
       "label": "Market value",
-      "value": "$1.53tn"
+      "value": "$1.37tn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "473.7"
+      "value": "528.0"
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "516.1"
+      "value": "575.3"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -2293,27 +2293,27 @@
    "cap": {
     "value": 824.8,
     "currency": "USD",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "Nasdaq"
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 310.53,
+    "price": 316.66,
     "rows": [
      {
       "label": "Market value",
-      "value": "$842.9bn"
+      "value": "$824.8bn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "13.5"
+      "value": "13.7"
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "13.0"
+      "value": "13.2"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -2343,15 +2343,15 @@
    "cap": {
     "value": 1257.3,
     "currency": "USD",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "Nasdaq"
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-09-30",
     "basis": "results for the 12 months to September 2026 (TradingView)",
-    "price": 570.0,
+    "price": 572.36,
     "rows": [
      {
       "label": "Market value",
@@ -2359,7 +2359,7 @@
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "15.9"
+      "value": "16.0"
      },
      {
       "label": "P/B",
@@ -2413,27 +2413,27 @@
    "cap": {
     "value": 1015.1,
     "currency": "USD",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "Nasdaq"
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-10-31",
     "basis": "the four quarters to Oct 2026",
-    "price": 127.95,
+    "price": 129.58,
     "rows": [
      {
       "label": "Market value",
-      "value": "$1.01tn"
+      "value": "$1.02tn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "44.7"
+      "value": "45.3"
      },
      {
       "label": "Forecast P/E (fiscal 2027)",
-      "value": "44.3"
+      "value": "44.8"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -2483,15 +2483,15 @@
    "cap": {
     "value": 109.6,
     "currency": "EGP",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "TradingView"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-09-30",
     "basis": "results for the 12 months to September 2026",
-    "price": 36.21,
+    "price": 36.6,
     "rows": [
      {
       "label": "Market value",
@@ -2499,7 +2499,7 @@
      },
      {
       "label": "P/E",
-      "value": "6.6"
+      "value": "6.7"
      },
      {
       "label": "P/B",
@@ -2592,15 +2592,15 @@
    "cap": {
     "value": 102.2,
     "currency": "EGP",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "TradingView"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-03-31",
     "basis": "results for the 12 months to March 2026",
-    "price": 32.6,
+    "price": 33.21,
     "rows": [
      {
       "label": "Market value",
@@ -2608,11 +2608,11 @@
      },
      {
       "label": "P/E",
-      "value": "11.0"
+      "value": "11.2"
      },
      {
       "label": "P/B",
-      "value": "6.7"
+      "value": "6.9"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -2702,15 +2702,15 @@
    "cap": {
     "value": 88.5,
     "currency": "EGP",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "TradingView"
    },
    "valuation": {
     "source": "TradingView and Mubasher",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": null,
     "basis": "per-share figures that do not match the price",
-    "price": 24.1,
+    "price": 24.8,
     "rows": [
      {
       "label": "Market value",
@@ -2812,15 +2812,15 @@
    "cap": {
     "value": 69.7,
     "currency": "EGP",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "TradingView"
    },
    "valuation": {
     "source": "Company filing (Mubasher; Hapi Journal for 2025)",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-09-30",
     "basis": "results for the 12 months to September 2026",
-    "price": 11.99,
+    "price": 11.9,
     "rows": [
      {
       "label": "Market value",
@@ -2828,7 +2828,7 @@
      },
      {
       "label": "P/E",
-      "value": "5.9"
+      "value": "5.8"
      },
      {
       "label": "P/B",
@@ -2983,10 +2983,10 @@
    ],
    "valuation": {
     "source": "Company filing (Arab Finance)",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-09-30",
     "basis": "results for the 12 months to September 2026",
-    "price": 5.25,
+    "price": 5.4,
     "rows": [
      {
       "label": "Market value",
@@ -2994,7 +2994,7 @@
      },
      {
       "label": "P/E",
-      "value": "4.8"
+      "value": "4.9"
      },
      {
       "label": "P/B",
@@ -3013,7 +3013,7 @@
    "cap": {
     "value": 83.9,
     "currency": "EGP",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "TradingView"
    },
    "lastResults": {
@@ -3072,27 +3072,27 @@
    "cap": {
     "value": 725.3,
     "currency": "USD",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "Nasdaq"
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 401.87,
+    "price": 409.4,
     "rows": [
      {
       "label": "Market value",
-      "value": "$737.8bn"
+      "value": "$725.3bn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "30.3"
+      "value": "30.8"
      },
      {
       "label": "Forecast P/E (fiscal 2027)",
-      "value": "26.8"
+      "value": "27.3"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -3134,27 +3134,27 @@
    "cap": {
     "value": 305.9,
     "currency": "USD",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "Nasdaq"
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-08-31",
     "basis": "the four quarters to Aug 2026",
-    "price": 101.19,
+    "price": 113.68,
     "rows": [
      {
       "label": "Market value",
-      "value": "$346.2bn"
+      "value": "$305.9bn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "14.9"
+      "value": "16.7"
      },
      {
       "label": "Forecast P/E (fiscal 2027)",
-      "value": "15.1"
+      "value": "17.0"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -3226,27 +3226,27 @@
    "cap": {
     "value": 488.4,
     "currency": "USD",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "Nasdaq"
    },
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-08-31",
     "basis": "the four quarters to Aug 2026",
-    "price": 1102.15,
+    "price": 1097.91,
     "rows": [
      {
       "label": "Market value",
-      "value": "$483.2bn"
+      "value": "$488.4bn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "53.9"
+      "value": "53.7"
      },
      {
       "label": "Forecast P/E (fiscal 2027)",
-      "value": "48.5"
+      "value": "48.3"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -3291,15 +3291,15 @@
    "cap": {
     "value": 125.8,
     "currency": "EGP",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "TradingView"
    },
    "valuation": {
     "source": "Company filing (Arab Finance (EGX filing); ekhbary24)",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-09-30",
     "basis": "results for the 12 months to September 2026; book value from TradingView, to June 2026",
-    "price": 298.0,
+    "price": 302.0,
     "rows": [
      {
       "label": "Market value",
@@ -3307,11 +3307,11 @@
      },
      {
       "label": "P/E",
-      "value": "6.8"
+      "value": "6.9"
      },
      {
       "label": "P/B",
-      "value": "3.6"
+      "value": "3.7"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -3417,15 +3417,15 @@
    "cap": {
     "value": 17.0,
     "currency": "EGP",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "TradingView"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-03-31",
     "basis": "results for the 12 months to March 2026",
-    "price": 12.5,
+    "price": 12.51,
     "rows": [
      {
       "label": "Market value",
@@ -3508,15 +3508,15 @@
    "cap": {
     "value": 16.6,
     "currency": "EGP",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "TradingView"
    },
    "valuation": {
     "source": "TradingView and Mubasher",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": null,
     "basis": "per-share figures that do not match the price",
-    "price": 14.12,
+    "price": 14.18,
     "rows": [
      {
       "label": "Market value",
@@ -3559,15 +3559,15 @@
    "cap": {
     "value": 44.0,
     "currency": "EGP",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "TradingView"
    },
    "valuation": {
     "source": "TradingView",
-    "asOf": "2026-11-23",
-    "period": "2026-06-30",
-    "basis": "results for the 12 months to June 2026",
-    "price": 20.1,
+    "asOf": "2026-11-24",
+    "period": "2026-09-30",
+    "basis": "results for the 12 months to September 2026",
+    "price": 20.4,
     "rows": [
      {
       "label": "Market value",
@@ -3575,19 +3575,19 @@
      },
      {
       "label": "P/E",
-      "value": "13.4"
+      "value": "12.3"
      },
      {
       "label": "P/B",
-      "value": "7.1"
+      "value": "6.1"
      },
      {
       "label": "Earnings per share (12 months)",
-      "value": "EGP 1.50"
+      "value": "EGP 1.66"
      },
      {
       "label": "Book value per share",
-      "value": "EGP 2.85"
+      "value": "EGP 3.32"
      }
     ]
    },
@@ -3682,22 +3682,22 @@
    "next": [],
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 56.73,
+    "price": 58.1,
     "rows": [
      {
       "label": "Market value",
-      "value": "$236.7bn"
+      "value": "$233.0bn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "19.4"
+      "value": "19.8"
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "15.8"
+      "value": "16.2"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -3716,7 +3716,7 @@
    "cap": {
     "value": 233.0,
     "currency": "USD",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "Nasdaq"
    }
   },
@@ -3757,22 +3757,22 @@
    "next": [],
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 51.28,
+    "price": 59.66,
     "rows": [
      {
       "label": "Market value",
-      "value": "$312.2bn"
+      "value": "$272.6bn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "55.7"
+      "value": "64.8"
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "49.3"
+      "value": "57.4"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -3791,7 +3791,7 @@
    "cap": {
     "value": 272.6,
     "currency": "USD",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "Nasdaq"
    }
   },
@@ -3808,22 +3808,22 @@
    "next": [],
    "valuation": {
     "source": "Nasdaq",
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-24",
     "period": "2026-09-30",
     "basis": "the four quarters to Sep 2026",
-    "price": 1347.11,
+    "price": 1364.6,
     "rows": [
      {
       "label": "Market value",
-      "value": "$1.29tn"
+      "value": "$1.27tn"
      },
      {
       "label": "P/E (last 12 months)",
-      "value": "42.2"
+      "value": "42.7"
      },
      {
       "label": "Forecast P/E (fiscal 2026)",
-      "value": "37.8"
+      "value": "38.3"
      },
      {
       "label": "Earnings per share (12 months)",
@@ -3842,7 +3842,7 @@
    "cap": {
     "value": 1268.8,
     "currency": "USD",
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "source": "Nasdaq"
    }
   }

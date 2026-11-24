@@ -1,57 +1,12 @@
 {
  "note": "The desk's stocks' coming results and dividends, from TradingView (fetch_calendar.py); for the US stocks, declared dividends and stock splits from Polygon. Results dates for Egyptian companies are often TradingView's estimate until the company announces one.",
- "fetched": "2026-11-23",
+ "fetched": "2026-11-24",
  "items": [
   {
    "t": "CLHO",
    "market": "egx",
    "kind": "results",
-   "date": "2026-11-23",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
-  {
-   "t": "EAST",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-11-23",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
-  {
-   "t": "EFID",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-11-23",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
-  {
-   "t": "EFIH",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-11-23",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
-  {
-   "t": "JUFO",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-11-23",
-   "period": "2026-09-30",
-   "time": null,
-   "expected": true
-  },
-  {
-   "t": "PHDC",
-   "market": "egx",
-   "kind": "results",
-   "date": "2026-11-23",
+   "date": "2026-11-24",
    "period": "2026-09-30",
    "time": null,
    "expected": true
@@ -66,6 +21,42 @@
    "cur": "$",
    "declared": "2026-11-10",
    "src": "Polygon"
+  },
+  {
+   "t": "EAST",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-24",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "EFIH",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-24",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "JUFO",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-24",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "PHDC",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-24",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
   },
   {
    "t": "ALCN",
