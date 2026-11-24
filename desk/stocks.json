@@ -731,6 +731,12 @@
    "sector": "Internet",
    "news": [
     {
+     "date": "2026-11-23",
+     "text": "Rose 6.3% to $282.10 in the AI rebound on Huang's return, with no company news.",
+     "source": "TIKR",
+     "url": "https://www.tikr.com/blog/alphabet-soars-6-as-jensen-huangs-return-to-nvidia-reignites-ai-stocks"
+    },
+    {
      "date": "2026-11-19",
      "text": "Fell 3.5% to $272.66 as Anthropic's debut put a fresh value on Google's stake without lifting AI stocks; the S&P 500 fell for a sixth day.",
      "source": "Reuters (via Yahoo Finance)",
@@ -833,6 +839,12 @@
   "AVGO": {
    "sector": "Semiconductors",
    "news": [
+    {
+     "date": "2026-11-23",
+     "text": "Rose 3.0% to $313.55, recovering part of Friday's 12.2% fall on an unconfirmed report that Google cut its 2027 TPU orders.",
+     "source": "MarketBeat",
+     "url": "https://www.marketbeat.com/instant-alerts/price-broadcom-nasdaq-avgo-shares-up-3-should-you-buy-2026-11-23/"
+    },
     {
      "date": "2026-11-20",
      "text": "Fell 12.2% to $304.41 after analyst Ming-Chi Kuo said Google is shifting part of its 2027 TPU orders to MediaTek; neither company confirmed it.",
@@ -1597,7 +1609,15 @@
     "source": "Arab Finance",
     "url": "https://www.arabfinance.com/en/news/newdetails/Cleopatra-Hospital-projects-h1-2026-revenue-to-rise-27-percent",
     "written": "2026-11-21"
-   }
+   },
+   "news": [
+    {
+     "date": "2026-11-18",
+     "text": "Said it will file its third-quarter statements later than scheduled, without giving a new date.",
+     "source": "ad-hoc-news (Sigma Capital)",
+     "url": "https://www.ad-hoc-news.de/boerse/news/nebenwerte/cleopatra-hospitals-stock-flags-delay-in-financial-statements/70544940"
+    }
+   ]
   },
   "JUFO": {
    "sector": "Food",
@@ -1941,6 +1961,18 @@
    },
    "news": [
     {
+     "date": "2026-11-23",
+     "text": "The board reinstated Jensen Huang as chief executive, 11 days after his ouster; the stock rose 31.5% to $165.05, its biggest daily gain since 2003.",
+     "source": "MLQ.ai",
+     "url": "https://mlq.ai/news/nasdaq-jumps-65-in-its-best-day-since-april-2025-as-nvidia-soars-31-on-huangs-return/"
+    },
+    {
+     "date": "2026-11-23",
+     "text": "The Commerce Department added Megaspeed International, the Singapore firm at the center of the chip-smuggling case, to its entity list.",
+     "source": "Semafor",
+     "url": "https://www.semafor.com/article/11/23/2026/commerce-to-add-megaspeed-to-trade-blacklist"
+    },
+    {
      "date": "2026-11-21",
      "text": "The New York Times reported the SEC's confidential inquiry into its accounting is at an early stage; the stock lost more than 20% on the week.",
      "source": "Yahoo Finance (AFP)",
@@ -2103,6 +2135,12 @@
    },
    "news": [
     {
+     "date": "2026-11-23",
+     "text": "Agreed to buy Decart's AI optimization software and hire its founders, for about $7.5bn according to Bloomberg, to support its Trainium chips.",
+     "source": "GeekWire",
+     "url": "https://www.geekwire.com/2026/amazon-is-buying-decarts-ai-chip-software-for-a-reported-7-5b-and-bringing-its-founders-aboard/"
+    },
+    {
      "date": "2026-11-20",
      "text": "Fell 4.1% to $246.82 as the Nasdaq lost 5.28% and erased its gain for the year.",
      "source": "CNN",
@@ -2177,6 +2215,12 @@
    },
    "news": [
     {
+     "date": "2026-11-23",
+     "text": "Paused its planned non-voting Class C shares while a Delaware suit proceeds, with trial set for April 19, 2027, delaying a $60bn share sale meant to fund AI spending.",
+     "source": "TradingView (8-K)",
+     "url": "https://www.tradingview.com/news/tradingview:c3ba9d2fb719a:0-meta-platforms-pauses-class-c-share-issuance-amid-delaware-litigation/"
+    },
+    {
      "date": "2026-11-20",
      "text": "Fell 5.9% to $560.84 in the tech selloff.",
      "source": "MarketBeat",
@@ -2250,6 +2294,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-23",
+     "text": "Rose 11.5% to $385.46 after the FT reported Tesla and SpaceX each named five directors to negotiate a merger; neither company has given terms.",
+     "source": "MarketScreener (FT)",
+     "url": "https://www.marketscreener.com/news/spacex-and-tesla-entrusts-five-directors-for-merger-talks-ft-reports-ce7851dad189f326"
+    },
     {
      "date": "2026-11-20",
      "text": "Fell 7.6% to $345.82 as Tesla and SpaceX set up board committees to explore a possible combination; no deal, price or structure is agreed.",
@@ -3172,6 +3222,12 @@
    },
    "news": [
     {
+     "date": "2026-11-23",
+     "text": "Rose 12.3% to $113.68 after saying its roughly $300bn OpenAI contract is fully funded following a $20bn raise.",
+     "source": "MarketBeat",
+     "url": "https://www.marketbeat.com/instant-alerts/price-oracle-nyse-orcl-shares-up-126-heres-what-happened-2026-11-23/"
+    },
+    {
      "date": "2026-11-20",
      "text": "Fell 8.5% to $101.19, a 52-week low, though it said its OpenAI infrastructure contract is fully funded after a final $20bn raise.",
      "source": "ad-hoc-news",
@@ -3723,6 +3779,12 @@
   "INTC": {
    "sector": "Semiconductors",
    "news": [
+    {
+     "date": "2026-11-23",
+     "text": "Rose 16.3% to $59.66 in the chip rally, after saying on November 18 it had signed its first external customer for its 18A process.",
+     "source": "MarketBeat",
+     "url": "https://www.marketbeat.com/instant-alerts/price-intel-nasdaq-intc-shares-climb-163-heres-why-2026-11-23/"
+    },
     {
      "date": "2026-11-20",
      "text": "Fell 8.0% to $51.28 in the AI chip selloff; no company news.",

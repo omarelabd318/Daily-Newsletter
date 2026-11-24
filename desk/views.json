@@ -594,6 +594,13 @@
      "source": "Yahoo Finance",
      "url": "https://finance.yahoo.com/markets/stocks/articles/nvidia-stock-plunge-wipes-nearly-212722915.html",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-24",
+     "text": "Nvidia's reinstatement of Jensen Huang set off the best day for US stocks since April 2025: Alphabet rose 6.3% to $282.10, almost back to the view's start, while Walmart rose 1.3% to $129.58.",
+     "source": "MLQ.ai",
+     "url": "https://mlq.ai/news/nasdaq-jumps-65-in-its-best-day-since-april-2025-as-nvidia-soars-31-on-huangs-return/",
+     "effect": "against"
     }
    ],
    "driver": "ai-spending"

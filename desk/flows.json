@@ -408,6 +408,30 @@
     }
    ],
    "note": "Foreigners' net buying of EGP 158.3m agrees at Arab Finance and Osoul Misr (EGP 170.1m by institutions less EGP 11.8m by individuals); the split between Egyptians and Arabs differs by outlet, so the rows are Arab Finance's. Local institutions led the selling."
+  },
+  {
+   "date": "2026-11-23",
+   "confirmed": false,
+   "rows": {
+    "Egyptian investors": -0.1047,
+    "Arab investors": 0.0526,
+    "Foreign investors": 0.052
+   },
+   "sources": [
+    "Youlyou"
+   ],
+   "turnover": 7.56,
+   "links": [
+    {
+     "source": "Youlyou",
+     "url": "https://www.youlyou.com/101080"
+    },
+    {
+     "source": "Osoul Misr",
+     "url": "https://www.osoulmisrmagazine.com/453285"
+    }
+   ],
+   "note": "Youlyou gives Arabs and foreigners as net buyers of about EGP 52m each and Egyptians as net sellers of EGP 104.7m; Youm7 and Osoul Misr agree on the direction, but Masrawy gives the signs reversed, so the rows are unconfirmed."
   }
  ]
 }
