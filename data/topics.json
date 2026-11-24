@@ -14,8 +14,8 @@
    "drivers": [
     "oil"
    ],
-   "now": "Iranian strikes on Bahrain injured two people on November 21-22, one critically, and Manama demanded reparations, while the Houthis claimed a hit on Saudi Arabia's Rabigh refinery on November 22 with no Saudi confirmation. Trump said he is inclined to strike Iran next year if there is no deal, and US-Iran talks remain stalled.",
-   "now_date": "2026-11-23"
+   "now": "Attacks on shipping in and around Hormuz are at their highest since the war began, with 31 in October and about 19 so far in November by UKMTO's count, as the US blockade of Iran continues. Air raids on Houthi-held Hodeidah killed at least eight people on November 23, by Houthi-side counts.",
+   "now_date": "2026-11-24"
   },
   {
    "id": "pound-cbe",
@@ -30,8 +30,8 @@
    "drivers": [
     "egp-rates"
    ],
-   "now": "The central bank's dollar selling rate rose 63 piastres to 54.50 by the morning of November 23, from 53.87 at the November 19 close, as a global sell-off hit Egyptian assets; the EGX30 fell 2.85% to 49,989.80 on November 22. Overnight rates stand at 20% and 21%, and the next rate meeting is December 17.",
-   "now_date": "2026-11-23"
+   "now": "The central bank's dollar rate held at EGP 54.30 buy and 54.44 sell on the morning of November 24, unchanged from the November 23 close, keeping the pound within about 2% of its strongest level in a year. The EGX30 rebounded 1.44% to 50,711.96 on November 23; overnight rates stand at 20% and 21%, and the next rate meeting is December 17.",
+   "now_date": "2026-11-24"
   },
   {
    "id": "ai-chips",
@@ -46,8 +46,8 @@
    "drivers": [
     "ai-spending"
    ],
-   "now": "Wall Street had its worst week since 2020 to November 20, with the S&P 500 down 3.70% to 6,910.39 that day and Nvidia down 14% to $125.53, a 52-week low, after founder Jensen Huang's resignation and questions over its accounting and China chip sales. Asian markets fell again on November 23, while US futures rebounded about 3%; Nvidia's board is searching for a new chief executive.",
-   "now_date": "2026-11-23"
+   "now": "Nvidia's board reinstated Jensen Huang as chief executive on November 23, 11 days after his ouster, after President Trump said he brokered the deal; the stock jumped 31.5% to $165.05 and the Nasdaq rose 6.51%, its best day since April 2025. The same day the Commerce Department added Megaspeed, the firm at the center of the chip-smuggling scandal, to its entity list.",
+   "now_date": "2026-11-24"
   },
   {
    "id": "us-midterms",
@@ -112,8 +112,8 @@
    "match": "\\b(Gaza|Hamas|Hezbollah|Lebanon|Lebanese)\\b",
    "related": [],
    "drivers": [],
-   "now": "An Israeli strike on a food-aid van in Gaza City killed at least three people on November 21, among at least four Palestinians killed that day despite the October 2025 ceasefire. Israeli tanks had crossed the yellow line into central Gaza on November 18, the first ground operation past it since the truce.",
-   "now_date": "2026-11-22"
+   "now": "Israeli strikes killed at least three people in Gaza on November 23, including UNRWA worker Adel al-Helo in Jabalia, more than a year into the October 2025 ceasefire.",
+   "now_date": "2026-11-24"
   },
   {
    "id": "oil",
@@ -128,8 +128,8 @@
    "drivers": [
     "oil"
    ],
-   "now": "Brent settled at $92.57 a barrel on November 20, up 0.64% on the day but down about 3.4% on the week, its third weekly fall, as exports through Hormuz recovered.",
-   "now_date": "2026-11-21"
+   "now": "Brent settled at $89.37 a barrel on November 23, down 3.46% and its lowest since August 28, as Libya reopened its Sharara pipeline and Trump signaled talks with Iran. Iraq is weighing supplying Egypt with about 10 million barrels of crude, including by routes that avoid Hormuz, with no volume or price agreed.",
+   "now_date": "2026-11-24"
   },
   {
    "id": "saudi-deployment",
@@ -144,13 +144,93 @@
    "id": "misr-life",
    "name": "Misr Life Insurance listing",
    "match": "Misr Life",
-   "now": "Misr Life Insurance plans to sell 750 million existing shares, 15% of its capital, on the EGX in December, with all proceeds going to the state. A government committee valued it at about EGP 69.1 billion, or EGP 13.82 a share, an unnamed official told Asharq Business; prospectus approval is expected in the week of November 23.",
-   "now_date": "2026-11-23",
+   "now": "Misr Life Insurance opened its IPO books on November 24 at EGP 12.00-13.60 a share for 750 million shares, 15% of the company, raising EGP 9.0-10.2 billion for the state; the whole range is below BDO's EGP 13.82 fair value. Institutions bid until November 27, the public until November 30, and trading is expected around December 3.",
+   "now_date": "2026-11-24",
    "related": [],
    "drivers": []
   }
  ],
  "stories": [
+  {
+   "ed": "2026-11-24",
+   "id": "story-unrwa-worker-killed-in-gaza",
+   "lead": "UNRWA worker killed in Gaza",
+   "sec": "Regional and Gulf",
+   "text": "Israeli strikes killed at least three people in Gaza on Monday, including UNRWA staff member Adel al-Helo, who was working near a well in the Jabalia camp, the agency and medics said, according to Al Jazeera and Middle East Monitor. Three…",
+   "topics": [
+    "gaza-lebanon"
+   ]
+  },
+  {
+   "ed": "2026-11-24",
+   "id": "story-pound-steady",
+   "lead": "Pound steady",
+   "sec": "Markets",
+   "text": "The central bank's dollar rate held at EGP 54.30 buy and 54.44 sell on Tuesday morning, unchanged from Monday's close, Youm7 and Al Masdar reported, calming the jump seen on Sunday. The pound remains within about 2% of its strongest level…",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-11-24",
+   "id": "story-nvidia-rally",
+   "lead": "Nvidia rally",
+   "sec": "Markets",
+   "text": "Wall Street had its best day since April 2025 on Monday after Nvidia's board reinstated Jensen Huang as chief executive. The S&P 500 rose 4.73% to 7,237.17, the Nasdaq 6.51% to 24,089.56 and the Dow Jones 3.01% to 49,595.31. Nvidia jumped…",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-11-24",
+   "id": "story-misr-life-ipo",
+   "lead": "Misr Life IPO",
+   "sec": "Markets",
+   "text": "Misr Life Insurance opens its order books on Tuesday at EGP 12.00 to 13.60 a share, for 750 million existing shares, 15% of the state insurer, which would raise EGP 9.0 to 10.2 billion, all for the state, and value the company at EGP 60 to…",
+   "topics": [
+    "misr-life"
+   ]
+  },
+  {
+   "ed": "2026-11-24",
+   "id": "story-megaspeed-blacklisted",
+   "lead": "Megaspeed blacklisted",
+   "sec": "Top World Headlines",
+   "text": "The US Commerce Department on Monday added Megaspeed International, the Singapore-based firm at the center of the Nvidia chip-smuggling scandal, to its entity list, barring it from US semiconductors and other technology without a license,…",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-11-24",
+   "id": "story-huang-back-at-nvidia",
+   "lead": "Huang back at Nvidia",
+   "sec": "In Other News",
+   "text": "Nvidia's board reinstated Jensen Huang as chief executive on Monday, 11 days after his ouster and days after rejecting his offer to return. President Trump said \"I made the deal,\" claiming he convinced the board, according to ABC News.…",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-11-24",
+   "id": "story-hormuz-attacks-at-a-high",
+   "lead": "Hormuz attacks at a high",
+   "sec": "Regional and Gulf",
+   "text": "Attacks on shipping in and around the Strait of Hormuz have reached their highest level since the Iran war began in late February, with the UK Maritime Trade Operations center recording 31 in October and about 19 so far in November, ABC…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-24",
+   "id": "story-egypt-and-iraq",
+   "lead": "Egypt and Iraq",
+   "sec": "Egypt News",
+   "text": "Egypt and Iraq agreed on Monday to lift entry visas between the two countries, Iraqi Prime Minister Ali al-Zaidi announced after talks with President Abdel Fattah El-Sisi on his first official visit to Cairo. Iraq is also weighing…",
+   "topics": [
+    "oil"
+   ]
+  },
   {
    "ed": "2026-11-23",
    "id": "story-treasury-bills",
