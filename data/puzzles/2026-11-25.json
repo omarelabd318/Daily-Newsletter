@@ -1,0 +1,601 @@
+{
+ "date": "2026-11-25",
+ "no": 14,
+ "crossword": {
+  "size": 11,
+  "grid": [
+   "##DAD##BALI",
+   "#MENU#SONIC",
+   "MOVIE#MONTE",
+   "ATOM#VET###",
+   "LITERAL#MAR",
+   "EVE#ILL#AGE",
+   "SEE#DESIRES",
+   "###PIT#MINT",
+   "ACTIN#RANTS",
+   "CHANG#AGES#",
+   "TABS##PER##"
+  ],
+  "clues": {
+   "across": [
+    {
+     "n": 1,
+     "row": 0,
+     "col": 2,
+     "len": 3,
+     "answer": "DAD",
+     "clue": "Father figure with questionable jokes"
+    },
+    {
+     "n": 4,
+     "row": 0,
+     "col": 7,
+     "len": 4,
+     "answer": "BALI",
+     "clue": "Indonesian island of rice terraces and surf"
+    },
+    {
+     "n": 8,
+     "row": 1,
+     "col": 1,
+     "len": 4,
+     "answer": "MENU",
+     "clue": "What a diner studies before ordering"
+    },
+    {
+     "n": 9,
+     "row": 1,
+     "col": 6,
+     "len": 5,
+     "answer": "SONIC",
+     "clue": "Of sound; also a blue hedgehog's surname-like adjective"
+    },
+    {
+     "n": 10,
+     "row": 2,
+     "col": 0,
+     "len": 5,
+     "answer": "MOVIE",
+     "clue": "Popcorn-friendly night out"
+    },
+    {
+     "n": 11,
+     "row": 2,
+     "col": 6,
+     "len": 5,
+     "answer": "MONTE",
+     "clue": "___ Carlo, home of a famous casino"
+    },
+    {
+     "n": 12,
+     "row": 3,
+     "col": 0,
+     "len": 4,
+     "answer": "ATOM",
+     "clue": "Smallest unit of an element"
+    },
+    {
+     "n": 13,
+     "row": 3,
+     "col": 5,
+     "len": 3,
+     "answer": "VET",
+     "clue": "Animal doctor, for short"
+    },
+    {
+     "n": 14,
+     "row": 4,
+     "col": 0,
+     "len": 7,
+     "answer": "LITERAL",
+     "clue": "Taking every word at face value"
+    },
+    {
+     "n": 16,
+     "row": 4,
+     "col": 8,
+     "len": 3,
+     "answer": "MAR",
+     "clue": "Spoil, as a drone strike did to Riyadh's tallest tower on Tuesday"
+    },
+    {
+     "n": 19,
+     "row": 5,
+     "col": 0,
+     "len": 3,
+     "answer": "EVE",
+     "clue": "Night before a holiday"
+    },
+    {
+     "n": 20,
+     "row": 5,
+     "col": 4,
+     "len": 3,
+     "answer": "ILL",
+     "clue": "Under the weather"
+    },
+    {
+     "n": 21,
+     "row": 5,
+     "col": 8,
+     "len": 3,
+     "answer": "AGE",
+     "clue": "Number on a birthday cake"
+    },
+    {
+     "n": 22,
+     "row": 6,
+     "col": 0,
+     "len": 3,
+     "answer": "SEE",
+     "clue": "Look at, or understand"
+    },
+    {
+     "n": 23,
+     "row": 6,
+     "col": 4,
+     "len": 7,
+     "answer": "DESIRES",
+     "clue": "Longings"
+    },
+    {
+     "n": 25,
+     "row": 7,
+     "col": 3,
+     "len": 3,
+     "answer": "PIT",
+     "clue": "Orchestra's sunken home"
+    },
+    {
+     "n": 26,
+     "row": 7,
+     "col": 7,
+     "len": 4,
+     "answer": "MINT",
+     "clue": "Leaf in a mojito, or where coins are made"
+    },
+    {
+     "n": 27,
+     "row": 8,
+     "col": 0,
+     "len": 5,
+     "answer": "ACTIN",
+     "clue": "Muscle protein that pairs with myosin"
+    },
+    {
+     "n": 30,
+     "row": 8,
+     "col": 6,
+     "len": 5,
+     "answer": "RANTS",
+     "clue": "Angry tirades"
+    },
+    {
+     "n": 31,
+     "row": 9,
+     "col": 0,
+     "len": 5,
+     "answer": "CHANG",
+     "clue": "Thai beer brand with an elephant on the label"
+    },
+    {
+     "n": 32,
+     "row": 9,
+     "col": 6,
+     "len": 4,
+     "answer": "AGES",
+     "clue": "A very long time"
+    },
+    {
+     "n": 33,
+     "row": 10,
+     "col": 0,
+     "len": 4,
+     "answer": "TABS",
+     "clue": "Browser's row of open pages"
+    },
+    {
+     "n": 34,
+     "row": 10,
+     "col": 6,
+     "len": 3,
+     "answer": "PER",
+     "clue": "Each, in a recipe ratio"
+    }
+   ],
+   "down": [
+    {
+     "n": 1,
+     "row": 0,
+     "col": 2,
+     "len": 7,
+     "answer": "DEVOTEE",
+     "clue": "Ardent fan"
+    },
+    {
+     "n": 2,
+     "row": 0,
+     "col": 3,
+     "len": 5,
+     "answer": "ANIME",
+     "clue": "Japanese animation"
+    },
+    {
+     "n": 3,
+     "row": 0,
+     "col": 4,
+     "len": 3,
+     "answer": "DUE",
+     "clue": "Owed, as a bill"
+    },
+    {
+     "n": 4,
+     "row": 0,
+     "col": 7,
+     "len": 4,
+     "answer": "BOOT",
+     "clue": "Trunk of a British car"
+    },
+    {
+     "n": 5,
+     "row": 0,
+     "col": 8,
+     "len": 3,
+     "answer": "ANN",
+     "clue": "___ Arbor, Michigan college town"
+    },
+    {
+     "n": 6,
+     "row": 0,
+     "col": 9,
+     "len": 3,
+     "answer": "LIT",
+     "clue": "Set alight"
+    },
+    {
+     "n": 7,
+     "row": 0,
+     "col": 10,
+     "len": 3,
+     "answer": "ICE",
+     "clue": "Skater's surface"
+    },
+    {
+     "n": 8,
+     "row": 1,
+     "col": 1,
+     "len": 6,
+     "answer": "MOTIVE",
+     "clue": "Detective's question after means and opportunity"
+    },
+    {
+     "n": 9,
+     "row": 1,
+     "col": 6,
+     "len": 6,
+     "answer": "SMELLS",
+     "clue": "Notices with the nose"
+    },
+    {
+     "n": 10,
+     "row": 2,
+     "col": 0,
+     "len": 5,
+     "answer": "MALES",
+     "clue": "Stags and bulls"
+    },
+    {
+     "n": 13,
+     "row": 3,
+     "col": 5,
+     "len": 5,
+     "answer": "VALET",
+     "clue": "Parks your car for a tip"
+    },
+    {
+     "n": 15,
+     "row": 4,
+     "col": 4,
+     "len": 6,
+     "answer": "RIDING",
+     "clue": "Sitting on a horse or bike"
+    },
+    {
+     "n": 16,
+     "row": 4,
+     "col": 8,
+     "len": 7,
+     "answer": "MARINER",
+     "clue": "Ancient one in Coleridge's poem"
+    },
+    {
+     "n": 17,
+     "row": 4,
+     "col": 9,
+     "len": 6,
+     "answer": "AGENTS",
+     "clue": "Spies, or talent representatives"
+    },
+    {
+     "n": 18,
+     "row": 4,
+     "col": 10,
+     "len": 5,
+     "answer": "RESTS",
+     "clue": "Short breaks"
+    },
+    {
+     "n": 24,
+     "row": 6,
+     "col": 7,
+     "len": 5,
+     "answer": "IMAGE",
+     "clue": "Picture, or public persona"
+    },
+    {
+     "n": 25,
+     "row": 7,
+     "col": 3,
+     "len": 4,
+     "answer": "PINS",
+     "clue": "Bowling targets"
+    },
+    {
+     "n": 27,
+     "row": 8,
+     "col": 0,
+     "len": 3,
+     "answer": "ACT",
+     "clue": "Part of a play"
+    },
+    {
+     "n": 28,
+     "row": 8,
+     "col": 1,
+     "len": 3,
+     "answer": "CHA",
+     "clue": "Chinese word for tea"
+    },
+    {
+     "n": 29,
+     "row": 8,
+     "col": 2,
+     "len": 3,
+     "answer": "TAB",
+     "clue": "Bar bill to run up"
+    },
+    {
+     "n": 30,
+     "row": 8,
+     "col": 6,
+     "len": 3,
+     "answer": "RAP",
+     "clue": "Hip-hop vocal style"
+    }
+   ]
+  },
+  "news": []
+ },
+ "killer": {
+  "level": 3,
+  "solution": "842513769571896342963742815437685921256139487198274536315467298629358174784921653",
+  "cages": [
+   {
+    "sum": 25,
+    "cells": [
+     26,
+     33,
+     34,
+     35,
+     43
+    ]
+   },
+   {
+    "sum": 29,
+    "cells": [
+     18,
+     19,
+     27,
+     28,
+     29
+    ]
+   },
+   {
+    "sum": 23,
+    "cells": [
+     40,
+     41,
+     42,
+     49
+    ]
+   },
+   {
+    "sum": 12,
+    "cells": [
+     75,
+     76,
+     77
+    ]
+   },
+   {
+    "sum": 12,
+    "cells": [
+     62,
+     71
+    ]
+   },
+   {
+    "sum": 7,
+    "cells": [
+     39,
+     48,
+     57
+    ]
+   },
+   {
+    "sum": 24,
+    "cells": [
+     50,
+     51,
+     58,
+     59,
+     60
+    ]
+   },
+   {
+    "sum": 21,
+    "cells": [
+     6,
+     15,
+     23,
+     24,
+     25
+    ]
+   },
+   {
+    "sum": 10,
+    "cells": [
+     45,
+     46
+    ]
+   },
+   {
+    "sum": 6,
+    "cells": [
+     54,
+     55,
+     64
+    ]
+   },
+   {
+    "sum": 6,
+    "cells": [
+     16,
+     17
+    ]
+   },
+   {
+    "sum": 21,
+    "cells": [
+     70,
+     78,
+     79,
+     80
+    ]
+   },
+   {
+    "sum": 21,
+    "cells": [
+     65,
+     73,
+     74
+    ]
+   },
+   {
+    "sum": 13,
+    "cells": [
+     63,
+     72
+    ]
+   },
+   {
+    "sum": 17,
+    "cells": [
+     22,
+     31,
+     32
+    ]
+   },
+   {
+    "sum": 13,
+    "cells": [
+     47,
+     56
+    ]
+   },
+   {
+    "sum": 24,
+    "cells": [
+     0,
+     1,
+     9,
+     10
+    ]
+   },
+   {
+    "sum": 17,
+    "cells": [
+     11,
+     20,
+     21,
+     30
+    ]
+   },
+   {
+    "sum": 16,
+    "cells": [
+     44,
+     52,
+     53
+    ]
+   },
+   {
+    "sum": 15,
+    "cells": [
+     3,
+     4,
+     5,
+     14
+    ]
+   },
+   {
+    "sum": 15,
+    "cells": [
+     7,
+     8
+    ]
+   },
+   {
+    "sum": 8,
+    "cells": [
+     66,
+     67
+    ]
+   },
+   {
+    "sum": 13,
+    "cells": [
+     36,
+     37,
+     38
+    ]
+   },
+   {
+    "sum": 9,
+    "cells": [
+     61
+    ]
+   },
+   {
+    "sum": 9,
+    "cells": [
+     68,
+     69
+    ]
+   },
+   {
+    "sum": 2,
+    "cells": [
+     2
+    ]
+   },
+   {
+    "sum": 17,
+    "cells": [
+     12,
+     13
+    ]
+   }
+  ]
+ }
+}
