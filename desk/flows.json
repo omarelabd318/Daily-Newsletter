@@ -432,6 +432,31 @@
     }
    ],
    "note": "Youlyou gives Arabs and foreigners as net buyers of about EGP 52m each and Egyptians as net sellers of EGP 104.7m; Youm7 and Osoul Misr agree on the direction, but Masrawy gives the signs reversed, so the rows are unconfirmed."
+  },
+  {
+   "date": "2026-11-24",
+   "confirmed": true,
+   "rows": {
+    "Egyptian investors": 0.1266,
+    "Arab investors": 0.0371,
+    "Foreign investors": -0.1637
+   },
+   "sources": [
+    "Youm7",
+    "Masrawy"
+   ],
+   "turnover": 8.8,
+   "links": [
+    {
+     "source": "Youm7",
+     "url": "https://www.youm7.com/story/2026/11/24/أخبار-البورصة-اليوم-الثلاثاء-24-11-2026/7631231"
+    },
+    {
+     "source": "Masrawy",
+     "url": "https://www.masrawy.com/news/news_economy/details/2026/11/24/3083828/"
+    }
+   ],
+   "note": "Youm7 also gives the split (one report): Egyptian institutions +EGP 167m, individuals -40.4m; Arab institutions +52.4m, individuals -15.3m; foreign institutions -161.5m, individuals -2.2m. Foreigners were 7.95% of trading, Arabs 2.3%."
   }
  ]
 }

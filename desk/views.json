@@ -601,6 +601,13 @@
      "source": "MLQ.ai",
      "url": "https://mlq.ai/news/nasdaq-jumps-65-in-its-best-day-since-april-2025-as-nvidia-soars-31-on-huangs-return/",
      "effect": "against"
+    },
+    {
+     "date": "2026-11-24",
+     "text": "Dollar Tree's 4.6% comparable-sales rise and higher outlook lifted it 11.2%, and Walmart rose 2.1% to $132.31 as Alphabet fell 1.1% with AI credit swaps at records.",
+     "source": "Trefis",
+     "url": "https://www.trefis.com/stock/dltr/articles/628749/why-dollar-tree-stock-jumped-despite-a-margin-slip/2026-11-25",
+     "effect": "supports"
     }
    ],
    "driver": "ai-spending"
@@ -1041,6 +1048,13 @@
      "source": "Manassa",
      "url": "https://manassa.news/en/news/35074",
      "effect": "against"
+    },
+    {
+     "date": "2026-11-25",
+     "text": "Suez Canal revenue doubled to $593m in November's first 24 days, and the central bank's rate eased to 54.31 on Wednesday morning.",
+     "source": "Business Today Egypt",
+     "url": "https://www.businesstodayegypt.com/Article/1/8127/Suez-Canal-revenues-surge-101-2-to-593M-since-start",
+     "effect": "supports"
     }
    ],
    "wrongIf": [

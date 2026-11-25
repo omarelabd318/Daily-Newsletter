@@ -840,6 +840,12 @@
    "sector": "Semiconductors",
    "news": [
     {
+     "date": "2026-11-24",
+     "text": "Fell 4.0% to $301.08 with the chip selloff, more than 37% below its June high; no company news.",
+     "source": "Yahoo Finance",
+     "url": "https://finance.yahoo.com/markets/article/nvidia-amd-broadcom-lead-chip-stocks-lower-as-ai-trade-comes-under-pressure-141635463.html"
+    },
+    {
      "date": "2026-11-23",
      "text": "Rose 3.0% to $313.55, recovering part of Friday's 12.2% fall on an unconfirmed report that Google cut its 2027 TPU orders.",
      "source": "MarketBeat",
@@ -1207,6 +1213,12 @@
    },
    "news": [
     {
+     "date": "2026-11-25",
+     "text": "Completed its purchase of OCI Rembrandt Holdings from OCI N.V., issuing 97,201,359 new shares and lifting its share count to 207,445,294; the shares go to OCI's eligible holders by December 8.",
+     "source": "Al Mal",
+     "url": "https://almalnews.com/2149532/أوراسكوم-كونستراكشون-تتم-الاستحواذ-على-أصول-والتزامات/"
+    },
+    {
      "date": "2026-11-22",
      "text": "Filed to list 97.2m new shares from the OCI N.V. swap, raising paid-in capital to $207.44m from $110.24m at 0.46 Orascom share per OCI share; the listing is targeted for November 24.",
      "source": "Youlyou",
@@ -1263,10 +1275,10 @@
    ],
    "next": [
     {
-     "event": "New OCI shares list on the EGX and ADX (target)",
-     "when": "Tue, Nov 24",
-     "date": "2026-11-24",
-     "why": "97.2 million new shares; crediting to OCI holders from about December 8.",
+     "event": "New shares credited to OCI's eligible holders",
+     "when": "By Tue, Dec 8",
+     "date": "2026-12-08",
+     "why": "97.2 million new shares, nearly doubling the count to 207.4 million; some new holders may sell.",
      "impact": "medium"
     }
    ],
@@ -1598,7 +1610,7 @@
     "change": "Results on November 16: profit growth well above 30% would support the multiple."
    },
    "preview": {
-    "date": "2026-11-23",
+    "date": "2026-12-02",
     "period": "Third quarter 2026",
     "watch": [
      "Revenue growth against the 27% the company guided for the first half (from EGP 3.382bn a year earlier) and 31% for the second quarter.",
@@ -1657,6 +1669,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-24",
+     "text": "Told traders it raises prices on several dairy products from Sunday, the 1-liter full-cream pack to EGP 57 for shoppers, a food-industry division member said; confirmed by Al Mostaqbal.",
+     "source": "Al Mal",
+     "url": "https://almalnews.com/2149368/زيادة-جديدة-في-أسعار-ألبان-جهينة-ارتفاع/"
+    },
     {
      "date": "2026-11-12",
      "text": "On its call: third-quarter revenue up 25% to EGP 10bn, net profit up 33% to EGP 654m after a EGP 107m currency loss; the fourth quarter is guided at the same pace. The stock fell 2.3% to EGP 24.13.",
@@ -1960,6 +1978,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-24",
+     "text": "Fell 5.9% to $155.38 after Monday's 31.5% surge on Jensen Huang's return, and lost about 2% more overnight.",
+     "source": "Yahoo Finance",
+     "url": "https://finance.yahoo.com/markets/article/nvidia-amd-broadcom-lead-chip-stocks-lower-as-ai-trade-comes-under-pressure-141635463.html"
+    },
     {
      "date": "2026-11-23",
      "text": "The board reinstated Jensen Huang as chief executive, 11 days after his ouster; the stock rose 31.5% to $165.05, its biggest daily gain since 2003.",
@@ -3222,6 +3246,12 @@
    },
    "news": [
     {
+     "date": "2026-11-24",
+     "text": "Fell 3.7% to $109.50 as its five-year credit default swaps hit a record, along with Alphabet's and CoreWeave's, on S&P Global figures reported by Reuters.",
+     "source": "Stocktwits (via TradingView)",
+     "url": "https://www.tradingview.com/news/stocktwits:49038ad8f094b:0-ai-concerns-resurface-orcl-googl-spcx-crwv-credit-default-swap-spreads-hit-records-as-nvda-ant-tumble/"
+    },
+    {
      "date": "2026-11-23",
      "text": "Rose 12.3% to $113.68 after saying its roughly $300bn OpenAI contract is fully funded following a $20bn raise.",
      "source": "MarketBeat",
@@ -3334,10 +3364,10 @@
    ],
    "next": [
     {
-     "event": "$30 special dividend: record date",
-     "when": "Tue, Nov 24",
-     "date": "2026-11-24",
-     "why": "About $13.3bn paid December 4; the stock trades without it from about the record date.",
+     "event": "$30 special dividend paid",
+     "when": "Fri, Dec 4",
+     "date": "2026-12-04",
+     "why": "About $13.3bn paid; the stock already trades without it.",
      "impact": "low"
     }
    ]
@@ -3780,6 +3810,12 @@
    "sector": "Semiconductors",
    "news": [
     {
+     "date": "2026-11-24",
+     "text": "Fell 8.1% to $54.80, giving back half of Monday's 16.3% jump as chip stocks sold off; no company news behind the move.",
+     "source": "Motley Fool",
+     "url": "https://www.fool.com/investing/2026/11/24/why-intel-stock-fell-today/"
+    },
+    {
      "date": "2026-11-23",
      "text": "Rose 16.3% to $59.66 in the chip rally, after saying on November 18 it had signed its first external customer for its 18A process.",
      "source": "MarketBeat",
@@ -3860,6 +3896,12 @@
   "LLY": {
    "sector": "Pharmaceuticals",
    "news": [
+    {
+     "date": "2026-11-24",
+     "text": "Rose 3.2% to $1,407.59 as Moody's raised its senior unsecured and issuer ratings to Aa2 from Aa3, citing its metabolic drug franchise (one report).",
+     "source": "BigGo Finance",
+     "url": "https://finance.biggo.com/news/685c9f61-b9d8-4ef7-9746-5eec8fe868f4"
+    },
     {
      "date": "2026-11-12",
      "text": "China approved its weight-loss pill orforglipron.",
