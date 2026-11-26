@@ -457,6 +457,31 @@
     }
    ],
    "note": "Youm7 also gives the split (one report): Egyptian institutions +EGP 167m, individuals -40.4m; Arab institutions +52.4m, individuals -15.3m; foreign institutions -161.5m, individuals -2.2m. Foreigners were 7.95% of trading, Arabs 2.3%."
+  },
+  {
+   "date": "2026-11-25",
+   "confirmed": true,
+   "rows": {
+    "Egyptian investors": -0.1586,
+    "Arab investors": 0.0369,
+    "Foreign investors": 0.122
+   },
+   "sources": [
+    "Al-Raees",
+    "Youm7"
+   ],
+   "turnover": 6.2,
+   "links": [
+    {
+     "source": "Al-Raees",
+     "url": "https://www.alraeesnews.com/348724"
+    },
+    {
+     "source": "Youm7",
+     "url": "https://www.youm7.com/story/2026/11/25/أسعار-الأسهم-بالبورصة-المصرية-اليوم-الأربعاء-25-11-2026/7632325"
+    }
+   ],
+   "note": "By group: Egyptian institutions -EGP 162.5m, individuals +3.9m; Arab institutions -3.4m, individuals +40.3m; foreign institutions +140.3m, individuals -18.3m. Egyptians were 89.6% of trading, foreigners 7.48%, Arabs 2.93%."
   }
  ]
 }

@@ -2,6 +2,34 @@
  "note": "Every view and projection the Markets Desk has made, newest first, with the news that bears on each, until it is right, wrong or closed. Never delete an entry: a wrong call stays on the record, marked wrong.",
  "views": [
   {
+   "id": "2026-11-26-dollar-below-56-50",
+   "opened": "2026-11-26",
+   "market": "egp",
+   "kind": "view",
+   "title": "The dollar stays below EGP 56.50 through the central bank's December 17 meeting",
+   "confidence": "medium",
+   "detail": "Foreigners sold $663m of Egyptian debt on November 24 and 25 and the pound slipped to 54.76, but the IMF staff deal on the final review (about $2.3bn on board approval before December 15), Suez revenue at double last year's and record remittances should cap the dollar. The risk is a Fed that hikes on December 9 and signals more.",
+   "wrong": "The central bank's dollar rate closes above EGP 56.50 before December 17, or the IMF board delays the review.",
+   "due": "2026-12-17",
+   "track": {
+    "key": "usd_egp",
+    "label": "USD/EGP",
+    "start": 54.76,
+    "good": "down"
+   },
+   "tickers": [],
+   "status": "open",
+   "updates": [],
+   "wrongIf": [
+    {
+     "key": "usd_egp",
+     "op": ">",
+     "level": 56.5
+    }
+   ],
+   "driver": "imf-review"
+  },
+  {
    "id": "2026-11-12-etel-msci",
    "opened": "2026-11-12",
    "market": "egx",
@@ -50,6 +78,13 @@
      "source": "Arab Finance",
      "url": "https://www.arabfinance.com/en/news/newdetails/egx-closes-sunday-november-22-trading-session-down",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-26",
+     "text": "Telecom Egypt fell 1.3% to EGP 139.20 as the EGX30 lost 0.68%, still well above the EGP 122 test before Monday's inclusion.",
+     "source": "Youm7",
+     "url": "https://www.youm7.com/story/2026/11/25/أسعار-الأسهم-بالبورصة-المصرية-اليوم-الأربعاء-25-11-2026/7632325",
+     "effect": "neutral"
     }
    ],
    "wrongIf": [
@@ -444,6 +479,13 @@
      "source": "Arab Finance",
      "url": "https://www.arabfinance.com/en/news/newdetails/cbe-auctions-egp-140-billion-t-bills-on-november-22",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-26",
+     "text": "Foreigners sold $663m of Egyptian debt in two days and a December Fed hike became near certain, pushing a local rate cut further out; Palm Hills fell 1.3% while Talaat Moustafa rose 1.1%.",
+     "source": "Al-Ain",
+     "url": "https://al-ain.com/article/dollar-rate-today-in-egypt-thursday-26-nov-2026",
+     "effect": "supports"
     }
    ],
    "driver": "egp-rates"
@@ -607,6 +649,13 @@
      "text": "Dollar Tree's 4.6% comparable-sales rise and higher outlook lifted it 11.2%, and Walmart rose 2.1% to $132.31 as Alphabet fell 1.1% with AI credit swaps at records.",
      "source": "Trefis",
      "url": "https://www.trefis.com/stock/dltr/articles/628749/why-dollar-tree-stock-jumped-despite-a-margin-slip/2026-11-25",
+     "effect": "supports"
+    },
+    {
+     "date": "2026-11-26",
+     "text": "Credit swaps on Oracle and Alphabet hit records and Alphabet touched a 52-week low before closing down 2.1%, while Walmart held near its high.",
+     "source": "Reuters (via Yahoo Finance)",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/ai-credit-default-swap-spreads-050255426.html",
      "effect": "supports"
     }
    ],
@@ -1055,6 +1104,13 @@
      "source": "Business Today Egypt",
      "url": "https://www.businesstodayegypt.com/Article/1/8127/Suez-Canal-revenues-surge-101-2-to-593M-since-start",
      "effect": "supports"
+    },
+    {
+     "date": "2026-11-26",
+     "text": "Egypt and the IMF reached a staff-level agreement on the final review, Madbouly said; the dollar closed at EGP 54.76 after $663m of foreign debt sales in two days.",
+     "source": "CairoScene",
+     "url": "https://cairoscene.com/News/IMF-Reaches-Agreement-to-Unlock-USD-2-3-Billion-for-Egypt",
+     "effect": "supports"
     }
    ],
    "wrongIf": [
@@ -1250,6 +1306,13 @@
      "source": "Al-Masdar",
      "url": "https://www.almasdar.com/176153",
      "effect": "neutral"
+    },
+    {
+     "date": "2026-11-26",
+     "text": "Egypt Aluminium fell 1.6% to EGP 293.35, within about 1% of the EGP 290 that would end the call, before results expected December 2.",
+     "source": "Youm7",
+     "url": "https://www.youm7.com/story/2026/11/25/أسعار-الأسهم-بالبورصة-المصرية-اليوم-الأربعاء-25-11-2026/7632325",
+     "effect": "against"
     }
    ],
    "wrongIf": [

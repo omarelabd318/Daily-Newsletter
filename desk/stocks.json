@@ -731,6 +731,12 @@
    "sector": "Internet",
    "news": [
     {
+     "date": "2026-11-25",
+     "text": "Dropped 4.7% to a 52-week low before closing down 2.1% at $273.10, as its five-year credit swaps hit a record.",
+     "source": "Reuters (via Yahoo Finance)",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/ai-stock-rout-deepens-damage-222733772.html"
+    },
+    {
      "date": "2026-11-23",
      "text": "Rose 6.3% to $282.10 in the AI rebound on Huang's return, with no company news.",
      "source": "TIKR",
@@ -839,6 +845,12 @@
   "AVGO": {
    "sector": "Semiconductors",
    "news": [
+    {
+     "date": "2026-11-25",
+     "text": "Dropped 5.8% early before ending flat at $300.86 as AI stocks recovered.",
+     "source": "Reuters (via Yahoo Finance)",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/ai-stock-rout-deepens-damage-222733772.html"
+    },
     {
      "date": "2026-11-24",
      "text": "Fell 4.0% to $301.08 with the chip selloff, more than 37% below its June high; no company news.",
@@ -1212,6 +1224,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-25",
+     "text": "Completed its combination with OCI, issuing 97,201,359 new shares and lifting the share count to 207.4m from 110.2m; the stock fell 2.8% to EGP 763.00, its lowest since August.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/egypt/2026/11/26/nassef-sawiris-gets-his-infrastructure-investment-giant-as-orascom-closes-oci-deal/"
+    },
     {
      "date": "2026-11-25",
      "text": "Completed its purchase of OCI Rembrandt Holdings from OCI N.V., issuing 97,201,359 new shares and lifting its share count to 207,445,294; the shares go to OCI's eligible holders by December 8.",
@@ -1991,6 +2009,18 @@
    },
    "news": [
     {
+     "date": "2026-11-26",
+     "text": "Told partners including Dell and Supermicro to hold AI-server orders for Malaysia, Singapore, Thailand and Indonesia under new US export rules, the Financial Times reported.",
+     "source": "The National",
+     "url": "https://www.thenationalnews.com/future/technology/2026/11/26/nvidia-halts-chip-shipments-to-south-east-asia-amid-us-crackdown/"
+    },
+    {
+     "date": "2026-11-25",
+     "text": "Fell 8.5% intraday to a fresh low before closing 3.9% lower at $149.30 as the Nasdaq recovered most of a 4.6% drop.",
+     "source": "Reuters (via Yahoo Finance)",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/ai-stock-rout-deepens-damage-222733772.html"
+    },
+    {
      "date": "2026-11-24",
      "text": "Fell 5.9% to $155.38 after Monday's 31.5% surge on Jensen Huang's return, and lost about 2% more overnight.",
      "source": "Yahoo Finance",
@@ -2171,6 +2201,12 @@
    },
    "news": [
     {
+     "date": "2026-11-25",
+     "text": "Fell 3.1% to $244.43 in the AI-spending selloff; Fortune reported talks with Meta on ending its block of Meta's Muse agent, with advertising, a $68.6bn business for Amazon, a main issue.",
+     "source": "Fortune",
+     "url": "https://fortune.com/2026/11/25/exclusive-amazon-meta-talks-deal-muse-ai-shopping-agent-blockade/"
+    },
+    {
      "date": "2026-11-23",
      "text": "Agreed to buy Decart's AI optimization software and hire its founders, for about $7.5bn according to Bloomberg, to support its Trainium chips.",
      "source": "GeekWire",
@@ -2250,6 +2286,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-25",
+     "text": "Rose 3.4% to $609.89 as Fortune reported repeated talks with Amazon on connecting its Muse shopping agent to Amazon's store; search results and advertising are the main issues.",
+     "source": "Fortune",
+     "url": "https://fortune.com/2026/11/25/exclusive-amazon-meta-talks-deal-muse-ai-shopping-agent-blockade/"
+    },
     {
      "date": "2026-11-23",
      "text": "Paused its planned non-voting Class C shares while a Delaware suit proceeds, with trial set for April 19, 2027, delaying a $60bn share sale meant to fund AI spending.",
@@ -3257,6 +3299,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-25",
+     "text": "Fell 5.1% to $103.88, near its 52-week low, as five-year credit default swaps on Oracle, Alphabet, SpaceX and CoreWeave hit records over two sessions.",
+     "source": "Reuters (via Yahoo Finance)",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/ai-credit-default-swap-spreads-050255426.html"
+    },
     {
      "date": "2026-11-24",
      "text": "Fell 3.7% to $109.50 as its five-year credit default swaps hit a record, along with Alphabet's and CoreWeave's, on S&P Global figures reported by Reuters.",
