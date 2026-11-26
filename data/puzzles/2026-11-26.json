@@ -1,0 +1,575 @@
+{
+ "date": "2026-11-26",
+ "no": 15,
+ "crossword": {
+  "size": 11,
+  "grid": [
+   "SWAT##PAD##",
+   "HOME##ADAPT",
+   "AMEN##ROTOR",
+   "PANDAS#RELY",
+   "END#CHEESY#",
+   "###STEAD###",
+   "#SUNSET#HAD",
+   "CANE#PSEUDO",
+   "OFTEN##CROW",
+   "SEIZE##HORN",
+   "##LET##ONES"
+  ],
+  "clues": {
+   "across": [
+    {
+     "n": 1,
+     "row": 0,
+     "col": 0,
+     "len": 4,
+     "answer": "SWAT",
+     "clue": "Fly-killer's blow"
+    },
+    {
+     "n": 5,
+     "row": 0,
+     "col": 6,
+     "len": 3,
+     "answer": "PAD",
+     "clue": "Launch site for a rocket, or a flat to crash in"
+    },
+    {
+     "n": 8,
+     "row": 1,
+     "col": 0,
+     "len": 4,
+     "answer": "HOME",
+     "clue": "Plate you run to after three bases"
+    },
+    {
+     "n": 9,
+     "row": 1,
+     "col": 6,
+     "len": 5,
+     "answer": "ADAPT",
+     "clue": "Evolve to suit new conditions"
+    },
+    {
+     "n": 12,
+     "row": 2,
+     "col": 0,
+     "len": 4,
+     "answer": "AMEN",
+     "clue": "Last word of a prayer"
+    },
+    {
+     "n": 13,
+     "row": 2,
+     "col": 6,
+     "len": 5,
+     "answer": "ROTOR",
+     "clue": "Helicopter's spinning blade"
+    },
+    {
+     "n": 14,
+     "row": 3,
+     "col": 0,
+     "len": 6,
+     "answer": "PANDAS",
+     "clue": "Bamboo-munching black-and-white bears"
+    },
+    {
+     "n": 17,
+     "row": 3,
+     "col": 7,
+     "len": 4,
+     "answer": "RELY",
+     "clue": "Count on"
+    },
+    {
+     "n": 18,
+     "row": 4,
+     "col": 0,
+     "len": 3,
+     "answer": "END",
+     "clue": "Finale, or the tip of a pencil"
+    },
+    {
+     "n": 19,
+     "row": 4,
+     "col": 4,
+     "len": 6,
+     "answer": "CHEESY",
+     "clue": "Corny, like a bad pickup line"
+    },
+    {
+     "n": 21,
+     "row": 5,
+     "col": 3,
+     "len": 5,
+     "answer": "STEAD",
+     "clue": "In one's place, as in 'stand in good ___'"
+    },
+    {
+     "n": 22,
+     "row": 6,
+     "col": 1,
+     "len": 6,
+     "answer": "SUNSET",
+     "clue": "Daily horizon show for photographers"
+    },
+    {
+     "n": 24,
+     "row": 6,
+     "col": 8,
+     "len": 3,
+     "answer": "HAD",
+     "clue": "Owned, or fooled"
+    },
+    {
+     "n": 27,
+     "row": 7,
+     "col": 0,
+     "len": 4,
+     "answer": "CANE",
+     "clue": "Walking aid with a hooked handle"
+    },
+    {
+     "n": 28,
+     "row": 7,
+     "col": 5,
+     "len": 6,
+     "answer": "PSEUDO",
+     "clue": "Fake prefix"
+    },
+    {
+     "n": 30,
+     "row": 8,
+     "col": 0,
+     "len": 5,
+     "answer": "OFTEN",
+     "clue": "Again and again"
+    },
+    {
+     "n": 32,
+     "row": 8,
+     "col": 7,
+     "len": 4,
+     "answer": "CROW",
+     "clue": "Boast, or a bird that cries at dawn"
+    },
+    {
+     "n": 33,
+     "row": 9,
+     "col": 0,
+     "len": 5,
+     "answer": "SEIZE",
+     "clue": "Grab, as in 'the day'"
+    },
+    {
+     "n": 34,
+     "row": 9,
+     "col": 7,
+     "len": 4,
+     "answer": "HORN",
+     "clue": "Rhino's headgear"
+    },
+    {
+     "n": 35,
+     "row": 10,
+     "col": 2,
+     "len": 3,
+     "answer": "LET",
+     "clue": "Rent out, or a tennis do-over"
+    },
+    {
+     "n": 36,
+     "row": 10,
+     "col": 7,
+     "len": 4,
+     "answer": "ONES",
+     "clue": "Bills smaller than fives"
+    }
+   ],
+   "down": [
+    {
+     "n": 1,
+     "row": 0,
+     "col": 0,
+     "len": 5,
+     "answer": "SHAPE",
+     "clue": "Circle or square, say"
+    },
+    {
+     "n": 2,
+     "row": 0,
+     "col": 1,
+     "len": 5,
+     "answer": "WOMAN",
+     "clue": "Eve, for one"
+    },
+    {
+     "n": 3,
+     "row": 0,
+     "col": 2,
+     "len": 5,
+     "answer": "AMEND",
+     "clue": "Tweak a constitution"
+    },
+    {
+     "n": 4,
+     "row": 0,
+     "col": 3,
+     "len": 4,
+     "answer": "TEND",
+     "clue": "Look after, as a garden"
+    },
+    {
+     "n": 5,
+     "row": 0,
+     "col": 6,
+     "len": 3,
+     "answer": "PAR",
+     "clue": "A golfer's goal on each hole"
+    },
+    {
+     "n": 6,
+     "row": 0,
+     "col": 7,
+     "len": 6,
+     "answer": "ADORED",
+     "clue": "Worshipped from afar"
+    },
+    {
+     "n": 7,
+     "row": 0,
+     "col": 8,
+     "len": 5,
+     "answer": "DATES",
+     "clue": "Fruit of the palm, or calendar entries; hearings on the proposed US tariffs are set for one in January"
+    },
+    {
+     "n": 10,
+     "row": 1,
+     "col": 9,
+     "len": 4,
+     "answer": "POLY",
+     "clue": "Prefix meaning 'many'"
+    },
+    {
+     "n": 11,
+     "row": 1,
+     "col": 10,
+     "len": 3,
+     "answer": "TRY",
+     "clue": "Rugby score, or give it a go"
+    },
+    {
+     "n": 15,
+     "row": 3,
+     "col": 4,
+     "len": 4,
+     "answer": "ACTS",
+     "clue": "Bills in Parliament, or parts of a play"
+    },
+    {
+     "n": 16,
+     "row": 3,
+     "col": 5,
+     "len": 5,
+     "answer": "SHEEP",
+     "clue": "Counted to fall asleep"
+    },
+    {
+     "n": 20,
+     "row": 4,
+     "col": 6,
+     "len": 4,
+     "answer": "EATS",
+     "clue": "Has for dinner"
+    },
+    {
+     "n": 21,
+     "row": 5,
+     "col": 3,
+     "len": 6,
+     "answer": "SNEEZE",
+     "clue": "Achoo, in other words"
+    },
+    {
+     "n": 22,
+     "row": 6,
+     "col": 1,
+     "len": 4,
+     "answer": "SAFE",
+     "clue": "What Red Sea shipping is not after Houthi strikes on Saudi ports this week"
+    },
+    {
+     "n": 23,
+     "row": 6,
+     "col": 2,
+     "len": 5,
+     "answer": "UNTIL",
+     "clue": "Up to the time that"
+    },
+    {
+     "n": 24,
+     "row": 6,
+     "col": 8,
+     "len": 5,
+     "answer": "HURON",
+     "clue": "Great Lake named for a Native American people"
+    },
+    {
+     "n": 25,
+     "row": 6,
+     "col": 9,
+     "len": 5,
+     "answer": "ADORE",
+     "clue": "Love dearly"
+    },
+    {
+     "n": 26,
+     "row": 6,
+     "col": 10,
+     "len": 5,
+     "answer": "DOWNS",
+     "clue": "Ups and ___"
+    },
+    {
+     "n": 27,
+     "row": 7,
+     "col": 0,
+     "len": 3,
+     "answer": "COS",
+     "clue": "Lettuce variety, for short, or firms: abbr."
+    },
+    {
+     "n": 29,
+     "row": 7,
+     "col": 7,
+     "len": 4,
+     "answer": "ECHO",
+     "clue": "Mountain's reply"
+    },
+    {
+     "n": 31,
+     "row": 8,
+     "col": 4,
+     "len": 3,
+     "answer": "NET",
+     "clue": "Take-home pay, after deductions"
+    }
+   ]
+  },
+  "news": []
+ },
+ "killer": {
+  "level": 4,
+  "solution": "237649158895371642416825397358497216169582473742163589673914825521738964984256731",
+  "cages": [
+   {
+    "sum": 18,
+    "cells": [
+     76,
+     77,
+     78
+    ]
+   },
+   {
+    "sum": 28,
+    "cells": [
+     3,
+     4,
+     5,
+     13,
+     22
+    ]
+   },
+   {
+    "sum": 26,
+    "cells": [
+     16,
+     25,
+     26,
+     35
+    ]
+   },
+   {
+    "sum": 12,
+    "cells": [
+     0,
+     1,
+     2
+    ]
+   },
+   {
+    "sum": 9,
+    "cells": [
+     42,
+     51
+    ]
+   },
+   {
+    "sum": 23,
+    "cells": [
+     36,
+     37,
+     38,
+     45
+    ]
+   },
+   {
+    "sum": 15,
+    "cells": [
+     54,
+     55,
+     64
+    ]
+   },
+   {
+    "sum": 26,
+    "cells": [
+     11,
+     12,
+     20,
+     21,
+     30
+    ]
+   },
+   {
+    "sum": 21,
+    "cells": [
+     9,
+     10,
+     18
+    ]
+   },
+   {
+    "sum": 17,
+    "cells": [
+     19,
+     27,
+     28,
+     29
+    ]
+   },
+   {
+    "sum": 19,
+    "cells": [
+     49,
+     58,
+     59,
+     60
+    ]
+   },
+   {
+    "sum": 7,
+    "cells": [
+     46,
+     47,
+     48
+    ]
+   },
+   {
+    "sum": 18,
+    "cells": [
+     31,
+     32,
+     33
+    ]
+   },
+   {
+    "sum": 18,
+    "cells": [
+     39,
+     40,
+     41,
+     50
+    ]
+   },
+   {
+    "sum": 15,
+    "cells": [
+     14,
+     15,
+     23,
+     24
+    ]
+   },
+   {
+    "sum": 12,
+    "cells": [
+     66,
+     67,
+     75
+    ]
+   },
+   {
+    "sum": 23,
+    "cells": [
+     68,
+     69,
+     70
+    ]
+   },
+   {
+    "sum": 13,
+    "cells": [
+     56,
+     57,
+     65
+    ]
+   },
+   {
+    "sum": 11,
+    "cells": [
+     34,
+     43,
+     44
+    ]
+   },
+   {
+    "sum": 24,
+    "cells": [
+     52,
+     53,
+     61,
+     62
+    ]
+   },
+   {
+    "sum": 8,
+    "cells": [
+     71,
+     79,
+     80
+    ]
+   },
+   {
+    "sum": 16,
+    "cells": [
+     6,
+     7,
+     8,
+     17
+    ]
+   },
+   {
+    "sum": 9,
+    "cells": [
+     72
+    ]
+   },
+   {
+    "sum": 12,
+    "cells": [
+     73,
+     74
+    ]
+   },
+   {
+    "sum": 5,
+    "cells": [
+     63
+    ]
+   }
+  ]
+ }
+}

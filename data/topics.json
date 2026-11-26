@@ -14,8 +14,8 @@
    "drivers": [
     "oil"
    ],
-   "now": "A Houthi drone struck the Public Investment Fund's tower in Riyadh on November 24, injuring 11 people, four of them Egyptian, the second hit on the building in under a week; the Houthis have threatened Jeddah and Saudi Arabia's other Red Sea ports. The dollar reached a record of about 2.85 million rials in Tehran after new US sanctions on Iran's shadow-banking network.",
-   "now_date": "2026-11-25"
+   "now": "The Houthis claimed strikes on Saudi Arabia's Red Sea ports of Jeddah and Jazan on November 25; the coalition said Jazan suffered minor damage, and four drones aimed at Ras Tanura were downed. Maersk told President Sisi the same day it plans a full return to the Suez Canal route in the coming months.",
+   "now_date": "2026-11-26"
   },
   {
    "id": "pound-cbe",
@@ -30,8 +30,8 @@
    "drivers": [
     "egp-rates"
    ],
-   "now": "The central bank's dollar rate eased to EGP 54.17 buy and 54.31 sell on the morning of November 25, keeping the pound within 2% of its strongest level in a year. The EGX30 rose 0.34% to 50,885.30 on November 24; overnight rates stand at 20% and 21%, and the next rate meeting is December 17.",
-   "now_date": "2026-11-25"
+   "now": "The central bank's dollar rate rose about 1% on November 25 to EGP 54.63 buy and 54.76 sell, as foreigners sold a net $576 million of Egyptian debt on November 24 and $87 million on November 25 amid bets on a US rate rise. The EGX30 fell 0.68% to 50,538.70 on November 25; overnight rates stand at 20% and 21%, and the next rate meeting is December 17.",
+   "now_date": "2026-11-26"
   },
   {
    "id": "ai-chips",
@@ -46,8 +46,8 @@
    "drivers": [
     "ai-spending"
    ],
-   "now": "Chip stocks gave back part of their Nvidia-driven surge on November 24: Nvidia fell 5.9% to $155.38, Intel 8.2% and the Nasdaq 1.48% to 23,733.54, a day after Jensen Huang's reinstatement as chief executive sent the index up 6.51%. Asian markets fell sharply on November 25 as doubts about the AI trade returned.",
-   "now_date": "2026-11-25"
+   "now": "Nvidia fell 3.9% to $149.30 on November 25 and has stopped shipping AI servers to Malaysia, Singapore, Thailand and Indonesia under US export controls, the Financial Times reported. The Nasdaq lost 0.62% to 23,585.80 after recovering from a 4.6% intraday drop.",
+   "now_date": "2026-11-26"
   },
   {
    "id": "us-midterms",
@@ -103,8 +103,8 @@
     ]
    ],
    "drivers": [],
-   "now": "Egypt's IMF program expires on December 15, with the board expected to take up its final review before then. Goldman Sachs favors a successor program.",
-   "now_date": "2026-11-22"
+   "now": "Prime Minister Mostafa Madbouly said on November 25 that Egypt and the IMF reached a staff-level agreement on the eighth and final review of the loan program, which would release about $2.3 billion, about $1.5 billion from the Extended Fund Facility and up to $800 million from the Resilience and Sustainability Facility, once the board approves it in December. The program expires on December 15, and no successor has been announced.",
+   "now_date": "2026-11-26"
   },
   {
    "id": "gaza-lebanon",
@@ -112,8 +112,8 @@
    "match": "\\b(Gaza|Hamas|Hezbollah|Lebanon|Lebanese)\\b",
    "related": [],
    "drivers": [],
-   "now": "An Israeli strike in Gaza City on November 24 killed Naim Abu Nahl, head of Hamas's internal security service, according to Gaza's Interior Ministry, more than a year into the October 2025 ceasefire; Gaza authorities count about 1,680 killed since it began.",
-   "now_date": "2026-11-25"
+   "now": "Israeli strikes killed five Palestinians in Gaza on November 26, including deputy education minister Khaled Abu Nada, more than a year into the October 2025 ceasefire; Gaza's Health Ministry counts 1,679 people killed since it took hold.",
+   "now_date": "2026-11-26"
   },
   {
    "id": "oil",
@@ -128,8 +128,8 @@
    "drivers": [
     "oil"
    ],
-   "now": "Brent settled 2.3% higher at $91.40 a barrel on November 24 after touching $88.10, its lowest since late August, as reports of ships hit near Hormuz revived supply fears; OPEC+ meets on November 29.",
-   "now_date": "2026-11-25"
+   "now": "Brent rose 3.5% to settle at $94.61 a barrel on November 25 after Houthi attacks on Saudi ports and Iranian claims of mine strikes on ships; OPEC+ meets on November 29.",
+   "now_date": "2026-11-26"
   },
   {
    "id": "saudi-deployment",
@@ -144,13 +144,127 @@
    "id": "misr-life",
    "name": "Misr Life Insurance listing",
    "match": "Misr Life",
-   "now": "Retail investors ordered about 7.1 million shares on the first day of Misr Life Insurance's IPO, about a fifth of the 37.5 million-share retail tranche, EnterpriseAM reported; the 750 million shares are offered at EGP 12.00-13.60. Institutions bid until November 27, the public until November 30, and trading is expected around December 3.",
-   "now_date": "2026-11-25",
+   "now": "Misr Life Insurance is selling 750 million shares, 15% of the company, at EGP 12.00 to 13.60 each; retail orders covered about a fifth of the 37.5 million-share retail tranche on day one. The public subscription closes on November 30, the price is expected around November 28 and trading around December 3.",
+   "now_date": "2026-11-26",
    "related": [],
    "drivers": []
   }
  ],
  "stories": [
+  {
+   "ed": "2026-11-26",
+   "id": "story-what-it-means-for-egypt",
+   "lead": "What it means for Egypt",
+   "sec": "Markets",
+   "text": "Higher US rates and costlier oil cut both ways for Egypt: they shrink the premium that draws foreign money into treasury bills and raise the fuel import bill, a mix that weighs on the pound.",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-11-26",
+   "id": "story-pound-weakens",
+   "lead": "Pound weakens",
+   "sec": "Markets",
+   "text": "The central bank's dollar rate rose to EGP 54.63 buy and 54.76 sell by Wednesday's close, from 54.17 and 54.31 that morning, about 1% weaker in a day, and held there on Thursday morning, Al-Masry Al-Youm reported. EnterpriseAM said…",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-11-26",
+   "id": "story-oil-gold-and-bitcoin",
+   "lead": "Oil, gold and bitcoin",
+   "sec": "Markets",
+   "text": "Brent rose 3.5% to settle at $94.61 on Wednesday on the Houthi claims and Iranian claims of mine strikes on ships, ahead of Sunday's OPEC+ meeting. Gold futures fell 0.7% to $3,535.80, within 0.6% of their 52-week low, after briefly…",
+   "topics": [
+    "oil"
+   ],
+   "added": [
+    "oil"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-26",
+   "id": "story-nvidia-halts-southeast-asia-shipments",
+   "lead": "Nvidia halts Southeast Asia shipments",
+   "sec": "In Other News",
+   "text": "Nvidia has stopped shipping AI servers to Malaysia, Singapore, Thailand and Indonesia under US export controls aimed at keeping advanced chips from reaching China, the Financial Times reported, as cited by The National. The move comes as…",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-11-26",
+   "id": "story-misr-life-ipo",
+   "lead": "Misr Life IPO",
+   "sec": "Markets",
+   "text": "Misr Life Insurance's offering of 750 million shares, 15% of the company, at EGP 12.00 to 13.60 each, runs to November 30 for the public tranche, with trading expected to start around December 3. Retail demand covered about a fifth of its…",
+   "topics": [
+    "misr-life"
+   ]
+  },
+  {
+   "ed": "2026-11-26",
+   "id": "story-maersk-returns-to-suez",
+   "lead": "Maersk returns to Suez",
+   "sec": "Egypt News",
+   "text": "Maersk chief executive Vincent Clerc told President Abdel Fattah El-Sisi on Wednesday that the shipping group has resumed sailings through the Suez Canal and plans to bring its full network back to the Red Sea route \"in the coming months,\"…",
+   "topics": [
+    "iran-war"
+   ],
+   "added": [
+    "iran-war"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-26",
+   "id": "story-imf-final-review",
+   "lead": "IMF final review",
+   "sec": "Egypt News",
+   "text": "Egypt and the International Monetary Fund have reached a staff-level agreement on the eighth and final review of the country's loan program, Madbouly said on Wednesday, Akhbar El-Youm reported. Once the IMF board approves it in December,…",
+   "topics": [
+    "imf"
+   ]
+  },
+  {
+   "ed": "2026-11-26",
+   "id": "story-houthis-hit-saudi-ports",
+   "lead": "Houthis hit Saudi ports",
+   "sec": "Regional and Gulf",
+   "text": "The Houthis claimed strikes on Saudi Arabia's Red Sea ports of Jeddah and Jazan on Wednesday, the latest escalation after two hits on Riyadh's Public Investment Fund tower in under a week, Al Jazeera reported. The Saudi-led coalition said…",
+   "topics": [
+    "iran-war"
+   ],
+   "added": [
+    "iran-war"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-26",
+   "id": "story-gaza-strikes",
+   "lead": "Gaza strikes",
+   "sec": "Regional and Gulf",
+   "text": "Israeli strikes killed five Palestinians in Gaza on Thursday, including deputy education minister Khaled Abu Nada, 56, and his wife in Deir al-Balah, Anadolu reported; three more were killed in a drone strike on al-Shati camp. Gaza's…",
+   "topics": [
+    "gaza-lebanon"
+   ]
+  },
+  {
+   "ed": "2026-11-26",
+   "id": "story-egx-slips-on-thin-trade",
+   "lead": "EGX slips on thin trade",
+   "sec": "Markets",
+   "text": "The EGX30 fell 0.68% to 50,538.70 on Wednesday, giving back its two-day rebound, and the small and mid-cap EGX70 lost 1.32% to 16,886.70. Turnover in stocks was about EGP 6.2 billion, near its lowest in a year. Egyptian investors were net…",
+   "topics": [],
+   "removed": [
+    "gas-fertilizer"
+   ],
+   "added": []
+  },
   {
    "ed": "2026-11-25",
    "id": "story-pound-firms",
