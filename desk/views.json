@@ -969,7 +969,7 @@
     "good": "down"
    },
    "tickers": [],
-   "status": "on track",
+   "status": "wrong",
    "updates": [
     {
      "date": "2026-11-06",
@@ -1120,7 +1120,11 @@
      "level": 56
     }
    ],
-   "driver": "foreign-flows"
+   "driver": "foreign-flows",
+   "result": {
+    "date": "2026-11-27",
+    "text": "Judged on its date: USD/EGP at 54.91 from 54.77 (+0.3%)."
+   }
   },
   {
    "id": "2026-11-05-brent-hormuz",

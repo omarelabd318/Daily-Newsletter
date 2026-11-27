@@ -1,12 +1,39 @@
 {
  "note": "The desk's stocks' coming results and dividends, from TradingView (fetch_calendar.py); for the US stocks, declared dividends and stock splits from Polygon. Results dates for Egyptian companies are often TradingView's estimate until the company announces one.",
- "fetched": "2026-11-26",
+ "fetched": "2026-11-27",
  "items": [
   {
    "t": "CLHO",
    "market": "egx",
    "kind": "results",
-   "date": "2026-12-02",
+   "date": "2026-11-27",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "EAST",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-27",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "EFIH",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-27",
+   "period": "2026-09-30",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "JUFO",
+   "market": "egx",
+   "kind": "results",
+   "date": "2026-11-27",
    "period": "2026-09-30",
    "time": null,
    "expected": true
@@ -220,6 +247,15 @@
    "market": "egx",
    "kind": "results",
    "date": "2027-02-09",
+   "period": "2026-12-31",
+   "time": null,
+   "expected": true
+  },
+  {
+   "t": "LLY",
+   "market": "us",
+   "kind": "results",
+   "date": "2027-02-10",
    "period": "2026-12-31",
    "time": null,
    "expected": true
