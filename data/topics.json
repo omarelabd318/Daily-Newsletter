@@ -14,8 +14,8 @@
    "drivers": [
     "oil"
    ],
-   "now": "The Houthis claimed strikes on Saudi Arabia's Red Sea ports of Jeddah and Jazan on November 25; the coalition said Jazan suffered minor damage, and four drones aimed at Ras Tanura were downed. Maersk told President Sisi the same day it plans a full return to the Suez Canal route in the coming months.",
-   "now_date": "2026-11-26"
+   "now": "Drones struck a site in Kuwait on November 26, killing two Italian technicians working for Rheinmetall; Kuwait blamed Iran, which denied involvement, and a Houthi strike on a Jazan refinery killed a Nepali worker the same day. President Trump said any new US action would hit Pickaxe Mountain near Natanz, while Iran's president said it was time to end the war from a position of strength.",
+   "now_date": "2026-11-27"
   },
   {
    "id": "pound-cbe",
@@ -30,8 +30,8 @@
    "drivers": [
     "egp-rates"
    ],
-   "now": "The central bank's dollar rate rose about 1% on November 25 to EGP 54.63 buy and 54.76 sell, as foreigners sold a net $576 million of Egyptian debt on November 24 and $87 million on November 25 amid bets on a US rate rise. The EGX30 fell 0.68% to 50,538.70 on November 25; overnight rates stand at 20% and 21%, and the next rate meeting is December 17.",
-   "now_date": "2026-11-26"
+   "now": "The central bank's dollar rate ended November 26 at EGP 54.77 buy and 54.91 sell, about 2.3% from its 52-week high, and the one-year treasury bill yield rose to 26.35% at that day's auction, the highest since March 2024. Overnight rates stand at 20% and 21%; the next rate meeting is December 17.",
+   "now_date": "2026-11-27"
   },
   {
    "id": "ai-chips",
@@ -112,8 +112,8 @@
    "match": "\\b(Gaza|Hamas|Hezbollah|Lebanon|Lebanese)\\b",
    "related": [],
    "drivers": [],
-   "now": "Israeli strikes killed five Palestinians in Gaza on November 26, including deputy education minister Khaled Abu Nada, more than a year into the October 2025 ceasefire; Gaza's Health Ministry counts 1,679 people killed since it took hold.",
-   "now_date": "2026-11-26"
+   "now": "Israeli Defense Minister Israel Katz said on November 26 that Hamas must disarm or face another evacuation of one million Gaza residents southward; Israeli strikes killed at least 10 Palestinians that day, and Hamas said it was weighing its response.",
+   "now_date": "2026-11-27"
   },
   {
    "id": "oil",
@@ -128,8 +128,8 @@
    "drivers": [
     "oil"
    ],
-   "now": "Brent rose 3.5% to settle at $94.61 a barrel on November 25 after Houthi attacks on Saudi ports and Iranian claims of mine strikes on ships; OPEC+ meets on November 29.",
-   "now_date": "2026-11-26"
+   "now": "Brent settled at $96.57 a barrel on November 26, up 1.2% and its highest since November 6, after the attacks on Kuwait and Jazan, and traded near $96 on November 27. OPEC+ ministers meet on November 29 to set 2027 output.",
+   "now_date": "2026-11-27"
   },
   {
    "id": "saudi-deployment",
@@ -144,13 +144,81 @@
    "id": "misr-life",
    "name": "Misr Life Insurance listing",
    "match": "Misr Life",
-   "now": "Misr Life Insurance is selling 750 million shares, 15% of the company, at EGP 12.00 to 13.60 each; retail orders covered about a fifth of the 37.5 million-share retail tranche on day one. The public subscription closes on November 30, the price is expected around November 28 and trading around December 3.",
-   "now_date": "2026-11-26",
+   "now": "Misr Life Insurance's retail tranche was 0.19 times covered on its first day, with orders for 7.09 million of 37.5 million shares. Institutional bidding closes November 27, the final price within EGP 12.00-13.60 is due November 28, retail subscription runs to November 30 and trading is expected around December 3.",
+   "now_date": "2026-11-27",
    "related": [],
    "drivers": []
   }
  ],
  "stories": [
+  {
+   "ed": "2026-11-27",
+   "id": "story-trump-on-iran",
+   "lead": "Trump on Iran",
+   "sec": "Regional and Gulf",
+   "text": "Trump said on Thursday that if the US acts again, \"we will definitely hit Pickaxe Mountain,\" a fortified site near Iran's Natanz nuclear complex, while offering Tehran a deal. Iranian President Masoud Pezeshkian said on Friday it was time…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-27",
+   "id": "story-t-bill-yields-climb",
+   "lead": "T-bill yields climb",
+   "sec": "Markets",
+   "text": "The average yield on one-year treasury bills rose to 26.35% at Thursday's auction, the highest since March 2024, and the six-month yield to 25.74% from 25.36%; the central bank accepted EGP 87.2 billion against a EGP 95 billion target. The…",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-11-27",
+   "id": "story-oil-before-opec",
+   "lead": "Oil before OPEC",
+   "sec": "Markets",
+   "text": "Brent settled at $96.57 a barrel on Thursday, up 1.2% and its highest since November 6, after the strikes on Kuwait and Jazan, and traded near $96 on Friday before Sunday's OPEC+ meeting on 2027 output.",
+   "topics": [
+    "oil"
+   ],
+   "added": [
+    "oil"
+   ],
+   "removed": []
+  },
+  {
+   "ed": "2026-11-27",
+   "id": "story-misr-life-book",
+   "lead": "Misr Life book",
+   "sec": "Markets",
+   "text": "The retail tranche of Misr Life Insurance's IPO was 0.19 times covered on its first day, with orders for 7.09 million of 37.5 million shares, EnterpriseAM reported. Institutional bidding closes today, the final price within the EGP…",
+   "topics": [
+    "misr-life"
+   ]
+  },
+  {
+   "ed": "2026-11-27",
+   "id": "story-gaza-displacement-threat",
+   "lead": "Gaza displacement threat",
+   "sec": "Regional and Gulf",
+   "text": "Israeli Defense Minister Israel Katz said Hamas must \"disarm voluntarily\" or the army would disarm it, \"including another evacuation of one million Gaza residents southward.\" Israeli strikes killed at least 10 Palestinians on Thursday,…",
+   "topics": [
+    "gaza-lebanon"
+   ]
+  },
+  {
+   "ed": "2026-11-27",
+   "id": "story-drone-strike-on-kuwait",
+   "lead": "Drone strike on Kuwait",
+   "sec": "Regional and Gulf",
+   "text": "Two Italian technicians working for German defense group Rheinmetall were killed on Thursday when drones hit what Kuwait's defense ministry called a \"vital site\"; Kuwaiti and Pakistani workers were wounded. Kuwait blamed Iran, which denied…",
+   "topics": [
+    "iran-war"
+   ],
+   "added": [
+    "iran-war"
+   ],
+   "removed": []
+  },
   {
    "ed": "2026-11-26",
    "id": "story-what-it-means-for-egypt",
