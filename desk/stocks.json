@@ -265,6 +265,12 @@
    "sector": "Fertilizers",
    "news": [
     {
+     "date": "2026-11-27",
+     "text": "Reported a 33% cut in its gas supply, from 20% before, as fertilizer makers pay $12.75 per MMBtu, 50% more, for unrestricted exports until December 31.",
+     "source": "UkrAgroConsult",
+     "url": "https://ukragroconsult.com/en/news/egypt-temporarily-allows-unrestricted-fertilizer-exports-and-prepares-for-imports/"
+    },
+    {
      "date": "2026-11-22",
      "text": "CI Capital kept its neutral rating and raised its 12-month target 19% to EGP 85.4, citing volatile urea prices; the stock fell 3.1% to EGP 74.00 on Sunday.",
      "source": "Economy Plus",
@@ -1225,6 +1231,12 @@
    },
    "news": [
     {
+     "date": "2026-11-26",
+     "text": "Rose 3.5% to EGP 790.00 on OCI's last day of trading in Amsterdam; the 97.2m new shares, lifting the count to 207.4m, reach OCI's holders around December 8.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/menaplus/2026/11/27/orascom-construction-closes-oci-deal-as-nmdc-energy-pushes-into-deepwater-fabrication/"
+    },
+    {
      "date": "2026-11-25",
      "text": "Completed its combination with OCI, issuing 97,201,359 new shares and lifting the share count to 207.4m from 110.2m; the stock fell 2.8% to EGP 763.00, its lowest since August.",
      "source": "EnterpriseAM",
@@ -2016,6 +2028,12 @@
     },
     {
      "date": "2026-11-25",
+     "text": "S&P Global Ratings put Nvidia on CreditWatch negative, citing management and governance risks; the stock fell 3.9% to $149.30 after the Nasdaq dropped as much as 4.6% intraday.",
+     "source": "Reuters (via Yahoo Finance)",
+     "url": "https://sg.finance.yahoo.com/news/analysis-volatility-weary-investors-hammered-173803967.html"
+    },
+    {
+     "date": "2026-11-25",
      "text": "Fell 8.5% intraday to a fresh low before closing 3.9% lower at $149.30 as the Nasdaq recovered most of a 4.6% drop.",
      "source": "Reuters (via Yahoo Finance)",
      "url": "https://finance.yahoo.com/markets/stocks/articles/ai-stock-rout-deepens-damage-222733772.html"
@@ -2200,6 +2218,12 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-25",
+     "text": "Fell 3.1% to $244.43 after opening about 4.3% lower, as hyperscalers fell on doubts that debt-funded AI spending will pay back.",
+     "source": "GuruFocus (via TradingView)",
+     "url": "https://www.tradingview.com/news/gurufocus:eccdca4a2094b:0-amazon-stocks-fall-4-26-as-215-billion-capex-run-rate-meets-ai-doubts/"
+    },
     {
      "date": "2026-11-25",
      "text": "Fell 3.1% to $244.43 in the AI-spending selloff; Fortune reported talks with Meta on ending its block of Meta's Muse agent, with advertising, a $68.6bn business for Amazon, a main issue.",
@@ -3301,6 +3325,12 @@
    "news": [
     {
      "date": "2026-11-25",
+     "text": "Fell 5.1% to $103.88 after opening 7.45% lower as its five-year credit-default swap spread hit a record, about 10% below its November 2 offer price of $116.",
+     "source": "GuruFocus (via TradingView)",
+     "url": "https://www.tradingview.com/news/gurufocus:3cd88f2fe094b:0-oracle-stocks-tumble-7-45-now-12-6-below-november-offering-price/"
+    },
+    {
+     "date": "2026-11-25",
      "text": "Fell 5.1% to $103.88, near its 52-week low, as five-year credit default swaps on Oracle, Alphabet, SpaceX and CoreWeave hit records over two sessions.",
      "source": "Reuters (via Yahoo Finance)",
      "url": "https://finance.yahoo.com/markets/stocks/articles/ai-credit-default-swap-spreads-050255426.html"
@@ -3738,6 +3768,18 @@
     ]
    },
    "news": [
+    {
+     "date": "2026-11-26",
+     "text": "Called a December 27 general assembly to cancel 11.0m treasury shares, cutting issued capital to EGP 416.7m from 418.9m, and to note a long-term financing contract with the IFC; the stock rose 2.9% to EGP 21.30.",
+     "source": "Youlyou",
+     "url": "https://www.youlyou.com/103278"
+    },
+    {
+     "date": "2026-11-25",
+     "text": "The IFC is providing $25m to more than double Edita's production capacity in Iraq within two years, with new lines and a new plant.",
+     "source": "Milling Middle East & Africa",
+     "url": "https://millingmea.com/edita-ifc-partner-in-us25m-investment-to-expand-food-manufacturing-in-iraq/"
+    },
     {
      "date": "2026-11-23",
      "text": "The regulator cleared the call for an extraordinary assembly to cancel about 11m treasury shares, cutting capital to EGP 416.71m from EGP 418.91m; the stock fell 4.3% to EGP 20.10 on Sunday in the market-wide fall.",
