@@ -1430,12 +1430,15 @@ body.listening #content .s-body :is(p,li,blockquote,h3,h4){cursor:pointer}
     var cw = (run.clientWidth - parseFloat(cs.paddingLeft || 0) - parseFloat(cs.paddingRight || 0) - gap * (n - 1)) / n;
     var col = function(r){ return Math.max(0, Math.min(n - 1, Math.floor((r.left + 1 - left) / (cw + gap)))); };
     var top0 = null, prev = null, last = null, out = [], cols = [];
-    [].forEach.call(run.querySelectorAll(':scope > p, li'), function(el){
-      var rg = document.createRange(); rg.selectNodeContents(el);
-      var ls = [].filter.call(rg.getClientRects(), function(r){ return r.width && r.height; });
+    // a box (an Explained note) is measured too, so a story under one at a column's head is not taken to open that
+    // column low and pulled up over the box; a box itself is never lifted
+    [].forEach.call(run.querySelectorAll(':scope > p, :scope > blockquote, li'), function(el){
+      var box = el.tagName === 'BLOCKQUOTE', ls;
+      if(box) ls = [].filter.call(el.getClientRects(), function(r){ return r.width && r.height; });
+      else { var rg = document.createRange(); rg.selectNodeContents(el); ls = [].filter.call(rg.getClientRects(), function(r){ return r.width && r.height; }); }
       if(!ls.length) return;
-      if(top0 === null) top0 = ls[0].top;
-      else if(prev !== null && col(ls[0]) > prev) out.push({el: el, d: ls[0].top - top0, prev: last});
+      if(top0 === null){ if(!box) top0 = ls[0].top; }
+      else if(!box && prev !== null && col(ls[0]) > prev) out.push({el: el, d: ls[0].top - top0, prev: last});
       prev = col(ls[ls.length - 1]); last = el;
       cols.push(col(ls[0]) + '-' + prev);
     });
