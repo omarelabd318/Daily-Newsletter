@@ -381,7 +381,7 @@
     "TMGH",
     "PHDC"
    ],
-   "status": "on track",
+   "status": "right",
    "updates": [
     {
      "date": "2026-10-28",
@@ -503,7 +503,11 @@
      "effect": "supports"
     }
    ],
-   "driver": "egp-rates"
+   "driver": "egp-rates",
+   "result": {
+    "date": "2026-11-28",
+    "text": "Judged on its date: Talaat Moustafa and Palm Hills -1.0% on average against the EGX30 +1.4% since 2026-10-30."
+   }
   },
   {
    "id": "2026-10-30-rotation",
@@ -538,7 +542,7 @@
     "GOOGL",
     "AMZN"
    ],
-   "status": "on track",
+   "status": "right",
    "updates": [
     {
      "date": "2026-10-29",
@@ -681,7 +685,11 @@
      "effect": "supports"
     }
    ],
-   "driver": "ai-spending"
+   "driver": "ai-spending",
+   "result": {
+    "date": "2026-11-28",
+    "text": "Judged on its date: Walmart and JPMorgan +1.9% on average against Alphabet and Amazon +0.6% since 2026-10-30."
+   }
   },
   {
    "id": "2026-10-30-cib-margins",
