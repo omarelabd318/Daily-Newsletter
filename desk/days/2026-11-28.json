@@ -1,0 +1,1169 @@
+{
+ "date": "2026-11-28",
+ "asOf": "2026-11-27",
+ "fetched": "Sat, Nov 28, 12:19 Cairo",
+ "egypt": {
+  "finding": "Misr Life Insurance priced its offer at EGP 12.80, inside its range, after institutions bid 3.42 times the shares on offer: big money still wants Egyptian equity with one-year bills at 26.35%. The EGX30 ended the week 2.2% lower at 50,311.78 as the dollar rose 1.9% to EGP 54.91.",
+  "next": "The EGX reopens Sunday after OPEC+ meets; MSCI's changes and Misr Life's retail close come Monday.",
+  "close": {
+   "title": "Thursday's close",
+   "groups": [
+    {
+     "name": "Egypt",
+     "rows": [
+      {
+       "label": "EGX30",
+       "value": "50,311.78",
+       "change": -0.45,
+       "lead": true
+      },
+      {
+       "label": "EGX70 EWI",
+       "value": "16,886.20",
+       "change": 0.0
+      },
+      {
+       "label": "USD/EGP (central bank, sell)",
+       "value": "54.91",
+       "change": 0.27
+      },
+      {
+       "label": "Gold 24K, per gram",
+       "value": "6,650",
+       "change": 2.99
+      }
+     ]
+    },
+    {
+     "name": "Global",
+     "rows": [
+      {
+       "label": "Brent, $ per barrel (front month)",
+       "value": "95.44",
+       "change": -1.17
+      },
+      {
+       "label": "Gold, $ per ounce",
+       "value": "3,653.50",
+       "change": 2.4
+      },
+      {
+       "label": "Dollar index",
+       "value": "104.04",
+       "change": 0.37
+      },
+      {
+       "label": "Bitcoin, $",
+       "value": "59,574",
+       "change": -3.27
+      }
+     ]
+    }
+   ],
+   "note": "The EGX30 and EGX70 EWI are Thursday's closes, the last session of the week. The dollar rate is the central bank's selling rate at Thursday's close (54.77 buy, 54.91 sell), unchanged since. Gold 24K is Saturday's retail price. Brent, gold and the dollar index are Friday's closes; Bitcoin is Saturday morning's price."
+  },
+  "board": {
+   "horizon": "EGX sectors · next 1–4 weeks",
+   "helped": [
+    {
+     "name": "Banks: CIB, Banque du Caire",
+     "why": "One-year bills cleared at 26.35% on Thursday, the highest since March 2024, and a December 9 Fed hike is priced as near certain, so a cut on December 17 looks unlikely and bill income stays high; CIB fell 1.4% to EGP 124.25.",
+     "confidence": "medium"
+    },
+    {
+     "name": "Shipping and ports: Alexandria Containers",
+     "why": "Suez transits ran 31% above last November's weekly average in the week to November 22 and container capacity reached 984,782 TEU, 24% below pre-crisis levels (Lloyd's List); the stock fell 1.2% to EGP 30.87.",
+     "confidence": "low"
+    },
+    {
+     "name": "Telecoms: Telecom Egypt",
+     "why": "Index funds buy it at MSCI's November 30 close; it fell 2.4% to EGP 135.90 on Thursday, still just above where the desk opened its call at EGP 135.01.",
+     "confidence": "medium"
+    }
+   ],
+   "hurt": [
+    {
+     "name": "Developers: Palm Hills, Talaat Moustafa",
+     "why": "Bills at 26.35% push local rate cuts further out; Palm Hills' 50-day average crossed below its 200-day on Thursday at EGP 11.34, and Talaat Moustafa is 1.4% below where it stood on October 30.",
+     "confidence": "medium"
+    },
+    {
+     "name": "Importers and fuel users",
+     "why": "Brent settled at $96.57, its highest since November 6, and the dollar rose to EGP 54.91 on the same day, raising the pound cost of imported fuel and inputs.",
+     "confidence": "low"
+    },
+    {
+     "name": "Small caps",
+     "why": "The EGX70 EWI was flat at 16,886.20 while 122 stocks fell and 79 rose, as Misr Life's offer, a fifth covered by retail buyers on day one, competes for cash through November 30.",
+     "confidence": "low"
+    }
+   ]
+  },
+  "stocksNote": "<b>Orascom Construction rose 3.5% to EGP 790.00</b>, recovering Wednesday's fall as OCI delists from Amsterdam; Edita rose 2.9% to EGP 21.30 on a $25m IFC loan for Iraq and EFG Holding 2.5% to EGP 26.98, its sixth straight gain. Telecom Egypt fell 2.4% to EGP 135.90 and CIB 1.4% to EGP 124.25.",
+  "week": [
+   {
+    "day": "Sun, Nov 29",
+    "event": "OPEC+ meets online on quotas and 2027 targets",
+    "impact": "medium",
+    "why": "Brent settled at $95.44 on Friday; a rollover into January is expected, which keeps Egypt's fuel bill high."
+   },
+   {
+    "day": "Mon, Nov 30",
+    "event": "MSCI's index changes take effect at the close; Misr Life's retail subscription closes",
+    "impact": "medium",
+    "why": "Index funds buy Telecom Egypt and sell Eastern Company on the day."
+   },
+   {
+    "day": "Wed, Dec 2",
+    "event": "Third-quarter results expected from Sidi Kerir, Alexandria Containers, AMOC, Egypt Aluminium, Emaar Misr and Cleopatra Hospital",
+    "impact": "medium",
+    "why": "The last desk stocks to report the quarter; Egypt Aluminium, at EGP 292.50, is EGP 2.50 above the EGP 290 that would end the desk's projection."
+   },
+   {
+    "day": "Thu, Dec 3",
+    "event": "Misr Life Insurance expected to start trading; weekly T-bill auction",
+    "impact": "medium",
+    "why": "About EGP 9.6bn raised at EGP 12.80 returns to the market once the shares trade."
+   },
+   {
+    "day": "By Dec 8",
+    "event": "OCI's holders receive Orascom Construction's 97.2m new shares",
+    "impact": "medium",
+    "why": "Nearly doubles the shares in issue to 207.4m; OCI's holders outside the Sawiris family could sell."
+   },
+   {
+    "day": "Wed, Dec 9",
+    "event": "Federal Reserve decision",
+    "impact": "high",
+    "why": "Futures price a quarter-point hike at about 98%; what the Fed signals for January sets the pressure on Egyptian bill yields."
+   },
+   {
+    "day": "Before Dec 15",
+    "event": "IMF board vote on the final review",
+    "impact": "high",
+    "why": "Staff agreed the review; approval releases about $2.3bn before the program expires on December 15."
+   },
+   {
+    "day": "Thu, Dec 17",
+    "event": "Central bank Monetary Policy Committee",
+    "impact": "high",
+    "why": "Deposit rate 20%; one-year bills at 26.35% and a Fed hike eight days earlier argue for holding."
+   }
+  ],
+  "calls": [
+   {
+    "headline": "One-year bill yield hits 26.35%, highest since March 2024, as the dollar rises to 54.91",
+    "body": "The average yield on one-year treasury bills rose to 26.35% at Thursday's auction from 26.16% a week earlier, and the six-month yield to 25.74% from 25.36%; the central bank accepted EGP 87.2bn against a EGP 95bn target (Mubasher, Youlyou). Its dollar rate ended Thursday at EGP 54.77 buy and 54.91 sell, from 54.63 and 54.76. Futures price a quarter-point Fed hike on December 9 as near certain, about 98% on CME's FedWatch (Gotrade, Coinpedia). The EGX30 fell 0.45% to 50,311.78 on EGP 6.58bn of turnover, but foreigners bought a net EGP 224.9m of shares while Egyptians sold 147.9m and Arabs 76.9m (Arab Finance, Masrawy).",
+    "view": "Egypt is paying more to keep foreign money as the Fed tightens, and taking less than it offered shows the central bank resisting a faster climb. That keeps the pound drifting, not breaking: the desk expects the dollar to stay below EGP 56.50 through December 17, with banks earning more on bills and developers paying more for credit. Foreign share buying on a down day is a small, steady vote for the market at these prices. Medium confidence.",
+    "wrong": "The central bank's dollar rate closes above EGP 56.50 before December 17, or the one-year yield jumps above 27% at the next auction.",
+    "confidence": "medium",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "Banks",
+      "dir": "up"
+     },
+     {
+      "kind": "stock",
+      "dir": "up",
+      "t": "COMI",
+      "chg": -1.4
+     },
+     {
+      "kind": "stock",
+      "dir": "up",
+      "t": "BQDC"
+     },
+     {
+      "kind": "sector",
+      "name": "Real estate",
+      "dir": "down"
+     },
+     {
+      "kind": "stock",
+      "dir": "down",
+      "t": "PHDC",
+      "chg": -0.1
+     },
+     {
+      "kind": "market",
+      "name": "T-bill yields",
+      "dir": "up"
+     },
+     {
+      "kind": "market",
+      "name": "Pound",
+      "dir": "down",
+      "chg": -0.27
+     },
+     {
+      "kind": "market",
+      "name": "EGX30",
+      "dir": "mixed",
+      "chg": -0.45
+     }
+    ]
+   },
+   {
+    "headline": "Brent eases to $95.44 before OPEC+ as Saudi-Houthi strikes continue",
+    "line": "Oil near $95 keeps Egypt's import bill high into December, with a quota rollover already priced in.",
+    "body": "Brent settled 1.17% lower at $95.44 on Friday, still up 3.1% on the week. OPEC+ meets online on Sunday and is considering rolling current quotas into January, two delegates told Bloomberg (via Yahoo Finance), while some members dispute the new capacity figures behind 2027 targets (Japan Times). Saudi Arabia said it shot down a Houthi cruise missile aimed at Riyadh on Saturday, after strikes on Sanaa (AP).",
+    "view": "A rollover is priced in, so Sunday is unlikely to lower Egypt's fuel bill; the risk is upward, from attacks on Saudi energy sites such as the Jazan refinery. Dearer fuel and a weaker pound together raise import costs, one more reason the central bank holds on December 17. Low confidence on the oil level.",
+    "wrong": "Brent closes below $88 before the central bank's December 17 meeting.",
+    "confidence": "low",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "Importers and fuel users",
+      "dir": "down"
+     },
+     {
+      "kind": "stock",
+      "t": "AMOC",
+      "dir": "mixed"
+     },
+     {
+      "kind": "market",
+      "name": "Brent",
+      "dir": "up",
+      "chg": -1.17
+     },
+     {
+      "kind": "market",
+      "name": "Pound",
+      "dir": "down"
+     }
+    ]
+   },
+   {
+    "headline": "Suez transits run 31% above last November as container lines return",
+    "line": "Canal dollars are recovering faster than the Houthi threat to Saudi ports is growing, for now.",
+    "body": "In the week to November 22, 318 ships of 30.1m dwt crossed the canal, 31% more than the weekly average of November 2025 though 28% below pre-crisis tonnage, and container capacity reached 984,782 TEU, 24% below pre-crisis levels (Lloyd's List Intelligence). The Suez Canal Authority put revenue at $593m in the first weeks of November against $295m a year earlier, and Maersk told President Sisi it will restore its full network through the canal within months (DNE Africa).",
+    "view": "A second dollar source is rebuilding beside foreign bill buying, which softens the pound's exposure to a Fed hike. The risk is the Red Sea itself: the Houthis claimed attacks on Jeddah and Jazan this week. Medium confidence.",
+    "wrong": "Weekly Suez transits fall back below the November 2025 average, or a major line suspends canal sailings again.",
+    "confidence": "medium",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "Shipping and ports",
+      "dir": "up"
+     },
+     {
+      "kind": "stock",
+      "dir": "up",
+      "t": "ALCN",
+      "chg": -1.2
+     },
+     {
+      "kind": "market",
+      "name": "Pound",
+      "dir": "up"
+     }
+    ]
+   },
+   {
+    "headline": "Orascom Construction rises 3.5% to EGP 790 as OCI leaves Amsterdam",
+    "line": "The rebound undoes Wednesday's fall, but 97.2m new shares reach OCI's holders around December 8.",
+    "body": "Orascom Construction rose 3.5% to EGP 790.00 on Thursday, OCI's last day of trading in Amsterdam before it delists on Friday. The combination added 97,201,359 shares, lifting the count to 207.4m from 110.2m; NNS Holding and the Sawiris family hold about 78% of OCI, and the new shares are credited on or around December 8 (EnterpriseAM, Prop News Time).",
+    "view": "About a fifth of the new shares go to holders outside the Sawiris family, some of whom bought OCI for its Dutch listing and may sell Egyptian shares; that supply can cap the stock into mid-December. Low confidence.",
+    "wrong": "The stock closes above EGP 830 before December 15.",
+    "confidence": "low",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "Construction",
+      "dir": "mixed"
+     },
+     {
+      "kind": "stock",
+      "dir": "mixed",
+      "t": "ORAS",
+      "chg": 3.5
+     },
+     {
+      "kind": "market",
+      "name": "EGX30",
+      "dir": "mixed"
+     }
+    ]
+   }
+  ],
+  "flows": {
+   "title": "Who bought and who sold",
+   "sub": "Net EGX equity flows, Thu, Nov 26, EGP bn · Arab Finance and Masrawy agree",
+   "confirmed": true,
+   "rows": [
+    {
+     "who": "Egyptian investors",
+     "net": -0.148
+    },
+    {
+     "who": "Arab investors",
+     "net": -0.0769
+    },
+    {
+     "who": "Foreign investors",
+     "net": 0.2249
+    }
+   ],
+   "read": "Foreigners bought a net EGP 224.9m while Egyptians sold 147.9m and Arabs 76.9m, on EGP 6.58bn of turnover with 122 stocks down: foreign buying into a soft market, the second session running that Egyptians were net sellers. The split between institutions and individuals was not in the reports found."
+  },
+  "views": [
+   {
+    "call": "The pound stays firmer than EGP 56 per dollar into the IMF review",
+    "status": "wrong",
+    "note": "From Nov 5: USD/EGP 54.77. Judged Thursday at 54.91: the record scores it on direction from the start, though the dollar stayed below the EGP 56 line the call named."
+   },
+   {
+    "call": "The dollar stays below EGP 56.50 through the central bank's December 17 meeting",
+    "status": "open",
+    "note": "From 54.76. Thursday: 54.91, with one-year bills at 26.35%. Wrong if it closes above EGP 56.50; judged December 17."
+   },
+   {
+    "call": "Telecom Egypt holds its ground into MSCI's November 30 inclusion",
+    "status": "on track",
+    "note": "From EGP 135.01. Thursday: EGP 135.90 (-2.4%). Wrong if it closes below EGP 122; judged November 30."
+   },
+   {
+    "call": "Gas rationing keeps fertilizer stocks under pressure through November",
+    "status": "on track",
+    "note": "From Nov 4: Abu Qir EGP 77.71. Thursday: EGP 73.49 (-0.1%), 5.4% below the start. Wrong if it closes above EGP 85; judged November 30."
+   },
+   {
+    "call": "Developers lag while rates stay high",
+    "status": "right",
+    "note": "Judged on November 27: Talaat Moustafa and Palm Hills -1.0% on average against the EGX30 +1.4% since October 30."
+   },
+   {
+    "call": "Egypt Aluminium returns to EGP 335–345 by end of December",
+    "status": "open",
+    "note": "From EGP 317.00. Thursday: EGP 292.50 (-0.3%), EGP 2.50 above the EGP 290 test, with results expected December 2."
+   }
+  ]
+ },
+ "global": {
+  "finding": "Chipmakers led Wall Street's best week since April 2025: the S&P 500 rose 1.60% to 7,297.49 in Friday's half-day session and 5.6% on the week, as the chip index gained 4.7% (Reuters). The rebound runs straight into a December 9 hike priced at about 98%.",
+  "next": "OPEC+ meets Sunday; Nvidia trades without its dividend on December 2 and the Fed decides on December 9.",
+  "close": {
+   "title": "Friday's close",
+   "groups": [
+    {
+     "name": "USA",
+     "rows": [
+      {
+       "label": "S&P 500",
+       "value": "7,297.49",
+       "change": 1.6,
+       "lead": true
+      },
+      {
+       "label": "Nasdaq",
+       "value": "24,129.50",
+       "change": 2.31
+      },
+      {
+       "label": "Dow Jones",
+       "value": "50,774.94",
+       "change": 1.18
+      }
+     ]
+    },
+    {
+     "name": "Global",
+     "rows": [
+      {
+       "label": "Brent, $ per barrel (front month)",
+       "value": "95.44",
+       "change": -1.17
+      },
+      {
+       "label": "Gold, $ per ounce",
+       "value": "3,653.50",
+       "change": 2.4
+      },
+      {
+       "label": "Dollar index",
+       "value": "104.04",
+       "change": 0.37
+      },
+      {
+       "label": "Bitcoin, $",
+       "value": "59,574",
+       "change": -3.27
+      }
+     ]
+    }
+   ],
+   "note": "Friday's closes from a half-day session that ended at 1pm New York; changes are against Wednesday's closes, as markets were shut Thursday for Thanksgiving. Brent is Friday's settlement; Bitcoin is Saturday morning's price."
+  },
+  "board": {
+   "horizon": "US sectors · next 1–4 weeks",
+   "helped": [
+    {
+     "name": "Steady earners: Walmart, Berkshire Hathaway",
+     "why": "The desk's rotation call came right on November 27, Walmart and JPMorgan up 1.9% on average since October 30 against 0.6% for Alphabet and Amazon; Walmart rose 0.9% to $133.13, though at an RSI of 72 it is stretched.",
+     "confidence": "medium"
+    },
+    {
+     "name": "Banks: JPMorgan",
+     "why": "JPMorgan rose 2.0% to $322.96; a hike priced at about 98% and a 10-year yield of 4.94% widen what banks earn on deposits.",
+     "confidence": "low"
+    }
+   ],
+   "hurt": [
+    {
+     "name": "AI borrowers: Oracle",
+     "why": "Oracle rose 3.1% to $107.13 in the rebound but stays 7.6% below the $116 at which it sold shares on November 2, with its credit swaps near Wednesday's record.",
+     "confidence": "low"
+    },
+    {
+     "name": "Housing and small caps",
+     "why": "Futures price a December 9 hike at about 98%, and the 10-year yield closed the week at 4.94%.",
+     "confidence": "medium"
+    }
+   ]
+  },
+  "stocksNote": "<b>Intel rose 5.4% to $57.40 and Tesla 5.2% to $400.00</b> as chipmakers and SpaceX merger talk led Friday's half-day session; Amazon gained 4.0% to $254.12, Broadcom 3.8% to $312.34, Oracle 3.1% to $107.13 and Meta 3.1% to $628.96. Eli Lilly was flat at $1,392.38.",
+  "week": [
+   {
+    "day": "Sun, Nov 29",
+    "event": "OPEC+ meets on quotas and 2027 targets",
+    "impact": "medium",
+    "why": "Brent settled at $95.44; a rollover into January is expected, so a surprise moves Exxon and the airlines."
+   },
+   {
+    "day": "Wed, Dec 2",
+    "event": "Nvidia trades without its $0.25 dividend",
+    "impact": "low",
+    "why": "A token payout; it rose only 0.8% on Friday as other chipmakers jumped."
+   },
+   {
+    "day": "Mon, Dec 7",
+    "event": "Alphabet trades without its $0.22 dividend",
+    "impact": "low",
+    "why": "A small payout; its credit swaps matter more."
+   },
+   {
+    "day": "Wed, Dec 9",
+    "event": "Federal Reserve decision; Broadcom results after the close (expected)",
+    "impact": "high",
+    "why": "A quarter-point hike is priced at about 98%; a signal of more is the risk for rate-sensitive stocks, and Broadcom tests the chip rebound."
+   }
+  ],
+  "calls": [
+   {
+    "headline": "Chipmakers lead Wall Street's best week since April 2025",
+    "body": "The S&P 500 rose 1.60% to 7,297.49, the Nasdaq 2.31% to 24,129.50 and the Dow 1.18% to 50,774.94 in Friday's half-day session, as Micron gained 7.6%, Marvell 7.3% and the chip index 4.7%; Nvidia ended only 0.8% higher (Reuters via Yahoo Finance). On the week the S&P 500 gained 5.6% and the Nasdaq 6.68%, and the Dow had its biggest weekly gain since October 2022 (CNBC via MLQ.ai). SanDisk rose 15.96%, Intel 5.4% to $57.40 and Broadcom 3.8% to $312.34.",
+    "view": "This is relief after the worst week since 2020, not a turn: the credit worries behind the selloff are unchanged, with Oracle still below its $116 offer price, volume was thin, and the Fed is set to tighten on December 9. The desk expects the Nasdaq to give back part of the week before the Fed. Low confidence: a strong Broadcom guide could extend the rally.",
+    "wrong": "The Nasdaq closes above 25,000 before December 9.",
+    "confidence": "low",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "Chips",
+      "dir": "up"
+     },
+     {
+      "kind": "stock",
+      "name": "Micron",
+      "t": "MU",
+      "dir": "up",
+      "chg": 7.6
+     },
+     {
+      "kind": "stock",
+      "name": "Sandisk",
+      "t": "SNDK",
+      "dir": "up",
+      "chg": 15.96
+     },
+     {
+      "kind": "stock",
+      "t": "INTC",
+      "dir": "up",
+      "chg": 5.4
+     },
+     {
+      "kind": "stock",
+      "t": "AVGO",
+      "dir": "up",
+      "chg": 3.8
+     },
+     {
+      "kind": "stock",
+      "t": "NVDA",
+      "dir": "mixed",
+      "chg": 0.8
+     },
+     {
+      "kind": "market",
+      "name": "Nasdaq",
+      "dir": "up",
+      "chg": 2.31
+     }
+    ]
+   },
+   {
+    "headline": "A December hike is priced at about 98% as the dollar firms",
+    "line": "With the hike in prices, what the Fed signals for January moves stocks.",
+    "body": "Markets price a 98% chance of a quarter-point rise at the December 8–9 meeting, which would take the range to 4.00–4.25% (Barchart); CME's FedWatch showed 99.4% on Thursday (Invezz). The dollar index rose 0.37% on Friday after October's trade deficit came in at $149.5bn against $136.0bn expected, a 19-month high (Barchart), and the 10-year Treasury yield ended the week at 4.94%.",
+    "view": "The hike itself is no longer news; a statement that leaves January open would hit rate-sensitive stocks and help the dollar, while a signal of a pause would lift small caps and housing. The desk leans to the first, given growth revised to 4.3% and core PCE at 3.3%. Medium confidence.",
+    "wrong": "Futures odds for December fall below 70%, or the 10-year closes below 4.50%.",
+    "confidence": "medium",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "Housing",
+      "dir": "down"
+     },
+     {
+      "kind": "sector",
+      "name": "Small caps",
+      "dir": "down"
+     },
+     {
+      "kind": "stock",
+      "t": "JPM",
+      "dir": "up",
+      "chg": 2.0
+     },
+     {
+      "kind": "market",
+      "name": "Rate-hike odds",
+      "dir": "up"
+     },
+     {
+      "kind": "market",
+      "name": "Treasury yields",
+      "dir": "up"
+     }
+    ]
+   },
+   {
+    "headline": "Tesla rises 5.2% to $400 as SpaceX merger talks advance",
+    "line": "Deal talk, not deliveries, is setting Tesla's price, with no terms on the table.",
+    "body": "Tesla rose 5.2% to $400.00 on Friday, from $380.14 on Wednesday, after trading as high as $401.18 (AOL), as special committees of Tesla's and SpaceX's boards negotiate a possible all-stock merger (FXLeaders); the FT reported on November 23 that each company named five directors to the talks (MarketScreener). SpaceX trades below its $135 June offer price (FXLeaders).",
+    "view": "Without terms the stock is trading on hope: an all-stock deal would dilute Tesla's holders at a price no one has yet set, and Texas's incoming attorney general has promised scrutiny. The desk expects the gain to fade unless terms come out. Low confidence: one leak on terms could move it 10% either way.",
+    "wrong": "Tesla closes above $440 before any merger terms are announced.",
+    "confidence": "low",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "Electric vehicles",
+      "dir": "mixed"
+     },
+     {
+      "kind": "stock",
+      "t": "TSLA",
+      "dir": "mixed",
+      "chg": 5.2
+     },
+     {
+      "kind": "stock",
+      "name": "SpaceX",
+      "dir": "mixed"
+     },
+     {
+      "kind": "market",
+      "name": "Nasdaq",
+      "dir": "mixed"
+     }
+    ]
+   },
+   {
+    "headline": "Vertex falls 5.2% as the FDA delays its kidney drug to February",
+    "line": "A delay, not a rejection: the risk is a rival reaching the market first.",
+    "body": "The FDA moved its decision on povetacicept for IgA nephropathy from November 30 to as late as February 28, 2027, after classifying a late reply from Vertex as a major amendment (Tech Times, Medical Daily). Vertex fell 5.24% to $534.57 on Friday; Citi kept its Buy rating and $585 target, calling the delay \"not thesis changing\" (StockTwits via TradingView), and rival Vera Therapeutics rose about 14% (Medical Daily).",
+    "view": "Three months' delay costs Vertex little in value but hands Otsuka and Vera time in the same disease; the fall prices the delay, not a rejection. Low confidence.",
+    "wrong": "Vertex closes below $480 before February 28, 2027.",
+    "confidence": "low",
+    "affects": [
+     {
+      "kind": "sector",
+      "name": "Biotech",
+      "dir": "mixed"
+     },
+     {
+      "kind": "stock",
+      "name": "Vertex",
+      "t": "VRTX",
+      "dir": "down",
+      "chg": -5.24
+     },
+     {
+      "kind": "stock",
+      "name": "Vera Therapeutics",
+      "t": "VERA",
+      "dir": "up"
+     }
+    ]
+   }
+  ],
+  "views": [
+   {
+    "call": "Money rotates from AI spenders to steady earners",
+    "status": "right",
+    "note": "Judged on November 27: Walmart and JPMorgan +1.9% on average against Alphabet and Amazon +0.6% since October 30."
+   }
+  ]
+ },
+ "pages": {
+  "egx": {
+   "finding": "The EGX30 fell 0.45% to 50,311.78 on Thursday on EGP 6.58bn of turnover, with 122 stocks down and 79 up, while foreigners bought a net EGP 224.9m.",
+   "session": {
+    "turnover": 6.58,
+    "vs90": null,
+    "breadth": null
+   },
+   "outlook": {
+    "bull": {
+     "sectors": [
+      {
+       "name": "Telecoms",
+       "confidence": "medium",
+       "why": "MSCI adds Telecom Egypt to its Egypt standard index at the November 30 close; the stock fell 2.4% to EGP 135.90 on Thursday, after nine-month profit rose 44% to EGP 24.4bn."
+      },
+      {
+       "name": "Banks",
+       "confidence": "medium",
+       "why": "One-year bills cleared at 26.35% on Thursday, the highest since March 2024, and a December 9 Fed hike is priced at about 98%, so a cut on December 17 looks unlikely and bill income stays high."
+      }
+     ],
+     "stocks": [
+      {
+       "t": "EGAL",
+       "range": [
+        335,
+        345
+       ],
+       "dp": 0,
+       "by": "end of December",
+       "confidence": "low",
+       "why": "A return to about its 50-day average of EGP 336. First-quarter profit of EGP 4.93bn (+104%) supports the stock, but at EGP 292.50 it sits EGP 2.50 above the EGP 290 that would end the call, with results due December 2.",
+       "wrong": "it closes below EGP 290."
+      }
+     ]
+    },
+    "bear": {
+     "sectors": [
+      {
+       "name": "Fertilizers",
+       "confidence": "medium",
+       "why": "Gas costs $12.75 per MMBtu, 50% more, until December 31 (EnterpriseAM, UkrAgroConsult), and Abu Qir reports a 33% cut in its gas supply; the stock is at EGP 73.49, 5.4% below where the desk opened its call."
+      },
+      {
+       "name": "Real estate developers",
+       "confidence": "medium",
+       "why": "One-year bills at 26.35% keep financing dear for buyers and builders; Palm Hills' 50-day average crossed below its 200-day on Thursday."
+      }
+     ],
+     "stocks": [
+      {
+       "t": "TMGH",
+       "range": [
+        72,
+        76
+       ],
+       "dp": 0,
+       "by": "end of December",
+       "confidence": "low",
+       "why": "At EGP 79.24, below its 50-day average of about EGP 88; attributable profit rose 11.9% against revenue up 24%, as dearer money weighs on buyers and debt, and bills at 26.35% push local rate cuts further out.",
+       "wrong": "it closes back above EGP 88, near its 50-day average, or a big sales launch beats expectations."
+      },
+      {
+       "t": "PHDC",
+       "range": [
+        10.2,
+        10.8
+       ],
+       "dp": 1,
+       "by": "end of December",
+       "confidence": "low",
+       "why": "At EGP 11.34, with its 50-day average now below the 200-day. Nine-month attributable profit fell 4.7% to EGP 3.37bn as the gross margin dropped to 35.1% from 40.8%; the EGP 75bn of Ras El-Hekma sales booked in the third quarter argue against a deep fall.",
+       "wrong": "it closes above EGP 12.50."
+      }
+     ]
+    }
+   },
+   "news": [
+    {
+     "headline": "Foreigners buy EGP 224.9m of shares as EGX30 slips 0.45%",
+     "text": "The EGX30 closed at 50,311.78; Egyptians sold a net EGP 147.9m and Arabs 76.9m, and A Capital Holding led gainers with 12.87%.",
+     "source": "Masrawy",
+     "url": "https://www.masrawy.com/news/news_economy/details/2026/11/26/3084942",
+     "impact": "mixed",
+     "affects": [
+      {
+       "kind": "market",
+       "name": "EGX30",
+       "dir": "down",
+       "chg": -0.45
+      }
+     ]
+    },
+    {
+     "headline": "Orascom rises 3.5% to EGP 790 as OCI delists",
+     "text": "OCI's last Amsterdam trading day was Thursday; the 97.2m new Orascom shares, lifting the count to 207.4m, reach OCI's holders around December 8.",
+     "source": "EnterpriseAM",
+     "url": "https://enterpriseam.com/menaplus/2026/11/27/orascom-construction-closes-oci-deal-as-nmdc-energy-pushes-into-deepwater-fabrication/",
+     "impact": "mixed",
+     "affects": [
+      {
+       "kind": "stock",
+       "t": "ORAS",
+       "dir": "up",
+       "chg": 3.5
+      }
+     ]
+    },
+    {
+     "headline": "Misr Life prices its IPO at EGP 12.80; institutions bid 3.42 times",
+     "text": "Institutional bids reached EGP 31.2bn for the 750m-share sale, 15% of the company, which raises about EGP 9.6bn; retail subscription closes November 30 and trading is expected around December 3.",
+     "source": "Asharq Business",
+     "url": "https://asharqbusiness.com/companies/158222/تغطية-الطرح-الخاص-ل-مصر-لتأمينات-الحياة-3-4-مرة-بالبورصة/",
+     "impact": "mixed",
+     "affects": [
+      {
+       "kind": "sector",
+       "name": "Insurance",
+       "dir": "up"
+      },
+      {
+       "kind": "market",
+       "name": "EGX30",
+       "dir": "mixed"
+      }
+     ]
+    },
+    {
+     "headline": "IFC's $25m to double Edita's Iraq capacity; stock up 2.9%",
+     "text": "The IFC financing is to more than double Edita's production capacity in Iraq within two years (Milling Middle East & Africa); a December 27 general assembly will vote on canceling 11.0m treasury shares (Youlyou).",
+     "source": "Milling Middle East & Africa",
+     "url": "https://millingmea.com/edita-ifc-partner-in-us25m-investment-to-expand-food-manufacturing-in-iraq/",
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "stock",
+       "t": "EFID",
+       "dir": "up",
+       "chg": 2.9
+      }
+     ]
+    },
+    {
+     "headline": "Fertilizer makers may export all output at $12.75 gas until December 31",
+     "text": "Gas for fertilizer plants costs 50% more, $12.75 per MMBtu, from November 16 in return for unrestricted exports, and Abu Qir reported a 33% cut in its gas supply, from 20% before.",
+     "source": "UkrAgroConsult",
+     "url": "https://ukragroconsult.com/en/news/egypt-temporarily-allows-unrestricted-fertilizer-exports-and-prepares-for-imports/",
+     "impact": "mixed",
+     "affects": [
+      {
+       "kind": "sector",
+       "name": "Fertilizers",
+       "dir": "mixed"
+      },
+      {
+       "kind": "stock",
+       "t": "ABUK",
+       "dir": "mixed",
+       "chg": -0.1
+      }
+     ]
+    }
+   ]
+  },
+  "egp": {
+   "finding": "The central bank's dollar rate rose to 54.77 buy and 54.91 sell on Thursday, and one-year bills cleared at 26.35%, the highest since March 2024, as a near-certain Fed hike raises the price of holding foreign money.",
+   "rates": [
+    {
+     "label": "Dollar, central bank (Thursday close)",
+     "value": "54.77 buy / 54.91 sell"
+    },
+    {
+     "label": "1-year T-bill (November 26 auction)",
+     "value": "26.35%, from 26.16%; EGP 87.2bn accepted of a EGP 95bn target"
+    },
+    {
+     "label": "6-month T-bill (November 26 auction)",
+     "value": "25.74%, from 25.36%"
+    },
+    {
+     "label": "Overnight deposit / lending",
+     "value": "20% / 21%, raised October 29; next meeting December 17"
+    }
+   ],
+   "drivers": [
+    {
+     "name": "The IMF's final review",
+     "confidence": "high",
+     "why": "Egypt and the IMF reached a staff-level agreement on the eighth and final review on Wednesday, Madbouly said; board approval before December 15 would release about $2.3bn (Akhbar El-Youm, CairoScene)."
+    },
+    {
+     "name": "Foreign debt outflows",
+     "confidence": "medium",
+     "why": "Foreigners sold a net $576m of Egyptian government debt on Tuesday and $87m on Wednesday, after buying $842.2m the week before (Al-Ain, citing EGX data; EnterpriseAM), as a Fed hike narrows the carry."
+    },
+    {
+     "name": "Suez Canal's recovery",
+     "confidence": "high",
+     "why": "$593m in November 1–24, up from $295m a year earlier, and Maersk told Sisi on Wednesday it will bring its full network back in the coming months (Suez Canal Authority via DNE Africa; Daily News Egypt)."
+    },
+    {
+     "name": "A wider trade gap",
+     "confidence": "medium",
+     "why": "The September deficit widened 60.6% to $5.3bn as imports rose 29.7% to $10.6bn (CAPMAS via Arab Finance); Brent's rise to $94.61 adds to the fuel bill."
+    },
+    {
+     "name": "A stronger dollar abroad",
+     "confidence": "medium",
+     "why": "The dollar index closed at 103.70, near its 52-week high, and futures price a December 9 Fed hike as near certain after core PCE rose to 3.3% (Kotak Neo, EnterpriseAM)."
+    },
+    {
+     "name": "Record remittances",
+     "confidence": "high",
+     "why": "$13bn in July–September, up 20.4%, and $38.2bn in nine months, the economy's largest single source of dollars (central bank via EnterpriseAM)."
+    },
+    {
+     "name": "Oil and the Red Sea",
+     "confidence": "low",
+     "why": "Brent settled 3.5% higher at $94.61 on Wednesday after Houthi strikes on Saudi Arabia's Ras Tanura refinery and Red Sea ports, and rose above $95 on Thursday (Nation Thailand, ING)."
+    }
+   ],
+   "view": {
+    "headline": "The IMF and Suez hold the dollar below EGP 56.50",
+    "confidence": "medium",
+    "body": "The pound slipped 0.3% to 54.91 on Thursday as one-year bills rose to 26.35%, but the IMF staff deal, a canal earning double last year's dollars and record remittances should keep the dollar below EGP 56.50 through the December 17 meeting. The risk is a Fed that hikes and signals more: bills would then need to climb further to hold foreign money.",
+    "wrong": "The dollar closes above EGP 56.50 before December 17, or the IMF board delays the review.",
+    "affects": [
+     {
+      "kind": "sector",
+      "dir": "mixed",
+      "name": "Banks"
+     },
+     {
+      "kind": "sector",
+      "dir": "down",
+      "name": "Importers"
+     },
+     {
+      "kind": "sector",
+      "dir": "up",
+      "name": "Exporters"
+     },
+     {
+      "kind": "market",
+      "dir": "mixed",
+      "name": "Pound"
+     },
+     {
+      "kind": "market",
+      "dir": "up",
+      "name": "T-bill yields"
+     }
+    ]
+   },
+   "news": [
+    {
+     "headline": "One-year bill yield climbs to 26.35%, highest since March 2024",
+     "text": "The six-month yield rose to 25.74% from 25.36%, and the central bank accepted EGP 87.2bn against a EGP 95bn target.",
+     "source": "Mubasher",
+     "url": "https://www.mubasher.info/news/21589746/",
+     "impact": "bearish",
+     "affects": [
+      {
+       "kind": "market",
+       "name": "T-bill yields",
+       "dir": "up"
+      },
+      {
+       "kind": "market",
+       "name": "Pound",
+       "dir": "down"
+      }
+     ]
+    },
+    {
+     "headline": "IMF staff deal on the final review would unlock about $2.3bn",
+     "text": "Madbouly said Egypt and the IMF reached staff-level agreement on the eighth and final review; the board must approve before the program expires on December 15.",
+     "source": "CairoScene",
+     "url": "https://cairoscene.com/News/IMF-Reaches-Agreement-to-Unlock-USD-2-3-Billion-for-Egypt",
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "market",
+       "name": "Pound",
+       "dir": "up"
+      }
+     ]
+    },
+    {
+     "headline": "Suez transits run 31% above last November's weekly average",
+     "text": "318 ships of 30.1m dwt crossed in the week to November 22, and container capacity reached 984,782 TEU, 24% below pre-crisis levels; tonnage is still 28% short.",
+     "source": "Lloyd's List Intelligence",
+     "url": "https://www.lloydslistintelligence.com/resources/blog/red-sea-brief---26-november-2026",
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "sector",
+       "name": "Shipping and ports",
+       "dir": "up"
+      },
+      {
+       "kind": "market",
+       "name": "Pound",
+       "dir": "up"
+      }
+     ]
+    }
+   ]
+  },
+  "us": {
+   "finding": "The S&P 500 rose 1.60% to 7,297.49 and the Nasdaq 2.31% to 24,129.50 in Friday's half-day session, ending the S&P's best week since April 2025 (+5.6%) as chipmakers rebounded; Vertex fell 5.2% on an FDA delay.",
+   "rates": [
+    {
+     "label": "December 9 Fed hike (futures)",
+     "value": "About 98% priced (Barchart); CME FedWatch at 99.4% on Thursday (Invezz)"
+    },
+    {
+     "label": "US trade deficit, October",
+     "value": "$149.5bn against $136.0bn expected, a 19-month high (Barchart)"
+    }
+   ],
+   "afterBell": [
+    {
+     "name": "OPEC+, Sunday",
+     "move": "A rollover of quotas into January expected",
+     "why": "Two delegates told Bloomberg; Brent settled 1.17% lower at $95.44 on Friday."
+    },
+    {
+     "name": "Gold, Friday",
+     "move": "Up 2.4% to $3,653.50",
+     "why": "A rebound from a 15-month low as the dollar's advance paused (Reuters via Asharq Al-Awsat)."
+    },
+    {
+     "name": "Bitcoin, Saturday",
+     "move": "Down 3.3% to about $59,600",
+     "why": "It lagged the stock rebound after Friday's options expiry (CoinMarketCap)."
+    }
+   ],
+   "outlook": {
+    "bull": {
+     "sectors": [
+      {
+       "name": "Steady earners",
+       "confidence": "medium",
+       "why": "Walmart and JPMorgan rose 1.9% on average from October 30 to November 27 against 0.6% for Alphabet and Amazon; Walmart is at $133.13, though stretched at an RSI of 72."
+      },
+      {
+       "name": "Payments",
+       "confidence": "low",
+       "why": "Visa rose 1.2% to $429.56 as nominal spending runs hot with growth revised to 4.3%."
+      }
+     ],
+     "stocks": []
+    },
+    "bear": {
+     "sectors": [
+      {
+       "name": "AI borrowers",
+       "confidence": "low",
+       "why": "Oracle's 3.1% rise to $107.13 leaves it 7.6% below its $116 November offer price; the credit swaps that hit records last week have not reversed (Reuters)."
+      },
+      {
+       "name": "Housing and small caps",
+       "confidence": "medium",
+       "why": "Futures price a December 9 hike at about 98% after core PCE rose to 3.3%, with the 10-year at 4.94%."
+      }
+     ],
+     "stocks": []
+    }
+   },
+   "news": [
+    {
+     "headline": "Chipmakers lead Wall Street's best week since April 2025",
+     "text": "The S&P 500 rose 1.60% to 7,297.49 and the Nasdaq 2.31% to 24,129.50 in Friday's half-day session; the chip index gained 4.7% and Micron 7.6%.",
+     "source": "Reuters (via Yahoo Finance)",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/wall-st-futures-surge-investors-073405748.html",
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "sector",
+       "name": "Chips",
+       "dir": "up"
+      },
+      {
+       "kind": "stock",
+       "name": "Micron",
+       "t": "MU",
+       "dir": "up",
+       "chg": 7.6
+      },
+      {
+       "kind": "market",
+       "name": "S&P 500",
+       "dir": "up",
+       "chg": 1.6
+      },
+      {
+       "kind": "market",
+       "name": "Nasdaq",
+       "dir": "up",
+       "chg": 2.31
+      }
+     ]
+    },
+    {
+     "headline": "SanDisk jumps 16% as memory stocks rebound",
+     "text": "SanDisk rose 15.96% and Lumentum 7.98%; the Dow had its biggest weekly gain since October 2022.",
+     "source": "MLQ.ai (citing Reuters and CNBC)",
+     "url": "https://mlq.ai/news/dow-jumps-592-points-as-the-sp-500-logs-its-best-week-since-april-2025/",
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "stock",
+       "name": "Sandisk",
+       "t": "SNDK",
+       "dir": "up",
+       "chg": 15.96
+      },
+      {
+       "kind": "stock",
+       "name": "Lumentum",
+       "t": "LITE",
+       "dir": "up",
+       "chg": 7.98
+      }
+     ]
+    },
+    {
+     "headline": "Tesla rises 5.2% to $400 on SpaceX merger talk",
+     "text": "Tesla traded as high as $401.18 after closing at $380.14 on Wednesday, as traders weighed the SpaceX merger talks and a delayed European review of its driving software.",
+     "source": "AOL (The Motley Fool)",
+     "url": "https://www.aol.com/articles/tesla-stock-rallies-despite-lingering-194300000.html",
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "stock",
+       "t": "TSLA",
+       "dir": "up",
+       "chg": 5.2
+      }
+     ]
+    },
+    {
+     "headline": "Vertex falls 5.2% as the FDA delays its kidney drug decision",
+     "text": "The FDA moved its povetacicept decision from November 30 to as late as February 28, 2027; Vertex closed at $534.57.",
+     "source": "Tech Times",
+     "url": "https://www.techtimes.com/articles/331629/20261126/fda-delays-vertex-kidney-drug-povetacicept-three-months-after-major-amendment.htm",
+     "impact": "bearish",
+     "affects": [
+      {
+       "kind": "stock",
+       "name": "Vertex",
+       "t": "VRTX",
+       "dir": "down",
+       "chg": -5.24
+      }
+     ]
+    },
+    {
+     "headline": "XP jumps 18% as Brazil names Bradesco's chairman finance minister",
+     "text": "Brazil named Luiz Carlos Trabuco finance minister; the Ibovespa rose 2.6% and Bradesco's US shares 17%.",
+     "source": "Seeking Alpha (via TradingView)",
+     "url": "https://www.tradingview.com/news/seekingalpha:598661509094b:0-brazilian-stocks-surge-as-bradesco-chairman-named-finance-minister/",
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "stock",
+       "name": "XP",
+       "t": "XP",
+       "dir": "up",
+       "chg": 18.1
+      },
+      {
+       "kind": "stock",
+       "name": "Bradesco",
+       "t": "BBD",
+       "dir": "up",
+       "chg": 17
+      }
+     ]
+    }
+   ]
+  },
+  "global": {
+   "finding": "Brent settled 1.17% lower at $95.44 on Friday, still up 3.1% on the week, before an OPEC+ meeting on Sunday expected to roll quotas into January; gold rebounded 2.4% to $3,653.50 from a 15-month low.",
+   "notes": {
+    "brent": "Egypt imports fuel and LNG: Brent at $95.44 keeps the import bill high, and attacks on Saudi energy sites keep the risk upward; OPEC+ meets on Sunday.",
+    "gold_usd": "Sets the base for Egyptian gold: spot rose 2.4% to $3,653.50 on Friday from a 15-month low, and the 24K gram rose 3.0% to EGP 6,650 on Saturday.",
+    "dxy": "Up 0.37% on Friday to about 104.04 after a wider US trade deficit, with a December Fed hike priced at about 98%; the pound held at 54.91.",
+    "btc": "A gauge of risk appetite: down 3.3% to about $59,600 on Saturday, lagging the stock rebound."
+   },
+   "news": [
+    {
+     "headline": "OPEC+ weighs rolling quotas into January at Sunday's meeting",
+     "text": "Two delegates said the group is considering a rollover, with the Iran war adding uncertainty; it has yet to set 2027 targets.",
+     "source": "Bloomberg (via Yahoo Finance)",
+     "url": "https://finance.yahoo.com/energy/articles/opec-considers-sticking-current-oil-110926979.html",
+     "impact": "mixed",
+     "affects": [
+      {
+       "kind": "market",
+       "name": "Brent",
+       "dir": "mixed",
+       "chg": -1.17
+      }
+     ]
+    },
+    {
+     "headline": "OPEC+ members dispute new capacity figures before 2027 targets",
+     "text": "Some of the 21 members contest the capacity levels from a two-year review by DeGolyer and MacNaughton.",
+     "source": "The Japan Times",
+     "url": "https://www.japantimes.co.jp/business/2026/11/27/opec-2027-output-talks/",
+     "impact": "mixed",
+     "affects": [
+      {
+       "kind": "market",
+       "name": "Brent",
+       "dir": "mixed"
+      }
+     ]
+    },
+    {
+     "headline": "Gold rebounds nearly 3% from a 15-month low as the dollar pauses",
+     "text": "Spot rose 2.9% to $3,670.69 on Friday morning after Wednesday's low, the lowest since August 2025, as forced sales tied to equity losses stopped.",
+     "source": "Reuters (via Asharq Al-Awsat)",
+     "url": "https://english.aawsat.com/business/5346235-gold-gains-nearly-3-dollar-rally-stalls-equities-stabilize",
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "market",
+       "name": "Gold",
+       "dir": "up",
+       "chg": 2.4
+      }
+     ]
+    },
+    {
+     "headline": "Saudi Arabia downs a Houthi missile aimed at Riyadh",
+     "text": "Strikes on Sanaa wounded at least 15 people, the Houthi-run health ministry said, after a week of Houthi attacks that included the Jazan refinery.",
+     "source": "AP (via The Seattle Times)",
+     "url": "https://www.seattletimes.com/nation-world/houthis-report-airstrikes-in-yemen-israeli-strike-kills-2-near-gaza-clinic-and-other-mideast-news/",
+     "impact": "bullish",
+     "affects": [
+      {
+       "kind": "market",
+       "name": "Brent",
+       "dir": "up"
+      },
+      {
+       "kind": "market",
+       "name": "Red Sea shipping",
+       "dir": "down"
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

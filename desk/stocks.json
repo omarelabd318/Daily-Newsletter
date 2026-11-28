@@ -852,6 +852,12 @@
    "sector": "Semiconductors",
    "news": [
     {
+     "date": "2026-11-27",
+     "text": "Rose 3.8% to $312.34 as chipmakers rebounded, the chip index up 4.7%; no company news.",
+     "source": "Reuters (via Yahoo Finance)",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/wall-st-futures-surge-investors-073405748.html"
+    },
+    {
      "date": "2026-11-25",
      "text": "Dropped 5.8% early before ending flat at $300.86 as AI stocks recovered.",
      "source": "Reuters (via Yahoo Finance)",
@@ -2397,6 +2403,12 @@
    },
    "news": [
     {
+     "date": "2026-11-27",
+     "text": "Rose 5.2% to $400.00, its best week in 18 months, as special board committees of Tesla and SpaceX negotiate a possible all-stock merger; no terms given.",
+     "source": "AOL (The Motley Fool)",
+     "url": "https://www.aol.com/articles/tesla-stock-rallies-despite-lingering-194300000.html"
+    },
+    {
      "date": "2026-11-23",
      "text": "Rose 11.5% to $385.46 after the FT reported Tesla and SpaceX each named five directors to negotiate a merger; neither company has given terms.",
      "source": "MarketScreener (FT)",
@@ -3911,6 +3923,12 @@
   "INTC": {
    "sector": "Semiconductors",
    "news": [
+    {
+     "date": "2026-11-27",
+     "text": "Rose 5.4% to $57.40 in Friday's half-day session as the chip index gained 4.7% in a rebound from the month's AI selloff.",
+     "source": "Reuters (via Yahoo Finance)",
+     "url": "https://finance.yahoo.com/markets/stocks/articles/wall-st-futures-surge-investors-073405748.html"
+    },
     {
      "date": "2026-11-24",
      "text": "Fell 8.1% to $54.80, giving back half of Monday's 16.3% jump as chip stocks sold off; no company news behind the move.",
