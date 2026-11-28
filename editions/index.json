@@ -1,6 +1,12 @@
 {
   "editions": [
     {
+      "date": "2026-11-28",
+      "id": "2026-11-28-recap",
+      "label": "Weekly Recap",
+      "summary": "The Ring Road fire, an IMF deal, a weaker pound, war across the Gulf and Wall Street's best week in over a year."
+    },
+    {
       "date": "2026-11-27",
       "summary": "Driver detained over Ring Road fire, donations hit EGP 200m, one-year T-bill yield at 26.35%, and Iranian drones kill two in Kuwait."
     },

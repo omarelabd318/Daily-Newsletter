@@ -14,8 +14,8 @@
    "drivers": [
     "oil"
    ],
-   "now": "Drones struck a site in Kuwait on November 26, killing two Italian technicians working for Rheinmetall; Kuwait blamed Iran, which denied involvement, and a Houthi strike on a Jazan refinery killed a Nepali worker the same day. President Trump said any new US action would hit Pickaxe Mountain near Natanz, while Iran's president said it was time to end the war from a position of strength.",
-   "now_date": "2026-11-27"
+   "now": "US forces disabled the merchant ship Pacific Archer in the Gulf of Oman on November 26, at least the 15th ship stopped under the blockade of Iranian ports, and Iran's navy chief vowed to break the blockade. Strikes on Sanaa wounded at least 15 people on November 28 as Saudi Arabia said it downed a Houthi cruise missile aimed at Riyadh, after a week of Houthi attacks on the PIF Tower and the Jazan refinery.",
+   "now_date": "2026-11-28"
   },
   {
    "id": "pound-cbe",
@@ -112,8 +112,8 @@
    "match": "\\b(Gaza|Hamas|Hezbollah|Lebanon|Lebanese)\\b",
    "related": [],
    "drivers": [],
-   "now": "Israeli Defense Minister Israel Katz said on November 26 that Hamas must disarm or face another evacuation of one million Gaza residents southward; Israeli strikes killed at least 10 Palestinians that day, and Hamas said it was weighing its response.",
-   "now_date": "2026-11-27"
+   "now": "An Israeli strike late on November 27 killed two Doctors Without Borders watchmen at or near one of its Gaza City clinics, taking the group's staff deaths in Gaza to 17; Israel said the two were Hamas militants. Defense Minister Israel Katz has said Hamas must disarm or face another mass evacuation southward, and in Lebanon France is drafting a plan to keep UN peacekeepers working after their mandate ends on December 31.",
+   "now_date": "2026-11-28"
   },
   {
    "id": "oil",
@@ -144,13 +144,116 @@
    "id": "misr-life",
    "name": "Misr Life Insurance listing",
    "match": "Misr Life",
-   "now": "Misr Life Insurance's retail tranche was 0.19 times covered on its first day, with orders for 7.09 million of 37.5 million shares. Institutional bidding closes November 27, the final price within EGP 12.00-13.60 is due November 28, retail subscription runs to November 30 and trading is expected around December 3.",
-   "now_date": "2026-11-27",
+   "now": "Misr Life Insurance priced its IPO at EGP 12.80 a share, within its EGP 12.00-13.60 range, after institutional bids of EGP 31.2 billion covered the shares on offer 3.42 times, according to sources cited by Asharq Business. The sale of 750 million shares, 15% of the company, raises about EGP 9.6 billion; retail subscription closes on November 30 and trading is expected around December 3.",
+   "now_date": "2026-11-28",
    "related": [],
    "drivers": []
   }
  ],
  "stories": [
+  {
+   "ed": "2026-11-28-recap",
+   "id": "story-us-disables-another-blockade-runner",
+   "lead": "US disables another blockade runner",
+   "sec": "Since Friday",
+   "text": "US forces disabled the merchant ship Pacific Archer in the Gulf of Oman on November 26, saying it tried to breach the naval blockade on Iranian ports, US Central Command said; the crew was unharmed. It is at least the 15th ship disabled…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-28-recap",
+   "id": "story-treasury-bill-auction",
+   "lead": "Treasury bill auction",
+   "sec": "How It Played Out",
+   "text": "Watched after the pound's slide; the one-year bill cleared at 26.35% on November 26, up from 26.16% a week earlier.",
+   "topics": [
+    "pound-cbe"
+   ]
+  },
+  {
+   "ed": "2026-11-28-recap",
+   "id": "story-saudi-arabia-and-the-houthis-trade-strikes-on-capitals",
+   "lead": "Saudi Arabia and the Houthis trade strikes on capitals",
+   "sec": "Since Friday",
+   "text": "Strikes on Yemen's capital, Sanaa, wounded at least 15 people on Saturday, according to the Houthi-run health ministry, while Saudi Arabia said it shot down a Houthi cruise missile aimed at Riyadh, the Associated Press reported. The…",
+   "topics": [
+    "iran-war"
+   ],
+   "added": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-28-recap",
+   "id": "story-nvidia-s-week",
+   "lead": "Nvidia's week",
+   "sec": "Culture and Tech",
+   "text": "Vice President JD Vance said Jensen Huang was not under investigation, after a week of turmoil over Nvidia's leadership. Nvidia has stopped shipping AI servers to Malaysia, Singapore, Thailand and Indonesia under US export controls, the…",
+   "topics": [
+    "ai-chips"
+   ]
+  },
+  {
+   "ed": "2026-11-28-recap",
+   "id": "story-misr-life-insurance-prices-its-ipo",
+   "lead": "Misr Life Insurance prices its IPO",
+   "sec": "Since Friday",
+   "text": "The state insurer set its offer price at EGP 12.80 a share, within its EGP 12.00-13.60 range, after institutional bids reached EGP 31.2 billion, 3.42 times the shares on offer, Asharq Business reported, citing sources. The sale of 750…",
+   "topics": [
+    "misr-life"
+   ]
+  },
+  {
+   "ed": "2026-11-28-recap",
+   "id": "story-iran-and-hormuz",
+   "lead": "Iran and Hormuz",
+   "sec": "Region and World",
+   "text": "Drones hit an air-defense site in Kuwait on November 26, killing two Italian technicians working for Rheinmetall, the first European civilians killed in the war, the BBC reported. Italy's foreign minister said the drones were Iranian;…",
+   "topics": [
+    "iran-war"
+   ]
+  },
+  {
+   "ed": "2026-11-28-recap",
+   "id": "story-imf-final-review",
+   "lead": "IMF final review",
+   "sec": "Egypt This Week",
+   "text": "Prime Minister Mostafa Madbouly said Egypt and the IMF reached a staff-level agreement on the eighth and final review of the $8 billion program, worth about $2.3 billion: about $1.5 billion from the Extended Fund Facility and up to $800…",
+   "topics": [
+    "imf"
+   ]
+  },
+  {
+   "ed": "2026-11-28-recap",
+   "id": "story-hamas-ultimatum-and-un-peacekeepers",
+   "lead": "Hamas ultimatum and UN peacekeepers",
+   "sec": "Region and World",
+   "text": "Israeli Defense Minister Israel Katz said on November 26 that Hamas must \"disarm voluntarily\" or face \"another evacuation of one million Gaza residents southward.\" Israel killed Hamas security chief Naim Abu Nahl on November 24. In…",
+   "topics": [
+    "gaza-lebanon"
+   ]
+  },
+  {
+   "ed": "2026-11-28-recap",
+   "id": "story-energy-squeeze",
+   "lead": "Energy squeeze",
+   "sec": "Egypt This Week",
+   "text": "Three LNG cargoes bound for Egypt sailed elsewhere in November as European buyers outbid Cairo, EnterpriseAM reported, and gas supply to fertilizer plants stays cut by 20% to 40%, at $12.75 per mmBtu through December 31. On the supply…",
+   "topics": [
+    "gas-fertilizer"
+   ]
+  },
+  {
+   "ed": "2026-11-28-recap",
+   "id": "story-doctors-without-borders-staff-killed-in-gaza",
+   "lead": "Doctors Without Borders staff killed in Gaza",
+   "sec": "Since Friday",
+   "text": "An Israeli strike late on Friday killed two watchmen working for Doctors Without Borders (MSF) at one of its clinics in Gaza City, bringing the group's staff deaths in Gaza to 17. MSF said it was \"devastated and outraged\"; Israel said on…",
+   "topics": [
+    "gaza-lebanon"
+   ]
+  },
   {
    "ed": "2026-11-27",
    "id": "story-trump-on-iran",

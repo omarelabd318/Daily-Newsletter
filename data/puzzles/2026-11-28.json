@@ -1,0 +1,590 @@
+{
+ "date": "2026-11-28",
+ "no": 17,
+ "crossword": {
+  "size": 11,
+  "grid": [
+   "#CORP##TAP#",
+   "SONAR##IVE#",
+   "CUSTOM#LOAD",
+   "APES#ATTIRE",
+   "MET##NEEDLE",
+   "###TONED###",
+   "ENGINE##FED",
+   "GARTER#MILO",
+   "OVAL#STOLEN",
+   "#ACE##ERECT",
+   "#LED##NEST#"
+  ],
+  "clues": {
+   "across": [
+    {
+     "n": 1,
+     "row": 0,
+     "col": 1,
+     "len": 4,
+     "answer": "CORP",
+     "clue": "Business, briefly, in a company's name"
+    },
+    {
+     "n": 5,
+     "row": 0,
+     "col": 7,
+     "len": 3,
+     "answer": "TAP",
+     "clue": "Spigot, or gentle knock"
+    },
+    {
+     "n": 8,
+     "row": 1,
+     "col": 0,
+     "len": 5,
+     "answer": "SONAR",
+     "clue": "Submarine's listening gear"
+    },
+    {
+     "n": 9,
+     "row": 1,
+     "col": 7,
+     "len": 3,
+     "answer": "IVE",
+     "clue": "Jony of Apple design fame, to friends"
+    },
+    {
+     "n": 10,
+     "row": 2,
+     "col": 0,
+     "len": 6,
+     "answer": "CUSTOM",
+     "clue": "Made to order, or habitual practice"
+    },
+    {
+     "n": 12,
+     "row": 2,
+     "col": 7,
+     "len": 4,
+     "answer": "LOAD",
+     "clue": "What a truck carries, or a washer's cycle"
+    },
+    {
+     "n": 14,
+     "row": 3,
+     "col": 0,
+     "len": 4,
+     "answer": "APES",
+     "clue": "Mimics, or our closest relatives"
+    },
+    {
+     "n": 15,
+     "row": 3,
+     "col": 5,
+     "len": 6,
+     "answer": "ATTIRE",
+     "clue": "Outfit"
+    },
+    {
+     "n": 17,
+     "row": 4,
+     "col": 0,
+     "len": 3,
+     "answer": "MET",
+     "clue": "Crossed paths with"
+    },
+    {
+     "n": 18,
+     "row": 4,
+     "col": 5,
+     "len": 6,
+     "answer": "NEEDLE",
+     "clue": "Haystack's hidden item, or tease"
+    },
+    {
+     "n": 19,
+     "row": 5,
+     "col": 3,
+     "len": 5,
+     "answer": "TONED",
+     "clue": "Fit and firm"
+    },
+    {
+     "n": 21,
+     "row": 6,
+     "col": 0,
+     "len": 6,
+     "answer": "ENGINE",
+     "clue": "Car's heart under the hood"
+    },
+    {
+     "n": 24,
+     "row": 6,
+     "col": 8,
+     "len": 3,
+     "answer": "FED",
+     "clue": "Raised on a bottle, perhaps; also US central bank, informally"
+    },
+    {
+     "n": 27,
+     "row": 7,
+     "col": 0,
+     "len": 6,
+     "answer": "GARTER",
+     "clue": "Snake or stocking holder"
+    },
+    {
+     "n": 28,
+     "row": 7,
+     "col": 7,
+     "len": 4,
+     "answer": "MILO",
+     "clue": "Sorghum grain, or Ancient Greek wrestler's first name"
+    },
+    {
+     "n": 29,
+     "row": 8,
+     "col": 0,
+     "len": 4,
+     "answer": "OVAL",
+     "clue": "Racetrack shape, or the president's office"
+    },
+    {
+     "n": 30,
+     "row": 8,
+     "col": 5,
+     "len": 6,
+     "answer": "STOLEN",
+     "clue": "Taken without asking, like bases in baseball"
+    },
+    {
+     "n": 32,
+     "row": 9,
+     "col": 1,
+     "len": 3,
+     "answer": "ACE",
+     "clue": "Tennis serve that goes untouched"
+    },
+    {
+     "n": 33,
+     "row": 9,
+     "col": 6,
+     "len": 5,
+     "answer": "ERECT",
+     "clue": "Build, or upright"
+    },
+    {
+     "n": 34,
+     "row": 10,
+     "col": 1,
+     "len": 3,
+     "answer": "LED",
+     "clue": "Was in front, or a light-emitting bulb type"
+    },
+    {
+     "n": 35,
+     "row": 10,
+     "col": 6,
+     "len": 4,
+     "answer": "NEST",
+     "clue": "Bird's home"
+    }
+   ],
+   "down": [
+    {
+     "n": 1,
+     "row": 0,
+     "col": 1,
+     "len": 5,
+     "answer": "COUPE",
+     "clue": "Two-door car"
+    },
+    {
+     "n": 2,
+     "row": 0,
+     "col": 2,
+     "len": 5,
+     "answer": "ONSET",
+     "clue": "Beginning, as of a storm"
+    },
+    {
+     "n": 3,
+     "row": 0,
+     "col": 3,
+     "len": 4,
+     "answer": "RATS",
+     "clue": "Pied Piper's followers; also an exclamation of annoyance"
+    },
+    {
+     "n": 4,
+     "row": 0,
+     "col": 4,
+     "len": 3,
+     "answer": "PRO",
+     "clue": "Opposite of con"
+    },
+    {
+     "n": 5,
+     "row": 0,
+     "col": 7,
+     "len": 6,
+     "answer": "TILTED",
+     "clue": "Leaning, like a tower in Pisa"
+    },
+    {
+     "n": 6,
+     "row": 0,
+     "col": 8,
+     "len": 5,
+     "answer": "AVOID",
+     "clue": "Steer clear of"
+    },
+    {
+     "n": 7,
+     "row": 0,
+     "col": 9,
+     "len": 5,
+     "answer": "PEARL",
+     "clue": "Oyster's gem"
+    },
+    {
+     "n": 8,
+     "row": 1,
+     "col": 0,
+     "len": 4,
+     "answer": "SCAM",
+     "clue": "Con job"
+    },
+    {
+     "n": 11,
+     "row": 2,
+     "col": 5,
+     "len": 7,
+     "answer": "MANNERS",
+     "clue": "Please and thank you, say"
+    },
+    {
+     "n": 13,
+     "row": 2,
+     "col": 10,
+     "len": 3,
+     "answer": "DEE",
+     "clue": "River of Chester, or letter after C"
+    },
+    {
+     "n": 16,
+     "row": 3,
+     "col": 6,
+     "len": 3,
+     "answer": "TEE",
+     "clue": "Golfer's peg"
+    },
+    {
+     "n": 19,
+     "row": 5,
+     "col": 3,
+     "len": 6,
+     "answer": "TITLED",
+     "clue": "Given a name, like a book, or a noble"
+    },
+    {
+     "n": 20,
+     "row": 5,
+     "col": 4,
+     "len": 3,
+     "answer": "ONE",
+     "clue": "Singular digit, the smallest positive integer"
+    },
+    {
+     "n": 21,
+     "row": 6,
+     "col": 0,
+     "len": 3,
+     "answer": "EGO",
+     "clue": "Self-importance, to Freud, the 'I'"
+    },
+    {
+     "n": 22,
+     "row": 6,
+     "col": 1,
+     "len": 5,
+     "answer": "NAVAL",
+     "clue": "Sea-borne, like the blockade of Iranian ports a ship tried to breach this week"
+    },
+    {
+     "n": 23,
+     "row": 6,
+     "col": 2,
+     "len": 5,
+     "answer": "GRACE",
+     "clue": "Pre-meal prayer, or elegant movement"
+    },
+    {
+     "n": 24,
+     "row": 6,
+     "col": 8,
+     "len": 5,
+     "answer": "FILES",
+     "clue": "Folders on a computer, or nail tools"
+    },
+    {
+     "n": 25,
+     "row": 6,
+     "col": 9,
+     "len": 5,
+     "answer": "ELECT",
+     "clue": "Choose by vote"
+    },
+    {
+     "n": 26,
+     "row": 6,
+     "col": 10,
+     "len": 4,
+     "answer": "DONT",
+     "clue": "Contraction in a warning: '___ touch that!'"
+    },
+    {
+     "n": 28,
+     "row": 7,
+     "col": 7,
+     "len": 4,
+     "answer": "MORE",
+     "clue": "Oliver Twist's request for 'some'"
+    },
+    {
+     "n": 31,
+     "row": 8,
+     "col": 6,
+     "len": 3,
+     "answer": "TEN",
+     "clue": "Perfect score, or two hands of fingers"
+    }
+   ]
+  },
+  "news": []
+ },
+ "killer": {
+  "level": 6,
+  "solution": "958631742376482195421597683694253817587149326213768459739815264145326978862974531",
+  "cages": [
+   {
+    "sum": 30,
+    "cells": [
+     50,
+     51,
+     52,
+     61,
+     70
+    ]
+   },
+   {
+    "sum": 24,
+    "cells": [
+     28,
+     36,
+     37,
+     45
+    ]
+   },
+   {
+    "sum": 19,
+    "cells": [
+     33,
+     34,
+     35,
+     42
+    ]
+   },
+   {
+    "sum": 13,
+    "cells": [
+     65,
+     73,
+     74
+    ]
+   },
+   {
+    "sum": 20,
+    "cells": [
+     11,
+     19,
+     20,
+     29,
+     38
+    ]
+   },
+   {
+    "sum": 12,
+    "cells": [
+     47,
+     56
+    ]
+   },
+   {
+    "sum": 18,
+    "cells": [
+     14,
+     23,
+     24,
+     32
+    ]
+   },
+   {
+    "sum": 14,
+    "cells": [
+     58,
+     67,
+     76,
+     77
+    ]
+   },
+   {
+    "sum": 27,
+    "cells": [
+     8,
+     16,
+     17,
+     25,
+     26
+    ]
+   },
+   {
+    "sum": 28,
+    "cells": [
+     0,
+     1,
+     9,
+     10,
+     18
+    ]
+   },
+   {
+    "sum": 24,
+    "cells": [
+     31,
+     40,
+     41,
+     49
+    ]
+   },
+   {
+    "sum": 1,
+    "cells": [
+     80
+    ]
+   },
+   {
+    "sum": 20,
+    "cells": [
+     57,
+     66,
+     75
+    ]
+   },
+   {
+    "sum": 24,
+    "cells": [
+     21,
+     22,
+     30,
+     39,
+     48
+    ]
+   },
+   {
+    "sum": 21,
+    "cells": [
+     43,
+     44,
+     53,
+     62
+    ]
+   },
+   {
+    "sum": 18,
+    "cells": [
+     2,
+     3,
+     12
+    ]
+   },
+   {
+    "sum": 13,
+    "cells": [
+     59,
+     60,
+     68
+    ]
+   },
+   {
+    "sum": 8,
+    "cells": [
+     6,
+     15
+    ]
+   },
+   {
+    "sum": 4,
+    "cells": [
+     7
+    ]
+   },
+   {
+    "sum": 12,
+    "cells": [
+     4,
+     5,
+     13
+    ]
+   },
+   {
+    "sum": 4,
+    "cells": [
+     46,
+     55
+    ]
+   },
+   {
+    "sum": 6,
+    "cells": [
+     27
+    ]
+   },
+   {
+    "sum": 1,
+    "cells": [
+     63
+    ]
+   },
+   {
+    "sum": 8,
+    "cells": [
+     72
+    ]
+   },
+   {
+    "sum": 4,
+    "cells": [
+     64
+    ]
+   },
+   {
+    "sum": 7,
+    "cells": [
+     54
+    ]
+   },
+   {
+    "sum": 17,
+    "cells": [
+     69,
+     78,
+     79
+    ]
+   },
+   {
+    "sum": 8,
+    "cells": [
+     71
+    ]
+   }
+  ]
+ }
+}
